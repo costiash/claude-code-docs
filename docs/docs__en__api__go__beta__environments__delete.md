@@ -1,4 +1,4 @@
-## Delete
+## Delete Environment
 
 `client.Beta.Environments.Delete(ctx, environmentID, body) (*BetaEnvironmentDeleteResponse, error)`
 
@@ -114,5 +114,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaEnvironmentDeleteResponse.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
 }
 ```

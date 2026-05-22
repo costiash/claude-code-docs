@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `beta.memory_stores.delete(strmemory_store_id, MemoryStoreDeleteParams**kwargs)  -> BetaManagedAgentsDeletedMemoryStore`
 
@@ -95,4 +95,13 @@ beta_managed_agents_deleted_memory_store = client.beta.memory_stores.delete(
     memory_store_id="memory_store_id",
 )
 print(beta_managed_agents_deleted_memory_store.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

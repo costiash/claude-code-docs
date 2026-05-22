@@ -1,4 +1,4 @@
-## Download
+## Download File
 
 `client.beta.files.download(stringfileID, FileDownloadParamsparams?, RequestOptionsoptions?): Response`
 

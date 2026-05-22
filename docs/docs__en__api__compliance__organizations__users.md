@@ -1,6 +1,6 @@
 # Users
 
-## List
+## List organization users
 
 **get** `/v1/compliance/organizations/{org_uuid}/users`
 
@@ -88,11 +88,29 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "email": "email",
+      "full_name": "full_name",
+      "organization_role": "admin"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### User List Response
 
-- `UserListResponse = object { id, created_at, email, 2 more }`
+- `UserListResponse object { id, created_at, email, 2 more }`
 
   User member information for compliance responses.
 

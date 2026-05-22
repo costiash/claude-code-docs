@@ -1,4 +1,4 @@
-## Delete
+## Delete a Message Batch
 
 **delete** `/v1/messages/batches/{message_batch_id}`
 
@@ -16,7 +16,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `DeletedMessageBatch = object { id, type }`
+- `DeletedMessageBatch object { id, type }`
 
   - `id: string`
 
@@ -37,4 +37,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

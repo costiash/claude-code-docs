@@ -100,3 +100,13 @@ beta_user_profile_enrollment_url = client.beta.user_profiles.create_enrollment_u
 )
 print(beta_user_profile_enrollment_url.expires_at)
 ```
+
+#### Response
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
+```

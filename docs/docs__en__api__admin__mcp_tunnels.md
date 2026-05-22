@@ -1,6 +1,6 @@
 # MCP Tunnels
 
-## Retrieve
+## Get Tunnel
 
 **get** `/v1/organizations/tunnels/{tunnel_id}`
 
@@ -64,7 +64,21 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Production",
+  "domain": "a1b2c3d4.tunnel.anthropic.com",
+  "type": "tunnel",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
+## List Tunnels
 
 **get** `/v1/organizations/tunnels`
 
@@ -153,7 +167,26 @@ curl https://api.anthropic.com/v1/organizations/tunnels \
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## Reveal Token
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "display_name": "Production",
+      "domain": "a1b2c3d4.tunnel.anthropic.com",
+      "type": "tunnel",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Reveal Tunnel Token
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`
 
@@ -204,7 +237,17 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token 
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## Rotate Token
+#### Response
+
+```json
+{
+  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
+  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
+  "type": "tunnel_token"
+}
+```
+
+## Rotate Tunnel Token
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`
 
@@ -260,7 +303,17 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token 
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
+  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
+  "type": "tunnel_token"
+}
+```
+
+## Archive Tunnel
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/archive`
 
@@ -330,11 +383,25 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
+#### Response
+
+```json
+{
+  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Production",
+  "domain": "a1b2c3d4.tunnel.anthropic.com",
+  "type": "tunnel",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
 ## Domain Types
 
 ### MCP Tunnel Retrieve Response
 
-- `MCPTunnelRetrieveResponse = object { id, archived_at, created_at, 4 more }`
+- `MCPTunnelRetrieveResponse object { id, archived_at, created_at, 4 more }`
 
   - `id: string`
 
@@ -372,7 +439,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel List Response
 
-- `MCPTunnelListResponse = object { data, next_page }`
+- `MCPTunnelListResponse object { data, next_page }`
 
   - `data: array of object { id, archived_at, created_at, 4 more }`
 
@@ -416,7 +483,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel Reveal Token Response
 
-- `MCPTunnelRevealTokenResponse = object { id, tunnel_token, type }`
+- `MCPTunnelRevealTokenResponse object { id, tunnel_token, type }`
 
   - `id: string`
 
@@ -435,7 +502,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel Rotate Token Response
 
-- `MCPTunnelRotateTokenResponse = object { id, tunnel_token, type }`
+- `MCPTunnelRotateTokenResponse object { id, tunnel_token, type }`
 
   - `id: string`
 
@@ -454,7 +521,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel Archive Response
 
-- `MCPTunnelArchiveResponse = object { id, archived_at, created_at, 4 more }`
+- `MCPTunnelArchiveResponse object { id, archived_at, created_at, 4 more }`
 
   - `id: string`
 
@@ -492,7 +559,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 # Tunnel Certificates
 
-## Create
+## Create Tunnel Certificate
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`
 
@@ -570,7 +637,21 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
+## Get Tunnel Certificate
 
 **get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
@@ -636,7 +717,21 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
+## List Tunnel Certificates
 
 **get** `/v1/organizations/tunnels/{tunnel_id}/certificates`
 
@@ -722,7 +817,26 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "expires_at": "2024-10-30T23:58:27.427722Z",
+      "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+      "type": "tunnel_certificate"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Archive Tunnel Certificate
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
 
@@ -793,11 +907,25 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
 ## Domain Types
 
 ### Tunnel Certificate Create Response
 
-- `TunnelCertificateCreateResponse = object { id, archived_at, created_at, 4 more }`
+- `TunnelCertificateCreateResponse object { id, archived_at, created_at, 4 more }`
 
   - `id: string`
 
@@ -833,7 +961,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate Retrieve Response
 
-- `TunnelCertificateRetrieveResponse = object { id, archived_at, created_at, 4 more }`
+- `TunnelCertificateRetrieveResponse object { id, archived_at, created_at, 4 more }`
 
   - `id: string`
 
@@ -869,7 +997,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate List Response
 
-- `TunnelCertificateListResponse = object { data, next_page }`
+- `TunnelCertificateListResponse object { data, next_page }`
 
   - `data: array of object { id, archived_at, created_at, 4 more }`
 
@@ -911,7 +1039,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate Archive Response
 
-- `TunnelCertificateArchiveResponse = object { id, archived_at, created_at, 4 more }`
+- `TunnelCertificateArchiveResponse object { id, archived_at, created_at, 4 more }`
 
   - `id: string`
 

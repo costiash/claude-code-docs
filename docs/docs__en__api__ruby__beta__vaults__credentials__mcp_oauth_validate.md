@@ -1,4 +1,4 @@
-## MCP OAuth Validate
+## Validate Credential
 
 `beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs) -> BetaManagedAgentsCredentialValidation`
 
@@ -16,9 +16,9 @@ Validate Credential
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -120,22 +120,6 @@ Validate Credential
 
       An HTTP response captured during a credential validation probe.
 
-      - `body: String`
-
-        Response body. May be truncated and has sensitive values scrubbed.
-
-      - `body_truncated: bool`
-
-        Whether `body` was truncated.
-
-      - `content_type: String`
-
-        Value of the `Content-Type` response header.
-
-      - `status_code: Integer`
-
-        HTTP status code.
-
     - `status: :succeeded | :failed | :connect_error | :no_refresh_token`
 
       Outcome of a refresh-token exchange attempted during credential validation.
@@ -183,4 +167,35 @@ beta_managed_agents_credential_validation = anthropic.beta.vaults.credentials.mc
 )
 
 puts(beta_managed_agents_credential_validation)
+```
+
+#### Response
+
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+}
 ```

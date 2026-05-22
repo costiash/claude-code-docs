@@ -1,4 +1,4 @@
-## Download
+## Download artifact content
 
 **get** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
 

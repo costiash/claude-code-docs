@@ -1,4 +1,4 @@
-## Delete
+## Delete Environment
 
 `BetaEnvironmentDeleteResponse Beta.Environments.Delete(EnvironmentDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -91,4 +91,13 @@ EnvironmentDeleteParams parameters = new()
 var betaEnvironmentDeleteResponse = await client.Beta.Environments.Delete(parameters);
 
 Console.WriteLine(betaEnvironmentDeleteResponse);
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
 ```

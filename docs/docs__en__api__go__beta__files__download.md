@@ -1,4 +1,4 @@
-## Download
+## Download File
 
 `client.Beta.Files.Download(ctx, fileID, query) (*Response, error)`
 

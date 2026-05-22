@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `beta.skills.versions.download(strversion, VersionDownloadParams**kwargs)  -> BinaryResponseContent`
 

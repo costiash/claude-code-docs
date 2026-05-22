@@ -1,4 +1,4 @@
-## Create
+## Create Session
 
 `BetaManagedAgentsSession beta().sessions().create(SessionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -288,63 +288,11 @@ Create Session
 
           - `Type type`
 
-            - `URL("url")`
-
           - `String url`
 
         - `BetaManagedAgentsModelConfig model`
 
           Model identifier and configuration.
-
-          - `BetaManagedAgentsModel id`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-              Most intelligent model for building agents and coding
-
-            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-              Best combination of speed and intelligence
-
-            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-              Fastest model with near-frontier intelligence
-
-            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-              Fastest model with near-frontier intelligence
-
-            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-              High-performance model for agents and coding
-
-            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-              High-performance model for agents and coding
-
-          - `Optional<Speed> speed`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-            - `STANDARD("standard")`
-
-            - `FAST("fast")`
 
         - `String name`
 
@@ -438,17 +386,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `Type type`
-
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
-
-                  - `Type type`
-
-                    - `ALWAYS_ASK("always_ask")`
 
             - `Type type`
 
@@ -470,17 +410,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `Type type`
-
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
-
-                  - `Type type`
-
-                    - `ALWAYS_ASK("always_ask")`
 
             - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
@@ -496,17 +428,9 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `Type type`
-
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
-
-                  - `Type type`
-
-                    - `ALWAYS_ASK("always_ask")`
 
             - `String mcpServerName`
 
@@ -562,25 +486,9 @@ Create Session
 
         A resolved Anthropic-managed skill.
 
-        - `String skillId`
-
-        - `Type type`
-
-          - `ANTHROPIC("anthropic")`
-
-        - `String version`
-
       - `class BetaManagedAgentsCustomSkill:`
 
         A resolved user-created custom skill.
-
-        - `String skillId`
-
-        - `Type type`
-
-          - `CUSTOM("custom")`
-
-        - `String version`
 
     - `Optional<String> system`
 
@@ -588,169 +496,11 @@ Create Session
 
       - `class BetaManagedAgentsAgentToolset20260401:`
 
-        - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-          - `boolean enabled`
-
-          - `Name name`
-
-            Built-in agent tool identifier.
-
-            - `BASH("bash")`
-
-            - `EDIT("edit")`
-
-            - `READ("read")`
-
-            - `WRITE("write")`
-
-            - `GLOB("glob")`
-
-            - `GREP("grep")`
-
-            - `WEB_FETCH("web_fetch")`
-
-            - `WEB_SEARCH("web_search")`
-
-          - `PermissionPolicy permissionPolicy`
-
-            Permission policy for tool execution.
-
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `Type type`
-
-                - `ALWAYS_ALLOW("always_allow")`
-
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-              Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `ALWAYS_ASK("always_ask")`
-
-        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-          Resolved default configuration for agent tools.
-
-          - `boolean enabled`
-
-          - `PermissionPolicy permissionPolicy`
-
-            Permission policy for tool execution.
-
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `Type type`
-
-                - `ALWAYS_ALLOW("always_allow")`
-
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-              Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `ALWAYS_ASK("always_ask")`
-
-        - `Type type`
-
-          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
       - `class BetaManagedAgentsMcpToolset:`
-
-        - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-          - `boolean enabled`
-
-          - `String name`
-
-          - `PermissionPolicy permissionPolicy`
-
-            Permission policy for tool execution.
-
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `Type type`
-
-                - `ALWAYS_ALLOW("always_allow")`
-
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-              Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `ALWAYS_ASK("always_ask")`
-
-        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-          Resolved default configuration for all tools from an MCP server.
-
-          - `boolean enabled`
-
-          - `PermissionPolicy permissionPolicy`
-
-            Permission policy for tool execution.
-
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-              Tool calls are automatically approved without user confirmation.
-
-              - `Type type`
-
-                - `ALWAYS_ALLOW("always_allow")`
-
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-              Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `ALWAYS_ASK("always_ask")`
-
-        - `String mcpServerName`
-
-        - `Type type`
-
-          - `MCP_TOOLSET("mcp_toolset")`
 
       - `class BetaManagedAgentsCustomTool:`
 
         A custom tool as returned in API responses.
-
-        - `String description`
-
-        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-          JSON Schema for custom tool input parameters.
-
-          - `Optional<Properties> properties`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `Optional<List<String>> required`
-
-            List of required property names.
-
-          - `Optional<Type> type`
-
-            Must be 'object' for tool input schemas.
-
-            - `OBJECT("object")`
-
-        - `String name`
-
-        - `Type type`
-
-          - `CUSTOM("custom")`
 
     - `Type type`
 
@@ -990,5 +740,172 @@ public final class Main {
             .build();
         BetaManagedAgentsSession betaManagedAgentsSession = client.beta().sessions().create(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ]
 }
 ```

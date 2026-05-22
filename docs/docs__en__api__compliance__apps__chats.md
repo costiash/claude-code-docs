@@ -1,6 +1,6 @@
 # Chats
 
-## List
+## List chats
 
 **get** `/v1/compliance/apps/chats`
 
@@ -151,7 +151,34 @@ curl https://api.anthropic.com/v1/compliance/apps/chats \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "claude_chat_abc123",
+      "name": "Product Requirements Discussion",
+      "created_at": "2025-06-07T08:09:10Z",
+      "updated_at": "2025-06-07T09:10:11Z",
+      "organization_id": "org_abc123",
+      "organization_uuid": "abcdef0123-4567-89ab-cdef-0123456789ab",
+      "project_id": "claude_proj_xyz789",
+      "model": "claude-opus-4-7",
+      "user": {
+        "id": "user_xyz456",
+        "email_address": "user@example.com"
+      },
+      "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789"
+    }
+  ],
+  "has_more": false,
+  "first_id": "claude_chat_abc123",
+  "last_id": "claude_chat_abc123"
+}
+```
+
+## Delete chat
 
 **delete** `/v1/compliance/apps/chats/{claude_chat_id}`
 
@@ -188,11 +215,20 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "claude_chat_abc123",
+  "type": "claude_chat_deleted"
+}
+```
+
 ## Domain Types
 
 ### Chat List Response
 
-- `ChatListResponse = object { id, created_at, deleted_at, 8 more }`
+- `ChatListResponse object { id, created_at, deleted_at, 8 more }`
 
   Chat metadata for listing chats (without messages).
 
@@ -250,7 +286,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
 
 ### Chat Delete Response
 
-- `ChatDeleteResponse = object { id, type }`
+- `ChatDeleteResponse object { id, type }`
 
   Response for deleting a Claude chat.
 
@@ -266,7 +302,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
 
 # Messages
 
-## List
+## Get chat messages
 
 **get** `/v1/compliance/apps/chats/{claude_chat_id}/messages`
 
@@ -497,11 +533,73 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "claude_chat_abc123",
+  "name": "Product Requirements Discussion",
+  "created_at": "2025-06-07T08:09:10Z",
+  "updated_at": "2025-06-07T08:09:11Z",
+  "organization_id": "org_abc123",
+  "organization_uuid": "abcdef0123-4567-89ab-cdef-0123456789ab",
+  "project_id": "claude_proj_xyz789",
+  "model": "claude-opus-4-7",
+  "user": {
+    "id": "user_xyz456",
+    "email_address": "user@example.com"
+  },
+  "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
+  "chat_messages": [
+    {
+      "id": "claude_chat_msg_abc123",
+      "role": "user",
+      "created_at": "2025-06-07T08:09:10Z",
+      "content": [
+        {
+          "type": "text",
+          "text": "Can you help me draft requirements for our new dashboard feature?"
+        }
+      ],
+      "files": [
+        {
+          "id": "claude_file_xyz789",
+          "filename": "dashboard_mockup_v1.pdf",
+          "mime_type": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "claude_chat_msg_def456",
+      "role": "assistant",
+      "created_at": "2025-06-07T08:09:11Z",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'd be happy to help you draft requirements for your dashboard feature..."
+        }
+      ],
+      "artifacts": [
+        {
+          "id": "claude_artifact_abc123",
+          "version_id": "claude_artifact_version_xyz789",
+          "title": "Dashboard Requirements Draft",
+          "artifact_type": "text/markdown"
+        }
+      ]
+    }
+  ],
+  "has_more": false,
+  "first_id": "eyJtc2dfdXVpZCI6ICIwZjcwYjA2Ni0uLi4ifQ==",
+  "last_id": "eyJtc2dfdXVpZCI6ICJhNGUwYjE3Mi0uLi4ifQ=="
+}
+```
+
 ## Domain Types
 
 ### Message List Response
 
-- `MessageListResponse = object { id, artifacts, content, 4 more }`
+- `MessageListResponse object { id, artifacts, content, 4 more }`
 
   A single message in a chat conversation.
 
@@ -587,7 +685,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
 
 # Files
 
-## Retrieve
+## Get file metadata
 
 **get** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
@@ -642,7 +740,23 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "claude_file_xyz789",
+  "filename": "quarterly_report.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 1048576,
+  "md5": "5d41402abc4b2a76b9719d911017c592",
+  "created_at": "2024-01-15T10:30:00Z",
+  "message_ids": [
+    "claude_chat_msg_abc123"
+  ]
+}
+```
+
+## Delete file
 
 **delete** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
@@ -679,7 +793,16 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "id": "claude_file_xyz789",
+  "type": "claude_file_deleted"
+}
+```
+
+## Download file content
 
 **get** `/v1/compliance/apps/chats/files/{claude_file_id}/content`
 
@@ -706,7 +829,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 ### File Retrieve Response
 
-- `FileRetrieveResponse = object { id, created_at, filename, 4 more }`
+- `FileRetrieveResponse object { id, created_at, filename, 4 more }`
 
   File metadata for GET /v1/compliance/apps/chats/files/{claude_file_id}.
 
@@ -743,7 +866,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 ### File Delete Response
 
-- `FileDeleteResponse = object { id, type }`
+- `FileDeleteResponse object { id, type }`
 
   Response for deleting a compliance file.
 
@@ -759,7 +882,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 # Generated Files
 
-## Retrieve
+## Get Claude-generated file metadata
 
 **get** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}`
 
@@ -816,7 +939,21 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "id": "id",
+  "claude_chat_id": "claude_chat_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "mime_type",
+  "size_bytes": 0
+}
+```
+
+## Download a Claude-generated file
 
 **get** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`
 
@@ -843,7 +980,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
 
 ### Generated File Retrieve Response
 
-- `GeneratedFileRetrieveResponse = object { id, claude_chat_id, created_at, 4 more }`
+- `GeneratedFileRetrieveResponse object { id, claude_chat_id, created_at, 4 more }`
 
   Metadata for GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}.
 

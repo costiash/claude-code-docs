@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `client.Beta.Skills.Versions.Download(ctx, version, params) (*Response, error)`
 

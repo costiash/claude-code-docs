@@ -1,4 +1,4 @@
-## Delete
+## Delete File
 
 `beta.files.delete(file_id, **kwargs) -> DeletedFile`
 
@@ -16,9 +16,9 @@ Delete File
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -96,4 +96,13 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 deleted_file = anthropic.beta.files.delete("file_id")
 
 puts(deleted_file)
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```

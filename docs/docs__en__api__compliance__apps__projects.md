@@ -1,6 +1,6 @@
 # Projects
 
-## List
+## List projects
 
 **get** `/v1/compliance/apps/projects`
 
@@ -112,7 +112,31 @@ curl https://api.anthropic.com/v1/compliance/apps/projects \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "claude_proj_abc123",
+      "name": "Q4 Product Planning",
+      "created_at": "2025-06-01T10:00:00Z",
+      "updated_at": "2025-06-15T14:30:00Z",
+      "is_private": true,
+      "organization_id": "org_abc123",
+      "organization_uuid": "abc12345-6789-0abc-def0-123456789abc",
+      "user": {
+        "id": "user_xyz456",
+        "email_address": "user@example.com"
+      }
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_eyJjcmVhdGVkX2F0IjoiMjAyNS0wNi0wMVQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn0="
+}
+```
+
+## Get project details
 
 **get** `/v1/compliance/apps/projects/{project_id}`
 
@@ -200,7 +224,30 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "id",
+  "attachments_count": 0,
+  "chats_count": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "instructions": "instructions",
+  "is_private": true,
+  "name": "name",
+  "organization_id": "organization_id",
+  "organization_uuid": "organization_uuid",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
+```
+
+## Delete project
 
 **delete** `/v1/compliance/apps/projects/{project_id}`
 
@@ -252,11 +299,20 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "claude_project_deleted"
+}
+```
+
 ## Domain Types
 
 ### Project List Response
 
-- `ProjectListResponse = object { id, created_at, deleted_at, 6 more }`
+- `ProjectListResponse object { id, created_at, deleted_at, 6 more }`
 
   Project information for compliance responses.
 
@@ -306,7 +362,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
 ### Project Retrieve Response
 
-- `ProjectRetrieveResponse = object { id, attachments_count, chats_count, 10 more }`
+- `ProjectRetrieveResponse object { id, attachments_count, chats_count, 10 more }`
 
   Detailed project information for compliance responses.
 
@@ -372,7 +428,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
 ### Project Delete Response
 
-- `ProjectDeleteResponse = object { id, type }`
+- `ProjectDeleteResponse object { id, type }`
 
   Response for deleting a Claude project.
 
@@ -388,7 +444,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
 # Attachments
 
-## List
+## List project attachments
 
 **get** `/v1/compliance/apps/projects/{project_id}/attachments`
 
@@ -435,7 +491,7 @@ NotFoundException: If project doesn't exist or project_id format is invalid
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
 
     File attachment reference for compliance responses.
 
@@ -461,7 +517,7 @@ NotFoundException: If project doesn't exist or project_id format is invalid
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -504,6 +560,24 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "filename",
+      "mime_type": "mime_type",
+      "type": "project_file"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Attachment List Response
@@ -512,7 +586,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
   File attachment reference for compliance responses.
 
-  - `ComplianceProjectFileReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
 
     File attachment reference for compliance responses.
 
@@ -538,7 +612,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -568,7 +642,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
 # Documents
 
-## Retrieve
+## Get project document content
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}`
 
@@ -624,7 +698,22 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Metadata
+#### Response
+
+```json
+{
+  "id": "id",
+  "content": "content",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
+```
+
+## Get project document metadata
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
@@ -696,7 +785,25 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
+```
+
+## Delete project document
 
 **delete** `/v1/compliance/apps/projects/documents/{document_id}`
 
@@ -737,11 +844,20 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "claude_project_document_deleted"
+}
+```
+
 ## Domain Types
 
 ### Document Retrieve Response
 
-- `DocumentRetrieveResponse = object { id, content, created_at, 2 more }`
+- `DocumentRetrieveResponse object { id, content, created_at, 2 more }`
 
   Project document information for compliance responses.
 
@@ -775,7 +891,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Metadata Response
 
-- `DocumentMetadataResponse = object { id, claude_project_id, created_at, 5 more }`
+- `DocumentMetadataResponse object { id, claude_project_id, created_at, 5 more }`
 
   Project document metadata for GET /v1/compliance/apps/projects/documents/{document_id}/metadata.
 
@@ -826,7 +942,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Delete Response
 
-- `DocumentDeleteResponse = object { id, type }`
+- `DocumentDeleteResponse object { id, type }`
 
   Response for deleting a project document.
 

@@ -1,4 +1,4 @@
-## Delete
+## Delete a Message Batch
 
 `DeletedMessageBatch Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -40,4 +40,13 @@ BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 var deletedMessageBatch = await client.Messages.Batches.Delete(parameters);
 
 Console.WriteLine(deletedMessageBatch);
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

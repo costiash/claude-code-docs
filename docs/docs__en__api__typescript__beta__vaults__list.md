@@ -1,4 +1,4 @@
-## List
+## List Vaults
 
 `client.beta.vaults.list(VaultListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsVault>`
 
@@ -126,5 +126,26 @@ const client = new Anthropic({
 // Automatically fetches more pages as needed.
 for await (const betaManagedAgentsVault of client.beta.vaults.list()) {
   console.log(betaManagedAgentsVault.id);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Example vault",
+      "metadata": {
+        "environment": "production"
+      },
+      "type": "vault",
+      "updated_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

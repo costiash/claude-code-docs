@@ -1,4 +1,4 @@
-## Delete
+## Delete a Message Batch
 
 `messages.batches.delete(strmessage_batch_id)  -> DeletedMessageBatch`
 
@@ -45,4 +45,13 @@ deleted_message_batch = client.messages.batches.delete(
     "message_batch_id",
 )
 print(deleted_message_batch.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

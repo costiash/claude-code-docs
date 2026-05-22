@@ -1,6 +1,6 @@
 # Completions
 
-## Create
+## Create a Text Completion
 
 `completions.create(CompletionCreateParams**kwargs)  -> Completion`
 
@@ -394,6 +394,18 @@ for completion in client.completions.create(
     prompt="\n\nHuman: Hello, world!\n\nAssistant:",
 ):
   print(completion)
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
 ```
 
 ## Domain Types

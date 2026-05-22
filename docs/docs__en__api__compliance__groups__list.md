@@ -1,4 +1,4 @@
-## List
+## List Compliance Groups
 
 **get** `/v1/compliance/groups`
 
@@ -69,4 +69,26 @@ List Compliance Groups
 ```http
 curl https://api.anthropic.com/v1/compliance/groups \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "created_at",
+      "description": "description",
+      "name": "name",
+      "roles": [
+        "string"
+      ],
+      "source_type": "source_type",
+      "updated_at": "updated_at"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
 ```

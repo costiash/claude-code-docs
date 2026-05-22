@@ -1,6 +1,6 @@
 # Memory Versions
 
-## List
+## List memory versions
 
 `MemoryVersionListPage beta().memoryStores().memoryVersions().list(MemoryVersionListParamsparams = MemoryVersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -204,42 +204,6 @@ List memory versions
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `String sessionId`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
-
-      - `Type type`
-
-        - `SESSION_ACTOR("session_actor")`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `String apiKeyId`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `Type type`
-
-        - `API_ACTOR("api_actor")`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `Type type`
-
-        - `USER_ACTOR("user_actor")`
-
-      - `String userId`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```java
@@ -261,7 +225,38 @@ public final class Main {
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory version
 
 `BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().retrieve(MemoryVersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -435,42 +430,6 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `String sessionId`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
-
-      - `Type type`
-
-        - `SESSION_ACTOR("session_actor")`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `String apiKeyId`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `Type type`
-
-        - `API_ACTOR("api_actor")`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `Type type`
-
-        - `USER_ACTOR("user_actor")`
-
-      - `String userId`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```java
@@ -496,7 +455,33 @@ public final class Main {
 }
 ```
 
-## Redact
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
 
 `BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().redact(MemoryVersionRedactParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -666,42 +651,6 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `String sessionId`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
-
-      - `Type type`
-
-        - `SESSION_ACTOR("session_actor")`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `String apiKeyId`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `Type type`
-
-        - `API_ACTOR("api_actor")`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `Type type`
-
-        - `USER_ACTOR("user_actor")`
-
-      - `String userId`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```java
@@ -724,6 +673,32 @@ public final class Main {
             .build();
         BetaManagedAgentsMemoryVersion betaManagedAgentsMemoryVersion = client.beta().memoryStores().memoryVersions().redact(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
 }
 ```
 
@@ -884,42 +859,6 @@ public final class Main {
   - `Optional<BetaManagedAgentsActor> redactedBy`
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
-
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `String sessionId`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
-
-      - `Type type`
-
-        - `SESSION_ACTOR("session_actor")`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `String apiKeyId`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `Type type`
-
-        - `API_ACTOR("api_actor")`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `Type type`
-
-        - `USER_ACTOR("user_actor")`
-
-      - `String userId`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Beta Managed Agents Memory Version Operation
 

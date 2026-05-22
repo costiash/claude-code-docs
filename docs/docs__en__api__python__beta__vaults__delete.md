@@ -1,4 +1,4 @@
-## Delete
+## Delete Vault
 
 `beta.vaults.delete(strvault_id, VaultDeleteParams**kwargs)  -> BetaManagedAgentsDeletedVault`
 
@@ -95,4 +95,13 @@ beta_managed_agents_deleted_vault = client.beta.vaults.delete(
     vault_id="vlt_011CZkZDLs7fYzm1hXNPeRjv",
 )
 print(beta_managed_agents_deleted_vault.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "type": "vault_deleted"
+}
 ```

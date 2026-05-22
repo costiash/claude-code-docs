@@ -4,7 +4,7 @@
 
 ### Beta Webhook Event
 
-- `BetaWebhookEvent = object { id, created_at, data, type }`
+- `BetaWebhookEvent object { id, created_at, data, type }`
 
   - `id: string`
 
@@ -16,7 +16,7 @@
 
   - `data: BetaWebhookEventData`
 
-    - `BetaWebhookSessionCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -30,7 +30,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionPendingEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionPendingEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -44,7 +44,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionRunningEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionRunningEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -58,7 +58,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -72,7 +72,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionRequiresActionEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionRequiresActionEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -86,7 +86,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionArchivedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionArchivedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -100,7 +100,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionDeletedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionDeletedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -114,7 +114,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusRescheduledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusRescheduledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -128,7 +128,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusRunStartedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusRunStartedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -142,7 +142,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -156,7 +156,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusTerminatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusTerminatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -170,7 +170,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -184,7 +184,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -198,7 +198,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadTerminatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -212,7 +212,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -226,7 +226,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -240,7 +240,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultArchivedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultArchivedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -254,7 +254,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultDeletedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultDeletedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -268,7 +268,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialCreatedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialCreatedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -286,7 +286,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialArchivedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialArchivedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -304,7 +304,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialDeletedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialDeletedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -322,7 +322,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -350,7 +350,7 @@
 
 - `BetaWebhookEventData = BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 19 more`
 
-  - `BetaWebhookSessionCreatedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionCreatedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -364,7 +364,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionPendingEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionPendingEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -378,7 +378,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionRunningEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionRunningEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -392,7 +392,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionIdledEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionIdledEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -406,7 +406,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionRequiresActionEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionRequiresActionEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -420,7 +420,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionArchivedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionArchivedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -434,7 +434,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionDeletedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionDeletedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -448,7 +448,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionStatusRescheduledEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionStatusRescheduledEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -462,7 +462,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionStatusRunStartedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionStatusRunStartedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -476,7 +476,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionStatusIdledEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionStatusIdledEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -490,7 +490,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionStatusTerminatedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionStatusTerminatedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -504,7 +504,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadCreatedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -518,7 +518,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadIdledEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -532,7 +532,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadTerminatedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -546,7 +546,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -560,7 +560,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultCreatedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookVaultCreatedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -574,7 +574,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultArchivedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookVaultArchivedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -588,7 +588,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultDeletedEventData = object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookVaultDeletedEventData object { id, organization_id, type, workspace_id }`
 
     - `id: string`
 
@@ -602,7 +602,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultCredentialCreatedEventData = object { id, organization_id, type, 2 more }`
+  - `BetaWebhookVaultCredentialCreatedEventData object { id, organization_id, type, 2 more }`
 
     - `id: string`
 
@@ -620,7 +620,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultCredentialArchivedEventData = object { id, organization_id, type, 2 more }`
+  - `BetaWebhookVaultCredentialArchivedEventData object { id, organization_id, type, 2 more }`
 
     - `id: string`
 
@@ -638,7 +638,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultCredentialDeletedEventData = object { id, organization_id, type, 2 more }`
+  - `BetaWebhookVaultCredentialDeletedEventData object { id, organization_id, type, 2 more }`
 
     - `id: string`
 
@@ -656,7 +656,7 @@
 
     - `workspace_id: string`
 
-  - `BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization_id, type, 2 more }`
+  - `BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization_id, type, 2 more }`
 
     - `id: string`
 
@@ -676,7 +676,7 @@
 
 ### Beta Webhook Session Archived Event Data
 
-- `BetaWebhookSessionArchivedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionArchivedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -692,7 +692,7 @@
 
 ### Beta Webhook Session Created Event Data
 
-- `BetaWebhookSessionCreatedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionCreatedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -708,7 +708,7 @@
 
 ### Beta Webhook Session Deleted Event Data
 
-- `BetaWebhookSessionDeletedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionDeletedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -724,7 +724,7 @@
 
 ### Beta Webhook Session Idled Event Data
 
-- `BetaWebhookSessionIdledEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionIdledEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -740,7 +740,7 @@
 
 ### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-- `BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -756,7 +756,7 @@
 
 ### Beta Webhook Session Pending Event Data
 
-- `BetaWebhookSessionPendingEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionPendingEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -772,7 +772,7 @@
 
 ### Beta Webhook Session Requires Action Event Data
 
-- `BetaWebhookSessionRequiresActionEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionRequiresActionEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -788,7 +788,7 @@
 
 ### Beta Webhook Session Running Event Data
 
-- `BetaWebhookSessionRunningEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionRunningEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -804,7 +804,7 @@
 
 ### Beta Webhook Session Status Idled Event Data
 
-- `BetaWebhookSessionStatusIdledEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionStatusIdledEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -820,7 +820,7 @@
 
 ### Beta Webhook Session Status Rescheduled Event Data
 
-- `BetaWebhookSessionStatusRescheduledEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionStatusRescheduledEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -836,7 +836,7 @@
 
 ### Beta Webhook Session Status Run Started Event Data
 
-- `BetaWebhookSessionStatusRunStartedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionStatusRunStartedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -852,7 +852,7 @@
 
 ### Beta Webhook Session Status Terminated Event Data
 
-- `BetaWebhookSessionStatusTerminatedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionStatusTerminatedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -868,7 +868,7 @@
 
 ### Beta Webhook Session Thread Created Event Data
 
-- `BetaWebhookSessionThreadCreatedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -884,7 +884,7 @@
 
 ### Beta Webhook Session Thread Idled Event Data
 
-- `BetaWebhookSessionThreadIdledEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -900,7 +900,7 @@
 
 ### Beta Webhook Session Thread Terminated Event Data
 
-- `BetaWebhookSessionThreadTerminatedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -916,7 +916,7 @@
 
 ### Beta Webhook Vault Archived Event Data
 
-- `BetaWebhookVaultArchivedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookVaultArchivedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -932,7 +932,7 @@
 
 ### Beta Webhook Vault Created Event Data
 
-- `BetaWebhookVaultCreatedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookVaultCreatedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -948,7 +948,7 @@
 
 ### Beta Webhook Vault Credential Archived Event Data
 
-- `BetaWebhookVaultCredentialArchivedEventData = object { id, organization_id, type, 2 more }`
+- `BetaWebhookVaultCredentialArchivedEventData object { id, organization_id, type, 2 more }`
 
   - `id: string`
 
@@ -968,7 +968,7 @@
 
 ### Beta Webhook Vault Credential Created Event Data
 
-- `BetaWebhookVaultCredentialCreatedEventData = object { id, organization_id, type, 2 more }`
+- `BetaWebhookVaultCredentialCreatedEventData object { id, organization_id, type, 2 more }`
 
   - `id: string`
 
@@ -988,7 +988,7 @@
 
 ### Beta Webhook Vault Credential Deleted Event Data
 
-- `BetaWebhookVaultCredentialDeletedEventData = object { id, organization_id, type, 2 more }`
+- `BetaWebhookVaultCredentialDeletedEventData object { id, organization_id, type, 2 more }`
 
   - `id: string`
 
@@ -1008,7 +1008,7 @@
 
 ### Beta Webhook Vault Credential Refresh Failed Event Data
 
-- `BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization_id, type, 2 more }`
+- `BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization_id, type, 2 more }`
 
   - `id: string`
 
@@ -1028,7 +1028,7 @@
 
 ### Beta Webhook Vault Deleted Event Data
 
-- `BetaWebhookVaultDeletedEventData = object { id, organization_id, type, workspace_id }`
+- `BetaWebhookVaultDeletedEventData object { id, organization_id, type, workspace_id }`
 
   - `id: string`
 
@@ -1044,7 +1044,7 @@
 
 ### Unwrap Webhook Event
 
-- `UnwrapWebhookEvent = object { id, created_at, data, type }`
+- `UnwrapWebhookEvent object { id, created_at, data, type }`
 
   - `id: string`
 
@@ -1056,7 +1056,7 @@
 
   - `data: BetaWebhookEventData`
 
-    - `BetaWebhookSessionCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1070,7 +1070,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionPendingEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionPendingEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1084,7 +1084,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionRunningEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionRunningEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1098,7 +1098,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1112,7 +1112,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionRequiresActionEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionRequiresActionEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1126,7 +1126,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionArchivedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionArchivedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1140,7 +1140,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionDeletedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionDeletedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1154,7 +1154,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusRescheduledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusRescheduledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1168,7 +1168,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusRunStartedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusRunStartedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1182,7 +1182,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1196,7 +1196,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionStatusTerminatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionStatusTerminatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1210,7 +1210,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1224,7 +1224,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadIdledEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1238,7 +1238,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadTerminatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1252,7 +1252,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1266,7 +1266,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCreatedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultCreatedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1280,7 +1280,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultArchivedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultArchivedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1294,7 +1294,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultDeletedEventData = object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookVaultDeletedEventData object { id, organization_id, type, workspace_id }`
 
       - `id: string`
 
@@ -1308,7 +1308,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialCreatedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialCreatedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -1326,7 +1326,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialArchivedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialArchivedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -1344,7 +1344,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialDeletedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialDeletedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 
@@ -1362,7 +1362,7 @@
 
       - `workspace_id: string`
 
-    - `BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization_id, type, 2 more }`
+    - `BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization_id, type, 2 more }`
 
       - `id: string`
 

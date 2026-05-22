@@ -1,4 +1,4 @@
-## List
+## List organizations
 
 **get** `/v1/compliance/organizations`
 
@@ -35,4 +35,18 @@ response would exceed 1,000 organizations.
 ```http
 curl https://api.anthropic.com/v1/compliance/organizations \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "created_at": "created_at",
+      "name": "name",
+      "uuid": "uuid"
+    }
+  ]
+}
 ```

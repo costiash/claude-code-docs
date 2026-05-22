@@ -1,4 +1,4 @@
-## Delete
+## Delete a Message Batch
 
 `client.Messages.Batches.Delete(ctx, messageBatchID) (*DeletedMessageBatch, error)`
 
@@ -54,5 +54,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", deletedMessageBatch.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
 }
 ```

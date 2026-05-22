@@ -1,4 +1,4 @@
-## Stats
+## Get Queue Statistics
 
 `$ ant beta:environments:work stats`
 
@@ -48,4 +48,16 @@ Get statistics about the work queue for an environment.
 ant beta:environments:work stats \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
 ```

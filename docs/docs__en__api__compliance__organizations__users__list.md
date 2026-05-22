@@ -1,4 +1,4 @@
-## List
+## List organization users
 
 **get** `/v1/compliance/organizations/{org_uuid}/users`
 
@@ -84,4 +84,22 @@ List of user members with pagination info
 ```http
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "email": "email",
+      "full_name": "full_name",
+      "organization_role": "admin"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
 ```

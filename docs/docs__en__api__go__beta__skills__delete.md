@@ -1,4 +1,4 @@
-## Delete
+## Delete Skill
 
 `client.Beta.Skills.Delete(ctx, skillID, body) (*BetaSkillDeleteResponse, error)`
 
@@ -118,5 +118,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", skill.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
 }
 ```

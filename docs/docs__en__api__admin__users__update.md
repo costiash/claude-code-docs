@@ -1,4 +1,4 @@
-## Update
+## Update User
 
 **post** `/v1/organizations/users/{user_id}`
 
@@ -26,7 +26,7 @@ Update User
 
 ### Returns
 
-- `User = object { id, added_at, email, 3 more }`
+- `User object { id, added_at, email, 3 more }`
 
   - `id: string`
 
@@ -76,4 +76,17 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -d '{
           "role": "user"
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "added_at": "2024-10-30T23:58:27.427722Z",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "user",
+  "type": "user"
+}
 ```

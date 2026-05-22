@@ -1,4 +1,4 @@
-## Retrieve
+## Get artifact metadata
 
 **get** `/v1/compliance/apps/artifacts/{artifact_version_id}`
 
@@ -58,4 +58,19 @@ without downloading every artifact.
 ```http
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "artifact_type": "artifact_type",
+  "claude_chat_id": "claude_chat_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "md5": "md5",
+  "size_bytes": 0,
+  "title": "title",
+  "version_id": "version_id"
+}
 ```

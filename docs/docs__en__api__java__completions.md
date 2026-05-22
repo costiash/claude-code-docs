@@ -1,6 +1,6 @@
 # Completions
 
-## Create
+## Create a Text Completion
 
 `Completion completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -267,6 +267,18 @@ public final class Main {
             .build();
         Completion completion = client.completions().create(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
 }
 ```
 

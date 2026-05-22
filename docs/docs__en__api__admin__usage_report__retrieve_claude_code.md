@@ -1,4 +1,4 @@
-## Retrieve Claude Code
+## Get Claude Code Usage Report
 
 **get** `/v1/organizations/usage_report/claude_code`
 
@@ -21,7 +21,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ### Returns
 
-- `ClaudeCodeUsageReport = object { data, has_more, next_page }`
+- `ClaudeCodeUsageReport object { data, has_more, next_page }`
 
   - `data: array of object { actor, core_metrics, customer_type, 6 more }`
 
@@ -31,7 +31,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       The user or API key that performed the Claude Code actions.
 
-      - `UserActor = object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -41,7 +41,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -173,4 +173,81 @@ Enables organizations to analyze developer productivity and build custom dashboa
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "actor": {
+        "email_address": "user@emaildomain.com",
+        "type": "user_actor"
+      },
+      "core_metrics": {
+        "commits_by_claude_code": 8,
+        "lines_of_code": {
+          "added": 342,
+          "removed": 128
+        },
+        "num_sessions": 15,
+        "pull_requests_by_claude_code": 2
+      },
+      "customer_type": "api",
+      "date": "2025-08-08T00:00:00Z",
+      "model_breakdown": [
+        {
+          "estimated_cost": {
+            "amount": 186,
+            "currency": "USD"
+          },
+          "model": "claude-sonnet-4-20250514",
+          "tokens": {
+            "cache_creation": 2340,
+            "cache_read": 8790,
+            "input": 45230,
+            "output": 12450
+          }
+        },
+        {
+          "estimated_cost": {
+            "amount": 42,
+            "currency": "USD"
+          },
+          "model": "claude-3-5-haiku-20241022",
+          "tokens": {
+            "cache_creation": 890,
+            "cache_read": 3420,
+            "input": 23100,
+            "output": 5680
+          }
+        }
+      ],
+      "organization_id": "12345678-1234-5678-1234-567812345678",
+      "terminal_type": "iTerm.app",
+      "tool_actions": {
+        "edit_tool": {
+          "accepted": 25,
+          "rejected": 3
+        },
+        "multi_edit_tool": {
+          "accepted": 12,
+          "rejected": 1
+        },
+        "notebook_edit_tool": {
+          "accepted": 5,
+          "rejected": 2
+        },
+        "write_tool": {
+          "accepted": 8,
+          "rejected": 0
+        }
+      },
+      "subscription_type": "enterprise"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
 ```

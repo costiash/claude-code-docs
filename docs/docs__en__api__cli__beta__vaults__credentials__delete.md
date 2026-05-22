@@ -1,4 +1,4 @@
-## Delete
+## Delete Credential
 
 `$ ant beta:vaults:credentials delete`
 
@@ -41,4 +41,13 @@ ant beta:vaults:credentials delete \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

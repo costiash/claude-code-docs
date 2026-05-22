@@ -1,4 +1,4 @@
-## Create
+## Create Agent
 
 `BetaManagedAgentsAgent Beta.Agents.Create(AgentCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -258,17 +258,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsMcpToolsetParams:`
 
@@ -302,17 +294,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
 
@@ -330,17 +314,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsCustomToolParams:`
 
@@ -626,17 +602,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -658,17 +626,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -684,17 +644,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -756,4 +708,76 @@ AgentCreateParams parameters = new()
 var betaManagedAgentsAgent = await client.Beta.Agents.Create(parameters);
 
 Console.WriteLine(betaManagedAgentsAgent);
+```
+
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
 ```

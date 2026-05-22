@@ -1,4 +1,4 @@
-## Delete
+## Delete Skill Version
 
 `VersionDeleteResponse beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -114,5 +114,14 @@ public final class Main {
             .build();
         VersionDeleteResponse version = client.beta().skills().versions().delete(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
 }
 ```

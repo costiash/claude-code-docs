@@ -1,4 +1,4 @@
-## Create
+## Create a Text Completion
 
 `client.completions.create(CompletionCreateParamsparams, RequestOptionsoptions?): Completion | Stream<Completion>`
 
@@ -236,8 +236,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       See [streaming](https://docs.claude.com/en/api/streaming) for details.
 
-      - `false`
-
   - `CompletionCreateParamsStreaming extends CompletionCreateParamsBase`
 
     - `stream: true`
@@ -373,4 +371,16 @@ const completion = await client.completions.create({
 });
 
 console.log(completion.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
 ```

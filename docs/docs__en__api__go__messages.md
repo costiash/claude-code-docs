@@ -1,6 +1,6 @@
 # Messages
 
-## Create
+## Create a Message
 
 `client.Messages.New(ctx, body) (*Message, error)`
 
@@ -256,25 +256,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type DocumentBlockParamResp struct{…}`
 
           - `Source DocumentBlockParamSourceUnionResp`
@@ -313,197 +294,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `type TextBlockParamResp struct{…}`
 
-                    - `Text string`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations []TextCitationParamUnionResp`
-
-                      - `type CitationCharLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndCharIndex int64`
-
-                        - `StartCharIndex int64`
-
-                        - `Type CharLocation`
-
-                          - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                      - `type CitationPageLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndPageNumber int64`
-
-                        - `StartPageNumber int64`
-
-                        - `Type PageLocation`
-
-                          - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                      - `type CitationContentBlockLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Type ContentBlockLocation`
-
-                          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                      - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `EncryptedIndex string`
-
-                        - `Title string`
-
-                        - `Type WebSearchResultLocation`
-
-                          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                        - `URL string`
-
-                      - `type CitationSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `SearchResultIndex int64`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `Source string`
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Title string`
-
-                        - `Type SearchResultLocation`
-
-                          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                   - `type ImageBlockParamResp struct{…}`
-
-                    - `Source ImageBlockParamSourceUnionResp`
-
-                      - `type Base64ImageSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType Base64ImageSourceMediaType`
-
-                          - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                          - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                          - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                          - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type URLImageSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Image`
-
-                      - `const ImageImage Image = "image"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `Type Content`
 
@@ -525,25 +316,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
 
             - `Enabled bool`
@@ -560,136 +332,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `Type Text`
 
-              - `const TextText Text = "text"`
-
             - `CacheControl CacheControlEphemeral`
 
               Create a cache control breakpoint at this content block.
 
-              - `Type Ephemeral`
-
-                - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-              - `TTL CacheControlEphemeralTTL`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `Citations []TextCitationParamUnionResp`
-
-              - `type CitationCharLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndCharIndex int64`
-
-                - `StartCharIndex int64`
-
-                - `Type CharLocation`
-
-                  - `const CharLocationCharLocation CharLocation = "char_location"`
-
-              - `type CitationPageLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndPageNumber int64`
-
-                - `StartPageNumber int64`
-
-                - `Type PageLocation`
-
-                  - `const PageLocationPageLocation PageLocation = "page_location"`
-
-              - `type CitationContentBlockLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Type ContentBlockLocation`
-
-                  - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-              - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `EncryptedIndex string`
-
-                - `Title string`
-
-                - `Type WebSearchResultLocation`
-
-                  - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                - `URL string`
-
-              - `type CitationSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `SearchResultIndex int64`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `Source string`
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Title string`
-
-                - `Type SearchResultLocation`
-
-                  - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
           - `Source string`
 
@@ -703,28 +350,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
-
-            - `Enabled bool`
 
         - `type ThinkingBlockParamResp struct{…}`
 
@@ -759,25 +385,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `Caller ToolUseBlockParamCallerUnionResp`
 
@@ -821,673 +428,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Content []ToolResultBlockParamContentUnionResp`
 
             - `[]ToolResultBlockParamContentUnionResp`
 
               - `type TextBlockParamResp struct{…}`
 
-                - `Text string`
-
-                - `Type Text`
-
-                  - `const TextText Text = "text"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations []TextCitationParamUnionResp`
-
-                  - `type CitationCharLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndCharIndex int64`
-
-                    - `StartCharIndex int64`
-
-                    - `Type CharLocation`
-
-                      - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                  - `type CitationPageLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndPageNumber int64`
-
-                    - `StartPageNumber int64`
-
-                    - `Type PageLocation`
-
-                      - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                  - `type CitationContentBlockLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Type ContentBlockLocation`
-
-                      - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                  - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `EncryptedIndex string`
-
-                    - `Title string`
-
-                    - `Type WebSearchResultLocation`
-
-                      - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                    - `URL string`
-
-                  - `type CitationSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `SearchResultIndex int64`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `Source string`
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Title string`
-
-                    - `Type SearchResultLocation`
-
-                      - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
               - `type ImageBlockParamResp struct{…}`
-
-                - `Source ImageBlockParamSourceUnionResp`
-
-                  - `type Base64ImageSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType Base64ImageSourceMediaType`
-
-                      - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                      - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                      - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                      - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type URLImageSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Image`
-
-                  - `const ImageImage Image = "image"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `type SearchResultBlockParamResp struct{…}`
 
-                - `Content []TextBlockParamResp`
-
-                  - `Text string`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Citations []TextCitationParamUnionResp`
-
-                    - `type CitationCharLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndCharIndex int64`
-
-                      - `StartCharIndex int64`
-
-                      - `Type CharLocation`
-
-                        - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                    - `type CitationPageLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndPageNumber int64`
-
-                      - `StartPageNumber int64`
-
-                      - `Type PageLocation`
-
-                        - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                    - `type CitationContentBlockLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Type ContentBlockLocation`
-
-                        - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                    - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `EncryptedIndex string`
-
-                      - `Title string`
-
-                      - `Type WebSearchResultLocation`
-
-                        - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                      - `URL string`
-
-                    - `type CitationSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `SearchResultIndex int64`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `Source string`
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Title string`
-
-                      - `Type SearchResultLocation`
-
-                        - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                - `Source string`
-
-                - `Title string`
-
-                - `Type SearchResult`
-
-                  - `const SearchResultSearchResult SearchResult = "search_result"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
               - `type DocumentBlockParamResp struct{…}`
-
-                - `Source DocumentBlockParamSourceUnionResp`
-
-                  - `type Base64PDFSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType ApplicationPDF`
-
-                      - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type PlainTextSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType TextPlain`
-
-                      - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                  - `type ContentBlockSource struct{…}`
-
-                    - `Content ContentBlockSourceContentUnion`
-
-                      - `string`
-
-                      - `[]ContentBlockSourceContentItemUnion`
-
-                        - `type TextBlockParamResp struct{…}`
-
-                          - `Text string`
-
-                          - `Type Text`
-
-                            - `const TextText Text = "text"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                          - `Citations []TextCitationParamUnionResp`
-
-                            - `type CitationCharLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndCharIndex int64`
-
-                              - `StartCharIndex int64`
-
-                              - `Type CharLocation`
-
-                                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                            - `type CitationPageLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndPageNumber int64`
-
-                              - `StartPageNumber int64`
-
-                              - `Type PageLocation`
-
-                                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                            - `type CitationContentBlockLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Type ContentBlockLocation`
-
-                                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `EncryptedIndex string`
-
-                              - `Title string`
-
-                              - `Type WebSearchResultLocation`
-
-                                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                              - `URL string`
-
-                            - `type CitationSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `SearchResultIndex int64`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `Source string`
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Title string`
-
-                              - `Type SearchResultLocation`
-
-                                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                        - `type ImageBlockParamResp struct{…}`
-
-                          - `Source ImageBlockParamSourceUnionResp`
-
-                            - `type Base64ImageSource struct{…}`
-
-                              - `Data string`
-
-                              - `MediaType Base64ImageSourceMediaType`
-
-                                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                              - `Type Base64`
-
-                                - `const Base64Base64 Base64 = "base64"`
-
-                            - `type URLImageSource struct{…}`
-
-                              - `Type URL`
-
-                                - `const URLURL URL = "url"`
-
-                              - `URL string`
-
-                          - `Type Image`
-
-                            - `const ImageImage Image = "image"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Type Content`
-
-                      - `const ContentContent Content = "content"`
-
-                  - `type URLPDFSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Document`
-
-                  - `const DocumentDocument Document = "document"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
-                - `Context string`
-
-                - `Title string`
 
               - `type ToolReferenceBlockParamResp struct{…}`
 
@@ -1502,25 +453,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
                 - `CacheControl CacheControlEphemeral`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `IsError bool`
 
@@ -1554,25 +486,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller ServerToolUseBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -1581,27 +494,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type WebSearchToolResultBlockParamResp struct{…}`
 
@@ -1651,25 +548,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller WebSearchToolResultBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -1678,27 +556,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type WebFetchToolResultBlockParamResp struct{…}`
 
@@ -1732,281 +594,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `Content DocumentBlockParamResp`
 
-                - `Source DocumentBlockParamSourceUnionResp`
-
-                  - `type Base64PDFSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType ApplicationPDF`
-
-                      - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type PlainTextSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType TextPlain`
-
-                      - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                  - `type ContentBlockSource struct{…}`
-
-                    - `Content ContentBlockSourceContentUnion`
-
-                      - `string`
-
-                      - `[]ContentBlockSourceContentItemUnion`
-
-                        - `type TextBlockParamResp struct{…}`
-
-                          - `Text string`
-
-                          - `Type Text`
-
-                            - `const TextText Text = "text"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                          - `Citations []TextCitationParamUnionResp`
-
-                            - `type CitationCharLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndCharIndex int64`
-
-                              - `StartCharIndex int64`
-
-                              - `Type CharLocation`
-
-                                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                            - `type CitationPageLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndPageNumber int64`
-
-                              - `StartPageNumber int64`
-
-                              - `Type PageLocation`
-
-                                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                            - `type CitationContentBlockLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Type ContentBlockLocation`
-
-                                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `EncryptedIndex string`
-
-                              - `Title string`
-
-                              - `Type WebSearchResultLocation`
-
-                                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                              - `URL string`
-
-                            - `type CitationSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `SearchResultIndex int64`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `Source string`
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Title string`
-
-                              - `Type SearchResultLocation`
-
-                                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                        - `type ImageBlockParamResp struct{…}`
-
-                          - `Source ImageBlockParamSourceUnionResp`
-
-                            - `type Base64ImageSource struct{…}`
-
-                              - `Data string`
-
-                              - `MediaType Base64ImageSourceMediaType`
-
-                                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                              - `Type Base64`
-
-                                - `const Base64Base64 Base64 = "base64"`
-
-                            - `type URLImageSource struct{…}`
-
-                              - `Type URL`
-
-                                - `const URLURL URL = "url"`
-
-                              - `URL string`
-
-                          - `Type Image`
-
-                            - `const ImageImage Image = "image"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Type Content`
-
-                      - `const ContentContent Content = "content"`
-
-                  - `type URLPDFSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Document`
-
-                  - `const DocumentDocument Document = "document"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
-                - `Context string`
-
-                - `Title string`
-
               - `Type WebFetchResult`
 
                 - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
@@ -2029,25 +616,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -2056,27 +624,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -2130,8 +682,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `Type CodeExecutionOutput`
 
-                  - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
               - `EncryptedStdout string`
 
               - `ReturnCode int64`
@@ -2151,25 +701,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -2222,25 +753,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -2322,25 +834,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type ToolSearchToolResultBlockParamResp struct{…}`
 
           - `Content ToolSearchToolResultBlockParamContentUnionResp`
@@ -2369,30 +862,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `Type ToolReference`
 
-                  - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
                 - `CacheControl CacheControlEphemeral`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -2408,25 +880,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type ContainerUploadBlockParamResp struct{…}`
 
           A content block that represents a file to be uploaded to the container
@@ -2441,25 +894,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `Role MessageParamRole`
 
@@ -2525,136 +959,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `Type Text`
 
-        - `const TextText Text = "text"`
-
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations []TextCitationParamUnionResp`
-
-        - `type CitationCharLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndCharIndex int64`
-
-          - `StartCharIndex int64`
-
-          - `Type CharLocation`
-
-            - `const CharLocationCharLocation CharLocation = "char_location"`
-
-        - `type CitationPageLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndPageNumber int64`
-
-          - `StartPageNumber int64`
-
-          - `Type PageLocation`
-
-            - `const PageLocationPageLocation PageLocation = "page_location"`
-
-        - `type CitationContentBlockLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Type ContentBlockLocation`
-
-            - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-        - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `EncryptedIndex string`
-
-          - `Title string`
-
-          - `Type WebSearchResultLocation`
-
-            - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-          - `URL string`
-
-        - `type CitationSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `SearchResultIndex int64`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `Source string`
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Title string`
-
-          - `Type SearchResultLocation`
-
-            - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
   - `Temperature param.Field[float64]`
 
@@ -2774,25 +1083,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -2843,25 +1133,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -2898,25 +1169,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -2950,25 +1202,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -3006,25 +1239,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3058,25 +1272,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -3114,25 +1309,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3169,25 +1345,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3223,25 +1380,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -3290,25 +1428,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -3380,30 +1499,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -3455,25 +1553,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3489,26 +1568,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `UserLocation UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
-
-        - `Type Approximate`
-
-          - `const ApproximateApproximate Approximate = "approximate"`
-
-        - `City string`
-
-          The city of the user.
-
-        - `Country string`
-
-          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-        - `Region string`
-
-          The region of the user.
-
-        - `Timezone string`
-
-          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
     - `type WebFetchTool20260209 struct{…}`
 
@@ -3544,30 +1603,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -3621,30 +1659,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -3694,25 +1711,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3748,25 +1746,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -4039,27 +2018,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Input map[string, any]`
 
@@ -4093,27 +2056,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
@@ -4167,27 +2114,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
@@ -4328,8 +2259,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `FileID string`
 
             - `Type CodeExecutionOutput`
-
-              - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
           - `EncryptedStdout string`
 
@@ -4780,7 +2709,62 @@ func main() {
 }
 ```
 
-## Count Tokens
+#### Response
+
+```json
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "container": {
+    "id": "id",
+    "expires_at": "2019-12-27T18:11:19.117Z"
+  },
+  "content": [
+    {
+      "citations": [
+        {
+          "cited_text": "cited_text",
+          "document_index": 0,
+          "document_title": "document_title",
+          "end_char_index": 0,
+          "file_id": "file_id",
+          "start_char_index": 0,
+          "type": "char_location"
+        }
+      ],
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "model": "claude-opus-4-6",
+  "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 2051,
+    "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
+    "input_tokens": 2095,
+    "output_tokens": 503,
+    "server_tool_use": {
+      "web_fetch_requests": 2,
+      "web_search_requests": 0
+    },
+    "service_tier": "standard"
+  }
+}
+```
+
+## Count tokens in a Message
 
 `client.Messages.CountTokens(ctx, body) (*MessageTokensCount, error)`
 
@@ -5026,25 +3010,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type DocumentBlockParamResp struct{…}`
 
           - `Source DocumentBlockParamSourceUnionResp`
@@ -5083,197 +3048,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `type TextBlockParamResp struct{…}`
 
-                    - `Text string`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations []TextCitationParamUnionResp`
-
-                      - `type CitationCharLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndCharIndex int64`
-
-                        - `StartCharIndex int64`
-
-                        - `Type CharLocation`
-
-                          - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                      - `type CitationPageLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndPageNumber int64`
-
-                        - `StartPageNumber int64`
-
-                        - `Type PageLocation`
-
-                          - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                      - `type CitationContentBlockLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Type ContentBlockLocation`
-
-                          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                      - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `EncryptedIndex string`
-
-                        - `Title string`
-
-                        - `Type WebSearchResultLocation`
-
-                          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                        - `URL string`
-
-                      - `type CitationSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `SearchResultIndex int64`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `Source string`
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Title string`
-
-                        - `Type SearchResultLocation`
-
-                          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                   - `type ImageBlockParamResp struct{…}`
-
-                    - `Source ImageBlockParamSourceUnionResp`
-
-                      - `type Base64ImageSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType Base64ImageSourceMediaType`
-
-                          - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                          - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                          - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                          - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type URLImageSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Image`
-
-                      - `const ImageImage Image = "image"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `Type Content`
 
@@ -5295,25 +3070,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
 
             - `Enabled bool`
@@ -5330,136 +3086,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `Type Text`
 
-              - `const TextText Text = "text"`
-
             - `CacheControl CacheControlEphemeral`
 
               Create a cache control breakpoint at this content block.
 
-              - `Type Ephemeral`
-
-                - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-              - `TTL CacheControlEphemeralTTL`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `Citations []TextCitationParamUnionResp`
-
-              - `type CitationCharLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndCharIndex int64`
-
-                - `StartCharIndex int64`
-
-                - `Type CharLocation`
-
-                  - `const CharLocationCharLocation CharLocation = "char_location"`
-
-              - `type CitationPageLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndPageNumber int64`
-
-                - `StartPageNumber int64`
-
-                - `Type PageLocation`
-
-                  - `const PageLocationPageLocation PageLocation = "page_location"`
-
-              - `type CitationContentBlockLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Type ContentBlockLocation`
-
-                  - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-              - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `EncryptedIndex string`
-
-                - `Title string`
-
-                - `Type WebSearchResultLocation`
-
-                  - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                - `URL string`
-
-              - `type CitationSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `SearchResultIndex int64`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `Source string`
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Title string`
-
-                - `Type SearchResultLocation`
-
-                  - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
           - `Source string`
 
@@ -5473,28 +3104,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
-
-            - `Enabled bool`
 
         - `type ThinkingBlockParamResp struct{…}`
 
@@ -5529,25 +3139,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `Caller ToolUseBlockParamCallerUnionResp`
 
@@ -5591,673 +3182,17 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Content []ToolResultBlockParamContentUnionResp`
 
             - `[]ToolResultBlockParamContentUnionResp`
 
               - `type TextBlockParamResp struct{…}`
 
-                - `Text string`
-
-                - `Type Text`
-
-                  - `const TextText Text = "text"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations []TextCitationParamUnionResp`
-
-                  - `type CitationCharLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndCharIndex int64`
-
-                    - `StartCharIndex int64`
-
-                    - `Type CharLocation`
-
-                      - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                  - `type CitationPageLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndPageNumber int64`
-
-                    - `StartPageNumber int64`
-
-                    - `Type PageLocation`
-
-                      - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                  - `type CitationContentBlockLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Type ContentBlockLocation`
-
-                      - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                  - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `EncryptedIndex string`
-
-                    - `Title string`
-
-                    - `Type WebSearchResultLocation`
-
-                      - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                    - `URL string`
-
-                  - `type CitationSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `SearchResultIndex int64`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `Source string`
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Title string`
-
-                    - `Type SearchResultLocation`
-
-                      - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
               - `type ImageBlockParamResp struct{…}`
-
-                - `Source ImageBlockParamSourceUnionResp`
-
-                  - `type Base64ImageSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType Base64ImageSourceMediaType`
-
-                      - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                      - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                      - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                      - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type URLImageSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Image`
-
-                  - `const ImageImage Image = "image"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `type SearchResultBlockParamResp struct{…}`
 
-                - `Content []TextBlockParamResp`
-
-                  - `Text string`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Citations []TextCitationParamUnionResp`
-
-                    - `type CitationCharLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndCharIndex int64`
-
-                      - `StartCharIndex int64`
-
-                      - `Type CharLocation`
-
-                        - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                    - `type CitationPageLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndPageNumber int64`
-
-                      - `StartPageNumber int64`
-
-                      - `Type PageLocation`
-
-                        - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                    - `type CitationContentBlockLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Type ContentBlockLocation`
-
-                        - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                    - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `EncryptedIndex string`
-
-                      - `Title string`
-
-                      - `Type WebSearchResultLocation`
-
-                        - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                      - `URL string`
-
-                    - `type CitationSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `SearchResultIndex int64`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `Source string`
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Title string`
-
-                      - `Type SearchResultLocation`
-
-                        - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                - `Source string`
-
-                - `Title string`
-
-                - `Type SearchResult`
-
-                  - `const SearchResultSearchResult SearchResult = "search_result"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
               - `type DocumentBlockParamResp struct{…}`
-
-                - `Source DocumentBlockParamSourceUnionResp`
-
-                  - `type Base64PDFSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType ApplicationPDF`
-
-                      - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type PlainTextSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType TextPlain`
-
-                      - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                  - `type ContentBlockSource struct{…}`
-
-                    - `Content ContentBlockSourceContentUnion`
-
-                      - `string`
-
-                      - `[]ContentBlockSourceContentItemUnion`
-
-                        - `type TextBlockParamResp struct{…}`
-
-                          - `Text string`
-
-                          - `Type Text`
-
-                            - `const TextText Text = "text"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                          - `Citations []TextCitationParamUnionResp`
-
-                            - `type CitationCharLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndCharIndex int64`
-
-                              - `StartCharIndex int64`
-
-                              - `Type CharLocation`
-
-                                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                            - `type CitationPageLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndPageNumber int64`
-
-                              - `StartPageNumber int64`
-
-                              - `Type PageLocation`
-
-                                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                            - `type CitationContentBlockLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Type ContentBlockLocation`
-
-                                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `EncryptedIndex string`
-
-                              - `Title string`
-
-                              - `Type WebSearchResultLocation`
-
-                                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                              - `URL string`
-
-                            - `type CitationSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `SearchResultIndex int64`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `Source string`
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Title string`
-
-                              - `Type SearchResultLocation`
-
-                                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                        - `type ImageBlockParamResp struct{…}`
-
-                          - `Source ImageBlockParamSourceUnionResp`
-
-                            - `type Base64ImageSource struct{…}`
-
-                              - `Data string`
-
-                              - `MediaType Base64ImageSourceMediaType`
-
-                                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                              - `Type Base64`
-
-                                - `const Base64Base64 Base64 = "base64"`
-
-                            - `type URLImageSource struct{…}`
-
-                              - `Type URL`
-
-                                - `const URLURL URL = "url"`
-
-                              - `URL string`
-
-                          - `Type Image`
-
-                            - `const ImageImage Image = "image"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Type Content`
-
-                      - `const ContentContent Content = "content"`
-
-                  - `type URLPDFSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Document`
-
-                  - `const DocumentDocument Document = "document"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
-                - `Context string`
-
-                - `Title string`
 
               - `type ToolReferenceBlockParamResp struct{…}`
 
@@ -6272,25 +3207,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
                 - `CacheControl CacheControlEphemeral`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `IsError bool`
 
@@ -6324,25 +3240,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller ServerToolUseBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -6351,27 +3248,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type WebSearchToolResultBlockParamResp struct{…}`
 
@@ -6421,25 +3302,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller WebSearchToolResultBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -6448,27 +3310,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type WebFetchToolResultBlockParamResp struct{…}`
 
@@ -6502,281 +3348,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `Content DocumentBlockParamResp`
 
-                - `Source DocumentBlockParamSourceUnionResp`
-
-                  - `type Base64PDFSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType ApplicationPDF`
-
-                      - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                    - `Type Base64`
-
-                      - `const Base64Base64 Base64 = "base64"`
-
-                  - `type PlainTextSource struct{…}`
-
-                    - `Data string`
-
-                    - `MediaType TextPlain`
-
-                      - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                  - `type ContentBlockSource struct{…}`
-
-                    - `Content ContentBlockSourceContentUnion`
-
-                      - `string`
-
-                      - `[]ContentBlockSourceContentItemUnion`
-
-                        - `type TextBlockParamResp struct{…}`
-
-                          - `Text string`
-
-                          - `Type Text`
-
-                            - `const TextText Text = "text"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                          - `Citations []TextCitationParamUnionResp`
-
-                            - `type CitationCharLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndCharIndex int64`
-
-                              - `StartCharIndex int64`
-
-                              - `Type CharLocation`
-
-                                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                            - `type CitationPageLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndPageNumber int64`
-
-                              - `StartPageNumber int64`
-
-                              - `Type PageLocation`
-
-                                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                            - `type CitationContentBlockLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `DocumentIndex int64`
-
-                              - `DocumentTitle string`
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Type ContentBlockLocation`
-
-                                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                              - `EncryptedIndex string`
-
-                              - `Title string`
-
-                              - `Type WebSearchResultLocation`
-
-                                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                              - `URL string`
-
-                            - `type CitationSearchResultLocationParamResp struct{…}`
-
-                              - `CitedText string`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `EndBlockIndex int64`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `SearchResultIndex int64`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `Source string`
-
-                              - `StartBlockIndex int64`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `Title string`
-
-                              - `Type SearchResultLocation`
-
-                                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                        - `type ImageBlockParamResp struct{…}`
-
-                          - `Source ImageBlockParamSourceUnionResp`
-
-                            - `type Base64ImageSource struct{…}`
-
-                              - `Data string`
-
-                              - `MediaType Base64ImageSourceMediaType`
-
-                                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                              - `Type Base64`
-
-                                - `const Base64Base64 Base64 = "base64"`
-
-                            - `type URLImageSource struct{…}`
-
-                              - `Type URL`
-
-                                - `const URLURL URL = "url"`
-
-                              - `URL string`
-
-                          - `Type Image`
-
-                            - `const ImageImage Image = "image"`
-
-                          - `CacheControl CacheControlEphemeral`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `Type Ephemeral`
-
-                              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                            - `TTL CacheControlEphemeralTTL`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Type Content`
-
-                      - `const ContentContent Content = "content"`
-
-                  - `type URLPDFSource struct{…}`
-
-                    - `Type URL`
-
-                      - `const URLURL URL = "url"`
-
-                    - `URL string`
-
-                - `Type Document`
-
-                  - `const DocumentDocument Document = "document"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations CitationsConfigParamResp`
-
-                  - `Enabled bool`
-
-                - `Context string`
-
-                - `Title string`
-
               - `Type WebFetchResult`
 
                 - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
@@ -6799,25 +3370,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
             Tool invocation directly from the model.
@@ -6826,27 +3378,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -6900,8 +3436,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `Type CodeExecutionOutput`
 
-                  - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
               - `EncryptedStdout string`
 
               - `ReturnCode int64`
@@ -6921,25 +3455,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -6992,25 +3507,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -7092,25 +3588,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type ToolSearchToolResultBlockParamResp struct{…}`
 
           - `Content ToolSearchToolResultBlockParamContentUnionResp`
@@ -7139,30 +3616,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `Type ToolReference`
 
-                  - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
                 - `CacheControl CacheControlEphemeral`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -7178,25 +3634,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `type ContainerUploadBlockParamResp struct{…}`
 
           A content block that represents a file to be uploaded to the container
@@ -7211,25 +3648,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `Role MessageParamRole`
 
@@ -7265,136 +3683,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `Type Text`
 
-        - `const TextText Text = "text"`
-
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations []TextCitationParamUnionResp`
-
-        - `type CitationCharLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndCharIndex int64`
-
-          - `StartCharIndex int64`
-
-          - `Type CharLocation`
-
-            - `const CharLocationCharLocation CharLocation = "char_location"`
-
-        - `type CitationPageLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndPageNumber int64`
-
-          - `StartPageNumber int64`
-
-          - `Type PageLocation`
-
-            - `const PageLocationPageLocation PageLocation = "page_location"`
-
-        - `type CitationContentBlockLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Type ContentBlockLocation`
-
-            - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-        - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `EncryptedIndex string`
-
-          - `Title string`
-
-          - `Type WebSearchResultLocation`
-
-            - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-          - `URL string`
-
-        - `type CitationSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `SearchResultIndex int64`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `Source string`
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Title string`
-
-          - `Type SearchResultLocation`
-
-            - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
   - `Thinking param.Field[ThinkingConfigParamUnionResp]`
 
@@ -7506,25 +3799,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7575,25 +3849,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7630,25 +3885,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7682,25 +3918,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -7738,25 +3955,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7790,25 +3988,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -7846,25 +4025,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7901,25 +4061,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -7955,25 +4096,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -8022,25 +4144,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -8112,30 +4215,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -8187,25 +4269,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8221,26 +4284,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `UserLocation UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
-
-        - `Type Approximate`
-
-          - `const ApproximateApproximate Approximate = "approximate"`
-
-        - `City string`
-
-          The city of the user.
-
-        - `Country string`
-
-          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-        - `Region string`
-
-          The region of the user.
-
-        - `Timezone string`
-
-          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
     - `type WebFetchTool20260209 struct{…}`
 
@@ -8276,30 +4319,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -8353,30 +4375,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations CitationsConfigParamResp`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Enabled bool`
 
       - `DeferLoading bool`
 
@@ -8426,25 +4427,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `DeferLoading bool`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8480,25 +4462,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `DeferLoading bool`
 
@@ -8548,6 +4511,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", messageTokensCount.InputTokens)
+}
+```
+
+#### Response
+
+```json
+{
+  "input_tokens": 2095
 }
 ```
 
@@ -9514,8 +5485,6 @@ func main() {
 
         - `Type CodeExecutionOutput`
 
-          - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
       - `EncryptedStdout string`
 
       - `ReturnCode int64`
@@ -9584,8 +5553,6 @@ func main() {
 
       - `Type CodeExecutionOutput`
 
-        - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
     - `EncryptedStdout string`
 
     - `ReturnCode int64`
@@ -9649,8 +5616,6 @@ func main() {
         - `FileID string`
 
         - `Type CodeExecutionOutput`
-
-          - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
       - `EncryptedStdout string`
 
@@ -9742,8 +5707,6 @@ func main() {
       - `FileID string`
 
       - `Type CodeExecutionOutput`
-
-        - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
     - `EncryptedStdout string`
 
@@ -10067,27 +6030,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
     - `Input map[string, any]`
 
@@ -10121,27 +6068,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
     - `Content WebSearchToolResultBlockContentUnion`
 
@@ -10195,27 +6126,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
     - `Content WebFetchToolResultBlockContentUnion`
 
@@ -10356,8 +6271,6 @@ func main() {
           - `FileID string`
 
           - `Type CodeExecutionOutput`
-
-            - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
         - `EncryptedStdout string`
 
@@ -10732,25 +6645,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
   - `type DocumentBlockParamResp struct{…}`
 
     - `Source DocumentBlockParamSourceUnionResp`
@@ -10789,197 +6683,7 @@ func main() {
 
             - `type TextBlockParamResp struct{…}`
 
-              - `Text string`
-
-              - `Type Text`
-
-                - `const TextText Text = "text"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Citations []TextCitationParamUnionResp`
-
-                - `type CitationCharLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndCharIndex int64`
-
-                  - `StartCharIndex int64`
-
-                  - `Type CharLocation`
-
-                    - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                - `type CitationPageLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndPageNumber int64`
-
-                  - `StartPageNumber int64`
-
-                  - `Type PageLocation`
-
-                    - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                - `type CitationContentBlockLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndBlockIndex int64`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `StartBlockIndex int64`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `Type ContentBlockLocation`
-
-                    - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `EncryptedIndex string`
-
-                  - `Title string`
-
-                  - `Type WebSearchResultLocation`
-
-                    - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                  - `URL string`
-
-                - `type CitationSearchResultLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `EndBlockIndex int64`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `SearchResultIndex int64`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `Source string`
-
-                  - `StartBlockIndex int64`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `Title string`
-
-                  - `Type SearchResultLocation`
-
-                    - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
             - `type ImageBlockParamResp struct{…}`
-
-              - `Source ImageBlockParamSourceUnionResp`
-
-                - `type Base64ImageSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType Base64ImageSourceMediaType`
-
-                    - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                    - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                    - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                    - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                  - `Type Base64`
-
-                    - `const Base64Base64 Base64 = "base64"`
-
-                - `type URLImageSource struct{…}`
-
-                  - `Type URL`
-
-                    - `const URLURL URL = "url"`
-
-                  - `URL string`
-
-              - `Type Image`
-
-                - `const ImageImage Image = "image"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Type Content`
 
@@ -11001,25 +6705,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       - `Enabled bool`
@@ -11036,136 +6721,11 @@ func main() {
 
       - `Type Text`
 
-        - `const TextText Text = "text"`
-
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Citations []TextCitationParamUnionResp`
-
-        - `type CitationCharLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndCharIndex int64`
-
-          - `StartCharIndex int64`
-
-          - `Type CharLocation`
-
-            - `const CharLocationCharLocation CharLocation = "char_location"`
-
-        - `type CitationPageLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndPageNumber int64`
-
-          - `StartPageNumber int64`
-
-          - `Type PageLocation`
-
-            - `const PageLocationPageLocation PageLocation = "page_location"`
-
-        - `type CitationContentBlockLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Type ContentBlockLocation`
-
-            - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-        - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `EncryptedIndex string`
-
-          - `Title string`
-
-          - `Type WebSearchResultLocation`
-
-            - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-          - `URL string`
-
-        - `type CitationSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `SearchResultIndex int64`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `Source string`
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Title string`
-
-          - `Type SearchResultLocation`
-
-            - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
     - `Source string`
 
@@ -11179,28 +6739,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
-
-      - `Enabled bool`
 
   - `type ThinkingBlockParamResp struct{…}`
 
@@ -11235,25 +6774,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `Caller ToolUseBlockParamCallerUnionResp`
 
@@ -11297,673 +6817,17 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Content []ToolResultBlockParamContentUnionResp`
 
       - `[]ToolResultBlockParamContentUnionResp`
 
         - `type TextBlockParamResp struct{…}`
 
-          - `Text string`
-
-          - `Type Text`
-
-            - `const TextText Text = "text"`
-
-          - `CacheControl CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-          - `Citations []TextCitationParamUnionResp`
-
-            - `type CitationCharLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndCharIndex int64`
-
-              - `StartCharIndex int64`
-
-              - `Type CharLocation`
-
-                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-            - `type CitationPageLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndPageNumber int64`
-
-              - `StartPageNumber int64`
-
-              - `Type PageLocation`
-
-                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-            - `type CitationContentBlockLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Type ContentBlockLocation`
-
-                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `EncryptedIndex string`
-
-              - `Title string`
-
-              - `Type WebSearchResultLocation`
-
-                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-              - `URL string`
-
-            - `type CitationSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `SearchResultIndex int64`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `Source string`
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Title string`
-
-              - `Type SearchResultLocation`
-
-                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
         - `type ImageBlockParamResp struct{…}`
-
-          - `Source ImageBlockParamSourceUnionResp`
-
-            - `type Base64ImageSource struct{…}`
-
-              - `Data string`
-
-              - `MediaType Base64ImageSourceMediaType`
-
-                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-              - `Type Base64`
-
-                - `const Base64Base64 Base64 = "base64"`
-
-            - `type URLImageSource struct{…}`
-
-              - `Type URL`
-
-                - `const URLURL URL = "url"`
-
-              - `URL string`
-
-          - `Type Image`
-
-            - `const ImageImage Image = "image"`
-
-          - `CacheControl CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `type SearchResultBlockParamResp struct{…}`
 
-          - `Content []TextBlockParamResp`
-
-            - `Text string`
-
-            - `Type Text`
-
-              - `const TextText Text = "text"`
-
-            - `CacheControl CacheControlEphemeral`
-
-              Create a cache control breakpoint at this content block.
-
-              - `Type Ephemeral`
-
-                - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-              - `TTL CacheControlEphemeralTTL`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-            - `Citations []TextCitationParamUnionResp`
-
-              - `type CitationCharLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndCharIndex int64`
-
-                - `StartCharIndex int64`
-
-                - `Type CharLocation`
-
-                  - `const CharLocationCharLocation CharLocation = "char_location"`
-
-              - `type CitationPageLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndPageNumber int64`
-
-                - `StartPageNumber int64`
-
-                - `Type PageLocation`
-
-                  - `const PageLocationPageLocation PageLocation = "page_location"`
-
-              - `type CitationContentBlockLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `DocumentIndex int64`
-
-                - `DocumentTitle string`
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Type ContentBlockLocation`
-
-                  - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-              - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                - `EncryptedIndex string`
-
-                - `Title string`
-
-                - `Type WebSearchResultLocation`
-
-                  - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                - `URL string`
-
-              - `type CitationSearchResultLocationParamResp struct{…}`
-
-                - `CitedText string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `EndBlockIndex int64`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `SearchResultIndex int64`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `Source string`
-
-                - `StartBlockIndex int64`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `Title string`
-
-                - `Type SearchResultLocation`
-
-                  - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-          - `Source string`
-
-          - `Title string`
-
-          - `Type SearchResult`
-
-            - `const SearchResultSearchResult SearchResult = "search_result"`
-
-          - `CacheControl CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-          - `Citations CitationsConfigParamResp`
-
-            - `Enabled bool`
-
         - `type DocumentBlockParamResp struct{…}`
-
-          - `Source DocumentBlockParamSourceUnionResp`
-
-            - `type Base64PDFSource struct{…}`
-
-              - `Data string`
-
-              - `MediaType ApplicationPDF`
-
-                - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-              - `Type Base64`
-
-                - `const Base64Base64 Base64 = "base64"`
-
-            - `type PlainTextSource struct{…}`
-
-              - `Data string`
-
-              - `MediaType TextPlain`
-
-                - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-              - `Type Text`
-
-                - `const TextText Text = "text"`
-
-            - `type ContentBlockSource struct{…}`
-
-              - `Content ContentBlockSourceContentUnion`
-
-                - `string`
-
-                - `[]ContentBlockSourceContentItemUnion`
-
-                  - `type TextBlockParamResp struct{…}`
-
-                    - `Text string`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations []TextCitationParamUnionResp`
-
-                      - `type CitationCharLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndCharIndex int64`
-
-                        - `StartCharIndex int64`
-
-                        - `Type CharLocation`
-
-                          - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                      - `type CitationPageLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndPageNumber int64`
-
-                        - `StartPageNumber int64`
-
-                        - `Type PageLocation`
-
-                          - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                      - `type CitationContentBlockLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Type ContentBlockLocation`
-
-                          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                      - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `EncryptedIndex string`
-
-                        - `Title string`
-
-                        - `Type WebSearchResultLocation`
-
-                          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                        - `URL string`
-
-                      - `type CitationSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `SearchResultIndex int64`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `Source string`
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Title string`
-
-                        - `Type SearchResultLocation`
-
-                          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                  - `type ImageBlockParamResp struct{…}`
-
-                    - `Source ImageBlockParamSourceUnionResp`
-
-                      - `type Base64ImageSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType Base64ImageSourceMediaType`
-
-                          - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                          - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                          - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                          - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type URLImageSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Image`
-
-                      - `const ImageImage Image = "image"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Type Content`
-
-                - `const ContentContent Content = "content"`
-
-            - `type URLPDFSource struct{…}`
-
-              - `Type URL`
-
-                - `const URLURL URL = "url"`
-
-              - `URL string`
-
-          - `Type Document`
-
-            - `const DocumentDocument Document = "document"`
-
-          - `CacheControl CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-          - `Citations CitationsConfigParamResp`
-
-            - `Enabled bool`
-
-          - `Context string`
-
-          - `Title string`
 
         - `type ToolReferenceBlockParamResp struct{…}`
 
@@ -11978,25 +6842,6 @@ func main() {
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `IsError bool`
 
@@ -12030,25 +6875,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Caller ServerToolUseBlockParamCallerUnionResp`
 
       Tool invocation directly from the model.
@@ -12057,27 +6883,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
   - `type WebSearchToolResultBlockParamResp struct{…}`
 
@@ -12127,25 +6937,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Caller WebSearchToolResultBlockParamCallerUnionResp`
 
       Tool invocation directly from the model.
@@ -12154,27 +6945,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
   - `type WebFetchToolResultBlockParamResp struct{…}`
 
@@ -12208,281 +6983,6 @@ func main() {
 
         - `Content DocumentBlockParamResp`
 
-          - `Source DocumentBlockParamSourceUnionResp`
-
-            - `type Base64PDFSource struct{…}`
-
-              - `Data string`
-
-              - `MediaType ApplicationPDF`
-
-                - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-              - `Type Base64`
-
-                - `const Base64Base64 Base64 = "base64"`
-
-            - `type PlainTextSource struct{…}`
-
-              - `Data string`
-
-              - `MediaType TextPlain`
-
-                - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-              - `Type Text`
-
-                - `const TextText Text = "text"`
-
-            - `type ContentBlockSource struct{…}`
-
-              - `Content ContentBlockSourceContentUnion`
-
-                - `string`
-
-                - `[]ContentBlockSourceContentItemUnion`
-
-                  - `type TextBlockParamResp struct{…}`
-
-                    - `Text string`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations []TextCitationParamUnionResp`
-
-                      - `type CitationCharLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndCharIndex int64`
-
-                        - `StartCharIndex int64`
-
-                        - `Type CharLocation`
-
-                          - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                      - `type CitationPageLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndPageNumber int64`
-
-                        - `StartPageNumber int64`
-
-                        - `Type PageLocation`
-
-                          - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                      - `type CitationContentBlockLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Type ContentBlockLocation`
-
-                          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                      - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `EncryptedIndex string`
-
-                        - `Title string`
-
-                        - `Type WebSearchResultLocation`
-
-                          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                        - `URL string`
-
-                      - `type CitationSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `SearchResultIndex int64`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `Source string`
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Title string`
-
-                        - `Type SearchResultLocation`
-
-                          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                  - `type ImageBlockParamResp struct{…}`
-
-                    - `Source ImageBlockParamSourceUnionResp`
-
-                      - `type Base64ImageSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType Base64ImageSourceMediaType`
-
-                          - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                          - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                          - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                          - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type URLImageSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Image`
-
-                      - `const ImageImage Image = "image"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Type Content`
-
-                - `const ContentContent Content = "content"`
-
-            - `type URLPDFSource struct{…}`
-
-              - `Type URL`
-
-                - `const URLURL URL = "url"`
-
-              - `URL string`
-
-          - `Type Document`
-
-            - `const DocumentDocument Document = "document"`
-
-          - `CacheControl CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-          - `Citations CitationsConfigParamResp`
-
-            - `Enabled bool`
-
-          - `Context string`
-
-          - `Title string`
-
         - `Type WebFetchResult`
 
           - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
@@ -12505,25 +7005,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
       Tool invocation directly from the model.
@@ -12532,27 +7013,11 @@ func main() {
 
         Tool invocation directly from the model.
 
-        - `Type Direct`
-
-          - `const DirectDirect Direct = "direct"`
-
       - `type ServerToolCaller struct{…}`
 
         Tool invocation generated by a server-side tool.
 
-        - `ToolID string`
-
-        - `Type CodeExecution20250825`
-
-          - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
       - `type ServerToolCaller20260120 struct{…}`
-
-        - `ToolID string`
-
-        - `Type CodeExecution20260120`
-
-          - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
   - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -12606,8 +7071,6 @@ func main() {
 
           - `Type CodeExecutionOutput`
 
-            - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
         - `EncryptedStdout string`
 
         - `ReturnCode int64`
@@ -12627,25 +7090,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -12698,25 +7142,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -12798,25 +7223,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
   - `type ToolSearchToolResultBlockParamResp struct{…}`
 
     - `Content ToolSearchToolResultBlockParamContentUnionResp`
@@ -12845,30 +7251,9 @@ func main() {
 
           - `Type ToolReference`
 
-            - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Type ToolSearchToolSearchResult`
 
@@ -12884,25 +7269,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
   - `type ContainerUploadBlockParamResp struct{…}`
 
     A content block that represents a file to be uploaded to the container
@@ -12917,25 +7283,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
 ### Content Block Source
 
@@ -13122,25 +7469,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
   - `Type Content`
 
     - `const ContentContent Content = "content"`
@@ -13323,25 +7651,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
 ### Direct Caller
 
@@ -13610,25 +7919,6 @@ func main() {
 
               Create a cache control breakpoint at this content block.
 
-              - `Type Ephemeral`
-
-                - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-              - `TTL CacheControlEphemeralTTL`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Type Content`
 
         - `const ContentContent Content = "content"`
@@ -13648,25 +7938,6 @@ func main() {
   - `CacheControl CacheControlEphemeral`
 
     Create a cache control breakpoint at this content block.
-
-    - `Type Ephemeral`
-
-      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-    - `TTL CacheControlEphemeralTTL`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `Citations CitationsConfigParamResp`
 
@@ -14109,27 +8380,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Input map[string, any]`
 
@@ -14163,27 +8418,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
@@ -14237,27 +8476,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
@@ -14398,8 +8621,6 @@ func main() {
             - `FileID string`
 
             - `Type CodeExecutionOutput`
-
-              - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
           - `EncryptedStdout string`
 
@@ -14923,25 +9144,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -14978,25 +9180,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15030,25 +9213,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -15086,25 +9250,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15138,25 +9283,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -15194,25 +9320,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15249,25 +9356,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15303,25 +9391,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -15370,25 +9439,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -15460,25 +9510,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -15535,25 +9566,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15569,26 +9581,6 @@ func main() {
     - `UserLocation UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `Type Approximate`
-
-        - `const ApproximateApproximate Approximate = "approximate"`
-
-      - `City string`
-
-        The city of the user.
-
-      - `Country string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `Region string`
-
-        The region of the user.
-
-      - `Timezone string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `type WebFetchTool20260209 struct{…}`
 
@@ -15624,30 +9616,9 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Enabled bool`
 
     - `DeferLoading bool`
 
@@ -15701,30 +9672,9 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Enabled bool`
 
     - `DeferLoading bool`
 
@@ -15774,25 +9724,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15828,25 +9759,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -16071,25 +9983,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `type DocumentBlockParamResp struct{…}`
 
         - `Source DocumentBlockParamSourceUnionResp`
@@ -16128,197 +10021,7 @@ func main() {
 
                 - `type TextBlockParamResp struct{…}`
 
-                  - `Text string`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Citations []TextCitationParamUnionResp`
-
-                    - `type CitationCharLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndCharIndex int64`
-
-                      - `StartCharIndex int64`
-
-                      - `Type CharLocation`
-
-                        - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                    - `type CitationPageLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndPageNumber int64`
-
-                      - `StartPageNumber int64`
-
-                      - `Type PageLocation`
-
-                        - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                    - `type CitationContentBlockLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Type ContentBlockLocation`
-
-                        - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                    - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `EncryptedIndex string`
-
-                      - `Title string`
-
-                      - `Type WebSearchResultLocation`
-
-                        - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                      - `URL string`
-
-                    - `type CitationSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `SearchResultIndex int64`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `Source string`
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Title string`
-
-                      - `Type SearchResultLocation`
-
-                        - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                 - `type ImageBlockParamResp struct{…}`
-
-                  - `Source ImageBlockParamSourceUnionResp`
-
-                    - `type Base64ImageSource struct{…}`
-
-                      - `Data string`
-
-                      - `MediaType Base64ImageSourceMediaType`
-
-                        - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                        - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                        - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                        - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                      - `Type Base64`
-
-                        - `const Base64Base64 Base64 = "base64"`
-
-                    - `type URLImageSource struct{…}`
-
-                      - `Type URL`
-
-                        - `const URLURL URL = "url"`
-
-                      - `URL string`
-
-                  - `Type Image`
-
-                    - `const ImageImage Image = "image"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `Type Content`
 
@@ -16340,25 +10043,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Citations CitationsConfigParamResp`
 
           - `Enabled bool`
@@ -16375,136 +10059,11 @@ func main() {
 
           - `Type Text`
 
-            - `const TextText Text = "text"`
-
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations []TextCitationParamUnionResp`
-
-            - `type CitationCharLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndCharIndex int64`
-
-              - `StartCharIndex int64`
-
-              - `Type CharLocation`
-
-                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-            - `type CitationPageLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndPageNumber int64`
-
-              - `StartPageNumber int64`
-
-              - `Type PageLocation`
-
-                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-            - `type CitationContentBlockLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Type ContentBlockLocation`
-
-                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `EncryptedIndex string`
-
-              - `Title string`
-
-              - `Type WebSearchResultLocation`
-
-                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-              - `URL string`
-
-            - `type CitationSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `SearchResultIndex int64`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `Source string`
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Title string`
-
-              - `Type SearchResultLocation`
-
-                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
         - `Source string`
 
@@ -16518,28 +10077,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Citations CitationsConfigParamResp`
-
-          - `Enabled bool`
 
       - `type ThinkingBlockParamResp struct{…}`
 
@@ -16574,25 +10112,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Caller ToolUseBlockParamCallerUnionResp`
 
@@ -16636,673 +10155,17 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Content []ToolResultBlockParamContentUnionResp`
 
           - `[]ToolResultBlockParamContentUnionResp`
 
             - `type TextBlockParamResp struct{…}`
 
-              - `Text string`
-
-              - `Type Text`
-
-                - `const TextText Text = "text"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Citations []TextCitationParamUnionResp`
-
-                - `type CitationCharLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndCharIndex int64`
-
-                  - `StartCharIndex int64`
-
-                  - `Type CharLocation`
-
-                    - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                - `type CitationPageLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndPageNumber int64`
-
-                  - `StartPageNumber int64`
-
-                  - `Type PageLocation`
-
-                    - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                - `type CitationContentBlockLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `DocumentIndex int64`
-
-                  - `DocumentTitle string`
-
-                  - `EndBlockIndex int64`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `StartBlockIndex int64`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `Type ContentBlockLocation`
-
-                    - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                  - `EncryptedIndex string`
-
-                  - `Title string`
-
-                  - `Type WebSearchResultLocation`
-
-                    - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                  - `URL string`
-
-                - `type CitationSearchResultLocationParamResp struct{…}`
-
-                  - `CitedText string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `EndBlockIndex int64`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `SearchResultIndex int64`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `Source string`
-
-                  - `StartBlockIndex int64`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `Title string`
-
-                  - `Type SearchResultLocation`
-
-                    - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
             - `type ImageBlockParamResp struct{…}`
-
-              - `Source ImageBlockParamSourceUnionResp`
-
-                - `type Base64ImageSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType Base64ImageSourceMediaType`
-
-                    - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                    - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                    - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                    - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                  - `Type Base64`
-
-                    - `const Base64Base64 Base64 = "base64"`
-
-                - `type URLImageSource struct{…}`
-
-                  - `Type URL`
-
-                    - `const URLURL URL = "url"`
-
-                  - `URL string`
-
-              - `Type Image`
-
-                - `const ImageImage Image = "image"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `type SearchResultBlockParamResp struct{…}`
 
-              - `Content []TextBlockParamResp`
-
-                - `Text string`
-
-                - `Type Text`
-
-                  - `const TextText Text = "text"`
-
-                - `CacheControl CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                - `Citations []TextCitationParamUnionResp`
-
-                  - `type CitationCharLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndCharIndex int64`
-
-                    - `StartCharIndex int64`
-
-                    - `Type CharLocation`
-
-                      - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                  - `type CitationPageLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndPageNumber int64`
-
-                    - `StartPageNumber int64`
-
-                    - `Type PageLocation`
-
-                      - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                  - `type CitationContentBlockLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Type ContentBlockLocation`
-
-                      - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                  - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `EncryptedIndex string`
-
-                    - `Title string`
-
-                    - `Type WebSearchResultLocation`
-
-                      - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                    - `URL string`
-
-                  - `type CitationSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `SearchResultIndex int64`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `Source string`
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Title string`
-
-                    - `Type SearchResultLocation`
-
-                      - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-              - `Source string`
-
-              - `Title string`
-
-              - `Type SearchResult`
-
-                - `const SearchResultSearchResult SearchResult = "search_result"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Citations CitationsConfigParamResp`
-
-                - `Enabled bool`
-
             - `type DocumentBlockParamResp struct{…}`
-
-              - `Source DocumentBlockParamSourceUnionResp`
-
-                - `type Base64PDFSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType ApplicationPDF`
-
-                    - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                  - `Type Base64`
-
-                    - `const Base64Base64 Base64 = "base64"`
-
-                - `type PlainTextSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType TextPlain`
-
-                    - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                - `type ContentBlockSource struct{…}`
-
-                  - `Content ContentBlockSourceContentUnion`
-
-                    - `string`
-
-                    - `[]ContentBlockSourceContentItemUnion`
-
-                      - `type TextBlockParamResp struct{…}`
-
-                        - `Text string`
-
-                        - `Type Text`
-
-                          - `const TextText Text = "text"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                        - `Citations []TextCitationParamUnionResp`
-
-                          - `type CitationCharLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndCharIndex int64`
-
-                            - `StartCharIndex int64`
-
-                            - `Type CharLocation`
-
-                              - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                          - `type CitationPageLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndPageNumber int64`
-
-                            - `StartPageNumber int64`
-
-                            - `Type PageLocation`
-
-                              - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                          - `type CitationContentBlockLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Type ContentBlockLocation`
-
-                              - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                          - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `EncryptedIndex string`
-
-                            - `Title string`
-
-                            - `Type WebSearchResultLocation`
-
-                              - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                            - `URL string`
-
-                          - `type CitationSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `SearchResultIndex int64`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `Source string`
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Title string`
-
-                            - `Type SearchResultLocation`
-
-                              - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                      - `type ImageBlockParamResp struct{…}`
-
-                        - `Source ImageBlockParamSourceUnionResp`
-
-                          - `type Base64ImageSource struct{…}`
-
-                            - `Data string`
-
-                            - `MediaType Base64ImageSourceMediaType`
-
-                              - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                              - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                              - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                              - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                            - `Type Base64`
-
-                              - `const Base64Base64 Base64 = "base64"`
-
-                          - `type URLImageSource struct{…}`
-
-                            - `Type URL`
-
-                              - `const URLURL URL = "url"`
-
-                            - `URL string`
-
-                        - `Type Image`
-
-                          - `const ImageImage Image = "image"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Type Content`
-
-                    - `const ContentContent Content = "content"`
-
-                - `type URLPDFSource struct{…}`
-
-                  - `Type URL`
-
-                    - `const URLURL URL = "url"`
-
-                  - `URL string`
-
-              - `Type Document`
-
-                - `const DocumentDocument Document = "document"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Citations CitationsConfigParamResp`
-
-                - `Enabled bool`
-
-              - `Context string`
-
-              - `Title string`
 
             - `type ToolReferenceBlockParamResp struct{…}`
 
@@ -17317,25 +10180,6 @@ func main() {
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `IsError bool`
 
@@ -17369,25 +10213,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Caller ServerToolUseBlockParamCallerUnionResp`
 
           Tool invocation directly from the model.
@@ -17396,27 +10221,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `type WebSearchToolResultBlockParamResp struct{…}`
 
@@ -17466,25 +10275,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Caller WebSearchToolResultBlockParamCallerUnionResp`
 
           Tool invocation directly from the model.
@@ -17493,27 +10283,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `type WebFetchToolResultBlockParamResp struct{…}`
 
@@ -17547,281 +10321,6 @@ func main() {
 
             - `Content DocumentBlockParamResp`
 
-              - `Source DocumentBlockParamSourceUnionResp`
-
-                - `type Base64PDFSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType ApplicationPDF`
-
-                    - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                  - `Type Base64`
-
-                    - `const Base64Base64 Base64 = "base64"`
-
-                - `type PlainTextSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType TextPlain`
-
-                    - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                - `type ContentBlockSource struct{…}`
-
-                  - `Content ContentBlockSourceContentUnion`
-
-                    - `string`
-
-                    - `[]ContentBlockSourceContentItemUnion`
-
-                      - `type TextBlockParamResp struct{…}`
-
-                        - `Text string`
-
-                        - `Type Text`
-
-                          - `const TextText Text = "text"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                        - `Citations []TextCitationParamUnionResp`
-
-                          - `type CitationCharLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndCharIndex int64`
-
-                            - `StartCharIndex int64`
-
-                            - `Type CharLocation`
-
-                              - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                          - `type CitationPageLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndPageNumber int64`
-
-                            - `StartPageNumber int64`
-
-                            - `Type PageLocation`
-
-                              - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                          - `type CitationContentBlockLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Type ContentBlockLocation`
-
-                              - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                          - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `EncryptedIndex string`
-
-                            - `Title string`
-
-                            - `Type WebSearchResultLocation`
-
-                              - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                            - `URL string`
-
-                          - `type CitationSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `SearchResultIndex int64`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `Source string`
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Title string`
-
-                            - `Type SearchResultLocation`
-
-                              - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                      - `type ImageBlockParamResp struct{…}`
-
-                        - `Source ImageBlockParamSourceUnionResp`
-
-                          - `type Base64ImageSource struct{…}`
-
-                            - `Data string`
-
-                            - `MediaType Base64ImageSourceMediaType`
-
-                              - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                              - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                              - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                              - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                            - `Type Base64`
-
-                              - `const Base64Base64 Base64 = "base64"`
-
-                          - `type URLImageSource struct{…}`
-
-                            - `Type URL`
-
-                              - `const URLURL URL = "url"`
-
-                            - `URL string`
-
-                        - `Type Image`
-
-                          - `const ImageImage Image = "image"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Type Content`
-
-                    - `const ContentContent Content = "content"`
-
-                - `type URLPDFSource struct{…}`
-
-                  - `Type URL`
-
-                    - `const URLURL URL = "url"`
-
-                  - `URL string`
-
-              - `Type Document`
-
-                - `const DocumentDocument Document = "document"`
-
-              - `CacheControl CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-              - `Citations CitationsConfigParamResp`
-
-                - `Enabled bool`
-
-              - `Context string`
-
-              - `Title string`
-
             - `Type WebFetchResult`
 
               - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
@@ -17844,25 +10343,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
           Tool invocation directly from the model.
@@ -17871,27 +10351,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -17945,8 +10409,6 @@ func main() {
 
               - `Type CodeExecutionOutput`
 
-                - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
             - `EncryptedStdout string`
 
             - `ReturnCode int64`
@@ -17966,25 +10428,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -18037,25 +10480,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
       - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -18137,25 +10561,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `type ToolSearchToolResultBlockParamResp struct{…}`
 
         - `Content ToolSearchToolResultBlockParamContentUnionResp`
@@ -18184,30 +10589,9 @@ func main() {
 
               - `Type ToolReference`
 
-                - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -18223,25 +10607,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `type ContainerUploadBlockParamResp struct{…}`
 
         A content block that represents a file to be uploaded to the container
@@ -18256,25 +10621,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `Role MessageParamRole`
 
@@ -18948,27 +11294,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Input map[string, any]`
 
@@ -19002,27 +11332,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
@@ -19076,27 +11390,11 @@ func main() {
 
           Tool invocation directly from the model.
 
-          - `Type Direct`
-
-            - `const DirectDirect Direct = "direct"`
-
         - `type ServerToolCaller struct{…}`
 
           Tool invocation generated by a server-side tool.
 
-          - `ToolID string`
-
-          - `Type CodeExecution20250825`
-
-            - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
         - `type ServerToolCaller20260120 struct{…}`
-
-          - `ToolID string`
-
-          - `Type CodeExecution20260120`
-
-            - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
@@ -19237,8 +11535,6 @@ func main() {
             - `FileID string`
 
             - `Type CodeExecutionOutput`
-
-              - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
           - `EncryptedStdout string`
 
@@ -19799,27 +12095,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Input map[string, any]`
 
@@ -19853,27 +12133,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Content WebSearchToolResultBlockContentUnion`
 
@@ -19927,27 +12191,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Content WebFetchToolResultBlockContentUnion`
 
@@ -20088,8 +12336,6 @@ func main() {
               - `FileID string`
 
               - `Type CodeExecutionOutput`
-
-                - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
             - `EncryptedStdout string`
 
@@ -20767,27 +13013,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Input map[string, any]`
 
@@ -20821,27 +13051,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Content WebSearchToolResultBlockContentUnion`
 
@@ -20895,27 +13109,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Content WebFetchToolResultBlockContentUnion`
 
@@ -21056,8 +13254,6 @@ func main() {
                 - `FileID string`
 
                 - `Type CodeExecutionOutput`
-
-                  - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
               - `EncryptedStdout string`
 
@@ -21484,51 +13680,11 @@ func main() {
 
         Information about the container used in the request (for the code execution tool)
 
-        - `ID string`
-
-          Identifier for the container used in this request
-
-        - `ExpiresAt Time`
-
-          The time at which the container will expire.
-
       - `StopDetails RefusalStopDetails`
 
         Structured information about a refusal.
 
-        - `Category RefusalStopDetailsCategory`
-
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
-
-          - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
-
-          - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
-
-        - `Explanation string`
-
-          Human-readable explanation of the refusal.
-
-          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `Type Refusal`
-
-          - `const RefusalRefusal Refusal = "refusal"`
-
       - `StopReason StopReason`
-
-        - `const StopReasonEndTurn StopReason = "end_turn"`
-
-        - `const StopReasonMaxTokens StopReason = "max_tokens"`
-
-        - `const StopReasonStopSequence StopReason = "stop_sequence"`
-
-        - `const StopReasonToolUse StopReason = "tool_use"`
-
-        - `const StopReasonPauseTurn StopReason = "pause_turn"`
-
-        - `const StopReasonRefusal StopReason = "refusal"`
 
       - `StopSequence string`
 
@@ -21568,14 +13724,6 @@ func main() {
 
         The number of server tool requests.
 
-        - `WebFetchRequests int64`
-
-          The number of web fetch tool requests.
-
-        - `WebSearchRequests int64`
-
-          The number of web search tool requests.
-
   - `type MessageStopEvent struct{…}`
 
     - `Type MessageStop`
@@ -21590,683 +13738,29 @@ func main() {
 
       - `type TextBlock struct{…}`
 
-        - `Citations []TextCitationUnion`
-
-          Citations supporting the text block.
-
-          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-          - `type CitationCharLocation struct{…}`
-
-            - `CitedText string`
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndCharIndex int64`
-
-            - `FileID string`
-
-            - `StartCharIndex int64`
-
-            - `Type CharLocation`
-
-              - `const CharLocationCharLocation CharLocation = "char_location"`
-
-          - `type CitationPageLocation struct{…}`
-
-            - `CitedText string`
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndPageNumber int64`
-
-            - `FileID string`
-
-            - `StartPageNumber int64`
-
-            - `Type PageLocation`
-
-              - `const PageLocationPageLocation PageLocation = "page_location"`
-
-          - `type CitationContentBlockLocation struct{…}`
-
-            - `CitedText string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndBlockIndex int64`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `FileID string`
-
-            - `StartBlockIndex int64`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `Type ContentBlockLocation`
-
-              - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-          - `type CitationsWebSearchResultLocation struct{…}`
-
-            - `CitedText string`
-
-            - `EncryptedIndex string`
-
-            - `Title string`
-
-            - `Type WebSearchResultLocation`
-
-              - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-            - `URL string`
-
-          - `type CitationsSearchResultLocation struct{…}`
-
-            - `CitedText string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `EndBlockIndex int64`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `SearchResultIndex int64`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `Source string`
-
-            - `StartBlockIndex int64`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `Title string`
-
-            - `Type SearchResultLocation`
-
-              - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-        - `Text string`
-
-        - `Type Text`
-
-          - `const TextText Text = "text"`
-
       - `type ThinkingBlock struct{…}`
-
-        - `Signature string`
-
-        - `Thinking string`
-
-        - `Type Thinking`
-
-          - `const ThinkingThinking Thinking = "thinking"`
 
       - `type RedactedThinkingBlock struct{…}`
 
-        - `Data string`
-
-        - `Type RedactedThinking`
-
-          - `const RedactedThinkingRedactedThinking RedactedThinking = "redacted_thinking"`
-
       - `type ToolUseBlock struct{…}`
-
-        - `ID string`
-
-        - `Caller ToolUseBlockCallerUnion`
-
-          Tool invocation directly from the model.
-
-          - `type DirectCaller struct{…}`
-
-            Tool invocation directly from the model.
-
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
-          - `type ServerToolCaller struct{…}`
-
-            Tool invocation generated by a server-side tool.
-
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
-          - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
-
-        - `Input map[string, any]`
-
-        - `Name string`
-
-        - `Type ToolUse`
-
-          - `const ToolUseToolUse ToolUse = "tool_use"`
 
       - `type ServerToolUseBlock struct{…}`
 
-        - `ID string`
-
-        - `Caller ServerToolUseBlockCallerUnion`
-
-          Tool invocation directly from the model.
-
-          - `type DirectCaller struct{…}`
-
-            Tool invocation directly from the model.
-
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
-          - `type ServerToolCaller struct{…}`
-
-            Tool invocation generated by a server-side tool.
-
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
-          - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
-
-        - `Input map[string, any]`
-
-        - `Name ServerToolUseBlockName`
-
-          - `const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web_search"`
-
-          - `const ServerToolUseBlockNameWebFetch ServerToolUseBlockName = "web_fetch"`
-
-          - `const ServerToolUseBlockNameCodeExecution ServerToolUseBlockName = "code_execution"`
-
-          - `const ServerToolUseBlockNameBashCodeExecution ServerToolUseBlockName = "bash_code_execution"`
-
-          - `const ServerToolUseBlockNameTextEditorCodeExecution ServerToolUseBlockName = "text_editor_code_execution"`
-
-          - `const ServerToolUseBlockNameToolSearchToolRegex ServerToolUseBlockName = "tool_search_tool_regex"`
-
-          - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
-
-        - `Type ServerToolUse`
-
-          - `const ServerToolUseServerToolUse ServerToolUse = "server_tool_use"`
-
       - `type WebSearchToolResultBlock struct{…}`
-
-        - `Caller WebSearchToolResultBlockCallerUnion`
-
-          Tool invocation directly from the model.
-
-          - `type DirectCaller struct{…}`
-
-            Tool invocation directly from the model.
-
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
-          - `type ServerToolCaller struct{…}`
-
-            Tool invocation generated by a server-side tool.
-
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
-          - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
-
-        - `Content WebSearchToolResultBlockContentUnion`
-
-          - `type WebSearchToolResultError struct{…}`
-
-            - `ErrorCode WebSearchToolResultErrorCode`
-
-              - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
-
-              - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
-
-              - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
-
-              - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
-
-              - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
-
-              - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
-
-            - `Type WebSearchToolResultError`
-
-              - `const WebSearchToolResultErrorWebSearchToolResultError WebSearchToolResultError = "web_search_tool_result_error"`
-
-          - `type WebSearchToolResultBlockContentArray []WebSearchResultBlock`
-
-            - `EncryptedContent string`
-
-            - `PageAge string`
-
-            - `Title string`
-
-            - `Type WebSearchResult`
-
-              - `const WebSearchResultWebSearchResult WebSearchResult = "web_search_result"`
-
-            - `URL string`
-
-        - `ToolUseID string`
-
-        - `Type WebSearchToolResult`
-
-          - `const WebSearchToolResultWebSearchToolResult WebSearchToolResult = "web_search_tool_result"`
 
       - `type WebFetchToolResultBlock struct{…}`
 
-        - `Caller WebFetchToolResultBlockCallerUnion`
-
-          Tool invocation directly from the model.
-
-          - `type DirectCaller struct{…}`
-
-            Tool invocation directly from the model.
-
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
-          - `type ServerToolCaller struct{…}`
-
-            Tool invocation generated by a server-side tool.
-
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
-          - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
-
-        - `Content WebFetchToolResultBlockContentUnion`
-
-          - `type WebFetchToolResultErrorBlock struct{…}`
-
-            - `ErrorCode WebFetchToolResultErrorCode`
-
-              - `const WebFetchToolResultErrorCodeInvalidToolInput WebFetchToolResultErrorCode = "invalid_tool_input"`
-
-              - `const WebFetchToolResultErrorCodeURLTooLong WebFetchToolResultErrorCode = "url_too_long"`
-
-              - `const WebFetchToolResultErrorCodeURLNotAllowed WebFetchToolResultErrorCode = "url_not_allowed"`
-
-              - `const WebFetchToolResultErrorCodeURLNotAccessible WebFetchToolResultErrorCode = "url_not_accessible"`
-
-              - `const WebFetchToolResultErrorCodeUnsupportedContentType WebFetchToolResultErrorCode = "unsupported_content_type"`
-
-              - `const WebFetchToolResultErrorCodeTooManyRequests WebFetchToolResultErrorCode = "too_many_requests"`
-
-              - `const WebFetchToolResultErrorCodeMaxUsesExceeded WebFetchToolResultErrorCode = "max_uses_exceeded"`
-
-              - `const WebFetchToolResultErrorCodeUnavailable WebFetchToolResultErrorCode = "unavailable"`
-
-            - `Type WebFetchToolResultError`
-
-              - `const WebFetchToolResultErrorWebFetchToolResultError WebFetchToolResultError = "web_fetch_tool_result_error"`
-
-          - `type WebFetchBlock struct{…}`
-
-            - `Content DocumentBlock`
-
-              - `Citations CitationsConfig`
-
-                Citation configuration for the document
-
-                - `Enabled bool`
-
-              - `Source DocumentBlockSourceUnion`
-
-                - `type Base64PDFSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType ApplicationPDF`
-
-                    - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                  - `Type Base64`
-
-                    - `const Base64Base64 Base64 = "base64"`
-
-                - `type PlainTextSource struct{…}`
-
-                  - `Data string`
-
-                  - `MediaType TextPlain`
-
-                    - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-              - `Title string`
-
-                The title of the document
-
-              - `Type Document`
-
-                - `const DocumentDocument Document = "document"`
-
-            - `RetrievedAt string`
-
-              ISO 8601 timestamp when the content was retrieved
-
-            - `Type WebFetchResult`
-
-              - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
-
-            - `URL string`
-
-              Fetched content URL
-
-        - `ToolUseID string`
-
-        - `Type WebFetchToolResult`
-
-          - `const WebFetchToolResultWebFetchToolResult WebFetchToolResult = "web_fetch_tool_result"`
-
       - `type CodeExecutionToolResultBlock struct{…}`
-
-        - `Content CodeExecutionToolResultBlockContentUnion`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
-
-          - `type CodeExecutionToolResultError struct{…}`
-
-            - `ErrorCode CodeExecutionToolResultErrorCode`
-
-              - `const CodeExecutionToolResultErrorCodeInvalidToolInput CodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-              - `const CodeExecutionToolResultErrorCodeUnavailable CodeExecutionToolResultErrorCode = "unavailable"`
-
-              - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
-
-              - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-            - `Type CodeExecutionToolResultError`
-
-              - `const CodeExecutionToolResultErrorCodeExecutionToolResultError CodeExecutionToolResultError = "code_execution_tool_result_error"`
-
-          - `type CodeExecutionResultBlock struct{…}`
-
-            - `Content []CodeExecutionOutputBlock`
-
-              - `FileID string`
-
-              - `Type CodeExecutionOutput`
-
-                - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
-            - `ReturnCode int64`
-
-            - `Stderr string`
-
-            - `Stdout string`
-
-            - `Type CodeExecutionResult`
-
-              - `const CodeExecutionResultCodeExecutionResult CodeExecutionResult = "code_execution_result"`
-
-          - `type EncryptedCodeExecutionResultBlock struct{…}`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `Content []CodeExecutionOutputBlock`
-
-              - `FileID string`
-
-              - `Type CodeExecutionOutput`
-
-                - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
-            - `EncryptedStdout string`
-
-            - `ReturnCode int64`
-
-            - `Stderr string`
-
-            - `Type EncryptedCodeExecutionResult`
-
-              - `const EncryptedCodeExecutionResultEncryptedCodeExecutionResult EncryptedCodeExecutionResult = "encrypted_code_execution_result"`
-
-        - `ToolUseID string`
-
-        - `Type CodeExecutionToolResult`
-
-          - `const CodeExecutionToolResultCodeExecutionToolResult CodeExecutionToolResult = "code_execution_tool_result"`
 
       - `type BashCodeExecutionToolResultBlock struct{…}`
 
-        - `Content BashCodeExecutionToolResultBlockContentUnion`
-
-          - `type BashCodeExecutionToolResultError struct{…}`
-
-            - `ErrorCode BashCodeExecutionToolResultErrorCode`
-
-              - `const BashCodeExecutionToolResultErrorCodeInvalidToolInput BashCodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-              - `const BashCodeExecutionToolResultErrorCodeUnavailable BashCodeExecutionToolResultErrorCode = "unavailable"`
-
-              - `const BashCodeExecutionToolResultErrorCodeTooManyRequests BashCodeExecutionToolResultErrorCode = "too_many_requests"`
-
-              - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-              - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
-
-            - `Type BashCodeExecutionToolResultError`
-
-              - `const BashCodeExecutionToolResultErrorBashCodeExecutionToolResultError BashCodeExecutionToolResultError = "bash_code_execution_tool_result_error"`
-
-          - `type BashCodeExecutionResultBlock struct{…}`
-
-            - `Content []BashCodeExecutionOutputBlock`
-
-              - `FileID string`
-
-              - `Type BashCodeExecutionOutput`
-
-                - `const BashCodeExecutionOutputBashCodeExecutionOutput BashCodeExecutionOutput = "bash_code_execution_output"`
-
-            - `ReturnCode int64`
-
-            - `Stderr string`
-
-            - `Stdout string`
-
-            - `Type BashCodeExecutionResult`
-
-              - `const BashCodeExecutionResultBashCodeExecutionResult BashCodeExecutionResult = "bash_code_execution_result"`
-
-        - `ToolUseID string`
-
-        - `Type BashCodeExecutionToolResult`
-
-          - `const BashCodeExecutionToolResultBashCodeExecutionToolResult BashCodeExecutionToolResult = "bash_code_execution_tool_result"`
-
       - `type TextEditorCodeExecutionToolResultBlock struct{…}`
 
-        - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
-
-          - `type TextEditorCodeExecutionToolResultError struct{…}`
-
-            - `ErrorCode TextEditorCodeExecutionToolResultErrorCode`
-
-              - `const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-              - `const TextEditorCodeExecutionToolResultErrorCodeUnavailable TextEditorCodeExecutionToolResultErrorCode = "unavailable"`
-
-              - `const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests TextEditorCodeExecutionToolResultErrorCode = "too_many_requests"`
-
-              - `const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded TextEditorCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-              - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
-
-            - `ErrorMessage string`
-
-            - `Type TextEditorCodeExecutionToolResultError`
-
-              - `const TextEditorCodeExecutionToolResultErrorTextEditorCodeExecutionToolResultError TextEditorCodeExecutionToolResultError = "text_editor_code_execution_tool_result_error"`
-
-          - `type TextEditorCodeExecutionViewResultBlock struct{…}`
-
-            - `Content string`
-
-            - `FileType TextEditorCodeExecutionViewResultBlockFileType`
-
-              - `const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"`
-
-              - `const TextEditorCodeExecutionViewResultBlockFileTypeImage TextEditorCodeExecutionViewResultBlockFileType = "image"`
-
-              - `const TextEditorCodeExecutionViewResultBlockFileTypePDF TextEditorCodeExecutionViewResultBlockFileType = "pdf"`
-
-            - `NumLines int64`
-
-            - `StartLine int64`
-
-            - `TotalLines int64`
-
-            - `Type TextEditorCodeExecutionViewResult`
-
-              - `const TextEditorCodeExecutionViewResultTextEditorCodeExecutionViewResult TextEditorCodeExecutionViewResult = "text_editor_code_execution_view_result"`
-
-          - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
-
-            - `IsFileUpdate bool`
-
-            - `Type TextEditorCodeExecutionCreateResult`
-
-              - `const TextEditorCodeExecutionCreateResultTextEditorCodeExecutionCreateResult TextEditorCodeExecutionCreateResult = "text_editor_code_execution_create_result"`
-
-          - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
-
-            - `Lines []string`
-
-            - `NewLines int64`
-
-            - `NewStart int64`
-
-            - `OldLines int64`
-
-            - `OldStart int64`
-
-            - `Type TextEditorCodeExecutionStrReplaceResult`
-
-              - `const TextEditorCodeExecutionStrReplaceResultTextEditorCodeExecutionStrReplaceResult TextEditorCodeExecutionStrReplaceResult = "text_editor_code_execution_str_replace_result"`
-
-        - `ToolUseID string`
-
-        - `Type TextEditorCodeExecutionToolResult`
-
-          - `const TextEditorCodeExecutionToolResultTextEditorCodeExecutionToolResult TextEditorCodeExecutionToolResult = "text_editor_code_execution_tool_result"`
-
       - `type ToolSearchToolResultBlock struct{…}`
-
-        - `Content ToolSearchToolResultBlockContentUnion`
-
-          - `type ToolSearchToolResultError struct{…}`
-
-            - `ErrorCode ToolSearchToolResultErrorCode`
-
-              - `const ToolSearchToolResultErrorCodeInvalidToolInput ToolSearchToolResultErrorCode = "invalid_tool_input"`
-
-              - `const ToolSearchToolResultErrorCodeUnavailable ToolSearchToolResultErrorCode = "unavailable"`
-
-              - `const ToolSearchToolResultErrorCodeTooManyRequests ToolSearchToolResultErrorCode = "too_many_requests"`
-
-              - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
-
-            - `ErrorMessage string`
-
-            - `Type ToolSearchToolResultError`
-
-              - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
-
-          - `type ToolSearchToolSearchResultBlock struct{…}`
-
-            - `ToolReferences []ToolReferenceBlock`
-
-              - `ToolName string`
-
-              - `Type ToolReference`
-
-                - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-            - `Type ToolSearchToolSearchResult`
-
-              - `const ToolSearchToolSearchResultToolSearchToolSearchResult ToolSearchToolSearchResult = "tool_search_tool_search_result"`
-
-        - `ToolUseID string`
-
-        - `Type ToolSearchToolResult`
-
-          - `const ToolSearchToolResultToolSearchToolResult ToolSearchToolResult = "tool_search_tool_result"`
 
       - `type ContainerUploadBlock struct{…}`
 
         Response model for a file uploaded to the container.
-
-        - `FileID string`
-
-        - `Type ContainerUpload`
-
-          - `const ContainerUploadContainerUpload ContainerUpload = "container_upload"`
 
     - `Index int64`
 
@@ -22300,113 +13794,13 @@ func main() {
 
           - `type CitationCharLocation struct{…}`
 
-            - `CitedText string`
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndCharIndex int64`
-
-            - `FileID string`
-
-            - `StartCharIndex int64`
-
-            - `Type CharLocation`
-
-              - `const CharLocationCharLocation CharLocation = "char_location"`
-
           - `type CitationPageLocation struct{…}`
-
-            - `CitedText string`
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndPageNumber int64`
-
-            - `FileID string`
-
-            - `StartPageNumber int64`
-
-            - `Type PageLocation`
-
-              - `const PageLocationPageLocation PageLocation = "page_location"`
 
           - `type CitationContentBlockLocation struct{…}`
 
-            - `CitedText string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `DocumentIndex int64`
-
-            - `DocumentTitle string`
-
-            - `EndBlockIndex int64`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `FileID string`
-
-            - `StartBlockIndex int64`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `Type ContentBlockLocation`
-
-              - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
           - `type CitationsWebSearchResultLocation struct{…}`
 
-            - `CitedText string`
-
-            - `EncryptedIndex string`
-
-            - `Title string`
-
-            - `Type WebSearchResultLocation`
-
-              - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-            - `URL string`
-
           - `type CitationsSearchResultLocation struct{…}`
-
-            - `CitedText string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `EndBlockIndex int64`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `SearchResultIndex int64`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `Source string`
-
-            - `StartBlockIndex int64`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `Title string`
-
-            - `Type SearchResultLocation`
-
-              - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
         - `Type CitationsDelta`
 
@@ -22640,25 +14034,6 @@ func main() {
   - `CacheControl CacheControlEphemeral`
 
     Create a cache control breakpoint at this content block.
-
-    - `Type Ephemeral`
-
-      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-    - `TTL CacheControlEphemeralTTL`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `Citations CitationsConfigParamResp`
 
@@ -24187,25 +15562,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Citations []TextCitationParamUnionResp`
 
           - `type CitationCharLocationParamResp struct{…}`
@@ -24350,25 +15706,6 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `type SearchResultBlockParamResp struct{…}`
 
         - `Content []TextBlockParamResp`
@@ -24377,136 +15714,11 @@ func main() {
 
           - `Type Text`
 
-            - `const TextText Text = "text"`
-
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations []TextCitationParamUnionResp`
-
-            - `type CitationCharLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndCharIndex int64`
-
-              - `StartCharIndex int64`
-
-              - `Type CharLocation`
-
-                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-            - `type CitationPageLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndPageNumber int64`
-
-              - `StartPageNumber int64`
-
-              - `Type PageLocation`
-
-                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-            - `type CitationContentBlockLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Type ContentBlockLocation`
-
-                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `EncryptedIndex string`
-
-              - `Title string`
-
-              - `Type WebSearchResultLocation`
-
-                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-              - `URL string`
-
-            - `type CitationSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `SearchResultIndex int64`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `Source string`
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Title string`
-
-              - `Type SearchResultLocation`
-
-                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
         - `Source string`
 
@@ -24519,25 +15731,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Citations CitationsConfigParamResp`
 
@@ -24581,197 +15774,7 @@ func main() {
 
                 - `type TextBlockParamResp struct{…}`
 
-                  - `Text string`
-
-                  - `Type Text`
-
-                    - `const TextText Text = "text"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                  - `Citations []TextCitationParamUnionResp`
-
-                    - `type CitationCharLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndCharIndex int64`
-
-                      - `StartCharIndex int64`
-
-                      - `Type CharLocation`
-
-                        - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                    - `type CitationPageLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndPageNumber int64`
-
-                      - `StartPageNumber int64`
-
-                      - `Type PageLocation`
-
-                        - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                    - `type CitationContentBlockLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `DocumentIndex int64`
-
-                      - `DocumentTitle string`
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Type ContentBlockLocation`
-
-                        - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                    - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                      - `EncryptedIndex string`
-
-                      - `Title string`
-
-                      - `Type WebSearchResultLocation`
-
-                        - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                      - `URL string`
-
-                    - `type CitationSearchResultLocationParamResp struct{…}`
-
-                      - `CitedText string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `EndBlockIndex int64`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `SearchResultIndex int64`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `Source string`
-
-                      - `StartBlockIndex int64`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `Title string`
-
-                      - `Type SearchResultLocation`
-
-                        - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                 - `type ImageBlockParamResp struct{…}`
-
-                  - `Source ImageBlockParamSourceUnionResp`
-
-                    - `type Base64ImageSource struct{…}`
-
-                      - `Data string`
-
-                      - `MediaType Base64ImageSourceMediaType`
-
-                        - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                        - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                        - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                        - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                      - `Type Base64`
-
-                        - `const Base64Base64 Base64 = "base64"`
-
-                    - `type URLImageSource struct{…}`
-
-                      - `Type URL`
-
-                        - `const URLURL URL = "url"`
-
-                      - `URL string`
-
-                  - `Type Image`
-
-                    - `const ImageImage Image = "image"`
-
-                  - `CacheControl CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `Type Content`
 
@@ -24793,28 +15796,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Citations CitationsConfigParamResp`
-
-          - `Enabled bool`
 
         - `Context string`
 
@@ -24833,25 +15815,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `IsError bool`
 
@@ -25081,25 +16044,6 @@ func main() {
   - `CacheControl CacheControlEphemeral`
 
     Create a cache control breakpoint at this content block.
-
-    - `Type Ephemeral`
-
-      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-    - `TTL CacheControlEphemeralTTL`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
 ### Tool Search Tool Result Error
 
@@ -25490,25 +16434,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25545,25 +16470,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25597,25 +16503,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -25653,25 +16540,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25705,25 +16573,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -25761,25 +16610,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25816,25 +16646,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25870,25 +16681,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -25937,25 +16729,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -26027,25 +16800,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -26102,25 +16856,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26136,26 +16871,6 @@ func main() {
     - `UserLocation UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `Type Approximate`
-
-        - `const ApproximateApproximate Approximate = "approximate"`
-
-      - `City string`
-
-        The city of the user.
-
-      - `Country string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `Region string`
-
-        The region of the user.
-
-      - `Timezone string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `type WebFetchTool20260209 struct{…}`
 
@@ -26191,30 +16906,9 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Enabled bool`
 
     - `DeferLoading bool`
 
@@ -26268,30 +16962,9 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `Citations CitationsConfigParamResp`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Enabled bool`
 
     - `DeferLoading bool`
 
@@ -26341,25 +17014,6 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
     - `DeferLoading bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26395,25 +17049,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `DeferLoading bool`
 
@@ -26909,25 +17544,6 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
         - `Type Content`
 
           - `const ContentContent Content = "content"`
@@ -26947,25 +17563,6 @@ func main() {
     - `CacheControl CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `Type Ephemeral`
-
-        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-      - `TTL CacheControlEphemeralTTL`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
     - `Citations CitationsConfigParamResp`
 
@@ -27589,25 +18186,6 @@ func main() {
 
                     Create a cache control breakpoint at this content block.
 
-                    - `Type Ephemeral`
-
-                      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                    - `TTL CacheControlEphemeralTTL`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `Type Content`
 
               - `const ContentContent Content = "content"`
@@ -27627,25 +18205,6 @@ func main() {
         - `CacheControl CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `Type Ephemeral`
-
-            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-          - `TTL CacheControlEphemeralTTL`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Citations CitationsConfigParamResp`
 
@@ -27676,25 +18235,6 @@ func main() {
   - `CacheControl CacheControlEphemeral`
 
     Create a cache control breakpoint at this content block.
-
-    - `Type Ephemeral`
-
-      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-    - `TTL CacheControlEphemeralTTL`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-      - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
   - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
@@ -28325,7 +18865,7 @@ func main() {
 
 # Batches
 
-## Create
+## Create a Message Batch
 
 `client.Messages.Batches.New(ctx, body) (*MessageBatch, error)`
 
@@ -28597,25 +19137,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `type DocumentBlockParamResp struct{…}`
 
               - `Source DocumentBlockParamSourceUnionResp`
@@ -28654,197 +19175,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `type TextBlockParamResp struct{…}`
 
-                        - `Text string`
-
-                        - `Type Text`
-
-                          - `const TextText Text = "text"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                        - `Citations []TextCitationParamUnionResp`
-
-                          - `type CitationCharLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndCharIndex int64`
-
-                            - `StartCharIndex int64`
-
-                            - `Type CharLocation`
-
-                              - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                          - `type CitationPageLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndPageNumber int64`
-
-                            - `StartPageNumber int64`
-
-                            - `Type PageLocation`
-
-                              - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                          - `type CitationContentBlockLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `DocumentIndex int64`
-
-                            - `DocumentTitle string`
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Type ContentBlockLocation`
-
-                              - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                          - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                            - `EncryptedIndex string`
-
-                            - `Title string`
-
-                            - `Type WebSearchResultLocation`
-
-                              - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                            - `URL string`
-
-                          - `type CitationSearchResultLocationParamResp struct{…}`
-
-                            - `CitedText string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `EndBlockIndex int64`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `SearchResultIndex int64`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `Source string`
-
-                            - `StartBlockIndex int64`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `Title string`
-
-                            - `Type SearchResultLocation`
-
-                              - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                       - `type ImageBlockParamResp struct{…}`
-
-                        - `Source ImageBlockParamSourceUnionResp`
-
-                          - `type Base64ImageSource struct{…}`
-
-                            - `Data string`
-
-                            - `MediaType Base64ImageSourceMediaType`
-
-                              - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                              - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                              - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                              - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                            - `Type Base64`
-
-                              - `const Base64Base64 Base64 = "base64"`
-
-                          - `type URLImageSource struct{…}`
-
-                            - `Type URL`
-
-                              - `const URLURL URL = "url"`
-
-                            - `URL string`
-
-                        - `Type Image`
-
-                          - `const ImageImage Image = "image"`
-
-                        - `CacheControl CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `Type Ephemeral`
-
-                            - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                          - `TTL CacheControlEphemeralTTL`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                            - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
                   - `Type Content`
 
@@ -28866,25 +19197,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Citations CitationsConfigParamResp`
 
                 - `Enabled bool`
@@ -28901,136 +19213,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `Type Text`
 
-                  - `const TextText Text = "text"`
-
                 - `CacheControl CacheControlEphemeral`
 
                   Create a cache control breakpoint at this content block.
 
-                  - `Type Ephemeral`
-
-                    - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                  - `TTL CacheControlEphemeralTTL`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                    - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
                 - `Citations []TextCitationParamUnionResp`
-
-                  - `type CitationCharLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndCharIndex int64`
-
-                    - `StartCharIndex int64`
-
-                    - `Type CharLocation`
-
-                      - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                  - `type CitationPageLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndPageNumber int64`
-
-                    - `StartPageNumber int64`
-
-                    - `Type PageLocation`
-
-                      - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                  - `type CitationContentBlockLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `DocumentIndex int64`
-
-                    - `DocumentTitle string`
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Type ContentBlockLocation`
-
-                      - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                  - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                    - `EncryptedIndex string`
-
-                    - `Title string`
-
-                    - `Type WebSearchResultLocation`
-
-                      - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                    - `URL string`
-
-                  - `type CitationSearchResultLocationParamResp struct{…}`
-
-                    - `CitedText string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `EndBlockIndex int64`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `SearchResultIndex int64`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `Source string`
-
-                    - `StartBlockIndex int64`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `Title string`
-
-                    - `Type SearchResultLocation`
-
-                      - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
               - `Source string`
 
@@ -29044,28 +19231,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Citations CitationsConfigParamResp`
-
-                - `Enabled bool`
 
             - `type ThinkingBlockParamResp struct{…}`
 
@@ -29100,25 +19266,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `Caller ToolUseBlockParamCallerUnionResp`
 
@@ -29162,673 +19309,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Content []ToolResultBlockParamContentUnionResp`
 
                 - `[]ToolResultBlockParamContentUnionResp`
 
                   - `type TextBlockParamResp struct{…}`
 
-                    - `Text string`
-
-                    - `Type Text`
-
-                      - `const TextText Text = "text"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations []TextCitationParamUnionResp`
-
-                      - `type CitationCharLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndCharIndex int64`
-
-                        - `StartCharIndex int64`
-
-                        - `Type CharLocation`
-
-                          - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                      - `type CitationPageLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndPageNumber int64`
-
-                        - `StartPageNumber int64`
-
-                        - `Type PageLocation`
-
-                          - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                      - `type CitationContentBlockLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `DocumentIndex int64`
-
-                        - `DocumentTitle string`
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Type ContentBlockLocation`
-
-                          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                      - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                        - `EncryptedIndex string`
-
-                        - `Title string`
-
-                        - `Type WebSearchResultLocation`
-
-                          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                        - `URL string`
-
-                      - `type CitationSearchResultLocationParamResp struct{…}`
-
-                        - `CitedText string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `EndBlockIndex int64`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `SearchResultIndex int64`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `Source string`
-
-                        - `StartBlockIndex int64`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `Title string`
-
-                        - `Type SearchResultLocation`
-
-                          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
                   - `type ImageBlockParamResp struct{…}`
-
-                    - `Source ImageBlockParamSourceUnionResp`
-
-                      - `type Base64ImageSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType Base64ImageSourceMediaType`
-
-                          - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                          - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                          - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                          - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type URLImageSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Image`
-
-                      - `const ImageImage Image = "image"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
                   - `type SearchResultBlockParamResp struct{…}`
 
-                    - `Content []TextBlockParamResp`
-
-                      - `Text string`
-
-                      - `Type Text`
-
-                        - `const TextText Text = "text"`
-
-                      - `CacheControl CacheControlEphemeral`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `Type Ephemeral`
-
-                          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                        - `TTL CacheControlEphemeralTTL`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                      - `Citations []TextCitationParamUnionResp`
-
-                        - `type CitationCharLocationParamResp struct{…}`
-
-                          - `CitedText string`
-
-                          - `DocumentIndex int64`
-
-                          - `DocumentTitle string`
-
-                          - `EndCharIndex int64`
-
-                          - `StartCharIndex int64`
-
-                          - `Type CharLocation`
-
-                            - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                        - `type CitationPageLocationParamResp struct{…}`
-
-                          - `CitedText string`
-
-                          - `DocumentIndex int64`
-
-                          - `DocumentTitle string`
-
-                          - `EndPageNumber int64`
-
-                          - `StartPageNumber int64`
-
-                          - `Type PageLocation`
-
-                            - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                        - `type CitationContentBlockLocationParamResp struct{…}`
-
-                          - `CitedText string`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `DocumentIndex int64`
-
-                          - `DocumentTitle string`
-
-                          - `EndBlockIndex int64`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `StartBlockIndex int64`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `Type ContentBlockLocation`
-
-                            - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                        - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                          - `CitedText string`
-
-                          - `EncryptedIndex string`
-
-                          - `Title string`
-
-                          - `Type WebSearchResultLocation`
-
-                            - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                          - `URL string`
-
-                        - `type CitationSearchResultLocationParamResp struct{…}`
-
-                          - `CitedText string`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `EndBlockIndex int64`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `SearchResultIndex int64`
-
-                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                          - `Source string`
-
-                          - `StartBlockIndex int64`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `Title string`
-
-                          - `Type SearchResultLocation`
-
-                            - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                    - `Source string`
-
-                    - `Title string`
-
-                    - `Type SearchResult`
-
-                      - `const SearchResultSearchResult SearchResult = "search_result"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations CitationsConfigParamResp`
-
-                      - `Enabled bool`
-
                   - `type DocumentBlockParamResp struct{…}`
-
-                    - `Source DocumentBlockParamSourceUnionResp`
-
-                      - `type Base64PDFSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType ApplicationPDF`
-
-                          - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type PlainTextSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType TextPlain`
-
-                          - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                        - `Type Text`
-
-                          - `const TextText Text = "text"`
-
-                      - `type ContentBlockSource struct{…}`
-
-                        - `Content ContentBlockSourceContentUnion`
-
-                          - `string`
-
-                          - `[]ContentBlockSourceContentItemUnion`
-
-                            - `type TextBlockParamResp struct{…}`
-
-                              - `Text string`
-
-                              - `Type Text`
-
-                                - `const TextText Text = "text"`
-
-                              - `CacheControl CacheControlEphemeral`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `Type Ephemeral`
-
-                                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                                - `TTL CacheControlEphemeralTTL`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                              - `Citations []TextCitationParamUnionResp`
-
-                                - `type CitationCharLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndCharIndex int64`
-
-                                  - `StartCharIndex int64`
-
-                                  - `Type CharLocation`
-
-                                    - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                                - `type CitationPageLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndPageNumber int64`
-
-                                  - `StartPageNumber int64`
-
-                                  - `Type PageLocation`
-
-                                    - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                                - `type CitationContentBlockLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndBlockIndex int64`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `StartBlockIndex int64`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `Type ContentBlockLocation`
-
-                                    - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                                - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `EncryptedIndex string`
-
-                                  - `Title string`
-
-                                  - `Type WebSearchResultLocation`
-
-                                    - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                                  - `URL string`
-
-                                - `type CitationSearchResultLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `EndBlockIndex int64`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `SearchResultIndex int64`
-
-                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                  - `Source string`
-
-                                  - `StartBlockIndex int64`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `Title string`
-
-                                  - `Type SearchResultLocation`
-
-                                    - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                            - `type ImageBlockParamResp struct{…}`
-
-                              - `Source ImageBlockParamSourceUnionResp`
-
-                                - `type Base64ImageSource struct{…}`
-
-                                  - `Data string`
-
-                                  - `MediaType Base64ImageSourceMediaType`
-
-                                    - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                    - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                    - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                    - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                                  - `Type Base64`
-
-                                    - `const Base64Base64 Base64 = "base64"`
-
-                                - `type URLImageSource struct{…}`
-
-                                  - `Type URL`
-
-                                    - `const URLURL URL = "url"`
-
-                                  - `URL string`
-
-                              - `Type Image`
-
-                                - `const ImageImage Image = "image"`
-
-                              - `CacheControl CacheControlEphemeral`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `Type Ephemeral`
-
-                                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                                - `TTL CacheControlEphemeralTTL`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                        - `Type Content`
-
-                          - `const ContentContent Content = "content"`
-
-                      - `type URLPDFSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Document`
-
-                      - `const DocumentDocument Document = "document"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations CitationsConfigParamResp`
-
-                      - `Enabled bool`
-
-                    - `Context string`
-
-                    - `Title string`
 
                   - `type ToolReferenceBlockParamResp struct{…}`
 
@@ -29843,25 +19334,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                     - `CacheControl CacheControlEphemeral`
 
                       Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
               - `IsError bool`
 
@@ -29895,25 +19367,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Caller ServerToolUseBlockParamCallerUnionResp`
 
                 Tool invocation directly from the model.
@@ -29922,27 +19375,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `Type Direct`
-
-                    - `const DirectDirect Direct = "direct"`
-
                 - `type ServerToolCaller struct{…}`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `ToolID string`
-
-                  - `Type CodeExecution20250825`
-
-                    - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
                 - `type ServerToolCaller20260120 struct{…}`
-
-                  - `ToolID string`
-
-                  - `Type CodeExecution20260120`
-
-                    - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `type WebSearchToolResultBlockParamResp struct{…}`
 
@@ -29992,25 +19429,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Caller WebSearchToolResultBlockParamCallerUnionResp`
 
                 Tool invocation directly from the model.
@@ -30019,27 +19437,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `Type Direct`
-
-                    - `const DirectDirect Direct = "direct"`
-
                 - `type ServerToolCaller struct{…}`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `ToolID string`
-
-                  - `Type CodeExecution20250825`
-
-                    - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
                 - `type ServerToolCaller20260120 struct{…}`
-
-                  - `ToolID string`
-
-                  - `Type CodeExecution20260120`
-
-                    - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `type WebFetchToolResultBlockParamResp struct{…}`
 
@@ -30073,281 +19475,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `Content DocumentBlockParamResp`
 
-                    - `Source DocumentBlockParamSourceUnionResp`
-
-                      - `type Base64PDFSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType ApplicationPDF`
-
-                          - `const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"`
-
-                        - `Type Base64`
-
-                          - `const Base64Base64 Base64 = "base64"`
-
-                      - `type PlainTextSource struct{…}`
-
-                        - `Data string`
-
-                        - `MediaType TextPlain`
-
-                          - `const TextPlainTextPlain TextPlain = "text/plain"`
-
-                        - `Type Text`
-
-                          - `const TextText Text = "text"`
-
-                      - `type ContentBlockSource struct{…}`
-
-                        - `Content ContentBlockSourceContentUnion`
-
-                          - `string`
-
-                          - `[]ContentBlockSourceContentItemUnion`
-
-                            - `type TextBlockParamResp struct{…}`
-
-                              - `Text string`
-
-                              - `Type Text`
-
-                                - `const TextText Text = "text"`
-
-                              - `CacheControl CacheControlEphemeral`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `Type Ephemeral`
-
-                                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                                - `TTL CacheControlEphemeralTTL`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                              - `Citations []TextCitationParamUnionResp`
-
-                                - `type CitationCharLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndCharIndex int64`
-
-                                  - `StartCharIndex int64`
-
-                                  - `Type CharLocation`
-
-                                    - `const CharLocationCharLocation CharLocation = "char_location"`
-
-                                - `type CitationPageLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndPageNumber int64`
-
-                                  - `StartPageNumber int64`
-
-                                  - `Type PageLocation`
-
-                                    - `const PageLocationPageLocation PageLocation = "page_location"`
-
-                                - `type CitationContentBlockLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `DocumentIndex int64`
-
-                                  - `DocumentTitle string`
-
-                                  - `EndBlockIndex int64`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `StartBlockIndex int64`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `Type ContentBlockLocation`
-
-                                    - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-                                - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                  - `EncryptedIndex string`
-
-                                  - `Title string`
-
-                                  - `Type WebSearchResultLocation`
-
-                                    - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-                                  - `URL string`
-
-                                - `type CitationSearchResultLocationParamResp struct{…}`
-
-                                  - `CitedText string`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `EndBlockIndex int64`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `SearchResultIndex int64`
-
-                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                  - `Source string`
-
-                                  - `StartBlockIndex int64`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `Title string`
-
-                                  - `Type SearchResultLocation`
-
-                                    - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-                            - `type ImageBlockParamResp struct{…}`
-
-                              - `Source ImageBlockParamSourceUnionResp`
-
-                                - `type Base64ImageSource struct{…}`
-
-                                  - `Data string`
-
-                                  - `MediaType Base64ImageSourceMediaType`
-
-                                    - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
-
-                                    - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
-
-                                    - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
-
-                                    - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
-
-                                  - `Type Base64`
-
-                                    - `const Base64Base64 Base64 = "base64"`
-
-                                - `type URLImageSource struct{…}`
-
-                                  - `Type URL`
-
-                                    - `const URLURL URL = "url"`
-
-                                  - `URL string`
-
-                              - `Type Image`
-
-                                - `const ImageImage Image = "image"`
-
-                              - `CacheControl CacheControlEphemeral`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `Type Ephemeral`
-
-                                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                                - `TTL CacheControlEphemeralTTL`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                        - `Type Content`
-
-                          - `const ContentContent Content = "content"`
-
-                      - `type URLPDFSource struct{…}`
-
-                        - `Type URL`
-
-                          - `const URLURL URL = "url"`
-
-                        - `URL string`
-
-                    - `Type Document`
-
-                      - `const DocumentDocument Document = "document"`
-
-                    - `CacheControl CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
-                    - `Citations CitationsConfigParamResp`
-
-                      - `Enabled bool`
-
-                    - `Context string`
-
-                    - `Title string`
-
                   - `Type WebFetchResult`
 
                     - `const WebFetchResultWebFetchResult WebFetchResult = "web_fetch_result"`
@@ -30370,25 +19497,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
               - `Caller WebFetchToolResultBlockParamCallerUnionResp`
 
                 Tool invocation directly from the model.
@@ -30397,27 +19505,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `Type Direct`
-
-                    - `const DirectDirect Direct = "direct"`
-
                 - `type ServerToolCaller struct{…}`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `ToolID string`
-
-                  - `Type CodeExecution20250825`
-
-                    - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
                 - `type ServerToolCaller20260120 struct{…}`
-
-                  - `ToolID string`
-
-                  - `Type CodeExecution20260120`
-
-                    - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -30471,8 +19563,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `Type CodeExecutionOutput`
 
-                      - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
-
                   - `EncryptedStdout string`
 
                   - `ReturnCode int64`
@@ -30492,25 +19582,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -30563,25 +19634,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
             - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
@@ -30663,25 +19715,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `type ToolSearchToolResultBlockParamResp struct{…}`
 
               - `Content ToolSearchToolResultBlockParamContentUnionResp`
@@ -30710,30 +19743,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `Type ToolReference`
 
-                      - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
                     - `CacheControl CacheControlEphemeral`
 
                       Create a cache control breakpoint at this content block.
-
-                      - `Type Ephemeral`
-
-                        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                      - `TTL CacheControlEphemeralTTL`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                        - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
                   - `Type ToolSearchToolSearchResult`
 
@@ -30749,25 +19761,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
             - `type ContainerUploadBlockParamResp struct{…}`
 
               A content block that represents a file to be uploaded to the container
@@ -30782,25 +19775,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `CacheControl CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `Type Ephemeral`
-
-                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-                - `TTL CacheControlEphemeralTTL`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-                  - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
         - `Role MessageParamRole`
 
@@ -30894,25 +19868,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL CacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-          - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
       - `Container string`
 
         Container identifier for reuse across requests.
@@ -30997,136 +19952,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `Type Text`
 
-            - `const TextText Text = "text"`
-
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations []TextCitationParamUnionResp`
-
-            - `type CitationCharLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndCharIndex int64`
-
-              - `StartCharIndex int64`
-
-              - `Type CharLocation`
-
-                - `const CharLocationCharLocation CharLocation = "char_location"`
-
-            - `type CitationPageLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndPageNumber int64`
-
-              - `StartPageNumber int64`
-
-              - `Type PageLocation`
-
-                - `const PageLocationPageLocation PageLocation = "page_location"`
-
-            - `type CitationContentBlockLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `DocumentIndex int64`
-
-              - `DocumentTitle string`
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Type ContentBlockLocation`
-
-                - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-              - `EncryptedIndex string`
-
-              - `Title string`
-
-              - `Type WebSearchResultLocation`
-
-                - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-              - `URL string`
-
-            - `type CitationSearchResultLocationParamResp struct{…}`
-
-              - `CitedText string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `EndBlockIndex int64`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `SearchResultIndex int64`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `Source string`
-
-              - `StartBlockIndex int64`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `Title string`
-
-              - `Type SearchResultLocation`
-
-                - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
 
       - `Temperature float64`
 
@@ -31342,25 +20172,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31411,25 +20222,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31466,25 +20258,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31518,25 +20291,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `DeferLoading bool`
 
@@ -31574,25 +20328,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31626,25 +20361,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `DeferLoading bool`
 
@@ -31682,25 +20398,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31737,25 +20434,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31791,25 +20469,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `DeferLoading bool`
 
@@ -31858,25 +20517,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `DeferLoading bool`
 
@@ -31948,30 +20588,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Enabled bool`
 
           - `DeferLoading bool`
 
@@ -32023,25 +20642,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32057,26 +20657,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `UserLocation UserLocation`
 
             Parameters for the user's location. Used to provide more relevant search results.
-
-            - `Type Approximate`
-
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
-
-              The city of the user.
-
-            - `Country string`
-
-              The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-            - `Region string`
-
-              The region of the user.
-
-            - `Timezone string`
-
-              The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
         - `type WebFetchTool20260209 struct{…}`
 
@@ -32112,30 +20692,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Enabled bool`
 
           - `DeferLoading bool`
 
@@ -32189,30 +20748,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `Citations CitationsConfigParamResp`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Enabled bool`
 
           - `DeferLoading bool`
 
@@ -32262,25 +20800,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
-
           - `DeferLoading bool`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32316,25 +20835,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `Type Ephemeral`
-
-              - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-            - `TTL CacheControlEphemeralTTL`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
-
-              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
           - `DeferLoading bool`
 
@@ -32491,7 +20991,30 @@ func main() {
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Retrieve a Message Batch
 
 `client.Messages.Batches.Get(ctx, messageBatchID) (*MessageBatch, error)`
 
@@ -32622,7 +21145,30 @@ func main() {
 }
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## List Message Batches
 
 `client.Messages.Batches.List(ctx, query) (*Page[MessageBatch], error)`
 
@@ -32767,7 +21313,37 @@ func main() {
 }
 ```
 
-## Cancel
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Cancel a Message Batch
 
 `client.Messages.Batches.Cancel(ctx, messageBatchID) (*MessageBatch, error)`
 
@@ -32900,7 +21476,30 @@ func main() {
 }
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Delete a Message Batch
 
 `client.Messages.Batches.Delete(ctx, messageBatchID) (*DeletedMessageBatch, error)`
 
@@ -32959,7 +21558,16 @@ func main() {
 }
 ```
 
-## Results
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+## Retrieve Message Batch results
 
 `client.Messages.Batches.Results(ctx, messageBatchID) (*MessageBatchIndividualResponse, error)`
 
@@ -33242,27 +21850,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Input map[string, any]`
 
@@ -33296,27 +21888,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Content WebSearchToolResultBlockContentUnion`
 
@@ -33370,27 +21946,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Content WebFetchToolResultBlockContentUnion`
 
@@ -33531,8 +22091,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `FileID string`
 
                   - `Type CodeExecutionOutput`
-
-                    - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
                 - `EncryptedStdout string`
 
@@ -34558,27 +23116,11 @@ func main() {
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Input map[string, any]`
 
@@ -34612,27 +23154,11 @@ func main() {
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Content WebSearchToolResultBlockContentUnion`
 
@@ -34686,27 +23212,11 @@ func main() {
 
                 Tool invocation directly from the model.
 
-                - `Type Direct`
-
-                  - `const DirectDirect Direct = "direct"`
-
               - `type ServerToolCaller struct{…}`
 
                 Tool invocation generated by a server-side tool.
 
-                - `ToolID string`
-
-                - `Type CodeExecution20250825`
-
-                  - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
               - `type ServerToolCaller20260120 struct{…}`
-
-                - `ToolID string`
-
-                - `Type CodeExecution20260120`
-
-                  - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
             - `Content WebFetchToolResultBlockContentUnion`
 
@@ -34847,8 +23357,6 @@ func main() {
                   - `FileID string`
 
                   - `Type CodeExecutionOutput`
-
-                    - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
                 - `EncryptedStdout string`
 
@@ -35654,27 +24162,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Input map[string, any]`
 
@@ -35708,27 +24200,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Content WebSearchToolResultBlockContentUnion`
 
@@ -35782,27 +24258,11 @@ func main() {
 
               Tool invocation directly from the model.
 
-              - `Type Direct`
-
-                - `const DirectDirect Direct = "direct"`
-
             - `type ServerToolCaller struct{…}`
 
               Tool invocation generated by a server-side tool.
 
-              - `ToolID string`
-
-              - `Type CodeExecution20250825`
-
-                - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
             - `type ServerToolCaller20260120 struct{…}`
-
-              - `ToolID string`
-
-              - `Type CodeExecution20260120`
-
-                - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
           - `Content WebFetchToolResultBlockContentUnion`
 
@@ -35943,8 +24403,6 @@ func main() {
                 - `FileID string`
 
                 - `Type CodeExecutionOutput`
-
-                  - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
               - `EncryptedStdout string`
 
@@ -36712,27 +25170,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Input map[string, any]`
 
@@ -36766,27 +25208,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Content WebSearchToolResultBlockContentUnion`
 
@@ -36840,27 +25266,11 @@ func main() {
 
             Tool invocation directly from the model.
 
-            - `Type Direct`
-
-              - `const DirectDirect Direct = "direct"`
-
           - `type ServerToolCaller struct{…}`
 
             Tool invocation generated by a server-side tool.
 
-            - `ToolID string`
-
-            - `Type CodeExecution20250825`
-
-              - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
-
           - `type ServerToolCaller20260120 struct{…}`
-
-            - `ToolID string`
-
-            - `Type CodeExecution20260120`
-
-              - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
         - `Content WebFetchToolResultBlockContentUnion`
 
@@ -37001,8 +25411,6 @@ func main() {
               - `FileID string`
 
               - `Type CodeExecutionOutput`
-
-                - `const CodeExecutionOutputCodeExecutionOutput CodeExecutionOutput = "code_execution_output"`
 
             - `EncryptedStdout string`
 

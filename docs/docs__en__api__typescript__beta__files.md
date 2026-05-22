@@ -1,6 +1,6 @@
 # Files
 
-## Upload
+## Upload File
 
 `client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): FileMetadata`
 
@@ -141,7 +141,25 @@ const fileMetadata = await client.beta.files.upload({ file: fs.createReadStream(
 console.log(fileMetadata.id);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
 
 `client.beta.files.list(FileListParamsparams?, RequestOptionsoptions?): Page<FileMetadata>`
 
@@ -296,7 +314,32 @@ for await (const fileMetadata of client.beta.files.list()) {
 }
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
 
 `client.beta.files.download(stringfileID, FileDownloadParamsparams?, RequestOptionsoptions?): Response`
 
@@ -391,7 +434,7 @@ const content = await response.blob();
 console.log(content);
 ```
 
-## Retrieve Metadata
+## Get File Metadata
 
 `client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): FileMetadata`
 
@@ -531,7 +574,25 @@ const fileMetadata = await client.beta.files.retrieveMetadata('file_id');
 console.log(fileMetadata.id);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
 
 `client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): DeletedFile`
 
@@ -633,6 +694,15 @@ const client = new Anthropic({
 const deletedFile = await client.beta.files.delete('file_id');
 
 console.log(deletedFile.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```
 
 ## Domain Types

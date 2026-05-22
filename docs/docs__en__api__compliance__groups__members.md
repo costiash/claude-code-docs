@@ -1,6 +1,6 @@
 # Members
 
-## List
+## List Compliance Group Members
 
 **get** `/v1/compliance/groups/{group_id}/members`
 
@@ -63,11 +63,28 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "created_at": "created_at",
+      "email": "email",
+      "updated_at": "updated_at",
+      "user_id": "user_id"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Member List Response
 
-- `MemberListResponse = object { created_at, email, updated_at, user_id }`
+- `MemberListResponse object { created_at, email, updated_at, user_id }`
 
   Group member for compliance responses.
 

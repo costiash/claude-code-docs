@@ -1,4 +1,4 @@
-## Results
+## Retrieve Message Batch results
 
 **get** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -20,9 +20,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,7 +76,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `BetaMessageBatchIndividualResponse = object { custom_id, result }`
+- `BetaMessageBatchIndividualResponse object { custom_id, result }`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -92,7 +92,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `BetaMessageBatchSucceededResult = object { message, type }`
+    - `BetaMessageBatchSucceededResult object { message, type }`
 
       - `message: BetaMessage`
 
@@ -163,7 +163,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `BetaTextBlock = object { citations, text, type }`
+          - `BetaTextBlock object { citations, text, type }`
 
             - `citations: array of BetaTextCitation`
 
@@ -171,7 +171,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `BetaCitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `BetaCitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -189,7 +189,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"char_location"`
 
-              - `BetaCitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `BetaCitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -207,7 +207,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"page_location"`
 
-              - `BetaCitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `BetaCitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -235,7 +235,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"content_block_location"`
 
-              - `BetaCitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+              - `BetaCitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -249,7 +249,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `url: string`
 
-              - `BetaCitationSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `BetaCitationSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -287,7 +287,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text"`
 
-          - `BetaThinkingBlock = object { signature, thinking, type }`
+          - `BetaThinkingBlock object { signature, thinking, type }`
 
             - `signature: string`
 
@@ -297,7 +297,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"thinking"`
 
-          - `BetaRedactedThinkingBlock = object { data, type }`
+          - `BetaRedactedThinkingBlock object { data, type }`
 
             - `data: string`
 
@@ -305,7 +305,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"redacted_thinking"`
 
-          - `BetaToolUseBlock = object { id, input, name, 2 more }`
+          - `BetaToolUseBlock object { id, input, name, 2 more }`
 
             - `id: string`
 
@@ -321,7 +321,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `BetaDirectCaller = object { type }`
+              - `BetaDirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
@@ -329,7 +329,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"direct"`
 
-              - `BetaServerToolCaller = object { tool_id, type }`
+              - `BetaServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
@@ -339,7 +339,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `BetaServerToolCaller20260120 = object { tool_id, type }`
+              - `BetaServerToolCaller20260120 object { tool_id, type }`
 
                 - `tool_id: string`
 
@@ -347,7 +347,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20260120"`
 
-          - `BetaServerToolUseBlock = object { id, input, name, 2 more }`
+          - `BetaServerToolUseBlock object { id, input, name, 2 more }`
 
             - `id: string`
 
@@ -379,37 +379,21 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `BetaDirectCaller = object { type }`
+              - `BetaDirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `BetaServerToolCaller = object { tool_id, type }`
+              - `BetaServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `BetaServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `BetaServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `BetaWebSearchToolResultBlock = object { content, tool_use_id, type, caller }`
+          - `BetaWebSearchToolResultBlock object { content, tool_use_id, type, caller }`
 
             - `content: BetaWebSearchToolResultBlockContent`
 
-              - `BetaWebSearchToolResultError = object { error_code, type }`
+              - `BetaWebSearchToolResultError object { error_code, type }`
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -429,7 +413,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_search_tool_result_error"`
 
-              - `UnionMember1 = array of BetaWebSearchResultBlock`
+              - `array of BetaWebSearchResultBlock`
 
                 - `encrypted_content: string`
 
@@ -453,37 +437,21 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `BetaDirectCaller = object { type }`
+              - `BetaDirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `BetaServerToolCaller = object { tool_id, type }`
+              - `BetaServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `BetaServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `BetaServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `BetaWebFetchToolResultBlock = object { content, tool_use_id, type, caller }`
+          - `BetaWebFetchToolResultBlock object { content, tool_use_id, type, caller }`
 
             - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
-              - `BetaWebFetchToolResultErrorBlock = object { error_code, type }`
+              - `BetaWebFetchToolResultErrorBlock object { error_code, type }`
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -507,7 +475,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_fetch_tool_result_error"`
 
-              - `BetaWebFetchBlock = object { content, retrieved_at, type, url }`
+              - `BetaWebFetchBlock object { content, retrieved_at, type, url }`
 
                 - `content: BetaDocumentBlock`
 
@@ -519,7 +487,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `source: BetaBase64PDFSource or BetaPlainTextSource`
 
-                    - `BetaBase64PDFSource = object { data, media_type, type }`
+                    - `BetaBase64PDFSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -531,7 +499,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `"base64"`
 
-                    - `BetaPlainTextSource = object { data, media_type, type }`
+                    - `BetaPlainTextSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -573,37 +541,21 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `BetaDirectCaller = object { type }`
+              - `BetaDirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `BetaServerToolCaller = object { tool_id, type }`
+              - `BetaServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `BetaServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `BetaServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+          - `BetaAdvisorToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
-              - `BetaAdvisorToolResultError = object { error_code, type }`
+              - `BetaAdvisorToolResultError object { error_code, type }`
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
 
@@ -623,7 +575,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_tool_result_error"`
 
-              - `BetaAdvisorResultBlock = object { text, type }`
+              - `BetaAdvisorResultBlock object { text, type }`
 
                 - `text: string`
 
@@ -631,7 +583,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_result"`
 
-              - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+              - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
 
                 - `encrypted_content: string`
 
@@ -647,13 +599,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"advisor_tool_result"`
 
-          - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BetaCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `BetaCodeExecutionToolResultError = object { error_code, type }`
+              - `BetaCodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -669,7 +621,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_tool_result_error"`
 
-              - `BetaCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `BetaCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BetaCodeExecutionOutputBlock`
 
@@ -689,7 +641,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_result"`
 
-              - `BetaEncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+              - `BetaEncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -698,8 +650,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `file_id: string`
 
                   - `type: "code_execution_output"`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: string`
 
@@ -717,11 +667,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"code_execution_tool_result"`
 
-          - `BetaBashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BetaBashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
-              - `BetaBashCodeExecutionToolResultError = object { error_code, type }`
+              - `BetaBashCodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -739,7 +689,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"bash_code_execution_tool_result_error"`
 
-              - `BetaBashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `BetaBashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BetaBashCodeExecutionOutputBlock`
 
@@ -765,11 +715,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"bash_code_execution_tool_result"`
 
-          - `BetaTextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BetaTextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `BetaTextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+              - `BetaTextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -789,7 +739,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_tool_result_error"`
 
-              - `BetaTextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+              - `BetaTextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
                 - `content: string`
 
@@ -811,7 +761,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_view_result"`
 
-              - `BetaTextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+              - `BetaTextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
                 - `is_file_update: boolean`
 
@@ -819,7 +769,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_create_result"`
 
-              - `BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+              - `BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
                 - `lines: array of string`
 
@@ -841,11 +791,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text_editor_code_execution_tool_result"`
 
-          - `BetaToolSearchToolResultBlock = object { content, tool_use_id, type }`
+          - `BetaToolSearchToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
-              - `BetaToolSearchToolResultError = object { error_code, error_message, type }`
+              - `BetaToolSearchToolResultError object { error_code, error_message, type }`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -863,7 +813,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"tool_search_tool_result_error"`
 
-              - `BetaToolSearchToolSearchResultBlock = object { tool_references, type }`
+              - `BetaToolSearchToolSearchResultBlock object { tool_references, type }`
 
                 - `tool_references: array of BetaToolReferenceBlock`
 
@@ -883,7 +833,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"tool_search_tool_result"`
 
-          - `BetaMCPToolUseBlock = object { id, input, name, 2 more }`
+          - `BetaMCPToolUseBlock object { id, input, name, 2 more }`
 
             - `id: string`
 
@@ -901,11 +851,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"mcp_tool_use"`
 
-          - `BetaMCPToolResultBlock = object { content, is_error, tool_use_id, type }`
+          - `BetaMCPToolResultBlock object { content, is_error, tool_use_id, type }`
 
             - `content: string or array of BetaTextBlock`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
 
@@ -915,121 +865,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-                  - `BetaCitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_char_index: number`
-
-                    - `file_id: string`
-
-                    - `start_char_index: number`
-
-                    - `type: "char_location"`
-
-                      - `"char_location"`
-
-                  - `BetaCitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_page_number: number`
-
-                    - `file_id: string`
-
-                    - `start_page_number: number`
-
-                    - `type: "page_location"`
-
-                      - `"page_location"`
-
-                  - `BetaCitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `file_id: string`
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: "content_block_location"`
-
-                      - `"content_block_location"`
-
-                  - `BetaCitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
-
-                    - `cited_text: string`
-
-                    - `encrypted_index: string`
-
-                    - `title: string`
-
-                    - `type: "web_search_result_location"`
-
-                      - `"web_search_result_location"`
-
-                    - `url: string`
-
-                  - `BetaCitationSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: number`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: string`
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: string`
-
-                    - `type: "search_result_location"`
-
-                      - `"search_result_location"`
-
                 - `text: string`
 
                 - `type: "text"`
-
-                  - `"text"`
 
             - `is_error: boolean`
 
@@ -1039,7 +877,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"mcp_tool_result"`
 
-          - `BetaContainerUploadBlock = object { file_id, type }`
+          - `BetaContainerUploadBlock object { file_id, type }`
 
             Response model for a file uploaded to the container.
 
@@ -1049,7 +887,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"container_upload"`
 
-          - `BetaCompactionBlock = object { content, encrypted_content, type }`
+          - `BetaCompactionBlock object { content, encrypted_content, type }`
 
             A compaction block returned when autocompact is triggered.
 
@@ -1079,7 +917,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             List of context management edits that were applied.
 
-            - `BetaClearToolUses20250919EditResponse = object { cleared_input_tokens, cleared_tool_uses, type }`
+            - `BetaClearToolUses20250919EditResponse object { cleared_input_tokens, cleared_tool_uses, type }`
 
               - `cleared_input_tokens: number`
 
@@ -1095,7 +933,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"clear_tool_uses_20250919"`
 
-            - `BetaClearThinking20251015EditResponse = object { cleared_input_tokens, cleared_thinking_turns, type }`
+            - `BetaClearThinking20251015EditResponse object { cleared_input_tokens, cleared_thinking_turns, type }`
 
               - `cleared_input_tokens: number`
 
@@ -1120,7 +958,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-            - `BetaCacheMissModelChanged = object { cache_missed_input_tokens, type }`
+            - `BetaCacheMissModelChanged object { cache_missed_input_tokens, type }`
 
               - `cache_missed_input_tokens: number`
 
@@ -1130,7 +968,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"model_changed"`
 
-            - `BetaCacheMissSystemChanged = object { cache_missed_input_tokens, type }`
+            - `BetaCacheMissSystemChanged object { cache_missed_input_tokens, type }`
 
               - `cache_missed_input_tokens: number`
 
@@ -1140,7 +978,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"system_changed"`
 
-            - `BetaCacheMissToolsChanged = object { cache_missed_input_tokens, type }`
+            - `BetaCacheMissToolsChanged object { cache_missed_input_tokens, type }`
 
               - `cache_missed_input_tokens: number`
 
@@ -1150,7 +988,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"tools_changed"`
 
-            - `BetaCacheMissMessagesChanged = object { cache_missed_input_tokens, type }`
+            - `BetaCacheMissMessagesChanged object { cache_missed_input_tokens, type }`
 
               - `cache_missed_input_tokens: number`
 
@@ -1160,13 +998,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"messages_changed"`
 
-            - `BetaCacheMissPreviousMessageNotFound = object { type }`
+            - `BetaCacheMissPreviousMessageNotFound object { type }`
 
               - `type: "previous_message_not_found"`
 
                 - `"previous_message_not_found"`
 
-            - `BetaCacheMissUnavailable = object { type }`
+            - `BetaCacheMissUnavailable object { type }`
 
               - `type: "unavailable"`
 
@@ -1178,7 +1016,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
@@ -1252,7 +1090,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Fast and cost-effective model
 
-          - `UnionMember1 = string`
+          - `string`
 
         - `role: "assistant"`
 
@@ -1381,21 +1219,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - Calculate the true context window size from the last iteration
             - Understand token accumulation across server-side tool use loops
 
-            - `BetaMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+            - `BetaMessageIterationUsage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
 
               Token usage for a sampling iteration.
 
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
-
-                - `ephemeral_1h_input_tokens: number`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: number`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `cache_creation_input_tokens: number`
 
@@ -1419,21 +1249,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"message"`
 
-            - `BetaCompactionIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+            - `BetaCompactionIterationUsage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
 
               Token usage for a compaction iteration.
 
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
-
-                - `ephemeral_1h_input_tokens: number`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: number`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `cache_creation_input_tokens: number`
 
@@ -1457,21 +1279,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"compaction"`
 
-            - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+            - `BetaAdvisorMessageIterationUsage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
               Token usage for an advisor sub-inference iteration.
 
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
-
-                - `ephemeral_1h_input_tokens: number`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `ephemeral_5m_input_tokens: number`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `cache_creation_input_tokens: number`
 
@@ -1490,82 +1304,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
-
-                  The model that will complete your prompt.
-
-                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                  - `"claude-opus-4-7"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-mythos-preview"`
-
-                    New class of intelligence, strongest in coding and cybersecurity
-
-                  - `"claude-opus-4-6"`
-
-                    Frontier intelligence for long-running agents and coding
-
-                  - `"claude-sonnet-4-6"`
-
-                    Best combination of speed and intelligence
-
-                  - `"claude-haiku-4-5"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-haiku-4-5-20251001"`
-
-                    Fastest model with near-frontier intelligence
-
-                  - `"claude-opus-4-5"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-opus-4-5-20251101"`
-
-                    Premium model combining maximum intelligence with practical performance
-
-                  - `"claude-sonnet-4-5"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-sonnet-4-5-20250929"`
-
-                    High-performance model for agents and coding
-
-                  - `"claude-opus-4-1"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-1-20250805"`
-
-                    Exceptional model for specialized complex tasks
-
-                  - `"claude-opus-4-0"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-opus-4-20250514"`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-sonnet-4-0"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-sonnet-4-20250514"`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-3-haiku-20240307"`
-
-                    Fast and cost-effective model
-
-                - `UnionMember1 = string`
 
               - `output_tokens: number`
 
@@ -1615,13 +1353,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"succeeded"`
 
-    - `BetaMessageBatchErroredResult = object { error, type }`
+    - `BetaMessageBatchErroredResult object { error, type }`
 
       - `error: BetaErrorResponse`
 
         - `error: BetaError`
 
-          - `BetaInvalidRequestError = object { message, type }`
+          - `BetaInvalidRequestError object { message, type }`
 
             - `message: string`
 
@@ -1629,7 +1367,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"invalid_request_error"`
 
-          - `BetaAuthenticationError = object { message, type }`
+          - `BetaAuthenticationError object { message, type }`
 
             - `message: string`
 
@@ -1637,7 +1375,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"authentication_error"`
 
-          - `BetaBillingError = object { message, type }`
+          - `BetaBillingError object { message, type }`
 
             - `message: string`
 
@@ -1645,7 +1383,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"billing_error"`
 
-          - `BetaPermissionError = object { message, type }`
+          - `BetaPermissionError object { message, type }`
 
             - `message: string`
 
@@ -1653,7 +1391,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"permission_error"`
 
-          - `BetaNotFoundError = object { message, type }`
+          - `BetaNotFoundError object { message, type }`
 
             - `message: string`
 
@@ -1661,7 +1399,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"not_found_error"`
 
-          - `BetaRateLimitError = object { message, type }`
+          - `BetaRateLimitError object { message, type }`
 
             - `message: string`
 
@@ -1669,7 +1407,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"rate_limit_error"`
 
-          - `BetaGatewayTimeoutError = object { message, type }`
+          - `BetaGatewayTimeoutError object { message, type }`
 
             - `message: string`
 
@@ -1677,7 +1415,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"timeout_error"`
 
-          - `BetaAPIError = object { message, type }`
+          - `BetaAPIError object { message, type }`
 
             - `message: string`
 
@@ -1685,7 +1423,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"api_error"`
 
-          - `BetaOverloadedError = object { message, type }`
+          - `BetaOverloadedError object { message, type }`
 
             - `message: string`
 
@@ -1703,13 +1441,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"errored"`
 
-    - `BetaMessageBatchCanceledResult = object { type }`
+    - `BetaMessageBatchCanceledResult object { type }`
 
       - `type: "canceled"`
 
         - `"canceled"`
 
-    - `BetaMessageBatchExpiredResult = object { type }`
+    - `BetaMessageBatchExpiredResult object { type }`
 
       - `type: "expired"`
 

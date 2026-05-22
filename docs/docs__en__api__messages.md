@@ -1,6 +1,6 @@
 # Messages
 
-## Create
+## Create a Message
 
 **post** `/v1/messages`
 
@@ -75,11 +75,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `content: string or array of ContentBlockParam`
 
-    - `UnionMember0 = string`
+    - `string`
 
-    - `UnionMember1 = array of ContentBlockParam`
+    - `array of ContentBlockParam`
 
-      - `TextBlockParam = object { text, type, cache_control, citations }`
+      - `TextBlockParam object { text, type, cache_control, citations }`
 
         - `text: string`
 
@@ -112,7 +112,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `citations: optional array of TextCitationParam`
 
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -128,7 +128,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"char_location"`
 
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -144,7 +144,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"page_location"`
 
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -170,7 +170,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"content_block_location"`
 
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -184,7 +184,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `url: string`
 
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -216,11 +216,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"search_result_location"`
 
-      - `ImageBlockParam = object { source, type, cache_control }`
+      - `ImageBlockParam object { source, type, cache_control }`
 
         - `source: Base64ImageSource or URLImageSource`
 
-          - `Base64ImageSource = object { data, media_type, type }`
+          - `Base64ImageSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -238,7 +238,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"base64"`
 
-          - `URLImageSource = object { type, url }`
+          - `URLImageSource object { type, url }`
 
             - `type: "url"`
 
@@ -254,30 +254,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+      - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -289,7 +270,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -301,213 +282,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"text"`
 
-          - `ContentBlockSource = object { content, type }`
+          - `ContentBlockSource object { content, type }`
 
             - `content: string or array of ContentBlockSourceContent`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
-                  - `text: string`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional array of TextCitationParam`
-
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_char_index: number`
-
-                      - `start_char_index: number`
-
-                      - `type: "char_location"`
-
-                        - `"char_location"`
-
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_page_number: number`
-
-                      - `start_page_number: number`
-
-                      - `type: "page_location"`
-
-                        - `"page_location"`
-
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: "content_block_location"`
-
-                        - `"content_block_location"`
-
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                      - `cited_text: string`
-
-                      - `encrypted_index: string`
-
-                      - `title: string`
-
-                      - `type: "web_search_result_location"`
-
-                        - `"web_search_result_location"`
-
-                      - `url: string`
-
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: number`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: string`
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: string`
-
-                      - `type: "search_result_location"`
-
-                        - `"search_result_location"`
-
-                - `ImageBlockParam = object { source, type, cache_control }`
-
-                  - `source: Base64ImageSource or URLImageSource`
-
-                    - `Base64ImageSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `URLImageSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "image"`
-
-                    - `"image"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
+                - `ImageBlockParam object { source, type, cache_control }`
 
             - `type: "content"`
 
               - `"content"`
 
-          - `URLPDFSource = object { type, url }`
+          - `URLPDFSource object { type, url }`
 
             - `type: "url"`
 
@@ -523,25 +314,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           - `enabled: optional boolean`
@@ -550,7 +322,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `title: optional string`
 
-      - `SearchResultBlockParam = object { content, source, title, 3 more }`
+      - `SearchResultBlockParam object { content, source, title, 3 more }`
 
         - `content: array of TextBlockParam`
 
@@ -558,136 +330,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `type: "text"`
 
-            - `"text"`
-
           - `cache_control: optional CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: optional array of TextCitationParam`
-
-            - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_char_index: number`
-
-              - `start_char_index: number`
-
-              - `type: "char_location"`
-
-                - `"char_location"`
-
-            - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_page_number: number`
-
-              - `start_page_number: number`
-
-              - `type: "page_location"`
-
-                - `"page_location"`
-
-            - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: "content_block_location"`
-
-                - `"content_block_location"`
-
-            - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-              - `cited_text: string`
-
-              - `encrypted_index: string`
-
-              - `title: string`
-
-              - `type: "web_search_result_location"`
-
-                - `"web_search_result_location"`
-
-              - `url: string`
-
-            - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: number`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: string`
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: string`
-
-              - `type: "search_result_location"`
-
-                - `"search_result_location"`
 
         - `source: string`
 
@@ -701,30 +348,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
-          - `enabled: optional boolean`
-
-      - `ThinkingBlockParam = object { signature, thinking, type }`
+      - `ThinkingBlockParam object { signature, thinking, type }`
 
         - `signature: string`
 
@@ -734,7 +360,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"thinking"`
 
-      - `RedactedThinkingBlockParam = object { data, type }`
+      - `RedactedThinkingBlockParam object { data, type }`
 
         - `data: string`
 
@@ -742,7 +368,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"redacted_thinking"`
 
-      - `ToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -758,30 +384,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
@@ -789,7 +396,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"direct"`
 
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
@@ -799,7 +406,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"code_execution_20250825"`
 
-          - `ServerToolCaller20260120 = object { tool_id, type }`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `tool_id: string`
 
@@ -807,7 +414,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"code_execution_20260120"`
 
-      - `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+      - `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
         - `tool_use_id: string`
 
@@ -819,677 +426,21 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-          - `UnionMember0 = string`
+          - `string`
 
-          - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+          - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-            - `TextBlockParam = object { text, type, cache_control, citations }`
+            - `TextBlockParam object { text, type, cache_control, citations }`
 
-              - `text: string`
+            - `ImageBlockParam object { source, type, cache_control }`
 
-              - `type: "text"`
+            - `SearchResultBlockParam object { content, source, title, 3 more }`
 
-                - `"text"`
+            - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional array of TextCitationParam`
-
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_char_index: number`
-
-                  - `start_char_index: number`
-
-                  - `type: "char_location"`
-
-                    - `"char_location"`
-
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_page_number: number`
-
-                  - `start_page_number: number`
-
-                  - `type: "page_location"`
-
-                    - `"page_location"`
-
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: "content_block_location"`
-
-                    - `"content_block_location"`
-
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                  - `cited_text: string`
-
-                  - `encrypted_index: string`
-
-                  - `title: string`
-
-                  - `type: "web_search_result_location"`
-
-                    - `"web_search_result_location"`
-
-                  - `url: string`
-
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: number`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: string`
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: string`
-
-                  - `type: "search_result_location"`
-
-                    - `"search_result_location"`
-
-            - `ImageBlockParam = object { source, type, cache_control }`
-
-              - `source: Base64ImageSource or URLImageSource`
-
-                - `Base64ImageSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `URLImageSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "image"`
-
-                - `"image"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-            - `SearchResultBlockParam = object { content, source, title, 3 more }`
-
-              - `content: array of TextBlockParam`
-
-                - `text: string`
-
-                - `type: "text"`
-
-                  - `"text"`
-
-                - `cache_control: optional CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: "ephemeral"`
-
-                    - `"ephemeral"`
-
-                  - `ttl: optional "5m" or "1h"`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: optional array of TextCitationParam`
-
-                  - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_char_index: number`
-
-                    - `start_char_index: number`
-
-                    - `type: "char_location"`
-
-                      - `"char_location"`
-
-                  - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_page_number: number`
-
-                    - `start_page_number: number`
-
-                    - `type: "page_location"`
-
-                      - `"page_location"`
-
-                  - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: "content_block_location"`
-
-                      - `"content_block_location"`
-
-                  - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                    - `cited_text: string`
-
-                    - `encrypted_index: string`
-
-                    - `title: string`
-
-                    - `type: "web_search_result_location"`
-
-                      - `"web_search_result_location"`
-
-                    - `url: string`
-
-                  - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: number`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: string`
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: string`
-
-                    - `type: "search_result_location"`
-
-                      - `"search_result_location"`
-
-              - `source: string`
-
-              - `title: string`
-
-              - `type: "search_result"`
-
-                - `"search_result"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-            - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
-
-            - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+            - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
               Tool reference block that can be included in tool_result content.
 
@@ -1503,28 +454,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
         - `is_error: optional boolean`
 
-      - `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -1554,56 +486,21 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebSearchToolResultBlockParamContent`
 
@@ -1621,7 +518,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `page_age: optional string`
 
-          - `WebSearchToolRequestError = object { error_code, type }`
+          - `WebSearchToolRequestError object { error_code, type }`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -1651,60 +548,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-          - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+          - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -1728,284 +590,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"web_fetch_tool_result_error"`
 
-          - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+          - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
             - `content: DocumentBlockParam`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
 
             - `type: "web_fetch_result"`
 
@@ -2029,62 +616,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: CodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -2100,7 +652,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"code_execution_tool_result_error"`
 
-          - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of CodeExecutionOutputBlockParam`
 
@@ -2120,7 +672,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"code_execution_result"`
 
-          - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+          - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -2129,8 +681,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `file_id: string`
 
               - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: string`
 
@@ -2152,30 +702,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-          - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -2193,7 +724,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"bash_code_execution_tool_result_error"`
 
-          - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -2223,30 +754,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-          - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+          - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -2266,7 +778,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `error_message: optional string`
 
-          - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+          - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
             - `content: string`
 
@@ -2288,7 +800,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `total_lines: optional number`
 
-          - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+          - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
             - `is_file_update: boolean`
 
@@ -2296,7 +808,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"text_editor_code_execution_create_result"`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+          - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -2322,30 +834,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-          - `ToolSearchToolResultErrorParam = object { error_code, type }`
+          - `ToolSearchToolResultErrorParam object { error_code, type }`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -2361,7 +854,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"tool_search_tool_result_error"`
 
-          - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+          - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
             - `tool_references: array of ToolReferenceBlockParam`
 
@@ -2369,30 +862,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `type: "tool_reference"`
 
-                - `"tool_reference"`
-
               - `cache_control: optional CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -2408,26 +880,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+      - `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -2442,25 +895,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `role: "user" or "assistant"`
 
     - `"user"`
@@ -2473,7 +907,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
@@ -2547,30 +981,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Fast and cost-effective model
 
-  - `UnionMember1 = string`
+  - `string`
 
 - `cache_control: optional CacheControlEphemeral`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-  - `type: "ephemeral"`
-
-    - `"ephemeral"`
-
-  - `ttl: optional "5m" or "1h"`
-
-    The time-to-live for the cache control breakpoint.
-
-    This may be one the following values:
-
-    - `5m`: 5 minutes
-    - `1h`: 1 hour
-
-    Defaults to `5m`.
-
-    - `"5m"`
-
-    - `"1h"`
 
 - `container: optional string`
 
@@ -2650,144 +1065,19 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = array of TextBlockParam`
+  - `array of TextBlockParam`
 
     - `text: string`
 
     - `type: "text"`
 
-      - `"text"`
-
     - `cache_control: optional CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional array of TextCitationParam`
-
-      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_char_index: number`
-
-        - `start_char_index: number`
-
-        - `type: "char_location"`
-
-          - `"char_location"`
-
-      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_page_number: number`
-
-        - `start_page_number: number`
-
-        - `type: "page_location"`
-
-          - `"page_location"`
-
-      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_block_index: number`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `start_block_index: number`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `type: "content_block_location"`
-
-          - `"content_block_location"`
-
-      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-        - `cited_text: string`
-
-        - `encrypted_index: string`
-
-        - `title: string`
-
-        - `type: "web_search_result_location"`
-
-          - `"web_search_result_location"`
-
-        - `url: string`
-
-      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-        - `cited_text: string`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `end_block_index: number`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `search_result_index: number`
-
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-        - `source: string`
-
-        - `start_block_index: number`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `title: string`
-
-        - `type: "search_result_location"`
-
-          - `"search_result_location"`
 
 - `temperature: optional number`
 
@@ -2805,7 +1095,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-  - `ThinkingConfigEnabled = object { budget_tokens, type, display }`
+  - `ThinkingConfigEnabled object { budget_tokens, type, display }`
 
     - `budget_tokens: number`
 
@@ -2827,13 +1117,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"omitted"`
 
-  - `ThinkingConfigDisabled = object { type }`
+  - `ThinkingConfigDisabled object { type }`
 
     - `type: "disabled"`
 
       - `"disabled"`
 
-  - `ThinkingConfigAdaptive = object { type, display }`
+  - `ThinkingConfigAdaptive object { type, display }`
 
     - `type: "adaptive"`
 
@@ -2851,7 +1141,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `ToolChoiceAuto = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAuto object { type, disable_parallel_tool_use }`
 
     The model will automatically decide whether to use tools.
 
@@ -2865,7 +1155,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `ToolChoiceAny = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAny object { type, disable_parallel_tool_use }`
 
     The model will use any available tools.
 
@@ -2879,7 +1169,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceTool = object { name, type, disable_parallel_tool_use }`
+  - `ToolChoiceTool object { name, type, disable_parallel_tool_use }`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -2897,7 +1187,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceNone = object { type }`
+  - `ToolChoiceNone object { type }`
 
     The model will not be allowed to use tools.
 
@@ -2969,7 +1259,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-  - `Tool = object { input_schema, name, allowed_callers, 7 more }`
+  - `Tool object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -3003,25 +1293,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3046,7 +1317,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"custom"`
 
-  - `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "bash"`
 
@@ -3072,25 +1343,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3101,7 +1353,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -3127,25 +1379,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3154,7 +1387,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -3180,25 +1413,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3207,7 +1421,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -3235,25 +1449,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3262,7 +1457,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+  - `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
     - `name: "memory"`
 
@@ -3288,25 +1483,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3317,7 +1493,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_editor"`
 
@@ -3343,25 +1519,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3372,7 +1529,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -3398,25 +1555,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3427,7 +1565,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+  - `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -3453,25 +1591,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3486,7 +1605,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -3520,25 +1639,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3575,7 +1675,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -3609,30 +1709,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -3650,7 +1729,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -3684,25 +1763,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3719,27 +1779,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-      - `type: "approximate"`
-
-        - `"approximate"`
-
-      - `city: optional string`
-
-        The city of the user.
-
-      - `country: optional string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: optional string`
-
-        The region of the user.
-
-      - `timezone: optional string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-  - `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -3773,30 +1813,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -3814,7 +1833,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+  - `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -3850,30 +1869,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -3895,7 +1893,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
 
@@ -3923,25 +1921,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3950,7 +1929,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_regex"`
 
@@ -3978,25 +1957,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4023,7 +1983,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ### Returns
 
-- `Message = object { id, container, content, 7 more }`
+- `Message object { id, container, content, 7 more }`
 
   - `id: string`
 
@@ -4072,7 +2032,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `TextBlock = object { citations, text, type }`
+    - `TextBlock object { citations, text, type }`
 
       - `citations: array of TextCitation`
 
@@ -4080,7 +2040,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -4098,7 +2058,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"char_location"`
 
-        - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -4116,7 +2076,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"page_location"`
 
-        - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -4144,7 +2104,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"content_block_location"`
 
-        - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+        - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
           - `cited_text: string`
 
@@ -4158,7 +2118,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `url: string`
 
-        - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+        - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
           - `cited_text: string`
 
@@ -4196,7 +2156,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"text"`
 
-    - `ThinkingBlock = object { signature, thinking, type }`
+    - `ThinkingBlock object { signature, thinking, type }`
 
       - `signature: string`
 
@@ -4206,7 +2166,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"thinking"`
 
-    - `RedactedThinkingBlock = object { data, type }`
+    - `RedactedThinkingBlock object { data, type }`
 
       - `data: string`
 
@@ -4214,7 +2174,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"redacted_thinking"`
 
-    - `ToolUseBlock = object { id, caller, input, 2 more }`
+    - `ToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -4222,7 +2182,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
@@ -4230,7 +2190,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"direct"`
 
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
@@ -4240,7 +2200,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"code_execution_20250825"`
 
-        - `ServerToolCaller20260120 = object { tool_id, type }`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `tool_id: string`
 
@@ -4256,7 +2216,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"tool_use"`
 
-    - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+    - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -4264,31 +2224,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `input: map[unknown]`
 
@@ -4312,41 +2256,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"server_tool_use"`
 
-    - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError = object { error_code, type }`
+        - `WebSearchToolResultError object { error_code, type }`
 
           - `error_code: WebSearchToolResultErrorCode`
 
@@ -4366,7 +2294,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"web_search_tool_result_error"`
 
-        - `UnionMember1 = array of WebSearchResultBlock`
+        - `array of WebSearchResultBlock`
 
           - `encrypted_content: string`
 
@@ -4386,41 +2314,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"web_search_tool_result"`
 
-    - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock = object { error_code, type }`
+        - `WebFetchToolResultErrorBlock object { error_code, type }`
 
           - `error_code: WebFetchToolResultErrorCode`
 
@@ -4444,7 +2356,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"web_fetch_tool_result_error"`
 
-        - `WebFetchBlock = object { content, retrieved_at, type, url }`
+        - `WebFetchBlock object { content, retrieved_at, type, url }`
 
           - `content: DocumentBlock`
 
@@ -4456,7 +2368,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `source: Base64PDFSource or PlainTextSource`
 
-              - `Base64PDFSource = object { data, media_type, type }`
+              - `Base64PDFSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -4468,7 +2380,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `"base64"`
 
-              - `PlainTextSource = object { data, media_type, type }`
+              - `PlainTextSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -4506,13 +2418,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"web_fetch_tool_result"`
 
-    - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `CodeExecutionToolResultError = object { error_code, type }`
+        - `CodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -4528,7 +2440,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"code_execution_tool_result_error"`
 
-        - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of CodeExecutionOutputBlock`
 
@@ -4548,7 +2460,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"code_execution_result"`
 
-        - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+        - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -4557,8 +2469,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `file_id: string`
 
             - `type: "code_execution_output"`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: string`
 
@@ -4576,11 +2486,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_tool_result"`
 
-    - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError = object { error_code, type }`
+        - `BashCodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -4598,7 +2508,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"bash_code_execution_tool_result_error"`
 
-        - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of BashCodeExecutionOutputBlock`
 
@@ -4624,11 +2534,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"bash_code_execution_tool_result"`
 
-    - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+        - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -4648,7 +2558,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"text_editor_code_execution_tool_result_error"`
 
-        - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+        - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
           - `content: string`
 
@@ -4670,7 +2580,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"text_editor_code_execution_view_result"`
 
-        - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+        - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
           - `is_file_update: boolean`
 
@@ -4678,7 +2588,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"text_editor_code_execution_create_result"`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+        - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
           - `lines: array of string`
 
@@ -4700,11 +2610,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"text_editor_code_execution_tool_result"`
 
-    - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+    - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
       - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError = object { error_code, error_message, type }`
+        - `ToolSearchToolResultError object { error_code, error_message, type }`
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -4722,7 +2632,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"tool_search_tool_result_error"`
 
-        - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+        - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
           - `tool_references: array of ToolReferenceBlock`
 
@@ -4742,7 +2652,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"tool_search_tool_result"`
 
-    - `ContainerUploadBlock = object { file_id, type }`
+    - `ContainerUploadBlock object { file_id, type }`
 
       Response model for a file uploaded to the container.
 
@@ -4758,7 +2668,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
@@ -4832,7 +2742,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Fast and cost-effective model
 
-    - `UnionMember1 = string`
+    - `string`
 
   - `role: "assistant"`
 
@@ -5020,7 +2930,62 @@ curl https://api.anthropic.com/v1/messages \
         }"
 ```
 
-## Count Tokens
+#### Response
+
+```json
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "container": {
+    "id": "id",
+    "expires_at": "2019-12-27T18:11:19.117Z"
+  },
+  "content": [
+    {
+      "citations": [
+        {
+          "cited_text": "cited_text",
+          "document_index": 0,
+          "document_title": "document_title",
+          "end_char_index": 0,
+          "file_id": "file_id",
+          "start_char_index": 0,
+          "type": "char_location"
+        }
+      ],
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "model": "claude-opus-4-6",
+  "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 2051,
+    "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
+    "input_tokens": 2095,
+    "output_tokens": 503,
+    "server_tool_use": {
+      "web_fetch_requests": 2,
+      "web_search_requests": 0
+    },
+    "service_tier": "standard"
+  }
+}
+```
+
+## Count tokens in a Message
 
 **post** `/v1/messages/count_tokens`
 
@@ -5085,11 +3050,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `content: string or array of ContentBlockParam`
 
-    - `UnionMember0 = string`
+    - `string`
 
-    - `UnionMember1 = array of ContentBlockParam`
+    - `array of ContentBlockParam`
 
-      - `TextBlockParam = object { text, type, cache_control, citations }`
+      - `TextBlockParam object { text, type, cache_control, citations }`
 
         - `text: string`
 
@@ -5122,7 +3087,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `citations: optional array of TextCitationParam`
 
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -5138,7 +3103,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"char_location"`
 
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -5154,7 +3119,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"page_location"`
 
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -5180,7 +3145,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"content_block_location"`
 
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -5194,7 +3159,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `url: string`
 
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -5226,11 +3191,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"search_result_location"`
 
-      - `ImageBlockParam = object { source, type, cache_control }`
+      - `ImageBlockParam object { source, type, cache_control }`
 
         - `source: Base64ImageSource or URLImageSource`
 
-          - `Base64ImageSource = object { data, media_type, type }`
+          - `Base64ImageSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -5248,7 +3213,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"base64"`
 
-          - `URLImageSource = object { type, url }`
+          - `URLImageSource object { type, url }`
 
             - `type: "url"`
 
@@ -5264,30 +3229,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+      - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -5299,7 +3245,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -5311,213 +3257,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"text"`
 
-          - `ContentBlockSource = object { content, type }`
+          - `ContentBlockSource object { content, type }`
 
             - `content: string or array of ContentBlockSourceContent`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
-                  - `text: string`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional array of TextCitationParam`
-
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_char_index: number`
-
-                      - `start_char_index: number`
-
-                      - `type: "char_location"`
-
-                        - `"char_location"`
-
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_page_number: number`
-
-                      - `start_page_number: number`
-
-                      - `type: "page_location"`
-
-                        - `"page_location"`
-
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: "content_block_location"`
-
-                        - `"content_block_location"`
-
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                      - `cited_text: string`
-
-                      - `encrypted_index: string`
-
-                      - `title: string`
-
-                      - `type: "web_search_result_location"`
-
-                        - `"web_search_result_location"`
-
-                      - `url: string`
-
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: number`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: string`
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: string`
-
-                      - `type: "search_result_location"`
-
-                        - `"search_result_location"`
-
-                - `ImageBlockParam = object { source, type, cache_control }`
-
-                  - `source: Base64ImageSource or URLImageSource`
-
-                    - `Base64ImageSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `URLImageSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "image"`
-
-                    - `"image"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
+                - `ImageBlockParam object { source, type, cache_control }`
 
             - `type: "content"`
 
               - `"content"`
 
-          - `URLPDFSource = object { type, url }`
+          - `URLPDFSource object { type, url }`
 
             - `type: "url"`
 
@@ -5533,25 +3289,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           - `enabled: optional boolean`
@@ -5560,7 +3297,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `title: optional string`
 
-      - `SearchResultBlockParam = object { content, source, title, 3 more }`
+      - `SearchResultBlockParam object { content, source, title, 3 more }`
 
         - `content: array of TextBlockParam`
 
@@ -5568,136 +3305,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `type: "text"`
 
-            - `"text"`
-
           - `cache_control: optional CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: optional array of TextCitationParam`
-
-            - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_char_index: number`
-
-              - `start_char_index: number`
-
-              - `type: "char_location"`
-
-                - `"char_location"`
-
-            - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_page_number: number`
-
-              - `start_page_number: number`
-
-              - `type: "page_location"`
-
-                - `"page_location"`
-
-            - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: "content_block_location"`
-
-                - `"content_block_location"`
-
-            - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-              - `cited_text: string`
-
-              - `encrypted_index: string`
-
-              - `title: string`
-
-              - `type: "web_search_result_location"`
-
-                - `"web_search_result_location"`
-
-              - `url: string`
-
-            - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: number`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: string`
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: string`
-
-              - `type: "search_result_location"`
-
-                - `"search_result_location"`
 
         - `source: string`
 
@@ -5711,30 +3323,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
-          - `enabled: optional boolean`
-
-      - `ThinkingBlockParam = object { signature, thinking, type }`
+      - `ThinkingBlockParam object { signature, thinking, type }`
 
         - `signature: string`
 
@@ -5744,7 +3335,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `"thinking"`
 
-      - `RedactedThinkingBlockParam = object { data, type }`
+      - `RedactedThinkingBlockParam object { data, type }`
 
         - `data: string`
 
@@ -5752,7 +3343,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `"redacted_thinking"`
 
-      - `ToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -5768,30 +3359,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
@@ -5799,7 +3371,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"direct"`
 
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
@@ -5809,7 +3381,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"code_execution_20250825"`
 
-          - `ServerToolCaller20260120 = object { tool_id, type }`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `tool_id: string`
 
@@ -5817,7 +3389,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"code_execution_20260120"`
 
-      - `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+      - `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
         - `tool_use_id: string`
 
@@ -5829,677 +3401,21 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-          - `UnionMember0 = string`
+          - `string`
 
-          - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+          - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-            - `TextBlockParam = object { text, type, cache_control, citations }`
+            - `TextBlockParam object { text, type, cache_control, citations }`
 
-              - `text: string`
+            - `ImageBlockParam object { source, type, cache_control }`
 
-              - `type: "text"`
+            - `SearchResultBlockParam object { content, source, title, 3 more }`
 
-                - `"text"`
+            - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional array of TextCitationParam`
-
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_char_index: number`
-
-                  - `start_char_index: number`
-
-                  - `type: "char_location"`
-
-                    - `"char_location"`
-
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_page_number: number`
-
-                  - `start_page_number: number`
-
-                  - `type: "page_location"`
-
-                    - `"page_location"`
-
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: "content_block_location"`
-
-                    - `"content_block_location"`
-
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                  - `cited_text: string`
-
-                  - `encrypted_index: string`
-
-                  - `title: string`
-
-                  - `type: "web_search_result_location"`
-
-                    - `"web_search_result_location"`
-
-                  - `url: string`
-
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: number`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: string`
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: string`
-
-                  - `type: "search_result_location"`
-
-                    - `"search_result_location"`
-
-            - `ImageBlockParam = object { source, type, cache_control }`
-
-              - `source: Base64ImageSource or URLImageSource`
-
-                - `Base64ImageSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `URLImageSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "image"`
-
-                - `"image"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-            - `SearchResultBlockParam = object { content, source, title, 3 more }`
-
-              - `content: array of TextBlockParam`
-
-                - `text: string`
-
-                - `type: "text"`
-
-                  - `"text"`
-
-                - `cache_control: optional CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: "ephemeral"`
-
-                    - `"ephemeral"`
-
-                  - `ttl: optional "5m" or "1h"`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: optional array of TextCitationParam`
-
-                  - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_char_index: number`
-
-                    - `start_char_index: number`
-
-                    - `type: "char_location"`
-
-                      - `"char_location"`
-
-                  - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_page_number: number`
-
-                    - `start_page_number: number`
-
-                    - `type: "page_location"`
-
-                      - `"page_location"`
-
-                  - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: "content_block_location"`
-
-                      - `"content_block_location"`
-
-                  - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                    - `cited_text: string`
-
-                    - `encrypted_index: string`
-
-                    - `title: string`
-
-                    - `type: "web_search_result_location"`
-
-                      - `"web_search_result_location"`
-
-                    - `url: string`
-
-                  - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: number`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: string`
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: string`
-
-                    - `type: "search_result_location"`
-
-                      - `"search_result_location"`
-
-              - `source: string`
-
-              - `title: string`
-
-              - `type: "search_result"`
-
-                - `"search_result"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-            - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
-
-            - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+            - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
               Tool reference block that can be included in tool_result content.
 
@@ -6513,28 +3429,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
         - `is_error: optional boolean`
 
-      - `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -6564,56 +3461,21 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebSearchToolResultBlockParamContent`
 
@@ -6631,7 +3493,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `page_age: optional string`
 
-          - `WebSearchToolRequestError = object { error_code, type }`
+          - `WebSearchToolRequestError object { error_code, type }`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -6661,60 +3523,25 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-          - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+          - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -6738,284 +3565,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"web_fetch_tool_result_error"`
 
-          - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+          - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
             - `content: DocumentBlockParam`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
 
             - `type: "web_fetch_result"`
 
@@ -7039,62 +3591,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: CodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -7110,7 +3627,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"code_execution_tool_result_error"`
 
-          - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of CodeExecutionOutputBlockParam`
 
@@ -7130,7 +3647,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"code_execution_result"`
 
-          - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+          - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -7139,8 +3656,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `file_id: string`
 
               - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: string`
 
@@ -7162,30 +3677,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-          - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -7203,7 +3699,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"bash_code_execution_tool_result_error"`
 
-          - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -7233,30 +3729,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-          - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+          - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -7276,7 +3753,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `error_message: optional string`
 
-          - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+          - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
             - `content: string`
 
@@ -7298,7 +3775,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `total_lines: optional number`
 
-          - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+          - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
             - `is_file_update: boolean`
 
@@ -7306,7 +3783,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"text_editor_code_execution_create_result"`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+          - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -7332,30 +3809,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-          - `ToolSearchToolResultErrorParam = object { error_code, type }`
+          - `ToolSearchToolResultErrorParam object { error_code, type }`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -7371,7 +3829,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"tool_search_tool_result_error"`
 
-          - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+          - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
             - `tool_references: array of ToolReferenceBlockParam`
 
@@ -7379,30 +3837,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `type: "tool_reference"`
 
-                - `"tool_reference"`
-
               - `cache_control: optional CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -7418,26 +3855,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+      - `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -7452,25 +3870,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `role: "user" or "assistant"`
 
     - `"user"`
@@ -7483,7 +3882,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
@@ -7557,30 +3956,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Fast and cost-effective model
 
-  - `UnionMember1 = string`
+  - `string`
 
 - `cache_control: optional CacheControlEphemeral`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-  - `type: "ephemeral"`
-
-    - `"ephemeral"`
-
-  - `ttl: optional "5m" or "1h"`
-
-    The time-to-live for the cache control breakpoint.
-
-    This may be one the following values:
-
-    - `5m`: 5 minutes
-    - `1h`: 1 hour
-
-    Defaults to `5m`.
-
-    - `"5m"`
-
-    - `"1h"`
 
 - `output_config: optional OutputConfig`
 
@@ -7618,144 +3998,19 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = array of TextBlockParam`
+  - `array of TextBlockParam`
 
     - `text: string`
 
     - `type: "text"`
 
-      - `"text"`
-
     - `cache_control: optional CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional array of TextCitationParam`
-
-      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_char_index: number`
-
-        - `start_char_index: number`
-
-        - `type: "char_location"`
-
-          - `"char_location"`
-
-      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_page_number: number`
-
-        - `start_page_number: number`
-
-        - `type: "page_location"`
-
-          - `"page_location"`
-
-      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-        - `cited_text: string`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `document_index: number`
-
-        - `document_title: string`
-
-        - `end_block_index: number`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `start_block_index: number`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `type: "content_block_location"`
-
-          - `"content_block_location"`
-
-      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-        - `cited_text: string`
-
-        - `encrypted_index: string`
-
-        - `title: string`
-
-        - `type: "web_search_result_location"`
-
-          - `"web_search_result_location"`
-
-        - `url: string`
-
-      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-        - `cited_text: string`
-
-          The full text of the cited block range, concatenated.
-
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-        - `end_block_index: number`
-
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-        - `search_result_index: number`
-
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-        - `source: string`
-
-        - `start_block_index: number`
-
-          0-based index of the first cited block in the source's `content` array.
-
-        - `title: string`
-
-        - `type: "search_result_location"`
-
-          - `"search_result_location"`
 
 - `thinking: optional ThinkingConfigParam`
 
@@ -7765,7 +4020,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-  - `ThinkingConfigEnabled = object { budget_tokens, type, display }`
+  - `ThinkingConfigEnabled object { budget_tokens, type, display }`
 
     - `budget_tokens: number`
 
@@ -7787,13 +4042,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"omitted"`
 
-  - `ThinkingConfigDisabled = object { type }`
+  - `ThinkingConfigDisabled object { type }`
 
     - `type: "disabled"`
 
       - `"disabled"`
 
-  - `ThinkingConfigAdaptive = object { type, display }`
+  - `ThinkingConfigAdaptive object { type, display }`
 
     - `type: "adaptive"`
 
@@ -7811,7 +4066,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `ToolChoiceAuto = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAuto object { type, disable_parallel_tool_use }`
 
     The model will automatically decide whether to use tools.
 
@@ -7825,7 +4080,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `ToolChoiceAny = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAny object { type, disable_parallel_tool_use }`
 
     The model will use any available tools.
 
@@ -7839,7 +4094,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceTool = object { name, type, disable_parallel_tool_use }`
+  - `ToolChoiceTool object { name, type, disable_parallel_tool_use }`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -7857,7 +4112,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceNone = object { type }`
+  - `ToolChoiceNone object { type }`
 
     The model will not be allowed to use tools.
 
@@ -7929,7 +4184,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-  - `Tool = object { input_schema, name, allowed_callers, 7 more }`
+  - `Tool object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -7963,25 +4218,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8006,7 +4242,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"custom"`
 
-  - `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "bash"`
 
@@ -8032,25 +4268,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8061,7 +4278,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -8087,25 +4304,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8114,7 +4312,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -8140,25 +4338,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8167,7 +4346,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -8195,25 +4374,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8222,7 +4382,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+  - `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
     - `name: "memory"`
 
@@ -8248,25 +4408,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8277,7 +4418,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_editor"`
 
@@ -8303,25 +4444,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8332,7 +4454,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -8358,25 +4480,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8387,7 +4490,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+  - `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -8413,25 +4516,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8446,7 +4530,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -8480,25 +4564,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8535,7 +4600,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -8569,30 +4634,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -8610,7 +4654,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -8644,25 +4688,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8679,27 +4704,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-      - `type: "approximate"`
-
-        - `"approximate"`
-
-      - `city: optional string`
-
-        The city of the user.
-
-      - `country: optional string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: optional string`
-
-        The region of the user.
-
-      - `timezone: optional string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-  - `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -8733,30 +4738,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -8774,7 +4758,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+  - `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -8810,30 +4794,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -8855,7 +4818,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
 
@@ -8883,25 +4846,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8910,7 +4854,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_regex"`
 
@@ -8938,25 +4882,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8967,7 +4892,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ### Returns
 
-- `MessageTokensCount = object { input_tokens }`
+- `MessageTokensCount object { input_tokens }`
 
   - `input_tokens: number`
 
@@ -9015,11 +4940,19 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         }"
 ```
 
+#### Response
+
+```json
+{
+  "input_tokens": 2095
+}
+```
+
 ## Domain Types
 
 ### Base64 Image Source
 
-- `Base64ImageSource = object { data, media_type, type }`
+- `Base64ImageSource object { data, media_type, type }`
 
   - `data: string`
 
@@ -9039,7 +4972,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Base64 PDF Source
 
-- `Base64PDFSource = object { data, media_type, type }`
+- `Base64PDFSource object { data, media_type, type }`
 
   - `data: string`
 
@@ -9053,7 +4986,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Output Block
 
-- `BashCodeExecutionOutputBlock = object { file_id, type }`
+- `BashCodeExecutionOutputBlock object { file_id, type }`
 
   - `file_id: string`
 
@@ -9063,7 +4996,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Output Block Param
 
-- `BashCodeExecutionOutputBlockParam = object { file_id, type }`
+- `BashCodeExecutionOutputBlockParam object { file_id, type }`
 
   - `file_id: string`
 
@@ -9073,7 +5006,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Result Block
 
-- `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+- `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
   - `content: array of BashCodeExecutionOutputBlock`
 
@@ -9095,7 +5028,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Result Block Param
 
-- `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+- `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
   - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -9117,11 +5050,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Tool Result Block
 
-- `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+- `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
   - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-    - `BashCodeExecutionToolResultError = object { error_code, type }`
+    - `BashCodeExecutionToolResultError object { error_code, type }`
 
       - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -9139,7 +5072,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"bash_code_execution_tool_result_error"`
 
-    - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+    - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
       - `content: array of BashCodeExecutionOutputBlock`
 
@@ -9167,11 +5100,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Tool Result Block Param
 
-- `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+- `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
   - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-    - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+    - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
       - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -9189,7 +5122,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"bash_code_execution_tool_result_error"`
 
-    - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+    - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
       - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -9240,7 +5173,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Tool Result Error
 
-- `BashCodeExecutionToolResultError = object { error_code, type }`
+- `BashCodeExecutionToolResultError object { error_code, type }`
 
   - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -9274,7 +5207,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Bash Code Execution Tool Result Error Param
 
-- `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+- `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
   - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -9294,7 +5227,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Cache Control Ephemeral
 
-- `CacheControlEphemeral = object { type, ttl }`
+- `CacheControlEphemeral object { type, ttl }`
 
   - `type: "ephemeral"`
 
@@ -9317,7 +5250,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Cache Creation
 
-- `CacheCreation = object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+- `CacheCreation object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
   - `ephemeral_1h_input_tokens: number`
 
@@ -9329,7 +5262,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Char Location
 
-- `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+- `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
   - `cited_text: string`
 
@@ -9349,7 +5282,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Char Location Param
 
-- `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+- `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
   - `cited_text: string`
 
@@ -9367,7 +5300,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Content Block Location
 
-- `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+- `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
   - `cited_text: string`
 
@@ -9397,7 +5330,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Content Block Location Param
 
-- `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+- `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
   - `cited_text: string`
 
@@ -9425,7 +5358,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Page Location
 
-- `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+- `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
   - `cited_text: string`
 
@@ -9445,7 +5378,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Page Location Param
 
-- `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+- `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
   - `cited_text: string`
 
@@ -9463,7 +5396,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Search Result Location Param
 
-- `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+- `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
   - `cited_text: string`
 
@@ -9497,7 +5430,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citation Web Search Result Location Param
 
-- `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+- `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
   - `cited_text: string`
 
@@ -9513,23 +5446,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citations Config
 
-- `CitationsConfig = object { enabled }`
+- `CitationsConfig object { enabled }`
 
   - `enabled: boolean`
 
 ### Citations Config Param
 
-- `CitationsConfigParam = object { enabled }`
+- `CitationsConfigParam object { enabled }`
 
   - `enabled: optional boolean`
 
 ### Citations Delta
 
-- `CitationsDelta = object { citation, type }`
+- `CitationsDelta object { citation, type }`
 
   - `citation: CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
-    - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -9547,7 +5480,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"char_location"`
 
-    - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -9565,7 +5498,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"page_location"`
 
-    - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -9593,7 +5526,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"content_block_location"`
 
-    - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+    - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
       - `cited_text: string`
 
@@ -9607,7 +5540,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `url: string`
 
-    - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+    - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
       - `cited_text: string`
 
@@ -9645,7 +5578,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citations Search Result Location
 
-- `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+- `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
   - `cited_text: string`
 
@@ -9679,7 +5612,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Citations Web Search Result Location
 
-- `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+- `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
   - `cited_text: string`
 
@@ -9695,7 +5628,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Output Block
 
-- `CodeExecutionOutputBlock = object { file_id, type }`
+- `CodeExecutionOutputBlock object { file_id, type }`
 
   - `file_id: string`
 
@@ -9705,7 +5638,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Output Block Param
 
-- `CodeExecutionOutputBlockParam = object { file_id, type }`
+- `CodeExecutionOutputBlockParam object { file_id, type }`
 
   - `file_id: string`
 
@@ -9715,7 +5648,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Result Block
 
-- `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+- `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
   - `content: array of CodeExecutionOutputBlock`
 
@@ -9737,7 +5670,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Result Block Param
 
-- `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+- `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
   - `content: array of CodeExecutionOutputBlockParam`
 
@@ -9759,7 +5692,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool 20250522
 
-- `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+- `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
   - `name: "code_execution"`
 
@@ -9814,7 +5747,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool 20250825
 
-- `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+- `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
   - `name: "code_execution"`
 
@@ -9869,7 +5802,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool 20260120
 
-- `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+- `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -9926,13 +5859,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool Result Block
 
-- `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+- `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
   - `content: CodeExecutionToolResultBlockContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
-    - `CodeExecutionToolResultError = object { error_code, type }`
+    - `CodeExecutionToolResultError object { error_code, type }`
 
       - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -9948,7 +5881,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_tool_result_error"`
 
-    - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+    - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
       - `content: array of CodeExecutionOutputBlock`
 
@@ -9968,7 +5901,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_result"`
 
-    - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+    - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9977,8 +5910,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `file_id: string`
 
         - `type: "code_execution_output"`
-
-          - `"code_execution_output"`
 
       - `encrypted_stdout: string`
 
@@ -10002,7 +5933,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
-  - `CodeExecutionToolResultError = object { error_code, type }`
+  - `CodeExecutionToolResultError object { error_code, type }`
 
     - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10018,7 +5949,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"code_execution_tool_result_error"`
 
-  - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+  - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
     - `content: array of CodeExecutionOutputBlock`
 
@@ -10038,7 +5969,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"code_execution_result"`
 
-  - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+  - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10047,8 +5978,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `file_id: string`
 
       - `type: "code_execution_output"`
-
-        - `"code_execution_output"`
 
     - `encrypted_stdout: string`
 
@@ -10062,13 +5991,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool Result Block Param
 
-- `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+- `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
   - `content: CodeExecutionToolResultBlockParamContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
-    - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+    - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
       - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10084,7 +6013,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_tool_result_error"`
 
-    - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+    - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
       - `content: array of CodeExecutionOutputBlockParam`
 
@@ -10104,7 +6033,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_result"`
 
-    - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+    - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10113,8 +6042,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `file_id: string`
 
         - `type: "code_execution_output"`
-
-          - `"code_execution_output"`
 
       - `encrypted_stdout: string`
 
@@ -10161,7 +6088,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
-  - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+  - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
     - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10177,7 +6104,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"code_execution_tool_result_error"`
 
-  - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+  - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
     - `content: array of CodeExecutionOutputBlockParam`
 
@@ -10197,7 +6124,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"code_execution_result"`
 
-  - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+  - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10206,8 +6133,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `file_id: string`
 
       - `type: "code_execution_output"`
-
-        - `"code_execution_output"`
 
     - `encrypted_stdout: string`
 
@@ -10221,7 +6146,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool Result Error
 
-- `CodeExecutionToolResultError = object { error_code, type }`
+- `CodeExecutionToolResultError object { error_code, type }`
 
   - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10251,7 +6176,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool Result Error Param
 
-- `CodeExecutionToolResultErrorParam = object { error_code, type }`
+- `CodeExecutionToolResultErrorParam object { error_code, type }`
 
   - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10269,7 +6194,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Container
 
-- `Container = object { id, expires_at }`
+- `Container object { id, expires_at }`
 
   Information about the container used in the request (for the code execution tool)
 
@@ -10283,7 +6208,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Container Upload Block
 
-- `ContainerUploadBlock = object { file_id, type }`
+- `ContainerUploadBlock object { file_id, type }`
 
   Response model for a file uploaded to the container.
 
@@ -10295,7 +6220,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Container Upload Block Param
 
-- `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+- `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
@@ -10335,7 +6260,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Response model for a file uploaded to the container.
 
-  - `TextBlock = object { citations, text, type }`
+  - `TextBlock object { citations, text, type }`
 
     - `citations: array of TextCitation`
 
@@ -10343,7 +6268,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-      - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -10361,7 +6286,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"char_location"`
 
-      - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -10379,7 +6304,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"page_location"`
 
-      - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -10407,7 +6332,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"content_block_location"`
 
-      - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+      - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
         - `cited_text: string`
 
@@ -10421,7 +6346,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `url: string`
 
-      - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+      - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `cited_text: string`
 
@@ -10459,7 +6384,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"text"`
 
-  - `ThinkingBlock = object { signature, thinking, type }`
+  - `ThinkingBlock object { signature, thinking, type }`
 
     - `signature: string`
 
@@ -10469,7 +6394,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"thinking"`
 
-  - `RedactedThinkingBlock = object { data, type }`
+  - `RedactedThinkingBlock object { data, type }`
 
     - `data: string`
 
@@ -10477,7 +6402,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"redacted_thinking"`
 
-  - `ToolUseBlock = object { id, caller, input, 2 more }`
+  - `ToolUseBlock object { id, caller, input, 2 more }`
 
     - `id: string`
 
@@ -10485,7 +6410,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
@@ -10493,7 +6418,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"direct"`
 
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
@@ -10503,7 +6428,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_20250825"`
 
-      - `ServerToolCaller20260120 = object { tool_id, type }`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `tool_id: string`
 
@@ -10519,7 +6444,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"tool_use"`
 
-  - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+  - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
     - `id: string`
 
@@ -10527,31 +6452,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
-
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
     - `input: map[unknown]`
 
@@ -10575,41 +6484,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"server_tool_use"`
 
-  - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+  - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
-
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
     - `content: WebSearchToolResultBlockContent`
 
-      - `WebSearchToolResultError = object { error_code, type }`
+      - `WebSearchToolResultError object { error_code, type }`
 
         - `error_code: WebSearchToolResultErrorCode`
 
@@ -10629,7 +6522,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"web_search_tool_result_error"`
 
-      - `UnionMember1 = array of WebSearchResultBlock`
+      - `array of WebSearchResultBlock`
 
         - `encrypted_content: string`
 
@@ -10649,41 +6542,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"web_search_tool_result"`
 
-  - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+  - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
-
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
     - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-      - `WebFetchToolResultErrorBlock = object { error_code, type }`
+      - `WebFetchToolResultErrorBlock object { error_code, type }`
 
         - `error_code: WebFetchToolResultErrorCode`
 
@@ -10707,7 +6584,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"web_fetch_tool_result_error"`
 
-      - `WebFetchBlock = object { content, retrieved_at, type, url }`
+      - `WebFetchBlock object { content, retrieved_at, type, url }`
 
         - `content: DocumentBlock`
 
@@ -10719,7 +6596,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `source: Base64PDFSource or PlainTextSource`
 
-            - `Base64PDFSource = object { data, media_type, type }`
+            - `Base64PDFSource object { data, media_type, type }`
 
               - `data: string`
 
@@ -10731,7 +6608,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"base64"`
 
-            - `PlainTextSource = object { data, media_type, type }`
+            - `PlainTextSource object { data, media_type, type }`
 
               - `data: string`
 
@@ -10769,13 +6646,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"web_fetch_tool_result"`
 
-  - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+  - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
     - `content: CodeExecutionToolResultBlockContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
-      - `CodeExecutionToolResultError = object { error_code, type }`
+      - `CodeExecutionToolResultError object { error_code, type }`
 
         - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10791,7 +6668,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_tool_result_error"`
 
-      - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+      - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
         - `content: array of CodeExecutionOutputBlock`
 
@@ -10811,7 +6688,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_result"`
 
-      - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+      - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10820,8 +6697,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `file_id: string`
 
           - `type: "code_execution_output"`
-
-            - `"code_execution_output"`
 
         - `encrypted_stdout: string`
 
@@ -10839,11 +6714,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"code_execution_tool_result"`
 
-  - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+  - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
     - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-      - `BashCodeExecutionToolResultError = object { error_code, type }`
+      - `BashCodeExecutionToolResultError object { error_code, type }`
 
         - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -10861,7 +6736,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"bash_code_execution_tool_result_error"`
 
-      - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+      - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
         - `content: array of BashCodeExecutionOutputBlock`
 
@@ -10887,11 +6762,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"bash_code_execution_tool_result"`
 
-  - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+  - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
     - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-      - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+      - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
         - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -10911,7 +6786,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_editor_code_execution_tool_result_error"`
 
-      - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+      - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
         - `content: string`
 
@@ -10933,7 +6808,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_editor_code_execution_view_result"`
 
-      - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+      - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
         - `is_file_update: boolean`
 
@@ -10941,7 +6816,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_editor_code_execution_create_result"`
 
-      - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+      - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
         - `lines: array of string`
 
@@ -10963,11 +6838,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"text_editor_code_execution_tool_result"`
 
-  - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+  - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
     - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-      - `ToolSearchToolResultError = object { error_code, error_message, type }`
+      - `ToolSearchToolResultError object { error_code, error_message, type }`
 
         - `error_code: ToolSearchToolResultErrorCode`
 
@@ -10985,7 +6860,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_search_tool_result_error"`
 
-      - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+      - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
         - `tool_references: array of ToolReferenceBlock`
 
@@ -11005,7 +6880,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"tool_search_tool_result"`
 
-  - `ContainerUploadBlock = object { file_id, type }`
+  - `ContainerUploadBlock object { file_id, type }`
 
     Response model for a file uploaded to the container.
 
@@ -11021,7 +6896,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Regular text content.
 
-  - `TextBlockParam = object { text, type, cache_control, citations }`
+  - `TextBlockParam object { text, type, cache_control, citations }`
 
     - `text: string`
 
@@ -11054,7 +6929,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `citations: optional array of TextCitationParam`
 
-      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -11070,7 +6945,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"char_location"`
 
-      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -11086,7 +6961,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"page_location"`
 
-      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -11112,7 +6987,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"content_block_location"`
 
-      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+      - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
         - `cited_text: string`
 
@@ -11126,7 +7001,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `url: string`
 
-      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+      - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `cited_text: string`
 
@@ -11158,11 +7033,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"search_result_location"`
 
-  - `ImageBlockParam = object { source, type, cache_control }`
+  - `ImageBlockParam object { source, type, cache_control }`
 
     - `source: Base64ImageSource or URLImageSource`
 
-      - `Base64ImageSource = object { data, media_type, type }`
+      - `Base64ImageSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -11180,7 +7055,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"base64"`
 
-      - `URLImageSource = object { type, url }`
+      - `URLImageSource object { type, url }`
 
         - `type: "url"`
 
@@ -11196,30 +7071,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
-  - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+  - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
     - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-      - `Base64PDFSource = object { data, media_type, type }`
+      - `Base64PDFSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -11231,7 +7087,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"base64"`
 
-      - `PlainTextSource = object { data, media_type, type }`
+      - `PlainTextSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -11243,213 +7099,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text"`
 
-      - `ContentBlockSource = object { content, type }`
+      - `ContentBlockSource object { content, type }`
 
         - `content: string or array of ContentBlockSourceContent`
 
-          - `UnionMember0 = string`
+          - `string`
 
           - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-            - `TextBlockParam = object { text, type, cache_control, citations }`
+            - `TextBlockParam object { text, type, cache_control, citations }`
 
-              - `text: string`
-
-              - `type: "text"`
-
-                - `"text"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional array of TextCitationParam`
-
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_char_index: number`
-
-                  - `start_char_index: number`
-
-                  - `type: "char_location"`
-
-                    - `"char_location"`
-
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_page_number: number`
-
-                  - `start_page_number: number`
-
-                  - `type: "page_location"`
-
-                    - `"page_location"`
-
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: "content_block_location"`
-
-                    - `"content_block_location"`
-
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                  - `cited_text: string`
-
-                  - `encrypted_index: string`
-
-                  - `title: string`
-
-                  - `type: "web_search_result_location"`
-
-                    - `"web_search_result_location"`
-
-                  - `url: string`
-
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: number`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: string`
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: string`
-
-                  - `type: "search_result_location"`
-
-                    - `"search_result_location"`
-
-            - `ImageBlockParam = object { source, type, cache_control }`
-
-              - `source: Base64ImageSource or URLImageSource`
-
-                - `Base64ImageSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `URLImageSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "image"`
-
-                - `"image"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
+            - `ImageBlockParam object { source, type, cache_control }`
 
         - `type: "content"`
 
           - `"content"`
 
-      - `URLPDFSource = object { type, url }`
+      - `URLPDFSource object { type, url }`
 
         - `type: "url"`
 
@@ -11465,25 +7131,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       - `enabled: optional boolean`
@@ -11492,7 +7139,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `title: optional string`
 
-  - `SearchResultBlockParam = object { content, source, title, 3 more }`
+  - `SearchResultBlockParam object { content, source, title, 3 more }`
 
     - `content: array of TextBlockParam`
 
@@ -11500,136 +7147,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `type: "text"`
 
-        - `"text"`
-
       - `cache_control: optional CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
 
-        - `type: "ephemeral"`
-
-          - `"ephemeral"`
-
-        - `ttl: optional "5m" or "1h"`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"`
-
-          - `"1h"`
-
       - `citations: optional array of TextCitationParam`
-
-        - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-          - `cited_text: string`
-
-          - `document_index: number`
-
-          - `document_title: string`
-
-          - `end_char_index: number`
-
-          - `start_char_index: number`
-
-          - `type: "char_location"`
-
-            - `"char_location"`
-
-        - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-          - `cited_text: string`
-
-          - `document_index: number`
-
-          - `document_title: string`
-
-          - `end_page_number: number`
-
-          - `start_page_number: number`
-
-          - `type: "page_location"`
-
-            - `"page_location"`
-
-        - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-          - `cited_text: string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `document_index: number`
-
-          - `document_title: string`
-
-          - `end_block_index: number`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `start_block_index: number`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `type: "content_block_location"`
-
-            - `"content_block_location"`
-
-        - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-          - `cited_text: string`
-
-          - `encrypted_index: string`
-
-          - `title: string`
-
-          - `type: "web_search_result_location"`
-
-            - `"web_search_result_location"`
-
-          - `url: string`
-
-        - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-          - `cited_text: string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `end_block_index: number`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `search_result_index: number`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `source: string`
-
-          - `start_block_index: number`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `title: string`
-
-          - `type: "search_result_location"`
-
-            - `"search_result_location"`
 
     - `source: string`
 
@@ -11643,30 +7165,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
-      - `enabled: optional boolean`
-
-  - `ThinkingBlockParam = object { signature, thinking, type }`
+  - `ThinkingBlockParam object { signature, thinking, type }`
 
     - `signature: string`
 
@@ -11676,7 +7177,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"thinking"`
 
-  - `RedactedThinkingBlockParam = object { data, type }`
+  - `RedactedThinkingBlockParam object { data, type }`
 
     - `data: string`
 
@@ -11684,7 +7185,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"redacted_thinking"`
 
-  - `ToolUseBlockParam = object { id, input, name, 3 more }`
+  - `ToolUseBlockParam object { id, input, name, 3 more }`
 
     - `id: string`
 
@@ -11700,30 +7201,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
@@ -11731,7 +7213,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"direct"`
 
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
@@ -11741,7 +7223,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_20250825"`
 
-      - `ServerToolCaller20260120 = object { tool_id, type }`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `tool_id: string`
 
@@ -11749,7 +7231,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_20260120"`
 
-  - `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+  - `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
     - `tool_use_id: string`
 
@@ -11761,677 +7243,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-      - `UnionMember0 = string`
+      - `string`
 
-      - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+      - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-        - `TextBlockParam = object { text, type, cache_control, citations }`
+        - `TextBlockParam object { text, type, cache_control, citations }`
 
-          - `text: string`
+        - `ImageBlockParam object { source, type, cache_control }`
 
-          - `type: "text"`
+        - `SearchResultBlockParam object { content, source, title, 3 more }`
 
-            - `"text"`
+        - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
-          - `cache_control: optional CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: optional array of TextCitationParam`
-
-            - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_char_index: number`
-
-              - `start_char_index: number`
-
-              - `type: "char_location"`
-
-                - `"char_location"`
-
-            - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_page_number: number`
-
-              - `start_page_number: number`
-
-              - `type: "page_location"`
-
-                - `"page_location"`
-
-            - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: "content_block_location"`
-
-                - `"content_block_location"`
-
-            - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-              - `cited_text: string`
-
-              - `encrypted_index: string`
-
-              - `title: string`
-
-              - `type: "web_search_result_location"`
-
-                - `"web_search_result_location"`
-
-              - `url: string`
-
-            - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: number`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: string`
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: string`
-
-              - `type: "search_result_location"`
-
-                - `"search_result_location"`
-
-        - `ImageBlockParam = object { source, type, cache_control }`
-
-          - `source: Base64ImageSource or URLImageSource`
-
-            - `Base64ImageSource = object { data, media_type, type }`
-
-              - `data: string`
-
-              - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                - `"image/jpeg"`
-
-                - `"image/png"`
-
-                - `"image/gif"`
-
-                - `"image/webp"`
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `URLImageSource = object { type, url }`
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-          - `type: "image"`
-
-            - `"image"`
-
-          - `cache_control: optional CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-        - `SearchResultBlockParam = object { content, source, title, 3 more }`
-
-          - `content: array of TextBlockParam`
-
-            - `text: string`
-
-            - `type: "text"`
-
-              - `"text"`
-
-            - `cache_control: optional CacheControlEphemeral`
-
-              Create a cache control breakpoint at this content block.
-
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-            - `citations: optional array of TextCitationParam`
-
-              - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                - `cited_text: string`
-
-                - `document_index: number`
-
-                - `document_title: string`
-
-                - `end_char_index: number`
-
-                - `start_char_index: number`
-
-                - `type: "char_location"`
-
-                  - `"char_location"`
-
-              - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                - `cited_text: string`
-
-                - `document_index: number`
-
-                - `document_title: string`
-
-                - `end_page_number: number`
-
-                - `start_page_number: number`
-
-                - `type: "page_location"`
-
-                  - `"page_location"`
-
-              - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                - `cited_text: string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: number`
-
-                - `document_title: string`
-
-                - `end_block_index: number`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `start_block_index: number`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: "content_block_location"`
-
-                  - `"content_block_location"`
-
-              - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                - `cited_text: string`
-
-                - `encrypted_index: string`
-
-                - `title: string`
-
-                - `type: "web_search_result_location"`
-
-                  - `"web_search_result_location"`
-
-                - `url: string`
-
-              - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                - `cited_text: string`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: number`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: number`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: string`
-
-                - `start_block_index: number`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: string`
-
-                - `type: "search_result_location"`
-
-                  - `"search_result_location"`
-
-          - `source: string`
-
-          - `title: string`
-
-          - `type: "search_result"`
-
-            - `"search_result"`
-
-          - `cache_control: optional CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: optional CitationsConfigParam`
-
-            - `enabled: optional boolean`
-
-        - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
-
-          - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-            - `Base64PDFSource = object { data, media_type, type }`
-
-              - `data: string`
-
-              - `media_type: "application/pdf"`
-
-                - `"application/pdf"`
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `PlainTextSource = object { data, media_type, type }`
-
-              - `data: string`
-
-              - `media_type: "text/plain"`
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `ContentBlockSource = object { content, type }`
-
-              - `content: string or array of ContentBlockSourceContent`
-
-                - `UnionMember0 = string`
-
-                - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                  - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                    - `text: string`
-
-                    - `type: "text"`
-
-                      - `"text"`
-
-                    - `cache_control: optional CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: "ephemeral"`
-
-                        - `"ephemeral"`
-
-                      - `ttl: optional "5m" or "1h"`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: optional array of TextCitationParam`
-
-                      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_char_index: number`
-
-                        - `start_char_index: number`
-
-                        - `type: "char_location"`
-
-                          - `"char_location"`
-
-                      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_page_number: number`
-
-                        - `start_page_number: number`
-
-                        - `type: "page_location"`
-
-                          - `"page_location"`
-
-                      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: "content_block_location"`
-
-                          - `"content_block_location"`
-
-                      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                        - `cited_text: string`
-
-                        - `encrypted_index: string`
-
-                        - `title: string`
-
-                        - `type: "web_search_result_location"`
-
-                          - `"web_search_result_location"`
-
-                        - `url: string`
-
-                      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: number`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: string`
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: string`
-
-                        - `type: "search_result_location"`
-
-                          - `"search_result_location"`
-
-                  - `ImageBlockParam = object { source, type, cache_control }`
-
-                    - `source: Base64ImageSource or URLImageSource`
-
-                      - `Base64ImageSource = object { data, media_type, type }`
-
-                        - `data: string`
-
-                        - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                          - `"image/jpeg"`
-
-                          - `"image/png"`
-
-                          - `"image/gif"`
-
-                          - `"image/webp"`
-
-                        - `type: "base64"`
-
-                          - `"base64"`
-
-                      - `URLImageSource = object { type, url }`
-
-                        - `type: "url"`
-
-                          - `"url"`
-
-                        - `url: string`
-
-                    - `type: "image"`
-
-                      - `"image"`
-
-                    - `cache_control: optional CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: "ephemeral"`
-
-                        - `"ephemeral"`
-
-                      - `ttl: optional "5m" or "1h"`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-              - `type: "content"`
-
-                - `"content"`
-
-            - `URLPDFSource = object { type, url }`
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `cache_control: optional CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: optional CitationsConfigParam`
-
-            - `enabled: optional boolean`
-
-          - `context: optional string`
-
-          - `title: optional string`
-
-        - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+        - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
           Tool reference block that can be included in tool_result content.
 
@@ -12445,28 +7271,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Create a cache control breakpoint at this content block.
 
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
     - `is_error: optional boolean`
 
-  - `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+  - `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
     - `id: string`
 
@@ -12496,56 +7303,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
-
-  - `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+  - `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
     - `content: WebSearchToolResultBlockParamContent`
 
@@ -12563,7 +7335,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `page_age: optional string`
 
-      - `WebSearchToolRequestError = object { error_code, type }`
+      - `WebSearchToolRequestError object { error_code, type }`
 
         - `error_code: WebSearchToolResultErrorCode`
 
@@ -12593,60 +7365,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
-
-  - `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+  - `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
     - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-      - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+      - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
         - `error_code: WebFetchToolResultErrorCode`
 
@@ -12670,284 +7407,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"web_fetch_tool_result_error"`
 
-      - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+      - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
         - `content: DocumentBlockParam`
-
-          - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-            - `Base64PDFSource = object { data, media_type, type }`
-
-              - `data: string`
-
-              - `media_type: "application/pdf"`
-
-                - `"application/pdf"`
-
-              - `type: "base64"`
-
-                - `"base64"`
-
-            - `PlainTextSource = object { data, media_type, type }`
-
-              - `data: string`
-
-              - `media_type: "text/plain"`
-
-                - `"text/plain"`
-
-              - `type: "text"`
-
-                - `"text"`
-
-            - `ContentBlockSource = object { content, type }`
-
-              - `content: string or array of ContentBlockSourceContent`
-
-                - `UnionMember0 = string`
-
-                - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                  - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                    - `text: string`
-
-                    - `type: "text"`
-
-                      - `"text"`
-
-                    - `cache_control: optional CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: "ephemeral"`
-
-                        - `"ephemeral"`
-
-                      - `ttl: optional "5m" or "1h"`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: optional array of TextCitationParam`
-
-                      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_char_index: number`
-
-                        - `start_char_index: number`
-
-                        - `type: "char_location"`
-
-                          - `"char_location"`
-
-                      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_page_number: number`
-
-                        - `start_page_number: number`
-
-                        - `type: "page_location"`
-
-                          - `"page_location"`
-
-                      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: "content_block_location"`
-
-                          - `"content_block_location"`
-
-                      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                        - `cited_text: string`
-
-                        - `encrypted_index: string`
-
-                        - `title: string`
-
-                        - `type: "web_search_result_location"`
-
-                          - `"web_search_result_location"`
-
-                        - `url: string`
-
-                      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: number`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: string`
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: string`
-
-                        - `type: "search_result_location"`
-
-                          - `"search_result_location"`
-
-                  - `ImageBlockParam = object { source, type, cache_control }`
-
-                    - `source: Base64ImageSource or URLImageSource`
-
-                      - `Base64ImageSource = object { data, media_type, type }`
-
-                        - `data: string`
-
-                        - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                          - `"image/jpeg"`
-
-                          - `"image/png"`
-
-                          - `"image/gif"`
-
-                          - `"image/webp"`
-
-                        - `type: "base64"`
-
-                          - `"base64"`
-
-                      - `URLImageSource = object { type, url }`
-
-                        - `type: "url"`
-
-                          - `"url"`
-
-                        - `url: string`
-
-                    - `type: "image"`
-
-                      - `"image"`
-
-                    - `cache_control: optional CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: "ephemeral"`
-
-                        - `"ephemeral"`
-
-                      - `ttl: optional "5m" or "1h"`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-              - `type: "content"`
-
-                - `"content"`
-
-            - `URLPDFSource = object { type, url }`
-
-              - `type: "url"`
-
-                - `"url"`
-
-              - `url: string`
-
-          - `type: "document"`
-
-            - `"document"`
-
-          - `cache_control: optional CacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
-          - `citations: optional CitationsConfigParam`
-
-            - `enabled: optional boolean`
-
-          - `context: optional string`
-
-          - `title: optional string`
 
         - `type: "web_fetch_result"`
 
@@ -12971,62 +7433,27 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
-      - `DirectCaller = object { type }`
+      - `DirectCaller object { type }`
 
         Tool invocation directly from the model.
 
-        - `type: "direct"`
-
-          - `"direct"`
-
-      - `ServerToolCaller = object { tool_id, type }`
+      - `ServerToolCaller object { tool_id, type }`
 
         Tool invocation generated by a server-side tool.
 
-        - `tool_id: string`
+      - `ServerToolCaller20260120 object { tool_id, type }`
 
-        - `type: "code_execution_20250825"`
-
-          - `"code_execution_20250825"`
-
-      - `ServerToolCaller20260120 = object { tool_id, type }`
-
-        - `tool_id: string`
-
-        - `type: "code_execution_20260120"`
-
-          - `"code_execution_20260120"`
-
-  - `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+  - `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
     - `content: CodeExecutionToolResultBlockParamContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
-      - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+      - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
         - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -13042,7 +7469,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_tool_result_error"`
 
-      - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+      - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
         - `content: array of CodeExecutionOutputBlockParam`
 
@@ -13062,7 +7489,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_result"`
 
-      - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+      - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -13071,8 +7498,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `file_id: string`
 
           - `type: "code_execution_output"`
-
-            - `"code_execution_output"`
 
         - `encrypted_stdout: string`
 
@@ -13094,30 +7519,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
-  - `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+  - `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
     - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-      - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+      - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
         - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -13135,7 +7541,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"bash_code_execution_tool_result_error"`
 
-      - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+      - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
         - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -13165,30 +7571,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
-  - `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+  - `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
     - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-      - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+      - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
         - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -13208,7 +7595,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `error_message: optional string`
 
-      - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+      - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
         - `content: string`
 
@@ -13230,7 +7617,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `total_lines: optional number`
 
-      - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+      - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
         - `is_file_update: boolean`
 
@@ -13238,7 +7625,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_editor_code_execution_create_result"`
 
-      - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+      - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
         - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -13264,30 +7651,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
-  - `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+  - `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
     - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-      - `ToolSearchToolResultErrorParam = object { error_code, type }`
+      - `ToolSearchToolResultErrorParam object { error_code, type }`
 
         - `error_code: ToolSearchToolResultErrorCode`
 
@@ -13303,7 +7671,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_search_tool_result_error"`
 
-      - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+      - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
         - `tool_references: array of ToolReferenceBlockParam`
 
@@ -13311,30 +7679,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `type: "tool_reference"`
 
-            - `"tool_reference"`
-
           - `cache_control: optional CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
-
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
 
         - `type: "tool_search_tool_search_result"`
 
@@ -13350,26 +7697,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
-  - `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+  - `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
@@ -13384,36 +7712,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
 ### Content Block Source
 
-- `ContentBlockSource = object { content, type }`
+- `ContentBlockSource object { content, type }`
 
   - `content: string or array of ContentBlockSourceContent`
 
-    - `UnionMember0 = string`
+    - `string`
 
     - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-      - `TextBlockParam = object { text, type, cache_control, citations }`
+      - `TextBlockParam object { text, type, cache_control, citations }`
 
         - `text: string`
 
@@ -13446,7 +7755,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `citations: optional array of TextCitationParam`
 
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -13462,7 +7771,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"char_location"`
 
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -13478,7 +7787,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"page_location"`
 
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -13504,7 +7813,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"content_block_location"`
 
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -13518,7 +7827,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `url: string`
 
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -13550,11 +7859,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"search_result_location"`
 
-      - `ImageBlockParam = object { source, type, cache_control }`
+      - `ImageBlockParam object { source, type, cache_control }`
 
         - `source: Base64ImageSource or URLImageSource`
 
-          - `Base64ImageSource = object { data, media_type, type }`
+          - `Base64ImageSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -13572,7 +7881,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `URLImageSource = object { type, url }`
+          - `URLImageSource object { type, url }`
 
             - `type: "url"`
 
@@ -13588,25 +7897,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `type: "content"`
 
     - `"content"`
@@ -13615,7 +7905,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ContentBlockSourceContent = TextBlockParam or ImageBlockParam`
 
-  - `TextBlockParam = object { text, type, cache_control, citations }`
+  - `TextBlockParam object { text, type, cache_control, citations }`
 
     - `text: string`
 
@@ -13648,7 +7938,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `citations: optional array of TextCitationParam`
 
-      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -13664,7 +7954,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"char_location"`
 
-      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -13680,7 +7970,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"page_location"`
 
-      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -13706,7 +7996,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"content_block_location"`
 
-      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+      - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
         - `cited_text: string`
 
@@ -13720,7 +8010,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `url: string`
 
-      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+      - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `cited_text: string`
 
@@ -13752,11 +8042,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"search_result_location"`
 
-  - `ImageBlockParam = object { source, type, cache_control }`
+  - `ImageBlockParam object { source, type, cache_control }`
 
     - `source: Base64ImageSource or URLImageSource`
 
-      - `Base64ImageSource = object { data, media_type, type }`
+      - `Base64ImageSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -13774,7 +8064,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"base64"`
 
-      - `URLImageSource = object { type, url }`
+      - `URLImageSource object { type, url }`
 
         - `type: "url"`
 
@@ -13790,28 +8080,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
 ### Direct Caller
 
-- `DirectCaller = object { type }`
+- `DirectCaller object { type }`
 
   Tool invocation directly from the model.
 
@@ -13821,7 +8092,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Document Block
 
-- `DocumentBlock = object { citations, source, title, type }`
+- `DocumentBlock object { citations, source, title, type }`
 
   - `citations: CitationsConfig`
 
@@ -13831,7 +8102,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `source: Base64PDFSource or PlainTextSource`
 
-    - `Base64PDFSource = object { data, media_type, type }`
+    - `Base64PDFSource object { data, media_type, type }`
 
       - `data: string`
 
@@ -13843,7 +8114,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"base64"`
 
-    - `PlainTextSource = object { data, media_type, type }`
+    - `PlainTextSource object { data, media_type, type }`
 
       - `data: string`
 
@@ -13865,11 +8136,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Document Block Param
 
-- `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+- `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
   - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-    - `Base64PDFSource = object { data, media_type, type }`
+    - `Base64PDFSource object { data, media_type, type }`
 
       - `data: string`
 
@@ -13881,7 +8152,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"base64"`
 
-    - `PlainTextSource = object { data, media_type, type }`
+    - `PlainTextSource object { data, media_type, type }`
 
       - `data: string`
 
@@ -13893,15 +8164,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text"`
 
-    - `ContentBlockSource = object { content, type }`
+    - `ContentBlockSource object { content, type }`
 
       - `content: string or array of ContentBlockSourceContent`
 
-        - `UnionMember0 = string`
+        - `string`
 
         - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-          - `TextBlockParam = object { text, type, cache_control, citations }`
+          - `TextBlockParam object { text, type, cache_control, citations }`
 
             - `text: string`
 
@@ -13934,7 +8205,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `citations: optional array of TextCitationParam`
 
-              - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -13950,7 +8221,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"char_location"`
 
-              - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -13966,7 +8237,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"page_location"`
 
-              - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -13992,7 +8263,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"content_block_location"`
 
-              - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+              - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -14006,7 +8277,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `url: string`
 
-              - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -14038,11 +8309,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"search_result_location"`
 
-          - `ImageBlockParam = object { source, type, cache_control }`
+          - `ImageBlockParam object { source, type, cache_control }`
 
             - `source: Base64ImageSource or URLImageSource`
 
-              - `Base64ImageSource = object { data, media_type, type }`
+              - `Base64ImageSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -14060,7 +8331,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"base64"`
 
-              - `URLImageSource = object { type, url }`
+              - `URLImageSource object { type, url }`
 
                 - `type: "url"`
 
@@ -14076,30 +8347,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
       - `type: "content"`
 
         - `"content"`
 
-    - `URLPDFSource = object { type, url }`
+    - `URLPDFSource object { type, url }`
 
       - `type: "url"`
 
@@ -14115,25 +8367,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Create a cache control breakpoint at this content block.
 
-    - `type: "ephemeral"`
-
-      - `"ephemeral"`
-
-    - `ttl: optional "5m" or "1h"`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
-
   - `citations: optional CitationsConfigParam`
 
     - `enabled: optional boolean`
@@ -14144,7 +8377,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Encrypted Code Execution Result Block
 
-- `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+- `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -14168,7 +8401,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Encrypted Code Execution Result Block Param
 
-- `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+- `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -14192,11 +8425,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Image Block Param
 
-- `ImageBlockParam = object { source, type, cache_control }`
+- `ImageBlockParam object { source, type, cache_control }`
 
   - `source: Base64ImageSource or URLImageSource`
 
-    - `Base64ImageSource = object { data, media_type, type }`
+    - `Base64ImageSource object { data, media_type, type }`
 
       - `data: string`
 
@@ -14214,7 +8447,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"base64"`
 
-    - `URLImageSource = object { type, url }`
+    - `URLImageSource object { type, url }`
 
       - `type: "url"`
 
@@ -14251,7 +8484,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Input JSON Delta
 
-- `InputJSONDelta = object { partial_json, type }`
+- `InputJSONDelta object { partial_json, type }`
 
   - `partial_json: string`
 
@@ -14261,7 +8494,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### JSON Output Format
 
-- `JSONOutputFormat = object { schema, type }`
+- `JSONOutputFormat object { schema, type }`
 
   - `schema: map[unknown]`
 
@@ -14273,7 +8506,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Memory Tool 20250818
 
-- `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+- `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
   - `name: "memory"`
 
@@ -14330,7 +8563,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Message
 
-- `Message = object { id, container, content, 7 more }`
+- `Message object { id, container, content, 7 more }`
 
   - `id: string`
 
@@ -14379,7 +8612,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `TextBlock = object { citations, text, type }`
+    - `TextBlock object { citations, text, type }`
 
       - `citations: array of TextCitation`
 
@@ -14387,7 +8620,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -14405,7 +8638,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"char_location"`
 
-        - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -14423,7 +8656,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"page_location"`
 
-        - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -14451,7 +8684,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"content_block_location"`
 
-        - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+        - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
           - `cited_text: string`
 
@@ -14465,7 +8698,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `url: string`
 
-        - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+        - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
           - `cited_text: string`
 
@@ -14503,7 +8736,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text"`
 
-    - `ThinkingBlock = object { signature, thinking, type }`
+    - `ThinkingBlock object { signature, thinking, type }`
 
       - `signature: string`
 
@@ -14513,7 +8746,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"thinking"`
 
-    - `RedactedThinkingBlock = object { data, type }`
+    - `RedactedThinkingBlock object { data, type }`
 
       - `data: string`
 
@@ -14521,7 +8754,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"redacted_thinking"`
 
-    - `ToolUseBlock = object { id, caller, input, 2 more }`
+    - `ToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -14529,7 +8762,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
@@ -14537,7 +8770,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"direct"`
 
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
@@ -14547,7 +8780,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_20250825"`
 
-        - `ServerToolCaller20260120 = object { tool_id, type }`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `tool_id: string`
 
@@ -14563,7 +8796,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_use"`
 
-    - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+    - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -14571,31 +8804,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `input: map[unknown]`
 
@@ -14619,41 +8836,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"server_tool_use"`
 
-    - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError = object { error_code, type }`
+        - `WebSearchToolResultError object { error_code, type }`
 
           - `error_code: WebSearchToolResultErrorCode`
 
@@ -14673,7 +8874,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_search_tool_result_error"`
 
-        - `UnionMember1 = array of WebSearchResultBlock`
+        - `array of WebSearchResultBlock`
 
           - `encrypted_content: string`
 
@@ -14693,41 +8894,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_search_tool_result"`
 
-    - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock = object { error_code, type }`
+        - `WebFetchToolResultErrorBlock object { error_code, type }`
 
           - `error_code: WebFetchToolResultErrorCode`
 
@@ -14751,7 +8936,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_fetch_tool_result_error"`
 
-        - `WebFetchBlock = object { content, retrieved_at, type, url }`
+        - `WebFetchBlock object { content, retrieved_at, type, url }`
 
           - `content: DocumentBlock`
 
@@ -14763,7 +8948,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `source: Base64PDFSource or PlainTextSource`
 
-              - `Base64PDFSource = object { data, media_type, type }`
+              - `Base64PDFSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -14775,7 +8960,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"base64"`
 
-              - `PlainTextSource = object { data, media_type, type }`
+              - `PlainTextSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -14813,13 +8998,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_fetch_tool_result"`
 
-    - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `CodeExecutionToolResultError = object { error_code, type }`
+        - `CodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -14835,7 +9020,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_tool_result_error"`
 
-        - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of CodeExecutionOutputBlock`
 
@@ -14855,7 +9040,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_result"`
 
-        - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+        - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -14864,8 +9049,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `file_id: string`
 
             - `type: "code_execution_output"`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: string`
 
@@ -14883,11 +9066,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_tool_result"`
 
-    - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError = object { error_code, type }`
+        - `BashCodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -14905,7 +9088,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"bash_code_execution_tool_result_error"`
 
-        - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of BashCodeExecutionOutputBlock`
 
@@ -14931,11 +9114,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"bash_code_execution_tool_result"`
 
-    - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+        - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -14955,7 +9138,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_tool_result_error"`
 
-        - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+        - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
           - `content: string`
 
@@ -14977,7 +9160,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_view_result"`
 
-        - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+        - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
           - `is_file_update: boolean`
 
@@ -14985,7 +9168,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_create_result"`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+        - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
           - `lines: array of string`
 
@@ -15007,11 +9190,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_tool_result"`
 
-    - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+    - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
       - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError = object { error_code, error_message, type }`
+        - `ToolSearchToolResultError object { error_code, error_message, type }`
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -15029,7 +9212,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"tool_search_tool_result_error"`
 
-        - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+        - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
           - `tool_references: array of ToolReferenceBlock`
 
@@ -15049,7 +9232,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_result"`
 
-    - `ContainerUploadBlock = object { file_id, type }`
+    - `ContainerUploadBlock object { file_id, type }`
 
       Response model for a file uploaded to the container.
 
@@ -15065,7 +9248,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
@@ -15139,7 +9322,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Fast and cost-effective model
 
-    - `UnionMember1 = string`
+    - `string`
 
   - `role: "assistant"`
 
@@ -15286,7 +9469,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-  - `Tool = object { input_schema, name, allowed_callers, 7 more }`
+  - `Tool object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -15363,7 +9546,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"custom"`
 
-  - `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "bash"`
 
@@ -15389,25 +9572,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15418,7 +9582,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -15444,25 +9608,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15471,7 +9616,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -15497,25 +9642,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15524,7 +9650,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -15552,25 +9678,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15579,7 +9686,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+  - `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
     - `name: "memory"`
 
@@ -15605,25 +9712,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15634,7 +9722,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_editor"`
 
@@ -15660,25 +9748,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15689,7 +9758,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -15715,25 +9784,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15744,7 +9794,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+  - `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -15770,25 +9820,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15803,7 +9834,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -15837,25 +9868,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -15892,7 +9904,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -15926,25 +9938,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -15967,7 +9960,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -16001,25 +9994,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -16036,27 +10010,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-      - `type: "approximate"`
-
-        - `"approximate"`
-
-      - `city: optional string`
-
-        The city of the user.
-
-      - `country: optional string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: optional string`
-
-        The region of the user.
-
-      - `timezone: optional string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-  - `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -16090,30 +10044,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -16131,7 +10064,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+  - `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -16167,30 +10100,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -16212,7 +10124,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
 
@@ -16240,25 +10152,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -16267,7 +10160,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_regex"`
 
@@ -16295,25 +10188,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -16324,7 +10198,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Message Delta Usage
 
-- `MessageDeltaUsage = object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 2 more }`
+- `MessageDeltaUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 2 more }`
 
   - `cache_creation_input_tokens: number`
 
@@ -16356,15 +10230,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Message Param
 
-- `MessageParam = object { content, role }`
+- `MessageParam object { content, role }`
 
   - `content: string or array of ContentBlockParam`
 
-    - `UnionMember0 = string`
+    - `string`
 
-    - `UnionMember1 = array of ContentBlockParam`
+    - `array of ContentBlockParam`
 
-      - `TextBlockParam = object { text, type, cache_control, citations }`
+      - `TextBlockParam object { text, type, cache_control, citations }`
 
         - `text: string`
 
@@ -16397,7 +10271,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `citations: optional array of TextCitationParam`
 
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -16413,7 +10287,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"char_location"`
 
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -16429,7 +10303,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"page_location"`
 
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -16455,7 +10329,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"content_block_location"`
 
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -16469,7 +10343,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `url: string`
 
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -16501,11 +10375,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"search_result_location"`
 
-      - `ImageBlockParam = object { source, type, cache_control }`
+      - `ImageBlockParam object { source, type, cache_control }`
 
         - `source: Base64ImageSource or URLImageSource`
 
-          - `Base64ImageSource = object { data, media_type, type }`
+          - `Base64ImageSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -16523,7 +10397,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `URLImageSource = object { type, url }`
+          - `URLImageSource object { type, url }`
 
             - `type: "url"`
 
@@ -16539,30 +10413,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+      - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -16574,7 +10429,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -16586,213 +10441,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text"`
 
-          - `ContentBlockSource = object { content, type }`
+          - `ContentBlockSource object { content, type }`
 
             - `content: string or array of ContentBlockSourceContent`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
-                  - `text: string`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional array of TextCitationParam`
-
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_char_index: number`
-
-                      - `start_char_index: number`
-
-                      - `type: "char_location"`
-
-                        - `"char_location"`
-
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_page_number: number`
-
-                      - `start_page_number: number`
-
-                      - `type: "page_location"`
-
-                        - `"page_location"`
-
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: "content_block_location"`
-
-                        - `"content_block_location"`
-
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                      - `cited_text: string`
-
-                      - `encrypted_index: string`
-
-                      - `title: string`
-
-                      - `type: "web_search_result_location"`
-
-                        - `"web_search_result_location"`
-
-                      - `url: string`
-
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: number`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: string`
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: string`
-
-                      - `type: "search_result_location"`
-
-                        - `"search_result_location"`
-
-                - `ImageBlockParam = object { source, type, cache_control }`
-
-                  - `source: Base64ImageSource or URLImageSource`
-
-                    - `Base64ImageSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `URLImageSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "image"`
-
-                    - `"image"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
+                - `ImageBlockParam object { source, type, cache_control }`
 
             - `type: "content"`
 
               - `"content"`
 
-          - `URLPDFSource = object { type, url }`
+          - `URLPDFSource object { type, url }`
 
             - `type: "url"`
 
@@ -16808,25 +10473,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           - `enabled: optional boolean`
@@ -16835,7 +10481,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `title: optional string`
 
-      - `SearchResultBlockParam = object { content, source, title, 3 more }`
+      - `SearchResultBlockParam object { content, source, title, 3 more }`
 
         - `content: array of TextBlockParam`
 
@@ -16843,136 +10489,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `type: "text"`
 
-            - `"text"`
-
           - `cache_control: optional CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: optional array of TextCitationParam`
-
-            - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_char_index: number`
-
-              - `start_char_index: number`
-
-              - `type: "char_location"`
-
-                - `"char_location"`
-
-            - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_page_number: number`
-
-              - `start_page_number: number`
-
-              - `type: "page_location"`
-
-                - `"page_location"`
-
-            - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: "content_block_location"`
-
-                - `"content_block_location"`
-
-            - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-              - `cited_text: string`
-
-              - `encrypted_index: string`
-
-              - `title: string`
-
-              - `type: "web_search_result_location"`
-
-                - `"web_search_result_location"`
-
-              - `url: string`
-
-            - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: number`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: string`
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: string`
-
-              - `type: "search_result_location"`
-
-                - `"search_result_location"`
 
         - `source: string`
 
@@ -16986,30 +10507,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
-          - `enabled: optional boolean`
-
-      - `ThinkingBlockParam = object { signature, thinking, type }`
+      - `ThinkingBlockParam object { signature, thinking, type }`
 
         - `signature: string`
 
@@ -17019,7 +10519,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"thinking"`
 
-      - `RedactedThinkingBlockParam = object { data, type }`
+      - `RedactedThinkingBlockParam object { data, type }`
 
         - `data: string`
 
@@ -17027,7 +10527,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"redacted_thinking"`
 
-      - `ToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -17043,30 +10543,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
@@ -17074,7 +10555,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"direct"`
 
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
@@ -17084,7 +10565,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_20250825"`
 
-          - `ServerToolCaller20260120 = object { tool_id, type }`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `tool_id: string`
 
@@ -17092,7 +10573,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_20260120"`
 
-      - `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+      - `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
         - `tool_use_id: string`
 
@@ -17104,677 +10585,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-          - `UnionMember0 = string`
+          - `string`
 
-          - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+          - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-            - `TextBlockParam = object { text, type, cache_control, citations }`
+            - `TextBlockParam object { text, type, cache_control, citations }`
 
-              - `text: string`
+            - `ImageBlockParam object { source, type, cache_control }`
 
-              - `type: "text"`
+            - `SearchResultBlockParam object { content, source, title, 3 more }`
 
-                - `"text"`
+            - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional array of TextCitationParam`
-
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_char_index: number`
-
-                  - `start_char_index: number`
-
-                  - `type: "char_location"`
-
-                    - `"char_location"`
-
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_page_number: number`
-
-                  - `start_page_number: number`
-
-                  - `type: "page_location"`
-
-                    - `"page_location"`
-
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: "content_block_location"`
-
-                    - `"content_block_location"`
-
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                  - `cited_text: string`
-
-                  - `encrypted_index: string`
-
-                  - `title: string`
-
-                  - `type: "web_search_result_location"`
-
-                    - `"web_search_result_location"`
-
-                  - `url: string`
-
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: number`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: string`
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: string`
-
-                  - `type: "search_result_location"`
-
-                    - `"search_result_location"`
-
-            - `ImageBlockParam = object { source, type, cache_control }`
-
-              - `source: Base64ImageSource or URLImageSource`
-
-                - `Base64ImageSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                    - `"image/jpeg"`
-
-                    - `"image/png"`
-
-                    - `"image/gif"`
-
-                    - `"image/webp"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `URLImageSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "image"`
-
-                - `"image"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-            - `SearchResultBlockParam = object { content, source, title, 3 more }`
-
-              - `content: array of TextBlockParam`
-
-                - `text: string`
-
-                - `type: "text"`
-
-                  - `"text"`
-
-                - `cache_control: optional CacheControlEphemeral`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `type: "ephemeral"`
-
-                    - `"ephemeral"`
-
-                  - `ttl: optional "5m" or "1h"`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"`
-
-                    - `"1h"`
-
-                - `citations: optional array of TextCitationParam`
-
-                  - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_char_index: number`
-
-                    - `start_char_index: number`
-
-                    - `type: "char_location"`
-
-                      - `"char_location"`
-
-                  - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_page_number: number`
-
-                    - `start_page_number: number`
-
-                    - `type: "page_location"`
-
-                      - `"page_location"`
-
-                  - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `document_index: number`
-
-                    - `document_title: string`
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `type: "content_block_location"`
-
-                      - `"content_block_location"`
-
-                  - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                    - `cited_text: string`
-
-                    - `encrypted_index: string`
-
-                    - `title: string`
-
-                    - `type: "web_search_result_location"`
-
-                      - `"web_search_result_location"`
-
-                    - `url: string`
-
-                  - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                    - `cited_text: string`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `end_block_index: number`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `search_result_index: number`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `source: string`
-
-                    - `start_block_index: number`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `title: string`
-
-                    - `type: "search_result_location"`
-
-                      - `"search_result_location"`
-
-              - `source: string`
-
-              - `title: string`
-
-              - `type: "search_result"`
-
-                - `"search_result"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-            - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
-
-            - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+            - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
               Tool reference block that can be included in tool_result content.
 
@@ -17788,28 +10613,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
         - `is_error: optional boolean`
 
-      - `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+      - `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
         - `id: string`
 
@@ -17839,56 +10645,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebSearchToolResultBlockParamContent`
 
@@ -17906,7 +10677,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `page_age: optional string`
 
-          - `WebSearchToolRequestError = object { error_code, type }`
+          - `WebSearchToolRequestError object { error_code, type }`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -17936,60 +10707,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+      - `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
         - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-          - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+          - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -18013,284 +10749,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"web_fetch_tool_result_error"`
 
-          - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+          - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
             - `content: DocumentBlockParam`
-
-              - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                - `ContentBlockSource = object { content, type }`
-
-                  - `content: string or array of ContentBlockSourceContent`
-
-                    - `UnionMember0 = string`
-
-                    - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                      - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                        - `text: string`
-
-                        - `type: "text"`
-
-                          - `"text"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                        - `citations: optional array of TextCitationParam`
-
-                          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_char_index: number`
-
-                            - `start_char_index: number`
-
-                            - `type: "char_location"`
-
-                              - `"char_location"`
-
-                          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_page_number: number`
-
-                            - `start_page_number: number`
-
-                            - `type: "page_location"`
-
-                              - `"page_location"`
-
-                          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `document_index: number`
-
-                            - `document_title: string`
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `type: "content_block_location"`
-
-                              - `"content_block_location"`
-
-                          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                            - `cited_text: string`
-
-                            - `encrypted_index: string`
-
-                            - `title: string`
-
-                            - `type: "web_search_result_location"`
-
-                              - `"web_search_result_location"`
-
-                            - `url: string`
-
-                          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                            - `cited_text: string`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `end_block_index: number`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `search_result_index: number`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `source: string`
-
-                            - `start_block_index: number`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `title: string`
-
-                            - `type: "search_result_location"`
-
-                              - `"search_result_location"`
-
-                      - `ImageBlockParam = object { source, type, cache_control }`
-
-                        - `source: Base64ImageSource or URLImageSource`
-
-                          - `Base64ImageSource = object { data, media_type, type }`
-
-                            - `data: string`
-
-                            - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                              - `"image/jpeg"`
-
-                              - `"image/png"`
-
-                              - `"image/gif"`
-
-                              - `"image/webp"`
-
-                            - `type: "base64"`
-
-                              - `"base64"`
-
-                          - `URLImageSource = object { type, url }`
-
-                            - `type: "url"`
-
-                              - `"url"`
-
-                            - `url: string`
-
-                        - `type: "image"`
-
-                          - `"image"`
-
-                        - `cache_control: optional CacheControlEphemeral`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `type: "ephemeral"`
-
-                            - `"ephemeral"`
-
-                          - `ttl: optional "5m" or "1h"`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"`
-
-                            - `"1h"`
-
-                  - `type: "content"`
-
-                    - `"content"`
-
-                - `URLPDFSource = object { type, url }`
-
-                  - `type: "url"`
-
-                    - `"url"`
-
-                  - `url: string`
-
-              - `type: "document"`
-
-                - `"document"`
-
-              - `cache_control: optional CacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
-              - `citations: optional CitationsConfigParam`
-
-                - `enabled: optional boolean`
-
-              - `context: optional string`
-
-              - `title: optional string`
 
             - `type: "web_fetch_result"`
 
@@ -18314,62 +10775,27 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-      - `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: CodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -18385,7 +10811,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_tool_result_error"`
 
-          - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of CodeExecutionOutputBlockParam`
 
@@ -18405,7 +10831,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_result"`
 
-          - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+          - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -18414,8 +10840,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               - `file_id: string`
 
               - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: string`
 
@@ -18437,30 +10861,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-          - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+          - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -18478,7 +10883,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"bash_code_execution_tool_result_error"`
 
-          - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+          - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
             - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -18508,30 +10913,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-          - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+          - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -18551,7 +10937,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `error_message: optional string`
 
-          - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+          - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
             - `content: string`
 
@@ -18573,7 +10959,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `total_lines: optional number`
 
-          - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+          - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
             - `is_file_update: boolean`
 
@@ -18581,7 +10967,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text_editor_code_execution_create_result"`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+          - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -18607,30 +10993,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+      - `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
         - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-          - `ToolSearchToolResultErrorParam = object { error_code, type }`
+          - `ToolSearchToolResultErrorParam object { error_code, type }`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -18646,7 +11013,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"tool_search_tool_result_error"`
 
-          - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+          - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
             - `tool_references: array of ToolReferenceBlockParam`
 
@@ -18654,30 +11021,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `type: "tool_reference"`
 
-                - `"tool_reference"`
-
               - `cache_control: optional CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
-
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -18693,26 +11039,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+      - `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -18727,25 +11054,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `role: "user" or "assistant"`
 
     - `"user"`
@@ -18754,7 +11062,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Message Tokens Count
 
-- `MessageTokensCount = object { input_tokens }`
+- `MessageTokensCount object { input_tokens }`
 
   - `input_tokens: number`
 
@@ -18762,7 +11070,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Metadata
 
-- `Metadata = object { user_id }`
+- `Metadata object { user_id }`
 
   - `user_id: optional string`
 
@@ -18778,7 +11086,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
@@ -18852,11 +11160,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Fast and cost-effective model
 
-  - `UnionMember1 = string`
+  - `string`
 
 ### Output Config
 
-- `OutputConfig = object { effort, format }`
+- `OutputConfig object { effort, format }`
 
   - `effort: optional "low" or "medium" or "high" or 2 more`
 
@@ -18886,7 +11194,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Plain Text Source
 
-- `PlainTextSource = object { data, media_type, type }`
+- `PlainTextSource object { data, media_type, type }`
 
   - `data: string`
 
@@ -18902,7 +11210,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `RawContentBlockDelta = TextDelta or InputJSONDelta or CitationsDelta or 2 more`
 
-  - `TextDelta = object { text, type }`
+  - `TextDelta object { text, type }`
 
     - `text: string`
 
@@ -18910,7 +11218,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"text_delta"`
 
-  - `InputJSONDelta = object { partial_json, type }`
+  - `InputJSONDelta object { partial_json, type }`
 
     - `partial_json: string`
 
@@ -18918,11 +11226,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"input_json_delta"`
 
-  - `CitationsDelta = object { citation, type }`
+  - `CitationsDelta object { citation, type }`
 
     - `citation: CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
-      - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -18940,7 +11248,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"char_location"`
 
-      - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -18958,7 +11266,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"page_location"`
 
-      - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
         - `cited_text: string`
 
@@ -18986,7 +11294,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"content_block_location"`
 
-      - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+      - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
         - `cited_text: string`
 
@@ -19000,7 +11308,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `url: string`
 
-      - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+      - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `cited_text: string`
 
@@ -19036,7 +11344,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"citations_delta"`
 
-  - `ThinkingDelta = object { thinking, type }`
+  - `ThinkingDelta object { thinking, type }`
 
     - `thinking: string`
 
@@ -19044,7 +11352,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"thinking_delta"`
 
-  - `SignatureDelta = object { signature, type }`
+  - `SignatureDelta object { signature, type }`
 
     - `signature: string`
 
@@ -19054,11 +11362,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Content Block Delta Event
 
-- `RawContentBlockDeltaEvent = object { delta, index, type }`
+- `RawContentBlockDeltaEvent object { delta, index, type }`
 
   - `delta: RawContentBlockDelta`
 
-    - `TextDelta = object { text, type }`
+    - `TextDelta object { text, type }`
 
       - `text: string`
 
@@ -19066,7 +11374,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_delta"`
 
-    - `InputJSONDelta = object { partial_json, type }`
+    - `InputJSONDelta object { partial_json, type }`
 
       - `partial_json: string`
 
@@ -19074,11 +11382,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"input_json_delta"`
 
-    - `CitationsDelta = object { citation, type }`
+    - `CitationsDelta object { citation, type }`
 
       - `citation: CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
-        - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19096,7 +11404,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"char_location"`
 
-        - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19114,7 +11422,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"page_location"`
 
-        - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19142,7 +11450,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"content_block_location"`
 
-        - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+        - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
           - `cited_text: string`
 
@@ -19156,7 +11464,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `url: string`
 
-        - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+        - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
           - `cited_text: string`
 
@@ -19192,7 +11500,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"citations_delta"`
 
-    - `ThinkingDelta = object { thinking, type }`
+    - `ThinkingDelta object { thinking, type }`
 
       - `thinking: string`
 
@@ -19200,7 +11508,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"thinking_delta"`
 
-    - `SignatureDelta = object { signature, type }`
+    - `SignatureDelta object { signature, type }`
 
       - `signature: string`
 
@@ -19216,13 +11524,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Content Block Start Event
 
-- `RawContentBlockStartEvent = object { content_block, index, type }`
+- `RawContentBlockStartEvent object { content_block, index, type }`
 
   - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
     Response model for a file uploaded to the container.
 
-    - `TextBlock = object { citations, text, type }`
+    - `TextBlock object { citations, text, type }`
 
       - `citations: array of TextCitation`
 
@@ -19230,7 +11538,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19248,7 +11556,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"char_location"`
 
-        - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19266,7 +11574,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"page_location"`
 
-        - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+        - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
           - `cited_text: string`
 
@@ -19294,7 +11602,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"content_block_location"`
 
-        - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+        - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
           - `cited_text: string`
 
@@ -19308,7 +11616,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `url: string`
 
-        - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+        - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
           - `cited_text: string`
 
@@ -19346,7 +11654,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text"`
 
-    - `ThinkingBlock = object { signature, thinking, type }`
+    - `ThinkingBlock object { signature, thinking, type }`
 
       - `signature: string`
 
@@ -19356,7 +11664,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"thinking"`
 
-    - `RedactedThinkingBlock = object { data, type }`
+    - `RedactedThinkingBlock object { data, type }`
 
       - `data: string`
 
@@ -19364,7 +11672,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"redacted_thinking"`
 
-    - `ToolUseBlock = object { id, caller, input, 2 more }`
+    - `ToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -19372,7 +11680,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
@@ -19380,7 +11688,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"direct"`
 
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
@@ -19390,7 +11698,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_20250825"`
 
-        - `ServerToolCaller20260120 = object { tool_id, type }`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `tool_id: string`
 
@@ -19406,7 +11714,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_use"`
 
-    - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+    - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
       - `id: string`
 
@@ -19414,31 +11722,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `input: map[unknown]`
 
@@ -19462,41 +11754,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"server_tool_use"`
 
-    - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError = object { error_code, type }`
+        - `WebSearchToolResultError object { error_code, type }`
 
           - `error_code: WebSearchToolResultErrorCode`
 
@@ -19516,7 +11792,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_search_tool_result_error"`
 
-        - `UnionMember1 = array of WebSearchResultBlock`
+        - `array of WebSearchResultBlock`
 
           - `encrypted_content: string`
 
@@ -19536,41 +11812,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_search_tool_result"`
 
-    - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+    - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
-        - `DirectCaller = object { type }`
+        - `DirectCaller object { type }`
 
           Tool invocation directly from the model.
 
-          - `type: "direct"`
-
-            - `"direct"`
-
-        - `ServerToolCaller = object { tool_id, type }`
+        - `ServerToolCaller object { tool_id, type }`
 
           Tool invocation generated by a server-side tool.
 
-          - `tool_id: string`
-
-          - `type: "code_execution_20250825"`
-
-            - `"code_execution_20250825"`
-
-        - `ServerToolCaller20260120 = object { tool_id, type }`
-
-          - `tool_id: string`
-
-          - `type: "code_execution_20260120"`
-
-            - `"code_execution_20260120"`
+        - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock = object { error_code, type }`
+        - `WebFetchToolResultErrorBlock object { error_code, type }`
 
           - `error_code: WebFetchToolResultErrorCode`
 
@@ -19594,7 +11854,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_fetch_tool_result_error"`
 
-        - `WebFetchBlock = object { content, retrieved_at, type, url }`
+        - `WebFetchBlock object { content, retrieved_at, type, url }`
 
           - `content: DocumentBlock`
 
@@ -19606,7 +11866,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `source: Base64PDFSource or PlainTextSource`
 
-              - `Base64PDFSource = object { data, media_type, type }`
+              - `Base64PDFSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -19618,7 +11878,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `"base64"`
 
-              - `PlainTextSource = object { data, media_type, type }`
+              - `PlainTextSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -19656,13 +11916,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_fetch_tool_result"`
 
-    - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `CodeExecutionToolResultError = object { error_code, type }`
+        - `CodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -19678,7 +11938,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_tool_result_error"`
 
-        - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of CodeExecutionOutputBlock`
 
@@ -19698,7 +11958,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_result"`
 
-        - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+        - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -19707,8 +11967,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `file_id: string`
 
             - `type: "code_execution_output"`
-
-              - `"code_execution_output"`
 
           - `encrypted_stdout: string`
 
@@ -19726,11 +11984,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_tool_result"`
 
-    - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError = object { error_code, type }`
+        - `BashCodeExecutionToolResultError object { error_code, type }`
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -19748,7 +12006,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"bash_code_execution_tool_result_error"`
 
-        - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+        - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
           - `content: array of BashCodeExecutionOutputBlock`
 
@@ -19774,11 +12032,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"bash_code_execution_tool_result"`
 
-    - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+    - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
       - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+        - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -19798,7 +12056,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_tool_result_error"`
 
-        - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+        - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
           - `content: string`
 
@@ -19820,7 +12078,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_view_result"`
 
-        - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+        - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
           - `is_file_update: boolean`
 
@@ -19828,7 +12086,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_create_result"`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+        - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
           - `lines: array of string`
 
@@ -19850,11 +12108,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_tool_result"`
 
-    - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+    - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
       - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError = object { error_code, error_message, type }`
+        - `ToolSearchToolResultError object { error_code, error_message, type }`
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -19872,7 +12130,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"tool_search_tool_result_error"`
 
-        - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+        - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
           - `tool_references: array of ToolReferenceBlock`
 
@@ -19892,7 +12150,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_result"`
 
-    - `ContainerUploadBlock = object { file_id, type }`
+    - `ContainerUploadBlock object { file_id, type }`
 
       Response model for a file uploaded to the container.
 
@@ -19910,7 +12168,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Content Block Stop Event
 
-- `RawContentBlockStopEvent = object { index, type }`
+- `RawContentBlockStopEvent object { index, type }`
 
   - `index: number`
 
@@ -19920,7 +12178,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Message Delta Event
 
-- `RawMessageDeltaEvent = object { delta, type, usage }`
+- `RawMessageDeltaEvent object { delta, type, usage }`
 
   - `delta: object { container, stop_details, stop_reason, stop_sequence }`
 
@@ -20022,7 +12280,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Message Start Event
 
-- `RawMessageStartEvent = object { message, type }`
+- `RawMessageStartEvent object { message, type }`
 
   - `message: Message`
 
@@ -20073,7 +12331,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `TextBlock = object { citations, text, type }`
+      - `TextBlock object { citations, text, type }`
 
         - `citations: array of TextCitation`
 
@@ -20081,7 +12339,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -20099,7 +12357,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"char_location"`
 
-          - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -20117,7 +12375,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"page_location"`
 
-          - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -20145,7 +12403,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"content_block_location"`
 
-          - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -20159,7 +12417,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `url: string`
 
-          - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -20197,7 +12455,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text"`
 
-      - `ThinkingBlock = object { signature, thinking, type }`
+      - `ThinkingBlock object { signature, thinking, type }`
 
         - `signature: string`
 
@@ -20207,7 +12465,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"thinking"`
 
-      - `RedactedThinkingBlock = object { data, type }`
+      - `RedactedThinkingBlock object { data, type }`
 
         - `data: string`
 
@@ -20215,7 +12473,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"redacted_thinking"`
 
-      - `ToolUseBlock = object { id, caller, input, 2 more }`
+      - `ToolUseBlock object { id, caller, input, 2 more }`
 
         - `id: string`
 
@@ -20223,7 +12481,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
@@ -20231,7 +12489,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"direct"`
 
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
@@ -20241,7 +12499,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_20250825"`
 
-          - `ServerToolCaller20260120 = object { tool_id, type }`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `tool_id: string`
 
@@ -20257,7 +12515,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_use"`
 
-      - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+      - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
         - `id: string`
 
@@ -20265,31 +12523,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `input: map[unknown]`
 
@@ -20313,41 +12555,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"server_tool_use"`
 
-      - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+      - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError = object { error_code, type }`
+          - `WebSearchToolResultError object { error_code, type }`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -20367,7 +12593,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"web_search_tool_result_error"`
 
-          - `UnionMember1 = array of WebSearchResultBlock`
+          - `array of WebSearchResultBlock`
 
             - `encrypted_content: string`
 
@@ -20387,41 +12613,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"web_search_tool_result"`
 
-      - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+      - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-          - `WebFetchToolResultErrorBlock = object { error_code, type }`
+          - `WebFetchToolResultErrorBlock object { error_code, type }`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -20445,7 +12655,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"web_fetch_tool_result_error"`
 
-          - `WebFetchBlock = object { content, retrieved_at, type, url }`
+          - `WebFetchBlock object { content, retrieved_at, type, url }`
 
             - `content: DocumentBlock`
 
@@ -20457,7 +12667,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `source: Base64PDFSource or PlainTextSource`
 
-                - `Base64PDFSource = object { data, media_type, type }`
+                - `Base64PDFSource object { data, media_type, type }`
 
                   - `data: string`
 
@@ -20469,7 +12679,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"base64"`
 
-                - `PlainTextSource = object { data, media_type, type }`
+                - `PlainTextSource object { data, media_type, type }`
 
                   - `data: string`
 
@@ -20507,13 +12717,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"web_fetch_tool_result"`
 
-      - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: CodeExecutionToolResultBlockContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `CodeExecutionToolResultError = object { error_code, type }`
+          - `CodeExecutionToolResultError object { error_code, type }`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -20529,7 +12739,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_tool_result_error"`
 
-          - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+          - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
             - `content: array of CodeExecutionOutputBlock`
 
@@ -20549,7 +12759,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"code_execution_result"`
 
-          - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+          - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -20558,8 +12768,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               - `file_id: string`
 
               - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: string`
 
@@ -20577,11 +12785,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"code_execution_tool_result"`
 
-      - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError = object { error_code, type }`
+          - `BashCodeExecutionToolResultError object { error_code, type }`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -20599,7 +12807,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"bash_code_execution_tool_result_error"`
 
-          - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+          - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
             - `content: array of BashCodeExecutionOutputBlock`
 
@@ -20625,11 +12833,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"bash_code_execution_tool_result"`
 
-      - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+          - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -20649,7 +12857,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text_editor_code_execution_tool_result_error"`
 
-          - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+          - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
             - `content: string`
 
@@ -20671,7 +12879,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text_editor_code_execution_view_result"`
 
-          - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+          - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
             - `is_file_update: boolean`
 
@@ -20679,7 +12887,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text_editor_code_execution_create_result"`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+          - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
             - `lines: array of string`
 
@@ -20701,11 +12909,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_editor_code_execution_tool_result"`
 
-      - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+      - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
         - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError = object { error_code, error_message, type }`
+          - `ToolSearchToolResultError object { error_code, error_message, type }`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -20723,7 +12931,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"tool_search_tool_result_error"`
 
-          - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+          - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
             - `tool_references: array of ToolReferenceBlock`
 
@@ -20743,7 +12951,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"tool_search_tool_result"`
 
-      - `ContainerUploadBlock = object { file_id, type }`
+      - `ContainerUploadBlock object { file_id, type }`
 
         Response model for a file uploaded to the container.
 
@@ -20759,7 +12967,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
@@ -20833,7 +13041,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Fast and cost-effective model
 
-      - `UnionMember1 = string`
+      - `string`
 
     - `role: "assistant"`
 
@@ -20980,7 +13188,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Raw Message Stop Event
 
-- `RawMessageStopEvent = object { type }`
+- `RawMessageStopEvent object { type }`
 
   - `type: "message_stop"`
 
@@ -20990,7 +13198,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `RawMessageStreamEvent = RawMessageStartEvent or RawMessageDeltaEvent or RawMessageStopEvent or 3 more`
 
-  - `RawMessageStartEvent = object { message, type }`
+  - `RawMessageStartEvent object { message, type }`
 
     - `message: Message`
 
@@ -21041,7 +13249,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `TextBlock = object { citations, text, type }`
+        - `TextBlock object { citations, text, type }`
 
           - `citations: array of TextCitation`
 
@@ -21049,7 +13257,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -21067,7 +13275,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"char_location"`
 
-            - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -21085,7 +13293,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"page_location"`
 
-            - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -21113,7 +13321,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"content_block_location"`
 
-            - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+            - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
               - `cited_text: string`
 
@@ -21127,7 +13335,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `url: string`
 
-            - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+            - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
               - `cited_text: string`
 
@@ -21165,7 +13373,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text"`
 
-        - `ThinkingBlock = object { signature, thinking, type }`
+        - `ThinkingBlock object { signature, thinking, type }`
 
           - `signature: string`
 
@@ -21175,7 +13383,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"thinking"`
 
-        - `RedactedThinkingBlock = object { data, type }`
+        - `RedactedThinkingBlock object { data, type }`
 
           - `data: string`
 
@@ -21183,7 +13391,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"redacted_thinking"`
 
-        - `ToolUseBlock = object { id, caller, input, 2 more }`
+        - `ToolUseBlock object { id, caller, input, 2 more }`
 
           - `id: string`
 
@@ -21191,7 +13399,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
@@ -21199,7 +13407,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"direct"`
 
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
@@ -21209,7 +13417,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"code_execution_20250825"`
 
-            - `ServerToolCaller20260120 = object { tool_id, type }`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
               - `tool_id: string`
 
@@ -21225,7 +13433,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"tool_use"`
 
-        - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+        - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
           - `id: string`
 
@@ -21233,31 +13441,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `input: map[unknown]`
 
@@ -21281,41 +13473,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"server_tool_use"`
 
-        - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+        - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError = object { error_code, type }`
+            - `WebSearchToolResultError object { error_code, type }`
 
               - `error_code: WebSearchToolResultErrorCode`
 
@@ -21335,7 +13511,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"web_search_tool_result_error"`
 
-            - `UnionMember1 = array of WebSearchResultBlock`
+            - `array of WebSearchResultBlock`
 
               - `encrypted_content: string`
 
@@ -21355,41 +13531,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_search_tool_result"`
 
-        - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+        - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-            - `WebFetchToolResultErrorBlock = object { error_code, type }`
+            - `WebFetchToolResultErrorBlock object { error_code, type }`
 
               - `error_code: WebFetchToolResultErrorCode`
 
@@ -21413,7 +13573,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"web_fetch_tool_result_error"`
 
-            - `WebFetchBlock = object { content, retrieved_at, type, url }`
+            - `WebFetchBlock object { content, retrieved_at, type, url }`
 
               - `content: DocumentBlock`
 
@@ -21425,7 +13585,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `source: Base64PDFSource or PlainTextSource`
 
-                  - `Base64PDFSource = object { data, media_type, type }`
+                  - `Base64PDFSource object { data, media_type, type }`
 
                     - `data: string`
 
@@ -21437,7 +13597,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `"base64"`
 
-                  - `PlainTextSource = object { data, media_type, type }`
+                  - `PlainTextSource object { data, media_type, type }`
 
                     - `data: string`
 
@@ -21475,13 +13635,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"web_fetch_tool_result"`
 
-        - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: CodeExecutionToolResultBlockContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
-            - `CodeExecutionToolResultError = object { error_code, type }`
+            - `CodeExecutionToolResultError object { error_code, type }`
 
               - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -21497,7 +13657,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"code_execution_tool_result_error"`
 
-            - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+            - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
               - `content: array of CodeExecutionOutputBlock`
 
@@ -21517,7 +13677,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"code_execution_result"`
 
-            - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+            - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -21526,8 +13686,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 - `file_id: string`
 
                 - `type: "code_execution_output"`
-
-                  - `"code_execution_output"`
 
               - `encrypted_stdout: string`
 
@@ -21545,11 +13703,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"code_execution_tool_result"`
 
-        - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError = object { error_code, type }`
+            - `BashCodeExecutionToolResultError object { error_code, type }`
 
               - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -21567,7 +13725,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"bash_code_execution_tool_result_error"`
 
-            - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+            - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
               - `content: array of BashCodeExecutionOutputBlock`
 
@@ -21593,11 +13751,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"bash_code_execution_tool_result"`
 
-        - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+            - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
               - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -21617,7 +13775,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"text_editor_code_execution_tool_result_error"`
 
-            - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+            - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
               - `content: string`
 
@@ -21639,7 +13797,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"text_editor_code_execution_view_result"`
 
-            - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+            - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
               - `is_file_update: boolean`
 
@@ -21647,7 +13805,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"text_editor_code_execution_create_result"`
 
-            - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+            - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
               - `lines: array of string`
 
@@ -21669,11 +13827,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"text_editor_code_execution_tool_result"`
 
-        - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+        - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
           - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError = object { error_code, error_message, type }`
+            - `ToolSearchToolResultError object { error_code, error_message, type }`
 
               - `error_code: ToolSearchToolResultErrorCode`
 
@@ -21691,7 +13849,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"tool_search_tool_result_error"`
 
-            - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+            - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
               - `tool_references: array of ToolReferenceBlock`
 
@@ -21711,7 +13869,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"tool_search_tool_result"`
 
-        - `ContainerUploadBlock = object { file_id, type }`
+        - `ContainerUploadBlock object { file_id, type }`
 
           Response model for a file uploaded to the container.
 
@@ -21727,7 +13885,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
@@ -21801,7 +13959,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Fast and cost-effective model
 
-        - `UnionMember1 = string`
+        - `string`
 
       - `role: "assistant"`
 
@@ -21946,7 +14104,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"message_start"`
 
-  - `RawMessageDeltaEvent = object { delta, type, usage }`
+  - `RawMessageDeltaEvent object { delta, type, usage }`
 
     - `delta: object { container, stop_details, stop_reason, stop_sequence }`
 
@@ -21954,51 +14112,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Information about the container used in the request (for the code execution tool)
 
-        - `id: string`
-
-          Identifier for the container used in this request
-
-        - `expires_at: string`
-
-          The time at which the container will expire.
-
       - `stop_details: RefusalStopDetails`
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio"`
-
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
-
-          - `"cyber"`
-
-          - `"bio"`
-
-        - `explanation: string`
-
-          Human-readable explanation of the refusal.
-
-          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `type: "refusal"`
-
-          - `"refusal"`
-
       - `stop_reason: StopReason`
-
-        - `"end_turn"`
-
-        - `"max_tokens"`
-
-        - `"stop_sequence"`
-
-        - `"tool_use"`
-
-        - `"pause_turn"`
-
-        - `"refusal"`
 
       - `stop_sequence: string`
 
@@ -22038,705 +14156,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The number of server tool requests.
 
-        - `web_fetch_requests: number`
-
-          The number of web fetch tool requests.
-
-        - `web_search_requests: number`
-
-          The number of web search tool requests.
-
-  - `RawMessageStopEvent = object { type }`
+  - `RawMessageStopEvent object { type }`
 
     - `type: "message_stop"`
 
       - `"message_stop"`
 
-  - `RawContentBlockStartEvent = object { content_block, index, type }`
+  - `RawContentBlockStartEvent object { content_block, index, type }`
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
       Response model for a file uploaded to the container.
 
-      - `TextBlock = object { citations, text, type }`
+      - `TextBlock object { citations, text, type }`
 
-        - `citations: array of TextCitation`
+      - `ThinkingBlock object { signature, thinking, type }`
 
-          Citations supporting the text block.
+      - `RedactedThinkingBlock object { data, type }`
 
-          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+      - `ToolUseBlock object { id, caller, input, 2 more }`
 
-          - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+      - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
-            - `cited_text: string`
+      - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
-            - `document_index: number`
+      - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
-            - `document_title: string`
+      - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
-            - `end_char_index: number`
+      - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
-            - `file_id: string`
+      - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
-            - `start_char_index: number`
+      - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
-            - `type: "char_location"`
-
-              - `"char_location"`
-
-          - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
-
-            - `cited_text: string`
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_page_number: number`
-
-            - `file_id: string`
-
-            - `start_page_number: number`
-
-            - `type: "page_location"`
-
-              - `"page_location"`
-
-          - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: string`
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: "content_block_location"`
-
-              - `"content_block_location"`
-
-          - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
-
-            - `cited_text: string`
-
-            - `encrypted_index: string`
-
-            - `title: string`
-
-            - `type: "web_search_result_location"`
-
-              - `"web_search_result_location"`
-
-            - `url: string`
-
-          - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: number`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: string`
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: string`
-
-            - `type: "search_result_location"`
-
-              - `"search_result_location"`
-
-        - `text: string`
-
-        - `type: "text"`
-
-          - `"text"`
-
-      - `ThinkingBlock = object { signature, thinking, type }`
-
-        - `signature: string`
-
-        - `thinking: string`
-
-        - `type: "thinking"`
-
-          - `"thinking"`
-
-      - `RedactedThinkingBlock = object { data, type }`
-
-        - `data: string`
-
-        - `type: "redacted_thinking"`
-
-          - `"redacted_thinking"`
-
-      - `ToolUseBlock = object { id, caller, input, 2 more }`
-
-        - `id: string`
-
-        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
-
-          - `DirectCaller = object { type }`
-
-            Tool invocation directly from the model.
-
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-        - `input: map[unknown]`
-
-        - `name: string`
-
-        - `type: "tool_use"`
-
-          - `"tool_use"`
-
-      - `ServerToolUseBlock = object { id, caller, input, 2 more }`
-
-        - `id: string`
-
-        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
-
-          - `DirectCaller = object { type }`
-
-            Tool invocation directly from the model.
-
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-        - `input: map[unknown]`
-
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
-
-          - `"web_search"`
-
-          - `"web_fetch"`
-
-          - `"code_execution"`
-
-          - `"bash_code_execution"`
-
-          - `"text_editor_code_execution"`
-
-          - `"tool_search_tool_regex"`
-
-          - `"tool_search_tool_bm25"`
-
-        - `type: "server_tool_use"`
-
-          - `"server_tool_use"`
-
-      - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
-
-        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
-
-          - `DirectCaller = object { type }`
-
-            Tool invocation directly from the model.
-
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-        - `content: WebSearchToolResultBlockContent`
-
-          - `WebSearchToolResultError = object { error_code, type }`
-
-            - `error_code: WebSearchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"max_uses_exceeded"`
-
-              - `"too_many_requests"`
-
-              - `"query_too_long"`
-
-              - `"request_too_large"`
-
-            - `type: "web_search_tool_result_error"`
-
-              - `"web_search_tool_result_error"`
-
-          - `UnionMember1 = array of WebSearchResultBlock`
-
-            - `encrypted_content: string`
-
-            - `page_age: string`
-
-            - `title: string`
-
-            - `type: "web_search_result"`
-
-              - `"web_search_result"`
-
-            - `url: string`
-
-        - `tool_use_id: string`
-
-        - `type: "web_search_tool_result"`
-
-          - `"web_search_tool_result"`
-
-      - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
-
-        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
-
-          - `DirectCaller = object { type }`
-
-            Tool invocation directly from the model.
-
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
-
-        - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
-
-          - `WebFetchToolResultErrorBlock = object { error_code, type }`
-
-            - `error_code: WebFetchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"url_too_long"`
-
-              - `"url_not_allowed"`
-
-              - `"url_not_accessible"`
-
-              - `"unsupported_content_type"`
-
-              - `"too_many_requests"`
-
-              - `"max_uses_exceeded"`
-
-              - `"unavailable"`
-
-            - `type: "web_fetch_tool_result_error"`
-
-              - `"web_fetch_tool_result_error"`
-
-          - `WebFetchBlock = object { content, retrieved_at, type, url }`
-
-            - `content: DocumentBlock`
-
-              - `citations: CitationsConfig`
-
-                Citation configuration for the document
-
-                - `enabled: boolean`
-
-              - `source: Base64PDFSource or PlainTextSource`
-
-                - `Base64PDFSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "application/pdf"`
-
-                    - `"application/pdf"`
-
-                  - `type: "base64"`
-
-                    - `"base64"`
-
-                - `PlainTextSource = object { data, media_type, type }`
-
-                  - `data: string`
-
-                  - `media_type: "text/plain"`
-
-                    - `"text/plain"`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-              - `title: string`
-
-                The title of the document
-
-              - `type: "document"`
-
-                - `"document"`
-
-            - `retrieved_at: string`
-
-              ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
-
-              - `"web_fetch_result"`
-
-            - `url: string`
-
-              Fetched content URL
-
-        - `tool_use_id: string`
-
-        - `type: "web_fetch_tool_result"`
-
-          - `"web_fetch_tool_result"`
-
-      - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
-
-        - `content: CodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
-
-          - `CodeExecutionToolResultError = object { error_code, type }`
-
-            - `error_code: CodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `type: "code_execution_tool_result_error"`
-
-              - `"code_execution_tool_result_error"`
-
-          - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
-
-            - `content: array of CodeExecutionOutputBlock`
-
-              - `file_id: string`
-
-              - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
-
-            - `return_code: number`
-
-            - `stderr: string`
-
-            - `stdout: string`
-
-            - `type: "code_execution_result"`
-
-              - `"code_execution_result"`
-
-          - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `content: array of CodeExecutionOutputBlock`
-
-              - `file_id: string`
-
-              - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
-
-            - `encrypted_stdout: string`
-
-            - `return_code: number`
-
-            - `stderr: string`
-
-            - `type: "encrypted_code_execution_result"`
-
-              - `"encrypted_code_execution_result"`
-
-        - `tool_use_id: string`
-
-        - `type: "code_execution_tool_result"`
-
-          - `"code_execution_tool_result"`
-
-      - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
-
-        - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
-
-          - `BashCodeExecutionToolResultError = object { error_code, type }`
-
-            - `error_code: BashCodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"output_file_too_large"`
-
-            - `type: "bash_code_execution_tool_result_error"`
-
-              - `"bash_code_execution_tool_result_error"`
-
-          - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
-
-            - `content: array of BashCodeExecutionOutputBlock`
-
-              - `file_id: string`
-
-              - `type: "bash_code_execution_output"`
-
-                - `"bash_code_execution_output"`
-
-            - `return_code: number`
-
-            - `stderr: string`
-
-            - `stdout: string`
-
-            - `type: "bash_code_execution_result"`
-
-              - `"bash_code_execution_result"`
-
-        - `tool_use_id: string`
-
-        - `type: "bash_code_execution_tool_result"`
-
-          - `"bash_code_execution_tool_result"`
-
-      - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
-
-        - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
-
-          - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
-
-            - `error_code: TextEditorCodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"file_not_found"`
-
-            - `error_message: string`
-
-            - `type: "text_editor_code_execution_tool_result_error"`
-
-              - `"text_editor_code_execution_tool_result_error"`
-
-          - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
-
-            - `content: string`
-
-            - `file_type: "text" or "image" or "pdf"`
-
-              - `"text"`
-
-              - `"image"`
-
-              - `"pdf"`
-
-            - `num_lines: number`
-
-            - `start_line: number`
-
-            - `total_lines: number`
-
-            - `type: "text_editor_code_execution_view_result"`
-
-              - `"text_editor_code_execution_view_result"`
-
-          - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
-
-            - `is_file_update: boolean`
-
-            - `type: "text_editor_code_execution_create_result"`
-
-              - `"text_editor_code_execution_create_result"`
-
-          - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
-
-            - `lines: array of string`
-
-            - `new_lines: number`
-
-            - `new_start: number`
-
-            - `old_lines: number`
-
-            - `old_start: number`
-
-            - `type: "text_editor_code_execution_str_replace_result"`
-
-              - `"text_editor_code_execution_str_replace_result"`
-
-        - `tool_use_id: string`
-
-        - `type: "text_editor_code_execution_tool_result"`
-
-          - `"text_editor_code_execution_tool_result"`
-
-      - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
-
-        - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
-
-          - `ToolSearchToolResultError = object { error_code, error_message, type }`
-
-            - `error_code: ToolSearchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `error_message: string`
-
-            - `type: "tool_search_tool_result_error"`
-
-              - `"tool_search_tool_result_error"`
-
-          - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
-
-            - `tool_references: array of ToolReferenceBlock`
-
-              - `tool_name: string`
-
-              - `type: "tool_reference"`
-
-                - `"tool_reference"`
-
-            - `type: "tool_search_tool_search_result"`
-
-              - `"tool_search_tool_search_result"`
-
-        - `tool_use_id: string`
-
-        - `type: "tool_search_tool_result"`
-
-          - `"tool_search_tool_result"`
-
-      - `ContainerUploadBlock = object { file_id, type }`
+      - `ContainerUploadBlock object { file_id, type }`
 
         Response model for a file uploaded to the container.
-
-        - `file_id: string`
-
-        - `type: "container_upload"`
-
-          - `"container_upload"`
 
     - `index: number`
 
@@ -22744,11 +14200,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"content_block_start"`
 
-  - `RawContentBlockDeltaEvent = object { delta, index, type }`
+  - `RawContentBlockDeltaEvent object { delta, index, type }`
 
     - `delta: RawContentBlockDelta`
 
-      - `TextDelta = object { text, type }`
+      - `TextDelta object { text, type }`
 
         - `text: string`
 
@@ -22756,7 +14212,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text_delta"`
 
-      - `InputJSONDelta = object { partial_json, type }`
+      - `InputJSONDelta object { partial_json, type }`
 
         - `partial_json: string`
 
@@ -22764,125 +14220,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"input_json_delta"`
 
-      - `CitationsDelta = object { citation, type }`
+      - `CitationsDelta object { citation, type }`
 
         - `citation: CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
-          - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
-            - `cited_text: string`
+          - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
-            - `document_index: number`
+          - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
-            - `document_title: string`
+          - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
-            - `end_char_index: number`
-
-            - `file_id: string`
-
-            - `start_char_index: number`
-
-            - `type: "char_location"`
-
-              - `"char_location"`
-
-          - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
-
-            - `cited_text: string`
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_page_number: number`
-
-            - `file_id: string`
-
-            - `start_page_number: number`
-
-            - `type: "page_location"`
-
-              - `"page_location"`
-
-          - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: string`
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: "content_block_location"`
-
-              - `"content_block_location"`
-
-          - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
-
-            - `cited_text: string`
-
-            - `encrypted_index: string`
-
-            - `title: string`
-
-            - `type: "web_search_result_location"`
-
-              - `"web_search_result_location"`
-
-            - `url: string`
-
-          - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: number`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: string`
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: string`
-
-            - `type: "search_result_location"`
-
-              - `"search_result_location"`
+          - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `type: "citations_delta"`
 
           - `"citations_delta"`
 
-      - `ThinkingDelta = object { thinking, type }`
+      - `ThinkingDelta object { thinking, type }`
 
         - `thinking: string`
 
@@ -22890,7 +14246,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"thinking_delta"`
 
-      - `SignatureDelta = object { signature, type }`
+      - `SignatureDelta object { signature, type }`
 
         - `signature: string`
 
@@ -22904,7 +14260,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"content_block_delta"`
 
-  - `RawContentBlockStopEvent = object { index, type }`
+  - `RawContentBlockStopEvent object { index, type }`
 
     - `index: number`
 
@@ -22914,7 +14270,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Redacted Thinking Block
 
-- `RedactedThinkingBlock = object { data, type }`
+- `RedactedThinkingBlock object { data, type }`
 
   - `data: string`
 
@@ -22924,7 +14280,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Redacted Thinking Block Param
 
-- `RedactedThinkingBlockParam = object { data, type }`
+- `RedactedThinkingBlockParam object { data, type }`
 
   - `data: string`
 
@@ -22934,7 +14290,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Refusal Stop Details
 
-- `RefusalStopDetails = object { category, explanation, type }`
+- `RefusalStopDetails object { category, explanation, type }`
 
   Structured information about a refusal.
 
@@ -22960,7 +14316,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Search Result Block Param
 
-- `SearchResultBlockParam = object { content, source, title, 3 more }`
+- `SearchResultBlockParam object { content, source, title, 3 more }`
 
   - `content: array of TextBlockParam`
 
@@ -22995,7 +14351,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `citations: optional array of TextCitationParam`
 
-      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -23011,7 +14367,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"char_location"`
 
-      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -23027,7 +14383,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"page_location"`
 
-      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+      - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
         - `cited_text: string`
 
@@ -23053,7 +14409,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"content_block_location"`
 
-      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+      - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
         - `cited_text: string`
 
@@ -23067,7 +14423,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `url: string`
 
-      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+      - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
         - `cited_text: string`
 
@@ -23111,32 +14467,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Create a cache control breakpoint at this content block.
 
-    - `type: "ephemeral"`
-
-      - `"ephemeral"`
-
-    - `ttl: optional "5m" or "1h"`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
-
   - `citations: optional CitationsConfigParam`
 
     - `enabled: optional boolean`
 
 ### Server Tool Caller
 
-- `ServerToolCaller = object { tool_id, type }`
+- `ServerToolCaller object { tool_id, type }`
 
   Tool invocation generated by a server-side tool.
 
@@ -23148,7 +14485,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Server Tool Caller 20260120
 
-- `ServerToolCaller20260120 = object { tool_id, type }`
+- `ServerToolCaller20260120 object { tool_id, type }`
 
   - `tool_id: string`
 
@@ -23158,7 +14495,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Server Tool Usage
 
-- `ServerToolUsage = object { web_fetch_requests, web_search_requests }`
+- `ServerToolUsage object { web_fetch_requests, web_search_requests }`
 
   - `web_fetch_requests: number`
 
@@ -23170,7 +14507,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Server Tool Use Block
 
-- `ServerToolUseBlock = object { id, caller, input, 2 more }`
+- `ServerToolUseBlock object { id, caller, input, 2 more }`
 
   - `id: string`
 
@@ -23178,7 +14515,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -23186,7 +14523,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -23196,7 +14533,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -23228,7 +14565,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Server Tool Use Block Param
 
-- `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+- `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
   - `id: string`
 
@@ -23281,7 +14618,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -23289,7 +14626,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -23299,7 +14636,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -23309,7 +14646,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Signature Delta
 
-- `SignatureDelta = object { signature, type }`
+- `SignatureDelta object { signature, type }`
 
   - `signature: string`
 
@@ -23335,7 +14672,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Block
 
-- `TextBlock = object { citations, text, type }`
+- `TextBlock object { citations, text, type }`
 
   - `citations: array of TextCitation`
 
@@ -23343,7 +14680,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-    - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -23361,7 +14698,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"char_location"`
 
-    - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -23379,7 +14716,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"page_location"`
 
-    - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+    - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
       - `cited_text: string`
 
@@ -23407,7 +14744,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"content_block_location"`
 
-    - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+    - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
       - `cited_text: string`
 
@@ -23421,7 +14758,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `url: string`
 
-    - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+    - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
       - `cited_text: string`
 
@@ -23461,7 +14798,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Block Param
 
-- `TextBlockParam = object { text, type, cache_control, citations }`
+- `TextBlockParam object { text, type, cache_control, citations }`
 
   - `text: string`
 
@@ -23494,7 +14831,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `citations: optional array of TextCitationParam`
 
-    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+    - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
       - `cited_text: string`
 
@@ -23510,7 +14847,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"char_location"`
 
-    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+    - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
       - `cited_text: string`
 
@@ -23526,7 +14863,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"page_location"`
 
-    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+    - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
       - `cited_text: string`
 
@@ -23552,7 +14889,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"content_block_location"`
 
-    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+    - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
       - `cited_text: string`
 
@@ -23566,7 +14903,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `url: string`
 
-    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+    - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
       - `cited_text: string`
 
@@ -23602,7 +14939,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `TextCitation = CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
-  - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+  - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
     - `cited_text: string`
 
@@ -23620,7 +14957,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"char_location"`
 
-  - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+  - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
     - `cited_text: string`
 
@@ -23638,7 +14975,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"page_location"`
 
-  - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+  - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
     - `cited_text: string`
 
@@ -23666,7 +15003,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"content_block_location"`
 
-  - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+  - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
     - `cited_text: string`
 
@@ -23680,7 +15017,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `url: string`
 
-  - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+  - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
     - `cited_text: string`
 
@@ -23716,7 +15053,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `TextCitationParam = CitationCharLocationParam or CitationPageLocationParam or CitationContentBlockLocationParam or 2 more`
 
-  - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+  - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
     - `cited_text: string`
 
@@ -23732,7 +15069,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"char_location"`
 
-  - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+  - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
     - `cited_text: string`
 
@@ -23748,7 +15085,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"page_location"`
 
-  - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+  - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
     - `cited_text: string`
 
@@ -23774,7 +15111,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"content_block_location"`
 
-  - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+  - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
     - `cited_text: string`
 
@@ -23788,7 +15125,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `url: string`
 
-  - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+  - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
     - `cited_text: string`
 
@@ -23822,7 +15159,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Delta
 
-- `TextDelta = object { text, type }`
+- `TextDelta object { text, type }`
 
   - `text: string`
 
@@ -23832,7 +15169,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Create Result Block
 
-- `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+- `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
   - `is_file_update: boolean`
 
@@ -23842,7 +15179,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Create Result Block Param
 
-- `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+- `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
   - `is_file_update: boolean`
 
@@ -23852,7 +15189,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Str Replace Result Block
 
-- `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+- `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
   - `lines: array of string`
 
@@ -23870,7 +15207,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
-- `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+- `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -23888,11 +15225,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Tool Result Block
 
-- `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+- `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
   - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-    - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+    - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
       - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -23912,7 +15249,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_tool_result_error"`
 
-    - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+    - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
       - `content: string`
 
@@ -23934,7 +15271,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_view_result"`
 
-    - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+    - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
       - `is_file_update: boolean`
 
@@ -23942,7 +15279,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_create_result"`
 
-    - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+    - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
       - `lines: array of string`
 
@@ -23966,11 +15303,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Tool Result Block Param
 
-- `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+- `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
   - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-    - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+    - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
       - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -23990,7 +15327,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `error_message: optional string`
 
-    - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+    - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
       - `content: string`
 
@@ -24012,7 +15349,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `total_lines: optional number`
 
-    - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+    - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
       - `is_file_update: boolean`
 
@@ -24020,7 +15357,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"text_editor_code_execution_create_result"`
 
-    - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+    - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
       - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -24067,7 +15404,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Tool Result Error
 
-- `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+- `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -24103,7 +15440,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution Tool Result Error Param
 
-- `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+- `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -24125,7 +15462,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution View Result Block
 
-- `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+- `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
   - `content: string`
 
@@ -24149,7 +15486,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Text Editor Code Execution View Result Block Param
 
-- `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+- `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
   - `content: string`
 
@@ -24173,7 +15510,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Block
 
-- `ThinkingBlock = object { signature, thinking, type }`
+- `ThinkingBlock object { signature, thinking, type }`
 
   - `signature: string`
 
@@ -24185,7 +15522,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Block Param
 
-- `ThinkingBlockParam = object { signature, thinking, type }`
+- `ThinkingBlockParam object { signature, thinking, type }`
 
   - `signature: string`
 
@@ -24197,7 +15534,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Config Adaptive
 
-- `ThinkingConfigAdaptive = object { type, display }`
+- `ThinkingConfigAdaptive object { type, display }`
 
   - `type: "adaptive"`
 
@@ -24213,7 +15550,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Config Disabled
 
-- `ThinkingConfigDisabled = object { type }`
+- `ThinkingConfigDisabled object { type }`
 
   - `type: "disabled"`
 
@@ -24221,7 +15558,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Config Enabled
 
-- `ThinkingConfigEnabled = object { budget_tokens, type, display }`
+- `ThinkingConfigEnabled object { budget_tokens, type, display }`
 
   - `budget_tokens: number`
 
@@ -24253,7 +15590,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-  - `ThinkingConfigEnabled = object { budget_tokens, type, display }`
+  - `ThinkingConfigEnabled object { budget_tokens, type, display }`
 
     - `budget_tokens: number`
 
@@ -24275,13 +15612,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"omitted"`
 
-  - `ThinkingConfigDisabled = object { type }`
+  - `ThinkingConfigDisabled object { type }`
 
     - `type: "disabled"`
 
       - `"disabled"`
 
-  - `ThinkingConfigAdaptive = object { type, display }`
+  - `ThinkingConfigAdaptive object { type, display }`
 
     - `type: "adaptive"`
 
@@ -24297,7 +15634,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Delta
 
-- `ThinkingDelta = object { thinking, type }`
+- `ThinkingDelta object { thinking, type }`
 
   - `thinking: string`
 
@@ -24307,7 +15644,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool
 
-- `Tool = object { input_schema, name, allowed_callers, 7 more }`
+- `Tool object { input_schema, name, allowed_callers, 7 more }`
 
   - `input_schema: object { type, properties, required }`
 
@@ -24386,7 +15723,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Bash 20250124
 
-- `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+- `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
   - `name: "bash"`
 
@@ -24447,7 +15784,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `ToolChoiceAuto = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAuto object { type, disable_parallel_tool_use }`
 
     The model will automatically decide whether to use tools.
 
@@ -24461,7 +15798,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `ToolChoiceAny = object { type, disable_parallel_tool_use }`
+  - `ToolChoiceAny object { type, disable_parallel_tool_use }`
 
     The model will use any available tools.
 
@@ -24475,7 +15812,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceTool = object { name, type, disable_parallel_tool_use }`
+  - `ToolChoiceTool object { name, type, disable_parallel_tool_use }`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -24493,7 +15830,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceNone = object { type }`
+  - `ToolChoiceNone object { type }`
 
     The model will not be allowed to use tools.
 
@@ -24503,7 +15840,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Choice Any
 
-- `ToolChoiceAny = object { type, disable_parallel_tool_use }`
+- `ToolChoiceAny object { type, disable_parallel_tool_use }`
 
   The model will use any available tools.
 
@@ -24519,7 +15856,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Choice Auto
 
-- `ToolChoiceAuto = object { type, disable_parallel_tool_use }`
+- `ToolChoiceAuto object { type, disable_parallel_tool_use }`
 
   The model will automatically decide whether to use tools.
 
@@ -24535,7 +15872,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Choice None
 
-- `ToolChoiceNone = object { type }`
+- `ToolChoiceNone object { type }`
 
   The model will not be allowed to use tools.
 
@@ -24545,7 +15882,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Choice Tool
 
-- `ToolChoiceTool = object { name, type, disable_parallel_tool_use }`
+- `ToolChoiceTool object { name, type, disable_parallel_tool_use }`
 
   The model will use the specified tool with `tool_choice.name`.
 
@@ -24565,7 +15902,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Reference Block
 
-- `ToolReferenceBlock = object { tool_name, type }`
+- `ToolReferenceBlock object { tool_name, type }`
 
   - `tool_name: string`
 
@@ -24575,7 +15912,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Reference Block Param
 
-- `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+- `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
   Tool reference block that can be included in tool_result content.
 
@@ -24610,7 +15947,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Result Block Param
 
-- `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+- `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
   - `tool_use_id: string`
 
@@ -24643,11 +15980,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-    - `UnionMember0 = string`
+    - `string`
 
-    - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+    - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-      - `TextBlockParam = object { text, type, cache_control, citations }`
+      - `TextBlockParam object { text, type, cache_control, citations }`
 
         - `text: string`
 
@@ -24659,28 +15996,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional array of TextCitationParam`
 
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -24696,7 +16014,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"char_location"`
 
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -24712,7 +16030,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"page_location"`
 
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+          - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
             - `cited_text: string`
 
@@ -24738,7 +16056,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"content_block_location"`
 
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -24752,7 +16070,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `url: string`
 
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -24784,11 +16102,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"search_result_location"`
 
-      - `ImageBlockParam = object { source, type, cache_control }`
+      - `ImageBlockParam object { source, type, cache_control }`
 
         - `source: Base64ImageSource or URLImageSource`
 
-          - `Base64ImageSource = object { data, media_type, type }`
+          - `Base64ImageSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -24806,7 +16124,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `URLImageSource = object { type, url }`
+          - `URLImageSource object { type, url }`
 
             - `type: "url"`
 
@@ -24822,26 +16140,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
-      - `SearchResultBlockParam = object { content, source, title, 3 more }`
+      - `SearchResultBlockParam object { content, source, title, 3 more }`
 
         - `content: array of TextBlockParam`
 
@@ -24849,136 +16148,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `type: "text"`
 
-            - `"text"`
-
           - `cache_control: optional CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
 
-            - `type: "ephemeral"`
-
-              - `"ephemeral"`
-
-            - `ttl: optional "5m" or "1h"`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"`
-
-              - `"1h"`
-
           - `citations: optional array of TextCitationParam`
-
-            - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_char_index: number`
-
-              - `start_char_index: number`
-
-              - `type: "char_location"`
-
-                - `"char_location"`
-
-            - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_page_number: number`
-
-              - `start_page_number: number`
-
-              - `type: "page_location"`
-
-                - `"page_location"`
-
-            - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: number`
-
-              - `document_title: string`
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: "content_block_location"`
-
-                - `"content_block_location"`
-
-            - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-              - `cited_text: string`
-
-              - `encrypted_index: string`
-
-              - `title: string`
-
-              - `type: "web_search_result_location"`
-
-                - `"web_search_result_location"`
-
-              - `url: string`
-
-            - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-              - `cited_text: string`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: number`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: number`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: string`
-
-              - `start_block_index: number`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: string`
-
-              - `type: "search_result_location"`
-
-                - `"search_result_location"`
 
         - `source: string`
 
@@ -24992,34 +16166,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           - `enabled: optional boolean`
 
-      - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+      - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -25031,7 +16186,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -25043,213 +16198,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text"`
 
-          - `ContentBlockSource = object { content, type }`
+          - `ContentBlockSource object { content, type }`
 
             - `content: string or array of ContentBlockSourceContent`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
-                  - `text: string`
-
-                  - `type: "text"`
-
-                    - `"text"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional array of TextCitationParam`
-
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_char_index: number`
-
-                      - `start_char_index: number`
-
-                      - `type: "char_location"`
-
-                        - `"char_location"`
-
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_page_number: number`
-
-                      - `start_page_number: number`
-
-                      - `type: "page_location"`
-
-                        - `"page_location"`
-
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: "content_block_location"`
-
-                        - `"content_block_location"`
-
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                      - `cited_text: string`
-
-                      - `encrypted_index: string`
-
-                      - `title: string`
-
-                      - `type: "web_search_result_location"`
-
-                        - `"web_search_result_location"`
-
-                      - `url: string`
-
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: number`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: string`
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: string`
-
-                      - `type: "search_result_location"`
-
-                        - `"search_result_location"`
-
-                - `ImageBlockParam = object { source, type, cache_control }`
-
-                  - `source: Base64ImageSource or URLImageSource`
-
-                    - `Base64ImageSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `URLImageSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "image"`
-
-                    - `"image"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
+                - `ImageBlockParam object { source, type, cache_control }`
 
             - `type: "content"`
 
               - `"content"`
 
-          - `URLPDFSource = object { type, url }`
+          - `URLPDFSource object { type, url }`
 
             - `type: "url"`
 
@@ -25265,34 +16230,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
-
-          - `enabled: optional boolean`
 
         - `context: optional string`
 
         - `title: optional string`
 
-      - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+      - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
         Tool reference block that can be included in tool_result content.
 
@@ -25306,30 +16250,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
   - `is_error: optional boolean`
 
 ### Tool Search Tool Bm25 20251119
 
-- `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+- `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
   - `name: "tool_search_tool_bm25"`
 
@@ -25386,7 +16311,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Regex 20251119
 
-- `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+- `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
   - `name: "tool_search_tool_regex"`
 
@@ -25443,11 +16368,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Result Block
 
-- `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+- `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
   - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-    - `ToolSearchToolResultError = object { error_code, error_message, type }`
+    - `ToolSearchToolResultError object { error_code, error_message, type }`
 
       - `error_code: ToolSearchToolResultErrorCode`
 
@@ -25465,7 +16390,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_result_error"`
 
-    - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+    - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
       - `tool_references: array of ToolReferenceBlock`
 
@@ -25487,11 +16412,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Result Block Param
 
-- `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+- `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
   - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-    - `ToolSearchToolResultErrorParam = object { error_code, type }`
+    - `ToolSearchToolResultErrorParam object { error_code, type }`
 
       - `error_code: ToolSearchToolResultErrorCode`
 
@@ -25507,7 +16432,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"tool_search_tool_result_error"`
 
-    - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+    - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
       - `tool_references: array of ToolReferenceBlockParam`
 
@@ -25554,28 +16479,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Create a cache control breakpoint at this content block.
 
-    - `type: "ephemeral"`
-
-      - `"ephemeral"`
-
-    - `ttl: optional "5m" or "1h"`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
-
 ### Tool Search Tool Result Error
 
-- `ToolSearchToolResultError = object { error_code, error_message, type }`
+- `ToolSearchToolResultError object { error_code, error_message, type }`
 
   - `error_code: ToolSearchToolResultErrorCode`
 
@@ -25607,7 +16513,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Result Error Param
 
-- `ToolSearchToolResultErrorParam = object { error_code, type }`
+- `ToolSearchToolResultErrorParam object { error_code, type }`
 
   - `error_code: ToolSearchToolResultErrorCode`
 
@@ -25625,7 +16531,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Search Result Block
 
-- `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+- `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
   - `tool_references: array of ToolReferenceBlock`
 
@@ -25641,7 +16547,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Search Tool Search Result Block Param
 
-- `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+- `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
   - `tool_references: array of ToolReferenceBlockParam`
 
@@ -25680,7 +16586,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Text Editor 20250124
 
-- `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+- `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
   - `name: "str_replace_editor"`
 
@@ -25737,7 +16643,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Text Editor 20250429
 
-- `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+- `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
   - `name: "str_replace_based_edit_tool"`
 
@@ -25794,7 +16700,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Text Editor 20250728
 
-- `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+- `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
   - `name: "str_replace_based_edit_tool"`
 
@@ -25859,7 +16765,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-  - `Tool = object { input_schema, name, allowed_callers, 7 more }`
+  - `Tool object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -25936,7 +16842,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"custom"`
 
-  - `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "bash"`
 
@@ -25962,25 +16868,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -25991,7 +16878,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -26017,25 +16904,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26044,7 +16912,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
     - `name: "code_execution"`
 
@@ -26070,25 +16938,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26097,7 +16946,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+  - `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -26125,25 +16974,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26152,7 +16982,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+  - `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
     - `name: "memory"`
 
@@ -26178,25 +17008,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26207,7 +17018,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_editor"`
 
@@ -26233,25 +17044,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26262,7 +17054,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+  - `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -26288,25 +17080,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26317,7 +17090,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+  - `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
     - `name: "str_replace_based_edit_tool"`
 
@@ -26343,25 +17116,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26376,7 +17130,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -26410,25 +17164,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26465,7 +17200,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -26499,25 +17234,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -26540,7 +17256,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+  - `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
     - `name: "web_search"`
 
@@ -26574,25 +17290,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26609,27 +17306,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-      - `type: "approximate"`
-
-        - `"approximate"`
-
-      - `city: optional string`
-
-        The city of the user.
-
-      - `country: optional string`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `region: optional string`
-
-        The region of the user.
-
-      - `timezone: optional string`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-  - `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+  - `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
     - `name: "web_fetch"`
 
@@ -26663,30 +17340,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -26704,7 +17360,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+  - `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -26740,30 +17396,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `citations: optional CitationsConfigParam`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `enabled: optional boolean`
 
     - `defer_loading: optional boolean`
 
@@ -26785,7 +17420,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
 
@@ -26813,25 +17448,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26840,7 +17456,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+  - `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_regex"`
 
@@ -26868,25 +17484,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
-
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -26897,7 +17494,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Use Block
 
-- `ToolUseBlock = object { id, caller, input, 2 more }`
+- `ToolUseBlock object { id, caller, input, 2 more }`
 
   - `id: string`
 
@@ -26905,7 +17502,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -26913,7 +17510,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -26923,7 +17520,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -26941,7 +17538,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool Use Block Param
 
-- `ToolUseBlockParam = object { id, input, name, 3 more }`
+- `ToolUseBlockParam object { id, input, name, 3 more }`
 
   - `id: string`
 
@@ -26980,7 +17577,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -26988,7 +17585,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -26998,7 +17595,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -27008,7 +17605,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### URL Image Source
 
-- `URLImageSource = object { type, url }`
+- `URLImageSource object { type, url }`
 
   - `type: "url"`
 
@@ -27018,7 +17615,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### URL PDF Source
 
-- `URLPDFSource = object { type, url }`
+- `URLPDFSource object { type, url }`
 
   - `type: "url"`
 
@@ -27028,7 +17625,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Usage
 
-- `Usage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 5 more }`
+- `Usage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 5 more }`
 
   - `cache_creation: CacheCreation`
 
@@ -27086,7 +17683,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### User Location
 
-- `UserLocation = object { type, city, country, 2 more }`
+- `UserLocation object { type, city, country, 2 more }`
 
   - `type: "approximate"`
 
@@ -27110,7 +17707,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Block
 
-- `WebFetchBlock = object { content, retrieved_at, type, url }`
+- `WebFetchBlock object { content, retrieved_at, type, url }`
 
   - `content: DocumentBlock`
 
@@ -27122,7 +17719,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `source: Base64PDFSource or PlainTextSource`
 
-      - `Base64PDFSource = object { data, media_type, type }`
+      - `Base64PDFSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -27134,7 +17731,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"base64"`
 
-      - `PlainTextSource = object { data, media_type, type }`
+      - `PlainTextSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -27168,13 +17765,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Block Param
 
-- `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+- `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
   - `content: DocumentBlockParam`
 
     - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-      - `Base64PDFSource = object { data, media_type, type }`
+      - `Base64PDFSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -27186,7 +17783,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"base64"`
 
-      - `PlainTextSource = object { data, media_type, type }`
+      - `PlainTextSource object { data, media_type, type }`
 
         - `data: string`
 
@@ -27198,15 +17795,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"text"`
 
-      - `ContentBlockSource = object { content, type }`
+      - `ContentBlockSource object { content, type }`
 
         - `content: string or array of ContentBlockSourceContent`
 
-          - `UnionMember0 = string`
+          - `string`
 
           - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-            - `TextBlockParam = object { text, type, cache_control, citations }`
+            - `TextBlockParam object { text, type, cache_control, citations }`
 
               - `text: string`
 
@@ -27239,7 +17836,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `citations: optional array of TextCitationParam`
 
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                   - `cited_text: string`
 
@@ -27255,7 +17852,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"char_location"`
 
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                   - `cited_text: string`
 
@@ -27271,7 +17868,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"page_location"`
 
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                   - `cited_text: string`
 
@@ -27297,7 +17894,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"content_block_location"`
 
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+                - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
                   - `cited_text: string`
 
@@ -27311,7 +17908,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `url: string`
 
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+                - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
                   - `cited_text: string`
 
@@ -27343,11 +17940,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"search_result_location"`
 
-            - `ImageBlockParam = object { source, type, cache_control }`
+            - `ImageBlockParam object { source, type, cache_control }`
 
               - `source: Base64ImageSource or URLImageSource`
 
-                - `Base64ImageSource = object { data, media_type, type }`
+                - `Base64ImageSource object { data, media_type, type }`
 
                   - `data: string`
 
@@ -27365,7 +17962,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `"base64"`
 
-                - `URLImageSource = object { type, url }`
+                - `URLImageSource object { type, url }`
 
                   - `type: "url"`
 
@@ -27381,30 +17978,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
         - `type: "content"`
 
           - `"content"`
 
-      - `URLPDFSource = object { type, url }`
+      - `URLPDFSource object { type, url }`
 
         - `type: "url"`
 
@@ -27419,25 +17997,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `cache_control: optional CacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
-
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `citations: optional CitationsConfigParam`
 
@@ -27461,7 +18020,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool 20250910
 
-- `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+- `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
   - `name: "web_fetch"`
 
@@ -27538,7 +18097,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool 20260209
 
-- `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+- `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
   - `name: "web_fetch"`
 
@@ -27615,7 +18174,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool 20260309
 
-- `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+- `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -27698,13 +18257,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool Result Block
 
-- `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+- `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -27712,7 +18271,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -27722,7 +18281,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -27732,7 +18291,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-    - `WebFetchToolResultErrorBlock = object { error_code, type }`
+    - `WebFetchToolResultErrorBlock object { error_code, type }`
 
       - `error_code: WebFetchToolResultErrorCode`
 
@@ -27756,7 +18315,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_fetch_tool_result_error"`
 
-    - `WebFetchBlock = object { content, retrieved_at, type, url }`
+    - `WebFetchBlock object { content, retrieved_at, type, url }`
 
       - `content: DocumentBlock`
 
@@ -27768,7 +18327,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `source: Base64PDFSource or PlainTextSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -27780,7 +18339,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -27820,11 +18379,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool Result Block Param
 
-- `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+- `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
   - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-    - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+    - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
       - `error_code: WebFetchToolResultErrorCode`
 
@@ -27848,13 +18407,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_fetch_tool_result_error"`
 
-    - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+    - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
       - `content: DocumentBlockParam`
 
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-          - `Base64PDFSource = object { data, media_type, type }`
+          - `Base64PDFSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -27866,7 +18425,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"base64"`
 
-          - `PlainTextSource = object { data, media_type, type }`
+          - `PlainTextSource object { data, media_type, type }`
 
             - `data: string`
 
@@ -27878,15 +18437,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"text"`
 
-          - `ContentBlockSource = object { content, type }`
+          - `ContentBlockSource object { content, type }`
 
             - `content: string or array of ContentBlockSourceContent`
 
-              - `UnionMember0 = string`
+              - `string`
 
               - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
                   - `text: string`
 
@@ -27919,7 +18478,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `citations: optional array of TextCitationParam`
 
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                    - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                       - `cited_text: string`
 
@@ -27935,7 +18494,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"char_location"`
 
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                    - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                       - `cited_text: string`
 
@@ -27951,7 +18510,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"page_location"`
 
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+                    - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                       - `cited_text: string`
 
@@ -27977,7 +18536,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"content_block_location"`
 
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+                    - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
                       - `cited_text: string`
 
@@ -27991,7 +18550,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `url: string`
 
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+                    - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
                       - `cited_text: string`
 
@@ -28023,11 +18582,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"search_result_location"`
 
-                - `ImageBlockParam = object { source, type, cache_control }`
+                - `ImageBlockParam object { source, type, cache_control }`
 
                   - `source: Base64ImageSource or URLImageSource`
 
-                    - `Base64ImageSource = object { data, media_type, type }`
+                    - `Base64ImageSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -28045,7 +18604,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         - `"base64"`
 
-                    - `URLImageSource = object { type, url }`
+                    - `URLImageSource object { type, url }`
 
                       - `type: "url"`
 
@@ -28061,30 +18620,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     Create a cache control breakpoint at this content block.
 
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
             - `type: "content"`
 
               - `"content"`
 
-          - `URLPDFSource = object { type, url }`
+          - `URLPDFSource object { type, url }`
 
             - `type: "url"`
 
@@ -28099,25 +18639,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `cache_control: optional CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
-
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
 
         - `citations: optional CitationsConfigParam`
 
@@ -28149,30 +18670,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Create a cache control breakpoint at this content block.
 
-    - `type: "ephemeral"`
-
-      - `"ephemeral"`
-
-    - `ttl: optional "5m" or "1h"`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"`
-
-      - `"1h"`
-
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -28180,7 +18682,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -28190,7 +18692,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -28200,7 +18702,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool Result Error Block
 
-- `WebFetchToolResultErrorBlock = object { error_code, type }`
+- `WebFetchToolResultErrorBlock object { error_code, type }`
 
   - `error_code: WebFetchToolResultErrorCode`
 
@@ -28226,7 +18728,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool Result Error Block Param
 
-- `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+- `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
   - `error_code: WebFetchToolResultErrorCode`
 
@@ -28272,7 +18774,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Result Block
 
-- `WebSearchResultBlock = object { encrypted_content, page_age, title, 2 more }`
+- `WebSearchResultBlock object { encrypted_content, page_age, title, 2 more }`
 
   - `encrypted_content: string`
 
@@ -28288,7 +18790,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Result Block Param
 
-- `WebSearchResultBlockParam = object { encrypted_content, title, type, 2 more }`
+- `WebSearchResultBlockParam object { encrypted_content, title, type, 2 more }`
 
   - `encrypted_content: string`
 
@@ -28304,7 +18806,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool 20250305
 
-- `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+- `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
   - `name: "web_search"`
 
@@ -28395,7 +18897,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool 20260209
 
-- `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+- `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
   - `name: "web_search"`
 
@@ -28486,7 +18988,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Request Error
 
-- `WebSearchToolRequestError = object { error_code, type }`
+- `WebSearchToolRequestError object { error_code, type }`
 
   - `error_code: WebSearchToolResultErrorCode`
 
@@ -28508,13 +19010,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Result Block
 
-- `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+- `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -28522,7 +19024,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -28532,7 +19034,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -28542,7 +19044,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: WebSearchToolResultBlockContent`
 
-    - `WebSearchToolResultError = object { error_code, type }`
+    - `WebSearchToolResultError object { error_code, type }`
 
       - `error_code: WebSearchToolResultErrorCode`
 
@@ -28562,7 +19064,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"web_search_tool_result_error"`
 
-    - `UnionMember1 = array of WebSearchResultBlock`
+    - `array of WebSearchResultBlock`
 
       - `encrypted_content: string`
 
@@ -28586,7 +19088,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `WebSearchToolResultBlockContent = WebSearchToolResultError or array of WebSearchResultBlock`
 
-  - `WebSearchToolResultError = object { error_code, type }`
+  - `WebSearchToolResultError object { error_code, type }`
 
     - `error_code: WebSearchToolResultErrorCode`
 
@@ -28606,7 +19108,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"web_search_tool_result_error"`
 
-  - `UnionMember1 = array of WebSearchResultBlock`
+  - `array of WebSearchResultBlock`
 
     - `encrypted_content: string`
 
@@ -28622,7 +19124,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Result Block Param
 
-- `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+- `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
   - `content: WebSearchToolResultBlockParamContent`
 
@@ -28640,7 +19142,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `page_age: optional string`
 
-    - `WebSearchToolRequestError = object { error_code, type }`
+    - `WebSearchToolRequestError object { error_code, type }`
 
       - `error_code: WebSearchToolResultErrorCode`
 
@@ -28693,7 +19195,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Tool invocation directly from the model.
 
-    - `DirectCaller = object { type }`
+    - `DirectCaller object { type }`
 
       Tool invocation directly from the model.
 
@@ -28701,7 +19203,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"direct"`
 
-    - `ServerToolCaller = object { tool_id, type }`
+    - `ServerToolCaller object { tool_id, type }`
 
       Tool invocation generated by a server-side tool.
 
@@ -28711,7 +19213,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"code_execution_20250825"`
 
-    - `ServerToolCaller20260120 = object { tool_id, type }`
+    - `ServerToolCaller20260120 object { tool_id, type }`
 
       - `tool_id: string`
 
@@ -28737,7 +19239,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `page_age: optional string`
 
-  - `WebSearchToolRequestError = object { error_code, type }`
+  - `WebSearchToolRequestError object { error_code, type }`
 
     - `error_code: WebSearchToolResultErrorCode`
 
@@ -28759,7 +19261,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Result Error
 
-- `WebSearchToolResultError = object { error_code, type }`
+- `WebSearchToolResultError object { error_code, type }`
 
   - `error_code: WebSearchToolResultErrorCode`
 
@@ -28797,7 +19299,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 # Batches
 
-## Create
+## Create a Message Batch
 
 **post** `/v1/messages/batches`
 
@@ -28888,11 +19390,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `content: string or array of ContentBlockParam`
 
-        - `UnionMember0 = string`
+        - `string`
 
-        - `UnionMember1 = array of ContentBlockParam`
+        - `array of ContentBlockParam`
 
-          - `TextBlockParam = object { text, type, cache_control, citations }`
+          - `TextBlockParam object { text, type, cache_control, citations }`
 
             - `text: string`
 
@@ -28925,7 +19427,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `citations: optional array of TextCitationParam`
 
-              - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -28941,7 +19443,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"char_location"`
 
-              - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -28957,7 +19459,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"page_location"`
 
-              - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
+              - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
 
                 - `cited_text: string`
 
@@ -28983,7 +19485,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"content_block_location"`
 
-              - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
+              - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -28997,7 +19499,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `url: string`
 
-              - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -29029,11 +19531,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"search_result_location"`
 
-          - `ImageBlockParam = object { source, type, cache_control }`
+          - `ImageBlockParam object { source, type, cache_control }`
 
             - `source: Base64ImageSource or URLImageSource`
 
-              - `Base64ImageSource = object { data, media_type, type }`
+              - `Base64ImageSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -29051,7 +19553,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"base64"`
 
-              - `URLImageSource = object { type, url }`
+              - `URLImageSource object { type, url }`
 
                 - `type: "url"`
 
@@ -29067,30 +19569,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-          - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
+          - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
             - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
 
-              - `Base64PDFSource = object { data, media_type, type }`
+              - `Base64PDFSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -29102,7 +19585,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"base64"`
 
-              - `PlainTextSource = object { data, media_type, type }`
+              - `PlainTextSource object { data, media_type, type }`
 
                 - `data: string`
 
@@ -29114,213 +19597,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text"`
 
-              - `ContentBlockSource = object { content, type }`
+              - `ContentBlockSource object { content, type }`
 
                 - `content: string or array of ContentBlockSourceContent`
 
-                  - `UnionMember0 = string`
+                  - `string`
 
                   - `ContentBlockSourceContent = array of ContentBlockSourceContent`
 
-                    - `TextBlockParam = object { text, type, cache_control, citations }`
+                    - `TextBlockParam object { text, type, cache_control, citations }`
 
-                      - `text: string`
-
-                      - `type: "text"`
-
-                        - `"text"`
-
-                      - `cache_control: optional CacheControlEphemeral`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `type: "ephemeral"`
-
-                          - `"ephemeral"`
-
-                        - `ttl: optional "5m" or "1h"`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `"5m"`
-
-                          - `"1h"`
-
-                      - `citations: optional array of TextCitationParam`
-
-                        - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                          - `cited_text: string`
-
-                          - `document_index: number`
-
-                          - `document_title: string`
-
-                          - `end_char_index: number`
-
-                          - `start_char_index: number`
-
-                          - `type: "char_location"`
-
-                            - `"char_location"`
-
-                        - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                          - `cited_text: string`
-
-                          - `document_index: number`
-
-                          - `document_title: string`
-
-                          - `end_page_number: number`
-
-                          - `start_page_number: number`
-
-                          - `type: "page_location"`
-
-                            - `"page_location"`
-
-                        - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                          - `cited_text: string`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `document_index: number`
-
-                          - `document_title: string`
-
-                          - `end_block_index: number`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `start_block_index: number`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `type: "content_block_location"`
-
-                            - `"content_block_location"`
-
-                        - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                          - `cited_text: string`
-
-                          - `encrypted_index: string`
-
-                          - `title: string`
-
-                          - `type: "web_search_result_location"`
-
-                            - `"web_search_result_location"`
-
-                          - `url: string`
-
-                        - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                          - `cited_text: string`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `end_block_index: number`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `search_result_index: number`
-
-                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                          - `source: string`
-
-                          - `start_block_index: number`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `title: string`
-
-                          - `type: "search_result_location"`
-
-                            - `"search_result_location"`
-
-                    - `ImageBlockParam = object { source, type, cache_control }`
-
-                      - `source: Base64ImageSource or URLImageSource`
-
-                        - `Base64ImageSource = object { data, media_type, type }`
-
-                          - `data: string`
-
-                          - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                            - `"image/jpeg"`
-
-                            - `"image/png"`
-
-                            - `"image/gif"`
-
-                            - `"image/webp"`
-
-                          - `type: "base64"`
-
-                            - `"base64"`
-
-                        - `URLImageSource = object { type, url }`
-
-                          - `type: "url"`
-
-                            - `"url"`
-
-                          - `url: string`
-
-                      - `type: "image"`
-
-                        - `"image"`
-
-                      - `cache_control: optional CacheControlEphemeral`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `type: "ephemeral"`
-
-                          - `"ephemeral"`
-
-                        - `ttl: optional "5m" or "1h"`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `"5m"`
-
-                          - `"1h"`
+                    - `ImageBlockParam object { source, type, cache_control }`
 
                 - `type: "content"`
 
                   - `"content"`
 
-              - `URLPDFSource = object { type, url }`
+              - `URLPDFSource object { type, url }`
 
                 - `type: "url"`
 
@@ -29336,25 +19629,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: optional CitationsConfigParam`
 
               - `enabled: optional boolean`
@@ -29363,7 +19637,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `title: optional string`
 
-          - `SearchResultBlockParam = object { content, source, title, 3 more }`
+          - `SearchResultBlockParam object { content, source, title, 3 more }`
 
             - `content: array of TextBlockParam`
 
@@ -29371,136 +19645,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type: "text"`
 
-                - `"text"`
-
               - `cache_control: optional CacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
 
-                - `type: "ephemeral"`
-
-                  - `"ephemeral"`
-
-                - `ttl: optional "5m" or "1h"`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"`
-
-                  - `"1h"`
-
               - `citations: optional array of TextCitationParam`
-
-                - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_char_index: number`
-
-                  - `start_char_index: number`
-
-                  - `type: "char_location"`
-
-                    - `"char_location"`
-
-                - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_page_number: number`
-
-                  - `start_page_number: number`
-
-                  - `type: "page_location"`
-
-                    - `"page_location"`
-
-                - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `document_index: number`
-
-                  - `document_title: string`
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `type: "content_block_location"`
-
-                    - `"content_block_location"`
-
-                - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                  - `cited_text: string`
-
-                  - `encrypted_index: string`
-
-                  - `title: string`
-
-                  - `type: "web_search_result_location"`
-
-                    - `"web_search_result_location"`
-
-                  - `url: string`
-
-                - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                  - `cited_text: string`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `end_block_index: number`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `search_result_index: number`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `source: string`
-
-                  - `start_block_index: number`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `title: string`
-
-                  - `type: "search_result_location"`
-
-                    - `"search_result_location"`
 
             - `source: string`
 
@@ -29514,30 +19663,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `citations: optional CitationsConfigParam`
 
-              - `enabled: optional boolean`
-
-          - `ThinkingBlockParam = object { signature, thinking, type }`
+          - `ThinkingBlockParam object { signature, thinking, type }`
 
             - `signature: string`
 
@@ -29547,7 +19675,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"thinking"`
 
-          - `RedactedThinkingBlockParam = object { data, type }`
+          - `RedactedThinkingBlockParam object { data, type }`
 
             - `data: string`
 
@@ -29555,7 +19683,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"redacted_thinking"`
 
-          - `ToolUseBlockParam = object { id, input, name, 3 more }`
+          - `ToolUseBlockParam object { id, input, name, 3 more }`
 
             - `id: string`
 
@@ -29571,30 +19699,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
@@ -29602,7 +19711,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"direct"`
 
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
@@ -29612,7 +19721,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `ServerToolCaller20260120 = object { tool_id, type }`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
                 - `tool_id: string`
 
@@ -29620,7 +19729,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20260120"`
 
-          - `ToolResultBlockParam = object { tool_use_id, type, cache_control, 2 more }`
+          - `ToolResultBlockParam object { tool_use_id, type, cache_control, 2 more }`
 
             - `tool_use_id: string`
 
@@ -29632,677 +19741,21 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `content: optional string or array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-              - `UnionMember0 = string`
+              - `string`
 
-              - `UnionMember1 = array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
+              - `array of TextBlockParam or ImageBlockParam or SearchResultBlockParam or 2 more`
 
-                - `TextBlockParam = object { text, type, cache_control, citations }`
+                - `TextBlockParam object { text, type, cache_control, citations }`
 
-                  - `text: string`
+                - `ImageBlockParam object { source, type, cache_control }`
 
-                  - `type: "text"`
+                - `SearchResultBlockParam object { content, source, title, 3 more }`
 
-                    - `"text"`
+                - `DocumentBlockParam object { source, type, cache_control, 3 more }`
 
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional array of TextCitationParam`
-
-                    - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_char_index: number`
-
-                      - `start_char_index: number`
-
-                      - `type: "char_location"`
-
-                        - `"char_location"`
-
-                    - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_page_number: number`
-
-                      - `start_page_number: number`
-
-                      - `type: "page_location"`
-
-                        - `"page_location"`
-
-                    - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `document_index: number`
-
-                      - `document_title: string`
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `type: "content_block_location"`
-
-                        - `"content_block_location"`
-
-                    - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                      - `cited_text: string`
-
-                      - `encrypted_index: string`
-
-                      - `title: string`
-
-                      - `type: "web_search_result_location"`
-
-                        - `"web_search_result_location"`
-
-                      - `url: string`
-
-                    - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                      - `cited_text: string`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `end_block_index: number`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `search_result_index: number`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `source: string`
-
-                      - `start_block_index: number`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `title: string`
-
-                      - `type: "search_result_location"`
-
-                        - `"search_result_location"`
-
-                - `ImageBlockParam = object { source, type, cache_control }`
-
-                  - `source: Base64ImageSource or URLImageSource`
-
-                    - `Base64ImageSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                        - `"image/jpeg"`
-
-                        - `"image/png"`
-
-                        - `"image/gif"`
-
-                        - `"image/webp"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `URLImageSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "image"`
-
-                    - `"image"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                - `SearchResultBlockParam = object { content, source, title, 3 more }`
-
-                  - `content: array of TextBlockParam`
-
-                    - `text: string`
-
-                    - `type: "text"`
-
-                      - `"text"`
-
-                    - `cache_control: optional CacheControlEphemeral`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `type: "ephemeral"`
-
-                        - `"ephemeral"`
-
-                      - `ttl: optional "5m" or "1h"`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"`
-
-                        - `"1h"`
-
-                    - `citations: optional array of TextCitationParam`
-
-                      - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_char_index: number`
-
-                        - `start_char_index: number`
-
-                        - `type: "char_location"`
-
-                          - `"char_location"`
-
-                      - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_page_number: number`
-
-                        - `start_page_number: number`
-
-                        - `type: "page_location"`
-
-                          - `"page_location"`
-
-                      - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `document_index: number`
-
-                        - `document_title: string`
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `type: "content_block_location"`
-
-                          - `"content_block_location"`
-
-                      - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                        - `cited_text: string`
-
-                        - `encrypted_index: string`
-
-                        - `title: string`
-
-                        - `type: "web_search_result_location"`
-
-                          - `"web_search_result_location"`
-
-                        - `url: string`
-
-                      - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                        - `cited_text: string`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `end_block_index: number`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `search_result_index: number`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `source: string`
-
-                        - `start_block_index: number`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `title: string`
-
-                        - `type: "search_result_location"`
-
-                          - `"search_result_location"`
-
-                  - `source: string`
-
-                  - `title: string`
-
-                  - `type: "search_result"`
-
-                    - `"search_result"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional CitationsConfigParam`
-
-                    - `enabled: optional boolean`
-
-                - `DocumentBlockParam = object { source, type, cache_control, 3 more }`
-
-                  - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                    - `Base64PDFSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "application/pdf"`
-
-                        - `"application/pdf"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `PlainTextSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "text/plain"`
-
-                        - `"text/plain"`
-
-                      - `type: "text"`
-
-                        - `"text"`
-
-                    - `ContentBlockSource = object { content, type }`
-
-                      - `content: string or array of ContentBlockSourceContent`
-
-                        - `UnionMember0 = string`
-
-                        - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                          - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                            - `text: string`
-
-                            - `type: "text"`
-
-                              - `"text"`
-
-                            - `cache_control: optional CacheControlEphemeral`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: "ephemeral"`
-
-                                - `"ephemeral"`
-
-                              - `ttl: optional "5m" or "1h"`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                            - `citations: optional array of TextCitationParam`
-
-                              - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_char_index: number`
-
-                                - `start_char_index: number`
-
-                                - `type: "char_location"`
-
-                                  - `"char_location"`
-
-                              - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_page_number: number`
-
-                                - `start_page_number: number`
-
-                                - `type: "page_location"`
-
-                                  - `"page_location"`
-
-                              - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_block_index: number`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `start_block_index: number`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `type: "content_block_location"`
-
-                                  - `"content_block_location"`
-
-                              - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                                - `cited_text: string`
-
-                                - `encrypted_index: string`
-
-                                - `title: string`
-
-                                - `type: "web_search_result_location"`
-
-                                  - `"web_search_result_location"`
-
-                                - `url: string`
-
-                              - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                                - `cited_text: string`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `end_block_index: number`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `search_result_index: number`
-
-                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                - `source: string`
-
-                                - `start_block_index: number`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `title: string`
-
-                                - `type: "search_result_location"`
-
-                                  - `"search_result_location"`
-
-                          - `ImageBlockParam = object { source, type, cache_control }`
-
-                            - `source: Base64ImageSource or URLImageSource`
-
-                              - `Base64ImageSource = object { data, media_type, type }`
-
-                                - `data: string`
-
-                                - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                                  - `"image/jpeg"`
-
-                                  - `"image/png"`
-
-                                  - `"image/gif"`
-
-                                  - `"image/webp"`
-
-                                - `type: "base64"`
-
-                                  - `"base64"`
-
-                              - `URLImageSource = object { type, url }`
-
-                                - `type: "url"`
-
-                                  - `"url"`
-
-                                - `url: string`
-
-                            - `type: "image"`
-
-                              - `"image"`
-
-                            - `cache_control: optional CacheControlEphemeral`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: "ephemeral"`
-
-                                - `"ephemeral"`
-
-                              - `ttl: optional "5m" or "1h"`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                      - `type: "content"`
-
-                        - `"content"`
-
-                    - `URLPDFSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "document"`
-
-                    - `"document"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional CitationsConfigParam`
-
-                    - `enabled: optional boolean`
-
-                  - `context: optional string`
-
-                  - `title: optional string`
-
-                - `ToolReferenceBlockParam = object { tool_name, type, cache_control }`
+                - `ToolReferenceBlockParam object { tool_name, type, cache_control }`
 
                   Tool reference block that can be included in tool_result content.
 
@@ -30316,28 +19769,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     Create a cache control breakpoint at this content block.
 
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
             - `is_error: optional boolean`
 
-          - `ServerToolUseBlockParam = object { id, input, name, 3 more }`
+          - `ServerToolUseBlockParam object { id, input, name, 3 more }`
 
             - `id: string`
 
@@ -30367,56 +19801,21 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `WebSearchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+          - `WebSearchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
             - `content: WebSearchToolResultBlockParamContent`
 
@@ -30434,7 +19833,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `page_age: optional string`
 
-              - `WebSearchToolRequestError = object { error_code, type }`
+              - `WebSearchToolRequestError object { error_code, type }`
 
                 - `error_code: WebSearchToolResultErrorCode`
 
@@ -30464,60 +19863,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `WebFetchToolResultBlockParam = object { content, tool_use_id, type, 2 more }`
+          - `WebFetchToolResultBlockParam object { content, tool_use_id, type, 2 more }`
 
             - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
-              - `WebFetchToolResultErrorBlockParam = object { error_code, type }`
+              - `WebFetchToolResultErrorBlockParam object { error_code, type }`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -30541,284 +19905,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_fetch_tool_result_error"`
 
-              - `WebFetchBlockParam = object { content, type, url, retrieved_at }`
+              - `WebFetchBlockParam object { content, type, url, retrieved_at }`
 
                 - `content: DocumentBlockParam`
-
-                  - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or URLPDFSource`
-
-                    - `Base64PDFSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "application/pdf"`
-
-                        - `"application/pdf"`
-
-                      - `type: "base64"`
-
-                        - `"base64"`
-
-                    - `PlainTextSource = object { data, media_type, type }`
-
-                      - `data: string`
-
-                      - `media_type: "text/plain"`
-
-                        - `"text/plain"`
-
-                      - `type: "text"`
-
-                        - `"text"`
-
-                    - `ContentBlockSource = object { content, type }`
-
-                      - `content: string or array of ContentBlockSourceContent`
-
-                        - `UnionMember0 = string`
-
-                        - `ContentBlockSourceContent = array of ContentBlockSourceContent`
-
-                          - `TextBlockParam = object { text, type, cache_control, citations }`
-
-                            - `text: string`
-
-                            - `type: "text"`
-
-                              - `"text"`
-
-                            - `cache_control: optional CacheControlEphemeral`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: "ephemeral"`
-
-                                - `"ephemeral"`
-
-                              - `ttl: optional "5m" or "1h"`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                            - `citations: optional array of TextCitationParam`
-
-                              - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_char_index: number`
-
-                                - `start_char_index: number`
-
-                                - `type: "char_location"`
-
-                                  - `"char_location"`
-
-                              - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_page_number: number`
-
-                                - `start_page_number: number`
-
-                                - `type: "page_location"`
-
-                                  - `"page_location"`
-
-                              - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-                                - `cited_text: string`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `document_index: number`
-
-                                - `document_title: string`
-
-                                - `end_block_index: number`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `start_block_index: number`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `type: "content_block_location"`
-
-                                  - `"content_block_location"`
-
-                              - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-                                - `cited_text: string`
-
-                                - `encrypted_index: string`
-
-                                - `title: string`
-
-                                - `type: "web_search_result_location"`
-
-                                  - `"web_search_result_location"`
-
-                                - `url: string`
-
-                              - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-                                - `cited_text: string`
-
-                                  The full text of the cited block range, concatenated.
-
-                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                - `end_block_index: number`
-
-                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                - `search_result_index: number`
-
-                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                - `source: string`
-
-                                - `start_block_index: number`
-
-                                  0-based index of the first cited block in the source's `content` array.
-
-                                - `title: string`
-
-                                - `type: "search_result_location"`
-
-                                  - `"search_result_location"`
-
-                          - `ImageBlockParam = object { source, type, cache_control }`
-
-                            - `source: Base64ImageSource or URLImageSource`
-
-                              - `Base64ImageSource = object { data, media_type, type }`
-
-                                - `data: string`
-
-                                - `media_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"`
-
-                                  - `"image/jpeg"`
-
-                                  - `"image/png"`
-
-                                  - `"image/gif"`
-
-                                  - `"image/webp"`
-
-                                - `type: "base64"`
-
-                                  - `"base64"`
-
-                              - `URLImageSource = object { type, url }`
-
-                                - `type: "url"`
-
-                                  - `"url"`
-
-                                - `url: string`
-
-                            - `type: "image"`
-
-                              - `"image"`
-
-                            - `cache_control: optional CacheControlEphemeral`
-
-                              Create a cache control breakpoint at this content block.
-
-                              - `type: "ephemeral"`
-
-                                - `"ephemeral"`
-
-                              - `ttl: optional "5m" or "1h"`
-
-                                The time-to-live for the cache control breakpoint.
-
-                                This may be one the following values:
-
-                                - `5m`: 5 minutes
-                                - `1h`: 1 hour
-
-                                Defaults to `5m`.
-
-                                - `"5m"`
-
-                                - `"1h"`
-
-                      - `type: "content"`
-
-                        - `"content"`
-
-                    - `URLPDFSource = object { type, url }`
-
-                      - `type: "url"`
-
-                        - `"url"`
-
-                      - `url: string`
-
-                  - `type: "document"`
-
-                    - `"document"`
-
-                  - `cache_control: optional CacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
-
-                  - `citations: optional CitationsConfigParam`
-
-                    - `enabled: optional boolean`
-
-                  - `context: optional string`
-
-                  - `title: optional string`
 
                 - `type: "web_fetch_result"`
 
@@ -30842,62 +19931,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
-
-          - `CodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+          - `CodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
             - `content: CodeExecutionToolResultBlockParamContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `CodeExecutionToolResultErrorParam = object { error_code, type }`
+              - `CodeExecutionToolResultErrorParam object { error_code, type }`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -30913,7 +19967,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_tool_result_error"`
 
-              - `CodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+              - `CodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
                 - `content: array of CodeExecutionOutputBlockParam`
 
@@ -30933,7 +19987,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_result"`
 
-              - `EncryptedCodeExecutionResultBlockParam = object { content, encrypted_stdout, return_code, 2 more }`
+              - `EncryptedCodeExecutionResultBlockParam object { content, encrypted_stdout, return_code, 2 more }`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -30942,8 +19996,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `file_id: string`
 
                   - `type: "code_execution_output"`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: string`
 
@@ -30965,30 +20017,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-          - `BashCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+          - `BashCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
             - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
-              - `BashCodeExecutionToolResultErrorParam = object { error_code, type }`
+              - `BashCodeExecutionToolResultErrorParam object { error_code, type }`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -31006,7 +20039,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"bash_code_execution_tool_result_error"`
 
-              - `BashCodeExecutionResultBlockParam = object { content, return_code, stderr, 2 more }`
+              - `BashCodeExecutionResultBlockParam object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BashCodeExecutionOutputBlockParam`
 
@@ -31036,30 +20069,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-          - `TextEditorCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+          - `TextEditorCodeExecutionToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
             - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-              - `TextEditorCodeExecutionToolResultErrorParam = object { error_code, type, error_message }`
+              - `TextEditorCodeExecutionToolResultErrorParam object { error_code, type, error_message }`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -31079,7 +20093,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `error_message: optional string`
 
-              - `TextEditorCodeExecutionViewResultBlockParam = object { content, file_type, type, 3 more }`
+              - `TextEditorCodeExecutionViewResultBlockParam object { content, file_type, type, 3 more }`
 
                 - `content: string`
 
@@ -31101,7 +20115,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `total_lines: optional number`
 
-              - `TextEditorCodeExecutionCreateResultBlockParam = object { is_file_update, type }`
+              - `TextEditorCodeExecutionCreateResultBlockParam object { is_file_update, type }`
 
                 - `is_file_update: boolean`
 
@@ -31109,7 +20123,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_create_result"`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new_lines, 3 more }`
+              - `TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new_lines, 3 more }`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -31135,30 +20149,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-          - `ToolSearchToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+          - `ToolSearchToolResultBlockParam object { content, tool_use_id, type, cache_control }`
 
             - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
-              - `ToolSearchToolResultErrorParam = object { error_code, type }`
+              - `ToolSearchToolResultErrorParam object { error_code, type }`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -31174,7 +20169,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"tool_search_tool_result_error"`
 
-              - `ToolSearchToolSearchResultBlockParam = object { tool_references, type }`
+              - `ToolSearchToolSearchResultBlockParam object { tool_references, type }`
 
                 - `tool_references: array of ToolReferenceBlockParam`
 
@@ -31182,30 +20177,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `type: "tool_reference"`
 
-                    - `"tool_reference"`
-
                   - `cache_control: optional CacheControlEphemeral`
 
                     Create a cache control breakpoint at this content block.
-
-                    - `type: "ephemeral"`
-
-                      - `"ephemeral"`
-
-                    - `ttl: optional "5m" or "1h"`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"`
-
-                      - `"1h"`
 
                 - `type: "tool_search_tool_search_result"`
 
@@ -31221,26 +20195,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
-          - `ContainerUploadBlockParam = object { file_id, type, cache_control }`
+          - `ContainerUploadBlockParam object { file_id, type, cache_control }`
 
             A content block that represents a file to be uploaded to the container
             Files uploaded via this block will be available in the container's input directory.
@@ -31255,25 +20210,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-              - `type: "ephemeral"`
-
-                - `"ephemeral"`
-
-              - `ttl: optional "5m" or "1h"`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"`
-
-                - `"1h"`
-
       - `role: "user" or "assistant"`
 
         - `"user"`
@@ -31286,7 +20222,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
@@ -31360,30 +20296,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Fast and cost-effective model
 
-      - `UnionMember1 = string`
+      - `string`
 
     - `cache_control: optional CacheControlEphemeral`
 
       Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-      - `type: "ephemeral"`
-
-        - `"ephemeral"`
-
-      - `ttl: optional "5m" or "1h"`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"`
-
-        - `"1h"`
 
     - `container: optional string`
 
@@ -31463,144 +20380,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-      - `UnionMember0 = string`
+      - `string`
 
-      - `UnionMember1 = array of TextBlockParam`
+      - `array of TextBlockParam`
 
         - `text: string`
 
         - `type: "text"`
 
-          - `"text"`
-
         - `cache_control: optional CacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional array of TextCitationParam`
-
-          - `CitationCharLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-            - `cited_text: string`
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_char_index: number`
-
-            - `start_char_index: number`
-
-            - `type: "char_location"`
-
-              - `"char_location"`
-
-          - `CitationPageLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-            - `cited_text: string`
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_page_number: number`
-
-            - `start_page_number: number`
-
-            - `type: "page_location"`
-
-              - `"page_location"`
-
-          - `CitationContentBlockLocationParam = object { cited_text, document_index, document_title, 3 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: number`
-
-            - `document_title: string`
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: "content_block_location"`
-
-              - `"content_block_location"`
-
-          - `CitationWebSearchResultLocationParam = object { cited_text, encrypted_index, title, 2 more }`
-
-            - `cited_text: string`
-
-            - `encrypted_index: string`
-
-            - `title: string`
-
-            - `type: "web_search_result_location"`
-
-              - `"web_search_result_location"`
-
-            - `url: string`
-
-          - `CitationSearchResultLocationParam = object { cited_text, end_block_index, search_result_index, 4 more }`
-
-            - `cited_text: string`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: number`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: number`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: string`
-
-            - `start_block_index: number`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: string`
-
-            - `type: "search_result_location"`
-
-              - `"search_result_location"`
 
     - `temperature: optional number`
 
@@ -31618,7 +20410,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-      - `ThinkingConfigEnabled = object { budget_tokens, type, display }`
+      - `ThinkingConfigEnabled object { budget_tokens, type, display }`
 
         - `budget_tokens: number`
 
@@ -31640,13 +20432,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"omitted"`
 
-      - `ThinkingConfigDisabled = object { type }`
+      - `ThinkingConfigDisabled object { type }`
 
         - `type: "disabled"`
 
           - `"disabled"`
 
-      - `ThinkingConfigAdaptive = object { type, display }`
+      - `ThinkingConfigAdaptive object { type, display }`
 
         - `type: "adaptive"`
 
@@ -31664,7 +20456,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-      - `ToolChoiceAuto = object { type, disable_parallel_tool_use }`
+      - `ToolChoiceAuto object { type, disable_parallel_tool_use }`
 
         The model will automatically decide whether to use tools.
 
@@ -31678,7 +20470,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-      - `ToolChoiceAny = object { type, disable_parallel_tool_use }`
+      - `ToolChoiceAny object { type, disable_parallel_tool_use }`
 
         The model will use any available tools.
 
@@ -31692,7 +20484,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `ToolChoiceTool = object { name, type, disable_parallel_tool_use }`
+      - `ToolChoiceTool object { name, type, disable_parallel_tool_use }`
 
         The model will use the specified tool with `tool_choice.name`.
 
@@ -31710,7 +20502,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `ToolChoiceNone = object { type }`
+      - `ToolChoiceNone object { type }`
 
         The model will not be allowed to use tools.
 
@@ -31782,7 +20574,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-      - `Tool = object { input_schema, name, allowed_callers, 7 more }`
+      - `Tool object { input_schema, name, allowed_callers, 7 more }`
 
         - `input_schema: object { type, properties, required }`
 
@@ -31816,25 +20608,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31859,7 +20632,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"custom"`
 
-      - `ToolBash20250124 = object { name, type, allowed_callers, 4 more }`
+      - `ToolBash20250124 object { name, type, allowed_callers, 4 more }`
 
         - `name: "bash"`
 
@@ -31885,25 +20658,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31914,7 +20668,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20250522 = object { name, type, allowed_callers, 3 more }`
+      - `CodeExecutionTool20250522 object { name, type, allowed_callers, 3 more }`
 
         - `name: "code_execution"`
 
@@ -31940,25 +20694,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -31967,7 +20702,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20250825 = object { name, type, allowed_callers, 3 more }`
+      - `CodeExecutionTool20250825 object { name, type, allowed_callers, 3 more }`
 
         - `name: "code_execution"`
 
@@ -31993,25 +20728,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32020,7 +20736,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20260120 = object { name, type, allowed_callers, 3 more }`
+      - `CodeExecutionTool20260120 object { name, type, allowed_callers, 3 more }`
 
         Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -32048,25 +20764,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32075,7 +20772,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `MemoryTool20250818 = object { name, type, allowed_callers, 4 more }`
+      - `MemoryTool20250818 object { name, type, allowed_callers, 4 more }`
 
         - `name: "memory"`
 
@@ -32101,25 +20798,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32130,7 +20808,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolTextEditor20250124 = object { name, type, allowed_callers, 4 more }`
+      - `ToolTextEditor20250124 object { name, type, allowed_callers, 4 more }`
 
         - `name: "str_replace_editor"`
 
@@ -32156,25 +20834,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32185,7 +20844,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolTextEditor20250429 = object { name, type, allowed_callers, 4 more }`
+      - `ToolTextEditor20250429 object { name, type, allowed_callers, 4 more }`
 
         - `name: "str_replace_based_edit_tool"`
 
@@ -32211,25 +20870,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32240,7 +20880,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolTextEditor20250728 = object { name, type, allowed_callers, 5 more }`
+      - `ToolTextEditor20250728 object { name, type, allowed_callers, 5 more }`
 
         - `name: "str_replace_based_edit_tool"`
 
@@ -32266,25 +20906,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32299,7 +20920,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebSearchTool20250305 = object { name, type, allowed_callers, 7 more }`
+      - `WebSearchTool20250305 object { name, type, allowed_callers, 7 more }`
 
         - `name: "web_search"`
 
@@ -32333,25 +20954,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32388,7 +20990,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      - `WebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
+      - `WebFetchTool20250910 object { name, type, allowed_callers, 8 more }`
 
         - `name: "web_fetch"`
 
@@ -32422,30 +21024,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: optional boolean`
 
         - `defer_loading: optional boolean`
 
@@ -32463,7 +21044,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebSearchTool20260209 = object { name, type, allowed_callers, 7 more }`
+      - `WebSearchTool20260209 object { name, type, allowed_callers, 7 more }`
 
         - `name: "web_search"`
 
@@ -32497,25 +21078,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32532,27 +21094,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Parameters for the user's location. Used to provide more relevant search results.
 
-          - `type: "approximate"`
-
-            - `"approximate"`
-
-          - `city: optional string`
-
-            The city of the user.
-
-          - `country: optional string`
-
-            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-          - `region: optional string`
-
-            The region of the user.
-
-          - `timezone: optional string`
-
-            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-      - `WebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
+      - `WebFetchTool20260209 object { name, type, allowed_callers, 8 more }`
 
         - `name: "web_fetch"`
 
@@ -32586,30 +21128,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: optional boolean`
 
         - `defer_loading: optional boolean`
 
@@ -32627,7 +21148,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebFetchTool20260309 = object { name, type, allowed_callers, 9 more }`
+      - `WebFetchTool20260309 object { name, type, allowed_callers, 9 more }`
 
         Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -32663,30 +21184,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `citations: optional CitationsConfigParam`
 
           Citations configuration for fetched documents. Citations are disabled by default.
-
-          - `enabled: optional boolean`
 
         - `defer_loading: optional boolean`
 
@@ -32708,7 +21208,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-      - `ToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
+      - `ToolSearchToolBm25_20251119 object { name, type, allowed_callers, 3 more }`
 
         - `name: "tool_search_tool_bm25"`
 
@@ -32736,25 +21236,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32763,7 +21244,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolSearchToolRegex20251119 = object { name, type, allowed_callers, 3 more }`
+      - `ToolSearchToolRegex20251119 object { name, type, allowed_callers, 3 more }`
 
         - `name: "tool_search_tool_regex"`
 
@@ -32791,25 +21272,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Create a cache control breakpoint at this content block.
 
-          - `type: "ephemeral"`
-
-            - `"ephemeral"`
-
-          - `ttl: optional "5m" or "1h"`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"`
-
-            - `"1h"`
-
         - `defer_loading: optional boolean`
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -32836,7 +21298,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
+- `MessageBatch object { id, archived_at, cancel_initiated_at, 7 more }`
 
   - `id: string`
 
@@ -32950,7 +21412,30 @@ curl https://api.anthropic.com/v1/messages/batches \
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Retrieve a Message Batch
 
 **get** `/v1/messages/batches/{message_batch_id}`
 
@@ -32966,7 +21451,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
+- `MessageBatch object { id, archived_at, cancel_initiated_at, 7 more }`
 
   - `id: string`
 
@@ -33062,7 +21547,30 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## List Message Batches
 
 **get** `/v1/messages/batches`
 
@@ -33196,7 +21704,37 @@ curl https://api.anthropic.com/v1/messages/batches \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Cancel
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Cancel a Message Batch
 
 **post** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -33214,7 +21752,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
+- `MessageBatch object { id, archived_at, cancel_initiated_at, 7 more }`
 
   - `id: string`
 
@@ -33311,7 +21849,30 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Delete a Message Batch
 
 **delete** `/v1/messages/batches/{message_batch_id}`
 
@@ -33329,7 +21890,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `DeletedMessageBatch = object { id, type }`
+- `DeletedMessageBatch object { id, type }`
 
   - `id: string`
 
@@ -33352,7 +21913,16 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-## Results
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+## Retrieve Message Batch results
 
 **get** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -33370,7 +21940,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatchIndividualResponse = object { custom_id, result }`
+- `MessageBatchIndividualResponse object { custom_id, result }`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -33386,7 +21956,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult = object { message, type }`
+    - `MessageBatchSucceededResult object { message, type }`
 
       - `message: Message`
 
@@ -33437,7 +22007,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock = object { citations, text, type }`
+          - `TextBlock object { citations, text, type }`
 
             - `citations: array of TextCitation`
 
@@ -33445,7 +22015,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -33463,7 +22033,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"char_location"`
 
-              - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -33481,7 +22051,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"page_location"`
 
-              - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -33509,7 +22079,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"content_block_location"`
 
-              - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+              - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -33523,7 +22093,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -33561,7 +22131,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text"`
 
-          - `ThinkingBlock = object { signature, thinking, type }`
+          - `ThinkingBlock object { signature, thinking, type }`
 
             - `signature: string`
 
@@ -33571,7 +22141,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"thinking"`
 
-          - `RedactedThinkingBlock = object { data, type }`
+          - `RedactedThinkingBlock object { data, type }`
 
             - `data: string`
 
@@ -33579,7 +22149,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"redacted_thinking"`
 
-          - `ToolUseBlock = object { id, caller, input, 2 more }`
+          - `ToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -33587,7 +22157,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
@@ -33595,7 +22165,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"direct"`
 
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
@@ -33605,7 +22175,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `ServerToolCaller20260120 = object { tool_id, type }`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
                 - `tool_id: string`
 
@@ -33621,7 +22191,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"tool_use"`
 
-          - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+          - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -33629,31 +22199,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `input: map[unknown]`
 
@@ -33677,41 +22231,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"server_tool_use"`
 
-          - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError = object { error_code, type }`
+              - `WebSearchToolResultError object { error_code, type }`
 
                 - `error_code: WebSearchToolResultErrorCode`
 
@@ -33731,7 +22269,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_search_tool_result_error"`
 
-              - `UnionMember1 = array of WebSearchResultBlock`
+              - `array of WebSearchResultBlock`
 
                 - `encrypted_content: string`
 
@@ -33751,41 +22289,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"web_search_tool_result"`
 
-          - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock = object { error_code, type }`
+              - `WebFetchToolResultErrorBlock object { error_code, type }`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -33809,7 +22331,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_fetch_tool_result_error"`
 
-              - `WebFetchBlock = object { content, retrieved_at, type, url }`
+              - `WebFetchBlock object { content, retrieved_at, type, url }`
 
                 - `content: DocumentBlock`
 
@@ -33821,7 +22343,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `source: Base64PDFSource or PlainTextSource`
 
-                    - `Base64PDFSource = object { data, media_type, type }`
+                    - `Base64PDFSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -33833,7 +22355,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `"base64"`
 
-                    - `PlainTextSource = object { data, media_type, type }`
+                    - `PlainTextSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -33871,13 +22393,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"web_fetch_tool_result"`
 
-          - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: CodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `CodeExecutionToolResultError = object { error_code, type }`
+              - `CodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -33893,7 +22415,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_tool_result_error"`
 
-              - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of CodeExecutionOutputBlock`
 
@@ -33913,7 +22435,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_result"`
 
-              - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+              - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -33922,8 +22444,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `file_id: string`
 
                   - `type: "code_execution_output"`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: string`
 
@@ -33941,11 +22461,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"code_execution_tool_result"`
 
-          - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError = object { error_code, type }`
+              - `BashCodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -33963,7 +22483,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"bash_code_execution_tool_result_error"`
 
-              - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BashCodeExecutionOutputBlock`
 
@@ -33989,11 +22509,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"bash_code_execution_tool_result"`
 
-          - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+              - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -34013,7 +22533,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_tool_result_error"`
 
-              - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+              - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
                 - `content: string`
 
@@ -34035,7 +22555,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_view_result"`
 
-              - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+              - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
                 - `is_file_update: boolean`
 
@@ -34043,7 +22563,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_create_result"`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+              - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
                 - `lines: array of string`
 
@@ -34065,11 +22585,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text_editor_code_execution_tool_result"`
 
-          - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+          - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
             - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError = object { error_code, error_message, type }`
+              - `ToolSearchToolResultError object { error_code, error_message, type }`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -34087,7 +22607,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"tool_search_tool_result_error"`
 
-              - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+              - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
                 - `tool_references: array of ToolReferenceBlock`
 
@@ -34107,7 +22627,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"tool_search_tool_result"`
 
-          - `ContainerUploadBlock = object { file_id, type }`
+          - `ContainerUploadBlock object { file_id, type }`
 
             Response model for a file uploaded to the container.
 
@@ -34123,7 +22643,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
@@ -34197,7 +22717,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Fast and cost-effective model
 
-          - `UnionMember1 = string`
+          - `string`
 
         - `role: "assistant"`
 
@@ -34342,13 +22862,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"succeeded"`
 
-    - `MessageBatchErroredResult = object { error, type }`
+    - `MessageBatchErroredResult object { error, type }`
 
       - `error: ErrorResponse`
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError = object { message, type }`
+          - `InvalidRequestError object { message, type }`
 
             - `message: string`
 
@@ -34356,7 +22876,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"invalid_request_error"`
 
-          - `AuthenticationError = object { message, type }`
+          - `AuthenticationError object { message, type }`
 
             - `message: string`
 
@@ -34364,7 +22884,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"authentication_error"`
 
-          - `BillingError = object { message, type }`
+          - `BillingError object { message, type }`
 
             - `message: string`
 
@@ -34372,7 +22892,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"billing_error"`
 
-          - `PermissionError = object { message, type }`
+          - `PermissionError object { message, type }`
 
             - `message: string`
 
@@ -34380,7 +22900,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"permission_error"`
 
-          - `NotFoundError = object { message, type }`
+          - `NotFoundError object { message, type }`
 
             - `message: string`
 
@@ -34388,7 +22908,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"not_found_error"`
 
-          - `RateLimitError = object { message, type }`
+          - `RateLimitError object { message, type }`
 
             - `message: string`
 
@@ -34396,7 +22916,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"rate_limit_error"`
 
-          - `GatewayTimeoutError = object { message, type }`
+          - `GatewayTimeoutError object { message, type }`
 
             - `message: string`
 
@@ -34404,7 +22924,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"timeout_error"`
 
-          - `APIErrorObject = object { message, type }`
+          - `APIErrorObject object { message, type }`
 
             - `message: string`
 
@@ -34412,7 +22932,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"api_error"`
 
-          - `OverloadedError = object { message, type }`
+          - `OverloadedError object { message, type }`
 
             - `message: string`
 
@@ -34430,13 +22950,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"errored"`
 
-    - `MessageBatchCanceledResult = object { type }`
+    - `MessageBatchCanceledResult object { type }`
 
       - `type: "canceled"`
 
         - `"canceled"`
 
-    - `MessageBatchExpiredResult = object { type }`
+    - `MessageBatchExpiredResult object { type }`
 
       - `type: "expired"`
 
@@ -34454,7 +22974,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Deleted Message Batch
 
-- `DeletedMessageBatch = object { id, type }`
+- `DeletedMessageBatch object { id, type }`
 
   - `id: string`
 
@@ -34470,7 +22990,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch
 
-- `MessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
+- `MessageBatch object { id, archived_at, cancel_initiated_at, 7 more }`
 
   - `id: string`
 
@@ -34560,7 +23080,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Canceled Result
 
-- `MessageBatchCanceledResult = object { type }`
+- `MessageBatchCanceledResult object { type }`
 
   - `type: "canceled"`
 
@@ -34568,13 +23088,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Errored Result
 
-- `MessageBatchErroredResult = object { error, type }`
+- `MessageBatchErroredResult object { error, type }`
 
   - `error: ErrorResponse`
 
     - `error: ErrorObject`
 
-      - `InvalidRequestError = object { message, type }`
+      - `InvalidRequestError object { message, type }`
 
         - `message: string`
 
@@ -34582,7 +23102,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"invalid_request_error"`
 
-      - `AuthenticationError = object { message, type }`
+      - `AuthenticationError object { message, type }`
 
         - `message: string`
 
@@ -34590,7 +23110,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"authentication_error"`
 
-      - `BillingError = object { message, type }`
+      - `BillingError object { message, type }`
 
         - `message: string`
 
@@ -34598,7 +23118,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"billing_error"`
 
-      - `PermissionError = object { message, type }`
+      - `PermissionError object { message, type }`
 
         - `message: string`
 
@@ -34606,7 +23126,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"permission_error"`
 
-      - `NotFoundError = object { message, type }`
+      - `NotFoundError object { message, type }`
 
         - `message: string`
 
@@ -34614,7 +23134,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"not_found_error"`
 
-      - `RateLimitError = object { message, type }`
+      - `RateLimitError object { message, type }`
 
         - `message: string`
 
@@ -34622,7 +23142,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"rate_limit_error"`
 
-      - `GatewayTimeoutError = object { message, type }`
+      - `GatewayTimeoutError object { message, type }`
 
         - `message: string`
 
@@ -34630,7 +23150,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"timeout_error"`
 
-      - `APIErrorObject = object { message, type }`
+      - `APIErrorObject object { message, type }`
 
         - `message: string`
 
@@ -34638,7 +23158,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"api_error"`
 
-      - `OverloadedError = object { message, type }`
+      - `OverloadedError object { message, type }`
 
         - `message: string`
 
@@ -34658,7 +23178,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Expired Result
 
-- `MessageBatchExpiredResult = object { type }`
+- `MessageBatchExpiredResult object { type }`
 
   - `type: "expired"`
 
@@ -34666,7 +23186,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Individual Response
 
-- `MessageBatchIndividualResponse = object { custom_id, result }`
+- `MessageBatchIndividualResponse object { custom_id, result }`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -34682,7 +23202,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult = object { message, type }`
+    - `MessageBatchSucceededResult object { message, type }`
 
       - `message: Message`
 
@@ -34733,7 +23253,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock = object { citations, text, type }`
+          - `TextBlock object { citations, text, type }`
 
             - `citations: array of TextCitation`
 
@@ -34741,7 +23261,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -34759,7 +23279,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"char_location"`
 
-              - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -34777,7 +23297,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"page_location"`
 
-              - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -34805,7 +23325,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"content_block_location"`
 
-              - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+              - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -34819,7 +23339,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -34857,7 +23377,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"text"`
 
-          - `ThinkingBlock = object { signature, thinking, type }`
+          - `ThinkingBlock object { signature, thinking, type }`
 
             - `signature: string`
 
@@ -34867,7 +23387,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"thinking"`
 
-          - `RedactedThinkingBlock = object { data, type }`
+          - `RedactedThinkingBlock object { data, type }`
 
             - `data: string`
 
@@ -34875,7 +23395,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"redacted_thinking"`
 
-          - `ToolUseBlock = object { id, caller, input, 2 more }`
+          - `ToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -34883,7 +23403,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
@@ -34891,7 +23411,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"direct"`
 
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
@@ -34901,7 +23421,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"code_execution_20250825"`
 
-              - `ServerToolCaller20260120 = object { tool_id, type }`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
                 - `tool_id: string`
 
@@ -34917,7 +23437,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"tool_use"`
 
-          - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+          - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -34925,31 +23445,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `input: map[unknown]`
 
@@ -34973,41 +23477,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"server_tool_use"`
 
-          - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError = object { error_code, type }`
+              - `WebSearchToolResultError object { error_code, type }`
 
                 - `error_code: WebSearchToolResultErrorCode`
 
@@ -35027,7 +23515,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"web_search_tool_result_error"`
 
-              - `UnionMember1 = array of WebSearchResultBlock`
+              - `array of WebSearchResultBlock`
 
                 - `encrypted_content: string`
 
@@ -35047,41 +23535,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"web_search_tool_result"`
 
-          - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock = object { error_code, type }`
+              - `WebFetchToolResultErrorBlock object { error_code, type }`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -35105,7 +23577,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"web_fetch_tool_result_error"`
 
-              - `WebFetchBlock = object { content, retrieved_at, type, url }`
+              - `WebFetchBlock object { content, retrieved_at, type, url }`
 
                 - `content: DocumentBlock`
 
@@ -35117,7 +23589,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `source: Base64PDFSource or PlainTextSource`
 
-                    - `Base64PDFSource = object { data, media_type, type }`
+                    - `Base64PDFSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -35129,7 +23601,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                         - `"base64"`
 
-                    - `PlainTextSource = object { data, media_type, type }`
+                    - `PlainTextSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -35167,13 +23639,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"web_fetch_tool_result"`
 
-          - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: CodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `CodeExecutionToolResultError = object { error_code, type }`
+              - `CodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -35189,7 +23661,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"code_execution_tool_result_error"`
 
-              - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of CodeExecutionOutputBlock`
 
@@ -35209,7 +23681,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"code_execution_result"`
 
-              - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+              - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -35218,8 +23690,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
                   - `file_id: string`
 
                   - `type: "code_execution_output"`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: string`
 
@@ -35237,11 +23707,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"code_execution_tool_result"`
 
-          - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError = object { error_code, type }`
+              - `BashCodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -35259,7 +23729,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"bash_code_execution_tool_result_error"`
 
-              - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BashCodeExecutionOutputBlock`
 
@@ -35285,11 +23755,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"bash_code_execution_tool_result"`
 
-          - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+              - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -35309,7 +23779,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"text_editor_code_execution_tool_result_error"`
 
-              - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+              - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
                 - `content: string`
 
@@ -35331,7 +23801,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"text_editor_code_execution_view_result"`
 
-              - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+              - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
                 - `is_file_update: boolean`
 
@@ -35339,7 +23809,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"text_editor_code_execution_create_result"`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+              - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
                 - `lines: array of string`
 
@@ -35361,11 +23831,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"text_editor_code_execution_tool_result"`
 
-          - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+          - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
             - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError = object { error_code, error_message, type }`
+              - `ToolSearchToolResultError object { error_code, error_message, type }`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -35383,7 +23853,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"tool_search_tool_result_error"`
 
-              - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+              - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
                 - `tool_references: array of ToolReferenceBlock`
 
@@ -35403,7 +23873,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"tool_search_tool_result"`
 
-          - `ContainerUploadBlock = object { file_id, type }`
+          - `ContainerUploadBlock object { file_id, type }`
 
             Response model for a file uploaded to the container.
 
@@ -35419,7 +23889,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
@@ -35493,7 +23963,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               Fast and cost-effective model
 
-          - `UnionMember1 = string`
+          - `string`
 
         - `role: "assistant"`
 
@@ -35638,13 +24108,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `"succeeded"`
 
-    - `MessageBatchErroredResult = object { error, type }`
+    - `MessageBatchErroredResult object { error, type }`
 
       - `error: ErrorResponse`
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError = object { message, type }`
+          - `InvalidRequestError object { message, type }`
 
             - `message: string`
 
@@ -35652,7 +24122,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"invalid_request_error"`
 
-          - `AuthenticationError = object { message, type }`
+          - `AuthenticationError object { message, type }`
 
             - `message: string`
 
@@ -35660,7 +24130,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"authentication_error"`
 
-          - `BillingError = object { message, type }`
+          - `BillingError object { message, type }`
 
             - `message: string`
 
@@ -35668,7 +24138,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"billing_error"`
 
-          - `PermissionError = object { message, type }`
+          - `PermissionError object { message, type }`
 
             - `message: string`
 
@@ -35676,7 +24146,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"permission_error"`
 
-          - `NotFoundError = object { message, type }`
+          - `NotFoundError object { message, type }`
 
             - `message: string`
 
@@ -35684,7 +24154,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"not_found_error"`
 
-          - `RateLimitError = object { message, type }`
+          - `RateLimitError object { message, type }`
 
             - `message: string`
 
@@ -35692,7 +24162,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"rate_limit_error"`
 
-          - `GatewayTimeoutError = object { message, type }`
+          - `GatewayTimeoutError object { message, type }`
 
             - `message: string`
 
@@ -35700,7 +24170,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"timeout_error"`
 
-          - `APIErrorObject = object { message, type }`
+          - `APIErrorObject object { message, type }`
 
             - `message: string`
 
@@ -35708,7 +24178,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"api_error"`
 
-          - `OverloadedError = object { message, type }`
+          - `OverloadedError object { message, type }`
 
             - `message: string`
 
@@ -35726,13 +24196,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `"errored"`
 
-    - `MessageBatchCanceledResult = object { type }`
+    - `MessageBatchCanceledResult object { type }`
 
       - `type: "canceled"`
 
         - `"canceled"`
 
-    - `MessageBatchExpiredResult = object { type }`
+    - `MessageBatchExpiredResult object { type }`
 
       - `type: "expired"`
 
@@ -35740,7 +24210,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Request Counts
 
-- `MessageBatchRequestCounts = object { canceled, errored, expired, 2 more }`
+- `MessageBatchRequestCounts object { canceled, errored, expired, 2 more }`
 
   - `canceled: number`
 
@@ -35778,7 +24248,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
   Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-  - `MessageBatchSucceededResult = object { message, type }`
+  - `MessageBatchSucceededResult object { message, type }`
 
     - `message: Message`
 
@@ -35829,7 +24299,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `TextBlock = object { citations, text, type }`
+        - `TextBlock object { citations, text, type }`
 
           - `citations: array of TextCitation`
 
@@ -35837,7 +24307,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -35855,7 +24325,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"char_location"`
 
-            - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -35873,7 +24343,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"page_location"`
 
-            - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+            - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
               - `cited_text: string`
 
@@ -35901,7 +24371,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"content_block_location"`
 
-            - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+            - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
               - `cited_text: string`
 
@@ -35915,7 +24385,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `url: string`
 
-            - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+            - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
               - `cited_text: string`
 
@@ -35953,7 +24423,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"text"`
 
-        - `ThinkingBlock = object { signature, thinking, type }`
+        - `ThinkingBlock object { signature, thinking, type }`
 
           - `signature: string`
 
@@ -35963,7 +24433,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"thinking"`
 
-        - `RedactedThinkingBlock = object { data, type }`
+        - `RedactedThinkingBlock object { data, type }`
 
           - `data: string`
 
@@ -35971,7 +24441,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"redacted_thinking"`
 
-        - `ToolUseBlock = object { id, caller, input, 2 more }`
+        - `ToolUseBlock object { id, caller, input, 2 more }`
 
           - `id: string`
 
@@ -35979,7 +24449,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
@@ -35987,7 +24457,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"direct"`
 
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
@@ -35997,7 +24467,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"code_execution_20250825"`
 
-            - `ServerToolCaller20260120 = object { tool_id, type }`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
               - `tool_id: string`
 
@@ -36013,7 +24483,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"tool_use"`
 
-        - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+        - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
           - `id: string`
 
@@ -36021,31 +24491,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `input: map[unknown]`
 
@@ -36069,41 +24523,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"server_tool_use"`
 
-        - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+        - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError = object { error_code, type }`
+            - `WebSearchToolResultError object { error_code, type }`
 
               - `error_code: WebSearchToolResultErrorCode`
 
@@ -36123,7 +24561,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"web_search_tool_result_error"`
 
-            - `UnionMember1 = array of WebSearchResultBlock`
+            - `array of WebSearchResultBlock`
 
               - `encrypted_content: string`
 
@@ -36143,41 +24581,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"web_search_tool_result"`
 
-        - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+        - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
-            - `DirectCaller = object { type }`
+            - `DirectCaller object { type }`
 
               Tool invocation directly from the model.
 
-              - `type: "direct"`
-
-                - `"direct"`
-
-            - `ServerToolCaller = object { tool_id, type }`
+            - `ServerToolCaller object { tool_id, type }`
 
               Tool invocation generated by a server-side tool.
 
-              - `tool_id: string`
-
-              - `type: "code_execution_20250825"`
-
-                - `"code_execution_20250825"`
-
-            - `ServerToolCaller20260120 = object { tool_id, type }`
-
-              - `tool_id: string`
-
-              - `type: "code_execution_20260120"`
-
-                - `"code_execution_20260120"`
+            - `ServerToolCaller20260120 object { tool_id, type }`
 
           - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-            - `WebFetchToolResultErrorBlock = object { error_code, type }`
+            - `WebFetchToolResultErrorBlock object { error_code, type }`
 
               - `error_code: WebFetchToolResultErrorCode`
 
@@ -36201,7 +24623,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"web_fetch_tool_result_error"`
 
-            - `WebFetchBlock = object { content, retrieved_at, type, url }`
+            - `WebFetchBlock object { content, retrieved_at, type, url }`
 
               - `content: DocumentBlock`
 
@@ -36213,7 +24635,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `source: Base64PDFSource or PlainTextSource`
 
-                  - `Base64PDFSource = object { data, media_type, type }`
+                  - `Base64PDFSource object { data, media_type, type }`
 
                     - `data: string`
 
@@ -36225,7 +24647,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                       - `"base64"`
 
-                  - `PlainTextSource = object { data, media_type, type }`
+                  - `PlainTextSource object { data, media_type, type }`
 
                     - `data: string`
 
@@ -36263,13 +24685,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"web_fetch_tool_result"`
 
-        - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: CodeExecutionToolResultBlockContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
-            - `CodeExecutionToolResultError = object { error_code, type }`
+            - `CodeExecutionToolResultError object { error_code, type }`
 
               - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -36285,7 +24707,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"code_execution_tool_result_error"`
 
-            - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+            - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
               - `content: array of CodeExecutionOutputBlock`
 
@@ -36305,7 +24727,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"code_execution_result"`
 
-            - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+            - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -36314,8 +24736,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
                 - `file_id: string`
 
                 - `type: "code_execution_output"`
-
-                  - `"code_execution_output"`
 
               - `encrypted_stdout: string`
 
@@ -36333,11 +24753,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"code_execution_tool_result"`
 
-        - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError = object { error_code, type }`
+            - `BashCodeExecutionToolResultError object { error_code, type }`
 
               - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -36355,7 +24775,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"bash_code_execution_tool_result_error"`
 
-            - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+            - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
               - `content: array of BashCodeExecutionOutputBlock`
 
@@ -36381,11 +24801,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"bash_code_execution_tool_result"`
 
-        - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+        - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
           - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+            - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
               - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -36405,7 +24825,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"text_editor_code_execution_tool_result_error"`
 
-            - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+            - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
               - `content: string`
 
@@ -36427,7 +24847,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"text_editor_code_execution_view_result"`
 
-            - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+            - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
               - `is_file_update: boolean`
 
@@ -36435,7 +24855,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"text_editor_code_execution_create_result"`
 
-            - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+            - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
               - `lines: array of string`
 
@@ -36457,11 +24877,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"text_editor_code_execution_tool_result"`
 
-        - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+        - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
           - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError = object { error_code, error_message, type }`
+            - `ToolSearchToolResultError object { error_code, error_message, type }`
 
               - `error_code: ToolSearchToolResultErrorCode`
 
@@ -36479,7 +24899,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"tool_search_tool_result_error"`
 
-            - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+            - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
               - `tool_references: array of ToolReferenceBlock`
 
@@ -36499,7 +24919,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"tool_search_tool_result"`
 
-        - `ContainerUploadBlock = object { file_id, type }`
+        - `ContainerUploadBlock object { file_id, type }`
 
           Response model for a file uploaded to the container.
 
@@ -36515,7 +24935,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
@@ -36589,7 +25009,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             Fast and cost-effective model
 
-        - `UnionMember1 = string`
+        - `string`
 
       - `role: "assistant"`
 
@@ -36734,13 +25154,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       - `"succeeded"`
 
-  - `MessageBatchErroredResult = object { error, type }`
+  - `MessageBatchErroredResult object { error, type }`
 
     - `error: ErrorResponse`
 
       - `error: ErrorObject`
 
-        - `InvalidRequestError = object { message, type }`
+        - `InvalidRequestError object { message, type }`
 
           - `message: string`
 
@@ -36748,7 +25168,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"invalid_request_error"`
 
-        - `AuthenticationError = object { message, type }`
+        - `AuthenticationError object { message, type }`
 
           - `message: string`
 
@@ -36756,7 +25176,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"authentication_error"`
 
-        - `BillingError = object { message, type }`
+        - `BillingError object { message, type }`
 
           - `message: string`
 
@@ -36764,7 +25184,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"billing_error"`
 
-        - `PermissionError = object { message, type }`
+        - `PermissionError object { message, type }`
 
           - `message: string`
 
@@ -36772,7 +25192,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"permission_error"`
 
-        - `NotFoundError = object { message, type }`
+        - `NotFoundError object { message, type }`
 
           - `message: string`
 
@@ -36780,7 +25200,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"not_found_error"`
 
-        - `RateLimitError = object { message, type }`
+        - `RateLimitError object { message, type }`
 
           - `message: string`
 
@@ -36788,7 +25208,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"rate_limit_error"`
 
-        - `GatewayTimeoutError = object { message, type }`
+        - `GatewayTimeoutError object { message, type }`
 
           - `message: string`
 
@@ -36796,7 +25216,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"timeout_error"`
 
-        - `APIErrorObject = object { message, type }`
+        - `APIErrorObject object { message, type }`
 
           - `message: string`
 
@@ -36804,7 +25224,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"api_error"`
 
-        - `OverloadedError = object { message, type }`
+        - `OverloadedError object { message, type }`
 
           - `message: string`
 
@@ -36822,13 +25242,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       - `"errored"`
 
-  - `MessageBatchCanceledResult = object { type }`
+  - `MessageBatchCanceledResult object { type }`
 
     - `type: "canceled"`
 
       - `"canceled"`
 
-  - `MessageBatchExpiredResult = object { type }`
+  - `MessageBatchExpiredResult object { type }`
 
     - `type: "expired"`
 
@@ -36836,7 +25256,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
 ### Message Batch Succeeded Result
 
-- `MessageBatchSucceededResult = object { message, type }`
+- `MessageBatchSucceededResult object { message, type }`
 
   - `message: Message`
 
@@ -36887,7 +25307,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `TextBlock = object { citations, text, type }`
+      - `TextBlock object { citations, text, type }`
 
         - `citations: array of TextCitation`
 
@@ -36895,7 +25315,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -36913,7 +25333,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"char_location"`
 
-          - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -36931,7 +25351,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"page_location"`
 
-          - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+          - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
             - `cited_text: string`
 
@@ -36959,7 +25379,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"content_block_location"`
 
-          - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+          - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
             - `cited_text: string`
 
@@ -36973,7 +25393,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `url: string`
 
-          - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+          - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
             - `cited_text: string`
 
@@ -37011,7 +25431,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"text"`
 
-      - `ThinkingBlock = object { signature, thinking, type }`
+      - `ThinkingBlock object { signature, thinking, type }`
 
         - `signature: string`
 
@@ -37021,7 +25441,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"thinking"`
 
-      - `RedactedThinkingBlock = object { data, type }`
+      - `RedactedThinkingBlock object { data, type }`
 
         - `data: string`
 
@@ -37029,7 +25449,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"redacted_thinking"`
 
-      - `ToolUseBlock = object { id, caller, input, 2 more }`
+      - `ToolUseBlock object { id, caller, input, 2 more }`
 
         - `id: string`
 
@@ -37037,7 +25457,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
@@ -37045,7 +25465,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"direct"`
 
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
@@ -37055,7 +25475,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"code_execution_20250825"`
 
-          - `ServerToolCaller20260120 = object { tool_id, type }`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `tool_id: string`
 
@@ -37071,7 +25491,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"tool_use"`
 
-      - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+      - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
         - `id: string`
 
@@ -37079,31 +25499,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `input: map[unknown]`
 
@@ -37127,41 +25531,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"server_tool_use"`
 
-      - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+      - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError = object { error_code, type }`
+          - `WebSearchToolResultError object { error_code, type }`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -37181,7 +25569,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"web_search_tool_result_error"`
 
-          - `UnionMember1 = array of WebSearchResultBlock`
+          - `array of WebSearchResultBlock`
 
             - `encrypted_content: string`
 
@@ -37201,41 +25589,25 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"web_search_tool_result"`
 
-      - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+      - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
-          - `DirectCaller = object { type }`
+          - `DirectCaller object { type }`
 
             Tool invocation directly from the model.
 
-            - `type: "direct"`
-
-              - `"direct"`
-
-          - `ServerToolCaller = object { tool_id, type }`
+          - `ServerToolCaller object { tool_id, type }`
 
             Tool invocation generated by a server-side tool.
 
-            - `tool_id: string`
-
-            - `type: "code_execution_20250825"`
-
-              - `"code_execution_20250825"`
-
-          - `ServerToolCaller20260120 = object { tool_id, type }`
-
-            - `tool_id: string`
-
-            - `type: "code_execution_20260120"`
-
-              - `"code_execution_20260120"`
+          - `ServerToolCaller20260120 object { tool_id, type }`
 
         - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-          - `WebFetchToolResultErrorBlock = object { error_code, type }`
+          - `WebFetchToolResultErrorBlock object { error_code, type }`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -37259,7 +25631,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"web_fetch_tool_result_error"`
 
-          - `WebFetchBlock = object { content, retrieved_at, type, url }`
+          - `WebFetchBlock object { content, retrieved_at, type, url }`
 
             - `content: DocumentBlock`
 
@@ -37271,7 +25643,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `source: Base64PDFSource or PlainTextSource`
 
-                - `Base64PDFSource = object { data, media_type, type }`
+                - `Base64PDFSource object { data, media_type, type }`
 
                   - `data: string`
 
@@ -37283,7 +25655,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                     - `"base64"`
 
-                - `PlainTextSource = object { data, media_type, type }`
+                - `PlainTextSource object { data, media_type, type }`
 
                   - `data: string`
 
@@ -37321,13 +25693,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"web_fetch_tool_result"`
 
-      - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: CodeExecutionToolResultBlockContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `CodeExecutionToolResultError = object { error_code, type }`
+          - `CodeExecutionToolResultError object { error_code, type }`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -37343,7 +25715,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"code_execution_tool_result_error"`
 
-          - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+          - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
             - `content: array of CodeExecutionOutputBlock`
 
@@ -37363,7 +25735,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"code_execution_result"`
 
-          - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+          - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -37372,8 +25744,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
               - `file_id: string`
 
               - `type: "code_execution_output"`
-
-                - `"code_execution_output"`
 
             - `encrypted_stdout: string`
 
@@ -37391,11 +25761,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"code_execution_tool_result"`
 
-      - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError = object { error_code, type }`
+          - `BashCodeExecutionToolResultError object { error_code, type }`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -37413,7 +25783,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"bash_code_execution_tool_result_error"`
 
-          - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+          - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
             - `content: array of BashCodeExecutionOutputBlock`
 
@@ -37439,11 +25809,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"bash_code_execution_tool_result"`
 
-      - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+      - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
         - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+          - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -37463,7 +25833,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"text_editor_code_execution_tool_result_error"`
 
-          - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+          - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
             - `content: string`
 
@@ -37485,7 +25855,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"text_editor_code_execution_view_result"`
 
-          - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+          - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
             - `is_file_update: boolean`
 
@@ -37493,7 +25863,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"text_editor_code_execution_create_result"`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+          - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
             - `lines: array of string`
 
@@ -37515,11 +25885,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"text_editor_code_execution_tool_result"`
 
-      - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+      - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
         - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError = object { error_code, error_message, type }`
+          - `ToolSearchToolResultError object { error_code, error_message, type }`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -37537,7 +25907,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"tool_search_tool_result_error"`
 
-          - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+          - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
             - `tool_references: array of ToolReferenceBlock`
 
@@ -37557,7 +25927,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"tool_search_tool_result"`
 
-      - `ContainerUploadBlock = object { file_id, type }`
+      - `ContainerUploadBlock object { file_id, type }`
 
         Response model for a file uploaded to the container.
 
@@ -37573,7 +25943,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
@@ -37647,7 +26017,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           Fast and cost-effective model
 
-      - `UnionMember1 = string`
+      - `string`
 
     - `role: "assistant"`
 

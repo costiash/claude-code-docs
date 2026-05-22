@@ -1,4 +1,4 @@
-## Delete
+## Delete Skill
 
 `client.beta.skills.delete(stringskillID, SkillDeleteParamsparams?, RequestOptionsoptions?): SkillDeleteResponse`
 
@@ -102,4 +102,13 @@ const client = new Anthropic({
 const skill = await client.beta.skills.delete('skill_id');
 
 console.log(skill.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
 ```

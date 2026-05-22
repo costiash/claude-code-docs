@@ -1,4 +1,4 @@
-## Delete
+## Delete Credential
 
 `client.beta.vaults.credentials.delete(stringcredentialID, CredentialDeleteParamsparams, RequestOptionsoptions?): BetaManagedAgentsDeletedCredential`
 
@@ -103,4 +103,13 @@ const betaManagedAgentsDeletedCredential = await client.beta.vaults.credentials.
 );
 
 console.log(betaManagedAgentsDeletedCredential.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

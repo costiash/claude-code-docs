@@ -1,6 +1,6 @@
 # Events
 
-## List
+## List Events
 
 `EventListPage beta().sessions().events().list(EventListParamsparams = EventListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -352,143 +352,13 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
       - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -584,8 +454,6 @@ List Events
 
       - `Type type`
 
-        - `TEXT("text")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -680,179 +548,17 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -924,179 +630,17 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -1118,143 +662,13 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `String fromSessionThreadId`
 
@@ -1288,143 +702,13 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `LocalDateTime processedAt`
 
@@ -1526,25 +810,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -1566,25 +838,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -1606,25 +866,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -1650,25 +898,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -1694,25 +930,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -1734,25 +958,13 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -2010,30 +1222,6 @@ List Events
 
       Token usage for a single model request.
 
-      - `long cacheCreationInputTokens`
-
-        Tokens used to create prompt cache in this request.
-
-      - `long cacheReadInputTokens`
-
-        Tokens read from prompt cache in this request.
-
-      - `long inputTokens`
-
-        Input tokens consumed by this request.
-
-      - `long outputTokens`
-
-        Output tokens generated by this request.
-
-      - `Optional<Speed> speed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -2190,29 +1378,13 @@ List Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type type`
-
-          - `END_TURN("end_turn")`
-
       - `class BetaManagedAgentsSessionRequiresAction:`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `List<String> eventIds`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
-
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
     - `Type type`
 
@@ -2266,179 +1438,17 @@ List Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -2582,63 +1592,11 @@ List Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
           - `BetaManagedAgentsModelConfig model`
 
             Model identifier and configuration.
-
-            - `BetaManagedAgentsModel id`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-                Most intelligent model for building agents and coding
-
-              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-                Best combination of speed and intelligence
-
-              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-                High-performance model for agents and coding
-
-              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-                High-performance model for agents and coding
-
-            - `Optional<Speed> speed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `STANDARD("standard")`
-
-              - `FAST("fast")`
 
           - `String name`
 
@@ -2732,17 +1690,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `Type type`
 
@@ -2764,17 +1714,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
@@ -2790,17 +1732,9 @@ List Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `String mcpServerName`
 
@@ -2856,25 +1790,9 @@ List Events
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
-          - `Type type`
-
-            - `ANTHROPIC("anthropic")`
-
-          - `String version`
-
         - `class BetaManagedAgentsCustomSkill:`
 
           A resolved user-created custom skill.
-
-          - `String skillId`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
-
-          - `String version`
 
       - `Optional<String> system`
 
@@ -2882,169 +1800,11 @@ List Events
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
-          - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `Name name`
-
-              Built-in agent tool identifier.
-
-              - `BASH("bash")`
-
-              - `EDIT("edit")`
-
-              - `READ("read")`
-
-              - `WRITE("write")`
-
-              - `GLOB("glob")`
-
-              - `GREP("grep")`
-
-              - `WEB_FETCH("web_fetch")`
-
-              - `WEB_SEARCH("web_search")`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
         - `class BetaManagedAgentsMcpToolset:`
-
-          - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `String name`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `String mcpServerName`
-
-          - `Type type`
-
-            - `MCP_TOOLSET("mcp_toolset")`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
-
-          - `String description`
-
-          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Optional<Properties> properties`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Optional<List<String>> required`
-
-              List of required property names.
-
-            - `Optional<Type> type`
-
-              Must be 'object' for tool input schemas.
-
-              - `OBJECT("object")`
-
-          - `String name`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
 
       - `Type type`
 
@@ -3081,7 +1841,39 @@ public final class Main {
 }
 ```
 
-## Send
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "content": [
+        {
+          "text": "Let me look up order #1234 for you.",
+          "type": "text"
+        }
+      ],
+      "processed_at": "2026-03-15T10:00:00Z",
+      "type": "agent.message"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Send Events
 
 `BetaManagedAgentsSendSessionEvents beta().sessions().events().send(EventSendParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -3363,143 +2155,13 @@ Send Events
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
 
         - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -3605,179 +2267,17 @@ Send Events
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
 
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
-
         - `class BetaManagedAgentsSearchResultBlock:`
 
           A block containing a web search result.
-
-          - `BetaManagedAgentsSearchResultCitations citations`
-
-            Citation settings for a search result.
-
-            - `boolean enabled`
-
-              Whether citations are enabled for this search result.
-
-          - `List<BetaManagedAgentsSearchResultContent> content`
-
-            Array of text content blocks from the search result.
-
-            - `String text`
-
-              The text content.
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `String source`
-
-            The URL source of the search result.
-
-          - `String title`
-
-            The title of the search result.
-
-          - `Type type`
-
-            - `SEARCH_RESULT("search_result")`
 
       - `Optional<Boolean> isError`
 
@@ -4035,143 +2535,13 @@ Send Events
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
 
         - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -4301,179 +2671,17 @@ Send Events
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
 
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
-
         - `class BetaManagedAgentsSearchResultBlock:`
 
           A block containing a web search result.
-
-          - `BetaManagedAgentsSearchResultCitations citations`
-
-            Citation settings for a search result.
-
-            - `boolean enabled`
-
-              Whether citations are enabled for this search result.
-
-          - `List<BetaManagedAgentsSearchResultContent> content`
-
-            Array of text content blocks from the search result.
-
-            - `String text`
-
-              The text content.
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `String source`
-
-            The URL source of the search result.
-
-          - `String title`
-
-            The title of the search result.
-
-          - `Type type`
-
-            - `SEARCH_RESULT("search_result")`
 
       - `Optional<Boolean> isError`
 
@@ -4518,7 +2726,27 @@ public final class Main {
 }
 ```
 
-## Stream
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+## Stream Events
 
 `BetaManagedAgentsStreamSessionEvents beta().sessions().events().streamStreaming(EventStreamParamsparams = EventStreamParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -4834,143 +3062,13 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
       - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -5066,8 +3164,6 @@ Stream Events
 
       - `Type type`
 
-        - `TEXT("text")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -5162,179 +3258,17 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -5406,179 +3340,17 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -5600,143 +3372,13 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `String fromSessionThreadId`
 
@@ -5770,143 +3412,13 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `LocalDateTime processedAt`
 
@@ -6008,25 +3520,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6048,25 +3548,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6088,25 +3576,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6132,25 +3608,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6176,25 +3640,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6216,25 +3668,13 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -6492,30 +3932,6 @@ Stream Events
 
       Token usage for a single model request.
 
-      - `long cacheCreationInputTokens`
-
-        Tokens used to create prompt cache in this request.
-
-      - `long cacheReadInputTokens`
-
-        Tokens read from prompt cache in this request.
-
-      - `long inputTokens`
-
-        Input tokens consumed by this request.
-
-      - `long outputTokens`
-
-        Output tokens generated by this request.
-
-      - `Optional<Speed> speed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -6672,29 +4088,13 @@ Stream Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type type`
-
-          - `END_TURN("end_turn")`
-
       - `class BetaManagedAgentsSessionRequiresAction:`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `List<String> eventIds`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
-
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
     - `Type type`
 
@@ -6748,179 +4148,17 @@ Stream Events
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -7064,63 +4302,11 @@ Stream Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
           - `BetaManagedAgentsModelConfig model`
 
             Model identifier and configuration.
-
-            - `BetaManagedAgentsModel id`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-                Most intelligent model for building agents and coding
-
-              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-                Best combination of speed and intelligence
-
-              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-                High-performance model for agents and coding
-
-              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-                High-performance model for agents and coding
-
-            - `Optional<Speed> speed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `STANDARD("standard")`
-
-              - `FAST("fast")`
 
           - `String name`
 
@@ -7214,17 +4400,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `Type type`
 
@@ -7246,17 +4424,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
@@ -7272,17 +4442,9 @@ Stream Events
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `String mcpServerName`
 
@@ -7338,25 +4500,9 @@ Stream Events
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
-          - `Type type`
-
-            - `ANTHROPIC("anthropic")`
-
-          - `String version`
-
         - `class BetaManagedAgentsCustomSkill:`
 
           A resolved user-created custom skill.
-
-          - `String skillId`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
-
-          - `String version`
 
       - `Optional<String> system`
 
@@ -7364,169 +4510,11 @@ Stream Events
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
-          - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `Name name`
-
-              Built-in agent tool identifier.
-
-              - `BASH("bash")`
-
-              - `EDIT("edit")`
-
-              - `READ("read")`
-
-              - `WRITE("write")`
-
-              - `GLOB("glob")`
-
-              - `GREP("grep")`
-
-              - `WEB_FETCH("web_fetch")`
-
-              - `WEB_SEARCH("web_search")`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
         - `class BetaManagedAgentsMcpToolset:`
-
-          - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `String name`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `String mcpServerName`
-
-          - `Type type`
-
-            - `MCP_TOOLSET("mcp_toolset")`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
-
-          - `String description`
-
-          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Optional<Properties> properties`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Optional<List<String>> required`
-
-              List of required property names.
-
-            - `Optional<Type> type`
-
-              Must be 'object' for tool input schemas.
-
-              - `OBJECT("object")`
-
-          - `String name`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
 
       - `Type type`
 
@@ -7561,6 +4549,22 @@ public final class Main {
 
         StreamResponse<BetaManagedAgentsStreamSessionEvents> betaManagedAgentsStreamSessionEvents = client.beta().sessions().events().streamStreaming("sesn_011CZkZAtmR3yMPDzynEDxu7");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
 }
 ```
 
@@ -8880,143 +5884,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
       - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -9122,179 +5996,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -9992,143 +6704,13 @@ public final class Main {
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
 
         - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -10258,179 +6840,17 @@ public final class Main {
 
           Regular text content.
 
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `Source source`
-
-            Union type for image source variants.
-
-            - `class BetaManagedAgentsBase64ImageSource:`
-
-              Base64-encoded image data.
-
-              - `String data`
-
-                Base64-encoded image data.
-
-              - `String mediaType`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsUrlImageSource:`
-
-              Image referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the image to fetch.
-
-            - `class BetaManagedAgentsFileImageSource:`
-
-              Image referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `IMAGE("image")`
 
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Source source`
-
-            Union type for document source variants.
-
-            - `class BetaManagedAgentsBase64DocumentSource:`
-
-              Base64-encoded document data.
-
-              - `String data`
-
-                Base64-encoded document data.
-
-              - `String mediaType`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type type`
-
-                - `BASE64("base64")`
-
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-              Plain text document content.
-
-              - `String data`
-
-                The plain text content.
-
-              - `MediaType mediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `TEXT_PLAIN("text/plain")`
-
-              - `Type type`
-
-                - `TEXT("text")`
-
-            - `class BetaManagedAgentsUrlDocumentSource:`
-
-              Document referenced by URL.
-
-              - `Type type`
-
-                - `URL("url")`
-
-              - `String url`
-
-                URL of the document to fetch.
-
-            - `class BetaManagedAgentsFileDocumentSource:`
-
-              Document referenced by file ID.
-
-              - `String fileId`
-
-                ID of a previously uploaded file.
-
-              - `Type type`
-
-                - `FILE("file")`
-
-          - `Type type`
-
-            - `DOCUMENT("document")`
-
-          - `Optional<String> context`
-
-            Additional context about the document for the model.
-
-          - `Optional<String> title`
-
-            The title of the document.
-
         - `class BetaManagedAgentsSearchResultBlock:`
 
           A block containing a web search result.
-
-          - `BetaManagedAgentsSearchResultCitations citations`
-
-            Citation settings for a search result.
-
-            - `boolean enabled`
-
-              Whether citations are enabled for this search result.
-
-          - `List<BetaManagedAgentsSearchResultContent> content`
-
-            Array of text content blocks from the search result.
-
-            - `String text`
-
-              The text content.
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `String source`
-
-            The URL source of the search result.
-
-          - `String title`
-
-            The title of the search result.
-
-          - `Type type`
-
-            - `SEARCH_RESULT("search_result")`
 
       - `Optional<Boolean> isError`
 
@@ -10542,25 +6962,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -10582,25 +6990,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -10622,25 +7018,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -10666,25 +7050,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -10710,25 +7082,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -10750,25 +7110,13 @@ public final class Main {
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `Type type`
-
-            - `RETRYING("retrying")`
-
         - `class BetaManagedAgentsRetryStatusExhausted:`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `Type type`
-
-            - `EXHAUSTED("exhausted")`
-
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-          - `Type type`
-
-            - `TERMINAL("terminal")`
 
       - `Type type`
 
@@ -11030,143 +7378,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
       - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -11262,8 +7480,6 @@ public final class Main {
 
       - `Type type`
 
-        - `TEXT("text")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -11358,179 +7574,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -11602,179 +7656,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -11796,143 +7688,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `String fromSessionThreadId`
 
@@ -11966,143 +7728,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `LocalDateTime processedAt`
 
@@ -12204,25 +7836,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12244,25 +7864,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12284,25 +7892,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12328,25 +7924,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12372,25 +7956,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12412,25 +7984,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -12688,30 +8248,6 @@ public final class Main {
 
       Token usage for a single model request.
 
-      - `long cacheCreationInputTokens`
-
-        Tokens used to create prompt cache in this request.
-
-      - `long cacheReadInputTokens`
-
-        Tokens read from prompt cache in this request.
-
-      - `long inputTokens`
-
-        Input tokens consumed by this request.
-
-      - `long outputTokens`
-
-        Output tokens generated by this request.
-
-      - `Optional<Speed> speed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -12868,29 +8404,13 @@ public final class Main {
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type type`
-
-          - `END_TURN("end_turn")`
-
       - `class BetaManagedAgentsSessionRequiresAction:`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `List<String> eventIds`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
-
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
     - `Type type`
 
@@ -12944,179 +8464,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -13260,63 +8618,11 @@ public final class Main {
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
           - `BetaManagedAgentsModelConfig model`
 
             Model identifier and configuration.
-
-            - `BetaManagedAgentsModel id`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-                Most intelligent model for building agents and coding
-
-              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-                Best combination of speed and intelligence
-
-              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-                High-performance model for agents and coding
-
-              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-                High-performance model for agents and coding
-
-            - `Optional<Speed> speed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `STANDARD("standard")`
-
-              - `FAST("fast")`
 
           - `String name`
 
@@ -13410,17 +8716,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `Type type`
 
@@ -13442,17 +8740,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
@@ -13468,17 +8758,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `String mcpServerName`
 
@@ -13534,25 +8816,9 @@ public final class Main {
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
-          - `Type type`
-
-            - `ANTHROPIC("anthropic")`
-
-          - `String version`
-
         - `class BetaManagedAgentsCustomSkill:`
 
           A resolved user-created custom skill.
-
-          - `String skillId`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
-
-          - `String version`
 
       - `Optional<String> system`
 
@@ -13560,169 +8826,11 @@ public final class Main {
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
-          - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `Name name`
-
-              Built-in agent tool identifier.
-
-              - `BASH("bash")`
-
-              - `EDIT("edit")`
-
-              - `READ("read")`
-
-              - `WRITE("write")`
-
-              - `GLOB("glob")`
-
-              - `GREP("grep")`
-
-              - `WEB_FETCH("web_fetch")`
-
-              - `WEB_SEARCH("web_search")`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
         - `class BetaManagedAgentsMcpToolset:`
-
-          - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `String name`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `String mcpServerName`
-
-          - `Type type`
-
-            - `MCP_TOOLSET("mcp_toolset")`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
-
-          - `String description`
-
-          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Optional<Properties> properties`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Optional<List<String>> required`
-
-              List of required property names.
-
-            - `Optional<Type> type`
-
-              Must be 'object' for tool input schemas.
-
-              - `OBJECT("object")`
-
-          - `String name`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
 
       - `Type type`
 
@@ -14496,143 +9604,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
       - `class BetaManagedAgentsSearchResultBlock:`
 
@@ -14728,8 +9706,6 @@ public final class Main {
 
       - `Type type`
 
-        - `TEXT("text")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -14824,179 +9800,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -15068,179 +9882,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -15262,143 +9914,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `String fromSessionThreadId`
 
@@ -15432,143 +9954,13 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
 
     - `LocalDateTime processedAt`
 
@@ -15670,25 +10062,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -15710,25 +10090,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -15750,25 +10118,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -15794,25 +10150,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -15838,25 +10182,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -15878,25 +10210,13 @@ public final class Main {
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `Type type`
-
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `Type type`
-
-              - `EXHAUSTED("exhausted")`
-
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-            - `Type type`
-
-              - `TERMINAL("terminal")`
 
         - `Type type`
 
@@ -16154,30 +10474,6 @@ public final class Main {
 
       Token usage for a single model request.
 
-      - `long cacheCreationInputTokens`
-
-        Tokens used to create prompt cache in this request.
-
-      - `long cacheReadInputTokens`
-
-        Tokens read from prompt cache in this request.
-
-      - `long inputTokens`
-
-        Input tokens consumed by this request.
-
-      - `long outputTokens`
-
-        Output tokens generated by this request.
-
-      - `Optional<Speed> speed`
-
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
-
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
@@ -16334,29 +10630,13 @@ public final class Main {
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `Type type`
-
-          - `END_TURN("end_turn")`
-
       - `class BetaManagedAgentsSessionRequiresAction:`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `List<String> eventIds`
-
-          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
-
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
-
-        - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
     - `Type type`
 
@@ -16410,179 +10690,17 @@ public final class Main {
 
         Regular text content.
 
-        - `String text`
-
-          The text content.
-
-        - `Type type`
-
-          - `TEXT("text")`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
-
-        - `Source source`
-
-          Union type for image source variants.
-
-          - `class BetaManagedAgentsBase64ImageSource:`
-
-            Base64-encoded image data.
-
-            - `String data`
-
-              Base64-encoded image data.
-
-            - `String mediaType`
-
-              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsUrlImageSource:`
-
-            Image referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the image to fetch.
-
-          - `class BetaManagedAgentsFileImageSource:`
-
-            Image referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Source source`
-
-          Union type for document source variants.
-
-          - `class BetaManagedAgentsBase64DocumentSource:`
-
-            Base64-encoded document data.
-
-            - `String data`
-
-              Base64-encoded document data.
-
-            - `String mediaType`
-
-              MIME type of the document (e.g., "application/pdf").
-
-            - `Type type`
-
-              - `BASE64("base64")`
-
-          - `class BetaManagedAgentsPlainTextDocumentSource:`
-
-            Plain text document content.
-
-            - `String data`
-
-              The plain text content.
-
-            - `MediaType mediaType`
-
-              MIME type of the text content. Must be "text/plain".
-
-              - `TEXT_PLAIN("text/plain")`
-
-            - `Type type`
-
-              - `TEXT("text")`
-
-          - `class BetaManagedAgentsUrlDocumentSource:`
-
-            Document referenced by URL.
-
-            - `Type type`
-
-              - `URL("url")`
-
-            - `String url`
-
-              URL of the document to fetch.
-
-          - `class BetaManagedAgentsFileDocumentSource:`
-
-            Document referenced by file ID.
-
-            - `String fileId`
-
-              ID of a previously uploaded file.
-
-            - `Type type`
-
-              - `FILE("file")`
-
-        - `Type type`
-
-          - `DOCUMENT("document")`
-
-        - `Optional<String> context`
-
-          Additional context about the document for the model.
-
-        - `Optional<String> title`
-
-          The title of the document.
-
       - `class BetaManagedAgentsSearchResultBlock:`
 
         A block containing a web search result.
-
-        - `BetaManagedAgentsSearchResultCitations citations`
-
-          Citation settings for a search result.
-
-          - `boolean enabled`
-
-            Whether citations are enabled for this search result.
-
-        - `List<BetaManagedAgentsSearchResultContent> content`
-
-          Array of text content blocks from the search result.
-
-          - `String text`
-
-            The text content.
-
-          - `Type type`
-
-            - `TEXT("text")`
-
-        - `String source`
-
-          The URL source of the search result.
-
-        - `String title`
-
-          The title of the search result.
-
-        - `Type type`
-
-          - `SEARCH_RESULT("search_result")`
 
     - `Optional<Boolean> isError`
 
@@ -16726,63 +10844,11 @@ public final class Main {
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
           - `BetaManagedAgentsModelConfig model`
 
             Model identifier and configuration.
-
-            - `BetaManagedAgentsModel id`
-
-              The model that will power your agent.
-
-              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-                Most intelligent model for building agents and coding
-
-              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-                Best combination of speed and intelligence
-
-              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                Fastest model with near-frontier intelligence
-
-              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-                High-performance model for agents and coding
-
-              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-                High-performance model for agents and coding
-
-            - `Optional<Speed> speed`
-
-              Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-              - `STANDARD("standard")`
-
-              - `FAST("fast")`
 
           - `String name`
 
@@ -16876,17 +10942,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `Type type`
 
@@ -16908,17 +10966,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
@@ -16934,17 +10984,9 @@ public final class Main {
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
                   - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                     Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
 
               - `String mcpServerName`
 
@@ -17000,25 +11042,9 @@ public final class Main {
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
-          - `Type type`
-
-            - `ANTHROPIC("anthropic")`
-
-          - `String version`
-
         - `class BetaManagedAgentsCustomSkill:`
 
           A resolved user-created custom skill.
-
-          - `String skillId`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
-
-          - `String version`
 
       - `Optional<String> system`
 
@@ -17026,169 +11052,11 @@ public final class Main {
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
-          - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `Name name`
-
-              Built-in agent tool identifier.
-
-              - `BASH("bash")`
-
-              - `EDIT("edit")`
-
-              - `READ("read")`
-
-              - `WRITE("write")`
-
-              - `GLOB("glob")`
-
-              - `GREP("grep")`
-
-              - `WEB_FETCH("web_fetch")`
-
-              - `WEB_SEARCH("web_search")`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for agent tools.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
         - `class BetaManagedAgentsMcpToolset:`
-
-          - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-            - `boolean enabled`
-
-            - `String name`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-            Resolved default configuration for all tools from an MCP server.
-
-            - `boolean enabled`
-
-            - `PermissionPolicy permissionPolicy`
-
-              Permission policy for tool execution.
-
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                Tool calls are automatically approved without user confirmation.
-
-                - `Type type`
-
-                  - `ALWAYS_ALLOW("always_allow")`
-
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                Tool calls require user confirmation before execution.
-
-                - `Type type`
-
-                  - `ALWAYS_ASK("always_ask")`
-
-          - `String mcpServerName`
-
-          - `Type type`
-
-            - `MCP_TOOLSET("mcp_toolset")`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
-
-          - `String description`
-
-          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-            JSON Schema for custom tool input parameters.
-
-            - `Optional<Properties> properties`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `Optional<List<String>> required`
-
-              List of required property names.
-
-            - `Optional<Type> type`
-
-              Must be 'object' for tool input schemas.
-
-              - `OBJECT("object")`
-
-          - `String name`
-
-          - `Type type`
-
-            - `CUSTOM("custom")`
 
       - `Type type`
 

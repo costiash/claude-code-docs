@@ -1,4 +1,4 @@
-## Delete
+## Delete Session
 
 `beta.sessions.delete(strsession_id, SessionDeleteParams**kwargs)  -> BetaManagedAgentsDeletedSession`
 
@@ -93,4 +93,13 @@ beta_managed_agents_deleted_session = client.beta.sessions.delete(
     session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
 )
 print(beta_managed_agents_deleted_session.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

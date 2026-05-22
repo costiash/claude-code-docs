@@ -1,4 +1,4 @@
-## Send
+## Send Events
 
 `client.Beta.Sessions.Events.Send(ctx, sessionID, params) (*BetaManagedAgentsSendSessionEvents, error)`
 
@@ -226,143 +226,13 @@ Send Events
 
           Regular text content.
 
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsTextBlockType`
-
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
         - `type BetaManagedAgentsImageBlock struct{…}`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-            Union type for image source variants.
-
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-              Base64-encoded image data.
-
-              - `Data string`
-
-                Base64-encoded image data.
-
-              - `MediaType string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type BetaManagedAgentsBase64ImageSourceType`
-
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-            - `type BetaManagedAgentsURLImageSource struct{…}`
-
-              Image referenced by URL.
-
-              - `Type BetaManagedAgentsURLImageSourceType`
-
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-              - `URL string`
-
-                URL of the image to fetch.
-
-            - `type BetaManagedAgentsFileImageSource struct{…}`
-
-              Image referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileImageSourceType`
-
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-          - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-            Union type for document source variants.
-
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-              Base64-encoded document data.
-
-              - `Data string`
-
-                Base64-encoded document data.
-
-              - `MediaType string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-              Plain text document content.
-
-              - `Data string`
-
-                The plain text content.
-
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-              Document referenced by URL.
-
-              - `Type BetaManagedAgentsURLDocumentSourceType`
-
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-              - `URL string`
-
-                URL of the document to fetch.
-
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-              Document referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileDocumentSourceType`
-
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-          - `Type BetaManagedAgentsDocumentBlockType`
-
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
-
-            Additional context about the document for the model.
-
-          - `Title string`
-
-            The title of the document.
 
         - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
@@ -468,179 +338,17 @@ Send Events
 
           Regular text content.
 
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsTextBlockType`
-
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
         - `type BetaManagedAgentsImageBlock struct{…}`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-            Union type for image source variants.
-
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-              Base64-encoded image data.
-
-              - `Data string`
-
-                Base64-encoded image data.
-
-              - `MediaType string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type BetaManagedAgentsBase64ImageSourceType`
-
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-            - `type BetaManagedAgentsURLImageSource struct{…}`
-
-              Image referenced by URL.
-
-              - `Type BetaManagedAgentsURLImageSourceType`
-
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-              - `URL string`
-
-                URL of the image to fetch.
-
-            - `type BetaManagedAgentsFileImageSource struct{…}`
-
-              Image referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileImageSourceType`
-
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-          - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-            Union type for document source variants.
-
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-              Base64-encoded document data.
-
-              - `Data string`
-
-                Base64-encoded document data.
-
-              - `MediaType string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-              Plain text document content.
-
-              - `Data string`
-
-                The plain text content.
-
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-              Document referenced by URL.
-
-              - `Type BetaManagedAgentsURLDocumentSourceType`
-
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-              - `URL string`
-
-                URL of the document to fetch.
-
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-              Document referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileDocumentSourceType`
-
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-          - `Type BetaManagedAgentsDocumentBlockType`
-
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
-
-            Additional context about the document for the model.
-
-          - `Title string`
-
-            The title of the document.
-
         - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
           A block containing a web search result.
-
-          - `Citations BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `Enabled bool`
-
-              Whether citations are enabled for this search result.
-
-          - `Content []BetaManagedAgentsSearchResultContent`
-
-            Array of text content blocks from the search result.
-
-            - `Text string`
-
-              The text content.
-
-            - `Type BetaManagedAgentsSearchResultContentType`
-
-              - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-          - `Source string`
-
-            The URL source of the search result.
-
-          - `Title string`
-
-            The title of the search result.
-
-          - `Type BetaManagedAgentsSearchResultBlockType`
-
-            - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
       - `IsError bool`
 
@@ -956,143 +664,13 @@ Send Events
 
           Regular text content.
 
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsTextBlockType`
-
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
         - `type BetaManagedAgentsImageBlock struct{…}`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-            Union type for image source variants.
-
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-              Base64-encoded image data.
-
-              - `Data string`
-
-                Base64-encoded image data.
-
-              - `MediaType string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type BetaManagedAgentsBase64ImageSourceType`
-
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-            - `type BetaManagedAgentsURLImageSource struct{…}`
-
-              Image referenced by URL.
-
-              - `Type BetaManagedAgentsURLImageSourceType`
-
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-              - `URL string`
-
-                URL of the image to fetch.
-
-            - `type BetaManagedAgentsFileImageSource struct{…}`
-
-              Image referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileImageSourceType`
-
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-          - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
-
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-            Union type for document source variants.
-
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-              Base64-encoded document data.
-
-              - `Data string`
-
-                Base64-encoded document data.
-
-              - `MediaType string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-              Plain text document content.
-
-              - `Data string`
-
-                The plain text content.
-
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-              Document referenced by URL.
-
-              - `Type BetaManagedAgentsURLDocumentSourceType`
-
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-              - `URL string`
-
-                URL of the document to fetch.
-
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-              Document referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileDocumentSourceType`
-
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-          - `Type BetaManagedAgentsDocumentBlockType`
-
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
-
-            Additional context about the document for the model.
-
-          - `Title string`
-
-            The title of the document.
 
         - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
@@ -1222,179 +800,17 @@ Send Events
 
           Regular text content.
 
-          - `Text string`
-
-            The text content.
-
-          - `Type BetaManagedAgentsTextBlockType`
-
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
-
         - `type BetaManagedAgentsImageBlock struct{…}`
 
           Image content specified directly as base64 data or as a reference via a URL.
-
-          - `Source BetaManagedAgentsImageBlockSourceUnion`
-
-            Union type for image source variants.
-
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
-
-              Base64-encoded image data.
-
-              - `Data string`
-
-                Base64-encoded image data.
-
-              - `MediaType string`
-
-                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-              - `Type BetaManagedAgentsBase64ImageSourceType`
-
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
-
-            - `type BetaManagedAgentsURLImageSource struct{…}`
-
-              Image referenced by URL.
-
-              - `Type BetaManagedAgentsURLImageSourceType`
-
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
-              - `URL string`
-
-                URL of the image to fetch.
-
-            - `type BetaManagedAgentsFileImageSource struct{…}`
-
-              Image referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileImageSourceType`
-
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
-          - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
-
-            Union type for document source variants.
-
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
-
-              Base64-encoded document data.
-
-              - `Data string`
-
-                Base64-encoded document data.
-
-              - `MediaType string`
-
-                MIME type of the document (e.g., "application/pdf").
-
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
-
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
-
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
-
-              Plain text document content.
-
-              - `Data string`
-
-                The plain text content.
-
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
-
-                MIME type of the text content. Must be "text/plain".
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
-
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
-
-              Document referenced by URL.
-
-              - `Type BetaManagedAgentsURLDocumentSourceType`
-
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
-              - `URL string`
-
-                URL of the document to fetch.
-
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
-
-              Document referenced by file ID.
-
-              - `FileID string`
-
-                ID of a previously uploaded file.
-
-              - `Type BetaManagedAgentsFileDocumentSourceType`
-
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
-
-          - `Type BetaManagedAgentsDocumentBlockType`
-
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
-
-            Additional context about the document for the model.
-
-          - `Title string`
-
-            The title of the document.
-
         - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
           A block containing a web search result.
-
-          - `Citations BetaManagedAgentsSearchResultCitations`
-
-            Citation settings for a search result.
-
-            - `Enabled bool`
-
-              Whether citations are enabled for this search result.
-
-          - `Content []BetaManagedAgentsSearchResultContent`
-
-            Array of text content blocks from the search result.
-
-            - `Text string`
-
-              The text content.
-
-            - `Type BetaManagedAgentsSearchResultContentType`
-
-              - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
-
-          - `Source string`
-
-            The URL source of the search result.
-
-          - `Title string`
-
-            The title of the search result.
-
-          - `Type BetaManagedAgentsSearchResultBlockType`
-
-            - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
 
       - `IsError bool`
 
@@ -1446,5 +862,25 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsSendSessionEvents.Data)
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
 }
 ```

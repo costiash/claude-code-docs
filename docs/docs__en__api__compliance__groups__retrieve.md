@@ -1,4 +1,4 @@
-## Retrieve
+## Get Compliance Group
 
 **get** `/v1/compliance/groups/{group_id}`
 
@@ -49,4 +49,20 @@ Get Compliance Group
 ```http
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "created_at",
+  "description": "description",
+  "name": "name",
+  "roles": [
+    "string"
+  ],
+  "source_type": "source_type",
+  "updated_at": "updated_at"
+}
 ```

@@ -1,4 +1,4 @@
-## Create
+## Create Vault
 
 `$ ant beta:vaults create`
 
@@ -60,4 +60,20 @@ Create Vault
 ant beta:vaults create \
   --api-key my-anthropic-api-key \
   --display-name 'Example vault'
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

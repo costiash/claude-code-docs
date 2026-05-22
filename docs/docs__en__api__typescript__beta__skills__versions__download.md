@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `client.beta.skills.versions.download(stringversion, VersionDownloadParamsparams, RequestOptionsoptions?): Response`
 

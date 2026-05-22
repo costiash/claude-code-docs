@@ -1,6 +1,6 @@
 # Generated Files
 
-## Retrieve
+## Get Claude-generated file metadata
 
 **get** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}`
 
@@ -57,7 +57,21 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "id": "id",
+  "claude_chat_id": "claude_chat_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "mime_type",
+  "size_bytes": 0
+}
+```
+
+## Download a Claude-generated file
 
 **get** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`
 
@@ -84,7 +98,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
 
 ### Generated File Retrieve Response
 
-- `GeneratedFileRetrieveResponse = object { id, claude_chat_id, created_at, 4 more }`
+- `GeneratedFileRetrieveResponse object { id, claude_chat_id, created_at, 4 more }`
 
   Metadata for GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}.
 

@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -93,4 +93,13 @@ MemoryStoreDeleteParams parameters = new()
 var betaManagedAgentsDeletedMemoryStore = await client.Beta.MemoryStores.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

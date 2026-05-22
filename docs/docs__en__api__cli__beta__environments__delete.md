@@ -1,4 +1,4 @@
-## Delete
+## Delete Environment
 
 `$ ant beta:environments delete`
 
@@ -34,4 +34,13 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 ant beta:environments delete \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
 ```

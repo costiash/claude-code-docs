@@ -1,4 +1,4 @@
-## Count Tokens
+## Count tokens in a Message
 
 `$ ant beta:messages count-tokens`
 
@@ -206,4 +206,15 @@ ant beta:messages count-tokens \
   --api-key my-anthropic-api-key \
   --message '{content: [{text: x, type: text}], role: user}' \
   --model claude-opus-4-6
+```
+
+#### Response
+
+```json
+{
+  "context_management": {
+    "original_input_tokens": 0
+  },
+  "input_tokens": 2095
+}
 ```

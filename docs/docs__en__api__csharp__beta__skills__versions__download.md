@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `HttpResponse Beta.Skills.Versions.Download(VersionDownloadParamsparameters, CancellationTokencancellationToken = default)`
 

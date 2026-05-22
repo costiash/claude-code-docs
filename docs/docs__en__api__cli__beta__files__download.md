@@ -1,4 +1,4 @@
-## Download
+## Download File
 
 `$ ant beta:files download`
 

@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedMemoryStore`
 
@@ -98,4 +98,13 @@ const betaManagedAgentsDeletedMemoryStore = await client.beta.memoryStores.delet
 );
 
 console.log(betaManagedAgentsDeletedMemoryStore.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

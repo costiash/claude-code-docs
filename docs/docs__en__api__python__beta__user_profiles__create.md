@@ -1,4 +1,4 @@
-## Create
+## Create User Profile
 
 `beta.user_profiles.create(UserProfileCreateParams**kwargs)  -> BetaUserProfile`
 
@@ -157,4 +157,24 @@ client = Anthropic(
 )
 beta_user_profile = client.beta.user_profiles.create()
 print(beta_user_profile.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "relationship": "external",
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345",
+  "name": "Example User"
+}
 ```

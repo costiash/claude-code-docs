@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `HttpResponse beta().skills().versions().download(VersionDownloadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 

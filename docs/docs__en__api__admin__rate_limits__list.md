@@ -1,4 +1,4 @@
-## List
+## List Organization Rate Limits
 
 **get** `/v1/organizations/rate_limits`
 
@@ -88,4 +88,27 @@ and contains the set of limiter values that apply to it.
 curl https://api.anthropic.com/v1/organizations/rate_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "group_type": "model_group",
+      "limits": [
+        {
+          "type": "type",
+          "value": 0
+        }
+      ],
+      "models": [
+        "string"
+      ],
+      "type": "rate_limit"
+    }
+  ],
+  "next_page": "next_page"
+}
 ```

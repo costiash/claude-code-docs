@@ -1,6 +1,6 @@
 # Messages
 
-## Create
+## Create a Message
 
 `BetaMessage Beta.Messages.Create(MessageCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -244,23 +244,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaRequestDocumentBlock:`
 
           - `required Source Source`
@@ -291,181 +274,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `class BetaTextBlockParam:`
 
-                    - `required string Text`
-
-                    - `JsonElement Type "text"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                      - `class BetaCitationCharLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndCharIndex`
-
-                        - `required Long StartCharIndex`
-
-                        - `JsonElement Type "char_location"constant`
-
-                      - `class BetaCitationPageLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndPageNumber`
-
-                        - `required Long StartPageNumber`
-
-                        - `JsonElement Type "page_location"constant`
-
-                      - `class BetaCitationContentBlockLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `JsonElement Type "content_block_location"constant`
-
-                      - `class BetaCitationWebSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required string EncryptedIndex`
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "web_search_result_location"constant`
-
-                        - `required string Url`
-
-                      - `class BetaCitationSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long SearchResultIndex`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `required string Source`
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "search_result_location"constant`
-
                   - `class BetaImageBlockParam:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64ImageSource:`
-
-                        - `required string Data`
-
-                        - `required MediaType MediaType`
-
-                          - `"image/jpeg"ImageJpeg`
-
-                          - `"image/png"ImagePng`
-
-                          - `"image/gif"ImageGif`
-
-                          - `"image/webp"ImageWebP`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaUrlImageSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileImageSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "image"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
 
               - `JsonElement Type "content"constant`
 
@@ -487,23 +296,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam? Citations`
 
             - `Boolean Enabled`
@@ -524,118 +316,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type "ephemeral"constant`
-
-              - `Ttl Ttl`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"Ttl5m`
-
-                - `"1h"Ttl1h`
-
             - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-              - `class BetaCitationCharLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationWebSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
 
           - `required string Source`
 
@@ -647,26 +328,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam Citations`
-
-            - `Boolean Enabled`
 
         - `class BetaThinkingBlockParam:`
 
@@ -695,23 +357,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Caller Caller`
 
@@ -747,23 +392,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Content Content`
 
             - `string`
@@ -772,588 +400,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `class BetaTextBlockParam:`
 
-                - `required string Text`
-
-                - `JsonElement Type "text"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                  - `class BetaCitationCharLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationWebSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
-
               - `class BetaImageBlockParam:`
-
-                - `required Source Source`
-
-                  - `class BetaBase64ImageSource:`
-
-                    - `required string Data`
-
-                    - `required MediaType MediaType`
-
-                      - `"image/jpeg"ImageJpeg`
-
-                      - `"image/png"ImagePng`
-
-                      - `"image/gif"ImageGif`
-
-                      - `"image/webp"ImageWebP`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaUrlImageSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileImageSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "image"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
 
               - `class BetaSearchResultBlockParam:`
 
-                - `required IReadOnlyList<BetaTextBlockParam> Content`
-
-                  - `required string Text`
-
-                  - `JsonElement Type "text"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
-                  - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                    - `class BetaCitationCharLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndCharIndex`
-
-                      - `required Long StartCharIndex`
-
-                      - `JsonElement Type "char_location"constant`
-
-                    - `class BetaCitationPageLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndPageNumber`
-
-                      - `required Long StartPageNumber`
-
-                      - `JsonElement Type "page_location"constant`
-
-                    - `class BetaCitationContentBlockLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `JsonElement Type "content_block_location"constant`
-
-                    - `class BetaCitationWebSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required string EncryptedIndex`
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "web_search_result_location"constant`
-
-                      - `required string Url`
-
-                    - `class BetaCitationSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long SearchResultIndex`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `required string Source`
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "search_result_location"constant`
-
-                - `required string Source`
-
-                - `required string Title`
-
-                - `JsonElement Type "search_result"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam Citations`
-
-                  - `Boolean Enabled`
-
               - `class BetaRequestDocumentBlock:`
-
-                - `required Source Source`
-
-                  - `class BetaBase64PdfSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "application/pdf"constant`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaPlainTextSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "text/plain"constant`
-
-                    - `JsonElement Type "text"constant`
-
-                  - `class BetaContentBlockSource:`
-
-                    - `required Content Content`
-
-                      - `string`
-
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                        - `class BetaTextBlockParam:`
-
-                          - `required string Text`
-
-                          - `JsonElement Type "text"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                          - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                            - `class BetaCitationCharLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndCharIndex`
-
-                              - `required Long StartCharIndex`
-
-                              - `JsonElement Type "char_location"constant`
-
-                            - `class BetaCitationPageLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndPageNumber`
-
-                              - `required Long StartPageNumber`
-
-                              - `JsonElement Type "page_location"constant`
-
-                            - `class BetaCitationContentBlockLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `JsonElement Type "content_block_location"constant`
-
-                            - `class BetaCitationWebSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required string EncryptedIndex`
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "web_search_result_location"constant`
-
-                              - `required string Url`
-
-                            - `class BetaCitationSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long SearchResultIndex`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `required string Source`
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "search_result_location"constant`
-
-                        - `class BetaImageBlockParam:`
-
-                          - `required Source Source`
-
-                            - `class BetaBase64ImageSource:`
-
-                              - `required string Data`
-
-                              - `required MediaType MediaType`
-
-                                - `"image/jpeg"ImageJpeg`
-
-                                - `"image/png"ImagePng`
-
-                                - `"image/gif"ImageGif`
-
-                                - `"image/webp"ImageWebP`
-
-                              - `JsonElement Type "base64"constant`
-
-                            - `class BetaUrlImageSource:`
-
-                              - `JsonElement Type "url"constant`
-
-                              - `required string Url`
-
-                            - `class BetaFileImageSource:`
-
-                              - `required string FileID`
-
-                              - `JsonElement Type "file"constant`
-
-                          - `JsonElement Type "image"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                    - `JsonElement Type "content"constant`
-
-                  - `class BetaUrlPdfSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileDocumentSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "document"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam? Citations`
-
-                  - `Boolean Enabled`
-
-                - `string? Context`
-
-                - `string? Title`
 
               - `class BetaToolReferenceBlockParam:`
 
@@ -1366,23 +417,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
                 - `BetaCacheControlEphemeral? CacheControl`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
 
           - `Boolean IsError`
 
@@ -1416,23 +450,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -1441,21 +458,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebSearchToolResultBlockParam:`
 
@@ -1499,23 +506,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -1524,21 +514,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebFetchToolResultBlockParam:`
 
@@ -1570,255 +550,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `required BetaRequestDocumentBlock Content`
 
-                - `required Source Source`
-
-                  - `class BetaBase64PdfSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "application/pdf"constant`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaPlainTextSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "text/plain"constant`
-
-                    - `JsonElement Type "text"constant`
-
-                  - `class BetaContentBlockSource:`
-
-                    - `required Content Content`
-
-                      - `string`
-
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                        - `class BetaTextBlockParam:`
-
-                          - `required string Text`
-
-                          - `JsonElement Type "text"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                          - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                            - `class BetaCitationCharLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndCharIndex`
-
-                              - `required Long StartCharIndex`
-
-                              - `JsonElement Type "char_location"constant`
-
-                            - `class BetaCitationPageLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndPageNumber`
-
-                              - `required Long StartPageNumber`
-
-                              - `JsonElement Type "page_location"constant`
-
-                            - `class BetaCitationContentBlockLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `JsonElement Type "content_block_location"constant`
-
-                            - `class BetaCitationWebSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required string EncryptedIndex`
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "web_search_result_location"constant`
-
-                              - `required string Url`
-
-                            - `class BetaCitationSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long SearchResultIndex`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `required string Source`
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "search_result_location"constant`
-
-                        - `class BetaImageBlockParam:`
-
-                          - `required Source Source`
-
-                            - `class BetaBase64ImageSource:`
-
-                              - `required string Data`
-
-                              - `required MediaType MediaType`
-
-                                - `"image/jpeg"ImageJpeg`
-
-                                - `"image/png"ImagePng`
-
-                                - `"image/gif"ImageGif`
-
-                                - `"image/webp"ImageWebP`
-
-                              - `JsonElement Type "base64"constant`
-
-                            - `class BetaUrlImageSource:`
-
-                              - `JsonElement Type "url"constant`
-
-                              - `required string Url`
-
-                            - `class BetaFileImageSource:`
-
-                              - `required string FileID`
-
-                              - `JsonElement Type "file"constant`
-
-                          - `JsonElement Type "image"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                    - `JsonElement Type "content"constant`
-
-                  - `class BetaUrlPdfSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileDocumentSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "document"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam? Citations`
-
-                  - `Boolean Enabled`
-
-                - `string? Context`
-
-                - `string? Title`
-
               - `JsonElement Type "web_fetch_result"constant`
 
               - `required string Url`
@@ -1837,23 +568,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -1862,21 +576,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaAdvisorToolResultBlockParam:`
 
@@ -1921,23 +625,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -2001,23 +688,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaBashCodeExecutionToolResultBlockParam:`
 
           - `required Content Content`
@@ -2061,23 +731,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
@@ -2149,23 +802,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaToolSearchToolResultBlockParam:`
 
           - `required Content Content`
@@ -2196,23 +832,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   Create a cache control breakpoint at this content block.
 
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
               - `JsonElement Type "tool_search_tool_search_result"constant`
 
           - `required string ToolUseID`
@@ -2222,23 +841,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaMcpToolUseBlockParam:`
 
@@ -2258,23 +860,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaRequestMcpToolResultBlockParam:`
 
           - `required string ToolUseID`
@@ -2284,23 +869,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Content Content`
 
@@ -2316,118 +884,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                - `class BetaCitationCharLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationWebSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
 
           - `Boolean IsError`
 
@@ -2443,23 +900,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaCompactionBlockParam:`
 
@@ -2480,23 +920,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `string? EncryptedContent`
 
@@ -2643,118 +1066,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-        - `class BetaCitationCharLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndCharIndex`
-
-          - `required Long StartCharIndex`
-
-          - `JsonElement Type "char_location"constant`
-
-        - `class BetaCitationPageLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndPageNumber`
-
-          - `required Long StartPageNumber`
-
-          - `JsonElement Type "page_location"constant`
-
-        - `class BetaCitationContentBlockLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `JsonElement Type "content_block_location"constant`
-
-        - `class BetaCitationWebSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-          - `required string EncryptedIndex`
-
-          - `required string? Title`
-
-          - `JsonElement Type "web_search_result_location"constant`
-
-          - `required string Url`
-
-        - `class BetaCitationSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long SearchResultIndex`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `required string Source`
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `required string? Title`
-
-          - `JsonElement Type "search_result_location"constant`
 
   - `Double temperature`
 
@@ -2872,23 +1184,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -2935,23 +1230,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -2983,23 +1261,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3033,23 +1294,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3079,23 +1323,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3128,23 +1355,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3184,23 +1394,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3236,23 +1429,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3294,23 +1470,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3346,23 +1505,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3404,23 +1546,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3461,23 +1586,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3510,23 +1618,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3558,23 +1649,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3619,23 +1693,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -3701,28 +1758,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -3770,23 +1808,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -3802,24 +1823,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaUserLocation? UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
-
-        - `JsonElement Type "approximate"constant`
-
-        - `string? City`
-
-          The city of the user.
-
-        - `string? Country`
-
-          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-        - `string? Region`
-
-          The region of the user.
-
-        - `string? Timezone`
-
-          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
     - `class BetaWebFetchTool20260209:`
 
@@ -3851,28 +1854,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -3922,28 +1906,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -4061,43 +2026,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCacheControlEphemeral? Caching`
 
         Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -4137,23 +2068,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4188,23 +2102,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -4229,23 +2126,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `IReadOnlyDictionary<string, BetaMcpToolConfig>? Configs`
 
@@ -4602,21 +2482,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebSearchToolResultBlock:`
 
@@ -4664,21 +2534,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebFetchToolResultBlock:`
 
@@ -4762,21 +2622,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaAdvisorToolResultBlock:`
 
@@ -5045,106 +2895,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             Citations supporting the text block.
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-            - `class BetaCitationCharLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required string? FileID`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required string? FileID`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required string? FileID`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationsWebSearchResultLocation:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
 
           - `required string Text`
 
@@ -5472,14 +3222,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Breakdown of cached tokens by TTL
 
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `required Long CacheCreationInputTokens`
 
           The number of input tokens used to create the cache entry.
@@ -5507,14 +3249,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `required BetaCacheCreation? CacheCreation`
 
           Breakdown of cached tokens by TTL
-
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
 
         - `required Long CacheCreationInputTokens`
 
@@ -5544,14 +3278,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Breakdown of cached tokens by TTL
 
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `required Long CacheCreationInputTokens`
 
           The number of input tokens used to create the cache entry.
@@ -5569,74 +3295,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `"claude-opus-4-7"ClaudeOpus4_7`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-mythos-preview"ClaudeMythosPreview`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `"claude-opus-4-6"ClaudeOpus4_6`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-            Best combination of speed and intelligence
-
-          - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-opus-4-5"ClaudeOpus4_5`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-            High-performance model for agents and coding
-
-          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-            High-performance model for agents and coding
-
-          - `"claude-opus-4-1"ClaudeOpus4_1`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-0"ClaudeOpus4_0`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-            Fast and cost-effective model
 
         - `required Long OutputTokens`
 
@@ -5702,7 +3360,98 @@ var betaMessage = await client.Beta.Messages.Create(parameters);
 Console.WriteLine(betaMessage);
 ```
 
-## Count Tokens
+#### Response
+
+```json
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "container": {
+    "id": "id",
+    "expires_at": "2019-12-27T18:11:19.117Z",
+    "skills": [
+      {
+        "skill_id": "pdf",
+        "type": "anthropic",
+        "version": "latest"
+      }
+    ]
+  },
+  "content": [
+    {
+      "citations": [
+        {
+          "cited_text": "cited_text",
+          "document_index": 0,
+          "document_title": "document_title",
+          "end_char_index": 0,
+          "file_id": "file_id",
+          "start_char_index": 0,
+          "type": "char_location"
+        }
+      ],
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "context_management": {
+    "applied_edits": [
+      {
+        "cleared_input_tokens": 0,
+        "cleared_tool_uses": 0,
+        "type": "clear_tool_uses_20250919"
+      }
+    ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
+  "model": "claude-opus-4-6",
+  "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 2051,
+    "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
+    "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
+    "output_tokens": 503,
+    "server_tool_use": {
+      "web_fetch_requests": 2,
+      "web_search_requests": 0
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+  }
+}
+```
+
+## Count tokens in a Message
 
 `BetaMessageTokensCount Beta.Messages.CountTokens(MessageCountTokensParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -5936,23 +3685,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaRequestDocumentBlock:`
 
           - `required Source Source`
@@ -5983,181 +3715,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `class BetaTextBlockParam:`
 
-                    - `required string Text`
-
-                    - `JsonElement Type "text"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                      - `class BetaCitationCharLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndCharIndex`
-
-                        - `required Long StartCharIndex`
-
-                        - `JsonElement Type "char_location"constant`
-
-                      - `class BetaCitationPageLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndPageNumber`
-
-                        - `required Long StartPageNumber`
-
-                        - `JsonElement Type "page_location"constant`
-
-                      - `class BetaCitationContentBlockLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `JsonElement Type "content_block_location"constant`
-
-                      - `class BetaCitationWebSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required string EncryptedIndex`
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "web_search_result_location"constant`
-
-                        - `required string Url`
-
-                      - `class BetaCitationSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long SearchResultIndex`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `required string Source`
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "search_result_location"constant`
-
                   - `class BetaImageBlockParam:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64ImageSource:`
-
-                        - `required string Data`
-
-                        - `required MediaType MediaType`
-
-                          - `"image/jpeg"ImageJpeg`
-
-                          - `"image/png"ImagePng`
-
-                          - `"image/gif"ImageGif`
-
-                          - `"image/webp"ImageWebP`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaUrlImageSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileImageSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "image"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
 
               - `JsonElement Type "content"constant`
 
@@ -6179,23 +3737,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam? Citations`
 
             - `Boolean Enabled`
@@ -6216,118 +3757,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type "ephemeral"constant`
-
-              - `Ttl Ttl`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"Ttl5m`
-
-                - `"1h"Ttl1h`
-
             - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-              - `class BetaCitationCharLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationWebSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
 
           - `required string Source`
 
@@ -6339,26 +3769,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam Citations`
-
-            - `Boolean Enabled`
 
         - `class BetaThinkingBlockParam:`
 
@@ -6387,23 +3798,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Caller Caller`
 
@@ -6439,23 +3833,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Content Content`
 
             - `string`
@@ -6464,588 +3841,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `class BetaTextBlockParam:`
 
-                - `required string Text`
-
-                - `JsonElement Type "text"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                  - `class BetaCitationCharLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationWebSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
-
               - `class BetaImageBlockParam:`
-
-                - `required Source Source`
-
-                  - `class BetaBase64ImageSource:`
-
-                    - `required string Data`
-
-                    - `required MediaType MediaType`
-
-                      - `"image/jpeg"ImageJpeg`
-
-                      - `"image/png"ImagePng`
-
-                      - `"image/gif"ImageGif`
-
-                      - `"image/webp"ImageWebP`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaUrlImageSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileImageSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "image"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
 
               - `class BetaSearchResultBlockParam:`
 
-                - `required IReadOnlyList<BetaTextBlockParam> Content`
-
-                  - `required string Text`
-
-                  - `JsonElement Type "text"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
-                  - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                    - `class BetaCitationCharLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndCharIndex`
-
-                      - `required Long StartCharIndex`
-
-                      - `JsonElement Type "char_location"constant`
-
-                    - `class BetaCitationPageLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndPageNumber`
-
-                      - `required Long StartPageNumber`
-
-                      - `JsonElement Type "page_location"constant`
-
-                    - `class BetaCitationContentBlockLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `JsonElement Type "content_block_location"constant`
-
-                    - `class BetaCitationWebSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required string EncryptedIndex`
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "web_search_result_location"constant`
-
-                      - `required string Url`
-
-                    - `class BetaCitationSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long SearchResultIndex`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `required string Source`
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "search_result_location"constant`
-
-                - `required string Source`
-
-                - `required string Title`
-
-                - `JsonElement Type "search_result"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam Citations`
-
-                  - `Boolean Enabled`
-
               - `class BetaRequestDocumentBlock:`
-
-                - `required Source Source`
-
-                  - `class BetaBase64PdfSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "application/pdf"constant`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaPlainTextSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "text/plain"constant`
-
-                    - `JsonElement Type "text"constant`
-
-                  - `class BetaContentBlockSource:`
-
-                    - `required Content Content`
-
-                      - `string`
-
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                        - `class BetaTextBlockParam:`
-
-                          - `required string Text`
-
-                          - `JsonElement Type "text"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                          - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                            - `class BetaCitationCharLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndCharIndex`
-
-                              - `required Long StartCharIndex`
-
-                              - `JsonElement Type "char_location"constant`
-
-                            - `class BetaCitationPageLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndPageNumber`
-
-                              - `required Long StartPageNumber`
-
-                              - `JsonElement Type "page_location"constant`
-
-                            - `class BetaCitationContentBlockLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `JsonElement Type "content_block_location"constant`
-
-                            - `class BetaCitationWebSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required string EncryptedIndex`
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "web_search_result_location"constant`
-
-                              - `required string Url`
-
-                            - `class BetaCitationSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long SearchResultIndex`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `required string Source`
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "search_result_location"constant`
-
-                        - `class BetaImageBlockParam:`
-
-                          - `required Source Source`
-
-                            - `class BetaBase64ImageSource:`
-
-                              - `required string Data`
-
-                              - `required MediaType MediaType`
-
-                                - `"image/jpeg"ImageJpeg`
-
-                                - `"image/png"ImagePng`
-
-                                - `"image/gif"ImageGif`
-
-                                - `"image/webp"ImageWebP`
-
-                              - `JsonElement Type "base64"constant`
-
-                            - `class BetaUrlImageSource:`
-
-                              - `JsonElement Type "url"constant`
-
-                              - `required string Url`
-
-                            - `class BetaFileImageSource:`
-
-                              - `required string FileID`
-
-                              - `JsonElement Type "file"constant`
-
-                          - `JsonElement Type "image"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                    - `JsonElement Type "content"constant`
-
-                  - `class BetaUrlPdfSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileDocumentSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "document"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam? Citations`
-
-                  - `Boolean Enabled`
-
-                - `string? Context`
-
-                - `string? Title`
 
               - `class BetaToolReferenceBlockParam:`
 
@@ -7058,23 +3858,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
                 - `BetaCacheControlEphemeral? CacheControl`
 
                   Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
 
           - `Boolean IsError`
 
@@ -7108,23 +3891,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -7133,21 +3899,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebSearchToolResultBlockParam:`
 
@@ -7191,23 +3947,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -7216,21 +3955,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebFetchToolResultBlockParam:`
 
@@ -7262,255 +3991,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `required BetaRequestDocumentBlock Content`
 
-                - `required Source Source`
-
-                  - `class BetaBase64PdfSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "application/pdf"constant`
-
-                    - `JsonElement Type "base64"constant`
-
-                  - `class BetaPlainTextSource:`
-
-                    - `required string Data`
-
-                    - `JsonElement MediaType "text/plain"constant`
-
-                    - `JsonElement Type "text"constant`
-
-                  - `class BetaContentBlockSource:`
-
-                    - `required Content Content`
-
-                      - `string`
-
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                        - `class BetaTextBlockParam:`
-
-                          - `required string Text`
-
-                          - `JsonElement Type "text"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                          - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                            - `class BetaCitationCharLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndCharIndex`
-
-                              - `required Long StartCharIndex`
-
-                              - `JsonElement Type "char_location"constant`
-
-                            - `class BetaCitationPageLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndPageNumber`
-
-                              - `required Long StartPageNumber`
-
-                              - `JsonElement Type "page_location"constant`
-
-                            - `class BetaCitationContentBlockLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long DocumentIndex`
-
-                              - `required string? DocumentTitle`
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `JsonElement Type "content_block_location"constant`
-
-                            - `class BetaCitationWebSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                              - `required string EncryptedIndex`
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "web_search_result_location"constant`
-
-                              - `required string Url`
-
-                            - `class BetaCitationSearchResultLocationParam:`
-
-                              - `required string CitedText`
-
-                                The full text of the cited block range, concatenated.
-
-                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                              - `required Long EndBlockIndex`
-
-                                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                              - `required Long SearchResultIndex`
-
-                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                              - `required string Source`
-
-                              - `required Long StartBlockIndex`
-
-                                0-based index of the first cited block in the source's `content` array.
-
-                              - `required string? Title`
-
-                              - `JsonElement Type "search_result_location"constant`
-
-                        - `class BetaImageBlockParam:`
-
-                          - `required Source Source`
-
-                            - `class BetaBase64ImageSource:`
-
-                              - `required string Data`
-
-                              - `required MediaType MediaType`
-
-                                - `"image/jpeg"ImageJpeg`
-
-                                - `"image/png"ImagePng`
-
-                                - `"image/gif"ImageGif`
-
-                                - `"image/webp"ImageWebP`
-
-                              - `JsonElement Type "base64"constant`
-
-                            - `class BetaUrlImageSource:`
-
-                              - `JsonElement Type "url"constant`
-
-                              - `required string Url`
-
-                            - `class BetaFileImageSource:`
-
-                              - `required string FileID`
-
-                              - `JsonElement Type "file"constant`
-
-                          - `JsonElement Type "image"constant`
-
-                          - `BetaCacheControlEphemeral? CacheControl`
-
-                            Create a cache control breakpoint at this content block.
-
-                            - `JsonElement Type "ephemeral"constant`
-
-                            - `Ttl Ttl`
-
-                              The time-to-live for the cache control breakpoint.
-
-                              This may be one the following values:
-
-                              - `5m`: 5 minutes
-                              - `1h`: 1 hour
-
-                              Defaults to `5m`.
-
-                              - `"5m"Ttl5m`
-
-                              - `"1h"Ttl1h`
-
-                    - `JsonElement Type "content"constant`
-
-                  - `class BetaUrlPdfSource:`
-
-                    - `JsonElement Type "url"constant`
-
-                    - `required string Url`
-
-                  - `class BetaFileDocumentSource:`
-
-                    - `required string FileID`
-
-                    - `JsonElement Type "file"constant`
-
-                - `JsonElement Type "document"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `BetaCitationsConfigParam? Citations`
-
-                  - `Boolean Enabled`
-
-                - `string? Context`
-
-                - `string? Title`
-
               - `JsonElement Type "web_fetch_result"constant`
 
               - `required string Url`
@@ -7529,23 +4009,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Caller Caller`
 
             Tool invocation directly from the model.
@@ -7554,21 +4017,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaAdvisorToolResultBlockParam:`
 
@@ -7613,23 +4066,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -7693,23 +4129,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaBashCodeExecutionToolResultBlockParam:`
 
           - `required Content Content`
@@ -7753,23 +4172,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
@@ -7841,23 +4243,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaToolSearchToolResultBlockParam:`
 
           - `required Content Content`
@@ -7888,23 +4273,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   Create a cache control breakpoint at this content block.
 
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
               - `JsonElement Type "tool_search_tool_search_result"constant`
 
           - `required string ToolUseID`
@@ -7914,23 +4282,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaMcpToolUseBlockParam:`
 
@@ -7950,23 +4301,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `class BetaRequestMcpToolResultBlockParam:`
 
           - `required string ToolUseID`
@@ -7976,23 +4310,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Content Content`
 
@@ -8008,118 +4325,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                - `class BetaCitationCharLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationWebSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
 
           - `Boolean IsError`
 
@@ -8135,23 +4341,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaCompactionBlockParam:`
 
@@ -8172,23 +4361,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `string? EncryptedContent`
 
@@ -8270,118 +4442,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-        - `class BetaCitationCharLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndCharIndex`
-
-          - `required Long StartCharIndex`
-
-          - `JsonElement Type "char_location"constant`
-
-        - `class BetaCitationPageLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndPageNumber`
-
-          - `required Long StartPageNumber`
-
-          - `JsonElement Type "page_location"constant`
-
-        - `class BetaCitationContentBlockLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `JsonElement Type "content_block_location"constant`
-
-        - `class BetaCitationWebSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-          - `required string EncryptedIndex`
-
-          - `required string? Title`
-
-          - `JsonElement Type "web_search_result_location"constant`
-
-          - `required string Url`
-
-        - `class BetaCitationSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long SearchResultIndex`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `required string Source`
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `required string? Title`
-
-          - `JsonElement Type "search_result_location"constant`
 
   - `BetaThinkingConfigParam thinking`
 
@@ -8491,23 +4552,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8554,23 +4598,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8602,23 +4629,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -8652,23 +4662,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8698,23 +4691,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -8747,23 +4723,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -8803,23 +4762,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8855,23 +4797,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -8913,23 +4838,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -8965,23 +4873,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -9023,23 +4914,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9080,23 +4954,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9129,23 +4986,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9177,23 +5017,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -9238,23 +5061,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -9320,28 +5126,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -9389,23 +5176,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9421,24 +5191,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaUserLocation? UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
-
-        - `JsonElement Type "approximate"constant`
-
-        - `string? City`
-
-          The city of the user.
-
-        - `string? Country`
-
-          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-        - `string? Region`
-
-          The region of the user.
-
-        - `string? Timezone`
-
-          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
     - `class BetaWebFetchTool20260209:`
 
@@ -9470,28 +5222,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -9541,28 +5274,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCitationsConfigParam? Citations`
 
         Citations configuration for fetched documents. Citations are disabled by default.
-
-        - `Boolean Enabled`
 
       - `Boolean DeferLoading`
 
@@ -9680,43 +5394,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `BetaCacheControlEphemeral? Caching`
 
         Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Boolean DeferLoading`
 
@@ -9756,23 +5436,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9807,23 +5470,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `Boolean DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -9848,23 +5494,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `IReadOnlyDictionary<string, BetaMcpToolConfig>? Configs`
 
@@ -9971,6 +5600,17 @@ MessageCountTokensParams parameters = new()
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);
 
 Console.WriteLine(betaMessageTokensCount);
+```
+
+#### Response
+
+```json
+{
+  "context_management": {
+    "original_input_tokens": 0
+  },
+  "input_tokens": 2095
+}
 ```
 
 ## Domain Types
@@ -10241,23 +5881,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `BetaCacheControlEphemeral? Caching`
 
     Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-    - `JsonElement Type "ephemeral"constant`
-
-    - `Ttl Ttl`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"Ttl5m`
-
-      - `"1h"Ttl1h`
 
   - `Boolean DeferLoading`
 
@@ -12103,21 +7726,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaWebSearchToolResultBlock:`
 
@@ -12165,21 +7778,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaWebFetchToolResultBlock:`
 
@@ -12263,21 +7866,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaAdvisorToolResultBlock:`
 
@@ -12547,106 +8140,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `class BetaCitationCharLocation:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndCharIndex`
-
-            - `required string? FileID`
-
-            - `required Long StartCharIndex`
-
-            - `JsonElement Type "char_location"constant`
-
-          - `class BetaCitationPageLocation:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndPageNumber`
-
-            - `required string? FileID`
-
-            - `required Long StartPageNumber`
-
-            - `JsonElement Type "page_location"constant`
-
-          - `class BetaCitationContentBlockLocation:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required string? FileID`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `JsonElement Type "content_block_location"constant`
-
-          - `class BetaCitationsWebSearchResultLocation:`
-
-            - `required string CitedText`
-
-            - `required string EncryptedIndex`
-
-            - `required string? Title`
-
-            - `JsonElement Type "web_search_result_location"constant`
-
-            - `required string Url`
-
-          - `class BetaCitationSearchResultLocation:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required Long SearchResultIndex`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `required string Source`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `required string? Title`
-
-            - `JsonElement Type "search_result_location"constant`
-
         - `required string Text`
 
         - `JsonElement Type "text"constant`
@@ -12850,23 +8343,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
   - `class BetaRequestDocumentBlock:`
 
     - `required Source Source`
@@ -12897,181 +8373,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `class BetaTextBlockParam:`
 
-              - `required string Text`
-
-              - `JsonElement Type "text"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
-              - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                - `class BetaCitationCharLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationWebSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
-
             - `class BetaImageBlockParam:`
-
-              - `required Source Source`
-
-                - `class BetaBase64ImageSource:`
-
-                  - `required string Data`
-
-                  - `required MediaType MediaType`
-
-                    - `"image/jpeg"ImageJpeg`
-
-                    - `"image/png"ImagePng`
-
-                    - `"image/gif"ImageGif`
-
-                    - `"image/webp"ImageWebP`
-
-                  - `JsonElement Type "base64"constant`
-
-                - `class BetaUrlImageSource:`
-
-                  - `JsonElement Type "url"constant`
-
-                  - `required string Url`
-
-                - `class BetaFileImageSource:`
-
-                  - `required string FileID`
-
-                  - `JsonElement Type "file"constant`
-
-              - `JsonElement Type "image"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
         - `JsonElement Type "content"constant`
 
@@ -13093,23 +8395,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCitationsConfigParam? Citations`
 
       - `Boolean Enabled`
@@ -13130,118 +8415,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         Create a cache control breakpoint at this content block.
 
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
-
       - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-        - `class BetaCitationCharLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndCharIndex`
-
-          - `required Long StartCharIndex`
-
-          - `JsonElement Type "char_location"constant`
-
-        - `class BetaCitationPageLocationParam:`
-
-          - `required string CitedText`
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndPageNumber`
-
-          - `required Long StartPageNumber`
-
-          - `JsonElement Type "page_location"constant`
-
-        - `class BetaCitationContentBlockLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long DocumentIndex`
-
-          - `required string? DocumentTitle`
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `JsonElement Type "content_block_location"constant`
-
-        - `class BetaCitationWebSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-          - `required string EncryptedIndex`
-
-          - `required string? Title`
-
-          - `JsonElement Type "web_search_result_location"constant`
-
-          - `required string Url`
-
-        - `class BetaCitationSearchResultLocationParam:`
-
-          - `required string CitedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `required Long EndBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `required Long SearchResultIndex`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `required string Source`
-
-          - `required Long StartBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `required string? Title`
-
-          - `JsonElement Type "search_result_location"constant`
 
     - `required string Source`
 
@@ -13253,26 +8427,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCitationsConfigParam Citations`
-
-      - `Boolean Enabled`
 
   - `class BetaThinkingBlockParam:`
 
@@ -13301,23 +8456,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Caller Caller`
 
@@ -13353,23 +8491,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Content Content`
 
       - `string`
@@ -13378,588 +8499,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `class BetaTextBlockParam:`
 
-          - `required string Text`
-
-          - `JsonElement Type "text"constant`
-
-          - `BetaCacheControlEphemeral? CacheControl`
-
-            Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
-          - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-            - `class BetaCitationCharLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationWebSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
-
         - `class BetaImageBlockParam:`
-
-          - `required Source Source`
-
-            - `class BetaBase64ImageSource:`
-
-              - `required string Data`
-
-              - `required MediaType MediaType`
-
-                - `"image/jpeg"ImageJpeg`
-
-                - `"image/png"ImagePng`
-
-                - `"image/gif"ImageGif`
-
-                - `"image/webp"ImageWebP`
-
-              - `JsonElement Type "base64"constant`
-
-            - `class BetaUrlImageSource:`
-
-              - `JsonElement Type "url"constant`
-
-              - `required string Url`
-
-            - `class BetaFileImageSource:`
-
-              - `required string FileID`
-
-              - `JsonElement Type "file"constant`
-
-          - `JsonElement Type "image"constant`
-
-          - `BetaCacheControlEphemeral? CacheControl`
-
-            Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
         - `class BetaSearchResultBlockParam:`
 
-          - `required IReadOnlyList<BetaTextBlockParam> Content`
-
-            - `required string Text`
-
-            - `JsonElement Type "text"constant`
-
-            - `BetaCacheControlEphemeral? CacheControl`
-
-              Create a cache control breakpoint at this content block.
-
-              - `JsonElement Type "ephemeral"constant`
-
-              - `Ttl Ttl`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"Ttl5m`
-
-                - `"1h"Ttl1h`
-
-            - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-              - `class BetaCitationCharLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationWebSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
-
-          - `required string Source`
-
-          - `required string Title`
-
-          - `JsonElement Type "search_result"constant`
-
-          - `BetaCacheControlEphemeral? CacheControl`
-
-            Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
-          - `BetaCitationsConfigParam Citations`
-
-            - `Boolean Enabled`
-
         - `class BetaRequestDocumentBlock:`
-
-          - `required Source Source`
-
-            - `class BetaBase64PdfSource:`
-
-              - `required string Data`
-
-              - `JsonElement MediaType "application/pdf"constant`
-
-              - `JsonElement Type "base64"constant`
-
-            - `class BetaPlainTextSource:`
-
-              - `required string Data`
-
-              - `JsonElement MediaType "text/plain"constant`
-
-              - `JsonElement Type "text"constant`
-
-            - `class BetaContentBlockSource:`
-
-              - `required Content Content`
-
-                - `string`
-
-                - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                  - `class BetaTextBlockParam:`
-
-                    - `required string Text`
-
-                    - `JsonElement Type "text"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                      - `class BetaCitationCharLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndCharIndex`
-
-                        - `required Long StartCharIndex`
-
-                        - `JsonElement Type "char_location"constant`
-
-                      - `class BetaCitationPageLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndPageNumber`
-
-                        - `required Long StartPageNumber`
-
-                        - `JsonElement Type "page_location"constant`
-
-                      - `class BetaCitationContentBlockLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `JsonElement Type "content_block_location"constant`
-
-                      - `class BetaCitationWebSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required string EncryptedIndex`
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "web_search_result_location"constant`
-
-                        - `required string Url`
-
-                      - `class BetaCitationSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long SearchResultIndex`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `required string Source`
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "search_result_location"constant`
-
-                  - `class BetaImageBlockParam:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64ImageSource:`
-
-                        - `required string Data`
-
-                        - `required MediaType MediaType`
-
-                          - `"image/jpeg"ImageJpeg`
-
-                          - `"image/png"ImagePng`
-
-                          - `"image/gif"ImageGif`
-
-                          - `"image/webp"ImageWebP`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaUrlImageSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileImageSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "image"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-              - `JsonElement Type "content"constant`
-
-            - `class BetaUrlPdfSource:`
-
-              - `JsonElement Type "url"constant`
-
-              - `required string Url`
-
-            - `class BetaFileDocumentSource:`
-
-              - `required string FileID`
-
-              - `JsonElement Type "file"constant`
-
-          - `JsonElement Type "document"constant`
-
-          - `BetaCacheControlEphemeral? CacheControl`
-
-            Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
-          - `BetaCitationsConfigParam? Citations`
-
-            - `Boolean Enabled`
-
-          - `string? Context`
-
-          - `string? Title`
 
         - `class BetaToolReferenceBlockParam:`
 
@@ -13972,23 +8516,6 @@ Console.WriteLine(betaMessageTokensCount);
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
     - `Boolean IsError`
 
@@ -14022,23 +8549,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Caller Caller`
 
       Tool invocation directly from the model.
@@ -14047,21 +8557,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaWebSearchToolResultBlockParam:`
 
@@ -14105,23 +8605,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Caller Caller`
 
       Tool invocation directly from the model.
@@ -14130,21 +8613,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaWebFetchToolResultBlockParam:`
 
@@ -14176,255 +8649,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required BetaRequestDocumentBlock Content`
 
-          - `required Source Source`
-
-            - `class BetaBase64PdfSource:`
-
-              - `required string Data`
-
-              - `JsonElement MediaType "application/pdf"constant`
-
-              - `JsonElement Type "base64"constant`
-
-            - `class BetaPlainTextSource:`
-
-              - `required string Data`
-
-              - `JsonElement MediaType "text/plain"constant`
-
-              - `JsonElement Type "text"constant`
-
-            - `class BetaContentBlockSource:`
-
-              - `required Content Content`
-
-                - `string`
-
-                - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                  - `class BetaTextBlockParam:`
-
-                    - `required string Text`
-
-                    - `JsonElement Type "text"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                      - `class BetaCitationCharLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndCharIndex`
-
-                        - `required Long StartCharIndex`
-
-                        - `JsonElement Type "char_location"constant`
-
-                      - `class BetaCitationPageLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndPageNumber`
-
-                        - `required Long StartPageNumber`
-
-                        - `JsonElement Type "page_location"constant`
-
-                      - `class BetaCitationContentBlockLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `JsonElement Type "content_block_location"constant`
-
-                      - `class BetaCitationWebSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required string EncryptedIndex`
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "web_search_result_location"constant`
-
-                        - `required string Url`
-
-                      - `class BetaCitationSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long SearchResultIndex`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `required string Source`
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "search_result_location"constant`
-
-                  - `class BetaImageBlockParam:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64ImageSource:`
-
-                        - `required string Data`
-
-                        - `required MediaType MediaType`
-
-                          - `"image/jpeg"ImageJpeg`
-
-                          - `"image/png"ImagePng`
-
-                          - `"image/gif"ImageGif`
-
-                          - `"image/webp"ImageWebP`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaUrlImageSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileImageSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "image"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-              - `JsonElement Type "content"constant`
-
-            - `class BetaUrlPdfSource:`
-
-              - `JsonElement Type "url"constant`
-
-              - `required string Url`
-
-            - `class BetaFileDocumentSource:`
-
-              - `required string FileID`
-
-              - `JsonElement Type "file"constant`
-
-          - `JsonElement Type "document"constant`
-
-          - `BetaCacheControlEphemeral? CacheControl`
-
-            Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
-          - `BetaCitationsConfigParam? Citations`
-
-            - `Boolean Enabled`
-
-          - `string? Context`
-
-          - `string? Title`
-
         - `JsonElement Type "web_fetch_result"constant`
 
         - `required string Url`
@@ -14443,23 +8667,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Caller Caller`
 
       Tool invocation directly from the model.
@@ -14468,21 +8675,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         Tool invocation directly from the model.
 
-        - `JsonElement Type "direct"constant`
-
       - `class BetaServerToolCaller:`
 
         Tool invocation generated by a server-side tool.
 
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20250825"constant`
-
       - `class BetaServerToolCaller20260120:`
-
-        - `required string ToolID`
-
-        - `JsonElement Type "code_execution_20260120"constant`
 
   - `class BetaAdvisorToolResultBlockParam:`
 
@@ -14527,23 +8724,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
   - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -14607,23 +8787,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
   - `class BetaBashCodeExecutionToolResultBlockParam:`
 
     - `required Content Content`
@@ -14667,23 +8830,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
   - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
@@ -14755,23 +8901,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
   - `class BetaToolSearchToolResultBlockParam:`
 
     - `required Content Content`
@@ -14802,23 +8931,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
         - `JsonElement Type "tool_search_tool_search_result"constant`
 
     - `required string ToolUseID`
@@ -14828,23 +8940,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
   - `class BetaMcpToolUseBlockParam:`
 
@@ -14864,23 +8959,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
   - `class BetaRequestMcpToolResultBlockParam:`
 
     - `required string ToolUseID`
@@ -14890,23 +8968,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Content Content`
 
@@ -14922,118 +8983,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-          - `class BetaCitationCharLocationParam:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndCharIndex`
-
-            - `required Long StartCharIndex`
-
-            - `JsonElement Type "char_location"constant`
-
-          - `class BetaCitationPageLocationParam:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndPageNumber`
-
-            - `required Long StartPageNumber`
-
-            - `JsonElement Type "page_location"constant`
-
-          - `class BetaCitationContentBlockLocationParam:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `JsonElement Type "content_block_location"constant`
-
-          - `class BetaCitationWebSearchResultLocationParam:`
-
-            - `required string CitedText`
-
-            - `required string EncryptedIndex`
-
-            - `required string? Title`
-
-            - `JsonElement Type "web_search_result_location"constant`
-
-            - `required string Url`
-
-          - `class BetaCitationSearchResultLocationParam:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required Long SearchResultIndex`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `required string Source`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `required string? Title`
-
-            - `JsonElement Type "search_result_location"constant`
 
     - `Boolean IsError`
 
@@ -15049,23 +8999,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
   - `class BetaCompactionBlockParam:`
 
@@ -15086,23 +9019,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `string? EncryptedContent`
 
@@ -15279,23 +9195,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
   - `JsonElement Type "content"constant`
 
 ### Beta Content Block Source Content
@@ -15463,23 +9362,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
 ### Beta Context Management Config
 
 - `class BetaContextManagementConfig:`
@@ -15573,10 +9455,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `BetaInputTokensTrigger? Trigger`
 
         When to trigger compaction. Defaults to 150000 input tokens.
-
-        - `JsonElement Type "input_tokens"constant`
-
-        - `required Long Value`
 
 ### Beta Context Management Response
 
@@ -16634,21 +10512,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebSearchToolResultBlock:`
 
@@ -16696,21 +10564,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebFetchToolResultBlock:`
 
@@ -16794,21 +10652,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaAdvisorToolResultBlock:`
 
@@ -17077,106 +10925,6 @@ Console.WriteLine(betaMessageTokensCount);
             Citations supporting the text block.
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-            - `class BetaCitationCharLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required string? FileID`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required string? FileID`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required string? FileID`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationsWebSearchResultLocation:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
 
           - `required string Text`
 
@@ -17504,14 +11252,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Breakdown of cached tokens by TTL
 
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `required Long CacheCreationInputTokens`
 
           The number of input tokens used to create the cache entry.
@@ -17539,14 +11279,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `required BetaCacheCreation? CacheCreation`
 
           Breakdown of cached tokens by TTL
-
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
 
         - `required Long CacheCreationInputTokens`
 
@@ -17576,14 +11308,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Breakdown of cached tokens by TTL
 
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `required Long CacheCreationInputTokens`
 
           The number of input tokens used to create the cache entry.
@@ -17601,74 +11325,6 @@ Console.WriteLine(betaMessageTokensCount);
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `"claude-opus-4-7"ClaudeOpus4_7`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-mythos-preview"ClaudeMythosPreview`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `"claude-opus-4-6"ClaudeOpus4_6`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-            Best combination of speed and intelligence
-
-          - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-opus-4-5"ClaudeOpus4_5`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-            High-performance model for agents and coding
-
-          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-            High-performance model for agents and coding
-
-          - `"claude-opus-4-1"ClaudeOpus4_1`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-0"ClaudeOpus4_0`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-            Fast and cost-effective model
 
         - `required Long OutputTokens`
 
@@ -17782,14 +11438,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         Breakdown of cached tokens by TTL
 
-        - `required Long Ephemeral1hInputTokens`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `required Long Ephemeral5mInputTokens`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `required Long CacheCreationInputTokens`
 
         The number of input tokens used to create the cache entry.
@@ -17817,14 +11465,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `required BetaCacheCreation? CacheCreation`
 
         Breakdown of cached tokens by TTL
-
-        - `required Long Ephemeral1hInputTokens`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `required Long Ephemeral5mInputTokens`
-
-          The number of input tokens used to create the 5 minute cache entry.
 
       - `required Long CacheCreationInputTokens`
 
@@ -18145,23 +11785,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
       - `class BetaRequestDocumentBlock:`
 
         - `required Source Source`
@@ -18192,181 +11815,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                 - `class BetaTextBlockParam:`
 
-                  - `required string Text`
-
-                  - `JsonElement Type "text"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
-                  - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                    - `class BetaCitationCharLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndCharIndex`
-
-                      - `required Long StartCharIndex`
-
-                      - `JsonElement Type "char_location"constant`
-
-                    - `class BetaCitationPageLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndPageNumber`
-
-                      - `required Long StartPageNumber`
-
-                      - `JsonElement Type "page_location"constant`
-
-                    - `class BetaCitationContentBlockLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `JsonElement Type "content_block_location"constant`
-
-                    - `class BetaCitationWebSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required string EncryptedIndex`
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "web_search_result_location"constant`
-
-                      - `required string Url`
-
-                    - `class BetaCitationSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long SearchResultIndex`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `required string Source`
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "search_result_location"constant`
-
                 - `class BetaImageBlockParam:`
-
-                  - `required Source Source`
-
-                    - `class BetaBase64ImageSource:`
-
-                      - `required string Data`
-
-                      - `required MediaType MediaType`
-
-                        - `"image/jpeg"ImageJpeg`
-
-                        - `"image/png"ImagePng`
-
-                        - `"image/gif"ImageGif`
-
-                        - `"image/webp"ImageWebP`
-
-                      - `JsonElement Type "base64"constant`
-
-                    - `class BetaUrlImageSource:`
-
-                      - `JsonElement Type "url"constant`
-
-                      - `required string Url`
-
-                    - `class BetaFileImageSource:`
-
-                      - `required string FileID`
-
-                      - `JsonElement Type "file"constant`
-
-                  - `JsonElement Type "image"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
 
             - `JsonElement Type "content"constant`
 
@@ -18388,23 +11837,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `BetaCitationsConfigParam? Citations`
 
           - `Boolean Enabled`
@@ -18425,118 +11857,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-            - `class BetaCitationCharLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationWebSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
 
         - `required string Source`
 
@@ -18548,26 +11869,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `BetaCitationsConfigParam Citations`
-
-          - `Boolean Enabled`
 
       - `class BetaThinkingBlockParam:`
 
@@ -18596,23 +11898,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
         - `Caller Caller`
 
@@ -18648,23 +11933,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `Content Content`
 
           - `string`
@@ -18673,588 +11941,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `class BetaTextBlockParam:`
 
-              - `required string Text`
-
-              - `JsonElement Type "text"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
-              - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                - `class BetaCitationCharLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationWebSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocationParam:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
-
             - `class BetaImageBlockParam:`
-
-              - `required Source Source`
-
-                - `class BetaBase64ImageSource:`
-
-                  - `required string Data`
-
-                  - `required MediaType MediaType`
-
-                    - `"image/jpeg"ImageJpeg`
-
-                    - `"image/png"ImagePng`
-
-                    - `"image/gif"ImageGif`
-
-                    - `"image/webp"ImageWebP`
-
-                  - `JsonElement Type "base64"constant`
-
-                - `class BetaUrlImageSource:`
-
-                  - `JsonElement Type "url"constant`
-
-                  - `required string Url`
-
-                - `class BetaFileImageSource:`
-
-                  - `required string FileID`
-
-                  - `JsonElement Type "file"constant`
-
-              - `JsonElement Type "image"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
             - `class BetaSearchResultBlockParam:`
 
-              - `required IReadOnlyList<BetaTextBlockParam> Content`
-
-                - `required string Text`
-
-                - `JsonElement Type "text"constant`
-
-                - `BetaCacheControlEphemeral? CacheControl`
-
-                  Create a cache control breakpoint at this content block.
-
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
-                - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                  - `class BetaCitationCharLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationWebSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
-
-              - `required string Source`
-
-              - `required string Title`
-
-              - `JsonElement Type "search_result"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
-              - `BetaCitationsConfigParam Citations`
-
-                - `Boolean Enabled`
-
             - `class BetaRequestDocumentBlock:`
-
-              - `required Source Source`
-
-                - `class BetaBase64PdfSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "application/pdf"constant`
-
-                  - `JsonElement Type "base64"constant`
-
-                - `class BetaPlainTextSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "text/plain"constant`
-
-                  - `JsonElement Type "text"constant`
-
-                - `class BetaContentBlockSource:`
-
-                  - `required Content Content`
-
-                    - `string`
-
-                    - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                      - `class BetaTextBlockParam:`
-
-                        - `required string Text`
-
-                        - `JsonElement Type "text"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
-
-                        - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                          - `class BetaCitationCharLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndCharIndex`
-
-                            - `required Long StartCharIndex`
-
-                            - `JsonElement Type "char_location"constant`
-
-                          - `class BetaCitationPageLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndPageNumber`
-
-                            - `required Long StartPageNumber`
-
-                            - `JsonElement Type "page_location"constant`
-
-                          - `class BetaCitationContentBlockLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `JsonElement Type "content_block_location"constant`
-
-                          - `class BetaCitationWebSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required string EncryptedIndex`
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "web_search_result_location"constant`
-
-                            - `required string Url`
-
-                          - `class BetaCitationSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long SearchResultIndex`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `required string Source`
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "search_result_location"constant`
-
-                      - `class BetaImageBlockParam:`
-
-                        - `required Source Source`
-
-                          - `class BetaBase64ImageSource:`
-
-                            - `required string Data`
-
-                            - `required MediaType MediaType`
-
-                              - `"image/jpeg"ImageJpeg`
-
-                              - `"image/png"ImagePng`
-
-                              - `"image/gif"ImageGif`
-
-                              - `"image/webp"ImageWebP`
-
-                            - `JsonElement Type "base64"constant`
-
-                          - `class BetaUrlImageSource:`
-
-                            - `JsonElement Type "url"constant`
-
-                            - `required string Url`
-
-                          - `class BetaFileImageSource:`
-
-                            - `required string FileID`
-
-                            - `JsonElement Type "file"constant`
-
-                        - `JsonElement Type "image"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
-
-                  - `JsonElement Type "content"constant`
-
-                - `class BetaUrlPdfSource:`
-
-                  - `JsonElement Type "url"constant`
-
-                  - `required string Url`
-
-                - `class BetaFileDocumentSource:`
-
-                  - `required string FileID`
-
-                  - `JsonElement Type "file"constant`
-
-              - `JsonElement Type "document"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
-              - `BetaCitationsConfigParam? Citations`
-
-                - `Boolean Enabled`
-
-              - `string? Context`
-
-              - `string? Title`
 
             - `class BetaToolReferenceBlockParam:`
 
@@ -19267,23 +11958,6 @@ Console.WriteLine(betaMessageTokensCount);
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
         - `Boolean IsError`
 
@@ -19317,23 +11991,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `Caller Caller`
 
           Tool invocation directly from the model.
@@ -19342,21 +11999,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebSearchToolResultBlockParam:`
 
@@ -19400,23 +12047,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `Caller Caller`
 
           Tool invocation directly from the model.
@@ -19425,21 +12055,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebFetchToolResultBlockParam:`
 
@@ -19471,255 +12091,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `required BetaRequestDocumentBlock Content`
 
-              - `required Source Source`
-
-                - `class BetaBase64PdfSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "application/pdf"constant`
-
-                  - `JsonElement Type "base64"constant`
-
-                - `class BetaPlainTextSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "text/plain"constant`
-
-                  - `JsonElement Type "text"constant`
-
-                - `class BetaContentBlockSource:`
-
-                  - `required Content Content`
-
-                    - `string`
-
-                    - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                      - `class BetaTextBlockParam:`
-
-                        - `required string Text`
-
-                        - `JsonElement Type "text"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
-
-                        - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                          - `class BetaCitationCharLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndCharIndex`
-
-                            - `required Long StartCharIndex`
-
-                            - `JsonElement Type "char_location"constant`
-
-                          - `class BetaCitationPageLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndPageNumber`
-
-                            - `required Long StartPageNumber`
-
-                            - `JsonElement Type "page_location"constant`
-
-                          - `class BetaCitationContentBlockLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `JsonElement Type "content_block_location"constant`
-
-                          - `class BetaCitationWebSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required string EncryptedIndex`
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "web_search_result_location"constant`
-
-                            - `required string Url`
-
-                          - `class BetaCitationSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long SearchResultIndex`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `required string Source`
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "search_result_location"constant`
-
-                      - `class BetaImageBlockParam:`
-
-                        - `required Source Source`
-
-                          - `class BetaBase64ImageSource:`
-
-                            - `required string Data`
-
-                            - `required MediaType MediaType`
-
-                              - `"image/jpeg"ImageJpeg`
-
-                              - `"image/png"ImagePng`
-
-                              - `"image/gif"ImageGif`
-
-                              - `"image/webp"ImageWebP`
-
-                            - `JsonElement Type "base64"constant`
-
-                          - `class BetaUrlImageSource:`
-
-                            - `JsonElement Type "url"constant`
-
-                            - `required string Url`
-
-                          - `class BetaFileImageSource:`
-
-                            - `required string FileID`
-
-                            - `JsonElement Type "file"constant`
-
-                        - `JsonElement Type "image"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
-
-                  - `JsonElement Type "content"constant`
-
-                - `class BetaUrlPdfSource:`
-
-                  - `JsonElement Type "url"constant`
-
-                  - `required string Url`
-
-                - `class BetaFileDocumentSource:`
-
-                  - `required string FileID`
-
-                  - `JsonElement Type "file"constant`
-
-              - `JsonElement Type "document"constant`
-
-              - `BetaCacheControlEphemeral? CacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
-              - `BetaCitationsConfigParam? Citations`
-
-                - `Boolean Enabled`
-
-              - `string? Context`
-
-              - `string? Title`
-
             - `JsonElement Type "web_fetch_result"constant`
 
             - `required string Url`
@@ -19738,23 +12109,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `Caller Caller`
 
           Tool invocation directly from the model.
@@ -19763,21 +12117,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaAdvisorToolResultBlockParam:`
 
@@ -19822,23 +12166,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
       - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -19902,23 +12229,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
       - `class BetaBashCodeExecutionToolResultBlockParam:`
 
         - `required Content Content`
@@ -19962,23 +12272,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
@@ -20050,23 +12343,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
       - `class BetaToolSearchToolResultBlockParam:`
 
         - `required Content Content`
@@ -20097,23 +12373,6 @@ Console.WriteLine(betaMessageTokensCount);
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
             - `JsonElement Type "tool_search_tool_search_result"constant`
 
         - `required string ToolUseID`
@@ -20123,23 +12382,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
       - `class BetaMcpToolUseBlockParam:`
 
@@ -20159,23 +12401,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
       - `class BetaRequestMcpToolResultBlockParam:`
 
         - `required string ToolUseID`
@@ -20185,23 +12410,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
         - `Content Content`
 
@@ -20217,118 +12425,7 @@ Console.WriteLine(betaMessageTokensCount);
 
               Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type "ephemeral"constant`
-
-              - `Ttl Ttl`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"Ttl5m`
-
-                - `"1h"Ttl1h`
-
             - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-              - `class BetaCitationCharLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocationParam:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationWebSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocationParam:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
 
         - `Boolean IsError`
 
@@ -20344,23 +12441,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
       - `class BetaCompactionBlockParam:`
 
@@ -20381,23 +12461,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
         - `string? EncryptedContent`
 
@@ -20985,21 +13048,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebSearchToolResultBlock:`
 
@@ -21047,21 +13100,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaWebFetchToolResultBlock:`
 
@@ -21145,21 +13188,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           Tool invocation directly from the model.
 
-          - `JsonElement Type "direct"constant`
-
         - `class BetaServerToolCaller:`
 
           Tool invocation generated by a server-side tool.
 
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20250825"constant`
-
         - `class BetaServerToolCaller20260120:`
-
-          - `required string ToolID`
-
-          - `JsonElement Type "code_execution_20260120"constant`
 
     - `class BetaAdvisorToolResultBlock:`
 
@@ -21429,106 +13462,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `class BetaCitationCharLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required string? FileID`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocation:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required string? FileID`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required string? FileID`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationsWebSearchResultLocation:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocation:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
-
           - `required string Text`
 
           - `JsonElement Type "text"constant`
@@ -21773,14 +13706,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Breakdown of cached tokens by TTL
 
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
         - `required Long CacheCreationInputTokens`
 
           The number of input tokens used to create the cache entry.
@@ -21808,14 +13733,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `required BetaCacheCreation? CacheCreation`
 
           Breakdown of cached tokens by TTL
-
-          - `required Long Ephemeral1hInputTokens`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `required Long Ephemeral5mInputTokens`
-
-            The number of input tokens used to create the 5 minute cache entry.
 
         - `required Long CacheCreationInputTokens`
 
@@ -22194,21 +14111,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebSearchToolResultBlock:`
 
@@ -22256,21 +14163,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebFetchToolResultBlock:`
 
@@ -22354,21 +14251,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaAdvisorToolResultBlock:`
 
@@ -22637,106 +14524,6 @@ Console.WriteLine(betaMessageTokensCount);
               Citations supporting the text block.
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-              - `class BetaCitationCharLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required string? FileID`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required string? FileID`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required string? FileID`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationsWebSearchResultLocation:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
 
             - `required string Text`
 
@@ -23064,14 +14851,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             Breakdown of cached tokens by TTL
 
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `required Long CacheCreationInputTokens`
 
             The number of input tokens used to create the cache entry.
@@ -23099,14 +14878,6 @@ Console.WriteLine(betaMessageTokensCount);
           - `required BetaCacheCreation? CacheCreation`
 
             Breakdown of cached tokens by TTL
-
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
 
           - `required Long CacheCreationInputTokens`
 
@@ -23136,14 +14907,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             Breakdown of cached tokens by TTL
 
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `required Long CacheCreationInputTokens`
 
             The number of input tokens used to create the cache entry.
@@ -23161,74 +14924,6 @@ Console.WriteLine(betaMessageTokensCount);
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7"ClaudeOpus4_7`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"ClaudeMythosPreview`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"ClaudeOpus4_6`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"ClaudeOpus4_5`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"ClaudeOpus4_1`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"ClaudeOpus4_0`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-              Fast and cost-effective model
 
           - `required Long OutputTokens`
 
@@ -23549,21 +15244,11 @@ Console.WriteLine(betaMessageTokensCount);
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebSearchToolResultBlock:`
 
@@ -23611,21 +15296,11 @@ Console.WriteLine(betaMessageTokensCount);
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebFetchToolResultBlock:`
 
@@ -23709,21 +15384,11 @@ Console.WriteLine(betaMessageTokensCount);
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaAdvisorToolResultBlock:`
 
@@ -23992,106 +15657,6 @@ Console.WriteLine(betaMessageTokensCount);
                 Citations supporting the text block.
 
                 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-                - `class BetaCitationCharLocation:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required string? FileID`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocation:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required string? FileID`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocation:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required string? FileID`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationsWebSearchResultLocation:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocation:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
 
               - `required string Text`
 
@@ -24419,14 +15984,6 @@ Console.WriteLine(betaMessageTokensCount);
 
               Breakdown of cached tokens by TTL
 
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `required Long CacheCreationInputTokens`
 
               The number of input tokens used to create the cache entry.
@@ -24454,14 +16011,6 @@ Console.WriteLine(betaMessageTokensCount);
             - `required BetaCacheCreation? CacheCreation`
 
               Breakdown of cached tokens by TTL
-
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
 
             - `required Long CacheCreationInputTokens`
 
@@ -24491,14 +16040,6 @@ Console.WriteLine(betaMessageTokensCount);
 
               Breakdown of cached tokens by TTL
 
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `required Long CacheCreationInputTokens`
 
               The number of input tokens used to create the cache entry.
@@ -24516,74 +16057,6 @@ Console.WriteLine(betaMessageTokensCount);
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7"ClaudeOpus4_7`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-mythos-preview"ClaudeMythosPreview`
-
-                New class of intelligence, strongest in coding and cybersecurity
-
-              - `"claude-opus-4-6"ClaudeOpus4_6`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"ClaudeOpus4_5`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-                High-performance model for agents and coding
-
-              - `"claude-opus-4-1"ClaudeOpus4_1`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                Powerful model for complex tasks
-
-              - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                Powerful model for complex tasks
-
-              - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                High-performance model with extended thinking
-
-              - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                High-performance model with extended thinking
-
-              - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                Fast and cost-effective model
 
             - `required Long OutputTokens`
 
@@ -24635,111 +16108,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Information about context management strategies applied during the request
 
-      - `required IReadOnlyList<AppliedEdit> AppliedEdits`
-
-        List of context management edits that were applied.
-
-        - `class BetaClearToolUses20250919EditResponse:`
-
-          - `required Long ClearedInputTokens`
-
-            Number of input tokens cleared by this edit.
-
-          - `required Long ClearedToolUses`
-
-            Number of tool uses that were cleared.
-
-          - `JsonElement Type "clear_tool_uses_20250919"constant`
-
-            The type of context management edit applied.
-
-        - `class BetaClearThinking20251015EditResponse:`
-
-          - `required Long ClearedInputTokens`
-
-            Number of input tokens cleared by this edit.
-
-          - `required Long ClearedThinkingTurns`
-
-            Number of thinking turns that were cleared.
-
-          - `JsonElement Type "clear_thinking_20251015"constant`
-
-            The type of context management edit applied.
-
     - `required Delta Delta`
 
       - `required BetaContainer? Container`
 
         Information about the container used in the request (for the code execution tool)
 
-        - `required string ID`
-
-          Identifier for the container used in this request
-
-        - `required DateTimeOffset ExpiresAt`
-
-          The time at which the container will expire.
-
-        - `required IReadOnlyList<BetaSkill>? Skills`
-
-          Skills loaded in the container
-
-          - `required string SkillID`
-
-            Skill ID
-
-          - `required Type Type`
-
-            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-            - `"anthropic"Anthropic`
-
-            - `"custom"Custom`
-
-          - `required string Version`
-
-            Skill version or 'latest' for most recent version
-
       - `required BetaRefusalStopDetails? StopDetails`
 
         Structured information about a refusal.
 
-        - `required Category? Category`
-
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
-
-          - `"cyber"Cyber`
-
-          - `"bio"Bio`
-
-        - `required string? Explanation`
-
-          Human-readable explanation of the refusal.
-
-          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `JsonElement Type "refusal"constant`
-
       - `required BetaStopReason? StopReason`
-
-        - `"end_turn"EndTurn`
-
-        - `"max_tokens"MaxTokens`
-
-        - `"stop_sequence"StopSequence`
-
-        - `"tool_use"ToolUse`
-
-        - `"pause_turn"PauseTurn`
-
-        - `"compaction"Compaction`
-
-        - `"refusal"Refusal`
-
-        - `"model_context_window_exceeded"ModelContextWindowExceeded`
 
       - `required string? StopSequence`
 
@@ -24779,188 +16158,6 @@ Console.WriteLine(betaMessageTokensCount);
         - Calculate the true context window size from the last iteration
         - Understand token accumulation across server-side tool use loops
 
-        - `class BetaMessageIterationUsage:`
-
-          Token usage for a sampling iteration.
-
-          - `required BetaCacheCreation? CacheCreation`
-
-            Breakdown of cached tokens by TTL
-
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `required Long CacheCreationInputTokens`
-
-            The number of input tokens used to create the cache entry.
-
-          - `required Long CacheReadInputTokens`
-
-            The number of input tokens read from the cache.
-
-          - `required Long InputTokens`
-
-            The number of input tokens which were used.
-
-          - `required Long OutputTokens`
-
-            The number of output tokens which were used.
-
-          - `JsonElement Type "message"constant`
-
-            Usage for a sampling iteration
-
-        - `class BetaCompactionIterationUsage:`
-
-          Token usage for a compaction iteration.
-
-          - `required BetaCacheCreation? CacheCreation`
-
-            Breakdown of cached tokens by TTL
-
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `required Long CacheCreationInputTokens`
-
-            The number of input tokens used to create the cache entry.
-
-          - `required Long CacheReadInputTokens`
-
-            The number of input tokens read from the cache.
-
-          - `required Long InputTokens`
-
-            The number of input tokens which were used.
-
-          - `required Long OutputTokens`
-
-            The number of output tokens which were used.
-
-          - `JsonElement Type "compaction"constant`
-
-            Usage for a compaction iteration
-
-        - `class BetaAdvisorMessageIterationUsage:`
-
-          Token usage for an advisor sub-inference iteration.
-
-          - `required BetaCacheCreation? CacheCreation`
-
-            Breakdown of cached tokens by TTL
-
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `required Long CacheCreationInputTokens`
-
-            The number of input tokens used to create the cache entry.
-
-          - `required Long CacheReadInputTokens`
-
-            The number of input tokens read from the cache.
-
-          - `required Long InputTokens`
-
-            The number of input tokens which were used.
-
-          - `required Model Model`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7"ClaudeOpus4_7`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"ClaudeMythosPreview`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"ClaudeOpus4_6`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"ClaudeOpus4_5`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"ClaudeOpus4_1`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"ClaudeOpus4_0`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-              Fast and cost-effective model
-
-          - `required Long OutputTokens`
-
-            The number of output tokens which were used.
-
-          - `JsonElement Type "advisor_message"constant`
-
-            Usage for an advisor sub-inference iteration
-
       - `required Long OutputTokens`
 
         The cumulative number of output tokens which were used.
@@ -24968,14 +16165,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `required BetaServerToolUsage? ServerToolUse`
 
         The number of server tool requests.
-
-        - `required Long WebFetchRequests`
-
-          The number of web fetch tool requests.
-
-        - `required Long WebSearchRequests`
-
-          The number of web search tool requests.
 
   - `class BetaRawMessageStopEvent:`
 
@@ -24989,759 +16178,35 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `class BetaTextBlock:`
 
-        - `required IReadOnlyList<BetaTextCitation>? Citations`
-
-          Citations supporting the text block.
-
-          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-          - `class BetaCitationCharLocation:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndCharIndex`
-
-            - `required string? FileID`
-
-            - `required Long StartCharIndex`
-
-            - `JsonElement Type "char_location"constant`
-
-          - `class BetaCitationPageLocation:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndPageNumber`
-
-            - `required string? FileID`
-
-            - `required Long StartPageNumber`
-
-            - `JsonElement Type "page_location"constant`
-
-          - `class BetaCitationContentBlockLocation:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required string? FileID`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `JsonElement Type "content_block_location"constant`
-
-          - `class BetaCitationsWebSearchResultLocation:`
-
-            - `required string CitedText`
-
-            - `required string EncryptedIndex`
-
-            - `required string? Title`
-
-            - `JsonElement Type "web_search_result_location"constant`
-
-            - `required string Url`
-
-          - `class BetaCitationSearchResultLocation:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required Long SearchResultIndex`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `required string Source`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `required string? Title`
-
-            - `JsonElement Type "search_result_location"constant`
-
-        - `required string Text`
-
-        - `JsonElement Type "text"constant`
-
       - `class BetaThinkingBlock:`
-
-        - `required string Signature`
-
-        - `required string Thinking`
-
-        - `JsonElement Type "thinking"constant`
 
       - `class BetaRedactedThinkingBlock:`
 
-        - `required string Data`
-
-        - `JsonElement Type "redacted_thinking"constant`
-
       - `class BetaToolUseBlock:`
-
-        - `required string ID`
-
-        - `required IReadOnlyDictionary<string, JsonElement> Input`
-
-        - `required string Name`
-
-        - `JsonElement Type "tool_use"constant`
-
-        - `Caller Caller`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller:`
-
-            Tool invocation directly from the model.
-
-            - `JsonElement Type "direct"constant`
-
-          - `class BetaServerToolCaller:`
-
-            Tool invocation generated by a server-side tool.
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
-          - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaServerToolUseBlock:`
 
-        - `required string ID`
-
-        - `required IReadOnlyDictionary<string, JsonElement> Input`
-
-        - `required Name Name`
-
-          - `"advisor"Advisor`
-
-          - `"web_search"WebSearch`
-
-          - `"web_fetch"WebFetch`
-
-          - `"code_execution"CodeExecution`
-
-          - `"bash_code_execution"BashCodeExecution`
-
-          - `"text_editor_code_execution"TextEditorCodeExecution`
-
-          - `"tool_search_tool_regex"ToolSearchToolRegex`
-
-          - `"tool_search_tool_bm25"ToolSearchToolBm25`
-
-        - `JsonElement Type "server_tool_use"constant`
-
-        - `Caller Caller`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller:`
-
-            Tool invocation directly from the model.
-
-            - `JsonElement Type "direct"constant`
-
-          - `class BetaServerToolCaller:`
-
-            Tool invocation generated by a server-side tool.
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
-          - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
-
       - `class BetaWebSearchToolResultBlock:`
-
-        - `required BetaWebSearchToolResultBlockContent Content`
-
-          - `class BetaWebSearchToolResultError:`
-
-            - `required BetaWebSearchToolResultErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"unavailable"Unavailable`
-
-              - `"max_uses_exceeded"MaxUsesExceeded`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"query_too_long"QueryTooLong`
-
-              - `"request_too_large"RequestTooLarge`
-
-            - `JsonElement Type "web_search_tool_result_error"constant`
-
-          - `IReadOnlyList<BetaWebSearchResultBlock>`
-
-            - `required string EncryptedContent`
-
-            - `required string? PageAge`
-
-            - `required string Title`
-
-            - `JsonElement Type "web_search_result"constant`
-
-            - `required string Url`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "web_search_tool_result"constant`
-
-        - `Caller Caller`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller:`
-
-            Tool invocation directly from the model.
-
-            - `JsonElement Type "direct"constant`
-
-          - `class BetaServerToolCaller:`
-
-            Tool invocation generated by a server-side tool.
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
-          - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebFetchToolResultBlock:`
 
-        - `required Content Content`
-
-          - `class BetaWebFetchToolResultErrorBlock:`
-
-            - `required BetaWebFetchToolResultErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"url_too_long"UrlTooLong`
-
-              - `"url_not_allowed"UrlNotAllowed`
-
-              - `"url_not_accessible"UrlNotAccessible`
-
-              - `"unsupported_content_type"UnsupportedContentType`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"max_uses_exceeded"MaxUsesExceeded`
-
-              - `"unavailable"Unavailable`
-
-            - `JsonElement Type "web_fetch_tool_result_error"constant`
-
-          - `class BetaWebFetchBlock:`
-
-            - `required BetaDocumentBlock Content`
-
-              - `required BetaCitationConfig? Citations`
-
-                Citation configuration for the document
-
-                - `required Boolean Enabled`
-
-              - `required Source Source`
-
-                - `class BetaBase64PdfSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "application/pdf"constant`
-
-                  - `JsonElement Type "base64"constant`
-
-                - `class BetaPlainTextSource:`
-
-                  - `required string Data`
-
-                  - `JsonElement MediaType "text/plain"constant`
-
-                  - `JsonElement Type "text"constant`
-
-              - `required string? Title`
-
-                The title of the document
-
-              - `JsonElement Type "document"constant`
-
-            - `required string? RetrievedAt`
-
-              ISO 8601 timestamp when the content was retrieved
-
-            - `JsonElement Type "web_fetch_result"constant`
-
-            - `required string Url`
-
-              Fetched content URL
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "web_fetch_tool_result"constant`
-
-        - `Caller Caller`
-
-          Tool invocation directly from the model.
-
-          - `class BetaDirectCaller:`
-
-            Tool invocation directly from the model.
-
-            - `JsonElement Type "direct"constant`
-
-          - `class BetaServerToolCaller:`
-
-            Tool invocation generated by a server-side tool.
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
-          - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
-
       - `class BetaAdvisorToolResultBlock:`
-
-        - `required Content Content`
-
-          - `class BetaAdvisorToolResultError:`
-
-            - `required ErrorCode ErrorCode`
-
-              - `"max_uses_exceeded"MaxUsesExceeded`
-
-              - `"prompt_too_long"PromptTooLong`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"overloaded"Overloaded`
-
-              - `"unavailable"Unavailable`
-
-              - `"execution_time_exceeded"ExecutionTimeExceeded`
-
-            - `JsonElement Type "advisor_tool_result_error"constant`
-
-          - `class BetaAdvisorResultBlock:`
-
-            - `required string Text`
-
-            - `JsonElement Type "advisor_result"constant`
-
-          - `class BetaAdvisorRedactedResultBlock:`
-
-            - `required string EncryptedContent`
-
-              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-            - `JsonElement Type "advisor_redacted_result"constant`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "advisor_tool_result"constant`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
-        - `required BetaCodeExecutionToolResultBlockContent Content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
-
-          - `class BetaCodeExecutionToolResultError:`
-
-            - `required BetaCodeExecutionToolResultErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"unavailable"Unavailable`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"execution_time_exceeded"ExecutionTimeExceeded`
-
-            - `JsonElement Type "code_execution_tool_result_error"constant`
-
-          - `class BetaCodeExecutionResultBlock:`
-
-            - `required IReadOnlyList<BetaCodeExecutionOutputBlock> Content`
-
-              - `required string FileID`
-
-              - `JsonElement Type "code_execution_output"constant`
-
-            - `required Long ReturnCode`
-
-            - `required string Stderr`
-
-            - `required string Stdout`
-
-            - `JsonElement Type "code_execution_result"constant`
-
-          - `class BetaEncryptedCodeExecutionResultBlock:`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `required IReadOnlyList<BetaCodeExecutionOutputBlock> Content`
-
-              - `required string FileID`
-
-              - `JsonElement Type "code_execution_output"constant`
-
-            - `required string EncryptedStdout`
-
-            - `required Long ReturnCode`
-
-            - `required string Stderr`
-
-            - `JsonElement Type "encrypted_code_execution_result"constant`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "code_execution_tool_result"constant`
-
       - `class BetaBashCodeExecutionToolResultBlock:`
-
-        - `required Content Content`
-
-          - `class BetaBashCodeExecutionToolResultError:`
-
-            - `required ErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"unavailable"Unavailable`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"execution_time_exceeded"ExecutionTimeExceeded`
-
-              - `"output_file_too_large"OutputFileTooLarge`
-
-            - `JsonElement Type "bash_code_execution_tool_result_error"constant`
-
-          - `class BetaBashCodeExecutionResultBlock:`
-
-            - `required IReadOnlyList<BetaBashCodeExecutionOutputBlock> Content`
-
-              - `required string FileID`
-
-              - `JsonElement Type "bash_code_execution_output"constant`
-
-            - `required Long ReturnCode`
-
-            - `required string Stderr`
-
-            - `required string Stdout`
-
-            - `JsonElement Type "bash_code_execution_result"constant`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "bash_code_execution_tool_result"constant`
 
       - `class BetaTextEditorCodeExecutionToolResultBlock:`
 
-        - `required Content Content`
-
-          - `class BetaTextEditorCodeExecutionToolResultError:`
-
-            - `required ErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"unavailable"Unavailable`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"execution_time_exceeded"ExecutionTimeExceeded`
-
-              - `"file_not_found"FileNotFound`
-
-            - `required string? ErrorMessage`
-
-            - `JsonElement Type "text_editor_code_execution_tool_result_error"constant`
-
-          - `class BetaTextEditorCodeExecutionViewResultBlock:`
-
-            - `required string Content`
-
-            - `required FileType FileType`
-
-              - `"text"Text`
-
-              - `"image"Image`
-
-              - `"pdf"Pdf`
-
-            - `required Long? NumLines`
-
-            - `required Long? StartLine`
-
-            - `required Long? TotalLines`
-
-            - `JsonElement Type "text_editor_code_execution_view_result"constant`
-
-          - `class BetaTextEditorCodeExecutionCreateResultBlock:`
-
-            - `required Boolean IsFileUpdate`
-
-            - `JsonElement Type "text_editor_code_execution_create_result"constant`
-
-          - `class BetaTextEditorCodeExecutionStrReplaceResultBlock:`
-
-            - `required IReadOnlyList<string>? Lines`
-
-            - `required Long? NewLines`
-
-            - `required Long? NewStart`
-
-            - `required Long? OldLines`
-
-            - `required Long? OldStart`
-
-            - `JsonElement Type "text_editor_code_execution_str_replace_result"constant`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "text_editor_code_execution_tool_result"constant`
-
       - `class BetaToolSearchToolResultBlock:`
-
-        - `required Content Content`
-
-          - `class BetaToolSearchToolResultError:`
-
-            - `required ErrorCode ErrorCode`
-
-              - `"invalid_tool_input"InvalidToolInput`
-
-              - `"unavailable"Unavailable`
-
-              - `"too_many_requests"TooManyRequests`
-
-              - `"execution_time_exceeded"ExecutionTimeExceeded`
-
-            - `required string? ErrorMessage`
-
-            - `JsonElement Type "tool_search_tool_result_error"constant`
-
-          - `class BetaToolSearchToolSearchResultBlock:`
-
-            - `required IReadOnlyList<BetaToolReferenceBlock> ToolReferences`
-
-              - `required string ToolName`
-
-              - `JsonElement Type "tool_reference"constant`
-
-            - `JsonElement Type "tool_search_tool_search_result"constant`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "tool_search_tool_result"constant`
 
       - `class BetaMcpToolUseBlock:`
 
-        - `required string ID`
-
-        - `required IReadOnlyDictionary<string, JsonElement> Input`
-
-        - `required string Name`
-
-          The name of the MCP tool
-
-        - `required string ServerName`
-
-          The name of the MCP server
-
-        - `JsonElement Type "mcp_tool_use"constant`
-
       - `class BetaMcpToolResultBlock:`
-
-        - `required Content Content`
-
-          - `string`
-
-          - `IReadOnlyList<BetaTextBlock>`
-
-            - `required IReadOnlyList<BetaTextCitation>? Citations`
-
-              Citations supporting the text block.
-
-              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-              - `class BetaCitationCharLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required string? FileID`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required string? FileID`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required string? FileID`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationsWebSearchResultLocation:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
-
-            - `required string Text`
-
-            - `JsonElement Type "text"constant`
-
-        - `required Boolean IsError`
-
-        - `required string ToolUseID`
-
-        - `JsonElement Type "mcp_tool_result"constant`
 
       - `class BetaContainerUploadBlock:`
 
         Response model for a file uploaded to the container.
-
-        - `required string FileID`
-
-        - `JsonElement Type "container_upload"constant`
 
       - `class BetaCompactionBlock:`
 
@@ -25750,16 +16215,6 @@ Console.WriteLine(betaMessageTokensCount);
         When content is None, it indicates the compaction failed to produce a valid
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
-
-        - `required string? Content`
-
-          Summary of compacted content, or null if compaction failed
-
-        - `required string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
-        - `JsonElement Type "compaction"constant`
 
     - `required Long Index`
 
@@ -25787,103 +16242,13 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `class BetaCitationCharLocation:`
 
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndCharIndex`
-
-            - `required string? FileID`
-
-            - `required Long StartCharIndex`
-
-            - `JsonElement Type "char_location"constant`
-
           - `class BetaCitationPageLocation:`
-
-            - `required string CitedText`
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndPageNumber`
-
-            - `required string? FileID`
-
-            - `required Long StartPageNumber`
-
-            - `JsonElement Type "page_location"constant`
 
           - `class BetaCitationContentBlockLocation:`
 
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long DocumentIndex`
-
-            - `required string? DocumentTitle`
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required string? FileID`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `JsonElement Type "content_block_location"constant`
-
           - `class BetaCitationsWebSearchResultLocation:`
 
-            - `required string CitedText`
-
-            - `required string EncryptedIndex`
-
-            - `required string? Title`
-
-            - `JsonElement Type "web_search_result_location"constant`
-
-            - `required string Url`
-
           - `class BetaCitationSearchResultLocation:`
-
-            - `required string CitedText`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `required Long EndBlockIndex`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `required Long SearchResultIndex`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `required string Source`
-
-            - `required Long StartBlockIndex`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `required string? Title`
-
-            - `JsonElement Type "search_result_location"constant`
 
         - `JsonElement Type "citations_delta"constant`
 
@@ -26150,23 +16515,6 @@ Console.WriteLine(betaMessageTokensCount);
 
               Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type "ephemeral"constant`
-
-              - `Ttl Ttl`
-
-                The time-to-live for the cache control breakpoint.
-
-                This may be one the following values:
-
-                - `5m`: 5 minutes
-                - `1h`: 1 hour
-
-                Defaults to `5m`.
-
-                - `"5m"Ttl5m`
-
-                - `"1h"Ttl1h`
-
       - `JsonElement Type "content"constant`
 
     - `class BetaUrlPdfSource:`
@@ -26186,23 +16534,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `BetaCacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
-
-    - `JsonElement Type "ephemeral"constant`
-
-    - `Ttl Ttl`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"Ttl5m`
-
-      - `"1h"Ttl1h`
 
   - `BetaCitationsConfigParam? Citations`
 
@@ -26280,23 +16611,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
@@ -26532,23 +16846,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `BetaCacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
-
-    - `JsonElement Type "ephemeral"constant`
-
-    - `Ttl Ttl`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"Ttl5m`
-
-      - `"1h"Ttl1h`
 
   - `BetaCitationsConfigParam Citations`
 
@@ -28221,23 +18518,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
           - `class BetaCitationCharLocationParam:`
@@ -28372,23 +18652,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
       - `class BetaSearchResultBlockParam:`
 
         - `required IReadOnlyList<BetaTextBlockParam> Content`
@@ -28401,118 +18664,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-            - `class BetaCitationCharLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationWebSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
 
         - `required string Source`
 
@@ -28523,23 +18675,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
         - `BetaCitationsConfigParam Citations`
 
@@ -28575,181 +18710,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                 - `class BetaTextBlockParam:`
 
-                  - `required string Text`
-
-                  - `JsonElement Type "text"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
-                  - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                    - `class BetaCitationCharLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndCharIndex`
-
-                      - `required Long StartCharIndex`
-
-                      - `JsonElement Type "char_location"constant`
-
-                    - `class BetaCitationPageLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndPageNumber`
-
-                      - `required Long StartPageNumber`
-
-                      - `JsonElement Type "page_location"constant`
-
-                    - `class BetaCitationContentBlockLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `JsonElement Type "content_block_location"constant`
-
-                    - `class BetaCitationWebSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required string EncryptedIndex`
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "web_search_result_location"constant`
-
-                      - `required string Url`
-
-                    - `class BetaCitationSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long SearchResultIndex`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `required string Source`
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "search_result_location"constant`
-
                 - `class BetaImageBlockParam:`
-
-                  - `required Source Source`
-
-                    - `class BetaBase64ImageSource:`
-
-                      - `required string Data`
-
-                      - `required MediaType MediaType`
-
-                        - `"image/jpeg"ImageJpeg`
-
-                        - `"image/png"ImagePng`
-
-                        - `"image/gif"ImageGif`
-
-                        - `"image/webp"ImageWebP`
-
-                      - `JsonElement Type "base64"constant`
-
-                    - `class BetaUrlImageSource:`
-
-                      - `JsonElement Type "url"constant`
-
-                      - `required string Url`
-
-                    - `class BetaFileImageSource:`
-
-                      - `required string FileID`
-
-                      - `JsonElement Type "file"constant`
-
-                  - `JsonElement Type "image"constant`
-
-                  - `BetaCacheControlEphemeral? CacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
 
             - `JsonElement Type "content"constant`
 
@@ -28771,26 +18732,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           Create a cache control breakpoint at this content block.
 
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
-
         - `BetaCitationsConfigParam? Citations`
-
-          - `Boolean Enabled`
 
         - `string? Context`
 
@@ -28807,23 +18749,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
   - `Boolean IsError`
 
@@ -29027,23 +18952,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `BetaCacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
-
-    - `JsonElement Type "ephemeral"constant`
-
-    - `Ttl Ttl`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"Ttl5m`
-
-      - `"1h"Ttl1h`
 
 ### Beta Tool Search Tool Result Error
 
@@ -29433,23 +19341,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -29481,23 +19372,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -29531,23 +19405,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -29577,23 +19434,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -29626,23 +19466,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -29682,23 +19505,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -29734,23 +19540,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -29792,23 +19581,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -29844,23 +19616,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -29902,23 +19657,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -29959,23 +19697,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -30008,23 +19729,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -30056,23 +19760,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -30117,23 +19804,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -30199,23 +19869,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCitationsConfigParam? Citations`
 
       Citations configuration for fetched documents. Citations are disabled by default.
@@ -30268,23 +19921,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -30300,24 +19936,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaUserLocation? UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
-
-      - `JsonElement Type "approximate"constant`
-
-      - `string? City`
-
-        The city of the user.
-
-      - `string? Country`
-
-        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-      - `string? Region`
-
-        The region of the user.
-
-      - `string? Timezone`
-
-        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `class BetaWebFetchTool20260209:`
 
@@ -30349,28 +19967,9 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCitationsConfigParam? Citations`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Boolean Enabled`
 
     - `Boolean DeferLoading`
 
@@ -30420,28 +20019,9 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCitationsConfigParam? Citations`
 
       Citations configuration for fetched documents. Citations are disabled by default.
-
-      - `Boolean Enabled`
 
     - `Boolean DeferLoading`
 
@@ -30559,43 +20139,9 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `BetaCacheControlEphemeral? Caching`
 
       Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `Boolean DeferLoading`
 
@@ -30635,23 +20181,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -30686,23 +20215,6 @@ Console.WriteLine(betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
-
     - `Boolean DeferLoading`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -30727,23 +20239,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `IReadOnlyDictionary<string, BetaMcpToolConfig>? Configs`
 
@@ -30936,14 +20431,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         Breakdown of cached tokens by TTL
 
-        - `required Long Ephemeral1hInputTokens`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `required Long Ephemeral5mInputTokens`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `required Long CacheCreationInputTokens`
 
         The number of input tokens used to create the cache entry.
@@ -30972,14 +20459,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         Breakdown of cached tokens by TTL
 
-        - `required Long Ephemeral1hInputTokens`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `required Long Ephemeral5mInputTokens`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
       - `required Long CacheCreationInputTokens`
 
         The number of input tokens used to create the cache entry.
@@ -31007,14 +20486,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `required BetaCacheCreation? CacheCreation`
 
         Breakdown of cached tokens by TTL
-
-        - `required Long Ephemeral1hInputTokens`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `required Long Ephemeral5mInputTokens`
-
-          The number of input tokens used to create the 5 minute cache entry.
 
       - `required Long CacheCreationInputTokens`
 
@@ -31405,23 +20876,6 @@ Console.WriteLine(betaMessageTokensCount);
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
         - `JsonElement Type "content"constant`
 
       - `class BetaUrlPdfSource:`
@@ -31441,23 +20895,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
-
-      - `JsonElement Type "ephemeral"constant`
-
-      - `Ttl Ttl`
-
-        The time-to-live for the cache control breakpoint.
-
-        This may be one the following values:
-
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
-
-        Defaults to `5m`.
-
-        - `"5m"Ttl5m`
-
-        - `"1h"Ttl1h`
 
     - `BetaCitationsConfigParam? Citations`
 
@@ -32015,23 +21452,6 @@ Console.WriteLine(betaMessageTokensCount);
 
                     Create a cache control breakpoint at this content block.
 
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
             - `JsonElement Type "content"constant`
 
           - `class BetaUrlPdfSource:`
@@ -32051,23 +21471,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
-
-          - `JsonElement Type "ephemeral"constant`
-
-          - `Ttl Ttl`
-
-            The time-to-live for the cache control breakpoint.
-
-            This may be one the following values:
-
-            - `5m`: 5 minutes
-            - `1h`: 1 hour
-
-            Defaults to `5m`.
-
-            - `"5m"Ttl5m`
-
-            - `"1h"Ttl1h`
 
         - `BetaCitationsConfigParam? Citations`
 
@@ -32094,23 +21497,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `BetaCacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
-
-    - `JsonElement Type "ephemeral"constant`
-
-    - `Ttl Ttl`
-
-      The time-to-live for the cache control breakpoint.
-
-      This may be one the following values:
-
-      - `5m`: 5 minutes
-      - `1h`: 1 hour
-
-      Defaults to `5m`.
-
-      - `"5m"Ttl5m`
-
-      - `"1h"Ttl1h`
 
   - `Caller Caller`
 
@@ -32673,7 +22059,7 @@ Console.WriteLine(betaMessageTokensCount);
 
 # Batches
 
-## Create
+## Create a Message Batch
 
 `BetaMessageBatch Beta.Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -32933,23 +22319,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
             - `class BetaRequestDocumentBlock:`
 
               - `required Source Source`
@@ -32980,181 +22349,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `class BetaTextBlockParam:`
 
-                        - `required string Text`
-
-                        - `JsonElement Type "text"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
-
-                        - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                          - `class BetaCitationCharLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndCharIndex`
-
-                            - `required Long StartCharIndex`
-
-                            - `JsonElement Type "char_location"constant`
-
-                          - `class BetaCitationPageLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndPageNumber`
-
-                            - `required Long StartPageNumber`
-
-                            - `JsonElement Type "page_location"constant`
-
-                          - `class BetaCitationContentBlockLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long DocumentIndex`
-
-                            - `required string? DocumentTitle`
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `JsonElement Type "content_block_location"constant`
-
-                          - `class BetaCitationWebSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                            - `required string EncryptedIndex`
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "web_search_result_location"constant`
-
-                            - `required string Url`
-
-                          - `class BetaCitationSearchResultLocationParam:`
-
-                            - `required string CitedText`
-
-                              The full text of the cited block range, concatenated.
-
-                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                            - `required Long EndBlockIndex`
-
-                              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                            - `required Long SearchResultIndex`
-
-                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                            - `required string Source`
-
-                            - `required Long StartBlockIndex`
-
-                              0-based index of the first cited block in the source's `content` array.
-
-                            - `required string? Title`
-
-                            - `JsonElement Type "search_result_location"constant`
-
                       - `class BetaImageBlockParam:`
-
-                        - `required Source Source`
-
-                          - `class BetaBase64ImageSource:`
-
-                            - `required string Data`
-
-                            - `required MediaType MediaType`
-
-                              - `"image/jpeg"ImageJpeg`
-
-                              - `"image/png"ImagePng`
-
-                              - `"image/gif"ImageGif`
-
-                              - `"image/webp"ImageWebP`
-
-                            - `JsonElement Type "base64"constant`
-
-                          - `class BetaUrlImageSource:`
-
-                            - `JsonElement Type "url"constant`
-
-                            - `required string Url`
-
-                          - `class BetaFileImageSource:`
-
-                            - `required string FileID`
-
-                            - `JsonElement Type "file"constant`
-
-                        - `JsonElement Type "image"constant`
-
-                        - `BetaCacheControlEphemeral? CacheControl`
-
-                          Create a cache control breakpoint at this content block.
-
-                          - `JsonElement Type "ephemeral"constant`
-
-                          - `Ttl Ttl`
-
-                            The time-to-live for the cache control breakpoint.
-
-                            This may be one the following values:
-
-                            - `5m`: 5 minutes
-                            - `1h`: 1 hour
-
-                            Defaults to `5m`.
-
-                            - `"5m"Ttl5m`
-
-                            - `"1h"Ttl1h`
 
                   - `JsonElement Type "content"constant`
 
@@ -33176,23 +22371,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `BetaCitationsConfigParam? Citations`
 
                 - `Boolean Enabled`
@@ -33213,118 +22391,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Create a cache control breakpoint at this content block.
 
-                  - `JsonElement Type "ephemeral"constant`
-
-                  - `Ttl Ttl`
-
-                    The time-to-live for the cache control breakpoint.
-
-                    This may be one the following values:
-
-                    - `5m`: 5 minutes
-                    - `1h`: 1 hour
-
-                    Defaults to `5m`.
-
-                    - `"5m"Ttl5m`
-
-                    - `"1h"Ttl1h`
-
                 - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                  - `class BetaCitationCharLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationWebSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocationParam:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
 
               - `required string Source`
 
@@ -33336,26 +22403,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `BetaCitationsConfigParam Citations`
-
-                - `Boolean Enabled`
 
             - `class BetaThinkingBlockParam:`
 
@@ -33384,23 +22432,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
               - `Caller Caller`
 
@@ -33436,23 +22467,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `Content Content`
 
                 - `string`
@@ -33461,588 +22475,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `class BetaTextBlockParam:`
 
-                    - `required string Text`
-
-                    - `JsonElement Type "text"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                      - `class BetaCitationCharLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndCharIndex`
-
-                        - `required Long StartCharIndex`
-
-                        - `JsonElement Type "char_location"constant`
-
-                      - `class BetaCitationPageLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndPageNumber`
-
-                        - `required Long StartPageNumber`
-
-                        - `JsonElement Type "page_location"constant`
-
-                      - `class BetaCitationContentBlockLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long DocumentIndex`
-
-                        - `required string? DocumentTitle`
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `JsonElement Type "content_block_location"constant`
-
-                      - `class BetaCitationWebSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                        - `required string EncryptedIndex`
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "web_search_result_location"constant`
-
-                        - `required string Url`
-
-                      - `class BetaCitationSearchResultLocationParam:`
-
-                        - `required string CitedText`
-
-                          The full text of the cited block range, concatenated.
-
-                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                        - `required Long EndBlockIndex`
-
-                          Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                        - `required Long SearchResultIndex`
-
-                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                          Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                        - `required string Source`
-
-                        - `required Long StartBlockIndex`
-
-                          0-based index of the first cited block in the source's `content` array.
-
-                        - `required string? Title`
-
-                        - `JsonElement Type "search_result_location"constant`
-
                   - `class BetaImageBlockParam:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64ImageSource:`
-
-                        - `required string Data`
-
-                        - `required MediaType MediaType`
-
-                          - `"image/jpeg"ImageJpeg`
-
-                          - `"image/png"ImagePng`
-
-                          - `"image/gif"ImageGif`
-
-                          - `"image/webp"ImageWebP`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaUrlImageSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileImageSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "image"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
 
                   - `class BetaSearchResultBlockParam:`
 
-                    - `required IReadOnlyList<BetaTextBlockParam> Content`
-
-                      - `required string Text`
-
-                      - `JsonElement Type "text"constant`
-
-                      - `BetaCacheControlEphemeral? CacheControl`
-
-                        Create a cache control breakpoint at this content block.
-
-                        - `JsonElement Type "ephemeral"constant`
-
-                        - `Ttl Ttl`
-
-                          The time-to-live for the cache control breakpoint.
-
-                          This may be one the following values:
-
-                          - `5m`: 5 minutes
-                          - `1h`: 1 hour
-
-                          Defaults to `5m`.
-
-                          - `"5m"Ttl5m`
-
-                          - `"1h"Ttl1h`
-
-                      - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                        - `class BetaCitationCharLocationParam:`
-
-                          - `required string CitedText`
-
-                          - `required Long DocumentIndex`
-
-                          - `required string? DocumentTitle`
-
-                          - `required Long EndCharIndex`
-
-                          - `required Long StartCharIndex`
-
-                          - `JsonElement Type "char_location"constant`
-
-                        - `class BetaCitationPageLocationParam:`
-
-                          - `required string CitedText`
-
-                          - `required Long DocumentIndex`
-
-                          - `required string? DocumentTitle`
-
-                          - `required Long EndPageNumber`
-
-                          - `required Long StartPageNumber`
-
-                          - `JsonElement Type "page_location"constant`
-
-                        - `class BetaCitationContentBlockLocationParam:`
-
-                          - `required string CitedText`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `required Long DocumentIndex`
-
-                          - `required string? DocumentTitle`
-
-                          - `required Long EndBlockIndex`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `required Long StartBlockIndex`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `JsonElement Type "content_block_location"constant`
-
-                        - `class BetaCitationWebSearchResultLocationParam:`
-
-                          - `required string CitedText`
-
-                          - `required string EncryptedIndex`
-
-                          - `required string? Title`
-
-                          - `JsonElement Type "web_search_result_location"constant`
-
-                          - `required string Url`
-
-                        - `class BetaCitationSearchResultLocationParam:`
-
-                          - `required string CitedText`
-
-                            The full text of the cited block range, concatenated.
-
-                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                          - `required Long EndBlockIndex`
-
-                            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                          - `required Long SearchResultIndex`
-
-                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                          - `required string Source`
-
-                          - `required Long StartBlockIndex`
-
-                            0-based index of the first cited block in the source's `content` array.
-
-                          - `required string? Title`
-
-                          - `JsonElement Type "search_result_location"constant`
-
-                    - `required string Source`
-
-                    - `required string Title`
-
-                    - `JsonElement Type "search_result"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `BetaCitationsConfigParam Citations`
-
-                      - `Boolean Enabled`
-
                   - `class BetaRequestDocumentBlock:`
-
-                    - `required Source Source`
-
-                      - `class BetaBase64PdfSource:`
-
-                        - `required string Data`
-
-                        - `JsonElement MediaType "application/pdf"constant`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaPlainTextSource:`
-
-                        - `required string Data`
-
-                        - `JsonElement MediaType "text/plain"constant`
-
-                        - `JsonElement Type "text"constant`
-
-                      - `class BetaContentBlockSource:`
-
-                        - `required Content Content`
-
-                          - `string`
-
-                          - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                            - `class BetaTextBlockParam:`
-
-                              - `required string Text`
-
-                              - `JsonElement Type "text"constant`
-
-                              - `BetaCacheControlEphemeral? CacheControl`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `JsonElement Type "ephemeral"constant`
-
-                                - `Ttl Ttl`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `"5m"Ttl5m`
-
-                                  - `"1h"Ttl1h`
-
-                              - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                                - `class BetaCitationCharLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndCharIndex`
-
-                                  - `required Long StartCharIndex`
-
-                                  - `JsonElement Type "char_location"constant`
-
-                                - `class BetaCitationPageLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndPageNumber`
-
-                                  - `required Long StartPageNumber`
-
-                                  - `JsonElement Type "page_location"constant`
-
-                                - `class BetaCitationContentBlockLocationParam:`
-
-                                  - `required string CitedText`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndBlockIndex`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `required Long StartBlockIndex`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `JsonElement Type "content_block_location"constant`
-
-                                - `class BetaCitationWebSearchResultLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required string EncryptedIndex`
-
-                                  - `required string? Title`
-
-                                  - `JsonElement Type "web_search_result_location"constant`
-
-                                  - `required string Url`
-
-                                - `class BetaCitationSearchResultLocationParam:`
-
-                                  - `required string CitedText`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `required Long EndBlockIndex`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `required Long SearchResultIndex`
-
-                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                  - `required string Source`
-
-                                  - `required Long StartBlockIndex`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `required string? Title`
-
-                                  - `JsonElement Type "search_result_location"constant`
-
-                            - `class BetaImageBlockParam:`
-
-                              - `required Source Source`
-
-                                - `class BetaBase64ImageSource:`
-
-                                  - `required string Data`
-
-                                  - `required MediaType MediaType`
-
-                                    - `"image/jpeg"ImageJpeg`
-
-                                    - `"image/png"ImagePng`
-
-                                    - `"image/gif"ImageGif`
-
-                                    - `"image/webp"ImageWebP`
-
-                                  - `JsonElement Type "base64"constant`
-
-                                - `class BetaUrlImageSource:`
-
-                                  - `JsonElement Type "url"constant`
-
-                                  - `required string Url`
-
-                                - `class BetaFileImageSource:`
-
-                                  - `required string FileID`
-
-                                  - `JsonElement Type "file"constant`
-
-                              - `JsonElement Type "image"constant`
-
-                              - `BetaCacheControlEphemeral? CacheControl`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `JsonElement Type "ephemeral"constant`
-
-                                - `Ttl Ttl`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `"5m"Ttl5m`
-
-                                  - `"1h"Ttl1h`
-
-                        - `JsonElement Type "content"constant`
-
-                      - `class BetaUrlPdfSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileDocumentSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "document"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `BetaCitationsConfigParam? Citations`
-
-                      - `Boolean Enabled`
-
-                    - `string? Context`
-
-                    - `string? Title`
 
                   - `class BetaToolReferenceBlockParam:`
 
@@ -34055,23 +22492,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                     - `BetaCacheControlEphemeral? CacheControl`
 
                       Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
 
               - `Boolean IsError`
 
@@ -34105,23 +22525,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `Caller Caller`
 
                 Tool invocation directly from the model.
@@ -34130,21 +22533,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `JsonElement Type "direct"constant`
-
                 - `class BetaServerToolCaller:`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20250825"constant`
-
                 - `class BetaServerToolCaller20260120:`
-
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20260120"constant`
 
             - `class BetaWebSearchToolResultBlockParam:`
 
@@ -34188,23 +22581,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `Caller Caller`
 
                 Tool invocation directly from the model.
@@ -34213,21 +22589,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `JsonElement Type "direct"constant`
-
                 - `class BetaServerToolCaller:`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20250825"constant`
-
                 - `class BetaServerToolCaller20260120:`
-
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20260120"constant`
 
             - `class BetaWebFetchToolResultBlockParam:`
 
@@ -34259,255 +22625,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `required BetaRequestDocumentBlock Content`
 
-                    - `required Source Source`
-
-                      - `class BetaBase64PdfSource:`
-
-                        - `required string Data`
-
-                        - `JsonElement MediaType "application/pdf"constant`
-
-                        - `JsonElement Type "base64"constant`
-
-                      - `class BetaPlainTextSource:`
-
-                        - `required string Data`
-
-                        - `JsonElement MediaType "text/plain"constant`
-
-                        - `JsonElement Type "text"constant`
-
-                      - `class BetaContentBlockSource:`
-
-                        - `required Content Content`
-
-                          - `string`
-
-                          - `IReadOnlyList<BetaContentBlockSourceContent>`
-
-                            - `class BetaTextBlockParam:`
-
-                              - `required string Text`
-
-                              - `JsonElement Type "text"constant`
-
-                              - `BetaCacheControlEphemeral? CacheControl`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `JsonElement Type "ephemeral"constant`
-
-                                - `Ttl Ttl`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `"5m"Ttl5m`
-
-                                  - `"1h"Ttl1h`
-
-                              - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                                - `class BetaCitationCharLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndCharIndex`
-
-                                  - `required Long StartCharIndex`
-
-                                  - `JsonElement Type "char_location"constant`
-
-                                - `class BetaCitationPageLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndPageNumber`
-
-                                  - `required Long StartPageNumber`
-
-                                  - `JsonElement Type "page_location"constant`
-
-                                - `class BetaCitationContentBlockLocationParam:`
-
-                                  - `required string CitedText`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `required Long DocumentIndex`
-
-                                  - `required string? DocumentTitle`
-
-                                  - `required Long EndBlockIndex`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `required Long StartBlockIndex`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `JsonElement Type "content_block_location"constant`
-
-                                - `class BetaCitationWebSearchResultLocationParam:`
-
-                                  - `required string CitedText`
-
-                                  - `required string EncryptedIndex`
-
-                                  - `required string? Title`
-
-                                  - `JsonElement Type "web_search_result_location"constant`
-
-                                  - `required string Url`
-
-                                - `class BetaCitationSearchResultLocationParam:`
-
-                                  - `required string CitedText`
-
-                                    The full text of the cited block range, concatenated.
-
-                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                                  - `required Long EndBlockIndex`
-
-                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                                  - `required Long SearchResultIndex`
-
-                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                                  - `required string Source`
-
-                                  - `required Long StartBlockIndex`
-
-                                    0-based index of the first cited block in the source's `content` array.
-
-                                  - `required string? Title`
-
-                                  - `JsonElement Type "search_result_location"constant`
-
-                            - `class BetaImageBlockParam:`
-
-                              - `required Source Source`
-
-                                - `class BetaBase64ImageSource:`
-
-                                  - `required string Data`
-
-                                  - `required MediaType MediaType`
-
-                                    - `"image/jpeg"ImageJpeg`
-
-                                    - `"image/png"ImagePng`
-
-                                    - `"image/gif"ImageGif`
-
-                                    - `"image/webp"ImageWebP`
-
-                                  - `JsonElement Type "base64"constant`
-
-                                - `class BetaUrlImageSource:`
-
-                                  - `JsonElement Type "url"constant`
-
-                                  - `required string Url`
-
-                                - `class BetaFileImageSource:`
-
-                                  - `required string FileID`
-
-                                  - `JsonElement Type "file"constant`
-
-                              - `JsonElement Type "image"constant`
-
-                              - `BetaCacheControlEphemeral? CacheControl`
-
-                                Create a cache control breakpoint at this content block.
-
-                                - `JsonElement Type "ephemeral"constant`
-
-                                - `Ttl Ttl`
-
-                                  The time-to-live for the cache control breakpoint.
-
-                                  This may be one the following values:
-
-                                  - `5m`: 5 minutes
-                                  - `1h`: 1 hour
-
-                                  Defaults to `5m`.
-
-                                  - `"5m"Ttl5m`
-
-                                  - `"1h"Ttl1h`
-
-                        - `JsonElement Type "content"constant`
-
-                      - `class BetaUrlPdfSource:`
-
-                        - `JsonElement Type "url"constant`
-
-                        - `required string Url`
-
-                      - `class BetaFileDocumentSource:`
-
-                        - `required string FileID`
-
-                        - `JsonElement Type "file"constant`
-
-                    - `JsonElement Type "document"constant`
-
-                    - `BetaCacheControlEphemeral? CacheControl`
-
-                      Create a cache control breakpoint at this content block.
-
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
-                    - `BetaCitationsConfigParam? Citations`
-
-                      - `Boolean Enabled`
-
-                    - `string? Context`
-
-                    - `string? Title`
-
                   - `JsonElement Type "web_fetch_result"constant`
 
                   - `required string Url`
@@ -34526,23 +22643,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
               - `Caller Caller`
 
                 Tool invocation directly from the model.
@@ -34551,21 +22651,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Tool invocation directly from the model.
 
-                  - `JsonElement Type "direct"constant`
-
                 - `class BetaServerToolCaller:`
 
                   Tool invocation generated by a server-side tool.
 
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20250825"constant`
-
                 - `class BetaServerToolCaller20260120:`
-
-                  - `required string ToolID`
-
-                  - `JsonElement Type "code_execution_20260120"constant`
 
             - `class BetaAdvisorToolResultBlockParam:`
 
@@ -34610,23 +22700,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
             - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -34690,23 +22763,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
             - `class BetaBashCodeExecutionToolResultBlockParam:`
 
               - `required Content Content`
@@ -34750,23 +22806,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
             - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
@@ -34838,23 +22877,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
             - `class BetaToolSearchToolResultBlockParam:`
 
               - `required Content Content`
@@ -34885,23 +22907,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       Create a cache control breakpoint at this content block.
 
-                      - `JsonElement Type "ephemeral"constant`
-
-                      - `Ttl Ttl`
-
-                        The time-to-live for the cache control breakpoint.
-
-                        This may be one the following values:
-
-                        - `5m`: 5 minutes
-                        - `1h`: 1 hour
-
-                        Defaults to `5m`.
-
-                        - `"5m"Ttl5m`
-
-                        - `"1h"Ttl1h`
-
                   - `JsonElement Type "tool_search_tool_search_result"constant`
 
               - `required string ToolUseID`
@@ -34911,23 +22916,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
             - `class BetaMcpToolUseBlockParam:`
 
@@ -34947,23 +22935,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
-
             - `class BetaRequestMcpToolResultBlockParam:`
 
               - `required string ToolUseID`
@@ -34973,23 +22944,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
               - `Content Content`
 
@@ -35005,118 +22959,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     Create a cache control breakpoint at this content block.
 
-                    - `JsonElement Type "ephemeral"constant`
-
-                    - `Ttl Ttl`
-
-                      The time-to-live for the cache control breakpoint.
-
-                      This may be one the following values:
-
-                      - `5m`: 5 minutes
-                      - `1h`: 1 hour
-
-                      Defaults to `5m`.
-
-                      - `"5m"Ttl5m`
-
-                      - `"1h"Ttl1h`
-
                   - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-                    - `class BetaCitationCharLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndCharIndex`
-
-                      - `required Long StartCharIndex`
-
-                      - `JsonElement Type "char_location"constant`
-
-                    - `class BetaCitationPageLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndPageNumber`
-
-                      - `required Long StartPageNumber`
-
-                      - `JsonElement Type "page_location"constant`
-
-                    - `class BetaCitationContentBlockLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long DocumentIndex`
-
-                      - `required string? DocumentTitle`
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `JsonElement Type "content_block_location"constant`
-
-                    - `class BetaCitationWebSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                      - `required string EncryptedIndex`
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "web_search_result_location"constant`
-
-                      - `required string Url`
-
-                    - `class BetaCitationSearchResultLocationParam:`
-
-                      - `required string CitedText`
-
-                        The full text of the cited block range, concatenated.
-
-                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                      - `required Long EndBlockIndex`
-
-                        Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                      - `required Long SearchResultIndex`
-
-                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                        Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                      - `required string Source`
-
-                      - `required Long StartBlockIndex`
-
-                        0-based index of the first cited block in the source's `content` array.
-
-                      - `required string? Title`
-
-                      - `JsonElement Type "search_result_location"constant`
 
               - `Boolean IsError`
 
@@ -35132,23 +22975,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
             - `class BetaCompactionBlockParam:`
 
@@ -35169,23 +22995,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
-
-                - `JsonElement Type "ephemeral"constant`
-
-                - `Ttl Ttl`
-
-                  The time-to-live for the cache control breakpoint.
-
-                  This may be one the following values:
-
-                  - `5m`: 5 minutes
-                  - `1h`: 1 hour
-
-                  Defaults to `5m`.
-
-                  - `"5m"Ttl5m`
-
-                  - `"1h"Ttl1h`
 
               - `string? EncryptedContent`
 
@@ -35274,23 +23083,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `BetaCacheControlEphemeral? CacheControl`
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
-
-        - `JsonElement Type "ephemeral"constant`
-
-        - `Ttl Ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`.
-
-          - `"5m"Ttl5m`
-
-          - `"1h"Ttl1h`
 
       - `Container? Container`
 
@@ -35422,10 +23214,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               When to trigger compaction. Defaults to 150000 input tokens.
 
-              - `JsonElement Type "input_tokens"constant`
-
-              - `required Long Value`
-
       - `BetaDiagnosticsParam? Diagnostics`
 
         Request-level diagnostics. Currently carries the previous response
@@ -35517,12 +23305,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-        - `required IReadOnlyDictionary<string, JsonElement> Schema`
-
-          The JSON schema of the format
-
-        - `JsonElement Type "json_schema"constant`
-
       - `ServiceTier ServiceTier`
 
         Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -35573,118 +23355,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `IReadOnlyList<BetaTextCitationParam>? Citations`
-
-            - `class BetaCitationCharLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndCharIndex`
-
-              - `required Long StartCharIndex`
-
-              - `JsonElement Type "char_location"constant`
-
-            - `class BetaCitationPageLocationParam:`
-
-              - `required string CitedText`
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndPageNumber`
-
-              - `required Long StartPageNumber`
-
-              - `JsonElement Type "page_location"constant`
-
-            - `class BetaCitationContentBlockLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long DocumentIndex`
-
-              - `required string? DocumentTitle`
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `JsonElement Type "content_block_location"constant`
-
-            - `class BetaCitationWebSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-              - `required string EncryptedIndex`
-
-              - `required string? Title`
-
-              - `JsonElement Type "web_search_result_location"constant`
-
-              - `required string Url`
-
-            - `class BetaCitationSearchResultLocationParam:`
-
-              - `required string CitedText`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `required Long EndBlockIndex`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `required Long SearchResultIndex`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `required string Source`
-
-              - `required Long StartBlockIndex`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `required string? Title`
-
-              - `JsonElement Type "search_result_location"constant`
 
       - `Double Temperature`
 
@@ -35884,23 +23555,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35947,23 +23601,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -35995,23 +23632,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36045,23 +23665,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36091,23 +23694,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36140,23 +23726,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36196,23 +23765,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36248,23 +23800,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36306,23 +23841,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36358,23 +23876,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36416,23 +23917,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36473,23 +23957,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36522,23 +23989,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36570,23 +24020,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36631,23 +24064,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -36713,28 +24129,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam? Citations`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Boolean Enabled`
 
           - `Boolean DeferLoading`
 
@@ -36782,23 +24179,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -36814,24 +24194,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaUserLocation? UserLocation`
 
             Parameters for the user's location. Used to provide more relevant search results.
-
-            - `JsonElement Type "approximate"constant`
-
-            - `string? City`
-
-              The city of the user.
-
-            - `string? Country`
-
-              The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
-
-            - `string? Region`
-
-              The region of the user.
-
-            - `string? Timezone`
-
-              The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
         - `class BetaWebFetchTool20260209:`
 
@@ -36863,28 +24225,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam? Citations`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Boolean Enabled`
 
           - `Boolean DeferLoading`
 
@@ -36934,28 +24277,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCitationsConfigParam? Citations`
 
             Citations configuration for fetched documents. Citations are disabled by default.
-
-            - `Boolean Enabled`
 
           - `Boolean DeferLoading`
 
@@ -36985,74 +24309,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `"claude-opus-4-7"ClaudeOpus4_7`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"ClaudeMythosPreview`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"ClaudeOpus4_6`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"ClaudeOpus4_5`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"ClaudeOpus4_1`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"ClaudeOpus4_0`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-              Fast and cost-effective model
-
           - `JsonElement Name "advisor"constant`
 
             Name of the tool.
@@ -37073,43 +24329,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `BetaCacheControlEphemeral? Caching`
 
             Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `Boolean DeferLoading`
 
@@ -37149,23 +24371,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -37200,23 +24405,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
-
           - `Boolean DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
@@ -37241,23 +24429,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
-
-            - `JsonElement Type "ephemeral"constant`
-
-            - `Ttl Ttl`
-
-              The time-to-live for the cache control breakpoint.
-
-              This may be one the following values:
-
-              - `5m`: 5 minutes
-              - `1h`: 1 hour
-
-              Defaults to `5m`.
-
-              - `"5m"Ttl5m`
-
-              - `"1h"Ttl1h`
 
           - `IReadOnlyDictionary<string, BetaMcpToolConfig>? Configs`
 
@@ -37625,7 +24796,30 @@ var betaMessageBatch = await client.Beta.Messages.Batches.Create(parameters);
 Console.WriteLine(betaMessageBatch);
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Retrieve a Message Batch
 
 `BetaMessageBatch Beta.Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -37795,7 +24989,30 @@ var betaMessageBatch = await client.Beta.Messages.Batches.Retrieve(parameters);
 Console.WriteLine(betaMessageBatch);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## List Message Batches
 
 `BatchListPageResponse Beta.Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)`
 
@@ -37991,7 +25208,37 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Cancel
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Cancel a Message Batch
 
 `BetaMessageBatch Beta.Messages.Batches.Cancel(BatchCancelParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -38163,7 +25410,30 @@ var betaMessageBatch = await client.Beta.Messages.Batches.Cancel(parameters);
 Console.WriteLine(betaMessageBatch);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+## Delete a Message Batch
 
 `BetaDeletedMessageBatch Beta.Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -38261,7 +25531,16 @@ var betaDeletedMessageBatch = await client.Beta.Messages.Batches.Delete(paramete
 Console.WriteLine(betaDeletedMessageBatch);
 ```
 
-## Results
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+## Retrieve Message Batch results
 
 `BetaMessageBatchIndividualResponse Beta.Messages.Batches.ResultsStreaming(BatchResultsParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -38618,21 +25897,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaWebSearchToolResultBlock:`
 
@@ -38680,21 +25949,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaWebFetchToolResultBlock:`
 
@@ -38778,21 +26037,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaAdvisorToolResultBlock:`
 
@@ -39061,106 +26310,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   Citations supporting the text block.
 
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-                  - `class BetaCitationCharLocation:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required string? FileID`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocation:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required string? FileID`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocation:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required string? FileID`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationsWebSearchResultLocation:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocation:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
 
                 - `required string Text`
 
@@ -39488,14 +26637,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Breakdown of cached tokens by TTL
 
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `required Long CacheCreationInputTokens`
 
                 The number of input tokens used to create the cache entry.
@@ -39523,14 +26664,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `required BetaCacheCreation? CacheCreation`
 
                 Breakdown of cached tokens by TTL
-
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `required Long CacheCreationInputTokens`
 
@@ -39560,14 +26693,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Breakdown of cached tokens by TTL
 
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `required Long CacheCreationInputTokens`
 
                 The number of input tokens used to create the cache entry.
@@ -39585,74 +26710,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `"claude-opus-4-7"ClaudeOpus4_7`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-mythos-preview"ClaudeMythosPreview`
-
-                  New class of intelligence, strongest in coding and cybersecurity
-
-                - `"claude-opus-4-6"ClaudeOpus4_6`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"ClaudeOpus4_5`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-                  High-performance model for agents and coding
-
-                - `"claude-opus-4-1"ClaudeOpus4_1`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                  Powerful model for complex tasks
-
-                - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                  Powerful model for complex tasks
-
-                - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                  High-performance model with extended thinking
-
-                - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                  High-performance model with extended thinking
-
-                - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                  Fast and cost-effective model
 
               - `required Long OutputTokens`
 
@@ -40250,21 +27307,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaWebSearchToolResultBlock:`
 
@@ -40312,21 +27359,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaWebFetchToolResultBlock:`
 
@@ -40410,21 +27447,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Tool invocation directly from the model.
 
-                - `JsonElement Type "direct"constant`
-
               - `class BetaServerToolCaller:`
 
                 Tool invocation generated by a server-side tool.
 
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20250825"constant`
-
               - `class BetaServerToolCaller20260120:`
-
-                - `required string ToolID`
-
-                - `JsonElement Type "code_execution_20260120"constant`
 
           - `class BetaAdvisorToolResultBlock:`
 
@@ -40693,106 +27720,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
                   Citations supporting the text block.
 
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-                  - `class BetaCitationCharLocation:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndCharIndex`
-
-                    - `required string? FileID`
-
-                    - `required Long StartCharIndex`
-
-                    - `JsonElement Type "char_location"constant`
-
-                  - `class BetaCitationPageLocation:`
-
-                    - `required string CitedText`
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndPageNumber`
-
-                    - `required string? FileID`
-
-                    - `required Long StartPageNumber`
-
-                    - `JsonElement Type "page_location"constant`
-
-                  - `class BetaCitationContentBlockLocation:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long DocumentIndex`
-
-                    - `required string? DocumentTitle`
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required string? FileID`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `JsonElement Type "content_block_location"constant`
-
-                  - `class BetaCitationsWebSearchResultLocation:`
-
-                    - `required string CitedText`
-
-                    - `required string EncryptedIndex`
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "web_search_result_location"constant`
-
-                    - `required string Url`
-
-                  - `class BetaCitationSearchResultLocation:`
-
-                    - `required string CitedText`
-
-                      The full text of the cited block range, concatenated.
-
-                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                    - `required Long EndBlockIndex`
-
-                      Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                    - `required Long SearchResultIndex`
-
-                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                      Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                    - `required string Source`
-
-                    - `required Long StartBlockIndex`
-
-                      0-based index of the first cited block in the source's `content` array.
-
-                    - `required string? Title`
-
-                    - `JsonElement Type "search_result_location"constant`
 
                 - `required string Text`
 
@@ -41120,14 +28047,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Breakdown of cached tokens by TTL
 
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `required Long CacheCreationInputTokens`
 
                 The number of input tokens used to create the cache entry.
@@ -41155,14 +28074,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               - `required BetaCacheCreation? CacheCreation`
 
                 Breakdown of cached tokens by TTL
-
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
 
               - `required Long CacheCreationInputTokens`
 
@@ -41192,14 +28103,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Breakdown of cached tokens by TTL
 
-                - `required Long Ephemeral1hInputTokens`
-
-                  The number of input tokens used to create the 1 hour cache entry.
-
-                - `required Long Ephemeral5mInputTokens`
-
-                  The number of input tokens used to create the 5 minute cache entry.
-
               - `required Long CacheCreationInputTokens`
 
                 The number of input tokens used to create the cache entry.
@@ -41217,74 +28120,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `"claude-opus-4-7"ClaudeOpus4_7`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-mythos-preview"ClaudeMythosPreview`
-
-                  New class of intelligence, strongest in coding and cybersecurity
-
-                - `"claude-opus-4-6"ClaudeOpus4_6`
-
-                  Frontier intelligence for long-running agents and coding
-
-                - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-                  Best combination of speed and intelligence
-
-                - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-                  Fastest model with near-frontier intelligence
-
-                - `"claude-opus-4-5"ClaudeOpus4_5`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-                  Premium model combining maximum intelligence with practical performance
-
-                - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-                  High-performance model for agents and coding
-
-                - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-                  High-performance model for agents and coding
-
-                - `"claude-opus-4-1"ClaudeOpus4_1`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-                  Exceptional model for specialized complex tasks
-
-                - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                  Powerful model for complex tasks
-
-                - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                  Powerful model for complex tasks
-
-                - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                  High-performance model with extended thinking
-
-                - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                  High-performance model with extended thinking
-
-                - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                  Fast and cost-effective model
 
               - `required Long OutputTokens`
 
@@ -41709,21 +28544,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebSearchToolResultBlock:`
 
@@ -41771,21 +28596,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaWebFetchToolResultBlock:`
 
@@ -41869,21 +28684,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
-
             - `class BetaServerToolCaller:`
 
               Tool invocation generated by a server-side tool.
 
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20250825"constant`
-
             - `class BetaServerToolCaller20260120:`
-
-              - `required string ToolID`
-
-              - `JsonElement Type "code_execution_20260120"constant`
 
         - `class BetaAdvisorToolResultBlock:`
 
@@ -42152,106 +28957,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
                 Citations supporting the text block.
 
                 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-                - `class BetaCitationCharLocation:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndCharIndex`
-
-                  - `required string? FileID`
-
-                  - `required Long StartCharIndex`
-
-                  - `JsonElement Type "char_location"constant`
-
-                - `class BetaCitationPageLocation:`
-
-                  - `required string CitedText`
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndPageNumber`
-
-                  - `required string? FileID`
-
-                  - `required Long StartPageNumber`
-
-                  - `JsonElement Type "page_location"constant`
-
-                - `class BetaCitationContentBlockLocation:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long DocumentIndex`
-
-                  - `required string? DocumentTitle`
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required string? FileID`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `JsonElement Type "content_block_location"constant`
-
-                - `class BetaCitationsWebSearchResultLocation:`
-
-                  - `required string CitedText`
-
-                  - `required string EncryptedIndex`
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "web_search_result_location"constant`
-
-                  - `required string Url`
-
-                - `class BetaCitationSearchResultLocation:`
-
-                  - `required string CitedText`
-
-                    The full text of the cited block range, concatenated.
-
-                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                  - `required Long EndBlockIndex`
-
-                    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                  - `required Long SearchResultIndex`
-
-                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                  - `required string Source`
-
-                  - `required Long StartBlockIndex`
-
-                    0-based index of the first cited block in the source's `content` array.
-
-                  - `required string? Title`
-
-                  - `JsonElement Type "search_result_location"constant`
 
               - `required string Text`
 
@@ -42579,14 +29284,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Breakdown of cached tokens by TTL
 
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `required Long CacheCreationInputTokens`
 
               The number of input tokens used to create the cache entry.
@@ -42614,14 +29311,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             - `required BetaCacheCreation? CacheCreation`
 
               Breakdown of cached tokens by TTL
-
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
 
             - `required Long CacheCreationInputTokens`
 
@@ -42651,14 +29340,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Breakdown of cached tokens by TTL
 
-              - `required Long Ephemeral1hInputTokens`
-
-                The number of input tokens used to create the 1 hour cache entry.
-
-              - `required Long Ephemeral5mInputTokens`
-
-                The number of input tokens used to create the 5 minute cache entry.
-
             - `required Long CacheCreationInputTokens`
 
               The number of input tokens used to create the cache entry.
@@ -42676,74 +29357,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-              - `"claude-opus-4-7"ClaudeOpus4_7`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-mythos-preview"ClaudeMythosPreview`
-
-                New class of intelligence, strongest in coding and cybersecurity
-
-              - `"claude-opus-4-6"ClaudeOpus4_6`
-
-                Frontier intelligence for long-running agents and coding
-
-              - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-                Best combination of speed and intelligence
-
-              - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-                Fastest model with near-frontier intelligence
-
-              - `"claude-opus-4-5"ClaudeOpus4_5`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-                Premium model combining maximum intelligence with practical performance
-
-              - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-                High-performance model for agents and coding
-
-              - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-                High-performance model for agents and coding
-
-              - `"claude-opus-4-1"ClaudeOpus4_1`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-                Exceptional model for specialized complex tasks
-
-              - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                Powerful model for complex tasks
-
-              - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                Powerful model for complex tasks
-
-              - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                High-performance model with extended thinking
-
-              - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                High-performance model with extended thinking
-
-              - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                Fast and cost-effective model
 
             - `required Long OutputTokens`
 
@@ -43130,21 +29743,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebSearchToolResultBlock:`
 
@@ -43192,21 +29795,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaWebFetchToolResultBlock:`
 
@@ -43290,21 +29883,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Tool invocation directly from the model.
 
-            - `JsonElement Type "direct"constant`
-
           - `class BetaServerToolCaller:`
 
             Tool invocation generated by a server-side tool.
 
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20250825"constant`
-
           - `class BetaServerToolCaller20260120:`
-
-            - `required string ToolID`
-
-            - `JsonElement Type "code_execution_20260120"constant`
 
       - `class BetaAdvisorToolResultBlock:`
 
@@ -43573,106 +30156,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               Citations supporting the text block.
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-              - `class BetaCitationCharLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndCharIndex`
-
-                - `required string? FileID`
-
-                - `required Long StartCharIndex`
-
-                - `JsonElement Type "char_location"constant`
-
-              - `class BetaCitationPageLocation:`
-
-                - `required string CitedText`
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndPageNumber`
-
-                - `required string? FileID`
-
-                - `required Long StartPageNumber`
-
-                - `JsonElement Type "page_location"constant`
-
-              - `class BetaCitationContentBlockLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long DocumentIndex`
-
-                - `required string? DocumentTitle`
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required string? FileID`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `JsonElement Type "content_block_location"constant`
-
-              - `class BetaCitationsWebSearchResultLocation:`
-
-                - `required string CitedText`
-
-                - `required string EncryptedIndex`
-
-                - `required string? Title`
-
-                - `JsonElement Type "web_search_result_location"constant`
-
-                - `required string Url`
-
-              - `class BetaCitationSearchResultLocation:`
-
-                - `required string CitedText`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `required Long EndBlockIndex`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `required Long SearchResultIndex`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `required string Source`
-
-                - `required Long StartBlockIndex`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `required string? Title`
-
-                - `JsonElement Type "search_result_location"constant`
 
             - `required string Text`
 
@@ -44000,14 +30483,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Breakdown of cached tokens by TTL
 
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `required Long CacheCreationInputTokens`
 
             The number of input tokens used to create the cache entry.
@@ -44035,14 +30510,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           - `required BetaCacheCreation? CacheCreation`
 
             Breakdown of cached tokens by TTL
-
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
 
           - `required Long CacheCreationInputTokens`
 
@@ -44072,14 +30539,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Breakdown of cached tokens by TTL
 
-            - `required Long Ephemeral1hInputTokens`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `required Long Ephemeral5mInputTokens`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
           - `required Long CacheCreationInputTokens`
 
             The number of input tokens used to create the cache entry.
@@ -44097,74 +30556,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `"claude-opus-4-7"ClaudeOpus4_7`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"ClaudeMythosPreview`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"ClaudeOpus4_6`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"ClaudeHaiku4_5`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"ClaudeOpus4_5`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
-
-              High-performance model for agents and coding
-
-            - `"claude-opus-4-1"ClaudeOpus4_1`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
-
-              Exceptional model for specialized complex tasks
-
-            - `"claude-opus-4-0"ClaudeOpus4_0`
-
-              Powerful model for complex tasks
-
-            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-              Powerful model for complex tasks
-
-            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-              High-performance model with extended thinking
-
-            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-              High-performance model with extended thinking
-
-            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-              Fast and cost-effective model
 
           - `required Long OutputTokens`
 

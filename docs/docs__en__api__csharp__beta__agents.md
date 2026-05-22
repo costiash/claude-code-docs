@@ -1,6 +1,6 @@
 # Agents
 
-## Create
+## Create Agent
 
 `BetaManagedAgentsAgent Beta.Agents.Create(AgentCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -260,17 +260,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsMcpToolsetParams:`
 
@@ -304,17 +296,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
 
@@ -332,17 +316,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsCustomToolParams:`
 
@@ -628,17 +604,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -660,17 +628,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -686,17 +646,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -760,7 +712,79 @@ var betaManagedAgentsAgent = await client.Beta.Agents.Create(parameters);
 Console.WriteLine(betaManagedAgentsAgent);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## List Agents
 
 `AgentListPageResponse Beta.Agents.List(AgentListParams?parameters, CancellationTokencancellationToken = default)`
 
@@ -1046,17 +1070,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required Type Type`
 
@@ -1078,17 +1094,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -1104,17 +1112,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required string McpServerName`
 
@@ -1180,7 +1180,84 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Agent
 
 `BetaManagedAgentsAgent Beta.Agents.Retrieve(AgentRetrieveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1450,17 +1527,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -1482,17 +1551,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -1508,17 +1569,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -1581,7 +1634,79 @@ var betaManagedAgentsAgent = await client.Beta.Agents.Retrieve(parameters);
 Console.WriteLine(betaManagedAgentsAgent);
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Update Agent
 
 `BetaManagedAgentsAgent Beta.Agents.Update(AgentUpdateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1849,17 +1974,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsMcpToolsetParams:`
 
@@ -1893,17 +2010,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
 
@@ -1921,17 +2030,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
     - `class BetaManagedAgentsCustomToolParams:`
 
@@ -2217,17 +2318,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -2249,17 +2342,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -2275,17 +2360,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -2349,7 +2426,79 @@ var betaManagedAgentsAgent = await client.Beta.Agents.Update(parameters);
 Console.WriteLine(betaManagedAgentsAgent);
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Archive Agent
 
 `BetaManagedAgentsAgent Beta.Agents.Archive(AgentArchiveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -2615,17 +2764,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -2647,17 +2788,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -2673,17 +2806,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -2744,6 +2869,78 @@ AgentArchiveParams parameters = new()
 var betaManagedAgentsAgent = await client.Beta.Agents.Archive(parameters);
 
 Console.WriteLine(betaManagedAgentsAgent);
+```
+
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
 ```
 
 ## Domain Types
@@ -2944,17 +3141,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -2976,17 +3165,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -3002,17 +3183,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -3294,17 +3467,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
-
-          - `"always_allow"AlwaysAllow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
         Tool calls require user confirmation before execution.
-
-        - `required Type Type`
-
-          - `"always_ask"AlwaysAsk`
 
   - `required Type Type`
 
@@ -3467,17 +3632,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
-
-          - `"always_allow"AlwaysAllow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
         Tool calls require user confirmation before execution.
-
-        - `required Type Type`
-
-          - `"always_ask"AlwaysAsk`
 
 ### Beta Managed Agents Agent Toolset20260401 Read Input
 
@@ -3806,17 +3963,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
-
-          - `"always_allow"AlwaysAllow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
         Tool calls require user confirmation before execution.
-
-        - `required Type Type`
-
-          - `"always_ask"AlwaysAsk`
 
   - `required string McpServerName`
 
@@ -3944,17 +4093,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
-
-          - `"always_allow"AlwaysAllow`
-
       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
         Tool calls require user confirmation before execution.
-
-        - `required Type Type`
-
-          - `"always_ask"AlwaysAsk`
 
 ### Beta Managed Agents Model Config
 
@@ -4306,17 +4447,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required Type Type`
 
@@ -4338,17 +4471,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -4364,17 +4489,9 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Tool calls are automatically approved without user confirmation.
 
-            - `required Type Type`
-
-              - `"always_allow"AlwaysAllow`
-
           - `class BetaManagedAgentsAlwaysAskPolicy:`
 
             Tool calls require user confirmation before execution.
-
-            - `required Type Type`
-
-              - `"always_ask"AlwaysAsk`
 
       - `required string McpServerName`
 
@@ -4476,7 +4593,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
 # Versions
 
-## List
+## List Agent Versions
 
 `VersionListPageResponse Beta.Agents.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -4754,17 +4871,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required Type Type`
 
@@ -4786,17 +4895,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
 
@@ -4812,17 +4913,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
-
-                - `"always_allow"AlwaysAllow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy:`
 
               Tool calls require user confirmation before execution.
-
-              - `required Type Type`
-
-                - `"always_ask"AlwaysAsk`
 
         - `required string McpServerName`
 
@@ -4888,5 +4981,82 @@ var page = await client.Beta.Agents.Versions.List(parameters);
 await foreach (var item in page.Paginate())
 {
     Console.WriteLine(item);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
 }
 ```

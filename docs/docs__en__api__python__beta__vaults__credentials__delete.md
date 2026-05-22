@@ -1,4 +1,4 @@
-## Delete
+## Delete Credential
 
 `beta.vaults.credentials.delete(strcredential_id, CredentialDeleteParams**kwargs)  -> BetaManagedAgentsDeletedCredential`
 
@@ -98,4 +98,13 @@ beta_managed_agents_deleted_credential = client.beta.vaults.credentials.delete(
     vault_id="vlt_011CZkZDLs7fYzm1hXNPeRjv",
 )
 print(beta_managed_agents_deleted_credential.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

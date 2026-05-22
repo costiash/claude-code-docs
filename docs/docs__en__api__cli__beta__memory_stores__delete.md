@@ -1,4 +1,4 @@
-## Delete
+## Delete a memory store
 
 `$ ant beta:memory-stores delete`
 
@@ -36,4 +36,13 @@ Delete a memory store
 ant beta:memory-stores delete \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

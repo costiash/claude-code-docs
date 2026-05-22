@@ -1,4 +1,4 @@
-## Download
+## Download Skill Version Content
 
 `$ ant beta:skills:versions download`
 
