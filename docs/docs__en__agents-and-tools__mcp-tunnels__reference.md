@@ -5,7 +5,7 @@ Proxy configuration fields, the Tunnels REST API, certificate requirements, and 
 ---
 
 <Note>
-  MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+  MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 </Note>
 
 ## Proxy configuration
@@ -84,7 +84,7 @@ Attaches to the tunnel you created in the Console, generates a CA and server cer
 |---|---|---|
 | `--api-url` | Claude API base URL. Also read from `API_URL`. | Required |
 | `--tunnel-id` | Tunnel ID to attach to (`tnl_...`). Also read from `TUNNEL_ID`. | Required |
-| `--output` | Output destination: `dir:/path` or `k8s-secret:NAME`. | `k8s-secret:mcp-gateway` (auto-detected when running in a Kubernetes pod; required otherwise) |
+| `--output` | Output destination: `dir:/path` or `k8s-secret:NAME`. | `k8s-secret:mcp-tunnel` (auto-detected when running in a Kubernetes pod; required otherwise) |
 | `--cert-duration` | Server certificate validity period. | `2160h` (90 days) |
 | `--token-version` | Change-detection string. A new value triggers token rotation on re-run. | None |
 
@@ -96,7 +96,7 @@ Issues a new server certificate signed by the stored CA. Makes no API calls.
 
 | Flag | Description | Default |
 |---|---|---|
-| `--output` | Output destination: `dir:/path` or `k8s-secret:NAME`. | `k8s-secret:mcp-gateway` (auto-detected when running in a Kubernetes pod; required otherwise) |
+| `--output` | Output destination: `dir:/path` or `k8s-secret:NAME`. | `k8s-secret:mcp-tunnel` (auto-detected when running in a Kubernetes pod; required otherwise) |
 | `--cert-duration` | New certificate validity period. | `2160h` (90 days) |
 | `--renew-before` | Skip renewal if the existing certificate has more than this duration remaining. | `0` (always renew) |
 

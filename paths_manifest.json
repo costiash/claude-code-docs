@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-21T21:34:17.366241Z",
-    "total_paths": 1680,
+    "generated_at": "2026-05-22T00:53:12.491487Z",
+    "total_paths": 1681,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-21T21:34:17.366249Z"
+    "last_regenerated": "2026-05-22T00:53:12.491496Z"
   },
   "categories": {
     "core_documentation": [
@@ -169,6 +169,7 @@
       "/docs/en/prompt-caching",
       "/docs/en/remote-control",
       "/docs/en/routines",
+      "/docs/en/sandbox-environments",
       "/docs/en/scheduled-tasks",
       "/docs/en/server-managed-settings",
       "/docs/en/sessions",

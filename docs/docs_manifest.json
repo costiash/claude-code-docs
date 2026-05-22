@@ -33,20 +33,20 @@
     "docs__en__agents-and-tools__mcp-tunnels__console.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console.md",
-      "hash": "e98ac2bb9bdf3436d540cde1cdd3ee8fe91fa91769f3d4c02048ffbcfcb985bd",
-      "last_updated": "2026-05-19T10:19:49.043392"
+      "hash": "43bf9793d1ff07af193f81fab834f91d7cb05e4781361ff6b966014a790df229",
+      "last_updated": "2026-05-22T00:53:23.223913"
     },
     "docs__en__agents-and-tools__mcp-tunnels__deploy-compose.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose.md",
-      "hash": "a15e15b2b634a77246d081de94a81e6ee84f0aa46a5136bf9a4d6df70bcf02df",
-      "last_updated": "2026-05-20T04:29:40.413669"
+      "hash": "d451cffdf794db2067134683e9a3e6bd43b60cd29a7801b3e23fec097352dde6",
+      "last_updated": "2026-05-22T00:53:23.832943"
     },
     "docs__en__agents-and-tools__mcp-tunnels__deploy-helm.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm.md",
-      "hash": "a34b02eb9f9babbf4a9ffcfba35c92e04c89eacccf67671019b8cc94b1e0246f",
-      "last_updated": "2026-05-19T10:19:50.218544"
+      "hash": "58b4a2047382b36be8ebb35e0b517476627496b195514d9d172913b1009377fb",
+      "last_updated": "2026-05-22T00:53:24.427353"
     },
     "docs__en__agents-and-tools__mcp-tunnels__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview",
@@ -57,26 +57,26 @@
     "docs__en__agents-and-tools__mcp-tunnels__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart.md",
-      "hash": "dd690bfb55171fde8d2ef0ba03f5a89eb3a447693c875ef7b22cad2c4c0bbe6b",
-      "last_updated": "2026-05-19T10:19:51.382213"
+      "hash": "e54f6c3cde8eebc73dba659a5b46300587fe5b36efa41c2d163fa11b21547708",
+      "last_updated": "2026-05-22T00:53:25.631642"
     },
     "docs__en__agents-and-tools__mcp-tunnels__reference.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference.md",
-      "hash": "65dd113335c68b39e1a333a20818a93a65956b4ee847074dcdda39783d751a5c",
-      "last_updated": "2026-05-19T10:19:51.970857"
+      "hash": "c5703b0fbce3f08f640eb97003d10c25e5a9ff43f5be338d2a661d8a4b809b7b",
+      "last_updated": "2026-05-22T00:53:26.230726"
     },
     "docs__en__agents-and-tools__mcp-tunnels__security.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security.md",
-      "hash": "1599b49c597556737d4a4068c9fee7f1e7a1fa12e0bbdbbe65cc4fbed4cdc88e",
-      "last_updated": "2026-05-20T04:29:43.339706"
+      "hash": "3dea27162f1688ed13de763c824b6e7bffa21de2fb84134fb28e9f6d3365db56",
+      "last_updated": "2026-05-22T00:53:26.841608"
     },
     "docs__en__agents-and-tools__mcp-tunnels__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/troubleshooting",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/troubleshooting.md",
-      "hash": "58290b8a96099a9a81f2bc2a79909d685ab25ef0bb1584f65d809ececfacbffd",
-      "last_updated": "2026-05-19T10:19:53.152762"
+      "hash": "92570f2901c9005bbdf290a1cb8d559ae929587b6699f74cda1443070d638721",
+      "last_updated": "2026-05-22T00:53:27.436650"
     },
     "docs__en__agents-and-tools__remote-mcp-servers.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers",
@@ -7395,8 +7395,8 @@
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
       "original_md_url": "https://platform.claude.com/docs/en/devcontainer.md",
-      "hash": "3cffb108cae6f94cf2e4be33324b5147707e663ee48346343ed98f7ca3240388",
-      "last_updated": "2026-04-27T18:46:56.888738"
+      "hash": "f806dba4afa929c1654a728a1b3276431eec3abcdde7b538db5caed215a7b82a",
+      "last_updated": "2026-05-22T01:07:19.614720"
     },
     "docs__en__get-started.md": {
       "original_url": "https://platform.claude.com/docs/en/get-started",
@@ -7839,14 +7839,14 @@
     "claude-code__sandboxing.md": {
       "original_url": "https://platform.claude.com/docs/en/sandboxing",
       "original_md_url": "https://platform.claude.com/docs/en/sandboxing.md",
-      "hash": "a81ce454be65350325ff0ae303695dbbf7ec444d0ebe1f37332f8641c804190e",
-      "last_updated": "2026-05-12T18:55:05.321391"
+      "hash": "3253fc8f179224b5ec083e7f06cbabdc0abfec5271b908daef76d9bd68125e3b",
+      "last_updated": "2026-05-22T01:08:08.649973"
     },
     "claude-code__security.md": {
       "original_url": "https://platform.claude.com/docs/en/security",
       "original_md_url": "https://platform.claude.com/docs/en/security.md",
-      "hash": "eb2a1c81108dd890084187946ff961f733d9ad82589eb9b96f93630f498bfae5",
-      "last_updated": "2026-05-19T04:43:11.950024"
+      "hash": "3cd0e8581e8058b18551d7f1a92bd9652720a6cad53bdbecce02df291906f0db",
+      "last_updated": "2026-05-22T01:08:09.523533"
     },
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
@@ -7911,17 +7911,17 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "74204ed12250082a147e5b45283dc49d90a774c99f1cd433e3807b683252b6f5",
-      "last_updated": "2026-05-21T21:50:01.071275",
+      "hash": "cf9563c51fb21584c65e23a82d5db0689d7d68ba127a8a9eb18a497c6d35f5a7",
+      "last_updated": "2026-05-22T01:08:21.149591",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-21T21:50:01.071486",
-    "fetch_duration_seconds": 944.267823,
-    "total_pages_discovered": 1680,
+    "last_fetch_completed": "2026-05-22T01:08:21.149799",
+    "fetch_duration_seconds": 909.267698,
+    "total_pages_discovered": 1681,
     "pages_fetched_successfully": 1319,
-    "pages_failed": 362,
+    "pages_failed": 363,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/agent-sdk/agent-loop",
@@ -8264,6 +8264,7 @@
       "/docs/en/prompt-caching",
       "/docs/en/remote-control",
       "/docs/en/routines",
+      "/docs/en/sandbox-environments",
       "/docs/en/scheduled-tasks",
       "/docs/en/server-managed-settings",
       "/docs/en/sessions",
@@ -8291,7 +8292,7 @@
     "total_files": 1319,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-21T21:50:01.071507",
+  "last_updated": "2026-05-22T01:08:21.149815",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

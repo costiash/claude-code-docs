@@ -5,7 +5,7 @@ Hardening guidance, credential rotation, breach response, and teardown for MCP t
 ---
 
 <Note>
-  MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+  MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 </Note>
 
 The tunnel architecture provides strong defaults (outbound-only connectivity, end-to-end encryption, and IP validation), but the overall security of your deployment also depends on how you configure and operate it. This page covers recommended hardening, breach response, and how to decommission a tunnel.

@@ -5,7 +5,7 @@ Connect Claude to a private MCP server using a local Docker Compose deployment.
 ---
 
 <Note>
-  MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+  MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 </Note>
 
 This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with manually supplied credentials, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](/docs/en/agents-and-tools/mcp-tunnels/deploy-helm) or [Deploy with Docker Compose](/docs/en/agents-and-tools/mcp-tunnels/deploy-compose).
@@ -155,7 +155,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
     <Tabs>
     <Tab title="macOS / Linux">
     ```bash
-    cat > config/mcp-gateway.yaml <<EOF
+    cat > config/mcp-proxy.yaml <<EOF
     listen_addr: ":8080"
     tunnel_domain: ${TUNNEL_DOMAIN}
     tls:
@@ -167,10 +167,10 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
 
     cat > docker-compose.yaml <<'EOF'
     services:
-      mcp-gateway:
+      mcp-proxy:
         image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
         volumes:
-          - ./config/mcp-gateway.yaml:/etc/mcp-gateway/config.yaml:ro
+          - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
           - ./data:/data:ro
         restart: unless-stopped
 
@@ -179,7 +179,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
         command: tunnel --no-autoupdate run --url http://localhost:8080
         environment:
           - TUNNEL_TOKEN
-        network_mode: "service:mcp-gateway"
+        network_mode: "service:mcp-proxy"
         restart: unless-stopped
 
       hello-mcp:
@@ -202,14 +202,14 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
       key_file: /data/tls.key
     routes:
       echo: http://hello-mcp:9000
-    "@ | Set-Content -NoNewline -Encoding ascii -Path config/mcp-gateway.yaml
+    "@ | Set-Content -NoNewline -Encoding ascii -Path config/mcp-proxy.yaml
 
     @'
     services:
-      mcp-gateway:
+      mcp-proxy:
         image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
         volumes:
-          - ./config/mcp-gateway.yaml:/etc/mcp-gateway/config.yaml:ro
+          - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
           - ./data:/data:ro
         restart: unless-stopped
 
@@ -218,7 +218,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
         command: tunnel --no-autoupdate run --url http://localhost:8080
         environment:
           - TUNNEL_TOKEN
-        network_mode: "service:mcp-gateway"
+        network_mode: "service:mcp-proxy"
         restart: unless-stopped
 
       hello-mcp:
@@ -239,14 +239,14 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
     <Tab title="macOS / Linux">
     ```bash
     docker compose up -d
-    docker compose logs mcp-gateway | grep "route configured"
+    docker compose logs mcp-proxy | grep "route configured"
     docker compose logs cloudflared | grep "Registered tunnel connection"
     ```
     </Tab>
     <Tab title="Windows (PowerShell)">
     ```powershell
     docker compose up -d
-    docker compose logs mcp-gateway | Select-String "route configured"
+    docker compose logs mcp-proxy | Select-String "route configured"
     docker compose logs cloudflared | Select-String "Registered tunnel connection"
     ```
     </Tab>

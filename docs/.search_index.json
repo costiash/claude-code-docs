@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-21T21:50:04Z",
+  "generated_at": "2026-05-22T01:08:24Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 47865,
+      "word_count": 47834,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -292,8 +292,8 @@
         "claude",
         "dev",
         "run",
-        "step",
         "containers",
+        "step",
         "inside",
         "host",
         "repository",
@@ -308,7 +308,7 @@
         "across",
         "project"
       ],
-      "word_count": 2076,
+      "word_count": 2091,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
@@ -928,31 +928,31 @@
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
-      "title": "Sandboxing",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Sandboxing  > L...",
+      "title": "Configure the sandboxed Bash tool",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Configure the s...",
       "keywords": [
         "sandbox",
-        "access",
+        "settings",
         "commands",
         "permission",
-        "settings",
         "claude",
-        "sandboxing",
         "code",
-        "network",
-        "paths",
-        "security",
+        "access",
+        "run",
         "bash",
+        "network",
+        "command",
+        "sandboxing",
+        "sandboxed",
+        "wsl",
+        "mode",
         "when",
-        "filesystem",
-        "configuration",
-        "tools",
-        "allow",
         "isolation",
-        "cannot",
-        "system"
+        "managed",
+        "runs",
+        "allow"
       ],
-      "word_count": 2916,
+      "word_count": 3940,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -980,7 +980,7 @@
         "working",
         "directory"
       ],
-      "word_count": 1325,
+      "word_count": 1333,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -1405,7 +1405,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/deploy-compose": {
       "title": "Deploy MCP tunnels with Docker Compose",
-      "content_preview": "# Deploy MCP tunnels with Docker Compose  Install the MCP tunnel stack on a VM using Docker Compose.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/...",
+      "content_preview": "# Deploy MCP tunnels with Docker Compose  Install the MCP tunnel stack on a VM using Docker Compose.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](https://claude.com/form/...",
       "keywords": [
         "step",
         "tunnel",
@@ -1433,7 +1433,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/deploy-helm": {
       "title": "Deploy MCP tunnels with Helm",
-      "content_preview": "# Deploy MCP tunnels with Helm  Install the MCP tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](https://...",
+      "content_preview": "# Deploy MCP tunnels with Helm  Install the MCP tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](https://...",
       "keywords": [
         "step",
         "tunnel",
@@ -1489,7 +1489,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
       "title": "MCP tunnels quickstart",
-      "content_preview": "# MCP tunnels quickstart  Connect Claude to a private MCP server using a local Docker Compose deployment.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](https://claude.com/...",
+      "content_preview": "# MCP tunnels quickstart  Connect Claude to a private MCP server using a local Docker Compose deployment.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](https://claude.com/...",
       "keywords": [
         "tab",
         "title",
@@ -1517,7 +1517,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/reference": {
       "title": "MCP tunnels reference",
-      "content_preview": "# MCP tunnels reference  Proxy configuration fields, the Tunnels REST API, certificate requirements, and the setup CLI.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](https...",
+      "content_preview": "# MCP tunnels reference  Proxy configuration fields, the Tunnels REST API, certificate requirements, and the setup CLI.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](https...",
       "keywords": [
         "certificate",
         "required",
@@ -1545,7 +1545,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/security": {
       "title": "MCP tunnels security",
-      "content_preview": "# MCP tunnels security  Hardening guidance, credential rotation, breach response, and teardown for MCP tunnel deployments.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](ht...",
+      "content_preview": "# MCP tunnels security  Hardening guidance, credential rotation, breach response, and teardown for MCP tunnel deployments.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](ht...",
       "keywords": [
         "tunnel",
         "step",
@@ -1573,7 +1573,7 @@
     },
     "/docs/en/agents-and-tools/mcp-tunnels/troubleshooting": {
       "title": "Troubleshoot MCP tunnels",
-      "content_preview": "# Troubleshoot MCP tunnels  Diagnose connectivity, TLS, IP validation, and OAuth routing issues in an MCP tunnel deployment.  ---  <Note>   MCP tunnels is a Research Preview feature. [Request access](...",
+      "content_preview": "# Troubleshoot MCP tunnels  Diagnose connectivity, TLS, IP validation, and OAuth routing issues in an MCP tunnel deployment.  ---  <Note>   MCP tunnels is a research preview feature. [Request access](...",
       "keywords": [
         "tunnel",
         "proxy",
