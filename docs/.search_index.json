@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-23T01:06:42Z",
+  "generated_at": "2026-05-23T04:35:48Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 48338,
+      "word_count": 48347,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1105,8 +1105,8 @@
         "when",
         "main",
         "agent",
-        "conversation",
         "session",
+        "conversation",
         "prompt",
         "code",
         "context",
@@ -1120,7 +1120,7 @@
         "model",
         "plugin"
       ],
-      "word_count": 8072,
+      "word_count": 8085,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
