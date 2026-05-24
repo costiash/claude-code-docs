@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-24T01:09:26Z",
+  "generated_at": "2026-05-24T04:47:15Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -943,16 +943,16 @@
         "network",
         "command",
         "sandboxing",
+        "when",
         "sandboxed",
         "wsl",
         "mode",
-        "when",
         "isolation",
         "managed",
         "runs",
         "allow"
       ],
-      "word_count": 3940,
+      "word_count": 3986,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
