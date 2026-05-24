@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-24T04:47:15Z",
+  "generated_at": "2026-05-24T07:27:21Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -913,18 +913,18 @@
         "tab",
         "commands",
         "common",
-        "command",
         "note",
         "windows",
         "git",
         "info",
+        "first",
         "more",
         "available",
         "before",
         "terminal",
-        "project"
+        "command"
       ],
-      "word_count": 1486,
+      "word_count": 1488,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
