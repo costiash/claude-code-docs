@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-25T18:54:36Z",
+  "generated_at": "2026-05-25T21:44:31Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -205,26 +205,26 @@
       "keywords": [
         "claude",
         "code",
+        "usage",
         "context",
         "per",
-        "usage",
         "costs",
         "when",
         "token",
         "tokens",
-        "users",
         "team",
+        "users",
         "teams",
+        "session",
         "tasks",
         "work",
+        "limits",
         "workspace",
         "agent",
         "before",
-        "limits",
-        "see",
-        "cost"
+        "plan"
       ],
-      "word_count": 1899,
+      "word_count": 2045,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -728,7 +728,7 @@
         "such",
         "hook"
       ],
-      "word_count": 8566,
+      "word_count": 8653,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -784,7 +784,7 @@
         "want",
         "default"
       ],
-      "word_count": 1073,
+      "word_count": 1096,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -988,8 +988,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
-        "source",
         "managed",
+        "source",
         "json",
         "claude",
         "plugins",
@@ -1005,10 +1005,10 @@
         "github",
         "when",
         "user",
-        "repo",
-        "com"
+        "only",
+        "repo"
       ],
-      "word_count": 10072,
+      "word_count": 10100,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "tools",
         "prompt"
       ],
-      "word_count": 6006,
+      "word_count": 6207,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
