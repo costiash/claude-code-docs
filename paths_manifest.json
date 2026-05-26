@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-26T18:52:33.832329Z",
+    "generated_at": "2026-05-26T21:34:46.736649Z",
     "total_paths": 1681,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-26T18:52:33.832335Z"
+    "last_regenerated": "2026-05-26T21:34:46.736656Z"
   },
   "categories": {
     "core_documentation": [
@@ -97,7 +97,6 @@
       "/docs/en/context-window",
       "/docs/en/debug-your-config",
       "/docs/en/deep-links",
-      "/docs/en/desktop-changelog",
       "/docs/en/desktop-quickstart",
       "/docs/en/desktop-scheduled-tasks",
       "/docs/en/discover-plugins",
@@ -171,6 +170,7 @@
       "/docs/en/routines",
       "/docs/en/sandbox-environments",
       "/docs/en/scheduled-tasks",
+      "/docs/en/security-guidance",
       "/docs/en/server-managed-settings",
       "/docs/en/sessions",
       "/docs/en/slack",
