@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-27T13:33:16Z",
+  "generated_at": "2026-05-27T16:36:05Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -488,23 +488,23 @@
         "code",
         "mode",
         "command",
-        "input",
         "commands",
+        "input",
+        "history",
         "press",
         "prompt",
-        "history",
-        "terminal",
-        "background",
         "session",
+        "terminal",
+        "conversation",
+        "background",
         "cursor",
         "text",
         "previous",
         "when",
-        "conversation",
         "search",
         "word"
       ],
-      "word_count": 3337,
+      "word_count": 3463,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
