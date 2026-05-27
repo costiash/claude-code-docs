@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-26T21:50:26Z",
+  "generated_at": "2026-05-27T01:10:51Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -56,7 +56,7 @@
         "amazon",
         "access"
       ],
-      "word_count": 3082,
+      "word_count": 3080,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -189,14 +189,14 @@
         "image",
         "tasks",
         "context",
-        "when",
         "see",
+        "when",
         "suppose",
         "need",
         "directory",
         "specific"
       ],
-      "word_count": 2298,
+      "word_count": 2313,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -392,7 +392,7 @@
         "div",
         "wizard"
       ],
-      "word_count": 2016,
+      "word_count": 2014,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -616,7 +616,7 @@
         "variable",
         "available"
       ],
-      "word_count": 6356,
+      "word_count": 6371,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -644,7 +644,7 @@
         "into",
         "every"
       ],
-      "word_count": 3792,
+      "word_count": 3823,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -672,7 +672,7 @@
         "configuration",
         "const"
       ],
-      "word_count": 1001,
+      "word_count": 999,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {

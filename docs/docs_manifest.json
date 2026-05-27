@@ -237,8 +237,8 @@
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "9ccb5dd75ff66755f4e49314e8c8e7f6b5af5249ee7e69e98ac5a83f8942c129",
-      "last_updated": "2026-05-19T18:42:20.117704"
+      "hash": "e2084dab95b545006d20551b0fabe1b43147164f6ddecf87bad3ce51971362de",
+      "last_updated": "2026-05-27T00:55:15.394075"
     },
     "claude-code__analytics.md": {
       "original_url": "https://platform.claude.com/docs/en/analytics",
@@ -8157,8 +8157,8 @@
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
       "original_md_url": "https://platform.claude.com/docs/en/common-workflows.md",
-      "hash": "c5c94eb80b81d8298b2fa6bcdcbe5b6cc77ce969c31857c9964287e54db46d2d",
-      "last_updated": "2026-05-11T18:55:39.252236"
+      "hash": "c5375cc0f8d983fe2da468d638d105e2b9213eceb5cb2c131aae59f32e25acc1",
+      "last_updated": "2026-05-27T01:09:40.009450"
     },
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
@@ -8211,8 +8211,8 @@
     "claude-code__google-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/google-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/google-vertex-ai.md",
-      "hash": "a0dae25acfd3a04f8101d2d1f37207543e8aca27b7a9c5617c3c5e15f42544b8",
-      "last_updated": "2026-05-19T18:56:01.516997"
+      "hash": "484117c7ba530caa331ac12921d2e0994ee2f9037a386635be48b16e2057f39a",
+      "last_updated": "2026-05-27T01:09:49.333368"
     },
     "claude-code__headless.md": {
       "original_url": "https://platform.claude.com/docs/en/headless",
@@ -8547,20 +8547,20 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "d99316755c0169a60b66a9c313b621fd82d85918a26108f3c5fc392ad367d311",
-      "last_updated": "2026-05-26T01:07:44.060087"
+      "hash": "3f77e1b53b3a5597d7826d055e27d48d8857d1059d89a4e7041e27053c342a30",
+      "last_updated": "2026-05-27T01:10:24.631677"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
       "original_md_url": "https://platform.claude.com/docs/en/memory.md",
-      "hash": "2a54743b4a3ea2476ac5070186df39193cc19cb18b6121c9b838770fe4ab2253",
-      "last_updated": "2026-05-26T21:50:00.599324"
+      "hash": "533da459958a35d21f7bf9eba3bd87fb08cad6e1e8d4bf4d8f4308875c0d2784",
+      "last_updated": "2026-05-27T01:10:25.170326"
     },
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
       "original_md_url": "https://platform.claude.com/docs/en/microsoft-foundry.md",
-      "hash": "b627e03075f645d06784e1aab274bddf6b5b2ff21f34969e6735faeee7a9760c",
-      "last_updated": "2026-05-19T18:56:36.996171"
+      "hash": "4ae26ec3816a180532e546d51eef89db6679fb796c7633d55fbf141a84973435",
+      "last_updated": "2026-05-27T01:10:25.717759"
     },
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
@@ -8703,11 +8703,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-26T21:50:23.286032",
-    "fetch_duration_seconds": 936.974539,
-    "total_pages_discovered": 1681,
+    "last_fetch_completed": "2026-05-27T01:10:48.249271",
+    "fetch_duration_seconds": 965.475774,
+    "total_pages_discovered": 1682,
     "pages_fetched_successfully": 1450,
-    "pages_failed": 232,
+    "pages_failed": 233,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/agent-sdk/agent-loop",
@@ -8909,6 +8909,7 @@
       "/docs/en/goal",
       "/docs/en/how-claude-code-works",
       "/docs/en/keybindings",
+      "/docs/en/large-codebases",
       "/docs/en/managed-mcp",
       "/docs/en/permission-modes",
       "/docs/en/permissions",
@@ -8947,7 +8948,7 @@
     "total_files": 1450,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-26T21:50:23.286055",
+  "last_updated": "2026-05-27T01:10:48.249302",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
