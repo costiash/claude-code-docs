@@ -640,6 +640,8 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 
 You can include the web search tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
+To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Limits](/settings/limits) page in the Claude Console; contact sales from that page to request a higher limit. Typical batch web-search workloads include enriching records with current web data, researching a large list of entities, and grounding or checking a corpus of content against live sources.
+
 ## Usage and pricing
 
 Web search usage is charged in addition to token usage:

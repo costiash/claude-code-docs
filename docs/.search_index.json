@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-27T21:54:32Z",
+  "generated_at": "2026-05-28T01:06:41Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -12,15 +12,15 @@
         "now",
         "added",
         "claude",
-        "tool",
         "instead",
-        "improved",
+        "tool",
         "session",
+        "improved",
         "mode",
         "sessions",
         "after",
-        "being",
         "mcp",
+        "being",
         "code",
         "prompt",
         "command",
@@ -28,7 +28,7 @@
         "terminal",
         "file"
       ],
-      "word_count": 49031,
+      "word_count": 49712,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1369,10 +1369,10 @@
         "connector",
         "token",
         "sdk",
-        "client",
-        "version"
+        "messages",
+        "client"
       ],
-      "word_count": 2799,
+      "word_count": 2829,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/console": {
@@ -2024,27 +2024,27 @@
       "content_preview": "# Server tools  Work with Anthropic-executed tools: server_tool_use blocks, pause_turn continuation, and domain filtering.  ---  This page covers the shared mechanics of server-executed tools: the `se...",
       "keywords": [
         "tool",
-        "domain",
         "tools",
-        "web",
+        "domain",
         "server",
+        "web",
         "search",
         "execution",
         "card",
         "filtering",
         "block",
         "when",
-        "zdr",
         "request",
         "code",
-        "only",
         "turn",
+        "zdr",
+        "only",
         "claude",
         "same",
         "fetch",
         "dynamic"
       ],
-      "word_count": 1634,
+      "word_count": 1728,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__server-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/strict-tool-use": {
@@ -2315,16 +2315,16 @@
         "dynamic",
         "note",
         "error",
+        "content",
         "citations",
         "available",
-        "content",
-        "token",
         "see",
+        "token",
         "server",
         "when",
-        "must"
+        "searches"
       ],
-      "word_count": 2243,
+      "word_count": 2322,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -38054,25 +38054,25 @@
         "batch",
         "api",
         "batches",
-        "message",
         "requests",
+        "message",
         "processing",
         "request",
         "results",
         "mtok",
-        "section",
         "messages",
+        "section",
         "claude",
         "codegroup",
-        "each",
         "large",
+        "each",
         "data",
+        "result",
         "when",
         "may",
-        "workspace",
-        "result"
+        "workspace"
       ],
-      "word_count": 7222,
+      "word_count": 7523,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -38744,7 +38744,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10221,
+      "word_count": 10230,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {

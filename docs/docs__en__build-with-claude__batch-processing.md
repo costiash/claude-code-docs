@@ -51,15 +51,27 @@ This is especially useful for bulk operations that don't require immediate resul
 All [active models](/docs/en/about-claude/models/overview) support the Message Batches API.
 
 ### What can be batched
-Any request that you can make to the Messages API can be included in a batch. This includes:
+Almost any request you can make to the Messages API can be included in a batch. This includes:
 
 - Vision
-- Tool use
+- Tool use, including all [server tools](/docs/en/agents-and-tools/tool-use/server-tools) (web search, web fetch, code execution, MCP connectors, advisor, and tool search)
 - System messages
 - Multi-turn conversations
-- Any beta features
+- Extended thinking
+- Most beta features
 
 Since each request in the batch is processed independently, you can mix different types of requests within a single batch.
+
+A small number of Messages API parameters are **not** supported in batch requests. Including any of these returns a validation error:
+
+| Parameter | Why |
+|---|---|
+| `stream: true` | Batch results come back as a single file, not a stream. |
+| `speed` ([Fast mode](/docs/en/build-with-claude/fast-mode)) | Fast mode tunes synchronous latency, which doesn't apply to asynchronous batch processing. |
+| `store` / `previous_thread_event_id` (Threads) | Threads are stateful; batch requests are not. |
+| `cache_hint` / `context_hint` | These routing hints apply to synchronous request scheduling only. |
+| `max_tokens: 0` | See [Batch limitations](#batch-limitations). |
+| `research_preview_2026_02: "active"` | Research preview mode is not available on the batch path. |
 
 <Tip>
 Since batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration) with prompt caching for better cache hit rates when processing batches with shared context.
@@ -1863,6 +1875,14 @@ message_batch = client.messages.batches.create(
 
 In this example, both requests in the batch include identical system messages and the full text of Pride and Prejudice marked with `cache_control` to increase the likelihood of cache hits.
 
+### Server tools and the agentic loop
+
+All [server tools](/docs/en/agents-and-tools/tool-use/server-tools) (web search, web fetch, code execution, MCP connectors, advisor, and tool search) work in batch requests. The batch worker runs the same server-side agentic loop as the synchronous Messages API.
+
+Because there is no open connection to maintain, the batch loop runs **more iterations per turn** than a synchronous request before it returns `stop_reason: "pause_turn"`. If a batch result comes back with `pause_turn`, the turn did not finish; you can continue it by submitting the paused assistant content in a follow-up request (batch or synchronous) exactly as shown in the [pause_turn continuation pattern](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn).
+
+The batch worker additionally throttles `web_search` per organization so that highly concurrent batch processing does not exhaust your organization's web-search rate limit. The batch retries throttled requests automatically; you don't need to handle this yourself, but very large web-search batches might take longer to complete.
+
 ### Extended output (beta)
 
 The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
@@ -2177,7 +2197,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
 
   <section title="Can I use the Message Batches API with other API features?">
 
-    Yes, the Message Batches API supports all features available in the Messages API, including beta features. However, streaming is not supported for batch requests.
+    Yes, the Message Batches API supports nearly all features available in the Messages API, including most beta features. A small number of parameters (`stream`, `speed`, `store`, `previous_thread_event_id`, `cache_hint`, `context_hint`, `max_tokens: 0`, and `research_preview_2026_02`) are not supported. See [What can be batched](#what-can-be-batched) for the full list.
   
 </section>
 
