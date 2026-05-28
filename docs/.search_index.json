@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-28T04:46:08Z",
+  "generated_at": "2026-05-28T07:44:16Z",
   "indexed_files": 1514,
   "index": {
     "/changelog": {
@@ -686,21 +686,21 @@
         "claude",
         "code",
         "effort",
-        "level",
         "default",
-        "settings",
+        "level",
         "sonnet",
         "context",
         "environment",
+        "settings",
         "picker",
         "thinking",
         "models",
         "name",
         "variable",
         "session",
-        "which"
+        "uses"
       ],
-      "word_count": 3825,
+      "word_count": 3857,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -714,8 +714,8 @@
         "events",
         "request",
         "code",
-        "name",
         "claude",
+        "name",
         "session",
         "plugin",
         "metrics",
@@ -728,7 +728,7 @@
         "mcp",
         "such"
       ],
-      "word_count": 8941,
+      "word_count": 8999,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1008,7 +1008,7 @@
         "only",
         "repo"
       ],
-      "word_count": 10186,
+      "word_count": 10249,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1022,21 +1022,21 @@
         "title",
         "install",
         "powershell",
+        "see",
+        "run",
         "linux",
         "tabs",
-        "run",
+        "installation",
         "version",
-        "see",
         "wsl",
         "package",
-        "installation",
         "updates",
         "step",
         "channel",
         "native",
-        "upgrade"
+        "update"
       ],
-      "word_count": 2977,
+      "word_count": 3026,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1074,25 +1074,25 @@
         "status",
         "line",
         "script",
-        "git",
         "claude",
-        "context",
+        "git",
         "code",
+        "context",
         "session",
         "when",
         "window",
         "current",
+        "output",
         "json",
         "name",
         "directory",
         "only",
         "codegroup",
-        "output",
         "api",
         "command",
         "may"
       ],
-      "word_count": 6116,
+      "word_count": 6181,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1104,8 +1104,8 @@
         "claude",
         "when",
         "main",
-        "agent",
         "session",
+        "agent",
         "conversation",
         "prompt",
         "code",
@@ -1120,7 +1120,7 @@
         "model",
         "plugin"
       ],
-      "word_count": 8121,
+      "word_count": 8206,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
