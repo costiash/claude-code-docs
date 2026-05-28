@@ -28,7 +28,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.7 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
 
 <CodeGroup defaultLanguage="CLI">
   
@@ -40,7 +40,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "content-type: application/json" \
   -d '{
     "name": "Coding Assistant",
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "system": "You are a helpful coding agent.",
     "tools": [{"type": "agent_toolset_20260401"}]
   }')
@@ -53,7 +53,7 @@ AGENT_VERSION=$(jq -r '.version' <<< "$agent")
 ````bash
 ant beta:agents create \
   --name "Coding Assistant" \
-  --model '{id: claude-opus-4-7}' \
+  --model '{id: claude-opus-4-8}' \
   --system "You are a helpful coding agent." \
   --tool '{type: agent_toolset_20260401}'
 ````
@@ -62,7 +62,7 @@ ant beta:agents create \
 ````python
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     system="You are a helpful coding agent.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -74,7 +74,7 @@ agent = client.beta.agents.create(
 ````typescript
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system: "You are a helpful coding agent.",
   tools: [{ type: "agent_toolset_20260401" }],
 });
@@ -85,7 +85,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = new("claude-opus-4-7"),
+    Model = new("claude-opus-4-8"),
     System = "You are a helpful coding agent.",
     Tools =
     [
@@ -102,7 +102,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-4-7",
+		ID: "claude-opus-4-8",
 	},
 	System: anthropic.String("You are a helpful coding agent."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -121,7 +121,7 @@ if err != nil {
 var agent = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Coding Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .system("You are a helpful coding agent.")
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -136,7 +136,7 @@ var agent = client.beta().agents().create(
 ````php
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     system: 'You are a helpful coding agent.',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
@@ -150,7 +150,7 @@ $agent = $client->beta->agents->create(
 ````ruby
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system_: "You are a helpful coding agent.",
   tools: [{type: "agent_toolset_20260401"}]
 )
@@ -159,7 +159,7 @@ agent = client.beta.agents.create(
 </CodeGroup>
 
 <Tip>
-To use Claude Opus 4.6 or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object: `{"id": "claude-opus-4-7", "speed": "fast"}`.
+To use Claude Opus 4.8, Claude Opus 4.7, or Claude Opus 4.6 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later.
 </Tip>
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time an update changes the agent.
@@ -170,7 +170,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-4-7",
+    "id": "claude-opus-4-8",
     "speed": "standard"
   },
   "system": "You are a helpful coding agent.",

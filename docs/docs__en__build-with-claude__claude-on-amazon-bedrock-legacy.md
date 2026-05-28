@@ -125,12 +125,12 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 #### API model IDs
 
 <Note>
-  Claude Opus 4.7 is reachable through `InvokeModel` on `bedrock-runtime`.
+  Claude Opus 4.8 and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
   These requests are served by the same infrastructure as the
   [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock)
   endpoint. For the native Messages API request shape and full feature
-  parity, use that page. Claude Opus 4.7 is omitted from the model table
-  on this page because it does not have an ARN-versioned model ID.
+  parity, use that page. Claude Opus 4.8 and Claude Opus 4.7 are omitted from the model table
+  on this page because they do not have ARN-versioned model IDs.
 </Note>
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations); a "Retiring" annotation gives the platform's announced retirement date. The dates in the following table are the **Amazon Bedrock** schedule, which AWS sets independently. A model's lifecycle status and dates here can differ from the Anthropic-operated schedule on the Model deprecations page.
@@ -673,7 +673,7 @@ PDF support is available on Bedrock through both the Converse API and InvokeMode
 
 ### Context window
 
-Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 

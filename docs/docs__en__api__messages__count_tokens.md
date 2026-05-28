@@ -564,6 +564,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -883,11 +885,42 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-  - `role: "user" or "assistant"`
+      - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of TextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional CacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of TextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional CacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: Model`
 
@@ -895,11 +928,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 

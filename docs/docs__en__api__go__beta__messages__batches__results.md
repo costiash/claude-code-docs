@@ -76,6 +76,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
 ### Returns
 
 - `type BetaMessageBatchIndividualResponse struct{…}`
@@ -463,6 +465,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                  - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                   - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                   - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -579,6 +583,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type BetaAdvisorResultBlock struct{…}`
 
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `Text string`
 
                 - `Type AdvisorResult`
@@ -590,6 +598,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `EncryptedContent string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `Type AdvisorRedactedResult`
 
@@ -1024,6 +1036,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
               Frontier intelligence for long-running agents and coding
@@ -1320,6 +1336,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `OutputTokens int64`
 
             The number of output tokens which were used.
+
+          - `OutputTokensDetails BetaOutputTokensDetails`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `ThinkingTokens int64`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `ServerToolUse BetaServerToolUsage`
 

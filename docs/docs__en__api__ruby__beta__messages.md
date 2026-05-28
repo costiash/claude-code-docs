@@ -596,6 +596,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -682,6 +684,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:advisor_result`
 
+            - `stop_reason: String`
+
           - `class BetaAdvisorRedactedResultBlockParam`
 
             - `encrypted_content: String`
@@ -691,6 +695,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `type: :advisor_redacted_result`
 
               - `:advisor_redacted_result`
+
+            - `stop_reason: String`
 
         - `tool_use_id: String`
 
@@ -1027,10 +1033,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: String`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: :compaction`
 
           - `:compaction`
@@ -1039,15 +1041,50 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
+        - `content: String`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: String`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: :user | :assistant`
+      - `class BetaMidConversationSystemBlockParam`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: Array[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: String`
+
+          - `type: :text`
+
+          - `cache_control: BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Array[BetaTextCitationParam]`
+
+        - `type: :mid_conv_system`
+
+          - `:mid_conv_system`
+
+        - `cache_control: BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: :user | :assistant | :system`
 
     - `:user`
 
     - `:assistant`
+
+    - `:system`
 
 - `model: Model`
 
@@ -1055,11 +1092,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `:"claude-opus-4-7"`
 
@@ -2649,7 +2690,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2700,6 +2741,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -3070,6 +3113,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:url_not_allowed`
 
+            - `:url_not_in_prior_context`
+
             - `:url_not_accessible`
 
             - `:unsupported_content_type`
@@ -3186,6 +3231,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class BetaAdvisorResultBlock`
 
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: String`
 
           - `type: :advisor_result`
@@ -3197,6 +3246,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `encrypted_content: String`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: :advisor_redacted_result`
 
@@ -3625,11 +3678,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -3928,6 +3985,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: BetaOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: Integer`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: BetaServerToolUsage`
 
       The number of server tool requests.
@@ -4055,6 +4132,9 @@ puts(beta_message)
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -4651,6 +4731,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -4737,6 +4819,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:advisor_result`
 
+            - `stop_reason: String`
+
           - `class BetaAdvisorRedactedResultBlockParam`
 
             - `encrypted_content: String`
@@ -4746,6 +4830,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
             - `type: :advisor_redacted_result`
 
               - `:advisor_redacted_result`
+
+            - `stop_reason: String`
 
         - `tool_use_id: String`
 
@@ -5082,10 +5168,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: String`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: :compaction`
 
           - `:compaction`
@@ -5094,15 +5176,50 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
+        - `content: String`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: String`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: :user | :assistant`
+      - `class BetaMidConversationSystemBlockParam`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: Array[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: String`
+
+          - `type: :text`
+
+          - `cache_control: BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Array[BetaTextCitationParam]`
+
+        - `type: :mid_conv_system`
+
+          - `:mid_conv_system`
+
+        - `cache_control: BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: :user | :assistant | :system`
 
     - `:user`
 
     - `:assistant`
+
+    - `:system`
 
 - `model: Model`
 
@@ -5110,11 +5227,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `:"claude-opus-4-7"`
 
@@ -6595,7 +6716,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -6646,6 +6767,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -6727,11 +6850,15 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -6821,6 +6948,10 @@ puts(beta_message_tokens_count)
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+  - `stop_reason: String`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
   - `type: :advisor_redacted_result`
 
     - `:advisor_redacted_result`
@@ -6837,9 +6968,15 @@ puts(beta_message_tokens_count)
 
     - `:advisor_redacted_result`
 
+  - `stop_reason: String`
+
 ### Beta Advisor Result Block
 
 - `class BetaAdvisorResultBlock`
+
+  - `stop_reason: String`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: String`
 
@@ -6857,6 +6994,8 @@ puts(beta_message_tokens_count)
 
     - `:advisor_result`
 
+  - `stop_reason: String`
+
 ### Beta Advisor Tool 20260301
 
 - `class BetaAdvisorTool20260301`
@@ -6867,11 +7006,15 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -7030,6 +7173,10 @@ puts(beta_message_tokens_count)
 
     - `class BetaAdvisorResultBlock`
 
+      - `stop_reason: String`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
       - `text: String`
 
       - `type: :advisor_result`
@@ -7041,6 +7188,10 @@ puts(beta_message_tokens_count)
       - `encrypted_content: String`
 
         Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `stop_reason: String`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
       - `type: :advisor_redacted_result`
 
@@ -7086,6 +7237,8 @@ puts(beta_message_tokens_count)
 
         - `:advisor_result`
 
+      - `stop_reason: String`
+
     - `class BetaAdvisorRedactedResultBlockParam`
 
       - `encrypted_content: String`
@@ -7095,6 +7248,8 @@ puts(beta_message_tokens_count)
       - `type: :advisor_redacted_result`
 
         - `:advisor_redacted_result`
+
+      - `stop_reason: String`
 
   - `tool_use_id: String`
 
@@ -8657,10 +8812,6 @@ puts(beta_message_tokens_count)
   When content is None, the block represents a failed compaction. The server
   treats these as no-ops. Empty string content is not allowed.
 
-  - `content: String`
-
-    Summary of previously compacted content, or null if compaction failed
-
   - `type: :compaction`
 
     - `:compaction`
@@ -8687,6 +8838,10 @@ puts(beta_message_tokens_count)
       - `:"5m"`
 
       - `:"1h"`
+
+  - `content: String`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `encrypted_content: String`
 
@@ -9162,6 +9317,8 @@ puts(beta_message_tokens_count)
 
           - `:url_not_allowed`
 
+          - `:url_not_in_prior_context`
+
           - `:url_not_accessible`
 
           - `:unsupported_content_type`
@@ -9278,6 +9435,10 @@ puts(beta_message_tokens_count)
 
       - `class BetaAdvisorResultBlock`
 
+        - `stop_reason: String`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
         - `text: String`
 
         - `type: :advisor_result`
@@ -9289,6 +9450,10 @@ puts(beta_message_tokens_count)
         - `encrypted_content: String`
 
           Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `stop_reason: String`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
         - `type: :advisor_redacted_result`
 
@@ -9610,7 +9775,7 @@ puts(beta_message_tokens_count)
 
 ### Beta Content Block Param
 
-- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 17 more`
+- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 18 more`
 
   Regular text content.
 
@@ -10129,6 +10294,8 @@ puts(beta_message_tokens_count)
 
           - `:url_not_allowed`
 
+          - `:url_not_in_prior_context`
+
           - `:url_not_accessible`
 
           - `:unsupported_content_type`
@@ -10215,6 +10382,8 @@ puts(beta_message_tokens_count)
 
           - `:advisor_result`
 
+        - `stop_reason: String`
+
       - `class BetaAdvisorRedactedResultBlockParam`
 
         - `encrypted_content: String`
@@ -10224,6 +10393,8 @@ puts(beta_message_tokens_count)
         - `type: :advisor_redacted_result`
 
           - `:advisor_redacted_result`
+
+        - `stop_reason: String`
 
     - `tool_use_id: String`
 
@@ -10560,10 +10731,6 @@ puts(beta_message_tokens_count)
     When content is None, the block represents a failed compaction. The server
     treats these as no-ops. Empty string content is not allowed.
 
-    - `content: String`
-
-      Summary of previously compacted content, or null if compaction failed
-
     - `type: :compaction`
 
       - `:compaction`
@@ -10572,9 +10739,42 @@ puts(beta_message_tokens_count)
 
       Create a cache control breakpoint at this content block.
 
+    - `content: String`
+
+      Summary of previously compacted content, or null if compaction failed
+
     - `encrypted_content: String`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `class BetaMidConversationSystemBlockParam`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `content: Array[BetaTextBlockParam]`
+
+      System instruction text blocks.
+
+      - `text: String`
+
+      - `type: :text`
+
+      - `cache_control: BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `citations: Array[BetaTextCitationParam]`
+
+    - `type: :mid_conv_system`
+
+      - `:mid_conv_system`
+
+    - `cache_control: BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
 
 ### Beta Content Block Source
 
@@ -11521,11 +11721,15 @@ puts(beta_message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `:"claude-opus-4-7"`
 
@@ -12538,6 +12742,8 @@ puts(beta_message_tokens_count)
 
             - `:url_not_allowed`
 
+            - `:url_not_in_prior_context`
+
             - `:url_not_accessible`
 
             - `:unsupported_content_type`
@@ -12654,6 +12860,10 @@ puts(beta_message_tokens_count)
 
         - `class BetaAdvisorResultBlock`
 
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: String`
 
           - `type: :advisor_result`
@@ -12665,6 +12875,10 @@ puts(beta_message_tokens_count)
           - `encrypted_content: String`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: :advisor_redacted_result`
 
@@ -13093,11 +13307,15 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -13396,6 +13614,26 @@ puts(beta_message_tokens_count)
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: BetaOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: Integer`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: BetaServerToolUsage`
 
       The number of server tool requests.
@@ -13546,11 +13784,15 @@ puts(beta_message_tokens_count)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `:"claude-opus-4-7"`
 
@@ -13635,6 +13877,26 @@ puts(beta_message_tokens_count)
   - `output_tokens: Integer`
 
     The cumulative number of output tokens which were used.
+
+  - `output_tokens_details: BetaOutputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: Integer`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: BetaServerToolUsage`
 
@@ -14213,6 +14475,8 @@ puts(beta_message_tokens_count)
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -14299,6 +14563,8 @@ puts(beta_message_tokens_count)
 
               - `:advisor_result`
 
+            - `stop_reason: String`
+
           - `class BetaAdvisorRedactedResultBlockParam`
 
             - `encrypted_content: String`
@@ -14308,6 +14574,8 @@ puts(beta_message_tokens_count)
             - `type: :advisor_redacted_result`
 
               - `:advisor_redacted_result`
+
+            - `stop_reason: String`
 
         - `tool_use_id: String`
 
@@ -14644,10 +14912,6 @@ puts(beta_message_tokens_count)
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: String`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: :compaction`
 
           - `:compaction`
@@ -14656,15 +14920,50 @@ puts(beta_message_tokens_count)
 
           Create a cache control breakpoint at this content block.
 
+        - `content: String`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: String`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: :user | :assistant`
+      - `class BetaMidConversationSystemBlockParam`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: Array[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: String`
+
+          - `type: :text`
+
+          - `cache_control: BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Array[BetaTextCitationParam]`
+
+        - `type: :mid_conv_system`
+
+          - `:mid_conv_system`
+
+        - `cache_control: BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: :user | :assistant | :system`
 
     - `:user`
 
     - `:assistant`
+
+    - `:system`
 
 ### Beta Message Tokens Count
 
@@ -14691,6 +14990,162 @@ puts(beta_message_tokens_count)
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Mid Conversation System Block Param
+
+- `class BetaMidConversationSystemBlockParam`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `content: Array[BetaTextBlockParam]`
+
+    System instruction text blocks.
+
+    - `text: String`
+
+    - `type: :text`
+
+      - `:text`
+
+    - `cache_control: BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: :ephemeral`
+
+        - `:ephemeral`
+
+      - `ttl: :"5m" | :"1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `:"5m"`
+
+        - `:"1h"`
+
+    - `citations: Array[BetaTextCitationParam]`
+
+      - `class BetaCitationCharLocationParam`
+
+        - `cited_text: String`
+
+        - `document_index: Integer`
+
+        - `document_title: String`
+
+        - `end_char_index: Integer`
+
+        - `start_char_index: Integer`
+
+        - `type: :char_location`
+
+          - `:char_location`
+
+      - `class BetaCitationPageLocationParam`
+
+        - `cited_text: String`
+
+        - `document_index: Integer`
+
+        - `document_title: String`
+
+        - `end_page_number: Integer`
+
+        - `start_page_number: Integer`
+
+        - `type: :page_location`
+
+          - `:page_location`
+
+      - `class BetaCitationContentBlockLocationParam`
+
+        - `cited_text: String`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `document_index: Integer`
+
+        - `document_title: String`
+
+        - `end_block_index: Integer`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `type: :content_block_location`
+
+          - `:content_block_location`
+
+      - `class BetaCitationWebSearchResultLocationParam`
+
+        - `cited_text: String`
+
+        - `encrypted_index: String`
+
+        - `title: String`
+
+        - `type: :web_search_result_location`
+
+          - `:web_search_result_location`
+
+        - `url: String`
+
+      - `class BetaCitationSearchResultLocationParam`
+
+        - `cited_text: String`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `end_block_index: Integer`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `search_result_index: Integer`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `source: String`
+
+        - `start_block_index: Integer`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `title: String`
+
+        - `type: :search_result_location`
+
+          - `:search_result_location`
+
+  - `type: :mid_conv_system`
+
+    - `:mid_conv_system`
+
+  - `cache_control: BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -14739,6 +15194,21 @@ puts(beta_message_tokens_count)
     - `remaining: Integer`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Output Tokens Details
+
+- `class BetaOutputTokensDetails`
+
+  - `thinking_tokens: Integer`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -14893,6 +15363,10 @@ puts(beta_message_tokens_count)
       - `:citations_delta`
 
   - `class BetaThinkingDelta`
+
+    - `estimated_tokens: Integer`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
     - `thinking: String`
 
@@ -15061,6 +15535,10 @@ puts(beta_message_tokens_count)
         - `:citations_delta`
 
     - `class BetaThinkingDelta`
+
+      - `estimated_tokens: Integer`
+
+        Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
       - `thinking: String`
 
@@ -15400,6 +15878,8 @@ puts(beta_message_tokens_count)
 
             - `:url_not_allowed`
 
+            - `:url_not_in_prior_context`
+
             - `:url_not_accessible`
 
             - `:unsupported_content_type`
@@ -15516,6 +15996,10 @@ puts(beta_message_tokens_count)
 
         - `class BetaAdvisorResultBlock`
 
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: String`
 
           - `type: :advisor_result`
@@ -15527,6 +16011,10 @@ puts(beta_message_tokens_count)
           - `encrypted_content: String`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: :advisor_redacted_result`
 
@@ -16116,11 +16604,15 @@ puts(beta_message_tokens_count)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `:"claude-opus-4-7"`
 
@@ -16205,6 +16697,26 @@ puts(beta_message_tokens_count)
     - `output_tokens: Integer`
 
       The cumulative number of output tokens which were used.
+
+    - `output_tokens_details: BetaOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: Integer`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: BetaServerToolUsage`
 
@@ -16589,6 +17101,8 @@ puts(beta_message_tokens_count)
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -16705,6 +17219,10 @@ puts(beta_message_tokens_count)
 
           - `class BetaAdvisorResultBlock`
 
+            - `stop_reason: String`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `text: String`
 
             - `type: :advisor_result`
@@ -16716,6 +17234,10 @@ puts(beta_message_tokens_count)
             - `encrypted_content: String`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: String`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: :advisor_redacted_result`
 
@@ -17144,11 +17666,15 @@ puts(beta_message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `:"claude-opus-4-7"`
 
@@ -17446,6 +17972,26 @@ puts(beta_message_tokens_count)
       - `output_tokens: Integer`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: BetaOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: Integer`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: BetaServerToolUsage`
 
@@ -17862,6 +18408,8 @@ puts(beta_message_tokens_count)
 
                 - `:url_not_allowed`
 
+                - `:url_not_in_prior_context`
+
                 - `:url_not_accessible`
 
                 - `:unsupported_content_type`
@@ -17978,6 +18526,10 @@ puts(beta_message_tokens_count)
 
             - `class BetaAdvisorResultBlock`
 
+              - `stop_reason: String`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `text: String`
 
               - `type: :advisor_result`
@@ -17989,6 +18541,10 @@ puts(beta_message_tokens_count)
               - `encrypted_content: String`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: String`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: :advisor_redacted_result`
 
@@ -18417,11 +18973,15 @@ puts(beta_message_tokens_count)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `:"claude-opus-4-7"`
 
@@ -18720,6 +19280,26 @@ puts(beta_message_tokens_count)
 
           The number of output tokens which were used.
 
+        - `output_tokens_details: BetaOutputTokensDetails`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: Integer`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
         - `server_tool_use: BetaServerToolUsage`
 
           The number of server tool requests.
@@ -18815,6 +19395,15 @@ puts(beta_message_tokens_count)
       - `output_tokens: Integer`
 
         The cumulative number of output tokens which were used.
+
+      - `output_tokens_details: BetaOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
 
       - `server_tool_use: BetaServerToolUsage`
 
@@ -18917,6 +19506,10 @@ puts(beta_message_tokens_count)
           - `:citations_delta`
 
       - `class BetaThinkingDelta`
+
+        - `estimated_tokens: Integer`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
         - `thinking: String`
 
@@ -20805,6 +21398,10 @@ puts(beta_message_tokens_count)
 ### Beta Thinking Delta
 
 - `class BetaThinkingDelta`
+
+  - `estimated_tokens: Integer`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
   - `thinking: String`
 
@@ -23177,11 +23774,15 @@ puts(beta_message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `:"claude-opus-4-7"`
 
@@ -23679,11 +24280,15 @@ puts(beta_message_tokens_count)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `:"claude-opus-4-7"`
 
@@ -23768,6 +24373,26 @@ puts(beta_message_tokens_count)
   - `output_tokens: Integer`
 
     The number of output tokens which were used.
+
+  - `output_tokens_details: BetaOutputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: Integer`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: BetaServerToolUsage`
 
@@ -24405,6 +25030,8 @@ puts(beta_message_tokens_count)
 
         - `:url_not_allowed`
 
+        - `:url_not_in_prior_context`
+
         - `:url_not_accessible`
 
         - `:unsupported_content_type`
@@ -24526,6 +25153,8 @@ puts(beta_message_tokens_count)
         - `:url_too_long`
 
         - `:url_not_allowed`
+
+        - `:url_not_in_prior_context`
 
         - `:url_not_accessible`
 
@@ -24862,6 +25491,8 @@ puts(beta_message_tokens_count)
 
     - `:url_not_allowed`
 
+    - `:url_not_in_prior_context`
+
     - `:url_not_accessible`
 
     - `:unsupported_content_type`
@@ -24888,6 +25519,8 @@ puts(beta_message_tokens_count)
 
     - `:url_not_allowed`
 
+    - `:url_not_in_prior_context`
+
     - `:url_not_accessible`
 
     - `:unsupported_content_type`
@@ -24904,13 +25537,15 @@ puts(beta_message_tokens_count)
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `BetaWebFetchToolResultErrorCode = :invalid_tool_input | :url_too_long | :url_not_allowed | 5 more`
+- `BetaWebFetchToolResultErrorCode = :invalid_tool_input | :url_too_long | :url_not_allowed | 6 more`
 
   - `:invalid_tool_input`
 
   - `:url_too_long`
 
   - `:url_not_allowed`
+
+  - `:url_not_in_prior_context`
 
   - `:url_not_accessible`
 
@@ -26061,6 +26696,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:url_not_allowed`
 
+                  - `:url_not_in_prior_context`
+
                   - `:url_not_accessible`
 
                   - `:unsupported_content_type`
@@ -26147,6 +26784,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:advisor_result`
 
+                - `stop_reason: String`
+
               - `class BetaAdvisorRedactedResultBlockParam`
 
                 - `encrypted_content: String`
@@ -26156,6 +26795,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: :advisor_redacted_result`
 
                   - `:advisor_redacted_result`
+
+                - `stop_reason: String`
 
             - `tool_use_id: String`
 
@@ -26492,10 +27133,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             When content is None, the block represents a failed compaction. The server
             treats these as no-ops. Empty string content is not allowed.
 
-            - `content: String`
-
-              Summary of previously compacted content, or null if compaction failed
-
             - `type: :compaction`
 
               - `:compaction`
@@ -26504,15 +27141,50 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
+            - `content: String`
+
+              Summary of previously compacted content, or null if compaction failed
+
             - `encrypted_content: String`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `role: :user | :assistant`
+          - `class BetaMidConversationSystemBlockParam`
+
+            System instructions that appear mid-conversation.
+
+            Use this block to provide or update system-level instructions at a specific
+            point in the conversation, rather than only via the top-level `system` parameter.
+
+            - `content: Array[BetaTextBlockParam]`
+
+              System instruction text blocks.
+
+              - `text: String`
+
+              - `type: :text`
+
+              - `cache_control: BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+              - `citations: Array[BetaTextCitationParam]`
+
+            - `type: :mid_conv_system`
+
+              - `:mid_conv_system`
+
+            - `cache_control: BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+      - `role: :user | :assistant | :system`
 
         - `:user`
 
         - `:assistant`
+
+        - `:system`
 
     - `model: Model`
 
@@ -26520,11 +27192,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `:"claude-opus-4-7"`
 
@@ -28114,7 +28790,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -28165,6 +28841,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -28320,7 +28998,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -28371,6 +29049,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -28529,7 +29209,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -28580,6 +29260,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -28737,7 +29419,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -28788,6 +29470,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -28938,7 +29622,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -28989,6 +29673,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -29051,7 +29737,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -29102,6 +29788,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -29490,6 +30178,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:url_not_allowed`
 
+                  - `:url_not_in_prior_context`
+
                   - `:url_not_accessible`
 
                   - `:unsupported_content_type`
@@ -29606,6 +30296,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class BetaAdvisorResultBlock`
 
+                - `stop_reason: String`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `text: String`
 
                 - `type: :advisor_result`
@@ -29617,6 +30311,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `encrypted_content: String`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: String`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: :advisor_redacted_result`
 
@@ -30045,11 +30743,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `:"claude-opus-4-7"`
 
@@ -30347,6 +31049,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: BetaOutputTokensDetails`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: Integer`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: BetaServerToolUsage`
 
@@ -31095,6 +31817,8 @@ puts(beta_message_batch_individual_response)
 
                   - `:url_not_allowed`
 
+                  - `:url_not_in_prior_context`
+
                   - `:url_not_accessible`
 
                   - `:unsupported_content_type`
@@ -31211,6 +31935,10 @@ puts(beta_message_batch_individual_response)
 
               - `class BetaAdvisorResultBlock`
 
+                - `stop_reason: String`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `text: String`
 
                 - `type: :advisor_result`
@@ -31222,6 +31950,10 @@ puts(beta_message_batch_individual_response)
                 - `encrypted_content: String`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: String`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: :advisor_redacted_result`
 
@@ -31650,11 +32382,15 @@ puts(beta_message_batch_individual_response)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `:"claude-opus-4-7"`
 
@@ -31952,6 +32688,26 @@ puts(beta_message_batch_individual_response)
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: BetaOutputTokensDetails`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: Integer`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: BetaServerToolUsage`
 
@@ -32496,6 +33252,8 @@ puts(beta_message_batch_individual_response)
 
                 - `:url_not_allowed`
 
+                - `:url_not_in_prior_context`
+
                 - `:url_not_accessible`
 
                 - `:unsupported_content_type`
@@ -32612,6 +33370,10 @@ puts(beta_message_batch_individual_response)
 
             - `class BetaAdvisorResultBlock`
 
+              - `stop_reason: String`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `text: String`
 
               - `type: :advisor_result`
@@ -32623,6 +33385,10 @@ puts(beta_message_batch_individual_response)
               - `encrypted_content: String`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: String`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: :advisor_redacted_result`
 
@@ -33051,11 +33817,15 @@ puts(beta_message_batch_individual_response)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `:"claude-opus-4-7"`
 
@@ -33353,6 +34123,26 @@ puts(beta_message_batch_individual_response)
         - `output_tokens: Integer`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: BetaOutputTokensDetails`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: Integer`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: BetaServerToolUsage`
 
@@ -33859,6 +34649,8 @@ puts(beta_message_batch_individual_response)
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -33975,6 +34767,10 @@ puts(beta_message_batch_individual_response)
 
           - `class BetaAdvisorResultBlock`
 
+            - `stop_reason: String`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `text: String`
 
             - `type: :advisor_result`
@@ -33986,6 +34782,10 @@ puts(beta_message_batch_individual_response)
             - `encrypted_content: String`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: String`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: :advisor_redacted_result`
 
@@ -34414,11 +35214,15 @@ puts(beta_message_batch_individual_response)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `:"claude-opus-4-7"`
 
@@ -34716,6 +35520,26 @@ puts(beta_message_batch_individual_response)
       - `output_tokens: Integer`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: BetaOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: Integer`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: BetaServerToolUsage`
 

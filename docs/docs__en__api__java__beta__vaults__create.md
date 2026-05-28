@@ -64,6 +64,8 @@ Create Vault
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
   - `String displayName`
 
     Human-readable name for the vault. 1-255 characters.

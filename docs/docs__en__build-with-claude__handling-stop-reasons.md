@@ -112,7 +112,7 @@ messages = [
 # If you still get empty responses after fixing the above:
 def handle_empty_response(client, messages):
     response = client.messages.create(
-        model="claude-opus-4-7", max_tokens=1024, messages=messages
+        model="claude-opus-4-8", max_tokens=1024, messages=messages
     )
 
     # Check if response is empty
@@ -124,7 +124,7 @@ def handle_empty_response(client, messages):
         messages.append({"role": "user", "content": "Please continue"})
 
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages
+            model="claude-opus-4-8", max_tokens=1024, messages=messages
         )
 
     return response
@@ -141,7 +141,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 ```python Python
 # Request with limited tokens
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=10,
     messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
@@ -178,7 +178,7 @@ client = anthropic.Anthropic()
 tools: list[dict] = []
 messages: list[dict] = []
 response = client.messages.create(
-    model="claude-opus-4-7", max_tokens=1024, tools=tools, messages=messages
+    model="claude-opus-4-8", max_tokens=1024, tools=tools, messages=messages
 )
 # Check if response was truncated during tool use
 if response.stop_reason == "max_tokens":
@@ -187,7 +187,7 @@ if response.stop_reason == "max_tokens":
     if last_block.type == "tool_use":
         # Send the request with higher max_tokens
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=4096,  # Increased limit
             messages=messages,
             tools=tools,
@@ -202,7 +202,7 @@ if (response.stop_reason === "max_tokens") {
   if (lastBlock.type === "tool_use") {
     // Send the request with higher max_tokens
     response = await client.messages.create({
-      model: "claude-opus-4-7",
+      model: "claude-opus-4-8",
       max_tokens: 4096, // Increased limit
       messages: messages,
       tools: tools
@@ -220,7 +220,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 1024,
     Messages = messages,
     Tools = tools
@@ -256,7 +256,7 @@ func main() {
 	tools := []anthropic.ToolUnionParam{}
 	messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock("test"))}
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages:  messages,
 		Tools:     tools,
@@ -270,7 +270,7 @@ func main() {
 		switch lastBlock.AsAny().(type) {
 		case anthropic.ToolUseBlock:
 			response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-				Model:     anthropic.ModelClaudeOpus4_7,
+				Model:     anthropic.ModelClaudeOpus4_8,
 				MaxTokens: 4096,
 				Messages:  messages,
 				Tools:     tools,
@@ -298,7 +298,7 @@ import com.anthropic.models.messages.StopReason;
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 List<MessageCreateParams.Message> messages = List.of();
 List<Tool> tools = List.of();
-Message response = client.messages().create(MessageCreateParams.builder().model(Model.CLAUDE_OPUS_4_7).maxTokens(1024L).addUserMessage("test").build());
+Message response = client.messages().create(MessageCreateParams.builder().model(Model.CLAUDE_OPUS_4_8).maxTokens(1024L).addUserMessage("test").build());
 // Check if response was truncated during tool use
 if (response.stopReason().isPresent() && response.stopReason().get().equals(StopReason.MAX_TOKENS)) {
     ContentBlock lastBlock = response.content().get(response.content().size() - 1);
@@ -306,7 +306,7 @@ if (response.stopReason().isPresent() && response.stopReason().get().equals(Stop
         // Send the request with higher max_tokens
         response = client.messages().create(
             MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_7)
+                .model(Model.CLAUDE_OPUS_4_8)
                 .maxTokens(4096L) // Increased limit
                 .messages(messages)
                 .tools(tools)
@@ -326,7 +326,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 $response = $client->messages->create(
     maxTokens: 1024,
     messages: $messages,
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: $tools,
 );
 
@@ -336,7 +336,7 @@ if ($response->stopReason === 'max_tokens') {
         $response = $client->messages->create(
             maxTokens: 4096,
             messages: $messages,
-            model: 'claude-opus-4-7',
+            model: 'claude-opus-4-8',
             tools: $tools,
         );
     }
@@ -360,7 +360,7 @@ messages = [
 ]
 
 response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: messages,
   tools: tools
@@ -370,7 +370,7 @@ if response.stop_reason == :max_tokens
   last_block = response.content.last
   if last_block.type == :tool_use
     response = client.messages.create(
-      model: "claude-opus-4-7",
+      model: "claude-opus-4-8",
       max_tokens: 4096,
       messages: messages,
       tools: tools
@@ -385,7 +385,7 @@ Claude encountered one of your custom stop sequences.
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
     messages=[{"role": "user", "content": "Generate text until you say END"}],
@@ -399,7 +399,7 @@ if response.stop_reason == "stop_sequence":
 Claude is calling a tool and expects you to execute it.
 
 <Note>
-For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, use the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner), which automatically handles tool execution, result formatting, and conversation management.
 </Note>
 
 ```python Python nocheck
@@ -446,7 +446,7 @@ When this happens, the response may contain a `server_tool_use` block without a 
 
 ```python Python nocheck
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
@@ -459,7 +459,7 @@ if response.stop_reason == "pause_turn":
         {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -475,7 +475,7 @@ Claude refused to generate a response due to safety concerns.
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
@@ -490,13 +490,39 @@ if response.stop_reason == "refusal":
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
+#### Refusal categories
+
+On Claude Opus 4.7 and later models, a `refusal` response also includes a `stop_details` object alongside `stop_reason`, with no beta header required:
+
+- `stop_details.type` is always `"refusal"`.
+- `stop_details.category` identifies the policy category that triggered the refusal: `"cyber"` or `"bio"`. It is `null` when the refusal doesn't map to a named category.
+- `stop_details.explanation` is a human-readable description of the refusal, or `null` when no explanation is available for the category. The text is not guaranteed to be stable, so don't parse it programmatically.
+
+Use `stop_details.category` to handle specific refusal categories differently in your application, for example by logging them separately or surfacing a category-specific message to the user.
+
+```python Python
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "[Unsafe request]"}],
+)
+
+if response.stop_reason == "refusal" and response.stop_details:
+    print(f"Refusal category: {response.stop_details.category}")
+    if response.stop_details.category == "cyber":
+        # Route this category differently from generic safety refusals
+        print(response.stop_details.explanation)
+```
+
+`stop_details` is `null` for all stop reasons other than `refusal`.
+
 ### model_context_window_exceeded
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
 ```python Python nocheck
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
@@ -556,7 +582,7 @@ def handle_truncated_response(response):
             {"role": "assistant", "content": response.content[0].text},
         ]
         continuation = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=1024,
             messages=messages + [{"role": "user", "content": "Please continue"}],
         )
@@ -580,7 +606,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -674,7 +700,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -696,7 +722,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, max_tokens=4096
+            model="claude-opus-4-8", messages=messages, max_tokens=4096
         )
 
         full_response += response.content[0].text
@@ -725,7 +751,7 @@ def get_max_possible_tokens(client, prompt):
     without needing to calculate input token count
     """
     response = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )

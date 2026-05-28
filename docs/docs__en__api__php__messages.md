@@ -439,6 +439,9 @@ var_dump($message);
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -1681,6 +1684,18 @@ var_dump($messageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
+  - `MidConversationSystemBlockParam`
+
+    - `list<TextBlockParam> content`
+
+      System instruction text blocks.
+
+    - `"mid_conv_system" type`
+
+    - `?CacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
 ### Content Block Source
 
 - `ContentBlockSource`
@@ -2475,6 +2490,15 @@ var_dump($messageTokensCount);
 
     The cumulative number of output tokens which were used.
 
+  - `?OutputTokensDetails outputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
   - `?ServerToolUsage serverToolUse`
 
     The number of server tool requests.
@@ -2505,9 +2529,27 @@ var_dump($messageTokensCount);
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+### Mid Conversation System Block Param
+
+- `MidConversationSystemBlockParam`
+
+  - `list<TextBlockParam> content`
+
+    System instruction text blocks.
+
+  - `"mid_conv_system" type`
+
+  - `?CacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
 ### Model
 
 - `Model`
+
+  - `"claude-opus-4-8"`
+
+    Frontier intelligence for long-running agents and coding
 
   - `"claude-opus-4-7"`
 
@@ -2588,6 +2630,21 @@ var_dump($messageTokensCount);
   - `?JSONOutputFormat format`
 
     A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+### Output Tokens Details
+
+- `OutputTokensDetails`
+
+  - `int thinkingTokens`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Plain Text Source
 
@@ -4365,6 +4422,15 @@ var_dump($messageTokensCount);
 
     The number of output tokens which were used.
 
+  - `?OutputTokensDetails outputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
   - `?ServerToolUsage serverToolUse`
 
     The number of server tool requests.
@@ -4626,6 +4692,8 @@ var_dump($messageTokensCount);
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 

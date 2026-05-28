@@ -80,6 +80,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
 ### Returns
 
 - `class ModelListPageResponse:`

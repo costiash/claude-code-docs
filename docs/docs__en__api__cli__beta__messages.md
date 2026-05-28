@@ -75,7 +75,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+- `--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -583,13 +583,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
             - `"invalid_tool_input"`
 
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -687,17 +689,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `type: "advisor_tool_result_error"`
 
-        - `beta_advisor_result_block: object { text, type }`
+        - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
           - `type: "advisor_result"`
 
-        - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+        - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -1056,11 +1066,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `type: "unavailable"`
 
-  - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -1201,7 +1215,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     For Messages, this is always `"message"`.
 
-  - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+  - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
     Billing and rate-limit usage.
 
@@ -1351,11 +1365,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -1436,6 +1454,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `output_tokens: number`
 
       The number of output tokens which were used.
+
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -1558,6 +1596,9 @@ ant beta:messages create \
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -1633,7 +1674,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+- `--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -1821,11 +1862,15 @@ ant beta:messages count-tokens \
 
     The number of input tokens which were used.
 
-  - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -1905,17 +1950,21 @@ ant beta:messages count-tokens \
 
 ### Beta Advisor Redacted Result Block
 
-- `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+- `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
   - `encrypted_content: string`
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+  - `stop_reason: string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
   - `type: "advisor_redacted_result"`
 
 ### Beta Advisor Redacted Result Block Param
 
-- `beta_advisor_redacted_result_block_param: object { encrypted_content, type }`
+- `beta_advisor_redacted_result_block_param: object { encrypted_content, type, stop_reason }`
 
   - `encrypted_content: string`
 
@@ -1923,9 +1972,15 @@ ant beta:messages count-tokens \
 
   - `type: "advisor_redacted_result"`
 
+  - `stop_reason: optional string`
+
 ### Beta Advisor Result Block
 
-- `beta_advisor_result_block: object { text, type }`
+- `beta_advisor_result_block: object { stop_reason, text, type }`
+
+  - `stop_reason: string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: string`
 
@@ -1933,21 +1988,27 @@ ant beta:messages count-tokens \
 
 ### Beta Advisor Result Block Param
 
-- `beta_advisor_result_block_param: object { text, type }`
+- `beta_advisor_result_block_param: object { text, type, stop_reason }`
 
   - `text: string`
 
   - `type: "advisor_result"`
 
+  - `stop_reason: optional string`
+
 ### Beta Advisor Tool 20260301
 
 - `beta_advisor_tool_20260301: object { model, name, type, 6 more }`
 
-  - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -2107,17 +2168,25 @@ ant beta:messages count-tokens \
 
       - `type: "advisor_tool_result_error"`
 
-    - `beta_advisor_result_block: object { text, type }`
+    - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+      - `stop_reason: string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
       - `text: string`
 
       - `type: "advisor_result"`
 
-    - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+    - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
       - `encrypted_content: string`
 
         Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `stop_reason: string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
       - `type: "advisor_redacted_result"`
 
@@ -2149,19 +2218,23 @@ ant beta:messages count-tokens \
 
       - `type: "advisor_tool_result_error"`
 
-    - `beta_advisor_result_block_param: object { text, type }`
+    - `beta_advisor_result_block_param: object { text, type, stop_reason }`
 
       - `text: string`
 
       - `type: "advisor_result"`
 
-    - `beta_advisor_redacted_result_block_param: object { encrypted_content, type }`
+      - `stop_reason: optional string`
+
+    - `beta_advisor_redacted_result_block_param: object { encrypted_content, type, stop_reason }`
 
       - `encrypted_content: string`
 
         Opaque blob produced by a prior response; must be round-tripped verbatim.
 
       - `type: "advisor_redacted_result"`
+
+      - `stop_reason: optional string`
 
   - `tool_use_id: string`
 
@@ -3518,7 +3591,7 @@ ant beta:messages count-tokens \
 
 ### Beta Compaction Block Param
 
-- `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+- `beta_compaction_block_param: object { type, cache_control, content, encrypted_content }`
 
   A compaction block containing summary of previous context.
 
@@ -3527,10 +3600,6 @@ ant beta:messages count-tokens \
 
   When content is None, the block represents a failed compaction. The server
   treats these as no-ops. Empty string content is not allowed.
-
-  - `content: string`
-
-    Summary of previously compacted content, or null if compaction failed
 
   - `type: "compaction"`
 
@@ -3554,6 +3623,10 @@ ant beta:messages count-tokens \
       - `"5m"`
 
       - `"1h"`
+
+  - `content: optional string`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `encrypted_content: optional string`
 
@@ -3979,13 +4052,15 @@ ant beta:messages count-tokens \
 
       - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-        - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+        - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
           - `"invalid_tool_input"`
 
           - `"url_too_long"`
 
           - `"url_not_allowed"`
+
+          - `"url_not_in_prior_context"`
 
           - `"url_not_accessible"`
 
@@ -4083,17 +4158,25 @@ ant beta:messages count-tokens \
 
         - `type: "advisor_tool_result_error"`
 
-      - `beta_advisor_result_block: object { text, type }`
+      - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+        - `stop_reason: string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
         - `text: string`
 
         - `type: "advisor_result"`
 
-      - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+      - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
         - `encrypted_content: string`
 
           Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `stop_reason: string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
         - `type: "advisor_redacted_result"`
 
@@ -4367,7 +4450,7 @@ ant beta:messages count-tokens \
 
 ### Beta Content Block Param
 
-- `beta_content_block_param: BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 17 more`
+- `beta_content_block_param: BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 18 more`
 
   Regular text content.
 
@@ -4980,13 +5063,15 @@ ant beta:messages count-tokens \
 
       - `beta_web_fetch_tool_result_error_block_param: object { error_code, type }`
 
-        - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+        - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
           - `"invalid_tool_input"`
 
           - `"url_too_long"`
 
           - `"url_not_allowed"`
+
+          - `"url_not_in_prior_context"`
 
           - `"url_not_accessible"`
 
@@ -5085,19 +5170,23 @@ ant beta:messages count-tokens \
 
         - `type: "advisor_tool_result_error"`
 
-      - `beta_advisor_result_block_param: object { text, type }`
+      - `beta_advisor_result_block_param: object { text, type, stop_reason }`
 
         - `text: string`
 
         - `type: "advisor_result"`
 
-      - `beta_advisor_redacted_result_block_param: object { encrypted_content, type }`
+        - `stop_reason: optional string`
+
+      - `beta_advisor_redacted_result_block_param: object { encrypted_content, type, stop_reason }`
 
         - `encrypted_content: string`
 
           Opaque blob produced by a prior response; must be round-tripped verbatim.
 
         - `type: "advisor_redacted_result"`
+
+        - `stop_reason: optional string`
 
     - `tool_use_id: string`
 
@@ -5486,7 +5575,7 @@ ant beta:messages count-tokens \
 
         Defaults to `5m`.
 
-  - `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+  - `beta_compaction_block_param: object { type, cache_control, content, encrypted_content }`
 
     A compaction block containing summary of previous context.
 
@@ -5495,10 +5584,6 @@ ant beta:messages count-tokens \
 
     When content is None, the block represents a failed compaction. The server
     treats these as no-ops. Empty string content is not allowed.
-
-    - `content: string`
-
-      Summary of previously compacted content, or null if compaction failed
 
     - `type: "compaction"`
 
@@ -5519,9 +5604,53 @@ ant beta:messages count-tokens \
 
         Defaults to `5m`.
 
+    - `content: optional string`
+
+      Summary of previously compacted content, or null if compaction failed
+
     - `encrypted_content: optional string`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `beta_mid_conversation_system_block_param: object { content, type, cache_control }`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `content: array of BetaTextBlockParam`
+
+      System instruction text blocks.
+
+      - `text: string`
+
+      - `type: "text"`
+
+      - `cache_control: optional object { type, ttl }`
+
+        Create a cache control breakpoint at this content block.
+
+      - `citations: optional array of BetaTextCitationParam`
+
+    - `type: "mid_conv_system"`
+
+    - `cache_control: optional object { type, ttl }`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
 
 ### Beta Content Block Source
 
@@ -6382,11 +6511,15 @@ ant beta:messages count-tokens \
 
       The number of input tokens which were used.
 
-    - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -7299,13 +7432,15 @@ ant beta:messages count-tokens \
 
         - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
             - `"invalid_tool_input"`
 
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -7403,17 +7538,25 @@ ant beta:messages count-tokens \
 
           - `type: "advisor_tool_result_error"`
 
-        - `beta_advisor_result_block: object { text, type }`
+        - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
           - `type: "advisor_result"`
 
-        - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+        - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -7772,11 +7915,15 @@ ant beta:messages count-tokens \
 
         - `type: "unavailable"`
 
-  - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -7917,7 +8064,7 @@ ant beta:messages count-tokens \
 
     For Messages, this is always `"message"`.
 
-  - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+  - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
     Billing and rate-limit usage.
 
@@ -8067,11 +8214,15 @@ ant beta:messages count-tokens \
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -8153,6 +8304,26 @@ ant beta:messages count-tokens \
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
       The number of server tool requests.
@@ -8185,7 +8356,7 @@ ant beta:messages count-tokens \
 
 ### Beta Message Delta Usage
 
-- `beta_message_delta_usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 3 more }`
+- `beta_message_delta_usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 4 more }`
 
   - `cache_creation_input_tokens: number`
 
@@ -8309,11 +8480,15 @@ ant beta:messages count-tokens \
 
         The number of input tokens which were used.
 
-      - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -8394,6 +8569,26 @@ ant beta:messages count-tokens \
   - `output_tokens: number`
 
     The cumulative number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -9060,13 +9255,15 @@ ant beta:messages count-tokens \
 
         - `beta_web_fetch_tool_result_error_block_param: object { error_code, type }`
 
-          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
             - `"invalid_tool_input"`
 
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -9165,19 +9362,23 @@ ant beta:messages count-tokens \
 
           - `type: "advisor_tool_result_error"`
 
-        - `beta_advisor_result_block_param: object { text, type }`
+        - `beta_advisor_result_block_param: object { text, type, stop_reason }`
 
           - `text: string`
 
           - `type: "advisor_result"`
 
-        - `beta_advisor_redacted_result_block_param: object { encrypted_content, type }`
+          - `stop_reason: optional string`
+
+        - `beta_advisor_redacted_result_block_param: object { encrypted_content, type, stop_reason }`
 
           - `encrypted_content: string`
 
             Opaque blob produced by a prior response; must be round-tripped verbatim.
 
           - `type: "advisor_redacted_result"`
+
+          - `stop_reason: optional string`
 
       - `tool_use_id: string`
 
@@ -9566,7 +9767,7 @@ ant beta:messages count-tokens \
 
           Defaults to `5m`.
 
-    - `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+    - `beta_compaction_block_param: object { type, cache_control, content, encrypted_content }`
 
       A compaction block containing summary of previous context.
 
@@ -9575,10 +9776,6 @@ ant beta:messages count-tokens \
 
       When content is None, the block represents a failed compaction. The server
       treats these as no-ops. Empty string content is not allowed.
-
-      - `content: string`
-
-        Summary of previously compacted content, or null if compaction failed
 
       - `type: "compaction"`
 
@@ -9599,15 +9796,61 @@ ant beta:messages count-tokens \
 
           Defaults to `5m`.
 
+      - `content: optional string`
+
+        Summary of previously compacted content, or null if compaction failed
+
       - `encrypted_content: optional string`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: "user" or "assistant"`
+    - `beta_mid_conversation_system_block_param: object { content, type, cache_control }`
+
+      System instructions that appear mid-conversation.
+
+      Use this block to provide or update system-level instructions at a specific
+      point in the conversation, rather than only via the top-level `system` parameter.
+
+      - `content: array of BetaTextBlockParam`
+
+        System instruction text blocks.
+
+        - `text: string`
+
+        - `type: "text"`
+
+        - `cache_control: optional object { type, ttl }`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: optional array of BetaTextCitationParam`
+
+      - `type: "mid_conv_system"`
+
+      - `cache_control: optional object { type, ttl }`
+
+        Create a cache control breakpoint at this content block.
+
+        - `type: "ephemeral"`
+
+        - `ttl: optional "5m" or "1h"`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 ### Beta Message Tokens Count
 
@@ -9634,6 +9877,159 @@ ant beta:messages count-tokens \
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Mid Conversation System Block Param
+
+- `beta_mid_conversation_system_block_param: object { content, type, cache_control }`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `content: array of BetaTextBlockParam`
+
+    System instruction text blocks.
+
+    - `text: string`
+
+    - `type: "text"`
+
+    - `cache_control: optional object { type, ttl }`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `citations: optional array of BetaTextCitationParam`
+
+      - `beta_citation_char_location_param: object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_char_index: number`
+
+        - `start_char_index: number`
+
+        - `type: "char_location"`
+
+      - `beta_citation_page_location_param: object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_page_number: number`
+
+        - `start_page_number: number`
+
+        - `type: "page_location"`
+
+      - `beta_citation_content_block_location_param: object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `type: "content_block_location"`
+
+      - `beta_citation_web_search_result_location_param: object { cited_text, encrypted_index, title, 2 more }`
+
+        - `cited_text: string`
+
+        - `encrypted_index: string`
+
+        - `title: string`
+
+        - `type: "web_search_result_location"`
+
+        - `url: string`
+
+      - `beta_citation_search_result_location_param: object { cited_text, end_block_index, search_result_index, 4 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `source: string`
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `title: string`
+
+        - `type: "search_result_location"`
+
+  - `type: "mid_conv_system"`
+
+  - `cache_control: optional object { type, ttl }`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+    - `ttl: optional "5m" or "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
 
 ### Beta Output Config
 
@@ -9678,6 +10074,21 @@ ant beta:messages count-tokens \
     - `remaining: optional number`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Output Tokens Details
+
+- `beta_output_tokens_details: object { thinking_tokens }`
+
+  - `thinking_tokens: number`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -9811,7 +10222,11 @@ ant beta:messages count-tokens \
 
     - `type: "citations_delta"`
 
-  - `beta_thinking_delta: object { thinking, type }`
+  - `beta_thinking_delta: object { estimated_tokens, thinking, type }`
+
+    - `estimated_tokens: number`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
     - `thinking: string`
 
@@ -9957,7 +10372,11 @@ ant beta:messages count-tokens \
 
       - `type: "citations_delta"`
 
-    - `beta_thinking_delta: object { thinking, type }`
+    - `beta_thinking_delta: object { estimated_tokens, thinking, type }`
+
+      - `estimated_tokens: number`
+
+        Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
       - `thinking: string`
 
@@ -10249,13 +10668,15 @@ ant beta:messages count-tokens \
 
         - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
             - `"invalid_tool_input"`
 
             - `"url_too_long"`
 
             - `"url_not_allowed"`
+
+            - `"url_not_in_prior_context"`
 
             - `"url_not_accessible"`
 
@@ -10353,17 +10774,25 @@ ant beta:messages count-tokens \
 
           - `type: "advisor_tool_result_error"`
 
-        - `beta_advisor_result_block: object { text, type }`
+        - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
           - `type: "advisor_result"`
 
-        - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+        - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -10765,7 +11194,7 @@ ant beta:messages count-tokens \
 
   - `type: "message_delta"`
 
-  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 3 more }`
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 4 more }`
 
     Billing and rate-limit usage.
 
@@ -10899,11 +11328,15 @@ ant beta:messages count-tokens \
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -10984,6 +11417,26 @@ ant beta:messages count-tokens \
     - `output_tokens: number`
 
       The cumulative number of output tokens which were used.
+
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -11328,13 +11781,15 @@ ant beta:messages count-tokens \
 
           - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
               - `"invalid_tool_input"`
 
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -11432,17 +11887,25 @@ ant beta:messages count-tokens \
 
             - `type: "advisor_tool_result_error"`
 
-          - `beta_advisor_result_block: object { text, type }`
+          - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
             - `text: string`
 
             - `type: "advisor_result"`
 
-          - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+          - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
             - `encrypted_content: string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: "advisor_redacted_result"`
 
@@ -11801,11 +12264,15 @@ ant beta:messages count-tokens \
 
           - `type: "unavailable"`
 
-    - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -11946,7 +12413,7 @@ ant beta:messages count-tokens \
 
       For Messages, this is always `"message"`.
 
-    - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+    - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
       Billing and rate-limit usage.
 
@@ -12096,11 +12563,15 @@ ant beta:messages count-tokens \
 
             The number of input tokens which were used.
 
-          - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+          - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -12181,6 +12652,26 @@ ant beta:messages count-tokens \
       - `output_tokens: number`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -12553,13 +13044,15 @@ ant beta:messages count-tokens \
 
             - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
                 - `"invalid_tool_input"`
 
                 - `"url_too_long"`
 
                 - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
 
                 - `"url_not_accessible"`
 
@@ -12657,17 +13150,25 @@ ant beta:messages count-tokens \
 
               - `type: "advisor_tool_result_error"`
 
-            - `beta_advisor_result_block: object { text, type }`
+            - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
               - `text: string`
 
               - `type: "advisor_result"`
 
-            - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+            - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
               - `encrypted_content: string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: "advisor_redacted_result"`
 
@@ -13026,11 +13527,15 @@ ant beta:messages count-tokens \
 
             - `type: "unavailable"`
 
-      - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -13171,7 +13676,7 @@ ant beta:messages count-tokens \
 
         For Messages, this is always `"message"`.
 
-      - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+      - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
         Billing and rate-limit usage.
 
@@ -13321,11 +13826,15 @@ ant beta:messages count-tokens \
 
               The number of input tokens which were used.
 
-            - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+            - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"`
 
@@ -13406,6 +13915,26 @@ ant beta:messages count-tokens \
         - `output_tokens: number`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -13507,7 +14036,7 @@ ant beta:messages count-tokens \
 
     - `type: "message_delta"`
 
-    - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 3 more }`
+    - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 4 more }`
 
       Billing and rate-limit usage.
 
@@ -13556,6 +14085,26 @@ ant beta:messages count-tokens \
       - `output_tokens: number`
 
         The cumulative number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -13877,7 +14426,11 @@ ant beta:messages count-tokens \
 
         - `type: "citations_delta"`
 
-      - `beta_thinking_delta: object { thinking, type }`
+      - `beta_thinking_delta: object { estimated_tokens, thinking, type }`
+
+        - `estimated_tokens: number`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
         - `thinking: string`
 
@@ -15603,7 +16156,11 @@ ant beta:messages count-tokens \
 
 ### Beta Thinking Delta
 
-- `beta_thinking_delta: object { thinking, type }`
+- `beta_thinking_delta: object { estimated_tokens, thinking, type }`
+
+  - `estimated_tokens: number`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
   - `thinking: string`
 
@@ -18072,11 +18629,15 @@ ant beta:messages count-tokens \
 
   - `beta_advisor_tool_20260301: object { model, name, type, 6 more }`
 
-    - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -18475,7 +19036,7 @@ ant beta:messages count-tokens \
 
 ### Beta Usage
 
-- `beta_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+- `beta_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
   - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
@@ -18615,11 +19176,15 @@ ant beta:messages count-tokens \
 
         The number of input tokens which were used.
 
-      - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -18700,6 +19265,26 @@ ant beta:messages count-tokens \
   - `output_tokens: number`
 
     The number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -19283,13 +19868,15 @@ ant beta:messages count-tokens \
 
     - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-      - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+      - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
         - `"invalid_tool_input"`
 
         - `"url_too_long"`
 
         - `"url_not_allowed"`
+
+        - `"url_not_in_prior_context"`
 
         - `"url_not_accessible"`
 
@@ -19383,13 +19970,15 @@ ant beta:messages count-tokens \
 
     - `beta_web_fetch_tool_result_error_block_param: object { error_code, type }`
 
-      - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+      - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
         - `"invalid_tool_input"`
 
         - `"url_too_long"`
 
         - `"url_not_allowed"`
+
+        - `"url_not_in_prior_context"`
 
         - `"url_not_accessible"`
 
@@ -19707,13 +20296,15 @@ ant beta:messages count-tokens \
 
 - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-  - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+  - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
     - `"invalid_tool_input"`
 
     - `"url_too_long"`
 
     - `"url_not_allowed"`
+
+    - `"url_not_in_prior_context"`
 
     - `"url_not_accessible"`
 
@@ -19731,13 +20322,15 @@ ant beta:messages count-tokens \
 
 - `beta_web_fetch_tool_result_error_block_param: object { error_code, type }`
 
-  - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+  - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
     - `"invalid_tool_input"`
 
     - `"url_too_long"`
 
     - `"url_not_allowed"`
+
+    - `"url_not_in_prior_context"`
 
     - `"url_not_accessible"`
 
@@ -19753,13 +20346,15 @@ ant beta:messages count-tokens \
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `beta_web_fetch_tool_result_error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+- `beta_web_fetch_tool_result_error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
   - `"invalid_tool_input"`
 
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 
@@ -21252,13 +21847,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
                   - `"invalid_tool_input"`
 
                   - `"url_too_long"`
 
                   - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
 
                   - `"url_not_accessible"`
 
@@ -21356,17 +21953,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `type: "advisor_tool_result_error"`
 
-              - `beta_advisor_result_block: object { text, type }`
+              - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
                 - `text: string`
 
                 - `type: "advisor_result"`
 
-              - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+              - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
                 - `encrypted_content: string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: "advisor_redacted_result"`
 
@@ -21725,11 +22330,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type: "unavailable"`
 
-        - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -21870,7 +22479,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           For Messages, this is always `"message"`.
 
-        - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+        - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
           Billing and rate-limit usage.
 
@@ -22020,11 +22629,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 The number of input tokens which were used.
 
-              - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+              - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
 
                 - `"claude-opus-4-7"`
 
@@ -22105,6 +22718,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -22751,13 +23384,15 @@ ant beta:messages:batches results \
 
               - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
                   - `"invalid_tool_input"`
 
                   - `"url_too_long"`
 
                   - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
 
                   - `"url_not_accessible"`
 
@@ -22855,17 +23490,25 @@ ant beta:messages:batches results \
 
                 - `type: "advisor_tool_result_error"`
 
-              - `beta_advisor_result_block: object { text, type }`
+              - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
                 - `text: string`
 
                 - `type: "advisor_result"`
 
-              - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+              - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
                 - `encrypted_content: string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: "advisor_redacted_result"`
 
@@ -23224,11 +23867,15 @@ ant beta:messages:batches results \
 
               - `type: "unavailable"`
 
-        - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -23369,7 +24016,7 @@ ant beta:messages:batches results \
 
           For Messages, this is always `"message"`.
 
-        - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+        - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
           Billing and rate-limit usage.
 
@@ -23519,11 +24166,15 @@ ant beta:messages:batches results \
 
                 The number of input tokens which were used.
 
-              - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+              - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
 
                 - `"claude-opus-4-7"`
 
@@ -23604,6 +24255,26 @@ ant beta:messages:batches results \
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -24080,13 +24751,15 @@ ant beta:messages:batches results \
 
             - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
                 - `"invalid_tool_input"`
 
                 - `"url_too_long"`
 
                 - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
 
                 - `"url_not_accessible"`
 
@@ -24184,17 +24857,25 @@ ant beta:messages:batches results \
 
               - `type: "advisor_tool_result_error"`
 
-            - `beta_advisor_result_block: object { text, type }`
+            - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
               - `text: string`
 
               - `type: "advisor_result"`
 
-            - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+            - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
               - `encrypted_content: string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: "advisor_redacted_result"`
 
@@ -24553,11 +25234,15 @@ ant beta:messages:batches results \
 
             - `type: "unavailable"`
 
-      - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -24698,7 +25383,7 @@ ant beta:messages:batches results \
 
         For Messages, this is always `"message"`.
 
-      - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+      - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
         Billing and rate-limit usage.
 
@@ -24848,11 +25533,15 @@ ant beta:messages:batches results \
 
               The number of input tokens which were used.
 
-            - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+            - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"`
 
@@ -24933,6 +25622,26 @@ ant beta:messages:batches results \
         - `output_tokens: number`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 
@@ -25371,13 +26080,15 @@ ant beta:messages:batches results \
 
           - `beta_web_fetch_tool_result_error_block: object { error_code, type }`
 
-            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
               - `"invalid_tool_input"`
 
               - `"url_too_long"`
 
               - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
 
               - `"url_not_accessible"`
 
@@ -25475,17 +26186,25 @@ ant beta:messages:batches results \
 
             - `type: "advisor_tool_result_error"`
 
-          - `beta_advisor_result_block: object { text, type }`
+          - `beta_advisor_result_block: object { stop_reason, text, type }`
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
             - `text: string`
 
             - `type: "advisor_result"`
 
-          - `beta_advisor_redacted_result_block: object { encrypted_content, type }`
+          - `beta_advisor_redacted_result_block: object { encrypted_content, stop_reason, type }`
 
             - `encrypted_content: string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: "advisor_redacted_result"`
 
@@ -25844,11 +26563,15 @@ ant beta:messages:batches results \
 
           - `type: "unavailable"`
 
-    - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -25989,7 +26712,7 @@ ant beta:messages:batches results \
 
       For Messages, this is always `"message"`.
 
-    - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+    - `usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
       Billing and rate-limit usage.
 
@@ -26139,11 +26862,15 @@ ant beta:messages:batches results \
 
             The number of input tokens which were used.
 
-          - `model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+          - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -26224,6 +26951,26 @@ ant beta:messages:batches results \
       - `output_tokens: number`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: object { web_fetch_requests, web_search_requests }`
 

@@ -63,11 +63,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   There is a limit of 100,000 messages in a single request.
 
-  - `content: Union[str, List[Union[TextBlockParam, ImageBlockParam, DocumentBlockParam, 14 more]]]`
+  - `content: Union[str, List[Union[TextBlockParam, ImageBlockParam, DocumentBlockParam, 15 more]]]`
 
     - `str`
 
-    - `List[Union[TextBlockParam, ImageBlockParam, DocumentBlockParam, 14 more]]`
+    - `List[Union[TextBlockParam, ImageBlockParam, DocumentBlockParam, 15 more]]`
 
       - `class TextBlockParam: …`
 
@@ -566,6 +566,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -885,11 +887,42 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-  - `role: Literal["user", "assistant"]`
+      - `class MidConversationSystemBlockParam: …`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: List[TextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: str`
+
+          - `type: Literal["text"]`
+
+          - `cache_control: Optional[CacheControlEphemeral]`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Optional[List[TextCitationParam]]`
+
+        - `type: Literal["mid_conv_system"]`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: Optional[CacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: Literal["user", "assistant", "system"]`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: ModelParam`
 
@@ -897,12 +930,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]`
+  - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
     - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
     - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
     - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -920,6 +954,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 

@@ -594,6 +594,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `"url_not_allowed"`
 
+                    - `"url_not_in_prior_context"`
+
                     - `"url_not_accessible"`
 
                     - `"unsupported_content_type"`
@@ -913,11 +915,42 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
-        - `role: "user" | "assistant"`
+            - `MidConversationSystemBlockParam`
+
+              System instructions that appear mid-conversation.
+
+              Use this block to provide or update system-level instructions at a specific
+              point in the conversation, rather than only via the top-level `system` parameter.
+
+              - `content: Array<TextBlockParam>`
+
+                System instruction text blocks.
+
+                - `text: string`
+
+                - `type: "text"`
+
+                - `cache_control?: CacheControlEphemeral | null`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `citations?: Array<TextCitationParam> | null`
+
+              - `type: "mid_conv_system"`
+
+                - `"mid_conv_system"`
+
+              - `cache_control?: CacheControlEphemeral | null`
+
+                Create a cache control breakpoint at this content block.
+
+        - `role: "user" | "assistant" | "system"`
 
           - `"user"`
 
           - `"assistant"`
+
+          - `"system"`
 
       - `model: Model`
 
@@ -925,7 +958,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more`
+        - `"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more`
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 

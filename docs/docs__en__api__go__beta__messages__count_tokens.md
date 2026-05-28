@@ -582,6 +582,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                 - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                 - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -668,6 +670,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+              - `StopReason string`
+
             - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
               - `EncryptedContent string`
@@ -677,6 +681,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `Type AdvisorRedactedResult`
 
                 - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+              - `StopReason string`
 
           - `ToolUseID string`
 
@@ -1013,10 +1019,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `Content string`
-
-            Summary of previously compacted content, or null if compaction failed
-
           - `Type Compaction`
 
             - `const CompactionCompaction Compaction = "compaction"`
@@ -1025,15 +1027,50 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
+          - `Content string`
+
+            Summary of previously compacted content, or null if compaction failed
+
           - `EncryptedContent string`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
+
+        - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+          System instructions that appear mid-conversation.
+
+          Use this block to provide or update system-level instructions at a specific
+          point in the conversation, rather than only via the top-level `system` parameter.
+
+          - `Content []BetaTextBlockParamResp`
+
+            System instruction text blocks.
+
+            - `Text string`
+
+            - `Type Text`
+
+            - `CacheControl BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+            - `Citations []BetaTextCitationParamUnionResp`
+
+          - `Type MidConvSystem`
+
+            - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
 
     - `Role BetaMessageParamRole`
 
       - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
 
       - `const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"`
+
+      - `const BetaMessageParamRoleSystem BetaMessageParamRole = "system"`
 
   - `Model param.Field[Model]`
 
@@ -2053,6 +2090,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -2327,6 +2368,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
 ### Returns
 

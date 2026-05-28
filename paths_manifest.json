@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-28T16:28:10.499516Z",
-    "total_paths": 1682,
+    "generated_at": "2026-05-28T18:57:07.267169Z",
+    "total_paths": 1684,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-28T16:28:10.499525Z"
+    "last_regenerated": "2026-05-28T18:57:07.267178Z"
   },
   "categories": {
     "core_documentation": [
@@ -71,6 +71,7 @@
       "/docs/en/build-with-claude/fast-mode",
       "/docs/en/build-with-claude/files",
       "/docs/en/build-with-claude/handling-stop-reasons",
+      "/docs/en/build-with-claude/mid-conversation-system-messages",
       "/docs/en/build-with-claude/multilingual-support",
       "/docs/en/build-with-claude/overview",
       "/docs/en/build-with-claude/pdf-support",
@@ -191,6 +192,7 @@
       "/docs/en/whats-new/2026-w18",
       "/docs/en/whats-new/2026-w19",
       "/docs/en/whats-new/2026-w20",
+      "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
     ],

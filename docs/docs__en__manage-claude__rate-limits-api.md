@@ -63,7 +63,8 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
         "claude-opus-4-5",
         "claude-opus-4-5-20251101",
         "claude-opus-4-6",
-        "claude-opus-4-7"
+        "claude-opus-4-7",
+        "claude-opus-4-8"
       ],
       "limits": [
         { "type": "requests_per_minute", "value": 4000 },
@@ -87,7 +88,7 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
 Pass any model ID or alias as the `model` query parameter to return only the entry that contains it:
 
 ```bash cURL
-curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-4-7" \
+curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-4-8" \
   --header "anthropic-version: 2023-06-01" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
@@ -126,7 +127,8 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
         "claude-opus-4-5",
         "claude-opus-4-5-20251101",
         "claude-opus-4-6",
-        "claude-opus-4-7"
+        "claude-opus-4-7",
+        "claude-opus-4-8"
       ],
       "limits": [
         { "type": "requests_per_minute", "value": 1000, "org_limit": 4000 },

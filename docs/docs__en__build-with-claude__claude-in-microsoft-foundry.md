@@ -140,7 +140,7 @@ curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
   -H "api-key: YOUR_AZURE_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello!"}
@@ -157,7 +157,7 @@ export ANTHROPIC_API_KEY="YOUR_AZURE_API_KEY"
 
 ant messages create \
   --base-url https://example-resource.services.ai.azure.com/anthropic \
-  --model claude-opus-4-7 \
+  --model claude-opus-4-8 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello!"}' \
   --transform content
@@ -176,7 +176,7 @@ client = AnthropicFoundry(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -195,7 +195,7 @@ const client = new AnthropicFoundry({
 });
 
 const message = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello!" }]
 });
@@ -218,7 +218,7 @@ var client = new AnthropicFoundryClient(
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-4-7",
+    Model = "claude-opus-4-8",
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello!" }],
 });
@@ -246,7 +246,7 @@ void main() {
         .build();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model("claude-opus-4-7")
+        .model("claude-opus-4-8")
         .maxTokens(1024)
         .addUserMessage("Hello!")
         .build();
@@ -275,7 +275,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello!']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 echo $message->content[0]->text;
 ```
@@ -315,7 +315,7 @@ curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello!"}
@@ -344,7 +344,7 @@ client = AnthropicFoundry(
 
 # Make request
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -373,7 +373,7 @@ const client = new AnthropicFoundry({
 
 // Make request
 const message = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello!" }]
 });
@@ -397,7 +397,7 @@ var client = new AnthropicFoundryClient(
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-4-7",
+    Model = "claude-opus-4-8",
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello!" }],
 });
@@ -435,7 +435,7 @@ void main() {
         .build();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model("claude-opus-4-7")
+        .model("claude-opus-4-8")
         .maxTokens(1024)
         .addUserMessage("Hello!")
         .build();
@@ -469,7 +469,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello!']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 echo $message->content[0]->text;
 ```
@@ -496,7 +496,7 @@ Claude in Foundry supports most of Claude's powerful features. You can find all 
 
 ### Context window
 
-Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Sonnet 4.5, have a 200k-token context window.
+Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Opus 4.8 and Sonnet 4.5, have a 200k-token context window.
 
 ### Features not supported
 
@@ -513,17 +513,18 @@ For details on response headers specific to Foundry, see [Correlation request ID
 
 ## API model IDs and deployments
 
-The following Claude models are available through Foundry. The latest generation models (Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
+The following Claude models are available through Foundry. The latest generation models (Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
 
 | Model             | Default deployment name     |
 | :---------------- | :-------------------------- |
-| Claude Opus 4.7   | `claude-opus-4-7`           |
-| Claude Opus 4.6   | `claude-opus-4-6`           |
-| Claude Opus 4.5   | `claude-opus-4-5`           |
-| Claude Opus 4.1   | `claude-opus-4-1`           |
-| Claude Sonnet 4.6 | `claude-sonnet-4-6`         |
-| Claude Sonnet 4.5 | `claude-sonnet-4-5`         |
-| Claude Haiku 4.5  | `claude-haiku-4-5`          |
+| Claude Opus 4.8   | claude-opus-4-8 |
+| Claude Opus 4.7   | claude-opus-4-7           |
+| Claude Opus 4.6   | claude-opus-4-6           |
+| Claude Opus 4.5   | claude-opus-4-5           |
+| Claude Opus 4.1   | claude-opus-4-1           |
+| Claude Sonnet 4.6 | claude-sonnet-4-6         |
+| Claude Sonnet 4.5 | claude-sonnet-4-5         |
+| Claude Haiku 4.5  | claude-haiku-4-5          |
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 

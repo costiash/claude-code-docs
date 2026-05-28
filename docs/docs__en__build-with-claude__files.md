@@ -165,7 +165,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-8",
   "max_tokens": 1024,
   "messages": [
     {
@@ -191,7 +191,7 @@ EOF
 
 ````bash
 ant beta:messages create --beta files-api-2025-04-14 <<YAML
-model: claude-opus-4-6
+model: claude-opus-4-8
 max_tokens: 1024
 messages:
   - role: user
@@ -207,7 +207,7 @@ YAML
 
 ````python
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -231,7 +231,7 @@ print(response)
 
 ````typescript
 const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {
@@ -308,7 +308,7 @@ fmt.Println(msg)
 
 ````java
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_6)
+    .model(Model.CLAUDE_OPUS_4_8)
     .addBeta("files-api-2025-04-14")
     .maxTokens(1024)
     .addUserMessageOfBetaContentBlockParams(List.of(
@@ -345,7 +345,7 @@ $response = $client->beta->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-8',
     betas: ['files-api-2025-04-14'],
 );
 
@@ -354,7 +354,7 @@ print_r($response);
 
 ````ruby
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   betas: ["files-api-2025-04-14"],
   messages: [
@@ -406,7 +406,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<EOF
 {
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "max_tokens": 1024,
   "messages": [
     {
@@ -427,7 +427,7 @@ EOF
 printf 'This is a test document for upload.\n' > document.txt
 # The "@./path" reference inlines the file contents directly into the field.
 ant messages create \
-  --model claude-opus-4-7 \
+  --model claude-opus-4-8 \
   --max-tokens 1024 \
   --transform 'content.0.text' --raw-output <<'YAML'
 messages:
@@ -454,7 +454,7 @@ csv_content = df.to_string()
 
 # Send as plain text in the message
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -484,7 +484,7 @@ async function analyzeDocument() {
 
   // Send as plain text in the message
   const response = await anthropic.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       {
@@ -526,7 +526,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Messages = [new()
             {
@@ -567,7 +567,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(
@@ -601,7 +601,7 @@ public class FileUploadExample {
         String textContent = Files.readString(Paths.get("document.txt"));
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
+            .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024L)
             .addUserMessage("Here's the document content:\n\n" + textContent + "\n\nPlease summarize this document.")
             .build();
@@ -637,7 +637,7 @@ $message = $client->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 
 echo $message->content[0]->text;
@@ -652,7 +652,7 @@ client = Anthropic::Client.new
 text_content = File.read("document.txt")
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {

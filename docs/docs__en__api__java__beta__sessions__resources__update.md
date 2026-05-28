@@ -68,6 +68,8 @@ Update Session Resource
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
   - `String authorizationToken`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.

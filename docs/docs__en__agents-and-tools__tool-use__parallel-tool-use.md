@@ -88,7 +88,7 @@ messages = [
 # Make initial request
 print("Requesting parallel tool calls...")
 response = client.messages.create(
-    model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
 )
 
 # Check for parallel tool calls
@@ -131,7 +131,7 @@ messages.extend(
 # Get final response
 print("\nGetting final response...")
 final_response = client.messages.create(
-    model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
 )
 
 print(f"\nClaude's response:\n{final_response.content[0].text}")
@@ -184,7 +184,7 @@ async function testParallelTools() {
   // Make initial request
   console.log("Requesting parallel tool calls...");
   const response = await client.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       {
@@ -234,7 +234,7 @@ async function testParallelTools() {
   // Get final response with correct formatting
   console.log("\nGetting final response...");
   const finalResponse = await client.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       {
@@ -311,7 +311,7 @@ public class Program
         Console.WriteLine("Requesting parallel tool calls...");
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Messages = [new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" }],
             Tools = tools
@@ -369,7 +369,7 @@ public class Program
         Console.WriteLine("\nGetting final response...");
         var finalParameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Messages = [
                 new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" },
@@ -438,7 +438,7 @@ func main() {
 
 	fmt.Println("Requesting parallel tool calls...")
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in SF and NYC, and what time is it there?")),
@@ -509,7 +509,7 @@ func main() {
 
 	fmt.Println("\nGetting final response...")
 	finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in SF and NYC, and what time is it there?")),
@@ -580,7 +580,7 @@ void main() {
         .build();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(1024L)
         .addTool(weatherTool)
         .addTool(timeTool)
@@ -632,7 +632,7 @@ void main() {
 
     IO.println("\nGetting final response...");
     MessageCreateParams finalParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(1024L)
         .addTool(weatherTool)
         .addTool(timeTool)
@@ -697,7 +697,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather in SF and NYC, and what time is it there?"]
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: $tools,
 );
 
@@ -740,7 +740,7 @@ $finalResponse = $client->messages->create(
         ['role' => 'assistant', 'content' => $response->content],
         ['role' => 'user', 'content' => $toolResults]
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: $tools,
 );
 
@@ -790,7 +790,7 @@ tools = [
 
 puts "Requesting parallel tool calls..."
 response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" }
@@ -828,7 +828,7 @@ end
 
 puts "\nGetting final response..."
 final_response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" },

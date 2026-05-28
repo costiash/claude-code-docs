@@ -548,6 +548,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `"url_not_allowed"UrlNotAllowed`
 
+                    - `"url_not_in_prior_context"UrlNotInPriorContext`
+
                     - `"url_not_accessible"UrlNotAccessible`
 
                     - `"unsupported_content_type"UnsupportedContentType`
@@ -624,6 +626,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "advisor_result"constant`
 
+                  - `string? StopReason`
+
                 - `class BetaAdvisorRedactedResultBlockParam:`
 
                   - `required string EncryptedContent`
@@ -631,6 +635,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                     Opaque blob produced by a prior response; must be round-tripped verbatim.
 
                   - `JsonElement Type "advisor_redacted_result"constant`
+
+                  - `string? StopReason`
 
               - `required string ToolUseID`
 
@@ -925,19 +931,46 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               When content is None, the block represents a failed compaction. The server
               treats these as no-ops. Empty string content is not allowed.
 
-              - `required string? Content`
-
-                Summary of previously compacted content, or null if compaction failed
-
               - `JsonElement Type "compaction"constant`
 
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
 
+              - `string? Content`
+
+                Summary of previously compacted content, or null if compaction failed
+
               - `string? EncryptedContent`
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+            - `class BetaMidConversationSystemBlockParam:`
+
+              System instructions that appear mid-conversation.
+
+              Use this block to provide or update system-level instructions at a specific
+              point in the conversation, rather than only via the top-level `system` parameter.
+
+              - `required IReadOnlyList<BetaTextBlockParam> Content`
+
+                System instruction text blocks.
+
+                - `required string Text`
+
+                - `JsonElement Type "text"constant`
+
+                - `BetaCacheControlEphemeral? CacheControl`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `IReadOnlyList<BetaTextCitationParam>? Citations`
+
+              - `JsonElement Type "mid_conv_system"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
 
         - `required Role Role`
 
@@ -945,11 +978,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"assistant"Assistant`
 
+          - `"system"System`
+
       - `required Model Model`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -2458,6 +2497,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
 ### Returns
 

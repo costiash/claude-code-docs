@@ -66,6 +66,8 @@ Update a memory store
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
   - `Optional<String> description`
 
     New description for the store, up to 1024 characters. Pass an empty string to clear it.

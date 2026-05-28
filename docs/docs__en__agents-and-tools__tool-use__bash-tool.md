@@ -34,7 +34,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "tools": [
       {
@@ -53,7 +53,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-4-7 \
+  --model claude-opus-4-8 \
   --max-tokens 1024 \
   --tool '{type: bash_20250124, name: bash}' \
   --message '{role: user, content: List all Python files in the current directory.}'
@@ -65,7 +65,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[
@@ -82,7 +82,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   tools: [{ type: "bash_20250124", name: "bash" }],
   messages: [
@@ -105,7 +105,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus4_7,
+        Model = Model.ClaudeOpus4_8,
         MaxTokens = 1024,
         Tools = [new ToolBash20250124()],
         Messages =
@@ -137,7 +137,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Tools: []anthropic.ToolUnionParam{
 			{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
@@ -166,7 +166,7 @@ void main() {
 
     Message response = client.messages().create(
         MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
+            .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024)
             .addTool(ToolBash20250124.builder().build())
             .addUserMessage("List all Python files in the current directory.")
@@ -186,7 +186,7 @@ use Anthropic\Messages\ToolBash20250124;
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     maxTokens: 1024,
     tools: [new ToolBash20250124()],
     messages: [
@@ -203,7 +203,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   tools: [{type: "bash_20250124", name: "bash"}],
   messages: [

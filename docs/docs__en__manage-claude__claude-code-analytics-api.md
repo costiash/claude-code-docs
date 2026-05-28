@@ -179,7 +179,7 @@ The API returns data in the following format:
       },
       "model_breakdown": [
         {
-          "model": "claude-opus-4-7",
+          "model": "claude-opus-4-8",
           "tokens": {
             "input": 100000,
             "output": 35000,

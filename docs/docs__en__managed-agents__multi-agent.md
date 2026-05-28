@@ -43,7 +43,7 @@ coordinator=$(curl -fsS https://api.anthropic.com/v1/agents \
   -d @- <<EOF
 {
   "name": "Engineering Lead",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   "tools": [
     {
@@ -66,7 +66,7 @@ EOF
 ````bash
 ant beta:agents create <<YAML
 name: Engineering Lead
-model: claude-opus-4-7
+model: claude-opus-4-8
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
@@ -84,7 +84,7 @@ YAML
 ````python
 coordinator = client.beta.agents.create(
     name="Engineering Lead",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     system="You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -103,7 +103,7 @@ coordinator = client.beta.agents.create(
 ````typescript
 const coordinator = await client.beta.agents.create({
   name: "Engineering Lead",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system:
     "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   tools: [{ type: "agent_toolset_20260401" }],
@@ -122,7 +122,7 @@ const coordinator = await client.beta.agents.create({
 var coordinator = await client.Beta.Agents.Create(new()
 {
     Name = "Engineering Lead",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
     System = "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     Tools =
     [
@@ -143,7 +143,7 @@ var coordinator = await client.Beta.Agents.Create(new()
 ````go
 coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name:   "Engineering Lead",
-	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7},
+	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
 	System: anthropic.String("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -168,7 +168,7 @@ if err != nil {
 var coordinator = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Engineering Lead")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .system("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.")
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -194,7 +194,7 @@ var coordinator = client.beta().agents().create(
 ````php
 $coordinator = $client->beta->agents->create(
     name: 'Engineering Lead',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     system: 'You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.',
     tools: [
         ['type' => 'agent_toolset_20260401'],
@@ -213,7 +213,7 @@ $coordinator = $client->beta->agents->create(
 ````ruby
 coordinator = client.beta.agents.create(
   name: "Engineering Lead",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system: "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   tools: [
     {type: "agent_toolset_20260401"}
@@ -352,7 +352,7 @@ EOF
 coordinator_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
 {
   "name": "coordinator",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "tools": [{"type": "agent_toolset_20260401"}],
   "multiagent": {
     "type": "coordinator",
@@ -390,7 +390,7 @@ YAML
 
 coordinator_id=$(ant beta:agents create --transform id --raw-output <<YAML
 name: coordinator
-model: claude-opus-4-7
+model: claude-opus-4-8
 tools:
   - type: agent_toolset_20260401
 multiagent:
@@ -422,7 +422,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
     name="coordinator",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[{"type": "agent_toolset_20260401"}],
     multiagent={
         "type": "coordinator",
@@ -451,7 +451,7 @@ const researchAgent = await client.beta.agents.create({
 
 const coordinator = await client.beta.agents.create({
   name: "coordinator",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [{ type: "agent_toolset_20260401" }],
   multiagent: {
     type: "coordinator",
@@ -495,7 +495,7 @@ var researchAgent = await client.Beta.Agents.Create(new()
 var coordinator = await client.Beta.Agents.Create(new()
 {
     Name = "coordinator",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -549,7 +549,7 @@ if err != nil {
 
 coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name:  "coordinator",
-	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7},
+	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
 			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
@@ -603,7 +603,7 @@ var researcher = client.beta().agents().create(
 var coordinator = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("coordinator")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
             .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
             .build())
@@ -640,7 +640,7 @@ $researchAgent = $client->beta->agents->create(
 
 $coordinator = $client->beta->agents->create(
     name: 'coordinator',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [
         ['type' => 'agent_toolset_20260401'],
     ],
@@ -675,7 +675,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
   name: "coordinator",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [
     {type: "agent_toolset_20260401"}
   ],

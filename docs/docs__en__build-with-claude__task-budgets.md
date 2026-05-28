@@ -1,6 +1,6 @@
 # Task budgets
 
-Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks with task budgets.
+Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
 
 ---
 
@@ -11,7 +11,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
 <Note>
-Task budgets are in public beta on [Claude Opus 4.7](/docs/en/about-claude/models/overview). Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in beta on Claude Opus 4.8 and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
 </Note>
 
 ## When to use task budgets
@@ -31,13 +31,15 @@ Add `task_budget` to `output_config` and include the beta header:
 <CodeGroup>
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
+    --no-buffer \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
     --header "anthropic-beta: task-budgets-2026-03-13" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "max_tokens": 128000,
+        "stream": true,
         "messages": [{
             "role": "user",
             "content": "Review the codebase and propose a refactor plan."
@@ -50,8 +52,9 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta task-budgets-2026-03-13 <<'YAML'
-model: claude-opus-4-7
+ant beta:messages create --beta task-budgets-2026-03-13 \
+  --stream --format jsonl <<'YAML' | jq 'select(.type == "message_delta").usage'
+model: claude-opus-4-8
 max_tokens: 128000
 messages:
   - role: user
@@ -69,8 +72,8 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.beta.messages.create(
-    model="claude-opus-4-7",
+with client.beta.messages.stream(
+    model="claude-opus-4-8",
     max_tokens=128000,
     output_config={
         "effort": "high",
@@ -80,7 +83,10 @@ response = client.beta.messages.create(
         {"role": "user", "content": "Review the codebase and propose a refactor plan."}
     ],
     betas=["task-budgets-2026-03-13"],
-)
+) as stream:
+    response = stream.get_final_message()
+
+print(response.usage)
 ```
 
 ```typescript TypeScript hidelines={1..2}
@@ -88,8 +94,8 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-7",
+const stream = client.beta.messages.stream({
+  model: "claude-opus-4-8",
   max_tokens: 128000,
   output_config: {
     effort: "high",
@@ -98,9 +104,36 @@ const response = await client.beta.messages.create({
   messages: [{ role: "user", content: "Review the codebase and propose a refactor plan." }],
   betas: ["task-budgets-2026-03-13"]
 });
+
+const response = await stream.finalMessage();
+console.log(response.usage);
 ```
 
-```go Go hidelines={1..10,-2..}
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
+var client = new AnthropicClient();
+
+var responseUpdates = client.Beta.Messages.CreateStreaming(new MessageCreateParams
+{
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 128000,
+    Messages = [new() { Role = Role.User, Content = "Review the codebase and propose a refactor plan." }],
+    OutputConfig = new BetaOutputConfig
+    {
+        Effort = Effort.High,
+        TaskBudget = new BetaTokenTaskBudget { Total = 64000 },
+    },
+    Betas = ["task-budgets-2026-03-13"],
+});
+
+var response = await responseUpdates.Aggregate();
+Console.WriteLine(response.Usage);
+```
+
+```go Go hidelines={1..10,-1}
 package main
 
 import (
@@ -113,8 +146,8 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	response, _ := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     "claude-opus-4-7",
+	stream := client.Beta.Messages.NewStreaming(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 128000,
 		Betas:     []anthropic.AnthropicBeta{"task-budgets-2026-03-13"},
 		Messages: []anthropic.BetaMessageParam{{
@@ -130,69 +163,69 @@ func main() {
 			},
 		},
 	})
-	fmt.Println(response)
+
+	message := anthropic.BetaMessage{}
+	for stream.Next() {
+		event := stream.Current()
+		if err := message.Accumulate(event); err != nil {
+			panic(err)
+		}
+	}
+	if stream.Err() != nil {
+		panic(stream.Err())
+	}
+
+	fmt.Printf("Usage: input_tokens=%d, output_tokens=%d\n", message.Usage.InputTokens, message.Usage.OutputTokens)
 }
 ```
 
-```java Java hidelines={1..7,9..11,-2..}
+```java Java hidelines={1..11}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.http.StreamResponse;
+import com.anthropic.helpers.BetaMessageAccumulator;
 import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.BetaOutputConfig;
+import com.anthropic.models.beta.messages.BetaRawMessageStreamEvent;
 import com.anthropic.models.beta.messages.BetaTokenTaskBudget;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-public class Main {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(128000L)
-            .addUserMessage("Review the codebase and propose a refactor plan.")
-            .outputConfig(BetaOutputConfig.builder()
-                .effort(BetaOutputConfig.Effort.HIGH)
-                .taskBudget(BetaTokenTaskBudget.builder().total(64000L).build())
-                .build())
-            .addBeta("task-budgets-2026-03-13")
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(128000L)
+        .addUserMessage("Review the codebase and propose a refactor plan.")
+        .outputConfig(BetaOutputConfig.builder()
+            .effort(BetaOutputConfig.Effort.HIGH)
+            .taskBudget(BetaTokenTaskBudget.builder().total(64000L).build())
+            .build())
+        .addBeta("task-budgets-2026-03-13")
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
+    BetaMessageAccumulator accumulator = BetaMessageAccumulator.create();
+    try (StreamResponse<BetaRawMessageStreamEvent> stream =
+            client.beta().messages().createStreaming(params)) {
+        stream.stream().forEach(accumulator::accumulate);
     }
+
+    BetaMessage response = accumulator.message();
+    IO.println(response.usage());
 }
 ```
 
-```csharp C# hidelines={1..3}
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
-using Anthropic.Models.Messages;
-
-var client = new AnthropicClient();
-
-var response = await client.Beta.Messages.Create(new MessageCreateParams
-{
-    Model = "claude-opus-4-7",
-    MaxTokens = 128000,
-    Messages = [new() { Role = Role.User, Content = "Review the codebase and propose a refactor plan." }],
-    OutputConfig = new BetaOutputConfig
-    {
-        Effort = Effort.High,
-        TaskBudget = new BetaTokenTaskBudget { Total = 64000 },
-    },
-    Betas = ["task-budgets-2026-03-13"],
-});
-```
-
-```php PHP hidelines={1..4}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
+use Anthropic\Beta\Messages\BetaRawMessageDeltaEvent;
 
 $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
-$response = $client->beta->messages->create(
-    model: 'claude-opus-4-7',
+$stream = $client->beta->messages->createStream(
+    model: 'claude-opus-4-8',
     maxTokens: 128000,
     messages: [
         ['role' => 'user', 'content' => 'Review the codebase and propose a refactor plan.'],
@@ -203,6 +236,16 @@ $response = $client->beta->messages->create(
     ],
     betas: ['task-budgets-2026-03-13'],
 );
+
+// The final message_delta event carries the cumulative token usage for the request.
+$usage = null;
+foreach ($stream as $event) {
+    if ($event instanceof BetaRawMessageDeltaEvent) {
+        $usage = $event->usage;
+    }
+}
+
+echo $usage;
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -210,8 +253,8 @@ require "anthropic"
 
 client = Anthropic::Client.new
 
-response = client.beta.messages.create(
-  model: "claude-opus-4-7",
+stream = client.beta.messages.stream(
+  model: "claude-opus-4-8",
   max_tokens: 128_000,
   messages: [
     { role: "user", content: "Review the codebase and propose a refactor plan." }
@@ -223,7 +266,9 @@ response = client.beta.messages.create(
   betas: ["task-budgets-2026-03-13"]
 )
 
-puts response
+response = stream.accumulated_message
+
+puts response.usage
 ```
 </CodeGroup>
 
@@ -322,7 +367,7 @@ Putting the three turns side by side makes the distinction between payload size 
 | 1 | ~20 | 5,000 (thinking + `tool_use`) | ~95,000 |
 | 2 | ~7,800 (turn 1 history + tool result) | 6,800 (2,800 tool result + 4,000 thinking and `tool_use`) | ~88,200 |
 | 3 | ~13,000 (full history + second tool result) | 7,200 (1,200 tool result + 6,000 `text`) | ~81,000 |
-| **Total** | **~20,820 sent across requests** | **19,000 counted against budget** | — |
+| **Total** | **~20,820 sent across requests** | **19,000 counted against budget** | N/A |
 
 Your client sent the turn-1 user message three times and the turn-1 assistant message twice, but each was counted once. The budget spent 19,000 of 100,000 tokens, even though the cumulative payload your client transmitted was larger and the prompt-cached input on turns 2 and 3 was larger still.
 
@@ -439,13 +484,14 @@ def run_task_and_count_tokens(messages: list) -> int:
     """Runs an agentic loop to completion and returns total tokens spent."""
     total_spend = 0
     while True:
-        response = client.beta.messages.create(
-            model="claude-opus-4-7",
+        with client.beta.messages.stream(
+            model="claude-opus-4-8",
             max_tokens=128000,
             messages=messages,
             tools=tools,
             betas=["task-budgets-2026-03-13"],
-        )
+        ) as stream:
+            response = stream.get_final_message()
         # Count what Claude generated this turn (output covers text + thinking + tool calls).
         # Tool-result tokens also count against the budget; add the token count of the
         # tool_result blocks you append below if you want client-side tracking to match
@@ -466,13 +512,15 @@ async function runTaskAndCountTokens(
 ): Promise<number> {
   let totalSpend = 0;
   while (true) {
-    const response = await client.beta.messages.create({
-      model: "claude-opus-4-7",
-      max_tokens: 128000,
-      messages,
-      tools,
-      betas: ["task-budgets-2026-03-13"]
-    });
+    const response = await client.beta.messages
+      .stream({
+        model: "claude-opus-4-8",
+        max_tokens: 128000,
+        messages,
+        tools,
+        betas: ["task-budgets-2026-03-13"]
+      })
+      .finalMessage();
     // Count what Claude generated this turn (output covers text + tool calls;
     // add cache creation and thinking via the same usage object if you opt in).
     totalSpend += response.usage.output_tokens;
@@ -505,9 +553,10 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 
 | Model | Support |
 |-------|---------|
-| Claude Opus 4.7 | Public beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.8 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.7 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.6 | Not supported |
 | Claude Sonnet 4.6 | Not supported |
 | Claude Haiku 4.5 | Not supported |
 
-Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces at launch. Use task budgets directly via the Messages API on Claude Opus 4.7.
+Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces. Use task budgets directly via the Messages API on a [supported model](#feature-support).

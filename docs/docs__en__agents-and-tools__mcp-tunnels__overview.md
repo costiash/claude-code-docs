@@ -136,7 +136,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: mcp-client-2025-11-20" \
   -d '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1000,
     "messages": [{"role": "user", "content": "Use the hello tool to greet tunnel."}],
     "mcp_servers": [
@@ -156,7 +156,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1000,
     messages=[{"role": "user", "content": "Use the hello tool to greet tunnel."}],
     mcp_servers=[
@@ -179,7 +179,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const anthropic = new Anthropic();
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1000,
   messages: [{ role: "user", content: "Use the hello tool to greet tunnel." }],
   mcp_servers: [

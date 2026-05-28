@@ -71,7 +71,7 @@ public class BasicMessage {
             .build();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
+            .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024L)
             .addUserMessage("What is the capital of France?")
             .build();
@@ -113,6 +113,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 
 | Model                          | Vertex AI API model ID |
 | ------------------------------ | ------------------------ |
+| Claude Opus 4.8                    | claude-opus-4-8 |
 | Claude Opus 4.7                    | claude-opus-4-7 |
 | Claude Opus 4.6                  | claude-opus-4-6 |
 | Claude Sonnet 4.6              | claude-sonnet-4-6 |
@@ -138,7 +139,7 @@ The following examples show how to generate text from Claude on Vertex AI:
 
   
   ```bash cURL nocheck
-  MODEL_ID=claude-opus-4-7
+  MODEL_ID=claude-opus-4-8
   LOCATION=global
   PROJECT_ID=MY_PROJECT_ID
 
@@ -171,7 +172,7 @@ The following examples show how to generate text from Claude on Vertex AI:
   client = AnthropicVertex(project_id=project_id, region=region)
 
   message = client.messages.create(
-      model="claude-opus-4-7",
+      model="claude-opus-4-8",
       max_tokens=100,
       messages=[
           {
@@ -198,7 +199,7 @@ The following examples show how to generate text from Claude on Vertex AI:
 
   async function main() {
     const result = await client.messages.create({
-      model: "claude-opus-4-7",
+      model: "claude-opus-4-8",
       max_tokens: 100,
       messages: [
         {
@@ -229,7 +230,7 @@ The following examples show how to generate text from Claude on Vertex AI:
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_7,
+      Model = Model.ClaudeOpus4_8,
       MaxTokens = 100,
       Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
   };
@@ -257,7 +258,7 @@ The following examples show how to generate text from Claude on Vertex AI:
   	)
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-7",
+  		Model:     "claude-opus-4-8",
   		MaxTokens: 100,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
@@ -290,7 +291,7 @@ The following examples show how to generate text from Claude on Vertex AI:
         .messages()
         .create(
           MessageCreateParams.builder()
-            .model("claude-opus-4-7")
+            .model("claude-opus-4-8")
             .maxTokens(100)
             .addUserMessage("Hey Claude!")
             .build()
@@ -317,7 +318,7 @@ The following examples show how to generate text from Claude on Vertex AI:
       messages: [
           ['role' => 'user', 'content' => 'Hey Claude!']
       ],
-      model: 'claude-opus-4-7',
+      model: 'claude-opus-4-8',
   );
   echo $message->content[0]->text;
   ```
@@ -332,7 +333,7 @@ The following examples show how to generate text from Claude on Vertex AI:
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 100,
     messages: [{role: "user", content: "Hey Claude!"}]
   )
@@ -382,7 +383,7 @@ For the full feature list with Vertex AI availability, see [Features overview](/
 
 ### Context window
 
-Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -442,7 +443,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -466,7 +467,7 @@ const client = new AnthropicVertex({
 });
 
 const result = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [
     {
@@ -492,7 +493,7 @@ var client = new AnthropicClient
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 100,
     Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
 };
@@ -518,7 +519,7 @@ func main() {
 	)
 
 	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     "claude-opus-4-7",
+		Model:     "claude-opus-4-8",
 		MaxTokens: 100,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
@@ -549,7 +550,7 @@ void main() {
         .messages()
         .create(
             MessageCreateParams.builder()
-                .model("claude-opus-4-7")
+                .model("claude-opus-4-8")
                 .maxTokens(100)
                 .addUserMessage("Hey Claude!")
                 .build()
@@ -574,7 +575,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hey Claude!']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 
 echo $message->content[0]->text;
@@ -589,7 +590,7 @@ client = Anthropic::VertexClient.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [{role: "user", content: "Hey Claude!"}]
 )
@@ -617,7 +618,7 @@ region = "us"  # Multi-region identifier: "us" or "eu"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -641,7 +642,7 @@ const client = new AnthropicVertex({
 });
 
 const result = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [
     {
@@ -667,7 +668,7 @@ var client = new AnthropicClient
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 100,
     Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
 };
@@ -693,7 +694,7 @@ func main() {
 	)
 
 	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     "claude-opus-4-7",
+		Model:     "claude-opus-4-8",
 		MaxTokens: 100,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
@@ -724,7 +725,7 @@ void main() {
         .messages()
         .create(
             MessageCreateParams.builder()
-                .model("claude-opus-4-7")
+                .model("claude-opus-4-8")
                 .maxTokens(100)
                 .addUserMessage("Hey Claude!")
                 .build()
@@ -749,7 +750,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hey Claude!']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 echo $message->content[0]->text;
 ```
@@ -763,7 +764,7 @@ client = Anthropic::VertexClient.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [{role: "user", content: "Hey Claude!"}]
 )
@@ -791,7 +792,7 @@ region = "us-east1"  # Specify a specific region
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -815,7 +816,7 @@ const client = new AnthropicVertex({
 });
 
 const result = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [
     {
@@ -841,7 +842,7 @@ AnthropicClient client = new()
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 100,
     Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
 };
@@ -867,7 +868,7 @@ func main() {
 	)
 
 	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     "claude-opus-4-7",
+		Model:     "claude-opus-4-8",
 		MaxTokens: 100,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
@@ -898,7 +899,7 @@ void main() {
         .messages()
         .create(
             MessageCreateParams.builder()
-                .model("claude-opus-4-7")
+                .model("claude-opus-4-8")
                 .maxTokens(100)
                 .addUserMessage("Hey Claude!")
                 .build()
@@ -923,7 +924,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hey Claude!']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 echo $message->content[0]->text;
 ```
@@ -937,7 +938,7 @@ client = Anthropic::VertexClient.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 100,
   messages: [{role: "user", content: "Hey Claude!"}]
 )

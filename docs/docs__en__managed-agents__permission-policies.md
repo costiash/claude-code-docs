@@ -31,7 +31,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "content-type: application/json" \
   -d '{
     "name": "Coding Assistant",
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "tools": [
       {
         "type": "agent_toolset_20260401",
@@ -46,7 +46,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
 ```bash CLI
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-opus-4-7
+model: claude-opus-4-8
 tools:
   - type: agent_toolset_20260401
     default_config:
@@ -58,7 +58,7 @@ YAML
 ```python Python
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[
         {
             "type": "agent_toolset_20260401",
@@ -73,7 +73,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [
     {
       type: "agent_toolset_20260401",
@@ -89,7 +89,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = new("claude-opus-4-7"),
+    Model = new("claude-opus-4-8"),
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -108,7 +108,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-4-7",
+		ID: "claude-opus-4-8",
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -133,7 +133,7 @@ _ = agent
 var agent = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Coding Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
                 .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -155,7 +155,7 @@ var agent = client.beta().agents().create(
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
             type: 'agent_toolset_20260401',
@@ -170,7 +170,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [
     {
       type: "agent_toolset_20260401",
@@ -202,7 +202,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "content-type: application/json" \
   -d '{
     "name": "Dev Assistant",
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "mcp_servers": [
       {"type": "url", "name": "github", "url": "https://mcp.example.com/github"}
     ],
@@ -222,7 +222,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
 ```bash CLI
 ant beta:agents create <<'YAML'
 name: Dev Assistant
-model: claude-opus-4-7
+model: claude-opus-4-8
 mcp_servers:
   - type: url
     name: github
@@ -240,7 +240,7 @@ YAML
 ```python Python
 agent = client.beta.agents.create(
     name="Dev Assistant",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     mcp_servers=[
         {"type": "url", "name": "github", "url": "https://mcp.example.com/github"},
     ],
@@ -260,7 +260,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Dev Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   mcp_servers: [{ type: "url", name: "github", url: "https://mcp.example.com/github" }],
   tools: [
     { type: "agent_toolset_20260401" },
@@ -279,7 +279,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Dev Assistant",
-    Model = new("claude-opus-4-7"),
+    Model = new("claude-opus-4-8"),
     McpServers =
     [
         new() { Type = "url", Name = "github", Url = "https://mcp.example.com/github" },
@@ -307,7 +307,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Dev Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-4-7",
+		ID: "claude-opus-4-8",
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
 		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -345,7 +345,7 @@ _ = agent
 var agent = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Dev Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .addMcpServer(
             BetaManagedAgentsUrlMcpServerParams.builder()
                 .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -384,7 +384,7 @@ use Anthropic\Beta\Agents\BetaManagedAgentsURLMCPServerParams;
 
 $agent = $client->beta->agents->create(
     name: 'Dev Assistant',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     mcpServers: [
         BetaManagedAgentsURLMCPServerParams::with(
             type: 'url',
@@ -410,7 +410,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Dev Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   mcp_servers: [
     {type: "url", name: "github", url: "https://mcp.example.com/github"}
   ],

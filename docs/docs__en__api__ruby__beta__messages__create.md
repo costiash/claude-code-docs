@@ -594,6 +594,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:url_not_allowed`
 
+              - `:url_not_in_prior_context`
+
               - `:url_not_accessible`
 
               - `:unsupported_content_type`
@@ -680,6 +682,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:advisor_result`
 
+            - `stop_reason: String`
+
           - `class BetaAdvisorRedactedResultBlockParam`
 
             - `encrypted_content: String`
@@ -689,6 +693,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `type: :advisor_redacted_result`
 
               - `:advisor_redacted_result`
+
+            - `stop_reason: String`
 
         - `tool_use_id: String`
 
@@ -1025,10 +1031,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: String`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: :compaction`
 
           - `:compaction`
@@ -1037,15 +1039,50 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
+        - `content: String`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: String`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: :user | :assistant`
+      - `class BetaMidConversationSystemBlockParam`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: Array[BetaTextBlockParam]`
+
+          System instruction text blocks.
+
+          - `text: String`
+
+          - `type: :text`
+
+          - `cache_control: BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: Array[BetaTextCitationParam]`
+
+        - `type: :mid_conv_system`
+
+          - `:mid_conv_system`
+
+        - `cache_control: BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: :user | :assistant | :system`
 
     - `:user`
 
     - `:assistant`
+
+    - `:system`
 
 - `model: Model`
 
@@ -1053,11 +1090,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `:"claude-opus-4-7"`
 
@@ -2647,7 +2688,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2698,6 +2739,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
 
 ### Returns
 
@@ -3068,6 +3111,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:url_not_allowed`
 
+            - `:url_not_in_prior_context`
+
             - `:url_not_accessible`
 
             - `:unsupported_content_type`
@@ -3184,6 +3229,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class BetaAdvisorResultBlock`
 
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `text: String`
 
           - `type: :advisor_result`
@@ -3195,6 +3244,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `encrypted_content: String`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: String`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: :advisor_redacted_result`
 
@@ -3623,11 +3676,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more`
+    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `:"claude-opus-4-7"`
 
@@ -3926,6 +3983,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: BetaOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: Integer`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: BetaServerToolUsage`
 
       The number of server tool requests.
@@ -4053,6 +4130,9 @@ puts(beta_message)
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0

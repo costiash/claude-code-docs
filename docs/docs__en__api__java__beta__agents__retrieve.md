@@ -70,6 +70,8 @@ Get Agent
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -109,6 +111,10 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+        Frontier intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
