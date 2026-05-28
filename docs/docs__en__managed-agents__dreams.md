@@ -43,7 +43,7 @@ dream=$(curl -s https://api.anthropic.com/v1/dreams \
     { "type": "memory_store", "memory_store_id": "$store_id" },
     { "type": "sessions", "session_ids": ["$session_a", "$session_b"] }
   ],
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "instructions": "Focus on coding-style preferences; ignore one-off debugging notes."
 }
 EOF
@@ -60,7 +60,7 @@ inputs:
     memory_store_id: $store_id
   - type: sessions
     session_ids: [$session_a, $session_b]
-model: claude-opus-4-7
+model: claude-opus-4-8
 instructions: Focus on coding-style preferences; ignore one-off debugging notes.
 YAML
 )
@@ -73,7 +73,7 @@ dream = client.beta.dreams.create(
         {"type": "memory_store", "memory_store_id": store_id},
         {"type": "sessions", "session_ids": [session_a, session_b]},
     ],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     instructions="Focus on coding-style preferences; ignore one-off debugging notes.",
 )
 print(dream.id)  # drm_01...
@@ -86,7 +86,7 @@ let dream = await client.beta.dreams.create({
     { type: "memory_store", memory_store_id: storeId },
     { type: "sessions", session_ids: [sessionA, sessionB] },
   ],
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   instructions: "Focus on coding-style preferences; ignore one-off debugging notes.",
 });
 console.log(dream.id); // drm_01...
@@ -109,7 +109,7 @@ var dream = await client.Beta.Dreams.Create(new()
             SessionIds = [sessionA, sessionB],
         },
     ],
-    Model = "claude-opus-4-7",
+    Model = "claude-opus-4-8",
     Instructions = "Focus on coding-style preferences; ignore one-off debugging notes.",
 });
 Console.WriteLine(dream.ID);  // drm_01...
@@ -123,7 +123,7 @@ dream, err := client.Beta.Dreams.New(ctx, anthropic.BetaDreamNewParams{
 		anthropic.BetaDreamInputParamOfSessions([]string{sessionA, sessionB}),
 	},
 	Model: anthropic.BetaDreamModelParamsUnion{
-		OfString: anthropic.String("claude-opus-4-7"),
+		OfString: anthropic.String("claude-opus-4-8"),
 	},
 	Instructions: anthropic.String("Focus on coding-style preferences; ignore one-off debugging notes."),
 })
@@ -139,7 +139,7 @@ var dream = client.beta().dreams().create(
     DreamCreateParams.builder()
         .addMemoryStoreInput(storeId)
         .addSessionsInput(List.of(sessionA, sessionB))
-        .model("claude-opus-4-7")
+        .model("claude-opus-4-8")
         .instructions("Focus on coding-style preferences; ignore one-off debugging notes.")
         .build()
 );
@@ -153,7 +153,7 @@ $dream = $client->beta->dreams->create(
         ['type' => 'memory_store', 'memory_store_id' => $storeId],
         ['type' => 'sessions', 'session_ids' => [$sessionA, $sessionB]],
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     instructions: 'Focus on coding-style preferences; ignore one-off debugging notes.',
 );
 echo "{$dream->id}\n"; // drm_01...
@@ -166,7 +166,7 @@ dream = client.beta.dreams.create(
     {type: "memory_store", memory_store_id: store_id},
     {type: "sessions", session_ids: [session_a, session_b]}
   ],
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   instructions: "Focus on coding-style preferences; ignore one-off debugging notes."
 )
 puts dream.id # drm_01...
@@ -174,7 +174,7 @@ puts dream.id # drm_01...
 
 </CodeGroup>
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-7` and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-8`, `claude-opus-4-7`, and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -188,7 +188,7 @@ The response is the full `dream` resource with `status: "pending"`:
     { "type": "sessions", "session_ids": ["sesn_01...", "sesn_02..."] }
   ],
   "outputs": [],
-  "model": { "id": "claude-opus-4-7" },
+  "model": { "id": "claude-opus-4-8" },
   "instructions": "Focus on coding-style preferences; ignore one-off debugging notes.",
   "session_id": null,
   "created_at": "2026-04-29T17:04:10Z",
@@ -712,6 +712,6 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 | --- | --- |
 | Sessions per dream | 100 |
 | `instructions` length | 4,096 characters |
-| Supported models | `claude-opus-4-7`, `claude-sonnet-4-6` |
+| Supported models | `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-4-6` |
 
 Default rate limits apply to dream creation while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.

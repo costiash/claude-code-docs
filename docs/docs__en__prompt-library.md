@@ -324,13 +324,13 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
 If you would like Claude to identify itself correctly in your application or use specific API strings:
 
 ```text Sample prompt for model identity
-The assistant is Claude, created by Anthropic. The current model is Claude Opus 4.7.
+The assistant is Claude, created by Anthropic. The current model is Claude Opus 4.8.
 ```
 
 For LLM-powered apps that need to specify model strings:
 
 ```text Sample prompt for model string
-When an LLM is needed, please default to Claude Opus 4.7 unless the user requests otherwise. The exact model string for Claude Opus 4.7 is claude-opus-4-7.
+When an LLM is needed, please default to Claude Opus 4.8 unless the user requests otherwise. The exact model string for Claude Opus 4.8 is claude-opus-4-8.
 ```
 
 ## Output and formatting
@@ -835,7 +835,7 @@ Claude Sonnet 4.6 defaults to an effort level of `high`, in contrast to Claude S
 - **Low** for high-volume or latency-sensitive workloads
 - Set a large max output token budget (64k tokens recommended) at medium or high effort to give the model room to think and act
 
-**When to use Opus 4.7 instead:** For the hardest, longest-horizon problems (large-scale code migrations, deep research, extended autonomous work), Opus 4.7 remains the right choice. Sonnet 4.6 is optimized for workloads where fast turnaround and cost efficiency matter most.
+**When to use Opus 4.8 instead:** For the hardest, longest-horizon problems (large-scale code migrations, deep research, extended autonomous work), Opus 4.8 remains the right choice. Sonnet 4.6 is optimized for workloads where fast turnaround and cost efficiency matter most.
 
 #### If you're not using extended thinking
 

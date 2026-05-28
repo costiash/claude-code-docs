@@ -523,7 +523,7 @@ Claude stopped because it reached the model's context window limit. This allows 
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-8",
-    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.8 supports 128k with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],

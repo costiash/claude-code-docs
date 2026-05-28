@@ -45,14 +45,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-vertex:2.33.0")
+implementation("com.anthropic:anthropic-java-vertex:2.35.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.33.0</version>
+    <version>2.35.0</version>
 </dependency>
 ```
 

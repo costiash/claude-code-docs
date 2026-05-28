@@ -192,7 +192,7 @@ The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK addit
 
         
         ```bash nocheck
-        VERSION=1.9.1
+        VERSION=1.10.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
         curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -222,7 +222,7 @@ The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK addit
 
         ```text
         FROM your-base-image
-        ARG ANT_VERSION=1.9.1
+        ARG ANT_VERSION=1.10.0
         ARG TARGETARCH
         RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
             curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-28T19:13:28Z",
+  "generated_at": "2026-05-28T21:57:46Z",
   "indexed_files": 1515,
   "index": {
     "/changelog": {
@@ -39762,11 +39762,11 @@
         "store",
         "memory",
         "dream",
+        "claude",
         "sessions",
         "input",
         "output",
         "pipeline",
-        "claude",
         "session",
         "codegroup",
         "archived",
@@ -39780,7 +39780,7 @@
         "beta",
         "once"
       ],
-      "word_count": 2181,
+      "word_count": 2183,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {

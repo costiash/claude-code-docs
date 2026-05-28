@@ -278,14 +278,14 @@ go get github.com/anthropics/anthropic-sdk-go
 
 <Tab title="Java">
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java-aws:2.33.0")
+implementation("com.anthropic:anthropic-java-aws:2.35.0")
 ```
 
 ```xml Maven
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java-aws</artifactId>
-  <version>2.33.0</version>
+  <version>2.35.0</version>
 </dependency>
 ```
 </Tab>
