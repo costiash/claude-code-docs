@@ -1349,7 +1349,7 @@ for (var event : client.beta().sessions().threads().events().list(
         thread.id(),
         EventListParams.builder().sessionId(session.id()).build()
     ).autoPager()) {
-    var json = (Map<String, JsonValue>) event._json().orElseThrow().asObject().orElseThrow();
+    var json = event._json().orElseThrow().asObject().orElseThrow();
     var type = json.get("type").asStringOrThrow();
     var processedAt = json.containsKey("processed_at")
         ? json.get("processed_at").asStringOrThrow()

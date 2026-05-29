@@ -1052,7 +1052,7 @@ for _, event := range events.Data {
 ````java
 var events = client.beta().sessions().events().list(session.id());
 for (var event : events.data()) {
-    var json = (Map<String, JsonValue>) event._json().orElseThrow().asObject().orElseThrow();
+    var json = event._json().orElseThrow().asObject().orElseThrow();
     var type = json.get("type").asStringOrThrow();
     var processedAt = json.containsKey("processed_at")
         ? json.get("processed_at").asStringOrThrow()

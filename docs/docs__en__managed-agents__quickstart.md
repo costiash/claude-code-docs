@@ -271,12 +271,12 @@ import com.anthropic.models.beta.agents.AgentCreateParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Params;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
-import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
+import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
-import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 
 void main() {
     var client = AnthropicOkHttpClient.fromEnv();
