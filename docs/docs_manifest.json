@@ -8559,8 +8559,8 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "a3cded050f65ee11346191e627436cb0834cfd42d8c87846cd4d9e284ffd1b69",
-      "last_updated": "2026-05-29T01:13:03.316914"
+      "hash": "509b628310fa6b01ebc94309c1e557059b75d4e263bfeeb0a7068bcd66bc726f",
+      "last_updated": "2026-05-29T19:13:43.553686"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
@@ -8607,8 +8607,8 @@
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
       "original_md_url": "https://platform.claude.com/docs/en/plugin-marketplaces.md",
-      "hash": "f63b02451ec91045d89197e32bc55f2e3a329392d2e7821e1363373cc401af31",
-      "last_updated": "2026-05-29T01:13:12.048406"
+      "hash": "7366bb344b899c7be72355c5f94406dd3bd3a47a854caa35c35e1e506a4f2f37",
+      "last_updated": "2026-05-29T19:13:53.493014"
     },
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
@@ -8715,8 +8715,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-29T16:40:59.299499",
-    "fetch_duration_seconds": 1247.113566,
+    "last_fetch_completed": "2026-05-29T19:14:19.901902",
+    "fetch_duration_seconds": 1072.424536,
     "total_pages_discovered": 1685,
     "pages_fetched_successfully": 1452,
     "pages_failed": 234,
@@ -8961,7 +8961,7 @@
     "total_files": 1452,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-29T16:40:59.299526",
+  "last_updated": "2026-05-29T19:14:19.901930",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

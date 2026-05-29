@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-29T16:41:02Z",
+  "generated_at": "2026-05-29T19:14:22Z",
   "indexed_files": 1516,
   "index": {
     "/changelog": {
@@ -609,14 +609,14 @@
         "plugin",
         "project",
         "add",
+        "only",
         "configuration",
         "set",
-        "only",
-        "steps",
-        "variable",
-        "available"
+        "same",
+        "authentication",
+        "steps"
       ],
-      "word_count": 6414,
+      "word_count": 6529,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -840,7 +840,7 @@
         "source",
         "users"
       ],
-      "word_count": 6275,
+      "word_count": 6310,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
