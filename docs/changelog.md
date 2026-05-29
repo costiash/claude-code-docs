@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.156
+
+- Fixed an issue when using Opus 4.8 where thinking blocks were modified, leading to API errors.
+
 ## 2.1.154
 
 - Opus 4.8 is here! Now defaults to high effort · /effort xhigh for your hardest tasks
