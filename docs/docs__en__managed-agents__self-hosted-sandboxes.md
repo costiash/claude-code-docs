@@ -4,9 +4,7 @@ Run agent sessions in your own self-hosted sandbox environment.
 
 ---
 
-By default, Managed Agents executes tools and code inside [Anthropic-managed cloud containers](/docs/en/managed-agents/cloud-containers). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
-
-Self-hosted sandboxes are not yet available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
+By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](/docs/en/managed-agents/cloud-sandboxes-reference). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
 
 <Note>
 Self-hosted sandboxes support all Claude models available in Managed Agents, including <NextOpus />. The model is configured on the [agent](/docs/en/managed-agents/agent-setup), not the environment.
@@ -16,7 +14,7 @@ Self-hosted sandboxes support all Claude models available in Managed Agents, inc
 
 | | Cloud environment | Self-hosted sandbox |
 |---|---|---|
-| Where tools run | Anthropic-managed containers | Your infrastructure |
+| Where tools run | Anthropic-managed sandboxes | Your infrastructure |
 | Network reach | Anthropic's egress controls | Your network policy |
 | File and GitHub repo mounting | Managed by Anthropic | Managed by you |
 | Lifecycle | Managed by Anthropic | Managed by you |
@@ -27,7 +25,7 @@ For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](
 
 ## When to combine with MCP tunnels
 
-Self-hosting controls *where the agent's code executes*. [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud containers can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary.
+Self-hosting controls *where the agent's code executes*. [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary.
 
 ## Environment worker
 
@@ -41,7 +39,7 @@ Work is claimed by polling the environment's queue: either by an **always-on wor
 
 Both CLI and SDK include pre-built workers to orchestrate your sessions. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered architectures.
 
-The CLI and SDK both are configurable (see [reference](#reference)), but if you require more control, you can leverage the [Environments Work endpoints](/docs/en/api/beta/environments/work) directly and implement your own worker.
+The CLI and SDK both are configurable (see [reference](#reference)), but if you require more control, you can leverage the [Environments Work endpoints](/docs/en/api/beta/environments/work) directly and implement your own worker. On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), the `GET /v1/environments/{id}/work` list endpoint and its SDK equivalent are not currently available; the other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 
 <Note>
 The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK additionally requires `unzip`, `tar`, and Node.js 22 or later. These dependencies are resolved at fixed paths and do not respect `PATH` overrides.
@@ -50,7 +48,11 @@ The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK addit
 ### Sandbox filesystem
 
 - **`/workspace`**: the default working directory for tool execution and skill download. Skills are downloaded to `/workspace/skills/<name>/`. If you change `--workdir` from the default, update your agent's system prompt so Claude knows where to find them.
-- **`/mnt/session/outputs`**: the agent writes final output files to this path. When running in a container, mount a host directory here to retrieve them.
+- **`/mnt/session/outputs`**: the agent writes final output files to this path. When running in a sandbox, mount a host directory here to retrieve them.
+
+<Note>
+On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), the worker authenticates with AWS IAM (SigV4), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](/docs/en/api/claude-platform-on-aws-iam-actions#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
+</Note>
 
 <Tabs>
   <Tab title="Always-on (ant CLI)">
@@ -216,9 +218,9 @@ The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK addit
 
         The worker exits cleanly on SIGTERM or SIGINT, draining in-flight tool calls before stopping.
 
-        **Container per session**
+        **Sandbox per session**
 
-        For stronger isolation: a fresh filesystem, resource limits, or network controls per session. Run each session in its own container. Start by building an image with `ant` installed and `ant beta:worker run` as the entrypoint. When a container starts, it reads session details from environment variables, handles that session, and exits:
+        For stronger isolation: a fresh filesystem, resource limits, or network controls per session. Run each session in its own sandbox. Start by building an image with `ant` installed and `ant beta:worker run` as the entrypoint. When a sandbox starts, it reads session details from environment variables, handles that session, and exits:
 
         ```text
         FROM your-base-image
@@ -232,7 +234,7 @@ The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK addit
         ENTRYPOINT ["ant", "beta:worker", "run"]
         ```
 
-        Then write a spawn script that forwards session details into a fresh container, and start the poller pointing at it:
+        Then write a spawn script that forwards session details into a fresh sandbox, and start the poller pointing at it:
 
         ```bash
         #!/bin/bash
@@ -836,7 +838,7 @@ func main() {
 
 Once your worker is running, create a session that targets the environment. Anthropic enqueues it and your worker claims and executes it.
 
-File and GitHub resource mounting are handled in your container image rather than by Anthropic. To load your sandbox with session-specific files, you can pass session metadata when creating the session. Your orchestration layer can read that metadata and mount the relevant files before the worker starts executing.
+File and GitHub resource mounting are handled in your sandbox image rather than by Anthropic. To load your sandbox with session-specific files, you can pass session metadata when creating the session. Your orchestration layer can read that metadata and mount the relevant files before the worker starts executing.
 
 <CodeGroup>
   ```bash cURL nocheck
@@ -959,14 +961,14 @@ session = client.beta.sessions.create(
     - **`EnvironmentWorker`**: the out-of-the-box worker. Handles polling, setup, and execution end to end.
       - `.run()`: runs indefinitely, picking up sessions as they arrive. Exits cleanly on SIGTERM.
       - `.handle_item()`: picks up one pending session, handles it, and exits.
-    - **`work.poller()`**: polls the work queue on your behalf and gives you each claimed session. Use this when you want to decide what happens per session, for example launching a container rather than running tools in-process.
+    - **`work.poller()`**: polls the work queue on your behalf and gives you each claimed session. Use this when you want to decide what happens per session, for example launching a sandbox rather than running tools in-process.
       - `drain`: whether to stop polling once the queue is empty rather than waiting for new work.
       - `block_ms`: how long to wait for work to arrive before returning, in milliseconds. Must be between 1 and 999. Set to `None` for a non-blocking check.
       - `reclaim_older_than_ms`: re-claim work items leased to a worker that has stopped responding.
       - `auto_stop`: whether to post a stop signal on the work item after the iterator exits.
     - **`tool_runner()`**: runs tool calls for a single session. Use when you've already claimed the work and only need the execution layer.
 
-    `EnvironmentWorker` covers most use cases. Use the work poller directly when you want to launch your own per-session process, for example spinning up a container for each claimed session:
+    `EnvironmentWorker` covers most use cases. Use the work poller directly when you want to launch your own per-session process, for example spinning up a sandbox for each claimed session:
 
     
 
@@ -991,7 +993,7 @@ session = client.beta.sessions.create(
 
       async def launch_container(work: BetaSelfHostedWork) -> None:
           # Replace with your own per-session sandbox launcher. Pass
-          # ANTHROPIC_ENVIRONMENT_KEY into the launched container, never
+          # ANTHROPIC_ENVIRONMENT_KEY into the launched sandbox, never
           # your API key.
           print(f"claimed session {work.data.id}")
 
@@ -1003,7 +1005,7 @@ session = client.beta.sessions.create(
               async for work in client.beta.environments.work.poller(
                   environment_id=environment_id,
                   environment_key=environment_key,
-                  auto_stop=False,  # the launched container owns the stop call
+                  auto_stop=False,  # the launched sandbox owns the stop call
               ):
                   await launch_container(work)
 
@@ -1022,7 +1024,7 @@ session = client.beta.sessions.create(
 
       async function launchContainer(work: BetaSelfHostedWork): Promise<void> {
         // Replace with your own per-session sandbox launcher. Pass
-        // ANTHROPIC_ENVIRONMENT_KEY into the launched container, never
+        // ANTHROPIC_ENVIRONMENT_KEY into the launched sandbox, never
         // your API key.
         console.log(`claimed session ${work.data.id}`);
       }
@@ -1031,7 +1033,7 @@ session = client.beta.sessions.create(
         client,
         environmentId,
         environmentKey,
-        autoStop: false // the launched container owns the stop call
+        autoStop: false // the launched sandbox owns the stop call
       });
 
       for await (const work of poller) {

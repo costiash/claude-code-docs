@@ -3830,6 +3830,22 @@ When using `display: "omitted"`:
 The billed output token count will **not** match the visible token count in the response. You are billed for the full thinking process, not the thinking content visible in the response.
 </Warning>
 
+To see how many billed output tokens were spent on internal reasoning, read `usage.output_tokens_details.thinking_tokens` in the response. This value reflects the raw reasoning the model generated (not the summarized text returned in the body) and is always less than or equal to `output_tokens`. Subtract it from `output_tokens` to approximate the non-reasoning portion of the output.
+
+```json
+{
+  "usage": {
+    "input_tokens": 25,
+    "output_tokens": 348,
+    "output_tokens_details": {
+      "thinking_tokens": 312
+    }
+  }
+}
+```
+
+`output_tokens` remains the inclusive, authoritative total used for billing. `output_tokens_details` is a read-only breakdown for observability.
+
 ## Best practices and considerations for extended thinking
 
 ### Working with thinking budgets
@@ -3837,7 +3853,7 @@ The billed output token count will **not** match the visible token count in the 
 - **Budget optimization:** The minimum budget is 1,024 tokens. Start at the minimum and increase the thinking budget incrementally to find the optimal range for your use case. Higher token counts enable more comprehensive reasoning but with diminishing returns depending on the task. Increasing the budget can improve response quality at the tradeoff of increased latency. For critical tasks, test different settings to find the optimal balance. Note that the thinking budget is a target rather than a strict limit. Actual token usage may vary based on the task.
 - **Starting points:** Start with larger thinking budgets (16k+ tokens) for complex tasks and adjust based on your needs.
 - **Large budgets:** For thinking budgets above 32k, use [batch processing](/docs/en/build-with-claude/batch-processing) to avoid networking issues. Requests pushing the model to think above 32k tokens causes long running requests that might run up against system timeouts and open connection limits.
-- **Token usage tracking:** Monitor thinking token usage to optimize costs and performance.
+- **Token usage tracking:** Monitor thinking token usage to optimize costs and performance. The `usage.output_tokens_details.thinking_tokens` field in the response reports how many of the billed output tokens were internal reasoning. When streaming, this breakdown appears only on the final `message_delta` event.
 
 ### Performance considerations
 

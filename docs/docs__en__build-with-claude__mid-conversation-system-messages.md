@@ -41,7 +41,61 @@ Add a message with `"role": "system"` to the `messages` array. Use a plain strin
 
 You can still set the top-level `system` field for instructions that should apply to the entire conversation. Reserve mid-conversation system messages for instructions that only become relevant later, or that you want to add without invalidating the cached prefix.
 
-```python
+<CodeGroup>
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 1024,
+    "cache_control": {"type": "ephemeral"},
+    "system": "You are a code review assistant. Be concise.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Review process() in utils.py for performance issues."
+      },
+      {
+        "role": "assistant",
+        "content": "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list."
+      },
+      {
+        "role": "user",
+        "content": "Now review the calling code that invokes process()."
+      },
+      {
+        "role": "system",
+        "content": "From now on, every suggestion must include explicit type annotations."
+      }
+    ]
+  }'
+```
+
+```bash CLI
+ant messages create --transform 'content.0.text' --raw-output <<'YAML'
+model: claude-opus-4-8
+max_tokens: 1024
+cache_control:
+  type: ephemeral
+system: You are a code review assistant. Be concise.
+messages:
+  - role: user
+    content: Review process() in utils.py for performance issues.
+  - role: assistant
+    content: >-
+      The list comprehension is fine for small inputs. For large inputs,
+      consider a generator to avoid materializing the full list.
+  - role: user
+    content: Now review the calling code that invokes process().
+  - role: system
+    content: From now on, every suggestion must include explicit type annotations.
+YAML
+```
+
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -49,6 +103,9 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
+    # Automatic prompt caching: each request caches the conversation so far,
+    # and the next request reads the unchanged prefix from cache.
+    cache_control={"type": "ephemeral"},
     system="You are a code review assistant. Be concise.",
     messages=[
         {
@@ -65,8 +122,8 @@ response = client.messages.create(
         },
         # The reviewer realizes mid-session that all suggestions must
         # also pass the team's strict typing policy. Appending the
-        # instruction here keeps earlier turns byte-identical, so a
-        # cached prefix (if you set one) remains valid.
+        # instruction here keeps earlier turns byte-identical, so the
+        # prefix cached by the previous request is still read from cache.
         {
             "role": "system",
             "content": "From now on, every suggestion must include explicit type annotations.",
@@ -77,12 +134,251 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  // Automatic prompt caching: each request caches the conversation so far,
+  // and the next request reads the unchanged prefix from cache.
+  cache_control: { type: "ephemeral" },
+  system: "You are a code review assistant. Be concise.",
+  messages: [
+    {
+      role: "user",
+      content: "Review process() in utils.py for performance issues."
+    },
+    {
+      role: "assistant",
+      content:
+        "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list."
+    },
+    {
+      role: "user",
+      content: "Now review the calling code that invokes process()."
+    },
+    // The reviewer realizes mid-session that all suggestions must also pass
+    // the team's strict typing policy. Appending the instruction here keeps
+    // earlier turns byte-identical, so the prefix cached by the previous
+    // request is still read from cache.
+    {
+      role: "system",
+      content: "From now on, every suggestion must include explicit type annotations."
+    }
+  ]
+});
+
+const textBlock = response.content.find(
+  (block): block is Anthropic.TextBlock => block.type === "text"
+);
+console.log(textBlock?.text);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    // Automatic prompt caching: each request caches the conversation so far,
+    // and the next request reads the unchanged prefix from cache.
+    CacheControl = new CacheControlEphemeral(),
+    System = "You are a code review assistant. Be concise.",
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = "Review process() in utils.py for performance issues."
+        },
+        new()
+        {
+            Role = Role.Assistant,
+            Content = "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list."
+        },
+        new()
+        {
+            Role = Role.User,
+            Content = "Now review the calling code that invokes process()."
+        },
+        // The reviewer realizes mid-session that all suggestions must also pass
+        // the team's strict typing policy. Appending the instruction here keeps
+        // earlier turns byte-identical, so the prefix cached by the previous
+        // request is still read from cache.
+        new()
+        {
+            Role = Role.System,
+            Content = "From now on, every suggestion must include explicit type annotations."
+        }
+    ]
+};
+
+var response = await client.Messages.Create(parameters);
+Console.WriteLine(response);
+```
+
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		// Automatic prompt caching: each request caches the conversation so far,
+		// and the next request reads the unchanged prefix from cache.
+		CacheControl: anthropic.NewCacheControlEphemeralParam(),
+		System: []anthropic.TextBlockParam{
+			{Text: "You are a code review assistant. Be concise."},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Review process() in utils.py for performance issues.")),
+			anthropic.NewAssistantMessage(anthropic.NewTextBlock("The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list.")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Now review the calling code that invokes process().")),
+			// The reviewer realizes mid-session that all suggestions must also
+			// pass the team's strict typing policy. Appending the instruction
+			// here keeps earlier turns byte-identical, so the prefix cached by
+			// the previous request is still read from cache.
+			{
+				Role: anthropic.MessageParamRoleSystem,
+				Content: []anthropic.ContentBlockParamUnion{
+					anthropic.NewTextBlock("From now on, every suggestion must include explicit type annotations."),
+				},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content[0].Text)
+}
+```
+
+```java Java hidelines={1..2,4..5,7..11,-2..}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+
+public class MidConversationSystemExample {
+
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024)
+        // Automatic prompt caching: each request caches the conversation so far,
+        // and the next request reads the unchanged prefix from cache.
+        .cacheControl(CacheControlEphemeral.builder().build())
+        .system("You are a code review assistant. Be concise.")
+        .addUserMessage("Review process() in utils.py for performance issues.")
+        .addAssistantMessage("The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list.")
+        .addUserMessage("Now review the calling code that invokes process().")
+        // The reviewer realizes mid-session that all suggestions must also pass
+        // the team's strict typing policy. Appending the instruction here keeps
+        // earlier turns byte-identical, so the prefix cached by the previous
+        // request is still read from cache.
+        .addMessage(MessageParam.builder()
+            .role(MessageParam.Role.SYSTEM)
+            .content("From now on, every suggestion must include explicit type annotations.")
+            .build())
+        .build();
+
+    Message response = client.messages().create(params);
+    response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> System.out.println(textBlock.text()));
+  }
+}
+```
+
+```php PHP hidelines={1..3,5}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\CacheControlEphemeral;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Review process() in utils.py for performance issues.'],
+        ['role' => 'assistant', 'content' => 'The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list.'],
+        ['role' => 'user', 'content' => 'Now review the calling code that invokes process().'],
+        // The reviewer realizes mid-session that all suggestions must also pass
+        // the team's strict typing policy. Appending the instruction here keeps
+        // earlier turns byte-identical, so the prefix cached by the previous
+        // request is still read from cache.
+        ['role' => 'system', 'content' => 'From now on, every suggestion must include explicit type annotations.']
+    ],
+    model: 'claude-opus-4-8',
+    // Automatic prompt caching: each request caches the conversation so far,
+    // and the next request reads the unchanged prefix from cache.
+    cacheControl: CacheControlEphemeral::with(),
+    system: 'You are a code review assistant. Be concise.',
+);
+
+echo $response->content[0]->text;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  # Automatic prompt caching: each request caches the conversation so far,
+  # and the next request reads the unchanged prefix from cache.
+  cache_control: { type: "ephemeral" },
+  system: "You are a code review assistant. Be concise.",
+  messages: [
+    { role: "user", content: "Review process() in utils.py for performance issues." },
+    { role: "assistant", content: "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list." },
+    { role: "user", content: "Now review the calling code that invokes process()." },
+    # The reviewer realizes mid-session that all suggestions must also pass
+    # the team's strict typing policy. Appending the instruction here keeps
+    # earlier turns byte-identical, so the prefix cached by the previous
+    # request is still read from cache.
+    { role: "system", content: "From now on, every suggestion must include explicit type annotations." }
+  ]
+)
+
+puts response.content.first.text
+```
+</CodeGroup>
+
+This example enables [automatic caching](/docs/en/build-with-claude/prompt-caching#automatic-caching) with the top-level `cache_control` field. Prompt caching is opt-in: if a request has no `cache_control` field (automatic or an [explicit breakpoint](/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints)), nothing is cached and every request pays the regular input token price for the full conversation. With caching enabled, appending the system message leaves the already-cached turns unchanged, so the request that carries the new instruction still reads them from cache instead of processing them again. Caching also requires the conversation to meet the [minimum cacheable prompt length](/docs/en/build-with-claude/prompt-caching#cache-limitations); an example as short as this one falls below it, so `cache_creation_input_tokens` and `cache_read_input_tokens` stay at 0 until the conversation grows.
+
 A mid-conversation system message must immediately follow a `user` message (or an `assistant` message that ends in a server tool use), and must either be the last entry in `messages` or be followed by an `assistant` turn. In practice, append it at the end of the array, after the latest `user` turn.
 
 ## Combining with prompt caching
 
 Mid-conversation system messages and [prompt caching](/docs/en/build-with-claude/prompt-caching) are designed to be used together:
 
+- **Enable caching explicitly.** Caching only happens when the request includes `cache_control`, either the top-level [automatic caching](/docs/en/build-with-claude/prompt-caching#automatic-caching) field or an [explicit breakpoint](/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints) on a content block. A mid-conversation system message does not create a cache entry on its own, and without caching enabled there are no savings to preserve.
 - **Cache the stable prefix as usual.** Place `cache_control` on the last block that stays the same across requests, whether that is the end of the top-level `system` field, the end of your tool definitions, or a stable point in the message history.
 - **Append the system message after the breakpoint.** Because it comes after the cached prefix, it does not change the prefix hash and the cache still hits.
 - **A mid-conversation system message is itself cacheable.** Once it is in the conversation, it becomes part of the stable history. On the next turn you can move your cache breakpoint past it (or rely on [automatic caching](/docs/en/build-with-claude/prompt-caching#automatic-caching) to do so) and the system message is read from cache like any other turn.

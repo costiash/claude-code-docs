@@ -916,6 +916,22 @@ When using `display: "omitted"`:
 The billed output token count will **not** match the visible token count in the response. You are billed for the full thinking process, not the thinking content visible in the response.
 </Warning>
 
+To see how many billed output tokens were spent on internal reasoning, read `usage.output_tokens_details.thinking_tokens` in the response. This value reflects the raw reasoning the model generated (not the summarized text returned in the body) and is always less than or equal to `output_tokens`. Subtract it from `output_tokens` to approximate the non-reasoning portion of the output.
+
+```json
+{
+  "usage": {
+    "input_tokens": 25,
+    "output_tokens": 348,
+    "output_tokens_details": {
+      "thinking_tokens": 312
+    }
+  }
+}
+```
+
+`output_tokens` remains the inclusive, authoritative total used for billing. `output_tokens_details` is a read-only breakdown for observability.
+
 ### Additional topics
 
 The extended thinking page covers several topics in more detail with mode-specific code examples:

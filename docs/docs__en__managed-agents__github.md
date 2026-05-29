@@ -4,7 +4,7 @@ Connect your agent to GitHub repositories for cloning, reading, and creating pul
 
 ---
 
-You can mount a GitHub repository to your session container and connect to the GitHub MCP for making pull requests.
+You can mount a GitHub repository to your session sandbox and connect to the GitHub MCP for making pull requests.
 
 GitHub repositories are cached, so future sessions that use the same repository start faster.
 

@@ -4,7 +4,7 @@ Create a session to run your agent and begin executing tasks.
 
 ---
 
-A session is an agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session) to provision its container, then [send a user event](#starting-the-session) to start work.
+A session is an agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session) to provision its sandbox, then [send a user event](#starting-the-session) to start work.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -321,7 +321,7 @@ vault_session = client.beta.sessions.create(
 
 ## Starting the session
 
-Creating a session provisions the environment's container but does not start any work. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/events-and-streaming#event-types). The session acts as a state machine that tracks progress while events drive the actual execution.
+Creating a session provisions the environment's sandbox but does not start any work. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/events-and-streaming#event-types). The session acts as a state machine that tracks progress while events drive the actual execution.
 
 <CodeGroup defaultLanguage="CLI">
   
@@ -880,7 +880,7 @@ client.beta.sessions.archive(session.id)
 
 ### Deleting a session
 
-Delete a session to permanently remove its record, events, and associated container. A `running` session cannot be deleted; send an [interrupt event](/docs/en/managed-agents/events-and-streaming#event-types) if you need to delete it immediately.
+Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; send an [interrupt event](/docs/en/managed-agents/events-and-streaming#event-types) if you need to delete it immediately.
 
 Files, memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion.
 

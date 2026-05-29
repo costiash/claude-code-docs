@@ -567,7 +567,7 @@ end
 
 ## Retrieving deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the container. Once the session is idle, fetch them via the [Files API](/docs/en/build-with-claude/files) scoped to the session:
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them via the [Files API](/docs/en/build-with-claude/files) scoped to the session:
 
 <CodeGroup>
   

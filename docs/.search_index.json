@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-29T10:38:50Z",
+  "generated_at": "2026-05-29T13:28:44Z",
   "indexed_files": 1516,
   "index": {
     "/changelog": {
@@ -38034,17 +38034,17 @@
         "sonnet",
         "models",
         "blocks",
+        "output",
         "note",
         "mythos",
         "preview",
-        "output",
-        "default",
-        "manual",
-        "effort",
         "summarized",
-        "field"
+        "default",
+        "only",
+        "manual",
+        "effort"
       ],
-      "word_count": 4058,
+      "word_count": 4145,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -38263,12 +38263,12 @@
         "available",
         "sigv",
         "note",
+        "yes",
         "access",
-        "managed",
         "authentication",
         "first"
       ],
-      "word_count": 6476,
+      "word_count": 6499,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -38434,9 +38434,9 @@
         "default",
         "request",
         "interleaved",
-        "adaptive"
+        "see"
       ],
-      "word_count": 14665,
+      "word_count": 14780,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -38559,24 +38559,24 @@
         "message",
         "conversation",
         "cache",
+        "caching",
         "mid",
-        "messages",
         "level",
+        "messages",
+        "field",
+        "prompt",
         "instruction",
         "prefix",
-        "prompt",
+        "top",
         "turn",
         "instructions",
-        "field",
-        "top",
-        "caching",
-        "card",
         "cached",
-        "claude",
-        "after",
-        "session"
+        "request",
+        "card",
+        "new",
+        "claude"
       ],
-      "word_count": 1257,
+      "word_count": 2674,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-system-messages.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -39727,11 +39727,11 @@
       "word_count": 1510,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
-    "/docs/en/managed-agents/cloud-containers": {
-      "title": "Cloud container reference",
-      "content_preview": "# Cloud container reference  Pre-installed packages, databases, and utilities available in cloud containers.  ---  Cloud containers in Claude Managed Agents come pre-installed with a comprehensive set...",
+    "/docs/en/managed-agents/cloud-sandboxes-reference": {
+      "title": "Cloud sandbox reference",
+      "content_preview": "# Cloud sandbox reference  Pre-installed packages, databases, and utilities available in cloud sandboxes.  ---  Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastructure. Th...",
       "keywords": [
-        "container",
+        "sandbox",
         "databases",
         "note",
         "client",
@@ -39741,19 +39741,19 @@
         "installed",
         "utilities",
         "available",
+        "sandboxes",
         "database",
         "connecting",
         "external",
-        "containers",
+        "run",
         "managed",
-        "agents",
+        "infrastructure",
         "programming",
         "languages",
-        "these",
-        "immediately"
+        "these"
       ],
-      "word_count": 374,
-      "file_path": "docs/docs__en__managed-agents__cloud-containers.md"
+      "word_count": 379,
+      "file_path": "docs/docs__en__managed-agents__cloud-sandboxes-reference.md"
     },
     "/docs/en/managed-agents/define-outcomes": {
       "title": "Define outcomes",
@@ -39813,12 +39813,12 @@
     },
     "/docs/en/managed-agents/environments": {
       "title": "Cloud environment setup",
-      "content_preview": "# Cloud environment setup  Customize cloud containers for your sessions.  ---  Environments define the container configuration where your agent runs. You create an environment once, then reference its...",
+      "content_preview": "# Cloud environment setup  Customize cloud sandboxes for your sessions.  ---  Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID...",
       "keywords": [
         "environment",
+        "sandboxes",
         "cloud",
-        "container",
-        "containers",
+        "sandbox",
         "sessions",
         "environments",
         "create",
@@ -39826,7 +39826,6 @@
         "each",
         "session",
         "own",
-        "sandboxes",
         "see",
         "note",
         "beta",
@@ -39834,9 +39833,10 @@
         "codegroup",
         "hostsallow",
         "package",
-        "mcp"
+        "mcp",
+        "pre"
       ],
-      "word_count": 1750,
+      "word_count": 1753,
       "file_path": "docs/docs__en__managed-agents__environments.md"
     },
     "/docs/en/managed-agents/events-and-streaming": {
@@ -39869,7 +39869,7 @@
     },
     "/docs/en/managed-agents/files": {
       "title": "Adding files",
-      "content_preview": "# Adding files  Upload files and mount them in your container for reading and processing.  ---  You can provide files to your agent by uploading them via the Files API and mounting them in the session...",
+      "content_preview": "# Adding files  Upload files and mount them in your sandbox for reading and processing.  ---  You can provide files to your agent by uploading them via the Files API and mounting them in the session's...",
       "keywords": [
         "files",
         "session",
@@ -39878,7 +39878,7 @@
         "file",
         "them",
         "api",
-        "container",
+        "sandbox",
         "note",
         "using",
         "these",
@@ -39897,7 +39897,7 @@
     },
     "/docs/en/managed-agents/github": {
       "title": "Accessing GitHub",
-      "content_preview": "# Accessing GitHub  Connect your agent to GitHub repositories for cloning, reading, and creating pull requests.  ---  You can mount a GitHub repository to your session container and connect to the Git...",
+      "content_preview": "# Accessing GitHub  Connect your agent to GitHub repositories for cloning, reading, and creating pull requests.  ---  You can mount a GitHub repository to your session sandbox and connect to the GitHu...",
       "keywords": [
         "github",
         "codegroup",
@@ -40045,6 +40045,7 @@
         "agent",
         "step",
         "infrastructure",
+        "sandbox",
         "api",
         "code",
         "title",
@@ -40057,8 +40058,7 @@
         "tool",
         "execution",
         "environment",
-        "session",
-        "create"
+        "session"
       ],
       "word_count": 893,
       "file_path": "docs/docs__en__managed-agents__overview.md"
@@ -40099,13 +40099,13 @@
         "tab",
         "title",
         "managed",
+        "sandbox",
         "card",
         "agents",
         "create",
         "tools",
         "environment",
         "session",
-        "container",
         "events",
         "step",
         "codegroup",
@@ -40123,7 +40123,7 @@
       "title": "Security model",
       "content_preview": "# Security model  Shared responsibility model for self-hosted sandbox environments.  ---  Anthropic secures the control plane across all environments: session and work queue integrity, multi-tenant isolation, and agent-context minimization. When you self-host, the following responsibilities fall to",
       "keywords": [
-        "container",
+        "sandbox",
         "anthropic",
         "environment",
         "key",
@@ -40149,30 +40149,30 @@
     },
     "/docs/en/managed-agents/self-hosted-sandboxes": {
       "title": "Self-hosted sandboxes",
-      "content_preview": "# Self-hosted sandboxes  Run agent sessions in your own self-hosted sandbox environment.  ---  By default, Managed Agents executes tools and code inside [Anthropic-managed cloud containers](/docs/en/m...",
+      "content_preview": "# Self-hosted sandboxes  Run agent sessions in your own self-hosted sandbox environment.  ---  By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](/docs/en/ma...",
       "keywords": [
         "environment",
         "worker",
         "session",
         "run",
-        "self",
         "agent",
         "step",
-        "hosted",
+        "self",
+        "sandbox",
+        "managed",
         "anthropic",
+        "hosted",
         "tool",
+        "key",
         "title",
         "codegroup",
-        "managed",
-        "key",
         "note",
+        "work",
+        "claude",
         "mcp",
-        "skills",
-        "sandbox",
-        "network",
-        "when"
+        "skills"
       ],
-      "word_count": 4489,
+      "word_count": 4559,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/sessions": {
@@ -40197,7 +40197,7 @@
         "executing",
         "within",
         "environment",
-        "container",
+        "sandbox",
         "send"
       ],
       "word_count": 1960,
