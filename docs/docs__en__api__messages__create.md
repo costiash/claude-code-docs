@@ -2902,7 +2902,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails`
+    - `output_tokens_details: object { thinking_tokens }`
 
       Breakdown of output tokens by category.
 

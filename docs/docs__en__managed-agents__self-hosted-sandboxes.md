@@ -9,7 +9,7 @@ By default, Managed Agents executes tools and code inside [Anthropic-managed clo
 Self-hosted sandboxes are not yet available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 
 <Note>
-Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8. The model is configured on the [agent](/docs/en/managed-agents/agent-setup), not the environment.
+Self-hosted sandboxes support all Claude models available in Managed Agents, including <NextOpus />. The model is configured on the [agent](/docs/en/managed-agents/agent-setup), not the environment.
 </Note>
 
 ## How it differs from cloud environments

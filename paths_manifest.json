@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-28T21:41:43.465008Z",
-    "total_paths": 1684,
+    "generated_at": "2026-05-29T00:57:02.305077Z",
+    "total_paths": 1685,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-28T21:41:43.465015Z"
+    "last_regenerated": "2026-05-29T00:57:02.305084Z"
   },
   "categories": {
     "core_documentation": [
@@ -71,6 +71,7 @@
       "/docs/en/build-with-claude/fast-mode",
       "/docs/en/build-with-claude/files",
       "/docs/en/build-with-claude/handling-stop-reasons",
+      "/docs/en/build-with-claude/mid-conversation-effort-example",
       "/docs/en/build-with-claude/mid-conversation-system-messages",
       "/docs/en/build-with-claude/multilingual-support",
       "/docs/en/build-with-claude/overview",

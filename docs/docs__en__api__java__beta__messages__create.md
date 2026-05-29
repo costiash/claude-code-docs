@@ -70,6 +70,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -3699,7 +3701,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+    - `Optional<OutputTokensDetails> outputTokensDetails`
 
       Breakdown of output tokens by category.
 

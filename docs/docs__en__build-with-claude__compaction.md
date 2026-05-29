@@ -33,7 +33,7 @@ Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `com
 Compaction is supported on the following models:
 
 - [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
-- Claude Opus 4.8 (claude-opus-4-8)
+- <NextOpus /> (<NextOpusId />)
 - Claude Opus 4.7 (claude-opus-4-7)
 - Claude Opus 4.6 (claude-opus-4-6)
 - Claude Sonnet 4.6 (claude-sonnet-4-6)

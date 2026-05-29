@@ -72,6 +72,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -3701,7 +3703,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+    - `Optional<OutputTokensDetails> outputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -3943,6 +3945,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
   - `List<BetaMessageParam> messages`
 
@@ -12872,7 +12876,7 @@ public final class Main {
 
       The number of output tokens which were used.
 
-    - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+    - `Optional<OutputTokensDetails> outputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -13128,7 +13132,7 @@ public final class Main {
 
     The cumulative number of output tokens which were used.
 
-  - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+  - `Optional<OutputTokensDetails> outputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -14444,21 +14448,6 @@ public final class Main {
     - `Optional<Long> remaining`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-### Beta Output Tokens Details
-
-- `class BetaOutputTokensDetails:`
-
-  - `long thinkingTokens`
-
-    Number of output tokens the model generated as internal reasoning, including
-    the thinking-block delimiter tokens.
-
-    Reflects the raw reasoning the model produced, not the (possibly shorter)
-    summarized thinking text returned in the response body. Computed by
-    re-tokenizing the raw reasoning text, so it may differ from the model's exact
-    generation count by a small number of tokens. Always ≤ `output_tokens`;
-    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -15940,7 +15929,7 @@ public final class Main {
 
       The cumulative number of output tokens which were used.
 
-    - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+    - `Optional<OutputTokensDetails> outputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -17207,7 +17196,7 @@ public final class Main {
 
         The number of output tokens which were used.
 
-      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+      - `Optional<OutputTokensDetails> outputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -18506,7 +18495,7 @@ public final class Main {
 
           The number of output tokens which were used.
 
-        - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+        - `Optional<OutputTokensDetails> outputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -18634,7 +18623,7 @@ public final class Main {
 
         The cumulative number of output tokens which were used.
 
-      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+      - `Optional<OutputTokensDetails> outputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -18642,6 +18631,17 @@ public final class Main {
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
+
+        - `long thinkingTokens`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `Optional<BetaServerToolUsage> serverToolUse`
 
@@ -23596,7 +23596,7 @@ public final class Main {
 
     The number of output tokens which were used.
 
-  - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+  - `Optional<OutputTokensDetails> outputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -25377,6 +25377,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
   - `List<Request> requests`
 
@@ -28275,6 +28277,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -28493,6 +28497,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -28710,6 +28716,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -28920,6 +28928,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -29041,6 +29051,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
 ### Returns
 
@@ -30293,7 +30305,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+          - `Optional<OutputTokensDetails> outputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -31934,7 +31946,7 @@ public final class Main {
 
             The number of output tokens which were used.
 
-          - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+          - `Optional<OutputTokensDetails> outputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -33361,7 +33373,7 @@ public final class Main {
 
           The number of output tokens which were used.
 
-        - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+        - `Optional<OutputTokensDetails> outputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -34750,7 +34762,7 @@ public final class Main {
 
         The number of output tokens which were used.
 
-      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+      - `Optional<OutputTokensDetails> outputTokensDetails`
 
         Breakdown of output tokens by category.
 

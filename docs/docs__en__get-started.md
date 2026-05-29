@@ -7,6 +7,7 @@ Make your first API call to Claude and build a simple web search assistant.
 ## Prerequisites
 
 - An Anthropic [Console account](/)
+- An [API key](/settings/keys)
 
 ## Call the API
 
@@ -14,21 +15,19 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="cURL">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+        Export your API key as an environment variable. The cURL command below reads it from `$ANTHROPIC_API_KEY`.
 
         ```bash
-        export ANTHROPIC_API_KEY='your-api-key-here'
+        export ANTHROPIC_API_KEY="your-api-key-here"
         ```
-
-        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Make your first API call">
-        Run this command to create a simple web search assistant:
+        Send a `POST` request to the Messages API:
 
         ```bash cURL
         curl https://api.anthropic.com/v1/messages \
-          -H "Content-Type: application/json" \
+          -H "content-type: application/json" \
           -H "x-api-key: $ANTHROPIC_API_KEY" \
           -H "anthropic-version: 2023-06-01" \
           -d '{
@@ -43,19 +42,20 @@ Make your first API call to Claude and build a simple web search assistant.
           }'
         ```
 
-        **Example output:**
+        Claude returns a JSON response containing the assistant's message:
+
         ```json Output
         {
-          "id": "msg_01HCDu5LRGeP2o7s2xGmxyx8",
+          "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
           "type": "message",
           "role": "assistant",
+          "model": "claude-opus-4-8",
           "content": [
             {
               "type": "text",
-              "text": "Here are some effective search strategies to find the latest renewable energy developments:\n\n## Search Terms to Use:\n- \"renewable energy news 2024\"\n- \"clean energy breakthrough\"\n- \"solar/wind/battery technology advances\"\n- \"green energy innovations\"\n- \"climate tech developments\"\n- \"energy storage solutions\"\n\n## Best Sources to Check:\n\n**News & Industry Sites:**\n- Renewable Energy World\n- GreenTech Media (now Wood Mackenzie)\n- Energy Storage News\n- CleanTechnica\n- PV Magazine (for solar)\n- WindPower Engineering & Development..."
+              "text": "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."
             }
           ],
-          "model": "claude-opus-4-8",
           "stop_reason": "end_turn",
           "usage": {
             "input_tokens": 21,
@@ -96,9 +96,9 @@ Make your first API call to Claude and build a simple web search assistant.
       </Step>
 
       <Step title="Make your first API call">
-        Run this command to create a simple web search assistant:
+        Run `ant messages create` from your terminal:
 
-        ```bash
+        ```bash CLI
         ant messages create \
           --model claude-opus-4-8 \
           --max-tokens 1000 \
@@ -108,24 +108,22 @@ Make your first API call to Claude and build a simple web search assistant.
           }'
         ```
 
-        **Example output:**
+        The CLI prints the JSON response:
+
         ```json Output
         {
-          "id": "msg_01HCDu5LRGeP2o7s2xGmxyx8",
+          "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
           "type": "message",
           "role": "assistant",
+          "model": "claude-opus-4-8",
           "content": [
             {
               "type": "text",
-              "text": "Here are some effective search strategies to find the latest renewable energy developments:\n\n## Search Terms to Use:\n- \"renewable energy news 2024\"\n- \"clean energy breakthrough\"\n- \"solar/wind/battery technology advances\"\n- \"green energy innovations\"\n- \"climate tech developments\"\n- \"energy storage solutions\"\n\n## Best Sources to Check:\n\n**News & Industry Sites:**\n- Renewable Energy World\n- GreenTech Media (now Wood Mackenzie)\n- Energy Storage News\n- CleanTechnica\n- PV Magazine (for solar)\n- WindPower Engineering & Development..."
+              "text": "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."
             }
           ],
-          "model": "claude-opus-4-8",
           "stop_reason": "end_turn",
-          "usage": {
-            "input_tokens": 21,
-            "output_tokens": 305
-          }
+          "usage": { "input_tokens": 21, "output_tokens": 305 }
         }
         ```
       </Step>
@@ -135,27 +133,25 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="Python">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
         ```bash
-        export ANTHROPIC_API_KEY='your-api-key-here'
+        export ANTHROPIC_API_KEY="your-api-key-here"
         ```
-
-        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
-      <Step title="Install the SDK">
-        Install the Anthropic Python SDK:
-
+      <Step title="Create a project and install the SDK">
         ```bash
+        mkdir claude-quickstart && cd claude-quickstart
+        python3 -m venv .venv && source .venv/bin/activate
         pip install anthropic
         ```
       </Step>
 
       <Step title="Create your code">
-        Save this as `quickstart.py`:
+        Create a file called `quickstart.py`:
 
-        ```python
+        ```python Python
         import anthropic
 
         client = anthropic.Anthropic()
@@ -179,14 +175,8 @@ Make your first API call to Claude and build a simple web search assistant.
         python quickstart.py
         ```
 
-        **Example output:**
         ```text Output
-        [
-            TextBlock(
-                text='Here are some effective search strategies for finding the latest renewable energy developments:\n\n**Search Terms to Use:**\n- "renewable energy news 2024"\n- "clean energy breakthroughs"\n- "solar/wind/battery technology advances"\n- "energy storage innovations"\n- "green hydrogen developments"\n- "renewable energy policy updates"\n\n**Reliable Sources to Check:**\n- **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media, Energy Storage News\n- **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering\n- **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)\n- **Government Sources:** Department of Energy websites, EPA clean energy updates\n\n**Specific Topics to Explore:**\n- Perovskite and next-gen solar cells\n- Offshore wind expansion\n- Grid-scale battery storage\n- Green hydrogen production\n- Carbon capture technologies\n- Smart grid innovations\n- Energy policy changes and incentives...',
-                type="text",
-            )
-        ]
+        [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
         ```
       </Step>
     </Steps>
@@ -195,47 +185,41 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="TypeScript">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
         ```bash
-        export ANTHROPIC_API_KEY='your-api-key-here'
+        export ANTHROPIC_API_KEY="your-api-key-here"
         ```
-
-        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
-      <Step title="Install the SDK">
-        Install the Anthropic TypeScript SDK:
-
+      <Step title="Create a project and install the SDK">
         ```bash
+        mkdir claude-quickstart && cd claude-quickstart
+        npm init -y
+        npm pkg set type=module
         npm install @anthropic-ai/sdk
         ```
       </Step>
 
       <Step title="Create your code">
-        Save this as `quickstart.ts`:
+        Create a file called `quickstart.ts`:
 
-```typescript
-import Anthropic from "@anthropic-ai/sdk";
+        ```typescript TypeScript
+        import Anthropic from "@anthropic-ai/sdk";
 
-async function main() {
-  const anthropic = new Anthropic();
+        const client = new Anthropic();
 
-  const msg = await anthropic.messages.create({
-    model: "claude-opus-4-8",
-    max_tokens: 1000,
-    messages: [
-      {
-        role: "user",
-        content:
-          "What should I search for to find the latest developments in renewable energy?"
-      }
-    ]
-  });
-  console.log(msg);
-}
-
-main().catch(console.error);
+        const message = await client.messages.create({
+          model: "claude-opus-4-8",
+          max_tokens: 1000,
+          messages: [
+            {
+              role: "user",
+              content: "What should I search for to find the latest developments in renewable energy?"
+            }
+          ]
+        });
+        console.log(message.content);
         ```
       </Step>
 
@@ -244,43 +228,147 @@ main().catch(console.error);
         npx tsx quickstart.ts
         ```
 
-        **Example output:**
-        ```javascript Output hidelines={1..2}
-        const _ =
-          // output
+        ```text Output
+        [
           {
-            id: "msg_01ThFHzad6Bh4TpQ6cHux9t8",
-            type: "message",
-            role: "assistant",
-            model: "claude-opus-4-8",
-            content: [
-              {
-                type: "text",
-                text:
-                  "Here are some effective search strategies to find the latest renewable energy developments:\n\n" +
-                  "## Search Terms to Use:\n" +
-                  '- "renewable energy news 2024"\n' +
-                  '- "clean energy breakthroughs"\n' +
-                  '- "solar wind technology advances"\n' +
-                  '- "energy storage innovations"\n' +
-                  '- "green hydrogen developments"\n' +
-                  '- "offshore wind projects"\n' +
-                  '- "battery technology renewable"\n\n' +
-                  "## Best Sources to Check:\n\n" +
-                  "**News & Industry Sites:**\n" +
-                  "- Renewable Energy World\n" +
-                  "- CleanTechnica\n" +
-                  "- GreenTech Media (now Wood Mackenzie)\n" +
-                  "- Energy Storage News\n" +
-                  "- PV Magazine (for solar)..."
-              }
-            ],
-            stop_reason: "end_turn",
-            usage: {
-              input_tokens: 21,
-              output_tokens: 302
-            }
+            type: 'text',
+            text: 'Here are some effective search strategies to find the latest developments in renewable energy:\n' +
+              '\n' +
+              '## General Search Terms\n' +
+              '- "Renewable energy news 2025"\n' +
+              '- ...'
           }
+        ]
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="C#">
+    <Steps>
+      <Step title="Set your API key">
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
+
+        ```bash
+        export ANTHROPIC_API_KEY="your-api-key-here"
+        ```
+      </Step>
+
+      <Step title="Create a project and install the SDK">
+        Create a new console project and add the Anthropic package:
+
+        ```bash
+        dotnet new console -n ClaudeQuickstart
+        cd ClaudeQuickstart
+        dotnet add package Anthropic
+        ```
+      </Step>
+
+      <Step title="Create your code">
+        Replace the contents of `Program.cs`:
+
+        ```csharp C#
+        using Anthropic;
+        using Anthropic.Models.Messages;
+
+        var client = new AnthropicClient();
+
+        var message = await client.Messages.Create(new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_8,
+            MaxTokens = 1000,
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = "What should I search for to find the latest developments in renewable energy?",
+                },
+            ],
+        });
+
+        foreach (var block in message.Content)
+        {
+            Console.WriteLine(block);
+        }
+        ```
+      </Step>
+
+      <Step title="Run your code">
+        ```bash
+        dotnet run
+        ```
+
+        ```text Output
+        {
+          "type": "text",
+          "text": "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."
+        }
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Go">
+    <Steps>
+      <Step title="Set your API key">
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
+
+        ```bash
+        export ANTHROPIC_API_KEY="your-api-key-here"
+        ```
+      </Step>
+
+      <Step title="Create a project and install the SDK">
+        Create a new module and add the Anthropic SDK:
+
+        ```bash
+        mkdir claude-quickstart && cd claude-quickstart
+        go mod init claude-quickstart
+        go get github.com/anthropics/anthropic-sdk-go
+        ```
+      </Step>
+
+      <Step title="Create your code">
+        Create a file called `main.go`:
+
+        ```go Go
+        package main
+
+        import (
+        	"context"
+        	"fmt"
+        	"log"
+
+        	"github.com/anthropics/anthropic-sdk-go"
+        )
+
+        func main() {
+        	client := anthropic.NewClient()
+
+        	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+        		Model:     anthropic.ModelClaudeOpus4_8,
+        		MaxTokens: 1000,
+        		Messages: []anthropic.MessageParam{
+        			anthropic.NewUserMessage(anthropic.NewTextBlock("What should I search for to find the latest developments in renewable energy?")),
+        		},
+        	})
+        	if err != nil {
+        		log.Fatal(err)
+        	}
+
+        	fmt.Println(message.JSON.Content.Raw())
+        }
+        ```
+      </Step>
+
+      <Step title="Run your code">
+        ```bash
+        go run .
+        ```
+
+        ```text Output
+        [{"type":"text","text":"Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."}]
         ```
       </Step>
     </Steps>
@@ -289,13 +377,11 @@ main().catch(console.error);
   <Tab title="Java">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
         ```bash
-        export ANTHROPIC_API_KEY='your-api-key-here'
+        export ANTHROPIC_API_KEY="your-api-key-here"
         ```
-
-        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Set up your project">
@@ -364,7 +450,7 @@ main().catch(console.error);
       <Step title="Create your code">
         Save this as `QuickStart.java` in your project's Java source directory (usually `src/main/java/`):
 
-        ```java
+        ```java Java
         import com.anthropic.client.okhttp.AnthropicOkHttpClient;
         import com.anthropic.models.messages.Message;
         import com.anthropic.models.messages.MessageCreateParams;
@@ -401,29 +487,134 @@ main().catch(console.error);
           </Tab>
         </Tabs>
 
-        **Example output:**
         ```text Output
-        [ContentBlock{text=TextBlock{text=Here are some effective search strategies to find the latest renewable energy developments:
+        [ContentBlock{text=TextBlock{citations=, text=Here are some effective search strategies to find the latest developments in renewable energy:
 
-        ## Search Terms to Use:
-        - "renewable energy news 2024"
-        - "clean energy breakthroughs"
-        - "solar/wind/battery technology advances"
-        - "energy storage innovations"
-        - "green hydrogen developments"
-        - "renewable energy policy updates"
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ..., type=text, additionalProperties={}}}]
+        ```
+      </Step>
+    </Steps>
+  </Tab>
 
-        ## Best Sources to Check:
-        - **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media
-        - **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering
-        - **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)
-        - **Government Sources:** Department of Energy websites, EPA clean energy updates
+  <Tab title="PHP">
+    <Steps>
+      <Step title="Set your API key">
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
-        ## Specific Topics to Explore:
-        - Perovskite and next-gen solar cells
-        - Offshore wind expansion
-        - Grid-scale battery storage
-        - Green hydrogen production..., type=text}}]
+        ```bash
+        export ANTHROPIC_API_KEY="your-api-key-here"
+        ```
+      </Step>
+
+      <Step title="Create a project and install the SDK">
+        ```bash
+        mkdir claude-quickstart && cd claude-quickstart
+        composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
+        ```
+      </Step>
+
+      <Step title="Create your code">
+        Create a file called `quickstart.php`:
+
+        ```php PHP
+        <?php
+        require 'vendor/autoload.php';
+
+        use Anthropic\Client;
+        use Anthropic\Messages\Model;
+
+        $client = new Client();
+
+        $message = $client->messages->create(
+            model: Model::CLAUDE_OPUS_4_8,
+            maxTokens: 1000,
+            messages: [
+                [
+                    'role' => 'user',
+                    'content' => 'What should I search for to find the latest developments in renewable energy?',
+                ],
+            ],
+        );
+
+        print_r($message->content);
+        ```
+      </Step>
+
+      <Step title="Run your code">
+        ```bash
+        php quickstart.php
+        ```
+
+        ```text Output
+        Array
+        (
+            [0] => Anthropic\Messages\TextBlock Object
+                (
+                    [type] => text
+                    [citations] =>
+                    [text] => Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
+                )
+
+        )
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Ruby">
+    <Steps>
+      <Step title="Set your API key">
+        Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
+
+        ```bash
+        export ANTHROPIC_API_KEY="your-api-key-here"
+        ```
+      </Step>
+
+      <Step title="Create a project and install the SDK">
+        ```bash
+        mkdir claude-quickstart && cd claude-quickstart
+        bundle init
+        bundle add anthropic
+        ```
+      </Step>
+
+      <Step title="Create your code">
+        Create a file called `quickstart.rb`:
+
+        ```ruby Ruby
+        require "anthropic"
+
+        client = Anthropic::Client.new
+
+        message = client.messages.create(
+          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          max_tokens: 1000,
+          messages: [
+            {
+              role: "user",
+              content: "What should I search for to find the latest developments in renewable energy?"
+            }
+          ]
+        )
+
+        pp message.content
+        ```
+      </Step>
+
+      <Step title="Run your code">
+        ```bash
+        bundle exec ruby quickstart.rb
+        ```
+
+        ```text Output
+        [#<Anthropic::Models::TextBlock:0xc8 {text: "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ...", type: :text}>]
         ```
       </Step>
     </Steps>

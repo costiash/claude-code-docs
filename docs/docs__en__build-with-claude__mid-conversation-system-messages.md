@@ -15,7 +15,7 @@ Mid-conversation system messages close that gap. You append a `{"role": "system"
 <Note>
 Mid-conversation system messages are available on the Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). They are not available on [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
 
-This feature is available on Claude Opus 4.8 only. No beta header is required.
+This feature is available on <NextOpus /> only. No beta header is required.
 </Note>
 
 ## Why position matters for caching
@@ -31,6 +31,7 @@ A few situations where this matters:
 - **Mid-session policy or persona changes.** A long agentic session needs a new constraint ("from now on, write all SQL as parameterized queries") after dozens of cached turns. Adding it to the top-level `system` field would re-process the entire history.
 - **Per-turn context that must be authoritative.** You want to inject a freshness note, a session deadline, or a tool-availability change with system-level weight, and it changes too often to live in the cached prefix.
 - **Tool results that should reshape behavior.** A tool surfaces a fact the model must treat as an instruction ("the customer is on the enterprise plan; do not suggest the consumer upgrade flow") for the rest of the session.
+- **Mode switches that grant standing permissions.** A session-level mode can use a mid-conversation system message to grant standing consent to an expensive capability, such as automatically launching multi-agent workflows, with a short refresher every several turns and an exit notice when the mode is turned off. For a worked example, see [Build an orchestration mode](/docs/en/build-with-claude/mid-conversation-effort-example).
 
 In all of these cases, putting the instruction in a regular `user` message works, but the model treats user content as data to interpret, not as an instruction with system-level priority. A mid-conversation system message preserves the instruction's authority without paying the cache-miss cost.
 

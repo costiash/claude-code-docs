@@ -2476,6 +2476,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessage struct{…}`
@@ -3717,7 +3719,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `OutputTokensDetails BetaOutputTokensDetails`
+    - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -6269,6 +6271,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -13132,7 +13136,7 @@ func main() {
 
       The number of output tokens which were used.
 
-    - `OutputTokensDetails BetaOutputTokensDetails`
+    - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -13396,7 +13400,7 @@ func main() {
 
     The cumulative number of output tokens which were used.
 
-  - `OutputTokensDetails BetaOutputTokensDetails`
+  - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -14708,21 +14712,6 @@ func main() {
     - `Remaining int64`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-### Beta Output Tokens Details
-
-- `type BetaOutputTokensDetails struct{…}`
-
-  - `ThinkingTokens int64`
-
-    Number of output tokens the model generated as internal reasoning, including
-    the thinking-block delimiter tokens.
-
-    Reflects the raw reasoning the model produced, not the (possibly shorter)
-    summarized thinking text returned in the response body. Computed by
-    re-tokenizing the raw reasoning text, so it may differ from the model's exact
-    generation count by a small number of tokens. Always ≤ `output_tokens`;
-    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -16212,7 +16201,7 @@ func main() {
 
       The cumulative number of output tokens which were used.
 
-    - `OutputTokensDetails BetaOutputTokensDetails`
+    - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -17487,7 +17476,7 @@ func main() {
 
         The number of output tokens which were used.
 
-      - `OutputTokensDetails BetaOutputTokensDetails`
+      - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -18794,7 +18783,7 @@ func main() {
 
           The number of output tokens which were used.
 
-        - `OutputTokensDetails BetaOutputTokensDetails`
+        - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -18910,7 +18899,7 @@ func main() {
 
         The cumulative number of output tokens which were used.
 
-      - `OutputTokensDetails BetaOutputTokensDetails`
+      - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -18918,6 +18907,17 @@ func main() {
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
+
+        - `ThinkingTokens int64`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `ServerToolUse BetaServerToolUsage`
 
@@ -23886,7 +23886,7 @@ func main() {
 
     The number of output tokens which were used.
 
-  - `OutputTokensDetails BetaOutputTokensDetails`
+  - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -28352,6 +28352,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -28583,6 +28585,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -28816,6 +28820,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -29043,6 +29049,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -29267,6 +29275,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaDeletedMessageBatch struct{…}`
@@ -29402,6 +29412,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30662,7 +30674,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `OutputTokensDetails BetaOutputTokensDetails`
+          - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -32323,7 +32335,7 @@ func main() {
 
             The number of output tokens which were used.
 
-          - `OutputTokensDetails BetaOutputTokensDetails`
+          - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -33758,7 +33770,7 @@ func main() {
 
           The number of output tokens which were used.
 
-        - `OutputTokensDetails BetaOutputTokensDetails`
+        - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -35155,7 +35167,7 @@ func main() {
 
         The number of output tokens which were used.
 
-      - `OutputTokensDetails BetaOutputTokensDetails`
+      - `OutputTokensDetails BetaUsageOutputTokensDetails`
 
         Breakdown of output tokens by category.
 
