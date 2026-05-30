@@ -217,7 +217,7 @@ client.beta.memory_stores.memories.create(
 </CodeGroup>
 
 <Tip>
-Individual memories within the store are capped at 100 kB (~25k tokens). Structure memory as many small focused files, not a few large ones.
+Individual memories within the store are capped at 100 kB (~25k tokens). A store holds a maximum of 2,000 memories. Structure memory as many small focused files, not a few large ones.
 </Tip>
 
 ## Attach a memory store to a session
@@ -1462,6 +1462,14 @@ See the [Archive a memory store reference](/docs/en/api/beta/memory_stores/archi
 
 To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](/docs/en/api/beta/memory_stores/delete).
 
-## Limits
+## Best practices for memory management
 
-Default capacity and rate limits apply to memory stores while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
+When a store reaches its 2,000-memory limit, writes to new memories fail: both direct `memories.create` calls and the agent's file writes to unmapped paths. Existing memories remain readable and editable. The following practices help you stay well under the limit and recover gracefully if you reach it.
+
+- **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores — one per user, one for shared domain knowledge, and one for project-specific context. Each store has its own 2,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
+
+- **Condense or prune before the store fills up.** Delete stale or redundant memories with `memories.delete`. You can also run a [dreaming session](/docs/en/managed-agents/dreams), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
+
+- **Attach a new store when it makes sense.** If a store has grown beyond its useful scope, attach a fresh one for new content and attach the original with `read_only` access. The agent can read from both while only writing to the new one.
+
+- **Limit write access where appropriate.** Sessions that only read shared reference material don't need `read_write`. Keeping write access scoped to sessions that actually add new memories makes it easier to track where growth is coming from.

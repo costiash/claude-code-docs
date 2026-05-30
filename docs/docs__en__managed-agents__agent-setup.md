@@ -320,6 +320,8 @@ puts "New version: #{updated_agent.version}"
 
 - **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 
+- **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](/docs/en/managed-agents/multi-agent#configure-the-coordinator) so its roster references it.
+
 ## Agent lifecycle
 
 | Operation | Behavior |

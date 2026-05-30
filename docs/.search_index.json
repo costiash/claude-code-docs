@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-29T21:54:37Z",
+  "generated_at": "2026-05-30T01:08:44Z",
   "indexed_files": 1516,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "output",
         "flags"
       ],
-      "word_count": 3102,
+      "word_count": 3103,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -476,7 +476,7 @@
         "user",
         "context"
       ],
-      "word_count": 21090,
+      "word_count": 21082,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "when",
         "word"
       ],
-      "word_count": 3494,
+      "word_count": 3511,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -612,11 +612,11 @@
         "only",
         "configuration",
         "set",
+        "oauth",
         "same",
-        "authentication",
-        "steps"
+        "authentication"
       ],
-      "word_count": 6529,
+      "word_count": 6574,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -634,17 +634,17 @@
         "auto",
         "specific",
         "context",
-        "settings",
-        "session",
         "when",
+        "session",
         "loaded",
         "managed",
         "code",
         "them",
+        "settings",
         "into",
         "every"
       ],
-      "word_count": 3823,
+      "word_count": 3816,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -708,9 +708,9 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
+        "tool",
         "event",
         "attributes",
-        "tool",
         "events",
         "request",
         "code",
@@ -725,10 +725,10 @@
         "user",
         "prompt",
         "counter",
-        "mcp",
-        "such"
+        "such",
+        "mcp"
       ],
-      "word_count": 8999,
+      "word_count": 9170,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -850,25 +850,25 @@
         "plugin",
         "when",
         "claude",
-        "code",
         "directory",
+        "code",
         "plugins",
         "server",
         "default",
-        "field",
         "mcp",
+        "field",
+        "skills",
         "command",
-        "version",
         "see",
-        "files",
-        "path",
+        "version",
+        "marketplace",
         "servers",
+        "skill",
+        "path",
         "lsp",
-        "string",
-        "file",
-        "marketplace"
+        "files"
       ],
-      "word_count": 7413,
+      "word_count": 8149,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -879,24 +879,24 @@
         "plugins",
         "claude",
         "skills",
+        "code",
         "create",
         "skill",
-        "code",
-        "see",
         "directory",
+        "see",
+        "step",
         "hooks",
         "when",
-        "step",
+        "marketplace",
         "root",
         "add",
-        "marketplace",
         "test",
         "agents",
+        "install",
         "lsp",
-        "file",
-        "servers"
+        "file"
       ],
-      "word_count": 2752,
+      "word_count": 2841,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -999,16 +999,16 @@
         "code",
         "see",
         "project",
+        "set",
         "corp",
         "tools",
-        "set",
         "github",
         "when",
-        "user",
         "only",
+        "user",
         "repo"
       ],
-      "word_count": 10314,
+      "word_count": 10363,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "built",
         "tools"
       ],
-      "word_count": 6297,
+      "word_count": 6365,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1092,7 +1092,7 @@
         "command",
         "may"
       ],
-      "word_count": 6200,
+      "word_count": 6191,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1120,7 +1120,7 @@
         "model",
         "plugin"
       ],
-      "word_count": 8206,
+      "word_count": 8207,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1138,17 +1138,17 @@
         "theme",
         "background",
         "when",
-        "settings",
         "file",
+        "settings",
         "tmux",
         "key",
+        "text",
         "token",
         "shift",
         "such",
-        "text",
         "vim"
       ],
-      "word_count": 2607,
+      "word_count": 2636,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -38038,13 +38038,13 @@
         "note",
         "mythos",
         "preview",
+        "only",
         "summarized",
         "default",
-        "only",
         "manual",
         "effort"
       ],
-      "word_count": 4145,
+      "word_count": 4244,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -38333,26 +38333,26 @@
       "keywords": [
         "context",
         "thinking",
-        "window",
         "claude",
-        "extended",
+        "window",
         "tool",
+        "extended",
         "token",
-        "output",
         "tokens",
+        "output",
         "turn",
         "input",
         "api",
         "block",
         "model",
         "blocks",
-        "more",
-        "components",
-        "models",
         "when",
-        "conversation"
+        "more",
+        "conversation",
+        "components",
+        "models"
       ],
-      "word_count": 1770,
+      "word_count": 1819,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -39706,12 +39706,15 @@
         "agent",
         "tools",
         "version",
-        "claude",
-        "fields",
         "new",
+        "claude",
+        "reference",
+        "fields",
         "configuration",
         "sessions",
+        "coordinator",
         "codegroup",
+        "update",
         "array",
         "create",
         "reusable",
@@ -39719,12 +39722,9 @@
         "defines",
         "capabilities",
         "model",
-        "system",
-        "prompt",
-        "mcp",
-        "skills"
+        "system"
       ],
-      "word_count": 1510,
+      "word_count": 1559,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -39956,27 +39956,27 @@
       "content_preview": "# Using agent memory  Give your agents persistent memory that survives across sessions using memory stores.  ---  Each Managed Agents session starts with a fresh context by default. When a session end...",
       "keywords": [
         "memory",
+        "store",
         "stores",
         "codegroup",
-        "store",
         "agent",
         "session",
-        "beta",
+        "memories",
         "api",
+        "beta",
+        "one",
         "defaultlanguage",
         "cli",
         "full",
         "docs",
         "list",
-        "response",
-        "memories",
-        "see",
         "reference",
-        "parameters",
-        "schema",
-        "version"
+        "response",
+        "new",
+        "sessions",
+        "when"
       ],
-      "word_count": 3748,
+      "word_count": 3966,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -40004,7 +40004,7 @@
         "sessions",
         "multiple"
       ],
-      "word_count": 3821,
+      "word_count": 3889,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
