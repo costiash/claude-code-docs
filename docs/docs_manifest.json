@@ -8715,11 +8715,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-30T15:45:46.321846",
-    "fetch_duration_seconds": 960.758186,
-    "total_pages_discovered": 1685,
+    "last_fetch_completed": "2026-05-30T18:44:34.800210",
+    "fetch_duration_seconds": 1021.132098,
+    "total_pages_discovered": 1687,
     "pages_fetched_successfully": 1452,
-    "pages_failed": 234,
+    "pages_failed": 236,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/agent-sdk/agent-loop",
@@ -8952,6 +8952,8 @@
       "/docs/en/whats-new/2026-w18",
       "/docs/en/whats-new/2026-w19",
       "/docs/en/whats-new/2026-w20",
+      "/docs/en/whats-new/2026-w21",
+      "/docs/en/whats-new/2026-w22",
       "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
@@ -8961,7 +8963,7 @@
     "total_files": 1452,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-30T15:45:46.321868",
+  "last_updated": "2026-05-30T18:44:34.800235",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
