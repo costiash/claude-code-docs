@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-30T15:29:46.237476Z",
-    "total_paths": 1685,
+    "generated_at": "2026-05-30T18:27:34.288962Z",
+    "total_paths": 1687,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-30T15:29:46.237487Z"
+    "last_regenerated": "2026-05-30T18:27:34.288972Z"
   },
   "categories": {
     "core_documentation": [
@@ -193,6 +193,8 @@
       "/docs/en/whats-new/2026-w18",
       "/docs/en/whats-new/2026-w19",
       "/docs/en/whats-new/2026-w20",
+      "/docs/en/whats-new/2026-w21",
+      "/docs/en/whats-new/2026-w22",
       "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
