@@ -20,6 +20,10 @@ To connect to a remote MCP server:
 
 For more information about using remote MCP servers with the Claude API, see the [MCP connector docs](/docs/en/agents-and-tools/mcp-connector).
 
+<Note>
+Once connected, remote MCP tools follow the same triggering behavior as any other tool. See [When Claude uses MCP tools](/docs/en/agents-and-tools/mcp-connector#when-claude-uses-mcp-tools).
+</Note>
+
 ## Remote MCP server examples
 
 <MCPServersTable platform="mcpConnector" />

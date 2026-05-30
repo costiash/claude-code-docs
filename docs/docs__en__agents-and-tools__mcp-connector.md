@@ -23,6 +23,14 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 - **OAuth authentication**: Support for OAuth Bearer tokens for authenticated servers
 - **Multiple servers**: Connect to multiple MCP servers in a single request
 
+## When Claude uses MCP tools
+
+Once an MCP server is connected, Claude calls its tools when the user's request maps to a tool's described capability, either explicitly ("search Jira for open bugs") or implicitly ("what's blocking the release?" with a Jira server attached).
+
+Claude does **not** call an MCP tool for general knowledge questions about a connected service. Asking "how do Notion databases work?" with a Notion server attached is answered directly; asking "what's in my Projects database?" triggers the tool.
+
+You can steer how readily Claude calls MCP tools through your system prompt. See [When Claude uses tools](/docs/en/agents-and-tools/tool-use/overview#when-claude-uses-tools) for general guidance and example phrasings.
+
 ## Limitations
 
 - Of the feature set of the [MCP specification](https://modelcontextprotocol.io/introduction#explore-mcp), only [tool calls](https://modelcontextprotocol.io/docs/concepts/tools) are currently supported.
@@ -454,7 +462,7 @@ Set `enabled: false` as the default, then explicitly enable specific tools:
 
 ### Denylist: disable specific tools
 
-Enable all tools by default, then explicitly disable unwanted tools:
+Enable all tools by default, then explicitly disable unwanted tools. Denylisting write or destructive tools is recommended when building read-only assistants, or when you want a human confirmation step before state changes:
 
 ```json
 {
@@ -584,6 +592,8 @@ You can connect to multiple MCP servers by including multiple server definitions
   ]
 }
 ```
+
+With many tools available, Claude selects based on tool names and descriptions. Clear, specific tool descriptions improve selection accuracy. For large tool sets (dozens of tools across several servers), consider enabling [`defer_loading`](#tool-configuration-options) with the [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool) so only relevant tools are surfaced per query.
 
 ## Authentication
 

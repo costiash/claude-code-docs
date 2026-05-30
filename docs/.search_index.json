@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-30T01:08:44Z",
+  "generated_at": "2026-05-30T04:42:09Z",
   "indexed_files": 1516,
   "index": {
     "/changelog": {
@@ -13,8 +13,8 @@
         "added",
         "claude",
         "instead",
-        "session",
         "mode",
+        "session",
         "tool",
         "improved",
         "sessions",
@@ -28,7 +28,7 @@
         "terminal",
         "file"
       ],
-      "word_count": 51205,
+      "word_count": 51229,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1357,22 +1357,22 @@
         "server",
         "configuration",
         "api",
+        "claude",
         "servers",
         "mcptoolset",
         "array",
-        "claude",
         "note",
         "deprecated",
         "oauth",
         "default",
+        "when",
         "must",
         "connector",
+        "only",
         "token",
-        "sdk",
-        "messages",
-        "client"
+        "sdk"
       ],
-      "word_count": 2829,
+      "word_count": 3002,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/console": {
@@ -1606,10 +1606,12 @@
         "mcp",
         "remote",
         "servers",
-        "server",
         "note",
+        "server",
         "connect",
         "api",
+        "tools",
+        "claude",
         "more",
         "developers",
         "anthropic",
@@ -1617,14 +1619,12 @@
         "these",
         "users",
         "services",
-        "claude",
         "should",
         "review",
         "each",
-        "connecting",
-        "specific"
+        "connecting"
       ],
-      "word_count": 176,
+      "word_count": 198,
       "file_path": "docs/docs__en__agents-and-tools__remote-mcp-servers.md"
     },
     "/docs/en/agents-and-tools/tool-use/advisor-tool": {
@@ -1638,13 +1638,13 @@
         "model",
         "tool",
         "when",
-        "calls",
         "call",
-        "cost",
+        "calls",
         "prompt",
+        "cost",
         "conversation",
-        "tokens",
         "tasks",
+        "tokens",
         "block",
         "request",
         "level",
@@ -1652,7 +1652,7 @@
         "caching",
         "output"
       ],
-      "word_count": 3598,
+      "word_count": 3603,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1764,7 +1764,7 @@
         "tools",
         "note"
       ],
-      "word_count": 9351,
+      "word_count": 9419,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1946,21 +1946,21 @@
         "when",
         "see",
         "opus",
-        "anthropic",
-        "model",
-        "api",
-        "card",
-        "works",
         "call",
+        "anthropic",
         "request",
         "server",
         "more",
+        "model",
         "prompt",
-        "sonnet",
-        "additional",
-        "where"
+        "api",
+        "card",
+        "works",
+        "like",
+        "search",
+        "sonnet"
       ],
-      "word_count": 1076,
+      "word_count": 1228,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -2282,21 +2282,21 @@
         "content",
         "note",
         "api",
+        "when",
         "filtering",
         "urls",
-        "when",
         "tools",
+        "search",
+        "url",
+        "specific",
         "fetched",
         "available",
         "documents",
         "dynamic",
         "only",
-        "data",
-        "results",
-        "url",
-        "citations"
+        "data"
       ],
-      "word_count": 2532,
+      "word_count": 2676,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {

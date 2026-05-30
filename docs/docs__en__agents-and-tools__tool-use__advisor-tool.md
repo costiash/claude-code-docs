@@ -582,7 +582,7 @@ If your agent exposes other planner-like tools (for example, a todo list tool), 
 
 #### Suggested system prompt for coding tasks
 
-For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor. On internal coding evaluations this pattern produced the highest intelligence at near-Sonnet cost.
+Without system-prompt steering, the executor tends to under-call the advisor in some domains — coding tasks in particular. For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor.
 
 Timing guidance:
 

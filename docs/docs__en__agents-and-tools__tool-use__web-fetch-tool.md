@@ -44,6 +44,15 @@ When you add the web fetch tool to your API request:
 The web fetch tool currently does not support websites dynamically rendered with JavaScript.
 </Note>
 
+### When Claude fetches
+
+Claude fetches when the request points at a specific page or document:
+
+- A URL is provided in the conversation (or a previous tool result)
+- The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool) is also enabled so Claude can locate it first (see [Combined search and fetch](#combined-search-and-fetch))
+
+Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch; "what are best practices for REST API design?" is answered directly.
+
 ### Dynamic filtering
 
 Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With the `web_fetch_20260209` tool version, Claude can write and execute code to filter the fetched content before loading it into context.
@@ -690,6 +699,8 @@ In this workflow, Claude will:
 2. Select the most promising results
 3. Use web fetch to retrieve full content
 4. Provide detailed analysis with citations
+
+When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result.
 
 ## Prompt caching
 
