@@ -183,7 +183,7 @@ agent = client.beta.agents.create(
 ```
 </CodeGroup>
 
-`default_config` is an optional setting. If you omit it, the agent toolset will be enabled with the default permission policy, `always_allow`.
+`default_config` is an optional setting. If you omit it, the agent toolset is enabled with the default permission policy, `always_allow`.
 
 ### MCP toolset permissions
 

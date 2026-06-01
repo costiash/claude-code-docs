@@ -8,7 +8,7 @@ This page collects the configuration surfaces, validation constraints, and error
 
 ## Token exchange request
 
-`POST /v1/oauth/token` accepts a JSON body using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) `jwt-bearer` grant. The SDKs build this request for you from the [environment variables](#environment-variables) below; the cURL examples on each provider guide show the raw body.
+`POST /v1/oauth/token` accepts a JSON body using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) `jwt-bearer` grant. The SDKs build this request for you from the [environment variables](#environment-variables); the cURL examples on each provider guide show the raw body.
 
 | Field | Required | Description |
 | :--- | :--- | :--- |
@@ -60,7 +60,7 @@ The SDK resolves credentials in this order. The first source that yields a crede
 | 2 | `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` | Shadows federation entirely. Unset these when migrating from API keys. |
 | 3 | `ANTHROPIC_PROFILE` | Loads `<config_dir>/configs/<name>.json`. A missing named profile is an error, not a fall-through. |
 | 4 | Federation environment variables | `ANTHROPIC_FEDERATION_RULE_ID` + `ANTHROPIC_ORGANIZATION_ID` + `ANTHROPIC_SERVICE_ACCOUNT_ID` + `ANTHROPIC_IDENTITY_TOKEN[_FILE]`. |
-| 5 | Active profile | Resolved via `<config_dir>/active_config`, falling back to a profile named `default`. |
+| 5 | Active profile | Resolved from `<config_dir>/active_config`, falling back to a profile named `default`. |
 
 When a profile is loaded, environment variables fill any fields the profile omits but never override fields the profile sets explicitly. For example, `ANTHROPIC_WORKSPACE_ID` fills `workspace_id` only when the active profile does not set it.
 

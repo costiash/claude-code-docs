@@ -5,24 +5,24 @@ Connect Claude to a private MCP server using a local Docker Compose deployment.
 ---
 
 <Note>
-  MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+  MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 </Note>
 
-This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with manually supplied credentials, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](/docs/en/agents-and-tools/mcp-tunnels/deploy-helm) or [Deploy with Docker Compose](/docs/en/agents-and-tools/mcp-tunnels/deploy-compose).
+This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](/docs/en/agents-and-tools/mcp-tunnels/concepts#credential-provisioning) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](/docs/en/agents-and-tools/mcp-tunnels/deploy-helm) or [Deploy with Docker Compose](/docs/en/agents-and-tools/mcp-tunnels/deploy-compose).
 
 ## What you'll build
 
-A three-container stack on your machine: a sample MCP server, the tunnel proxy, and the outbound connector. When it's running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
+A two-container [tunnel stack](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) (the [proxy](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) and [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components)) plus a sample MCP server running alongside it. When everything is running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
 
 ## What you need
 
 - [Docker and Docker Compose](https://docs.docker.com/get-docker/) on a machine with outbound internet access.
-- A role in the [Claude Console](https://console.anthropic.com) that can manage MCP tunnels. See the [Console guide prerequisites](/docs/en/agents-and-tools/mcp-tunnels/console#prerequisites).
+- A role in the [Claude Console](https://platform.claude.com) that can manage MCP tunnels. See the [Console guide prerequisites](/docs/en/agents-and-tools/mcp-tunnels/console#prerequisites).
 - [OpenSSL](https://openssl-library.org/source/) 1.1.1 or later. Preinstalled on macOS and most Linux distributions; on Windows, install it separately (the `openssl` binary must be on your `PATH`).
 
 <Steps>
   <Step title="Create a tunnel">
-    In the Claude Console sidebar, go to **Manage > MCP tunnels** and click **New tunnel**. Give it a name. Leave **Set up programmatic access** off; this quickstart uses manually supplied credentials.
+    In the Claude Console sidebar, go to **Manage > MCP tunnels** and click **New tunnel**. Give it a name. Leave **Set up programmatic access** off; this quickstart uses manual credential provisioning.
 
     After it's created, open the tunnel. Copy two values from the **Connection** section:
 
@@ -52,7 +52,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
   </Step>
 
   <Step title="Generate a CA and server certificate">
-    The proxy terminates an inner TLS handshake using a certificate signed by a CA you control. Generate both:
+    The proxy terminates [inner TLS](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) using a certificate signed by a CA you control. Generate both:
 
     <Tabs>
     <Tab title="macOS / Linux">
@@ -256,7 +256,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
   </Step>
 
   <Step title="Call it from Claude">
-    In the Console, go to **Managed Agents > Sessions** and create a session. In the agent picker choose **Create new agent**, then click **+ MCP Server**, select your tunnel, set **Subdomain** to `echo` and **Path** to `mcp`. Then ask:
+    In the Console, go to **Managed Agents > Sessions** and create a session. In the agent picker choose **Create new agent**, give the agent a name, and keep the pre-filled model. Click **+ MCP Server**, select your tunnel, set **Subdomain** to `echo` and **Path** to `mcp`. Then ask:
 
     > Use the hello tool to greet tunnel.
 
@@ -266,7 +266,9 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
 
 ## Next steps
 
-The tunnel is verified end to end. For production deployments:
+The tunnel is verified end to end. To swap in your own MCP server, add it to `docker-compose.yaml` (or run it on the same Docker network), add a route for it in `config/mcp-proxy.yaml`, then restart the proxy (`docker compose restart mcp-proxy`).
+
+For production deployments:
 
 <CardGroup cols={2}>
   <Card title="Deploy with Docker Compose" icon="cube" href="/docs/en/agents-and-tools/mcp-tunnels/deploy-compose">

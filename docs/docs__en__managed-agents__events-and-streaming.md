@@ -16,69 +16,9 @@ Events flow in two directions.
 - **User events** are what you send to the agent to kick off a session and steer it as it progresses.
 - **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress.
 
-Event type strings follow a `{domain}.{action}` naming convention.
+Event type strings follow a `{domain}.{action}` naming convention. See [Event types](/docs/en/managed-agents/reference#event-types) in the reference for the full catalog.
 
-<Tabs>
-  <Tab title="User events">
-
-| Type | Description |
-| --- | --- |
-| `user.message` | A user message with text content. |
-| `user.interrupt` | Stop the agent mid-execution. |
-| `user.custom_tool_result` | Response to a custom tool call from the agent. |
-| `user.tool_confirmation` | Approve or deny an agent or MCP tool call when a permission policy requires confirmation. |
-| `user.define_outcome` | Define an [outcome](/docs/en/managed-agents/define-outcomes) for the agent to work toward.  |
-| `user.tool_result` | For sessions with `self_hosted` [environments](/docs/en/managed-agents/self-hosted-sandboxes) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
-
-  </Tab>
-  <Tab title="Agent events">
-
-| Type | Description |
-| --- | --- |
-| `agent.message` | Agent response containing text content blocks. |
-| `agent.thinking` | Agent thinking content, emitted separately from messages. |
-| `agent.tool_use` | Agent invokes a pre-built agent tool (bash, file operations, and so on). |
-| `agent.tool_result` | Result of a pre-built agent tool execution. |
-| `agent.mcp_tool_use` | Agent invokes an MCP server tool. |
-| `agent.mcp_tool_result` | Result of an MCP tool execution. |
-| `agent.custom_tool_use` | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event. |
-| `agent.thread_context_compacted` | Conversation history was compacted to fit the context window. |
-| `agent.thread_message_received` | In a [multiagent](/docs/en/managed-agents/multi-agent) session, an agent delivered its result to the coordinator. |
-| `agent.thread_message_sent` | In a [multiagent](/docs/en/managed-agents/multi-agent) session, the coordinator sent a follow-up to another agent. |
-
-  </Tab>
-  <Tab title="Session events">
-
-| Type | Description |
-| --- | --- |
-| `session.status_running` | Agent is actively processing. |
-| `session.status_idle` | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped. |
-| `session.status_rescheduled` | A transient error occurred and the session is retrying automatically. |
-| `session.status_terminated` | Session ended due to an unrecoverable error. |
-| `session.updated` | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn. |
-| `session.error` | An error occurred during processing. Includes a typed `error` object with a `retry_status`. |
-| `session.thread_created` | A [multiagent](/docs/en/managed-agents/multi-agent) thread was created. |
-| `session.thread_status_running` | A [multiagent](/docs/en/managed-agents/multi-agent) thread started activity. |
-| `session.thread_status_idle` | A [multiagent](/docs/en/managed-agents/multi-agent) thread finished its turn and is awaiting input. Includes `stop_reason`. |
-| `session.thread_status_terminated` | A [multiagent](/docs/en/managed-agents/multi-agent) thread was archived or reached a terminal error. |
-
-  </Tab>
-  <Tab title="Span events">
-
-Span events are observability markers that wrap activity for timing and usage tracking.
-
-| Type | Description |
-| --- | --- |
-| `span.model_request_start` | A model inference call has started. |
-| `span.model_request_end` | A model inference call has completed. Includes `model_usage` with token counts. |
-| `span.outcome_evaluation_start` | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has started.  |
-| `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](/docs/en/managed-agents/define-outcomes) evaluation.  |
-| `span.outcome_evaluation_end` | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has completed.  |
-
-  </Tab>
-</Tabs>
-
-Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and will be handled after preceding events finish processing.
+Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
 
 ## Integrating events
 
@@ -442,7 +382,7 @@ client.beta.sessions.events.send_(
 
 </CodeGroup>
 
-The agent will acknowledge the interruption and switch to the new task.
+The agent acknowledges the interruption and switches to the new task.
 
   </Tab>
   <Tab title="Streaming events">
@@ -741,7 +681,11 @@ end
 
 </CodeGroup>
 
-To reconnect to an existing session without missing events, open a new stream and then list the full history to seed a set of seen event IDs. Tail the live stream while skipping any events already returned by the history list.
+To reconnect to an existing session without missing events:
+
+1. Open a new stream.
+2. List the full event history to seed a set of seen event IDs.
+3. Tail the live stream, skipping any events already returned by the history list.
 
 <CodeGroup>
   
@@ -1776,13 +1720,13 @@ The session object includes a `usage` field with cumulative token statistics. Fe
 
 The Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
 
-- **Session list** - All sessions with their status, creation time, and model
-- **Tracing view** - A chronological view of events (content, timestamps, token usage) within a session. These are only accessible to Developers and Admins.
-- **Tool execution** - Details of each tool call and its result
+- **Session list:** All sessions with their status, creation time, and model
+- **Tracing view:** A chronological view of events (content, timestamps, token usage) within a session. Tracing views are only accessible to Developers and Admins.
+- **Tool execution:** Details of each tool call and its result
 
 ## Debugging tips
 
-- **Check session events** - Session errors are conveyed through the `session.error` event
-- **Review tool results** - Tool execution failures often explain unexpected agent behavior
-- **Track token usage** - Monitor token consumption to optimize prompts and reduce costs
-- **Use system prompts** - Add logging instructions to the system prompt to make the agent explain its reasoning
+- **Check session events:** Session errors are conveyed through the `session.error` event
+- **Review tool results:** Tool execution failures often explain unexpected agent behavior
+- **Track token usage:** Monitor token consumption to optimize prompts and reduce costs
+- **Use system prompts:** Add logging instructions to the system prompt to make the agent explain its reasoning

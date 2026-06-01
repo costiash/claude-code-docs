@@ -21,7 +21,7 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-- An Anthropic [Console account](/)
+- An Anthropic [Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
 ## Install the CLI
@@ -51,7 +51,7 @@ You can find all releases on the [GitHub releases page](https://github.com/anthr
 </Tab>
 <Tab title="Go">
 
-You may also install the CLI from source using `go install`. Requires Go 1.22 or later.
+You may also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
 ```bash
 go install github.com/anthropics/anthropic-cli/cmd/ant@latest
@@ -872,7 +872,7 @@ end
 
     </CodeGroup>
 
-    The agent will write a Python script, execute it in the sandbox, and verify the output file was created. Your output will look similar to this:
+    The agent writes a Python script, executes it in the sandbox, and verifies the output file was created. Your output looks similar to this:
 
     ```text
     I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
@@ -892,10 +892,10 @@ end
 When you send a user event, Claude Managed Agents:
 
 1. **Provisions a sandbox:** Your environment configuration determines how it's built.
-2. **Runs the agent loop:** Claude decides which tools to use based on your message
-3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox
-4. **Streams events:** You receive real-time updates as the agent works
-5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do
+2. **Runs the agent loop:** Claude determines which tools to use based on your message.
+3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox.
+4. **Streams events:** You receive real-time updates as the agent works.
+5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
 ## Next steps
 
@@ -909,7 +909,7 @@ When you send a user event, Claude Managed Agents:
   <Card title="Agent tools" icon="tool" href="/docs/en/managed-agents/tools">
     Enable specific tools for your agent
   </Card>
-  <Card title="Events and streaming" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
     Handle events and steer the agent mid-execution
   </Card>
 </CardGroup>

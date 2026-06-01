@@ -142,7 +142,7 @@ The `name` must be unique within your organization and workspace.
 
 ## Use the environment in a session
 
-Pass the environment ID as a string when creating a session.
+Pass the environment ID as a string when [creating a session](/docs/en/managed-agents/sessions).
 
 <CodeGroup>
   
@@ -396,7 +396,7 @@ The `networking` field controls the sandbox's outbound network access. It does n
 | Mode | Description |
 | --- | --- |
 | `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default. |
-| `limited` | Restricts sandbox network access to the `allowed_hosts` list. Further access is enabled via the `allow_package_managers` and `allow_mcp_servers` bool.|
+| `limited` | Restricts sandbox network access to the `allowed_hosts` list. Further access is enabled through the `allow_package_managers` and `allow_mcp_servers` bool.|
 
 <CodeGroup>
 ```bash curl
@@ -503,9 +503,9 @@ For production deployments, use `limited` networking with an explicit `allowed_h
 </Info>
 
 When using `limited` networking:
-- `allowed_hosts` specifies domains the sandbox can reach. These must be HTTPS-prefixed.
+- `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`); do not include a URL scheme.
 - `allow_mcp_servers` permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-- `allow_package_managers` permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+- `allow_package_managers` permits outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
 ## Environment lifecycle
 

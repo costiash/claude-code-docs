@@ -15,7 +15,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 ## Create a vault
 
 <Warning>
-Vaults and credentials are workspace-scoped, meaning anyone with API key access can use them for authorizing an agent to complete a task. To revoke access, delete the vault or credential.
+Vaults and credentials are workspace-scoped, meaning anyone with an API key for the same workspace can reference them when creating a session. To revoke access, delete the vault or credential.
 </Warning>
 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
@@ -652,7 +652,7 @@ This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](/docs/en/
 
 ### Diagnose an OAuth refresh failure
 
-To diagnose why a refresh failed, use the `/mcp_oauth_validate` endpoint. This allows you to determine how to handle the failure, which is distinct by error type.
+To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
 
 The top-level `status` tells you what to do next:
 

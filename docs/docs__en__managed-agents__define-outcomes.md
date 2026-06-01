@@ -6,12 +6,12 @@ Tell the agent what 'done' looks like, and let it iterate until it gets there.
 
 The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and iterating until the outcome is met.
 
-When you define an outcome, the harness automatically provisions a *grader* to evaluate the artifact against a rubric. It leverages a separate context window to avoid being influenced by the main agent's implementation choices.
+When you define an outcome, the harness automatically provisions a *grader* to evaluate the artifact against a rubric. The grader uses a separate context window to avoid being influenced by the main agent's implementation choices.
 
-The grader returns a per-criterion breakdown: either confirmation that the artifact satisfies the rubric, or the specific gaps between the current work and the requirements. That feedback is handed back to the agent for the next iteration.
+The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
 <Note>
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets this beta header automatically.
+All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 </Note>
 
 ## Create a rubric
@@ -54,9 +54,11 @@ Example rubric:
 - Sensitivity analysis on WACC and terminal growth rate is included
 ```
 
-Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it via the Files API for reuse across sessions:
+Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it through the Files API for reuse across sessions.
 
-**Requires beta header `files-api-2025-04-14`.**
+<Note>
+Uploading through the Files API requires both the `managed-agents-2026-04-01` and `files-api-2025-04-14` beta headers.
+</Note>
 
 <CodeGroup>
   
@@ -388,15 +390,15 @@ client.beta.sessions.events.send_(
 
 Progress on an outcome-oriented session is surfaced on the events [stream](/docs/en/managed-agents/events-and-streaming).
 
-- `agent.*` events (messages, tool use, etc.) show progress towards the outcome.
+- `agent.*` events (such as messages and tool use) show progress toward the outcome.
 - `span.outcome_evaluation_*` events are only emitted for outcome-oriented sessions and show the number of iteration loops and the grader's feedback process.
-- You can also send `user.message` [events](/docs/en/managed-agents/events-and-streaming#user-events) to an outcome-oriented session, to direct the agent's work as it progresses, but these are not as necessary; the agent knows to work until it has exhausted its iterations or achieved the outcome.
-- A `user.interrupt` event will pause work on the current outcome and mark the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
-- After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be kicked off. The session will retain history of the prior outcome.
+- You can also send `user.message` [events](/docs/en/managed-agents/reference#event-types) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
+- A `user.interrupt` event pauses work on the current outcome and marks the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
+- After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be kicked off. The session retains history of the prior outcome.
 
 ### Define outcome user event
 <Note>
-Only one outcome supported at a time, but you may chain together outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal event of the previous outcome.
+Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal event of the previous outcome.
 </Note>
 
 This is the event you send to initiate an outcome. It is echoed back on receipt, including a `processed_at` timestamp and `outcome_id`.
@@ -567,7 +569,7 @@ end
 
 ## Retrieving deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them via the [Files API](/docs/en/build-with-claude/files) scoped to the session:
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](/docs/en/build-with-claude/files) scoped to the session:
 
 <CodeGroup>
   
@@ -668,8 +670,13 @@ if len(files.Data) > 0 {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	fileContent, _ := io.ReadAll(resp.Body)
-	os.WriteFile("/tmp/output.txt", fileContent, 0o644)
+	fileContent, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	if err := os.WriteFile("/tmp/output.txt", fileContent, 0o644); err != nil {
+		panic(err)
+	}
 }
 ````
 

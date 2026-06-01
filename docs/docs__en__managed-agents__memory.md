@@ -14,7 +14,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](/docs/en/managed-agents/tools) is required for these interactions; make sure to enable it during [agent creation](/docs/en/managed-agents/agent-setup).
 
-Each **memory** in a store is addressed by a path and can be read and edited directly via the API or Console, allowing for tuning, importing, and exporting.
+Each **memory** in a store is addressed by a path and can be read and edited directly through the API or Console, allowing for tuning, importing, and exporting.
 
 Every change to a memory creates an immutable **memory version**, giving you an audit trail and point-in-time recovery for everything the agent writes.
 
@@ -409,7 +409,7 @@ The agent's reads and writes appear in the [event stream](/docs/en/managed-agent
 
 ## View and edit memories
 
-Memory stores can be managed directly via the API. Use this for building review workflows, correcting bad memories, or seeding stores before any session runs.
+Memory stores can be managed directly through the API. Use this for building review workflows, correcting bad memories, or seeding stores before any session runs.
 
 ### List memories
 
@@ -1010,7 +1010,7 @@ Versions belong to the store (not the individual memory) and survive even after 
 
 There is no dedicated restore endpoint; to roll back, retrieve the version you want and write its `content` back with `memories.update` (or `memories.create` if the parent memory has been deleted, because versions outlive their parent).
 
-Past memory versions might be deleted after 30 days. To preserve memory history for longer, export versions via the API.
+Past memory versions might be deleted after 30 days. To preserve memory history for longer, export versions through the API.
 
 ### List versions
 

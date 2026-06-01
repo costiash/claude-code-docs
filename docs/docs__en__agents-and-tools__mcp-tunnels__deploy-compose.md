@@ -5,10 +5,10 @@ Install the MCP tunnel stack on a VM using Docker Compose.
 ---
 
 <Note>
-  MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+  MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 </Note>
 
-This guide deploys the MCP tunnel stack as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
+This guide deploys the [tunnel stack](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
 ## Before you begin
 
@@ -16,10 +16,10 @@ You need:
 
 - **A tunnel created in the Console.** Follow [Create a tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`).
 - **A way for the host to authenticate to the Tunnels API.**
-  - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the `setup` service can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
+  - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
   - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](/docs/en/agents-and-tools/mcp-tunnels/console#get-the-connection-details), generate a CA and server certificate yourself, and [register the CA in the Console](/docs/en/agents-and-tools/mcp-tunnels/console#add-a-ca-certificate).
 - **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
-- **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the tunnel edge (7844 TCP and UDP). See the full [network requirements](/docs/en/agents-and-tools/mcp-tunnels/overview#network-requirements).
+- **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) (7844 TCP and UDP). See the full [network requirements](/docs/en/agents-and-tools/mcp-tunnels/overview#network-requirements).
 - **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
@@ -27,7 +27,7 @@ You need:
 If you don't have an MCP server available for testing, use this minimal one:
 
 ```bash
-mkdir -p mcp-tunnel/{config,data}
+mkdir -p mcp-tunnel
 cat > mcp-tunnel/hello_server.py <<'EOF'
 from mcp.server.fastmcp import FastMCP
 
@@ -54,7 +54,9 @@ This guide provides one reference approach using Docker Compose. You are respons
 <Tabs>
 <Tab title="With programmatic access">
 
-The `setup` service uses Workload Identity Federation to fetch the tunnel token, generate a CA and server certificate, and register the CA with Anthropic.
+This path requires the host to have an OIDC identity provider (such as a cloud VM metadata server or SPIFFE). If it doesn't, use the **Without programmatic access** tab instead.
+
+The setup component uses Workload Identity Federation to fetch the tunnel token, generate a CA and server certificate, and register the CA with Anthropic.
 
 <Steps>
   <Step title="Prepare the deployment directory">
@@ -69,6 +71,7 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
   </Step>
 
   <Step title="Write docker-compose.yaml">
+    The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
 
     ```bash
     cat > docker-compose.yaml <<'EOF'
@@ -137,8 +140,6 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
     EOF
     ```
 
-    The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
-
     If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
 
     ```bash
@@ -164,19 +165,19 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
     export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
     ```
 
-    If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; setup uses the default workspace otherwise.
+    If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise.
 
-    Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](/docs/en/manage-claude/workload-identity-federation#identity-providers) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting. If this host has no identity provider, switch to the **Without programmatic access** tab.
+    Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](/docs/en/manage-claude/workload-identity-federation#identity-providers) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
 
-    Run setup:
+    Run the setup component:
 
     ```bash
     docker compose run --rm setup
     ```
 
-    `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is only generated and registered when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
+    `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
 
-    See [Setup Job authentication failures](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting#setup-job-authentication-failures) if it errors.
+    See [Setup component authentication failures](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting#setup-component-authentication-failures) if it errors.
 
     Retrieve your tunnel domain and export it for later steps:
 
@@ -192,7 +193,7 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
   </Step>
 
   <Step title="Write the proxy config">
-    `tunnel_domain` is **required**: the proxy uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL.
+    `tunnel_domain` is **required**: the [proxy](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL, not a list.
 
     ```bash
     cat > config/mcp-proxy.yaml <<EOF
@@ -243,7 +244,7 @@ Use this flow if you didn't turn on **Set up programmatic access**, or for local
     cd mcp-tunnel
     ```
 
-    The proxy listens on `:8080` over plain WebSocket; the inner TLS handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's SAN must include `*.<tunnel-domain>` per the [certificate requirements](/docs/en/agents-and-tools/mcp-tunnels/reference#certificate-requirements).
+    The proxy listens on `:8080` over plain WebSocket; the [inner TLS](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` per the [certificate requirements](/docs/en/agents-and-tools/mcp-tunnels/reference#certificate-requirements).
 
     ```bash
     # Self-signed CA. Explicit extensions so it satisfies the certificate
@@ -273,6 +274,9 @@ Use this flow if you didn't turn on **Set up programmatic access**, or for local
       -out data/tls.crt -days 90 \
       -extfile data/tls.ext
 
+    # Allow the non-root proxy container (UID 65532) to read the key from
+    # the bind mount. Without the world-read bit the container cannot open
+    # a host-owned file.
     chmod 644 data/tls.key
     ```
 
@@ -308,7 +312,7 @@ Use this flow if you didn't turn on **Set up programmatic access**, or for local
   </Step>
 
   <Step title="Write docker-compose.yaml">
-    In this flow no ingress rules are configured server-side, so cloudflared needs an explicit local target. Share the proxy's network namespace and pass `--url http://localhost:8080` so cloudflared forwards traffic to the proxy in the same netns; without it, requests reach cloudflared with no route and fail with a 503 (which surfaces to callers as a 500).
+    The `network_mode: "service:mcp-proxy"` setting places [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) in the proxy's network namespace so that `localhost:8080` inside the cloudflared container reaches the proxy. The `--url http://localhost:8080` flag gives cloudflared its forwarding target; without that flag, cloudflared has no route for incoming requests and returns a 503.
 
     ```bash
     cat > docker-compose.yaml <<'EOF'
@@ -381,11 +385,13 @@ Use this flow if you didn't turn on **Set up programmatic access**, or for local
 </Tab>
 </Tabs>
 
-For a multi-VM deployment, copy your deployment directory to each host, set `TUNNEL_TOKEN` (`$(sudo cat data/tunnel-token)` in the programmatic flow, or the revealed value in the manual flow), and run `docker compose up -d`. The compose file reads `TUNNEL_TOKEN` from the environment with no default, so the export must run in every fresh shell, including after a reboot. The same tunnel token and certificates work across all replicas.
+The compose file reads `TUNNEL_TOKEN` from the host environment with no default, so the export must be repeated in every fresh shell and after a reboot.
+
+For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `TUNNEL_TOKEN`, and run `docker compose up -d`. In the programmatic flow `TUNNEL_TOKEN` is `$(sudo cat data/tunnel-token)`; in the manual flow it's the value you copied from the Console. The same tunnel token and certificates work across all replicas.
 
 ## Verify the deployment
 
-Verify end to end by calling a routed server from Anthropic's side: see [Use the tunneled MCP servers](/docs/en/agents-and-tools/mcp-tunnels/overview#use-the-tunneled-mcp-servers). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting).
+Verify end to end by calling an [upstream MCP server](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) from Anthropic's side: see [Use the tunneled MCP servers](/docs/en/agents-and-tools/mcp-tunnels/overview#use-the-tunneled-mcp-servers). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting).
 
 ## Upgrades
 
@@ -393,7 +399,7 @@ Run the commands in this section from inside the `mcp-tunnel/` deployment direct
 
 ### Rotate the tunnel token
 
-With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT (it will have expired since install), and re-run setup:
+With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT, and re-run the setup component:
 
 ```bash nocheck
 # Edit docker-compose.yaml: increment the integer in the setup service's
@@ -415,7 +421,7 @@ export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
 docker compose up -d cloudflared
 ```
 
-The setup binary authenticates with Workload Identity Federation; there is no API token to revoke.
+The `--token-version` argument is edited in `docker-compose.yaml` rather than passed on the command line so the new value persists for future runs of the setup component. The setup component authenticates with Workload Identity Federation; there is no API token to revoke.
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
 
@@ -432,6 +438,8 @@ With programmatic access:
 ```bash
 docker compose run --rm setup renew-cert --output=dir:/data
 ```
+
+The CLI arguments replace the `setup` service's `command` (the `init` arguments) but keep its `entrypoint`, so this runs `/setup renew-cert --output=dir:/data`.
 
 <Tip>
   Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
@@ -455,7 +463,7 @@ In either flow the proxy polls `tls.cert_file` and reloads it automatically, so 
 
 <CardGroup cols={2}>
   <Card title="Use the tunneled MCP servers" icon="link" href="/docs/en/agents-and-tools/mcp-tunnels/overview#use-the-tunneled-mcp-servers">
-    Attach a routed MCP server to a Managed Agent or the Messages API.
+    Attach an upstream MCP server to a Managed Agent or the Messages API.
   </Card>
   <Card title="Security" icon="lock" href="/docs/en/agents-and-tools/mcp-tunnels/security">
     Hardening guidance, credential rotation, and breach response.

@@ -66,7 +66,7 @@ Every tool in the `tools` array, including user-defined tools, accepts optional 
 | `"direct"`                  | The model can call this tool directly in a `tool_use` block. This is the default if `allowed_callers` is omitted. |
 | `"code_execution_20260120"` | Code running inside a `code_execution_20260120` sandbox can call this tool.                                       |
 
-Omitting `"direct"` from the array (for example, `"allowed_callers": ["code_execution_20260120"]`) means the tool is callable only from within code execution. The response's `tool_use` block includes a `caller` field that identifies which caller called the tool. See [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling#the-allowed-callers-field) for the full treatment, including the `caller` response shape and error behavior.
+Omitting `"direct"` from the array (for example, `"allowed_callers": ["code_execution_20260120"]`) guides Claude to call the tool only from within code execution. The response's `tool_use` block includes a `caller` field that identifies which caller called the tool. See [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling#the-allowed-callers-field) for the full treatment, including the `caller` response shape and error behavior.
 
 ### `defer_loading` and prompt caching
 

@@ -18,12 +18,15 @@ Claude Managed Agents provides the harness and infrastructure for running Claude
 Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents) in the Claude Platform on AWS guide.
 </Note>
 
-<CardGroup cols={2}>
+<CardGroup cols={3}>
   <Card title="Quickstart" icon="play" href="/docs/en/managed-agents/quickstart">
     Create your first agent session
   </Card>
-  <Card title="API reference" icon="code-brackets" href="/docs/en/managed-agents/sessions">
-    Full endpoint documentation
+  <Card title="Start a session" icon="code-brackets" href="/docs/en/managed-agents/sessions">
+    Create a session and send your first event
+  </Card>
+  <Card title="Reference" icon="book" href="/docs/en/managed-agents/reference">
+    Event types, rate limits, CLI flags, and other lookup tables
   </Card>
 </CardGroup>
 
@@ -51,7 +54,7 @@ Claude Managed Agents is built around four concepts:
     Launch a session that references your agent and environment configuration.
   </Step>
   <Step title="Send events and stream responses">
-    Send user messages as events. Claude autonomously executes tools and streams back results via server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
+    Send user messages as events. Claude autonomously executes tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
   </Step>
   <Step title="Steer or interrupt">
     Send additional user events to guide the agent mid-execution, or interrupt it to change direction.
@@ -90,33 +93,8 @@ To get started, you need:
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) and [dreaming](/docs/en/managed-agents/dreams)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Within the beta, [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) and [dreaming](/docs/en/managed-agents/dreams) are in a more limited research preview. [Request access](https://claude.com/form/claude-managed-agents) to enable them.
 
-Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](/docs/en/manage-claude/api-and-data-retention#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](/docs/en/managed-agents/sessions#deleting-a-session), and separately delete any [files](/docs/en/build-with-claude/files#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention#feature-eligibility).
+Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](/docs/en/manage-claude/api-and-data-retention#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](/docs/en/managed-agents/session-operations#deleting-a-session), and separately delete any [files](/docs/en/build-with-claude/files#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention#feature-eligibility).
 
-## Rate limits
-
-Managed Agents endpoints are rate-limited per organization:
-
-| Operation | Limit |
-| --- | --- |
-| Create endpoints (agents, sessions, environments, etc.) | 300 requests per minute |
-| Read endpoints (retrieve, list, stream, etc.) | 600 requests per minute |
-
-Organization-level [spend limits and tier-based rate limits](/docs/en/api/rate-limits) also apply.
-
-## Branding guidelines
-
-For partners integrating Claude Managed Agents, use of Claude branding is optional. When referencing Claude in your product:
-
-**Allowed:**
-- "Claude Agent" (preferred for dropdown menus)
-- "Claude" (when within a menu already labeled "Agents")
-- "{YourAgentName} Powered by Claude" (if you have an existing agent name)
-
-**Not permitted:**
-- "Claude Code" or "Claude Code Agent"
-- "Claude Cowork" or "Claude Cowork Agent"
-- Claude Code-branded ASCII art or visual elements that mimic Claude Code
-
-Your product should maintain its own branding and not appear to be Claude Code, Claude Cowork, or any other Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
+See [Rate limits](/docs/en/managed-agents/reference#rate-limits) and [Branding guidelines](/docs/en/managed-agents/reference#branding-guidelines) in the reference.
