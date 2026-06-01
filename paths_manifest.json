@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-01T19:41:14.922229Z",
-    "total_paths": 1687,
+    "generated_at": "2026-06-01T22:05:02.249930Z",
+    "total_paths": 1701,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-01T19:41:14.922236Z"
+    "last_regenerated": "2026-06-01T22:05:02.249941Z"
   },
   "categories": {
     "core_documentation": [
@@ -16,6 +16,7 @@
       "/docs/en/agents-and-tools/agent-skills/overview",
       "/docs/en/agents-and-tools/agent-skills/quickstart",
       "/docs/en/agents-and-tools/mcp-connector",
+      "/docs/en/agents-and-tools/mcp-tunnels/concepts",
       "/docs/en/agents-and-tools/mcp-tunnels/console",
       "/docs/en/agents-and-tools/mcp-tunnels/deploy-compose",
       "/docs/en/agents-and-tools/mcp-tunnels/deploy-helm",
@@ -119,6 +120,10 @@
       "/docs/en/manage-claude/api-and-data-retention",
       "/docs/en/manage-claude/authentication",
       "/docs/en/manage-claude/claude-code-analytics-api",
+      "/docs/en/manage-claude/cmek",
+      "/docs/en/manage-claude/cmek-aws-kms",
+      "/docs/en/manage-claude/cmek-azure-key-vault",
+      "/docs/en/manage-claude/cmek-google-cloud-kms",
       "/docs/en/manage-claude/compliance-activity-feed",
       "/docs/en/manage-claude/compliance-api",
       "/docs/en/manage-claude/compliance-api-access",
@@ -155,8 +160,10 @@
       "/docs/en/managed-agents/overview",
       "/docs/en/managed-agents/permission-policies",
       "/docs/en/managed-agents/quickstart",
+      "/docs/en/managed-agents/reference",
       "/docs/en/managed-agents/self-hosted-sandboxes",
       "/docs/en/managed-agents/self-hosted-sandboxes-security",
+      "/docs/en/managed-agents/session-operations",
       "/docs/en/managed-agents/sessions",
       "/docs/en/managed-agents/skills",
       "/docs/en/managed-agents/tools",
@@ -237,6 +244,13 @@
       "/docs/en/api/admin/api_keys/update",
       "/docs/en/api/admin/cost_report",
       "/docs/en/api/admin/cost_report/retrieve",
+      "/docs/en/api/admin/external_keys",
+      "/docs/en/api/admin/external_keys/create",
+      "/docs/en/api/admin/external_keys/delete",
+      "/docs/en/api/admin/external_keys/list",
+      "/docs/en/api/admin/external_keys/retrieve",
+      "/docs/en/api/admin/external_keys/update",
+      "/docs/en/api/admin/external_keys/validate",
       "/docs/en/api/admin/invites",
       "/docs/en/api/admin/invites/create",
       "/docs/en/api/admin/invites/delete",
