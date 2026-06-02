@@ -8235,8 +8235,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "fbd3d6997813eacd4ecdf5b8963d58c34e939273c8172a21993d3ea67c932d48",
-      "last_updated": "2026-06-01T22:19:47.188669"
+      "hash": "238a6337b4151938a34a538c81f8722bfd4bba42e7a29813af88fbc3045e9501",
+      "last_updated": "2026-06-02T22:13:47.299956"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -8295,8 +8295,8 @@
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
       "original_md_url": "https://platform.claude.com/docs/en/interactive-mode.md",
-      "hash": "4ab7591234fb2e7ab1497f252d2c76faa49c2fb2502c7ce0e4732892f03ef6d1",
-      "last_updated": "2026-05-30T01:07:35.429607"
+      "hash": "bee2d7b2a92817a585ffc089da68177e147e57b05eb4594206d0041feda90848",
+      "last_updated": "2026-06-02T22:14:01.336641"
     },
     "docs__en__intro.md": {
       "original_url": "https://platform.claude.com/docs/en/intro",
@@ -8733,8 +8733,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "cd6e2c100bb71fdb62e2daacfeb0f759f0c386001eefedb5bc903096c6dd62ed",
-      "last_updated": "2026-06-02T08:01:26.795035"
+      "hash": "9276d74fd1c6cffe376231fa1c702d6f82e431abbdd32cb5632bddf8013fa834",
+      "last_updated": "2026-06-02T22:15:17.254836"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -8757,20 +8757,20 @@
     "claude-code__sub-agents.md": {
       "original_url": "https://platform.claude.com/docs/en/sub-agents",
       "original_md_url": "https://platform.claude.com/docs/en/sub-agents.md",
-      "hash": "99285ec6898ea5d8f30d979b5a779196ff90106ee8c0e0d87ccf0720fd1bcf20",
-      "last_updated": "2026-05-30T01:08:30.996784"
+      "hash": "0a935091677c9bd42daabb0696235e118ab29be093e6bbcad1587864742f4412",
+      "last_updated": "2026-06-02T22:15:20.408326"
     },
     "claude-code__terminal-config.md": {
       "original_url": "https://platform.claude.com/docs/en/terminal-config",
       "original_md_url": "https://platform.claude.com/docs/en/terminal-config.md",
-      "hash": "ad5e5785d465c6f612abca7d79db0c8b254af8bc7313243a4511c1871278583b",
-      "last_updated": "2026-05-30T01:08:31.994925"
+      "hash": "a1e41a5439a7c85b4391e068cebfd4bb293bfcd1f15d126fe6b0a0ce9b26bba3",
+      "last_updated": "2026-06-02T22:15:21.185741"
     },
     "docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
       "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md",
-      "hash": "7baff047c413f3ff8ba21218d01af339dafb9be3d41b199bbfd47c56cfe2cd44",
-      "last_updated": "2026-06-02T19:36:07.387092"
+      "hash": "d90edec721bb5523d41ca54cace7079dbca9125b38e9ec74a37cfcd744eb71b9",
+      "last_updated": "2026-06-02T22:15:21.895656"
     },
     "claude-code__third-party-integrations.md": {
       "original_url": "https://platform.claude.com/docs/en/third-party-integrations",
@@ -8787,20 +8787,20 @@
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
       "original_md_url": "https://platform.claude.com/docs/en/vs-code.md",
-      "hash": "8391b4e439b13290e3ebee674427ba4ff7e6fa3b701cef8221e7ec8aed9bec05",
-      "last_updated": "2026-05-29T01:13:29.947277"
+      "hash": "d91903216e5d11d34f4b0db7b679a61c83f15036b2481ee42406b546c67ed819",
+      "last_updated": "2026-06-02T22:15:26.317636"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "777e85a921872607fdbe8db00b32d1a5dec36a441d85a262548cb2d75fc8946c",
-      "last_updated": "2026-06-02T04:50:20.444531",
+      "hash": "8efbc131f73b6ae70d5cf554c58aaa4e581328e8265364d74e50042cf3059665",
+      "last_updated": "2026-06-02T22:15:31.293421",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-02T19:36:16.814012",
-    "fetch_duration_seconds": 986.00001,
+    "last_fetch_completed": "2026-06-02T22:15:31.293653",
+    "fetch_duration_seconds": 1009.439817,
     "total_pages_discovered": 1702,
     "pages_fetched_successfully": 1466,
     "pages_failed": 237,
@@ -9048,7 +9048,7 @@
     "total_files": 1466,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-02T19:36:16.814033",
+  "last_updated": "2026-06-02T22:15:31.293669",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

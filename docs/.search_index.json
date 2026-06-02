@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-02T19:36:19Z",
+  "generated_at": "2026-06-02T22:15:34Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -13,8 +13,8 @@
         "added",
         "claude",
         "instead",
-        "mode",
         "session",
+        "mode",
         "tool",
         "improved",
         "sessions",
@@ -24,11 +24,11 @@
         "code",
         "prompt",
         "command",
-        "commands",
+        "terminal",
         "background",
-        "terminal"
+        "commands"
       ],
-      "word_count": 51806,
+      "word_count": 52239,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -262,12 +262,12 @@
         "claude",
         "code",
         "session",
-        "file",
         "auto",
+        "file",
         "desktop",
+        "mode",
         "app",
         "changes",
-        "mode",
         "windows",
         "preview",
         "settings",
@@ -278,9 +278,9 @@
         "server",
         "review",
         "see",
-        "available"
+        "terminal"
       ],
-      "word_count": 8505,
+      "word_count": 8528,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -504,7 +504,7 @@
         "when",
         "word"
       ],
-      "word_count": 3511,
+      "word_count": 3512,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -1008,7 +1008,7 @@
         "user",
         "repo"
       ],
-      "word_count": 10363,
+      "word_count": 10381,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1120,7 +1120,7 @@
         "model",
         "plugin"
       ],
-      "word_count": 8207,
+      "word_count": 8211,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1148,7 +1148,7 @@
         "such",
         "vim"
       ],
-      "word_count": 2636,
+      "word_count": 2639,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1232,7 +1232,7 @@
         "settings",
         "install"
       ],
-      "word_count": 5027,
+      "word_count": 5028,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -42527,13 +42527,13 @@
       "title": "Streaming refusals",
       "content_preview": "# Streaming refusals  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy vi...",
       "keywords": [
-        "refusal",
-        "refusals",
-        "api",
         "when",
+        "refusal",
+        "api",
+        "refusals",
         "streaming",
-        "response",
         "claude",
+        "response",
         "safety",
         "tip",
         "sonnet",
@@ -42544,11 +42544,11 @@
         "content",
         "filters",
         "context",
-        "types",
-        "error",
-        "future"
+        "before",
+        "usage",
+        "types"
       ],
-      "word_count": 1065,
+      "word_count": 1094,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }
