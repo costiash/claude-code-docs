@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-01T22:21:12Z",
+  "generated_at": "2026-06-02T01:17:33Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -616,7 +616,7 @@
         "same",
         "authentication"
       ],
-      "word_count": 6574,
+      "word_count": 6598,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -812,7 +812,7 @@
         "web",
         "build"
       ],
-      "word_count": 1721,
+      "word_count": 1731,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -884,19 +884,19 @@
         "skill",
         "directory",
         "see",
-        "step",
         "hooks",
+        "step",
         "when",
         "marketplace",
         "root",
         "add",
-        "test",
         "agents",
+        "test",
         "install",
         "lsp",
         "file"
       ],
-      "word_count": 2841,
+      "word_count": 2850,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {

@@ -8643,8 +8643,8 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "77d4075c7a29ded96f38e6bdfe3e8dd58c64c3bbed45934761bc226c34daac79",
-      "last_updated": "2026-05-30T01:08:09.060897"
+      "hash": "1f2e9282e8f44038ba3523e146f00e02ed4ee1072448c537f07de9171287b2ca",
+      "last_updated": "2026-06-02T01:16:52.084822"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
@@ -8685,8 +8685,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "0b2b7b3ba8f1a3d7874bf424861200b6a0f7da563b08076889e6c18187424e96",
-      "last_updated": "2026-05-18T21:44:51.830468"
+      "hash": "9b0a6a329d9ab583f46f6fbb62681daa1d29f5ec5bb1d021f3ebbe62e20da0ba",
+      "last_updated": "2026-06-02T01:16:59.599981"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -8697,8 +8697,8 @@
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
       "original_md_url": "https://platform.claude.com/docs/en/plugins.md",
-      "hash": "477e046cfd3c180df95d419d74e5342850dcb998028a1fe8648e812c30a520aa",
-      "last_updated": "2026-05-30T01:08:19.625723"
+      "hash": "f03154fa6e69135302d17247a31fad8434f2d64141bd240f466a7d03dc1afc38",
+      "last_updated": "2026-06-02T01:17:03.165011"
     },
     "claude-code__plugins-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins-reference",
@@ -8799,11 +8799,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-01T22:21:09.903190",
-    "fetch_duration_seconds": 968.361761,
-    "total_pages_discovered": 1701,
+    "last_fetch_completed": "2026-06-02T01:17:30.527924",
+    "fetch_duration_seconds": 1063.186358,
+    "total_pages_discovered": 1702,
     "pages_fetched_successfully": 1466,
-    "pages_failed": 236,
+    "pages_failed": 237,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/agent-sdk/agent-loop",
@@ -9007,6 +9007,7 @@
       "/docs/en/keybindings",
       "/docs/en/large-codebases",
       "/docs/en/managed-mcp",
+      "/docs/en/mcp-quickstart",
       "/docs/en/permission-modes",
       "/docs/en/permissions",
       "/docs/en/platforms",
@@ -9047,7 +9048,7 @@
     "total_files": 1466,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-01T22:21:09.903212",
+  "last_updated": "2026-06-02T01:17:30.527946",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
