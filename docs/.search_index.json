@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-02T01:17:33Z",
+  "generated_at": "2026-06-02T04:50:23Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "improved",
         "sessions",
         "after",
-        "mcp",
         "being",
+        "mcp",
         "code",
         "prompt",
         "command",
         "commands",
-        "terminal",
-        "file"
+        "background",
+        "terminal"
       ],
-      "word_count": 51238,
+      "word_count": 51806,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -868,7 +868,7 @@
         "lsp",
         "files"
       ],
-      "word_count": 8149,
+      "word_count": 8124,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
