@@ -22,6 +22,24 @@ When you add the web search tool to your API request:
 2. The API executes the searches and provides Claude with the results. This process may repeat multiple times throughout a single request.
 3. At the end of its turn, Claude provides a final response with cited sources.
 
+### When Claude searches
+
+Claude searches when the request depends on information that is current, changing, or outside its training data:
+
+- Recent events, news, or announcements
+- Current prices, rates, scores, or statistics
+- Information about specific organizations, people, or products that might have changed
+- Explicit requests to search or look something up
+
+Claude answers directly without searching when the request draws on stable knowledge:
+
+- Established facts, math, science fundamentals, or coding concepts
+- Creative writing or brainstorming
+- Analysis of content already provided in the conversation
+- Conversational turns and greetings
+
+Triggering is steerable through your system prompt: you can encourage Claude to search more readily or to prefer answering directly. For a hard constraint, use `max_uses` to cap the number of searches for each request.
+
 ### Dynamic filtering
 
 Web search is a token-intensive task. With basic web search, Claude needs to pull search results into context, fetch full HTML from multiple websites, and reason over all of it before arriving at an answer. Often, much of this content is irrelevant, which can degrade response quality.
@@ -194,7 +212,7 @@ void main() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 4096,
@@ -397,7 +415,7 @@ void main() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -470,6 +488,8 @@ The web search tool supports the following parameters:
 #### Max uses
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
+
+Simple factual queries typically use 1–3 searches; comparative or multi-entity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
 
 #### Domain filtering
 

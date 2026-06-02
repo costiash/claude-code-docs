@@ -72,8 +72,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
   - `List<Request> requests`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
@@ -2971,8 +2969,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -3191,8 +3187,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -3410,8 +3404,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -3622,8 +3614,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -3745,8 +3735,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
-
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
 ### Returns
 
@@ -4999,7 +4987,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `Optional<OutputTokensDetails> outputTokensDetails`
+          - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -6640,7 +6628,7 @@ public final class Main {
 
             The number of output tokens which were used.
 
-          - `Optional<OutputTokensDetails> outputTokensDetails`
+          - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -8067,7 +8055,7 @@ public final class Main {
 
           The number of output tokens which were used.
 
-        - `Optional<OutputTokensDetails> outputTokensDetails`
+        - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -9456,7 +9444,7 @@ public final class Main {
 
         The number of output tokens which were used.
 
-      - `Optional<OutputTokensDetails> outputTokensDetails`
+      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
         Breakdown of output tokens by category.
 

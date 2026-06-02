@@ -183,7 +183,7 @@ public class PromptCachingExample {
 use Anthropic\Client;
 use Anthropic\Messages\CacheControlEphemeral;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->create(
     maxTokens: 1024,
@@ -259,7 +259,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 | Model             | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 |-------------------|-------------------|-----------------|-----------------|----------------------|---------------|
-| <NextOpus />      | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
+| Claude Opus 4.8     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.7     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.6     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.5   | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
@@ -478,7 +478,7 @@ public class AutomaticCachingExample {
 use Anthropic\Client;
 use Anthropic\Messages\CacheControlEphemeral;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->create(
     maxTokens: 1024,
@@ -643,7 +643,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta), the minimum cacheable prompt length is:
 
 - 4,096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
-- 1,024 tokens for <NextOpus />, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations))
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations))
 - 4,096 tokens for Claude Haiku 4.5
 - 2,048 tokens for Claude Haiku 3.5 ([retired, except on Vertex AI](/docs/en/about-claude/model-deprecations))
 
@@ -701,7 +701,7 @@ The following table shows which parts of the cache are invalidated by different 
 | **Non-tool results passed to extended thinking requests** | ✓ | ✓ | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](#caching-with-thinking-blocks). |
 
 <Note>
-On <NextOpus />, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages).
+On Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages).
 </Note>
 
 ### Tracking cache performance
@@ -1488,7 +1488,7 @@ public class LegalDocumentAnalysisExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -1936,7 +1936,7 @@ public class ConversationWithCacheControlExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -2766,7 +2766,7 @@ public class MultipleCacheBreakpointsExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -3193,7 +3193,7 @@ These measures ensure that prompt caching maintains data privacy and security wh
 
       use Anthropic\Client;
 
-      $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+      $client = new Client();
 
       $message = $client->beta->promptCaching->messages->create(
           maxTokens: 1024,
@@ -3269,7 +3269,7 @@ These measures ensure that prompt caching maintains data privacy and security wh
 
       use Anthropic\Client;
 
-      $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+      $client = new Client();
 
       $message = $client->messages->create(
           maxTokens: 1024,

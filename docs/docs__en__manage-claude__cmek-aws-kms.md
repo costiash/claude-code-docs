@@ -104,7 +104,7 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
       ![AWS KMS Define key administrative permissions step listing IAM roles that can administer the key.](/docs/images/cmek/aws-admin-permissions.png)
     </Frame>
 
-    <Frame caption="Do not add Anthropic's account ID here — this wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see above).">
+    <Frame caption="Do not add Anthropic's account ID here. This wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see above).">
       ![AWS KMS Define key usage permissions step shown as an anti-pattern: adding Anthropic's account ID 915198916910 under Other AWS accounts here yields an over-permissive policy. Skip this step and leave it empty.](/docs/images/cmek/aws-usage-permissions.png)
     </Frame>
   </Step>

@@ -58,8 +58,6 @@
 
   - `"thinking-token-count-2026-05-13"`
 
-  - `"mid-conversation-system-2026-04-07"`
-
 ### Beta API Error
 
 - `BetaAPIError`
@@ -3739,7 +3737,7 @@ var_dump($betaMessageTokensCount);
 
     The cumulative number of output tokens which were used.
 
-  - `?OutputTokensDetails outputTokensDetails`
+  - `?BetaOutputTokensDetails outputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -3839,6 +3837,21 @@ var_dump($betaMessageTokensCount);
   - `?BetaTokenTaskBudget taskBudget`
 
     User-configurable total token budget across contexts.
+
+### Beta Output Tokens Details
+
+- `BetaOutputTokensDetails`
+
+  - `int thinkingTokens`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -6166,7 +6179,7 @@ var_dump($betaMessageTokensCount);
 
     The number of output tokens which were used.
 
-  - `?OutputTokensDetails outputTokensDetails`
+  - `?BetaOutputTokensDetails outputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -8895,6 +8908,10 @@ var_dump($betaManagedAgentsAgent);
 ### Beta Managed Agents Model
 
 - `BetaManagedAgentsModel`
+
+  - `"claude-opus-4-8"`
+
+    Frontier intelligence for long-running agents and coding
 
   - `"claude-opus-4-7"`
 

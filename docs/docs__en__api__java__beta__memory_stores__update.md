@@ -68,8 +68,6 @@ Update a memory store
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
   - `Optional<String> description`
 
     New description for the store, up to 1024 characters. Pass an empty string to clear it.

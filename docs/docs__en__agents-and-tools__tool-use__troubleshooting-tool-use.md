@@ -43,6 +43,12 @@ Symptom-to-fix tables for the most common tool-use errors. Each fix cross-refere
 | `Input schema is not compatible with strict mode: string patterns are not supported` | Using `pattern` with `strict: true` | Remove the pattern or drop `strict: true`. The `pattern` keyword is not in the supported JSON Schema subset yet. |
 | `All tools have defer_loading: true` | No tools visible to the model | At least one tool must be immediately loaded. The tool search tool itself must never have `defer_loading: true`. |
 
+## Claude flags tool results as prompt injection
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Claude refuses to act on a tool result, or asks the user to confirm instructions that came from it | Your own instructions are being delivered inside the `tool_result` content | Claude is trained to treat instructions inside tool results as potentially untrusted third-party content. Move your instructions out of the tool result: send them in a `user` turn after the `tool_result` block, or (on Claude Opus 4.8 and later) in a [mid-conversation system message](/docs/en/build-with-claude/mid-conversation-system-messages). Keep the tool result to just the data. See [Mitigate jailbreaks and prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks#indirect-prompt-injection). |
+
 ## JSON escaping differences (Opus 4.6+)
 
 | Symptom | Cause | Fix |

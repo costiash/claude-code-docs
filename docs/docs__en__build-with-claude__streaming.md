@@ -147,7 +147,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 
     use Anthropic\Client;
 
-    $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+    $client = new Client();
 
     $stream = $client->messages->createStream(
         maxTokens: 1024,
@@ -330,7 +330,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
 
     use Anthropic\Client;
 
-    $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+    $client = new Client();
 
     $stream = $client->messages->createStream(
         maxTokens: 128000,
@@ -614,7 +614,7 @@ public class StreamingExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $stream = $client->messages->createStream(
     maxTokens: 256,
@@ -969,7 +969,7 @@ public class StreamingToolUse {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $stream = $client->messages->createStream(
     maxTokens: 1024,
@@ -1312,7 +1312,7 @@ void main() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $stream = $client->messages->createStream(
     maxTokens: 20000,
@@ -1573,7 +1573,7 @@ public class WebSearchStreaming {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $stream = $client->messages->createStream(
     maxTokens: 1024,

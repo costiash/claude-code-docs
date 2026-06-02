@@ -13,13 +13,6 @@ Hard-deletes the project and all its associated data including:
 
 Project must have no attached chats - returns 409 if chats exist.
 
-Returns:
-ClaudeProjectDeleteResponse confirming the deletion
-
-Raises:
-ConflictException: If project has chats attached
-NotFoundException: If project doesn't exist or already deleted
-
 ### Path Parameters
 
 - `project_id: string`

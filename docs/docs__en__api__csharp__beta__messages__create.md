@@ -2256,8 +2256,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessage:`
@@ -3363,7 +3361,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 

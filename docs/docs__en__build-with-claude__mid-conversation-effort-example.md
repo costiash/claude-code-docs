@@ -13,7 +13,7 @@ The mode is not an API parameter. It is built entirely from documented pieces:
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
 <Note>
-This example uses mid-conversation system messages, which are currently available on <NextOpus /> only. The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
+This example uses mid-conversation system messages, which are currently available on Claude Opus 4.8 only. The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
 </Note>
 
 ## Set up the loop
@@ -32,7 +32,6 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-# model-id-sweep: next-opus
 MODEL = "claude-opus-4-8"
 EFFORT = "xhigh"
 
@@ -55,7 +54,6 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-// model-id-sweep: next-opus
 const MODEL = "claude-opus-4-8";
 const EFFORT = "xhigh";
 
@@ -79,7 +77,6 @@ using Anthropic.Models.Messages;
 
 AnthropicClient client = new();
 
-// model-id-sweep: next-opus
 const string model = "claude-opus-4-8";
 var effort = Effort.Xhigh;
 
@@ -114,7 +111,6 @@ import (
 var client = anthropic.NewClient()
 
 const (
-	// model-id-sweep: next-opus
 	modelID = "claude-opus-4-8"
 	effort  = anthropic.OutputConfigEffortXhigh
 
@@ -173,7 +169,6 @@ import java.util.stream.IntStream;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-// model-id-sweep: next-opus
 static final String MODEL = "claude-opus-4-8";
 static final OutputConfig.Effort EFFORT = OutputConfig.Effort.XHIGH;
 
@@ -197,7 +192,6 @@ require "tmpdir"
 
 CLIENT = Anthropic::Client.new
 
-# model-id-sweep: next-opus
 MODEL = "claude-opus-4-8"
 EFFORT = :xhigh
 
@@ -219,7 +213,6 @@ use Anthropic\Messages\ToolUseBlock;
 
 $client = new Client();
 
-// model-id-sweep: next-opus
 const MODEL = 'claude-opus-4-8';
 const EFFORT = 'xhigh';
 
@@ -2201,7 +2194,6 @@ The agent appends the user's message first, then any system messages that are du
 # stops at the first tool call. The agent loop that executes tool calls and fans
 # out subagents is shown in the SDK tabs; the Workflow description is condensed
 # here, the SDK examples carry the full standing-consent text.
-# model-id-sweep: next-opus
 curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -2253,7 +2245,6 @@ EOF
 # subagents is shown in the SDK tabs; the Workflow description is condensed here,
 # the SDK examples carry the full standing-consent text.
 ant messages create <<'YAML'
-# model-id-sweep: next-opus
 model: claude-opus-4-8
 max_tokens: 64000
 system: You are a helpful general-purpose agent. Answer the user's request directly.

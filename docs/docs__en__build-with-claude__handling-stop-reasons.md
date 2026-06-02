@@ -321,7 +321,7 @@ if (response.stopReason().isPresent() && response.stopReason().get().equals(Stop
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->create(
     maxTokens: 1024,

@@ -219,7 +219,7 @@ func main() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -293,6 +293,7 @@ The advisor itself runs without tools and without context management. Its thinki
 | `name`                  | string         | _required_   | Must be `"advisor"`.                                                                                                                               |
 | `model`                 | string         | _required_   | The advisor model ID, such as `"claude-opus-4-8"`. Billed at this model's rates for the sub-inference.                                             |
 | `max_uses`              | integer        | unlimited    | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](#cost-control) for conversation-level limits. |
+| `max_tokens`            | integer        | advisor model's output cap | Caps the advisor's total output (thinking plus text) per call. Minimum 1024. See [Capping advisor output](#capping-advisor-output). |
 | `caching`               | object \| null | `null` (off) | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching). |
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker; it is an on/off switch. The server decides where cache boundaries go.
@@ -339,10 +340,12 @@ The `server_tool_use.input` is always empty. The server constructs the advisor's
 
 The `advisor_tool_result.content` field is a discriminated union. For successful calls, the variant depends on the advisor model:
 
-| Variant                   | Fields              | Returned when                                                       |
-| ------------------------- | ------------------- | ------------------------------------------------------------------- |
-| `advisor_result`          | `text`              | The advisor model returns plaintext (for example, Claude Opus 4.8). |
-| `advisor_redacted_result` | `encrypted_content` | The advisor model returns encrypted output.                         |
+| Variant                   | Fields                            | Returned when                                                       |
+| ------------------------- | --------------------------------- | ------------------------------------------------------------------- |
+| `advisor_result`          | `text`, `stop_reason`             | The advisor model returns plaintext (for example, Claude Opus 4.8). |
+| `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output.                         |
+
+The `stop_reason` field is present on both result variants whenever [`max_tokens`](#capping-advisor-output) is set on the tool definition, carrying the advisor sub-call's stop reason (typically `"end_turn"`; `"max_tokens"` when the cap is hit), matching the top-level Messages API [`stop_reason`](/docs/en/build-with-claude/handling-stop-reasons). The field is absent when `max_tokens` is not set.
 
 With `advisor_result`, the `text` field contains human-readable advice. With `advisor_redacted_result`, the `encrypted_content` field contains an opaque blob that you cannot read; on the next turn, the server decrypts it and renders the plaintext into the executor's prompt.
 
@@ -488,7 +491,7 @@ The aggregation rules differ by field. Top-level `output_tokens` is the sum of a
 
 Advisor output is typically 400 to 700 text tokens, or 1,400 to 1,800 tokens total including thinking. The cost savings come from the advisor not generating your full final output; the executor does that at its lower rate.
 
-The top-level `max_tokens` applies to executor output only. It does not bound advisor sub-inference tokens. The advisor's tokens also do not draw from any task budget applied to the executor.
+The top-level `max_tokens` applies to executor output only. It does not bound advisor sub-inference tokens. To cap advisor output directly, set [`max_tokens` on the tool definition](#capping-advisor-output). The advisor's tokens also do not draw from any task budget applied to the executor.
 
 ## Advisor prompt caching
 
@@ -609,7 +612,7 @@ If you've already retrieved data pointing one way and the advisor points another
 
 #### Trimming advisor output length
 
-Advisor output is the advisor's largest cost driver, and `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
+Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
 ```text
 (Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
@@ -623,7 +626,54 @@ This line can be prefixed programmatically by your agent framework before sendin
   (more consults, each shorter).
 </Note>
 
-Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) for the strongest cost-versus-quality tradeoff.
+Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) for the strongest cost-versus-quality tradeoff. For a hard ceiling rather than a soft request, see [Capping advisor output](#capping-advisor-output).
+
+### Capping advisor output
+
+Set `max_tokens` on the tool definition to cap the advisor's total output (thinking plus text) per call:
+
+```python
+tools = [
+    {
+        "type": "advisor_20260301",
+        "name": "advisor",
+        "model": "claude-opus-4-8",
+        "max_tokens": 2048,
+    }
+]
+```
+
+The minimum value is 1024. Setting `max_tokens` above the advisor model's own output cap returns a 400 error. The cap applies to each advisor call independently and is not shared across calls in the same request.
+
+This is not a hard truncation alone. The server also passes the advisor its remaining-token budget, so the advisor shapes its response to fit.
+
+**Recommended starting point:** `max_tokens: 2048`. In Anthropic's testing on a hard reasoning benchmark (n=40 per configuration), this reduced mean advisor output by roughly 7x compared with leaving the cap unset, with near-zero truncation and no detectable quality degradation. The minimum value of 1024 reduced output roughly 10x but truncated around 10 percent of calls. Accuracy differences across all configurations were within noise at this sample size; validate on your own workload.
+
+| `max_tokens` | Mean advisor output tokens | Calls truncated |
+| ------------ | -------------------------- | --------------- |
+| unset        | ~4,200 to 5,900            | n/a             |
+| 2048         | ~630 to 840                | ~0%             |
+| 1024         | ~370 to 480                | ~10%            |
+
+Hard reasoning tasks elicit substantially longer advisor output than the [typical 1,400 to 1,800 tokens](#usage-and-billing) quoted earlier for lighter workloads. Use this table to size the savings ratio, not as a universal baseline for advisor output.
+
+When the advisor does hit the cap, the result block carries `stop_reason: "max_tokens"`. Use this to detect truncated advice and decide whether to raise the cap or let the executor proceed with partial guidance. The field is absent when `max_tokens` is not set.
+
+```json
+{
+  "type": "advisor_tool_result",
+  "tool_use_id": "srvtoolu_abc123",
+  "content": {
+    "type": "advisor_result",
+    "text": "Use a channel-based coordination pattern. The tricky part is",
+    "stop_reason": "max_tokens"
+  }
+}
+```
+
+Check `output_tokens` on the corresponding `advisor_message` entry in `usage.iterations` to see how close each call came to its cap.
+
+Compared with the [prompt-based approach](#trimming-advisor-output-length), `max_tokens` is a hard ceiling rather than a soft request. Use `max_tokens` when you need a guaranteed bound for cost or latency; use the prompt-based approach (or both together) when you want to bias toward brevity without risking a mid-thought cut.
 
 ### Pairing with effort settings
 
@@ -638,5 +688,5 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 
 - **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
 - **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
-- **`max_tokens` applies to executor output only.** It does not bound advisor tokens.
+- **The top-level `max_tokens` applies to executor output only.** It does not bound advisor tokens. To cap advisor output, set [`max_tokens` on the tool definition](#capping-advisor-output).
 - **[Priority Tier](/docs/en/api/service-tiers)** is honored for each model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.

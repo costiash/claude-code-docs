@@ -68,8 +68,6 @@ Send Events
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.

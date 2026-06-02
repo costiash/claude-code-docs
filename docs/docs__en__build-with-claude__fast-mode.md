@@ -4,7 +4,7 @@ Higher output speed for supported Claude Opus models, delivering significantly f
 
 ---
 
-Fast mode provides significantly faster output token generation for <NextOpus />, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` in your API request to opt in. Fast mode delivers up to 2.5x higher output tokens per second from the same model.
+Fast mode provides significantly faster output token generation for Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` in your API request to opt in. Fast mode delivers up to 2.5x higher output tokens per second from the same model.
 
 <Note>
 Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
@@ -18,23 +18,23 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 
 Fast mode is supported on the following models:
 
-- <NextOpus /> (<NextOpusId />)
+- Claude Opus 4.8 (claude-opus-4-8)
 - Claude Opus 4.7 (claude-opus-4-7)
 - Claude Opus 4.6 (claude-opus-4-6)
 
 <Note>
-Fast mode for <NextOpus /> launches as a research preview on the Claude API, including Claude Managed Agents, only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
+Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including Claude Managed Agents, only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
 </Note>
 
 <Warning>
-Fast mode for Claude Opus 4.6 is deprecated as of the <NextOpus /> launch and will be removed approximately 30 days later. After removal, requests to `claude-opus-4-6` with `speed: "fast"` will fall back to standard speed at standard pricing rather than return an error. Migrate to fast mode for <NextOpus /> or Claude Opus 4.7 to keep the speedup.
+Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later. After removal, requests to `claude-opus-4-6` with `speed: "fast"` will fall back to standard speed at standard pricing rather than return an error. Migrate to fast mode for Claude Opus 4.8 or Claude Opus 4.7 to keep the speedup.
 </Warning>
 
 ## How fast mode works
 
 Fast mode runs the same model with a faster inference configuration. There is no change to intelligence or capabilities.
 
-- On <NextOpus />, Claude Opus 4.7, and Claude Opus 4.6, up to 2.5x higher output tokens per second compared to standard speed
+- Up to 2.5x higher output tokens per second compared to standard speed
 - Speed benefits are focused on output tokens per second (OTPS), not time to first token (TTFT)
 - Same model weights and behavior (not a different model)
 
@@ -232,7 +232,7 @@ Fast mode is priced at a per-model multiplier on standard rates across the full 
 | Model | Input | Output |
 |:------|:------|:-------|
 | Claude Opus 4.6 / Claude Opus 4.7 | $30 / MTok | $150 / MTok |
-| <NextOpus /> | $10 / MTok | $50 / MTok |
+| Claude Opus 4.8 | $10 / MTok | $50 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -816,7 +816,7 @@ message = create_message_with_fast_fallback(
 ## Considerations
 
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-- **Supported models:** Fast mode is supported on <NextOpus />, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
+- **Supported models:** Fast mode is supported on Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](/docs/en/build-with-claude/batch-processing).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](/docs/en/api/service-tiers).

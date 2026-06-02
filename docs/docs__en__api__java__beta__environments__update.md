@@ -68,8 +68,6 @@ Update an existing environment's configuration.
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
-
   - `Optional<Config> config`
 
     Updated environment configuration

@@ -6,9 +6,6 @@
 
 List current user members of an organization.
 
-Returns:
-List of user members with pagination info
-
 ### Path Parameters
 
 - `org_uuid: string`

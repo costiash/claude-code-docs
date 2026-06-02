@@ -619,7 +619,7 @@ public class FileUploadExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Example: Reading a text file
 $textContent = file_get_contents("document.txt");
@@ -798,7 +798,7 @@ public class ListFiles {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $files = $client->beta->files->list();
 print_r($files);

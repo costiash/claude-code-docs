@@ -6,9 +6,6 @@ Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
 
-Returns:
-ComplianceProjectDocumentDeleteResponse confirming the deletion
-
 ### Path Parameters
 
 - `document_id: string`

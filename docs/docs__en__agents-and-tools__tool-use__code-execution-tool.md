@@ -232,7 +232,7 @@ public class CodeExecution {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 4096,
@@ -617,7 +617,7 @@ public class CodeExecutionWithFiles {
 use Anthropic\Client;
 use Anthropic\Core\FileParam;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Upload a file
 $fileObject = $client->beta->files->upload(
@@ -1015,7 +1015,7 @@ List<String> extractFileIds(BetaMessage response) {
 use Anthropic\Beta\Messages\BetaMessage;
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1617,7 +1617,7 @@ public class ContainerReuse {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response1 = $client->messages->create(
     maxTokens: 4096,

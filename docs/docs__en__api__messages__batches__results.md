@@ -918,7 +918,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: object { thinking_tokens }`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 

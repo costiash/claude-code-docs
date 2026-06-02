@@ -2688,7 +2688,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `OutputTokensDetails UsageOutputTokensDetails`
+    - `OutputTokensDetails OutputTokensDetails`
 
       Breakdown of output tokens by category.
 

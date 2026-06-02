@@ -2258,8 +2258,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessage:`
@@ -3365,7 +3363,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -5685,8 +5683,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -11550,7 +11546,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       The number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -11800,7 +11796,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     The cumulative number of output tokens which were used.
 
-  - `required OutputTokensDetails? OutputTokensDetails`
+  - `required BetaOutputTokensDetails? OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -12972,6 +12968,21 @@ Console.WriteLine(betaMessageTokensCount);
     - `Long? Remaining`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Output Tokens Details
+
+- `class BetaOutputTokensDetails:`
+
+  - `required Long ThinkingTokens`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -14285,7 +14296,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       The cumulative number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -15424,7 +15435,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         The number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -16591,7 +16602,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           The number of output tokens which were used.
 
-        - `required OutputTokensDetails? OutputTokensDetails`
+        - `required BetaOutputTokensDetails? OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -16703,7 +16714,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         The cumulative number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -16711,17 +16722,6 @@ Console.WriteLine(betaMessageTokensCount);
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
-
-        - `required Long ThinkingTokens`
-
-          Number of output tokens the model generated as internal reasoning, including
-          the thinking-block delimiter tokens.
-
-          Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
-          generation count by a small number of tokens. Always ≤ `output_tokens`;
-          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `required BetaServerToolUsage? ServerToolUse`
 
@@ -21162,7 +21162,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     The number of output tokens which were used.
 
-  - `required OutputTokensDetails? OutputTokensDetails`
+  - `required BetaOutputTokensDetails? OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -25168,8 +25168,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -25543,8 +25541,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -25749,8 +25745,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -25972,8 +25966,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -26171,8 +26163,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -26281,8 +26271,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -27407,7 +27395,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `required OutputTokensDetails? OutputTokensDetails`
+          - `required BetaOutputTokensDetails? OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -28851,7 +28839,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             The number of output tokens which were used.
 
-          - `required OutputTokensDetails? OutputTokensDetails`
+          - `required BetaOutputTokensDetails? OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -30122,7 +30110,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           The number of output tokens which were used.
 
-        - `required OutputTokensDetails? OutputTokensDetails`
+        - `required BetaOutputTokensDetails? OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -31355,7 +31343,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         The number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 

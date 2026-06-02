@@ -21,7 +21,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 ## Basic request and response
 
 <Note>
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including <NextOpus />. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including Claude Opus 4.8. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
 </Note>
 
 <CodeGroup>
@@ -144,7 +144,7 @@ The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on
 
   use Anthropic\Client;
 
-  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+  $client = new Client();
 
   $message = $client->messages->create(
       maxTokens: 1024,
@@ -340,7 +340,7 @@ public class MultiTurnConversation {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -396,7 +396,7 @@ puts message
 
 ### System role in messages
 
-The first message in `messages` must always have `"role": "user"`. After that, on <NextOpus />, you can also include messages with `"role": "system"` to add a new system instruction partway through a conversation.
+On Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](/docs/en/build-with-claude/mid-conversation-system-messages#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
@@ -407,7 +407,7 @@ See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversati
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), <NextOpus />, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
 </Warning>
 
 <CodeGroup>
@@ -554,7 +554,7 @@ Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/gla
 
   use Anthropic\Client;
 
-  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+  $client = new Client();
 
   $message = $client->messages->create(
       maxTokens: 1,
@@ -1042,7 +1042,7 @@ Claude can read both text and images in requests. Images can be supplied using t
 
   use Anthropic\Client;
 
-  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+  $client = new Client();
 
   // Option 1: Base64-encoded image
   $image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";

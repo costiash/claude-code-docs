@@ -87,7 +87,11 @@ are sorted chronologically (time ascending) by created_at.
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -141,9 +145,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects \
 **get** `/v1/compliance/apps/projects/{project_id}`
 
 Get detailed information for a specific project.
-
-Returns:
-Detailed project information including description, instructions, and counts
 
 ### Path Parameters
 
@@ -207,7 +208,11 @@ Detailed project information including description, instructions, and counts
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -261,13 +266,6 @@ Hard-deletes the project and all its associated data including:
 - Sync sources
 
 Project must have no attached chats - returns 409 if chats exist.
-
-Returns:
-ClaudeProjectDeleteResponse confirming the deletion
-
-Raises:
-ConflictException: If project has chats attached
-NotFoundException: If project doesn't exist or already deleted
 
 ### Path Parameters
 
@@ -350,7 +348,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -416,7 +418,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -458,12 +464,6 @@ GET /v1/compliance/apps/chats/files/{claude_file_id}/content endpoint.
 
 The text content of attached project documents can be fetched using the
 GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
-
-Returns:
-List of project attachments with pagination info
-
-Raises:
-NotFoundException: If project doesn't exist or project_id format is invalid
 
 ### Path Parameters
 
@@ -648,9 +648,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
 Get detailed information for a specific project document.
 
-Returns:
-Project document information including content and metadata
-
 ### Path Parameters
 
 - `document_id: string`
@@ -681,7 +678,11 @@ Project document information including content and metadata
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -768,7 +769,11 @@ consumer can dedupe or match hashes without downloading every document.
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -810,9 +815,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
-
-Returns:
-ComplianceProjectDocumentDeleteResponse confirming the deletion
 
 ### Path Parameters
 
@@ -879,7 +881,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -930,7 +936,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 

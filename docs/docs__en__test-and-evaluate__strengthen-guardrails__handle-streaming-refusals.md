@@ -272,7 +272,7 @@ void resetConversation() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [];
 
 function resetConversation(&$messages) {

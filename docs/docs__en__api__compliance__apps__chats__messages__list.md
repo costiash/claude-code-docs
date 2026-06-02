@@ -50,6 +50,14 @@ Retrieves message history and file metadata for a specific chat.
 
   - `"desc"`
 
+- `tool_result_max_chars: optional number`
+
+  Maximum characters returned per tool-result text item. Items longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+
+- `tool_use_input_max_chars: optional number`
+
+  Maximum characters of JSON-encoded tool input returned per tool_use block. Inputs longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+
 - `updated_at: optional object { gt, gte, lt, lte }`
 
   - `gt: optional string`
@@ -106,17 +114,97 @@ Retrieves message history and file metadata for a specific chat.
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }`
+  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `text: string`
+    - `Text object { text, type }`
 
-      Text content from human or assistant
+      Text content block.
 
-    - `type: "text"`
+      - `text: string`
 
-      - `"text"`
+        Text content from human or assistant
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `ToolUse object { id, input, integration_name, 4 more }`
+
+      Tool invocation requested by the assistant.
+
+      - `id: string`
+
+        Tool-use ID, e.g. 'toolu_01AbC...'
+
+      - `input: string`
+
+        Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool invoked
+
+      - `truncated: boolean`
+
+        True when `input` was shortened. Pass tool_use_input_max_chars=-1 to disable the limit
+
+      - `type: "tool_use"`
+
+        - `"tool_use"`
+
+    - `ToolResult object { content, integration_name, is_error, 5 more }`
+
+      Result returned by a tool invocation.
+
+      - `content: array of object { text, type }`
+
+        Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
+
+        - `text: string`
+
+          Text returned by the tool
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `is_error: boolean`
+
+        True when the tool reported an error
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool that produced this result
+
+      - `tool_use_id: string`
+
+        ID of the tool_use block this result responds to
+
+      - `truncated: boolean`
+
+        True when one or more text items in `content` were shortened. Pass tool_result_max_chars=-1 to retrieve full content.
+
+      - `type: "tool_result"`
+
+        - `"tool_result"`
 
   - `created_at: string`
 

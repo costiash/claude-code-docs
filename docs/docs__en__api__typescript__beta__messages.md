@@ -2692,7 +2692,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -2745,8 +2745,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"cache-diagnosis-2026-04-07"`
 
         - `"thinking-token-count-2026-05-13"`
-
-        - `"mid-conversation-system-2026-04-07"`
 
   - `MessageCreateParamsNonStreaming extends MessageCreateParamsBase`
 
@@ -4003,7 +4001,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails | null`
+    - `output_tokens_details: BetaOutputTokensDetails | null`
 
       Breakdown of output tokens by category.
 
@@ -6734,7 +6732,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -6787,8 +6785,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -13620,7 +13616,7 @@ console.log(betaMessageTokensCount.context_management);
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails | null`
+    - `output_tokens_details: BetaOutputTokensDetails | null`
 
       Breakdown of output tokens by category.
 
@@ -13880,7 +13876,7 @@ console.log(betaMessageTokensCount.context_management);
 
     The cumulative number of output tokens which were used.
 
-  - `output_tokens_details: OutputTokensDetails | null`
+  - `output_tokens_details: BetaOutputTokensDetails | null`
 
     Breakdown of output tokens by category.
 
@@ -15196,6 +15192,21 @@ console.log(betaMessageTokensCount.context_management);
     - `remaining?: number | null`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Output Tokens Details
+
+- `BetaOutputTokensDetails`
+
+  - `thinking_tokens: number`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -16681,7 +16692,7 @@ console.log(betaMessageTokensCount.context_management);
 
       The cumulative number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails | null`
+    - `output_tokens_details: BetaOutputTokensDetails | null`
 
       Breakdown of output tokens by category.
 
@@ -17952,7 +17963,7 @@ console.log(betaMessageTokensCount.context_management);
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails | null`
+      - `output_tokens_details: BetaOutputTokensDetails | null`
 
         Breakdown of output tokens by category.
 
@@ -19255,7 +19266,7 @@ console.log(betaMessageTokensCount.context_management);
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: OutputTokensDetails | null`
+        - `output_tokens_details: BetaOutputTokensDetails | null`
 
           Breakdown of output tokens by category.
 
@@ -19371,7 +19382,7 @@ console.log(betaMessageTokensCount.context_management);
 
         The cumulative number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails | null`
+      - `output_tokens_details: BetaOutputTokensDetails | null`
 
         Breakdown of output tokens by category.
 
@@ -19379,17 +19390,6 @@ console.log(betaMessageTokensCount.context_management);
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
-
-        - `thinking_tokens: number`
-
-          Number of output tokens the model generated as internal reasoning, including
-          the thinking-block delimiter tokens.
-
-          Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
-          generation count by a small number of tokens. Always ≤ `output_tokens`;
-          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: BetaServerToolUsage | null`
 
@@ -24352,7 +24352,7 @@ console.log(betaMessageTokensCount.context_management);
 
     The number of output tokens which were used.
 
-  - `output_tokens_details: OutputTokensDetails | null`
+  - `output_tokens_details: BetaOutputTokensDetails | null`
 
     Breakdown of output tokens by category.
 
@@ -28766,7 +28766,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -28819,8 +28819,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -28984,7 +28982,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -29037,8 +29035,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29201,7 +29197,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -29254,8 +29250,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29418,7 +29412,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -29471,8 +29465,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29627,7 +29619,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -29680,8 +29672,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29748,7 +29738,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -29801,8 +29791,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -31059,7 +31047,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: OutputTokensDetails | null`
+          - `output_tokens_details: BetaOutputTokensDetails | null`
 
             Breakdown of output tokens by category.
 
@@ -32698,7 +32686,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: OutputTokensDetails | null`
+          - `output_tokens_details: BetaOutputTokensDetails | null`
 
             Breakdown of output tokens by category.
 
@@ -34129,7 +34117,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: OutputTokensDetails | null`
+        - `output_tokens_details: BetaOutputTokensDetails | null`
 
           Breakdown of output tokens by category.
 
@@ -35522,7 +35510,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails | null`
+      - `output_tokens_details: BetaOutputTokensDetails | null`
 
         Breakdown of output tokens by category.
 

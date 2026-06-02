@@ -3580,7 +3580,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: object { thinking_tokens }`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -4852,7 +4852,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: object { thinking_tokens }`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -5924,7 +5924,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: object { thinking_tokens }`
+        - `output_tokens_details: OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -6958,7 +6958,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: object { thinking_tokens }`
+      - `output_tokens_details: OutputTokensDetails`
 
         Breakdown of output tokens by category.
 

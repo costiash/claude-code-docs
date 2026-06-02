@@ -4,9 +4,6 @@
 
 Get detailed information for a specific project.
 
-Returns:
-Detailed project information including description, instructions, and counts
-
 ### Path Parameters
 
 - `project_id: string`
@@ -69,7 +66,11 @@ Detailed project information including description, instructions, and counts
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 

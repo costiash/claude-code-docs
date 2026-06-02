@@ -1358,6 +1358,10 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsModel`
 
+  - `"claude-opus-4-8"`
+
+    Frontier intelligence for long-running agents and coding
+
   - `"claude-opus-4-7"`
 
     Frontier intelligence for long-running agents and coding

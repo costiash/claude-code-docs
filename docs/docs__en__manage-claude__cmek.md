@@ -60,7 +60,7 @@ For minimal latency, choose a region close to Anthropic's US infrastructure:
 
 Some features are turned off or substantially modified when CMEK is enabled:
 
-- Skills, sessions, server-side stateful tools, the standalone Files API (`/v1/files`), Batch API, and code execution.
+- Managed agent memory and agent dreaming are disabled.
 - Beta and research preview features may not be covered by CMEK.
 
 ### Not encrypted
@@ -70,6 +70,23 @@ These features remain available, but their data is not encrypted under your key.
 - Workbench in the Console.
 - Data that is not at rest (such as cache) and data with a TTL shorter than 24 hours.
 - Activity Feed, audit logs and telemetry network traffic like OTEL, so customers can maintain compliance even if a key is revoked.
+
+### Feature support
+
+The following APIs, managed agent resources, and tools store data at rest under your key when CMEK is enabled:
+
+| APIs | Managed Agents | Tools and features |
+|:-----|:---------------|:-------------------|
+| Messages | Agents | Web search |
+| Models | Environments | Web fetch |
+| Files | Sessions | Code execution |
+| Batch | Vaults | Bash tool |
+| Skills | | Text editor tool |
+| User profiles | | MCP connector |
+| | | Structured outputs (Claude Sonnet 4.6 and Claude Haiku 4.5 only) |
+| | | Advisor tool |
+| | | Computer use |
+| | | Context management |
 
 ## Limitations
 

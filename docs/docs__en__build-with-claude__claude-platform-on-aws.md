@@ -313,7 +313,7 @@ The following models are available on Claude Platform on AWS:
 
 | Model | Model ID |
 | :--- | :--- |
-| <NextOpus /> | <NextOpusId /> |
+| Claude Opus 4.8 | claude-opus-4-8 |
 | Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |

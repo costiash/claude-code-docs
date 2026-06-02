@@ -129,7 +129,7 @@ In order to have Anthropic use your encryption key, you must configure an Anthro
     Confirm that:
 
     - `rbac` is `true`.
-    - `purge` is `true`. If it is `false` or `null`, enable purge protection on the vault before proceeding — without it, a soft-deleted key can be permanently purged during the retention window, making your CMEK-protected data unrecoverable.
+    - `purge` is `true`. If it is `false` or `null`, enable purge protection on the vault before proceeding. Without it, a soft-deleted key can be permanently purged during the retention window, making your CMEK-protected data unrecoverable.
     - `pub` is `"Enabled"`. If it is `"Disabled"`, Anthropic cannot reach the vault over its public data-plane endpoint and validation fails.
     - `net` is `"Allow"`, or, if it is `"Deny"`, that `ipRules` include Anthropic's egress ranges (contact Anthropic for the current list).
     - `uri` is the vault URI you use when you register the key.
