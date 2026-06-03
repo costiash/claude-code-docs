@@ -18,15 +18,21 @@ This example uses mid-conversation system messages, which are currently availabl
 
 ## Set up the loop
 
-The example is a single file. The constants control the effort level, the fan-out width, and how often the mode refresher is re-sent.
+The example is a single file. The constants control the effort level, the fan-out shape, and how often the mode refresher is re-sent. `MAX_CONCURRENT` caps how many subagents run at the same time (the PHP port is sequential and ignores it); `MAX_TOTAL_SUBTASKS` caps how many the model may queue in a single Workflow call. Splitting the two lets the model plan a large backlog without launching it all at once. The `DOC_TEST_MODE` check caps the loops to a single turn when that environment variable is set, so the automated docs harness can validate that the file compiles and finishes quickly without running the full orchestration; leave it unset when running the example yourself.
 
 <CodeGroup>
   
 ````python
+import atexit
 import concurrent.futures
+import hashlib
 import json
+import os
+import shutil
 import subprocess
 import sys
+import tempfile
+import threading
 
 import anthropic
 
@@ -37,17 +43,26 @@ EFFORT = "xhigh"
 
 SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
 
+REQUEST_TIMEOUT_SECONDS = 600
 BASH_TIMEOUT_SECONDS = 60
 TOOL_RESULT_MAX_CHARS = 8000
-MAX_PARALLEL_AGENTS = 10
-MAX_SUBAGENT_TURNS = 15
-MAX_MAIN_TURNS = 30
+MAX_CONCURRENT = 10
+DOC_TEST_MODE = bool(os.environ.get("DOC_TEST_MODE"))
+MAX_TOTAL_SUBTASKS = 2 if DOC_TEST_MODE else 200
+MAX_SUBAGENT_TURNS = 1 if DOC_TEST_MODE else 15
+MAX_MAIN_TURNS = 1 if DOC_TEST_MODE else 30
 TURNS_BETWEEN_REFRESHERS = 10
+JOURNAL_PATH = os.environ.get("ORCH_JOURNAL") or "orchestration_journal.json"
 ````
 
   
 ````typescript
 import { exec } from "node:child_process";
+import { createHash } from "node:crypto";
+import { rmSync } from "node:fs";
+import { mkdtemp, readFile, rename, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { promisify } from "node:util";
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -60,17 +75,23 @@ const EFFORT = "xhigh";
 const SYSTEM_PROMPT =
   "You are a helpful general-purpose agent. Answer the user's request directly.";
 
+const REQUEST_TIMEOUT_SECONDS = 600;
 const BASH_TIMEOUT_SECONDS = 60;
 const TOOL_RESULT_MAX_CHARS = 8000;
-const MAX_PARALLEL_AGENTS = 10;
-const MAX_SUBAGENT_TURNS = 15;
-const MAX_MAIN_TURNS = 30;
+const MAX_CONCURRENT = 10;
+const DOC_TEST_MODE = Boolean(process.env.DOC_TEST_MODE);
+const MAX_TOTAL_SUBTASKS = DOC_TEST_MODE ? 2 : 200;
+const MAX_SUBAGENT_TURNS = DOC_TEST_MODE ? 1 : 15;
+const MAX_MAIN_TURNS = DOC_TEST_MODE ? 1 : 30;
 const TURNS_BETWEEN_REFRESHERS = 10;
+const JOURNAL_PATH = process.env.ORCH_JOURNAL || "orchestration_journal.json";
 ````
 
   
 ````csharp
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -82,25 +103,38 @@ var effort = Effort.Xhigh;
 
 const string systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly.";
 
+const int requestTimeoutSeconds = 600;
+// The other ports stream with max_tokens 64000. This port uses non-streaming
+// Messages.Create, and the API rejects non-streaming requests at that size.
+// 8192 is the non-streaming ceiling for Opus 4.0 and 4.1 and a conservative
+// choice for newer Opus models.
+const int requestMaxTokens = 8192;
 const int bashTimeoutSeconds = 60;
 const int toolResultMaxChars = 8000;
-const int maxParallelAgents = 10;
-const int maxSubagentTurns = 15;
-const int maxMainTurns = 30;
+const int maxConcurrent = 10;
+var docTestMode = Environment.GetEnvironmentVariable("DOC_TEST_MODE") is { Length: > 0 };
+int maxTotalSubtasks = docTestMode ? 2 : 200;
+int maxSubagentTurns = docTestMode ? 1 : 15;
+int maxMainTurns = docTestMode ? 1 : 30;
 const int turnsBetweenRefreshers = 10;
+var journalPath = Environment.GetEnvironmentVariable("ORCH_JOURNAL") is { Length: > 0 } p ? p : "orchestration_journal.json";
 ````
 
   
 ````go
 import (
 	"bytes"
+	"cmp"
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -116,13 +150,27 @@ const (
 
 	systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly."
 
+	requestTimeoutSeconds  = 600
 	bashTimeoutSeconds     = 60
 	toolResultMaxChars     = 8000
-	maxParallelAgents      = 10
-	maxSubagentTurns       = 15
-	maxMainTurns           = 30
+	maxConcurrent          = 10
 	turnsBetweenRefreshers = 10
 )
+
+var (
+	docTestMode      = os.Getenv("DOC_TEST_MODE") != ""
+	maxTotalSubtasks = ifTest(2, 200)
+	maxSubagentTurns = ifTest(1, 15)
+	maxMainTurns     = ifTest(1, 30)
+	journalPath      = cmp.Or(os.Getenv("ORCH_JOURNAL"), "orchestration_journal.json")
+)
+
+func ifTest(test, normal int) int {
+	if docTestMode {
+		return test
+	}
+	return normal
+}
 
 ````
 
@@ -131,6 +179,7 @@ const (
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
+import com.anthropic.core.RequestOptions;
 import com.anthropic.helpers.MessageAccumulator;
 import com.anthropic.models.messages.ContentBlock;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -146,6 +195,7 @@ import com.anthropic.models.messages.ToolBash20250124;
 import com.anthropic.models.messages.ToolResultBlockParam;
 import com.anthropic.models.messages.ToolUseBlock;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -153,9 +203,17 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
@@ -164,45 +222,32 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 static final String MODEL = "claude-opus-4-8";
+static final boolean DOC_TEST_MODE =
+        !Objects.requireNonNullElse(System.getenv("DOC_TEST_MODE"), "").isEmpty();
 static final OutputConfig.Effort EFFORT = OutputConfig.Effort.XHIGH;
 
 static final String SYSTEM_PROMPT =
         "You are a helpful general-purpose agent. Answer the user's request directly.";
 
+static final int REQUEST_TIMEOUT_SECONDS = 600;
+static final RequestOptions REQUEST_OPTIONS =
+        RequestOptions.builder().timeout(Duration.ofSeconds(REQUEST_TIMEOUT_SECONDS)).build();
 static final int BASH_TIMEOUT_SECONDS = 60;
 static final int TOOL_RESULT_MAX_CHARS = 8000;
-static final int MAX_PARALLEL_AGENTS = 10;
-static final int MAX_SUBAGENT_TURNS = 15;
-static final int MAX_MAIN_TURNS = 30;
+static final int MAX_CONCURRENT = 10;
+static final int MAX_TOTAL_SUBTASKS = DOC_TEST_MODE ? 2 : 200;
+static final int MAX_SUBAGENT_TURNS = DOC_TEST_MODE ? 1 : 15;
+static final int MAX_MAIN_TURNS = DOC_TEST_MODE ? 1 : 30;
 static final int TURNS_BETWEEN_REFRESHERS = 10;
-````
-
-  
-````ruby
-require "anthropic"
-require "json"
-require "open3"
-require "tmpdir"
-
-CLIENT = Anthropic::Client.new
-
-MODEL = "claude-opus-4-8"
-EFFORT = :xhigh
-
-SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
-
-BASH_TIMEOUT_SECONDS = 60
-TOOL_RESULT_MAX_CHARS = 8000
-MAX_PARALLEL_AGENTS = 10
-MAX_SUBAGENT_TURNS = 15
-MAX_MAIN_TURNS = 30
-TURNS_BETWEEN_REFRESHERS = 10
+static final Path JOURNAL_PATH = Path.of(Optional.ofNullable(System.getenv("ORCH_JOURNAL"))
+        .filter(s -> !s.isEmpty()).orElse("orchestration_journal.json"));
 ````
 
   
@@ -214,16 +259,48 @@ use Anthropic\Messages\ToolUseBlock;
 $client = new Client();
 
 const MODEL = 'claude-opus-4-8';
+define('DOC_TEST_MODE', (string) getenv('DOC_TEST_MODE') !== '');
 const EFFORT = 'xhigh';
 
 const SYSTEM_PROMPT = 'You are a helpful general-purpose agent. Answer the user\'s request directly.';
 
+const REQUEST_TIMEOUT_SECONDS = 600;
 const BASH_TIMEOUT_SECONDS = 60;
 const TOOL_RESULT_MAX_CHARS = 8000;
-const MAX_PARALLEL_AGENTS = 10;
-const MAX_SUBAGENT_TURNS = 15;
-const MAX_MAIN_TURNS = 30;
+const MAX_CONCURRENT = 10;
+define('MAX_TOTAL_SUBTASKS', DOC_TEST_MODE ? 2 : 200);
+define('MAX_SUBAGENT_TURNS', DOC_TEST_MODE ? 1 : 15);
+define('MAX_MAIN_TURNS', DOC_TEST_MODE ? 1 : 30);
 const TURNS_BETWEEN_REFRESHERS = 10;
+define('JOURNAL_PATH', getenv('ORCH_JOURNAL') ?: 'orchestration_journal.json');
+````
+
+  
+````ruby
+require "anthropic"
+require "digest"
+require "fileutils"
+require "json"
+require "open3"
+require "tmpdir"
+
+CLIENT = Anthropic::Client.new
+
+MODEL = "claude-opus-4-8"
+EFFORT = :xhigh
+
+SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
+
+REQUEST_TIMEOUT_SECONDS = 600
+BASH_TIMEOUT_SECONDS = 60
+TOOL_RESULT_MAX_CHARS = 8000
+MAX_CONCURRENT = 10
+DOC_TEST_MODE = !ENV["DOC_TEST_MODE"].to_s.empty?
+MAX_TOTAL_SUBTASKS = DOC_TEST_MODE ? 2 : 200
+MAX_SUBAGENT_TURNS = DOC_TEST_MODE ? 1 : 15
+MAX_MAIN_TURNS = DOC_TEST_MODE ? 1 : 30
+TURNS_BETWEEN_REFRESHERS = 10
+JOURNAL_PATH = ENV["ORCH_JOURNAL"].to_s.empty? ? "orchestration_journal.json" : ENV["ORCH_JOURNAL"]
 ````
 
 </CodeGroup>
@@ -237,9 +314,10 @@ The reminders are short on purpose. They flip the mode and point at the tool des
 ````python
 MODE_ENTER = (
     "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than "
-    "the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost "
-    "is not a constraint. See the Workflow tool's standing consent section and quality "
-    "patterns. Work solo only on conversational or trivial turns."
+    "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's "
+    "natural decomposition rather than the maximum the tool allows. See the Workflow tool's "
+    "description for standing consent, granularity guidance, and quality patterns. Work solo "
+    "only on conversational or trivial turns."
 )
 MODE_REFRESH = (
     "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
@@ -253,9 +331,10 @@ MODE_EXIT = (
 ````typescript
 const MODE_ENTER =
   "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than " +
-  "the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost " +
-  "is not a constraint. See the Workflow tool's standing consent section and quality " +
-  "patterns. Work solo only on conversational or trivial turns.";
+  "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's " +
+  "natural decomposition rather than the maximum the tool allows. See the Workflow tool's " +
+  "description for standing consent, granularity guidance, and quality patterns. Work solo " +
+  "only on conversational or trivial turns.";
 const MODE_REFRESH =
   "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
 const MODE_EXIT =
@@ -266,9 +345,10 @@ const MODE_EXIT =
 ````csharp
 const string modeEnter =
     "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than "
-    + "the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost "
-    + "is not a constraint. See the Workflow tool's standing consent section and quality "
-    + "patterns. Work solo only on conversational or trivial turns.";
+    + "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's "
+    + "natural decomposition rather than the maximum the tool allows. See the Workflow tool's "
+    + "description for standing consent, granularity guidance, and quality patterns. Work solo "
+    + "only on conversational or trivial turns.";
 const string modeRefresh =
     "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
 const string modeExit =
@@ -279,9 +359,10 @@ const string modeExit =
 ````go
 const (
 	modeEnter = "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than " +
-		"the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost " +
-		"is not a constraint. See the Workflow tool's standing consent section and quality " +
-		"patterns. Work solo only on conversational or trivial turns."
+		"the fastest one. Use the Workflow tool on every substantive task, sized to the problem's " +
+		"natural decomposition rather than the maximum the tool allows. See the Workflow tool's " +
+		"description for standing consent, granularity guidance, and quality patterns. Work solo " +
+		"only on conversational or trivial turns."
 	modeRefresh = "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
 	modeExit    = "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again."
 )
@@ -292,9 +373,10 @@ const (
 ````java
 static final String MODE_ENTER =
         "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than "
-                + "the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost "
-                + "is not a constraint. See the Workflow tool's standing consent section and quality "
-                + "patterns. Work solo only on conversational or trivial turns.";
+                + "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's "
+                + "natural decomposition rather than the maximum the tool allows. See the Workflow tool's "
+                + "description for standing consent, granularity guidance, and quality patterns. Work solo "
+                + "only on conversational or trivial turns.";
 static final String MODE_REFRESH =
         "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
 static final String MODE_EXIT =
@@ -302,36 +384,38 @@ static final String MODE_EXIT =
 ````
 
   
-````ruby
-MODE_ENTER =
-  "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than " \
-  "the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost " \
-  "is not a constraint. See the Workflow tool's standing consent section and quality " \
-  "patterns. Work solo only on conversational or trivial turns."
-MODE_REFRESH =
-  "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
-MODE_EXIT =
-  "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again."
-````
-
-  
 ````php
 const MODE_ENTER =
     'Orchestration mode is on: optimize for the most exhaustive, correct answer rather than '
-    . 'the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost '
-    . 'is not a constraint. See the Workflow tool\'s standing consent section and quality '
-    . 'patterns. Work solo only on conversational or trivial turns.';
+    . 'the fastest one. Use the Workflow tool on every substantive task, sized to the problem\'s '
+    . 'natural decomposition rather than the maximum the tool allows. See the Workflow tool\'s '
+    . 'description for standing consent, granularity guidance, and quality patterns. Work solo '
+    . 'only on conversational or trivial turns.';
 const MODE_REFRESH =
     'Orchestration mode is still on. Use the Workflow tool; see its standing consent section.';
 const MODE_EXIT =
     'Orchestration mode is off. The Workflow tool\'s standard opt-in rule applies again.';
 ````
 
+  
+````ruby
+MODE_ENTER =
+  "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than " \
+  "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's " \
+  "natural decomposition rather than the maximum the tool allows. See the Workflow tool's " \
+  "description for standing consent, granularity guidance, and quality patterns. Work solo " \
+  "only on conversational or trivial turns."
+MODE_REFRESH =
+  "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
+MODE_EXIT =
+  "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again."
+````
+
 </CodeGroup>
 
 ## Grant standing consent in the tool description
 
-The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, and the quality patterns the model can reach for (a verification wave, a completeness critic, multi-phase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool executed locally.
+The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multi-phase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
 
 <CodeGroup>
   
@@ -348,6 +432,10 @@ WORKFLOW_TOOL = {
         "the others missed), and multi-phase sequencing (understand, design, implement, and "
         "review as separate workflow calls, reading results between phases). A useful default "
         "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
+        "Granularity: scope each subtask to a distinct concern, component, or question rather "
+        "than per line or per file section. Scale the count to what the user asked for: a "
+        "focused review of a module of a few hundred lines rarely needs more than about ten "
+        "subtasks; a broad audit of a large codebase can justify more.\n\n"
         "Standing consent: while a system message confirms orchestration mode is on, that "
         "opt-in is standing. Author and run a workflow for every substantive task by default, "
         "and lean toward verifying findings adversarially. Work solo only on conversational "
@@ -414,6 +502,10 @@ const WORKFLOW_TOOL: Anthropic.Tool = {
     "the others missed), and multi-phase sequencing (understand, design, implement, and " +
     "review as separate workflow calls, reading results between phases). A useful default " +
     "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" +
+    "Granularity: scope each subtask to a distinct concern, component, or question rather " +
+    "than per line or per file section. Scale the count to what the user asked for: a " +
+    "focused review of a module of a few hundred lines rarely needs more than about ten " +
+    "subtasks; a broad audit of a large codebase can justify more.\n\n" +
     "Standing consent: while a system message confirms orchestration mode is on, that " +
     "opt-in is standing. Author and run a workflow for every substantive task by default, " +
     "and lean toward verifying findings adversarially. Work solo only on conversational " +
@@ -479,6 +571,10 @@ Tool workflowTool = new()
         + "the others missed), and multi-phase sequencing (understand, design, implement, and "
         + "review as separate workflow calls, reading results between phases). A useful default "
         + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
+        + "Granularity: scope each subtask to a distinct concern, component, or question rather "
+        + "than per line or per file section. Scale the count to what the user asked for: a "
+        + "focused review of a module of a few hundred lines rarely needs more than about ten "
+        + "subtasks; a broad audit of a large codebase can justify more.\n\n"
         + "Standing consent: while a system message confirms orchestration mode is on, that "
         + "opt-in is standing. Author and run a workflow for every substantive task by default, "
         + "and lean toward verifying findings adversarially. Work solo only on conversational "
@@ -555,6 +651,10 @@ var workflowTool = anthropic.ToolUnionParam{
 			"the others missed), and multi-phase sequencing (understand, design, implement, and " +
 			"review as separate workflow calls, reading results between phases). A useful default " +
 			"is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" +
+			"Granularity: scope each subtask to a distinct concern, component, or question rather " +
+			"than per line or per file section. Scale the count to what the user asked for: a " +
+			"focused review of a module of a few hundred lines rarely needs more than about ten " +
+			"subtasks; a broad audit of a large codebase can justify more.\n\n" +
 			"Standing consent: while a system message confirms orchestration mode is on, that " +
 			"opt-in is standing. Author and run a workflow for every substantive task by default, " +
 			"and lean toward verifying findings adversarially. Work solo only on conversational " +
@@ -621,6 +721,10 @@ static final Tool WORKFLOW_TOOL = Tool.builder()
                 + "the others missed), and multi-phase sequencing (understand, design, implement, and "
                 + "review as separate workflow calls, reading results between phases). A useful default "
                 + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
+                + "Granularity: scope each subtask to a distinct concern, component, or question rather "
+                + "than per line or per file section. Scale the count to what the user asked for: a "
+                + "focused review of a module of a few hundred lines rarely needs more than about ten "
+                + "subtasks; a broad audit of a large codebase can justify more.\n\n"
                 + "Standing consent: while a system message confirms orchestration mode is on, that "
                 + "opt-in is standing. Author and run a workflow for every substantive task by default, "
                 + "and lean toward verifying findings adversarially. Work solo only on conversational "
@@ -666,70 +770,6 @@ static final Tool REPORT_TOOL = Tool.builder()
 ````
 
   
-````ruby
-WORKFLOW_TOOL = {
-  name: "Workflow",
-  description:
-    "Orchestrate a multi-agent workflow: split a large task into independent subtasks " \
-    "and run them as parallel agents, then collect their results.\n\n" \
-    "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " \
-    "system message confirms that orchestration mode is on.\n\n" \
-    "Quality patterns: adversarial verification (a second wave of agents checks the first " \
-    "wave's findings against the source), a completeness critic (one agent hunts for what " \
-    "the others missed), and multi-phase sequencing (understand, design, implement, and " \
-    "review as separate workflow calls, reading results between phases). A useful default " \
-    "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" \
-    "Standing consent: while a system message confirms orchestration mode is on, that " \
-    "opt-in is standing. Author and run a workflow for every substantive task by default, " \
-    "and lean toward verifying findings adversarially. Work solo only on conversational " \
-    "turns or trivial mechanical edits. When a system message says the mode is off, " \
-    "revert to the opt-in rule above.",
-  input_schema: {
-    type: "object",
-    properties: {
-      subtasks: {
-        type: "array",
-        items: {type: "string"},
-        description: "Independent subtask prompts to run as parallel agents"
-      }
-    },
-    required: ["subtasks"]
-  }
-}.freeze
-
-BASH_TOOL = {type: "bash_20250124", name: "bash"}.freeze
-
-REPORT_TOOL = {
-  name: "report_findings",
-  description:
-    "Report the final findings for your subtask. Call this exactly once, when you are " \
-    "done investigating; it ends your task.",
-  input_schema: {
-    type: "object",
-    properties: {
-      summary: {type: "string", description: "Two or three sentences of synthesis"},
-      findings: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            claim: {type: "string", description: "The finding, one sentence"},
-            evidence: {
-              type: "string",
-              description: "How it was verified (file, line, or command output)"
-            },
-            severity: {type: "string", enum: ["high", "medium", "low", "info"]}
-          },
-          required: ["claim", "evidence", "severity"]
-        }
-      }
-    },
-    required: ["summary", "findings"]
-  }
-}.freeze
-````
-
-  
 ````php
 const WORKFLOW_TOOL = [
     'name' => 'Workflow',
@@ -743,6 +783,10 @@ const WORKFLOW_TOOL = [
         . 'the others missed), and multi-phase sequencing (understand, design, implement, and '
         . 'review as separate workflow calls, reading results between phases). A useful default '
         . "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
+        . 'Granularity: scope each subtask to a distinct concern, component, or question rather '
+        . 'than per line or per file section. Scale the count to what the user asked for: a '
+        . 'focused review of a module of a few hundred lines rarely needs more than about ten '
+        . "subtasks; a broad audit of a large codebase can justify more.\n\n"
         . 'Standing consent: while a system message confirms orchestration mode is on, that '
         . 'opt-in is standing. Author and run a workflow for every substantive task by default, '
         . 'and lean toward verifying findings adversarially. Work solo only on conversational '
@@ -793,21 +837,105 @@ const REPORT_TOOL = [
 ];
 ````
 
+  
+````ruby
+WORKFLOW_TOOL = {
+  name: "Workflow",
+  description:
+    "Orchestrate a multi-agent workflow: split a large task into independent subtasks " \
+    "and run them as parallel agents, then collect their results.\n\n" \
+    "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " \
+    "system message confirms that orchestration mode is on.\n\n" \
+    "Quality patterns: adversarial verification (a second wave of agents checks the first " \
+    "wave's findings against the source), a completeness critic (one agent hunts for what " \
+    "the others missed), and multi-phase sequencing (understand, design, implement, and " \
+    "review as separate workflow calls, reading results between phases). A useful default " \
+    "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" \
+    "Granularity: scope each subtask to a distinct concern, component, or question rather " \
+    "than per line or per file section. Scale the count to what the user asked for: a " \
+    "focused review of a module of a few hundred lines rarely needs more than about ten " \
+    "subtasks; a broad audit of a large codebase can justify more.\n\n" \
+    "Standing consent: while a system message confirms orchestration mode is on, that " \
+    "opt-in is standing. Author and run a workflow for every substantive task by default, " \
+    "and lean toward verifying findings adversarially. Work solo only on conversational " \
+    "turns or trivial mechanical edits. When a system message says the mode is off, " \
+    "revert to the opt-in rule above.",
+  input_schema: {
+    type: "object",
+    properties: {
+      subtasks: {
+        type: "array",
+        items: {type: "string"},
+        description: "Independent subtask prompts to run as parallel agents"
+      }
+    },
+    required: ["subtasks"]
+  }
+}.freeze
+
+BASH_TOOL = {type: "bash_20250124", name: "bash"}.freeze
+
+REPORT_TOOL = {
+  name: "report_findings",
+  description:
+    "Report the final findings for your subtask. Call this exactly once, when you are " \
+    "done investigating; it ends your task.",
+  input_schema: {
+    type: "object",
+    properties: {
+      summary: {type: "string", description: "Two or three sentences of synthesis"},
+      findings: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            claim: {type: "string", description: "The finding, one sentence"},
+            evidence: {
+              type: "string",
+              description: "How it was verified (file, line, or command output)"
+            },
+            severity: {type: "string", enum: ["high", "medium", "low", "info"]}
+          },
+          required: ["claim", "evidence", "severity"]
+        }
+      }
+    },
+    required: ["summary", "findings"]
+  }
+}.freeze
+````
+
 </CodeGroup>
 
-## Execute the bash tool locally
+## Run the bash tool locally
 
-The bash handler runs the requested command with a timeout, captures combined stdout and stderr, and truncates the result so a runaway command can't flood the context window. There is no sandbox here: the command runs with the permissions of the process that launched the example. For clarity this example runs each call in a fresh subshell rather than maintaining the persistent session the `bash_20250124` contract describes; a production agent should back the tool with a long-lived shell so that working directory, environment, and the `restart` action behave as documented.
+The bash handler runs the requested command with a timeout, captures combined stdout and stderr, and truncates the result so a runaway command can't flood the context window. Commands run in the directory you launch the example from, so pointing it at a project means starting it there; when `DOC_TEST_MODE` is set, the harness instead gives bash a small throwaway fixture directory that is removed on exit. There is no sandbox here: the command runs with the permissions of the process that launched the example. For clarity this example runs each call in a fresh subshell rather than maintaining the persistent session the `bash_20250124` contract describes; a production agent should back the tool with a long-lived shell so that working directory, environment, and the `restart` action behave as documented.
 
 <CodeGroup>
   
 ````python
+# Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+# points it at a throwaway fixture directory instead, removed on exit.
+if DOC_TEST_MODE:
+    WORK_DIR = tempfile.mkdtemp(prefix="orchestration-")
+    atexit.register(shutil.rmtree, WORK_DIR, ignore_errors=True)
+    with open(os.path.join(WORK_DIR, "sample.py"), "w") as fixture:
+        fixture.write(
+            "def fib(n):\n"
+            "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n"
+            "print(fib(10))\n"
+        )
+else:
+    WORK_DIR = os.getcwd()
+
+
 def run_bash(command: str) -> tuple[str, bool]:
     """Run a shell command and return (output, is_error). No sandbox: example code only."""
     print(f"[bash] {command}", file=sys.stderr)
     try:
         proc = subprocess.run(
             ["bash", "-c", command],
+            cwd=WORK_DIR,
             capture_output=True,
             text=True,
             errors="replace",
@@ -836,6 +964,21 @@ def handle_bash_block(block) -> tuple[str, bool]:
 ````typescript
 const execShell = promisify(exec);
 
+// Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+// points it at a throwaway fixture directory instead, removed on exit.
+const WORK_DIR = DOC_TEST_MODE
+  ? await mkdtemp(join(tmpdir(), "orchestration-"))
+  : process.cwd();
+if (DOC_TEST_MODE) {
+  await writeFile(
+    join(WORK_DIR, "sample.py"),
+    "def fib(n):\n" +
+      "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
+      "print(fib(10))\n",
+  );
+  process.on("exit", () => rmSync(WORK_DIR, { recursive: true, force: true }));
+}
+
 // Run a shell command and return its output. No sandbox: example code only.
 async function runBash(command: string): Promise<{ output: string; isError: boolean }> {
   console.error(`[bash] ${command}`);
@@ -845,6 +988,7 @@ async function runBash(command: string): Promise<{ output: string; isError: bool
   try {
     ({ stdout, stderr } = await execShell(command, {
       shell: "/bin/bash",
+      cwd: WORK_DIR,
       timeout: BASH_TIMEOUT_SECONDS * 1000,
       maxBuffer: 16 * 1024 * 1024,
     }));
@@ -891,6 +1035,24 @@ async function handleBashBlock(
 
   
 ````csharp
+// Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+// points it at a throwaway fixture directory instead, removed on exit.
+var workDir = Environment.CurrentDirectory;
+if (docTestMode)
+{
+    workDir = Directory.CreateTempSubdirectory("orchestration-").FullName;
+    File.WriteAllText(Path.Combine(workDir, "sample.py"),
+        "def fib(n):\n" +
+        "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
+        "print(fib(10))\n");
+    var fixtureDir = workDir;
+    AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+    {
+        try { Directory.Delete(fixtureDir, recursive: true); }
+        catch { /* Best-effort cleanup; the OS tmp sweeper handles leftovers. */ }
+    };
+}
+
 // Run a shell command and return its output plus an error flag. No sandbox: example code only.
 async Task<(string Output, bool IsError)> RunBash(string command)
 {
@@ -898,6 +1060,7 @@ async Task<(string Output, bool IsError)> RunBash(string command)
     using var process = Process.Start(new ProcessStartInfo("bash")
     {
         ArgumentList = { "-c", command },
+        WorkingDirectory = workDir,
         RedirectStandardOutput = true,
         RedirectStandardError = true,
     });
@@ -962,13 +1125,38 @@ async Task<(string Output, bool IsError)> HandleBashBlock(ToolUseBlock block)
 
   
 ````go
+// Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+// points it at a throwaway fixture directory instead, removed on exit.
+var workDir = func() string {
+	if !docTestMode {
+		dir, err := os.Getwd()
+		if err != nil {
+			log.Fatal(err)
+		}
+		return dir
+	}
+	dir, err := os.MkdirTemp("", "orchestration-")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fixture := "def fib(n):\n" +
+		"    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
+		"print(fib(10))\n"
+	if err := os.WriteFile(filepath.Join(dir, "sample.py"), []byte(fixture), 0o644); err != nil {
+		log.Fatal(err)
+	}
+	return dir
+}()
+
 // runBash runs a shell command and returns its output plus an error flag.
 // No sandbox: example code only.
 func runBash(ctx context.Context, command string) (string, bool) {
 	fmt.Fprintf(os.Stderr, "[bash] %s\n", command)
 	ctx, cancel := context.WithTimeout(ctx, bashTimeoutSeconds*time.Second)
 	defer cancel()
-	combined, err := exec.CommandContext(ctx, "bash", "-c", command).CombinedOutput()
+	cmd := exec.CommandContext(ctx, "bash", "-c", command)
+	cmd.Dir = workDir
+	combined, err := cmd.CombinedOutput()
 	if errors.Is(ctx.Err(), context.DeadlineExceeded) {
 		return fmt.Sprintf("command timed out after %ds", bashTimeoutSeconds), true
 	}
@@ -1013,10 +1201,14 @@ func handleBashBlock(ctx context.Context, block anthropic.ToolUseBlock) (string,
 ````java
 record ToolOutput(String output, boolean isError) {}
 
-// Give the bash tool a small, consistent working directory to explore.
+// Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+// points it at a throwaway fixture directory instead, removed on exit.
 static final Path WORK_DIR = createWorkDir();
 
 static Path createWorkDir() {
+    if (!DOC_TEST_MODE) {
+        return Path.of(System.getProperty("user.dir"));
+    }
     try {
         var dir = Files.createTempDirectory("orchestration-");
         Files.writeString(dir.resolve("sample.py"), """
@@ -1025,6 +1217,15 @@ static Path createWorkDir() {
 
                 print(fib(10))
                 """);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try (var paths = Files.walk(dir)) {
+                paths.sorted(Comparator.reverseOrder()).forEach(p -> {
+                    try { Files.deleteIfExists(p); } catch (IOException ignored) {}
+                });
+            } catch (IOException ignored) {
+                // Best-effort cleanup; the OS tmp sweeper handles leftovers.
+            }
+        }));
         return dir;
     } catch (IOException error) {
         throw new UncheckedIOException(error);
@@ -1088,15 +1289,94 @@ ToolOutput handleBashBlock(ToolUseBlock block) throws InterruptedException {
 ````
 
   
-````ruby
-# Give the bash tool a small, consistent working directory to explore.
-WORK_DIR = Dir.mktmpdir("orchestration-")
-File.write(File.join(WORK_DIR, "sample.py"), <<~PYTHON)
-  def fib(n):
-      return n if n < 2 else fib(n - 1) + fib(n - 2)
+````php
+// Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+// points it at a throwaway fixture directory instead, removed on exit.
+if (DOC_TEST_MODE) {
+    $workDir = sys_get_temp_dir() . '/orchestration-' . bin2hex(random_bytes(8));
+    if (!mkdir($workDir, 0700)) {
+        throw new RuntimeException("could not create working directory {$workDir}");
+    }
+    file_put_contents(
+        $workDir . '/sample.py',
+        "def fib(n):\n"
+        . "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n"
+        . "print(fib(10))\n",
+    );
+    register_shutdown_function(function () use ($workDir): void {
+        foreach (glob($workDir . '/*') ?: [] as $entry) {
+            @unlink($entry);
+        }
+        @rmdir($workDir);
+    });
+} else {
+    $workDir = getcwd() ?: '.';
+}
+define('WORK_DIR', $workDir);
 
-  print(fib(10))
-PYTHON
+/**
+ * Run a shell command and return [output, isError]. The coreutils timeout command
+ * enforces the time limit. No sandbox: example code only.
+ */
+function runBash(string $command): array
+{
+    fwrite(STDERR, "[bash] {$command}\n");
+    // Requires GNU coreutils 'timeout'. On macOS: brew install coreutils, or replace with gtimeout.
+    exec(
+        'cd ' . escapeshellarg(WORK_DIR) . ' && timeout ' . BASH_TIMEOUT_SECONDS
+            . ' bash -c ' . escapeshellarg($command) . ' 2>&1',
+        $outputLines,
+        $exitCode,
+    );
+    if ($exitCode === 124) {
+        return ['command timed out after ' . BASH_TIMEOUT_SECONDS . 's', true];
+    }
+    $output = trim(implode("\n", $outputLines));
+    if ($output === '') {
+        $output = '(no output)';
+    }
+    if (mb_strlen($output) > TOOL_RESULT_MAX_CHARS) {
+        $output = mb_substr($output, 0, TOOL_RESULT_MAX_CHARS)
+            . "\n(truncated at " . TOOL_RESULT_MAX_CHARS . ' chars)';
+    }
+    if ($exitCode !== 0) {
+        $output = "(exit code {$exitCode})\n{$output}";
+    }
+    return [$output, $exitCode !== 0];
+}
+
+/** Execute one bash tool call requested by the model. */
+function handleBashBlock(ToolUseBlock $block): array
+{
+    if (($block->input['restart'] ?? null) === true) {
+        return ['Shell restarted.', false];
+    }
+    $command = $block->input['command'] ?? '';
+    if (!is_string($command) || $command === '') {
+        return ['bash error: no command was provided.', true];
+    }
+    return runBash($command);
+}
+````
+
+  
+````ruby
+# Run bash where the example was launched. In DOC_TEST_MODE the docs harness
+# points it at a throwaway fixture directory instead, removed on exit.
+WORK_DIR =
+  if DOC_TEST_MODE
+    Dir.mktmpdir("orchestration-").tap do |dir|
+      File.write(File.join(dir, "sample.py"), <<~PYTHON)
+        def fib(n):
+            return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+        print(fib(10))
+      PYTHON
+      at_exit { FileUtils.remove_entry(dir, true) }
+    end
+  else
+    Dir.pwd
+  end
 
 # Tool input arrives as a Hash or as a raw JSON string from the streaming
 # accumulator; normalize either shape to a string-keyed Hash.
@@ -1180,57 +1460,11 @@ def assistant_content_param(content)
 end
 ````
 
-  
-````php
-/**
- * Run a shell command and return [output, isError]. The coreutils timeout command
- * enforces the time limit. No sandbox: example code only.
- */
-function runBash(string $command): array
-{
-    fwrite(STDERR, "[bash] {$command}\n");
-    // Requires GNU coreutils 'timeout'. On macOS: brew install coreutils, or replace with gtimeout.
-    exec(
-        'timeout ' . BASH_TIMEOUT_SECONDS . ' bash -c ' . escapeshellarg($command) . ' 2>&1',
-        $outputLines,
-        $exitCode,
-    );
-    if ($exitCode === 124) {
-        return ['command timed out after ' . BASH_TIMEOUT_SECONDS . 's', true];
-    }
-    $output = trim(implode("\n", $outputLines));
-    if ($output === '') {
-        $output = '(no output)';
-    }
-    if (mb_strlen($output) > TOOL_RESULT_MAX_CHARS) {
-        $output = mb_substr($output, 0, TOOL_RESULT_MAX_CHARS)
-            . "\n(truncated at " . TOOL_RESULT_MAX_CHARS . ' chars)';
-    }
-    if ($exitCode !== 0) {
-        $output = "(exit code {$exitCode})\n{$output}";
-    }
-    return [$output, $exitCode !== 0];
-}
-
-/** Execute one bash tool call requested by the model. */
-function handleBashBlock(ToolUseBlock $block): array
-{
-    if (($block->input['restart'] ?? null) === true) {
-        return ['Shell restarted.', false];
-    }
-    $command = $block->input['command'] ?? '';
-    if (!is_string($command) || $command === '') {
-        return ['bash error: no command was provided.', true];
-    }
-    return runBash($command);
-}
-````
-
 </CodeGroup>
 
-## Run subtasks as parallel subagents
+## Run one subagent
 
-Each workflow subtask becomes its own small agent loop with the bash tool, running at the same effort as the main loop. The fan-out caps the number of parallel agents and isolates failures so one broken subagent degrades to an error string instead of ending the run.
+Each workflow subtask becomes its own small agent loop with the bash tool, running at the same effort as the main loop. A per-request timeout bounds each API call so a dropped connection degrades one subagent instead of stalling the whole run.
 
 <CodeGroup>
   
@@ -1253,6 +1487,7 @@ def run_subagent(model: str, prompt: str) -> str:
             output_config={"effort": EFFORT},
             tools=[BASH_TOOL, REPORT_TOOL],
             messages=messages,
+            timeout=REQUEST_TIMEOUT_SECONDS,
         ) as stream:
             response = stream.get_final_message()
         messages.append({"role": "assistant", "content": response.content})
@@ -1301,15 +1536,18 @@ async function runSubagent(model: string, prompt: string): Promise<string> {
   const messages: Anthropic.MessageParam[] = [{ role: "user", content: prompt }];
   for (let turn = 0; turn < MAX_SUBAGENT_TURNS; turn++) {
     const response = await client.messages
-      .stream({
-        model,
-        max_tokens: 64000,
-        system: subagentSystem,
-        thinking: { type: "adaptive" },
-        output_config: { effort: EFFORT },
-        tools: [BASH_TOOL, REPORT_TOOL],
-        messages,
-      })
+      .stream(
+        {
+          model,
+          max_tokens: 64000,
+          system: subagentSystem,
+          thinking: { type: "adaptive" },
+          output_config: { effort: EFFORT },
+          tools: [BASH_TOOL, REPORT_TOOL],
+          messages,
+        },
+        { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) },
+      )
       .finalMessage();
     messages.push({ role: "assistant", content: response.content });
     if (response.stop_reason === "pause_turn") {
@@ -1372,16 +1610,17 @@ async Task<string> RunSubagent(string prompt)
     List<MessageParam> messages = [new() { Role = Role.User, Content = prompt }];
     for (var turn = 0; turn < maxSubagentTurns; turn++)
     {
+        using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(requestTimeoutSeconds));
         var response = await client.Messages.Create(new MessageCreateParams
         {
             Model = model,
-            MaxTokens = 64000,
+            MaxTokens = requestMaxTokens,
             System = subagentSystem,
             Thinking = new ThinkingConfigAdaptive(),
             OutputConfig = new OutputConfig { Effort = effort },
             Tools = [bashTool, reportTool],
             Messages = messages,
-        });
+        }, cancellationToken: deadline.Token);
         messages.Add(new()
         {
             Role = Role.Assistant,
@@ -1451,6 +1690,8 @@ func runSubagent(ctx context.Context, model string, prompt string) (string, erro
 	for range maxSubagentTurns {
 		var response anthropic.Message
 		err := func() error {
+			ctx, cancel := context.WithTimeout(ctx, requestTimeoutSeconds*time.Second)
+			defer cancel()
 			stream := client.Messages.NewStreaming(ctx, anthropic.MessageNewParams{
 				Model:        model,
 				MaxTokens:    64000,
@@ -1545,7 +1786,7 @@ String runSubagent(String model, String prompt) throws InterruptedException {
                 .messages(messages)
                 .build();
         MessageAccumulator accumulator = MessageAccumulator.create();
-        try (var stream = client.messages().createStreaming(params)) {
+        try (var stream = client.messages().createStreaming(params, REQUEST_OPTIONS)) {
             stream.stream().forEach(accumulator::accumulate);
         }
         Message response = accumulator.message();
@@ -1596,66 +1837,6 @@ String runSubagent(String model, String prompt) throws InterruptedException {
     }
     return "(subagent hit the turn limit before finishing)";
 }
-````
-
-  
-````ruby
-# One subagent: a small nested agent loop with the bash tool plus report_findings.
-# Subagents inherit the main loop's effort level.
-def run_subagent(model, prompt)
-  subagent_system =
-    "You are one agent in a larger parallel fan-out, assigned a single subtask. " \
-    "Investigate it directly, using bash to check facts rather than guessing, and finish " \
-    "by calling report_findings exactly once. Return findings, not narration."
-  messages = [{role: "user", content: prompt}]
-  MAX_SUBAGENT_TURNS.times do
-    stream = CLIENT.messages.stream(
-      model: model,
-      max_tokens: 64_000,
-      system_: subagent_system,
-      thinking: {type: :adaptive},
-      output_config: {effort: EFFORT},
-      tools: [BASH_TOOL, REPORT_TOOL],
-      messages: messages
-    )
-    response = stream.accumulated_message
-    messages << {role: "assistant", content: assistant_content_param(response.content)}
-    next if response.stop_reason == :pause_turn
-
-    unless response.stop_reason == :tool_use
-      text = response.content.select { |block| block.type == :text }.map(&:text).join
-      text += "\n\n(warning: subagent response was truncated at max_tokens)" if response.stop_reason == :max_tokens
-      return text
-    end
-
-    report = nil
-    tool_results = []
-    response.content.each do |block|
-      next unless block.type == :tool_use
-
-      input = parse_tool_input(block.input)
-      case block.name
-      when "report_findings"
-        report = JSON.pretty_generate(input)
-        output, is_error = "Findings recorded.", false
-      when "bash"
-        output, is_error = handle_bash_block(block)
-      else
-        output, is_error = "unknown tool: #{block.name}", true
-      end
-      tool_results << {
-        type: "tool_result",
-        tool_use_id: block.id,
-        content: output,
-        is_error: is_error
-      }
-    end
-    return report unless report.nil?
-
-    messages << {role: "user", content: tool_results}
-  end
-  "(subagent hit the turn limit before finishing)"
-end
 ````
 
   
@@ -1722,6 +1903,7 @@ function runSubagent(Client $client, string $model, string $prompt): string
             outputConfig: ['effort' => EFFORT],
             tools: [BASH_TOOL, REPORT_TOOL],
             messages: $messages,
+            requestOptions: ['timeout' => REQUEST_TIMEOUT_SECONDS],
         );
         [$content, $stopReason] = drainMessageStream($stream);
         $messages[] = ['role' => 'assistant', 'content' => $content];
@@ -1772,7 +1954,371 @@ function runSubagent(Client $client, string $model, string $prompt): string
 }
 ````
 
+  
+````ruby
+# One subagent: a small nested agent loop with the bash tool plus report_findings.
+# Subagents inherit the main loop's effort level.
+def run_subagent(model, prompt)
+  subagent_system =
+    "You are one agent in a larger parallel fan-out, assigned a single subtask. " \
+    "Investigate it directly, using bash to check facts rather than guessing, and finish " \
+    "by calling report_findings exactly once. Return findings, not narration."
+  messages = [{role: "user", content: prompt}]
+  MAX_SUBAGENT_TURNS.times do
+    stream = CLIENT.messages.stream(
+      model: model,
+      max_tokens: 64_000,
+      system_: subagent_system,
+      thinking: {type: :adaptive},
+      output_config: {effort: EFFORT},
+      tools: [BASH_TOOL, REPORT_TOOL],
+      messages: messages,
+      request_options: {timeout: REQUEST_TIMEOUT_SECONDS}
+    )
+    response = stream.accumulated_message
+    messages << {role: "assistant", content: assistant_content_param(response.content)}
+    next if response.stop_reason == :pause_turn
+
+    unless response.stop_reason == :tool_use
+      text = response.content.select { |block| block.type == :text }.map(&:text).join
+      text += "\n\n(warning: subagent response was truncated at max_tokens)" if response.stop_reason == :max_tokens
+      return text
+    end
+
+    report = nil
+    tool_results = []
+    response.content.each do |block|
+      next unless block.type == :tool_use
+
+      input = parse_tool_input(block.input)
+      case block.name
+      when "report_findings"
+        report = JSON.pretty_generate(input)
+        output, is_error = "Findings recorded.", false
+      when "bash"
+        output, is_error = handle_bash_block(block)
+      else
+        output, is_error = "unknown tool: #{block.name}", true
+      end
+      tool_results << {
+        type: "tool_result",
+        tool_use_id: block.id,
+        content: output,
+        is_error: is_error
+      }
+    end
+    return report unless report.nil?
+
+    messages << {role: "user", content: tool_results}
+  end
+  "(subagent hit the turn limit before finishing)"
+end
+````
+
 </CodeGroup>
+
+## Journal results so reruns resume
+
+A fan-out that spawns dozens of subagents is expensive to restart from scratch. A small content-addressed journal makes it idempotent: before dispatching a subagent, look up the SHA-256 of its prompt in a local JSON file, and return the recorded result if one exists. Interrupt the run, rerun it, and only the subtasks that never finished are recomputed. The journal deduplicates across runs, not within a single fan-out wave; delete the journal file to start fresh.
+
+<CodeGroup>
+  
+````python
+_journal_lock = threading.Lock()
+
+
+def _load_journal() -> dict:
+    try:
+        with open(JOURNAL_PATH) as file:
+            return json.load(file) or {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def journaled(prompt: str, compute) -> str:
+    """Return a cached result for this exact prompt, or compute and persist it. This
+    makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+    that never finished are recomputed. Delete the journal file to start fresh."""
+    key = hashlib.sha256(prompt.encode()).hexdigest()
+    cached = _load_journal().get(key)
+    if cached is not None:
+        print(f"[journal] cache hit for {key[:12]}", file=sys.stderr)
+        return cached
+    result = compute()
+    try:
+        with _journal_lock:  # fan-out writes from many threads
+            journal = _load_journal()
+            journal[key] = result
+            temp = f"{JOURNAL_PATH}.tmp"
+            with open(temp, "w") as file:
+                json.dump(journal, file)
+            os.replace(temp, JOURNAL_PATH)  # atomic on POSIX and Windows
+    except OSError as error:  # the journal is best-effort; never discard a computed result
+        print(f"[journal] write failed: {error}", file=sys.stderr)
+    return result
+````
+
+  
+````typescript
+let journalWriteChain = Promise.resolve();
+
+async function loadJournal(): Promise<Record<string, string>> {
+  try {
+    return JSON.parse(await readFile(JOURNAL_PATH, "utf8")) ?? {};
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      console.error(`[journal] discarding unreadable journal: ${error}`);
+    }
+    return {};
+  }
+}
+
+// Return a cached result for this exact prompt, or compute and persist it. This
+// makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+// that never finished are recomputed. Delete the journal file to start fresh.
+async function journaled(prompt: string, compute: () => Promise<string>): Promise<string> {
+  const key = createHash("sha256").update(prompt).digest("hex");
+  const cached = (await loadJournal())[key];
+  if (cached !== undefined) {
+    console.error(`[journal] cache hit for ${key.slice(0, 12)}`);
+    return cached;
+  }
+  const result = await compute();
+  // Chain writes so concurrent subagents do not clobber each other's entries.
+  // The chain is kept settled so one failed write does not poison later ones.
+  await (journalWriteChain = journalWriteChain
+    .then(async () => {
+      const journal = await loadJournal();
+      journal[key] = result;
+      const temp = `${JOURNAL_PATH}.tmp`;
+      await writeFile(temp, JSON.stringify(journal));
+      await rename(temp, JOURNAL_PATH);
+    })
+    .catch((error) => console.error(`[journal] write failed: ${error}`)));
+  return result;
+}
+````
+
+  
+````csharp
+SemaphoreSlim journalLock = new(1, 1);
+
+async Task<Dictionary<string, string>> LoadJournal()
+{
+    try
+    {
+        return JsonSerializer.Deserialize<Dictionary<string, string>>(await File.ReadAllTextAsync(journalPath)) ?? [];
+    }
+    catch (Exception error) when (error is IOException or UnauthorizedAccessException or JsonException)
+    {
+        return [];
+    }
+}
+
+// Return a cached result for this exact prompt, or compute and persist it. This
+// makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+// that never finished are recomputed. Delete the journal file to start fresh.
+async Task<string> Journaled(string prompt, Func<Task<string>> compute)
+{
+    var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(prompt))).ToLowerInvariant();
+    if ((await LoadJournal()).TryGetValue(key, out var cached))
+    {
+        Console.Error.WriteLine($"[journal] cache hit for {key[..12]}");
+        return cached;
+    }
+    var result = await compute();
+    await journalLock.WaitAsync(); // fan-out writes from many tasks
+    try
+    {
+        var journal = await LoadJournal();
+        journal[key] = result;
+        var temp = journalPath + ".tmp";
+        await File.WriteAllTextAsync(temp, JsonSerializer.Serialize(journal));
+        File.Move(temp, journalPath, overwrite: true);
+    }
+    catch (Exception error) when (error is IOException or UnauthorizedAccessException or NotSupportedException)
+    {
+        // The journal is best-effort; never discard a computed result.
+        Console.Error.WriteLine($"[journal] write failed: {error.Message}");
+    }
+    finally
+    {
+        journalLock.Release();
+    }
+    return result;
+}
+````
+
+  
+````go
+var journalMutex sync.Mutex
+
+func loadJournal() map[string]string {
+	data, err := os.ReadFile(journalPath)
+	if err != nil {
+		return map[string]string{}
+	}
+	var journal map[string]string
+	if err := json.Unmarshal(data, &journal); err != nil || journal == nil {
+		return map[string]string{}
+	}
+	return journal
+}
+
+// journaled returns a cached result for this exact prompt, or computes and persists
+// it. This makes the fan-out resumable: interrupt the run, rerun it, and only the
+// subtasks that never finished are recomputed. Delete the journal file to start fresh.
+func journaled(prompt string, compute func() (string, error)) (string, error) {
+	sum := sha256.Sum256([]byte(prompt))
+	key := hex.EncodeToString(sum[:])
+	if cached, ok := loadJournal()[key]; ok {
+		fmt.Fprintf(os.Stderr, "[journal] cache hit for %s\n", key[:12])
+		return cached, nil
+	}
+	result, err := compute()
+	if err != nil {
+		return "", err
+	}
+	journalMutex.Lock() // fan-out writes from many goroutines
+	defer journalMutex.Unlock()
+	journal := loadJournal()
+	journal[key] = result
+	data, _ := json.Marshal(journal)
+	temp := journalPath + ".tmp"
+	if err := os.WriteFile(temp, data, 0o644); err != nil {
+		fmt.Fprintf(os.Stderr, "[journal] write failed: %s\n", err)
+	} else if err := os.Rename(temp, journalPath); err != nil {
+		fmt.Fprintf(os.Stderr, "[journal] write failed: %s\n", err)
+		_ = os.Remove(temp)
+	}
+	return result, nil
+}
+
+````
+
+  
+````java
+static final ObjectMapper JOURNAL_MAPPER = new ObjectMapper();
+static final ReentrantLock JOURNAL_LOCK = new ReentrantLock();
+
+Map<String, String> loadJournal() {
+    try {
+        return Objects.requireNonNullElseGet(
+                JOURNAL_MAPPER.readValue(Files.readString(JOURNAL_PATH), new TypeReference<HashMap<String, String>>() {}),
+                HashMap::new);
+    } catch (IOException error) {
+        return new HashMap<>();
+    }
+}
+
+// Return a cached result for this exact prompt, or compute and persist it. This
+// makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+// that never finished are recomputed. Delete the journal file to start fresh.
+String journaled(String prompt, Callable<String> compute) throws Exception {
+    var digest = MessageDigest.getInstance("SHA-256").digest(prompt.getBytes(StandardCharsets.UTF_8));
+    String key = HexFormat.of().formatHex(digest);
+    String cached = loadJournal().get(key);
+    if (cached != null) {
+        System.err.println("[journal] cache hit for " + key.substring(0, 12));
+        return cached;
+    }
+    String result = compute.call();
+    JOURNAL_LOCK.lock(); // fan-out writes from many threads
+    try {
+        Map<String, String> journal = loadJournal();
+        journal.put(key, result);
+        Path temp = JOURNAL_PATH.resolveSibling(JOURNAL_PATH.getFileName() + ".tmp");
+        Files.writeString(temp, JOURNAL_MAPPER.writeValueAsString(journal));
+        Files.move(temp, JOURNAL_PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+    } catch (IOException error) {
+        // The journal is best-effort; never discard a computed result.
+        System.err.println("[journal] write failed: " + error);
+    } finally {
+        JOURNAL_LOCK.unlock();
+    }
+    return result;
+}
+````
+
+  
+````php
+function loadJournal(): array
+{
+    $raw = @file_get_contents(JOURNAL_PATH);
+    if ($raw === false) {
+        return [];
+    }
+    $decoded = json_decode($raw, true);
+    return is_array($decoded) ? $decoded : [];
+}
+
+/**
+ * Return a cached result for this exact prompt, or compute and persist it. This
+ * makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+ * that never finished are recomputed. Delete the journal file to start fresh.
+ */
+function journaled(string $prompt, callable $compute): string
+{
+    $key = hash('sha256', $prompt);
+    $journal = loadJournal();
+    if (array_key_exists($key, $journal)) {
+        fwrite(STDERR, '[journal] cache hit for ' . substr($key, 0, 12) . "\n");
+        return $journal[$key];
+    }
+    $result = $compute();
+    $journal = loadJournal();
+    $journal[$key] = $result;
+    $temp = JOURNAL_PATH . '.tmp';
+    $encoded = json_encode($journal, JSON_INVALID_UTF8_SUBSTITUTE);
+    if ($encoded === false || @file_put_contents($temp, $encoded) === false || !@rename($temp, JOURNAL_PATH)) {
+        fwrite(STDERR, '[journal] write failed: ' . (error_get_last()['message'] ?? json_last_error_msg()) . "\n");
+        @unlink($temp);
+    }
+    return $result;
+}
+````
+
+  
+````ruby
+JOURNAL_LOCK = Mutex.new
+
+def load_journal
+  JSON.parse(File.read(JOURNAL_PATH)) || {}
+rescue SystemCallError, JSON::ParserError
+  {}
+end
+
+# Return a cached result for this exact prompt, or compute and persist it. This
+# makes the fan-out resumable: interrupt the run, rerun it, and only the subtasks
+# that never finished are recomputed. Delete the journal file to start fresh.
+def journaled(prompt)
+  key = Digest::SHA256.hexdigest(prompt)
+  cached = load_journal[key]
+  unless cached.nil?
+    warn "[journal] cache hit for #{key[0, 12]}"
+    return cached
+  end
+  result = yield
+  begin
+    JOURNAL_LOCK.synchronize do # fan-out writes from many threads
+      journal = load_journal
+      journal[key] = result
+      temp = "#{JOURNAL_PATH}.tmp"
+      File.write(temp, JSON.generate(journal))
+      File.rename(temp, JOURNAL_PATH)
+    end
+  rescue SystemCallError => error # the journal is best-effort; never discard a computed result
+    warn "[journal] write failed: #{error}"
+  end
+  result
+end
+````
+
+</CodeGroup>
+
+## Fan out, then verify
+
+The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the journal with at most `MAX_CONCURRENT` in flight (sequential in the PHP port), and isolates failures so one broken subagent degrades to an error string instead of ending the run. Once the first wave finishes, a second wave reuses the same subagent path to try to refute each result: every verifier re-derives the claims from the source, defaulting to refuted when uncertain. Both the original result and its verdict are returned to the orchestrator so it can weigh them together.
 
 <CodeGroup>
   
@@ -1790,10 +2336,23 @@ def normalize_subtasks(raw) -> list[str]:
     return [task.strip() for task in raw if isinstance(task, str) and task.strip()]
 
 
+def verify_prompt_for(subtask: str, result: str) -> str:
+    return (
+        "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the "
+        "claims yourself with bash rather than trusting the result, and look for evidence "
+        "that contradicts them. Default to refuted if uncertain. Call report_findings with "
+        "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
+        "output that decided it.\n\n"
+        f"Subtask: {subtask}\n\nResult to verify:\n{result}"
+    )
+
+
 def run_workflow(model: str, raw_subtasks) -> tuple[str, bool]:
-    """Run subtasks as parallel subagents and collect their structured reports."""
+    """Run subtasks as parallel subagents, then run a second verification wave over
+    the results, and return both. MAX_TOTAL_SUBTASKS bounds how many the model can
+    queue; MAX_CONCURRENT bounds how many run at once."""
     all_subtasks = normalize_subtasks(raw_subtasks)
-    subtasks = all_subtasks[:MAX_PARALLEL_AGENTS]
+    subtasks = all_subtasks[:MAX_TOTAL_SUBTASKS]
     dropped = len(all_subtasks) - len(subtasks)
     if not subtasks:
         return "Workflow error: no usable subtasks were provided.", True
@@ -1801,19 +2360,23 @@ def run_workflow(model: str, raw_subtasks) -> tuple[str, bool]:
 
     def run_one(prompt: str) -> str:
         try:
-            return run_subagent(model, prompt)
+            return journaled(prompt, lambda: run_subagent(model, prompt))
         except Exception as error:  # isolation boundary: one bad subagent should not end the run
             return f"(subagent failed: {type(error).__name__}: {error})"
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_PARALLEL_AGENTS) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_CONCURRENT) as pool:
         results = list(pool.map(run_one, subtasks))
+        print(f"[workflow] verifying {len(results)} results", file=sys.stderr)
+        verify_prompts = [verify_prompt_for(task, result) for task, result in zip(subtasks, results)]
+        verdicts = list(pool.map(run_one, verify_prompts))
+
     joined = "\n\n".join(
-        f"[agent {index + 1}: {task}]\n{result}"
-        for index, (task, result) in enumerate(zip(subtasks, results))
+        f"[agent {index + 1}: {task}]\n{result}\n\n[verify {index + 1}]\n{verdict}"
+        for index, (task, result, verdict) in enumerate(zip(subtasks, results, verdicts))
     )
     if dropped > 0:
         joined = (
-            f"(note: {dropped} subtasks beyond MAX_PARALLEL_AGENTS={MAX_PARALLEL_AGENTS} were not "
+            f"(note: {dropped} subtasks beyond MAX_TOTAL_SUBTASKS={MAX_TOTAL_SUBTASKS} were not "
             "run; rerun them in a follow-up Workflow call)\n\n" + joined
         )
     return joined, False
@@ -1841,36 +2404,74 @@ function normalizeSubtasks(raw: unknown): string[] {
     .filter((task) => task.length > 0);
 }
 
-// Run subtasks as parallel subagents and collect their structured reports.
+function verifyPromptFor(subtask: string, result: string): string {
+  return (
+    "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the " +
+    "claims yourself with bash rather than trusting the result, and look for evidence " +
+    "that contradicts them. Default to refuted if uncertain. Call report_findings with " +
+    "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " +
+    "output that decided it.\n\n" +
+    `Subtask: ${subtask}\n\nResult to verify:\n${result}`
+  );
+}
+
+// Map with a concurrency limit: at most `limit` tasks are in flight at once.
+async function mapWithLimit<In, Out>(
+  items: readonly In[],
+  limit: number,
+  task: (item: In) => Promise<Out>,
+): Promise<Out[]> {
+  const results = new Array<Out>(items.length);
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const index = cursor++;
+      results[index] = await task(items[index]);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
+// Run subtasks as parallel subagents, then run a second verification wave over
+// the results, and return both. MAX_TOTAL_SUBTASKS bounds how many the model can
+// queue; MAX_CONCURRENT bounds how many run at once.
 async function runWorkflow(
   model: string,
   rawSubtasks: unknown,
 ): Promise<{ output: string; isError: boolean }> {
   const allSubtasks = normalizeSubtasks(rawSubtasks);
-  const subtasks = allSubtasks.slice(0, MAX_PARALLEL_AGENTS);
+  const subtasks = allSubtasks.slice(0, MAX_TOTAL_SUBTASKS);
   const dropped = allSubtasks.length - subtasks.length;
   if (subtasks.length === 0) {
     return { output: "Workflow error: no usable subtasks were provided.", isError: true };
   }
   console.error(`[workflow] fanning out ${subtasks.length} agents`);
 
-  const results = await Promise.all(
-    subtasks.map(async (prompt) => {
-      try {
-        return await runSubagent(model, prompt);
-      } catch (error) {
-        // Isolation boundary: one bad subagent should not end the run.
-        const reason = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-        return `(subagent failed: ${reason})`;
-      }
-    }),
-  );
+  const runOne = async (prompt: string): Promise<string> => {
+    try {
+      return await journaled(prompt, () => runSubagent(model, prompt));
+    } catch (error) {
+      // Isolation boundary: one bad subagent should not end the run.
+      const reason = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+      return `(subagent failed: ${reason})`;
+    }
+  };
+
+  const results = await mapWithLimit(subtasks, MAX_CONCURRENT, runOne);
+  console.error(`[workflow] verifying ${results.length} results`);
+  const verifyPrompts = subtasks.map((task, index) => verifyPromptFor(task, results[index]));
+  const verdicts = await mapWithLimit(verifyPrompts, MAX_CONCURRENT, runOne);
+
   let joined = subtasks
-    .map((task, index) => `[agent ${index + 1}: ${task}]\n${results[index]}`)
+    .map(
+      (task, index) =>
+        `[agent ${index + 1}: ${task}]\n${results[index]}\n\n[verify ${index + 1}]\n${verdicts[index]}`,
+    )
     .join("\n\n");
   if (dropped > 0) {
     joined =
-      `(note: ${dropped} subtasks beyond MAX_PARALLEL_AGENTS=${MAX_PARALLEL_AGENTS} were not ` +
+      `(note: ${dropped} subtasks beyond MAX_TOTAL_SUBTASKS=${MAX_TOTAL_SUBTASKS} were not ` +
       "run; rerun them in a follow-up Workflow call)\n\n" +
       joined;
   }
@@ -1907,11 +2508,21 @@ List<string> NormalizeSubtasks(JsonElement raw)
     return tasks.Where(task => task != null).Select(task => task.Trim()).Where(task => task.Length > 0).ToList();
 }
 
-// Run subtasks as parallel subagents and collect their structured reports.
+string VerifyPromptFor(string subtask, string result) =>
+    "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the "
+    + "claims yourself with bash rather than trusting the result, and look for evidence "
+    + "that contradicts them. Default to refuted if uncertain. Call report_findings with "
+    + "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
+    + "output that decided it.\n\n"
+    + $"Subtask: {subtask}\n\nResult to verify:\n{result}";
+
+// Run subtasks as parallel subagents, then run a second verification wave over
+// the results, and return both. maxTotalSubtasks bounds how many the model can
+// queue; maxConcurrent bounds how many run at once.
 async Task<(string Output, bool IsError)> RunWorkflow(JsonElement rawSubtasks)
 {
     var allSubtasks = NormalizeSubtasks(rawSubtasks);
-    var subtasks = allSubtasks.Take(maxParallelAgents).ToList();
+    var subtasks = allSubtasks.Take(maxTotalSubtasks).ToList();
     var dropped = allSubtasks.Count - subtasks.Count;
     if (subtasks.Count == 0)
     {
@@ -1919,24 +2530,37 @@ async Task<(string Output, bool IsError)> RunWorkflow(JsonElement rawSubtasks)
     }
     Console.Error.WriteLine($"[workflow] fanning out {subtasks.Count} agents");
 
-    var reports = await Task.WhenAll(subtasks.Select(async prompt =>
+    using SemaphoreSlim gate = new(maxConcurrent);
+    async Task<string> RunOne(string prompt)
     {
+        await gate.WaitAsync();
         try
         {
-            return await RunSubagent(prompt);
+            return await Journaled(prompt, () => RunSubagent(prompt));
         }
         catch (Exception error)
         {
             // Isolation boundary: one bad subagent should not end the run.
             return $"(subagent failed: {error.GetType().Name}: {error.Message})";
         }
-    }));
+        finally
+        {
+            gate.Release();
+        }
+    }
+
+    var results = await Task.WhenAll(subtasks.Select(RunOne));
+    Console.Error.WriteLine($"[workflow] verifying {results.Length} results");
+    var verifyPrompts = subtasks.Select((task, index) => VerifyPromptFor(task, results[index])).ToList();
+    var verdicts = await Task.WhenAll(verifyPrompts.Select(RunOne));
+
     var joined = string.Join(
         "\n\n",
-        subtasks.Select((task, index) => $"[agent {index + 1}: {task}]\n{reports[index]}"));
+        subtasks.Select((task, index) =>
+            $"[agent {index + 1}: {task}]\n{results[index]}\n\n[verify {index + 1}]\n{verdicts[index]}"));
     if (dropped > 0)
     {
-        joined = $"(note: {dropped} subtasks beyond maxParallelAgents={maxParallelAgents} were not run; "
+        joined = $"(note: {dropped} subtasks beyond maxTotalSubtasks={maxTotalSubtasks} were not run; "
             + "rerun them in a follow-up Workflow call)\n\n" + joined;
     }
     return (joined, false);
@@ -1967,13 +2591,41 @@ func normalizeSubtasks(raw json.RawMessage) []string {
 	return cleaned
 }
 
-// runWorkflow runs subtasks as parallel subagents and collects their structured reports.
-// It returns the combined report text plus an error flag for the tool result.
+func verifyPromptFor(subtask, result string) string {
+	return "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the " +
+		"claims yourself with bash rather than trusting the result, and look for evidence " +
+		"that contradicts them. Default to refuted if uncertain. Call report_findings with " +
+		"summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " +
+		"output that decided it.\n\n" +
+		"Subtask: " + subtask + "\n\nResult to verify:\n" + result
+}
+
+// mapWithLimit runs task over items with at most limit goroutines in flight.
+func mapWithLimit(items []string, limit int, task func(string) string) []string {
+	results := make([]string, len(items))
+	semaphore := make(chan struct{}, limit)
+	var waitGroup sync.WaitGroup
+	for index, item := range items {
+		waitGroup.Add(1)
+		semaphore <- struct{}{}
+		go func() {
+			defer waitGroup.Done()
+			defer func() { <-semaphore }()
+			results[index] = task(item)
+		}()
+	}
+	waitGroup.Wait()
+	return results
+}
+
+// runWorkflow runs subtasks as parallel subagents, then runs a second verification wave
+// over the results, and returns both. maxTotalSubtasks bounds how many the model can
+// queue; maxConcurrent bounds how many run at once.
 func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage) (string, bool) {
 	allSubtasks := normalizeSubtasks(rawSubtasks)
 	subtasks := allSubtasks
-	if len(subtasks) > maxParallelAgents {
-		subtasks = subtasks[:maxParallelAgents]
+	if len(subtasks) > maxTotalSubtasks {
+		subtasks = subtasks[:maxTotalSubtasks]
 	}
 	dropped := len(allSubtasks) - len(subtasks)
 	if len(subtasks) == 0 {
@@ -1981,30 +2633,32 @@ func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage)
 	}
 	fmt.Fprintf(os.Stderr, "[workflow] fanning out %d agents\n", len(subtasks))
 
-	results := make([]string, len(subtasks))
-	var waitGroup sync.WaitGroup
-	for index, prompt := range subtasks {
-		waitGroup.Add(1)
-		go func() {
-			defer waitGroup.Done()
-			report, err := runSubagent(ctx, model, prompt)
-			if err != nil {
-				// Isolation boundary: one bad subagent should not end the run.
-				report = fmt.Sprintf("(subagent failed: %s)", err)
-			}
-			results[index] = report
-		}()
+	runOne := func(prompt string) string {
+		report, err := journaled(prompt, func() (string, error) { return runSubagent(ctx, model, prompt) })
+		if err != nil {
+			// Isolation boundary: one bad subagent should not end the run.
+			return fmt.Sprintf("(subagent failed: %s)", err)
+		}
+		return report
 	}
-	waitGroup.Wait()
+
+	results := mapWithLimit(subtasks, maxConcurrent, runOne)
+	fmt.Fprintf(os.Stderr, "[workflow] verifying %d results\n", len(results))
+	verifyPrompts := make([]string, len(subtasks))
+	for index, task := range subtasks {
+		verifyPrompts[index] = verifyPromptFor(task, results[index])
+	}
+	verdicts := mapWithLimit(verifyPrompts, maxConcurrent, runOne)
 
 	sections := make([]string, len(subtasks))
 	for index, task := range subtasks {
-		sections[index] = fmt.Sprintf("[agent %d: %s]\n%s", index+1, task, results[index])
+		sections[index] = fmt.Sprintf("[agent %d: %s]\n%s\n\n[verify %d]\n%s",
+			index+1, task, results[index], index+1, verdicts[index])
 	}
 	joined := strings.Join(sections, "\n\n")
 	if dropped > 0 {
-		joined = fmt.Sprintf("(note: %d subtasks beyond maxParallelAgents=%d were not run; "+
-			"rerun them in a follow-up Workflow call)\n\n", dropped, maxParallelAgents) + joined
+		joined = fmt.Sprintf("(note: %d subtasks beyond maxTotalSubtasks=%d were not run; "+
+			"rerun them in a follow-up Workflow call)\n\n", dropped, maxTotalSubtasks) + joined
 	}
 	return joined, false
 }
@@ -2043,85 +2697,64 @@ List<String> normalizeSubtasks(JsonValue raw) {
             .toList();
 }
 
-// Run subtasks as parallel subagents and collect their structured reports.
+String verifyPromptFor(String subtask, String result) {
+    return "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the "
+            + "claims yourself with bash rather than trusting the result, and look for evidence "
+            + "that contradicts them. Default to refuted if uncertain. Call report_findings with "
+            + "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
+            + "output that decided it.\n\n"
+            + "Subtask: " + subtask + "\n\nResult to verify:\n" + result;
+}
+
+List<String> runAll(ExecutorService pool, List<String> prompts, String model) throws InterruptedException {
+    List<Callable<String>> jobs = prompts.stream()
+            .<Callable<String>>map(prompt -> () -> journaled(prompt, () -> runSubagent(model, prompt)))
+            .toList();
+    List<String> results = new ArrayList<>();
+    for (Future<String> future : pool.invokeAll(jobs)) {
+        try {
+            results.add(future.get());
+        } catch (ExecutionException | CancellationException error) {
+            // Isolation boundary: one bad subagent should not end the run.
+            Throwable cause = error.getCause() != null ? error.getCause() : error;
+            results.add("(subagent failed: " + cause + ")");
+        }
+    }
+    return results;
+}
+
+// Run subtasks as parallel subagents, then run a second verification wave over
+// the results, and return both. MAX_TOTAL_SUBTASKS bounds how many the model can
+// queue; MAX_CONCURRENT bounds how many run at once.
 ToolOutput runWorkflow(String model, JsonValue rawSubtasks) throws InterruptedException {
     List<String> allSubtasks = normalizeSubtasks(rawSubtasks);
-    List<String> subtasks = allSubtasks.stream().limit(MAX_PARALLEL_AGENTS).toList();
+    List<String> subtasks = allSubtasks.stream().limit(MAX_TOTAL_SUBTASKS).toList();
     int dropped = allSubtasks.size() - subtasks.size();
     if (subtasks.isEmpty()) {
         return new ToolOutput("Workflow error: no usable subtasks were provided.", true);
     }
     System.err.println("[workflow] fanning out " + subtasks.size() + " agents");
 
-    List<Callable<String>> jobs = subtasks.stream()
-            .<Callable<String>>map(prompt -> () -> runSubagent(model, prompt))
-            .toList();
-    List<String> results = new ArrayList<>();
-    try (ExecutorService pool = Executors.newVirtualThreadPerTaskExecutor()) {
-        for (Future<String> future : pool.invokeAll(jobs)) {
-            try {
-                results.add(future.get());
-            } catch (ExecutionException | CancellationException error) {
-                // Isolation boundary: one bad subagent should not end the run.
-                Throwable cause = error.getCause() != null ? error.getCause() : error;
-                results.add("(subagent failed: " + cause + ")");
-            }
-        }
+    List<String> results;
+    List<String> verdicts;
+    try (ExecutorService pool = Executors.newFixedThreadPool(MAX_CONCURRENT, Thread.ofVirtual().factory())) {
+        results = runAll(pool, subtasks, model);
+        System.err.println("[workflow] verifying " + results.size() + " results");
+        List<String> verifyPrompts = IntStream.range(0, subtasks.size())
+                .mapToObj(index -> verifyPromptFor(subtasks.get(index), results.get(index)))
+                .toList();
+        verdicts = runAll(pool, verifyPrompts, model);
     }
     String joined = IntStream.range(0, subtasks.size())
-            .mapToObj(index -> "[agent " + (index + 1) + ": " + subtasks.get(index) + "]\n" + results.get(index))
+            .mapToObj(index -> "[agent " + (index + 1) + ": " + subtasks.get(index) + "]\n" + results.get(index)
+                    + "\n\n[verify " + (index + 1) + "]\n" + verdicts.get(index))
             .collect(Collectors.joining("\n\n"));
     if (dropped > 0) {
-        joined = "(note: " + dropped + " subtasks beyond MAX_PARALLEL_AGENTS=" + MAX_PARALLEL_AGENTS
+        joined = "(note: " + dropped + " subtasks beyond MAX_TOTAL_SUBTASKS=" + MAX_TOTAL_SUBTASKS
                 + " were not run; rerun them in a follow-up Workflow call)\n\n" + joined;
     }
     return new ToolOutput(joined, false);
 }
-````
-
-  
-````ruby
-# Accept the subtasks input in whatever shape the model emits: an array, the array
-# JSON-encoded as a single string, or a newline-separated list.
-def normalize_subtasks(raw)
-  if raw.is_a?(String)
-    begin
-      raw = JSON.parse(raw)
-    rescue JSON::ParserError
-      raw = raw.include?("\n") ? raw.split("\n") : [raw]
-    end
-  end
-  return [] unless raw.is_a?(Array)
-  raw.select { |task| task.is_a?(String) }.map(&:strip).reject(&:empty?)
-end
-
-# Run subtasks as parallel subagents and collect their structured reports.
-# Returns [output, is_error].
-def run_workflow(model, raw_subtasks)
-  all_subtasks = normalize_subtasks(raw_subtasks)
-  subtasks = all_subtasks.first(MAX_PARALLEL_AGENTS)
-  dropped = all_subtasks.length - subtasks.length
-  return ["Workflow error: no usable subtasks were provided.", true] if subtasks.empty?
-
-  warn "[workflow] fanning out #{subtasks.length} agents"
-  threads = subtasks.map do |prompt|
-    Thread.new do
-      run_subagent(model, prompt)
-    rescue => error # isolation boundary: one bad subagent should not end the run
-      "(subagent failed: #{error.class}: #{error.message})"
-    end
-  end
-  results = threads.map(&:value)
-  joined = subtasks.each_with_index.map do |task, index|
-    "[agent #{index + 1}: #{task}]\n#{results[index]}"
-  end.join("\n\n")
-  if dropped > 0
-    joined =
-      "(note: #{dropped} subtasks beyond MAX_PARALLEL_AGENTS=#{MAX_PARALLEL_AGENTS} were not " \
-      "run; rerun them in a follow-up Workflow call)\n\n#{joined}"
-  end
-  [joined, false]
-end
 ````
 
   
@@ -2146,38 +2779,133 @@ function normalizeSubtasks(mixed $raw): array
     return array_values(array_filter($tasks, fn ($task) => $task !== ''));
 }
 
+function verifyPromptFor(string $subtask, string $result): string
+{
+    return 'Adversarially verify the subagent result below: try to REFUTE it. Re-derive the '
+        . 'claims yourself with bash rather than trusting the result, and look for evidence '
+        . 'that contradicts them. Default to refuted if uncertain. Call report_findings with '
+        . "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
+        . "output that decided it.\n\n"
+        . "Subtask: {$subtask}\n\nResult to verify:\n{$result}";
+}
+
 /**
- * Run the workflow subtasks and collect their structured reports into [output, isError].
- * PHP's standard runtime has no lightweight thread pool, so the subtasks run sequentially
- * here; the SDK examples in other languages fan them out in parallel.
+ * Run subtasks through the journal, then run a second verification wave over the
+ * results, and return both. PHP's standard runtime has no lightweight thread pool,
+ * so both waves run sequentially here (MAX_CONCURRENT is unused); the SDK examples
+ * in other languages fan them out in parallel.
  */
 function runWorkflow(Client $client, string $model, mixed $rawSubtasks): array
 {
     $allSubtasks = normalizeSubtasks($rawSubtasks);
-    $subtasks = array_slice($allSubtasks, 0, MAX_PARALLEL_AGENTS);
+    $subtasks = array_slice($allSubtasks, 0, MAX_TOTAL_SUBTASKS);
     $dropped = count($allSubtasks) - count($subtasks);
     if ($subtasks === []) {
         return ['Workflow error: no usable subtasks were provided.', true];
     }
     fwrite(STDERR, '[workflow] running ' . count($subtasks) . " agents\n");
 
-    $sections = [];
-    foreach ($subtasks as $index => $prompt) {
+    $runOne = function (string $prompt) use ($client, $model): string {
         try {
-            $report = runSubagent($client, $model, $prompt);
+            return journaled($prompt, fn () => runSubagent($client, $model, $prompt));
         } catch (Throwable $error) {
             // Isolation boundary: one bad subagent should not end the run.
-            $report = '(subagent failed: ' . $error::class . ': ' . $error->getMessage() . ')';
+            return '(subagent failed: ' . $error::class . ': ' . $error->getMessage() . ')';
         }
-        $sections[] = '[agent ' . ($index + 1) . ": {$prompt}]\n{$report}";
+    };
+
+    $results = array_map($runOne, $subtasks);
+    fwrite(STDERR, '[workflow] verifying ' . count($results) . " results\n");
+    $verifyPrompts = array_map(verifyPromptFor(...), $subtasks, $results);
+    $verdicts = array_map($runOne, $verifyPrompts);
+
+    $sections = [];
+    foreach ($subtasks as $index => $task) {
+        $sections[] = '[agent ' . ($index + 1) . ": {$task}]\n{$results[$index]}"
+            . "\n\n[verify " . ($index + 1) . "]\n{$verdicts[$index]}";
     }
     $joined = implode("\n\n", $sections);
     if ($dropped > 0) {
-        $joined = '(note: ' . $dropped . ' subtasks beyond MAX_PARALLEL_AGENTS=' . MAX_PARALLEL_AGENTS
+        $joined = '(note: ' . $dropped . ' subtasks beyond MAX_TOTAL_SUBTASKS=' . MAX_TOTAL_SUBTASKS
             . " were not run; rerun them in a follow-up Workflow call)\n\n" . $joined;
     }
     return [$joined, false];
 }
+````
+
+  
+````ruby
+# Accept the subtasks input in whatever shape the model emits: an array, the array
+# JSON-encoded as a single string, or a newline-separated list.
+def normalize_subtasks(raw)
+  if raw.is_a?(String)
+    begin
+      raw = JSON.parse(raw)
+    rescue JSON::ParserError
+      raw = raw.include?("\n") ? raw.split("\n") : [raw]
+    end
+  end
+  return [] unless raw.is_a?(Array)
+  raw.select { |task| task.is_a?(String) }.map(&:strip).reject(&:empty?)
+end
+
+def verify_prompt_for(subtask, result)
+  "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the " \
+    "claims yourself with bash rather than trusting the result, and look for evidence " \
+    "that contradicts them. Default to refuted if uncertain. Call report_findings with " \
+    "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " \
+    "output that decided it.\n\n" \
+    "Subtask: #{subtask}\n\nResult to verify:\n#{result}"
+end
+
+# Map with a concurrency limit: at most `limit` threads are in flight at once.
+def map_with_limit(items, limit)
+  results = Array.new(items.length)
+  queue = Queue.new
+  items.each_with_index { |item, index| queue << [index, item] }
+  workers = Array.new([limit, items.length].min) do
+    Thread.new do
+      until queue.empty?
+        index, item = queue.pop(true) rescue break
+        results[index] = yield item
+      end
+    end
+  end
+  workers.each(&:join)
+  results
+end
+
+# Run subtasks as parallel subagents, then run a second verification wave over
+# the results, and return both. MAX_TOTAL_SUBTASKS bounds how many the model can
+# queue; MAX_CONCURRENT bounds how many run at once.
+def run_workflow(model, raw_subtasks)
+  all_subtasks = normalize_subtasks(raw_subtasks)
+  subtasks = all_subtasks.first(MAX_TOTAL_SUBTASKS)
+  dropped = all_subtasks.length - subtasks.length
+  return ["Workflow error: no usable subtasks were provided.", true] if subtasks.empty?
+
+  warn "[workflow] fanning out #{subtasks.length} agents"
+  run_one = lambda do |prompt|
+    journaled(prompt) { run_subagent(model, prompt) }
+  rescue => error # isolation boundary: one bad subagent should not end the run
+    "(subagent failed: #{error.class}: #{error.message})"
+  end
+
+  results = map_with_limit(subtasks, MAX_CONCURRENT, &run_one)
+  warn "[workflow] verifying #{results.length} results"
+  verify_prompts = subtasks.zip(results).map { |task, result| verify_prompt_for(task, result) }
+  verdicts = map_with_limit(verify_prompts, MAX_CONCURRENT, &run_one)
+
+  joined = subtasks.each_with_index.map do |task, index|
+    "[agent #{index + 1}: #{task}]\n#{results[index]}\n\n[verify #{index + 1}]\n#{verdicts[index]}"
+  end.join("\n\n")
+  if dropped > 0
+    joined =
+      "(note: #{dropped} subtasks beyond MAX_TOTAL_SUBTASKS=#{MAX_TOTAL_SUBTASKS} were not " \
+      "run; rerun them in a follow-up Workflow call)\n\n#{joined}"
+  end
+  [joined, false]
+end
 ````
 
 </CodeGroup>
@@ -2208,7 +2936,7 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   "tools": [
     {
       "name": "Workflow",
-      "description": "Orchestrate a multi-agent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
+      "description": "Orchestrate a multi-agent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Granularity: scope each subtask to a distinct concern rather than per line or file section; a review of a small module rarely needs more than about ten. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -2230,7 +2958,7 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     },
     {
       "role": "system",
-      "content": "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than the fastest or cheapest one. Use the Workflow tool on every substantive task; token cost is not a constraint. See the Workflow tool's standing consent section and quality patterns. Work solo only on conversational or trivial turns."
+      "content": "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than the fastest one. Use the Workflow tool on every substantive task, sized to the problem's natural decomposition rather than the maximum the tool allows. See the Workflow tool's description for standing consent, granularity guidance, and quality patterns. Work solo only on conversational or trivial turns."
     }
   ]
 }
@@ -2257,9 +2985,12 @@ tools:
       subtasks and run them as parallel agents, then collect their results.
       Opt-in: only use this tool when the user explicitly asks for a workflow,
       or when a system message confirms that orchestration mode is on.
-      Standing consent: while a system message confirms orchestration mode is
-      on, author and run a workflow for every substantive task by default;
-      work solo only on conversational turns or trivial mechanical edits.
+      Granularity: scope each subtask to a distinct concern rather than per
+      line or file section; a review of a small module rarely needs more than
+      about ten. Standing consent: while a system message confirms
+      orchestration mode is on, author and run a workflow for every
+      substantive task by default; work solo only on conversational turns or
+      trivial mechanical edits.
     input_schema:
       type: object
       properties:
@@ -2277,10 +3008,11 @@ messages:
   - role: system
     content: >-
       Orchestration mode is on: optimize for the most exhaustive, correct
-      answer rather than the fastest or cheapest one. Use the Workflow tool on
-      every substantive task; token cost is not a constraint. See the Workflow
-      tool's standing consent section and quality patterns. Work solo only on
-      conversational or trivial turns.
+      answer rather than the fastest one. Use the Workflow tool on every
+      substantive task, sized to the problem's natural decomposition rather
+      than the maximum the tool allows. See the Workflow tool's description
+      for standing consent, granularity guidance, and quality patterns. Work
+      solo only on conversational or trivial turns.
 YAML
 ````
 
@@ -2342,6 +3074,7 @@ class ModeAgent:
                 output_config={"effort": EFFORT},
                 tools=[WORKFLOW_TOOL, BASH_TOOL],
                 messages=self.messages,
+                timeout=REQUEST_TIMEOUT_SECONDS,
             ) as stream:
                 response = stream.get_final_message()
             self.messages.append({"role": "assistant", "content": response.content})
@@ -2442,15 +3175,18 @@ class ModeAgent {
 
     for (let turn = 0; turn < MAX_MAIN_TURNS; turn++) {
       const response = await client.messages
-        .stream({
-          model: this.model,
-          max_tokens: 64000,
-          system: SYSTEM_PROMPT, // static for the whole session
-          thinking: { type: "adaptive" },
-          output_config: { effort: EFFORT },
-          tools: [WORKFLOW_TOOL, BASH_TOOL],
-          messages: this.messages,
-        })
+        .stream(
+          {
+            model: this.model,
+            max_tokens: 64000,
+            system: SYSTEM_PROMPT, // static for the whole session
+            thinking: { type: "adaptive" },
+            output_config: { effort: EFFORT },
+            tools: [WORKFLOW_TOOL, BASH_TOOL],
+            messages: this.messages,
+          },
+          { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) },
+        )
         .finalMessage();
       this.messages.push({ role: "assistant", content: response.content });
 
@@ -2573,16 +3309,17 @@ async Task<string> Turn(string userInput)
 
     for (var turn = 0; turn < maxMainTurns; turn++)
     {
+        using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(requestTimeoutSeconds));
         var response = await client.Messages.Create(new MessageCreateParams
         {
             Model = model,
-            MaxTokens = 64000,
+            MaxTokens = requestMaxTokens,
             System = systemPrompt, // static for the whole session
             Thinking = new ThinkingConfigAdaptive(),
             OutputConfig = new OutputConfig { Effort = effort },
             Tools = [workflowTool, bashTool],
             Messages = messages,
-        });
+        }, cancellationToken: deadline.Token);
         messages.Add(new()
         {
             Role = Role.Assistant,
@@ -2710,6 +3447,8 @@ func (agent *modeAgent) turn(ctx context.Context, userInput string) (string, err
 	for range maxMainTurns {
 		var response anthropic.Message
 		err := func() error {
+			ctx, cancel := context.WithTimeout(ctx, requestTimeoutSeconds*time.Second)
+			defer cancel()
 			stream := client.Messages.NewStreaming(ctx, anthropic.MessageNewParams{
 				Model:        agent.model,
 				MaxTokens:    64000,
@@ -2868,7 +3607,7 @@ class ModeAgent {
                     .messages(messages)
                     .build();
             MessageAccumulator accumulator = MessageAccumulator.create();
-            try (var stream = client.messages().createStreaming(params)) {
+            try (var stream = client.messages().createStreaming(params, REQUEST_OPTIONS)) {
                 stream.stream().forEach(accumulator::accumulate);
             }
             Message response = accumulator.message();
@@ -2924,113 +3663,6 @@ class ModeAgent {
 ````
 
   
-````ruby
-# An agent loop whose orchestration mode is toggled with mid-conversation system messages.
-class ModeAgent
-  def initialize(model, mode_on: true)
-    @model = model
-    @mode_on = mode_on
-    @messages = []
-    @mode_announced = false
-    @exit_pending = false
-    @turns_since_reminder = 0
-  end
-
-  # Turn the mode on or off. The notice is delivered with the next user turn.
-  def set_mode(mode_on)
-    return if mode_on == @mode_on
-
-    if mode_on
-      @exit_pending = false
-    else
-      @exit_pending = true if @mode_announced
-    end
-    @mode_on = mode_on
-  end
-
-  def turn(user_input)
-    # Mid-conversation system messages follow the user turn they apply to, which keeps
-    # the cached prefix ahead of them untouched.
-    @messages << {role: "user", content: user_input}
-    @messages.concat(due_system_messages)
-    @turns_since_reminder += 1
-
-    MAX_MAIN_TURNS.times do
-      stream = CLIENT.messages.stream(
-        model: @model,
-        max_tokens: 64_000,
-        system_: SYSTEM_PROMPT, # static for the whole session
-        thinking: {type: :adaptive},
-        output_config: {effort: EFFORT},
-        tools: [WORKFLOW_TOOL, BASH_TOOL],
-        messages: @messages
-      )
-      response = stream.accumulated_message
-      @messages << {role: "assistant", content: assistant_content_param(response.content)}
-
-      next if response.stop_reason == :pause_turn
-
-      unless response.stop_reason == :tool_use
-        text = response.content.select { |block| block.type == :text }.map(&:text).join
-        if response.stop_reason == :max_tokens
-          @messages.pop # drop the truncated assistant message from the history
-          text += "\n\n(warning: response was truncated at max_tokens)"
-        end
-        return text
-      end
-
-      tool_results = []
-      response.content.each do |block|
-        next unless block.type == :tool_use
-
-        input = parse_tool_input(block.input)
-        case block.name
-        when "Workflow"
-          output, is_error = run_workflow(@model, input["subtasks"] || [])
-        when "bash"
-          output, is_error = handle_bash_block(block)
-        else
-          output, is_error = "unknown tool: #{block.name}", true
-        end
-        tool_results << {
-          type: "tool_result",
-          tool_use_id: block.id,
-          content: output,
-          is_error: is_error
-        }
-      end
-      @messages << {role: "user", content: tool_results}
-    end
-    "(hit the main loop turn limit before finishing)"
-  end
-
-  private
-
-  # System messages owed on this turn: an exit notice, the full mode text on entry,
-  # or a one-line refresher every TURNS_BETWEEN_REFRESHERS user turns.
-  def due_system_messages
-    due = []
-    if @exit_pending
-      @exit_pending = false
-      @mode_announced = false
-      due << {role: "system", content: MODE_EXIT}
-    end
-    if @mode_on
-      if !@mode_announced
-        @mode_announced = true
-        @turns_since_reminder = 0
-        due << {role: "system", content: MODE_ENTER}
-      elsif @turns_since_reminder >= TURNS_BETWEEN_REFRESHERS
-        @turns_since_reminder = 0
-        due << {role: "system", content: MODE_REFRESH}
-      end
-    end
-    due
-  end
-end
-````
-
-  
 ````php
 /** An agent loop whose orchestration mode is toggled with mid-conversation system messages. */
 class ModeAgent
@@ -3078,6 +3710,7 @@ class ModeAgent
                 outputConfig: ['effort' => EFFORT],
                 tools: [WORKFLOW_TOOL, BASH_TOOL],
                 messages: $this->messages,
+                requestOptions: ['timeout' => REQUEST_TIMEOUT_SECONDS],
             );
             [$content, $stopReason] = drainMessageStream($stream);
             $this->messages[] = ['role' => 'assistant', 'content' => $content];
@@ -3153,6 +3786,114 @@ class ModeAgent
 }
 ````
 
+  
+````ruby
+# An agent loop whose orchestration mode is toggled with mid-conversation system messages.
+class ModeAgent
+  def initialize(model, mode_on: true)
+    @model = model
+    @mode_on = mode_on
+    @messages = []
+    @mode_announced = false
+    @exit_pending = false
+    @turns_since_reminder = 0
+  end
+
+  # Turn the mode on or off. The notice is delivered with the next user turn.
+  def set_mode(mode_on)
+    return if mode_on == @mode_on
+
+    if mode_on
+      @exit_pending = false
+    else
+      @exit_pending = true if @mode_announced
+    end
+    @mode_on = mode_on
+  end
+
+  def turn(user_input)
+    # Mid-conversation system messages follow the user turn they apply to, which keeps
+    # the cached prefix ahead of them untouched.
+    @messages << {role: "user", content: user_input}
+    @messages.concat(due_system_messages)
+    @turns_since_reminder += 1
+
+    MAX_MAIN_TURNS.times do
+      stream = CLIENT.messages.stream(
+        model: @model,
+        max_tokens: 64_000,
+        system_: SYSTEM_PROMPT, # static for the whole session
+        thinking: {type: :adaptive},
+        output_config: {effort: EFFORT},
+        tools: [WORKFLOW_TOOL, BASH_TOOL],
+        messages: @messages,
+        request_options: {timeout: REQUEST_TIMEOUT_SECONDS}
+      )
+      response = stream.accumulated_message
+      @messages << {role: "assistant", content: assistant_content_param(response.content)}
+
+      next if response.stop_reason == :pause_turn
+
+      unless response.stop_reason == :tool_use
+        text = response.content.select { |block| block.type == :text }.map(&:text).join
+        if response.stop_reason == :max_tokens
+          @messages.pop # drop the truncated assistant message from the history
+          text += "\n\n(warning: response was truncated at max_tokens)"
+        end
+        return text
+      end
+
+      tool_results = []
+      response.content.each do |block|
+        next unless block.type == :tool_use
+
+        input = parse_tool_input(block.input)
+        case block.name
+        when "Workflow"
+          output, is_error = run_workflow(@model, input["subtasks"] || [])
+        when "bash"
+          output, is_error = handle_bash_block(block)
+        else
+          output, is_error = "unknown tool: #{block.name}", true
+        end
+        tool_results << {
+          type: "tool_result",
+          tool_use_id: block.id,
+          content: output,
+          is_error: is_error
+        }
+      end
+      @messages << {role: "user", content: tool_results}
+    end
+    "(hit the main loop turn limit before finishing)"
+  end
+
+  private
+
+  # System messages owed on this turn: an exit notice, the full mode text on entry,
+  # or a one-line refresher every TURNS_BETWEEN_REFRESHERS user turns.
+  def due_system_messages
+    due = []
+    if @exit_pending
+      @exit_pending = false
+      @mode_announced = false
+      due << {role: "system", content: MODE_EXIT}
+    end
+    if @mode_on
+      if !@mode_announced
+        @mode_announced = true
+        @turns_since_reminder = 0
+        due << {role: "system", content: MODE_ENTER}
+      elsif @turns_since_reminder >= TURNS_BETWEEN_REFRESHERS
+        @turns_since_reminder = 0
+        due << {role: "system", content: MODE_REFRESH}
+      end
+    end
+    due
+  end
+end
+````
+
 </CodeGroup>
 
 ## Run it
@@ -3203,25 +3944,34 @@ Console.WriteLine(await Turn("Briefly summarize what you found above, no fan-out
   
 ````go
 func main() {
+	if err := run(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run(ctx context.Context) error {
+	if docTestMode {
+		defer os.RemoveAll(workDir)
+	}
 	task := "Explore the current directory, then give a thorough review: what it does, " +
 		"code-quality issues, and concrete improvements."
 	if len(os.Args) > 1 {
 		task = os.Args[1]
 	}
-	ctx := context.Background()
 	agent := newModeAgent(modelID)
 	answer, err := agent.turn(ctx, task)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	fmt.Println(answer)
 
 	agent.setMode(false)
 	summary, err := agent.turn(ctx, "Briefly summarize what you found above, no fan-out needed.")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	fmt.Println(summary)
+	return nil
 }
 
 ````
@@ -3241,17 +3991,6 @@ void main(String[] args) throws InterruptedException {
 ````
 
   
-````ruby
-task = ARGV[0] ||
-  "Explore the current directory, then give a thorough review: what it does, " \
-  "code-quality issues, and concrete improvements."
-agent = ModeAgent.new(MODEL)
-puts agent.turn(task)
-agent.set_mode(false)
-puts agent.turn("Briefly summarize what you found above, no fan-out needed.")
-````
-
-  
 ````php
 $task = $argv[1] ??
     'Explore the current directory, then give a thorough review: what it does, '
@@ -3262,13 +4001,36 @@ $agent->setMode(false);
 echo $agent->turn('Briefly summarize what you found above, no fan-out needed.'), PHP_EOL;
 ````
 
+  
+````ruby
+task = ARGV[0] ||
+  "Explore the current directory, then give a thorough review: what it does, " \
+  "code-quality issues, and concrete improvements."
+agent = ModeAgent.new(MODEL)
+puts agent.turn(task)
+agent.set_mode(false)
+puts agent.turn("Briefly summarize what you found above, no fan-out needed.")
+````
+
 </CodeGroup>
+
+Start the example from the directory you want the agents to work in, for example the root of a repository to review:
 
 ```bash
 python orchestration_mode.py "Review this repository for flaky tests and propose fixes."
 ```
 
 With the mode on, expect the model to scout with a few bash commands, dispatch the Workflow tool unprompted, and synthesize the subagent reports into a final answer. Trivial or conversational requests stay solo, as the reminder instructs.
+
+## Toward a production harness
+
+This example is deliberately small. A harness meant for real workloads would typically add:
+
+- **Sandboxed orchestration scripts:** let the model emit a short orchestration program (branching, loops, and reduce steps) and run it inside an isolated interpreter, rather than accepting only a flat list of subtask strings.
+- **Durable journaling:** replace the local JSON file with a store that survives process restarts and is safe under concurrent writers across machines.
+- **Budget enforcement:** track total subagents launched across the whole session, not just per Workflow call, and refuse to exceed a hard cap so a runaway plan cannot exhaust your quota.
+
+The patterns in this example (the mode reminders, standing consent in the tool description, journaling, and a verification wave) carry over unchanged; only the execution substrate around them gets more robust.
 
 ## Related
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-03T16:54:07Z",
+  "generated_at": "2026-06-03T19:42:22Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -51,12 +51,12 @@
         "variables",
         "set",
         "region",
+        "see",
         "profile",
         "file",
-        "amazon",
-        "access"
+        "amazon"
       ],
-      "word_count": 3080,
+      "word_count": 3093,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -1008,7 +1008,7 @@
         "user",
         "repo"
       ],
-      "word_count": 10381,
+      "word_count": 10430,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -38749,26 +38749,26 @@
       "keywords": [
         "tool",
         "mode",
-        "system",
+        "run",
         "codegroup",
+        "model",
+        "example",
+        "out",
         "card",
+        "orchestration",
+        "fan",
         "effort",
         "bash",
         "level",
-        "mid",
-        "conversation",
-        "messages",
-        "out",
-        "model",
-        "message",
-        "build",
-        "orchestration",
+        "when",
+        "workflow",
+        "subagent",
         "standing",
         "consent",
-        "fan",
-        "every"
+        "mid",
+        "conversation"
       ],
-      "word_count": 13661,
+      "word_count": 17923,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-effort-example.md"
     },
     "/docs/en/build-with-claude/mid-conversation-system-messages": {
@@ -39086,25 +39086,25 @@
         "image",
         "images",
         "claude",
-        "section",
         "api",
-        "title",
-        "request",
+        "section",
         "per",
-        "example",
+        "request",
+        "title",
         "using",
+        "example",
+        "size",
+        "base",
         "text",
         "tab",
-        "tokens",
-        "base",
         "when",
         "before",
-        "size",
+        "tokens",
         "opus",
-        "examples",
-        "multiple"
+        "these",
+        "examples"
       ],
-      "word_count": 5054,
+      "word_count": 5169,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -40527,12 +40527,12 @@
         "host",
         "claude",
         "queue",
-        "codegroup",
         "key",
+        "codegroup",
         "execution",
         "when"
       ],
-      "word_count": 4496,
+      "word_count": 4505,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {

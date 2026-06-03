@@ -243,8 +243,8 @@
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "f02bba36390009b277adfc1b14c9d6d1d34fb2f9490ecdbabe65535971fc8aaf",
-      "last_updated": "2026-05-28T18:57:41.391294"
+      "hash": "e17bad12755d34452f9c7b2fe3a7ad6fe0f27cd59761002dd55792b37ca501af",
+      "last_updated": "2026-06-03T19:25:33.954843"
     },
     "claude-code__analytics.md": {
       "original_url": "https://platform.claude.com/docs/en/analytics",
@@ -8115,8 +8115,8 @@
     "docs__en__build-with-claude__mid-conversation-effort-example.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example.md",
-      "hash": "b227f4f0f7ccdf5dd47c9e182d7ba1523511fc8e0b420c65611f8236243d2671",
-      "last_updated": "2026-06-02T19:34:36.221931"
+      "hash": "e2f703b297001f840813dbb6a3c9bb3719990ae716e12acf5717927efc720e52",
+      "last_updated": "2026-06-03T19:40:31.307935"
     },
     "docs__en__build-with-claude__mid-conversation-system-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages",
@@ -8187,8 +8187,8 @@
     "docs__en__build-with-claude__vision.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/vision",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/vision.md",
-      "hash": "0eaf62075521bef0b5960329a0a3762d53b933f8119a0475fa226ef5ca3aba42",
-      "last_updated": "2026-06-02T19:34:43.513290"
+      "hash": "b22d8c8f2e939b1380edd7f4b4ee378339a4666167e5dd9df3e73070d43559e9",
+      "last_updated": "2026-06-03T19:40:38.627994"
     },
     "docs__en__build-with-claude__working-with-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages",
@@ -8595,8 +8595,8 @@
     "docs__en__managed-agents__self-hosted-sandboxes.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
-      "hash": "c13f0453d578f63eff1a67e21f7ca8a952f3f86251b90ac8392e265b01b4b9e4",
-      "last_updated": "2026-06-02T19:35:39.163412"
+      "hash": "5641c281de5562e8e3511032cb8e38e8c97e1a638317455bad68972e0a373d0d",
+      "last_updated": "2026-06-03T19:41:35.409166"
     },
     "docs__en__managed-agents__self-hosted-sandboxes-security.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security",
@@ -8733,8 +8733,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "9276d74fd1c6cffe376231fa1c702d6f82e431abbdd32cb5632bddf8013fa834",
-      "last_updated": "2026-06-02T22:15:17.254836"
+      "hash": "ab9ca55f2560885d755c0437504bcae2e8d4037375803117d596514b2564af77",
+      "last_updated": "2026-06-03T19:41:59.217841"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -8799,8 +8799,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-03T16:54:05.583031",
-    "fetch_duration_seconds": 1104.377329,
+    "last_fetch_completed": "2026-06-03T19:42:19.565005",
+    "fetch_duration_seconds": 1042.446872,
     "total_pages_discovered": 1702,
     "pages_fetched_successfully": 1466,
     "pages_failed": 237,
@@ -9048,7 +9048,7 @@
     "total_files": 1466,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-03T16:54:05.583051",
+  "last_updated": "2026-06-03T19:42:19.565034",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
