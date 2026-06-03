@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-03T19:42:22Z",
+  "generated_at": "2026-06-03T22:17:46Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -11,9 +11,9 @@
         "when",
         "now",
         "added",
+        "session",
         "claude",
         "instead",
-        "session",
         "mode",
         "tool",
         "improved",
@@ -24,11 +24,11 @@
         "code",
         "prompt",
         "command",
-        "terminal",
         "background",
+        "terminal",
         "commands"
       ],
-      "word_count": 52239,
+      "word_count": 52869,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -420,7 +420,7 @@
         "message",
         "response"
       ],
-      "word_count": 1947,
+      "word_count": 1948,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -448,7 +448,7 @@
         "session",
         "exit"
       ],
-      "word_count": 6455,
+      "word_count": 6456,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "user",
         "context"
       ],
-      "word_count": 21426,
+      "word_count": 21428,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -602,8 +602,8 @@
         "code",
         "step",
         "tools",
-        "tool",
         "when",
+        "tool",
         "title",
         "environment",
         "plugin",
@@ -611,12 +611,12 @@
         "add",
         "only",
         "configuration",
+        "authentication",
         "set",
         "oauth",
-        "same",
-        "authentication"
+        "same"
       ],
-      "word_count": 6598,
+      "word_count": 6651,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -708,9 +708,9 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
+        "attributes",
         "tool",
         "event",
-        "attributes",
         "events",
         "request",
         "code",
@@ -720,15 +720,15 @@
         "plugin",
         "metrics",
         "only",
-        "api",
         "standard",
+        "api",
         "user",
+        "such",
         "prompt",
         "counter",
-        "such",
         "mcp"
       ],
-      "word_count": 9170,
+      "word_count": 9318,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1008,7 +1008,7 @@
         "user",
         "repo"
       ],
-      "word_count": 10430,
+      "word_count": 10477,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1115,12 +1115,12 @@
         "only",
         "same",
         "field",
-        "fork",
-        "hooks",
         "model",
-        "plugin"
+        "hooks",
+        "plugin",
+        "fork"
       ],
-      "word_count": 8211,
+      "word_count": 8225,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1183,28 +1183,28 @@
       "title": "Troubleshooting",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Troubleshooting...",
       "keywords": [
-        "claude",
         "code",
+        "claude",
         "file",
         "search",
         "tab",
+        "run",
         "memory",
         "issues",
-        "run",
         "usage",
         "performance",
         "files",
+        "settings",
         "context",
         "instead",
+        "when",
+        "terminal",
         "title",
         "high",
         "installation",
-        "may",
-        "when",
-        "large",
-        "native"
+        "may"
       ],
-      "word_count": 881,
+      "word_count": 954,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
