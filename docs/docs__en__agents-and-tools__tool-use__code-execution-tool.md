@@ -292,6 +292,23 @@ When you add the code execution tool to your API request:
 4. All operations run in a secure sandbox environment
 5. Claude provides results with any generated charts, calculations, or analysis
 
+### When Claude runs code
+
+Claude runs code when the request benefits from computation or file handling:
+
+- Non-trivial math (large numbers, many steps, precision-sensitive results)
+- Data analysis, file parsing, or visualization
+- Algorithm execution or simulation
+- Explicit requests to "run", "compute", or "execute"
+
+Claude answers directly without running code for:
+
+- Simple arithmetic and well-known math facts
+- Factual, conversational, or creative requests
+- Simple unit conversions or translations
+
+If you want Claude to run code for a borderline request, ask explicitly (for example, "run code to verify this").
+
 ## Using code execution with other execution tools
 
 When you provide code execution alongside client-provided tools that also run code (such as a [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) or custom REPL), Claude is operating in a multi-computer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.

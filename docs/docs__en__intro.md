@@ -17,7 +17,7 @@ The latest generation of Claude models:
 </Tip>
 
 <Note>
-Looking to chat with Claude? Visit [claude.ai](https://www.claude.ai).
+Looking to chat with Claude? Visit [claude.ai](https://claude.ai).
 </Note>
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:

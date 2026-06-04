@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-04T13:28:47Z",
+  "generated_at": "2026-06-04T16:28:40Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -616,7 +616,7 @@
         "oauth",
         "same"
       ],
-      "word_count": 6651,
+      "word_count": 6706,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1232,7 +1232,7 @@
         "settings",
         "install"
       ],
-      "word_count": 5028,
+      "word_count": 5058,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -1743,8 +1743,8 @@
       "title": "Code execution tool",
       "content_preview": "# Code execution tool  Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.  ---  Claude can analyze data, create visualizations, perform comple...",
       "keywords": [
-        "execution",
         "code",
+        "execution",
         "claude",
         "tool",
         "files",
@@ -1752,19 +1752,19 @@
         "file",
         "tools",
         "python",
+        "when",
         "opus",
         "container",
-        "when",
-        "bash",
         "data",
+        "run",
+        "bash",
         "environment",
+        "request",
         "note",
         "response",
-        "web",
-        "request",
-        "operations"
+        "web"
       ],
-      "word_count": 5537,
+      "word_count": 5629,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -38333,22 +38333,22 @@
         "document",
         "text",
         "citation",
-        "provided",
         "title",
+        "provided",
         "indexed",
         "plain",
         "custom",
         "blocks",
         "indices",
+        "tab",
         "into",
         "chunking",
         "claude",
         "example",
         "prompt",
-        "include",
-        "pdf"
+        "include"
       ],
-      "word_count": 2441,
+      "word_count": 2478,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
