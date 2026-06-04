@@ -8385,8 +8385,8 @@
     "docs__en__manage-claude__compliance-api-access.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/compliance-api-access",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md",
-      "hash": "ff30e0d0427ca5adb58f5120a8db375254270938f9879f3bf2de908697b48f32",
-      "last_updated": "2026-05-18T18:54:45.159574"
+      "hash": "0169a7a1edebcab3733587716c350d713a7307fcb2c69a28ebced75dab353066",
+      "last_updated": "2026-06-04T19:09:20.091460"
     },
     "docs__en__manage-claude__compliance-content-data.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/compliance-content-data",
@@ -8799,8 +8799,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-04T16:28:37.692181",
-    "fetch_duration_seconds": 1108.435299,
+    "last_fetch_completed": "2026-06-04T19:10:29.821335",
+    "fetch_duration_seconds": 1108.819463,
     "total_pages_discovered": 1702,
     "pages_fetched_successfully": 1466,
     "pages_failed": 237,
@@ -9048,7 +9048,7 @@
     "total_files": 1466,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-04T16:28:37.692205",
+  "last_updated": "2026-06-04T19:10:29.821358",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

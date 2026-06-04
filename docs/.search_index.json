@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-04T16:28:40Z",
+  "generated_at": "2026-06-04T19:10:32Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -39477,12 +39477,12 @@
       "keywords": [
         "key",
         "api",
-        "compliance",
         "claude",
+        "compliance",
         "organization",
         "keys",
-        "access",
         "admin",
+        "access",
         "step",
         "create",
         "activity",
@@ -39496,7 +39496,7 @@
         "delete",
         "organizations"
       ],
-      "word_count": 1527,
+      "word_count": 1513,
       "file_path": "docs/docs__en__manage-claude__compliance-api-access.md"
     },
     "/docs/en/manage-claude/compliance-api": {

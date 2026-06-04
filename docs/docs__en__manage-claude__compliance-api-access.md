@@ -18,7 +18,7 @@ The Compliance API uses two key types, and which one you create depends on which
 
 | Key type                                       | Created in                              | Used for                                                                                                       | Works with the Compliance API? |
 | ---------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls)  | Activity Feed, chats, files, projects, users, and organization metadata                                        | Yes (all endpoints)            |
+| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)  | Activity Feed, chats, files, projects, users, and organization metadata                                        | Yes (all endpoints)            |
 | **Admin API key** (`sk-ant-admin01-...`)           | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys)  | The [Admin API](/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed  | Activity Feed only             |
 | **Analytics API key**                          | [claude.ai > Analytics > API keys](https://claude.ai/analytics/api-keys)        | The [Claude Enterprise Analytics API](https://support.claude.com/en/articles/13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data)                                                                            | No                             |
 | **Claude API key** (`sk-ant-api03-...`)        | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys)    | Calling Claude models through the [Claude API](/docs/en/api/overview)                                          | No                             |
@@ -35,7 +35,7 @@ Contact your Anthropic representative to request access. Enablement happens at t
 
 ### After enablement: claude.ai organizations
 
-After Anthropic enables the Compliance API for your parent organization, a **Compliance access keys** section appears at [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). The primary owner can then [create Compliance Access Keys](#create-a-compliance-access-key).
+After Anthropic enables the Compliance API for your parent organization, the primary owner can [create Compliance Access Keys](#create-a-compliance-access-key) from the **Keys** section at [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access).
 
 ### After enablement: Claude Console organizations
 
@@ -58,11 +58,11 @@ After Anthropic enables the Compliance API for your parent organization, Admin A
 
 <Steps>
   <Step title="Sign in as the primary owner">
-    Only the primary owner of the parent organization can create Compliance Access Keys. If the **Compliance access keys** section described in the next step is not visible, either you are not the primary owner, or the Compliance API has not been enabled for your organization yet (see [Request Compliance API access](#request-compliance-api-access)).
+    Only the primary owner of the parent organization can create Compliance Access Keys. If the **API** page described in the next step is not visible, or compliance scopes are unavailable when creating a key, either you are not the primary owner, or the Compliance API has not been enabled for your organization yet (see [Request Compliance API access](#request-compliance-api-access)).
   </Step>
 
-  <Step title="Open Data and privacy settings">
-    Go to [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls) and find the **Compliance access keys** section.
+  <Step title="Open API settings">
+    Go to [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) and find the **Keys** section.
   </Step>
 
   <Step title="Create the key">
@@ -140,7 +140,7 @@ For the same key's role in managing your Claude Console organization, see [Admin
 To inspect the scopes on a key you already have, use one of the following signals.
 
 - **Key prefix.** `sk-ant-admin01-` is an Admin API key (carries `read:compliance_activities` only, subject to the enablement timing in the preceding section). `sk-ant-api01-` is a Compliance Access Key; its scopes are the subset you selected at creation.
-- **Settings UI.** Open the **Compliance access keys** section in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls), or the **Admin keys** section in [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys), and read the **Scopes** column for the key.
+- **Settings UI.** Open the **Keys** section in [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access), or the **Admin keys** section in [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys), and read the **Scopes** column for the key.
 - **Error responses.** A call that exceeds the key's scopes returns a 403 with a message in the format `Missing required scopes. Got: [<scopes the key carries>] Needed: [<scopes the endpoint requires>]`. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full error catalog.
 
 ```json
@@ -154,7 +154,7 @@ To inspect the scopes on a key you already have, use one of the following signal
 
 ## Manage and rotate keys
 
-Delete a Compliance Access Key from the same **Compliance access keys** panel where you created it: go to [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). Delete an Admin API key from [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys).
+Delete a Compliance Access Key from the same **Keys** table where you created it: go to [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access). Delete an Admin API key from [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys).
 
 Deleting a key takes effect on the next request: there is no grace period. Compliance Access Keys do not expire on their own.
 
