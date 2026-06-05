@@ -513,6 +513,8 @@ For details on response headers specific to Foundry, see [Correlation request ID
 
 ## API model IDs and deployments
 
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations). Microsoft Foundry follows the Claude API lifecycle schedule.
+
 The following Claude models are available through Foundry. The latest generation models (Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
 
 | Model             | Default deployment name     |
@@ -521,7 +523,7 @@ The following Claude models are available through Foundry. The latest generation
 | Claude Opus 4.7   | claude-opus-4-7           |
 | Claude Opus 4.6   | claude-opus-4-6           |
 | Claude Opus 4.5   | claude-opus-4-5           |
-| Claude Opus 4.1   | claude-opus-4-1           |
+| Claude Opus 4.1 <br /><small>Deprecated. Retiring August 5, 2026.</small> | claude-opus-4-1           |
 | Claude Sonnet 4.6 | claude-sonnet-4-6         |
 | Claude Sonnet 4.5 | claude-sonnet-4-5         |
 | Claude Haiku 4.5  | claude-haiku-4-5          |

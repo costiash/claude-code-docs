@@ -133,20 +133,20 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
   on this page because they do not have ARN-versioned model IDs.
 </Note>
 
-Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations); a "Retiring" annotation gives the platform's announced retirement date. The dates in the following table are the **Amazon Bedrock** schedule, which AWS sets independently. A model's lifecycle status and dates here can differ from the Anthropic-operated schedule on the Model deprecations page.
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Amazon Bedrock, see [Amazon Bedrock's model lifecycle page](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).
 
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.6 | anthropic.claude-sonnet-4-6 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
-| Claude Sonnet 4 <br /><small>Deprecated. Retiring October 14, 2026.</small> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
-| Claude Sonnet 3.7 <br /><small>Retired April 28, 2026.</small> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | No | No | No | No |
+| Claude Sonnet 4 <br /><small>Deprecated.</small> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
+| Claude Sonnet 3.7 <br /><small>Retired.</small> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | No | No | No | No |
 | Claude Opus 4.5 | anthropic.claude-opus-4-5-20251101-v1:0 | Yes | Yes | Yes | No | No |
-| Claude Opus 4.1 | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
-| Claude Opus 4 <br /><small>Deprecated. Retiring May 31, 2026.</small> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
+| Claude Opus 4.1 <br /><small>Deprecated.</small> | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
+| Claude Opus 4 <br /><small>Retired.</small> | anthropic.claude-opus-4-20250514-v1:0 | No | No | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
-| Claude Haiku 3.5 <br /><small>Deprecated. Retiring June 19, 2026.</small> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
+| Claude Haiku 3.5 <br /><small>Deprecated.</small> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 
 For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section.
 
