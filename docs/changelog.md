@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.165
+
+- Bug fixes and reliability improvements
+
 ## 2.1.163
 
 - Added `requiredMinimumVersion` and `requiredMaximumVersion` managed settings — Claude Code refuses to start if its version is outside the allowed range and directs the user to an approved version
