@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-04T21:53:17Z",
+  "generated_at": "2026-06-05T01:15:09Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -25,10 +25,10 @@
         "prompt",
         "command",
         "background",
-        "terminal",
-        "commands"
+        "commands",
+        "terminal"
       ],
-      "word_count": 52869,
+      "word_count": 53333,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -596,8 +596,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
         "server",
-        "mcp",
         "claude",
+        "mcp",
         "servers",
         "code",
         "step",
@@ -610,13 +610,13 @@
         "project",
         "add",
         "only",
+        "oauth",
         "configuration",
         "authentication",
-        "set",
-        "oauth",
-        "same"
+        "variable",
+        "set"
       ],
-      "word_count": 6706,
+      "word_count": 6789,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -644,7 +644,7 @@
         "into",
         "every"
       ],
-      "word_count": 3816,
+      "word_count": 3817,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -708,8 +708,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
-        "attributes",
         "tool",
+        "attributes",
         "event",
         "events",
         "request",
@@ -728,7 +728,7 @@
         "counter",
         "mcp"
       ],
-      "word_count": 9318,
+      "word_count": 9404,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -40117,10 +40117,10 @@
     },
     "/docs/en/managed-agents/dreams": {
       "title": "Dreams",
-      "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip> Dreaming is a Research Preview feature. [Request access](https://claude.com/form/claude-...",
+      "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip> Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-...",
       "keywords": [
-        "store",
         "memory",
+        "store",
         "dream",
         "claude",
         "sessions",
@@ -40140,7 +40140,7 @@
         "beta",
         "once"
       ],
-      "word_count": 2183,
+      "word_count": 2306,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {

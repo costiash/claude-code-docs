@@ -8517,8 +8517,8 @@
     "docs__en__managed-agents__dreams.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/dreams",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/dreams.md",
-      "hash": "beac7eefaa4f7781fe079e197ea2347ac9ed6b7971ec9193d0bb225c5347c5db",
-      "last_updated": "2026-05-28T21:57:02.494377"
+      "hash": "5912bf73d285517a8dbcb5c732b362a14dbb89443c67be4eba943eaafbaa366a",
+      "last_updated": "2026-06-05T01:14:19.186570"
     },
     "docs__en__managed-agents__environments.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/environments",
@@ -8643,14 +8643,14 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "a93fbe3c351c182680fba878bfb9e88eb43ec9f3552dc2e4f4d875b36a6b2d4a",
-      "last_updated": "2026-06-04T16:27:48.199483"
+      "hash": "227e1e98031a7189d6be6f1a6141d02cc7344485983a642d707043a202b63b86",
+      "last_updated": "2026-06-05T01:14:32.635726"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
       "original_md_url": "https://platform.claude.com/docs/en/memory.md",
-      "hash": "c5dc0aecc48d27f0ce98d4c5d87c311a251aaa419e6dfd403f351f225e7c9eef",
-      "last_updated": "2026-05-30T01:08:09.926474"
+      "hash": "150353b3b6f766e4ff3ae44fedab63931f873ff6d8582e6afacf874eb6a20f26",
+      "last_updated": "2026-06-05T01:14:33.721243"
     },
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
@@ -8667,8 +8667,8 @@
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
       "original_md_url": "https://platform.claude.com/docs/en/monitoring-usage.md",
-      "hash": "2d923b20a74ffe88eaf34ef6109628d9b2f624c57f035aa26209b3c99addefdb",
-      "last_updated": "2026-06-03T22:17:13.205255"
+      "hash": "bd3a06eded14571d4fb0acb313df7f47b7b9d47fcca7a72bb8afd884c010f4f1",
+      "last_updated": "2026-06-05T01:14:36.309325"
     },
     "claude-code__network-config.md": {
       "original_url": "https://platform.claude.com/docs/en/network-config",
@@ -8793,14 +8793,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "ace0569b9f5417732ba6ba3d67ecfae1ffd2104c19efeb0b0e70eb27d1970ba1",
-      "last_updated": "2026-06-03T22:17:43.740288",
+      "hash": "27292465d46b9575ce28f16229394b0f0f1a815bd333f057d57dd582d6bacb86",
+      "last_updated": "2026-06-05T01:15:07.316471",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-04T21:53:15.451953",
-    "fetch_duration_seconds": 1071.761022,
+    "last_fetch_completed": "2026-06-05T01:15:07.316657",
+    "fetch_duration_seconds": 1058.96912,
     "total_pages_discovered": 1702,
     "pages_fetched_successfully": 1466,
     "pages_failed": 237,
@@ -9048,7 +9048,7 @@
     "total_files": 1466,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-04T21:53:15.451973",
+  "last_updated": "2026-06-05T01:15:07.316669",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
