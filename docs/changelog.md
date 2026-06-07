@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.168
+
+- Bug fixes and reliability improvements
+
 ## 2.1.167
 
 - Bug fixes and reliability improvements
