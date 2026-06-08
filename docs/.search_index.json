@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-08T19:27:31Z",
+  "generated_at": "2026-06-08T22:08:16Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -23,12 +23,12 @@
         "mcp",
         "code",
         "prompt",
-        "command",
         "background",
+        "command",
         "commands",
         "terminal"
       ],
-      "word_count": 53788,
+      "word_count": 54385,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -239,10 +239,10 @@
         "session",
         "api",
         "disable",
-        "must",
         "off",
         "users",
         "settings",
+        "must",
         "retention",
         "when",
         "opt",
@@ -252,7 +252,7 @@
         "including",
         "model"
       ],
-      "word_count": 1910,
+      "word_count": 1917,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
