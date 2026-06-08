@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-08T16:43:25Z",
+  "generated_at": "2026-06-08T19:27:31Z",
   "indexed_files": 1530,
   "index": {
     "/changelog": {
@@ -1064,7 +1064,7 @@
         "built",
         "tools"
       ],
-      "word_count": 6422,
+      "word_count": 6450,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1326,25 +1326,25 @@
         "skills",
         "claude",
         "create",
+        "code",
         "agent",
         "api",
         "codegroup",
         "card",
-        "code",
         "skill",
         "file",
+        "note",
+        "execution",
+        "tool",
         "title",
         "icon",
         "href",
         "learn",
         "documents",
         "powerpoint",
-        "presentation",
-        "pdf",
-        "note",
-        "docs"
+        "presentation"
       ],
-      "word_count": 4074,
+      "word_count": 4134,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -1680,7 +1680,7 @@
         "block",
         "set"
       ],
-      "word_count": 4097,
+      "word_count": 4126,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -38402,9 +38402,9 @@
         "through",
         "entra",
         "portal",
-        "sdks"
+        "support"
       ],
-      "word_count": 2501,
+      "word_count": 2493,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -38473,8 +38473,8 @@
         "api",
         "console",
         "anthropic",
-        "see",
         "workspace",
+        "see",
         "bedrock",
         "iam",
         "account",
@@ -38488,7 +38488,7 @@
         "authentication",
         "first"
       ],
-      "word_count": 6499,
+      "word_count": 6491,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -38544,7 +38544,7 @@
         "title",
         "results"
       ],
-      "word_count": 7375,
+      "word_count": 7376,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -38992,7 +38992,7 @@
         "types",
         "json"
       ],
-      "word_count": 4879,
+      "word_count": 4880,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -39034,21 +39034,21 @@
         "tokens",
         "budgets",
         "agentic",
-        "turn",
         "loop",
-        "request",
-        "thinking",
+        "turn",
         "countdown",
-        "full",
+        "request",
         "model",
-        "than",
+        "thinking",
         "across",
+        "full",
+        "than",
         "client",
-        "result",
         "token",
-        "set"
+        "side",
+        "result"
       ],
-      "word_count": 2601,
+      "word_count": 2670,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -39141,8 +39141,8 @@
       "keywords": [
         "step",
         "title",
-        "api",
         "tab",
+        "api",
         "create",
         "steps",
         "key",
@@ -39158,9 +39158,9 @@
         "install",
         "run",
         "card",
-        "automatically"
+        "cli"
       ],
-      "word_count": 1684,
+      "word_count": 1686,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
@@ -39987,8 +39987,8 @@
         "issuer",
         "account",
         "rule",
-        "api",
         "jwt",
+        "api",
         "anthropic",
         "card",
         "claude",
@@ -40140,7 +40140,7 @@
         "beta",
         "once"
       ],
-      "word_count": 2306,
+      "word_count": 2339,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {

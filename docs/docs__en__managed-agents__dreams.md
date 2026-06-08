@@ -502,6 +502,10 @@ While a dream is `pending` or `running`, archiving or deleting its output store 
 
 Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling an already-`canceled` dream is an idempotent no-op; canceling a `completed` or `failed` dream returns 400.
 
+<Note>
+After cancellation, the dream's `usage` fields might continue to update for a few seconds while in-flight work winds down. Poll the dream until `usage` stabilizes if you need the final count.
+</Note>
+
 <CodeGroup>
   
 ````bash

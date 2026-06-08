@@ -388,6 +388,10 @@ Let's break down what each part does:
 - **`tools`:** Enables code execution (required for Skills)
 - **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
 
+<Note>
+The examples here use the `code_execution_20250825` tool version with its matching `code-execution-2025-08-25` beta header. Skills also work with the newer [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) revisions (`code_execution_20260120` and later); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+</Note>
+
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
 
 ## Step 3: Download the created file
