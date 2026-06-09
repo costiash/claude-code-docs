@@ -848,6 +848,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+              - `Optional<String> errorMessage`
+
             - `class ToolSearchToolSearchResultBlockParam:`
 
               - `List<ToolReferenceBlockParam> toolReferences`

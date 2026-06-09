@@ -844,6 +844,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+              - `ErrorMessage string`
+
             - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
               - `ToolReferences []ToolReferenceBlockParamResp`

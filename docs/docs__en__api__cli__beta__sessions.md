@@ -68,11 +68,19 @@ Create Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -146,7 +154,7 @@ Create Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -306,23 +314,15 @@ Create Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -808,7 +808,7 @@ List Sessions
 
 - `--page: optional string`
 
-  Query param: Opaque pagination cursor from a previous response's next_page.
+  Query param: Opaque pagination cursor from a previous response.
 
 - `--status: optional array of "rescheduling" or "running" or "idle" or "terminated"`
 
@@ -852,11 +852,19 @@ List Sessions
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -930,7 +938,7 @@ List Sessions
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -1090,23 +1098,15 @@ List Sessions
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -1595,11 +1595,19 @@ Get Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -1673,7 +1681,7 @@ Get Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -1833,23 +1841,15 @@ Get Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -2346,11 +2346,19 @@ Update Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -2424,7 +2432,7 @@ Update Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -2584,23 +2592,15 @@ Update Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -3128,11 +3128,19 @@ Archive Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -3206,7 +3214,7 @@ Archive Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -3366,23 +3374,15 @@ Archive Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -4133,11 +4133,19 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -4211,7 +4219,7 @@ ant beta:sessions archive \
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -4371,23 +4379,15 @@ ant beta:sessions archive \
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -4669,11 +4669,19 @@ ant beta:sessions archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"`
 
@@ -4747,7 +4755,7 @@ ant beta:sessions archive \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
@@ -4907,23 +4915,15 @@ ant beta:sessions archive \
 
           - `description: string`
 
-          - `input_schema: object { properties, required, type }`
+          - `input_schema: object { type, properties, required }`
 
             JSON Schema for custom tool input parameters.
 
+            - `type: "object"`
+
             - `properties: optional map[unknown]`
 
-              JSON Schema properties defining the tool's input parameters.
-
             - `required: optional array of string`
-
-              List of required property names.
-
-            - `type: optional "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
 
           - `name: string`
 
@@ -5137,23 +5137,15 @@ ant beta:sessions archive \
 
         Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -5191,11 +5183,19 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -5395,23 +5395,15 @@ ant beta:sessions archive \
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -5483,11 +5475,19 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -5561,7 +5561,7 @@ ant beta:sessions archive \
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
@@ -5721,23 +5721,15 @@ ant beta:sessions archive \
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -7531,11 +7523,19 @@ List Events
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for coding, agents, and knowledge work
+
+            - `"claude-mythos-5"`
+
+              Next generation of intelligence for cybersecurity and bio
 
             - `"claude-opus-4-8"`
 
@@ -7609,7 +7609,7 @@ List Events
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+              - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
                 The model that will power your agent.
 
@@ -7769,23 +7769,15 @@ List Events
 
                 - `description: string`
 
-                - `input_schema: object { properties, required, type }`
+                - `input_schema: object { type, properties, required }`
 
                   JSON Schema for custom tool input parameters.
 
+                  - `type: "object"`
+
                   - `properties: optional map[unknown]`
 
-                    JSON Schema properties defining the tool's input parameters.
-
                   - `required: optional array of string`
-
-                    List of required property names.
-
-                  - `type: optional "object"`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"`
 
                 - `name: string`
 
@@ -9806,11 +9798,19 @@ Stream Events
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -9884,7 +9884,7 @@ Stream Events
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -10044,23 +10044,15 @@ Stream Events
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -14142,11 +14134,19 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -14220,7 +14220,7 @@ ant beta:sessions:events stream \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -14380,23 +14380,15 @@ ant beta:sessions:events stream \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -16402,11 +16394,19 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -16480,7 +16480,7 @@ ant beta:sessions:events stream \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -16640,23 +16640,15 @@ ant beta:sessions:events stream \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -18860,11 +18852,19 @@ List Session Threads
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -19064,23 +19064,15 @@ List Session Threads
 
           - `description: string`
 
-          - `input_schema: object { properties, required, type }`
+          - `input_schema: object { type, properties, required }`
 
             JSON Schema for custom tool input parameters.
 
+            - `type: "object"`
+
             - `properties: optional map[unknown]`
 
-              JSON Schema properties defining the tool's input parameters.
-
             - `required: optional array of string`
-
-              List of required property names.
-
-            - `type: optional "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
 
           - `name: string`
 
@@ -19320,11 +19312,19 @@ Get Session Thread
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -19524,23 +19524,15 @@ Get Session Thread
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -19772,11 +19764,19 @@ Archive Session Thread
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -19976,23 +19976,15 @@ Archive Session Thread
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -20204,11 +20196,19 @@ ant beta:sessions:threads archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -20408,23 +20408,15 @@ ant beta:sessions:threads archive \
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -22020,11 +22012,19 @@ ant beta:sessions:threads archive \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -22098,7 +22098,7 @@ ant beta:sessions:threads archive \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -22258,23 +22258,15 @@ ant beta:sessions:threads archive \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -23806,11 +23798,19 @@ List Session Thread Events
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for coding, agents, and knowledge work
+
+            - `"claude-mythos-5"`
+
+              Next generation of intelligence for cybersecurity and bio
 
             - `"claude-opus-4-8"`
 
@@ -23884,7 +23884,7 @@ List Session Thread Events
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+              - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
                 The model that will power your agent.
 
@@ -24044,23 +24044,15 @@ List Session Thread Events
 
                 - `description: string`
 
-                - `input_schema: object { properties, required, type }`
+                - `input_schema: object { type, properties, required }`
 
                   JSON Schema for custom tool input parameters.
 
+                  - `type: "object"`
+
                   - `properties: optional map[unknown]`
 
-                    JSON Schema properties defining the tool's input parameters.
-
                   - `required: optional array of string`
-
-                    List of required property names.
-
-                  - `type: optional "object"`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"`
 
                 - `name: string`
 
@@ -25612,11 +25604,19 @@ Stream Session Thread Events
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -25690,7 +25690,7 @@ Stream Session Thread Events
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
               The model that will power your agent.
 
@@ -25850,23 +25850,15 @@ Stream Session Thread Events
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 

@@ -856,6 +856,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+              - `ErrorMessage string`
+
             - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
               - `ToolReferences []ToolReferenceBlockParamResp`
@@ -2499,6 +2501,14 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
       - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
         Frontier intelligence for long-running agents and coding
@@ -2594,6 +2604,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
       - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+      - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
     - `Explanation string`
 
@@ -3671,6 +3683,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `Type ToolSearchToolResultError`
 
                 - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
+
+              - `ErrorMessage string`
 
             - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
@@ -7342,6 +7356,8 @@ func main() {
 
           - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+        - `ErrorMessage string`
+
       - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
         - `ToolReferences []ToolReferenceBlockParamResp`
@@ -8956,6 +8972,14 @@ func main() {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
       - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
         Frontier intelligence for long-running agents and coding
@@ -9051,6 +9075,8 @@ func main() {
       - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
       - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+      - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
     - `Explanation string`
 
@@ -10757,6 +10783,8 @@ func main() {
 
               - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+            - `ErrorMessage string`
+
           - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
             - `ToolReferences []ToolReferenceBlockParamResp`
@@ -11022,6 +11050,14 @@ func main() {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
@@ -12160,6 +12196,8 @@ func main() {
 
         - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
 
+        - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
+
       - `Explanation string`
 
         Human-readable explanation of the refusal.
@@ -12947,6 +12985,14 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
         - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
           Frontier intelligence for long-running agents and coding
@@ -13042,6 +13088,8 @@ func main() {
         - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
         - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+        - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
       - `Explanation string`
 
@@ -13891,6 +13939,14 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
             Frontier intelligence for long-running agents and coding
@@ -13986,6 +14042,8 @@ func main() {
           - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
           - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+          - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
         - `Explanation string`
 
@@ -14336,6 +14394,8 @@ func main() {
     - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
     - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+    - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
   - `Explanation string`
 
@@ -16463,6 +16523,8 @@ func main() {
 
         - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+      - `ErrorMessage string`
+
     - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
       - `ToolReferences []ToolReferenceBlockParamResp`
@@ -16559,6 +16621,8 @@ func main() {
   - `Type ToolSearchToolResultError`
 
     - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
+
+  - `ErrorMessage string`
 
 ### Tool Search Tool Search Result Block
 
@@ -20232,6 +20296,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+                  - `ErrorMessage string`
+
                 - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
                   - `ToolReferences []ToolReferenceBlockParamResp`
@@ -20321,6 +20387,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
@@ -22830,6 +22904,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
             - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -22925,6 +23007,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
             - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+            - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
           - `Explanation string`
 
@@ -24122,6 +24206,14 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
             - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
               Frontier intelligence for long-running agents and coding
@@ -24217,6 +24309,8 @@ func main() {
             - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
             - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+            - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
           - `Explanation string`
 
@@ -25194,6 +25288,14 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
             Frontier intelligence for long-running agents and coding
@@ -25289,6 +25391,8 @@ func main() {
           - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
           - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+          - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
         - `Explanation string`
 
@@ -26228,6 +26332,14 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
         - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
           Frontier intelligence for long-running agents and coding
@@ -26323,6 +26435,8 @@ func main() {
         - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
         - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+        - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
       - `Explanation string`
 

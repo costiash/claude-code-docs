@@ -848,6 +848,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `"tool_search_tool_result_error"`
 
+              - `error_message?: string | null`
+
             - `ToolSearchToolSearchResultBlockParam`
 
               - `tool_references: Array<ToolReferenceBlockParam>`
@@ -932,7 +934,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more`
+    - `"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more`
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `"claude-opus-4-8"`
 

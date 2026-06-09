@@ -36,6 +36,10 @@ The Models API response can be used to determine which models are available for 
 
     Unique model identifier.
 
+  - `?list<string> allowedFallbackModels`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
   - `?BetaModelCapabilities capabilities`
 
     Model capability information.
@@ -88,6 +92,9 @@ var_dump($page);
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true

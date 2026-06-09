@@ -54,14 +54,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.35.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.39.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.35.0</version>
+    <version>2.39.0</version>
 </dependency>
 ```
 
@@ -125,12 +125,12 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 #### API model IDs
 
 <Note>
-  Claude Opus 4.8 and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
+  Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
   These requests are served by the same infrastructure as the
   [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock)
   endpoint. For the native Messages API request shape and full feature
-  parity, use that page. Claude Opus 4.8 and Claude Opus 4.7 are omitted from the model table
-  on this page because they do not have ARN-versioned model IDs.
+  parity, use that page. Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are omitted from the model
+  table on this page because they do not have ARN-versioned model IDs.
 </Note>
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Amazon Bedrock, see [Amazon Bedrock's model lifecycle page](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).
@@ -661,6 +661,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 - Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
 - API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
+- Server-side fallback (the [`fallbacks` parameter](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 
 ### PDF support on Bedrock
 
@@ -673,7 +674,7 @@ PDF support is available on Bedrock through both the Converse API and InvokeMode
 
 ### Context window
 
-Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 

@@ -68,13 +68,17 @@ Update Agent
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
   - `long version`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
   - `Optional<String> description`
 
-    Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+    Description. Omit to preserve; send empty string or null to clear.
 
   - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
@@ -105,6 +109,14 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -170,11 +182,11 @@ Update Agent
 
   - `Optional<String> name`
 
-    Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+    Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
   - `Optional<List<BetaManagedAgentsSkillParams>> skills`
 
-    Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+    Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
     - `class BetaManagedAgentsAnthropicSkillParams:`
 
@@ -210,7 +222,7 @@ Update Agent
 
   - `Optional<String> system`
 
-    System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+    System prompt. Omit to preserve; send empty string or null to clear.
 
   - `Optional<List<Tool>> tools`
 
@@ -360,19 +372,13 @@ Update Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `Optional<Properties> properties`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `Optional<List<String>> required`
-
-          List of required property names.
-
-        - `Optional<Type> type`
-
-          Must be 'object' for tool input schemas.
+        - `JsonValue; type "object"constant`
 
           - `OBJECT("object")`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
 
       - `String name`
 
@@ -421,6 +427,14 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -644,19 +658,13 @@ Update Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `Optional<Properties> properties`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `Optional<List<String>> required`
-
-          List of required property names.
-
-        - `Optional<Type> type`
-
-          Must be 'object' for tool input schemas.
+        - `JsonValue; type "object"constant`
 
           - `OBJECT("object")`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
 
       - `String name`
 

@@ -48,6 +48,7 @@ An image uses approximately `width * height / 750` tokens, where the width and h
 
 The maximal native image resolution is:
 
+- For Claude Fable 5 and Claude Mythos 5: 4784 tokens, and at most 2576 pixels on the long edge.
 - For Claude Opus 4.8: 4784 tokens, and at most 2576 pixels on the long edge.
 - For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
 - For other models: 1568 tokens, and at most 1568 pixels on the long edge.
@@ -78,11 +79,11 @@ Note that the last three images are downscaled before processing.
 
 #### High-resolution image support \{#high-resolution-image-support-on-claude-opus-4-7}
 
-Claude Opus 4.7 is the first Claude model with high-resolution image support; Claude Opus 4.8 and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
+Claude Opus 4.7 is the first Claude model with high-resolution image support; Claude Opus 4.8, Claude Fable 5, Claude Mythos 5, and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
 
 High-resolution support is automatic on Claude Opus 4.7 and later models and requires no beta header or client-side opt-in.
 
-High-resolution images on Claude Opus 4.7 and Claude Opus 4.8 can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
+High-resolution images on Claude Opus 4.7, Claude Opus 4.8, Claude Fable 5, and Claude Mythos 5 can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
 
 Here are the same image sizes tokenized for Claude Opus 4.7 and Claude Opus 4.8, based on their per-token price of $5 per million input tokens:
 

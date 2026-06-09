@@ -20,11 +20,15 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `beta_model_info: object { id, capabilities, created_at, 4 more }`
+- `beta_model_info: object { id, allowed_fallback_models, capabilities, 5 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: object { batch, citations, code_execution, 6 more }`
 
@@ -221,6 +225,9 @@ ant beta:models retrieve \
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true

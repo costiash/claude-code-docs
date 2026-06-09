@@ -50,7 +50,7 @@ List Sessions
 
 - `page?:optional string`
 
-  Opaque pagination cursor from a previous response's next_page.
+  Opaque pagination cursor from a previous response.
 
 - `statuses?:optional list<Status>`
 

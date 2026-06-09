@@ -28,7 +28,7 @@ List Session Threads
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -82,6 +82,10 @@ List Session Threads
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsSessionThread`
@@ -120,11 +124,19 @@ List Session Threads
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+        - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -330,19 +342,13 @@ List Session Threads
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: optional map[unknown]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
+          - `type: "object"`
 
             - `"object"`
+
+          - `properties: optional map[unknown]`
+
+          - `required: optional array of string`
 
         - `name: string`
 
@@ -549,7 +555,7 @@ Get Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -603,6 +609,10 @@ Get Session Thread
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `BetaManagedAgentsSessionThread object { id, agent, archived_at, 8 more }`
@@ -641,11 +651,19 @@ Get Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+        - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -851,19 +869,13 @@ Get Session Thread
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: optional map[unknown]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
+          - `type: "object"`
 
             - `"object"`
+
+          - `properties: optional map[unknown]`
+
+          - `required: optional array of string`
 
         - `name: string`
 
@@ -1061,7 +1073,7 @@ Archive Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1115,6 +1127,10 @@ Archive Session Thread
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `BetaManagedAgentsSessionThread object { id, agent, archived_at, 8 more }`
@@ -1153,11 +1169,19 @@ Archive Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+        - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -1363,19 +1387,13 @@ Archive Session Thread
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: optional map[unknown]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
+          - `type: "object"`
 
             - `"object"`
+
+          - `properties: optional map[unknown]`
+
+          - `required: optional array of string`
 
         - `name: string`
 
@@ -1594,11 +1612,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+        - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -1804,19 +1830,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: optional map[unknown]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
+          - `type: "object"`
 
             - `"object"`
+
+          - `properties: optional map[unknown]`
+
+          - `required: optional array of string`
 
         - `name: string`
 
@@ -3398,11 +3418,19 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+          - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for coding, agents, and knowledge work
+
+            - `"claude-mythos-5"`
+
+              Next generation of intelligence for cybersecurity and bio
 
             - `"claude-opus-4-8"`
 
@@ -3632,19 +3660,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: optional map[unknown]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
+                - `type: "object"`
 
                   - `"object"`
+
+                - `properties: optional map[unknown]`
+
+                - `required: optional array of string`
 
               - `name: string`
 
@@ -3732,7 +3754,7 @@ List Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3785,6 +3807,10 @@ List Session Thread Events
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -5212,11 +5238,19 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+          - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for coding, agents, and knowledge work
+
+            - `"claude-mythos-5"`
+
+              Next generation of intelligence for cybersecurity and bio
 
             - `"claude-opus-4-8"`
 
@@ -5446,19 +5480,13 @@ List Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: optional map[unknown]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
+                - `type: "object"`
 
                   - `"object"`
+
+                - `properties: optional map[unknown]`
+
+                - `required: optional array of string`
 
               - `name: string`
 
@@ -5568,7 +5596,7 @@ Stream Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -5621,6 +5649,10 @@ Stream Session Thread Events
     - `"cache-diagnosis-2026-04-07"`
 
     - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -7048,11 +7080,19 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+          - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for coding, agents, and knowledge work
+
+            - `"claude-mythos-5"`
+
+              Next generation of intelligence for cybersecurity and bio
 
             - `"claude-opus-4-8"`
 
@@ -7282,19 +7322,13 @@ Stream Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: optional map[unknown]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
+                - `type: "object"`
 
                   - `"object"`
+
+                - `properties: optional map[unknown]`
+
+                - `required: optional array of string`
 
               - `name: string`
 

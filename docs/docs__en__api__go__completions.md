@@ -146,6 +146,10 @@ Future models and features will not be compatible with Text Completions. See our
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `type Completion struct{…}`
@@ -171,6 +175,14 @@ Future models and features will not be compatible with Text Completions. See our
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
@@ -282,7 +294,7 @@ func main() {
   )
   completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
     MaxTokensToSample: 256,
-    Model: anthropic.ModelClaudeOpus4_8,
+    Model: anthropic.ModelClaudeFable5,
     Prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
   })
   if err != nil {
@@ -331,6 +343,14 @@ func main() {
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 

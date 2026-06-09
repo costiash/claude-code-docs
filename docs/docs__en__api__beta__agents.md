@@ -14,7 +14,7 @@ Create Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,23 +68,35 @@ Create Agent
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Body Parameters
 
 - `model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-  - `BetaManagedAgentsModel = "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"`
 
@@ -148,11 +160,11 @@ Create Agent
 
 - `name: string`
 
-  Human-readable name for the agent. 1-256 characters.
+  Human-readable name for the agent.
 
 - `description: optional string`
 
-  Description of what the agent does. Up to 2048 characters.
+  Description of what the agent does.
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
 
@@ -214,7 +226,7 @@ Create Agent
 
 - `skills: optional array of BetaManagedAgentsSkillParams`
 
-  Skills available to the agent. Maximum 20.
+  Skills available to the agent.
 
   - `BetaManagedAgentsAnthropicSkillParams object { skill_id, type, version }`
 
@@ -250,7 +262,7 @@ Create Agent
 
 - `system: optional string`
 
-  System prompt for the agent. Up to 100,000 characters.
+  System prompt for the agent.
 
 - `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
 
@@ -400,19 +412,13 @@ Create Agent
 
       JSON Schema for custom tool input parameters.
 
-      - `properties: optional map[unknown]`
-
-        JSON Schema properties defining the tool's input parameters.
-
-      - `required: optional array of string`
-
-        List of required property names.
-
-      - `type: optional "object"`
-
-        Must be 'object' for tool input schemas.
+      - `type: "object"`
 
         - `"object"`
+
+      - `properties: optional map[unknown]`
+
+      - `required: optional array of string`
 
     - `name: string`
 
@@ -462,11 +468,19 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -692,19 +706,13 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -856,7 +864,7 @@ List Agents
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -910,9 +918,13 @@ List Agents
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `data: optional array of BetaManagedAgentsAgent`
+- `data: array of BetaManagedAgentsAgent`
 
   List of agents.
 
@@ -950,11 +962,19 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -1180,19 +1200,13 @@ List Agents
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -1326,7 +1340,7 @@ Get Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1380,6 +1394,10 @@ Get Agent
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `BetaManagedAgentsAgent object { id, archived_at, created_at, 12 more }`
@@ -1420,11 +1438,19 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -1650,19 +1676,13 @@ Get Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -1781,7 +1801,7 @@ Update Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1835,6 +1855,10 @@ Update Agent
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Body Parameters
 
 - `version: number`
@@ -1843,7 +1867,7 @@ Update Agent
 
 - `description: optional string`
 
-  Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+  Description. Omit to preserve; send empty string or null to clear.
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
 
@@ -1869,17 +1893,25 @@ Update Agent
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-  - `BetaManagedAgentsModel = "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"`
 
@@ -1981,11 +2013,11 @@ Update Agent
 
 - `name: optional string`
 
-  Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 - `skills: optional array of BetaManagedAgentsSkillParams`
 
-  Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+  Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
   - `BetaManagedAgentsAnthropicSkillParams object { skill_id, type, version }`
 
@@ -2021,7 +2053,7 @@ Update Agent
 
 - `system: optional string`
 
-  System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+  System prompt. Omit to preserve; send empty string or null to clear.
 
 - `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
 
@@ -2171,19 +2203,13 @@ Update Agent
 
       JSON Schema for custom tool input parameters.
 
-      - `properties: optional map[unknown]`
-
-        JSON Schema properties defining the tool's input parameters.
-
-      - `required: optional array of string`
-
-        List of required property names.
-
-      - `type: optional "object"`
-
-        Must be 'object' for tool input schemas.
+      - `type: "object"`
 
         - `"object"`
+
+      - `properties: optional map[unknown]`
+
+      - `required: optional array of string`
 
     - `name: string`
 
@@ -2233,11 +2259,19 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -2463,19 +2497,13 @@ Update Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -2599,7 +2627,7 @@ Archive Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2653,6 +2681,10 @@ Archive Agent
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `BetaManagedAgentsAgent object { id, archived_at, created_at, 12 more }`
@@ -2693,11 +2725,19 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -2923,19 +2963,13 @@ Archive Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -3079,11 +3113,19 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -3309,19 +3351,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -3871,19 +3907,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     JSON Schema for custom tool input parameters.
 
-    - `properties: optional map[unknown]`
-
-      JSON Schema properties defining the tool's input parameters.
-
-    - `required: optional array of string`
-
-      List of required property names.
-
-    - `type: optional "object"`
-
-      Must be 'object' for tool input schemas.
+    - `type: "object"`
 
       - `"object"`
+
+    - `properties: optional map[unknown]`
+
+    - `required: optional array of string`
 
   - `name: string`
 
@@ -3893,23 +3923,17 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Custom Tool Input Schema
 
-- `BetaManagedAgentsCustomToolInputSchema object { properties, required, type }`
+- `BetaManagedAgentsCustomToolInputSchema object { type, properties, required }`
 
   JSON Schema for custom tool input parameters.
 
-  - `properties: optional map[unknown]`
-
-    JSON Schema properties defining the tool's input parameters.
-
-  - `required: optional array of string`
-
-    List of required property names.
-
-  - `type: optional "object"`
-
-    Must be 'object' for tool input schemas.
+  - `type: "object"`
 
     - `"object"`
+
+  - `properties: optional map[unknown]`
+
+  - `required: optional array of string`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -3925,19 +3949,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     JSON Schema for custom tool input parameters.
 
-    - `properties: optional map[unknown]`
-
-      JSON Schema properties defining the tool's input parameters.
-
-    - `required: optional array of string`
-
-      List of required property names.
-
-    - `type: optional "object"`
-
-      Must be 'object' for tool input schemas.
+    - `type: "object"`
 
       - `"object"`
+
+    - `properties: optional map[unknown]`
+
+    - `required: optional array of string`
 
   - `name: string`
 
@@ -4205,17 +4223,25 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Model
 
-- `BetaManagedAgentsModel = "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+- `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
 
   The model that will power your agent.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+  - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for coding, agents, and knowledge work
+
+    - `"claude-mythos-5"`
+
+      Next generation of intelligence for cybersecurity and bio
 
     - `"claude-opus-4-8"`
 
@@ -4271,11 +4297,19 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"`
 
@@ -4339,11 +4373,19 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"`
 
@@ -4497,11 +4539,19 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -4707,19 +4757,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 
@@ -4819,7 +4863,7 @@ List Agent Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4873,9 +4917,13 @@ List Agent Versions
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `data: optional array of BetaManagedAgentsAgent`
+- `data: array of BetaManagedAgentsAgent`
 
   Agent versions.
 
@@ -4913,11 +4961,19 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more`
+      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"`
 
@@ -5143,19 +5199,13 @@ List Agent Versions
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: optional map[unknown]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
+        - `type: "object"`
 
           - `"object"`
+
+        - `properties: optional map[unknown]`
+
+        - `required: optional array of string`
 
       - `name: string`
 

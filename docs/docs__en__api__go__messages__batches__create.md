@@ -870,6 +870,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `const ToolSearchToolResultErrorToolSearchToolResultError ToolSearchToolResultError = "tool_search_tool_result_error"`
 
+                  - `ErrorMessage string`
+
                 - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
                   - `ToolReferences []ToolReferenceBlockParamResp`
@@ -959,6 +961,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 

@@ -858,6 +858,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class ToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[ToolReferenceBlockParam]`
@@ -942,11 +944,19 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+  - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `:"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `:"claude-opus-4-8"`
 
@@ -2709,11 +2719,19 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `:"claude-opus-4-8"`
 
@@ -2801,7 +2819,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio`
+    - `category: :cyber | :bio | :reasoning_extraction`
 
       The policy category that triggered the refusal.
 
@@ -2810,6 +2828,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `:cyber`
 
       - `:bio`
+
+      - `:reasoning_extraction`
 
     - `explanation: String`
 
@@ -3870,6 +3890,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class ToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[ToolReferenceBlockParam]`
@@ -3954,11 +3976,19 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+  - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `:"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `:"claude-opus-4-8"`
 
@@ -7724,6 +7754,8 @@ puts(message_tokens_count)
 
           - `:tool_search_tool_result_error`
 
+        - `error_message: String`
+
       - `class ToolSearchToolSearchResultBlockParam`
 
         - `tool_references: Array[ToolReferenceBlockParam]`
@@ -9332,11 +9364,19 @@ puts(message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `:"claude-opus-4-8"`
 
@@ -9424,7 +9464,7 @@ puts(message_tokens_count)
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio`
+    - `category: :cyber | :bio | :reasoning_extraction`
 
       The policy category that triggered the refusal.
 
@@ -9433,6 +9473,8 @@ puts(message_tokens_count)
       - `:cyber`
 
       - `:bio`
+
+      - `:reasoning_extraction`
 
     - `explanation: String`
 
@@ -11143,6 +11185,8 @@ puts(message_tokens_count)
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class ToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[ToolReferenceBlockParam]`
@@ -11397,17 +11441,25 @@ puts(message_tokens_count)
 
 ### Model
 
-- `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more | String`
+- `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more | String`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+  - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `:"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `:"claude-opus-4-8"`
 
@@ -12536,7 +12588,7 @@ puts(message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -12545,6 +12597,8 @@ puts(message_tokens_count)
         - `:cyber`
 
         - `:bio`
+
+        - `:reasoning_extraction`
 
       - `explanation: String`
 
@@ -13327,11 +13381,19 @@ puts(message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `:"claude-opus-4-8"`
 
@@ -13419,7 +13481,7 @@ puts(message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -13428,6 +13490,8 @@ puts(message_tokens_count)
         - `:cyber`
 
         - `:bio`
+
+        - `:reasoning_extraction`
 
       - `explanation: String`
 
@@ -14271,11 +14335,19 @@ puts(message_tokens_count)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `:"claude-opus-4-8"`
 
@@ -14363,7 +14435,7 @@ puts(message_tokens_count)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio`
+        - `category: :cyber | :bio | :reasoning_extraction`
 
           The policy category that triggered the refusal.
 
@@ -14372,6 +14444,8 @@ puts(message_tokens_count)
           - `:cyber`
 
           - `:bio`
+
+          - `:reasoning_extraction`
 
         - `explanation: String`
 
@@ -14713,7 +14787,7 @@ puts(message_tokens_count)
 
   Structured information about a refusal.
 
-  - `category: :cyber | :bio`
+  - `category: :cyber | :bio | :reasoning_extraction`
 
     The policy category that triggered the refusal.
 
@@ -14722,6 +14796,8 @@ puts(message_tokens_count)
     - `:cyber`
 
     - `:bio`
+
+    - `:reasoning_extraction`
 
   - `explanation: String`
 
@@ -16851,6 +16927,8 @@ puts(message_tokens_count)
 
         - `:tool_search_tool_result_error`
 
+      - `error_message: String`
+
     - `class ToolSearchToolSearchResultBlockParam`
 
       - `tool_references: Array[ToolReferenceBlockParam]`
@@ -16947,6 +17025,8 @@ puts(message_tokens_count)
   - `type: :tool_search_tool_result_error`
 
     - `:tool_search_tool_result_error`
+
+  - `error_message: String`
 
 ### Tool Search Tool Search Result Block
 
@@ -20622,6 +20702,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:tool_search_tool_result_error`
 
+                - `error_message: String`
+
               - `class ToolSearchToolSearchResultBlockParam`
 
                 - `tool_references: Array[ToolReferenceBlockParam]`
@@ -20706,11 +20788,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `:"claude-opus-4-8"`
 
@@ -23138,11 +23228,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
 
             - `:"claude-opus-4-8"`
 
@@ -23230,7 +23328,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio`
+          - `category: :cyber | :bio | :reasoning_extraction`
 
             The policy category that triggered the refusal.
 
@@ -23239,6 +23337,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `:cyber`
 
             - `:bio`
+
+            - `:reasoning_extraction`
 
           - `explanation: String`
 
@@ -24414,11 +24514,19 @@ puts(message_batch_individual_response)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
 
             - `:"claude-opus-4-8"`
 
@@ -24506,7 +24614,7 @@ puts(message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio`
+          - `category: :cyber | :bio | :reasoning_extraction`
 
             The policy category that triggered the refusal.
 
@@ -24515,6 +24623,8 @@ puts(message_batch_individual_response)
             - `:cyber`
 
             - `:bio`
+
+            - `:reasoning_extraction`
 
           - `explanation: String`
 
@@ -25486,11 +25596,19 @@ puts(message_batch_individual_response)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `:"claude-opus-4-8"`
 
@@ -25578,7 +25696,7 @@ puts(message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio`
+        - `category: :cyber | :bio | :reasoning_extraction`
 
           The policy category that triggered the refusal.
 
@@ -25587,6 +25705,8 @@ puts(message_batch_individual_response)
           - `:cyber`
 
           - `:bio`
+
+          - `:reasoning_extraction`
 
         - `explanation: String`
 
@@ -26520,11 +26640,19 @@ puts(message_batch_individual_response)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `:"claude-opus-4-8"`
 
@@ -26612,7 +26740,7 @@ puts(message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -26621,6 +26749,8 @@ puts(message_batch_individual_response)
         - `:cyber`
 
         - `:bio`
+
+        - `:reasoning_extraction`
 
       - `explanation: String`
 

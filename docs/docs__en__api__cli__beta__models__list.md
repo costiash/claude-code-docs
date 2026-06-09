@@ -38,6 +38,10 @@ The Models API response can be used to determine which models are available for 
 
       Unique model identifier.
 
+    - `allowed_fallback_models: array of string`
+
+      Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
     - `capabilities: object { batch, citations, code_execution, 6 more }`
 
       Model capability information.
@@ -246,6 +250,9 @@ ant beta:models list \
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true

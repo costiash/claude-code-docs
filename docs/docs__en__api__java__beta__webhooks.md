@@ -20,7 +20,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -34,7 +34,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -48,7 +48,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -62,7 +62,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -76,7 +76,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -90,7 +90,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -104,7 +104,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -118,7 +118,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -132,7 +132,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -146,7 +146,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -160,7 +160,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -174,7 +174,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -188,7 +188,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -202,7 +202,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -216,7 +216,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -230,7 +230,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -244,7 +244,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -258,7 +258,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -272,7 +272,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -290,7 +290,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -308,7 +308,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -326,7 +326,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -354,7 +354,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -368,7 +368,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -382,7 +382,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -396,7 +396,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -410,7 +410,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -424,7 +424,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -438,7 +438,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -452,7 +452,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -466,7 +466,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -480,7 +480,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -494,7 +494,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -508,7 +508,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -522,7 +522,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -536,7 +536,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -550,7 +550,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `String organizationId`
 
@@ -564,7 +564,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `String organizationId`
 
@@ -578,7 +578,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `String organizationId`
 
@@ -592,7 +592,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `String organizationId`
 
@@ -606,7 +606,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `String organizationId`
 
@@ -624,7 +624,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `String organizationId`
 
@@ -642,7 +642,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `String organizationId`
 
@@ -660,7 +660,7 @@
 
     - `String id`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `String organizationId`
 
@@ -680,7 +680,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -696,7 +696,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -712,7 +712,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -728,7 +728,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -744,7 +744,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -760,7 +760,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -776,7 +776,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -792,7 +792,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -808,7 +808,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -824,7 +824,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -840,7 +840,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -856,7 +856,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -872,7 +872,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -888,7 +888,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -904,7 +904,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `String organizationId`
 
@@ -920,7 +920,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `String organizationId`
 
@@ -936,7 +936,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `String organizationId`
 
@@ -952,7 +952,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `String organizationId`
 
@@ -972,7 +972,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `String organizationId`
 
@@ -992,7 +992,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `String organizationId`
 
@@ -1012,7 +1012,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `String organizationId`
 
@@ -1032,7 +1032,7 @@
 
   - `String id`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `String organizationId`
 
@@ -1060,7 +1060,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1074,7 +1074,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1088,7 +1088,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1102,7 +1102,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1116,7 +1116,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1130,7 +1130,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1144,7 +1144,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1158,7 +1158,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1172,7 +1172,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1186,7 +1186,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1200,7 +1200,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1214,7 +1214,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1228,7 +1228,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1242,7 +1242,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1256,7 +1256,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `String organizationId`
 
@@ -1270,7 +1270,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -1284,7 +1284,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -1298,7 +1298,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `String organizationId`
 
@@ -1312,7 +1312,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -1330,7 +1330,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -1348,7 +1348,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 
@@ -1366,7 +1366,7 @@
 
       - `String id`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `String organizationId`
 

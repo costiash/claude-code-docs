@@ -20,6 +20,14 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"ClaudeMythos5`
+
+        Next generation of intelligence for cybersecurity and bio
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
         Frontier intelligence for long-running agents and coding
@@ -69,6 +77,14 @@ Create Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for coding, agents, and knowledge work
+
+        - `"claude-mythos-5"ClaudeMythos5`
+
+          Next generation of intelligence for cybersecurity and bio
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -120,11 +136,11 @@ Create Agent
 
   - `required string name`
 
-    Body param: Human-readable name for the agent. 1-256 characters.
+    Body param: Human-readable name for the agent.
 
   - `string? description`
 
-    Body param: Description of what the agent does. Up to 2048 characters.
+    Body param: Description of what the agent does.
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> mcpServers`
 
@@ -152,7 +168,7 @@ Create Agent
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams> skills`
 
-    Body param: Skills available to the agent. Maximum 20.
+    Body param: Skills available to the agent.
 
     - `class BetaManagedAgentsAnthropicSkillParams:`
 
@@ -188,7 +204,7 @@ Create Agent
 
   - `string? system`
 
-    Body param: System prompt for the agent. Up to 100,000 characters.
+    Body param: System prompt for the agent.
 
   - `IReadOnlyList<Tool> tools`
 
@@ -338,19 +354,11 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 
@@ -416,6 +424,10 @@ Create Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
+    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+
+    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -455,6 +467,14 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for coding, agents, and knowledge work
+
+      - `"claude-mythos-5"ClaudeMythos5`
+
+        Next generation of intelligence for cybersecurity and bio
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -678,19 +698,11 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
+        - `JsonElement Type "object"constant`
+
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
-          JSON Schema properties defining the tool's input parameters.
-
-        - `IReadOnlyList<string> Required`
-
-          List of required property names.
-
-        - `Type Type`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"Object`
+        - `IReadOnlyList<string>? Required`
 
       - `required string Name`
 

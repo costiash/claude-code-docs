@@ -413,7 +413,7 @@ Make your first API call to Claude and build a simple web search assistant.
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.35.0")
+                implementation("com.anthropic:anthropic-java:2.39.0")
             }
 
             application {
@@ -438,7 +438,7 @@ Make your first API call to Claude and build a simple web search assistant.
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.35.0</version>
+                  <version>2.39.0</version>
                 </dependency>
               </dependencies>
             </project>

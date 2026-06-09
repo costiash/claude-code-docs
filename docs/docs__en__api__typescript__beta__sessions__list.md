@@ -56,7 +56,7 @@ List Sessions
 
   - `page?: string`
 
-    Query param: Opaque pagination cursor from a previous response's next_page.
+    Query param: Opaque pagination cursor from a previous response.
 
   - `statuses?: Array<"rescheduling" | "running" | "idle" | "terminated">`
 
@@ -76,7 +76,7 @@ List Sessions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -130,6 +130,10 @@ List Sessions
 
       - `"thinking-token-count-2026-05-13"`
 
+      - `"server-side-fallback-2026-06-01"`
+
+      - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `BetaManagedAgentsSession`
@@ -166,7 +170,15 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more`
+        - `"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 9 more`
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -396,19 +408,13 @@ List Sessions
 
               JSON Schema for custom tool input parameters.
 
-              - `properties?: Record<string, unknown> | null`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required?: Array<string>`
-
-                List of required property names.
-
-              - `type?: "object"`
-
-                Must be 'object' for tool input schemas.
+              - `type: "object"`
 
                 - `"object"`
+
+              - `properties?: Record<string, unknown> | null`
+
+              - `required?: Array<string> | null`
 
             - `name: string`
 

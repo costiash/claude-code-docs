@@ -78,6 +78,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `type BetaMessageBatchIndividualResponse struct{…}`
@@ -577,6 +581,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution_time_exceeded"`
 
+                  - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
+
                 - `Type AdvisorToolResultError`
 
                   - `const AdvisorToolResultErrorAdvisorToolResultError AdvisorToolResultError = "advisor_tool_result_error"`
@@ -921,6 +927,126 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `const CompactionCompaction Compaction = "compaction"`
 
+          - `type BetaFallbackBlock struct{…}`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn routed directly by the sticky decision has no such boundary
+            and carries no block — the signal for whether a fallback model served the
+            response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `From BetaFallbackInfo`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `Model Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `type Model string`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `const ModelClaudeFable5 Model = "claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `string`
+
+            - `To BetaFallbackInfo`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `Type Fallback`
+
+              - `const FallbackFallback Fallback = "fallback"`
+
         - `ContextManagement BetaContextManagementResponse`
 
           Context management response.
@@ -1030,86 +1156,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `type Model string`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `string`
-
         - `Role Assistant`
 
           Conversational role of the generated message.
@@ -1132,11 +1178,62 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
 
+            - `const BetaRefusalStopDetailsCategoryReasoningExtraction BetaRefusalStopDetailsCategory = "reasoning_extraction"`
+
           - `Explanation string`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `FallbackCreditToken string`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `FallbackHasPrefillClaim bool`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `RecommendedModel string`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `Type Refusal`
 
@@ -1257,6 +1354,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 The number of input tokens which were used.
 
+              - `Model Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
               - `OutputTokens int64`
 
                 The number of output tokens which were used.
@@ -1332,6 +1435,47 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for an advisor sub-inference iteration
 
                 - `const AdvisorMessageAdvisorMessage AdvisorMessage = "advisor_message"`
+
+            - `type BetaFallbackMessageIterationUsage struct{…}`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `CacheCreation BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+              - `CacheCreationInputTokens int64`
+
+                The number of input tokens used to create the cache entry.
+
+              - `CacheReadInputTokens int64`
+
+                The number of input tokens read from the cache.
+
+              - `InputTokens int64`
+
+                The number of input tokens which were used.
+
+              - `Model Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `OutputTokens int64`
+
+                The number of output tokens which were used.
+
+              - `Type FallbackMessage`
+
+                Usage for the fallback-model attempt that served the response
+
+                - `const FallbackMessageFallbackMessage FallbackMessage = "fallback_message"`
 
           - `OutputTokens int64`
 

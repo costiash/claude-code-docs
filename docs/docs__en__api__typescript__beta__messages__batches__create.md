@@ -674,7 +674,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `BetaAdvisorToolResultErrorParam`
 
-                  - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 3 more`
+                  - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
                     - `"max_uses_exceeded"`
 
@@ -687,6 +687,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                     - `"unavailable"`
 
                     - `"execution_time_exceeded"`
+
+                    - `"model_not_found"`
 
                   - `type: "advisor_tool_result_error"`
 
@@ -948,6 +950,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `"tool_search_tool_result_error"`
 
+                  - `error_message?: string | null`
+
                 - `BetaToolSearchToolSearchResultBlockParam`
 
                   - `tool_references: Array<BetaToolReferenceBlockParam>`
@@ -1094,6 +1098,126 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
+            - `BetaFallbackBlockParam`
+
+              A `fallback` block echoed back from a prior response.
+
+              Accepted in `messages[].content` and never rendered into the prompt,
+              not validated against the request's `fallbacks` chain or top-level
+              `model`, and stripped before the sticky-routing cache key is computed.
+
+              Callers should echo the assistant turn verbatim — block included. The
+              block's position is load-bearing for thinking verification: the thinking
+              runs on either side of a fallback hop carry independently-rooted
+              verification hash chains, and this block is the only record of where one
+              chain ends and the next begins. When thinking runs flank the boundary,
+              omitting the block merges the runs into one contiguous span whose hashes
+              cannot verify (the request is rejected), and moving it into the middle of
+              a single run splits that run's chain and is likewise rejected; between
+              non-thinking blocks the block's placement has no verification effect.
+
+              - `from: BetaFallbackInfoParam`
+
+                Identifies one hop of a fallback transition.
+
+                - `model: Model`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more`
+
+                    - `"claude-fable-5"`
+
+                      Next generation of intelligence for the hardest knowledge work and coding problems
+
+                    - `"claude-mythos-5"`
+
+                      Most capable model for cybersecurity and biology research
+
+                    - `"claude-opus-4-8"`
+
+                      Frontier intelligence for long-running agents and coding
+
+                    - `"claude-opus-4-7"`
+
+                      Frontier intelligence for long-running agents and coding
+
+                    - `"claude-mythos-preview"`
+
+                      New class of intelligence, strongest in coding and cybersecurity
+
+                    - `"claude-opus-4-6"`
+
+                      Frontier intelligence for long-running agents and coding
+
+                    - `"claude-sonnet-4-6"`
+
+                      Best combination of speed and intelligence
+
+                    - `"claude-haiku-4-5"`
+
+                      Fastest model with near-frontier intelligence
+
+                    - `"claude-haiku-4-5-20251001"`
+
+                      Fastest model with near-frontier intelligence
+
+                    - `"claude-opus-4-5"`
+
+                      Premium model combining maximum intelligence with practical performance
+
+                    - `"claude-opus-4-5-20251101"`
+
+                      Premium model combining maximum intelligence with practical performance
+
+                    - `"claude-sonnet-4-5"`
+
+                      High-performance model for agents and coding
+
+                    - `"claude-sonnet-4-5-20250929"`
+
+                      High-performance model for agents and coding
+
+                    - `"claude-opus-4-1"`
+
+                      Exceptional model for specialized complex tasks
+
+                    - `"claude-opus-4-1-20250805"`
+
+                      Exceptional model for specialized complex tasks
+
+                    - `"claude-opus-4-0"`
+
+                      Powerful model for complex tasks
+
+                    - `"claude-opus-4-20250514"`
+
+                      Powerful model for complex tasks
+
+                    - `"claude-sonnet-4-0"`
+
+                      High-performance model with extended thinking
+
+                    - `"claude-sonnet-4-20250514"`
+
+                      High-performance model with extended thinking
+
+                    - `"claude-3-haiku-20240307"`
+
+                      Fast and cost-effective model
+
+                  - `(string & {})`
+
+              - `to: BetaFallbackInfoParam`
+
+                Identifies one hop of a fallback transition.
+
+              - `type: "fallback"`
+
+                - `"fallback"`
+
         - `role: "user" | "assistant" | "system"`
 
           - `"user"`
@@ -1107,82 +1231,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more`
-
-          - `"claude-opus-4-8"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-opus-4-7"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `"claude-opus-4-6"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `"claude-haiku-4-5"`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-opus-4-5"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-opus-4-5-20251101"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `"claude-sonnet-4-5"`
-
-            High-performance model for agents and coding
-
-          - `"claude-sonnet-4-5-20250929"`
-
-            High-performance model for agents and coding
-
-          - `"claude-opus-4-1"`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-1-20250805"`
-
-            Exceptional model for specialized complex tasks
-
-          - `"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
-        - `(string & {})`
 
       - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1347,6 +1395,137 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
+      - `fallback_credit_token?: string | null`
+
+        The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+        When a preceding request was refused and returned a `fallback_credit_token`,
+        pass that code here on the retry to have the retry's cache-creation tokens
+        for the prefix that was warm on the refused model billed at the cache-read
+        rate. Must be redeemed by the same organization and workspace, with the same
+        request body (optionally extended by one appended `assistant` message whose
+        content is the partial text — with any trailing whitespace stripped from
+        the final text block — and paired server-tool blocks streamed before the
+        refusal; the appended-assistant form is not available for requests with
+        `output_format` set or forced `tool_choice`), on an eligible fallback
+        model, on the same platform,
+        and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+        mid-server-tool-loop whose partial content was continuable may only be
+        redeemed with the appended-assistant form — if an exact-body retry is
+        rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry with the appended-assistant form instead.
+
+        When the appended-assistant form is used on a model that otherwise disallows
+        assistant-turn prefill, this token also authorizes that one prefill.
+
+      - `fallbacks?: Array<BetaFallbackParam> | null`
+
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `max_tokens?: number | null`
+
+        - `output_config?: BetaOutputConfig | null`
+
+          - `effort?: "low" | "medium" | "high" | 2 more | null`
+
+            All possible effort levels.
+
+            - `"low"`
+
+            - `"medium"`
+
+            - `"high"`
+
+            - `"xhigh"`
+
+            - `"max"`
+
+          - `format?: BetaJSONOutputFormat | null`
+
+            A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+            - `schema: Record<string, unknown>`
+
+              The JSON schema of the format
+
+            - `type: "json_schema"`
+
+              - `"json_schema"`
+
+          - `task_budget?: BetaTokenTaskBudget | null`
+
+            User-configurable total token budget across contexts.
+
+            - `total: number`
+
+              Total token budget across all contexts in the session.
+
+            - `type: "tokens"`
+
+              The budget type. Currently only 'tokens' is supported.
+
+              - `"tokens"`
+
+            - `remaining?: number | null`
+
+              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+        - `speed?: "standard" | "fast" | null`
+
+          - `"standard"`
+
+          - `"fast"`
+
+        - `thinking?: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive | null`
+
+          - `BetaThinkingConfigEnabled`
+
+            - `budget_tokens: number`
+
+              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+              Must be ≥1024 and less than `max_tokens`.
+
+              See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+            - `type: "enabled"`
+
+              - `"enabled"`
+
+            - `display?: "summarized" | "omitted" | null`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `"summarized"`
+
+              - `"omitted"`
+
+          - `BetaThinkingConfigDisabled`
+
+            - `type: "disabled"`
+
+              - `"disabled"`
+
+          - `BetaThinkingConfigAdaptive`
+
+            - `type: "adaptive"`
+
+              - `"adaptive"`
+
+            - `display?: "summarized" | "omitted" | null`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `"summarized"`
+
+              - `"omitted"`
+
       - `inference_geo?: string | null`
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -1384,50 +1563,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `output_config?: BetaOutputConfig`
 
         Configuration options for the model's output, such as the output format.
-
-        - `effort?: "low" | "medium" | "high" | 2 more | null`
-
-          All possible effort levels.
-
-          - `"low"`
-
-          - `"medium"`
-
-          - `"high"`
-
-          - `"xhigh"`
-
-          - `"max"`
-
-        - `format?: BetaJSONOutputFormat | null`
-
-          A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-
-          - `schema: Record<string, unknown>`
-
-            The JSON schema of the format
-
-          - `type: "json_schema"`
-
-            - `"json_schema"`
-
-        - `task_budget?: BetaTokenTaskBudget | null`
-
-          User-configurable total token budget across contexts.
-
-          - `total: number`
-
-            Total token budget across all contexts in the session.
-
-          - `type: "tokens"`
-
-            The budget type. Currently only 'tokens' is supported.
-
-            - `"tokens"`
-
-          - `remaining?: number | null`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `output_format?: BetaJSONOutputFormat | null`
 
@@ -1505,45 +1640,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `BetaThinkingConfigEnabled`
 
-          - `budget_tokens: number`
-
-            Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-            Must be ≥1024 and less than `max_tokens`.
-
-            See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
-
-          - `type: "enabled"`
-
-            - `"enabled"`
-
-          - `display?: "summarized" | "omitted" | null`
-
-            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-            - `"summarized"`
-
-            - `"omitted"`
-
         - `BetaThinkingConfigDisabled`
 
-          - `type: "disabled"`
-
-            - `"disabled"`
-
         - `BetaThinkingConfigAdaptive`
-
-          - `type: "adaptive"`
-
-            - `"adaptive"`
-
-          - `display?: "summarized" | "omitted" | null`
-
-            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-            - `"summarized"`
-
-            - `"omitted"`
 
       - `tool_choice?: BetaToolChoice`
 
@@ -2561,6 +2660,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+          - `max_tokens?: number | null`
+
+            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
           - `max_uses?: number | null`
 
             Maximum number of times the tool can be used in the API request.
@@ -2702,7 +2805,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2755,6 +2858,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
+
+      - `"server-side-fallback-2026-06-01"`
+
+      - `"fallback-credit-2026-06-01"`
 
 ### Returns
 

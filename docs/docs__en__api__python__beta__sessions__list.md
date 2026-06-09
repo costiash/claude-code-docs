@@ -54,7 +54,7 @@ List Sessions
 
 - `page: Optional[str]`
 
-  Opaque pagination cursor from a previous response's next_page.
+  Opaque pagination cursor from a previous response.
 
 - `statuses: Optional[List[Literal["rescheduling", "running", "idle", "terminated"]]]`
 
@@ -74,7 +74,7 @@ List Sessions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -128,6 +128,10 @@ List Sessions
 
     - `"thinking-token-count-2026-05-13"`
 
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession: …`
@@ -164,12 +168,14 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]`
+        - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
+          - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
           - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -180,6 +186,14 @@ List Sessions
           - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
           - `claude-sonnet-4-5` - High-performance model for agents and coding
           - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for coding, agents, and knowledge work
+
+          - `"claude-mythos-5"`
+
+            Next generation of intelligence for cybersecurity and bio
 
           - `"claude-opus-4-8"`
 
@@ -409,19 +423,13 @@ List Sessions
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Optional[Dict[str, object]]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Optional[List[str]]`
-
-                List of required property names.
-
-              - `type: Optional[Literal["object"]]`
-
-                Must be 'object' for tool input schemas.
+              - `type: Literal["object"]`
 
                 - `"object"`
+
+              - `properties: Optional[Dict[str, object]]`
+
+              - `required: Optional[List[str]]`
 
             - `name: str`
 

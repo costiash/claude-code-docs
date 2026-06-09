@@ -778,6 +778,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "tool_search_tool_result_error"constant`
 
+                  - `string? ErrorMessage`
+
                 - `class ToolSearchToolSearchResultBlockParam:`
 
                   - `required IReadOnlyList<ToolReferenceBlockParam> ToolReferences`
@@ -853,6 +855,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"ClaudeFable5`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"ClaudeMythos5`
+
+          Most capable model for cybersecurity and biology research
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 

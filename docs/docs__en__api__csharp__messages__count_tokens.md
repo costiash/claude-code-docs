@@ -752,6 +752,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `JsonElement Type "tool_search_tool_result_error"constant`
 
+              - `string? ErrorMessage`
+
             - `class ToolSearchToolSearchResultBlockParam:`
 
               - `required IReadOnlyList<ToolReferenceBlockParam> ToolReferences`
