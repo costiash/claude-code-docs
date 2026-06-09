@@ -18,7 +18,7 @@ Archive Session
 
 ### Returns
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -46,7 +46,7 @@ Archive Session
 
       Model identifier and configuration.
 
-      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
@@ -54,11 +54,7 @@ Archive Session
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -132,7 +128,7 @@ Archive Session
 
           Model identifier and configuration.
 
-          - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -558,6 +554,10 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```cli
@@ -729,6 +729,7 @@ ant beta:sessions archive \
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```

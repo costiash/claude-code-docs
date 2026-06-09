@@ -120,7 +120,7 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -128,11 +128,7 @@ Get Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 

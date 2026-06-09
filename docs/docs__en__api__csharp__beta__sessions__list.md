@@ -34,6 +34,10 @@ List Sessions
 
     Query param: Return sessions created at or before this time (inclusive).
 
+  - `string deploymentID`
+
+    Query param: Filter sessions created by this deployment ID.
+
   - `Boolean includeArchived`
 
     Query param: When true, includes archived sessions. Default: false (exclude archived).
@@ -172,11 +176,7 @@ List Sessions
 
           - `"claude-fable-5"ClaudeFable5`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `"claude-mythos-5"ClaudeMythos5`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -666,6 +666,10 @@ List Sessions
 
       Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+    - `string? DeploymentID`
+
+      Deployment ID when the session was created from a deployment reference. Null otherwise.
+
   - `string? NextPage`
 
     Opaque cursor for the next page. Null when no more results.
@@ -847,7 +851,8 @@ await foreach (var item in page.Paginate())
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

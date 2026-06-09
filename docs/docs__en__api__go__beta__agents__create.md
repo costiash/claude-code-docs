@@ -32,11 +32,7 @@ Create Agent
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `const BetaManagedAgentsModelClaudeMythos5 BetaManagedAgentsModel = "claude-mythos-5"`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 
@@ -436,11 +432,7 @@ Create Agent
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `const BetaManagedAgentsModelClaudeMythos5 BetaManagedAgentsModel = "claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `const BetaManagedAgentsModelClaudeOpus4_8 BetaManagedAgentsModel = "claude-opus-4-8"`
 

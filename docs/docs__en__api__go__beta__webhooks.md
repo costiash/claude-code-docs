@@ -178,6 +178,10 @@
 
       - `OrganizationID string`
 
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
+
       - `Type SessionThreadCreated`
 
         - `const SessionThreadCreatedSessionThreadCreated SessionThreadCreated = "session.thread_created"`
@@ -192,6 +196,10 @@
 
       - `OrganizationID string`
 
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
+
       - `Type SessionThreadIdled`
 
         - `const SessionThreadIdledSessionThreadIdled SessionThreadIdled = "session.thread_idled"`
@@ -205,6 +213,10 @@
         ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadTerminated`
 
@@ -512,6 +524,10 @@
 
     - `OrganizationID string`
 
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
+
     - `Type SessionThreadCreated`
 
       - `const SessionThreadCreatedSessionThreadCreated SessionThreadCreated = "session.thread_created"`
@@ -526,6 +542,10 @@
 
     - `OrganizationID string`
 
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
+
     - `Type SessionThreadIdled`
 
       - `const SessionThreadIdledSessionThreadIdled SessionThreadIdled = "session.thread_idled"`
@@ -539,6 +559,10 @@
       ID of the session that triggered the event.
 
     - `OrganizationID string`
+
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
 
     - `Type SessionThreadTerminated`
 
@@ -876,6 +900,10 @@
 
   - `OrganizationID string`
 
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
+
   - `Type SessionThreadCreated`
 
     - `const SessionThreadCreatedSessionThreadCreated SessionThreadCreated = "session.thread_created"`
@@ -892,6 +920,10 @@
 
   - `OrganizationID string`
 
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
+
   - `Type SessionThreadIdled`
 
     - `const SessionThreadIdledSessionThreadIdled SessionThreadIdled = "session.thread_idled"`
@@ -907,6 +939,10 @@
     ID of the session that triggered the event.
 
   - `OrganizationID string`
+
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
 
   - `Type SessionThreadTerminated`
 
@@ -1218,6 +1254,10 @@
 
       - `OrganizationID string`
 
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
+
       - `Type SessionThreadCreated`
 
         - `const SessionThreadCreatedSessionThreadCreated SessionThreadCreated = "session.thread_created"`
@@ -1232,6 +1272,10 @@
 
       - `OrganizationID string`
 
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
+
       - `Type SessionThreadIdled`
 
         - `const SessionThreadIdledSessionThreadIdled SessionThreadIdled = "session.thread_idled"`
@@ -1245,6 +1289,10 @@
         ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadTerminated`
 

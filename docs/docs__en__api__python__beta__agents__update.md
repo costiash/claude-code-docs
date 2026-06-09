@@ -42,16 +42,15 @@ Update Agent
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-  - `Union[Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more], str]`
+  - `Union[Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more], str]`
 
-    - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+    - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-      - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+      - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
       - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
       - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -65,11 +64,7 @@ Update Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -123,14 +118,13 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+      - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-        - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+        - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
         - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -502,14 +496,13 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+      - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-        - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+        - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
         - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
         - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -523,11 +516,7 @@ Update Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 

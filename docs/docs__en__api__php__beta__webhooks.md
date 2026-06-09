@@ -164,6 +164,10 @@
 
     - `string organizationID`
 
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
+
     - `"session.thread_created" type`
 
     - `string workspaceID`
@@ -176,6 +180,10 @@
 
     - `string organizationID`
 
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
+
     - `"session.thread_idled" type`
 
     - `string workspaceID`
@@ -187,6 +195,10 @@
       ID of the session that triggered the event.
 
     - `string organizationID`
+
+    - `string sessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `"session.thread_terminated" type`
 
@@ -482,6 +494,10 @@
 
   - `string organizationID`
 
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `"session.thread_created" type`
 
   - `string workspaceID`
@@ -496,6 +512,10 @@
 
   - `string organizationID`
 
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `"session.thread_idled" type`
 
   - `string workspaceID`
@@ -509,6 +529,10 @@
     ID of the session that triggered the event.
 
   - `string organizationID`
+
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `"session.thread_terminated" type`
 

@@ -122,14 +122,13 @@ List Session Threads
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+        - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-          - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+          - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
           - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -143,11 +142,7 @@ List Session Threads
 
           - `"claude-fable-5"`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `"claude-mythos-5"`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -665,14 +660,13 @@ Get Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+        - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-          - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+          - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
           - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -686,11 +680,7 @@ Get Session Thread
 
           - `"claude-fable-5"`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `"claude-mythos-5"`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -1203,14 +1193,13 @@ Archive Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+        - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-          - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+          - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
           - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -1224,11 +1213,7 @@ Archive Session Thread
 
           - `"claude-fable-5"`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `"claude-mythos-5"`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -1665,14 +1650,13 @@ print(beta_managed_agents_session_thread.id)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+        - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-          - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+          - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
           - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -1686,11 +1670,7 @@ print(beta_managed_agents_session_thread.id)
 
           - `"claude-fable-5"`
 
-            Next generation of intelligence for coding, agents, and knowledge work
-
-          - `"claude-mythos-5"`
-
-            Next generation of intelligence for cybersecurity and bio
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -2924,6 +2904,42 @@ print(beta_managed_agents_session_thread.id)
 
           - `"billing_error"`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: str`
+
+          ID of the affected credential.
+
+        - `message: str`
+
+          Human-readable error description.
+
+        - `retry_status: RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying: …`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted: …`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal: …`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: Literal["credential_host_unreachable_error"]`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: str`
+
+          ID of the vault containing the affected credential.
+
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
@@ -3484,14 +3500,13 @@ print(beta_managed_agents_session_thread.id)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+          - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-            - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+            - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
             - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -3505,11 +3520,7 @@ print(beta_managed_agents_session_thread.id)
 
             - `"claude-fable-5"`
 
-              Next generation of intelligence for coding, agents, and knowledge work
-
-            - `"claude-mythos-5"`
-
-              Next generation of intelligence for cybersecurity and bio
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `"claude-opus-4-8"`
 
@@ -3800,6 +3811,34 @@ print(beta_managed_agents_session_thread.id)
     - `title: Optional[str]`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent: …`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: str`
+
+      Unique identifier for this event.
+
+    - `content: List[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: str`
+
+        The text content.
+
+      - `type: Literal["text"]`
+
+        - `"text"`
+
+    - `type: Literal["system.message"]`
+
+      - `"system.message"`
+
+    - `processed_at: Optional[datetime]`
+
+      A timestamp in RFC 3339 format
 
 # Events
 
@@ -4755,6 +4794,42 @@ List Session Thread Events
 
           - `"billing_error"`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: str`
+
+          ID of the affected credential.
+
+        - `message: str`
+
+          Human-readable error description.
+
+        - `retry_status: RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying: …`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted: …`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal: …`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: Literal["credential_host_unreachable_error"]`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: str`
+
+          ID of the vault containing the affected credential.
+
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
@@ -5315,14 +5390,13 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+          - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-            - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+            - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
             - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -5336,11 +5410,7 @@ List Session Thread Events
 
             - `"claude-fable-5"`
 
-              Next generation of intelligence for coding, agents, and knowledge work
-
-            - `"claude-mythos-5"`
-
-              Next generation of intelligence for cybersecurity and bio
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `"claude-opus-4-8"`
 
@@ -5631,6 +5701,34 @@ List Session Thread Events
     - `title: Optional[str]`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent: …`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: str`
+
+      Unique identifier for this event.
+
+    - `content: List[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: str`
+
+        The text content.
+
+      - `type: Literal["text"]`
+
+        - `"text"`
+
+    - `type: Literal["system.message"]`
+
+      - `"system.message"`
+
+    - `processed_at: Optional[datetime]`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -6614,6 +6712,42 @@ Stream Session Thread Events
 
           - `"billing_error"`
 
+      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: str`
+
+          ID of the affected credential.
+
+        - `message: str`
+
+          Human-readable error description.
+
+        - `retry_status: RetryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying: …`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted: …`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal: …`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: Literal["credential_host_unreachable_error"]`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: str`
+
+          ID of the vault containing the affected credential.
+
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
@@ -7174,14 +7308,13 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5", "claude-mythos-5", "claude-opus-4-8", 9 more]`
+          - `Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `claude-fable-5` - Next generation of intelligence for coding, agents, and knowledge work
-            - `claude-mythos-5` - Next generation of intelligence for cybersecurity and bio
+            - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
             - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
             - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -7195,11 +7328,7 @@ Stream Session Thread Events
 
             - `"claude-fable-5"`
 
-              Next generation of intelligence for coding, agents, and knowledge work
-
-            - `"claude-mythos-5"`
-
-              Next generation of intelligence for cybersecurity and bio
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `"claude-opus-4-8"`
 
@@ -7490,6 +7619,34 @@ Stream Session Thread Events
     - `title: Optional[str]`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent: …`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: str`
+
+      Unique identifier for this event.
+
+    - `content: List[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: str`
+
+        The text content.
+
+      - `type: Literal["text"]`
+
+        - `"text"`
+
+    - `type: Literal["system.message"]`
+
+      - `"system.message"`
+
+    - `processed_at: Optional[datetime]`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 

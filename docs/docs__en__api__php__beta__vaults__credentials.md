@@ -738,6 +738,22 @@ var_dump($betaManagedAgentsCredentialValidation);
 
     Human-readable name for the credential.
 
+### Beta Managed Agents Credential Networking Params
+
+- `ManagedAgentsCredentialNetworkingParams`
+
+  - `ManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+    - `Type type`
+
+  - `ManagedAgentsLimitedCredentialNetworkingParams`
+
+    - `list<string> allowedHosts`
+
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+    - `Type type`
+
 ### Beta Managed Agents Credential Validation
 
 - `ManagedAgentsCredentialValidation`
@@ -789,6 +805,72 @@ var_dump($betaManagedAgentsCredentialValidation);
   - `string id`
 
     Unique identifier of the deleted credential.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `ManagedAgentsEnvironmentVariableAuthResponse`
+
+  - `Networking networking`
+
+    Outbound hosts the secret value is substituted on.
+
+  - `string secretName`
+
+    Name of the environment variable.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `ManagedAgentsEnvironmentVariableCreateParams`
+
+  - `ManagedAgentsCredentialNetworkingParams networking`
+
+    Outbound hosts the secret value is substituted on.
+
+  - `string secretName`
+
+    Name of the environment variable. Immutable after create.
+
+  - `string secretValue`
+
+    Secret value. Write-only; never returned in responses.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `ManagedAgentsEnvironmentVariableUpdateParams`
+
+  - `Type type`
+
+  - `?ManagedAgentsCredentialNetworkingParams networking`
+
+    Updated networking scope. Full replacement.
+
+  - `?string secretValue`
+
+    Updated secret value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `ManagedAgentsLimitedCredentialNetworkingParams`
+
+  - `list<string> allowedHosts`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `Type type`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `ManagedAgentsLimitedCredentialNetworkingResponse`
+
+  - `list<string> allowedHosts`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
   - `Type type`
 
@@ -1059,3 +1141,15 @@ var_dump($betaManagedAgentsCredentialValidation);
   - `?string clientSecret`
 
     Updated OAuth client secret.
+
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `ManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+  - `Type type`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `ManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+  - `Type type`

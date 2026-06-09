@@ -84,7 +84,7 @@ Create Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -92,11 +92,7 @@ Create Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -497,7 +493,7 @@ List Agents
 
       Model identifier and configuration.
 
-      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
@@ -505,11 +501,7 @@ List Agents
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -901,7 +893,7 @@ Get Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -909,11 +901,7 @@ Get Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -1333,7 +1321,7 @@ Update Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -1341,11 +1329,7 @@ Update Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -1726,7 +1710,7 @@ Archive Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -1734,11 +1718,7 @@ Archive Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -2102,7 +2082,7 @@ ant beta:agents archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -2110,11 +2090,7 @@ ant beta:agents archive \
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -3206,7 +3182,7 @@ ant beta:agents archive \
 
   Model identifier and configuration.
 
-  - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+  - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
@@ -3214,11 +3190,7 @@ ant beta:agents archive \
 
     - `"claude-fable-5"`
 
-      Next generation of intelligence for coding, agents, and knowledge work
-
-    - `"claude-mythos-5"`
-
-      Next generation of intelligence for cybersecurity and bio
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"`
 
@@ -3274,7 +3246,7 @@ ant beta:agents archive \
 
   An object that defines additional configuration control over model use
 
-  - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+  - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
@@ -3282,11 +3254,7 @@ ant beta:agents archive \
 
     - `"claude-fable-5"`
 
-      Next generation of intelligence for coding, agents, and knowledge work
-
-    - `"claude-mythos-5"`
-
-      Next generation of intelligence for cybersecurity and bio
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"`
 
@@ -3432,7 +3400,7 @@ ant beta:agents archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
@@ -3440,11 +3408,7 @@ ant beta:agents archive \
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -3788,7 +3752,7 @@ List Agent Versions
 
       Model identifier and configuration.
 
-      - `id: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
@@ -3796,11 +3760,7 @@ List Agent Versions
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 

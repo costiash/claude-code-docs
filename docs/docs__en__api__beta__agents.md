@@ -78,13 +78,13 @@ Create Agent
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+    - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
       The model that will power your agent.
 
@@ -92,11 +92,7 @@ Create Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -468,7 +464,7 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -476,11 +472,7 @@ Create Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -962,7 +954,7 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -970,11 +962,7 @@ List Agents
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -1438,7 +1426,7 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -1446,11 +1434,7 @@ Get Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -1893,13 +1877,13 @@ Update Agent
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+    - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
       The model that will power your agent.
 
@@ -1907,11 +1891,7 @@ Update Agent
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -2259,7 +2239,7 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -2267,11 +2247,7 @@ Update Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -2725,7 +2701,7 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -2733,11 +2709,7 @@ Archive Agent
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -3113,7 +3085,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -3121,11 +3093,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -4223,13 +4191,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Model
 
-- `BetaManagedAgentsModel = "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more or string`
+- `BetaManagedAgentsModel = "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
   The model that will power your agent.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+  - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
     The model that will power your agent.
 
@@ -4237,11 +4205,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"claude-fable-5"`
 
-      Next generation of intelligence for coding, agents, and knowledge work
-
-    - `"claude-mythos-5"`
-
-      Next generation of intelligence for cybersecurity and bio
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"`
 
@@ -4297,7 +4261,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+    - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
       The model that will power your agent.
 
@@ -4305,11 +4269,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -4373,7 +4333,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+    - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
       The model that will power your agent.
 
@@ -4381,11 +4341,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"claude-fable-5"`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -4539,7 +4495,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -4547,11 +4503,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -4961,7 +4913,7 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 9 more`
+      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
 
         The model that will power your agent.
 
@@ -4969,11 +4921,7 @@ List Agent Versions
 
         - `"claude-fable-5"`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 

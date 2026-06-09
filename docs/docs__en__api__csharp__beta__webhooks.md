@@ -156,6 +156,10 @@
 
       - `required string OrganizationID`
 
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
+
       - `JsonElement Type "session.thread_created"constant`
 
       - `required string WorkspaceID`
@@ -168,6 +172,10 @@
 
       - `required string OrganizationID`
 
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
+
       - `JsonElement Type "session.thread_idled"constant`
 
       - `required string WorkspaceID`
@@ -179,6 +187,10 @@
         ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_terminated"constant`
 
@@ -444,6 +456,10 @@
 
     - `required string OrganizationID`
 
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
+
     - `JsonElement Type "session.thread_created"constant`
 
     - `required string WorkspaceID`
@@ -456,6 +472,10 @@
 
     - `required string OrganizationID`
 
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
+
     - `JsonElement Type "session.thread_idled"constant`
 
     - `required string WorkspaceID`
@@ -467,6 +487,10 @@
       ID of the session that triggered the event.
 
     - `required string OrganizationID`
+
+    - `required string SessionThreadID`
+
+      ID of the session thread this event refers to.
 
     - `JsonElement Type "session.thread_terminated"constant`
 
@@ -762,6 +786,10 @@
 
   - `required string OrganizationID`
 
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `JsonElement Type "session.thread_created"constant`
 
   - `required string WorkspaceID`
@@ -776,6 +804,10 @@
 
   - `required string OrganizationID`
 
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
+
   - `JsonElement Type "session.thread_idled"constant`
 
   - `required string WorkspaceID`
@@ -789,6 +821,10 @@
     ID of the session that triggered the event.
 
   - `required string OrganizationID`
+
+  - `required string SessionThreadID`
+
+    ID of the session thread this event refers to.
 
   - `JsonElement Type "session.thread_terminated"constant`
 
@@ -1062,6 +1098,10 @@
 
       - `required string OrganizationID`
 
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
+
       - `JsonElement Type "session.thread_created"constant`
 
       - `required string WorkspaceID`
@@ -1074,6 +1114,10 @@
 
       - `required string OrganizationID`
 
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
+
       - `JsonElement Type "session.thread_idled"constant`
 
       - `required string WorkspaceID`
@@ -1085,6 +1129,10 @@
         ID of the session that triggered the event.
 
       - `required string OrganizationID`
+
+      - `required string SessionThreadID`
+
+        ID of the session thread this event refers to.
 
       - `JsonElement Type "session.thread_terminated"constant`
 

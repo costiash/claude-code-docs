@@ -54,11 +54,7 @@ Update Agent
 
       - `"claude-fable-5"ClaudeFable5`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"ClaudeMythos5`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -112,11 +108,7 @@ Update Agent
 
         - `"claude-fable-5"ClaudeFable5`
 
-          Next generation of intelligence for coding, agents, and knowledge work
-
-        - `"claude-mythos-5"ClaudeMythos5`
-
-          Next generation of intelligence for cybersecurity and bio
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
@@ -478,11 +470,7 @@ Update Agent
 
       - `"claude-fable-5"ClaudeFable5`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `"claude-mythos-5"ClaudeMythos5`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"ClaudeOpus4_8`
 

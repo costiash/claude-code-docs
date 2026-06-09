@@ -74,6 +74,13 @@ Span events are observability markers that wrap activity for timing and usage tr
 | `span.outcome_evaluation_end` | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has completed.  |
 
   </Tab>
+  <Tab title="System events">
+
+| Type | Description |
+|------|-------------|
+| `system.message` | Update the agent's system prompt between turns. Only supported on Claude Opus 4.8. |
+
+  </Tab>
 </Tabs>
 
 ## Self-hosted worker

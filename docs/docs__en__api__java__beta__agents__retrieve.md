@@ -118,11 +118,7 @@ Get Agent
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
-        Next generation of intelligence for coding, agents, and knowledge work
-
-      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
-
-        Next generation of intelligence for cybersecurity and bio
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 

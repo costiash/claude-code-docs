@@ -168,6 +168,42 @@ Get Credential
 
         - `STATIC_BEARER("static_bearer")`
 
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `Networking networking`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `Type type`
+
+            - `UNRESTRICTED("unrestricted")`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse:`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `List<String> allowedHosts`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `Type type`
+
+            - `LIMITED("limited")`
+
+      - `String secretName`
+
+        Name of the environment variable.
+
+      - `Type type`
+
+        - `ENVIRONMENT_VARIABLE("environment_variable")`
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
