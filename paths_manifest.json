@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-09T16:02:21.549371Z",
-    "total_paths": 1702,
+    "generated_at": "2026-06-09T18:48:42.222202Z",
+    "total_paths": 1704,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-09T16:02:21.549380Z"
+    "last_regenerated": "2026-06-09T18:48:42.222210Z"
   },
   "categories": {
     "core_documentation": [
@@ -69,6 +69,7 @@
       "/docs/en/build-with-claude/effort",
       "/docs/en/build-with-claude/embeddings",
       "/docs/en/build-with-claude/extended-thinking",
+      "/docs/en/build-with-claude/fallback-credit",
       "/docs/en/build-with-claude/fast-mode",
       "/docs/en/build-with-claude/files",
       "/docs/en/build-with-claude/handling-stop-reasons",
@@ -78,6 +79,7 @@
       "/docs/en/build-with-claude/overview",
       "/docs/en/build-with-claude/pdf-support",
       "/docs/en/build-with-claude/prompt-caching",
+      "/docs/en/build-with-claude/refusals-and-fallback",
       "/docs/en/build-with-claude/search-results",
       "/docs/en/build-with-claude/skills-guide",
       "/docs/en/build-with-claude/streaming",
