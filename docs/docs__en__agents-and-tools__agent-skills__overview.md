@@ -85,7 +85,7 @@ When you request something that matches a Skill's description, Claude reads SKIL
 
 **Content types: Instructions, code, and resources**. Skills can bundle additional materials:
 
-```text
+```text nowrap
 pdf-skill/
 ├── SKILL.md (main instructions)
 ├── FORMS.md (form-filling guide)

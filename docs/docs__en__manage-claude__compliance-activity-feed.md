@@ -129,7 +129,7 @@ A production **backfill** loop pages through older activities by driving iterati
 2. Page through with `after_id=<last_id>` until `has_more` is `false`.
 3. Persist the final `last_id` only after you've stored every page it covers.
 
-```text
+```text nowrap
 cursor = stored_cursor
 loop:
   if cursor is not null:

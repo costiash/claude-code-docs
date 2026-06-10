@@ -366,7 +366,7 @@ Shows directory contents or file contents with optional line ranges:
 #### Return values
 
 **For directories:** Return a listing that shows files and directories with their sizes:
-```text
+```text nowrap
 Here're the files and directories up to 2 levels deep in {path}, excluding hidden items and node_modules:
 {size}    {path}
 {size}    {path}/{filename1}
@@ -391,7 +391,7 @@ Line number formatting:
 - **Line limit**: Files with more than 999,999 lines should return an error: `"File {path} exceeds maximum line limit of 999,999 lines."`
 
 **Example output:**
-```text
+```text nowrap
 Here's the content of /memories/notes.txt with line numbers:
      1	Hello World
      2	This is line two

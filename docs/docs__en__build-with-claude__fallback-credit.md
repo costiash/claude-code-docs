@@ -4,7 +4,7 @@ Avoid paying the prompt-cache cost twice when you retry a refused Claude Fable 5
 
 ---
 
-Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch, and cache writes cost more than cache reads. Fallback credit removes that extra cost: the refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
+Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
 You need this page only when you build the retry yourself: on the Ruby or PHP SDK, over raw HTTP, or with custom retry logic. [Server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback) and the [SDK middleware](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) apply fallback credit automatically. If you use either, skip this page.
 
@@ -17,7 +17,12 @@ You need this page only when you build the retry yourself: on the Ruby or PHP SD
     Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-06-01` header. The `server-side-fallback-2026-06-01` header also grants the same fields.
   </Step>
   <Step title="Read two fields from the refusal">
-    On a refusal, `stop_details` includes `fallback_credit_token`, an opaque string that represents the credit, and `fallback_has_prefill_claim`, a Boolean that tells you which retry body shape to use. Both are `null` when no credit is available for the refusal.
+    On a refusal, `stop_details` includes two fields:
+
+    - **`fallback_credit_token`:** an opaque string that represents the credit.
+    - **`fallback_has_prefill_claim`:** a Boolean that tells you which retry body shape to use.
+
+    Both are `null` when no credit is available for the refusal.
   </Step>
   <Step title="Build the retry">
     Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. Pick the body shape from the table below.
@@ -36,7 +41,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 ## Example
 
-The example below makes a request that may be refused, redeems the credit token on a retry against Claude Opus 4.8, and degrades through the rejection ladder covered in [When a retry is rejected](#when-a-retry-is-rejected).
+The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](#when-a-retry-is-rejected).
 
 <CodeGroup>
 ```bash cURL hidelines={1..2}
@@ -629,19 +634,19 @@ puts JSON.generate({stop_reason: response.stop_reason, model: response.model})
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Claude Platform on AWS, Amazon Bedrock, Vertex AI, and Microsoft Foundry. Credit tokens returned in [Message Batches](/docs/en/build-with-claude/batch-processing) results cannot be redeemed; redemption applies only to direct Messages API requests.
+Fallback credit is in beta on the Claude API, Claude Platform on AWS, Amazon Bedrock, Vertex AI, and Microsoft Foundry. Credit tokens returned in [Message Batches](/docs/en/build-with-claude/batch-processing) results cannot be redeemed. Redemption applies only to direct Messages API requests.
 
 The retry model must be one of the refused model's permitted fallback targets. At launch, Claude Fable 5's permitted target is Claude Opus 4.8 (`claude-opus-4-8`).
 
 <section title="Looking up permitted fallback targets programmatically">
 
-On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](/docs/en/api/models/list) when the `server-side-fallback-2026-06-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone, and it is not exposed on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](/docs/en/api/models/list) when the `server-side-fallback-2026-06-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
 
 </section>
 
 ## Checking that the credit applied
 
-The refund is visible in the retry's `usage`: `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount, than the same request would report without the token. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
+The refund is visible in the retry's `usage`. Compared with what the same request would report without the token, `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
 
 ## When a retry is rejected
 
@@ -672,7 +677,7 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 
 <section title="Fields that must match the refused request">
 
-Redemption compares the retry against the refused request. Every field that shapes the prompt must match exactly; fields that do not shape the prompt may change on the retry.
+Redemption compares the retry against the refused request. Every field that shapes the prompt must match exactly. Fields that do not shape the prompt may change on the retry.
 
 | Rule | Fields |
 | :--- | :--- |
@@ -689,7 +694,10 @@ Do not strip `thinking` or `redacted_thinking` blocks from earlier turns on the 
 
 Send the same `anthropic-beta` headers on the retry as on the refused request. A beta header present on one of the two requests but not the other can fail the match even when the bodies are identical. The resulting 400 error carries the same `request body ... does not match` message as a body difference, so a header difference is easy to misread as a body problem. In particular, do not add or drop beta headers based on which model the request targets.
 
-Two header families are exempt from the match, for the retry's sake: `fallback-credit-*` and `server-side-fallback-*`. A retry must drop the `fallbacks` parameter, and dropping the `server-side-fallback-*` header along with it does not cause a mismatch. Keep the `fallback-credit-*` header on both requests; the retry needs it to redeem the token.
+Two header families are exempt from the match, for the retry's sake:
+
+- **`server-side-fallback-*`:** a retry must drop the `fallbacks` parameter, and dropping this header along with it does not cause a mismatch.
+- **`fallback-credit-*`:** keep this header on both requests. The retry needs it to redeem the token.
 
 <Note>
 On models that include the 1M token context window by default, such as Claude Fable 5 and Claude Opus 4.8, the `context-1m-2025-08-07` beta header has no effect. The most robust way to keep the two requests identical is to omit that header on both, rather than sending it on one request and not the other.
@@ -699,15 +707,20 @@ On models that include the 1M token context window by default, such as Claude Fa
 
 <section title="When fallback_has_prefill_claim is absent">
 
-The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still surface as absent (`None` in the typed SDKs) on Amazon Bedrock, Vertex AI, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`: try the appended-assistant-message shape first, and rely on the rejection handling above, which falls back to the unchanged body.
+The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still surface as absent (`None` in the typed SDKs) on Amazon Bedrock, Vertex AI, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](#when-a-retry-is-rejected), which falls back to the unchanged body.
 
 </section>
 
 <section title="Echoing the refused response's content">
 
-When a refusal's token supports the continuation shape, the refusal explanation is delivered in `stop_details.explanation` and the response `content` carries only the model's own output, so you can echo `content` into the appended assistant message as-is. Two adjustments may still be needed before sending: if the final block you send is a `text` block, strip its trailing whitespace, and omit any client-side `tool_use` block that has no matching `tool_result`.
+When a refusal's token supports the continuation shape, the response `content` carries only the model's own output, and the refusal explanation is delivered in `stop_details.explanation`. You can therefore echo `content` into the appended assistant message as-is.
 
-If the echoed content includes a `fallback` block from an earlier [server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback), keep the block exactly where it appeared. It is accepted on any request without a beta header, and the API uses its position to validate the thinking blocks around it: a request that echoes thinking blocks from both sides of that boundary is rejected if the block is omitted or moved.
+Two adjustments may still be needed before sending:
+
+- If the final block you send is a `text` block, strip its trailing whitespace.
+- Omit any client-side `tool_use` block that has no matching `tool_result`.
+
+If the echoed content includes a `fallback` block from an earlier [server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback), keep the block exactly where it appeared. It is accepted on any request without a beta header. The API uses its position to validate the thinking blocks around it, so a request that echoes thinking blocks from both sides of that boundary is rejected if the block is omitted or moved.
 
 </section>
 
@@ -723,7 +736,12 @@ The token expires five minutes after the refusal. After that, send the retry wit
 
 When the refusal arrived after server tools had already executed within the request, the token redeems only by continuing the partial response. That restriction is what prevents the completed tool calls from running, and billing, again.
 
-One combination can therefore leave the token unredeemable by either shape: a request that used `output_config.format` or a `tool_choice` that forces tool use (either of which rules out the appended-assistant-message shape), and whose refusal arrived after server tools had executed (which rules out the unchanged body). If the unchanged-body retry is rejected with a 400 error saying the token must be redeemed by continuing the partial response, discard the token. A retry without it goes through, but it re-runs and re-bills the completed server tools, so surface the cost or the error to your caller rather than retrying silently.
+One combination can therefore leave the token unredeemable by either shape, when both of the following are true:
+
+- The request used `output_config.format` or a `tool_choice` that forces tool use. Either one rules out the appended-assistant-message shape.
+- The refusal arrived after server tools had executed. That rules out the unchanged body.
+
+If the unchanged-body retry is rejected with a 400 error saying the token must be redeemed by continuing the partial response, discard the token. A retry without it goes through, but it re-runs and re-bills the completed server tools. Surface the cost or the error to your caller rather than retrying silently.
 
 </section>
 

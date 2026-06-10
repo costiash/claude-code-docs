@@ -26,9 +26,13 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 
 ## Zero data retention (ZDR) scope
 
+<Warning>
+Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
+</Warning>
+
 **What ZDR covers**
 
-- **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs. Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
+- **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs.
 - **Claude Code:** ZDR applies when used with Commercial organization API keys or through Claude Enterprise (see [Claude Code ZDR docs](https://code.claude.com/docs/en/zero-data-retention))
 
 **What ZDR does NOT cover**
@@ -48,6 +52,8 @@ For the most up-to-date information on what products and features are ZDR-eligib
 Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. Requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
 
 This requirement applies on the Claude API. For Claude Fable 5 on Amazon Bedrock, Vertex AI, and Microsoft Foundry, data retention requirements are set by each platform.
+
+Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
 
 ## HIPAA readiness
 

@@ -93,7 +93,7 @@ print(result.embeddings[1])
 
 `result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
 
-```text
+```text nowrap
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
 [-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for "Sample text 2"
 ```

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-10T16:54:02Z",
+  "generated_at": "2026-06-10T19:33:21Z",
   "indexed_files": 1641,
   "index": {
     "/changelog": {
@@ -56,7 +56,7 @@
         "default",
         "file"
       ],
-      "word_count": 3096,
+      "word_count": 2815,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -389,10 +389,10 @@
         "when",
         "through",
         "configuration",
-        "div",
-        "wizard"
+        "wizard",
+        "note"
       ],
-      "word_count": 2017,
+      "word_count": 1736,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -658,9 +658,7 @@
         "model",
         "azure",
         "set",
-        "div",
         "environment",
-        "classname",
         "create",
         "resource",
         "variables",
@@ -669,10 +667,12 @@
         "default",
         "documentation",
         "configuration",
-        "const",
-        "note"
+        "note",
+        "models",
+        "when",
+        "deployment"
       ],
-      "word_count": 1006,
+      "word_count": 725,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -880,8 +880,8 @@
         "claude",
         "skills",
         "skill",
-        "code",
         "directory",
+        "code",
         "create",
         "see",
         "hooks",
@@ -896,7 +896,7 @@
         "lsp",
         "file"
       ],
-      "word_count": 2914,
+      "word_count": 2951,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1159,8 +1159,8 @@
         "code",
         "through",
         "aws",
-        "enterprise",
         "tab",
+        "enterprise",
         "proxy",
         "environment",
         "configuration",
@@ -1168,15 +1168,15 @@
         "more",
         "llm",
         "variables",
-        "div",
         "teams",
         "default",
         "corporate",
         "traffic",
         "learn",
-        "organization"
+        "organizations",
+        "team"
       ],
-      "word_count": 1559,
+      "word_count": 1278,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -1260,7 +1260,7 @@
         "specific",
         "tasks"
       ],
-      "word_count": 5716,
+      "word_count": 5719,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__best-practices.md"
     },
     "/docs/en/agents-and-tools/agent-skills/enterprise": {
@@ -1316,7 +1316,7 @@
         "capabilities",
         "when"
       ],
-      "word_count": 2448,
+      "word_count": 2449,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__overview.md"
     },
     "/docs/en/agents-and-tools/agent-skills/quickstart": {
@@ -1662,25 +1662,25 @@
         "advisor",
         "executor",
         "claude",
-        "model",
         "opus",
+        "call",
+        "model",
         "tool",
         "output",
         "when",
-        "call",
         "calls",
-        "cap",
         "prompt",
-        "cost",
-        "conversation",
-        "tokens",
-        "request",
         "tasks",
-        "level",
         "block",
-        "set"
+        "cap",
+        "cost",
+        "turn",
+        "conversation",
+        "haiku",
+        "tokens",
+        "coding"
       ],
-      "word_count": 4148,
+      "word_count": 5549,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1708,7 +1708,7 @@
         "access",
         "using"
       ],
-      "word_count": 1935,
+      "word_count": 1936,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__bash-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5630,
+      "word_count": 5655,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1960,7 +1960,7 @@
         "files",
         "long"
       ],
-      "word_count": 2780,
+      "word_count": 2782,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2044,7 +2044,7 @@
         "field",
         "before"
       ],
-      "word_count": 5367,
+      "word_count": 5379,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2240,7 +2240,7 @@
         "format",
         "title"
       ],
-      "word_count": 3019,
+      "word_count": 3025,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -2277,26 +2277,26 @@
       "keywords": [
         "tool",
         "tools",
+        "calls",
         "fix",
         "claude",
-        "calls",
-        "symptom",
-        "cause",
         "schema",
+        "symptom",
         "card",
-        "likely",
-        "see",
+        "cause",
         "add",
         "message",
-        "model",
+        "request",
+        "likely",
+        "see",
         "parallel",
         "one",
-        "request",
-        "instructions",
         "errors",
-        "when"
+        "when",
+        "define",
+        "never"
       ],
-      "word_count": 715,
+      "word_count": 791,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__troubleshooting-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -2324,7 +2324,7 @@
         "only",
         "data"
       ],
-      "word_count": 2674,
+      "word_count": 2680,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2352,7 +2352,7 @@
         "see",
         "token"
       ],
-      "word_count": 2490,
+      "word_count": 2496,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -41281,14 +41281,14 @@
         "sonnet",
         "fable",
         "output",
+        "default",
         "only",
         "field",
         "note",
         "preview",
-        "default",
         "see"
       ],
-      "word_count": 4669,
+      "word_count": 4702,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -41652,7 +41652,7 @@
         "when",
         "more"
       ],
-      "word_count": 2270,
+      "word_count": 2271,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
@@ -41661,26 +41661,26 @@
       "keywords": [
         "thinking",
         "claude",
-        "blocks",
-        "opus",
-        "when",
-        "tool",
         "extended",
-        "models",
-        "tokens",
-        "sonnet",
-        "api",
+        "blocks",
+        "when",
+        "opus",
+        "tool",
         "note",
-        "context",
+        "api",
         "turn",
-        "model",
         "response",
+        "model",
+        "models",
+        "see",
+        "tokens",
+        "streaming",
+        "reasoning",
         "adaptive",
-        "default",
-        "request",
-        "interleaved"
+        "mythos",
+        "summarized"
       ],
-      "word_count": 14879,
+      "word_count": 14951,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -41690,12 +41690,12 @@
         "retry",
         "token",
         "request",
+        "when",
         "title",
         "fallback",
         "refused",
         "header",
         "section",
-        "when",
         "claude",
         "model",
         "body",
@@ -41704,11 +41704,11 @@
         "shape",
         "refusal",
         "server",
+        "rejected",
         "cache",
-        "must",
-        "beta"
+        "must"
       ],
-      "word_count": 3769,
+      "word_count": 3797,
       "file_path": "docs/docs__en__build-with-claude__fallback-credit.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -41885,26 +41885,26 @@
       "keywords": [
         "claude",
         "zdr",
-        "eligible",
         "platformavailability",
+        "eligible",
         "azureaibeta",
         "claudeapi",
         "claudeplatformaws",
+        "api",
         "bedrock",
         "vertexai",
-        "api",
         "tool",
         "feature",
+        "model",
         "tools",
         "context",
         "availability",
         "web",
+        "when",
         "opus",
-        "model",
-        "search",
-        "features"
+        "claudeapibeta"
       ],
-      "word_count": 1656,
+      "word_count": 1778,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -41973,22 +41973,22 @@
         "refusal",
         "retry",
         "block",
+        "when",
         "middleware",
         "claude",
-        "when",
         "response",
-        "output",
         "side",
+        "output",
         "server",
         "note",
         "requests",
         "any",
         "one",
-        "entry",
         "attempt",
+        "credit",
         "api"
       ],
-      "word_count": 4598,
+      "word_count": 4669,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -42100,7 +42100,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10236,
+      "word_count": 10248,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -42335,24 +42335,24 @@
         "claude",
         "api",
         "zdr",
-        "hipaa",
         "data",
+        "hipaa",
         "yes",
         "features",
         "retention",
         "tool",
         "section",
         "anthropic",
+        "organization",
         "status",
         "readiness",
-        "organization",
         "see",
         "code",
         "title",
         "sup",
         "phi"
       ],
-      "word_count": 3071,
+      "word_count": 3139,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -42548,7 +42548,7 @@
         "codegroup",
         "through"
       ],
-      "word_count": 1304,
+      "word_count": 1305,
       "file_path": "docs/docs__en__manage-claude__compliance-activity-feed.md"
     },
     "/docs/en/manage-claude/compliance-api-access": {
@@ -42716,7 +42716,7 @@
         "pass",
         "each"
       ],
-      "word_count": 1430,
+      "word_count": 1431,
       "file_path": "docs/docs__en__manage-claude__compliance-integration-patterns.md"
     },
     "/docs/en/manage-claude/compliance-org-data": {
@@ -43024,7 +43024,7 @@
         "every",
         "agent"
       ],
-      "word_count": 3124,
+      "word_count": 3127,
       "file_path": "docs/docs__en__manage-claude__wif-providers__spiffe.md"
     },
     "/docs/en/manage-claude/wif-reference": {
@@ -43640,7 +43640,7 @@
         "execution",
         "when"
       ],
-      "word_count": 4505,
+      "word_count": 4510,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
@@ -43780,7 +43780,7 @@
         "note",
         "api"
       ],
-      "word_count": 3116,
+      "word_count": 3107,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {

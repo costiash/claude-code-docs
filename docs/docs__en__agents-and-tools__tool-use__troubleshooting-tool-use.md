@@ -43,6 +43,12 @@ Symptom-to-fix tables for the most common tool-use errors. Each fix cross-refere
 | `Input schema is not compatible with strict mode: string patterns are not supported` | Using `pattern` with `strict: true` | Remove the pattern or drop `strict: true`. The `pattern` keyword is not in the supported JSON Schema subset yet. |
 | `All tools have defer_loading: true` | No tools visible to the model | At least one tool must be immediately loaded. The tool search tool itself must never have `defer_loading: true`. |
 
+## Error: thinking blocks cannot be modified
+
+If a request fails with a 400 `invalid_request_error` whose message contains `` `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified `` when continuing a conversation after a tool call, your application is altering the assistant's thinking blocks before sending them back. Send the entire assistant message back unchanged, then append your `tool_result`.
+
+See [Thinking blocks cannot be modified](/docs/en/api/errors#thinking-blocks-cannot-be-modified) for the full error and fix steps.
+
 ## Claude flags tool results as prompt injection
 
 | Symptom | Likely cause | Fix |

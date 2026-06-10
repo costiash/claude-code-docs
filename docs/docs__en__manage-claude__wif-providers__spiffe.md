@@ -45,7 +45,7 @@ The trust domain and the issuer URL are independent. The trust domain (`spiffe:/
 
 Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime; SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](#run-spiffe-helper)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum (1 hour by default; see [Validation rules](/docs/en/manage-claude/wif-reference#validation-rules)). This check applies to every SPIFFE implementation, not just SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
 
-```text server.conf
+```text server.conf nowrap
 server {
     trust_domain         = "prod.example.com"
     jwt_issuer           = "https://oidc-discovery.prod.example.com"
@@ -56,7 +56,7 @@ server {
 
 In the OIDC Discovery Provider's configuration, the same hostname must appear under `domains`, and the provider must be able to reach SPIRE Server's API socket. The provider serves the discovery document and JWKS over HTTPS; terminate TLS with its built-in ACME support or front it with a load balancer that does.
 
-```text oidc-discovery-provider.conf
+```text oidc-discovery-provider.conf nowrap
 domains = ["oidc-discovery.prod.example.com"]
 
 server_api {
@@ -95,7 +95,7 @@ Workloads outside Kubernetes use host-level selectors such as `unix:uid:1000` (`
 
 [spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the example below sets `daemon_mode = true` explicitly.
 
-```text helper.conf
+```text helper.conf nowrap
 agent_address = "/run/spire/sockets/agent.sock"
 cert_dir      = "/var/run/secrets/anthropic.com"
 daemon_mode   = true

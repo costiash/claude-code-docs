@@ -257,7 +257,7 @@ Restart the session:
 
 Claude can chain commands to complete complex tasks:
 
-```text
+```text nowrap
 User request:
 "Install the requests library and create a simple Python script that
 fetches a joke from an API, then run it."

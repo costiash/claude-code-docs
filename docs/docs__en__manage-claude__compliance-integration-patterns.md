@@ -73,7 +73,7 @@ Page through until `has_more` is `false`, then persist `first_id` from the final
 
 A production **catch-up** loop fetches activities recorded since your last poll by driving iteration off `has_more` and `first_id`:
 
-```text
+```text nowrap
 cursor = stored_cursor
 loop:
   page = GET /v1/compliance/activities?before_id={cursor}&limit=5000

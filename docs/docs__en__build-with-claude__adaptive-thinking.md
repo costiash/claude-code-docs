@@ -867,7 +867,14 @@ The `signature` field is identical whether `display` is `"summarized"` or `"omit
 </Note>
 
 <Note>
-On Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7, `thinking.display` defaults to `"omitted"`. Thinking blocks still appear in the response stream, but their `thinking` field is empty unless you explicitly opt in. This is a silent change from Claude Opus 4.6, where the default was `"summarized"`. `display` controls visibility only: thinking happens and is billed the same under every setting. To receive summarized thinking text on these models, set `thinking.display` to `"summarized"` explicitly:
+The `display` setting controls visibility only. Under every setting, thinking happens and is billed the same.
+
+The default for `thinking.display` depends on the model:
+
+- **Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing):** the default is `"omitted"`. Thinking blocks still appear in the response stream, but their `thinking` field is empty unless you explicitly opt in. This is a silent change from Claude Opus 4.6, where the default was `"summarized"`.
+- **Claude Opus 4.6:** the default is `"summarized"`. The readable summary appears without opting in.
+
+To receive summarized thinking text on models where the default is `"omitted"`, set `thinking.display` to `"summarized"` explicitly:
 
 ```python
 thinking = {
@@ -901,13 +908,23 @@ Here are some important considerations on thinking encryption:
 
 ### Thinking output on Claude Fable 5 and Claude Mythos 5 \{#thinking-output-on-claude-fable-5-and-claude-mythos-5}
 
-On Claude Fable 5 and Claude Mythos 5, the raw chain of thought is never returned. The thinking blocks you receive are regular `thinking` blocks, not `redacted_thinking`, and `thinking.display` works the same as on other models: `"summarized"` returns a readable summary of the reasoning, and with `"omitted"` (the default on these models), responses still include `thinking` blocks, but the `thinking` field is an empty string. For the response shape of thinking blocks, see the [Messages API reference](/docs/en/api/messages/create).
+On Claude Fable 5 and Claude Mythos 5, the raw chain of thought is never returned. The thinking blocks you receive are regular `thinking` blocks, not `redacted_thinking`. The `thinking.display` setting works the same as on other models:
+
+- `"summarized"` returns a readable summary of the reasoning.
+- `"omitted"` (the default on these models) still includes `thinking` blocks in responses, but their `thinking` field is an empty string.
+
+For the response shape of thinking blocks, see the [Messages API reference](/docs/en/api/messages/create).
 
 When continuing a conversation on the same model, pass each thinking block back to the API exactly as received, including blocks whose `thinking` field is empty. Don't edit or reconstruct them. Reading the summary text for display is fine: the API rejects blocks whose content has been modified, not blocks you have read.
 
-Thinking blocks are tied to the model that produced them. Other models silently ignore them rather than rejecting the request, but ignored blocks still add input tokens, so when you switch models, for example after a [classifier refusal fallback](/docs/en/build-with-claude/refusals-and-fallback), strip `thinking` and `redacted_thinking` blocks from prior assistant turns. The exceptions, covered in [Fallback credit](/docs/en/build-with-claude/fallback-credit), are fallback-credit retries (which must echo the refused request body unchanged) and `fallback` blocks from a mid-output fallback (which stay where they appeared).
+When you switch models, for example after a [classifier refusal fallback](/docs/en/build-with-claude/refusals-and-fallback), strip `thinking` and `redacted_thinking` blocks from prior assistant turns. Thinking blocks are tied to the model that produced them. Other models silently ignore them rather than rejecting the request, but ignored blocks still add input tokens.
 
-On Claude Fable 5, a request that attempts to elicit the model's internal reasoning as part of the response text can be refused with `stop_details.category: "reasoning_extraction"`. Applications that need reasoning visibility should read the `thinking` blocks described in this section rather than prompting for reasoning in the response. See [Refusal categories](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the field reference and handling guidance.
+Two exceptions, covered in [Fallback credit](/docs/en/build-with-claude/fallback-credit):
+
+- Fallback-credit retries must echo the refused request body unchanged.
+- `fallback` blocks from a mid-output fallback stay where they appeared.
+
+To get visibility into the model's reasoning, read the `thinking` blocks described in this section rather than prompting for reasoning in the response text. On Claude Fable 5, a request that attempts to elicit the model's internal reasoning as part of the response text can be refused with `stop_details.category: "reasoning_extraction"`. See [Refusal categories](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the field reference and handling guidance.
 
 ### Pricing
 

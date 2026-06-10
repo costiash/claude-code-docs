@@ -8,7 +8,12 @@ Claude Fable 5 includes safety classifiers that can decline a request. When that
 
 Read this page when you build on Claude Fable 5 and want declined requests to fall through to another model automatically. It also applies when you have just seen `"refusal"` in a response and want to know what to do next.
 
-The full list of `stop_reason` values is on [Stop reasons and fallback](/docs/en/build-with-claude/handling-stop-reasons). Details on how refused requests are billed, and how to avoid paying twice for prompt caching on a retry, are on [Fallback credit](/docs/en/build-with-claude/fallback-credit). The SDK helper that wraps all of this is on [SDK middleware](/docs/en/cli-sdks-libraries/middleware). For a worked end-to-end example, see the [Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide).
+Related pages:
+
+- [Stop reasons and fallback](/docs/en/build-with-claude/handling-stop-reasons): the full list of `stop_reason` values.
+- [Fallback credit](/docs/en/build-with-claude/fallback-credit): how refused requests are billed, and how to avoid paying twice for prompt caching on a retry.
+- [SDK middleware](/docs/en/cli-sdks-libraries/middleware): the SDK helper that wraps all of this.
+- [Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide): a worked end-to-end example.
 
 The simplest setup: name a fallback model on the request, and the API handles the retry.
 
@@ -48,18 +53,24 @@ A refusal is a successful HTTP 200 response with `stop_reason: "refusal"`:
 }
 ```
 
-The `stop_details` object explains the decline. Its `category` field names the policy area that triggered the classifier. Its `explanation` field is a human-readable description; the text is not stable, so display it rather than parse it. Both fields are `null` when the refusal does not map to a named category, and `null` is a normal, permanent value rather than a placeholder. `stop_details` itself is `null` for every stop reason other than `refusal`.
+The `stop_details` object explains the decline:
+
+- **`category`:** names the policy area that triggered the classifier.
+- **`explanation`:** a human-readable description. The text is not stable, so display it rather than parse it.
+- Both fields are `null` when the refusal does not map to a named category. That `null` is a normal, permanent value, not a placeholder.
+- `stop_details` itself is `null` for every stop reason other than `refusal`.
 
 | `category` | What it means |
 | :--- | :--- |
 | `"cyber"` | The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category. |
 | `"bio"` | The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category. |
+| `"frontier_llm"` | The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category. |
 | `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking). |
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
 
 <Note>
-**How refusals are billed:** A refusal before any output leaves `content` empty, and you are not billed (token counts appear in `usage` but are not charged, and the request does not count against rate limits). A mid-stream refusal bills the input tokens and the output already streamed at normal rates.
+**How refusals are billed:** You are not billed for a refusal that arrives before any output. `content` is empty, token counts appear in `usage` but are not charged, and the request does not count against rate limits. A mid-stream refusal bills the input tokens and the output already streamed at normal rates.
 </Note>
 
 ## Picking a fallback approach
@@ -72,7 +83,7 @@ There are three ways to retry a refused request on another model. The right one 
 | Any platform, with the TypeScript, Python, Go, Java, or C# SDK | [The SDK middleware](#client-side-fallback) | Configure once on the client. Retries happen automatically. |
 | Ruby, PHP, raw HTTP, or custom retry logic | Manual retry with [fallback credit](/docs/en/build-with-claude/fallback-credit) | Full control. Fallback credit keeps the cost down. |
 
-Server-side fallback and the SDK middleware apply fallback credit for you, so you only need that page when building the retry yourself.
+Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](/docs/en/build-with-claude/fallback-credit) page when you build the retry yourself.
 
 ## Server-side fallback \{#server-side-fallback}
 
@@ -389,7 +400,9 @@ The beta header must carry exactly the date `2026-06-01`. Under any other `serve
 The response looks like any other message, with two additions:
 
 - The top-level `model` field reports the model that produced the returned message, whether that is the requested model or a fallback.
-- A `fallback` content block marks each point in `content` where one model's output gives way to the next: `{"type": "fallback", "from": {"model": ...}, "to": {"model": ...}}`. `from.model` echoes the model string you sent when the declining hop is the requested model. `to.model` is always the resolved ID of the model that continues.
+- A `fallback` content block marks each point in `content` where one model's output gives way to the next: `{"type": "fallback", "from": {"model": ...}, "to": {"model": ...}}`.
+  - `from.model` echoes the model string you sent when the declining hop is the requested model.
+  - `to.model` is always the resolved ID of the model that continues.
 
 On a refusal before any output, the `fallback` block is the first content block:
 
@@ -457,25 +470,52 @@ A `connector_text` block carries narration text that some tool-using responses i
 
 ### Streaming
 
-On a streaming request, the retry happens on the same stream, and nothing you have already received is invalidated. When the decline happens before any output, `message_start` names the fallback model and the `fallback` block is the first content block; because `message_start` waits for the fallback attempt to start, time to first byte includes the declined attempt. When the decline happens mid-output, the open content block closes, the `fallback` block (an ordinary `content_block_start` and `content_block_stop` pair with no deltas) marks the boundary, and the fallback model continues from the partial output. Only the partial output's `text` blocks are passed to the fallback model as context; other block types remain in `content`. In the mid-output case `message_start` already named the requested model, so read the serving model from the `fallback` block's `to.model` and from the `fallback_message` entry in the final `message_delta`'s `usage.iterations`.
+On a streaming request, the retry happens on the same stream, and nothing you have already received is invalidated. What you see depends on when the decline happens.
+
+**When the decline happens before any output:**
+
+- `message_start` names the fallback model, and the `fallback` block is the first content block.
+- Because `message_start` waits for the fallback attempt to start, time to first byte includes the declined attempt.
+
+**When the decline happens mid-output:**
+
+- The open content block closes, and the `fallback` block (an ordinary `content_block_start` and `content_block_stop` pair with no deltas) marks the boundary.
+- The fallback model continues from the partial output. Only the partial output's `text` blocks are passed to the fallback model as context; other block types remain in `content`.
+- `message_start` already named the requested model, so read the serving model from the `fallback` block's `to.model` and from the `fallback_message` entry in the final `message_delta`'s `usage.iterations`.
+
+### Non-streaming responses
 
 On a non-streaming request, a mid-output decline behaves differently: the response omits the declined model's partial output, and the fallback model answers from scratch. The result looks like a decline before any output, with the `fallback` block first. The declined attempt and its output tokens still appear in `usage.iterations`.
 
 <Note>
-When a decline fires after server tools (for example, web search or code execution) have already executed within a request, the API returns the refusal instead of advancing to a fallback model. If the `fallback-credit-2026-06-01` header is also set, that refusal carries a credit token redeemable by continuing the partial response, so the completed tool work is not lost. This applies only to server tools iterating within a single request; conversations that use client-side tools fall back normally.
+**Declines after server tools run:** when a decline fires after server tools (for example, web search or code execution) have already executed within a request, the API returns the refusal instead of advancing to a fallback model. If the `fallback-credit-2026-06-01` header is also set, that refusal carries a credit token redeemable by continuing the partial response, so the completed tool work is not lost. This applies only to server tools iterating within a single request. Conversations that use client-side tools fall back normally.
 </Note>
 
 <section title="Sticky routing">
 
-Once a conversation has fallen back, later requests for that conversation that include `fallbacks` are served directly by the fallback model that served before, without running the requested model. This avoids paying for an attempt that would predictably be declined again on every turn. The routing decision is retained for approximately one hour, is scoped to your organization, and is stored as a content hash of the conversation prefix plus the model that served it; the message content itself is not stored. The decision is also best-effort, so your code must handle the requested model being tried again at any time. A sticky-served turn carries no `fallback` content block, because no model declined that turn; identify it by the `fallback_message` entry in `usage.iterations`, the absence of a `message` entry for the requested model, and the response's `model` field. In the current release, sticky routing applies only to non-streaming requests, although a streaming request that falls back still records the decision for later non-streaming turns.
+After a conversation falls back, the API records which model served it. Later requests for that conversation that include `fallbacks` go directly to that fallback model, without running the requested model. This avoids paying for an attempt that would predictably be declined again on every turn.
+
+A few properties of the routing decision:
+
+- It is retained for approximately one hour and is scoped to your organization.
+- It is stored as a content hash of the conversation prefix plus the model that served it. The message content itself is not stored.
+- It is best-effort, so your code must handle the requested model being tried again at any time.
+
+A sticky-served turn carries no `fallback` content block, because no model declined that turn. Identify it by the `fallback_message` entry in `usage.iterations`, the absence of a `message` entry for the requested model, and the response's `model` field.
+
+In the current release, sticky routing applies only to non-streaming requests. A streaming request that falls back still records the decision for later non-streaming turns.
 
 </section>
 
 <section title="How server-side fallback is billed">
 
-You pay for the model that actually serves the request. Each attempt is billed separately, at the rates of the model that ran it, and the `usage.iterations` array is the per-attempt record of what you are billed. The top-level `usage` counts describe only the attempt that produced the returned message; tokens from different models are never summed into one field. An attempt that declined before producing output costs nothing and consumes no rate limits.
+You pay for the model that actually serves the request. An attempt that declined before producing output costs nothing and consumes no rate limits.
 
-Each attempt that runs counts against its own model's rate limits. If the fallback model is rate limited or overloaded, the fallback attempt is not made: the preceding refusal is returned instead, and `stop_details.recommended_model` names a model to retry directly. The recommendation is a hint, not a guarantee, and it is `null` when no recommendation is available. Size the fallback model's rate limits for the refusal volume you expect, or fallbacks degrade to refusals under load.
+Each attempt is billed separately, at the rates of the model that ran it. The `usage.iterations` array is the per-attempt record of what you are billed. The top-level `usage` counts describe only the attempt that produced the returned message; tokens from different models are never summed into one field.
+
+Each attempt that runs counts against its own model's rate limits. If the fallback model is rate limited or overloaded, the fallback attempt is not made and the preceding refusal is returned instead. Size the fallback model's rate limits for the refusal volume you expect, or fallbacks degrade to refusals under load.
+
+When a fallback attempt is skipped this way, `stop_details.recommended_model` names a model to retry directly. The recommendation is a hint, not a guarantee, and it is `null` when no recommendation is available.
 
 </section>
 
@@ -790,7 +830,10 @@ On Ruby, PHP, or raw HTTP, implement the pattern the middleware wraps:
     Check the response for `stop_reason: "refusal"`.
   </Step>
   <Step title="Re-send on a fallback model">
-    Send the same request with `model` set to a fallback model, such as Claude Opus 4.8. A request that Claude Fable 5's classifiers decline can normally be served by another model. If you are not redeeming a fallback credit, you can first strip the [thinking blocks from Claude Fable 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) out of the conversation history; other models ignore them, and stripping keeps cross-model requests minimal. If you are redeeming a credit, send the body unchanged, because redemption requires an exact match.
+    Send the same request with `model` set to a fallback model, such as Claude Opus 4.8. A request that Claude Fable 5's classifiers decline can normally be served by another model. How you handle the conversation history depends on whether you redeem a [fallback credit](/docs/en/build-with-claude/fallback-credit):
+
+    - **Not redeeming a credit:** you can first strip the [thinking blocks from Claude Fable 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) out of the conversation history. Other models ignore them, and stripping keeps cross-model requests minimal.
+    - **Redeeming a credit:** send the body unchanged, because redemption requires an exact match.
   </Step>
   <Step title="Stay on the fallback model">
     For multi-turn conversations, keep using the fallback model for subsequent turns rather than switching back.
