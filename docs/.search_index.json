@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-10T19:33:21Z",
+  "generated_at": "2026-06-10T22:17:32Z",
   "indexed_files": 1641,
   "index": {
     "/changelog": {
@@ -25,10 +25,10 @@
         "prompt",
         "background",
         "command",
-        "commands",
-        "terminal"
+        "terminal",
+        "commands"
       ],
-      "word_count": 54489,
+      "word_count": 55102,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
