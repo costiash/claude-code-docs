@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-09T22:12:40Z",
+  "generated_at": "2026-06-10T01:34:41Z",
   "indexed_files": 1641,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "commands",
         "terminal"
       ],
-      "word_count": 54449,
+      "word_count": 54489,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -154,21 +154,21 @@
         "see",
         "settings",
         "sessions",
+        "code",
         "only",
         "default",
-        "code",
+        "model",
         "file",
         "background",
         "interactive",
         "print",
-        "model",
         "mcp",
         "available",
         "flag",
         "start",
         "output"
       ],
-      "word_count": 3312,
+      "word_count": 3364,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -248,11 +248,11 @@
         "opt",
         "see",
         "using",
+        "feedback",
         "set",
-        "including",
-        "model"
+        "including"
       ],
-      "word_count": 1917,
+      "word_count": 1944,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -261,11 +261,11 @@
       "keywords": [
         "claude",
         "code",
+        "mode",
         "session",
-        "auto",
         "file",
         "desktop",
-        "mode",
+        "auto",
         "app",
         "changes",
         "windows",
@@ -280,7 +280,7 @@
         "see",
         "terminal"
       ],
-      "word_count": 8562,
+      "word_count": 8626,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -455,8 +455,8 @@
       "title": "Hooks reference",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Hooks reference...",
       "keywords": [
-        "hooks",
         "hook",
+        "hooks",
         "claude",
         "when",
         "tool",
@@ -467,8 +467,8 @@
         "fields",
         "only",
         "session",
-        "runs",
         "command",
+        "runs",
         "file",
         "event",
         "output",
@@ -476,7 +476,7 @@
         "user",
         "control"
       ],
-      "word_count": 21832,
+      "word_count": 21868,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -569,18 +569,18 @@
       "keywords": [
         "claude",
         "code",
-        "api",
         "gateway",
+        "api",
         "litellm",
-        "request",
         "through",
+        "request",
         "model",
         "endpoint",
+        "configuration",
         "headers",
         "key",
         "format",
         "anthropic",
-        "configuration",
         "when",
         "using",
         "pass",
@@ -588,7 +588,7 @@
         "must",
         "body"
       ],
-      "word_count": 1108,
+      "word_count": 1154,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -616,7 +616,7 @@
         "variable",
         "set"
       ],
-      "word_count": 6780,
+      "word_count": 6798,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -700,7 +700,7 @@
         "thinking",
         "which"
       ],
-      "word_count": 5182,
+      "word_count": 5207,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -812,7 +812,7 @@
         "web",
         "build"
       ],
-      "word_count": 1896,
+      "word_count": 1736,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "terminal",
         "command"
       ],
-      "word_count": 1539,
+      "word_count": 1489,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -999,8 +999,8 @@
         "acme",
         "see",
         "project",
-        "set",
         "when",
+        "set",
         "corp",
         "tools",
         "github",
@@ -1008,7 +1008,7 @@
         "user",
         "repo"
       ],
-      "word_count": 11308,
+      "word_count": 11359,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1036,7 +1036,7 @@
         "settings",
         "native"
       ],
-      "word_count": 3384,
+      "word_count": 3179,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -42339,9 +42339,9 @@
         "data",
         "yes",
         "features",
+        "retention",
         "tool",
         "section",
-        "retention",
         "anthropic",
         "status",
         "readiness",
@@ -42352,7 +42352,7 @@
         "sup",
         "phi"
       ],
-      "word_count": 3061,
+      "word_count": 3071,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -42420,8 +42420,8 @@
         "step",
         "kms",
         "policy",
-        "account",
         "aws",
+        "account",
         "encryption",
         "frame",
         "cmek",
@@ -42434,9 +42434,9 @@
         "encrypt",
         "decrypt",
         "compartment",
-        "data"
+        "through"
       ],
-      "word_count": 1126,
+      "word_count": 1155,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
@@ -42501,26 +42501,26 @@
       "keywords": [
         "key",
         "cmek",
-        "data",
         "anthropic",
+        "data",
         "kms",
+        "claude",
+        "encryption",
         "aws",
         "cloud",
-        "encryption",
         "keys",
-        "claude",
+        "service",
         "managed",
         "workspace",
         "azure",
-        "enabled",
-        "card",
-        "rest",
         "google",
         "vault",
-        "only",
-        "encrypted"
+        "enabled",
+        "under",
+        "api",
+        "management"
       ],
-      "word_count": 998,
+      "word_count": 1272,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
