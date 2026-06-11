@@ -28,7 +28,7 @@ At a high level you need to:
 1. Create an Okta service application.
 2. Configure your default authorization server (or create a new custom authorization server) with an audience, a scope, an access policy, and any custom claims you want to match on.
 
-The exact navigation depends on your Okta org configuration and admin console version. The numbered steps below walk through one common path:
+The exact navigation depends on your Okta org configuration and admin console version. The following numbered steps walk through one common path:
 
 1. **Create a service app integration.** In the Okta Admin Console, create a new app integration of type **API Services** (OIDC, machine-to-machine). Note the generated **Client ID**.
 2. **Configure client authentication.** For a keyless setup, choose **Public key / Private key** (`private_key_jwt`) and register your workload's public JWK. Alternatively, use a client secret if your environment can store one securely. For the following example you may need to disable the DPoP requirement on the application; ensure that your production setup adheres to your organization's security requirements.
@@ -41,7 +41,9 @@ For a service app using `client_credentials`, Okta sets the `sub` claim of the i
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these Okta-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select **Custom OIDC**. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
 
 **Federation issuer:** Use your Okta custom authorization server URL and discovery mode. Anthropic reads Okta's `.well-known/openid-configuration` discovery document and fetches the JWKS from the `jwks_uri` it advertises.
 
@@ -49,7 +51,7 @@ Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federati
 {
   "name": "okta-prod",
   "issuer_url": "https://acme.okta.com/oauth2/aus1a2b3c4d5e6f7g8h9",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 

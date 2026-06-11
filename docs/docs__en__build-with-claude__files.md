@@ -738,7 +738,7 @@ const anthropic = new Anthropic();
 const files = await anthropic.beta.files.list();
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Threading.Tasks;
 using Anthropic;

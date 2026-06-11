@@ -164,27 +164,29 @@ const response = await anthropic.beta.messages.create({
 });
 ```
 
-```csharp C# nocheck
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
 AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-4-8",
+    Model = Messages::Model.ClaudeOpus4_8,
     MaxTokens = 4096,
     Messages = [
         new() { Role = Role.User, Content = "Search for recent developments in AI" }
     ],
     Tools = [
-        new() { Type = "web_search_20250305", Name = "web_search" }
+        new BetaWebSearchTool20250305()
     ],
-    ContextManagement = new BetaContextManagementConfig()
+    ContextManagement = new BetaContextManagementConfig
     {
         Edits = [new BetaClearToolUses20250919Edit()]
     },
-    Betas = ["context-management-2025-06-27"]
+    Betas = [AnthropicBeta.ContextManagement2025_06_27]
 };
 
 var response = await client.Beta.Messages.Create(parameters);
@@ -230,7 +232,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..4,9..12,-2..}
+```java Java hidelines={1..4,9..10}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -241,24 +243,22 @@ import com.anthropic.models.beta.messages.BetaClearToolUses20250919Edit;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class WebSearchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(4096L)
-            .addUserMessage("Search for recent developments in AI")
-            .addTool(BetaWebSearchTool20250305.builder().build())
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearToolUses20250919Edit.builder().build())
-                .build())
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Search for recent developments in AI")
+        .addTool(BetaWebSearchTool20250305.builder().build())
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearToolUses20250919Edit.builder().build())
+            .build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -495,80 +495,42 @@ const response = await anthropic.beta.messages.create({
 });
 ```
 
-```csharp C# nocheck
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 4096,
+    Messages = [
+        new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
+    ],
+    Tools = [
+        new BetaToolTextEditor20250728 { MaxCharacters = 10000 },
+        new BetaWebSearchTool20250305 { MaxUses = 3 }
+    ],
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = "claude-opus-4-8",
-            MaxTokens = 4096,
-            Messages = new List<BetaMessageParam>
+        Edits = [
+            new BetaClearToolUses20250919Edit
             {
-                new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
-            },
-            Tools = new List<object>
-            {
-                new Dictionary<string, object>
-                {
-                    { "type", "text_editor_20250728" },
-                    { "name", "str_replace_based_edit_tool" },
-                    { "max_characters", 10000 }
-                },
-                new Dictionary<string, object>
-                {
-                    { "type", "web_search_20250305" },
-                    { "name", "web_search" },
-                    { "max_uses", 3 }
-                }
-            },
-            Betas = new List<string> { "context-management-2025-06-27" },
-            ContextManagement = new Dictionary<string, object>
-            {
-                {
-                    "edits", new List<object>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "type", "clear_tool_uses_20250919" },
-                            { "trigger", new Dictionary<string, object>
-                                {
-                                    { "type", "input_tokens" },
-                                    { "value", 30000 }
-                                }
-                            },
-                            { "keep", new Dictionary<string, object>
-                                {
-                                    { "type", "tool_uses" },
-                                    { "value", 3 }
-                                }
-                            },
-                            { "clear_at_least", new Dictionary<string, object>
-                                {
-                                    { "type", "input_tokens" },
-                                    { "value", 5000 }
-                                }
-                            },
-                            { "exclude_tools", new List<string> { "web_search" } }
-                        }
-                    }
-                }
+                Trigger = new BetaInputTokensTrigger(30000),
+                Keep = new BetaToolUsesKeep(3),
+                ClearAtLeast = new BetaInputTokensClearAtLeast(5000),
+                ExcludeTools = ["web_search"]
             }
-        };
-
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
+        ]
     }
-}
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -626,7 +588,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..4,13..16,-2..}
+```java Java nocheck hidelines={1..4,13..14}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -641,40 +603,38 @@ import com.anthropic.models.beta.messages.BetaToolUsesKeep;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class ContextManagementExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(4096L)
-            .addUserMessage("Create a simple command line calculator app using Python")
-            .addTool(BetaToolTextEditor20250728.builder()
-                .maxCharacters(10000L)
-                .build())
-            .addTool(BetaWebSearchTool20250305.builder()
-                .maxUses(3L)
-                .build())
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearToolUses20250919Edit.builder()
-                    .trigger(BetaInputTokensTrigger.builder()
-                        .value(30000L)
-                        .build())
-                    .keep(BetaToolUsesKeep.builder()
-                        .value(3L)
-                        .build())
-                    .clearAtLeast(BetaInputTokensClearAtLeast.builder()
-                        .value(5000L)
-                        .build())
-                    .addExcludeTool("web_search")
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Create a simple command line calculator app using Python")
+        .addTool(BetaToolTextEditor20250728.builder()
+            .maxCharacters(10000L)
+            .build())
+        .addTool(BetaWebSearchTool20250305.builder()
+            .maxUses(3L)
+            .build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearToolUses20250919Edit.builder()
+                .trigger(BetaInputTokensTrigger.builder()
+                    .value(30000L)
                     .build())
+                .keep(BetaToolUsesKeep.builder()
+                    .value(3L)
+                    .build())
+                .clearAtLeast(BetaInputTokensClearAtLeast.builder()
+                    .value(5000L)
+                    .build())
+                .addExcludeTool("web_search")
                 .build())
-            .build();
+            .build())
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -685,7 +645,7 @@ use Anthropic\Client;
 
 $client = new Client();
 
-$message = $client->beta->messages->create(
+$response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: [
         [
@@ -729,7 +689,7 @@ $message = $client->beta->messages->create(
     ],
 );
 
-echo $message;
+echo $response;
 ```
 
 ```ruby Ruby nocheck hidelines={1..2}
@@ -798,13 +758,10 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-8",
         "max_tokens": 16000,
         "messages": [{"role": "user", "content": "Hello"}],
-        "thinking": {
-            "type": "enabled",
-            "budget_tokens": 10000
-        },
+        "thinking": {"type": "adaptive"},
         "context_management": {
             "edits": [
                 {
@@ -821,14 +778,13 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-4-6
+model: claude-opus-4-8
 max_tokens: 16000
 messages:
   - role: user
     content: Hello
 thinking:
-  type: enabled
-  budget_tokens: 10000
+  type: adaptive
 context_management:
   edits:
     - type: clear_thinking_20251015
@@ -838,12 +794,12 @@ context_management:
 YAML
 ```
 
-```python Python nocheck
+```python Python
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=16000,
-    messages=[...],
-    thinking={"type": "enabled", "budget_tokens": 10000},
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -856,7 +812,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..2}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -864,15 +820,10 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 16000,
-  messages: [
-    // ...
-  ],
-  thinking: {
-    type: "enabled",
-    budget_tokens: 10000
-  },
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -888,51 +839,39 @@ const response = await anthropic.beta.messages.create({
 });
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 16000,
+    Messages = [
+        new() { Role = Role.User, Content = "Hello" }
+    ],
+    Thinking = new BetaThinkingConfigAdaptive(),
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = "claude-opus-4-6",
-            MaxTokens = 16000,
-            Messages = [],
-            Thinking = new BetaThinkingParam
+        Edits = [
+            new BetaClearThinking20251015Edit
             {
-                Type = "enabled",
-                BudgetTokens = 10000
-            },
-            Betas = ["context-management-2025-06-27"],
-            ContextManagement = new BetaContextManagementConfig()
-            {
-                Edits = [
-                    new BetaClearThinking20251015Edit()
-                    {
-                        Keep = new BetaThinkingTurnsKeep
-                        {
-                            Type = "thinking_turns",
-                            Value = 2
-                        }
-                    }
-                ]
+                Keep = new BetaThinkingTurns(2)
             }
-        };
-
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
+        ]
     }
-}
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
-```go Go nocheck hidelines={1..11,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -947,11 +886,13 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 16000,
-		Messages:  []anthropic.BetaMessageParam{},
-		Thinking:  anthropic.BetaThinkingConfigParamOfEnabled(10000),
-		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+		},
+		Thinking: anthropic.BetaThinkingConfigParamUnion{OfAdaptive: &anthropic.BetaThinkingConfigAdaptiveParam{}},
+		Betas:    []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
 		ContextManagement: anthropic.BetaContextManagementConfigParam{
 			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
 				{OfClearThinking20251015: &anthropic.BetaClearThinking20251015EditParam{
@@ -971,60 +912,56 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..4,10..13,-2..}
+```java Java hidelines={1..4,10..11}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;
+import com.anthropic.models.beta.messages.BetaThinkingConfigAdaptive;
 import com.anthropic.models.beta.messages.BetaContextManagementConfig;
 import com.anthropic.models.beta.messages.BetaClearThinking20251015Edit;
 import com.anthropic.models.beta.messages.BetaThinkingTurns;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class Main {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(16000L)
-            .thinking(BetaThinkingConfigEnabled.builder()
-                .budgetTokens(10000L)
-                .build())
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearThinking20251015Edit.builder()
-                    .keep(BetaThinkingTurns.builder()
-                        .value(2L)
-                        .build())
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(16000L)
+        .addUserMessage("Hello")
+        .thinking(BetaThinkingConfigAdaptive.builder().build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearThinking20251015Edit.builder()
+                .keep(BetaThinkingTurns.builder()
+                    .value(2L)
                     .build())
                 .build())
-            .build();
+            .build())
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
-```php PHP hidelines={1..4} nocheck
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
 $client = new Client();
 
-$message = $client->beta->messages->create(
+$response = $client->beta->messages->create(
     maxTokens: 16000,
-    messages: [/* ... */],
-    model: 'claude-opus-4-6',
-    betas: ['context-management-2025-06-27'],
-    thinking: [
-        'type' => 'enabled',
-        'budget_tokens' => 10000
+    messages: [
+        ['role' => 'user', 'content' => 'Hello']
     ],
+    model: 'claude-opus-4-8',
+    betas: ['context-management-2025-06-27'],
+    thinking: ['type' => 'adaptive'],
     contextManagement: [
         'edits' => [
             [
@@ -1038,23 +975,19 @@ $message = $client->beta->messages->create(
     ],
 );
 
-echo $message;
+echo $response;
 ```
 
 ```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
-messages = [{ role: "user", content: "Explain quantum computing in simple terms" }]
 
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 16000,
-  messages: messages,
-  thinking: {
-    type: "enabled",
-    budget_tokens: 10000
-  },
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -1085,24 +1018,503 @@ The `clear_thinking_20251015` strategy supports the following configuration:
 
 Keep thinking blocks from the last 3 assistant turns:
 
-```json
-{
-  "type": "clear_thinking_20251015",
-  "keep": {
-    "type": "thinking_turns",
-    "value": 3
+<CodeGroup>
+
+```bash cURL highlight={15..17}
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "anthropic-beta: context-management-2025-06-27" \
+    --data '{
+        "model": "claude-opus-4-8",
+        "max_tokens": 16000,
+        "messages": [{"role": "user", "content": "Hello"}],
+        "thinking": {"type": "adaptive"},
+        "context_management": {
+            "edits": [
+                {
+                    "type": "clear_thinking_20251015",
+                    "keep": {
+                        "type": "thinking_turns",
+                        "value": 3
+                    }
+                }
+            ]
+        }
+    }'
+```
+
+```bash CLI highlight={12..14}
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-8
+max_tokens: 16000
+messages:
+  - role: user
+    content: Hello
+thinking:
+  type: adaptive
+context_management:
+  edits:
+    - type: clear_thinking_20251015
+      keep:
+        type: thinking_turns
+        value: 3
+YAML
+```
+
+```python Python highlight={11}
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=16000,
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": {"type": "thinking_turns", "value": 3},
+            }
+        ]
+    },
+)
+```
+
+```typescript TypeScript hidelines={1..2} highlight={17..19}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY
+});
+
+const response = await anthropic.beta.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
+  betas: ["context-management-2025-06-27"],
+  context_management: {
+    edits: [
+      {
+        type: "clear_thinking_20251015",
+        keep: {
+          type: "thinking_turns",
+          value: 3
+        }
+      }
+    ]
   }
+});
+```
+
+```csharp C# highlight={22}
+using Anthropic;
+using Anthropic.Models.Beta;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 16000,
+    Messages = [
+        new() { Role = Role.User, Content = "Hello" }
+    ],
+    Thinking = new BetaThinkingConfigAdaptive(),
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
+    {
+        Edits = [
+            new BetaClearThinking20251015Edit
+            {
+                Keep = new BetaThinkingTurns(3)
+            }
+        ]
+    }
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
+```
+
+```go Go hidelines={1..11,-1} highlight={25..29}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 16000,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+		},
+		Thinking: anthropic.BetaThinkingConfigParamUnion{OfAdaptive: &anthropic.BetaThinkingConfigAdaptiveParam{}},
+		Betas:    []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
+		ContextManagement: anthropic.BetaContextManagementConfigParam{
+			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
+				{OfClearThinking20251015: &anthropic.BetaClearThinking20251015EditParam{
+					Keep: anthropic.BetaClearThinking20251015EditKeepUnionParam{
+						OfThinkingTurns: &anthropic.BetaThinkingTurnsParam{
+							Value: 3,
+						},
+					},
+				}},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
 }
 ```
+
+```java Java hidelines={1..12,-1} highlight={23..25}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaThinkingConfigAdaptive;
+import com.anthropic.models.beta.messages.BetaContextManagementConfig;
+import com.anthropic.models.beta.messages.BetaClearThinking20251015Edit;
+import com.anthropic.models.beta.messages.BetaThinkingTurns;
+import com.anthropic.models.beta.AnthropicBeta;
+import com.anthropic.models.messages.Model;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(16000L)
+        .addUserMessage("Hello")
+        .thinking(BetaThinkingConfigAdaptive.builder().build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearThinking20251015Edit.builder()
+                .keep(BetaThinkingTurns.builder()
+                    .value(3L)
+                    .build())
+                .build())
+            .build())
+        .build();
+
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP hidelines={1..4} highlight={19..22}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$response = $client->beta->messages->create(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => 'Hello']
+    ],
+    model: 'claude-opus-4-8',
+    betas: ['context-management-2025-06-27'],
+    thinking: ['type' => 'adaptive'],
+    contextManagement: [
+        'edits' => [
+            [
+                'type' => 'clear_thinking_20251015',
+                'keep' => [
+                    'type' => 'thinking_turns',
+                    'value' => 3
+                ]
+            ]
+        ]
+    ],
+);
+
+echo $response;
+```
+
+```ruby Ruby hidelines={1..2} highlight={15..17}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
+  betas: ["context-management-2025-06-27"],
+  context_management: {
+    edits: [
+      {
+        type: "clear_thinking_20251015",
+        keep: {
+          type: "thinking_turns",
+          value: 3
+        }
+      }
+    ]
+  }
+)
+puts response
+```
+
+</CodeGroup>
 
 Keep all thinking blocks (maximizes cache hits):
 
-```json
+<CodeGroup>
+
+```bash cURL highlight={15}
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "anthropic-beta: context-management-2025-06-27" \
+    --data '{
+        "model": "claude-opus-4-8",
+        "max_tokens": 16000,
+        "messages": [{"role": "user", "content": "Hello"}],
+        "thinking": {"type": "adaptive"},
+        "context_management": {
+            "edits": [
+                {
+                    "type": "clear_thinking_20251015",
+                    "keep": "all"
+                }
+            ]
+        }
+    }'
+```
+
+```bash CLI highlight={12}
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-8
+max_tokens: 16000
+messages:
+  - role: user
+    content: Hello
+thinking:
+  type: adaptive
+context_management:
+  edits:
+    - type: clear_thinking_20251015
+      keep: all
+YAML
+```
+
+```python Python highlight={11}
+response = client.beta.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=16000,
+    messages=[{"role": "user", "content": "Hello"}],
+    thinking={"type": "adaptive"},
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": "all",
+            }
+        ]
+    },
+)
+```
+
+```typescript TypeScript hidelines={1..2} highlight={17}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY
+});
+
+const response = await anthropic.beta.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
+  betas: ["context-management-2025-06-27"],
+  context_management: {
+    edits: [
+      {
+        type: "clear_thinking_20251015",
+        keep: "all"
+      }
+    ]
+  }
+});
+```
+
+```csharp C# highlight={22}
+using Anthropic;
+using Anthropic.Models.Beta;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-  "type": "clear_thinking_20251015",
-  "keep": "all"
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 16000,
+    Messages = [
+        new() { Role = Role.User, Content = "Hello" }
+    ],
+    Thinking = new BetaThinkingConfigAdaptive(),
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
+    {
+        Edits = [
+            new BetaClearThinking20251015Edit
+            {
+                Keep = new All()
+            }
+        ]
+    }
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
+```
+
+```go Go hidelines={1..12,-1} highlight={26..28}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/shared/constant"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 16000,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+		},
+		Thinking: anthropic.BetaThinkingConfigParamUnion{OfAdaptive: &anthropic.BetaThinkingConfigAdaptiveParam{}},
+		Betas:    []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
+		ContextManagement: anthropic.BetaContextManagementConfigParam{
+			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
+				{OfClearThinking20251015: &anthropic.BetaClearThinking20251015EditParam{
+					Keep: anthropic.BetaClearThinking20251015EditKeepUnionParam{
+						OfAll: constant.ValueOf[constant.All](),
+					},
+				}},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
 }
 ```
+
+```java Java hidelines={1..11,-1} highlight={22}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaThinkingConfigAdaptive;
+import com.anthropic.models.beta.messages.BetaContextManagementConfig;
+import com.anthropic.models.beta.messages.BetaClearThinking20251015Edit;
+import com.anthropic.models.beta.AnthropicBeta;
+import com.anthropic.models.messages.Model;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(16000L)
+        .addUserMessage("Hello")
+        .thinking(BetaThinkingConfigAdaptive.builder().build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearThinking20251015Edit.builder()
+                .keepAll()
+                .build())
+            .build())
+        .build();
+
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP hidelines={1..4} highlight={19}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$response = $client->beta->messages->create(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => 'Hello']
+    ],
+    model: 'claude-opus-4-8',
+    betas: ['context-management-2025-06-27'],
+    thinking: ['type' => 'adaptive'],
+    contextManagement: [
+        'edits' => [
+            [
+                'type' => 'clear_thinking_20251015',
+                'keep' => 'all'
+            ]
+        ]
+    ],
+);
+
+echo $response;
+```
+
+```ruby Ruby hidelines={1..2} highlight={15}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  messages: [{ role: "user", content: "Hello" }],
+  thinking: { type: "adaptive" },
+  betas: ["context-management-2025-06-27"],
+  context_management: {
+    edits: [
+      {
+        type: "clear_thinking_20251015",
+        keep: "all"
+      }
+    ]
+  }
+)
+puts response
+```
+
+</CodeGroup>
 
 ### Combining strategies
 
@@ -1114,19 +1526,67 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 
 <CodeGroup>
 
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "anthropic-beta: context-management-2025-06-27" \
+    --data '{
+        "model": "claude-opus-4-8",
+        "max_tokens": 16000,
+        "messages": [
+            {
+                "role": "user",
+                "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs."
+            }
+        ],
+        "thinking": {"type": "adaptive"},
+        "tools": [
+            {
+                "type": "web_search_20250305",
+                "name": "web_search",
+                "max_uses": 5
+            }
+        ],
+        "context_management": {
+            "edits": [
+                {
+                    "type": "clear_thinking_20251015",
+                    "keep": {
+                        "type": "thinking_turns",
+                        "value": 2
+                    }
+                },
+                {
+                    "type": "clear_tool_uses_20250919",
+                    "trigger": {
+                        "type": "input_tokens",
+                        "value": 50000
+                    },
+                    "keep": {
+                        "type": "tool_uses",
+                        "value": 5
+                    }
+                }
+            ]
+        }
+    }'
+```
+
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-4-6
+model: claude-opus-4-8
 max_tokens: 16000
-thinking:
-  type: enabled
-  budget_tokens: 10000
 messages:
   - role: user
-    content: Hello
+    content: Search for the latest developments in quantum error correction and summarize the key breakthroughs.
+thinking:
+  type: adaptive
 tools:
   - type: web_search_20250305
     name: web_search
+    max_uses: 5
 context_management:
   edits:
     - type: clear_thinking_20251015
@@ -1143,13 +1603,28 @@ context_management:
 YAML
 ```
 
-```python Python nocheck
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=16000,
-    messages=[...],
-    thinking={"type": "enabled", "budget_tokens": 10000},
-    tools=[...],
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs.",
+        }
+    ],
+    thinking={"type": "adaptive"},
+    tools=[
+        {
+            "type": "web_search_20250305",
+            "name": "web_search",
+            "max_uses": 5,
+        }
+    ],
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -1165,21 +1640,34 @@ response = client.beta.messages.create(
         ]
     },
 )
+
+print(response)
 ```
 
-```typescript TypeScript nocheck
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY
+});
+
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 16000,
   messages: [
-    // ...
+    {
+      role: "user",
+      content:
+        "Search for the latest developments in quantum error correction and summarize the key breakthroughs."
+    }
   ],
-  thinking: {
-    type: "enabled",
-    budget_tokens: 10000
-  },
+  thinking: { type: "adaptive" },
   tools: [
-    // ...
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 5
+    }
   ],
   betas: ["context-management-2025-06-27"],
   context_management: {
@@ -1205,65 +1693,51 @@ const response = await anthropic.beta.messages.create({
     ]
   }
 });
+
+console.log(response);
 ```
 
-```csharp C# nocheck
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-public class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    public static async Task Main(string[] args)
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 16000,
+    Messages = [
+        new() { Role = Role.User, Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
+    ],
+    Thinking = new BetaThinkingConfigAdaptive(),
+    Tools = [
+        new BetaWebSearchTool20250305 { MaxUses = 5 }
+    ],
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 16000,
-            Messages = [],
-            Thinking = new BetaThinkingParam
+        Edits = [
+            new BetaClearThinking20251015Edit
             {
-                Type = "enabled",
-                BudgetTokens = 10000
+                Keep = new BetaThinkingTurns(2)
             },
-            Tools = [],
-            Betas = ["context-management-2025-06-27"],
-            ContextManagement = new BetaContextManagementConfig()
+            new BetaClearToolUses20250919Edit
             {
-                Edits = [
-                    new BetaClearThinking20251015Edit()
-                    {
-                        Keep = new BetaThinkingTurnsKeep
-                        {
-                            Type = "thinking_turns",
-                            Value = 2
-                        }
-                    },
-                    new BetaClearToolUses20250919Edit()
-                    {
-                        Trigger = new BetaInputTokensTrigger
-                        {
-                            Type = "input_tokens",
-                            Value = 50000
-                        },
-                        Keep = new BetaToolUsesKeep
-                        {
-                            Type = "tool_uses",
-                            Value = 5
-                        }
-                    }
-                ]
+                Trigger = new BetaInputTokensTrigger(50000),
+                Keep = new BetaToolUsesKeep(5)
             }
-        };
-
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
+        ]
     }
-}
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
-```go Go nocheck hidelines={1..11,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1278,11 +1752,17 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 16000,
-		Messages:  []anthropic.BetaMessageParam{},
-		Thinking:  anthropic.BetaThinkingConfigParamOfEnabled(10000),
-		Tools:     []anthropic.BetaToolUnionParam{},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Search for the latest developments in quantum error correction and summarize the key breakthroughs.")),
+		},
+		Thinking: anthropic.BetaThinkingConfigParamUnion{OfAdaptive: &anthropic.BetaThinkingConfigAdaptiveParam{}},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfWebSearchTool20250305: &anthropic.BetaWebSearchTool20250305Param{
+				MaxUses: anthropic.Int(5),
+			}},
+		},
 		Betas: []anthropic.AnthropicBeta{
 			anthropic.AnthropicBetaContextManagement2025_06_27,
 		},
@@ -1315,12 +1795,13 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..4,13..16,-2..}
+```java Java hidelines={1..4,14..15}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;
+import com.anthropic.models.beta.messages.BetaThinkingConfigAdaptive;
+import com.anthropic.models.beta.messages.BetaWebSearchTool20250305;
 import com.anthropic.models.beta.messages.BetaContextManagementConfig;
 import com.anthropic.models.beta.messages.BetaClearThinking20251015Edit;
 import com.anthropic.models.beta.messages.BetaClearToolUses20250919Edit;
@@ -1330,54 +1811,65 @@ import com.anthropic.models.beta.messages.BetaToolUsesKeep;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class ContextManagementExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(16000L)
-            .thinking(BetaThinkingConfigEnabled.builder()
-                .budgetTokens(10000L)
-                .build())
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearThinking20251015Edit.builder()
-                    .keep(BetaThinkingTurns.builder()
-                        .value(2L)
-                        .build())
-                    .build())
-                .addEdit(BetaClearToolUses20250919Edit.builder()
-                    .trigger(BetaInputTokensTrigger.builder()
-                        .value(50000L)
-                        .build())
-                    .keep(BetaToolUsesKeep.builder()
-                        .value(5L)
-                        .build())
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(16000L)
+        .addUserMessage("Search for the latest developments in quantum error correction and summarize the key breakthroughs.")
+        .thinking(BetaThinkingConfigAdaptive.builder().build())
+        .addTool(BetaWebSearchTool20250305.builder()
+            .maxUses(5L)
+            .build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearThinking20251015Edit.builder()
+                .keep(BetaThinkingTurns.builder()
+                    .value(2L)
                     .build())
                 .build())
-            .build();
+            .addEdit(BetaClearToolUses20250919Edit.builder()
+                .trigger(BetaInputTokensTrigger.builder()
+                    .value(50000L)
+                    .build())
+                .keep(BetaToolUsesKeep.builder()
+                    .value(5L)
+                    .build())
+                .build())
+            .build())
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
-```php PHP hidelines={1..4} nocheck
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
 $client = new Client();
 
-$message = $client->beta->messages->create(
+$response = $client->beta->messages->create(
     maxTokens: 16000,
-    messages: [/* ... */],
-    model: 'claude-opus-4-6',
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Search for the latest developments in quantum error correction and summarize the key breakthroughs.'
+        ]
+    ],
+    model: 'claude-opus-4-8',
     betas: ['context-management-2025-06-27'],
-    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
-    tools: [/* ... */],
+    thinking: ['type' => 'adaptive'],
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'max_uses' => 5
+        ]
+    ],
     contextManagement: [
         'edits' => [
             [
@@ -1402,25 +1894,30 @@ $message = $client->beta->messages->create(
     ],
 );
 
-echo $message;
+echo $response;
 ```
 
 ```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
-messages = [{ role: "user", content: "Explain quantum computing in simple terms" }]
 
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-8",
   max_tokens: 16000,
-  messages: messages,
-  thinking: {
-    type: "enabled",
-    budget_tokens: 10000
-  },
+  messages: [
+    {
+      role: "user",
+      content: "Search for the latest developments in quantum error correction and summarize the key breakthroughs."
+    }
+  ],
+  thinking: { type: "adaptive" },
   tools: [
-    # ...
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 5
+    }
   ],
   betas: ["context-management-2025-06-27"],
   context_management: {
@@ -1495,7 +1992,7 @@ You can see which context edits were applied to your request using the `context_
 }
 ```
 
-For streaming responses, the context edits will be included in the final `message_delta` event:
+For streaming responses, the context edits are included in the final `message_delta` event:
 
 ```json Streaming Response
 {
@@ -1535,7 +2032,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 "content": "Continue our conversation..."
             }
         ],
-        "tools": [],
         "context_management": {
             "edits": [
                 {
@@ -1560,7 +2056,6 @@ model: claude-opus-4-8
 messages:
   - role: user
     content: Continue our conversation...
-tools: []
 context_management:
   edits:
     - type: clear_tool_uses_20250919
@@ -1586,11 +2081,10 @@ printf 'After clearing: %s\n' "$INPUT_TOKENS"
 printf 'Savings: %s tokens\n' "$((ORIGINAL - INPUT_TOKENS))"
 ```
 
-```python Python nocheck
+```python Python
 response = client.beta.messages.count_tokens(
     model="claude-opus-4-8",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
-    tools=[...],  # Your tool definitions
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
@@ -1603,10 +2097,10 @@ response = client.beta.messages.count_tokens(
     },
 )
 
-print(f"Original tokens: {response.context_management['original_input_tokens']}")
+print(f"Original tokens: {response.context_management.original_input_tokens}")
 print(f"After clearing: {response.input_tokens}")
 print(
-    f"Savings: {response.context_management['original_input_tokens'] - response.input_tokens} tokens"
+    f"Savings: {response.context_management.original_input_tokens - response.input_tokens} tokens"
 )
 ```
 
@@ -1625,9 +2119,6 @@ const response = await anthropic.beta.messages.countTokens({
       content: "Continue our conversation..."
     }
   ],
-  tools: [
-    // ...
-  ], // Your tool definitions
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -1655,27 +2146,26 @@ console.log(
 );
 ```
 
-```csharp C# nocheck
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-var client = new AnthropicClient
-{
-    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-};
+AnthropicClient client = new();
 
-var parameters = new BetaMessageTokensCountParams
+var parameters = new MessageCountTokensParams
 {
-    Model = "claude-opus-4-8",
+    Model = Messages::Model.ClaudeOpus4_8,
     Messages = [new() { Role = Role.User, Content = "Continue our conversation..." }],
-    Betas = ["context-management-2025-06-27"],
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
     {
         Edits = [
             new BetaClearToolUses20250919Edit
             {
-                Trigger = new BetaInputTokensTrigger { Value = 30000 },
-                Keep = new BetaToolUsesKeep { Value = 5 }
+                Trigger = new BetaInputTokensTrigger(30000),
+                Keep = new BetaToolUsesKeep(5)
             }
         ]
     }
@@ -1735,7 +2225,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..2,10..13,-2..}
+```java Java hidelines={1..2,10..11}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.BetaMessageTokensCount;
@@ -1747,32 +2237,30 @@ import com.anthropic.models.beta.messages.BetaToolUsesKeep;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class TokenCountExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCountTokensParams params = MessageCountTokensParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .addUserMessage("Continue our conversation...")
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearToolUses20250919Edit.builder()
-                    .trigger(BetaInputTokensTrigger.builder()
-                        .value(30000L)
-                        .build())
-                    .keep(BetaToolUsesKeep.builder()
-                        .value(5L)
-                        .build())
+    MessageCountTokensParams params = MessageCountTokensParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .addUserMessage("Continue our conversation...")
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearToolUses20250919Edit.builder()
+                .trigger(BetaInputTokensTrigger.builder()
+                    .value(30000L)
+                    .build())
+                .keep(BetaToolUsesKeep.builder()
+                    .value(5L)
                     .build())
                 .build())
-            .build();
+            .build())
+        .build();
 
-        BetaMessageTokensCount response = client.beta().messages().countTokens(params);
+    BetaMessageTokensCount response = client.beta().messages().countTokens(params);
 
-        System.out.println("Original tokens: " + response.contextManagement().get().originalInputTokens());
-        System.out.println("After clearing: " + response.inputTokens());
-        System.out.println("Savings: " + (response.contextManagement().get().originalInputTokens() - response.inputTokens()) + " tokens");
-    }
+    IO.println("Original tokens: " + response.contextManagement().get().originalInputTokens());
+    IO.println("After clearing: " + response.inputTokens());
+    IO.println("Savings: " + (response.contextManagement().get().originalInputTokens() - response.inputTokens()) + " tokens");
 }
 ```
 
@@ -1863,15 +2351,44 @@ Context editing can be combined with the [memory tool](/docs/en/agents-and-tools
 
 This combination allows you to:
 
-- **Preserve important context**: Claude can write essential information from tool results to memory files before those results are cleared
-- **Maintain long-running workflows**: Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage
-- **Access information on demand**: Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window
+- **Preserve important context:** Claude can write essential information from tool results to memory files before those results are cleared
+- **Maintain long-running workflows:** Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage
+- **Access information on demand:** Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window
 
 For example, in a file editing workflow where Claude performs many operations, Claude can summarize completed changes to memory files as the context grows. When tool results are cleared, Claude retains access to that information through its memory system and can continue working effectively.
 
 To use both features together, enable them in your API request:
 
 <CodeGroup>
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "anthropic-beta: context-management-2025-06-27" \
+    --data '{
+        "model": "claude-opus-4-8",
+        "max_tokens": 4096,
+        "messages": [
+            {
+                "role": "user",
+                "content": "Hello"
+            }
+        ],
+        "tools": [
+            {
+                "type": "memory_20250818",
+                "name": "memory"
+            }
+        ],
+        "context_management": {
+            "edits": [
+                {"type": "clear_tool_uses_20250919"}
+            ]
+        }
+    }'
+```
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
@@ -1889,21 +2406,18 @@ context_management:
 YAML
 ```
 
-```python Python nocheck
+```python Python
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=4096,
-    messages=[...],
-    tools=[
-        {"type": "memory_20250818", "name": "memory"},
-        # Your other tools
-    ],
+    messages=[{"role": "user", "content": "Hello"}],
+    tools=[{"type": "memory_20250818", "name": "memory"}],
     betas=["context-management-2025-06-27"],
     context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..2}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -1913,15 +2427,12 @@ const anthropic = new Anthropic({
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-8",
   max_tokens: 4096,
-  messages: [
-    // ...
-  ],
+  messages: [{ role: "user", content: "Hello" }],
   tools: [
     {
       type: "memory_20250818",
       name: "memory"
     }
-    // Your other tools
   ],
   betas: ["context-management-2025-06-27"],
   context_management: {
@@ -1930,44 +2441,36 @@ const response = await anthropic.beta.messages.create({
 });
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C#
 using Anthropic;
+using Anthropic.Models.Beta;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Messages::Model.ClaudeOpus4_8,
+    MaxTokens = 4096,
+    Messages = [
+        new() { Role = Role.User, Content = "Hello" }
+    ],
+    Tools = [
+        new BetaMemoryTool20250818()
+    ],
+    Betas = [AnthropicBeta.ContextManagement2025_06_27],
+    ContextManagement = new BetaContextManagementConfig
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_8,
-            MaxTokens = 4096,
-            Messages = [],
-            Tools = [
-                new() {
-                    Type = "memory_20250818",
-                    Name = "memory"
-                }
-            ],
-            Betas = ["context-management-2025-06-27"],
-            ContextManagement = new BetaContextManagementConfig() {
-                Edits = [
-                    new BetaClearToolUses20250919Edit()
-                ]
-            }
-        };
-
-        var response = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(response);
+        Edits = [new BetaClearToolUses20250919Edit()]
     }
-}
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
-```go Go nocheck hidelines={1..11,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1984,7 +2487,9 @@ func main() {
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 4096,
-		Messages:  []anthropic.BetaMessageParam{},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+		},
 		Tools: []anthropic.BetaToolUnionParam{
 			{OfMemoryTool20250818: &anthropic.BetaMemoryTool20250818Param{}},
 		},
@@ -2002,7 +2507,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..4,9..12,-2..}
+```java Java hidelines={1..4,9..10}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -2013,27 +2518,26 @@ import com.anthropic.models.beta.messages.BetaClearToolUses20250919Edit;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.messages.Model;
 
-public class Main {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(4096L)
-            .addTool(BetaMemoryTool20250818.builder().build())
-            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaClearToolUses20250919Edit.builder().build())
-                .build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Hello")
+        .addTool(BetaMemoryTool20250818.builder().build())
+        .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+        .contextManagement(BetaContextManagementConfig.builder()
+            .addEdit(BetaClearToolUses20250919Edit.builder().build())
+            .build())
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
-```php PHP hidelines={1..4} nocheck
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2042,7 +2546,9 @@ $client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
-    messages: [],
+    messages: [
+        ['role' => 'user', 'content' => 'Hello']
+    ],
     model: 'claude-opus-4-8',
     betas: ['context-management-2025-06-27'],
     tools: [
@@ -2061,7 +2567,7 @@ $response = $client->beta->messages->create(
 echo $response;
 ```
 
-```ruby Ruby nocheck hidelines={1..2}
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2069,9 +2575,7 @@ client = Anthropic::Client.new
 response = client.beta.messages.create(
   model: "claude-opus-4-8",
   max_tokens: 4096,
-  messages: [
-    # ...
-  ],
+  messages: [{ role: "user", content: "Hello" }],
   tools: [
     {
       type: "memory_20250818",
@@ -2096,6 +2600,8 @@ For the full memory tool reference including commands and examples, see [Memory 
 
 <Warning>
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](/docs/en/build-with-claude/compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+
+The `compaction_control` parameter is deprecated in the Python, TypeScript, and Ruby SDKs and will be removed in a future version. The SDKs emit a deprecation warning when it is enabled. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
 </Warning>
 
 <Note>
@@ -2118,6 +2624,13 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
 
 <Tabs>
+<Tab title="cURL">
+
+<Note>
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers.
+</Note>
+
+</Tab>
 <Tab title="CLI">
 
 <Note>
@@ -2189,28 +2702,28 @@ for await (const message of runner) {
 <Tab title="C#">
 
 <Note>
-The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 </Note>
 
 </Tab>
 <Tab title="Go">
 
 <Note>
-The Go SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 </Note>
 
 </Tab>
@@ -2250,7 +2763,7 @@ end
 </Tab>
 </Tabs>
 
-#### What happens during compaction
+#### What occurs during compaction
 
 As the conversation grows, the message history accumulates:
 
@@ -2275,7 +2788,7 @@ As the conversation grows, the message history accumulates:
 
 When tokens exceed the threshold, the SDK injects a summary request and Claude generates a summary. The entire history is then replaced:
 
-**After compaction (back to ~2-3k tokens):**
+**After compaction (back to ~2–3k tokens):**
 ```json
 [
   {
@@ -2294,89 +2807,391 @@ Claude continues working from this summary as if it were the original conversati
 | `enabled` | boolean | Yes | - | Whether to enable automatic compaction |
 | `context_token_threshold` | number | No | 100,000 | Token count at which compaction triggers |
 | `model` | string | No | Same as main model | Model to use for generating summaries |
-| `summary_prompt` | string | No | See below | Custom prompt for summary generation |
+| `summary_prompt` | string | No | See [Default summary prompt](#default-summary-prompt) | Custom prompt for summary generation |
 
 #### Choosing a token threshold
 
 The threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.
 
-<CodeGroup>
+<Tabs>
+<Tab title="cURL">
 
-```python Python
-# More frequent compaction for memory-constrained scenarios
-compaction_control = {"enabled": True, "context_token_threshold": 50000}
+<Note>
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers.
+</Note>
 
-# Less frequent compaction when you need more context
-compaction_control = {"enabled": True, "context_token_threshold": 150000}
+</Tab>
+<Tab title="CLI">
+
+<Note>
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
+
+</Tab>
+<Tab title="Python">
+
+```python Python hidelines={1..10} highlight={18..19}
+import anthropic
+from anthropic import beta_tool
+
+
+@beta_tool
+def read_file(path: str) -> str:
+    """Read the contents of a file."""
+    return "file contents..."
+
+
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    # Lower values compact more often; raise to 150000 when the task needs more context
+    compaction_control={"enabled": True, "context_token_threshold": 50000},
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-```typescript TypeScript hidelines={1,7..9,-1}
-const _ = {
-  // More frequent compaction for memory-constrained scenarios
-  compactionControl: {
-    enabled: true,
-    contextTokenThreshold: 50000
-  }
-};
+</Tab>
+<Tab title="TypeScript">
 
-const __ = {
-  // Less frequent compaction when you need more context
-  compactionControl: {
-    enabled: true,
-    contextTokenThreshold: 150000
-  }
-};
+```typescript TypeScript hidelines={1..14} highlight={22..23}
+import Anthropic from "@anthropic-ai/sdk";
+import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
+
+const readFile = betaTool({
+  name: "read_file",
+  description: "Read the contents of a file",
+  inputSchema: {
+    type: "object",
+    properties: { path: { type: "string" } },
+    required: ["path"]
+  },
+  run: async () => "file contents..."
+});
+
+const client = new Anthropic();
+
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  // Lower values compact more often; raise to 150000 when the task needs more context
+  compactionControl: { enabled: true, contextTokenThreshold: 50000 }
+});
+
+for await (const message of runner) {
+  console.log(`Tokens used: ${message.usage.input_tokens}`);
+}
 ```
 
-</CodeGroup>
+</Tab>
+<Tab title="C#">
+
+<Note>
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Go">
+
+<Note>
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Java">
+
+<Note>
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="PHP">
+
+<Note>
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Ruby">
+
+```ruby Ruby hidelines={1..15} highlight={23..24}
+require "anthropic"
+
+class ReadFileInput < Anthropic::BaseModel
+  required :path, String, doc: "Path to the file"
+end
+
+class ReadFile < Anthropic::BaseTool
+  doc "Read the contents of a file"
+  input_schema ReadFileInput
+
+  def call(input)
+    "file contents..."
+  end
+end
+
+client = Anthropic::Client.new
+
+runner = client.beta.messages.tool_runner(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [ReadFile.new],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  # Lower values compact more often; raise to 150000 when the task needs more context
+  compaction_control: { enabled: true, context_token_threshold: 50000 }
+)
+
+runner.each_message do |message|
+  puts "Tokens used: #{message.usage.input_tokens}"
+end
+```
+
+</Tab>
+</Tabs>
 
 #### Using a different model for summaries
 
 You can use a faster or cheaper model for generating summaries:
 
-<CodeGroup>
+<Tabs>
+<Tab title="cURL">
 
-```python Python
-compaction_control = {
-    "enabled": True,
-    "context_token_threshold": 100000,
-    "model": "claude-haiku-4-5",
-}
+<Note>
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers.
+</Note>
+
+</Tab>
+<Tab title="CLI">
+
+<Note>
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
+
+</Tab>
+<Tab title="Python">
+
+```python Python hidelines={1..10} highlight={18..22}
+import anthropic
+from anthropic import beta_tool
+
+
+@beta_tool
+def read_file(path: str) -> str:
+    """Read the contents of a file."""
+    return "file contents..."
+
+
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    compaction_control={
+        "enabled": True,
+        "context_token_threshold": 100000,
+        "model": "claude-haiku-4-5",
+    },
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-```typescript TypeScript hidelines={1,-1}
-const _ = {
+</Tab>
+<Tab title="TypeScript">
+
+```typescript TypeScript hidelines={1..14} highlight={22..26}
+import Anthropic from "@anthropic-ai/sdk";
+import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
+
+const readFile = betaTool({
+  name: "read_file",
+  description: "Read the contents of a file",
+  inputSchema: {
+    type: "object",
+    properties: { path: { type: "string" } },
+    required: ["path"]
+  },
+  run: async () => "file contents..."
+});
+
+const client = new Anthropic();
+
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
   compactionControl: {
     enabled: true,
     contextTokenThreshold: 100000,
     model: "claude-haiku-4-5"
   }
-};
+});
+
+for await (const message of runner) {
+  console.log(`Tokens used: ${message.usage.input_tokens}`);
+}
 ```
 
-</CodeGroup>
+</Tab>
+<Tab title="C#">
+
+<Note>
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Go">
+
+<Note>
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Java">
+
+<Note>
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="PHP">
+
+<Note>
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Ruby">
+
+```ruby Ruby hidelines={1..15} highlight={23..27}
+require "anthropic"
+
+class ReadFileInput < Anthropic::BaseModel
+  required :path, String, doc: "Path to the file"
+end
+
+class ReadFile < Anthropic::BaseTool
+  doc "Read the contents of a file"
+  input_schema ReadFileInput
+
+  def call(input)
+    "file contents..."
+  end
+end
+
+client = Anthropic::Client.new
+
+runner = client.beta.messages.tool_runner(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [ReadFile.new],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compaction_control: {
+    enabled: true,
+    context_token_threshold: 100000,
+    model: "claude-haiku-4-5"
+  }
+)
+
+runner.each_message do |message|
+  puts "Tokens used: #{message.usage.input_tokens}"
+end
+```
+
+</Tab>
+</Tabs>
 
 #### Custom summary prompts
 
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
-<CodeGroup>
+<Tabs>
+<Tab title="cURL">
 
-```python Python
-compaction_control = {
-    "enabled": True,
-    "context_token_threshold": 100000,
-    "summary_prompt": """Summarize the research conducted so far, including:
+<Note>
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers.
+</Note>
+
+</Tab>
+<Tab title="CLI">
+
+<Note>
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
+
+</Tab>
+<Tab title="Python">
+
+```python Python hidelines={1..10} highlight={21..26}
+import anthropic
+from anthropic import beta_tool
+
+
+@beta_tool
+def read_file(path: str) -> str:
+    """Read the contents of a file."""
+    return "file contents..."
+
+
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    compaction_control={
+        "enabled": True,
+        "context_token_threshold": 100000,
+        "summary_prompt": """Summarize the research conducted so far, including:
 - Sources consulted and key findings
 - Questions answered and remaining unknowns
 - Recommended next steps
 
 Wrap your summary in <summary></summary> tags.""",
-}
+    },
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
 ```
 
-```typescript TypeScript hidelines={1,-1}
-const _ = {
+</Tab>
+<Tab title="TypeScript">
+
+```typescript TypeScript hidelines={1..14} highlight={25..30}
+import Anthropic from "@anthropic-ai/sdk";
+import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
+
+const readFile = betaTool({
+  name: "read_file",
+  description: "Read the contents of a file",
+  inputSchema: {
+    type: "object",
+    properties: { path: { type: "string" } },
+    required: ["path"]
+  },
+  run: async () => "file contents..."
+});
+
+const client = new Anthropic();
+
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
   compactionControl: {
     enabled: true,
     contextTokenThreshold: 100000,
@@ -2387,10 +3202,88 @@ const _ = {
 
 Wrap your summary in <summary></summary> tags.`
   }
-};
+});
+
+for await (const message of runner) {
+  console.log(`Tokens used: ${message.usage.input_tokens}`);
+}
 ```
 
-</CodeGroup>
+</Tab>
+<Tab title="C#">
+
+<Note>
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Go">
+
+<Note>
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Java">
+
+<Note>
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="PHP">
+
+<Note>
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+</Note>
+
+</Tab>
+<Tab title="Ruby">
+
+```ruby Ruby hidelines={1..15} highlight={26..33}
+require "anthropic"
+
+class ReadFileInput < Anthropic::BaseModel
+  required :path, String, doc: "Path to the file"
+end
+
+class ReadFile < Anthropic::BaseTool
+  doc "Read the contents of a file"
+  input_schema ReadFileInput
+
+  def call(input)
+    "file contents..."
+  end
+end
+
+client = Anthropic::Client.new
+
+runner = client.beta.messages.tool_runner(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [ReadFile.new],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compaction_control: {
+    enabled: true,
+    context_token_threshold: 100000,
+    summary_prompt: <<~PROMPT
+      Summarize the research conducted so far, including:
+      - Sources consulted and key findings
+      - Questions answered and remaining unknowns
+      - Recommended next steps
+
+      Wrap your summary in <summary></summary> tags.
+    PROMPT
+  }
+)
+
+runner.each_message do |message|
+  puts "Tokens used: #{message.usage.input_tokens}"
+end
+```
+
+</Tab>
+</Tabs>
 
 ### Default summary prompt
 
@@ -2480,6 +3373,20 @@ When the SDK triggers compaction while a tool use response is pending, it remove
 Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
 
 <Tabs>
+<Tab title="cURL">
+
+<Note>
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers.
+</Note>
+
+</Tab>
+<Tab title="CLI">
+
+<Note>
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
+
+</Tab>
 <Tab title="Python">
 
 The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
@@ -2540,28 +3447,28 @@ for await (const message of runner) {
 <Tab title="C#">
 
 <Note>
-The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The C# SDK's tool runner does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="Go">
 
 <Note>
-The Go SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The Go SDK's tool runner does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The Java SDK's tool runner does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+The PHP SDK's tool runner does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
@@ -2623,3 +3530,14 @@ end
 - Tasks requiring precise recall of early conversation details
 - Workflows using server-side tools extensively
 - Tasks that need to maintain exact state across many variables
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Compaction" icon="arrows-clockwise" href="/docs/en/build-with-claude/compaction">
+    Manage long conversations with server-side compaction, the recommended strategy for most use cases.
+  </Card>
+  <Card title="Prompt caching" icon="database" href="/docs/en/build-with-claude/prompt-caching">
+    Reduce cost and latency by caching prompt prefixes, and learn how context editing interacts with the cache.
+  </Card>
+</CardGroup>

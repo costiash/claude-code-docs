@@ -1073,12 +1073,11 @@ public class CompactionPauseExample {
 }
 ```
 
-```php PHP nocheck hidelines={1..4}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
-// The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
 $client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
@@ -3154,12 +3153,11 @@ public class CompactionExample {
 }
 ```
 
-```php PHP nocheck hidelines={1..4}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
-// The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
 $client = new Client();
 $messages = [];
 

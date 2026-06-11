@@ -93,7 +93,7 @@ Workloads outside Kubernetes use host-level selectors such as `unix:uid:1000` (`
 
 ### Run spiffe-helper
 
-[spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the example below sets `daemon_mode = true` explicitly.
+[spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the following example sets `daemon_mode = true` explicitly.
 
 ```text helper.conf nowrap
 agent_address = "/run/spire/sockets/agent.sock"
@@ -110,7 +110,9 @@ In Kubernetes, run spiffe-helper as a sidecar container that shares a memory-bac
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these SPIFFE-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select **Custom OIDC**. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
 
 **Federation issuer:** Register the OIDC Discovery Provider's public URL in `discovery` mode. Anthropic fetches `/.well-known/openid-configuration` from this URL and follows the returned `jwks_uri` to retrieve the trust domain's signing keys.
 
@@ -364,7 +366,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
     </CodeGroup>
   </Tab>
 
-  <Tab title="Callable via the SPIFFE Workload API">
+  <Tab title="Callable through the SPIFFE Workload API">
     Workloads that link a SPIFFE Workload API client directly can skip spiffe-helper and pass the SDK a callable that fetches a fresh JWT-SVID from the agent socket. The SDK invokes the callable before each token exchange, so the workload always presents an unexpired SVID. Go ([go-spiffe](https://github.com/spiffe/go-spiffe)) and Python ([py-spiffe](https://github.com/HewlettPackard/py-spiffe)) have mature Workload API clients.
 
     

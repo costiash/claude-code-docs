@@ -5,7 +5,7 @@ Choose between polling and cursor-driven Activity Feed consumption, correlate Co
 ---
 
 <Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>

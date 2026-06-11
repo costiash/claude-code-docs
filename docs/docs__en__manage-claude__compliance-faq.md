@@ -5,7 +5,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 ---
 
 <Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 ## Access and scopes
@@ -16,7 +16,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 
   To call the Compliance API, you create one of two key types instead:
 
-  - **For full Compliance API access ([Activity Feed](/docs/en/manage-claude/compliance-activity-feed) plus chats, files, projects, users, and organization metadata),** the primary owner of the parent organization creates a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) in claude.ai.
+  - **For full Compliance API access ([Activity Feed](/docs/en/manage-claude/compliance-activity-feed) plus chats, files, projects, users, organization metadata, and organization settings),** the primary owner of the parent organization creates a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) in claude.ai.
   - **For Activity Feed access only,** an organization admin in your Claude Console organization creates an [Admin API key](/docs/en/manage-claude/compliance-api-access#create-an-admin-api-key) in Claude Console. The Compliance API must already be enabled for the organization, and the admin must create the Admin API key after enablement for it to carry the `read:compliance_activities` scope.
 
 </section>
@@ -29,7 +29,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 
 <section title="Why does my Admin API key return 403 on chat or file endpoints?">
 
-  Admin API keys carry a fixed `read:compliance_activities` scope, which authorizes the Activity Feed only. Every other Compliance API endpoint requires a scope that only a Compliance Access Key created in claude.ai can carry. Calling a content or directory endpoint with an Admin API key returns a 403 naming the scope that endpoint family requires: `read:compliance_user_data` for chats, files, projects, project attachments, users, and group members, and `read:compliance_org_data` for organizations, roles, and groups. For example, listing chats returns the following response.
+  Admin API keys carry a fixed `read:compliance_activities` scope, which authorizes the Activity Feed only. Every other Compliance API endpoint requires a scope that only a Compliance Access Key created in claude.ai can carry. Calling a content or directory endpoint with an Admin API key returns a 403 naming the scope that endpoint family requires: `read:compliance_user_data` for chats, files, projects, project attachments, users, and group members, `read:compliance_org_data` for organizations, roles, and groups, and `read:compliance_org_settings` for effective organization settings. For example, listing chats returns the following response.
 
   ```json Response
   {
@@ -40,7 +40,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
   }
   ```
 
-  To access content endpoints, the primary owner of your parent organization must [create a Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_user_data` (and `delete:compliance_user_data` for deletes), or `read:compliance_org_data` for organization, role, and group endpoints. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full per-endpoint catalog.
+  To access content endpoints, the primary owner of your parent organization must [create a Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_user_data` (and `delete:compliance_user_data` for deletes), `read:compliance_org_data` for organization, role, and group endpoints, or `read:compliance_org_settings` for the effective-settings endpoint. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full per-endpoint catalog.
 
 </section>
 
@@ -96,7 +96,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 
   Set up a Claude Enterprise sandbox organization linked to a Claude Console organization under the same parent. This lets the sandbox exercise both the Activity Feed (through an Admin API key) and the chat, file, and project endpoints (through a Compliance Access Key).
 
-  1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization, or to [request Compliance API access](/docs/en/manage-claude/compliance-api-access#request-compliance-api-access) on an existing Claude Enterprise organization.
+  1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization. On an existing Claude Enterprise organization, the primary owner can [enable the Compliance API directly in claude.ai](/docs/en/manage-claude/compliance-api-access#request-compliance-api-access).
   2. **Create the Claude Console organization.** Create a Claude Console organization yourself at `platform.claude.com` using the same email address.
   3. **Link the two organizations.** Sign in as the primary owner of the Claude Enterprise organization, go to [claude.ai > Organization settings > Identity and access](https://claude.ai/admin-settings/identity), and use **Merge Organizations** to link the two under a shared parent.
 

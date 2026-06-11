@@ -1,4 +1,4 @@
-# Use WIF with Microsoft Azure
+# Use WIF with Microsoft Entra ID
 
 Federate Azure managed identities and Entra Workload Identity with the Claude API so your Azure workloads can call Claude without static API keys.
 
@@ -9,7 +9,7 @@ Azure workloads authenticate to the Claude API by presenting a JSON Web Token (J
 - **Managed identity (VMs, App Service, Functions, Container Apps):** The workload calls the Azure Instance Metadata Service (IMDS) at `http://169.254.169.254/metadata/identity/oauth2/token` and receives a JWT for its assigned identity.
 - **Entra Workload Identity (AKS pods):** Kubernetes projects a service account token (signed by the AKS cluster's OIDC issuer) into the pod at the path in `AZURE_FEDERATED_TOKEN_FILE`. The workload exchanges that token at Entra for an Entra-issued access token.
 
-In both cases the Entra-issued token you present to Anthropic carries a tenant-specific Entra issuer (the [Configure Anthropic](#configure-anthropic) step below shows the exact URL to register) and the managed identity's object ID in the `sub` and `oid` claims. You register that issuer with Anthropic once, write a federation rule that matches the expected claims, and your workload exchanges its Entra token for an `sk-ant-oat01-...` access token at runtime.
+In both cases the Entra-issued token you present to Anthropic carries a tenant-specific Entra issuer (the [Configure Anthropic](#configure-anthropic) step shows the exact URL to register) and the managed identity's object ID in the `sub` and `oid` claims. You register that issuer with Anthropic once, write a federation rule that matches the expected claims, and your workload exchanges its Entra token for an `sk-ant-oat01-...` access token at runtime.
 
 <Tip>
 AKS pods can alternatively skip the Entra exchange and present the Kubernetes-projected service account token to Anthropic directly. That path registers your AKS cluster's OIDC issuer with Anthropic instead of your Entra tenant. See [Kubernetes](/docs/en/manage-claude/wif-providers/kubernetes) for that flow.
@@ -24,7 +24,7 @@ AKS pods can alternatively skip the Entra exchange and present the Kubernetes-pr
 
 ## Configure Azure
 
-Set up the identity that Azure will issue tokens for. Choose the path that matches where your workload runs.
+Set up the identity that Microsoft Entra ID will issue tokens for. Choose the path that matches where your workload runs.
 
 <Tabs>
 <Tab title="VM, App Service, Functions, Container Apps">
@@ -58,7 +58,7 @@ An Entra-issued token for a managed identity carries these claims:
 {
   "iss": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
   "sub": "9f8e7d6c-1a2b-3c4d-5e6f-...",
-  "aud": "https://api.anthropic.com",
+  "aud": "00000000-0000-0000-0000-000000000000",
   "oid": "9f8e7d6c-1a2b-3c4d-5e6f-...",
   "tid": "<TENANT_ID>",
   "azp": "<CLIENT_ID>",
@@ -66,34 +66,36 @@ An Entra-issued token for a managed identity carries these claims:
 }
 ```
 
-`sub` and `oid` are identical (the managed identity's object ID). `azp` is the application or client ID. Match on `oid` to authorize one specific identity, or on `azp` to authorize any identity associated with an application registration. The `tid` claim repeats your tenant ID; matching on it is defense in depth, because the issuer URL already pins the tenant.
+`sub` and `oid` are identical (the managed identity's object ID). `azp` is the application or client ID. The `aud` claim carries your Entra application's client ID (a GUID), not a URL. Match on `oid` to authorize one specific identity, or on `azp` to authorize any identity associated with an application registration. The `tid` claim repeats your tenant ID; matching on it is defense in depth, because the issuer URL already pins the tenant.
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. In the Console, choose the **OIDC** provider option and supply the Entra-specific values that follow.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Microsoft Entra ID** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
-**Federation issuer:** Entra publishes an OIDC discovery document at the per-tenant issuer URL, so use discovery mode. Each Azure tenant you federate needs its own issuer record.
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
+
+**Federation issuer:** Entra publishes an OIDC discovery document at the per-tenant issuer URL, so use discovery mode. Each Microsoft Entra tenant you federate needs its own issuer record.
 
 ```json
 {
   "name": "azure-prod-tenant",
   "issuer_url": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 
 <Note>
-Depending on the token version, the `iss` claim may be `https://sts.windows.net/<TENANT_ID>/` instead. Decode your managed-identity token (the Verify section below shows how) and register whichever `iss` value it contains. The two URLs share the same JWKS, so discovery mode works for either.
+Depending on the token version, the `iss` claim may be `https://sts.windows.net/<TENANT_ID>/` instead, and the `aud` claim may carry the requested resource URL (`https://api.anthropic.com`) rather than a GUID. Decode your managed-identity token (the Verify section later in this guide shows how), register whichever `iss` value it contains, and set the federation rule's `audience` to whichever `aud` value it contains. The two issuer URLs share the same JWKS, so discovery mode works for either.
 </Note>
 
-**Federation rule:** Match on the managed identity's object ID and your tenant ID.
+**Federation rule:** Match on the managed identity's object ID and your tenant ID. For v2 tokens the `audience` value is your Entra application's client ID (a GUID); use the exact `aud` value from your decoded token.
 
 ```json
 {
   "name": "azure-inference-worker",
   "issuer_id": "fdis_...",
   "match": {
-    "audience": "https://api.anthropic.com",
+    "audience": "00000000-0000-0000-0000-000000000000",
     "claims": {
       "oid": "9f8e7d6c-1a2b-3c4d-5e6f-...",
       "tid": "<TENANT_ID>"
@@ -912,9 +914,9 @@ From your Azure resource, run the cURL exchange shown earlier and confirm that `
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
-- **Match `oid` as an exact value:** Set `claims.oid` to the managed identity's full object ID and never use `subject_prefix` for Azure tokens.
+- **Match `oid` as an exact value:** Set `claims.oid` to the managed identity's full object ID and never use `subject_prefix` for Entra tokens.
 - **Pin `tid` as defense in depth:** The issuer URL already pins your tenant, but adding `claims.tid` guards against configuration drift if the issuer record is later edited.
-- **Pin the audience:** Set `audience` to `https://api.anthropic.com` so tokens minted for other resources are rejected.
+- **Pin the audience:** Set `audience` to the exact `aud` value from your decoded token so tokens minted for other applications are rejected.
 - **Use a separate rule per managed identity:** Create one rule per identity rather than one rule that authorizes several, so you can revoke a single workload's access without affecting others.
 
 ## Next steps

@@ -90,7 +90,9 @@ Google issues identity tokens automatically to any workload with an attached ser
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these Google Cloud-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Google Cloud** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
 
 **Federation issuer:** Google publishes its OIDC discovery document publicly, so use discovery mode. This single issuer covers every Google Cloud surface (Cloud Run, GCE, Cloud Functions, App Engine, and GKE with Workload Identity). Differentiate workloads with rules, not issuers.
 
@@ -98,7 +100,7 @@ Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federati
 {
   "name": "gcp",
   "issuer_url": "https://accounts.google.com",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 

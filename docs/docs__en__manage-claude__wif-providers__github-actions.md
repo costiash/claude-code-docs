@@ -68,7 +68,9 @@ See [GitHub's OIDC subject claim reference](https://docs.github.com/en/actions/d
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these GitHub Actions-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **GitHub Actions** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
 
 **Federation issuer:** GitHub publishes its OIDC discovery document and JWKS publicly, so use discovery mode. Anthropic refreshes the keys automatically when GitHub rotates them.
 
@@ -76,7 +78,7 @@ Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federati
 {
   "name": "github-actions",
   "issuer_url": "https://token.actions.githubusercontent.com",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 

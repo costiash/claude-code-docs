@@ -124,9 +124,20 @@ The `oauth_scope` you set on a federation rule determines which Claude API endpo
 | Scope | Grants access to |
 | :--- | :--- |
 | `workspace:developer` | All non-administrative Claude API endpoints in the rule's workspace: [Messages](/docs/en/api/messages) (including streaming and token counting), [Models](/docs/en/api/models-list), [Managed Agents](/docs/en/managed-agents/overview) and their sessions, [Files](/docs/en/build-with-claude/files), and [Skills](/docs/en/build-with-claude/skills-guide). This matches the access an API key issued for the same workspace has. |
+| `workspace:inference` | The inference endpoints in the rule's workspace: [Messages](/docs/en/api/messages) (including streaming and token counting), [Models](/docs/en/api/models-list), and the [OpenAI-compatible chat endpoint](/docs/en/cli-sdks-libraries/libraries/openai-sdk). Use this for workloads that only need to call Claude and never need to manage Files, Skills, or other resources. |
 | `org:manage_tunnels` | The [MCP tunnels API](/docs/en/agents-and-tools/mcp-tunnels/reference#tunnels-api): list and get tunnels, register and archive CA certificates, reveal and rotate the tunnel token, and archive tunnels. The Console's create-tunnel modal locks this scope when you create a rule from it. |
+| `org:admin` | Full access to the [Admin API](/docs/en/manage-claude/admin-api) (organization members, invites, workspaces, API keys, and the rest). An OAuth `org:admin` token can only create or modify rules scoped to `workspace:developer` or `workspace:inference`, and cannot update an issuer that backs a rule with any other scope; see the [constraints](/docs/en/manage-claude/wif-admin-api#permissions-and-constraints). |
 
 A request to an endpoint outside the token's scope returns HTTP 403. Finer-grained scopes (per resource, or read versus write) are not currently available.
+
+### Permission boundaries
+
+A federation rule's `oauth_scope` is a ceiling: the minted token can never exceed it. The target service account's `organization_role` (`developer` or `admin`) determines which scopes are grantable, so a rule that grants `org:admin` must target a service account with `organization_role=admin`. Effective permissions are the intersection of the rule's scope and the service account's role.
+
+| Rule `oauth_scope` | Service account `organization_role` | Effective permissions |
+| :--- | :--- | :--- |
+| `workspace:developer` | `admin` | Claude API access in the rule's workspace only. The scope caps the token below the role. |
+| `org:admin` | `admin` | Full Admin API access (organization members, invites, workspaces, API keys, and the rest), minus the OAuth-caller carve-outs; see [constraints](/docs/en/manage-claude/wif-admin-api#permissions-and-constraints). |
 
 ## Validation rules
 
@@ -137,7 +148,8 @@ Anthropic enforces these constraints when you create or update issuers and rules
 | Field | Constraint |
 | :--- | :--- |
 | Issuer, rule, and service account `name` | Must match `^[a-z0-9-]+$`, length 1 to 255 characters. |
-| `workspace_id` | Optional. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. May be omitted for rules that are configured for only one workspace. |
+| `workspace_id` | Required on create unless `applies_to_all_workspaces` is true. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. |
+| `applies_to_all_workspaces` | Boolean. Set `true` to enable the rule in every workspace in the organization instead of naming one; either this or `workspace_id` is required on create. |
 | `token_lifetime_seconds` | Integer between `60` and `86400` (1 minute to 24 hours). Default `3600`. Values outside this range are rejected at request time. See [Token lifetime and refresh](/docs/en/manage-claude/workload-identity-federation#token-lifetime-and-refresh). |
 
 ### URL fields

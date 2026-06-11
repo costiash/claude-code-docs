@@ -536,15 +536,43 @@ See the [client SDKs](/docs/en/cli-sdks-libraries/overview) for more details, an
 
 You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
 
-<Note>
-Bearer token authentication is supported in the C#, Go, and Java SDKs. The PHP, Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
-</Note>
-
 The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which each SDK detects automatically when resolving credentials from the environment.
 
 To provide a token programmatically:
 
 <CodeGroup>
+
+```python Python nocheck
+from anthropic import AnthropicBedrock
+
+client = AnthropicBedrock(
+    api_key="your-bearer-token",
+    aws_region="us-west-2",
+)
+
+message = client.messages.create(
+    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+print(message.content)
+```
+
+```typescript TypeScript nocheck
+import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+
+const client = new AnthropicBedrock({
+  apiKey: "your-bearer-token",
+  awsRegion: "us-west-2"
+});
+
+const message = await client.messages.create({
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "Hello!" }]
+});
+console.log(message);
+```
 
 ```csharp C# nocheck
 using Anthropic.Bedrock;
@@ -628,6 +656,39 @@ MessageCreateParams params = MessageCreateParams.builder()
 client.messages().create(params).content().stream()
   .flatMap(block -> block.text().stream())
   .forEach(textBlock -> System.out.println(textBlock.text()));
+```
+
+```php PHP nocheck
+<?php
+
+use Anthropic\Bedrock;
+
+$client = Bedrock\Client::withApiKey('your-bearer-token', 'us-west-2');
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Hello!']
+    ],
+    model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+);
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::BedrockClient.new(
+  api_key: "your-bearer-token",
+  aws_region: "us-west-2"
+)
+
+message = client.messages.create(
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "Hello!"}]
+)
+puts message.content.first.text
 ```
 
 </CodeGroup>
