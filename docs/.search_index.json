@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-11T19:41:16Z",
-  "indexed_files": 1641,
+  "generated_at": "2026-06-11T22:18:50Z",
+  "indexed_files": 1652,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -1368,11 +1368,11 @@
         "when",
         "must",
         "connector",
-        "only",
         "token",
-        "sdk"
+        "sdk",
+        "messages"
       ],
-      "word_count": 3001,
+      "word_count": 3061,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1680,7 +1680,7 @@
         "tokens",
         "coding"
       ],
-      "word_count": 5549,
+      "word_count": 5536,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1721,9 +1721,9 @@
         "claude",
         "codegroup",
         "tools",
+        "runner",
         "call",
         "one",
-        "runner",
         "error",
         "single",
         "code",
@@ -1736,7 +1736,7 @@
         "user",
         "message"
       ],
-      "word_count": 7197,
+      "word_count": 7215,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md"
     },
     "/docs/en/agents-and-tools/tool-use/code-execution-tool": {
@@ -1848,7 +1848,7 @@
         "object",
         "warning"
       ],
-      "word_count": 2745,
+      "word_count": 2743,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md"
     },
     "/docs/en/agents-and-tools/tool-use/handle-tool-calls": {
@@ -1960,7 +1960,7 @@
         "files",
         "long"
       ],
-      "word_count": 2782,
+      "word_count": 2793,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2380,7 +2380,7 @@
         "returns",
         "archived"
       ],
-      "word_count": 16470,
+      "word_count": 16519,
       "file_path": "docs/docs__en__api__admin.md"
     },
     "/docs/en/api/admin/api_keys": {
@@ -2408,7 +2408,7 @@
         "parameters",
         "name"
       ],
-      "word_count": 913,
+      "word_count": 916,
       "file_path": "docs/docs__en__api__admin__api_keys.md"
     },
     "/docs/en/api/admin/api_keys/list": {
@@ -2436,7 +2436,7 @@
         "status",
         "rfc"
       ],
-      "word_count": 402,
+      "word_count": 403,
       "file_path": "docs/docs__en__api__admin__api_keys__list.md"
     },
     "/docs/en/api/admin/api_keys/retrieve": {
@@ -2464,7 +2464,7 @@
         "name",
         "partially"
       ],
-      "word_count": 235,
+      "word_count": 236,
       "file_path": "docs/docs__en__api__admin__api_keys__retrieve.md"
     },
     "/docs/en/api/admin/api_keys/update": {
@@ -2492,7 +2492,7 @@
         "path",
         "body"
       ],
-      "word_count": 273,
+      "word_count": 274,
       "file_path": "docs/docs__en__api__admin__api_keys__update.md"
     },
     "/docs/en/api/admin/cost_report": {
@@ -2520,7 +2520,7 @@
         "there",
         "more"
       ],
-      "word_count": 900,
+      "word_count": 901,
       "file_path": "docs/docs__en__api__admin__cost_report.md"
     },
     "/docs/en/api/admin/cost_report/retrieve": {
@@ -2548,7 +2548,7 @@
         "report",
         "timestamp"
       ],
-      "word_count": 558,
+      "word_count": 559,
       "file_path": "docs/docs__en__api__admin__cost_report__retrieve.md"
     },
     "/docs/en/api/admin/external_keys": {
@@ -2576,7 +2576,7 @@
         "customer",
         "identity"
       ],
-      "word_count": 2995,
+      "word_count": 3001,
       "file_path": "docs/docs__en__api__admin__external_keys.md"
     },
     "/docs/en/api/admin/external_keys/create": {
@@ -2604,7 +2604,7 @@
         "provider",
         "identity"
       ],
-      "word_count": 478,
+      "word_count": 479,
       "file_path": "docs/docs__en__api__admin__external_keys__create.md"
     },
     "/docs/en/api/admin/external_keys/delete": {
@@ -2628,7 +2628,7 @@
         "example",
         "response"
       ],
-      "word_count": 78,
+      "word_count": 79,
       "file_path": "docs/docs__en__api__admin__external_keys__delete.md"
     },
     "/docs/en/api/admin/external_keys/list": {
@@ -2656,7 +2656,7 @@
         "app",
         "next"
       ],
-      "word_count": 352,
+      "word_count": 353,
       "file_path": "docs/docs__en__api__admin__external_keys__list.md"
     },
     "/docs/en/api/admin/external_keys/retrieve": {
@@ -2684,7 +2684,7 @@
         "path",
         "parameters"
       ],
-      "word_count": 283,
+      "word_count": 284,
       "file_path": "docs/docs__en__api__admin__external_keys__retrieve.md"
     },
     "/docs/en/api/admin/external_keys/update": {
@@ -2712,7 +2712,7 @@
         "decrypt",
         "parameters"
       ],
-      "word_count": 509,
+      "word_count": 510,
       "file_path": "docs/docs__en__api__admin__external_keys__update.md"
     },
     "/docs/en/api/admin/external_keys/validate": {
@@ -2740,7 +2740,7 @@
         "customer",
         "anthropic"
       ],
-      "word_count": 139,
+      "word_count": 140,
       "file_path": "docs/docs__en__api__admin__external_keys__validate.md"
     },
     "/docs/en/api/admin/invites": {
@@ -2768,7 +2768,7 @@
         "being",
         "expires"
       ],
-      "word_count": 864,
+      "word_count": 868,
       "file_path": "docs/docs__en__api__admin__invites.md"
     },
     "/docs/en/api/admin/invites/create": {
@@ -2796,7 +2796,7 @@
         "expires",
         "created"
       ],
-      "word_count": 200,
+      "word_count": 201,
       "file_path": "docs/docs__en__api__admin__invites__create.md"
     },
     "/docs/en/api/admin/invites/delete": {
@@ -2816,7 +2816,7 @@
         "example",
         "response"
       ],
-      "word_count": 67,
+      "word_count": 68,
       "file_path": "docs/docs__en__api__admin__invites__delete.md"
     },
     "/docs/en/api/admin/invites/list": {
@@ -2844,7 +2844,7 @@
         "get",
         "query"
       ],
-      "word_count": 285,
+      "word_count": 286,
       "file_path": "docs/docs__en__api__admin__invites__list.md"
     },
     "/docs/en/api/admin/invites/retrieve": {
@@ -2872,7 +2872,7 @@
         "status",
         "object"
       ],
-      "word_count": 163,
+      "word_count": 164,
       "file_path": "docs/docs__en__api__admin__invites__retrieve.md"
     },
     "/docs/en/api/admin/mcp_tunnels": {
@@ -3208,7 +3208,7 @@
         "domain",
         "types"
       ],
-      "word_count": 123,
+      "word_count": 124,
       "file_path": "docs/docs__en__api__admin__organizations.md"
     },
     "/docs/en/api/admin/organizations/me": {
@@ -3234,7 +3234,7 @@
         "example",
         "response"
       ],
-      "word_count": 81,
+      "word_count": 82,
       "file_path": "docs/docs__en__api__admin__organizations__me.md"
     },
     "/docs/en/api/admin/rate_limits": {
@@ -3262,7 +3262,7 @@
         "set",
         "names"
       ],
-      "word_count": 518,
+      "word_count": 519,
       "file_path": "docs/docs__en__api__admin__rate_limits.md"
     },
     "/docs/en/api/admin/rate_limits/list": {
@@ -3290,7 +3290,7 @@
         "set",
         "filter"
       ],
-      "word_count": 335,
+      "word_count": 336,
       "file_path": "docs/docs__en__api__admin__rate_limits__list.md"
     },
     "/docs/en/api/admin/usage_report": {
@@ -3318,7 +3318,7 @@
         "requests",
         "tool"
       ],
-      "word_count": 2492,
+      "word_count": 2494,
       "file_path": "docs/docs__en__api__admin__usage_report.md"
     },
     "/docs/en/api/admin/usage_report/retrieve_claude_code": {
@@ -3346,7 +3346,7 @@
         "through",
         "type"
       ],
-      "word_count": 708,
+      "word_count": 709,
       "file_path": "docs/docs__en__api__admin__usage_report__retrieve_claude_code.md"
     },
     "/docs/en/api/admin/usage_report/retrieve_messages": {
@@ -3374,7 +3374,7 @@
         "beta",
         "maximum"
       ],
-      "word_count": 884,
+      "word_count": 885,
       "file_path": "docs/docs__en__api__admin__usage_report__retrieve_messages.md"
     },
     "/docs/en/api/admin/users": {
@@ -3402,7 +3402,7 @@
         "joined",
         "name"
       ],
-      "word_count": 762,
+      "word_count": 766,
       "file_path": "docs/docs__en__api__admin__users.md"
     },
     "/docs/en/api/admin/users/delete": {
@@ -3423,7 +3423,7 @@
         "example",
         "response"
       ],
-      "word_count": 67,
+      "word_count": 68,
       "file_path": "docs/docs__en__api__admin__users__delete.md"
     },
     "/docs/en/api/admin/users/list": {
@@ -3451,7 +3451,7 @@
         "after",
         "before"
       ],
-      "word_count": 265,
+      "word_count": 266,
       "file_path": "docs/docs__en__api__admin__users__list.md"
     },
     "/docs/en/api/admin/users/retrieve": {
@@ -3479,7 +3479,7 @@
         "always",
         "example"
       ],
-      "word_count": 135,
+      "word_count": 136,
       "file_path": "docs/docs__en__api__admin__users__retrieve.md"
     },
     "/docs/en/api/admin/users/update": {
@@ -3507,7 +3507,7 @@
         "email",
         "name"
       ],
-      "word_count": 173,
+      "word_count": 174,
       "file_path": "docs/docs__en__api__admin__users__update.md"
     },
     "/docs/en/api/admin/workspaces": {
@@ -3535,7 +3535,7 @@
         "response",
         "list"
       ],
-      "word_count": 3952,
+      "word_count": 3966,
       "file_path": "docs/docs__en__api__admin__workspaces.md"
     },
     "/docs/en/api/admin/workspaces/archive": {
@@ -3563,7 +3563,7 @@
         "kms",
         "inference"
       ],
-      "word_count": 377,
+      "word_count": 378,
       "file_path": "docs/docs__en__api__admin__workspaces__archive.md"
     },
     "/docs/en/api/admin/workspaces/create": {
@@ -3591,7 +3591,7 @@
         "rotate",
         "value"
       ],
-      "word_count": 649,
+      "word_count": 650,
       "file_path": "docs/docs__en__api__admin__workspaces__create.md"
     },
     "/docs/en/api/admin/workspaces/list": {
@@ -3619,7 +3619,7 @@
         "pagination",
         "provided"
       ],
-      "word_count": 515,
+      "word_count": 516,
       "file_path": "docs/docs__en__api__admin__workspaces__list.md"
     },
     "/docs/en/api/admin/workspaces/members": {
@@ -3647,7 +3647,7 @@
         "create",
         "post"
       ],
-      "word_count": 875,
+      "word_count": 880,
       "file_path": "docs/docs__en__api__admin__workspaces__members.md"
     },
     "/docs/en/api/admin/workspaces/members/create": {
@@ -3674,7 +3674,7 @@
         "example",
         "response"
       ],
-      "word_count": 159,
+      "word_count": 160,
       "file_path": "docs/docs__en__api__admin__workspaces__members__create.md"
     },
     "/docs/en/api/admin/workspaces/members/delete": {
@@ -3696,7 +3696,7 @@
         "example",
         "response"
       ],
-      "word_count": 86,
+      "word_count": 87,
       "file_path": "docs/docs__en__api__admin__workspaces__members__delete.md"
     },
     "/docs/en/api/admin/workspaces/members/list": {
@@ -3724,7 +3724,7 @@
         "before",
         "number"
       ],
-      "word_count": 244,
+      "word_count": 245,
       "file_path": "docs/docs__en__api__admin__workspaces__members__list.md"
     },
     "/docs/en/api/admin/workspaces/members/retrieve": {
@@ -3746,7 +3746,7 @@
         "example",
         "response"
       ],
-      "word_count": 118,
+      "word_count": 119,
       "file_path": "docs/docs__en__api__admin__workspaces__members__retrieve.md"
     },
     "/docs/en/api/admin/workspaces/members/update": {
@@ -3771,7 +3771,7 @@
         "example",
         "response"
       ],
-      "word_count": 157,
+      "word_count": 158,
       "file_path": "docs/docs__en__api__admin__workspaces__members__update.md"
     },
     "/docs/en/api/admin/workspaces/rate_limits": {
@@ -3799,7 +3799,7 @@
         "list",
         "configured"
       ],
-      "word_count": 585,
+      "word_count": 586,
       "file_path": "docs/docs__en__api__admin__workspaces__rate_limits.md"
     },
     "/docs/en/api/admin/workspaces/rate_limits/list": {
@@ -3827,7 +3827,7 @@
         "types",
         "without"
       ],
-      "word_count": 355,
+      "word_count": 356,
       "file_path": "docs/docs__en__api__admin__workspaces__rate_limits__list.md"
     },
     "/docs/en/api/admin/workspaces/retrieve": {
@@ -3855,7 +3855,7 @@
         "kms",
         "inference"
       ],
-      "word_count": 378,
+      "word_count": 379,
       "file_path": "docs/docs__en__api__admin__workspaces__retrieve.md"
     },
     "/docs/en/api/admin/workspaces/update": {
@@ -3883,7 +3883,7 @@
         "managed",
         "cloud"
       ],
-      "word_count": 571,
+      "word_count": 572,
       "file_path": "docs/docs__en__api__admin__workspaces__update.md"
     },
     "/docs/en/api/beta": {
@@ -11601,18 +11601,19 @@
     },
     "/docs/en/api/compliance": {
       "title": "Compliance API",
-      "content_preview": "# Compliance API  # Activities  ## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated parent organization.  Returns a paginated list of ...",
+      "content_preview": "# Compliance API  # Activities  ## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated tenant.  The tenant is the caller's parent organiz...",
       "keywords": [
         "activity",
         "organization",
         "when",
         "occurred",
+        "verified",
         "api",
         "null",
-        "compliance",
         "identifier",
-        "example",
+        "compliance",
         "uuid",
+        "example",
         "login",
         "abcd",
         "unique",
@@ -11621,20 +11622,20 @@
         "tied",
         "logout",
         "events",
-        "calls",
-        "setting"
+        "calls"
       ],
-      "word_count": 112938,
+      "word_count": 179225,
       "file_path": "docs/docs__en__api__compliance.md"
     },
     "/docs/en/api/compliance/activities": {
       "title": "Activities",
-      "content_preview": "# Activities  ## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated parent organization.  Returns a paginated list of compliance activit...",
+      "content_preview": "# Activities  ## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated tenant.  The tenant is the caller's parent organization, or \u2014 for an...",
       "keywords": [
         "activity",
         "organization",
         "when",
         "occurred",
+        "verified",
         "api",
         "null",
         "login",
@@ -11649,25 +11650,25 @@
         "tied",
         "logout",
         "events",
-        "calls",
-        "setting"
+        "calls"
       ],
-      "word_count": 104281,
+      "word_count": 167153,
       "file_path": "docs/docs__en__api__compliance__activities.md"
     },
     "/docs/en/api/compliance/activities/list": {
       "title": "Untitled",
-      "content_preview": "## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated parent organization.  Returns a paginated list of compliance activities that can b...",
+      "content_preview": "## Query compliance activities  **get** `/v1/compliance/activities`  List compliance activities for the authenticated tenant.  The tenant is the caller's parent organization, or \u2014 for an organization ...",
       "keywords": [
         "activity",
         "organization",
         "when",
         "occurred",
+        "verified",
         "api",
         "null",
+        "compliance",
         "login",
         "uuid",
-        "compliance",
         "example",
         "identifier",
         "unique",
@@ -11677,10 +11678,9 @@
         "tied",
         "logout",
         "events",
-        "calls",
-        "setting"
+        "calls"
       ],
-      "word_count": 53775,
+      "word_count": 86832,
       "file_path": "docs/docs__en__api__compliance__activities__list.md"
     },
     "/docs/en/api/compliance/apps": {
@@ -11692,23 +11692,23 @@
         "document",
         "chat",
         "claude",
-        "artifact",
+        "organization",
         "when",
         "user",
+        "artifact",
+        "response",
         "tool",
         "content",
-        "response",
-        "organization",
-        "timestamp",
-        "parameters",
-        "get",
-        "tagged",
         "format",
-        "created",
-        "identifier",
-        "abc"
+        "parameters",
+        "tagged",
+        "timestamp",
+        "rfc",
+        "get",
+        "granted",
+        "identifier"
       ],
-      "word_count": 6693,
+      "word_count": 7618,
       "file_path": "docs/docs__en__api__compliance__apps.md"
     },
     "/docs/en/api/compliance/apps/artifacts": {
@@ -11803,12 +11803,12 @@
         "when",
         "message",
         "chats",
-        "time",
         "messages",
         "format",
         "generated",
         "response",
         "rfc",
+        "time",
         "filter",
         "name",
         "content",
@@ -11817,7 +11817,7 @@
         "created",
         "result"
       ],
-      "word_count": 3759,
+      "word_count": 3743,
       "file_path": "docs/docs__en__api__compliance__apps__chats.md"
     },
     "/docs/en/api/compliance/apps/chats/delete": {
@@ -12046,9 +12046,9 @@
       "keywords": [
         "chat",
         "chats",
-        "time",
         "filter",
         "format",
+        "time",
         "rfc",
         "created",
         "ids",
@@ -12065,7 +12065,7 @@
         "pass",
         "request"
       ],
-      "word_count": 599,
+      "word_count": 591,
       "file_path": "docs/docs__en__api__compliance__apps__chats__list.md"
     },
     "/docs/en/api/compliance/apps/chats/messages": {
@@ -12086,14 +12086,14 @@
         "artifact",
         "content",
         "claude",
-        "time",
         "pass",
         "opaque",
         "via",
         "abc",
-        "may"
+        "may",
+        "returned"
       ],
-      "word_count": 1877,
+      "word_count": 1869,
       "file_path": "docs/docs__en__api__compliance__apps__chats__messages.md"
     },
     "/docs/en/api/compliance/apps/chats/messages/list": {
@@ -12106,12 +12106,12 @@
         "format",
         "message",
         "when",
-        "time",
         "file",
         "result",
         "pass",
         "opaque",
         "filter",
+        "time",
         "rfc",
         "claude",
         "may",
@@ -12121,7 +12121,7 @@
         "string",
         "created"
       ],
-      "word_count": 1311,
+      "word_count": 1303,
       "file_path": "docs/docs__en__api__compliance__apps__chats__messages__list.md"
     },
     "/docs/en/api/compliance/apps/projects": {
@@ -12132,24 +12132,24 @@
         "document",
         "organization",
         "user",
+        "granted",
         "tagged",
         "identifier",
+        "role",
+        "response",
+        "when",
         "timestamp",
         "creator",
-        "response",
-        "deleted",
-        "content",
+        "format",
         "parameters",
-        "claude",
+        "deleted",
         "get",
-        "created",
-        "when",
-        "type",
-        "file",
-        "creation",
-        "reference"
+        "rfc",
+        "claude",
+        "content",
+        "access"
       ],
-      "word_count": 2571,
+      "word_count": 3512,
       "file_path": "docs/docs__en__api__compliance__apps__projects.md"
     },
     "/docs/en/api/compliance/apps/projects/attachments": {
@@ -12207,6 +12207,62 @@
       ],
       "word_count": 390,
       "file_path": "docs/docs__en__api__compliance__apps__projects__attachments__list.md"
+    },
+    "/docs/en/api/compliance/apps/projects/collaborators": {
+      "title": "Collaborators",
+      "content_preview": "# Collaborators  ## List project collaborators  **get** `/v1/compliance/apps/projects/{project_id}/collaborators`  List the users, groups, and organization-wide grants on a project.  Each entry represents one active role assignment on the project. Principals are returned as a discriminated union on",
+      "keywords": [
+        "granted",
+        "role",
+        "project",
+        "access",
+        "organization",
+        "collaborator",
+        "format",
+        "user",
+        "when",
+        "rfc",
+        "discriminator",
+        "marking",
+        "group",
+        "level",
+        "individual",
+        "holders",
+        "tagged",
+        "list",
+        "response",
+        "next"
+      ],
+      "word_count": 941,
+      "file_path": "docs/docs__en__api__compliance__apps__projects__collaborators.md"
+    },
+    "/docs/en/api/compliance/apps/projects/collaborators/list": {
+      "title": "Untitled",
+      "content_preview": "## List project collaborators  **get** `/v1/compliance/apps/projects/{project_id}/collaborators`  List the users, groups, and organization-wide grants on a project.  Each entry represents one active r...",
+      "keywords": [
+        "granted",
+        "role",
+        "project",
+        "organization",
+        "access",
+        "collaborator",
+        "format",
+        "user",
+        "group",
+        "level",
+        "next",
+        "page",
+        "when",
+        "rfc",
+        "discriminator",
+        "marking",
+        "list",
+        "individual",
+        "holders",
+        "parameters"
+      ],
+      "word_count": 570,
+      "file_path": "docs/docs__en__api__compliance__apps__projects__collaborators__list.md"
     },
     "/docs/en/api/compliance/apps/projects/delete": {
       "title": "Untitled",
@@ -12404,6 +12460,146 @@
       "word_count": 257,
       "file_path": "docs/docs__en__api__compliance__apps__projects__retrieve.md"
     },
+    "/docs/en/api/compliance/code": {
+      "title": "Code",
+      "content_preview": "# Code  # Artifacts  ## List Code Artifacts  **get** `/v1/compliance/code/artifacts`  List Claude Code Artifacts owned by organizations under the parent organization.  Results are sorted by Artifact i...",
+      "keywords": [
+        "artifact",
+        "version",
+        "owner",
+        "organization",
+        "identifier",
+        "artifacts",
+        "when",
+        "code",
+        "response",
+        "only",
+        "tagged",
+        "time",
+        "published",
+        "user",
+        "content",
+        "deleted",
+        "parameters",
+        "returns",
+        "list",
+        "parent"
+      ],
+      "word_count": 1469,
+      "file_path": "docs/docs__en__api__compliance__code.md"
+    },
+    "/docs/en/api/compliance/code/artifacts": {
+      "title": "Artifacts",
+      "content_preview": "# Artifacts  ## List Code Artifacts  **get** `/v1/compliance/code/artifacts`  List Claude Code Artifacts owned by organizations under the parent organization.  Results are sorted by Artifact identifie...",
+      "keywords": [
+        "artifact",
+        "version",
+        "owner",
+        "organization",
+        "identifier",
+        "artifacts",
+        "when",
+        "code",
+        "response",
+        "only",
+        "tagged",
+        "time",
+        "published",
+        "user",
+        "content",
+        "deleted",
+        "parameters",
+        "returns",
+        "list",
+        "parent"
+      ],
+      "word_count": 1467,
+      "file_path": "docs/docs__en__api__compliance__code__artifacts.md"
+    },
+    "/docs/en/api/compliance/code/artifacts/delete": {
+      "title": "Untitled",
+      "content_preview": "## Delete Code Artifact  **delete** `/v1/compliance/code/artifacts/{artifact_id}`  Permanently deletes a Code Artifact and all its versions. This is a destructive operation that cannot be undone. A 20...",
+      "keywords": [
+        "artifact",
+        "returns",
+        "delete",
+        "response",
+        "parameters",
+        "code",
+        "deletion",
+        "organization",
+        "deleted",
+        "permanently",
+        "deletes",
+        "versions",
+        "destructive",
+        "operation",
+        "cannot",
+        "undone",
+        "means",
+        "initiated",
+        "claimed",
+        "content"
+      ],
+      "word_count": 169,
+      "file_path": "docs/docs__en__api__compliance__code__artifacts__delete.md"
+    },
+    "/docs/en/api/compliance/code/artifacts/list": {
+      "title": "Untitled",
+      "content_preview": "## List Code Artifacts  **get** `/v1/compliance/code/artifacts`  List Claude Code Artifacts owned by organizations under the parent organization.  Results are sorted by Artifact identifier within each...",
+      "keywords": [
+        "owner",
+        "artifacts",
+        "organization",
+        "artifact",
+        "version",
+        "identifier",
+        "time",
+        "page",
+        "only",
+        "when",
+        "published",
+        "before",
+        "format",
+        "user",
+        "may",
+        "set",
+        "after",
+        "ids",
+        "field",
+        "next"
+      ],
+      "word_count": 753,
+      "file_path": "docs/docs__en__api__compliance__code__artifacts__list.md"
+    },
+    "/docs/en/api/compliance/code/artifacts/retrieve_version": {
+      "title": "Untitled",
+      "content_preview": "## Download Code Artifact Version Content  **get** `/v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}`  Streams the content of one version of a Claude Code Artifact as the response bod...",
+      "keywords": [
+        "content",
+        "artifact",
+        "version",
+        "returns",
+        "list",
+        "parameters",
+        "code",
+        "response",
+        "body",
+        "organization",
+        "encoded",
+        "only",
+        "download",
+        "get",
+        "streams",
+        "one",
+        "claude",
+        "artifacts",
+        "don",
+        "exist"
+      ],
+      "word_count": 196,
+      "file_path": "docs/docs__en__api__compliance__code__artifacts__retrieve_version.md"
+    },
     "/docs/en/api/compliance/groups": {
       "title": "Groups",
       "content_preview": "# Groups  ## List Compliance Groups  **get** `/v1/compliance/groups`  List Compliance Groups  ### Query Parameters  - `limit: optional number`    Maximum results (default: 500, max: 1000)  - `name_pre...",
@@ -12549,27 +12745,27 @@
       "content_preview": "# Organizations  ## List organizations  **get** `/v1/compliance/organizations`  List organizations under the parent organization.  Returns a list of organizations sorted by creation date in ascending ...",
       "keywords": [
         "role",
-        "list",
         "organization",
+        "list",
         "response",
-        "user",
         "parameters",
+        "user",
         "creation",
+        "organizations",
         "identifier",
         "timestamp",
+        "enforced",
+        "get",
         "current",
+        "retrieve",
         "next",
         "page",
+        "value",
         "compliance",
-        "organizations",
-        "name",
-        "tagged",
-        "iso",
-        "get",
-        "format",
-        "retrieve"
+        "returns",
+        "name"
       ],
-      "word_count": 1203,
+      "word_count": 2224,
       "file_path": "docs/docs__en__api__compliance__organizations.md"
     },
     "/docs/en/api/compliance/organizations/list": {
@@ -12739,6 +12935,62 @@
       ],
       "word_count": 97,
       "file_path": "docs/docs__en__api__compliance__organizations__roles__retrieve.md"
+    },
+    "/docs/en/api/compliance/organizations/settings": {
+      "title": "Settings",
+      "content_preview": "# Settings  ## Get effective organization settings  **get** `/v1/compliance/organizations/{organization_id}/settings`  Retrieve the effective settings for an organization.  Returns the settings curren...",
+      "keywords": [
+        "organization",
+        "enforced",
+        "force",
+        "setting",
+        "data",
+        "retention",
+        "settings",
+        "whose",
+        "value",
+        "limit",
+        "key",
+        "time",
+        "list",
+        "single",
+        "means",
+        "members",
+        "provisioned",
+        "mode",
+        "reported",
+        "only"
+      ],
+      "word_count": 1021,
+      "file_path": "docs/docs__en__api__compliance__organizations__settings.md"
+    },
+    "/docs/en/api/compliance/organizations/settings/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Get effective organization settings  **get** `/v1/compliance/organizations/{organization_id}/settings`  Retrieve the effective settings for an organization.  Returns the settings currently in force...",
+      "keywords": [
+        "organization",
+        "enforced",
+        "settings",
+        "force",
+        "data",
+        "retention",
+        "key",
+        "setting",
+        "whose",
+        "value",
+        "limit",
+        "get",
+        "effective",
+        "returns",
+        "configured",
+        "example",
+        "list",
+        "hierarchy",
+        "organizations",
+        "parameters"
+      ],
+      "word_count": 543,
+      "file_path": "docs/docs__en__api__compliance__organizations__settings__retrieve.md"
     },
     "/docs/en/api/compliance/organizations/users": {
       "title": "Users",
@@ -42299,6 +42551,34 @@
       "word_count": 505,
       "file_path": "docs/docs__en__intro.md"
     },
+    "/docs/en/manage-claude/access-transparency": {
+      "title": "Access Transparency",
+      "content_preview": "# Access Transparency  Receive an audit record of human access to your organization's data by Anthropic personnel through the Compliance API.  ---  Learn how Access Transparency creates a record of hu...",
+      "keywords": [
+        "access",
+        "transparency",
+        "content",
+        "anthropic",
+        "api",
+        "claude",
+        "covered",
+        "feed",
+        "activity",
+        "section",
+        "events",
+        "event",
+        "human",
+        "organization",
+        "compliance",
+        "title",
+        "see",
+        "does",
+        "key",
+        "data"
+      ],
+      "word_count": 1996,
+      "file_path": "docs/docs__en__manage-claude__access-transparency.md"
+    },
     "/docs/en/manage-claude/admin-api": {
       "title": "Admin API",
       "content_preview": "# Admin API  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Ti...",
@@ -42830,6 +43110,34 @@
       ],
       "word_count": 1512,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
+    },
+    "/docs/en/manage-claude/wif-admin-api": {
+      "title": "Manage WIF with the Admin API",
+      "content_preview": "# Manage WIF with the Admin API  Create and manage Workload Identity Federation service accounts, issuers, and rules programmatically for infrastructure-as-code and CI workflows.  ---  The Admin API l...",
+      "keywords": [
+        "rule",
+        "federation",
+        "workload",
+        "service",
+        "admin",
+        "token",
+        "account",
+        "api",
+        "create",
+        "rules",
+        "issuer",
+        "identity",
+        "organization",
+        "endpoints",
+        "manage",
+        "issuers",
+        "console",
+        "oauth",
+        "workspace",
+        "through"
+      ],
+      "word_count": 1561,
+      "file_path": "docs/docs__en__manage-claude__wif-admin-api.md"
     },
     "/docs/en/manage-claude/wif-providers/aws": {
       "title": "Use WIF with AWS",

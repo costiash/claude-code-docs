@@ -583,8 +583,8 @@ The type mismatch between the initial `input: {}` (object) and `partial_json` (s
   };
 
   // Block index -> accumulated JSON fragments
-  // The C# SDK does not currently provide a stream accumulator for tool input;
-  // the manual pattern shown here is the supported approach.
+  // This example accumulates the deltas manually to show the raw stream;
+  // the SDK's MessageContentAggregator can also accumulate tool input automatically.
   var toolInputs = new Dictionary<long, StringBuilder>();
 
   await foreach (var streamEvent in client.Messages.CreateStreaming(parameters))

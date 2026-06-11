@@ -10,8 +10,7 @@ This pattern fits long-horizon agentic workloads (coding agents, computer use, m
 
 <Note>
   The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01`
-  in your requests. To request access or share feedback, contact your Anthropic
-  account team.
+  in your requests.
 </Note>
 
 <Note>
@@ -147,7 +146,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-```csharp C# nocheck hidelines={1}
+```csharp C# hidelines={1}
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
 using Messages = Anthropic.Models.Messages;
@@ -180,7 +179,7 @@ var response = await client.Beta.Messages.Create(parameters);
 Console.WriteLine(response);
 ```
 
-```go Go nocheck hidelines={1..11,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (

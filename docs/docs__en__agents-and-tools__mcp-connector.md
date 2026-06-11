@@ -637,12 +637,18 @@ Once you've obtained an access token using either of the preceding OAuth flows, 
 
 For detailed explanations of the OAuth flow, refer to the [Authorization section](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) in the MCP specification.
 
-## Client-side MCP helpers (TypeScript)
+## Client-side MCP helpers
 
-If you manage your own MCP client connection (for example, with local stdio servers, MCP prompts, or MCP resources), the TypeScript SDK provides helper functions that convert between MCP types and Claude API types. This eliminates manual conversion code when using the [MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk) alongside the Anthropic SDK.
+If you manage your own MCP client connection (for example, with local stdio servers, MCP prompts, or MCP resources), the SDKs provide helper functions that convert between MCP types and Claude API types. This eliminates manual conversion code when using an MCP SDK (such as the [TypeScript MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)) alongside the Anthropic SDK.
 
 <Note>
-  These helpers are currently available in the TypeScript SDK only.
+  These helpers are available in the Python, TypeScript, Java, Go, Ruby, and PHP SDKs. They are not yet available in the C# SDK. The examples in this section use TypeScript; in other languages, import the equivalent helpers from:
+
+  - **Python:** `anthropic.lib.tools.mcp` (install with `pip install anthropic[mcp]`)
+  - **Java:** `com.anthropic.mcp.BetaMcp` in the `anthropic-java-mcp` module
+  - **Go:** `github.com/anthropics/anthropic-sdk-go/mcp`
+  - **Ruby:** `Anthropic::Mcp` (requires the `mcp` gem)
+  - **PHP:** `Anthropic\Lib\Tools\BetaMcp`
 </Note>
 <Note>
   Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-api) when you have remote servers accessible by URL and only need tool support. Use the client-side helpers when you need local servers, prompts, resources, or more control over the connection with the base SDK.

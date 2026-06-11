@@ -137,7 +137,7 @@ Create Workspace
 curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "name": "x",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
