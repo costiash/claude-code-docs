@@ -44,38 +44,39 @@ Even when using the Files API, requests with many large images can fail before r
 
 ### Evaluate image size
 
-An image uses approximately `width * height / 750` tokens, where the width and height are expressed in pixels.
+Claude views images in patches instead of pixels. Each patch is a 28×28 pixel block of the image, referred to as a visual token. An image therefore costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
-The maximal native image resolution is:
+If Claude receives an image that is too large, it resizes it. The maximal native image resolution is:
 
 - For Claude Fable 5 and Claude Mythos 5: 4784 tokens, and at most 2576 pixels on the long edge.
 - For Claude Opus 4.8: 4784 tokens, and at most 2576 pixels on the long edge.
 - For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
 - For other models: 1568 tokens, and at most 1568 pixels on the long edge.
 
-If your input image is larger than this native resolution, it will first be resized to the largest possible size while preserving the aspect ratio. Moreover, images are padded on the bottom and right corners to a multiple of 28 pixels.
-
 <Note>
-When asking Claude to output coordinates (points, bounding boxes, etc.), they will be expressed with respect to the resized/padded image and will need to be rescaled/translated accordingly client-side based on the original and resized dimensions.
+If your input image is larger than this native resolution, it is first resized to the largest possible size that preserves the aspect ratio. All images, resized or not, are then padded on the bottom and right edges to a multiple of 28 pixels. See [How Claude resizes and pads images](#how-claude-resizes-and-pads-images) for the exact rule.
+
+When asking Claude to output coordinates (points, bounding boxes, and so on), it works best with absolute pixel coordinates expressed with respect to the resized image it sees. See [Working with coordinates and bounding boxes](#working-with-coordinates-and-bounding-boxes) for how to handle this.
 </Note>
 
 To minimize latency and to simplify coordinate-based workflows, you should prefer resizing images before uploading them.
 
 ### Calculate image costs
 
-Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you're using.
+Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the image's visual token count (see [Evaluate image size](#evaluate-image-size)) by the [per-token price of the model](https://claude.com/pricing) you're using.
 
-Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
+Here are examples of tokenization and approximate costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
 | Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
 | ----------------------------- | ------------ | ------------ | ---------------- |
-| 200x200 px(0.04 megapixels)   | \~54         | \~$0.00016   | \~$0.16          |
-| 1000x1000 px(1 megapixel)     | \~1334       | \~$0.004     | \~$4.00          |
-| 1092x1092 px(1.19 megapixels) | \~1568       | \~$0.0047    | \~$4.70          |
-| 1920x1080 px(2.07 megapixels) | \~1568       | \~$0.0047    | \~$4.70          |
-| 2000x1500 px(3 megapixels)    | \~1568       | \~$0.0047    | \~$4.70          |
+| 200x200 px(0.04 megapixels)   | 64           | \~$0.00019   | \~$0.19          |
+| 1000x1000 px(1 megapixel)     | 1296         | \~$0.0039    | \~$3.89          |
+| 1092x1092 px(1.19 megapixels) | 1521         | \~$0.0046    | \~$4.56          |
+| 1920x1080 px(2.07 megapixels) | 1560         | \~$0.0047    | \~$4.68          |
+| 2000x1500 px(3 megapixels)    | 1564         | \~$0.0047    | \~$4.69          |
+| 3840x2160 px(8.29 megapixels) | 1560         | \~$0.0047    | \~$4.68          |
 
-Note that the last three images are downscaled before processing.
+Note that the last three images exceed the native resolution and are downscaled before processing (to 1456x819 px, 1270x952 px, and 1456x819 px respectively), which caps their token cost. The 4K image costs no more than the 1920x1080 image because both downscale to the same size; the extra resolution is discarded.
 
 #### High-resolution image support \{#high-resolution-image-support-on-claude-opus-4-7}
 
@@ -89,11 +90,14 @@ Here are the same image sizes tokenized for Claude Opus 4.7 and Claude Opus 4.8,
 
 | Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
 | ----------------------------- | ------------ | ------------ | ---------------- |
-| 200x200 px(0.04 megapixels)   | \~54         | \~$0.00027   | \~$0.27          |
-| 1000x1000 px(1 megapixel)     | \~1334       | \~$0.0067    | \~$6.70          |
-| 1092x1092 px(1.19 megapixels) | \~1590       | \~$0.0080    | \~$8.00          |
-| 1920x1080 px(2.07 megapixels) | \~2765       | \~$0.014     | \~$14.00         |
-| 2000x1500 px(3 megapixels)    | \~4000       | \~$0.020     | \~$20.00         |
+| 200x200 px(0.04 megapixels)   | 64           | \~$0.00032   | \~$0.32          |
+| 1000x1000 px(1 megapixel)     | 1296         | \~$0.0065    | \~$6.48          |
+| 1092x1092 px(1.19 megapixels) | 1521         | \~$0.0076    | \~$7.61          |
+| 1920x1080 px(2.07 megapixels) | 2691         | \~$0.013     | \~$13.46         |
+| 2000x1500 px(3 megapixels)    | 3888         | \~$0.019     | \~$19.44         |
+| 3840x2160 px(8.29 megapixels) | 4784         | \~$0.024     | \~$23.92         |
+
+Only the last image exceeds the higher limits: the 4K image is downscaled to 2576x1449 px before processing. High-resolution support raises the resolution limits but does not remove them; images larger than 2576 px on the long edge (or 4784 visual tokens) are still downscaled.
 
 ### Ensure image quality
 
@@ -105,6 +109,127 @@ When providing images to Claude, keep the following in mind for best results:
 - **Text**: If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context just to enlarge the text.
 - **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing your images, cropping them, or both.
 - **Image compression**: Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
+
+---
+
+## Working with coordinates and bounding boxes
+
+Claude can locate and label regions of an image (for example, returning bounding boxes for tables, form fields, chart elements, or UI components).
+
+<Note>
+**Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
+</Note>
+
+Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
+
+<Note>
+Claude's spatial reasoning has limits (see [Limitations](#limitations)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF uploads](/docs/en/build-with-claude/pdf-support), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
+</Note>
+
+### How Claude resizes and pads images
+
+Claude finds the largest aspect-preserving size that satisfies both of the model's image limits:
+
+1. **Edge limit:** neither side exceeds the maximum edge length (1568 px for most models, 2576 px for Claude Opus 4.7 and later models).
+2. **Visual token limit:** the image's token cost `⌈width / 28⌉ × ⌈height / 28⌉` does not exceed the model's visual token budget (1568 tokens for most models, 4784 for Claude Opus 4.7 and later models).
+
+For most photos and screenshots the edge limit is what triggers a resize. For portrait documents the visual token limit usually triggers first, and overlooking it is the most common cause of misaligned coordinates. For example, an A4 page scanned at 130 DPI is 1075×1520 pixels: both sides are under 1568 px, but it costs `39 × 55 = 2145` visual tokens, so Claude resizes it to 924×1307.
+
+Claude then pads every image, whether or not it was resized, up to the next multiple of 28 pixels on the bottom and right edges (924×1307 becomes 924×1316 in the example). The padding contains no content: Claude perceives the padded image, but the page content only ever occupies the un-padded resized region. **Always normalize or rescale by the resized dimensions, not the padded dimensions**; dividing by the padded dimensions scales every coordinate by a small amount.
+
+### Resize your image before uploading
+
+The most reliable approach is to resize your image yourself before uploading, so the image you have is exactly the image Claude sees and the coordinates Claude returns need no conversion.
+
+The following reference implementation computes the exact size Claude resizes an image to:
+
+```python
+import math
+
+
+def count_image_tokens(width: int, height: int) -> int:
+    """Visual tokens consumed by an image: one token per 28x28 pixel patch."""
+    return math.ceil(width / 28) * math.ceil(height / 28)
+
+
+def resized_size(
+    width: int,
+    height: int,
+    max_edge: int = 1568,
+    max_tokens: int = 1568,
+) -> tuple[int, int]:
+    """The size Claude resizes an image to before padding.
+
+    Defaults are for most models. For Claude Opus 4.7 and later models, use
+    max_edge=2576 and max_tokens=4784. Returns (width, height). Images that
+    already fit within the limits are returned unchanged.
+    """
+
+    def fits(w: int, h: int) -> bool:
+        return (
+            math.ceil(w / 28) * 28 <= max_edge
+            and math.ceil(h / 28) * 28 <= max_edge
+            and count_image_tokens(w, h) <= max_tokens
+        )
+
+    if fits(width, height):
+        return (width, height)
+    if height > width:
+        resized_h, resized_w = resized_size(height, width, max_edge, max_tokens)
+        return (resized_w, resized_h)
+
+    # Binary search along the long edge for the largest aspect-preserving
+    # size that fits.
+    aspect_ratio = width / height
+    lo, hi = 1, width  # lo always fits; hi never fits
+    while lo + 1 < hi:
+        mid = (lo + hi) // 2
+        if fits(mid, max(round(mid / aspect_ratio), 1)):
+            lo = mid
+        else:
+            hi = mid
+    return (lo, max(round(lo / aspect_ratio), 1))
+
+
+# The A4 example from "How Claude resizes and pads images":
+print(resized_size(1075, 1520))  # (924, 1307)
+```
+
+1. Resize the image to the dimensions returned by `resized_size`. If the image already fits within the model's limits, `resized_size` returns its dimensions unchanged and no resize is needed.
+2. Send the resized image to the API. Don't pad it yourself; Claude handles padding, and padding doesn't shift the coordinate origin.
+3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."*
+4. Use the returned coordinates directly against the image you sent. If you need normalized coordinates, divide by the dimensions of the image you sent, not by the original image's dimensions and not by the padded dimensions.
+
+### Rescale coordinates when you cannot pre-resize
+
+If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use `resized_size` from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
+
+```python
+def to_relative_coordinates(
+    x: float,
+    y: float,
+    original_width: int,
+    original_height: int,
+    max_edge: int = 1568,
+    max_tokens: int = 1568,
+) -> tuple[float, float]:
+    """Map a pixel coordinate returned by Claude to relative coordinates in [0, 1].
+
+    Pass the dimensions of the image you uploaded. For Claude Opus 4.7 and
+    later models, use max_edge=2576 and max_tokens=4784.
+    """
+    resized_w, resized_h = resized_size(
+        original_width, original_height, max_edge, max_tokens
+    )
+    return (x / resized_w, y / resized_h)
+
+
+# To express the coordinate in your original image's pixel space, multiply the
+# relative coordinate by your original dimensions:
+# (rel_x * original_width, rel_y * original_height)
+```
+
+Padding is applied only to the bottom and right edges, so the origin doesn't shift and a per-axis linear rescale is sufficient.
 
 ---
 
@@ -1485,7 +1610,7 @@ While Claude's image understanding capabilities are cutting-edge, there are some
 
 - **People identification**: Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
 - **Accuracy**: Claude may hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
-- **Spatial reasoning**: Claude's spatial reasoning abilities are limited. It may struggle with tasks requiring precise localization or layouts, like reading an analog clock face or describing exact positions of chess pieces.
+- **Spatial reasoning**: Claude's coordinate and localization outputs are approximate. Follow the guidance in [Working with coordinates and bounding boxes](#working-with-coordinates-and-bounding-boxes) and verify outputs before relying on them.
 - **Counting**: Claude can give approximate counts of objects in an image but may not always be precisely accurate, especially with large numbers of small objects.
 - **AI generated images**: Claude does not know if an image is AI-generated and may be incorrect if asked. Do not rely on it to detect fake or synthetic images.
 - **Inappropriate content**: Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).

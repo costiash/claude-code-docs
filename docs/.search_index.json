@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-11T01:37:04Z",
+  "generated_at": "2026-06-11T05:09:27Z",
   "indexed_files": 1641,
   "index": {
     "/changelog": {
@@ -42164,27 +42164,27 @@
       "content_preview": "# Vision  Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.  ---  This guide describes how to work with images in Claude, including best practices, code examples, and limitations to keep in mind.  ---  ## How to use",
       "keywords": [
         "image",
-        "images",
         "claude",
+        "images",
         "api",
+        "coordinates",
         "section",
+        "example",
         "per",
         "request",
         "title",
-        "using",
-        "example",
-        "size",
-        "base",
-        "tokens",
-        "text",
-        "tab",
-        "when",
         "before",
-        "opus",
-        "these",
-        "examples"
+        "size",
+        "when",
+        "using",
+        "limits",
+        "token",
+        "tokens",
+        "see",
+        "models",
+        "dimensions"
       ],
-      "word_count": 5201,
+      "word_count": 6428,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
