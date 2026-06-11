@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-10T22:17:32Z",
+  "generated_at": "2026-06-11T01:37:04Z",
   "indexed_files": 1641,
   "index": {
     "/changelog": {
@@ -888,15 +888,15 @@
         "step",
         "when",
         "root",
-        "marketplace",
         "add",
+        "marketplace",
         "agents",
         "test",
         "install",
         "lsp",
         "file"
       ],
-      "word_count": 2951,
+      "word_count": 2973,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
