@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-12T13:51:25Z",
+  "generated_at": "2026-06-12T16:41:52Z",
   "indexed_files": 1652,
   "index": {
     "/changelog": {
@@ -476,7 +476,7 @@
         "user",
         "control"
       ],
-      "word_count": 21868,
+      "word_count": 21903,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -43172,27 +43172,27 @@
       "content_preview": "# Use WIF with Microsoft Entra ID  Federate Azure managed identities and Entra Workload Identity with the Claude API so your Azure workloads can call Claude without static API keys.  ---  Azure worklo...",
       "keywords": [
         "entra",
-        "identity",
         "token",
+        "identity",
         "workload",
         "issuer",
         "managed",
         "service",
-        "azure",
         "anthropic",
+        "azure",
         "aks",
         "tenant",
         "federation",
         "rule",
+        "tokens",
         "issued",
         "kubernetes",
         "account",
+        "value",
         "microsoft",
-        "cluster",
-        "oidc",
-        "value"
+        "cluster"
       ],
-      "word_count": 3283,
+      "word_count": 3326,
       "file_path": "docs/docs__en__manage-claude__wif-providers__azure.md"
     },
     "/docs/en/manage-claude/wif-providers/gcp": {
@@ -43933,8 +43933,8 @@
         "tool",
         "work",
         "run",
-        "self",
         "agent",
+        "self",
         "sandbox",
         "managed",
         "hosted",
@@ -43948,7 +43948,7 @@
         "execution",
         "when"
       ],
-      "word_count": 4476,
+      "word_count": 4479,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {

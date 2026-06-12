@@ -105,7 +105,7 @@ The wizard creates these resources for you. Use the following values whether you
 }
 ```
 
-Be as specific as the workload allows. Loosen `subject_prefix` to `repo:your-org/your-repo:*` (paired with a `claims.ref` constraint) only if the rule must match multiple event types from the same repository, since the trailing segment of `sub` varies between `ref:...`, `environment:...`, and `pull_request` events.
+Be as specific as the workload allows. Loosen `subject_prefix` to `repo:your-org/your-repo:*` (paired with a `claims.ref` constraint) only if the rule must match multiple event types from the same repository, because the trailing segment of `sub` varies between `ref:...`, `environment:...`, and `pull_request` events.
 
 ## Acquire and use a token
 
