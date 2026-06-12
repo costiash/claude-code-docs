@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-11T22:18:50Z",
+  "generated_at": "2026-06-12T01:37:42Z",
   "indexed_files": 1652,
   "index": {
     "/changelog": {
@@ -16,8 +16,8 @@
         "instead",
         "mode",
         "tool",
-        "improved",
         "sessions",
+        "improved",
         "after",
         "being",
         "mcp",
@@ -28,7 +28,7 @@
         "terminal",
         "commands"
       ],
-      "word_count": 55149,
+      "word_count": 55408,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -154,8 +154,8 @@
         "see",
         "settings",
         "sessions",
-        "code",
         "only",
+        "code",
         "default",
         "model",
         "file",
@@ -168,7 +168,7 @@
         "start",
         "output"
       ],
-      "word_count": 3364,
+      "word_count": 3383,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -404,15 +404,15 @@
         "sdk",
         "mode",
         "code",
-        "example",
         "session",
+        "example",
         "event",
+        "run",
         "cli",
         "note",
         "prompt",
         "without",
         "string",
-        "run",
         "tools",
         "bare",
         "file",
@@ -420,7 +420,7 @@
         "interactive",
         "message"
       ],
-      "word_count": 2038,
+      "word_count": 2068,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -596,17 +596,17 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
         "server",
-        "claude",
         "mcp",
+        "claude",
         "servers",
         "code",
         "step",
         "tools",
-        "when",
         "tool",
+        "when",
+        "plugin",
         "title",
         "environment",
-        "plugin",
         "project",
         "add",
         "only",
@@ -616,7 +616,7 @@
         "variable",
         "set"
       ],
-      "word_count": 6798,
+      "word_count": 6879,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -728,7 +728,7 @@
         "prompt",
         "mcp"
       ],
-      "word_count": 9795,
+      "word_count": 9801,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -906,25 +906,25 @@
         "claude",
         "code",
         "step",
+        "commands",
         "title",
         "see",
         "accordion",
         "card",
         "tab",
-        "commands",
+        "run",
+        "session",
         "common",
+        "terminal",
+        "command",
         "note",
         "windows",
         "git",
         "info",
-        "first",
-        "more",
-        "available",
-        "before",
-        "terminal",
-        "command"
+        "start",
+        "first"
       ],
-      "word_count": 1489,
+      "word_count": 1612,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1216,23 +1216,23 @@
         "open",
         "extension",
         "tab",
+        "see",
+        "cli",
         "new",
         "conversation",
-        "see",
         "session",
+        "panel",
         "click",
         "editor",
-        "panel",
         "icon",
-        "cli",
         "terminal",
         "file",
+        "install",
         "prompt",
         "when",
-        "settings",
-        "install"
+        "settings"
       ],
-      "word_count": 5058,
+      "word_count": 5161,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -41754,8 +41754,8 @@
         "iam",
         "bedrock",
         "account",
-        "available",
         "through",
+        "available",
         "data",
         "sigv",
         "note",
@@ -41764,7 +41764,7 @@
         "authentication",
         "first"
       ],
-      "word_count": 6574,
+      "word_count": 6537,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -43937,18 +43937,18 @@
         "agent",
         "sandbox",
         "managed",
-        "sdk",
         "hosted",
         "anthropic",
+        "sdk",
         "host",
-        "claude",
         "queue",
         "key",
         "codegroup",
+        "claude",
         "execution",
         "when"
       ],
-      "word_count": 4510,
+      "word_count": 4476,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {

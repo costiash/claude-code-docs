@@ -8757,8 +8757,8 @@
     "docs__en__build-with-claude__claude-platform-on-aws.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
-      "hash": "c5a37d3b70bb41fa94d8a58fd2a6ec67492b13f7a7c7229167b7f2f85bb17b34",
-      "last_updated": "2026-06-11T19:34:26.016520"
+      "hash": "dc1ba1fbdfdac7a8a3a6fb1dd364b338551ac0ed2fe14f28fc1601d0cfe1d29e",
+      "last_updated": "2026-06-12T01:30:52.242989"
     },
     "docs__en__build-with-claude__compaction.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
@@ -8925,8 +8925,8 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "bfcb504bfd3cb5fe5c8c28829269152646739f2fdff434771993d89ac8a229e5",
-      "last_updated": "2026-06-10T01:29:05.158861"
+      "hash": "cbbf1e8a033726589e7781c82c052364468172467f17b6c0af040fc2d378f3e0",
+      "last_updated": "2026-06-12T01:31:46.430662"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
@@ -8991,8 +8991,8 @@
     "claude-code__headless.md": {
       "original_url": "https://platform.claude.com/docs/en/headless",
       "original_md_url": "https://platform.claude.com/docs/en/headless.md",
-      "hash": "504d1709030ae578a36e2bee17408cb9fb7db777c24084851b927cea2d6a3434",
-      "last_updated": "2026-06-09T19:16:54.602651"
+      "hash": "e24989069a16d2e042f879a721b4cce4586e597e5ea3c2fb82a8cdf99b523bf4",
+      "last_updated": "2026-06-12T01:33:18.880934"
     },
     "claude-code__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks",
@@ -9327,8 +9327,8 @@
     "docs__en__managed-agents__self-hosted-sandboxes.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
-      "hash": "a31876847cfd7bbf43dd2715d53c7b244ee5924bfe06916fc14f9257992112b0",
-      "last_updated": "2026-06-10T19:29:57.077952"
+      "hash": "885639ff1b596cc6f7ee32a477dcec3b27396e6123512215be65344be2d2a598",
+      "last_updated": "2026-06-12T01:34:10.993882"
     },
     "docs__en__managed-agents__self-hosted-sandboxes-security.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security",
@@ -9375,8 +9375,8 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "6d06651c3d6de5547f594b68c88c16a6d1f7fd1648431bc2621731e167dc708b",
-      "last_updated": "2026-06-10T01:31:32.185171"
+      "hash": "9006b0bb74722d71c096aa2d196dbee0f3759d517d0f079d69d90159dcc13355",
+      "last_updated": "2026-06-12T01:34:20.629099"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
@@ -9399,8 +9399,8 @@
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
       "original_md_url": "https://platform.claude.com/docs/en/monitoring-usage.md",
-      "hash": "889bc394982b576702ff58b46f4a742b14d9ecb72cafe493fd26c67d6b7aa185",
-      "last_updated": "2026-06-09T22:09:14.589154"
+      "hash": "396d80451d906ee43b83e5a4e300eda1005b1cd3d16fa2a455dd361a4dba5923",
+      "last_updated": "2026-06-12T01:34:30.925509"
     },
     "claude-code__network-config.md": {
       "original_url": "https://platform.claude.com/docs/en/network-config",
@@ -9447,8 +9447,8 @@
     "claude-code__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/quickstart.md",
-      "hash": "0e97ce790ebc166da89c7982b88ed391c4d890a13ccabdf4c31f20693bffd367",
-      "last_updated": "2026-06-10T01:32:13.775513"
+      "hash": "342f68a91e02e55be7e550cfb489606d9043de134f1228413eb5e740b53b98ba",
+      "last_updated": "2026-06-12T01:35:08.471242"
     },
     "claude-code__sandboxing.md": {
       "original_url": "https://platform.claude.com/docs/en/sandboxing",
@@ -9519,20 +9519,20 @@
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
       "original_md_url": "https://platform.claude.com/docs/en/vs-code.md",
-      "hash": "d75e8325a5cf77444b9bf1a08e543ecf5e450623667f9d34f24c2867e7e8542c",
-      "last_updated": "2026-06-09T16:34:47.879143"
+      "hash": "778e31d691f137862819dfd283b8a5e3e93e6593ba491201e286d36a4198b131",
+      "last_updated": "2026-06-12T01:36:24.011687"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "23e8263c5f4f9c8ae01f5dffaa775ec041988265e569c4932750da38e087026b",
-      "last_updated": "2026-06-11T08:23:08.243677",
+      "hash": "a5487891ad1209b919a9d82b53d02f5b5f2d6d0565d5df06de3bee5e95fea218",
+      "last_updated": "2026-06-12T01:37:38.706857",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-11T22:18:47.399624",
-    "fetch_duration_seconds": 2110.420447,
+    "last_fetch_completed": "2026-06-12T01:37:38.707093",
+    "fetch_duration_seconds": 2119.717319,
     "total_pages_discovered": 1843,
     "pages_fetched_successfully": 1588,
     "pages_failed": 256,
@@ -9799,7 +9799,7 @@
     "total_files": 1588,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-11T22:18:47.399643",
+  "last_updated": "2026-06-12T01:37:38.707110",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

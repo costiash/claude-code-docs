@@ -535,7 +535,6 @@ The following capabilities are not currently available on Claude Platform on AWS
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
 - **Fast mode:** Not available on Claude Platform on AWS.
 - **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
-- **Self-hosted sandbox work-list endpoint:** The `GET /v1/environments/{id}/work` endpoint, which lists pending work for a [self-hosted sandbox](/docs/en/managed-agents/self-hosted-sandboxes), is not currently available. The other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 - **MCP tunnels:** Only MCP servers exposed over the public internet are supported.
 
 ## Data residency
