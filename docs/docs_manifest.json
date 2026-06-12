@@ -9171,8 +9171,8 @@
     "docs__en__manage-claude__wif-providers__azure.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/azure",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/azure.md",
-      "hash": "1aa4392071a21cdc94389db919542ad888f2ad98daf82a344858dcf8b4286031",
-      "last_updated": "2026-06-11T19:37:32.058093"
+      "hash": "f53ef2491bab07ae771aa4a88a187d8c4304b62dfeaf441dec657308166243d6",
+      "last_updated": "2026-06-12T08:15:51.165498"
     },
     "docs__en__manage-claude__wif-providers__gcp.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp",
@@ -9531,8 +9531,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-12T05:08:56.078286",
-    "fetch_duration_seconds": 2122.56284,
+    "last_fetch_completed": "2026-06-12T08:19:40.250976",
+    "fetch_duration_seconds": 2138.89208,
     "total_pages_discovered": 1843,
     "pages_fetched_successfully": 1588,
     "pages_failed": 256,
@@ -9799,7 +9799,7 @@
     "total_files": 1588,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-12T05:08:56.078303",
+  "last_updated": "2026-06-12T08:19:40.251003",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

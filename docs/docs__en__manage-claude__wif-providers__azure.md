@@ -85,7 +85,7 @@ The wizard creates these resources for you. Use the following values whether you
 ```
 
 <Note>
-Depending on the token version, the `iss` claim may be `https://sts.windows.net/<TENANT_ID>/` instead, and the `aud` claim may carry the requested resource URL (`https://api.anthropic.com`) rather than a GUID. Decode your managed-identity token (the Verify section later in this guide shows how), register whichever `iss` value it contains, and set the federation rule's `audience` to whichever `aud` value it contains. The two issuer URLs share the same JWKS, so discovery mode works for either.
+The access-token `iss` might be `https://sts.windows.net/<TENANT_ID>/` (v1.0) instead, and the `aud` claim might carry the requested resource URL (`https://api.anthropic.com`) rather than a GUID. Which form a workload gets is set by the **resource** app registration's `api.requestedAccessTokenVersion`: the default (`null`) emits v1.0 tokens, so managed-identity tokens for a custom audience are v1.0 unless that registration sets `requestedAccessTokenVersion: 2`. Decode your managed-identity token (the Verify section later in this guide shows how), register whichever `iss` value it contains, and set the federation rule's `audience` to whichever `aud` value it contains. The two issuer URLs share the same JWKS, so discovery mode works for either.
 </Note>
 
 **Federation rule:** Match on the managed identity's object ID and your tenant ID. For v2 tokens the `audience` value is your Entra application's client ID (a GUID); use the exact `aud` value from your decoded token.

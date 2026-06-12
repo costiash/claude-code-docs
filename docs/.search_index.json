@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-12T05:08:59Z",
+  "generated_at": "2026-06-12T08:19:43Z",
   "indexed_files": 1652,
   "index": {
     "/changelog": {
@@ -43174,8 +43174,8 @@
         "entra",
         "identity",
         "token",
-        "issuer",
         "workload",
+        "issuer",
         "managed",
         "service",
         "azure",
@@ -43192,7 +43192,7 @@
         "oidc",
         "value"
       ],
-      "word_count": 3253,
+      "word_count": 3283,
       "file_path": "docs/docs__en__manage-claude__wif-providers__azure.md"
     },
     "/docs/en/manage-claude/wif-providers/gcp": {
