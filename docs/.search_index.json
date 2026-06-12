@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-12T01:37:42Z",
+  "generated_at": "2026-06-12T05:08:59Z",
   "indexed_files": 1652,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "terminal",
         "commands"
       ],
-      "word_count": 55408,
+      "word_count": 55456,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -525,14 +525,14 @@
         "restart",
         "running",
         "installed",
+        "run",
         "configuration",
         "remote",
         "host",
         "step",
-        "features",
-        "installation"
+        "features"
       ],
-      "word_count": 1079,
+      "word_count": 1115,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -1232,7 +1232,7 @@
         "when",
         "settings"
       ],
-      "word_count": 5161,
+      "word_count": 5189,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
