@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-13T19:08:53Z",
+  "generated_at": "2026-06-13T22:05:13Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -681,26 +681,26 @@
       "keywords": [
         "model",
         "claude",
-        "opus",
         "when",
+        "opus",
         "set",
+        "default",
         "code",
         "fable",
-        "default",
         "effort",
-        "session",
         "models",
+        "session",
+        "settings",
         "context",
         "level",
         "picker",
         "setting",
-        "settings",
-        "environment",
         "sonnet",
+        "environment",
         "thinking",
-        "name"
+        "only"
       ],
-      "word_count": 5355,
+      "word_count": 5579,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -1003,12 +1003,12 @@
         "set",
         "corp",
         "tools",
-        "github",
         "only",
+        "github",
         "user",
         "repo"
       ],
-      "word_count": 11374,
+      "word_count": 11508,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
