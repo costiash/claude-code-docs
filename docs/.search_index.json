@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-12T22:12:19Z",
-  "indexed_files": 1652,
+  "generated_at": "2026-06-13T01:36:05Z",
+  "indexed_files": 1653,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -42607,6 +42607,34 @@
       "word_count": 1286,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
+    "/docs/en/manage-claude/analytics-api": {
+      "title": "Analytics APIs",
+      "content_preview": "# Analytics APIs  Understand which analytics API and API key your organization needs, then provision access to Claude Code productivity metrics or Claude Enterprise engagement and adoption data.  --- ...",
+      "keywords": [
+        "api",
+        "claude",
+        "analytics",
+        "key",
+        "enterprise",
+        "code",
+        "organization",
+        "usage",
+        "admin",
+        "step",
+        "cost",
+        "access",
+        "title",
+        "data",
+        "create",
+        "adoption",
+        "keys",
+        "card",
+        "engagement",
+        "which"
+      ],
+      "word_count": 837,
+      "file_path": "docs/docs__en__manage-claude__analytics-api.md"
+    },
     "/docs/en/manage-claude/api-and-data-retention": {
       "title": "API and data retention",
       "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  <Note> Informati...",
@@ -42670,25 +42698,25 @@
         "claude",
         "code",
         "api",
+        "analytics",
         "metrics",
         "usage",
         "tool",
-        "analytics",
         "data",
         "admin",
         "user",
         "number",
+        "organization",
         "cost",
         "model",
         "accepted",
         "rejected",
-        "organization",
-        "pagination",
-        "productivity",
         "users",
-        "through"
+        "key",
+        "type",
+        "pagination"
       ],
-      "word_count": 1469,
+      "word_count": 1513,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/cmek-aws-kms": {
@@ -42856,7 +42884,7 @@
         "read",
         "delete"
       ],
-      "word_count": 1545,
+      "word_count": 1548,
       "file_path": "docs/docs__en__manage-claude__compliance-api-access.md"
     },
     "/docs/en/manage-claude/compliance-api": {
@@ -43090,25 +43118,25 @@
         "usage",
         "api",
         "cost",
-        "data",
         "claude",
-        "costs",
+        "data",
         "organization",
+        "key",
         "admin",
+        "costs",
         "card",
         "track",
         "endpoint",
+        "analytics",
+        "console",
         "workspace",
         "buckets",
         "token",
+        "anthropic",
         "tier",
-        "key",
-        "code",
-        "filter",
-        "tip",
-        "console"
+        "keys"
       ],
-      "word_count": 1512,
+      "word_count": 1675,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {

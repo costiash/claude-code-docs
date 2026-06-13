@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-12T21:36:39.370658Z",
-    "total_paths": 1843,
+    "generated_at": "2026-06-13T01:00:49.626090Z",
+    "total_paths": 1844,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-12T21:36:39.370666Z"
+    "last_regenerated": "2026-06-13T01:00:49.626099Z"
   },
   "categories": {
     "core_documentation": [
@@ -121,6 +121,7 @@
       "/docs/en/large-codebases",
       "/docs/en/manage-claude/access-transparency",
       "/docs/en/manage-claude/admin-api",
+      "/docs/en/manage-claude/analytics-api",
       "/docs/en/manage-claude/api-and-data-retention",
       "/docs/en/manage-claude/authentication",
       "/docs/en/manage-claude/claude-code-analytics-api",
