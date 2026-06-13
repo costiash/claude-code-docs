@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-13T01:36:05Z",
+  "generated_at": "2026-06-13T05:08:32Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -514,25 +514,25 @@
         "claude",
         "code",
         "ide",
-        "wsl",
         "plugin",
+        "wsl",
         "jetbrains",
         "command",
         "terminal",
+        "step",
         "settings",
         "ides",
         "windows",
         "restart",
+        "install",
         "running",
         "installed",
         "run",
         "configuration",
         "remote",
-        "host",
-        "step",
-        "features"
+        "host"
       ],
-      "word_count": 1115,
+      "word_count": 1185,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -616,7 +616,7 @@
         "variable",
         "set"
       ],
-      "word_count": 6879,
+      "word_count": 6822,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -807,12 +807,12 @@
         "icon",
         "files",
         "tools",
+        "cli",
         "install",
         "review",
-        "web",
-        "build"
+        "web"
       ],
-      "word_count": 1736,
+      "word_count": 1860,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
