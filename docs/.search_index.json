@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-15T19:56:57Z",
+  "generated_at": "2026-06-15T22:28:52Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -25,10 +25,10 @@
         "background",
         "prompt",
         "command",
-        "terminal",
-        "commands"
+        "commands",
+        "model"
       ],
-      "word_count": 55877,
+      "word_count": 56380,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -400,16 +400,15 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Run Claude Code programmatically  > Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or",
       "keywords": [
         "claude",
-        "agent",
-        "sdk",
         "mode",
         "code",
         "session",
         "example",
+        "agent",
+        "sdk",
         "event",
         "run",
         "cli",
-        "note",
         "prompt",
         "without",
         "string",
@@ -417,10 +416,11 @@
         "bare",
         "file",
         "before",
-        "interactive",
-        "message"
+        "message",
+        "output",
+        "response"
       ],
-      "word_count": 2068,
+      "word_count": 2026,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -537,15 +537,13 @@
     },
     "/claude-code/legal-and-compliance": {
       "title": "Legal and compliance",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Legal and compl...",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Legal and compliance  > Legal agreements, compliance certifications, and security information for Claude Code.  ##",
       "keywords": [
         "claude",
         "code",
         "anthropic",
         "usage",
         "baa",
-        "agent",
-        "sdk",
         "api",
         "through",
         "authentication",
@@ -557,10 +555,12 @@
         "legal",
         "agreements",
         "information",
-        "plans",
-        "subject"
+        "subject",
+        "commercial",
+        "terms",
+        "free"
       ],
-      "word_count": 486,
+      "word_count": 444,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
@@ -812,7 +812,7 @@
         "review",
         "web"
       ],
-      "word_count": 1860,
+      "word_count": 1750,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "start",
         "first"
       ],
-      "word_count": 1612,
+      "word_count": 1542,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1753,9 +1753,9 @@
         "tools",
         "python",
         "when",
-        "opus",
         "container",
         "data",
+        "opus",
         "run",
         "bash",
         "environment",
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5665,
+      "word_count": 5637,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -41848,7 +41848,7 @@
         "components",
         "models"
       ],
-      "word_count": 1862,
+      "word_count": 1861,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -42616,8 +42616,8 @@
         "analytics",
         "key",
         "enterprise",
-        "code",
         "organization",
+        "code",
         "usage",
         "admin",
         "step",
@@ -42627,10 +42627,10 @@
         "data",
         "create",
         "adoption",
-        "keys",
         "card",
         "engagement",
-        "which"
+        "which",
+        "keys"
       ],
       "word_count": 837,
       "file_path": "docs/docs__en__manage-claude__analytics-api.md"
@@ -42727,24 +42727,24 @@
         "anthropic",
         "step",
         "kms",
-        "policy",
         "aws",
+        "policy",
         "account",
         "encryption",
-        "frame",
         "cmek",
-        "permissions",
+        "organization",
         "workspace",
-        "condition",
+        "frame",
+        "permissions",
         "create",
-        "iam",
-        "role",
         "encrypt",
         "decrypt",
-        "compartment",
-        "through"
+        "condition",
+        "claude",
+        "data",
+        "iam"
       ],
-      "word_count": 1155,
+      "word_count": 1269,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
@@ -42757,22 +42757,22 @@
         "step",
         "service",
         "tenant",
-        "principal",
-        "azure",
         "cmek",
+        "azure",
+        "principal",
+        "data",
         "role",
         "application",
-        "data",
+        "title",
         "access",
         "operations",
         "frame",
-        "title",
+        "organization",
         "rsa",
         "wrap",
-        "unwrap",
-        "create"
+        "unwrap"
       ],
-      "word_count": 1418,
+      "word_count": 1532,
       "file_path": "docs/docs__en__manage-claude__cmek-azure-key-vault.md"
     },
     "/docs/en/manage-claude/cmek-google-cloud-kms": {
@@ -42785,22 +42785,22 @@
         "step",
         "kms",
         "service",
-        "account",
         "google",
+        "account",
+        "organization",
         "create",
+        "title",
         "project",
         "encrypt",
         "decrypt",
-        "title",
-        "level",
-        "frame",
         "encryption",
-        "organization",
+        "resource",
+        "name",
+        "cmek",
         "data",
-        "access",
-        "ring"
+        "level"
       ],
-      "word_count": 1047,
+      "word_count": 1168,
       "file_path": "docs/docs__en__manage-claude__cmek-google-cloud-kms.md"
     },
     "/docs/en/manage-claude/cmek": {
@@ -42808,27 +42808,27 @@
       "content_preview": "# Customer-managed encryption keys  Encrypt Claude workspace data at rest with a key you control.  ---  ```bash title=\"Learn more with the /claude-api skill in Claude Code\" claude \"/claude-api tell me...",
       "keywords": [
         "key",
+        "claude",
         "cmek",
         "anthropic",
         "data",
         "kms",
-        "claude",
         "encryption",
         "aws",
         "cloud",
         "keys",
+        "platform",
+        "api",
+        "under",
         "service",
+        "disabled",
         "managed",
         "workspace",
         "azure",
-        "google",
-        "vault",
-        "enabled",
-        "under",
-        "api",
-        "management"
+        "admin",
+        "organization"
       ],
-      "word_count": 1272,
+      "word_count": 1547,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -42873,9 +42873,9 @@
         "access",
         "step",
         "create",
+        "settings",
         "console",
         "activity",
-        "settings",
         "feed",
         "title",
         "scopes",

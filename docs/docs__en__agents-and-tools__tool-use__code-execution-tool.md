@@ -34,8 +34,6 @@ The code execution tool is available on the following models:
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Haiku 4.5 (claude-haiku-4-5-20251001) | `code_execution_20250825` |
 | Claude Opus 4.1 (claude-opus-4-1-20250805) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
-| Claude Opus 4 (claude-opus-4-20250514) ([retired, except on Vertex AI](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
-| Claude Sonnet 4 (claude-sonnet-4-20250514) ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 
 <Note>
 `code_execution_20250825` supports Bash commands and file operations and is available on every model in the table. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox, and is available on Claude Fable 5, Claude Mythos 5, Opus 4.5+, and Sonnet 4.5+ only. If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.

@@ -24,7 +24,7 @@ The use of CMEK is optional. Eligible organizations can **opt in** to use custom
 
 ## How it works
 
-CMEK is attached per workspace. Only admins can configure it. CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
+Only admins can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
 CMEK admin configuration events appear in the [Compliance API Activity Feed](/docs/en/manage-claude/compliance-activity-feed). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
 
@@ -33,7 +33,7 @@ Anthropic calls your key management service from its standard public IP range. I
 ## Prerequisites
 
 - Cloud Admin access in the account, project, or subscription that will host the encryption key.
-- A Claude Console Organization Admin role (or Owner / Primary Owner).
+- An admin role in your Anthropic organization: an Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
 
 ## Availability and regions
 
@@ -55,29 +55,59 @@ For minimal latency, choose a region close to Anthropic's US infrastructure:
 
 ## What CMEK protects
 
+What CMEK covers depends on which product you use.
+
 ### Encrypted
 
+**Claude Platform**
+
 - Message content, files and attachments (both inline attachments sent with a request and Files API uploads), and MCP and tool configuration.
-- Backups and snapshots inherit the key.
+
+**Claude Enterprise**
+
+- Chat content, including skills, plugins, and artifacts.
+- Chat attachments and project attachments.
+- Claude Code on the CLI, including message content.
+
+On both products, backups and snapshots inherit the key.
 
 ### Disabled or modified
 
 Some features are turned off or substantially modified when CMEK is enabled. This list is not exhaustive; review it with your team before enabling CMEK.
 
+**Claude Platform**
+
 - Workbench in the Claude Console is disabled.
 - Portions of the Compliance API that return raw content, such as prompts, responses, and files, are disabled.
 - Beta and research preview features may not be covered by CMEK. This includes Claude Managed Agents, a beta feature that is disabled as a whole, including agent memory and agent dreaming.
+
+**Claude Enterprise**
+
+- Conversation history search is disabled. Conversation titles are encrypted, so searching by title or content returns no results.
+- Search across large numbers of files is slower.
+- The Analytics API and in-product analytics are degraded. Some usage views and reports may be incomplete.
+- Audit log exports are disabled.
+- Signed URLs for temporary file exchanges are disabled. These back claude.ai admin data exports and Claude Code Remote file flows such as screenshot updates.
+- Personal preferences are disabled for users who belong to a CMEK-protected organization, across all organizations under the same parent. Users who do not belong to a CMEK-protected organization can still use them across all organizations.
 
 ### Not encrypted
 
 These features remain available, but their data is not encrypted under your key. You can disable any feature that is not appropriate for your use case in Settings.
 
+**Claude Platform**
+
 - Data that is not at rest (such as cache) and data with a TTL shorter than 24 hours.
 - Activity Feed, audit logs, and telemetry network traffic such as OTEL, so customers can maintain compliance even if a key is revoked.
 
+**Claude Enterprise**
+
+- Claude Code Desktop, Claude Code on the web, Cowork, Office agents, and Claude in Slack. Anthropic recommends disabling any of these that are not appropriate for your use case in the admin console.
+- Beta and research preview features may not be covered by CMEK and can break in CMEK organizations, for example Claude Security and Claude Design.
+- On-demand data export under Settings > Privacy.
+
 ### Feature support
 
-The following APIs and tools store data at rest under your key when CMEK is enabled:
+The following Claude Platform APIs and tools store data at rest under your key when CMEK is enabled:
 
 | APIs | Tools and features |
 |:-----|:-------------------|
