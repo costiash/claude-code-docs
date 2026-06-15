@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-15T11:53:07Z",
+  "generated_at": "2026-06-15T14:50:16Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -42023,6 +42023,7 @@
       "title": "Stop reasons and fallback",
       "content_preview": "# Stop reasons and fallback  The stop_reason field, what each value means, and where to handle refusals and fallback.  ---  When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these",
       "keywords": [
+        "codegroup",
         "response",
         "claude",
         "tool",
@@ -42031,20 +42032,19 @@
         "reason",
         "when",
         "api",
+        "responses",
+        "empty",
         "reasons",
         "handle",
         "turn",
-        "responses",
+        "after",
         "without",
         "limit",
         "note",
         "server",
-        "fallback",
-        "empty",
-        "tokens",
-        "after"
+        "fallback"
       ],
-      "word_count": 2669,
+      "word_count": 10708,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {

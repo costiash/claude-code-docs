@@ -8817,8 +8817,8 @@
     "docs__en__build-with-claude__handling-stop-reasons.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons.md",
-      "hash": "b432dc513ec347411b71e2e0bad85c2d154edb444b046da2250b84982d3ac900",
-      "last_updated": "2026-06-09T19:14:38.089440"
+      "hash": "82c520771142e64856cd067d69a36a5eca6cf764af795d5a5c793d099e41cfad",
+      "last_updated": "2026-06-15T14:43:11.334761"
     },
     "docs__en__build-with-claude__mid-conversation-effort-example.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example",
@@ -9537,8 +9537,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-15T11:53:03.981100",
-    "fetch_duration_seconds": 2638.73141,
+    "last_fetch_completed": "2026-06-15T14:50:12.542471",
+    "fetch_duration_seconds": 2229.821138,
     "total_pages_discovered": 1844,
     "pages_fetched_successfully": 1589,
     "pages_failed": 256,
@@ -9805,7 +9805,7 @@
     "total_files": 1589,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-15T11:53:03.981125",
+  "last_updated": "2026-06-15T14:50:12.542496",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
