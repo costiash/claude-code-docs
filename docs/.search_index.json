@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-15T17:16:56Z",
+  "generated_at": "2026-06-15T19:56:57Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5655,
+      "word_count": 5665,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1792,7 +1792,7 @@
         "tools",
         "note"
       ],
-      "word_count": 9419,
+      "word_count": 9429,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1988,7 +1988,7 @@
         "search",
         "sonnet"
       ],
-      "word_count": 1230,
+      "word_count": 1240,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -41568,7 +41568,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7560,
+      "word_count": 7570,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -41708,7 +41708,7 @@
         "pricing",
         "available"
       ],
-      "word_count": 3153,
+      "word_count": 3150,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -41848,7 +41848,7 @@
         "components",
         "models"
       ],
-      "word_count": 1866,
+      "word_count": 1862,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -41932,7 +41932,7 @@
         "mythos",
         "summarized"
       ],
-      "word_count": 14951,
+      "word_count": 14972,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -42108,8 +42108,8 @@
       "content_preview": "# Multilingual support  Claude excels at tasks across multiple languages, maintaining strong cross-lingual performance relative to English.  ---  ## Overview  Claude demonstrates robust multilingual c...",
       "keywords": [
         "claude",
-        "sup",
         "languages",
+        "sup",
         "performance",
         "language",
         "prompt",
@@ -42121,14 +42121,14 @@
         "capabilities",
         "particularly",
         "note",
-        "deprecated",
         "native",
         "engineering",
         "support",
         "tasks",
-        "overview"
+        "overview",
+        "zero"
       ],
-      "word_count": 544,
+      "word_count": 474,
       "file_path": "docs/docs__en__build-with-claude__multilingual-support.md"
     },
     "/docs/en/build-with-claude/overview": {
@@ -42212,7 +42212,7 @@
         "input",
         "note"
       ],
-      "word_count": 15434,
+      "word_count": 15454,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -42268,7 +42268,7 @@
         "attribution",
         "custom"
       ],
-      "word_count": 5118,
+      "word_count": 5128,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -42301,30 +42301,30 @@
     },
     "/docs/en/build-with-claude/streaming": {
       "title": "Streaming messages",
-      "content_preview": "# Streaming messages  ---  When creating a Message, you can set `\"stream\": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent...",
+      "content_preview": "# Streaming messages  Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.  ---  When creating a Message, you can set `\"stream\":...",
       "keywords": [
         "event",
         "streaming",
         "events",
+        "thinking",
         "content",
+        "stream",
         "response",
         "codegroup",
-        "thinking",
         "request",
-        "stream",
+        "tool",
         "each",
         "block",
+        "sdks",
+        "claude",
+        "extended",
         "message",
         "delta",
         "partial",
-        "claude",
-        "using",
-        "sdks",
-        "sdk",
-        "types",
+        "card",
         "json"
       ],
-      "word_count": 4930,
+      "word_count": 5020,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -42385,30 +42385,30 @@
     },
     "/docs/en/build-with-claude/token-counting": {
       "title": "Token counting",
-      "content_preview": "# Token counting  ---  Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. With tok...",
+      "content_preview": "# Token counting  Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.  ---  ...",
       "keywords": [
         "token",
         "tokens",
         "claude",
-        "note",
         "count",
+        "note",
         "counting",
         "codegroup",
-        "message",
-        "limits",
         "counts",
-        "messages",
-        "usage",
-        "same",
-        "fable",
-        "before",
-        "prompts",
+        "limits",
+        "message",
+        "card",
         "rate",
+        "prompts",
+        "messages",
+        "before",
         "model",
-        "input",
-        "thinking"
+        "usage",
+        "caching",
+        "api",
+        "same"
       ],
-      "word_count": 4018,
+      "word_count": 4128,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision": {

@@ -14,23 +14,23 @@ Note that Claude is capable in many languages beyond those benchmarked below. Co
 
 Below are the zero-shot chain-of-thought evaluation scores for Claude models across different languages, shown as a percent relative to English performance (100%):
 
-| Language | Claude Opus 4.1 (deprecated)<sup>1</sup> | Claude Opus 4 (deprecated)<sup>1</sup> | Claude Sonnet 4.5<sup>1</sup> | Claude Sonnet 4 (deprecated)<sup>1</sup> | Claude Haiku 4.5<sup>1</sup> |
-|----------|---------------|---------------|---------------|-----------------|------------------|
-| English (baseline, fixed to 100%) | 100% | 100% | 100% | 100% | 100% |
-| Spanish | 98.1% | 98.0% | 98.2% | 97.5% | 96.4% |
-| Portuguese (Brazil) | 97.8% | 97.3% | 97.8% | 97.2% | 96.1% |
-| Italian | 97.7% | 97.5% | 97.9% | 97.3% | 96.0% |
-| French | 97.9% | 97.7% | 97.5% | 97.1% | 95.7% |
-| Indonesian | 97.3% | 97.2% | 97.3% | 96.2% | 94.2% |
-| German | 97.7% | 97.1% | 97.0% | 94.7% | 94.3% |
-| Arabic | 97.1% | 96.9% | 97.2% | 96.1% | 92.5% |
-| Chinese (Simplified) | 97.1% | 96.7% | 96.9% | 95.9% | 94.2% |
-| Korean | 96.6% | 96.4% | 96.7% | 95.9% | 93.3% |
-| Japanese | 96.9% | 96.2% | 96.8% | 95.6% | 93.5% |
-| Hindi | 96.8% | 96.7% | 96.7% | 95.8% | 92.4% |
-| Bengali | 95.7% | 95.2% | 95.4% | 94.4% | 90.4% |
-| Swahili | 89.8% | 89.5% | 91.1% | 87.1% | 78.3% |
-| Yoruba | 80.3% | 78.9% | 79.7% | 76.4% | 52.7% |
+| Language | Claude Opus 4.1 (deprecated)<sup>1</sup> | Claude Sonnet 4.5<sup>1</sup> | Claude Haiku 4.5<sup>1</sup> |
+|----------|---------------|---------------|------------------|
+| English (baseline, fixed to 100%) | 100% | 100% | 100% |
+| Spanish | 98.1% | 98.2% | 96.4% |
+| Portuguese (Brazil) | 97.8% | 97.8% | 96.1% |
+| Italian | 97.7% | 97.9% | 96.0% |
+| French | 97.9% | 97.5% | 95.7% |
+| Indonesian | 97.3% | 97.3% | 94.2% |
+| German | 97.7% | 97.0% | 94.3% |
+| Arabic | 97.1% | 97.2% | 92.5% |
+| Chinese (Simplified) | 97.1% | 96.9% | 94.2% |
+| Korean | 96.6% | 96.7% | 93.3% |
+| Japanese | 96.9% | 96.8% | 93.5% |
+| Hindi | 96.8% | 96.7% | 92.4% |
+| Bengali | 95.7% | 95.4% | 90.4% |
+| Swahili | 89.8% | 91.1% | 78.3% |
+| Yoruba | 80.3% | 79.7% | 52.7% |
 
 <sup>1</sup> With [extended thinking](/docs/en/build-with-claude/extended-thinking).
 
