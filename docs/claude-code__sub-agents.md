@@ -176,7 +176,9 @@ Subagents are Markdown files with YAML frontmatter. Store them in different loca
 
 **Project subagents** (`.claude/agents/`) are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.
 
-Project subagents are discovered by walking up from the current working directory. Directories added with `--add-dir` [grant file access only](/en/permissions#additional-directories-grant-file-access-not-configuration) and are not scanned for subagents. To share subagents across projects, use `~/.claude/agents/` or a [plugin](/en/plugins).
+Project subagents are discovered by walking up from the current working directory, so every `.claude/agents/` between there and the repository root is scanned. {/* min-version: 2.1.178 */}As of v2.1.178, when more than one of these nested directories defines the same `name`, Claude Code uses the definition closest to the working directory.
+
+Directories added with `--add-dir` are also scanned: a `.claude/agents/` folder inside an added directory loads alongside project subagents. See [Additional directories](/en/permissions#additional-directories-grant-file-access-not-configuration) for which other configuration types load from `--add-dir`. To share subagents across projects without `--add-dir`, use `~/.claude/agents/` or a [plugin](/en/plugins).
 
 **User subagents** (`~/.claude/agents/`) are personal subagents available in all your projects.
 
@@ -334,6 +336,8 @@ disallowedTools: Write, Edit
 ```
 
 If both are set, `disallowedTools` is applied first, then `tools` is resolved against the remaining pool. A tool listed in both is removed.
+
+Both fields accept MCP server-level patterns in addition to exact tool names: `mcp__<server>` or `mcp__<server>__*` grants or removes every tool from the named server. In `disallowedTools`, `mcp__*` also removes every MCP tool from any server.
 
 #### Restrict which subagents can be spawned
 
@@ -852,7 +856,7 @@ The `preTokens` value shows how many tokens were used before compaction occurred
 ## Fork the current conversation
 
 <Note>
-  Forked subagents require Claude Code v2.1.117 or later. {/* min-version: 2.1.161 */}From v2.1.161 the `/fork` command is enabled by default; on earlier versions it requires setting the [`CLAUDE_CODE_FORK_SUBAGENT`](/en/env-vars) environment variable to `1`. Making forks the model's *default* spawn behavior is experimental and may change in future releases. This default may also be enabled in interactive sessions as part of a staged rollout.
+  Forked subagents require Claude Code v2.1.117 or later. {/* min-version: 2.1.161 */}From v2.1.161 the `/fork` command is enabled by default; on earlier versions it requires setting the [`CLAUDE_CODE_FORK_SUBAGENT`](/en/env-vars) environment variable to `1`. Letting Claude itself spawn forks is experimental and may change in future releases. This capability may also be enabled in interactive sessions as part of a staged rollout.
 </Note>
 
 A fork is a subagent that inherits the entire conversation so far instead of starting fresh. This drops the input isolation that subagents otherwise provide: a fork sees the same system prompt, tools, model, and message history as the main session, so you can hand it a side task without re-explaining the situation. The fork's own tool calls still stay out of your conversation and only its final result comes back, so your main context window stays clean. Use a fork when a named subagent would need too much background to be useful, or when you want to try several approaches in parallel from the same starting point.
@@ -861,7 +865,7 @@ To control fork mode regardless of the staged rollout, set [`CLAUDE_CODE_FORK_SU
 
 Enabling fork mode changes Claude Code in two ways:
 
-* Claude spawns a fork whenever it would otherwise use the [general-purpose](#built-in-subagents) subagent. Named subagents such as Explore still spawn as before.
+* Claude can spawn a fork by requesting the `fork` subagent type explicitly. Spawns without a subagent type still use the [general-purpose](#built-in-subagents) subagent, and named subagents such as Explore still spawn as before.
 * Every subagent spawn runs in the [background](#run-subagents-in-foreground-or-background), whether it is a fork or a named subagent. Set `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` to `1` to keep spawns synchronous.
 
 You can start a fork yourself with `/fork` followed by a directive, with or without the variable set. Claude Code names the fork from the first words of the directive. The following example forks the conversation to draft test cases while you continue with the implementation in the main session:
