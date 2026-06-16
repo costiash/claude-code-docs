@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-16T16:34:46.215003Z",
-    "total_paths": 1846,
+    "generated_at": "2026-06-16T19:17:03.263273Z",
+    "total_paths": 1847,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-16T16:34:46.215009Z"
+    "last_regenerated": "2026-06-16T19:17:03.263279Z"
   },
   "categories": {
     "core_documentation": [
@@ -139,6 +139,7 @@
       "/docs/en/manage-claude/compliance-org-data",
       "/docs/en/manage-claude/data-residency",
       "/docs/en/manage-claude/rate-limits-api",
+      "/docs/en/manage-claude/spend-limits-api",
       "/docs/en/manage-claude/usage-cost-api",
       "/docs/en/manage-claude/wif-admin-api",
       "/docs/en/manage-claude/wif-providers/aws",
