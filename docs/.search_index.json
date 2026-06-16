@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-15T22:28:52Z",
+  "generated_at": "2026-06-16T01:42:47Z",
   "indexed_files": 1653,
   "index": {
     "/changelog": {
@@ -262,25 +262,25 @@
         "claude",
         "code",
         "mode",
-        "session",
         "file",
         "desktop",
+        "session",
         "auto",
-        "app",
         "changes",
-        "windows",
         "preview",
-        "settings",
-        "sessions",
         "diff",
-        "open",
         "files",
-        "server",
+        "settings",
+        "app",
+        "open",
+        "sessions",
         "review",
+        "windows",
         "see",
-        "terminal"
+        "permissions",
+        "before"
       ],
-      "word_count": 8626,
+      "word_count": 8647,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -988,19 +988,19 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
-        "managed",
         "claude",
+        "managed",
         "source",
         "json",
         "plugins",
+        "code",
         "theme",
         "null",
-        "code",
         "acme",
-        "see",
-        "project",
         "when",
+        "see",
         "set",
+        "project",
         "corp",
         "tools",
         "only",
@@ -1008,7 +1008,7 @@
         "user",
         "repo"
       ],
-      "word_count": 11508,
+      "word_count": 11764,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
