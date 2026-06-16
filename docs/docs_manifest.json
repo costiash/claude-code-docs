@@ -9156,6 +9156,12 @@
       "hash": "2d9fd551efb4ad1b72ddf241e737f042fbe16af184acee95b4c51faa1dd27c1e",
       "last_updated": "2026-05-28T19:12:32.365465"
     },
+    "docs__en__manage-claude__spend-limits-api.md": {
+      "original_url": "https://platform.claude.com/docs/en/manage-claude/spend-limits-api",
+      "original_md_url": "https://platform.claude.com/docs/en/manage-claude/spend-limits-api.md",
+      "hash": "461155ba65b02b71cdde339c408ecd7684c1a5ba905451a6cb528a919d093b9b",
+      "last_updated": "2026-06-16T19:48:59.750812"
+    },
     "docs__en__manage-claude__usage-cost-api.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api.md",
@@ -9447,8 +9453,8 @@
     "docs__en__prompt-library.md": {
       "original_url": "https://platform.claude.com/docs/en/prompt-library",
       "original_md_url": "https://platform.claude.com/docs/en/prompt-library.md",
-      "hash": "5f67b838d7fe40d06813370bd9176023b32809e37abdd9ac23ad8e03186e112e",
-      "last_updated": "2026-06-09T19:18:34.932600"
+      "hash": "81d3088db59aed818ecac9826a49285b777623c69bdfc02844a46520e2ba6f5a",
+      "last_updated": "2026-06-16T19:50:13.422000"
     },
     "claude-code__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/quickstart",
@@ -9537,10 +9543,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-16T17:10:33.352012",
-    "fetch_duration_seconds": 2147.900596,
-    "total_pages_discovered": 1846,
-    "pages_fetched_successfully": 1589,
+    "last_fetch_completed": "2026-06-16T19:52:56.048958",
+    "fetch_duration_seconds": 2153.562136,
+    "total_pages_discovered": 1847,
+    "pages_fetched_successfully": 1590,
     "pages_failed": 258,
     "failed_pages": [
       "/docs/en/admin-setup",
@@ -9804,10 +9810,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 1589,
+    "total_files": 1590,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-16T17:10:33.352033",
+  "last_updated": "2026-06-16T19:52:56.048982",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

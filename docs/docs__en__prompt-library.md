@@ -46,8 +46,7 @@ Create an analytics dashboard
 
 **More effective:**
 ```text
-Create an analytics dashboard. Include as many relevant features and interactions as
-possible. Go beyond the basics to create a fully-featured implementation.
+Create an analytics dashboard. Include as many relevant features and interactions as possible. Go beyond the basics to create a fully-featured implementation.
 ```
 
 </section>
@@ -65,8 +64,7 @@ NEVER use ellipses
 
 **More effective:**
 ```text
-Your response will be read aloud by a text-to-speech engine, so never use ellipses since
-the text-to-speech engine will not know how to pronounce them.
+Your response will be read aloud by a text-to-speech engine, so never use ellipses since the text-to-speech engine will not know how to pronounce them.
 ```
 
 </section>

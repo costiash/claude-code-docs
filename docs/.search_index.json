@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-16T17:10:36Z",
-  "indexed_files": 1653,
+  "generated_at": "2026-06-16T19:52:59Z",
+  "indexed_files": 1654,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -43110,6 +43110,34 @@
       ],
       "word_count": 1019,
       "file_path": "docs/docs__en__manage-claude__rate-limits-api.md"
+    },
+    "/docs/en/manage-claude/spend-limits-api": {
+      "title": "Spend Limits API",
+      "content_preview": "# Spend Limits API  Set a spend limit on each Claude Enterprise member, see where each member's spend limit is inherited from, and review or act on members' requests for a higher limit.  ---  The Spen...",
+      "keywords": [
+        "spend",
+        "limit",
+        "member",
+        "request",
+        "per",
+        "organization",
+        "claude",
+        "user",
+        "each",
+        "requests",
+        "scope",
+        "override",
+        "api",
+        "effective",
+        "increase",
+        "their",
+        "set",
+        "group",
+        "admin",
+        "endpoints"
+      ],
+      "word_count": 1807,
+      "file_path": "docs/docs__en__manage-claude__spend-limits-api.md"
     },
     "/docs/en/manage-claude/usage-cost-api": {
       "title": "Usage and Cost API",
