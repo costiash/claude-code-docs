@@ -9255,8 +9255,8 @@
     "docs__en__build-with-claude__working-with-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages.md",
-      "hash": "f622484d902ad48d1b243e05d874493698994c267bb77adb32ffff48beb075b7",
-      "last_updated": "2026-06-09T19:14:47.321326"
+      "hash": "19d673f3a8eacb6366002e8bbe03e667f02c347d15672fb71309486113bea982",
+      "last_updated": "2026-06-17T05:02:04.410587"
     },
     "claude-code__checkpointing.md": {
       "original_url": "https://platform.claude.com/docs/en/checkpointing",
@@ -9891,8 +9891,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-17T01:37:54.091349",
-    "fetch_duration_seconds": 2141.146785,
+    "last_fetch_completed": "2026-06-17T05:08:29.806282",
+    "fetch_duration_seconds": 2065.384835,
     "total_pages_discovered": 1899,
     "pages_fetched_successfully": 1648,
     "pages_failed": 252,
@@ -10155,7 +10155,7 @@
     "total_files": 1648,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-17T01:37:54.091375",
+  "last_updated": "2026-06-17T05:08:29.806304",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
