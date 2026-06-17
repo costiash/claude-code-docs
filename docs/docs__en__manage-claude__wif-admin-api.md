@@ -98,6 +98,8 @@ The create endpoint returns the new service account:
 
 To read or update a single service account, use `GET` and `POST` on `/v1/organizations/service_accounts/{service_account_id}`. A service account must be a member of a workspace before federated tokens can act in it. Every service account has an implicit membership in your organization's default workspace; add explicit memberships for other workspaces with `GET`, `POST`, and `DELETE` on `/v1/organizations/service_accounts/{service_account_id}/workspaces`, where `DELETE` targets `.../workspaces/{workspace_id}`.
 
+For complete parameter details and response schemas, see the [Service accounts API reference](/docs/en/api/admin/service_accounts).
+
 ## Federation issuers
 
 A [federation issuer](/docs/en/manage-claude/workload-identity-federation#federation-issuers) (`fdis_...`) registers an OIDC identity provider with your organization. The `jwks` field is a discriminated union that controls how Anthropic fetches the provider's signing keys:
@@ -132,6 +134,8 @@ curl --fail-with-body -sS --request POST "https://api.anthropic.com/v1/organizat
 ```
 
 To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](#permissions-and-constraints).
+
+For complete parameter details and response schemas, see the [Federation issuers API reference](/docs/en/api/admin/federation_issuers).
 
 ## Federation rules
 
@@ -180,6 +184,8 @@ The list endpoint returns a page of rules and the cursor for the next page:
 ```
 
 To read or update a single rule, use `GET` and `POST` on `/v1/organizations/federation_rules/{rule_id}`. To manage the workspaces a rule can mint tokens in, use `GET` and `POST` on `/v1/organizations/federation_rules/{rule_id}/workspaces`, and `DELETE` on `/v1/organizations/federation_rules/{rule_id}/workspaces/{workspace_id}`.
+
+For complete parameter details and response schemas, see the [Federation rules API reference](/docs/en/api/admin/federation_rules).
 
 ## Permissions and constraints
 

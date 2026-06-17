@@ -22,6 +22,8 @@ Webhook events return the event `type` and `id`, not the full object. When you r
     | `session.thread_idled` | An agent in a [multiagent interaction](/docs/en/managed-agents/multi-agent) is waiting for input. |
     | `session.thread_terminated` | A [multiagent thread](/docs/en/managed-agents/multi-agent) was archived. |
     | `session.outcome_evaluation_ended` | [Outcome evaluation](/docs/en/managed-agents/define-outcomes) for a single iteration completed. |
+    | `session.updated` | Session properties changed, for example its name or configuration was updated. |
+    | `session.deleted` | Session permanently deleted. Unlike other events, there is no object left to fetch. Treat the event itself as final. |
   </Tab>
   <Tab title="Vault events">
     | Event | Trigger |

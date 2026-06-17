@@ -143,6 +143,8 @@ A federation rule's `oauth_scope` is a ceiling: the minted token can never excee
 
 Anthropic enforces these constraints when you create or update issuers and rules, and when verifying an incoming JWT at exchange time.
 
+For complete parameter details and response schemas, see the [Service accounts API reference](/docs/en/api/admin/service_accounts), [Federation issuers API reference](/docs/en/api/admin/federation_issuers), and [Federation rules API reference](/docs/en/api/admin/federation_rules).
+
 ### Resource fields
 
 | Field | Constraint |

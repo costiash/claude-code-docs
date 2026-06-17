@@ -439,47 +439,41 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel List Response
 
-- `MCPTunnelListResponse object { data, next_page }`
+- `MCPTunnelListResponse object { id, archived_at, created_at, 4 more }`
 
-  - `data: array of object { id, archived_at, created_at, 4 more }`
+  - `id: string`
 
-    - `id: string`
+    ID of the Tunnel.
 
-      ID of the Tunnel.
+  - `archived_at: string`
 
-    - `archived_at: string`
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
 
-      RFC 3339 datetime string indicating when the Tunnel was archived, or
-      `null` if it is not archived.
+  - `created_at: string`
 
-    - `created_at: string`
+    RFC 3339 datetime string indicating when the Tunnel was created.
 
-      RFC 3339 datetime string indicating when the Tunnel was created.
+  - `display_name: string`
 
-    - `display_name: string`
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
-      Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+  - `domain: string`
 
-    - `domain: string`
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
 
-      Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
-      subdomain of this value are routed through the Tunnel. Globally unique and
-      never reused, even after the Tunnel is archived.
+  - `type: "tunnel"`
 
-    - `type: "tunnel"`
+    Object type. Always `tunnel` for Tunnels.
 
-      Object type. Always `tunnel` for Tunnels.
+    - `"tunnel"`
 
-      - `"tunnel"`
+  - `workspace_id: string`
 
-    - `workspace_id: string`
-
-      ID of the Workspace this Tunnel belongs to, or `null` for the default
-      Workspace. Immutable after creation.
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or `null` if there are no more results.
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
 
 ### MCP Tunnel Reveal Token Response
 
@@ -997,45 +991,39 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate List Response
 
-- `TunnelCertificateListResponse object { data, next_page }`
+- `TunnelCertificateListResponse object { id, archived_at, created_at, 4 more }`
 
-  - `data: array of object { id, archived_at, created_at, 4 more }`
+  - `id: string`
 
-    - `id: string`
+    ID of the Tunnel Certificate.
 
-      ID of the Tunnel Certificate.
+  - `archived_at: string`
 
-    - `archived_at: string`
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
 
-      RFC 3339 datetime string indicating when the certificate was archived, or
-      `null` if it is not archived.
+  - `created_at: string`
 
-    - `created_at: string`
+    RFC 3339 datetime string indicating when the certificate was registered.
 
-      RFC 3339 datetime string indicating when the certificate was registered.
+  - `expires_at: string`
 
-    - `expires_at: string`
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
 
-      RFC 3339 datetime string indicating when the certificate expires, or
-      `null` if it does not expire.
+  - `fingerprint: string`
 
-    - `fingerprint: string`
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-      The certificate's SHA-256 fingerprint, as a lowercase hex string.
+  - `tunnel_id: string`
 
-    - `tunnel_id: string`
+    ID of the Tunnel this certificate is registered against.
 
-      ID of the Tunnel this certificate is registered against.
+  - `type: "tunnel_certificate"`
 
-    - `type: "tunnel_certificate"`
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-      Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-      - `"tunnel_certificate"`
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or `null` if there are no more results.
+    - `"tunnel_certificate"`
 
 ### Tunnel Certificate Archive Response
 

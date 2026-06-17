@@ -29,7 +29,9 @@ The maximal number of images per message or request is:
   - 100 per request on the API, for models with a 200k-token context window.
   - 600 per request on the API, for all other models.
 
-The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
+The maximal dimensions per image are 8000x8000 px.
+
+If a single API request contains more than 20 images, a stricter per-image dimension limit applies. On Amazon Bedrock and Vertex AI, document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references "many-image requests" and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
 
 The maximal size per image is:
   - 10&nbsp;MB (base64-encoded) when using the Claude API directly.

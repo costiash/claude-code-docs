@@ -2539,6 +2539,13 @@ If you're also using bash or text editor tools alongside computer use, those too
 
 <CardGroup cols={2}>
   <Card
+    title="Text editor tool"
+    icon="file"
+    href="/docs/en/agents-and-tools/tool-use/text-editor-tool"
+  >
+    Continue to the next tool: view, create, and edit files with Claude
+  </Card>
+  <Card
     title="Reference implementation"
     icon="github-logo"
     href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo"
