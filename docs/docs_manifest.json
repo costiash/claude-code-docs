@@ -9399,8 +9399,8 @@
     "docs__en__manage-claude__analytics-api.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/analytics-api",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/analytics-api.md",
-      "hash": "2f21fed5460e83a24ac8164824bf2290a0a3e81c2e8a1afbd0d2f5f79e78501d",
-      "last_updated": "2026-06-15T22:24:48.451343"
+      "hash": "bff5762cd36c965b6f3518ba2a643c9086a4d13110da69e3b3b2fd650bdac68f",
+      "last_updated": "2026-06-17T19:26:45.586563"
     },
     "docs__en__manage-claude__api-and-data-retention.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
@@ -9417,8 +9417,8 @@
     "docs__en__manage-claude__claude-code-analytics-api.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api.md",
-      "hash": "02fbe59886e9ef56a1841f7746d468b84570a8b2a39c51532c8fcc29f7c4243f",
-      "last_updated": "2026-06-13T01:32:10.812677"
+      "hash": "ecb1a80e1d26e3304292b9fb36f05a008484ddd515cdf2b91235635d4868e6cb",
+      "last_updated": "2026-06-17T19:26:47.541523"
     },
     "docs__en__manage-claude__cmek.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/cmek",
@@ -9513,8 +9513,8 @@
     "docs__en__manage-claude__usage-cost-api.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api.md",
-      "hash": "3500fe6411df0b60ab38e1de6a43c685e66ad90d021d09beb81c7e364ea2cc5f",
-      "last_updated": "2026-06-13T01:32:20.074688"
+      "hash": "ab31637f0d08fcd81ea0374101e57c7fcea791bcde00ac8fdd94da01f3309cbf",
+      "last_updated": "2026-06-17T19:26:57.823977"
     },
     "docs__en__manage-claude__wif-admin-api.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/wif-admin-api",
@@ -9891,8 +9891,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-17T16:54:28.779356",
-    "fetch_duration_seconds": 2160.304596,
+    "last_fetch_completed": "2026-06-17T19:30:50.697433",
+    "fetch_duration_seconds": 2180.17445,
     "total_pages_discovered": 1899,
     "pages_fetched_successfully": 1648,
     "pages_failed": 252,
@@ -10155,7 +10155,7 @@
     "total_files": 1648,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-17T16:54:28.779379",
+  "last_updated": "2026-06-17T19:30:50.697457",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

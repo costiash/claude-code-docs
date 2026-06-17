@@ -35,7 +35,7 @@ Anthropic provides cost and usage reporting through two APIs, depending on which
 | Your organization                        | API                                                                 | Key type                             |
 | ---------------------------------------- | ------------------------------------------------------------------- | ------------------------------------ |
 | Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                 | Admin API key (`sk-ant-admin01-...`) |
-| Claude Enterprise (claude.ai)            | The [Claude Enterprise Analytics API](/docs/en/manage-claude/analytics-api) cost and usage endpoints | Analytics API key                    |
+| Claude Enterprise (claude.ai)            | The [Claude Enterprise Analytics API](/docs/en/api/admin/analytics) cost and usage endpoints | Analytics API key                    |
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](/docs/en/manage-claude/analytics-api) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 

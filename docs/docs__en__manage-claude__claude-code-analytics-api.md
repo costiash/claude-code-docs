@@ -66,7 +66,7 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 - **Cursor-based pagination**: Handle large datasets with stable pagination using opaque cursors
 - **Data freshness**: Metrics are available with up to 1-hour delay for consistency
 
-For complete parameter details and response schemas, see the [Claude Code Analytics API reference](/docs/en/api/admin-api/claude-code/get-claude-code-usage-report).
+For complete parameter details and response schemas, see the [Claude Code Analytics API reference](/docs/en/api/admin/usage_report/retrieve_claude_code).
 
 ### Basic examples
 

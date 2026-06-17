@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-17T16:54:32Z",
+  "generated_at": "2026-06-17T19:30:54Z",
   "indexed_files": 1712,
   "index": {
     "/changelog": {
@@ -44231,8 +44231,8 @@
         "enterprise",
         "organization",
         "code",
-        "usage",
         "admin",
+        "usage",
         "step",
         "cost",
         "access",
@@ -44245,7 +44245,7 @@
         "which",
         "keys"
       ],
-      "word_count": 837,
+      "word_count": 852,
       "file_path": "docs/docs__en__manage-claude__analytics-api.md"
     },
     "/docs/en/manage-claude/api-and-data-retention": {
