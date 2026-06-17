@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-17T13:57:39Z",
+  "generated_at": "2026-06-17T16:54:32Z",
   "indexed_files": 1712,
   "index": {
     "/changelog": {
@@ -1064,7 +1064,7 @@
         "available",
         "content"
       ],
-      "word_count": 6620,
+      "word_count": 6653,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1106,8 +1106,8 @@
         "main",
         "agent",
         "conversation",
-        "session",
         "tool",
+        "session",
         "code",
         "prompt",
         "context",
@@ -1120,7 +1120,7 @@
         "hooks",
         "task"
       ],
-      "word_count": 8698,
+      "word_count": 8738,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {

@@ -337,7 +337,15 @@ disallowedTools: Write, Edit
 
 If both are set, `disallowedTools` is applied first, then `tools` is resolved against the remaining pool. A tool listed in both is removed.
 
-Both fields accept MCP server-level patterns in addition to exact tool names: `mcp__<server>` or `mcp__<server>__*` grants or removes every tool from the named server. In `disallowedTools`, `mcp__*` also removes every MCP tool from any server.
+Both fields accept MCP server-level patterns in addition to exact tool names: `mcp__<server>` or `mcp__<server>__*` grants or removes every tool from the named server. In `disallowedTools`, `mcp__*` also removes every MCP tool from any server. This example removes every tool from the `github` MCP server while keeping tools from other servers and every built-in tool:
+
+```yaml theme={null}
+---
+name: local-only
+description: Inherits every tool except those from the github MCP server
+disallowedTools: mcp__github
+---
+```
 
 #### Restrict which subagents can be spawned
 
