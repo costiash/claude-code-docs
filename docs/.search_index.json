@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-17T22:16:55Z",
+  "generated_at": "2026-06-18T01:37:37Z",
   "indexed_files": 1712,
   "index": {
     "/changelog": {
@@ -626,25 +626,25 @@
         "claude",
         "files",
         "instructions",
-        "memory",
         "project",
+        "memory",
         "rules",
-        "directory",
-        "file",
-        "auto",
-        "specific",
-        "context",
-        "when",
-        "session",
-        "loaded",
-        "managed",
+        "local",
+        "mdclaude",
         "code",
-        "them",
+        "context",
+        "auto",
+        "file",
+        "session",
+        "write",
+        "specific",
         "settings",
+        "when",
+        "them",
         "into",
-        "every"
+        "preferences"
       ],
-      "word_count": 3817,
+      "word_count": 3856,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
