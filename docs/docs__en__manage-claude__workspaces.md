@@ -133,7 +133,7 @@ Archiving a workspace immediately revokes all API keys in that workspace. This a
 Programmatically manage workspaces using the [Admin API](/docs/en/manage-claude/admin-api).
 
 <Note>
-Admin API endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+Admin API endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. See [Create an Admin API key](/docs/en/manage-claude/admin-api-keys) for how to provision one.
 </Note>
 
 ```bash cURL

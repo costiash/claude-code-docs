@@ -41,10 +41,6 @@ CMEK is currently available in US regions only, and all encryption operations ar
 
 On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the Claude Console; the `external_keys` API endpoints are not currently available on Claude Platform on AWS. The key must be in the same AWS region as the workspace it is attached to.
 
-<Note>
-  CMEK is not currently supported for organizations with HIPAA enabled. Support for using CMEK together with HIPAA is planned. If your organization has HIPAA enabled, contact your Anthropic representative before configuring CMEK.
-</Note>
-
 For minimal latency, choose a region close to Anthropic's US infrastructure:
 
 | Provider | Recommended regions |

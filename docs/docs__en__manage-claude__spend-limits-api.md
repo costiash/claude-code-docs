@@ -11,7 +11,7 @@ For per-user and time-bucketed usage and cost *reporting*, see [Analytics APIs](
 <Check>
   **Scoped Admin API key required**
 
-  These endpoints require an Admin API key with the `read:spend_limits` scope (for `GET` endpoints) or the `write:spend_limits` scope (for `POST` and `DELETE` endpoints). Only the primary owner of your Claude Enterprise organization can create scoped keys at [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access). Pass the key in the `x-api-key` header on every request.
+  These endpoints require an Admin API key with the `read:spend_limits` scope (for `GET` endpoints) or the `write:spend_limits` scope (for `POST` and `DELETE` endpoints). See [Create an Admin API key](/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request.
 </Check>
 
 <Note>
@@ -67,7 +67,7 @@ All monetary values are strings in **minor units of the organization's billing c
 
 ### Increase request lifecycle
 
-A **spend limit increase request** is created when a member clicks "request more usage" in claude.ai. Requests are not created through this API. A request's `status` is one of:
+A **spend limit increase request** is created when a member clicks **Request more usage** in claude.ai. Requests are not created through this API. A request's `status` is one of:
 
 | Status | Meaning |
 |---|---|
@@ -109,6 +109,8 @@ Error responses follow the standard shape documented in [Errors](/docs/en/api/er
 
 `GET /v1/organizations/spend_limits/effective` returns one row per current member, reflecting each member's effective spend limit, its `source` in the scope hierarchy, and their `period_to_date_spend`. Requires the `read:spend_limits` scope.
 
+For complete parameter details and response schemas, see [List effective spend limits](/docs/en/api/admin/spend_limits/list_effective) in the API reference.
+
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/spend_limits/effective?limit=20" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
@@ -142,6 +144,8 @@ curl "https://api.anthropic.com/v1/organizations/spend_limits/effective?limit=20
 
 `GET /v1/organizations/spend_limits/{spend_limit_id}` returns one configured spend limit by ID. Use it to inspect the row that a `spend_limit_id` field referenced. Requires the `read:spend_limits` scope.
 
+For complete parameter details and response schemas, see [Retrieve a spend limit](/docs/en/api/admin/spend_limits/retrieve) in the API reference.
+
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/spend_limits/spl_01AbCdEfGhIjKlMnOpQrSt" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
@@ -150,6 +154,8 @@ curl "https://api.anthropic.com/v1/organizations/spend_limits/spl_01AbCdEfGhIjKl
 ### Set a per-user override
 
 `POST /v1/organizations/spend_limits` sets a per-user spend limit override. This is an upsert keyed on `(scope, period)`: setting a limit for a user and period that already has one overwrites it in place. This endpoint accepts only `scope.type: "user"`; seat-tier, group, and organization-level defaults are configured in claude.ai settings. Requires the `write:spend_limits` scope.
+
+For complete parameter details and response schemas, see [Create a spend limit](/docs/en/api/admin/spend_limits/create) in the API reference.
 
 ```bash cURL
 curl --request POST "https://api.anthropic.com/v1/organizations/spend_limits" \
@@ -175,6 +181,8 @@ curl --request POST "https://api.anthropic.com/v1/organizations/spend_limits" \
 
 `DELETE /v1/organizations/spend_limits/{spend_limit_id}` removes a per-user override, after which the member falls back to any inherited seat-tier, group, or organization default. Seat-tier, group, and organization-level rows cannot be deleted through this endpoint. Requires the `write:spend_limits` scope.
 
+For complete parameter details and response schemas, see [Delete a spend limit](/docs/en/api/admin/spend_limits/delete) in the API reference.
+
 ```bash cURL
 curl --request DELETE "https://api.anthropic.com/v1/organizations/spend_limits/spl_01RsTuVwXyZaBcDeFgHiJk" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
@@ -185,6 +193,8 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/spend_limits/s
 ### List increase requests
 
 `GET /v1/organizations/spend_limit_increase_requests` lists requests, most recent first. Filter by `status[]` (`pending`, `approved`, `denied`) and `actor_ids[]`. The list excludes requests whose requester is no longer a member of the organization. Requires the `read:spend_limits` scope.
+
+For complete parameter details and response schemas, see [List spend limit increase requests](/docs/en/api/admin/spend_limits/increase_requests/list) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/spend_limit_increase_requests?status[]=pending&limit=50" \
@@ -197,6 +207,8 @@ Each pending request carries a live `spend_summary` showing the requester's curr
 
 `GET /v1/organizations/spend_limit_increase_requests/{id}` returns one request by ID. Requires the `read:spend_limits` scope.
 
+For complete parameter details and response schemas, see [Retrieve a spend limit increase request](/docs/en/api/admin/spend_limits/increase_requests/retrieve) in the API reference.
+
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/slir_01AbCdEfGhIjKlMnOpQrSt" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
@@ -205,6 +217,8 @@ curl "https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/s
 ### Approve an increase request
 
 `POST /v1/organizations/spend_limit_increase_requests/{id}/approve` approves a pending request: it writes a per-user spend limit at the admin-supplied `amount` for the requester and transitions the request to `approved`. The request does not carry a requested amount; you supply the new spend limit on approval. Requires the `write:spend_limits` scope.
+
+For complete parameter details and response schemas, see [Approve a spend limit increase request](/docs/en/api/admin/spend_limits/increase_requests/approve) in the API reference.
 
 ```bash cURL
 curl --request POST "https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/slir_01AbCdEfGhIjKlMnOpQrSt/approve" \
@@ -216,6 +230,8 @@ curl --request POST "https://api.anthropic.com/v1/organizations/spend_limit_incr
 ### Deny an increase request
 
 `POST /v1/organizations/spend_limit_increase_requests/{id}/deny` denies a pending request. Idempotent on `denied`: denying an already-denied request returns 200 with the existing resource. The endpoint rejects an attempt to deny an already-approved request so automation can distinguish a retry from a conflicting decision. Requires the `write:spend_limits` scope.
+
+For complete parameter details and response schemas, see [Deny a spend limit increase request](/docs/en/api/admin/spend_limits/increase_requests/deny) in the API reference.
 
 ```bash cURL
 curl --request POST "https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/slir_01AbCdEfGhIjKlMnOpQrSt/deny" \
@@ -245,6 +261,12 @@ The spend reading can be temporarily unavailable, in which case the field reads 
 ## See also
 
 <CardGroup cols={2}>
+  <Card title="Spend Limits API reference" href="/docs/en/api/admin/spend_limits">
+    Generated request and response schemas for every Spend Limits API endpoint.
+  </Card>
+  <Card title="Spend Limit Increase Requests API reference" href="/docs/en/api/admin/spend_limits/increase_requests">
+    Generated request and response schemas for the increase-request endpoints.
+  </Card>
   <Card title="Analytics APIs" href="/docs/en/manage-claude/analytics-api">
     Per-user and time-bucketed usage and cost reporting for Claude Enterprise.
   </Card>

@@ -787,10 +787,7 @@ For a quick question about something already in your conversation, use [`/btw`](
 
 A nested subagent is configured the same way as a top-level one and resolves from the same [scopes](#choose-the-subagent-scope). The subagent panel below the prompt input shows the full tree: each row displays a `(+N)` count of descendants, and opening a row shows that subagent's direct children with a path back to `main`. The Running tab in [`/agents`](#use-the-%2Fagents-command) lists running subagents as a flat list.
 
-Depth is counted as the number of subagent levels below the main conversation, regardless of whether each level runs in the [foreground or background](#run-subagents-in-foreground-or-background):
-
-* **Foreground subagents**: can spawn at any depth. Each level blocks its parent until it returns, so the chain is self-limiting: the main conversation waits on the entire chain.
-* **Background subagents**: a background subagent at depth five does not receive the Agent tool and cannot spawn further. The limit is fixed and not configurable, and exists to prevent runaway concurrent trees.
+Depth is counted as the number of subagent levels below the main conversation, regardless of whether each level runs in the [foreground or background](#run-subagents-in-foreground-or-background). A subagent at depth five does not receive the Agent tool and cannot spawn further. The limit is fixed and not configurable.
 
 To prevent a specific subagent from spawning others, omit `Agent` from its [`tools`](#available-tools) list or add it to `disallowedTools`.
 

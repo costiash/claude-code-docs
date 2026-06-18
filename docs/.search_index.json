@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-18T16:48:30Z",
-  "indexed_files": 1712,
+  "generated_at": "2026-06-18T19:28:18Z",
+  "indexed_files": 1713,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -712,23 +712,23 @@
         "event",
         "tool",
         "events",
+        "request",
         "claude",
         "code",
         "plugin",
-        "request",
         "name",
         "session",
         "metrics",
-        "only",
         "api",
+        "only",
         "standard",
         "user",
         "such",
         "mcp",
         "counter",
-        "prompt"
+        "set"
       ],
-      "word_count": 9858,
+      "word_count": 10089,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -756,7 +756,7 @@
         "native",
         "github"
       ],
-      "word_count": 744,
+      "word_count": 775,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -826,9 +826,9 @@
         "string",
         "code",
         "see",
-        "directory",
         "claude",
         "marketplaces",
+        "directory",
         "add",
         "url",
         "when",
@@ -836,11 +836,11 @@
         "version",
         "github",
         "repository",
-        "source",
         "sources",
-        "users"
+        "source",
+        "field"
       ],
-      "word_count": 6501,
+      "word_count": 6521,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -868,7 +868,7 @@
         "root",
         "manifest"
       ],
-      "word_count": 8284,
+      "word_count": 8286,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -941,18 +941,18 @@
         "access",
         "sandboxed",
         "bash",
+        "command",
         "directory",
         "network",
-        "command",
         "sandboxing",
         "when",
+        "isolation",
+        "managed",
         "wsl",
         "mode",
-        "configuration",
-        "isolation",
-        "rules"
+        "allow"
       ],
-      "word_count": 4112,
+      "word_count": 4271,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -993,9 +993,9 @@
         "source",
         "json",
         "plugins",
+        "code",
         "theme",
         "null",
-        "code",
         "acme",
         "when",
         "see",
@@ -1005,10 +1005,10 @@
         "tools",
         "only",
         "github",
-        "user",
-        "repo"
+        "example",
+        "user"
       ],
-      "word_count": 12300,
+      "word_count": 12496,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "available",
         "content"
       ],
-      "word_count": 6653,
+      "word_count": 6652,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1092,7 +1092,7 @@
         "command",
         "may"
       ],
-      "word_count": 6236,
+      "word_count": 6231,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1120,7 +1120,7 @@
         "hooks",
         "task"
       ],
-      "word_count": 8738,
+      "word_count": 8698,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1988,7 +1988,7 @@
         "search",
         "sonnet"
       ],
-      "word_count": 1240,
+      "word_count": 1486,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -44192,6 +44192,34 @@
       "word_count": 1996,
       "file_path": "docs/docs__en__manage-claude__access-transparency.md"
     },
+    "/docs/en/manage-claude/admin-api-keys": {
+      "title": "Create an Admin API key",
+      "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  Every API in the **Admin** section of this guide (the [Admin API](/docs/en/manage-cl...",
+      "keywords": [
+        "api",
+        "claude",
+        "key",
+        "organization",
+        "create",
+        "admin",
+        "step",
+        "scopes",
+        "title",
+        "enterprise",
+        "compliance",
+        "limits",
+        "spend",
+        "keys",
+        "analytics",
+        "card",
+        "console",
+        "settings",
+        "apis",
+        "manage"
+      ],
+      "word_count": 729,
+      "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
+    },
     "/docs/en/manage-claude/admin-api": {
       "title": "Admin API",
       "content_preview": "# Admin API  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Ti...",
@@ -44202,22 +44230,22 @@
         "keys",
         "manage",
         "members",
-        "claude",
         "see",
         "section",
         "workspaces",
+        "claude",
+        "key",
         "federation",
         "codegroup",
-        "key",
         "only",
         "role",
         "invites",
-        "console",
         "access",
+        "create",
         "workspace",
         "usage"
       ],
-      "word_count": 1286,
+      "word_count": 1304,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
     "/docs/en/manage-claude/analytics-api": {
@@ -44227,25 +44255,25 @@
         "api",
         "claude",
         "analytics",
+        "usage",
         "key",
         "enterprise",
-        "organization",
         "code",
-        "admin",
-        "usage",
-        "step",
-        "cost",
-        "access",
-        "title",
+        "organization",
         "data",
-        "create",
+        "cost",
+        "admin",
+        "user",
+        "step",
+        "access",
+        "activity",
+        "title",
         "adoption",
-        "card",
-        "engagement",
-        "which",
-        "keys"
+        "per",
+        "available",
+        "card"
       ],
-      "word_count": 852,
+      "word_count": 1340,
       "file_path": "docs/docs__en__manage-claude__analytics-api.md"
     },
     "/docs/en/manage-claude/api-and-data-retention": {
@@ -44273,7 +44301,7 @@
         "sup",
         "phi"
       ],
-      "word_count": 3139,
+      "word_count": 3138,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -44316,20 +44344,20 @@
         "usage",
         "tool",
         "data",
-        "admin",
         "user",
+        "admin",
+        "key",
         "number",
         "organization",
         "cost",
         "model",
+        "type",
         "accepted",
         "rejected",
         "users",
-        "key",
-        "type",
         "pagination"
       ],
-      "word_count": 1513,
+      "word_count": 1510,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/cmek-aws-kms": {
@@ -44439,9 +44467,9 @@
         "workspace",
         "azure",
         "admin",
-        "organization"
+        "google"
       ],
-      "word_count": 1547,
+      "word_count": 1513,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -44482,22 +44510,22 @@
         "compliance",
         "organization",
         "keys",
-        "admin",
         "access",
-        "step",
+        "admin",
         "create",
-        "settings",
         "console",
         "activity",
+        "settings",
         "feed",
-        "title",
         "scopes",
         "organizations",
         "parent",
+        "step",
         "read",
-        "delete"
+        "delete",
+        "primary"
       ],
-      "word_count": 1548,
+      "word_count": 1456,
       "file_path": "docs/docs__en__manage-claude__compliance-api-access.md"
     },
     "/docs/en/manage-claude/compliance-api": {
@@ -44709,19 +44737,19 @@
         "model",
         "list",
         "endpoint",
-        "admin",
+        "see",
         "limit",
         "response",
         "limiter",
+        "admin",
         "configured",
-        "see",
         "parameter",
         "query",
-        "console",
         "claude",
-        "such"
+        "key",
+        "which"
       ],
-      "word_count": 1019,
+      "word_count": 1016,
       "file_path": "docs/docs__en__manage-claude__rate-limits-api.md"
     },
     "/docs/en/manage-claude/spend-limits-api": {
@@ -44732,24 +44760,24 @@
         "limit",
         "member",
         "request",
+        "api",
         "per",
-        "organization",
-        "claude",
+        "requests",
+        "increase",
         "user",
         "each",
-        "requests",
+        "organization",
+        "claude",
+        "see",
         "scope",
         "override",
-        "api",
-        "effective",
-        "increase",
-        "their",
-        "set",
-        "group",
+        "limits",
         "admin",
-        "endpoints"
+        "effective",
+        "response",
+        "their"
       ],
-      "word_count": 1807,
+      "word_count": 1976,
       "file_path": "docs/docs__en__manage-claude__spend-limits-api.md"
     },
     "/docs/en/manage-claude/usage-cost-api": {
@@ -44760,24 +44788,24 @@
         "api",
         "cost",
         "claude",
+        "key",
         "data",
         "organization",
-        "key",
-        "admin",
         "costs",
+        "admin",
         "card",
         "track",
         "endpoint",
         "analytics",
-        "console",
+        "which",
         "workspace",
         "buckets",
+        "console",
         "token",
         "anthropic",
-        "tier",
-        "keys"
+        "tier"
       ],
-      "word_count": 1675,
+      "word_count": 1671,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {
@@ -45072,20 +45100,20 @@
         "claude",
         "billing",
         "code",
-        "admin",
         "access",
+        "admin",
         "step",
+        "title",
         "keys",
         "members",
-        "title",
         "section",
         "create",
-        "role",
         "note",
         "usage",
-        "cannot"
+        "cannot",
+        "rate"
       ],
-      "word_count": 1983,
+      "word_count": 1978,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {

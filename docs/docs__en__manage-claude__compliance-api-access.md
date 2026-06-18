@@ -104,33 +104,13 @@ After Anthropic enables the Compliance API for your parent organization, Admin A
   The Compliance API must already be [enabled for your Claude Console organization](#request-compliance-api-access) before an Admin API key can call the Activity Feed.
 </Note>
 
-<Steps>
-  <Step title="Sign in as an organization admin">
-    Only an organization member with the **admin** role can create Admin API keys. See [Organization roles and permissions](/docs/en/manage-claude/admin-api#organization-roles-and-permissions) for the full role list.
-  </Step>
+Follow the steps in [Create an Admin API key](/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-console-organization), then set the key as an environment variable:
 
-  <Step title="Open Admin keys settings">
-    Go to [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys).
-  </Step>
+```bash
+export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
+```
 
-  <Step title="Create the key">
-    Click **Create key**, name the key, and click **Create**.
-  </Step>
-
-  <Step title="Copy and store the secret">
-    Copy the displayed secret key (starting with `sk-ant-admin01-`) and store it in your secrets manager. The full secret is displayed only once.
-  </Step>
-
-  <Step title="Export the key for use with the Activity Feed">
-    Set the key as an environment variable:
-
-    ```bash
-    export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
-    ```
-
-    The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) with an Admin API key.
-  </Step>
-</Steps>
+The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) with an Admin API key.
 
 Admin API keys carry the `read:compliance_activities` scope only when the Compliance API was enabled for the organization before the key was created; see [After enablement: Claude Console organizations](#after-enablement-claude-console-organizations). They cannot be granted any other Compliance API scope, so calls to any endpoint other than the Activity Feed return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
 

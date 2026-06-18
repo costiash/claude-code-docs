@@ -633,7 +633,7 @@ Logged when an API request to Claude fails.
 
 #### API refusal event
 
-Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on a successful response stream rather than as an HTTP error, so the `api_error` event does not fire for them. This event lets you track refusal frequency.
+Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on a successful response stream rather than as an HTTP error, so the `api_error` event does not fire for them. This event lets you track refusal frequency and group refusals by the same attributes as `api_request` and `api_error`.
 
 **Event Name**: `claude_code.api_refusal`
 
@@ -645,6 +645,15 @@ Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on 
 * `event.sequence`: monotonically increasing counter for ordering events within a session
 * `model`: Model identifier from the request
 * `request_id`: Anthropic API request ID from the response's `request-id` header, such as `"req_011..."`. Present only when the API returns one.
+* `query_source`: Subsystem that issued the request, such as `"repl_main_thread"`, `"compact"`, or a subagent name. See [`api_request`](#api-request-event) for definitions.
+* `speed`: Either `"fast"` when [Fast mode](/en/fast-mode) is active, or `"normal"`
+* `attempt`: Retry attempt number. The first attempt is `1`.
+* `effort`: [Effort level](/en/model-config#adjust-effort-level) applied to the request. Absent when the model does not support effort.
+* `server_fallback_hop`: `true` when the API's server-side model fallback already retried this refusal on a different model, so the user did not see this particular refusal. `false` when the request ended in a refusal. A single turn can emit both a `true` hop event and a later `false` final event when the fallback model also refuses.
+* `has_category`: `true` when the API response carried a `stop_details.category` of `"cyber"`, `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`. `false` when the response carried no category or a value outside that set. Absent when `server_fallback_hop` is `true`, because hop blocks do not carry `stop_details`.
+* `has_explanation`: `true` when the API response carried a `stop_details.explanation`, otherwise `false`. Absent when `server_fallback_hop` is `true`.
+* `category`: The `stop_details.category` value from the API response. One of `"cyber"`, `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`. Only present when `OTEL_LOG_TOOL_DETAILS=1` is set and `has_category` is `true`.
+* `agent.name`, `skill.name`, `plugin.name`, `marketplace.name`, `mcp_server.name`, `mcp_tool.name`: Skill, plugin, agent, and MCP attribution for the request. See [Cost counter](#cost-counter) for definitions and redaction behavior.
 
 #### API request body event
 

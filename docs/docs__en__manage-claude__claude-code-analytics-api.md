@@ -19,9 +19,7 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 * **Usage justification:** Provide metrics to justify and expand Claude Code adoption internally
 
 <Check>
-  **Admin API key required**
-
-  This API is part of the [Admin API](/docs/en/manage-claude/admin-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+  **Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](/docs/en/manage-claude/admin-api-keys) to find where to create one for your organization type and which scopes to select.
 </Check>
 
 <Note>

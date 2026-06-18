@@ -30,7 +30,7 @@ ant messages create --transform content --format yaml \
   --message '{role: user, content: "What is the latest on the Mars rover?"}'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -43,7 +43,7 @@ response = client.messages.create(
 print(response.content)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -54,6 +54,113 @@ const response = await client.messages.create({
   messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
 });
 console.log(response.content);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = [new ToolUnion(new WebSearchTool20260209())],
+    Messages = [new() { Role = Role.User, Content = "What's the latest on the Mars rover?" }]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message.Content);
+```
+
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolUnionParam{
+			{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the latest on the Mars rover?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content)
+}
+```
+
+```java Java hidelines={1..5}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.WebSearchTool20260209;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(WebSearchTool20260209.builder().build())
+        .addUserMessage("What's the latest on the Mars rover?")
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response.content());
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$message = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: [
+        ['type' => 'web_search_20260209', 'name' => 'web_search'],
+    ],
+    messages: [
+        ['role' => 'user', 'content' => "What's the latest on the Mars rover?"],
+    ],
+);
+
+echo $message;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [{ type: "web_search_20260209", name: "web_search" }],
+  messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
+)
+puts message.content
 ```
 </CodeGroup>
 
@@ -73,15 +180,15 @@ For connecting to MCP servers, see the [MCP connector](/docs/en/agents-and-tools
 Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
 </Tip>
 
-Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces outsized capability gains, often surpassing human expert baselines.
+Tool access is one of the most effective capabilities you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces large gains, often surpassing human expert baselines.
 
 ---
 
 ## When Claude uses tools
 
-With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context; it responds directly for stable knowledge, creative tasks, and conversational turns.
+With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
 
-This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use; a stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
+This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use. A stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
 
 For a hard guarantee rather than a nudge, use [`tool_choice`](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use).
 
@@ -149,22 +256,20 @@ These token counts are added to your normal input and output tokens to calculate
 
 Refer to the [models overview table](/docs/en/about-claude/models/overview#latest-models-comparison) for current per-model prices.
 
-When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
+When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 
 ---
 
 ## Next steps
 
-### Choose your path
-
-<CardGroup>
-  <Card href="/docs/en/agents-and-tools/tool-use/how-tool-use-works" title="Understand the concepts">
-    Where tools run, how the loop works, and when to use tools.
+<CardGroup cols={3}>
+  <Card href="/docs/en/agents-and-tools/tool-use/how-tool-use-works" title="How tool use works" icon="compass">
+    Understand the tool use loop, where tools execute, and when to use tools instead of prose.
   </Card>
-  <Card href="/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent" title="Build step by step">
-    The tutorial: from a single tool call to production.
+  <Card href="/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent" title="Tutorial: Build a tool-using agent" icon="graduation-cap">
+    A guided walkthrough from a single tool call to a production-ready agentic loop.
   </Card>
-  <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Browse all tools">
-    Directory of Anthropic-provided tools and properties.
+  <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Tool reference" icon="book">
+    Directory of Anthropic-provided tools and reference for optional tool definition properties.
   </Card>
 </CardGroup>
