@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-18T16:11:47.637066Z",
-    "total_paths": 1899,
+    "generated_at": "2026-06-18T18:52:39.862807Z",
+    "total_paths": 1901,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-18T16:11:47.637072Z"
+    "last_regenerated": "2026-06-18T18:52:39.862815Z"
   },
   "categories": {
     "core_documentation": [
@@ -52,6 +52,7 @@
       "/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use",
       "/docs/en/agents-and-tools/tool-use/web-fetch-tool",
       "/docs/en/agents-and-tools/tool-use/web-search-tool",
+      "/docs/en/artifacts",
       "/docs/en/authentication",
       "/docs/en/auto-mode-config",
       "/docs/en/best-practices",
@@ -121,6 +122,7 @@
       "/docs/en/large-codebases",
       "/docs/en/manage-claude/access-transparency",
       "/docs/en/manage-claude/admin-api",
+      "/docs/en/manage-claude/admin-api-keys",
       "/docs/en/manage-claude/analytics-api",
       "/docs/en/manage-claude/api-and-data-retention",
       "/docs/en/manage-claude/authentication",
