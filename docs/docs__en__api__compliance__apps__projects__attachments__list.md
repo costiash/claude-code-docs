@@ -35,11 +35,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ### Returns
 
-- `data: array of object { id, created_at, filename, 2 more }  or object { id, created_at, filename, 2 more }`
+- `data: array of object { id, created_at, filename, 4 more }  or object { id, created_at, filename, 3 more }`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 4 more }`
 
     File attachment reference for compliance responses.
 
@@ -55,9 +55,17 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Display name of the file (e.g., 'document.pdf')
 
+    - `md5: string`
+
+      Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+
     - `mime_type: string`
 
-      MIME type of the file when it was uploaded (e.g., 'application/pdf')
+      MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+
+    - `size_bytes: number`
+
+      Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
     - `type: "project_file"`
 
@@ -65,7 +73,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 3 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -93,6 +101,10 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       - `"project_doc"`
 
+    - `updated_at: string`
+
+      Last-modified timestamp of the document. Reserved for future use — currently always null.
+
 - `has_more: boolean`
 
   Whether more records exist beyond the current result set
@@ -117,7 +129,9 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "filename": "filename",
+      "md5": "md5",
       "mime_type": "mime_type",
+      "size_bytes": 0,
       "type": "project_file"
     }
   ],

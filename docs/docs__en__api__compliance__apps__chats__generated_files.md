@@ -6,9 +6,7 @@
 
 Returns metadata for a file the assistant created via tool use.
 
-Metadata is read from Filestore (the durable backing store for
-per-conversation tool outputs). Use the sibling `/content` endpoint to
-download the bytes.
+Use the sibling `/content` endpoint to download the bytes.
 
 ### Path Parameters
 
@@ -32,7 +30,7 @@ download the bytes.
 
 - `created_at: string`
 
-  File creation timestamp from Filestore
+  File creation timestamp, when available
 
 - `filename: string`
 
@@ -40,11 +38,11 @@ download the bytes.
 
 - `md5: string`
 
-  Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+  Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
 - `mime_type: string`
 
-  MIME type as recorded by Filestore, when available
+  MIME type of the stored file, when available
 
 - `size_bytes: number`
 
@@ -118,7 +116,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
 
   - `created_at: string`
 
-    File creation timestamp from Filestore
+    File creation timestamp, when available
 
   - `filename: string`
 
@@ -126,11 +124,11 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_
 
   - `md5: string`
 
-    Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+    Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
   - `mime_type: string`
 
-    MIME type as recorded by Filestore, when available
+    MIME type of the stored file, when available
 
   - `size_bytes: number`
 

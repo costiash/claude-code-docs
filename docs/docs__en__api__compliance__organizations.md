@@ -560,6 +560,38 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 ### Returns
 
+- `api_keys: array of object { id, created_at, created_by_id, 4 more }`
+
+  Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
+
+  - `id: string`
+
+    Unique identifier for the API key.
+
+  - `created_at: string`
+
+    When the key was created.
+
+  - `created_by_id: string`
+
+    Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
+
+  - `is_active: boolean`
+
+    Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
+
+  - `name: string`
+
+    The name given to the API key when it was created.
+
+  - `scopes: array of string`
+
+    The permission scopes granted to the key.
+
+  - `type: optional "compliance_api_key"`
+
+    - `"compliance_api_key"`
+
 - `organization_id: string`
 
 - `settings: array of object { name, value, type }  or object { name, value, type }  or object { name, value, type }  or 2 more`
@@ -668,7 +700,9 @@ unknown organizations and organizations outside the hierarchy return 404.
     apply to.
 
     A key of `all` covers every data type and is exclusive: when present it
-    is the only key. An empty object means no retention limit is in force.
+    is the only key. A missing key means no organization-level
+    administrator-configured retention period is in force for that data type;
+    Anthropic's service defaults may still apply.
 
     - `value: map[object { duration, timescale, type }  or object { type } ]`
 
@@ -719,6 +753,19 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
 
 ```json
 {
+  "api_keys": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "created_by_id": "created_by_id",
+      "is_active": true,
+      "name": "name",
+      "scopes": [
+        "string"
+      ],
+      "type": "compliance_api_key"
+    }
+  ],
   "organization_id": "organization_id",
   "settings": [
     {
@@ -735,7 +782,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
 
 ### Setting Retrieve Response
 
-- `SettingRetrieveResponse object { organization_id, settings, type }`
+- `SettingRetrieveResponse object { api_keys, organization_id, settings, type }`
 
   The resolved settings in force for one organization at read time.
 
@@ -743,6 +790,38 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
   reflect the enforced state. A setting the organization's administrators
   cannot change — for example, one controlled by Anthropic policy or not
   available to the organization — is omitted from the list.
+
+  - `api_keys: array of object { id, created_at, created_by_id, 4 more }`
+
+    Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
+
+    - `id: string`
+
+      Unique identifier for the API key.
+
+    - `created_at: string`
+
+      When the key was created.
+
+    - `created_by_id: string`
+
+      Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
+
+    - `is_active: boolean`
+
+      Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
+
+    - `name: string`
+
+      The name given to the API key when it was created.
+
+    - `scopes: array of string`
+
+      The permission scopes granted to the key.
+
+    - `type: optional "compliance_api_key"`
+
+      - `"compliance_api_key"`
 
   - `organization_id: string`
 
@@ -852,7 +931,9 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
       apply to.
 
       A key of `all` covers every data type and is exclusive: when present it
-      is the only key. An empty object means no retention limit is in force.
+      is the only key. A missing key means no organization-level
+      administrator-configured retention period is in force for that data type;
+      Anthropic's service defaults may still apply.
 
       - `value: map[object { duration, timescale, type }  or object { type } ]`
 
