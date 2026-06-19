@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-19T16:37:53Z",
+  "generated_at": "2026-06-19T19:18:34Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -43468,10 +43468,10 @@
       "title": "Effort",
       "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note> This feature is eligible for [Zero...",
       "keywords": [
-        "effort",
         "claude",
-        "opus",
+        "effort",
         "thinking",
+        "opus",
         "when",
         "token",
         "levels",
@@ -43480,16 +43480,16 @@
         "default",
         "parameter",
         "mythos",
+        "adaptive",
         "lower",
         "calls",
+        "extended",
+        "agentic",
         "set",
         "fable",
-        "recommended",
-        "cost",
-        "coding",
-        "where"
+        "recommended"
       ],
-      "word_count": 2506,
+      "word_count": 2570,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -43722,26 +43722,26 @@
       "keywords": [
         "claude",
         "languages",
-        "sup",
-        "performance",
         "language",
+        "sup",
+        "card",
         "prompt",
         "multilingual",
-        "across",
-        "english",
-        "strong",
-        "relative",
-        "capabilities",
-        "particularly",
-        "note",
-        "native",
-        "engineering",
-        "support",
-        "tasks",
+        "performance",
         "overview",
-        "zero"
+        "support",
+        "across",
+        "quality",
+        "english",
+        "output",
+        "title",
+        "icon",
+        "href",
+        "docs",
+        "strong",
+        "relative"
       ],
-      "word_count": 474,
+      "word_count": 1083,
       "file_path": "docs/docs__en__build-with-claude__multilingual-support.md"
     },
     "/docs/en/build-with-claude/overview": {
@@ -43954,18 +43954,18 @@
         "title",
         "response",
         "sdk",
+        "tool",
         "output",
         "type",
-        "class",
         "when",
-        "tool",
-        "api",
-        "java",
+        "class",
         "strict",
-        "tab",
-        "constraints"
+        "api",
+        "tools",
+        "java",
+        "tab"
       ],
-      "word_count": 10365,
+      "word_count": 10466,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {

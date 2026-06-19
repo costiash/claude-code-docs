@@ -9129,8 +9129,8 @@
     "docs__en__build-with-claude__effort.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/effort",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/effort.md",
-      "hash": "a9605e82f59721604066f031868d4fe4bd013be6e7b7b7e659d243f91563dd60",
-      "last_updated": "2026-06-09T19:14:34.402738"
+      "hash": "baf31d4be1e4138ccd336581cd9575c16b745f2605325259ca721e080cfde03e",
+      "last_updated": "2026-06-19T19:11:21.414237"
     },
     "docs__en__build-with-claude__embeddings.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/embeddings",
@@ -9183,8 +9183,8 @@
     "docs__en__build-with-claude__multilingual-support.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/multilingual-support",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/multilingual-support.md",
-      "hash": "927a8d368d067796e3e8590e5709f7f57e7f9d924db1b7fdb190305775e9dfb8",
-      "last_updated": "2026-06-15T19:50:38.952173"
+      "hash": "481896f2bb520e9fb4e4f579a71167e53faf3d730c9b88436ac0e5c2ed8327b1",
+      "last_updated": "2026-06-19T19:11:27.118156"
     },
     "docs__en__build-with-claude__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/overview",
@@ -9231,8 +9231,8 @@
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "832b24b73e2817cc23a3d2e7047d75cb371696b196d0ec901ea3734e12744dd3",
-      "last_updated": "2026-06-11T19:34:40.036403"
+      "hash": "07e57c4e94c471281cb1f8d540b6eda89506435ab227c09f00ec58bf35ac188e",
+      "last_updated": "2026-06-19T19:11:32.923843"
     },
     "docs__en__build-with-claude__task-budgets.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/task-budgets",
@@ -9897,8 +9897,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-19T16:37:49.872021",
-    "fetch_duration_seconds": 2148.938201,
+    "last_fetch_completed": "2026-06-19T19:18:31.325636",
+    "fetch_duration_seconds": 2203.396168,
     "total_pages_discovered": 1901,
     "pages_fetched_successfully": 1649,
     "pages_failed": 253,
@@ -10162,7 +10162,7 @@
     "total_files": 1649,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-19T16:37:49.872043",
+  "last_updated": "2026-06-19T19:18:31.325660",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
