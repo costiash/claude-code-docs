@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-18T22:20:06Z",
+  "generated_at": "2026-06-19T01:43:17Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -25,10 +25,10 @@
         "background",
         "prompt",
         "command",
-        "terminal",
-        "commands"
+        "model",
+        "terminal"
       ],
-      "word_count": 57300,
+      "word_count": 57686,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5637,
+      "word_count": 5694,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1782,9 +1782,9 @@
         "see",
         "actions",
         "section",
+        "screenshot",
         "step",
         "request",
-        "screenshot",
         "application",
         "screenshots",
         "when",
@@ -1792,7 +1792,7 @@
         "prompt",
         "note"
       ],
-      "word_count": 9449,
+      "word_count": 9426,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1999,24 +1999,24 @@
         "parallel",
         "calls",
         "claude",
+        "run",
         "message",
+        "tools",
         "call",
-        "one",
-        "see",
         "user",
         "execution",
-        "batch",
-        "section",
         "when",
+        "see",
+        "section",
+        "one",
         "single",
         "default",
+        "sequentially",
+        "return",
         "each",
-        "other",
-        "results",
-        "prompting",
-        "system"
+        "batch"
       ],
-      "word_count": 3443,
+      "word_count": 3489,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2044,7 +2044,7 @@
         "field",
         "before"
       ],
-      "word_count": 5379,
+      "word_count": 5381,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2072,7 +2072,7 @@
         "fetch",
         "dynamic"
       ],
-      "word_count": 1727,
+      "word_count": 1735,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__server-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/strict-tool-use": {
@@ -2168,23 +2168,23 @@
         "anthropic",
         "server",
         "search",
+        "version",
         "prompt",
         "see",
         "client",
+        "cache",
         "call",
         "definition",
         "properties",
+        "execution",
         "model",
-        "version",
-        "cache",
         "claude",
         "schema",
-        "execution",
+        "request",
         "array",
-        "user",
-        "defined"
+        "user"
       ],
-      "word_count": 876,
+      "word_count": 938,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-reference.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-runner": {
@@ -2250,25 +2250,25 @@
         "tool",
         "cache",
         "caching",
-        "tools",
         "prompt",
+        "tools",
         "messages",
-        "invalidates",
         "search",
+        "invalidates",
+        "prefix",
+        "breakpoint",
         "card",
         "definitions",
-        "prefix",
         "system",
+        "when",
+        "web",
         "caches",
+        "set",
         "interaction",
         "what",
-        "place",
-        "through",
-        "breakpoint",
-        "deferred",
-        "model"
+        "place"
       ],
-      "word_count": 576,
+      "word_count": 714,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-use-with-prompt-caching.md"
     },
     "/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use": {
@@ -2303,28 +2303,28 @@
       "title": "Web fetch tool",
       "content_preview": "# Web fetch tool  Fetch and read content from specific URLs to augment Claude's context with live web content.  ---  The web fetch tool allows Claude to retrieve full content from specified web pages ...",
       "keywords": [
-        "web",
         "fetch",
+        "web",
         "tool",
         "claude",
         "content",
         "note",
-        "api",
         "when",
+        "api",
         "filtering",
         "urls",
+        "response",
         "tools",
         "search",
         "url",
+        "only",
         "specific",
+        "dynamic",
         "fetched",
         "available",
-        "documents",
-        "dynamic",
-        "only",
-        "data"
+        "results"
       ],
-      "word_count": 2680,
+      "word_count": 2882,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2336,23 +2336,23 @@
         "claude",
         "tool",
         "api",
+        "response",
         "results",
         "filtering",
-        "tools",
-        "searches",
-        "response",
-        "dynamic",
         "note",
+        "tools",
         "when",
+        "searches",
         "content",
+        "dynamic",
         "request",
         "error",
         "citations",
-        "available",
-        "see",
-        "token"
+        "code",
+        "token",
+        "available"
       ],
-      "word_count": 2496,
+      "word_count": 2633,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -43825,7 +43825,7 @@
         "input",
         "note"
       ],
-      "word_count": 15454,
+      "word_count": 15479,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {

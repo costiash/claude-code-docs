@@ -4,7 +4,7 @@
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
-The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
+The latest web search tool version (`web_search_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. `web_search_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_search_20260209` for dynamic filtering only, `web_search_20250305` for basic search) remain available.
 
 <Note>
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
@@ -44,7 +44,7 @@ Triggering is steerable through your system prompt: you can encourage Claude to 
 
 Web search is a token-intensive task. With basic web search, Claude needs to pull search results into context, fetch full HTML from multiple websites, and reason over all of it before arriving at an answer. Often, much of this content is irrelevant, which can degrade response quality.
 
-With the `web_search_20260209` tool version, Claude can write and execute code to post-process query results. Instead of reasoning over full HTML files, Claude dynamically filters search results before loading them into context, keeping only what's relevant and discarding the rest.
+With `web_search_20260209` or later, Claude can write and execute code to post-process query results. Instead of reasoning over full HTML files, Claude dynamically filters search results before loading them into context, keeping only what's relevant and discarding the rest.
 
 Dynamic filtering is particularly effective for:
 - Searching through technical documentation
@@ -56,7 +56,7 @@ Dynamic filtering is particularly effective for:
 Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Vertex AI, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 </Note>
 
-To enable dynamic filtering, use the `web_search_20260209` tool version:
+To enable dynamic filtering, use `web_search_20260209` or any later version. The following examples use `web_search_20260209`:
 
 <CodeGroup>
 ```bash cURL
@@ -456,7 +456,7 @@ puts message
 ```
 </CodeGroup>
 
-### Tool definition
+## Tool definition
 
 The web search tool supports the following parameters:
 
@@ -485,17 +485,17 @@ The web search tool supports the following parameters:
 }
 ```
 
-#### Max uses
+### Max uses
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
 Simple factual queries typically use 1–3 searches; comparative or multi-entity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
 
-#### Domain filtering
+### Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#domain-filtering).
 
-#### Localization
+### Localization
 
 The `user_location` parameter allows you to localize search results based on a user's location.
 
@@ -505,7 +505,27 @@ The `user_location` parameter allows you to localize search results based on a u
 - `country`: The country
 - `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-### Response
+### Response inclusion
+
+<Note>
+Requires `web_search_20260318` or later.
+</Note>
+
+The `response_inclusion` parameter controls how search result blocks appear in the API response when the result was consumed by a completed [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw search content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+```json
+{
+  "tools": [
+    {
+      "type": "web_search_20260318",
+      "name": "web_search",
+      "response_inclusion": "excluded"
+    }
+  ]
+}
+```
+
+## Response
 
 Here's an example response structure:
 
@@ -572,7 +592,7 @@ Here's an example response structure:
 }
 ```
 
-#### Search results
+### Search results
 
 Search results include:
 
@@ -581,7 +601,7 @@ Search results include:
 - `page_age`: When the site was last updated
 - `encrypted_content`: Encrypted content that must be passed back in multi-turn conversations for citations
 
-#### Citations
+### Citations
 
 Citations are always enabled for web search, and each `web_search_result_location` includes:
 
@@ -596,7 +616,7 @@ The web search citation fields `cited_text`, `title`, and `url` do not count tow
   When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 </Note>
 
-#### Errors
+### Errors
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
@@ -619,7 +639,7 @@ These are the possible error codes:
 - `query_too_long`: Query exceeds maximum length
 - `unavailable`: An internal error occurred
 
-#### `pause_turn` stop reason
+### `pause_turn` stop reason
 
 For continuing after a `pause_turn` stop reason, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn).
 

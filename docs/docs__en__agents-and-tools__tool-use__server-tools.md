@@ -410,9 +410,9 @@ When handling `pause_turn`:
 
 The basic versions of web search (`web_search_20250305`) and web fetch (`web_fetch_20250910`) are eligible for [Zero Data Retention (ZDR)](/docs/en/manage-claude/api-and-data-retention).
 
-The `_20260209` versions with dynamic filtering are **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
+The `_20260209` and later versions with dynamic filtering are **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
 
-To use a `_20260209` server tool with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
+To use a `_20260209` or later server tool with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
 
 ```json
 {
@@ -464,10 +464,10 @@ When configuring domain allow/block lists:
 
 ## Dynamic filtering with code execution
 
-The `_20260209` versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
+The `_20260209` and later versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
 
 <Warning>
-Including a standalone `code_execution` tool alongside `_20260209` versions of web tools creates two execution environments, which can confuse the model. Use one or the other, or pin both to the same version.
+Including a standalone `code_execution` tool alongside `_20260209` or later versions of web tools creates two execution environments, which can confuse the model. Use one or the other, or pin both to the same version.
 </Warning>
 
 ## Streaming server-tool events

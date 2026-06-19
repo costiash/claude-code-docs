@@ -13,16 +13,18 @@ By default, Claude may use multiple tools to answer a user query. You can disabl
 
 ## Execution semantics
 
-Tool calls in a single assistant turn are unordered. You can run them concurrently (`Promise.all`, `asyncio.gather`), sequentially, or in any order. Claude doesn't assume one call in the batch has completed before another. Claude issues dependent calls across separate turns.
+When Claude returns multiple `tool_use` blocks in a single assistant turn, how you run them is your decision. The API doesn't prescribe an execution order: you can run the calls concurrently (`Promise.all`, `asyncio.gather`), sequentially in the order they appear, or in any combination that suits your tools.
 
-Claude might occasionally batch calls that turn out to depend on each other (for example, a create followed by an update of the same resource). You don't need to detect this in advance: dispatch all the calls, and if one fails because of a missing prerequisite, return the natural error message in a `tool_result` with `is_error: true`. Claude recognizes the dependency and reissues the call after the prerequisite completes.
+Choose the strategy based on what your tools do. Independent, read-only operations are usually safe to run in parallel for lower latency. Tools with side effects, shared state, or ordering requirements might be better run sequentially.
+
+Whichever strategy you use, return one `tool_result` for each `tool_use` block, all together in the next user message. If you choose not to run a particular call (for example, because you ran the batch sequentially and an earlier call failed), still return a `tool_result` for it with `is_error: true` and a brief explanation.
 
 ```json
 {
   "type": "tool_result",
   "tool_use_id": "toolu_02",
   "is_error": true,
-  "content": "cat: report.md: No such file or directory"
+  "content": "Not executed: the preceding write_file call failed."
 }
 ```
 
@@ -946,7 +948,7 @@ print(f"Average tools per message: {avg_tools_per_message}")
 
 **4. Calls in a batch appear to depend on each other**
 
-If a tool call fails because it depends on another call in the same batch, return `is_error: true` with the natural error message (you don't need to explain the dependency). Claude recovers and reissues the call. Don't switch to sequential execution; that adds latency and masks the issue. To reduce occurrences, add this to your system prompt: "Only batch tool calls that are independent of each other."
+Execution order is your choice. If your tools have ordering dependencies, running the batch sequentially and stopping on the first failure is a valid strategy: return `is_error: true` for any call you didn't run. If you run in parallel and a call fails because its prerequisite hadn't completed, return `is_error: true` with the natural error message; Claude will reissue it on the next turn. To reduce dependent calls appearing together, add this to your system prompt: "Only batch tool calls that are independent of each other."
 
 ## Next steps
 

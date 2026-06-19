@@ -12,9 +12,9 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 
 | Tool                                                                          | `type`                                                                 | Execution | Status                                                        |
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------- | ------------------------------------------------------------- |
-| [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool)         | `web_search_20260209`<br/>`web_search_20250305`                        | Server    | GA                                                            |
-| [Web fetch tool](/docs/en/agents-and-tools/tool-use/web-fetch-tool)           | `web_fetch_20260209`<br/>`web_fetch_20250910`                          | Server    | GA                                                            |
-| [Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) | `code_execution_20260120`<br/>`code_execution_20250825`                | Server    | GA                                                            |
+| [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool)         | `web_search_20260318`<br/>`web_search_20260209`<br/>`web_search_20250305`                        | Server    | GA                                                            |
+| [Web fetch tool](/docs/en/agents-and-tools/tool-use/web-fetch-tool)           | `web_fetch_20260318`<br/>`web_fetch_20260309`<br/>`web_fetch_20260209`<br/>`web_fetch_20250910`                          | Server    | GA                                                            |
+| [Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) | `code_execution_20260521`<br/>`code_execution_20260120`<br/>`code_execution_20250825`                | Server    | GA                                                            |
 | [Advisor tool](/docs/en/agents-and-tools/tool-use/advisor-tool)               | `advisor_20260301`                                                     | Server    | Beta: `advisor-tool-2026-03-01`                               |
 | [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool)       | `tool_search_tool_regex_20251119`<br/>`tool_search_tool_bm25_20251119` | Server    | GA                                                            |
 | [MCP connector](/docs/en/agents-and-tools/mcp-connector)                      | `mcp_toolset`                                                          | Server    | Beta: `mcp-client-2025-11-20`                                 |
@@ -37,7 +37,7 @@ Most Anthropic-provided tools carry a `_YYYYMMDD` suffix in the `type` string. A
 
 When a tool has multiple active versions, the relationship between them varies:
 
-- **Capability-keyed:** `web_search_20260209` and `web_fetch_20260209` add dynamic content filtering over their predecessors. `code_execution_20260120` adds [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox. In each case, both the new and old versions are current; which one you use depends on whether you need the new capability.
+- **Capability-keyed:** `web_search_20260209` and `web_fetch_20260209` add dynamic content filtering over their predecessors; `web_fetch_20260309` adds a cache-bypass option; `web_search_20260318` and `web_fetch_20260318` add response-inclusion control. `code_execution_20260120` adds [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox; `code_execution_20260521` discloses the per-cell time limit in the tool description. In each case, both the new and old versions are current; which one you use depends on whether you need the new capability.
 - **Model-keyed:** `text_editor_20250728` is for Claude 4 models and `text_editor_20250124` is for earlier models. The version you use depends on the model you target.
 - **Variant, not version:** `tool_search_tool_regex_20251119` and `tool_search_tool_bm25_20251119` are two search algorithms released together. Neither supersedes the other.
 - **Legacy:** `code_execution_20250522` supports only Python. `code_execution_20250825` adds Bash and file operations.
@@ -64,7 +64,9 @@ Every tool in the `tools` array, including user-defined tools, accepts optional 
 | Value                       | Meaning                                                                                                           |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `"direct"`                  | The model can call this tool directly in a `tool_use` block. This is the default if `allowed_callers` is omitted. |
-| `"code_execution_20260120"` | Code running inside a `code_execution_20260120` sandbox can call this tool.                                       |
+| `"code_execution_20260120"` | Code running inside a `code_execution_20260120` or later sandbox can call this tool.                              |
+
+Both `"code_execution_20260120"` and `"code_execution_20260521"` are accepted in `allowed_callers` and are interchangeable: a request using either code-execution tool version satisfies tools that list either caller. Response blocks always tag the caller as `code_execution_20260120` regardless of which version the request declared.
 
 Omitting `"direct"` from the array (for example, `"allowed_callers": ["code_execution_20260120"]`) guides Claude to call the tool only from within code execution. The response's `tool_use` block includes a `caller` field that identifies which caller called the tool. See [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling#the-allowed-callers-field) for the full treatment, including the `caller` response shape and error behavior.
 

@@ -20,7 +20,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 
 ## Model compatibility
 
-Programmatic tool calling requires `code_execution_20260120`, which is supported on the following models:
+Programmatic tool calling requires `code_execution_20260120` or later, which is supported on the following models:
 
 | Model |
 |-------|
