@@ -790,11 +790,29 @@ A server you've added in Claude Code takes [precedence](#scope-hierarchy-and-pre
 
 Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, do not support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. From v2.1.162, authenticating one of these hosts in `/mcp` shows a message directing you to connect it at Settings → Connectors on claude.ai instead. Once connected there, the connector appears in Claude Code automatically.
 
-To disable claude.ai MCP servers in Claude Code, set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`:
+### Disable claude.ai connectors
+
+To disable claude.ai MCP servers in Claude Code, set [`disableClaudeAiConnectors`](/en/settings#available-settings) to `true` in any settings scope:
+
+```json theme={null}
+{
+  "disableClaudeAiConnectors": true
+}
+```
+
+This setting uses any-source-true semantics: `true` in any settings source takes precedence. A checked-in project `.claude/settings.json` can opt a repository out of cloud connectors, but a project-level `false` cannot re-enable connectors that a user- or policy-level `true` has disabled. Servers passed explicitly via `--mcp-config` are unaffected.
+
+You can also set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`, which has the same effect for the current shell session:
 
 ```bash theme={null}
 ENABLE_CLAUDEAI_MCP_SERVERS=false claude
 ```
+
+To block individual claude.ai connectors instead of all of them, add them to [`deniedMcpServers`](/en/managed-mcp) by name or by URL pattern. For example, a `serverName` entry of `"claude.ai Slack"` blocks the Slack connector. To toggle a connector on or off for the current project only, use the `/mcp` panel.
+
+<Note>
+  These client-side settings govern local Claude Code sessions. In [Claude Code on the web](/en/claude-code-on-the-web) sessions, claude.ai connectors are provisioned by the remote host and arrive as explicit `--mcp-config` entries, so `disableClaudeAiConnectors` does not apply there. Connector URLs are also rewritten through the session proxy, so a `deniedMcpServers` `serverUrl` pattern targeting the vendor URL will not match. Manage which connectors a cloud session can use from your claude.ai organization settings.
+</Note>
 
 ## Use Claude Code as an MCP server
 

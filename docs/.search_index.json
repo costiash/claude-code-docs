@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-19T22:03:34Z",
+  "generated_at": "2026-06-20T01:31:33Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -140,7 +140,7 @@
         "fix",
         "repo"
       ],
-      "word_count": 6377,
+      "word_count": 6394,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -407,20 +407,20 @@
         "agent",
         "sdk",
         "event",
+        "without",
         "run",
         "cli",
         "prompt",
-        "without",
         "string",
         "tools",
+        "output",
         "bare",
         "file",
         "before",
         "message",
-        "output",
         "response"
       ],
-      "word_count": 2043,
+      "word_count": 2107,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -596,8 +596,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
         "server",
-        "mcp",
         "claude",
+        "mcp",
         "servers",
         "code",
         "step",
@@ -605,18 +605,18 @@
         "tool",
         "when",
         "plugin",
+        "project",
         "title",
         "environment",
-        "project",
         "add",
         "only",
+        "set",
         "oauth",
         "configuration",
-        "authentication",
-        "variable",
-        "set"
+        "same",
+        "authentication"
       ],
-      "word_count": 6822,
+      "word_count": 7019,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -696,11 +696,11 @@
         "picker",
         "setting",
         "environment",
-        "sonnet",
         "version",
+        "sonnet",
         "thinking"
       ],
-      "word_count": 5640,
+      "word_count": 5727,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -998,17 +998,17 @@
         "null",
         "acme",
         "when",
-        "see",
         "set",
+        "see",
         "project",
         "corp",
         "tools",
         "only",
         "github",
-        "example",
-        "user"
+        "user",
+        "mcp"
       ],
-      "word_count": 12496,
+      "word_count": 12670,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
