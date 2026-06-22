@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-22T14:36:52Z",
+  "generated_at": "2026-06-22T17:14:32Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -43169,8 +43169,8 @@
         "request",
         "results",
         "mtok",
-        "messages",
         "claude",
+        "messages",
         "section",
         "codegroup",
         "large",
@@ -43181,7 +43181,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7570,
+      "word_count": 7610,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -43521,31 +43521,31 @@
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
-      "title": "Building with extended thinking",
-      "content_preview": "# Building with extended thinking  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement...",
+      "title": "Extended thinking",
+      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
       "keywords": [
         "thinking",
         "claude",
-        "extended",
         "blocks",
+        "extended",
         "when",
-        "opus",
         "tool",
-        "note",
         "api",
         "turn",
+        "opus",
+        "note",
         "response",
         "model",
-        "models",
         "see",
         "tokens",
-        "streaming",
         "reasoning",
-        "adaptive",
+        "models",
+        "streaming",
         "mythos",
-        "summarized"
+        "supported",
+        "adaptive"
       ],
-      "word_count": 14972,
+      "word_count": 14648,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -43578,30 +43578,30 @@
     },
     "/docs/en/build-with-claude/fast-mode": {
       "title": "Fast mode (research preview)",
-      "content_preview": "# Fast mode (research preview)  Higher output speed for supported Claude Opus models, delivering significantly faster token generation for latency-sensitive and agentic workflows.  ---  Fast mode prov...",
+      "content_preview": "# Fast mode (research preview)  Get up to 2.5x higher output tokens per second from Claude Opus models.  ---  Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8, Claude...",
       "keywords": [
         "fast",
         "mode",
         "claude",
         "opus",
         "pricing",
-        "rate",
-        "output",
-        "speed",
-        "api",
         "tokens",
+        "rate",
         "standard",
-        "token",
-        "model",
-        "note",
-        "limit",
+        "speed",
+        "output",
         "per",
-        "limits",
-        "supported",
+        "note",
         "when",
-        "available"
+        "api",
+        "model",
+        "card",
+        "limit",
+        "supported",
+        "available",
+        "requests"
       ],
-      "word_count": 2552,
+      "word_count": 2643,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43634,30 +43634,30 @@
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
       "title": "Stop reasons and fallback",
-      "content_preview": "# Stop reasons and fallback  The stop_reason field, what each value means, and where to handle refusals and fallback.  ---  When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these",
+      "content_preview": "# Stop reasons and fallback  Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.  ---  Every Messages API response includes ...",
       "keywords": [
         "codegroup",
         "response",
         "claude",
         "tool",
         "stop",
-        "request",
-        "reason",
-        "when",
         "api",
-        "responses",
-        "empty",
-        "reasons",
-        "handle",
+        "when",
+        "request",
+        "fallback",
+        "reason",
+        "retry",
+        "model",
         "turn",
-        "after",
-        "without",
         "limit",
-        "note",
         "server",
-        "fallback"
+        "responses",
+        "card",
+        "reasons",
+        "errors",
+        "empty"
       ],
-      "word_count": 10708,
+      "word_count": 11678,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {
@@ -43853,7 +43853,7 @@
         "credit",
         "api"
       ],
-      "word_count": 4669,
+      "word_count": 4958,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -43868,20 +43868,20 @@
         "result",
         "citation",
         "blocks",
-        "text",
-        "source",
-        "block",
-        "when",
         "tool",
+        "text",
+        "block",
+        "source",
+        "when",
         "string",
         "array",
+        "card",
         "rag",
         "applications",
-        "opus",
-        "attribution",
+        "web",
         "custom"
       ],
-      "word_count": 5128,
+      "word_count": 5206,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -43928,16 +43928,16 @@
         "tool",
         "each",
         "block",
-        "sdks",
         "claude",
+        "card",
+        "sdks",
         "extended",
         "message",
         "delta",
         "partial",
-        "card",
         "json"
       ],
-      "word_count": 5020,
+      "word_count": 5036,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -44301,7 +44301,7 @@
         "sup",
         "phi"
       ],
-      "word_count": 3138,
+      "word_count": 3139,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -47638,30 +47638,30 @@
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals": {
       "title": "Streaming refusals",
-      "content_preview": "# Streaming refusals  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy vi...",
+      "content_preview": "# Streaming refusals  Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.  ---  Starting with Claude 4 models, streaming responses from Claud...",
       "keywords": [
-        "when",
-        "refusal",
-        "api",
         "refusals",
-        "streaming",
+        "refusal",
+        "fallback",
         "claude",
+        "when",
+        "streaming",
+        "model",
+        "retry",
         "response",
-        "safety",
-        "tip",
-        "sonnet",
-        "reset",
-        "note",
-        "responses",
+        "refused",
+        "api",
+        "card",
         "handle",
-        "content",
-        "filters",
+        "responses",
+        "handling",
+        "build",
+        "stop",
+        "another",
         "context",
-        "before",
-        "usage",
-        "types"
+        "request"
       ],
-      "word_count": 1095,
+      "word_count": 1424,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

@@ -1,11 +1,13 @@
 # Streaming refusals
 
+Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
+
 ---
 
-Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This new safety feature helps maintain content compliance during real-time streaming.
+Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.
 
 <Tip>
-To learn more about refusals triggered by API safety filters for Claude Sonnet 4.5, see [Understanding Sonnet 4.5's API Safety Filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+This page covers how refusals appear in streaming responses. For every `stop_reason` value and how to handle it, see [Stop reasons and fallback](/docs/en/build-with-claude/handling-stop-reasons). To retry refused requests on another Claude model, see [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback).
 </Tip>
 
 ## API response format
@@ -40,7 +42,7 @@ When a refusal arrives before Claude generates any output, you are not billed fo
 </Note>
 
 <Tip>
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+Resetting context is not the only way to recover. You can also retry the refused request on a different Claude model, and the [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback) page shows how to set that up with server-side fallback, the SDK middleware, or a manual retry.
 </Tip>
 
 ## Implementation guide
@@ -348,12 +350,36 @@ Future API versions will expand the **`stop_reason`: `refusal`** pattern to unif
 
 ## Best practices
 
-- **Monitor for refusals**: Include **`stop_reason`: `refusal`** checks in your error handling
-- **Reset automatically**: Implement automatic context reset when refusals are detected
-- **Provide custom messaging**: Create user-friendly messages for better UX when refusals occur
-- **Track refusal patterns**: Monitor refusal frequency to identify potential issues with your prompts
+- **Monitor for refusals:** Include **`stop_reason`: `refusal`** checks in your error handling
+- **Reset automatically:** Implement automatic context reset when refusals are detected
+- **Fall back to another model:** Configure [server-side fallback or the SDK middleware](/docs/en/build-with-claude/refusals-and-fallback) so refused requests are retried on another Claude model instead of surfacing a refusal to the user
+- **Redeem fallback credit on manual retries:** If you build the retry yourself, pass the refusal's [fallback credit](/docs/en/build-with-claude/fallback-credit) token so the retry doesn't pay the prompt-cache cost twice
+- **Provide custom messaging:** Create user-friendly messages for better UX when refusals occur
+- **Track refusal patterns:** Monitor refusal frequency to identify potential issues with your prompts
 
 ## Migration notes
 
-- Future models will expand this pattern to other refusal types
-- Plan your error handling to accommodate future unification of refusal responses
+If you built refusal handling when this feature first shipped, or you're adding it to an existing integration, check the following:
+
+- **Refusals are responses, not errors.** A refusal arrives as a successful HTTP 200 response with `stop_reason`: `"refusal"`, so monitoring built only on error rates won't surface it. Track refusals as their own signal.
+- **Newer models return more detail.** On Claude Fable 5, a refusal also includes a `stop_details` object that identifies the policy category behind the decline. See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the full response shape.
+- **Retry on a different model.** Re-sending a refused request to the same model usually results in another refusal. Instead of only resetting context, retry on a fallback model with [server-side fallback, the SDK middleware, or a manual retry](/docs/en/build-with-claude/refusals-and-fallback), and redeem [fallback credit](/docs/en/build-with-claude/fallback-credit) when you build the retry yourself.
+- **Check batch results for refusals.** A refused request in a [Message Batch](/docs/en/build-with-claude/batch-processing) is returned as a succeeded result with `stop_reason`: `"refusal"`, not as an errored result.
+- **Centralize handling on `stop_reason`.** The API continues to consolidate refusal handling around `stop_reason`: `"refusal"`, so branch on the stop reason rather than on model-specific behavior.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Refusals and fallback" icon="arrows-clockwise" href="/docs/en/build-with-claude/refusals-and-fallback">
+    Retry refused requests on another Claude model, server-side or in your client.
+  </Card>
+  <Card title="Stop reasons and fallback" icon="code" href="/docs/en/build-with-claude/handling-stop-reasons">
+    Every `stop_reason` value and how to handle it.
+  </Card>
+  <Card title="Streaming messages" icon="lightning" href="/docs/en/build-with-claude/streaming">
+    Stream responses and read `stop_reason` from `message_delta` events as they arrive.
+  </Card>
+  <Card title="Multilingual support" icon="text-aa" href="/docs/en/build-with-claude/multilingual-support">
+    Serve users across languages with Claude's cross-lingual capabilities.
+  </Card>
+</CardGroup>

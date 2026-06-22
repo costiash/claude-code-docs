@@ -17,15 +17,157 @@ Related pages:
 
 The simplest setup: name a fallback model on the request, and the API handles the retry.
 
-```typescript
+<CodeGroup>
+```bash cURL hidelines={1..2}
+#!/usr/bin/env bash
+set -euo pipefail
+curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: server-side-fallback-2026-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-fable-5",
+    "max_tokens": 1024,
+    "fallbacks": [{"model": "claude-opus-4-8"}],
+    "messages": [{"role": "user", "content": "Hello, Claude"}]
+  }'
+```
+
+```bash CLI hidelines={1..2}
+#!/usr/bin/env bash
+set -euo pipefail
+ant beta:messages create \
+  --model claude-fable-5 \
+  --max-tokens 1024 \
+  --message '{"role":"user","content":"Hello, Claude"}' \
+  --fallback '[{"model":"claude-opus-4-8"}]' \
+  --beta server-side-fallback-2026-06-01
+```
+
+```python Python hidelines={1..2}
+from anthropic import Anthropic
+
+client = Anthropic()
+
+client.beta.messages.create(
+    model="claude-fable-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    fallbacks=[{"model": "claude-opus-4-8"}],
+    betas=["server-side-fallback-2026-06-01"],
+)
+```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
 await client.beta.messages.create({
   model: "claude-fable-5",
   max_tokens: 1024,
-  messages,
-  betas: ["server-side-fallback-2026-06-01"],
-  fallbacks: [{ model: "claude-opus-4-8" }]
+  messages: [{ role: "user", content: "Hello, Claude" }],
+  fallbacks: [{ model: "claude-opus-4-8" }],
+  betas: ["server-side-fallback-2026-06-01"]
 });
 ```
+
+```csharp C# hidelines={1..5}
+using Anthropic;
+using Anthropic.Models.Beta;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+await client.Beta.Messages.Create(
+    new()
+    {
+        Model = Messages::Model.ClaudeFable5,
+        MaxTokens = 1024,
+        Messages = [new() { Content = "Hello, Claude", Role = Role.User }],
+        Fallbacks = [new(Messages::Model.ClaudeOpus4_8)],
+        Betas = [AnthropicBeta.ServerSideFallback2026_06_01],
+    }
+);
+```
+
+```go Go hidelines={1..9,21}
+package main
+
+import (
+	"context"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeFable5,
+		MaxTokens: 1024,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude")),
+		},
+		Fallbacks: []anthropic.BetaFallbackParam{{Model: anthropic.ModelClaudeOpus4_8}},
+		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaServerSideFallback2026_06_01},
+	})
+}
+```
+
+```java Java hidelines={1..8,18}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.AnthropicBeta;
+import com.anthropic.models.beta.messages.BetaFallbackParam;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    client.beta().messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_FABLE_5)
+        .maxTokens(1024L)
+        .addUserMessage("Hello, Claude")
+        .addFallback(BetaFallbackParam.builder().model(Model.CLAUDE_OPUS_4_8).build())
+        .addBeta(AnthropicBeta.SERVER_SIDE_FALLBACK_2026_06_01)
+        .build());
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$client->beta->messages->create(
+    maxTokens: 1024,
+    messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+    model: 'claude-fable-5',
+    fallbacks: [['model' => 'claude-opus-4-8']],
+    betas: ['server-side-fallback-2026-06-01'],
+);
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+client.beta.messages.create(
+  model: "claude-fable-5",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "Hello, Claude"}],
+  fallbacks: [{model: "claude-opus-4-8"}],
+  betas: ["server-side-fallback-2026-06-01"]
+)
+```
+</CodeGroup>
 
 The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 

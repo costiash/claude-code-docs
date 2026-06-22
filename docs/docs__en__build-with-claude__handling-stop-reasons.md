@@ -1,12 +1,24 @@
 # Stop reasons and fallback
 
-The stop_reason field, what each value means, and where to handle refusals and fallback.
+Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.
 
 ---
 
-When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
+Every Messages API response includes a `stop_reason` field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
 
-For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages/create).
+For the full response schema, see the [Messages API reference](/docs/en/api/messages/create).
+
+## Quick reference
+
+| Value | When it occurs | What to do |
+| --- | --- | --- |
+| [`end_turn`](#end-turn) | Claude finished its response naturally. | Use the response. |
+| [`max_tokens`](#max-tokens) | The response reached your `max_tokens` limit. | Raise `max_tokens` or [continue the response](#ensuring-complete-responses). |
+| [`stop_sequence`](#stop-sequence) | Claude emitted one of your `stop_sequences`. | Read `stop_sequence` to see which one fired. |
+| [`tool_use`](#tool-use) | Claude is calling a tool. | Run the tool and return the result. |
+| [`pause_turn`](#pause-turn) | A server-tool loop reached its iteration limit. | Send the assistant content back to continue. |
+| [`refusal`](#refusal) | Claude declined to respond. | Read `stop_details` and [retry on a fallback model](/docs/en/build-with-claude/refusals-and-fallback). |
+| [`model_context_window_exceeded`](#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated. |
 
 ## The stop_reason field
 
@@ -25,6 +37,7 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
   ],
   "stop_reason": "end_turn",
   "stop_sequence": null,
+  "stop_details": null,
   "usage": {
     "input_tokens": 100,
     "output_tokens": 50
@@ -93,7 +106,7 @@ if (response.stop_reason === "end_turn") {
 }
 ```
 
-```csharp C# hidelines={1..3}
+```csharp C# hidelines={1..4}
 using System;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -224,8 +237,6 @@ Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) 
 
 **How to prevent empty responses:**
 
-The message-array shape shown here is the same across all SDKs. Python and TypeScript are shown for brevity; other SDKs build the identical structure.
-
 <CodeGroup>
 
 ```python Python nocheck
@@ -322,6 +333,235 @@ messages = [
     content: [{ type: "tool_result", tool_use_id: "toolu_123", content: "6912" }]
   }
 ];
+```
+
+```csharp C# nocheck
+using System.Text.Json;
+using Anthropic.Models.Messages;
+
+var input = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(
+    """{"operation":"add","a":1234,"b":5678}"""
+)!;
+
+// INCORRECT: Adding text immediately after tool_result
+List<MessageParam> messages =
+[
+    new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
+    new()
+    {
+        Role = Role.Assistant,
+        Content = new List<ContentBlockParam>
+        {
+            new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
+        }
+    },
+    new()
+    {
+        Role = Role.User,
+        Content = new List<ContentBlockParam>
+        {
+            new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" },
+            new TextBlockParam { Text = "Here's the result" } // Don't add text after tool_result
+        }
+    }
+];
+
+// CORRECT: Send tool results directly without additional text
+messages =
+[
+    new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
+    new()
+    {
+        Role = Role.Assistant,
+        Content = new List<ContentBlockParam>
+        {
+            new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
+        }
+    },
+    new()
+    {
+        Role = Role.User,
+        // Just the tool_result, no additional text
+        Content = new List<ContentBlockParam>
+        {
+            new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" }
+        }
+    }
+];
+```
+
+```go Go nocheck hidelines={1..5,-2..-1}
+package main
+
+import "github.com/anthropics/anthropic-sdk-go"
+
+func main() {
+	input := map[string]any{"operation": "add", "a": 1234, "b": 5678}
+
+	// INCORRECT: Adding text immediately after tool_result
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Calculate the sum of 1234 and 5678")),
+		anthropic.NewAssistantMessage(
+			anthropic.NewToolUseBlock("toolu_123", input, "calculator"),
+		),
+		anthropic.NewUserMessage(
+			anthropic.NewToolResultBlock("toolu_123", "6912", false),
+			anthropic.NewTextBlock("Here's the result"), // Don't add text after tool_result
+		),
+	}
+
+	// CORRECT: Send tool results directly without additional text
+	messages = []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Calculate the sum of 1234 and 5678")),
+		anthropic.NewAssistantMessage(
+			anthropic.NewToolUseBlock("toolu_123", input, "calculator"),
+		),
+		// Just the tool_result, no additional text
+		anthropic.NewUserMessage(
+			anthropic.NewToolResultBlock("toolu_123", "6912", false),
+		),
+	}
+	_ = messages
+}
+```
+
+```java Java nocheck
+ToolUseBlockParam toolUse = ToolUseBlockParam.builder()
+    .id("toolu_123")
+    .name("calculator")
+    .input(ToolUseBlockParam.Input.builder()
+        .putAdditionalProperty("operation", JsonValue.from("add"))
+        .putAdditionalProperty("a", JsonValue.from(1234))
+        .putAdditionalProperty("b", JsonValue.from(5678))
+        .build())
+    .build();
+
+// INCORRECT: Adding text immediately after tool_result
+List<MessageParam> messages = List.of(
+    MessageParam.builder().role(MessageParam.Role.USER)
+        .content("Calculate the sum of 1234 and 5678").build(),
+    MessageParam.builder().role(MessageParam.Role.ASSISTANT)
+        .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
+    MessageParam.builder().role(MessageParam.Role.USER)
+        .contentOfBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
+            // Don't add text after tool_result
+            ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
+        )).build()
+);
+
+// CORRECT: Send tool results directly without additional text
+messages = List.of(
+    MessageParam.builder().role(MessageParam.Role.USER)
+        .content("Calculate the sum of 1234 and 5678").build(),
+    MessageParam.builder().role(MessageParam.Role.ASSISTANT)
+        .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
+    // Just the tool_result, no additional text
+    MessageParam.builder().role(MessageParam.Role.USER)
+        .contentOfBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
+        )).build()
+);
+```
+
+```php PHP nocheck
+// INCORRECT: Adding text immediately after tool_result
+$messages = [
+    ['role' => 'user', 'content' => 'Calculate the sum of 1234 and 5678'],
+    [
+        'role' => 'assistant',
+        'content' => [
+            [
+                'type' => 'tool_use',
+                'id' => 'toolu_123',
+                'name' => 'calculator',
+                'input' => ['operation' => 'add', 'a' => 1234, 'b' => 5678],
+            ],
+        ],
+    ],
+    [
+        'role' => 'user',
+        'content' => [
+            ['type' => 'tool_result', 'tool_use_id' => 'toolu_123', 'content' => '6912'],
+            // Don't add text after tool_result
+            ['type' => 'text', 'text' => "Here's the result"],
+        ],
+    ],
+];
+
+// CORRECT: Send tool results directly without additional text
+$messages = [
+    ['role' => 'user', 'content' => 'Calculate the sum of 1234 and 5678'],
+    [
+        'role' => 'assistant',
+        'content' => [
+            [
+                'type' => 'tool_use',
+                'id' => 'toolu_123',
+                'name' => 'calculator',
+                'input' => ['operation' => 'add', 'a' => 1234, 'b' => 5678],
+            ],
+        ],
+    ],
+    [
+        'role' => 'user',
+        // Just the tool_result, no additional text
+        'content' => [
+            ['type' => 'tool_result', 'tool_use_id' => 'toolu_123', 'content' => '6912'],
+        ],
+    ],
+];
+```
+
+```ruby Ruby nocheck
+# INCORRECT: Adding text immediately after tool_result
+messages = [
+  { role: "user", content: "Calculate the sum of 1234 and 5678" },
+  {
+    role: "assistant",
+    content: [
+      {
+        type: "tool_use",
+        id: "toolu_123",
+        name: "calculator",
+        input: { operation: "add", a: 1234, b: 5678 }
+      }
+    ]
+  },
+  {
+    role: "user",
+    content: [
+      { type: "tool_result", tool_use_id: "toolu_123", content: "6912" },
+      # Don't add text after tool_result
+      { type: "text", text: "Here's the result" }
+    ]
+  }
+]
+
+# CORRECT: Send tool results directly without additional text
+messages = [
+  { role: "user", content: "Calculate the sum of 1234 and 5678" },
+  {
+    role: "assistant",
+    content: [
+      {
+        type: "tool_use",
+        id: "toolu_123",
+        name: "calculator",
+        input: { operation: "add", a: 1234, b: 5678 }
+      }
+    ]
+  },
+  {
+    role: "user",
+    # Just the tool_result, no additional text
+    content: [
+      { type: "tool_result", tool_use_id: "toolu_123", content: "6912" }
+    ]
+  }
+]
 ```
 </CodeGroup>
 
@@ -530,9 +770,9 @@ end
 </CodeGroup>
 
 **Best practices:**
-1. **Never add text blocks immediately after tool results** - This teaches Claude to expect user input after every tool use
-2. **Don't retry empty responses without modification** - Simply sending the empty response back won't help
-3. **Use continuation prompts as a last resort** - Only if these fixes don't resolve the issue
+1. **Never add text blocks immediately after tool results:** This teaches Claude to expect user input after every tool use.
+2. **Don't retry empty responses without modification:** Sending the empty response back won't help.
+3. **Use continuation prompts as a last resort:** Only if these fixes don't resolve the issue.
 
 </section>
 
@@ -596,7 +836,7 @@ if (response.stop_reason === "max_tokens") {
 }
 ```
 
-```csharp C# hidelines={1..3}
+```csharp C# hidelines={1..4}
 using System;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -741,12 +981,22 @@ if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
 fi
 ```
 
-```python Python nocheck hidelines={1..8}
+```python Python nocheck hidelines={1..18}
 import anthropic
 
 client = anthropic.Anthropic()
-tools: list[dict] = []
-messages: list[dict] = []
+tools = [
+    {
+        "name": "get_weather",
+        "description": "Get the current weather in a given location",
+        "input_schema": {
+            "type": "object",
+            "properties": {"location": {"type": "string"}},
+            "required": ["location"],
+        },
+    }
+]
+messages = [{"role": "user", "content": "What's the weather in San Francisco?"}]
 response = client.messages.create(
     model="claude-opus-4-8", max_tokens=1024, tools=tools, messages=messages
 )
@@ -801,10 +1051,9 @@ var response = await client.Messages.Create(parameters);
 if (response.StopReason == "max_tokens")
 {
     var lastBlock = response.Content.Last();
-    if (lastBlock.Type == "tool_use")
+    if (lastBlock.TryPickToolUse(out _))
     {
-        parameters.MaxTokens = 4096;
-        response = await client.Messages.Create(parameters);
+        response = await client.Messages.Create(parameters with { MaxTokens = 4096 });
     }
 }
 ```
@@ -855,19 +1104,20 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..13}
+```java Java nocheck hidelines={1..14}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.ContentBlock;
-import java.util.List;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.StopReason;
+import com.anthropic.models.messages.ToolUnion;
+import java.util.List;
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-List<MessageCreateParams.Message> messages = List.of();
-List<Tool> tools = List.of();
+List<MessageParam> messages = List.of();
+List<ToolUnion> tools = List.of();
 Message response = client.messages().create(MessageCreateParams.builder().model(Model.CLAUDE_OPUS_4_8).maxTokens(1024L).addUserMessage("test").build());
 // Check if response was truncated during tool use
 if (response.stopReason().isPresent() && response.stopReason().get().equals(StopReason.MAX_TOKENS)) {
@@ -1010,7 +1260,7 @@ if (response.stop_reason === "stop_sequence") {
 }
 ```
 
-```csharp C# hidelines={1..3}
+```csharp C# hidelines={1..4}
 using System;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -1152,7 +1402,7 @@ curl https://api.anthropic.com/v1/messages \
         "required": ["location"]
       }
     }],
-    "messages": [{"role": "user", "content": "What is the weather?"}]
+    "messages": [{"role": "user", "content": "What is the weather in San Francisco?"}]
   }' | jq '.stop_reason, (.content[] | select(.type == "tool_use"))'
 ```
 
@@ -1162,7 +1412,7 @@ model: claude-opus-4-8
 max_tokens: 1024
 messages:
   - role: user
-    content: What is the weather?
+    content: What is the weather in San Francisco?
 tools:
   - name: get_weather
     description: Get the current weather in a given location
@@ -1200,7 +1450,7 @@ response = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
     tools=[weather_tool],
-    messages=[{"role": "user", "content": "What is the weather?"}],
+    messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
 )
 
 if response.stop_reason == "tool_use":
@@ -1235,7 +1485,7 @@ const response = await client.messages.create({
   model: "claude-opus-4-8",
   max_tokens: 1024,
   tools: [weatherTool],
-  messages: [{ role: "user", content: "What is the weather?" }]
+  messages: [{ role: "user", content: "What is the weather in San Francisco?" }]
 });
 
 if (response.stop_reason === "tool_use") {
@@ -1249,9 +1499,11 @@ if (response.stop_reason === "tool_use") {
 }
 ```
 
-```csharp C# nocheck hidelines={1..4}
+```csharp C# nocheck hidelines={1..7}
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
 
@@ -1261,11 +1513,13 @@ var weatherTool = new Tool
 {
     Name = "get_weather",
     Description = "Get the current weather in a given location",
-    InputSchema = new()
+    InputSchema = new InputSchema
     {
-        Properties = new()
+        Properties = new Dictionary<string, JsonElement>
         {
-            ["location"] = new { type = "string", description = "City and state" }
+            ["location"] = JsonSerializer.SerializeToElement(
+                new { type = "string", description = "City and state" }
+            ),
         },
         Required = ["location"]
     }
@@ -1276,7 +1530,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     Model = Model.ClaudeOpus4_8,
     MaxTokens = 1024,
     Tools = [weatherTool],
-    Messages = [new() { Role = Role.User, Content = "What is the weather?" }]
+    Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco?" }]
 });
 
 if (response.StopReason == "tool_use")
@@ -1322,7 +1576,7 @@ func main() {
 		MaxTokens: 1024,
 		Tools:     []anthropic.ToolUnionParam{{OfTool: &weatherTool}},
 		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather?")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather in San Francisco?")),
 		},
 	})
 	if err != nil {
@@ -1373,7 +1627,7 @@ void main() {
             .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024L)
             .addTool(weatherTool)
-            .addUserMessage("What is the weather?")
+            .addUserMessage("What is the weather in San Francisco?")
             .build()
     );
 
@@ -1409,7 +1663,7 @@ $weatherTool = [
 
 $response = $client->messages->create(
     maxTokens: 1024,
-    messages: [['role' => 'user', 'content' => 'What is the weather?']],
+    messages: [['role' => 'user', 'content' => 'What is the weather in San Francisco?']],
     model: 'claude-opus-4-8',
     tools: [$weatherTool],
 );
@@ -1445,7 +1699,7 @@ response = client.messages.create(
   model: "claude-opus-4-8",
   max_tokens: 1024,
   tools: [weather_tool],
-  messages: [{ role: "user", content: "What is the weather?" }]
+  messages: [{ role: "user", content: "What is the weather in San Francisco?" }]
 )
 
 if response.stop_reason == :tool_use
@@ -1473,7 +1727,7 @@ curl https://api.anthropic.com/v1/messages \
   --header "content-type: application/json" \
   --data '{
     "model": "claude-opus-4-8",
-    "max_tokens": 1024,
+    "max_tokens": 4096,
     "tools": [{"type": "web_search_20250305", "name": "web_search"}],
     "messages": [{"role": "user", "content": "Search for latest AI news"}]
   }' | jq '{stop_reason, content}'
@@ -1484,7 +1738,7 @@ curl https://api.anthropic.com/v1/messages \
 # response appended to --message.
 ant messages create --format json <<'YAML' | jq '{stop_reason, content}'
 model: claude-opus-4-8
-max_tokens: 1024
+max_tokens: 4096
 tools:
   - {type: web_search_20250305, name: web_search}
 messages:
@@ -1495,7 +1749,7 @@ YAML
 ```python Python nocheck
 response = client.messages.create(
     model="claude-opus-4-8",
-    max_tokens=1024,
+    max_tokens=4096,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
 )
@@ -1508,7 +1762,7 @@ if response.stop_reason == "pause_turn":
     ]
     continuation = client.messages.create(
         model="claude-opus-4-8",
-        max_tokens=1024,
+        max_tokens=4096,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
@@ -1517,7 +1771,7 @@ if response.stop_reason == "pause_turn":
 ```typescript TypeScript nocheck
 const response = await client.messages.create({
   model: "claude-opus-4-8",
-  max_tokens: 1024,
+  max_tokens: 4096,
   tools: [{ type: "web_search_20250305", name: "web_search" }],
   messages: [{ role: "user", content: "Search for latest AI news" }]
 });
@@ -1526,7 +1780,7 @@ if (response.stop_reason === "pause_turn") {
   // Continue the conversation by sending the response back
   const continuation = await client.messages.create({
     model: "claude-opus-4-8",
-    max_tokens: 1024,
+    max_tokens: 4096,
     tools: [{ type: "web_search_20250305", name: "web_search" }],
     messages: [
       { role: "user", content: "Search for latest AI news" },
@@ -1543,7 +1797,7 @@ MessageParam userMessage = new() { Role = Role.User, Content = "Search for lates
 var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus4_8,
-    MaxTokens = 1024,
+    MaxTokens = 4096,
     Tools = tools,
     Messages = [userMessage]
 });
@@ -1554,7 +1808,7 @@ if (response.StopReason == "pause_turn")
     var continuation = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus4_8,
-        MaxTokens = 1024,
+        MaxTokens = 4096,
         Tools = tools,
         Messages =
         [
@@ -1589,7 +1843,7 @@ func main() {
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 1024,
+		MaxTokens: 4096,
 		Tools:     tools,
 		Messages:  []anthropic.MessageParam{userMessage},
 	})
@@ -1605,7 +1859,7 @@ func main() {
 		}
 		continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 			Model:     anthropic.ModelClaudeOpus4_8,
-			MaxTokens: 1024,
+			MaxTokens: 4096,
 			Tools:     tools,
 			Messages:  []anthropic.MessageParam{userMessage, anthropic.NewAssistantMessage(contentParams...)},
 		})
@@ -1621,7 +1875,7 @@ func main() {
 Message response = client.messages().create(
     MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024L)
+        .maxTokens(4096L)
         .addTool(WebSearchTool20250305.builder().build())
         .addUserMessage("Search for latest AI news")
         .build()
@@ -1632,7 +1886,7 @@ if (response.stopReason().map(StopReason.PAUSE_TURN::equals).orElse(false)) {
     Message continuation = client.messages().create(
         MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(1024L)
+            .maxTokens(4096L)
             .addTool(WebSearchTool20250305.builder().build())
             .addUserMessage("Search for latest AI news")
             .addMessage(response)
@@ -1646,7 +1900,7 @@ $tools = [['type' => 'web_search_20250305', 'name' => 'web_search']];
 $userMessage = ['role' => 'user', 'content' => 'Search for latest AI news'];
 
 $response = $client->messages->create(
-    maxTokens: 1024,
+    maxTokens: 4096,
     messages: [$userMessage],
     model: 'claude-opus-4-8',
     tools: $tools,
@@ -1655,7 +1909,7 @@ $response = $client->messages->create(
 if ($response->stopReason === 'pause_turn') {
     // Continue the conversation by sending the response back
     $continuation = $client->messages->create(
-        maxTokens: 1024,
+        maxTokens: 4096,
         messages: [
             $userMessage,
             ['role' => 'assistant', 'content' => $response->content],
@@ -1672,7 +1926,7 @@ user_message = { role: "user", content: "Search for latest AI news" }
 
 response = client.messages.create(
   model: "claude-opus-4-8",
-  max_tokens: 1024,
+  max_tokens: 4096,
   tools: tools,
   messages: [user_message]
 )
@@ -1681,7 +1935,7 @@ if response.stop_reason == :pause_turn
   # Continue the conversation by sending the response back
   continuation = client.messages.create(
     model: "claude-opus-4-8",
-    max_tokens: 1024,
+    max_tokens: 4096,
     tools: tools,
     messages: [user_message, { role: "assistant", content: response.content }]
   )
@@ -1690,7 +1944,7 @@ end
 </CodeGroup>
 
 <Note>
-Your application should handle `pause_turn` in any agent loop that uses server tools. Simply add the assistant's response to your messages array and make another API request to let Claude continue.
+Your application should handle `pause_turn` in any agent loop that uses server tools. Add the assistant's response to your messages array and make another API request to let Claude continue.
 </Note>
 
 ### refusal
@@ -1751,7 +2005,7 @@ if (response.stop_reason === "refusal") {
 }
 ```
 
-```csharp C# hidelines={1..3}
+```csharp C# hidelines={1..4}
 using System;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -1881,7 +2135,11 @@ On a refusal, the `stop_details` object identifies the policy category that trig
 A refused request on Claude Fable 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback) shows how to set up that retry, server-side or in your client. [Fallback credit](/docs/en/build-with-claude/fallback-credit) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
 
 ### model_context_window_exceeded
-Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
+Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
+
+<Note>
+This stop reason is currently typed only in the SDKs' `beta` namespace, so the following examples call `client.beta.messages` and use the `Beta`-prefixed types. On Sonnet 4.5 and newer models the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
+</Note>
 
 <CodeGroup>
 ```bash cURL
@@ -1906,7 +2164,7 @@ ant messages create \
 
 ```python Python nocheck
 # Request with maximum tokens to get as much as possible
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.8 supports 128k with streaming)
     messages=[
@@ -1922,7 +2180,7 @@ if response.stop_reason == "model_context_window_exceeded":
 
 ```typescript TypeScript nocheck
 // Request with maximum tokens to get as much as possible
-const response = await client.messages.create({
+const response = await client.beta.messages.create({
   model: "claude-opus-4-8",
   max_tokens: 20000,
   messages: [{ role: "user", content: "Large input that uses most of context window..." }]
@@ -1936,15 +2194,18 @@ if (response.stop_reason === "model_context_window_exceeded") {
 ```
 
 ```csharp C# nocheck
+using Anthropic.Models.Beta.Messages;
+using Model = Anthropic.Models.Messages.Model;
+
 // Request with maximum tokens to get as much as possible
-var response = await client.Messages.Create(new MessageCreateParams
+var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus4_8,
     MaxTokens = 20000,
     Messages = [new() { Role = Role.User, Content = "Large input that uses most of context window..." }]
 });
 
-if (response.StopReason == "model_context_window_exceeded")
+if (response.StopReason?.Value() == BetaStopReason.ModelContextWindowExceeded)
 {
     // Response hit context window limit before max_tokens
     Console.WriteLine("Response reached model's context window limit");
@@ -1957,18 +2218,18 @@ package main
 
 func main() {
 	// Request with maximum tokens to get as much as possible
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 20000,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Large input that uses most of context window...")),
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Large input that uses most of context window...")),
 		},
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if response.StopReason == "model_context_window_exceeded" {
+	if response.StopReason == anthropic.BetaStopReasonModelContextWindowExceeded {
 		// Response hit context window limit before max_tokens
 		fmt.Println("Response reached model's context window limit")
 		// The response is still valid but was limited by context window
@@ -1977,8 +2238,12 @@ func main() {
 ```
 
 ```java Java nocheck
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaStopReason;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+
 // Request with maximum tokens to get as much as possible
-Message response = client.messages().create(
+BetaMessage response = client.beta().messages().create(
     MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(20000L)
@@ -1986,7 +2251,7 @@ Message response = client.messages().create(
         .build()
 );
 
-if (response.stopReason().map(StopReason.MODEL_CONTEXT_WINDOW_EXCEEDED::equals).orElse(false)) {
+if (response.stopReason().map(BetaStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED::equals).orElse(false)) {
     // Response hit context window limit before max_tokens
     IO.println("Response reached model's context window limit");
     // The response is still valid but was limited by context window
@@ -1995,7 +2260,7 @@ if (response.stopReason().map(StopReason.MODEL_CONTEXT_WINDOW_EXCEEDED::equals).
 
 ```php PHP nocheck
 // Request with maximum tokens to get as much as possible
-$response = $client->messages->create(
+$response = $client->beta->messages->create(
     maxTokens: 20000,
     messages: [['role' => 'user', 'content' => 'Large input that uses most of context window...']],
     model: 'claude-opus-4-8',
@@ -2010,7 +2275,7 @@ if ($response->stopReason === 'model_context_window_exceeded') {
 
 ```ruby Ruby nocheck
 # Request with maximum tokens to get as much as possible
-response = client.messages.create(
+response = client.beta.messages.create(
   model: "claude-opus-4-8",
   max_tokens: 20000,
   messages: [{ role: "user", content: "Large input that uses most of context window..." }]
@@ -2024,13 +2289,9 @@ end
 ```
 </CodeGroup>
 
-<Note>
-This stop reason is available by default in Sonnet 4.5 and newer models. For earlier models, use the beta header `model-context-window-exceeded-2025-08-26` to enable this behavior.
-</Note>
-
 ## Best practices for handling stop reasons
 
-### 1. Always check stop_reason
+### Always check stop_reason
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
@@ -2054,7 +2315,7 @@ def handle_response(response):
 ```
 
 ```typescript TypeScript nocheck
-function handleResponse(response: Anthropic.Message): string {
+function handleResponse(response: Anthropic.Beta.BetaMessage): string {
   switch (response.stop_reason) {
     case "tool_use":
       return handleToolUse(response);
@@ -2076,36 +2337,39 @@ function handleResponse(response: Anthropic.Message): string {
 ```
 
 ```csharp C# nocheck
-static string HandleResponse(Message response)
+static string HandleResponse(BetaMessage response)
 {
-    if (response.StopReason == "tool_use") return HandleToolUse(response);
-    if (response.StopReason == "max_tokens") return HandleTruncation(response);
-    if (response.StopReason == "model_context_window_exceeded") return HandleContextLimit(response);
-    if (response.StopReason == "pause_turn") return HandlePause(response);
-    if (response.StopReason == "refusal") return HandleRefusal(response);
-    // Handle end_turn and other cases
-    return response.Content[0].TryPickText(out var textBlock) ? textBlock.Text : "";
+    return response.StopReason?.Value() switch
+    {
+        BetaStopReason.ToolUse => HandleToolUse(response),
+        BetaStopReason.MaxTokens => HandleTruncation(response),
+        BetaStopReason.ModelContextWindowExceeded => HandleContextLimit(response),
+        BetaStopReason.PauseTurn => HandlePause(response),
+        BetaStopReason.Refusal => HandleRefusal(response),
+        // Handle end_turn and other cases
+        _ => response.Content[0].TryPickText(out var textBlock) ? textBlock.Text : "",
+    };
 }
 ```
 
 ```go Go nocheck hidelines={1..2}
 package main
 
-func handleResponse(response *anthropic.Message) string {
+func handleResponse(response *anthropic.BetaMessage) string {
 	switch response.StopReason {
-	case "tool_use":
+	case anthropic.BetaStopReasonToolUse:
 		return handleToolUse(response)
-	case "max_tokens":
+	case anthropic.BetaStopReasonMaxTokens:
 		return handleTruncation(response)
-	case "model_context_window_exceeded":
+	case anthropic.BetaStopReasonModelContextWindowExceeded:
 		return handleContextLimit(response)
-	case "pause_turn":
+	case anthropic.BetaStopReasonPauseTurn:
 		return handlePause(response)
-	case "refusal":
+	case anthropic.BetaStopReasonRefusal:
 		return handleRefusal(response)
 	default:
 		// Handle end_turn and other cases
-		if block, ok := response.Content[0].AsAny().(anthropic.TextBlock); ok {
+		if block, ok := response.Content[0].AsAny().(anthropic.BetaTextBlock); ok {
 			return block.Text
 		}
 		return ""
@@ -2114,21 +2378,21 @@ func handleResponse(response *anthropic.Message) string {
 ```
 
 ```java Java nocheck
-static String handleResponse(Message response) {
-    StopReason reason = response.stopReason().orElse(StopReason.END_TURN);
-    if (reason.equals(StopReason.TOOL_USE)) {
+static String handleResponse(BetaMessage response) {
+    BetaStopReason reason = response.stopReason().orElse(BetaStopReason.END_TURN);
+    if (reason.equals(BetaStopReason.TOOL_USE)) {
         return handleToolUse(response);
-    } else if (reason.equals(StopReason.MAX_TOKENS)) {
+    } else if (reason.equals(BetaStopReason.MAX_TOKENS)) {
         return handleTruncation(response);
-    } else if (reason.equals(StopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
+    } else if (reason.equals(BetaStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
         return handleContextLimit(response);
-    } else if (reason.equals(StopReason.PAUSE_TURN)) {
+    } else if (reason.equals(BetaStopReason.PAUSE_TURN)) {
         return handlePause(response);
-    } else if (reason.equals(StopReason.REFUSAL)) {
+    } else if (reason.equals(BetaStopReason.REFUSAL)) {
         return handleRefusal(response);
     }
     // Handle end_turn and other cases
-    return response.content().get(0).text().map(textBlock -> textBlock.text()).orElse("");
+    return response.content().get(0).text().map(BetaTextBlock::text).orElse("");
 }
 ```
 
@@ -2163,9 +2427,9 @@ end
 ```
 </CodeGroup>
 
-### 2. Handle truncated responses gracefully
+### Handle truncated responses gracefully
 
-When a response is truncated due to token limits or context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses) below.
+When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
 
 <CodeGroup>
 
@@ -2181,7 +2445,7 @@ def handle_truncated_response(response):
 ```
 
 ```typescript TypeScript nocheck
-function handleTruncatedResponse(response: Anthropic.Message): string {
+function handleTruncatedResponse(response: Anthropic.Beta.BetaMessage): string {
   const text = response.content[0].type === "text" ? response.content[0].text : "";
 
   if (
@@ -2199,13 +2463,14 @@ function handleTruncatedResponse(response: Anthropic.Message): string {
 ```
 
 ```csharp C# nocheck
-static string HandleTruncatedResponse(Message response)
+static string HandleTruncatedResponse(BetaMessage response)
 {
     var text = response.Content[0].TryPickText(out var textBlock) ? textBlock.Text : "";
+    var reason = response.StopReason?.Value();
 
-    if (response.StopReason == "max_tokens" || response.StopReason == "model_context_window_exceeded")
+    if (reason is BetaStopReason.MaxTokens or BetaStopReason.ModelContextWindowExceeded)
     {
-        var note = response.StopReason == "max_tokens"
+        var note = reason == BetaStopReason.MaxTokens
             ? "[Response truncated due to max_tokens limit]"
             : "[Response truncated due to context window limit]";
         return $"{text}\n\n{note}";
@@ -2217,15 +2482,16 @@ static string HandleTruncatedResponse(Message response)
 ```go Go nocheck hidelines={1..2}
 package main
 
-func handleTruncatedResponse(response *anthropic.Message) string {
+func handleTruncatedResponse(response *anthropic.BetaMessage) string {
 	text := ""
-	if block, ok := response.Content[0].AsAny().(anthropic.TextBlock); ok {
+	if block, ok := response.Content[0].AsAny().(anthropic.BetaTextBlock); ok {
 		text = block.Text
 	}
 
-	if response.StopReason == "max_tokens" || response.StopReason == "model_context_window_exceeded" {
+	if response.StopReason == anthropic.BetaStopReasonMaxTokens ||
+		response.StopReason == anthropic.BetaStopReasonModelContextWindowExceeded {
 		note := "[Response truncated due to context window limit]"
-		if response.StopReason == "max_tokens" {
+		if response.StopReason == anthropic.BetaStopReasonMaxTokens {
 			note = "[Response truncated due to max_tokens limit]"
 		}
 		return text + "\n\n" + note
@@ -2235,13 +2501,13 @@ func handleTruncatedResponse(response *anthropic.Message) string {
 ```
 
 ```java Java nocheck
-static String handleTruncatedResponse(Message response) {
-    String text = response.content().get(0).text().map(textBlock -> textBlock.text()).orElse("");
-    StopReason reason = response.stopReason().orElse(StopReason.END_TURN);
+static String handleTruncatedResponse(BetaMessage response) {
+    String text = response.content().get(0).text().map(BetaTextBlock::text).orElse("");
+    BetaStopReason reason = response.stopReason().orElse(BetaStopReason.END_TURN);
 
-    if (reason.equals(StopReason.MAX_TOKENS)
-            || reason.equals(StopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
-        String note = reason.equals(StopReason.MAX_TOKENS)
+    if (reason.equals(BetaStopReason.MAX_TOKENS)
+            || reason.equals(BetaStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
+        String note = reason.equals(BetaStopReason.MAX_TOKENS)
             ? "[Response truncated due to max_tokens limit]"
             : "[Response truncated due to context window limit]";
         return text + "\n\n" + note;
@@ -2282,7 +2548,7 @@ end
 ```
 </CodeGroup>
 
-### 3. Implement retry logic for pause_turn
+### Implement retry logic for pause_turn
 
 When using [server tools](/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
@@ -2301,7 +2567,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=4096, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -2322,7 +2588,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 async function handleServerToolConversation(
   client: Anthropic,
   userQuery: string,
-  tools: Anthropic.Tool[],
+  tools: Anthropic.ToolUnion[],
   maxContinuations = 5
 ): Promise<Anthropic.Message> {
   let messages: Anthropic.MessageParam[] = [{ role: "user", content: userQuery }];
@@ -2331,7 +2597,7 @@ async function handleServerToolConversation(
   for (let i = 0; i < maxContinuations; i++) {
     response = await client.messages.create({
       model: "claude-opus-4-8",
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages,
       tools
     });
@@ -2368,7 +2634,7 @@ static async Task<Message> HandleServerToolConversation(
         response = await client.Messages.Create(new MessageCreateParams
         {
             Model = Model.ClaudeOpus4_8,
-            MaxTokens = 1024,
+            MaxTokens = 4096,
             Messages = messages,
             Tools = tools
         });
@@ -2412,7 +2678,7 @@ func handleServerToolConversation(
 	for range maxContinuations {
 		response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 			Model:     anthropic.ModelClaudeOpus4_8,
-			MaxTokens: 1024,
+			MaxTokens: 4096,
 			Messages:  messages,
 			Tools:     tools,
 		})
@@ -2454,7 +2720,7 @@ static Message handleServerToolConversation(
         // Rebuild the params each iteration so messages aren't accumulated
         MessageCreateParams.Builder params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(1024L)
+            .maxTokens(4096L)
             .addUserMessage(userQuery);
         tools.forEach(params::addTool);
         if (response != null) {
@@ -2487,7 +2753,7 @@ function handle_server_tool_conversation(
 
     for ($i = 0; $i < $maxContinuations; $i++) {
         $response = $client->messages->create(
-            maxTokens: 1024,
+            maxTokens: 4096,
             messages: $messages,
             model: 'claude-opus-4-8',
             tools: $tools,
@@ -2518,7 +2784,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
   max_continuations.times do
     response = client.messages.create(
       model: "claude-opus-4-8",
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages: messages,
       tools: tools
     )
@@ -2631,7 +2897,7 @@ try {
 }
 ```
 
-```csharp C# hidelines={1..4}
+```csharp C# hidelines={1..5}
 using System;
 using Anthropic;
 using Anthropic.Exceptions;
@@ -2864,7 +3130,7 @@ for await (const event of stream) {
 }
 ```
 
-```csharp C# hidelines={1..3}
+```csharp C# hidelines={1..4}
 using System;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -3032,7 +3298,7 @@ def complete_tool_workflow(client, user_query, tools):
 async function completeToolWorkflow(
   client: Anthropic,
   userQuery: string,
-  tools: Anthropic.Tool[]
+  tools: Anthropic.ToolUnion[]
 ): Promise<Anthropic.Message> {
   const messages: Anthropic.MessageParam[] = [{ role: "user", content: userQuery }];
 
@@ -3161,7 +3427,7 @@ static Message completeToolWorkflow(
         messages.add(response.toParam());
         messages.add(MessageParam.builder()
             .role(MessageParam.Role.USER)
-            .contentOfBlockParams(toolResults)
+            .contentOfBlockParams(toolResults.stream().map(ContentBlockParam::ofToolResult).toList())
             .build());
     }
 }
@@ -3462,7 +3728,7 @@ def get_max_possible_tokens(client, prompt):
     Get as many tokens as possible within the model's context window
     without needing to calculate input token count
     """
-    response = client.messages.create(
+    response = client.beta.messages.create(
         model="claude-opus-4-8",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
@@ -3485,7 +3751,7 @@ def get_max_possible_tokens(client, prompt):
 
 ```typescript TypeScript nocheck
 async function getMaxPossibleTokens(client: Anthropic, prompt: string): Promise<string> {
-  const response = await client.messages.create({
+  const response = await client.beta.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 20000,
     messages: [{ role: "user", content: prompt }]
@@ -3509,9 +3775,12 @@ async function getMaxPossibleTokens(client: Anthropic, prompt: string): Promise<
 ```
 
 ```csharp C# nocheck
+using Anthropic.Models.Beta.Messages;
+using Model = Anthropic.Models.Messages.Model;
+
 static async Task<string> GetMaxPossibleTokens(AnthropicClient client, string prompt)
 {
-    var response = await client.Messages.Create(new MessageCreateParams
+    var response = await client.Beta.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus4_8,
         MaxTokens = 20000,
@@ -3519,12 +3788,13 @@ static async Task<string> GetMaxPossibleTokens(AnthropicClient client, string pr
     });
 
     var tokens = response.Usage.OutputTokens;
-    if (response.StopReason == "model_context_window_exceeded")
+    var reason = response.StopReason?.Value();
+    if (reason == BetaStopReason.ModelContextWindowExceeded)
     {
         // Got the maximum possible tokens given input size
         Console.WriteLine($"Generated {tokens} tokens (context limit reached)");
     }
-    else if (response.StopReason == "max_tokens")
+    else if (reason == BetaStopReason.MaxTokens)
     {
         // Got exactly the requested tokens
         Console.WriteLine($"Generated {tokens} tokens (max_tokens reached)");
@@ -3543,11 +3813,11 @@ static async Task<string> GetMaxPossibleTokens(AnthropicClient client, string pr
 package main
 
 func getMaxPossibleTokens(client anthropic.Client, prompt string) (string, error) {
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 20000,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(prompt)),
 		},
 	})
 	if err != nil {
@@ -3556,10 +3826,10 @@ func getMaxPossibleTokens(client anthropic.Client, prompt string) (string, error
 
 	tokens := response.Usage.OutputTokens
 	switch response.StopReason {
-	case "model_context_window_exceeded":
+	case anthropic.BetaStopReasonModelContextWindowExceeded:
 		// Got the maximum possible tokens given input size
 		fmt.Printf("Generated %d tokens (context limit reached)\n", tokens)
-	case "max_tokens":
+	case anthropic.BetaStopReasonMaxTokens:
 		// Got exactly the requested tokens
 		fmt.Printf("Generated %d tokens (max_tokens reached)\n", tokens)
 	default:
@@ -3567,7 +3837,7 @@ func getMaxPossibleTokens(client anthropic.Client, prompt string) (string, error
 		fmt.Printf("Generated %d tokens (natural completion)\n", tokens)
 	}
 
-	if block, ok := response.Content[0].AsAny().(anthropic.TextBlock); ok {
+	if block, ok := response.Content[0].AsAny().(anthropic.BetaTextBlock); ok {
 		return block.Text, nil
 	}
 	return "", nil
@@ -3575,8 +3845,13 @@ func getMaxPossibleTokens(client anthropic.Client, prompt string) (string, error
 ```
 
 ```java Java nocheck
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaStopReason;
+import com.anthropic.models.beta.messages.BetaTextBlock;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+
 static String getMaxPossibleTokens(AnthropicClient client, String prompt) {
-    Message response = client.messages().create(
+    BetaMessage response = client.beta().messages().create(
         MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(20000L)
@@ -3585,11 +3860,11 @@ static String getMaxPossibleTokens(AnthropicClient client, String prompt) {
     );
 
     long tokens = response.usage().outputTokens();
-    StopReason reason = response.stopReason().orElse(StopReason.END_TURN);
-    if (reason.equals(StopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
+    BetaStopReason reason = response.stopReason().orElse(BetaStopReason.END_TURN);
+    if (reason.equals(BetaStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED)) {
         // Got the maximum possible tokens given input size
         IO.println("Generated " + tokens + " tokens (context limit reached)");
-    } else if (reason.equals(StopReason.MAX_TOKENS)) {
+    } else if (reason.equals(BetaStopReason.MAX_TOKENS)) {
         // Got exactly the requested tokens
         IO.println("Generated " + tokens + " tokens (max_tokens reached)");
     } else {
@@ -3597,14 +3872,14 @@ static String getMaxPossibleTokens(AnthropicClient client, String prompt) {
         IO.println("Generated " + tokens + " tokens (natural completion)");
     }
 
-    return response.content().get(0).text().map(block -> block.text()).orElse("");
+    return response.content().get(0).text().map(BetaTextBlock::text).orElse("");
 }
 ```
 
 ```php PHP nocheck
 function get_max_possible_tokens(Client $client, string $prompt): string
 {
-    $response = $client->messages->create(
+    $response = $client->beta->messages->create(
         maxTokens: 20000,
         messages: [['role' => 'user', 'content' => $prompt]],
         model: 'claude-opus-4-8',
@@ -3626,7 +3901,7 @@ function get_max_possible_tokens(Client $client, string $prompt): string
 
 ```ruby Ruby nocheck
 def get_max_possible_tokens(client, prompt)
-  response = client.messages.create(
+  response = client.beta.messages.create(
     model: "claude-opus-4-8",
     max_tokens: 20000,
     messages: [{ role: "user", content: prompt }]
@@ -3650,4 +3925,19 @@ end
 ```
 </CodeGroup>
 
-By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Refusals and fallback" icon="arrows-clockwise" href="/docs/en/build-with-claude/refusals-and-fallback">
+    Retry refused requests on a fallback model, server-side or in your client.
+  </Card>
+  <Card title="Tool Runner (SDK)" icon="wrench" href="/docs/en/agents-and-tools/tool-use/tool-runner">
+    Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
+  </Card>
+  <Card title="Streaming messages" icon="lightning" href="/docs/en/build-with-claude/streaming">
+    Read `stop_reason` from the `message_delta` event when streaming.
+  </Card>
+  <Card title="Errors" icon="info" href="/docs/en/api/errors">
+    Handle 4xx and 5xx HTTP errors, which are distinct from stop reasons.
+  </Card>
+</CardGroup>
