@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-22T17:14:32Z",
+  "generated_at": "2026-06-22T19:47:21Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -1797,7 +1797,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
       "title": "Define tools",
-      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Choosing a model  Use the latest Claude Opus (4.7) model for complex tools and am...",
+      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Choosing a model  Use the latest Claude Opus (4.8) model for complex tools and am...",
       "keywords": [
         "tool",
         "tools",
@@ -1820,7 +1820,7 @@
         "more",
         "must"
       ],
-      "word_count": 2875,
+      "word_count": 3661,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -1856,27 +1856,27 @@
       "content_preview": "# Handle tool calls  Parse tool_use blocks, format tool_result responses, and handle errors with is_error.  ---  This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's respo...",
       "keywords": [
         "tool",
-        "section",
         "claude",
+        "section",
         "blocks",
         "error",
-        "example",
         "result",
+        "tools",
+        "example",
+        "title",
+        "results",
         "content",
         "response",
-        "results",
-        "tools",
         "user",
         "errors",
-        "title",
         "message",
         "tip",
-        "see",
-        "when",
-        "client",
-        "server"
+        "card",
+        "handle",
+        "runner",
+        "when"
       ],
-      "word_count": 1307,
+      "word_count": 1333,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__handle-tool-calls.md"
     },
     "/docs/en/agents-and-tools/tool-use/how-tool-use-works": {
@@ -2082,25 +2082,25 @@
         "tool",
         "schema",
         "strict",
-        "json",
-        "step",
-        "claude",
-        "codegroup",
         "tools",
-        "parameters",
+        "claude",
         "title",
-        "inputs",
+        "json",
+        "card",
         "agents",
-        "see",
+        "step",
+        "codegroup",
+        "parameters",
         "calls",
-        "section",
-        "phi",
+        "inputs",
         "sampling",
-        "guarantees",
-        "valid",
-        "mode"
+        "outputs",
+        "see",
+        "define",
+        "validated",
+        "section"
       ],
-      "word_count": 3300,
+      "word_count": 3406,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -2312,19 +2312,19 @@
         "when",
         "api",
         "filtering",
-        "urls",
-        "response",
         "tools",
+        "urls",
+        "code",
+        "response",
         "search",
         "url",
         "only",
         "specific",
         "dynamic",
         "fetched",
-        "available",
-        "results"
+        "available"
       ],
-      "word_count": 2882,
+      "word_count": 3441,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {

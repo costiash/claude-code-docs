@@ -695,6 +695,58 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
+<CodeGroup>
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --data '{
+        "model": "claude-opus-4-8",
+        "max_tokens": 4096,
+        "messages": [
+            {
+                "role": "user",
+                "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+            }
+        ],
+        "tools": [
+            {
+                "type": "web_search_20250305",
+                "name": "web_search",
+                "max_uses": 3
+            },
+            {
+                "type": "web_fetch_20250910",
+                "name": "web_fetch",
+                "max_uses": 5,
+                "citations": {"enabled": true}
+            }
+        ]
+    }'
+```
+
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-8
+max_tokens: 4096
+messages:
+  - role: user
+    content: >-
+      Find recent articles about quantum computing
+      and analyze the most relevant one in detail
+tools:
+  - type: web_search_20250305
+    name: web_search
+    max_uses: 3
+  - type: web_fetch_20250910
+    name: web_fetch
+    max_uses: 5
+    citations:
+      enabled: true
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -721,6 +773,183 @@ response = client.messages.create(
 )
 print(response)
 ```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content:
+        "Find recent articles about quantum computing and analyze the most relevant one in detail"
+    }
+  ],
+  tools: [
+    { type: "web_search_20250305", name: "web_search", max_uses: 3 },
+    {
+      type: "web_fetch_20250910",
+      name: "web_fetch",
+      max_uses: 5,
+      citations: { enabled: true }
+    }
+  ]
+});
+
+console.log(response);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 4096,
+    Messages = [new() { Role = Role.User, Content = "Find recent articles about quantum computing and analyze the most relevant one in detail" }],
+    Tools = [
+        new ToolUnion(new WebSearchTool20250305() { MaxUses = 3 }),
+        new ToolUnion(new WebFetchTool20250910() { MaxUses = 5, Citations = new() { Enabled = true } })
+    ]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 4096,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Find recent articles about quantum computing and analyze the most relevant one in detail")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
+				MaxUses: anthropic.Int(3),
+			}},
+			{OfWebFetchTool20250910: &anthropic.WebFetchTool20250910Param{
+				MaxUses:   anthropic.Int(5),
+				Citations: anthropic.CitationsConfigParam{Enabled: anthropic.Bool(true)},
+			}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..2,4..6}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CitationsConfigParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.WebFetchTool20250910;
+import com.anthropic.models.messages.WebSearchTool20250305;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Find recent articles about quantum computing and analyze the most relevant one in detail")
+        .addTool(WebSearchTool20250305.builder()
+            .maxUses(3L)
+            .build())
+        .addTool(WebFetchTool20250910.builder()
+            .maxUses(5L)
+            .citations(CitationsConfigParam.builder().enabled(true).build())
+            .build())
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Find recent articles about quantum computing and analyze the most relevant one in detail']
+    ],
+    model: 'claude-opus-4-8',
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'max_uses' => 3,
+        ],
+        [
+            'type' => 'web_fetch_20250910',
+            'name' => 'web_fetch',
+            'max_uses' => 5,
+            'citations' => ['enabled' => true],
+        ],
+    ],
+);
+echo $message;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    { role: "user", content: "Find recent articles about quantum computing and analyze the most relevant one in detail" }
+  ],
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 3
+    },
+    {
+      type: "web_fetch_20250910",
+      name: "web_fetch",
+      max_uses: 5,
+      citations: { enabled: true }
+    }
+  ]
+)
+puts message
+```
+</CodeGroup>
 
 In this workflow, Claude will:
 1. Use web search to find relevant articles
@@ -802,5 +1031,8 @@ Example token usage for typical content:
   </Card>
   <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Tool reference">
     Directory of all Anthropic-provided tools.
+  </Card>
+  <Card href="/docs/en/agents-and-tools/tool-use/code-execution-tool" title="Code execution tool">
+    Run Python and bash code in a sandboxed container.
   </Card>
 </CardGroup>

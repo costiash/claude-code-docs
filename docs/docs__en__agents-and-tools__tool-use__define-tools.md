@@ -6,7 +6,7 @@ Specify tool schemas, write effective descriptions, and control when Claude call
 
 ## Choosing a model
 
-Use the latest Claude Opus (4.7) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
+Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
@@ -587,13 +587,321 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 
 ### Forcing tool use
 
-In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field like so:
+In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field of the request. The highlighted lines are the only difference from a standard tool use request:
 
-```text
-tool_choice = {"type": "tool", "name": "get_weather"}
+<CodeGroup>
+```bash cURL highlight={25}
+curl -sS https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d @- <<'EOF'
+{
+  "model": "claude-opus-4-8",
+  "max_tokens": 1024,
+  "tools": [
+    {
+      "name": "get_weather",
+      "description": "Get the current weather in a given location",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "The city and state, e.g. San Francisco, CA"
+          }
+        },
+        "required": ["location"]
+      }
+    }
+  ],
+  "tool_choice": {"type": "tool", "name": "get_weather"},
+  "messages": [
+    {"role": "user", "content": "What's the weather like in San Francisco?"}
+  ]
+}
+EOF
 ```
 
-When working with the tool_choice parameter, there are four possible options:
+```bash CLI highlight={14..16}
+ant messages create <<'YAML'
+model: claude-opus-4-8
+max_tokens: 1024
+tools:
+  - name: get_weather
+    description: Get the current weather in a given location
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The city and state, e.g. San Francisco, CA
+      required: [location]
+tool_choice:
+  type: tool
+  name: get_weather
+messages:
+  - role: user
+    content: What's the weather like in San Francisco?
+YAML
+```
+
+```python Python highlight={26}
+import anthropic
+
+client = anthropic.Anthropic()
+
+tools = [
+    {
+        "name": "get_weather",
+        "description": "Get the current weather in a given location",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "The city and state, e.g. San Francisco, CA",
+                }
+            },
+            "required": ["location"],
+        },
+    }
+]
+
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    tools=tools,
+    tool_choice={"type": "tool", "name": "get_weather"},
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
+)
+
+print(response)
+```
+
+```typescript TypeScript hidelines={1..4} highlight={24}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          }
+        },
+        required: ["location"]
+      }
+    }
+  ],
+  tool_choice: { type: "tool", name: "get_weather" },
+  messages: [{ role: "user", content: "What's the weather like in San Francisco?" }]
+});
+
+console.log(response);
+```
+
+```csharp C# hidelines={1..7} highlight={29}
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = [
+        new ToolUnion(new Tool()
+        {
+            Name = "get_weather",
+            Description = "Get the current weather in a given location",
+            InputSchema = new InputSchema()
+            {
+                Properties = new Dictionary<string, JsonElement>
+                {
+                    ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
+                },
+                Required = ["location"],
+            },
+        }),
+    ],
+    ToolChoice = new ToolChoiceTool { Name = "get_weather" },
+    Messages = [
+        new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }
+    ]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go hidelines={1..11,-1} highlight={32}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:        "get_weather",
+				Description: anthropic.String("Get the current weather in a given location"),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"location": map[string]any{
+							"type":        "string",
+							"description": "The city and state, e.g. San Francisco, CA",
+						},
+					},
+					Required: []string{"location"},
+				},
+			}},
+		},
+		ToolChoice: anthropic.ToolChoiceUnionParam{OfTool: &anthropic.ToolChoiceToolParam{Name: "get_weather"}},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather like in San Francisco?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..6,11} highlight={31..33}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.ToolChoice;
+import com.anthropic.models.messages.ToolChoiceTool;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(Tool.builder()
+            .name("get_weather")
+            .description("Get the current weather in a given location")
+            .inputSchema(InputSchema.builder()
+                .properties(JsonValue.from(Map.of(
+                    "location", Map.of(
+                        "type", "string",
+                        "description", "The city and state, e.g. San Francisco, CA"
+                    )
+                )))
+                .required(List.of("location"))
+                .build())
+            .build())
+        .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
+            .name("get_weather")
+            .build()))
+        .addUserMessage("What's the weather like in San Francisco?")
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP highlight={13}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
+    ],
+    model: 'claude-opus-4-8',
+    toolChoice: ['type' => 'tool', 'name' => 'get_weather'],
+    tools: [
+        [
+            'name' => 'get_weather',
+            'description' => 'Get the current weather in a given location',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'location' => [
+                        'type' => 'string',
+                        'description' => 'The city and state, e.g. San Francisco, CA'
+                    ]
+                ],
+                'required' => ['location']
+            ]
+        ]
+    ],
+);
+```
+
+```ruby Ruby highlight={24}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          }
+        },
+        required: ["location"]
+      }
+    }
+  ],
+  tool_choice: { type: "tool", name: "get_weather" },
+  messages: [
+    { role: "user", content: "What's the weather like in San Francisco?" }
+  ]
+)
+puts message
+```
+</CodeGroup>
+
+When working with the `tool_choice` parameter, there are four possible options:
 
 - `auto` allows Claude to decide whether to call any provided tools or not. This is the default value when `tools` are provided.
 - `any` tells Claude that it must use one of the provided tools, but doesn't force a particular tool.
