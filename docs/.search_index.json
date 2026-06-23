@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-23T19:22:39Z",
+  "generated_at": "2026-06-23T22:13:15Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -24,11 +24,11 @@
         "code",
         "background",
         "prompt",
-        "command",
         "agent",
-        "terminal"
+        "command",
+        "model"
       ],
-      "word_count": 58278,
+      "word_count": 58662,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -140,7 +140,7 @@
         "fix",
         "repo"
       ],
-      "word_count": 6394,
+      "word_count": 6409,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -1064,7 +1064,7 @@
         "add",
         "context"
       ],
-      "word_count": 7111,
+      "word_count": 7133,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
