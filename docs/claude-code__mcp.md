@@ -508,6 +508,22 @@ If you configured `headers.Authorization` for the server and the server rejects 
   * OAuth authentication works with HTTP servers
 </Tip>
 
+### Authenticate from the command line
+
+From v2.1.186, `claude mcp login <name>` runs a configured server's OAuth flow directly from your shell, so you don't need to open the `/mcp` panel inside a session.
+
+```bash theme={null}
+claude mcp login sentry
+```
+
+To clear stored credentials later, run `claude mcp logout <name>`.
+
+When you're connected over SSH, add `--no-browser` so the command prints the authorization URL instead of opening a browser. Open the URL on your local machine, then paste the full redirect URL from your browser's address bar back at the prompt. The command needs an interactive terminal for the paste step, so connect with `ssh -t`.
+
+```bash theme={null}
+claude mcp login sentry --no-browser
+```
+
 ### Use a fixed OAuth callback port
 
 Some MCP servers require a specific redirect URI registered in advance. By default, Claude Code picks a random available port for the OAuth callback. Use `--callback-port` to fix the port so it matches a pre-registered redirect URI of the form `http://localhost:PORT/callback`.
