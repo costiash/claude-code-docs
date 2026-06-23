@@ -9693,8 +9693,8 @@
     "docs__en__managed-agents__self-hosted-sandboxes.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
-      "hash": "5ca9710cc77a227a56bc432fc210e7f9c7c5e84f02d68e910c4f3ea80779ec24",
-      "last_updated": "2026-06-12T16:38:29.214812"
+      "hash": "767106771527038f85a03e03c9847cf5481377ca6600a7124060eb43d895b51a",
+      "last_updated": "2026-06-23T16:34:37.007143"
     },
     "docs__en__managed-agents__self-hosted-sandboxes-security.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security",
@@ -9897,8 +9897,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-23T13:41:33.922999",
-    "fetch_duration_seconds": 2244.949815,
+    "last_fetch_completed": "2026-06-23T16:38:21.184114",
+    "fetch_duration_seconds": 2278.935534,
     "total_pages_discovered": 1902,
     "pages_fetched_successfully": 1649,
     "pages_failed": 254,
@@ -10163,7 +10163,7 @@
     "total_files": 1649,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-23T13:41:33.923023",
+  "last_updated": "2026-06-23T16:38:21.184139",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

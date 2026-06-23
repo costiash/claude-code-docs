@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-23T13:41:37Z",
+  "generated_at": "2026-06-23T16:38:24Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -45645,7 +45645,7 @@
         "execution",
         "when"
       ],
-      "word_count": 4479,
+      "word_count": 4482,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
