@@ -789,6 +789,8 @@ A nested subagent is configured the same way as a top-level one and resolves fro
 
 Depth is counted as the number of subagent levels below the main conversation, regardless of whether each level runs in the [foreground or background](#run-subagents-in-foreground-or-background). A subagent at depth five does not receive the Agent tool and cannot spawn further. The limit is fixed and not configurable.
 
+As of Claude Code v2.1.187, a background subagent's depth is fixed when it is first spawned, and [resuming](#resume-subagents) it later does not change that depth. For example, if your main conversation spawns subagent A, and A spawns a background subagent B at depth two, B is still at depth two when you resume it directly from the main conversation. Resuming a subagent from a shallower context does not let it spawn additional levels that the depth limit already prevented.
+
 To prevent a specific subagent from spawning others, omit `Agent` from its [`tools`](#available-tools) list or add it to `disallowedTools`.
 
 A [fork](#fork-the-current-conversation) still cannot spawn another fork. It can spawn other subagent types, and those count toward the depth limit.

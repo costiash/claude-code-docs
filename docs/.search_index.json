@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-24T16:25:06Z",
+  "generated_at": "2026-06-24T19:17:00Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -491,8 +491,8 @@
         "input",
         "prompt",
         "history",
-        "commands",
         "session",
+        "commands",
         "press",
         "terminal",
         "conversation",
@@ -504,7 +504,7 @@
         "previous",
         "word"
       ],
-      "word_count": 3699,
+      "word_count": 3717,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -1105,8 +1105,8 @@
         "when",
         "main",
         "agent",
-        "session",
         "conversation",
+        "session",
         "tool",
         "code",
         "prompt",
@@ -1118,9 +1118,9 @@
         "model",
         "field",
         "specific",
-        "hooks"
+        "background"
       ],
-      "word_count": 8747,
+      "word_count": 8826,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {

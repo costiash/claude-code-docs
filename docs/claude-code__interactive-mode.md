@@ -234,7 +234,7 @@ Press `Ctrl+R` to interactively search through your command history:
    * Press `Ctrl+C` to cancel and restore your original input
    * Press `Backspace` on empty search to cancel
 
-The search displays matching commands with the search term highlighted, so you can find and reuse previous inputs.
+The search loads the 100 most recent unique prompts in the selected scope, with duplicates collapsed to the newest occurrence. Matching prompts display with the search term highlighted, so you can find and reuse previous inputs.
 
 ## Background bash commands
 
