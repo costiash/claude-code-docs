@@ -196,6 +196,8 @@ An MCP server can also push messages directly into your session so Claude can re
 
 The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server do not extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. {/* min-version: 2.1.162 */}Before v2.1.162, values below 1000 were floored to one second instead. For HTTP and SSE servers, the per-request fetch first-byte budget has a 60-second minimum.
 
+As of v2.1.187, a tool call to a remote HTTP, SSE, WebSocket, or [claude.ai connector](#use-mcp-servers-from-claude-ai) server that sends no response and no progress notification for 5 minutes aborts with an error instead of waiting for the wall-clock limit. Set the [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](/en/env-vars) environment variable in milliseconds to change the idle window, or set it to `0` to disable the check. Stdio servers are local processes and are not subject to the idle timeout.
+
 ### Plugin-provided MCP servers
 
 [Plugins](/en/plugins) can bundle MCP servers, automatically providing tools and integrations when the plugin is enabled. Plugin MCP servers work identically to user-configured servers.

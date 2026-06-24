@@ -34,9 +34,9 @@ This GitHub Action allows you to run Claude Code within your GitHub Actions work
 
 ## Quick setup
 
-The easiest way to set up this action is through Claude Code in the terminal. Just open claude and run `/install-github-app`.
+Run `/install-github-app` in the Claude Code terminal to set up the integration interactively. The command installs the Claude GitHub App on your repository and then walks you through adding the GitHub Actions workflows and the API key secret.
 
-This command will guide you through setting up the GitHub app and required secrets.
+After the GitHub App is installed, the command asks whether to continue with GitHub Actions setup. In Claude Code v2.1.187 and later you can choose **Skip for now** to stop with only the App installed and return to the workflow and secret steps by running `/install-github-app` again. Earlier versions proceed straight to workflow selection.
 
 <Note>
   * You must be a repository admin to install the GitHub app and add secrets

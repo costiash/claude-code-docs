@@ -301,6 +301,8 @@ When Claude invokes a subagent, it can also pass a `model` parameter for that sp
 3. The subagent definition's `model` frontmatter
 4. The main conversation's model
 
+The environment variable, per-invocation parameter, and frontmatter values are checked against your organization's [`availableModels`](/en/model-config#restrict-model-selection) allowlist. A value that resolves to an excluded model is not used and the subagent runs on the inherited model instead.
+
 ### Control subagent capabilities
 
 You can control what subagents can do through tool access, permission modes, and conditional rules.
