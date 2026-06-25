@@ -130,25 +130,25 @@ Enable vim-style editing via `/config` → Editor mode.
 
 ### Navigation (NORMAL mode)
 
-| Command         | Action                                              |
-| :-------------- | :-------------------------------------------------- |
-| `h`/`j`/`k`/`l` | Move left/down/up/right                             |
-| `Space`         | Move right                                          |
-| `w`             | Next word                                           |
-| `e`             | End of word                                         |
-| `b`             | Previous word                                       |
-| `0`             | Beginning of line                                   |
-| `$`             | End of line                                         |
-| `^`             | First non-blank character                           |
-| `gg`            | Beginning of input                                  |
-| `G`             | End of input                                        |
-| `f{char}`       | Jump to next occurrence of character                |
-| `F{char}`       | Jump to previous occurrence of character            |
-| `t{char}`       | Jump to just before next occurrence of character    |
-| `T{char}`       | Jump to just after previous occurrence of character |
-| `;`             | Repeat last f/F/t/T motion                          |
-| `,`             | Repeat last f/F/t/T motion in reverse               |
-| `/`             | Open reverse history search, same as `Ctrl+R`       |
+| Command         | Action                                                                                                                                                                                          |
+| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `h`/`j`/`k`/`l` | Move left/down/up/right                                                                                                                                                                         |
+| `Space`         | Move right                                                                                                                                                                                      |
+| `w`             | Next word                                                                                                                                                                                       |
+| `e`             | End of word                                                                                                                                                                                     |
+| `b`             | Previous word                                                                                                                                                                                   |
+| `0`             | Beginning of line                                                                                                                                                                               |
+| `$`             | End of line                                                                                                                                                                                     |
+| `^`             | First non-blank character                                                                                                                                                                       |
+| `gg`            | Beginning of input                                                                                                                                                                              |
+| `G`             | End of input                                                                                                                                                                                    |
+| `f{char}`       | Jump to next occurrence of character                                                                                                                                                            |
+| `F{char}`       | Jump to previous occurrence of character                                                                                                                                                        |
+| `t{char}`       | Jump to just before next occurrence of character                                                                                                                                                |
+| `T{char}`       | Jump to just after previous occurrence of character                                                                                                                                             |
+| `;`             | Repeat last f/F/t/T motion                                                                                                                                                                      |
+| `,`             | Repeat last f/F/t/T motion in reverse                                                                                                                                                           |
+| `/`             | Open reverse history search, same as `Ctrl+R`. {/* min-version: 2.1.191 */}As of v2.1.191, the empty search prompt shows a hint: press `Esc` then `i` then `/` to open the command menu instead |
 
 <Note>
   In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, `j`/`k` and the arrow keys navigate command history instead.

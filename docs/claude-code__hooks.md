@@ -180,11 +180,13 @@ For details on settings file resolution, see [settings](/en/settings). Enterpris
 
 The `matcher` field filters when hooks fire. How a matcher is evaluated depends on the characters it contains:
 
-| Matcher value                       | Evaluated as                                          | Example                                                                                                            |
-| :---------------------------------- | :---------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| `"*"`, `""`, or omitted             | Match all                                             | fires on every occurrence of the event                                                                             |
-| Only letters, digits, `_`, and `\|` | Exact string, or `\|`-separated list of exact strings | `Bash` matches only the Bash tool; `Edit\|Write` matches either tool exactly                                       |
-| Contains any other character        | JavaScript regular expression                         | `^Notebook` matches any tool starting with Notebook; `mcp__memory__.*` matches every tool from the `memory` server |
+| Matcher value                                    | Evaluated as                                                                                         | Example                                                                                                            |
+| :----------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| `"*"`, `""`, or omitted                          | Match all                                                                                            | fires on every occurrence of the event                                                                             |
+| Only letters, digits, `_`, spaces, `,`, and `\|` | Exact string, or list of exact strings separated by `\|` or `,` with optional surrounding whitespace | `Bash` matches only the Bash tool; `Edit\|Write` and `Edit, Write` each match either tool exactly                  |
+| Contains any other character                     | JavaScript regular expression                                                                        | `^Notebook` matches any tool starting with Notebook; `mcp__memory__.*` matches every tool from the `memory` server |
+
+Comma separators and the surrounding whitespace tolerance require Claude Code v2.1.191 or later. The `FileChanged` and `StopFailure` events accept only `|` as the list separator and treat `,` as a literal character; all other events listed in the table that follows accept `|` or `,`.
 
 The `FileChanged` event does not follow these rules when building its watch list. See [FileChanged](#filechanged).
 
