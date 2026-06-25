@@ -1072,19 +1072,17 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           A `fallback` block echoed back from a prior response.
 
-          Accepted in `messages[].content` and never rendered into the prompt,
-          not validated against the request's `fallbacks` chain or top-level
-          `model`, and stripped before the sticky-routing cache key is computed.
+          Accepted in `messages[].content` and not rendered into the prompt; not
+          validated against the request's `fallbacks` chain or top-level `model`.
 
-          Callers should echo the assistant turn verbatim — block included. The
-          block's position is load-bearing for thinking verification: the thinking
-          runs on either side of a fallback hop carry independently-rooted
-          verification hash chains, and this block is the only record of where one
-          chain ends and the next begins. When thinking runs flank the boundary,
-          omitting the block merges the runs into one contiguous span whose hashes
-          cannot verify (the request is rejected), and moving it into the middle of
-          a single run splits that run's chain and is likewise rejected; between
-          non-thinking blocks the block's placement has no verification effect.
+          Echo the assistant turn back verbatim, including this block in its
+          original position. The block marks the boundary between content produced
+          before and after a fallback hop, and the server relies on that boundary
+          to validate the turn: when thinking runs flank the boundary, omitting
+          the block merges them into one span the server cannot validate (the
+          request is rejected), and moving it into the middle of a single run is
+          likewise rejected; between non-thinking blocks the block's placement has
+          no validation effect.
 
           - `From BetaFallbackInfoParamResp`
 
@@ -1162,26 +1160,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   Exceptional model for specialized complex tasks
 
-                - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-                  Powerful model for complex tasks
-
-                - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-                  Powerful model for complex tasks
-
-                - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-                  High-performance model with extended thinking
-
-                - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-                  High-performance model with extended thinking
-
-                - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-                  Fast and cost-effective model
-
               - `string`
 
           - `To BetaFallbackInfoParamResp`
@@ -1191,6 +1169,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           - `Type Fallback`
 
             - `const FallbackFallback Fallback = "fallback"`
+
+          - `Trigger any`
+
+            The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
     - `Role BetaMessageParamRole`
 
@@ -1380,6 +1362,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1430,6 +1414,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolBash20241022AllowedCallerCodeExecution20260521 BetaToolBash20241022AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1465,6 +1451,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash20250124AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolBash20250124AllowedCallerCodeExecution20260521 BetaToolBash20250124AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1502,6 +1490,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250522AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1535,6 +1525,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20250825"`
 
         - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20250825AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1571,6 +1563,46 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20250825"`
 
         - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260120AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `DeferLoading bool`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Strict bool`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `type BetaCodeExecutionTool20260521 struct{…}`
+
+      Code execution tool with REPL state persistence.
+
+      - `Name CodeExecution`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `const CodeExecutionCodeExecution CodeExecution = "code_execution"`
+
+      - `Type CodeExecution20260521`
+
+        - `const CodeExecution20260521CodeExecution20260521 CodeExecution20260521 = "code_execution_20260521"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerDirect BetaCodeExecutionTool20260521AllowedCaller = "direct"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaCodeExecutionTool20260521AllowedCallerCodeExecution20260521 BetaCodeExecutionTool20260521AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1614,6 +1646,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20241022AllowedCallerCodeExecution20260521 BetaToolComputerUse20241022AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1653,6 +1687,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool20250818AllowedCaller = "code_execution_20250825"`
 
         - `const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaMemoryTool20250818AllowedCallerCodeExecution20260521 BetaMemoryTool20250818AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1698,6 +1734,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20250124AllowedCallerCodeExecution20260521 BetaToolComputerUse20250124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1737,6 +1775,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextEditor20241022AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolTextEditor20241022AllowedCallerCodeExecution20260521 BetaToolTextEditor20241022AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1782,6 +1822,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolComputerUse20251124AllowedCallerCodeExecution20260521 BetaToolComputerUse20251124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1826,6 +1868,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolTextEditor20250124AllowedCallerCodeExecution20260521 BetaToolTextEditor20250124AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1862,6 +1906,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolTextEditor20250429AllowedCallerCodeExecution20260521 BetaToolTextEditor20250429AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -1897,6 +1943,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextEditor20250728AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolTextEditor20250728AllowedCallerCodeExecution20260521 BetaToolTextEditor20250728AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 
@@ -1937,6 +1985,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchTool20250305AllowedCaller = "code_execution_20250825"`
 
         - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebSearchTool20250305AllowedCallerCodeExecution20260521 BetaWebSearchTool20250305AllowedCaller = "code_execution_20260521"`
 
       - `AllowedDomains []string`
 
@@ -2008,6 +2058,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaWebFetchTool20250910AllowedCallerCodeExecution20260521 BetaWebFetchTool20250910AllowedCaller = "code_execution_20260521"`
+
       - `AllowedDomains []string`
 
         List of domains to allow fetching from
@@ -2062,6 +2114,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaWebSearchTool20260209AllowedCallerCodeExecution20260521 BetaWebSearchTool20260209AllowedCaller = "code_execution_20260521"`
+
       - `AllowedDomains []string`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -2111,6 +2165,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchTool20260209AllowedCaller = "code_execution_20250825"`
 
         - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebFetchTool20260209AllowedCallerCodeExecution20260521 BetaWebFetchTool20260209AllowedCaller = "code_execution_20260521"`
 
       - `AllowedDomains []string`
 
@@ -2167,6 +2223,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaWebFetchTool20260309AllowedCallerCodeExecution20250825 BetaWebFetchTool20260309AllowedCaller = "code_execution_20250825"`
 
         - `const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaWebFetchTool20260309AllowedCallerCodeExecution20260521 BetaWebFetchTool20260309AllowedCaller = "code_execution_20260521"`
 
       - `AllowedDomains []string`
 
@@ -2232,6 +2290,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaAdvisorTool20260301AllowedCallerCodeExecution20260521 BetaAdvisorTool20260301AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2280,6 +2340,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const BetaToolSearchToolBm25_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260120"`
 
+        - `const BetaToolSearchToolBm25_20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260521"`
+
       - `CacheControl BetaCacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2315,6 +2377,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20250825"`
 
         - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 BetaToolSearchToolRegex20251119AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl BetaCacheControlEphemeral`
 

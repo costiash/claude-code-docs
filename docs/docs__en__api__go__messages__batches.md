@@ -1024,26 +1024,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
         - `string`
 
       - `CacheControl CacheControlEphemeral`
@@ -1350,6 +1330,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code_execution_20260120"`
 
+            - `const ToolAllowedCallerCodeExecution20260521 ToolAllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1400,6 +1382,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code_execution_20260120"`
 
+            - `const ToolBash20250124AllowedCallerCodeExecution20260521 ToolBash20250124AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1436,6 +1420,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code_execution_20260120"`
 
+            - `const CodeExecutionTool20250522AllowedCallerCodeExecution20260521 CodeExecutionTool20250522AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1469,6 +1455,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code_execution_20250825"`
 
             - `const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code_execution_20260120"`
+
+            - `const CodeExecutionTool20250825AllowedCallerCodeExecution20260521 CodeExecutionTool20250825AllowedCaller = "code_execution_20260521"`
 
           - `CacheControl CacheControlEphemeral`
 
@@ -1506,6 +1494,46 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code_execution_20260120"`
 
+            - `const CodeExecutionTool20260120AllowedCallerCodeExecution20260521 CodeExecutionTool20260120AllowedCaller = "code_execution_20260521"`
+
+          - `CacheControl CacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `DeferLoading bool`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Strict bool`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `type CodeExecutionTool20260521 struct{…}`
+
+          Code execution tool with REPL state persistence.
+
+          - `Name CodeExecution`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `const CodeExecutionCodeExecution CodeExecution = "code_execution"`
+
+          - `Type CodeExecution20260521`
+
+            - `const CodeExecution20260521CodeExecution20260521 CodeExecution20260521 = "code_execution_20260521"`
+
+          - `AllowedCallers []string`
+
+            - `const CodeExecutionTool20260521AllowedCallerDirect CodeExecutionTool20260521AllowedCaller = "direct"`
+
+            - `const CodeExecutionTool20260521AllowedCallerCodeExecution20250825 CodeExecutionTool20260521AllowedCaller = "code_execution_20250825"`
+
+            - `const CodeExecutionTool20260521AllowedCallerCodeExecution20260120 CodeExecutionTool20260521AllowedCaller = "code_execution_20260120"`
+
+            - `const CodeExecutionTool20260521AllowedCallerCodeExecution20260521 CodeExecutionTool20260521AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1539,6 +1567,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code_execution_20250825"`
 
             - `const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code_execution_20260120"`
+
+            - `const MemoryTool20250818AllowedCallerCodeExecution20260521 MemoryTool20250818AllowedCaller = "code_execution_20260521"`
 
           - `CacheControl CacheControlEphemeral`
 
@@ -1576,6 +1606,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code_execution_20260120"`
 
+            - `const ToolTextEditor20250124AllowedCallerCodeExecution20260521 ToolTextEditor20250124AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1612,6 +1644,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code_execution_20260120"`
 
+            - `const ToolTextEditor20250429AllowedCallerCodeExecution20260521 ToolTextEditor20250429AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -1647,6 +1681,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code_execution_20250825"`
 
             - `const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code_execution_20260120"`
+
+            - `const ToolTextEditor20250728AllowedCallerCodeExecution20260521 ToolTextEditor20250728AllowedCaller = "code_execution_20260521"`
 
           - `CacheControl CacheControlEphemeral`
 
@@ -1687,6 +1723,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code_execution_20250825"`
 
             - `const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code_execution_20260120"`
+
+            - `const WebSearchTool20250305AllowedCallerCodeExecution20260521 WebSearchTool20250305AllowedCaller = "code_execution_20260521"`
 
           - `AllowedDomains []string`
 
@@ -1758,6 +1796,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code_execution_20260120"`
 
+            - `const WebFetchTool20250910AllowedCallerCodeExecution20260521 WebFetchTool20250910AllowedCaller = "code_execution_20260521"`
+
           - `AllowedDomains []string`
 
             List of domains to allow fetching from
@@ -1812,6 +1852,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code_execution_20260120"`
 
+            - `const WebSearchTool20260209AllowedCallerCodeExecution20260521 WebSearchTool20260209AllowedCaller = "code_execution_20260521"`
+
           - `AllowedDomains []string`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -1861,6 +1903,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool20260209AllowedCaller = "code_execution_20250825"`
 
             - `const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code_execution_20260120"`
+
+            - `const WebFetchTool20260209AllowedCallerCodeExecution20260521 WebFetchTool20260209AllowedCaller = "code_execution_20260521"`
 
           - `AllowedDomains []string`
 
@@ -1917,6 +1961,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool20260309AllowedCaller = "code_execution_20250825"`
 
             - `const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code_execution_20260120"`
+
+            - `const WebFetchTool20260309AllowedCallerCodeExecution20260521 WebFetchTool20260309AllowedCaller = "code_execution_20260521"`
 
           - `AllowedDomains []string`
 
@@ -1978,6 +2024,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260120"`
 
+            - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20260521 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260521"`
+
           - `CacheControl CacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
@@ -2013,6 +2061,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20250825"`
 
             - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20260120"`
+
+            - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20260521"`
 
           - `CacheControl CacheControlEphemeral`
 
@@ -3540,26 +3590,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
           - `string`
 
         - `Role Assistant`
@@ -3576,13 +3606,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `Category RefusalStopDetailsCategory`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
             - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+            - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
             - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
@@ -4842,26 +4872,6 @@ func main() {
 
               Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
           - `string`
 
         - `Role Assistant`
@@ -4878,13 +4888,13 @@ func main() {
 
           - `Category RefusalStopDetailsCategory`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
             - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+            - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
             - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
@@ -5924,26 +5934,6 @@ func main() {
 
             Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
         - `string`
 
       - `Role Assistant`
@@ -5960,13 +5950,13 @@ func main() {
 
         - `Category RefusalStopDetailsCategory`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
           - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+          - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
           - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
@@ -6968,26 +6958,6 @@ func main() {
 
           Exceptional model for specialized complex tasks
 
-        - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
       - `string`
 
     - `Role Assistant`
@@ -7004,13 +6974,13 @@ func main() {
 
       - `Category RefusalStopDetailsCategory`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
         - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+        - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
         - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 

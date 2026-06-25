@@ -928,9 +928,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Marks the point in `content` where one model's output gives way to the next.
 
             One block appears per hop where a preceding model actually ran this turn and
-            declined. A turn routed directly by the sticky decision has no such boundary
-            and carries no block — the signal for whether a fallback model served the
-            response is the presence of a `fallback_message` entry in
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
             `usage.iterations`, not this block.
 
             The block is treated like a server-tool content block for streaming: it
@@ -1007,29 +1007,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Exceptional model for specialized complex tasks
 
-                - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-                  Powerful model for complex tasks
-
-                - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-                  Powerful model for complex tasks
-
-                - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-                  High-performance model with extended thinking
-
-                - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-                  High-performance model with extended thinking
-
-                - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-                  Fast and cost-effective model
-
             - `BetaFallbackInfo to`
 
               The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `BetaFallbackRefusalTrigger trigger`
+
+              What caused the `from` model to hand over at this hop.
+
+              - `Optional<Category> category`
+
+                The policy category that triggered a refusal.
+
+                - `CYBER("cyber")`
+
+                - `BIO("bio")`
+
+                - `FRONTIER_LLM("frontier_llm")`
+
+                - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              - `JsonValue; type "refusal"constant`
+
+                - `REFUSAL("refusal")`
 
             - `JsonValue; type "fallback"constant`
 
@@ -1158,13 +1158,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `Optional<Category> category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 

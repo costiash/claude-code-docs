@@ -352,6 +352,20 @@
 
       - `WorkspaceID string`
 
+    - `type BetaWebhookSessionUpdatedEventData struct{…}`
+
+      - `ID string`
+
+        ID of the session that triggered the event.
+
+      - `OrganizationID string`
+
+      - `Type SessionUpdated`
+
+        - `const SessionUpdatedSessionUpdated SessionUpdated = "session.updated"`
+
+      - `WorkspaceID string`
+
   - `Type Event`
 
     Object type. Always `event` for webhook payloads.
@@ -698,6 +712,20 @@
 
     - `WorkspaceID string`
 
+  - `type BetaWebhookSessionUpdatedEventData struct{…}`
+
+    - `ID string`
+
+      ID of the session that triggered the event.
+
+    - `OrganizationID string`
+
+    - `Type SessionUpdated`
+
+      - `const SessionUpdatedSessionUpdated SessionUpdated = "session.updated"`
+
+    - `WorkspaceID string`
+
 ### Beta Webhook Session Archived Event Data
 
 - `type BetaWebhookSessionArchivedEventData struct{…}`
@@ -947,6 +975,22 @@
   - `Type SessionThreadTerminated`
 
     - `const SessionThreadTerminatedSessionThreadTerminated SessionThreadTerminated = "session.thread_terminated"`
+
+  - `WorkspaceID string`
+
+### Beta Webhook Session Updated Event Data
+
+- `type BetaWebhookSessionUpdatedEventData struct{…}`
+
+  - `ID string`
+
+    ID of the session that triggered the event.
+
+  - `OrganizationID string`
+
+  - `Type SessionUpdated`
+
+    - `const SessionUpdatedSessionUpdated SessionUpdated = "session.updated"`
 
   - `WorkspaceID string`
 
@@ -1425,6 +1469,20 @@
       - `VaultID string`
 
         ID of the vault that owns this credential.
+
+      - `WorkspaceID string`
+
+    - `type BetaWebhookSessionUpdatedEventData struct{…}`
+
+      - `ID string`
+
+        ID of the session that triggered the event.
+
+      - `OrganizationID string`
+
+      - `Type SessionUpdated`
+
+        - `const SessionUpdatedSessionUpdated SessionUpdated = "session.updated"`
 
       - `WorkspaceID string`
 

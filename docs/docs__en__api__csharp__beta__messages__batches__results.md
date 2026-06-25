@@ -828,9 +828,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Marks the point in `content` where one model's output gives way to the next.
 
             One block appears per hop where a preceding model actually ran this turn and
-            declined. A turn routed directly by the sticky decision has no such boundary
-            and carries no block — the signal for whether a fallback model served the
-            response is the presence of a `fallback_message` entry in
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
             `usage.iterations`, not this block.
 
             The block is treated like a server-tool content block for streaming: it
@@ -907,29 +907,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   Exceptional model for specialized complex tasks
 
-                - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                  Powerful model for complex tasks
-
-                - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                  Powerful model for complex tasks
-
-                - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                  High-performance model with extended thinking
-
-                - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                  High-performance model with extended thinking
-
-                - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                  Fast and cost-effective model
-
             - `required BetaFallbackInfo To`
 
               The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `required BetaFallbackRefusalTrigger Trigger`
+
+              What caused the `from` model to hand over at this hop.
+
+              - `required BetaFallbackRefusalTriggerCategory? Category`
+
+                The policy category that triggered a refusal.
+
+                - `"cyber"Cyber`
+
+                - `"bio"Bio`
+
+                - `"frontier_llm"FrontierLlm`
+
+                - `"reasoning_extraction"ReasoningExtraction`
+
+              - `JsonElement Type "refusal"constant`
 
             - `JsonElement Type "fallback"constant`
 
@@ -1038,13 +1036,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `required Category? Category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `"cyber"Cyber`
 
             - `"bio"Bio`
+
+            - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
 

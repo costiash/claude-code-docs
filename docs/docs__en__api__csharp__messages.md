@@ -1012,6 +1012,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1058,6 +1060,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1090,6 +1094,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1119,6 +1125,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -1152,6 +1160,42 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `class CodeExecutionTool20260521:`
+
+      Code execution tool with REPL state persistence.
+
+      - `JsonElement Name "code_execution"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "code_execution_20260521"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1181,6 +1225,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -1214,6 +1260,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1246,6 +1294,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1277,6 +1327,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -1313,6 +1365,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1378,6 +1432,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `IReadOnlyList<string>? AllowedDomains`
 
         List of domains to allow fetching from
@@ -1428,6 +1484,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `IReadOnlyList<string>? AllowedDomains`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -1473,6 +1531,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1525,6 +1585,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1584,6 +1646,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -1617,6 +1681,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -2309,26 +2375,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Exceptional model for specialized complex tasks
 
-    - `"claude-opus-4-0"ClaudeOpus4_0`
-
-      Powerful model for complex tasks
-
-    - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-      Powerful model for complex tasks
-
-    - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-      High-performance model with extended thinking
-
-    - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-      High-performance model with extended thinking
-
-    - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-      Fast and cost-effective model
-
   - `JsonElement Role "assistant"constant`
 
     Conversational role of the generated message.
@@ -2341,13 +2387,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `required Category? Category`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `"cyber"Cyber`
 
       - `"bio"Bio`
+
+      - `"frontier_llm"FrontierLlm`
 
       - `"reasoning_extraction"ReasoningExtraction`
 
@@ -3528,6 +3574,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3574,6 +3622,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3606,6 +3656,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3635,6 +3687,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -3668,6 +3722,42 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+    - `class CodeExecutionTool20260521:`
+
+      Code execution tool with REPL state persistence.
+
+      - `JsonElement Name "code_execution"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "code_execution_20260521"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3697,6 +3787,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -3730,6 +3822,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3762,6 +3856,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3793,6 +3889,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -3829,6 +3927,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3894,6 +3994,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `IReadOnlyList<string>? AllowedDomains`
 
         List of domains to allow fetching from
@@ -3944,6 +4046,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `IReadOnlyList<string>? AllowedDomains`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -3989,6 +4093,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -4041,6 +4147,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -4100,6 +4208,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `"code_execution_20260120"CodeExecution20260120`
 
+        - `"code_execution_20260521"CodeExecution20260521`
+
       - `CacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -4133,6 +4243,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `"code_execution_20250825"CodeExecution20250825`
 
         - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -4859,6 +4971,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -4907,6 +5021,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -4958,6 +5074,61 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
+
+  - `CacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+  - `Boolean DeferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Boolean Strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Code Execution Tool 20260521
+
+- `class CodeExecutionTool20260521:`
+
+  Code execution tool with REPL state persistence.
+
+  - `JsonElement Name "code_execution"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `JsonElement Type "code_execution_20260521"constant`
+
+  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+    - `"direct"Direct`
+
+    - `"code_execution_20250825"CodeExecution20250825`
+
+    - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -7344,6 +7515,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -8038,26 +8211,6 @@ Console.WriteLine(messageTokensCount);
 
       Exceptional model for specialized complex tasks
 
-    - `"claude-opus-4-0"ClaudeOpus4_0`
-
-      Powerful model for complex tasks
-
-    - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-      Powerful model for complex tasks
-
-    - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-      High-performance model with extended thinking
-
-    - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-      High-performance model with extended thinking
-
-    - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-      Fast and cost-effective model
-
   - `JsonElement Role "assistant"constant`
 
     Conversational role of the generated message.
@@ -8070,13 +8223,13 @@ Console.WriteLine(messageTokensCount);
 
     - `required Category? Category`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `"cyber"Cyber`
 
       - `"bio"Bio`
+
+      - `"frontier_llm"FrontierLlm`
 
       - `"reasoning_extraction"ReasoningExtraction`
 
@@ -8247,6 +8400,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8310,6 +8465,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8342,6 +8499,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8371,6 +8530,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -8404,6 +8565,42 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `class CodeExecutionTool20260521:`
+
+    Code execution tool with REPL state persistence.
+
+    - `JsonElement Name "code_execution"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "code_execution_20260521"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8433,6 +8630,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -8466,6 +8665,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8498,6 +8699,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8529,6 +8732,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -8565,6 +8770,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -8630,6 +8837,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `IReadOnlyList<string>? AllowedDomains`
 
       List of domains to allow fetching from
@@ -8682,6 +8891,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `IReadOnlyList<string>? AllowedDomains`
 
       If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -8727,6 +8938,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -8779,6 +8992,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -8838,6 +9053,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -8871,6 +9088,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -10774,13 +10993,13 @@ Console.WriteLine(messageTokensCount);
 
       - `required Category? Category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"Cyber`
 
         - `"bio"Bio`
+
+        - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
 
@@ -11535,26 +11754,6 @@ Console.WriteLine(messageTokensCount);
 
         Exceptional model for specialized complex tasks
 
-      - `"claude-opus-4-0"ClaudeOpus4_0`
-
-        Powerful model for complex tasks
-
-      - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-        Powerful model for complex tasks
-
-      - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-        High-performance model with extended thinking
-
-      - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-        High-performance model with extended thinking
-
-      - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-        Fast and cost-effective model
-
     - `JsonElement Role "assistant"constant`
 
       Conversational role of the generated message.
@@ -11567,13 +11766,13 @@ Console.WriteLine(messageTokensCount);
 
       - `required Category? Category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"Cyber`
 
         - `"bio"Bio`
+
+        - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
 
@@ -12385,26 +12584,6 @@ Console.WriteLine(messageTokensCount);
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"ClaudeOpus4_0`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-          Fast and cost-effective model
-
       - `JsonElement Role "assistant"constant`
 
         Conversational role of the generated message.
@@ -12417,13 +12596,13 @@ Console.WriteLine(messageTokensCount);
 
         - `required Category? Category`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `"cyber"Cyber`
 
           - `"bio"Bio`
+
+          - `"frontier_llm"FrontierLlm`
 
           - `"reasoning_extraction"ReasoningExtraction`
 
@@ -12739,13 +12918,13 @@ Console.WriteLine(messageTokensCount);
 
   - `required Category? Category`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
     - `"cyber"Cyber`
 
     - `"bio"Bio`
+
+    - `"frontier_llm"FrontierLlm`
 
     - `"reasoning_extraction"ReasoningExtraction`
 
@@ -13971,6 +14150,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -14035,6 +14216,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -14503,6 +14686,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -14555,6 +14740,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -14795,6 +14982,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -14846,6 +15035,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `CacheControlEphemeral? CacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -14896,6 +15087,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -14966,6 +15159,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15029,6 +15224,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15061,6 +15258,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15090,6 +15289,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -15123,6 +15324,42 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `class CodeExecutionTool20260521:`
+
+    Code execution tool with REPL state persistence.
+
+    - `JsonElement Name "code_execution"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "code_execution_20260521"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15152,6 +15389,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -15185,6 +15424,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15217,6 +15458,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15248,6 +15491,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -15284,6 +15529,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -15349,6 +15596,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `IReadOnlyList<string>? AllowedDomains`
 
       List of domains to allow fetching from
@@ -15401,6 +15650,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `IReadOnlyList<string>? AllowedDomains`
 
       If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -15446,6 +15697,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -15498,6 +15751,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `IReadOnlyList<string>? AllowedDomains`
 
@@ -15557,6 +15812,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"code_execution_20260120"CodeExecution20260120`
 
+      - `"code_execution_20260521"CodeExecution20260521`
+
     - `CacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -15590,6 +15847,8 @@ Console.WriteLine(messageTokensCount);
       - `"code_execution_20250825"CodeExecution20250825`
 
       - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -16097,6 +16356,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `IReadOnlyList<string>? AllowedDomains`
 
     List of domains to allow fetching from
@@ -16167,6 +16428,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `IReadOnlyList<string>? AllowedDomains`
 
@@ -16240,6 +16503,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `IReadOnlyList<string>? AllowedDomains`
 
@@ -16799,6 +17064,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"code_execution_20260120"CodeExecution20260120`
 
+    - `"code_execution_20260521"CodeExecution20260521`
+
   - `IReadOnlyList<string>? AllowedDomains`
 
     If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -16881,6 +17148,8 @@ Console.WriteLine(messageTokensCount);
     - `"code_execution_20250825"CodeExecution20250825`
 
     - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
 
   - `IReadOnlyList<string>? AllowedDomains`
 
@@ -18138,26 +18407,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"ClaudeOpus4_0`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-          Fast and cost-effective model
-
       - `CacheControlEphemeral? CacheControl`
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -18446,6 +18695,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18492,6 +18743,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18524,6 +18777,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18553,6 +18808,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -18586,6 +18843,42 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
+          - `CacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `class CodeExecutionTool20260521:`
+
+          Code execution tool with REPL state persistence.
+
+          - `JsonElement Name "code_execution"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "code_execution_20260521"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18615,6 +18908,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -18648,6 +18943,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18680,6 +18977,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -18711,6 +19010,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -18747,6 +19048,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -18812,6 +19115,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             List of domains to allow fetching from
@@ -18862,6 +19167,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -18907,6 +19214,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -18959,6 +19268,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -19018,6 +19329,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -19051,6 +19364,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -20521,26 +20836,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Exceptional model for specialized complex tasks
 
-          - `"claude-opus-4-0"ClaudeOpus4_0`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-            Fast and cost-effective model
-
         - `JsonElement Role "assistant"constant`
 
           Conversational role of the generated message.
@@ -20553,13 +20848,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `required Category? Category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `"cyber"Cyber`
 
             - `"bio"Bio`
+
+            - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
 
@@ -21648,26 +21943,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             Exceptional model for specialized complex tasks
 
-          - `"claude-opus-4-0"ClaudeOpus4_0`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-            Fast and cost-effective model
-
         - `JsonElement Role "assistant"constant`
 
           Conversational role of the generated message.
@@ -21680,13 +21955,13 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `required Category? Category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `"cyber"Cyber`
 
             - `"bio"Bio`
+
+            - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
 
@@ -22602,26 +22877,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"ClaudeOpus4_0`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-          Fast and cost-effective model
-
       - `JsonElement Role "assistant"constant`
 
         Conversational role of the generated message.
@@ -22634,13 +22889,13 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `required Category? Category`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `"cyber"Cyber`
 
           - `"bio"Bio`
+
+          - `"frontier_llm"FrontierLlm`
 
           - `"reasoning_extraction"ReasoningExtraction`
 
@@ -23518,26 +23773,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         Exceptional model for specialized complex tasks
 
-      - `"claude-opus-4-0"ClaudeOpus4_0`
-
-        Powerful model for complex tasks
-
-      - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-        Powerful model for complex tasks
-
-      - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-        High-performance model with extended thinking
-
-      - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-        High-performance model with extended thinking
-
-      - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-        Fast and cost-effective model
-
     - `JsonElement Role "assistant"constant`
 
       Conversational role of the generated message.
@@ -23550,13 +23785,13 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
       - `required Category? Category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"Cyber`
 
         - `"bio"Bio`
+
+        - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
 

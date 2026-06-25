@@ -316,6 +316,18 @@
 
     - `string workspaceID`
 
+  - `BetaWebhookSessionUpdatedEventData`
+
+    - `string id`
+
+      ID of the session that triggered the event.
+
+    - `string organizationID`
+
+    - `"session.updated" type`
+
+    - `string workspaceID`
+
 ### Beta Webhook Session Archived Event Data
 
 - `BetaWebhookSessionArchivedEventData`
@@ -535,6 +547,20 @@
     ID of the session thread this event refers to.
 
   - `"session.thread_terminated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Session Updated Event Data
+
+- `BetaWebhookSessionUpdatedEventData`
+
+  - `string id`
+
+    ID of the session that triggered the event.
+
+  - `string organizationID`
+
+  - `"session.updated" type`
 
   - `string workspaceID`
 

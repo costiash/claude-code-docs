@@ -429,6 +429,596 @@ for (const block of followup.content) {
 }
 ````
 
+  
+````csharp
+// Ring 1: Single tool, single turn.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+// Create a client. It reads ANTHROPIC_API_KEY from the environment.
+AnthropicClient client = new();
+
+// Define one tool. The input schema is a JSON Schema object describing
+// the arguments Claude should pass when it calls this tool. This schema
+// includes nested objects (recurrence), arrays (attendees), and optional
+// fields, which is closer to real-world tools than a flat string argument.
+List<ToolUnion> tools =
+[
+    new ToolUnion(new Tool()
+    {
+        Name = "create_calendar_event",
+        Description = "Create a calendar event with attendees and optional recurrence.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["title"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                ["start"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["end"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["attendees"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "array",
+                    items = new { type = "string", format = "email" },
+                }),
+                ["recurrence"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "object",
+                    properties = new
+                    {
+                        frequency = new { @enum = new[] { "daily", "weekly", "monthly" } },
+                        count = new { type = "integer", minimum = 1 },
+                    },
+                }),
+            },
+            Required = ["title", "start", "end"],
+        },
+    }),
+];
+
+// Ask for at most one tool call per turn so the single-turn flow below
+// stays predictable.
+var toolChoice = new ToolChoice(new ToolChoiceAuto { DisableParallelToolUse = true });
+
+const string userPrompt =
+    "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.";
+
+// Send the user's request along with the tool definition. Claude decides
+// whether to call the tool based on the request and the tool description.
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = tools,
+    ToolChoice = toolChoice,
+    Messages = [new() { Role = Role.User, Content = userPrompt }],
+});
+
+// When Claude calls a tool, the response has stop_reason "tool_use"
+// and the content array contains a tool_use block alongside any text.
+Console.WriteLine($"stop_reason: {response.StopReason?.Raw()}");
+
+// Find the tool_use block. A response may contain text blocks before the
+// tool_use block, so scan the content array rather than assuming position.
+ToolUseBlock? toolUse = null;
+foreach (var block in response.Content)
+{
+    if (block.TryPickToolUse(out var picked))
+    {
+        toolUse = picked;
+        break;
+    }
+}
+Console.WriteLine($"Tool: {toolUse!.Name}");
+Console.WriteLine($"Input: {JsonSerializer.Serialize(toolUse.Input)}");
+
+// Execute the tool. In a real system this would call your calendar API.
+// Here the result is hardcoded to keep the example self-contained.
+var result = """{"event_id": "evt_123", "status": "created"}""";
+
+// Send the result back. The tool_result block goes in a user message and
+// its tool_use_id must match the id from the tool_use block above. The
+// assistant's previous response is included so Claude has the full history.
+List<ContentBlockParam> toolResults =
+[
+    new ContentBlockParam(new ToolResultBlockParam()
+    {
+        ToolUseID = toolUse.ID,
+        Content = result,
+    }),
+];
+
+var followup = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = tools,
+    ToolChoice = toolChoice,
+    Messages =
+    [
+        new() { Role = Role.User, Content = userPrompt },
+        new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+        new() { Role = Role.User, Content = new MessageParamContent(toolResults) },
+    ],
+});
+
+// With the tool result in hand, Claude produces a final natural-language
+// answer and stop_reason becomes "end_turn".
+Console.WriteLine($"stop_reason: {followup.StopReason?.Raw()}");
+foreach (var block in followup.Content)
+{
+    if (block.TryPickText(out var text))
+    {
+        Console.WriteLine(text.Text);
+    }
+}
+````
+
+  
+````go
+// Ring 1: Single tool, single turn.
+
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	// Create a client. It reads ANTHROPIC_API_KEY from the environment.
+	client := anthropic.NewClient()
+	ctx := context.Background()
+
+	// Define one tool. The input schema is a JSON Schema object describing
+	// the arguments Claude should pass when it calls this tool. This schema
+	// includes nested objects (recurrence), arrays (attendees), and optional
+	// fields, which is closer to real-world tools than a flat string argument.
+	tools := []anthropic.ToolUnionParam{
+		{OfTool: &anthropic.ToolParam{
+			Name:        "create_calendar_event",
+			Description: anthropic.String("Create a calendar event with attendees and optional recurrence."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"title": map[string]any{"type": "string"},
+					"start": map[string]any{"type": "string", "format": "date-time"},
+					"end":   map[string]any{"type": "string", "format": "date-time"},
+					"attendees": map[string]any{
+						"type":  "array",
+						"items": map[string]any{"type": "string", "format": "email"},
+					},
+					"recurrence": map[string]any{
+						"type": "object",
+						"properties": map[string]any{
+							"frequency": map[string]any{"enum": []string{"daily", "weekly", "monthly"}},
+							"count":     map[string]any{"type": "integer", "minimum": 1},
+						},
+					},
+				},
+				Required: []string{"title", "start", "end"},
+			},
+		}},
+	}
+
+	// Ask for at most one tool call per turn so the single-turn flow below
+	// stays predictable.
+	toolChoice := anthropic.ToolChoiceUnionParam{
+		OfAuto: &anthropic.ToolChoiceAutoParam{DisableParallelToolUse: anthropic.Bool(true)},
+	}
+
+	userMessage := anthropic.NewUserMessage(anthropic.NewTextBlock(
+		"Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.",
+	))
+
+	// Send the user's request along with the tool definition. Claude decides
+	// whether to call the tool based on the request and the tool description.
+	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:      anthropic.ModelClaudeOpus4_8,
+		MaxTokens:  1024,
+		Tools:      tools,
+		ToolChoice: toolChoice,
+		Messages:   []anthropic.MessageParam{userMessage},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// When Claude calls a tool, the response has stop_reason "tool_use"
+	// and the content array contains a tool_use block alongside any text.
+	fmt.Printf("stop_reason: %s\n", response.StopReason)
+
+	// Find the tool_use block. A response may contain text blocks before the
+	// tool_use block, so scan the content array rather than assuming position.
+	var toolUse anthropic.ContentBlockUnion
+	for _, block := range response.Content {
+		if block.Type == "tool_use" {
+			toolUse = block
+			break
+		}
+	}
+	fmt.Printf("Tool: %s\n", toolUse.Name)
+	fmt.Printf("Input: %s\n", string(toolUse.Input))
+
+	// Execute the tool. In a real system this would call your calendar API.
+	// Here the result is hardcoded to keep the example self-contained.
+	result := `{"event_id": "evt_123", "status": "created"}`
+
+	// Send the result back. The tool_result block goes in a user message and
+	// its tool_use_id must match the id from the tool_use block above. The
+	// assistant's previous response is included so Claude has the full history.
+	var assistantContent []anthropic.ContentBlockParamUnion
+	for _, block := range response.Content {
+		assistantContent = append(assistantContent, block.ToParam())
+	}
+
+	followup, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:      anthropic.ModelClaudeOpus4_8,
+		MaxTokens:  1024,
+		Tools:      tools,
+		ToolChoice: toolChoice,
+		Messages: []anthropic.MessageParam{
+			userMessage,
+			anthropic.NewAssistantMessage(assistantContent...),
+			anthropic.NewUserMessage(anthropic.NewToolResultBlock(toolUse.ID, result, false)),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// With the tool result in hand, Claude produces a final natural-language
+	// answer and stop_reason becomes "end_turn".
+	fmt.Printf("stop_reason: %s\n", followup.StopReason)
+	for _, block := range followup.Content {
+		if block.Type == "text" {
+			fmt.Println(block.Text)
+		}
+	}
+}
+````
+
+  
+````java
+// Ring 1: Single tool, single turn.
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.ToolChoiceAuto;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlock;
+import java.util.List;
+import java.util.Map;
+
+void main() {
+    // Create a client. It reads ANTHROPIC_API_KEY from the environment.
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    // Define one tool. The input schema is a JSON Schema object describing
+    // the arguments Claude should pass when it calls this tool. This schema
+    // includes nested objects (recurrence), arrays (attendees), and optional
+    // fields, which is closer to real-world tools than a flat string argument.
+    Tool calendarTool = Tool.builder()
+        .name("create_calendar_event")
+        .description("Create a calendar event with attendees and optional recurrence.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "title", Map.of("type", "string"),
+                "start", Map.of("type", "string", "format", "date-time"),
+                "end", Map.of("type", "string", "format", "date-time"),
+                "attendees", Map.of(
+                    "type", "array",
+                    "items", Map.of("type", "string", "format", "email")
+                ),
+                "recurrence", Map.of(
+                    "type", "object",
+                    "properties", Map.of(
+                        "frequency", Map.of("enum", List.of("daily", "weekly", "monthly")),
+                        "count", Map.of("type", "integer", "minimum", 1)
+                    )
+                )
+            )))
+            .required(List.of("title", "start", "end"))
+            .build())
+        .build();
+
+    // Ask for at most one tool call per turn so the single-turn flow below
+    // stays predictable.
+    ToolChoiceAuto toolChoice = ToolChoiceAuto.builder()
+        .disableParallelToolUse(true)
+        .build();
+
+    String userPrompt =
+        "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.";
+
+    // Send the user's request along with the tool definition. Claude decides
+    // whether to call the tool based on the request and the tool description.
+    Message response = client.messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(calendarTool)
+        .toolChoice(toolChoice)
+        .addUserMessage(userPrompt)
+        .build());
+
+    // When Claude calls a tool, the response has stop_reason "tool_use"
+    // and the content array contains a tool_use block alongside any text.
+    IO.println("stop_reason: " + response.stopReason().orElse(null));
+
+    // Find the tool_use block. A response may contain text blocks before the
+    // tool_use block, so scan the content array rather than assuming position.
+    ToolUseBlock toolUse = response.content().stream()
+        .flatMap(block -> block.toolUse().stream())
+        .findFirst()
+        .orElseThrow();
+    IO.println("Tool: " + toolUse.name());
+    IO.println("Input: " + toolUse._input());
+
+    // Execute the tool. In a real system this would call your calendar API.
+    // Here the result is hardcoded to keep the example self-contained.
+    String result = "{\"event_id\": \"evt_123\", \"status\": \"created\"}";
+
+    // Send the result back. The tool_result block goes in a user message and
+    // its tool_use_id must match the id from the tool_use block above. The
+    // assistant's previous response is included so Claude has the full history.
+    Message followup = client.messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(calendarTool)
+        .toolChoice(toolChoice)
+        .addUserMessage(userPrompt)
+        .addMessage(response)
+        .addUserMessageOfBlockParams(List.of(ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder()
+                .toolUseId(toolUse.id())
+                .content(result)
+                .build())))
+        .build());
+
+    // With the tool result in hand, Claude produces a final natural-language
+    // answer and stop_reason becomes "end_turn".
+    IO.println("stop_reason: " + followup.stopReason().orElse(null));
+    followup.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+````
+
+  
+````php
+<?php
+
+// Ring 1: Single tool, single turn.
+
+use Anthropic\Client;
+use Anthropic\Messages\ToolChoiceAuto;
+
+// Create a client. It reads ANTHROPIC_API_KEY from the environment.
+$client = new Client();
+
+// Define one tool. The input_schema is a JSON Schema object describing
+// the arguments Claude should pass when it calls this tool. This schema
+// includes nested objects (recurrence), arrays (attendees), and optional
+// fields, which is closer to real-world tools than a flat string argument.
+$tools = [
+    [
+        'name' => 'create_calendar_event',
+        'description' => 'Create a calendar event with attendees and optional recurrence.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'title' => ['type' => 'string'],
+                'start' => ['type' => 'string', 'format' => 'date-time'],
+                'end' => ['type' => 'string', 'format' => 'date-time'],
+                'attendees' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string', 'format' => 'email'],
+                ],
+                'recurrence' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'frequency' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'count' => ['type' => 'integer', 'minimum' => 1],
+                    ],
+                ],
+            ],
+            'required' => ['title', 'start', 'end'],
+        ],
+    ],
+];
+
+$userMessage = [
+    'role' => 'user',
+    'content' => 'Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am.',
+];
+
+// Ask for at most one tool call per turn so the single-turn flow below
+// stays predictable.
+$toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
+
+// Send the user's request along with the tool definition. Claude decides
+// whether to call the tool based on the request and the tool description.
+$response = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: $tools,
+    toolChoice: $toolChoice,
+    messages: [$userMessage],
+);
+
+// When Claude calls a tool, the response has stop_reason "tool_use"
+// and the content array contains a tool_use block alongside any text.
+printf("stop_reason: %s\n", $response->stopReason);
+
+// Find the tool_use block. A response may contain text blocks before the
+// tool_use block, so scan the content array rather than assuming position.
+$toolUse = null;
+foreach ($response->content as $block) {
+    if ($block->type === 'tool_use') {
+        $toolUse = $block;
+        break;
+    }
+}
+printf("Tool: %s\n", $toolUse->name);
+printf("Input: %s\n", json_encode($toolUse->input));
+
+// Execute the tool. In a real system this would call your calendar API.
+// Here the result is hardcoded to keep the example self-contained.
+$result = ['event_id' => 'evt_123', 'status' => 'created'];
+
+// Send the result back. The tool_result block goes in a user message and
+// its tool_use_id must match the id from the tool_use block above. The
+// assistant's previous response is included so Claude has the full history.
+$followup = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: $tools,
+    toolChoice: $toolChoice,
+    messages: [
+        $userMessage,
+        ['role' => 'assistant', 'content' => $response->content],
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'tool_result',
+                    'tool_use_id' => $toolUse->id,
+                    'content' => json_encode($result),
+                ],
+            ],
+        ],
+    ],
+);
+
+// With the tool result in hand, Claude produces a final natural-language
+// answer and stop_reason becomes "end_turn".
+printf("stop_reason: %s\n", $followup->stopReason);
+foreach ($followup->content as $block) {
+    if ($block->type === 'text') {
+        echo $block->text, "\n";
+    }
+}
+````
+
+  
+````ruby
+# Ring 1: Single tool, single turn.
+
+require "anthropic"
+
+# Create a client. It reads ANTHROPIC_API_KEY from the environment.
+client = Anthropic::Client.new
+
+# Define one tool. The input_schema is a JSON Schema object describing
+# the arguments Claude should pass when it calls this tool. This schema
+# includes nested objects (recurrence), arrays (attendees), and optional
+# fields, which is closer to real-world tools than a flat string argument.
+tools = [
+  {
+    name: "create_calendar_event",
+    description: "Create a calendar event with attendees and optional recurrence.",
+    input_schema: {
+      type: "object",
+      properties: {
+        title: {type: "string"},
+        start: {type: "string", format: "date-time"},
+        end: {type: "string", format: "date-time"},
+        attendees: {
+          type: "array",
+          items: {type: "string", format: "email"}
+        },
+        recurrence: {
+          type: "object",
+          properties: {
+            frequency: {enum: ["daily", "weekly", "monthly"]},
+            count: {type: "integer", minimum: 1}
+          }
+        }
+      },
+      required: ["title", "start", "end"]
+    }
+  }
+]
+
+user_message = {
+  role: "user",
+  content: "Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am."
+}
+
+# Ask for at most one tool call per turn so the single-turn flow below
+# stays predictable.
+tool_choice = {type: "auto", disable_parallel_tool_use: true}
+
+# Send the user's request along with the tool definition. Claude decides
+# whether to call the tool based on the request and the tool description.
+response = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: tools,
+  tool_choice: tool_choice,
+  messages: [user_message]
+)
+
+# When Claude calls a tool, the response has stop_reason "tool_use"
+# and the content array contains a tool_use block alongside any text.
+puts "stop_reason: #{response.stop_reason}"
+
+# Find the tool_use block. A response may contain text blocks before the
+# tool_use block, so scan the content array rather than assuming position.
+tool_use = response.content.find { |block| block.type == :tool_use }
+puts "Tool: #{tool_use.name}"
+puts "Input: #{tool_use.input}"
+
+# Execute the tool. In a real system this would call your calendar API.
+# Here the result is hardcoded to keep the example self-contained.
+result = {event_id: "evt_123", status: "created"}
+
+# Send the result back. The tool_result block goes in a user message and
+# its tool_use_id must match the id from the tool_use block above. The
+# assistant's previous response is included so Claude has the full history.
+followup = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: tools,
+  tool_choice: tool_choice,
+  messages: [
+    user_message,
+    {role: "assistant", content: response.content},
+    {
+      role: "user",
+      content: [
+        {
+          type: "tool_result",
+          tool_use_id: tool_use.id,
+          content: JSON.generate(result)
+        }
+      ]
+    }
+  ]
+)
+
+# With the tool result in hand, Claude produces a final natural-language
+# answer and stop_reason becomes "end_turn".
+puts "stop_reason: #{followup.stop_reason}"
+followup.content.each do |block|
+  puts block.text if block.type == :text
+end
+````
+
 </CodeGroup>
 
 **What to expect**
@@ -801,6 +1391,571 @@ for (const block of response.content) {
 }
 ````
 
+  
+````csharp
+// Ring 2: The agentic loop.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+List<ToolUnion> tools =
+[
+    new ToolUnion(new Tool()
+    {
+        Name = "create_calendar_event",
+        Description = "Create a calendar event with attendees and optional recurrence.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["title"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                ["start"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["end"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["attendees"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "array",
+                    items = new { type = "string", format = "email" },
+                }),
+                ["recurrence"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "object",
+                    properties = new
+                    {
+                        frequency = new { @enum = new[] { "daily", "weekly", "monthly" } },
+                        count = new { type = "integer", minimum = 1 },
+                    },
+                }),
+            },
+            Required = ["title", "start", "end"],
+        },
+    }),
+];
+
+// Run the requested tool and return its result as a string.
+string RunTool(ToolUseBlock toolUse)
+{
+    if (toolUse.Name == "create_calendar_event")
+    {
+        var title = toolUse.Input.TryGetValue("title", out var t) ? t.GetString() : "";
+        return JsonSerializer.Serialize(new { event_id = "evt_123", status = "created", title });
+    }
+    return JsonSerializer.Serialize(new { error = $"Unknown tool: {toolUse.Name}" });
+}
+
+var toolChoice = new ToolChoice(new ToolChoiceAuto { DisableParallelToolUse = true });
+
+// Keep the full conversation history in a list so each turn sees prior context.
+List<MessageParam> messages =
+[
+    new()
+    {
+        Role = Role.User,
+        Content = "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+    },
+];
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = tools,
+    ToolChoice = toolChoice,
+    Messages = messages,
+});
+
+// Loop until Claude stops asking for tools. Each iteration runs the requested
+// tool, appends the result to history, and asks Claude to continue.
+while (response.StopReason == StopReason.ToolUse)
+{
+    ToolUseBlock? toolUse = null;
+    foreach (var block in response.Content)
+    {
+        if (block.TryPickToolUse(out var picked))
+        {
+            toolUse = picked;
+            break;
+        }
+    }
+    var result = RunTool(toolUse!);
+
+    messages.Add(new()
+    {
+        Role = Role.Assistant,
+        Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList(),
+    });
+    messages.Add(new()
+    {
+        Role = Role.User,
+        Content = new MessageParamContent(
+        [
+            new ContentBlockParam(new ToolResultBlockParam() { ToolUseID = toolUse!.ID, Content = result }),
+        ]),
+    });
+
+    response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = Model.ClaudeOpus4_8,
+        MaxTokens = 1024,
+        Tools = tools,
+        ToolChoice = toolChoice,
+        Messages = messages,
+    });
+}
+
+foreach (var block in response.Content)
+{
+    if (block.TryPickText(out var text))
+    {
+        Console.WriteLine(text.Text);
+    }
+}
+````
+
+  
+````go
+// Ring 2: The agentic loop.
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func runTool(name string, input map[string]any) string {
+	if name == "create_calendar_event" {
+		title, _ := input["title"].(string)
+		return fmt.Sprintf(`{"event_id": "evt_123", "status": "created", "title": %q}`, title)
+	}
+	return fmt.Sprintf(`{"error": "Unknown tool: %s"}`, name)
+}
+
+func main() {
+	client := anthropic.NewClient()
+	ctx := context.Background()
+
+	tools := []anthropic.ToolUnionParam{
+		{OfTool: &anthropic.ToolParam{
+			Name:        "create_calendar_event",
+			Description: anthropic.String("Create a calendar event with attendees and optional recurrence."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"title": map[string]any{"type": "string"},
+					"start": map[string]any{"type": "string", "format": "date-time"},
+					"end":   map[string]any{"type": "string", "format": "date-time"},
+					"attendees": map[string]any{
+						"type":  "array",
+						"items": map[string]any{"type": "string", "format": "email"},
+					},
+					"recurrence": map[string]any{
+						"type": "object",
+						"properties": map[string]any{
+							"frequency": map[string]any{"enum": []string{"daily", "weekly", "monthly"}},
+							"count":     map[string]any{"type": "integer", "minimum": 1},
+						},
+					},
+				},
+				Required: []string{"title", "start", "end"},
+			},
+		}},
+	}
+
+	toolChoice := anthropic.ToolChoiceUnionParam{
+		OfAuto: &anthropic.ToolChoiceAutoParam{DisableParallelToolUse: anthropic.Bool(true)},
+	}
+
+	// Keep the full conversation history in a slice so each turn sees prior context.
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock(
+			"Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+		)),
+	}
+
+	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:      anthropic.ModelClaudeOpus4_8,
+		MaxTokens:  1024,
+		Tools:      tools,
+		ToolChoice: toolChoice,
+		Messages:   messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Loop until Claude stops asking for tools. Each iteration runs the requested
+	// tool, appends the result to history, and asks Claude to continue.
+	for response.StopReason == "tool_use" {
+		var toolUse anthropic.ContentBlockUnion
+		for _, block := range response.Content {
+			if block.Type == "tool_use" {
+				toolUse = block
+				break
+			}
+		}
+
+		var input map[string]any
+		if err := json.Unmarshal(toolUse.Input, &input); err != nil {
+			log.Fatal(err)
+		}
+		result := runTool(toolUse.Name, input)
+
+		var assistantContent []anthropic.ContentBlockParamUnion
+		for _, block := range response.Content {
+			assistantContent = append(assistantContent, block.ToParam())
+		}
+		messages = append(messages, anthropic.NewAssistantMessage(assistantContent...))
+		messages = append(messages, anthropic.NewUserMessage(
+			anthropic.NewToolResultBlock(toolUse.ID, result, false),
+		))
+
+		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
+			Model:      anthropic.ModelClaudeOpus4_8,
+			MaxTokens:  1024,
+			Tools:      tools,
+			ToolChoice: toolChoice,
+			Messages:   messages,
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	for _, block := range response.Content {
+		if block.Type == "text" {
+			fmt.Println(block.Text)
+		}
+	}
+}
+````
+
+  
+````java
+// Ring 2: The agentic loop.
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.StopReason;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.ToolChoiceAuto;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlock;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+String runTool(ToolUseBlock toolUse) {
+    // The raw tool input is a JSON object; read fields out of it as a map.
+    Map<String, JsonValue> input = (Map<String, JsonValue>) toolUse._input().asObject().get();
+    if (toolUse.name().equals("create_calendar_event")) {
+        String title = input.containsKey("title") ? input.get("title").asStringOrThrow() : "";
+        return "{\"event_id\": \"evt_123\", \"status\": \"created\", \"title\": \"" + title + "\"}";
+    }
+    return "{\"error\": \"Unknown tool: " + toolUse.name() + "\"}";
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    Tool calendarTool = Tool.builder()
+        .name("create_calendar_event")
+        .description("Create a calendar event with attendees and optional recurrence.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "title", Map.of("type", "string"),
+                "start", Map.of("type", "string", "format", "date-time"),
+                "end", Map.of("type", "string", "format", "date-time"),
+                "attendees", Map.of(
+                    "type", "array",
+                    "items", Map.of("type", "string", "format", "email")
+                ),
+                "recurrence", Map.of(
+                    "type", "object",
+                    "properties", Map.of(
+                        "frequency", Map.of("enum", List.of("daily", "weekly", "monthly")),
+                        "count", Map.of("type", "integer", "minimum", 1)
+                    )
+                )
+            )))
+            .required(List.of("title", "start", "end"))
+            .build())
+        .build();
+
+    ToolChoiceAuto toolChoice = ToolChoiceAuto.builder()
+        .disableParallelToolUse(true)
+        .build();
+
+    // Keep the full conversation history in a list so each turn sees prior context.
+    List<MessageParam> messages = new ArrayList<>();
+    messages.add(MessageParam.builder()
+        .role(MessageParam.Role.USER)
+        .content("Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.")
+        .build());
+
+    Message response = client.messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(calendarTool)
+        .toolChoice(toolChoice)
+        .messages(messages)
+        .build());
+
+    // Loop until Claude stops asking for tools. Each iteration runs the requested
+    // tool, appends the result to history, and asks Claude to continue.
+    while (response.stopReason().isPresent()
+            && response.stopReason().get().equals(StopReason.TOOL_USE)) {
+        ToolUseBlock toolUse = response.content().stream()
+            .flatMap(block -> block.toolUse().stream())
+            .findFirst()
+            .orElseThrow();
+        String result = runTool(toolUse);
+
+        messages.add(response.toParam());
+        messages.add(MessageParam.builder()
+            .role(MessageParam.Role.USER)
+            .contentOfBlockParams(List.of(ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder()
+                    .toolUseId(toolUse.id())
+                    .content(result)
+                    .build())))
+            .build());
+
+        response = client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(1024L)
+            .addTool(calendarTool)
+            .toolChoice(toolChoice)
+            .messages(messages)
+            .build());
+    }
+
+    response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+````
+
+  
+````php
+<?php
+
+// Ring 2: The agentic loop.
+
+use Anthropic\Client;
+use Anthropic\Messages\ToolChoiceAuto;
+
+$client = new Client();
+
+$tools = [
+    [
+        'name' => 'create_calendar_event',
+        'description' => 'Create a calendar event with attendees and optional recurrence.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'title' => ['type' => 'string'],
+                'start' => ['type' => 'string', 'format' => 'date-time'],
+                'end' => ['type' => 'string', 'format' => 'date-time'],
+                'attendees' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string', 'format' => 'email'],
+                ],
+                'recurrence' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'frequency' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'count' => ['type' => 'integer', 'minimum' => 1],
+                    ],
+                ],
+            ],
+            'required' => ['title', 'start', 'end'],
+        ],
+    ],
+];
+
+function runTool(string $name, array $input): string
+{
+    if ($name === 'create_calendar_event') {
+        return json_encode([
+            'event_id' => 'evt_123',
+            'status' => 'created',
+            'title' => $input['title'],
+        ]);
+    }
+
+    return json_encode(['error' => "Unknown tool: {$name}"]);
+}
+
+$toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
+
+// Keep the full conversation history in an array so each turn sees prior context.
+$messages = [
+    [
+        'role' => 'user',
+        'content' => 'Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.',
+    ],
+];
+
+$response = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: $tools,
+    toolChoice: $toolChoice,
+    messages: $messages,
+);
+
+// Loop until Claude stops asking for tools. Each iteration runs the requested
+// tool, appends the result to history, and asks Claude to continue.
+while ($response->stopReason === 'tool_use') {
+    $toolUse = null;
+    foreach ($response->content as $block) {
+        if ($block->type === 'tool_use') {
+            $toolUse = $block;
+            break;
+        }
+    }
+
+    $result = runTool($toolUse->name, $toolUse->input);
+
+    $messages[] = ['role' => 'assistant', 'content' => $response->content];
+    $messages[] = [
+        'role' => 'user',
+        'content' => [
+            [
+                'type' => 'tool_result',
+                'tool_use_id' => $toolUse->id,
+                'content' => $result,
+            ],
+        ],
+    ];
+
+    $response = $client->messages->create(
+        model: 'claude-opus-4-8',
+        maxTokens: 1024,
+        tools: $tools,
+        toolChoice: $toolChoice,
+        messages: $messages,
+    );
+}
+
+foreach ($response->content as $block) {
+    if ($block->type === 'text') {
+        echo $block->text, "\n";
+    }
+}
+````
+
+  
+````ruby
+# Ring 2: The agentic loop.
+
+require "anthropic"
+
+client = Anthropic::Client.new
+
+tools = [
+  {
+    name: "create_calendar_event",
+    description: "Create a calendar event with attendees and optional recurrence.",
+    input_schema: {
+      type: "object",
+      properties: {
+        title: {type: "string"},
+        start: {type: "string", format: "date-time"},
+        end: {type: "string", format: "date-time"},
+        attendees: {
+          type: "array",
+          items: {type: "string", format: "email"}
+        },
+        recurrence: {
+          type: "object",
+          properties: {
+            frequency: {enum: ["daily", "weekly", "monthly"]},
+            count: {type: "integer", minimum: 1}
+          }
+        }
+      },
+      required: ["title", "start", "end"]
+    }
+  }
+]
+
+def run_tool(name, input)
+  case name
+  when "create_calendar_event"
+    JSON.generate({event_id: "evt_123", status: "created", title: input[:title]})
+  else
+    JSON.generate({error: "Unknown tool: #{name}"})
+  end
+end
+
+tool_choice = {type: "auto", disable_parallel_tool_use: true}
+
+# Keep the full conversation history in an array so each turn sees prior context.
+messages = [
+  {
+    role: "user",
+    content: "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."
+  }
+]
+
+response = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: tools,
+  tool_choice: tool_choice,
+  messages: messages
+)
+
+# Loop until Claude stops asking for tools. Each iteration runs the requested
+# tool, appends the result to history, and asks Claude to continue.
+while response.stop_reason == :tool_use
+  tool_use = response.content.find { |block| block.type == :tool_use }
+  result = run_tool(tool_use.name, tool_use.input)
+
+  messages << {role: "assistant", content: response.content}
+  messages << {
+    role: "user",
+    content: [
+      {
+        type: "tool_result",
+        tool_use_id: tool_use.id,
+        content: result
+      }
+    ]
+  }
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: tools,
+    tool_choice: tool_choice,
+    messages: messages
+  )
+end
+
+response.content.each do |block|
+  puts block.text if block.type == :text
+end
+````
+
 </CodeGroup>
 
 **What to expect**
@@ -809,13 +1964,13 @@ for (const block of response.content) {
 I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
 ```
 
-The loop may run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
+The loop might run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
 
 ## Ring 3: Multiple tools, parallel calls
 
 Agents rarely have just one capability. Add a second tool, `list_calendar_events`, so Claude can check the existing schedule before creating something new.
 
-When Claude has multiple independent tool calls to make, it may return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
+When Claude has multiple independent tool calls to make, it might return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
 
 <CodeGroup>
   
@@ -1200,6 +2355,596 @@ for (const block of response.content) {
     console.log(block.text);
   }
 }
+````
+
+  
+````csharp
+// Ring 3: Multiple tools, parallel calls.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+List<ToolUnion> tools =
+[
+    new ToolUnion(new Tool()
+    {
+        Name = "create_calendar_event",
+        Description = "Create a calendar event with attendees and optional recurrence.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["title"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                ["start"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["end"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["attendees"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "array",
+                    items = new { type = "string", format = "email" },
+                }),
+                ["recurrence"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "object",
+                    properties = new
+                    {
+                        frequency = new { @enum = new[] { "daily", "weekly", "monthly" } },
+                        count = new { type = "integer", minimum = 1 },
+                    },
+                }),
+            },
+            Required = ["title", "start", "end"],
+        },
+    }),
+    new ToolUnion(new Tool()
+    {
+        Name = "list_calendar_events",
+        Description = "List all calendar events on a given date.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
+            },
+            Required = ["date"],
+        },
+    }),
+];
+
+string RunTool(ToolUseBlock toolUse)
+{
+    if (toolUse.Name == "create_calendar_event")
+    {
+        var title = toolUse.Input.TryGetValue("title", out var t) ? t.GetString() : "";
+        return JsonSerializer.Serialize(new { event_id = "evt_123", status = "created", title });
+    }
+    if (toolUse.Name == "list_calendar_events")
+    {
+        return """{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}""";
+    }
+    return JsonSerializer.Serialize(new { error = $"Unknown tool: {toolUse.Name}" });
+}
+
+List<MessageParam> messages =
+[
+    new()
+    {
+        Role = Role.User,
+        Content = "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+    },
+];
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = tools,
+    Messages = messages,
+});
+
+while (response.StopReason == StopReason.ToolUse)
+{
+    // A single response can contain multiple tool_use blocks. Process all of
+    // them and return all results together in one user message.
+    List<ContentBlockParam> toolResults = [];
+    foreach (var block in response.Content)
+    {
+        if (block.TryPickToolUse(out var toolUse))
+        {
+            toolResults.Add(new ContentBlockParam(new ToolResultBlockParam()
+            {
+                ToolUseID = toolUse.ID,
+                Content = RunTool(toolUse),
+            }));
+        }
+    }
+
+    messages.Add(new()
+    {
+        Role = Role.Assistant,
+        Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList(),
+    });
+    messages.Add(new() { Role = Role.User, Content = new MessageParamContent(toolResults) });
+
+    response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = Model.ClaudeOpus4_8,
+        MaxTokens = 1024,
+        Tools = tools,
+        Messages = messages,
+    });
+}
+
+foreach (var block in response.Content)
+{
+    if (block.TryPickText(out var text))
+    {
+        Console.WriteLine(text.Text);
+    }
+}
+````
+
+  
+````go
+// Ring 3: Multiple tools, parallel calls.
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func runTool(name string, input map[string]any) string {
+	if name == "create_calendar_event" {
+		title, _ := input["title"].(string)
+		return fmt.Sprintf(`{"event_id": "evt_123", "status": "created", "title": %q}`, title)
+	}
+	if name == "list_calendar_events" {
+		return `{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}`
+	}
+	return fmt.Sprintf(`{"error": "Unknown tool: %s"}`, name)
+}
+
+func main() {
+	client := anthropic.NewClient()
+	ctx := context.Background()
+
+	tools := []anthropic.ToolUnionParam{
+		{OfTool: &anthropic.ToolParam{
+			Name:        "create_calendar_event",
+			Description: anthropic.String("Create a calendar event with attendees and optional recurrence."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"title": map[string]any{"type": "string"},
+					"start": map[string]any{"type": "string", "format": "date-time"},
+					"end":   map[string]any{"type": "string", "format": "date-time"},
+					"attendees": map[string]any{
+						"type":  "array",
+						"items": map[string]any{"type": "string", "format": "email"},
+					},
+					"recurrence": map[string]any{
+						"type": "object",
+						"properties": map[string]any{
+							"frequency": map[string]any{"enum": []string{"daily", "weekly", "monthly"}},
+							"count":     map[string]any{"type": "integer", "minimum": 1},
+						},
+					},
+				},
+				Required: []string{"title", "start", "end"},
+			},
+		}},
+		{OfTool: &anthropic.ToolParam{
+			Name:        "list_calendar_events",
+			Description: anthropic.String("List all calendar events on a given date."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"date": map[string]any{"type": "string", "format": "date"},
+				},
+				Required: []string{"date"},
+			},
+		}},
+	}
+
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock(
+			"Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+		)),
+	}
+
+	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		Tools:     tools,
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for response.StopReason == "tool_use" {
+		// A single response can contain multiple tool_use blocks. Process all of
+		// them and return all results together in one user message.
+		var toolResults []anthropic.ContentBlockParamUnion
+		for _, block := range response.Content {
+			if block.Type == "tool_use" {
+				var input map[string]any
+				if err := json.Unmarshal(block.Input, &input); err != nil {
+					log.Fatal(err)
+				}
+				result := runTool(block.Name, input)
+				toolResults = append(toolResults, anthropic.NewToolResultBlock(block.ID, result, false))
+			}
+		}
+
+		var assistantContent []anthropic.ContentBlockParamUnion
+		for _, block := range response.Content {
+			assistantContent = append(assistantContent, block.ToParam())
+		}
+		messages = append(messages, anthropic.NewAssistantMessage(assistantContent...))
+		messages = append(messages, anthropic.NewUserMessage(toolResults...))
+
+		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
+			Model:     anthropic.ModelClaudeOpus4_8,
+			MaxTokens: 1024,
+			Tools:     tools,
+			Messages:  messages,
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	for _, block := range response.Content {
+		if block.Type == "text" {
+			fmt.Println(block.Text)
+		}
+	}
+}
+````
+
+  
+````java
+// Ring 3: Multiple tools, parallel calls.
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.ContentBlock;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.StopReason;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlock;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+String runTool(ToolUseBlock toolUse) {
+    // The raw tool input is a JSON object; read fields out of it as a map.
+    Map<String, JsonValue> input = (Map<String, JsonValue>) toolUse._input().asObject().get();
+    if (toolUse.name().equals("create_calendar_event")) {
+        String title = input.containsKey("title") ? input.get("title").asStringOrThrow() : "";
+        return "{\"event_id\": \"evt_123\", \"status\": \"created\", \"title\": \"" + title + "\"}";
+    }
+    if (toolUse.name().equals("list_calendar_events")) {
+        return "{\"events\": [{\"title\": \"Existing meeting\", \"start\": \"14:00\", \"end\": \"15:00\"}]}";
+    }
+    return "{\"error\": \"Unknown tool: " + toolUse.name() + "\"}";
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    Tool calendarTool = Tool.builder()
+        .name("create_calendar_event")
+        .description("Create a calendar event with attendees and optional recurrence.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "title", Map.of("type", "string"),
+                "start", Map.of("type", "string", "format", "date-time"),
+                "end", Map.of("type", "string", "format", "date-time"),
+                "attendees", Map.of(
+                    "type", "array",
+                    "items", Map.of("type", "string", "format", "email")
+                ),
+                "recurrence", Map.of(
+                    "type", "object",
+                    "properties", Map.of(
+                        "frequency", Map.of("enum", List.of("daily", "weekly", "monthly")),
+                        "count", Map.of("type", "integer", "minimum", 1)
+                    )
+                )
+            )))
+            .required(List.of("title", "start", "end"))
+            .build())
+        .build();
+
+    Tool listTool = Tool.builder()
+        .name("list_calendar_events")
+        .description("List all calendar events on a given date.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "date", Map.of("type", "string", "format", "date")
+            )))
+            .required(List.of("date"))
+            .build())
+        .build();
+
+    List<MessageParam> messages = new ArrayList<>();
+    messages.add(MessageParam.builder()
+        .role(MessageParam.Role.USER)
+        .content("Check what I have next Monday, then schedule a planning session that avoids any conflicts.")
+        .build());
+
+    Message response = client.messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(calendarTool)
+        .addTool(listTool)
+        .messages(messages)
+        .build());
+
+    while (response.stopReason().isPresent()
+            && response.stopReason().get().equals(StopReason.TOOL_USE)) {
+        // A single response can contain multiple tool_use blocks. Process all of
+        // them and return all results together in one user message.
+        List<ContentBlockParam> toolResults = new ArrayList<>();
+        for (ContentBlock block : response.content()) {
+            if (block.toolUse().isPresent()) {
+                ToolUseBlock toolUse = block.toolUse().get();
+                toolResults.add(ContentBlockParam.ofToolResult(
+                    ToolResultBlockParam.builder()
+                        .toolUseId(toolUse.id())
+                        .content(runTool(toolUse))
+                        .build()));
+            }
+        }
+
+        messages.add(response.toParam());
+        messages.add(MessageParam.builder()
+            .role(MessageParam.Role.USER)
+            .contentOfBlockParams(toolResults)
+            .build());
+
+        response = client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(1024L)
+            .addTool(calendarTool)
+            .addTool(listTool)
+            .messages(messages)
+            .build());
+    }
+
+    response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+````
+
+  
+````php
+<?php
+
+// Ring 3: Multiple tools, parallel calls.
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$tools = [
+    [
+        'name' => 'create_calendar_event',
+        'description' => 'Create a calendar event with attendees and optional recurrence.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'title' => ['type' => 'string'],
+                'start' => ['type' => 'string', 'format' => 'date-time'],
+                'end' => ['type' => 'string', 'format' => 'date-time'],
+                'attendees' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string', 'format' => 'email'],
+                ],
+                'recurrence' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'frequency' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'count' => ['type' => 'integer', 'minimum' => 1],
+                    ],
+                ],
+            ],
+            'required' => ['title', 'start', 'end'],
+        ],
+    ],
+    [
+        'name' => 'list_calendar_events',
+        'description' => 'List all calendar events on a given date.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'date' => ['type' => 'string', 'format' => 'date'],
+            ],
+            'required' => ['date'],
+        ],
+    ],
+];
+
+function runTool(string $name, array $input): string
+{
+    if ($name === 'create_calendar_event') {
+        return json_encode([
+            'event_id' => 'evt_123',
+            'status' => 'created',
+            'title' => $input['title'],
+        ]);
+    }
+    if ($name === 'list_calendar_events') {
+        return json_encode([
+            'events' => [['title' => 'Existing meeting', 'start' => '14:00', 'end' => '15:00']],
+        ]);
+    }
+
+    return json_encode(['error' => "Unknown tool: {$name}"]);
+}
+
+$messages = [
+    [
+        'role' => 'user',
+        'content' => 'Check what I have next Monday, then schedule a planning session that avoids any conflicts.',
+    ],
+];
+
+$response = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: $tools,
+    messages: $messages,
+);
+
+while ($response->stopReason === 'tool_use') {
+    // A single response can contain multiple tool_use blocks. Process all of
+    // them and return all results together in one user message.
+    $toolResults = [];
+    foreach ($response->content as $block) {
+        if ($block->type === 'tool_use') {
+            $toolResults[] = [
+                'type' => 'tool_result',
+                'tool_use_id' => $block->id,
+                'content' => runTool($block->name, $block->input),
+            ];
+        }
+    }
+
+    $messages[] = ['role' => 'assistant', 'content' => $response->content];
+    $messages[] = ['role' => 'user', 'content' => $toolResults];
+
+    $response = $client->messages->create(
+        model: 'claude-opus-4-8',
+        maxTokens: 1024,
+        tools: $tools,
+        messages: $messages,
+    );
+}
+
+foreach ($response->content as $block) {
+    if ($block->type === 'text') {
+        echo $block->text, "\n";
+    }
+}
+````
+
+  
+````ruby
+# Ring 3: Multiple tools, parallel calls.
+
+require "anthropic"
+
+client = Anthropic::Client.new
+
+tools = [
+  {
+    name: "create_calendar_event",
+    description: "Create a calendar event with attendees and optional recurrence.",
+    input_schema: {
+      type: "object",
+      properties: {
+        title: {type: "string"},
+        start: {type: "string", format: "date-time"},
+        end: {type: "string", format: "date-time"},
+        attendees: {
+          type: "array",
+          items: {type: "string", format: "email"}
+        },
+        recurrence: {
+          type: "object",
+          properties: {
+            frequency: {enum: ["daily", "weekly", "monthly"]},
+            count: {type: "integer", minimum: 1}
+          }
+        }
+      },
+      required: ["title", "start", "end"]
+    }
+  },
+  {
+    name: "list_calendar_events",
+    description: "List all calendar events on a given date.",
+    input_schema: {
+      type: "object",
+      properties: {
+        date: {type: "string", format: "date"}
+      },
+      required: ["date"]
+    }
+  }
+]
+
+def run_tool(name, input)
+  case name
+  when "create_calendar_event"
+    JSON.generate({event_id: "evt_123", status: "created", title: input[:title]})
+  when "list_calendar_events"
+    JSON.generate({events: [{title: "Existing meeting", start: "14:00", end: "15:00"}]})
+  else
+    JSON.generate({error: "Unknown tool: #{name}"})
+  end
+end
+
+messages = [
+  {
+    role: "user",
+    content: "Check what I have next Monday, then schedule a planning session that avoids any conflicts."
+  }
+]
+
+response = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: tools,
+  messages: messages
+)
+
+while response.stop_reason == :tool_use
+  # A single response can contain multiple tool_use blocks. Process all of
+  # them and return all results together in one user message.
+  tool_results = response.content.select { |block| block.type == :tool_use }.map do |tool_use|
+    {
+      type: "tool_result",
+      tool_use_id: tool_use.id,
+      content: run_tool(tool_use.name, tool_use.input)
+    }
+  end
+
+  messages << {role: "assistant", content: response.content}
+  messages << {role: "user", content: tool_results}
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: tools,
+    messages: messages
+  )
+end
+
+response.content.each do |block|
+  puts block.text if block.type == :text
+end
 ````
 
 </CodeGroup>
@@ -1643,6 +3388,661 @@ for (const block of response.content) {
 }
 ````
 
+  
+````csharp
+// Ring 4: Error handling.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+List<ToolUnion> tools =
+[
+    new ToolUnion(new Tool()
+    {
+        Name = "create_calendar_event",
+        Description = "Create a calendar event with attendees and optional recurrence.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["title"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                ["start"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["end"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date-time" }),
+                ["attendees"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "array",
+                    items = new { type = "string", format = "email" },
+                }),
+                ["recurrence"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "object",
+                    properties = new
+                    {
+                        frequency = new { @enum = new[] { "daily", "weekly", "monthly" } },
+                        count = new { type = "integer", minimum = 1 },
+                    },
+                }),
+            },
+            Required = ["title", "start", "end"],
+        },
+    }),
+    new ToolUnion(new Tool()
+    {
+        Name = "list_calendar_events",
+        Description = "List all calendar events on a given date.",
+        InputSchema = new InputSchema()
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
+            },
+            Required = ["date"],
+        },
+    }),
+];
+
+string RunTool(ToolUseBlock toolUse)
+{
+    if (toolUse.Name == "create_calendar_event")
+    {
+        if (toolUse.Input.TryGetValue("attendees", out var attendees) && attendees.GetArrayLength() > 10)
+        {
+            throw new InvalidOperationException("Too many attendees (max 10)");
+        }
+        var title = toolUse.Input.TryGetValue("title", out var t) ? t.GetString() : "";
+        return JsonSerializer.Serialize(new { event_id = "evt_123", status = "created", title });
+    }
+    if (toolUse.Name == "list_calendar_events")
+    {
+        return """{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}""";
+    }
+    throw new InvalidOperationException($"Unknown tool: {toolUse.Name}");
+}
+
+// Build a request that exceeds the tool's attendee limit so the error path runs.
+var emails = string.Join(", ", Enumerable.Range(0, 15).Select(i => $"user{i}@example.com"));
+
+List<MessageParam> messages =
+[
+    new() { Role = Role.User, Content = $"Schedule an all-hands with everyone: {emails}" },
+];
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Tools = tools,
+    Messages = messages,
+});
+
+while (response.StopReason == StopReason.ToolUse)
+{
+    List<ContentBlockParam> toolResults = [];
+    foreach (var block in response.Content)
+    {
+        if (block.TryPickToolUse(out var toolUse))
+        {
+            ToolResultBlockParam toolResult;
+            try
+            {
+                toolResult = new ToolResultBlockParam() { ToolUseID = toolUse.ID, Content = RunTool(toolUse) };
+            }
+            catch (Exception e)
+            {
+                // Signal failure so Claude can retry or ask for clarification.
+                toolResult = new ToolResultBlockParam()
+                {
+                    ToolUseID = toolUse.ID,
+                    Content = e.Message,
+                    IsError = true,
+                };
+            }
+            toolResults.Add(new ContentBlockParam(toolResult));
+        }
+    }
+
+    messages.Add(new()
+    {
+        Role = Role.Assistant,
+        Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList(),
+    });
+    messages.Add(new() { Role = Role.User, Content = new MessageParamContent(toolResults) });
+
+    response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = Model.ClaudeOpus4_8,
+        MaxTokens = 1024,
+        Tools = tools,
+        Messages = messages,
+    });
+}
+
+foreach (var block in response.Content)
+{
+    if (block.TryPickText(out var text))
+    {
+        Console.WriteLine(text.Text);
+    }
+}
+````
+
+  
+````go
+// Ring 4: Error handling.
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+	"strings"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func runTool(name string, input map[string]any) (string, error) {
+	if name == "create_calendar_event" {
+		if attendees, ok := input["attendees"].([]any); ok && len(attendees) > 10 {
+			return "", fmt.Errorf("too many attendees (max 10)")
+		}
+		title, _ := input["title"].(string)
+		return fmt.Sprintf(`{"event_id": "evt_123", "status": "created", "title": %q}`, title), nil
+	}
+	if name == "list_calendar_events" {
+		return `{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}`, nil
+	}
+	return "", fmt.Errorf("unknown tool: %s", name)
+}
+
+func main() {
+	client := anthropic.NewClient()
+	ctx := context.Background()
+
+	tools := []anthropic.ToolUnionParam{
+		{OfTool: &anthropic.ToolParam{
+			Name:        "create_calendar_event",
+			Description: anthropic.String("Create a calendar event with attendees and optional recurrence."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"title": map[string]any{"type": "string"},
+					"start": map[string]any{"type": "string", "format": "date-time"},
+					"end":   map[string]any{"type": "string", "format": "date-time"},
+					"attendees": map[string]any{
+						"type":  "array",
+						"items": map[string]any{"type": "string", "format": "email"},
+					},
+					"recurrence": map[string]any{
+						"type": "object",
+						"properties": map[string]any{
+							"frequency": map[string]any{"enum": []string{"daily", "weekly", "monthly"}},
+							"count":     map[string]any{"type": "integer", "minimum": 1},
+						},
+					},
+				},
+				Required: []string{"title", "start", "end"},
+			},
+		}},
+		{OfTool: &anthropic.ToolParam{
+			Name:        "list_calendar_events",
+			Description: anthropic.String("List all calendar events on a given date."),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"date": map[string]any{"type": "string", "format": "date"},
+				},
+				Required: []string{"date"},
+			},
+		}},
+	}
+
+	// Build a request that exceeds the tool's attendee limit so the error path runs.
+	emails := make([]string, 15)
+	for i := range emails {
+		emails[i] = fmt.Sprintf("user%d@example.com", i)
+	}
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock(
+			"Schedule an all-hands with everyone: " + strings.Join(emails, ", "),
+		)),
+	}
+
+	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		Tools:     tools,
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for response.StopReason == "tool_use" {
+		var toolResults []anthropic.ContentBlockParamUnion
+		for _, block := range response.Content {
+			if block.Type == "tool_use" {
+				var input map[string]any
+				if err := json.Unmarshal(block.Input, &input); err != nil {
+					log.Fatal(err)
+				}
+				result, toolErr := runTool(block.Name, input)
+				if toolErr != nil {
+					// Signal failure so Claude can retry or ask for clarification.
+					toolResults = append(toolResults, anthropic.NewToolResultBlock(block.ID, toolErr.Error(), true))
+				} else {
+					toolResults = append(toolResults, anthropic.NewToolResultBlock(block.ID, result, false))
+				}
+			}
+		}
+
+		var assistantContent []anthropic.ContentBlockParamUnion
+		for _, block := range response.Content {
+			assistantContent = append(assistantContent, block.ToParam())
+		}
+		messages = append(messages, anthropic.NewAssistantMessage(assistantContent...))
+		messages = append(messages, anthropic.NewUserMessage(toolResults...))
+
+		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
+			Model:     anthropic.ModelClaudeOpus4_8,
+			MaxTokens: 1024,
+			Tools:     tools,
+			Messages:  messages,
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	for _, block := range response.Content {
+		if block.Type == "text" {
+			fmt.Println(block.Text)
+		}
+	}
+}
+````
+
+  
+````java
+// Ring 4: Error handling.
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.ContentBlock;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.StopReason;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlock;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+String runTool(ToolUseBlock toolUse) {
+    // The raw tool input is a JSON object; read fields out of it as a map.
+    Map<String, JsonValue> input = (Map<String, JsonValue>) toolUse._input().asObject().get();
+    if (toolUse.name().equals("create_calendar_event")) {
+        int attendeeCount = input.containsKey("attendees")
+            ? ((List<?>) input.get("attendees").asArray().get()).size()
+            : 0;
+        if (attendeeCount > 10) {
+            throw new IllegalArgumentException("Too many attendees (max 10)");
+        }
+        String title = input.containsKey("title") ? input.get("title").asStringOrThrow() : "";
+        return "{\"event_id\": \"evt_123\", \"status\": \"created\", \"title\": \"" + title + "\"}";
+    }
+    if (toolUse.name().equals("list_calendar_events")) {
+        return "{\"events\": [{\"title\": \"Existing meeting\", \"start\": \"14:00\", \"end\": \"15:00\"}]}";
+    }
+    throw new IllegalArgumentException("Unknown tool: " + toolUse.name());
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    Tool calendarTool = Tool.builder()
+        .name("create_calendar_event")
+        .description("Create a calendar event with attendees and optional recurrence.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "title", Map.of("type", "string"),
+                "start", Map.of("type", "string", "format", "date-time"),
+                "end", Map.of("type", "string", "format", "date-time"),
+                "attendees", Map.of(
+                    "type", "array",
+                    "items", Map.of("type", "string", "format", "email")
+                ),
+                "recurrence", Map.of(
+                    "type", "object",
+                    "properties", Map.of(
+                        "frequency", Map.of("enum", List.of("daily", "weekly", "monthly")),
+                        "count", Map.of("type", "integer", "minimum", 1)
+                    )
+                )
+            )))
+            .required(List.of("title", "start", "end"))
+            .build())
+        .build();
+
+    Tool listTool = Tool.builder()
+        .name("list_calendar_events")
+        .description("List all calendar events on a given date.")
+        .inputSchema(InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "date", Map.of("type", "string", "format", "date")
+            )))
+            .required(List.of("date"))
+            .build())
+        .build();
+
+    // Build a request that exceeds the tool's attendee limit so the error path runs.
+    String emails = IntStream.range(0, 15)
+        .mapToObj(i -> "user" + i + "@example.com")
+        .collect(Collectors.joining(", "));
+
+    List<MessageParam> messages = new ArrayList<>();
+    messages.add(MessageParam.builder()
+        .role(MessageParam.Role.USER)
+        .content("Schedule an all-hands with everyone: " + emails)
+        .build());
+
+    Message response = client.messages().create(MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addTool(calendarTool)
+        .addTool(listTool)
+        .messages(messages)
+        .build());
+
+    while (response.stopReason().isPresent()
+            && response.stopReason().get().equals(StopReason.TOOL_USE)) {
+        List<ContentBlockParam> toolResults = new ArrayList<>();
+        for (ContentBlock block : response.content()) {
+            if (block.toolUse().isPresent()) {
+                ToolUseBlock toolUse = block.toolUse().get();
+                ToolResultBlockParam.Builder resultBuilder = ToolResultBlockParam.builder()
+                    .toolUseId(toolUse.id());
+                try {
+                    resultBuilder.content(runTool(toolUse));
+                } catch (Exception e) {
+                    // Signal failure so Claude can retry or ask for clarification.
+                    resultBuilder.content(e.getMessage()).isError(true);
+                }
+                toolResults.add(ContentBlockParam.ofToolResult(resultBuilder.build()));
+            }
+        }
+
+        messages.add(response.toParam());
+        messages.add(MessageParam.builder()
+            .role(MessageParam.Role.USER)
+            .contentOfBlockParams(toolResults)
+            .build());
+
+        response = client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(1024L)
+            .addTool(calendarTool)
+            .addTool(listTool)
+            .messages(messages)
+            .build());
+    }
+
+    response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+````
+
+  
+````php
+<?php
+
+// Ring 4: Error handling.
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$tools = [
+    [
+        'name' => 'create_calendar_event',
+        'description' => 'Create a calendar event with attendees and optional recurrence.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'title' => ['type' => 'string'],
+                'start' => ['type' => 'string', 'format' => 'date-time'],
+                'end' => ['type' => 'string', 'format' => 'date-time'],
+                'attendees' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string', 'format' => 'email'],
+                ],
+                'recurrence' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'frequency' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'count' => ['type' => 'integer', 'minimum' => 1],
+                    ],
+                ],
+            ],
+            'required' => ['title', 'start', 'end'],
+        ],
+    ],
+    [
+        'name' => 'list_calendar_events',
+        'description' => 'List all calendar events on a given date.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'date' => ['type' => 'string', 'format' => 'date'],
+            ],
+            'required' => ['date'],
+        ],
+    ],
+];
+
+function runTool(string $name, array $input): string
+{
+    if ($name === 'create_calendar_event') {
+        if (count($input['attendees'] ?? []) > 10) {
+            throw new InvalidArgumentException('Too many attendees (max 10)');
+        }
+
+        return json_encode([
+            'event_id' => 'evt_123',
+            'status' => 'created',
+            'title' => $input['title'],
+        ]);
+    }
+    if ($name === 'list_calendar_events') {
+        return json_encode([
+            'events' => [['title' => 'Existing meeting', 'start' => '14:00', 'end' => '15:00']],
+        ]);
+    }
+
+    throw new InvalidArgumentException("Unknown tool: {$name}");
+}
+
+// Build a request that exceeds the tool's attendee limit so the error path runs.
+$emails = array_map(fn (int $i): string => "user{$i}@example.com", range(0, 14));
+$messages = [
+    [
+        'role' => 'user',
+        'content' => 'Schedule an all-hands with everyone: ' . implode(', ', $emails),
+    ],
+];
+
+$response = $client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 1024,
+    tools: $tools,
+    messages: $messages,
+);
+
+while ($response->stopReason === 'tool_use') {
+    $toolResults = [];
+    foreach ($response->content as $block) {
+        if ($block->type === 'tool_use') {
+            try {
+                $toolResults[] = [
+                    'type' => 'tool_result',
+                    'tool_use_id' => $block->id,
+                    'content' => runTool($block->name, $block->input),
+                ];
+            } catch (Exception $e) {
+                // Signal failure so Claude can retry or ask for clarification.
+                $toolResults[] = [
+                    'type' => 'tool_result',
+                    'tool_use_id' => $block->id,
+                    'content' => $e->getMessage(),
+                    'is_error' => true,
+                ];
+            }
+        }
+    }
+
+    $messages[] = ['role' => 'assistant', 'content' => $response->content];
+    $messages[] = ['role' => 'user', 'content' => $toolResults];
+
+    $response = $client->messages->create(
+        model: 'claude-opus-4-8',
+        maxTokens: 1024,
+        tools: $tools,
+        messages: $messages,
+    );
+}
+
+foreach ($response->content as $block) {
+    if ($block->type === 'text') {
+        echo $block->text, "\n";
+    }
+}
+````
+
+  
+````ruby
+# Ring 4: Error handling.
+
+require "anthropic"
+
+client = Anthropic::Client.new
+
+tools = [
+  {
+    name: "create_calendar_event",
+    description: "Create a calendar event with attendees and optional recurrence.",
+    input_schema: {
+      type: "object",
+      properties: {
+        title: {type: "string"},
+        start: {type: "string", format: "date-time"},
+        end: {type: "string", format: "date-time"},
+        attendees: {
+          type: "array",
+          items: {type: "string", format: "email"}
+        },
+        recurrence: {
+          type: "object",
+          properties: {
+            frequency: {enum: ["daily", "weekly", "monthly"]},
+            count: {type: "integer", minimum: 1}
+          }
+        }
+      },
+      required: ["title", "start", "end"]
+    }
+  },
+  {
+    name: "list_calendar_events",
+    description: "List all calendar events on a given date.",
+    input_schema: {
+      type: "object",
+      properties: {
+        date: {type: "string", format: "date"}
+      },
+      required: ["date"]
+    }
+  }
+]
+
+def run_tool(name, input)
+  case name
+  when "create_calendar_event"
+    attendees = input[:attendees]
+    raise ArgumentError, "Too many attendees (max 10)" if attendees && attendees.length > 10
+    JSON.generate({event_id: "evt_123", status: "created", title: input[:title]})
+  when "list_calendar_events"
+    JSON.generate({events: [{title: "Existing meeting", start: "14:00", end: "15:00"}]})
+  else
+    raise ArgumentError, "Unknown tool: #{name}"
+  end
+end
+
+# Build a request that exceeds the tool's attendee limit so the error path runs.
+emails = (0...15).map { |i| "user#{i}@example.com" }
+messages = [
+  {
+    role: "user",
+    content: "Schedule an all-hands with everyone: #{emails.join(", ")}"
+  }
+]
+
+response = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: tools,
+  messages: messages
+)
+
+while response.stop_reason == :tool_use
+  tool_results = response.content.select { |block| block.type == :tool_use }.map do |tool_use|
+    begin
+      {
+        type: "tool_result",
+        tool_use_id: tool_use.id,
+        content: run_tool(tool_use.name, tool_use.input)
+      }
+    rescue => e
+      # Signal failure so Claude can retry or ask for clarification.
+      {
+        type: "tool_result",
+        tool_use_id: tool_use.id,
+        content: e.message,
+        is_error: true
+      }
+    end
+  end
+
+  messages << {role: "assistant", content: response.content}
+  messages << {role: "user", content: tool_results}
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: tools,
+    messages: messages
+  )
+end
+
+response.content.each do |block|
+  puts block.text if block.type == :text
+end
+````
+
 </CodeGroup>
 
 **What to expect**
@@ -1657,10 +4057,10 @@ The `is_error` flag is the only difference from a successful result. Claude sees
 
 Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`, run tools, append results, repeat. The Tool Runner does this for you. Define each tool as a function, pass the list to `tool_runner`, and retrieve the final message once the loop completes. Error wrapping, result formatting, and conversation management are handled internally.
 
-The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema.
+The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema. The other SDKs follow the same pattern with their own helpers: `BetaRunnableTool` in C# and PHP, typed tool classes in Java and Ruby, and `toolrunner.NewBetaToolFromJSONSchema` in Go.
 
 <Note>
-Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. This tutorial shows Python and TypeScript; see [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner) for the other languages. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
+Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. See [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner) for the full reference. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
 </Note>
 
 <CodeGroup>
@@ -1669,10 +4069,10 @@ Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PH
 #!/bin/bash
 # Ring 5: The Tool Runner SDK abstraction.
 
-# The Tool Runner SDK abstraction is available in the Python, TypeScript,
-# and Ruby SDKs. There is no equivalent for raw curl requests. Switch to
-# the Python or TypeScript tab to see Ring 5, or keep the Ring 4 loop as
-# your shell implementation.
+# The Tool Runner SDK abstraction is available in all seven SDKs: Python,
+# TypeScript, C#, Go, Java, PHP, and Ruby. There is no equivalent for raw
+# curl requests. Switch to any SDK tab to see Ring 5, or keep the Ring 4
+# loop as your shell implementation.
 ````
 
   
@@ -1681,9 +4081,9 @@ Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PH
 # Ring 5: The Tool Runner SDK abstraction.
 set -euo pipefail
 
-# The Tool Runner SDK abstraction is available in the Python, TypeScript,
-# and Ruby SDKs. The ant CLI exposes the Messages API directly and has
-# no equivalent helper. Switch to the Python or TypeScript tab to see
+# The Tool Runner SDK abstraction is available in all seven SDKs: Python,
+# TypeScript, C#, Go, Java, PHP, and Ruby. The ant CLI exposes the Messages
+# API directly and has no equivalent helper. Switch to any SDK tab to see
 # Ring 5, or keep the Ring 4 loop as your CLI implementation.
 ````
 
@@ -1819,6 +4219,480 @@ for (const block of finalMessage.content) {
 }
 ````
 
+  
+````csharp
+// Ring 5: The Tool Runner SDK abstraction.
+
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Helpers.Beta;
+using Anthropic.Models.Beta.Messages;
+using MessageCreateParams = Anthropic.Models.Beta.Messages.MessageCreateParams;
+using InputSchema = Anthropic.Models.Beta.Messages.InputSchema;
+using Role = Anthropic.Models.Beta.Messages.Role;
+using Model = Anthropic.Models.Messages.Model;
+
+AnthropicClient client = new();
+
+// Define each tool as a runnable tool: the definition carries the JSON Schema
+// and the Run callback holds the implementation. Throwing an exception sends
+// the message back to Claude as a tool result with is_error set.
+var createCalendarEvent = new BetaRunnableTool
+{
+    Name = "create_calendar_event",
+    Definition = new BetaTool
+    {
+        Name = "create_calendar_event",
+        Description = "Create a calendar event with attendees and optional recurrence.",
+        InputSchema = new InputSchema
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["title"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Event title" }),
+                ["start"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Start time in ISO 8601 format" }),
+                ["end"] = JsonSerializer.SerializeToElement(new { type = "string", description = "End time in ISO 8601 format" }),
+                ["attendees"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "array",
+                    items = new { type = "string" },
+                    description = "Email addresses to invite",
+                }),
+                ["recurrence"] = JsonSerializer.SerializeToElement(new
+                {
+                    type = "object",
+                    properties = new
+                    {
+                        frequency = new { @enum = new[] { "daily", "weekly", "monthly" } },
+                        count = new { type = "integer", minimum = 1 },
+                    },
+                }),
+            },
+            Required = ["title", "start", "end"],
+        },
+    },
+    Run = (toolUse, _) =>
+    {
+        if (toolUse.Input.TryGetValue("attendees", out var attendees) && attendees.GetArrayLength() > 10)
+        {
+            throw new InvalidOperationException("Too many attendees (max 10)");
+        }
+        var title = toolUse.Input.TryGetValue("title", out var t) ? t.GetString() : "";
+        return Task.FromResult<BetaToolResultBlockParamContent>(
+            JsonSerializer.Serialize(new { event_id = "evt_123", status = "created", title })
+        );
+    },
+};
+
+var listCalendarEvents = new BetaRunnableTool
+{
+    Name = "list_calendar_events",
+    Definition = new BetaTool
+    {
+        Name = "list_calendar_events",
+        Description = "List all calendar events on a given date.",
+        InputSchema = new InputSchema
+        {
+            Properties = new Dictionary<string, JsonElement>
+            {
+                ["date"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Date in YYYY-MM-DD format" }),
+            },
+            Required = ["date"],
+        },
+    },
+    Run = (toolUse, _) => Task.FromResult<BetaToolResultBlockParamContent>(
+        """{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}"""
+    ),
+};
+
+// The runner calls the API, runs requested tools, and feeds results back
+// until Claude produces a final answer.
+var runner = client.Beta.Messages.ToolRunner(
+    new MessageCreateParams
+    {
+        Model = Model.ClaudeOpus4_8,
+        MaxTokens = 1024,
+        Messages =
+        [
+            new()
+            {
+                Role = Role.User,
+                Content = "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+            },
+        ],
+    },
+    [createCalendarEvent, listCalendarEvents]
+);
+
+BetaMessage? finalMessage = null;
+await foreach (var message in runner)
+{
+    finalMessage = message;
+}
+
+foreach (var block in finalMessage!.Content)
+{
+    if (block.TryPickText(out var text))
+    {
+        Console.WriteLine(text.Text);
+    }
+}
+````
+
+  
+````go
+// Ring 5: The Tool Runner SDK abstraction.
+
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/toolrunner"
+)
+
+// The input structs define each tool's schema. The tool runner generates the
+// JSON Schema from the struct fields and their jsonschema tags.
+type RecurrenceInput struct {
+	Frequency string `json:"frequency,omitempty" jsonschema:"enum=daily,enum=weekly,enum=monthly,description=How often the event repeats"`
+	Count     int    `json:"count,omitempty" jsonschema:"description=Number of occurrences"`
+}
+
+type CreateCalendarEventInput struct {
+	Title      string           `json:"title" jsonschema:"required,description=Event title"`
+	Start      string           `json:"start" jsonschema:"required,description=Start time in ISO 8601 format"`
+	End        string           `json:"end" jsonschema:"required,description=End time in ISO 8601 format"`
+	Attendees  []string         `json:"attendees,omitempty" jsonschema:"description=Email addresses to invite"`
+	Recurrence *RecurrenceInput `json:"recurrence,omitempty"`
+}
+
+type ListCalendarEventsInput struct {
+	Date string `json:"date" jsonschema:"required,description=Date in YYYY-MM-DD format"`
+}
+
+func main() {
+	client := anthropic.NewClient()
+	ctx := context.Background()
+
+	// Define each tool as a handler function. Returning an error sends the
+	// message back to Claude as a tool result with is_error set.
+	createCalendarEvent, err := toolrunner.NewBetaToolFromJSONSchema(
+		"create_calendar_event",
+		"Create a calendar event with attendees and optional recurrence.",
+		func(ctx context.Context, input CreateCalendarEventInput) (anthropic.BetaToolResultBlockParamContentUnion, error) {
+			if len(input.Attendees) > 10 {
+				return anthropic.BetaToolResultBlockParamContentUnion{}, fmt.Errorf("too many attendees (max 10)")
+			}
+			return anthropic.BetaToolResultBlockParamContentUnion{
+				OfText: &anthropic.BetaTextBlockParam{
+					Text: fmt.Sprintf(`{"event_id": "evt_123", "status": "created", "title": %q}`, input.Title),
+				},
+			}, nil
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	listCalendarEvents, err := toolrunner.NewBetaToolFromJSONSchema(
+		"list_calendar_events",
+		"List all calendar events on a given date.",
+		func(ctx context.Context, input ListCalendarEventsInput) (anthropic.BetaToolResultBlockParamContentUnion, error) {
+			return anthropic.BetaToolResultBlockParamContentUnion{
+				OfText: &anthropic.BetaTextBlockParam{
+					Text: `{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}`,
+				},
+			}, nil
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// The runner calls the API, runs requested tools, and feeds results back
+	// until Claude produces a final answer.
+	runner := client.Beta.Messages.NewToolRunner(
+		[]anthropic.BetaTool{createCalendarEvent, listCalendarEvents},
+		anthropic.BetaToolRunnerParams{
+			BetaMessageNewParams: anthropic.BetaMessageNewParams{
+				Model:     anthropic.ModelClaudeOpus4_8,
+				MaxTokens: 1024,
+				Messages: []anthropic.BetaMessageParam{
+					anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
+						"Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+					)),
+				},
+			},
+		},
+	)
+
+	var finalMessage *anthropic.BetaMessage
+	for message, err := range runner.All(ctx) {
+		if err != nil {
+			log.Fatal(err)
+		}
+		finalMessage = message
+	}
+
+	for _, block := range finalMessage.Content {
+		if block.Type == "text" {
+			fmt.Println(block.Text)
+		}
+	}
+}
+````
+
+  
+````java
+// Ring 5: The Tool Runner SDK abstraction.
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.helpers.BetaToolRunner;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.fasterxml.jackson.annotation.JsonClassDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import java.util.List;
+import java.util.function.Supplier;
+
+// Define each tool as a class: the fields describe the input schema, and the
+// get() method holds the implementation. Throwing an exception sends the
+// message back to Claude as a tool result with is_error set.
+@JsonClassDescription("Create a calendar event with attendees.")
+static class CreateCalendarEvent implements Supplier<String> {
+    @JsonPropertyDescription("Event title")
+    public String title;
+
+    @JsonPropertyDescription("Start time in ISO 8601 format")
+    public String start;
+
+    @JsonPropertyDescription("End time in ISO 8601 format")
+    public String end;
+
+    @JsonPropertyDescription("Email addresses to invite")
+    public List<String> attendees;
+
+    @Override
+    public String get() {
+        if (attendees != null && attendees.size() > 10) {
+            throw new IllegalArgumentException("Too many attendees (max 10)");
+        }
+        return "{\"event_id\": \"evt_123\", \"status\": \"created\", \"title\": \"" + title + "\"}";
+    }
+}
+
+@JsonClassDescription("List all calendar events on a given date.")
+static class ListCalendarEvents implements Supplier<String> {
+    @JsonPropertyDescription("Date in YYYY-MM-DD format")
+    public String date;
+
+    @Override
+    public String get() {
+        return "{\"events\": [{\"title\": \"Existing meeting\", \"start\": \"14:00\", \"end\": \"15:00\"}]}";
+    }
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    // The runner calls the API, runs requested tools, and feeds results back
+    // until Claude produces a final answer.
+    BetaToolRunner runner = client.beta()
+            .messages()
+            .toolRunner(MessageCreateParams.builder()
+                    .model(Model.CLAUDE_OPUS_4_8)
+                    .maxTokens(1024)
+                    .addBeta("structured-outputs-2025-11-13")
+                    .addUserMessage("Check what I have next Monday, then schedule a planning session that avoids any conflicts.")
+                    .addTool(CreateCalendarEvent.class)
+                    .addTool(ListCalendarEvents.class)
+                    .build());
+
+    BetaMessage finalMessage = null;
+    for (BetaMessage message : runner) {
+        finalMessage = message;
+    }
+
+    finalMessage.content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+````
+
+  
+````php
+<?php
+
+// Ring 5: The Tool Runner SDK abstraction.
+
+use Anthropic\Client;
+use Anthropic\Lib\Tools\BetaRunnableTool;
+use Anthropic\Messages\Model;
+
+$client = new Client();
+
+// Define each tool as a runnable tool: the definition carries the JSON Schema
+// and the run closure holds the implementation. Throwing an exception sends the
+// message back to Claude as a tool result with is_error set.
+$createCalendarEvent = new BetaRunnableTool(
+    definition: [
+        'name' => 'create_calendar_event',
+        'description' => 'Create a calendar event with attendees and optional recurrence.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'title' => ['type' => 'string', 'description' => 'Event title'],
+                'start' => ['type' => 'string', 'description' => 'Start time in ISO 8601 format'],
+                'end' => ['type' => 'string', 'description' => 'End time in ISO 8601 format'],
+                'attendees' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string'],
+                    'description' => 'Email addresses to invite',
+                ],
+                'recurrence' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'frequency' => ['enum' => ['daily', 'weekly', 'monthly']],
+                        'count' => ['type' => 'integer', 'minimum' => 1],
+                    ],
+                ],
+            ],
+            'required' => ['title', 'start', 'end'],
+        ],
+    ],
+    run: function (array $input): string {
+        if (count($input['attendees'] ?? []) > 10) {
+            throw new InvalidArgumentException('Too many attendees (max 10)');
+        }
+
+        return json_encode([
+            'event_id' => 'evt_123',
+            'status' => 'created',
+            'title' => $input['title'],
+        ]);
+    },
+);
+
+$listCalendarEvents = new BetaRunnableTool(
+    definition: [
+        'name' => 'list_calendar_events',
+        'description' => 'List all calendar events on a given date.',
+        'input_schema' => [
+            'type' => 'object',
+            'properties' => [
+                'date' => ['type' => 'string', 'description' => 'Date in YYYY-MM-DD format'],
+            ],
+            'required' => ['date'],
+        ],
+    ],
+    run: fn (array $input): string => json_encode([
+        'events' => [['title' => 'Existing meeting', 'start' => '14:00', 'end' => '15:00']],
+    ]),
+);
+
+// The runner calls the API, runs requested tools, and feeds results back
+// until Claude produces a final answer.
+$runner = $client->beta->messages->toolRunner(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Check what I have next Monday, then schedule a planning session that avoids any conflicts.',
+        ],
+    ],
+    model: Model::CLAUDE_OPUS_4_8,
+    tools: [$createCalendarEvent, $listCalendarEvents],
+);
+
+$finalMessage = null;
+foreach ($runner as $message) {
+    $finalMessage = $message;
+}
+
+foreach ($finalMessage->content as $block) {
+    if ($block->type === 'text') {
+        echo $block->text, "\n";
+    }
+}
+````
+
+  
+````ruby
+# Ring 5: The Tool Runner SDK abstraction.
+
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Define each tool as a class: a typed input model describes the schema, and
+# the call method holds the implementation. Raising an error sends the message
+# back to Claude as a tool result with is_error set.
+class RecurrenceInput < Anthropic::BaseModel
+  optional :frequency, Anthropic::InputSchema::EnumOf["daily", "weekly", "monthly"],
+           doc: "How often the event repeats"
+  optional :count, Integer, doc: "Number of occurrences"
+end
+
+class CreateCalendarEventInput < Anthropic::BaseModel
+  required :title, String, doc: "Event title"
+  required :start, String, doc: "Start time in ISO 8601 format"
+  required :end, String, doc: "End time in ISO 8601 format"
+  optional :attendees, Anthropic::InputSchema::ArrayOf[String], doc: "Email addresses to invite"
+  optional :recurrence, RecurrenceInput, doc: "Optional recurrence rule"
+end
+
+class CreateCalendarEvent < Anthropic::BaseTool
+  doc "Create a calendar event with attendees and optional recurrence."
+  input_schema CreateCalendarEventInput
+
+  def call(input)
+    raise ArgumentError, "Too many attendees (max 10)" if input.attendees && input.attendees.length > 10
+    JSON.generate({event_id: "evt_123", status: "created", title: input.title})
+  end
+end
+
+class ListCalendarEventsInput < Anthropic::BaseModel
+  required :date, String, doc: "Date in YYYY-MM-DD format"
+end
+
+class ListCalendarEvents < Anthropic::BaseTool
+  doc "List all calendar events on a given date."
+  input_schema ListCalendarEventsInput
+
+  def call(input)
+    JSON.generate({events: [{title: "Existing meeting", start: "14:00", end: "15:00"}]})
+  end
+end
+
+# The runner calls the API, runs requested tools, and feeds results back
+# until Claude produces a final answer.
+runner = client.beta.messages.tool_runner(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  tools: [CreateCalendarEvent.new, ListCalendarEvents.new],
+  messages: [
+    {
+      role: "user",
+      content: "Check what I have next Monday, then schedule a planning session that avoids any conflicts."
+    }
+  ]
+)
+
+final_message = nil
+runner.each_message { |message| final_message = message }
+
+final_message.content.each do |block|
+  puts block.text if block.type == :text
+end
+````
+
 </CodeGroup>
 
 **What to expect**
@@ -1836,7 +4710,7 @@ You started with a single hardcoded tool call and ended with a production-shaped
 ## Next steps
 
 <CardGroup>
-  <Card href="/docs/en/agents-and-tools/tool-use/define-tools" title="Sharpen your schemas">
+  <Card href="/docs/en/agents-and-tools/tool-use/define-tools" title="Define tools">
     Schema specification and best practices.
   </Card>
   <Card href="/docs/en/agents-and-tools/tool-use/tool-runner" title="Tool Runner deep dive">

@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-25T18:49:31.817874Z",
-    "total_paths": 1905,
+    "generated_at": "2026-06-25T21:35:15.330455Z",
+    "total_paths": 1907,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-25T18:49:31.817884Z"
+    "last_regenerated": "2026-06-25T21:35:15.330465Z"
   },
   "categories": {
     "core_documentation": [
@@ -89,6 +89,7 @@
       "/docs/en/build-with-claude/task-budgets",
       "/docs/en/build-with-claude/token-counting",
       "/docs/en/build-with-claude/vision",
+      "/docs/en/build-with-claude/vision-coordinates",
       "/docs/en/build-with-claude/working-with-messages",
       "/docs/en/champion-kit",
       "/docs/en/changelog",
@@ -110,6 +111,7 @@
       "/docs/en/env-vars",
       "/docs/en/errors",
       "/docs/en/fast-mode",
+      "/docs/en/feature-availability",
       "/docs/en/features-overview",
       "/docs/en/fullscreen",
       "/docs/en/get-started",

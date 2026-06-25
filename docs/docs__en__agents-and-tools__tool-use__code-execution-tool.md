@@ -50,10 +50,10 @@ Code execution is available on:
 - **[Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws)**
 - **[Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)**
 
-Code execution is not currently available on Amazon Bedrock or Vertex AI.
+Code execution is not currently available on Amazon Bedrock or Google Cloud.
 
 <Note>
-For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Vertex AI, or Claude Platform on AWS.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Google Cloud, or Claude Platform on AWS.
 </Note>
 
 ## Quick start

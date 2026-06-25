@@ -75,7 +75,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
   The model that will complete your prompt.
 
@@ -818,7 +818,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `type: "container_upload"`
 
-  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
     The model that will complete your prompt.
 
@@ -884,26 +884,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Exceptional model for specialized complex tasks
 
-    - `"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
   - `role: "assistant"`
 
     Conversational role of the generated message.
@@ -914,15 +894,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio" or "reasoning_extraction"`
+    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `"cyber"`
 
       - `"bio"`
+
+      - `"frontier_llm"`
 
       - `"reasoning_extraction"`
 
@@ -1192,7 +1172,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
   The model that will complete your prompt.
 
@@ -1981,13 +1961,15 @@ ant messages count-tokens \
 
   - `type: "code_execution_20250522"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -2030,13 +2012,15 @@ ant messages count-tokens \
 
   - `type: "code_execution_20250825"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -2081,13 +2065,68 @@ ant messages count-tokens \
 
   - `type: "code_execution_20260120"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
+
+  - `cache_control: optional object { type, ttl }`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+    - `ttl: optional "5m" or "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `defer_loading: optional boolean`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `strict: optional boolean`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Code Execution Tool 20260521
+
+- `code_execution_tool_20260521: object { name, type, allowed_callers, 3 more }`
+
+  Code execution tool with REPL state persistence.
+
+  - `name: "code_execution"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `type: "code_execution_20260521"`
+
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
+
+    - `"direct"`
+
+    - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -4789,13 +4828,15 @@ ant messages count-tokens \
 
   - `type: "memory_20250818"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -5425,7 +5466,7 @@ ant messages count-tokens \
 
       - `type: "container_upload"`
 
-  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
     The model that will complete your prompt.
 
@@ -5491,26 +5532,6 @@ ant messages count-tokens \
 
       Exceptional model for specialized complex tasks
 
-    - `"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
   - `role: "assistant"`
 
     Conversational role of the generated message.
@@ -5521,15 +5542,15 @@ ant messages count-tokens \
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio" or "reasoning_extraction"`
+    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-      The policy category that triggered the refusal.
-
-      `null` when the refusal doesn't map to a named category.
+      The policy category that triggered a refusal.
 
       - `"cyber"`
 
       - `"bio"`
+
+      - `"frontier_llm"`
 
       - `"reasoning_extraction"`
 
@@ -5668,7 +5689,7 @@ ant messages count-tokens \
 
 ### Message Count Tokens Tool
 
-- `message_count_tokens_tool: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 13 more`
+- `message_count_tokens_tool: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 14 more`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -5692,13 +5713,15 @@ ant messages count-tokens \
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5755,13 +5778,15 @@ ant messages count-tokens \
 
     - `type: "bash_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5800,13 +5825,15 @@ ant messages count-tokens \
 
     - `type: "code_execution_20250522"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5843,13 +5870,15 @@ ant messages count-tokens \
 
     - `type: "code_execution_20250825"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5888,13 +5917,62 @@ ant messages count-tokens \
 
     - `type: "code_execution_20260120"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
+
+    - `cache_control: optional object { type, ttl }`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+    - `defer_loading: optional boolean`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `strict: optional boolean`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `code_execution_tool_20260521: object { name, type, allowed_callers, 3 more }`
+
+    Code execution tool with REPL state persistence.
+
+    - `name: "code_execution"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `type: "code_execution_20260521"`
+
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5931,13 +6009,15 @@ ant messages count-tokens \
 
     - `type: "memory_20250818"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -5976,13 +6056,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -6021,13 +6103,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250429"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -6066,13 +6150,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250728"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -6115,13 +6201,15 @@ ant messages count-tokens \
 
     - `type: "web_search_20250305"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -6192,13 +6280,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20250910"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -6257,13 +6347,15 @@ ant messages count-tokens \
 
     - `type: "web_search_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -6334,13 +6426,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -6401,13 +6495,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20260309"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -6474,13 +6570,15 @@ ant messages count-tokens \
 
       - `"tool_search_tool_bm25"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -6521,13 +6619,15 @@ ant messages count-tokens \
 
       - `"tool_search_tool_regex"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -8722,15 +8822,15 @@ ant messages count-tokens \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"`
 
         - `"bio"`
+
+        - `"frontier_llm"`
 
         - `"reasoning_extraction"`
 
@@ -9419,7 +9519,7 @@ ant messages count-tokens \
 
         - `type: "container_upload"`
 
-    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
       The model that will complete your prompt.
 
@@ -9485,26 +9585,6 @@ ant messages count-tokens \
 
         Exceptional model for specialized complex tasks
 
-      - `"claude-opus-4-0"`
-
-        Powerful model for complex tasks
-
-      - `"claude-opus-4-20250514"`
-
-        Powerful model for complex tasks
-
-      - `"claude-sonnet-4-0"`
-
-        High-performance model with extended thinking
-
-      - `"claude-sonnet-4-20250514"`
-
-        High-performance model with extended thinking
-
-      - `"claude-3-haiku-20240307"`
-
-        Fast and cost-effective model
-
     - `role: "assistant"`
 
       Conversational role of the generated message.
@@ -9515,15 +9595,15 @@ ant messages count-tokens \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"`
 
         - `"bio"`
+
+        - `"frontier_llm"`
 
         - `"reasoning_extraction"`
 
@@ -10269,7 +10349,7 @@ ant messages count-tokens \
 
           - `type: "container_upload"`
 
-      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
         The model that will complete your prompt.
 
@@ -10335,26 +10415,6 @@ ant messages count-tokens \
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
       - `role: "assistant"`
 
         Conversational role of the generated message.
@@ -10365,15 +10425,15 @@ ant messages count-tokens \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `"cyber"`
 
           - `"bio"`
+
+          - `"frontier_llm"`
 
           - `"reasoning_extraction"`
 
@@ -10532,11 +10592,9 @@ ant messages count-tokens \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
         - `explanation: string`
 
@@ -10924,15 +10982,15 @@ ant messages count-tokens \
 
   Structured information about a refusal.
 
-  - `category: "cyber" or "bio" or "reasoning_extraction"`
+  - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
     - `"cyber"`
 
     - `"bio"`
+
+    - `"frontier_llm"`
 
     - `"reasoning_extraction"`
 
@@ -12163,13 +12221,15 @@ ant messages count-tokens \
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -12228,13 +12288,15 @@ ant messages count-tokens \
 
   - `type: "bash_20250124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -12776,13 +12838,15 @@ ant messages count-tokens \
 
     - `"tool_search_tool_bm25"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -12829,13 +12893,15 @@ ant messages count-tokens \
 
     - `"tool_search_tool_regex"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -13081,13 +13147,15 @@ ant messages count-tokens \
 
   - `type: "text_editor_20250124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -13132,13 +13200,15 @@ ant messages count-tokens \
 
   - `type: "text_editor_20250429"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -13183,13 +13253,15 @@ ant messages count-tokens \
 
   - `type: "text_editor_20250728"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `cache_control: optional object { type, ttl }`
 
@@ -13228,7 +13300,7 @@ ant messages count-tokens \
 
 ### Tool Union
 
-- `tool_union: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 13 more`
+- `tool_union: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 14 more`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -13252,13 +13324,15 @@ ant messages count-tokens \
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13315,13 +13389,15 @@ ant messages count-tokens \
 
     - `type: "bash_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13360,13 +13436,15 @@ ant messages count-tokens \
 
     - `type: "code_execution_20250522"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13403,13 +13481,15 @@ ant messages count-tokens \
 
     - `type: "code_execution_20250825"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13448,13 +13528,62 @@ ant messages count-tokens \
 
     - `type: "code_execution_20260120"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
+
+    - `cache_control: optional object { type, ttl }`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+    - `defer_loading: optional boolean`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `strict: optional boolean`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `code_execution_tool_20260521: object { name, type, allowed_callers, 3 more }`
+
+    Code execution tool with REPL state persistence.
+
+    - `name: "code_execution"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `type: "code_execution_20260521"`
+
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13491,13 +13620,15 @@ ant messages count-tokens \
 
     - `type: "memory_20250818"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13536,13 +13667,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13581,13 +13714,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250429"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13626,13 +13761,15 @@ ant messages count-tokens \
 
     - `type: "text_editor_20250728"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -13675,13 +13812,15 @@ ant messages count-tokens \
 
     - `type: "web_search_20250305"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -13752,13 +13891,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20250910"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -13817,13 +13958,15 @@ ant messages count-tokens \
 
     - `type: "web_search_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -13894,13 +14037,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -13961,13 +14106,15 @@ ant messages count-tokens \
 
     - `type: "web_fetch_20260309"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `allowed_domains: optional array of string`
 
@@ -14034,13 +14181,15 @@ ant messages count-tokens \
 
       - `"tool_search_tool_bm25"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -14081,13 +14230,15 @@ ant messages count-tokens \
 
       - `"tool_search_tool_regex"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
 
       - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
 
     - `cache_control: optional object { type, ttl }`
 
@@ -14626,13 +14777,15 @@ ant messages count-tokens \
 
   - `type: "web_fetch_20250910"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `allowed_domains: optional array of string`
 
@@ -14697,13 +14850,15 @@ ant messages count-tokens \
 
   - `type: "web_fetch_20260209"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `allowed_domains: optional array of string`
 
@@ -14770,13 +14925,15 @@ ant messages count-tokens \
 
   - `type: "web_fetch_20260309"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `allowed_domains: optional array of string`
 
@@ -15367,13 +15524,15 @@ ant messages count-tokens \
 
   - `type: "web_search_20250305"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `allowed_domains: optional array of string`
 
@@ -15450,13 +15609,15 @@ ant messages count-tokens \
 
   - `type: "web_search_20260209"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
 
     - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
 
   - `allowed_domains: optional array of string`
 
@@ -17052,7 +17213,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `type: "container_upload"`
 
-        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
           The model that will complete your prompt.
 
@@ -17118,26 +17279,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Exceptional model for specialized complex tasks
 
-          - `"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
         - `role: "assistant"`
 
           Conversational role of the generated message.
@@ -17148,15 +17289,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `"cyber"`
 
             - `"bio"`
+
+            - `"frontier_llm"`
 
             - `"reasoning_extraction"`
 
@@ -18176,7 +18317,7 @@ ant messages:batches results \
 
             - `type: "container_upload"`
 
-        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
           The model that will complete your prompt.
 
@@ -18242,26 +18383,6 @@ ant messages:batches results \
 
             Exceptional model for specialized complex tasks
 
-          - `"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
         - `role: "assistant"`
 
           Conversational role of the generated message.
@@ -18272,15 +18393,15 @@ ant messages:batches results \
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `"cyber"`
 
             - `"bio"`
+
+            - `"frontier_llm"`
 
             - `"reasoning_extraction"`
 
@@ -19130,7 +19251,7 @@ ant messages:batches results \
 
           - `type: "container_upload"`
 
-      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
         The model that will complete your prompt.
 
@@ -19196,26 +19317,6 @@ ant messages:batches results \
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
       - `role: "assistant"`
 
         Conversational role of the generated message.
@@ -19226,15 +19327,15 @@ ant messages:batches results \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `"cyber"`
 
           - `"bio"`
+
+          - `"frontier_llm"`
 
           - `"reasoning_extraction"`
 
@@ -20046,7 +20147,7 @@ ant messages:batches results \
 
         - `type: "container_upload"`
 
-    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more or string`
 
       The model that will complete your prompt.
 
@@ -20112,26 +20213,6 @@ ant messages:batches results \
 
         Exceptional model for specialized complex tasks
 
-      - `"claude-opus-4-0"`
-
-        Powerful model for complex tasks
-
-      - `"claude-opus-4-20250514"`
-
-        Powerful model for complex tasks
-
-      - `"claude-sonnet-4-0"`
-
-        High-performance model with extended thinking
-
-      - `"claude-sonnet-4-20250514"`
-
-        High-performance model with extended thinking
-
-      - `"claude-3-haiku-20240307"`
-
-        Fast and cost-effective model
-
     - `role: "assistant"`
 
       Conversational role of the generated message.
@@ -20142,15 +20223,15 @@ ant messages:batches results \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `"cyber"`
 
         - `"bio"`
+
+        - `"frontier_llm"`
 
         - `"reasoning_extraction"`
 

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-25T19:28:38Z",
-  "indexed_files": 1713,
+  "generated_at": "2026-06-25T22:10:29Z",
+  "indexed_files": 1714,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -25,10 +25,10 @@
         "background",
         "prompt",
         "agent",
-        "command",
-        "model"
+        "model",
+        "command"
       ],
-      "word_count": 59023,
+      "word_count": 59291,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -716,8 +716,8 @@
         "claude",
         "code",
         "plugin",
-        "name",
         "session",
+        "name",
         "metrics",
         "api",
         "only",
@@ -728,7 +728,7 @@
         "counter",
         "set"
       ],
-      "word_count": 10141,
+      "word_count": 10170,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1677,10 +1677,10 @@
         "turn",
         "conversation",
         "haiku",
-        "tokens",
-        "coding"
+        "only",
+        "tokens"
       ],
-      "word_count": 5536,
+      "word_count": 5546,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1718,25 +1718,25 @@
         "tool",
         "ring",
         "loop",
-        "claude",
-        "codegroup",
-        "tools",
-        "runner",
-        "call",
         "one",
-        "error",
-        "single",
-        "code",
-        "result",
-        "what",
+        "runner",
+        "tools",
+        "claude",
         "card",
+        "single",
+        "call",
         "sdk",
-        "schema",
         "note",
-        "user",
-        "message"
+        "code",
+        "codegroup",
+        "error",
+        "schema",
+        "message",
+        "result",
+        "agents",
+        "rings"
       ],
-      "word_count": 7215,
+      "word_count": 16528,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md"
     },
     "/docs/en/agents-and-tools/tool-use/code-execution-tool": {
@@ -5506,8 +5506,8 @@
         "tool",
         "model",
         "content",
-        "when",
         "block",
+        "when",
         "session",
         "text",
         "event",
@@ -5520,11 +5520,11 @@
         "rfc",
         "error",
         "input",
+        "server",
         "format",
-        "agents",
-        "server"
+        "agents"
       ],
-      "word_count": 275113,
+      "word_count": 275831,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -5552,7 +5552,7 @@
         "require",
         "permission"
       ],
-      "word_count": 13099,
+      "word_count": 13140,
       "file_path": "docs/docs__en__api__beta__agents.md"
     },
     "/docs/en/api/beta/agents/archive": {
@@ -5598,17 +5598,17 @@
         "agents",
         "configuration",
         "coding",
-        "tools",
         "mcp",
+        "tools",
+        "server",
         "version",
         "frontier",
         "performance",
-        "server",
+        "must",
         "permission",
-        "policy",
-        "automatically"
+        "policy"
       ],
-      "word_count": 2163,
+      "word_count": 2182,
       "file_path": "docs/docs__en__api__beta__agents__create.md"
     },
     "/docs/en/api/beta/agents/list": {
@@ -5683,16 +5683,16 @@
         "configuration",
         "coding",
         "version",
-        "tools",
         "server",
-        "omit",
         "mcp",
-        "preserve",
+        "tools",
+        "omit",
         "must",
+        "preserve",
         "frontier",
         "performance"
       ],
-      "word_count": 2257,
+      "word_count": 2279,
       "file_path": "docs/docs__en__api__beta__agents__update.md"
     },
     "/docs/en/api/beta/agents/versions": {
@@ -7188,27 +7188,27 @@
         "breakpoint",
         "output",
         "text",
-        "intelligence",
         "server",
+        "intelligence",
         "response",
         "search"
       ],
-      "word_count": 113871,
+      "word_count": 114417,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
       "title": "Batches",
       "content_preview": "# Batches  ## Create a Message Batch  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once...",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "tokens",
         "number",
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -7218,10 +7218,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 30868,
+      "word_count": 31055,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -7258,9 +7258,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -7270,14 +7270,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 9674,
+      "word_count": 9841,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -7356,12 +7356,12 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
-      "word_count": 4788,
+      "word_count": 4793,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -7399,8 +7399,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -7412,12 +7412,12 @@
         "search",
         "only",
         "schema",
-        "included",
         "name",
         "returned",
+        "included",
         "via"
       ],
-      "word_count": 8346,
+      "word_count": 8513,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -7436,16 +7436,16 @@
         "control",
         "request",
         "breakpoint",
-        "input",
         "true",
+        "input",
         "prompt",
         "used",
         "blocks",
-        "only",
         "response",
-        "output"
+        "only",
+        "server"
       ],
-      "word_count": 13658,
+      "word_count": 13830,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -9092,8 +9092,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: string...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -9112,7 +9112,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 3375,
+      "word_count": 3506,
       "file_path": "docs/docs__en__api__beta__webhooks.md"
     },
     "/docs/en/api/cli/beta": {
@@ -9140,7 +9140,7 @@
         "timestamp",
         "number"
       ],
-      "word_count": 251694,
+      "word_count": 250605,
       "file_path": "docs/docs__en__api__cli__beta.md"
     },
     "/docs/en/api/cli/beta/agents": {
@@ -9168,7 +9168,7 @@
         "permission",
         "configuration"
       ],
-      "word_count": 10542,
+      "word_count": 10583,
       "file_path": "docs/docs__en__api__cli__beta__agents.md"
     },
     "/docs/en/api/cli/beta/agents/archive": {
@@ -9224,7 +9224,7 @@
         "policy",
         "automatically"
       ],
-      "word_count": 1072,
+      "word_count": 1091,
       "file_path": "docs/docs__en__api__cli__beta__agents__create.md"
     },
     "/docs/en/api/cli/beta/agents/list": {
@@ -9301,14 +9301,14 @@
         "confirmation",
         "agents",
         "empty",
-        "null",
         "coding",
         "resolved",
         "version",
         "send",
+        "null",
         "clear"
       ],
-      "word_count": 1188,
+      "word_count": 1210,
       "file_path": "docs/docs__en__api__cli__beta__agents__update.md"
     },
     "/docs/en/api/cli/beta/agents/versions": {
@@ -10794,10 +10794,9 @@
         "cache",
         "number",
         "input",
-        "coding",
         "content",
+        "coding",
         "used",
-        "performance",
         "when",
         "request",
         "create",
@@ -10805,9 +10804,10 @@
         "agents",
         "output",
         "text",
-        "control"
+        "control",
+        "breakpoint"
       ],
-      "word_count": 102304,
+      "word_count": 101051,
       "file_path": "docs/docs__en__api__cli__beta__messages.md"
     },
     "/docs/en/api/cli/beta/messages/batches": {
@@ -10824,7 +10824,6 @@
         "coding",
         "used",
         "request",
-        "performance",
         "tool",
         "cache",
         "frontier",
@@ -10833,9 +10832,10 @@
         "which",
         "requests",
         "response",
-        "processing"
+        "processing",
+        "entry"
       ],
-      "word_count": 24743,
+      "word_count": 24227,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches.md"
     },
     "/docs/en/api/cli/beta/messages/batches/cancel": {
@@ -10962,7 +10962,6 @@
         "coding",
         "request",
         "used",
-        "performance",
         "tool",
         "cache",
         "frontier",
@@ -10971,11 +10970,12 @@
         "response",
         "output",
         "entry",
-        "high",
-        "complex",
-        "tasks"
+        "performance",
+        "token",
+        "content",
+        "long"
       ],
-      "word_count": 5546,
+      "word_count": 5417,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches__results.md"
     },
     "/docs/en/api/cli/beta/messages/batches/retrieve": {
@@ -11050,16 +11050,16 @@
         "coding",
         "cache",
         "response",
-        "performance",
         "content",
         "block",
         "param",
         "output",
         "frontier",
         "agents",
+        "token",
         "when"
       ],
-      "word_count": 7003,
+      "word_count": 6874,
       "file_path": "docs/docs__en__api__cli__beta__messages__create.md"
     },
     "/docs/en/api/cli/beta/models": {
@@ -12713,8 +12713,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `beta_webhook_event: object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: str...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -12733,7 +12733,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 3208,
+      "word_count": 3331,
       "file_path": "docs/docs__en__api__cli__beta__webhooks.md"
     },
     "/docs/en/api/cli/completions": {
@@ -12744,24 +12744,24 @@
         "intelligence",
         "coding",
         "stop",
-        "performance",
         "frontier",
         "agents",
         "param",
         "maximum",
-        "tasks",
         "body",
-        "high",
-        "complex",
+        "performance",
         "text",
         "may",
         "prompt",
         "long",
         "completions",
         "models",
-        "running"
+        "running",
+        "completion",
+        "see",
+        "additional"
       ],
-      "word_count": 1040,
+      "word_count": 972,
       "file_path": "docs/docs__en__api__cli__completions.md"
     },
     "/docs/en/api/cli/completions/create": {
@@ -12777,19 +12777,19 @@
         "text",
         "maximum",
         "prompt",
-        "performance",
         "models",
         "may",
-        "tasks",
         "frontier",
         "agents",
         "completions",
         "see",
         "our",
         "only",
-        "additional"
+        "additional",
+        "details",
+        "options"
       ],
-      "word_count": 738,
+      "word_count": 704,
       "file_path": "docs/docs__en__api__cli__completions__create.md"
     },
     "/docs/en/api/cli/messages": {
@@ -12809,15 +12809,15 @@
         "text",
         "number",
         "search",
-        "message",
         "may",
-        "results",
+        "message",
         "one",
+        "results",
         "create",
         "input",
         "invocation"
       ],
-      "word_count": 61712,
+      "word_count": 62026,
       "file_path": "docs/docs__en__api__cli__messages.md"
     },
     "/docs/en/api/cli/messages/batches": {
@@ -12845,7 +12845,7 @@
         "input",
         "intelligence"
       ],
-      "word_count": 13736,
+      "word_count": 13576,
       "file_path": "docs/docs__en__api__cli__messages__batches.md"
     },
     "/docs/en/api/cli/messages/batches/cancel": {
@@ -12985,7 +12985,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2808,
+      "word_count": 2768,
       "file_path": "docs/docs__en__api__cli__messages__batches__results.md"
     },
     "/docs/en/api/cli/messages/batches/retrieve": {
@@ -13066,10 +13066,10 @@
         "generated",
         "message",
         "single",
-        "when",
-        "intelligence"
+        "intelligence",
+        "api"
       ],
-      "word_count": 3768,
+      "word_count": 3728,
       "file_path": "docs/docs__en__api__cli__messages__create.md"
     },
     "/docs/en/api/cli/models": {
@@ -13163,13 +13163,10 @@
         "model",
         "intelligence",
         "coding",
-        "performance",
         "frontier",
         "agents",
-        "tasks",
         "stop",
-        "high",
-        "complex",
+        "performance",
         "maximum",
         "prompt",
         "long",
@@ -13179,9 +13176,12 @@
         "running",
         "may",
         "additional",
-        "options"
+        "options",
+        "text",
+        "complete",
+        "tasks"
       ],
-      "word_count": 1391,
+      "word_count": 1289,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -13191,15 +13191,12 @@
         "model",
         "intelligence",
         "coding",
-        "performance",
         "frontier",
         "agents",
         "stop",
-        "tasks",
         "maximum",
         "prompt",
-        "high",
-        "complex",
+        "performance",
         "models",
         "see",
         "details",
@@ -13207,9 +13204,12 @@
         "text",
         "may",
         "additional",
-        "options"
+        "options",
+        "running",
+        "complete",
+        "tasks"
       ],
-      "word_count": 1071,
+      "word_count": 1003,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/compliance": {
@@ -14682,11 +14682,11 @@
         "error",
         "rfc",
         "input",
+        "server",
         "agents",
-        "format",
-        "server"
+        "format"
       ],
-      "word_count": 246929,
+      "word_count": 247227,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/agents": {
@@ -14714,7 +14714,7 @@
         "frontier",
         "performance"
       ],
-      "word_count": 11637,
+      "word_count": 11678,
       "file_path": "docs/docs__en__api__csharp__beta__agents.md"
     },
     "/docs/en/api/csharp/beta/agents/archive": {
@@ -14763,14 +14763,14 @@
         "performance",
         "configuration",
         "param",
+        "mcp",
         "tools",
         "body",
         "maximum",
-        "mcp",
         "premium",
-        "permission"
+        "server"
       ],
-      "word_count": 1867,
+      "word_count": 1886,
       "file_path": "docs/docs__en__api__csharp__beta__agents__create.md"
     },
     "/docs/en/api/csharp/beta/agents/list": {
@@ -14848,13 +14848,13 @@
         "performance",
         "configuration",
         "body",
-        "tools",
         "mcp",
+        "tools",
         "server",
         "omit",
         "preserve"
       ],
-      "word_count": 1982,
+      "word_count": 2004,
       "file_path": "docs/docs__en__api__csharp__beta__agents__update.md"
     },
     "/docs/en/api/csharp/beta/agents/versions": {
@@ -16332,8 +16332,8 @@
       "content_preview": "# Messages  ## Create a Message  `BetaMessage Beta.Messages.Create(MessageCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages`  Send a structured list of inp...",
       "keywords": [
         "tool",
-        "model",
         "block",
+        "model",
         "tokens",
         "content",
         "cache",
@@ -16347,12 +16347,12 @@
         "breakpoint",
         "output",
         "text",
-        "intelligence",
         "server",
+        "intelligence",
         "search",
         "response"
       ],
-      "word_count": 99555,
+      "word_count": 99697,
       "file_path": "docs/docs__en__api__csharp__beta__messages.md"
     },
     "/docs/en/api/csharp/beta/messages/batches": {
@@ -16366,8 +16366,8 @@
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -16377,10 +16377,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 28360,
+      "word_count": 28448,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/cancel": {
@@ -16417,9 +16417,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -16429,14 +16429,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 8794,
+      "word_count": 8894,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__create.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/delete": {
@@ -16515,12 +16515,12 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
-      "word_count": 4381,
+      "word_count": 4378,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__results.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/retrieve": {
@@ -16558,8 +16558,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -16570,13 +16570,13 @@
         "system",
         "search",
         "included",
-        "only",
         "name",
+        "only",
         "schema",
         "via",
         "reference"
       ],
-      "word_count": 6458,
+      "word_count": 6558,
       "file_path": "docs/docs__en__api__csharp__beta__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/beta/messages/create": {
@@ -16601,10 +16601,10 @@
         "prompt",
         "blocks",
         "only",
-        "body",
-        "response"
+        "response",
+        "body"
       ],
-      "word_count": 11518,
+      "word_count": 11615,
       "file_path": "docs/docs__en__api__csharp__beta__messages__create.md"
     },
     "/docs/en/api/csharp/beta/models": {
@@ -18258,8 +18258,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `required string ID`      Unique event identifier for idempotency.    - `required DateTimeOffset CreatedAt`      R...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -18278,7 +18278,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 3016,
+      "word_count": 3131,
       "file_path": "docs/docs__en__api__csharp__beta__webhooks.md"
     },
     "/docs/en/api/csharp/messages": {
@@ -18300,13 +18300,13 @@
         "text",
         "number",
         "results",
+        "true",
         "invocation",
         "input",
         "used",
-        "true",
         "message"
       ],
-      "word_count": 64874,
+      "word_count": 65297,
       "file_path": "docs/docs__en__api__csharp__messages.md"
     },
     "/docs/en/api/csharp/messages/batches": {
@@ -18327,14 +18327,14 @@
         "results",
         "request",
         "invocation",
+        "cache",
         "response",
         "used",
-        "cache",
         "input",
         "which",
         "create"
       ],
-      "word_count": 18490,
+      "word_count": 18416,
       "file_path": "docs/docs__en__api__csharp__messages__batches.md"
     },
     "/docs/en/api/csharp/messages/batches/cancel": {
@@ -18370,16 +18370,16 @@
       "content_preview": "## Create a Message Batch  `MessageBatch Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -18390,7 +18390,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6295,
+      "word_count": 6389,
       "file_path": "docs/docs__en__api__csharp__messages__batches__create.md"
     },
     "/docs/en/api/csharp/messages/batches/delete": {
@@ -18474,7 +18474,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2560,
+      "word_count": 2518,
       "file_path": "docs/docs__en__api__csharp__messages__batches__results.md"
     },
     "/docs/en/api/csharp/messages/batches/retrieve": {
@@ -18527,10 +18527,10 @@
         "only",
         "schema",
         "via",
-        "used",
-        "reference"
+        "reference",
+        "name"
       ],
-      "word_count": 4647,
+      "word_count": 4775,
       "file_path": "docs/docs__en__api__csharp__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/messages/create": {
@@ -18547,18 +18547,18 @@
         "control",
         "breakpoint",
         "true",
+        "search",
         "used",
         "tokens",
-        "search",
-        "input",
         "blocks",
+        "input",
         "only",
-        "invocation",
         "system",
-        "number",
-        "prompt"
+        "invocation",
+        "prompt",
+        "number"
       ],
-      "word_count": 7274,
+      "word_count": 7360,
       "file_path": "docs/docs__en__api__csharp__messages__create.md"
     },
     "/docs/en/api/csharp/models": {
@@ -18656,10 +18656,10 @@
         "stringtype",
         "int",
         "tool",
-        "model",
-        "claude",
         "execution",
+        "model",
         "code",
+        "claude",
         "error",
         "result",
         "text",
@@ -18667,10 +18667,10 @@
         "message",
         "content",
         "block",
-        "thinking",
-        "url"
+        "url",
+        "thinking"
       ],
-      "word_count": 287112,
+      "word_count": 287666,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/agents": {
@@ -18698,7 +18698,7 @@
         "require",
         "permission"
       ],
-      "word_count": 13953,
+      "word_count": 13994,
       "file_path": "docs/docs__en__api__go__beta__agents.md"
     },
     "/docs/en/api/go/beta/agents/archive": {
@@ -18745,16 +18745,16 @@
         "agents",
         "configuration",
         "param",
+        "mcp",
         "tools",
         "body",
-        "mcp",
         "frontier",
         "performance",
+        "server",
         "permission",
-        "policy",
-        "automatically"
+        "policy"
       ],
-      "word_count": 2137,
+      "word_count": 2156,
       "file_path": "docs/docs__en__api__go__beta__agents__create.md"
     },
     "/docs/en/api/go/beta/agents/list": {
@@ -18830,15 +18830,15 @@
         "param",
         "configuration",
         "body",
-        "tools",
         "mcp",
+        "tools",
         "server",
         "omit",
         "preserve",
         "frontier",
         "performance"
       ],
-      "word_count": 2246,
+      "word_count": 2268,
       "file_path": "docs/docs__en__api__go__beta__agents__update.md"
     },
     "/docs/en/api/go/beta/agents/versions": {
@@ -20321,38 +20321,38 @@
         "struct",
         "int",
         "stringtype",
-        "tool",
-        "model",
         "execution",
         "code",
-        "claude",
+        "tool",
+        "model",
         "result",
         "block",
+        "allowedcaller",
+        "claude",
         "content",
         "search",
-        "allowedcaller",
+        "allowedcallercodeexecution",
         "text",
-        "index",
         "codeexecution",
-        "modelclaudeopus",
-        "opus"
+        "index",
+        "anthropicbeta"
       ],
-      "word_count": 117515,
+      "word_count": 117901,
       "file_path": "docs/docs__en__api__go__beta__messages.md"
     },
     "/docs/en/api/go/beta/messages/batches": {
       "title": "Batches",
       "content_preview": "# Batches  ## Create a Message Batch  `client.Beta.Messages.Batches.New(ctx, params) (*BetaMessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Messa...",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "tokens",
         "number",
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -20362,10 +20362,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 32592,
+      "word_count": 32787,
       "file_path": "docs/docs__en__api__go__beta__messages__batches.md"
     },
     "/docs/en/api/go/beta/messages/batches/cancel": {
@@ -20402,9 +20402,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -20414,14 +20414,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 9790,
+      "word_count": 9985,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__create.md"
     },
     "/docs/en/api/go/beta/messages/batches/delete": {
@@ -20500,9 +20500,9 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
       "word_count": 5170,
@@ -20543,8 +20543,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -20555,13 +20555,13 @@
         "system",
         "search",
         "included",
-        "only",
         "name",
+        "only",
         "schema",
         "via",
         "reference"
       ],
-      "word_count": 7707,
+      "word_count": 7902,
       "file_path": "docs/docs__en__api__go__beta__messages__count_tokens.md"
     },
     "/docs/en/api/go/beta/messages/create": {
@@ -20570,26 +20570,26 @@
       "keywords": [
         "const",
         "type",
-        "struct",
         "execution",
+        "code",
+        "struct",
+        "allowedcaller",
         "int",
         "tool",
-        "code",
-        "model",
         "block",
-        "allowedcaller",
-        "content",
         "allowedcallercodeexecution",
+        "content",
+        "model",
         "stringtype",
+        "betacodeexecutiontool",
+        "betatooltexteditor",
         "cache",
         "result",
         "anthropicbeta",
         "control",
-        "betatooltexteditor",
-        "text",
-        "search"
+        "codeexecution"
       ],
-      "word_count": 13428,
+      "word_count": 13623,
       "file_path": "docs/docs__en__api__go__beta__messages__create.md"
     },
     "/docs/en/api/go/beta/models": {
@@ -22239,8 +22239,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `type BetaWebhookEvent struct{\u2026}`    - `ID string`      Unique event identifier for idempotency.    - `CreatedAt Time`      RFC 3339 timestamp wh...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -22259,7 +22259,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 3250,
+      "word_count": 3377,
       "file_path": "docs/docs__en__api__go__beta__webhooks.md"
     },
     "/docs/en/api/go/completions": {
@@ -22274,20 +22274,20 @@
         "opus",
         "completion",
         "stop",
-        "modelclaudesonnet",
-        "sonnet",
         "param",
-        "haiku",
         "tokens",
         "prompt",
+        "modelclaudesonnet",
+        "sonnet",
         "text",
         "body",
         "sequences",
         "completions",
         "api",
-        "models"
+        "models",
+        "our"
       ],
-      "word_count": 1401,
+      "word_count": 1293,
       "file_path": "docs/docs__en__api__go__completions.md"
     },
     "/docs/en/api/go/completions/create": {
@@ -22299,23 +22299,23 @@
         "model",
         "claude",
         "param",
-        "modelclaudeopus",
-        "opus",
         "stop",
         "completion",
+        "modelclaudeopus",
+        "opus",
         "prompt",
         "text",
         "body",
-        "modelclaudesonnet",
-        "sonnet",
         "api",
         "models",
         "our",
         "tokens",
         "sequences",
-        "field"
+        "field",
+        "completions",
+        "see"
       ],
-      "word_count": 1008,
+      "word_count": 954,
       "file_path": "docs/docs__en__api__go__completions__create.md"
     },
     "/docs/en/api/go/messages": {
@@ -22325,25 +22325,25 @@
         "const",
         "type",
         "struct",
-        "int",
-        "stringtype",
         "execution",
-        "tool",
+        "int",
         "code",
+        "stringtype",
+        "tool",
         "result",
         "block",
+        "allowedcaller",
         "search",
         "content",
         "base",
-        "text",
         "codeexecution",
-        "allowedcaller",
+        "text",
+        "allowedcallercodeexecution",
         "index",
-        "model",
-        "web",
-        "url"
+        "codeexecutiontool",
+        "web"
       ],
-      "word_count": 76959,
+      "word_count": 77747,
       "file_path": "docs/docs__en__api__go__messages.md"
     },
     "/docs/en/api/go/messages/batches": {
@@ -22364,14 +22364,14 @@
         "results",
         "request",
         "invocation",
-        "response",
         "cache",
+        "response",
         "used",
         "input",
         "which",
         "create"
       ],
-      "word_count": 21412,
+      "word_count": 21345,
       "file_path": "docs/docs__en__api__go__messages__batches.md"
     },
     "/docs/en/api/go/messages/batches/cancel": {
@@ -22407,16 +22407,16 @@
       "content_preview": "## Create a Message Batch  `client.Messages.Batches.New(ctx, body) (*MessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be ...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -22427,7 +22427,7 @@
         "included",
         "returned"
       ],
-      "word_count": 7067,
+      "word_count": 7232,
       "file_path": "docs/docs__en__api__go__messages__batches__create.md"
     },
     "/docs/en/api/go/messages/batches/delete": {
@@ -22511,7 +22511,7 @@
         "always",
         "batch"
       ],
-      "word_count": 3107,
+      "word_count": 3049,
       "file_path": "docs/docs__en__api__go__messages__batches__results.md"
     },
     "/docs/en/api/go/messages/batches/retrieve": {
@@ -22564,10 +22564,10 @@
         "only",
         "schema",
         "via",
-        "used",
-        "reference"
+        "reference",
+        "name"
       ],
-      "word_count": 5458,
+      "word_count": 5677,
       "file_path": "docs/docs__en__api__go__messages__count_tokens.md"
     },
     "/docs/en/api/go/messages/create": {
@@ -22575,27 +22575,27 @@
       "content_preview": "## Create a Message  `client.Messages.New(ctx, body) (*Message, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate t...",
       "keywords": [
         "const",
+        "execution",
+        "code",
         "type",
         "tool",
-        "execution",
-        "struct",
-        "code",
-        "block",
         "allowedcaller",
+        "struct",
+        "block",
+        "allowedcallercodeexecution",
         "content",
         "int",
+        "codeexecutiontool",
         "model",
         "stringtype",
-        "allowedcallercodeexecution",
-        "result",
-        "search",
-        "text",
-        "codeexecutiontool",
         "webfetchtool",
-        "cache",
-        "codeexecution"
+        "result",
+        "codeexecution",
+        "search",
+        "tooltexteditor",
+        "text"
       ],
-      "word_count": 8553,
+      "word_count": 8714,
       "file_path": "docs/docs__en__api__go__messages__create.md"
     },
     "/docs/en/api/go/models": {
@@ -22703,11 +22703,11 @@
         "error",
         "rfc",
         "input",
+        "server",
         "agents",
-        "format",
-        "server"
+        "format"
       ],
-      "word_count": 239862,
+      "word_count": 240179,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/agents": {
@@ -22735,7 +22735,7 @@
         "require",
         "permission"
       ],
-      "word_count": 10989,
+      "word_count": 11030,
       "file_path": "docs/docs__en__api__java__beta__agents.md"
     },
     "/docs/en/api/java/beta/agents/archive": {
@@ -22781,17 +22781,17 @@
         "coding",
         "agents",
         "configuration",
-        "tools",
         "mcp",
+        "tools",
         "frontier",
         "performance",
+        "server",
         "permission",
         "policy",
         "automatically",
-        "approved",
-        "without"
+        "approved"
       ],
-      "word_count": 1698,
+      "word_count": 1717,
       "file_path": "docs/docs__en__api__java__beta__agents__create.md"
     },
     "/docs/en/api/java/beta/agents/list": {
@@ -22865,8 +22865,8 @@
         "coding",
         "agents",
         "configuration",
-        "tools",
         "mcp",
+        "tools",
         "server",
         "omit",
         "preserve",
@@ -22875,7 +22875,7 @@
         "permission",
         "policy"
       ],
-      "word_count": 1804,
+      "word_count": 1826,
       "file_path": "docs/docs__en__api__java__beta__agents__update.md"
     },
     "/docs/en/api/java/beta/agents/versions": {
@@ -24353,8 +24353,8 @@
       "content_preview": "# Messages  ## Create a Message  `BetaMessage beta().messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate the next message in",
       "keywords": [
         "tool",
-        "model",
         "block",
+        "model",
         "tokens",
         "content",
         "cache",
@@ -24368,12 +24368,12 @@
         "breakpoint",
         "output",
         "text",
-        "intelligence",
         "server",
+        "intelligence",
         "search",
         "response"
       ],
-      "word_count": 98840,
+      "word_count": 99005,
       "file_path": "docs/docs__en__api__java__beta__messages.md"
     },
     "/docs/en/api/java/beta/messages/batches": {
@@ -24387,8 +24387,8 @@
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -24398,10 +24398,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 27801,
+      "word_count": 27893,
       "file_path": "docs/docs__en__api__java__beta__messages__batches.md"
     },
     "/docs/en/api/java/beta/messages/batches/cancel": {
@@ -24438,9 +24438,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -24450,14 +24450,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 8460,
+      "word_count": 8564,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__create.md"
     },
     "/docs/en/api/java/beta/messages/batches/delete": {
@@ -24536,12 +24536,12 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
-      "word_count": 4348,
+      "word_count": 4345,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__results.md"
     },
     "/docs/en/api/java/beta/messages/batches/retrieve": {
@@ -24579,8 +24579,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -24591,13 +24591,13 @@
         "system",
         "search",
         "included",
-        "only",
         "name",
+        "only",
         "schema",
         "via",
         "reference"
       ],
-      "word_count": 6507,
+      "word_count": 6611,
       "file_path": "docs/docs__en__api__java__beta__messages__count_tokens.md"
     },
     "/docs/en/api/java/beta/messages/create": {
@@ -24625,7 +24625,7 @@
         "response",
         "search"
       ],
-      "word_count": 11479,
+      "word_count": 11580,
       "file_path": "docs/docs__en__api__java__beta__messages__create.md"
     },
     "/docs/en/api/java/beta/models": {
@@ -26268,8 +26268,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `String id`      Unique event identifier for idempotency.    - `LocalDateTime createdAt`      RFC 3339 timestamp w...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -26288,7 +26288,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 2898,
+      "word_count": 3009,
       "file_path": "docs/docs__en__api__java__beta__webhooks.md"
     },
     "/docs/en/api/java/completions": {
@@ -26299,13 +26299,10 @@
         "intelligence",
         "coding",
         "stop",
-        "performance",
         "frontier",
         "agents",
         "maximum",
-        "tasks",
-        "high",
-        "complex",
+        "performance",
         "text",
         "may",
         "prompt",
@@ -26314,9 +26311,12 @@
         "models",
         "running",
         "completion",
-        "see"
+        "see",
+        "additional",
+        "details",
+        "options"
       ],
-      "word_count": 1061,
+      "word_count": 993,
       "file_path": "docs/docs__en__api__java__completions.md"
     },
     "/docs/en/api/java/completions/create": {
@@ -26330,10 +26330,8 @@
         "text",
         "maximum",
         "prompt",
-        "performance",
         "models",
         "may",
-        "tasks",
         "frontier",
         "agents",
         "completions",
@@ -26342,9 +26340,11 @@
         "only",
         "additional",
         "details",
-        "options"
+        "options",
+        "sequences",
+        "long"
       ],
-      "word_count": 772,
+      "word_count": 738,
       "file_path": "docs/docs__en__api__java__completions__create.md"
     },
     "/docs/en/api/java/messages": {
@@ -26366,13 +26366,13 @@
         "text",
         "number",
         "results",
+        "true",
         "invocation",
         "input",
-        "true",
         "message",
         "used"
       ],
-      "word_count": 64734,
+      "word_count": 65149,
       "file_path": "docs/docs__en__api__java__messages.md"
     },
     "/docs/en/api/java/messages/batches": {
@@ -26393,14 +26393,14 @@
         "results",
         "request",
         "invocation",
-        "response",
         "cache",
+        "response",
         "used",
         "input",
         "which",
         "create"
       ],
-      "word_count": 18193,
+      "word_count": 18123,
       "file_path": "docs/docs__en__api__java__messages__batches.md"
     },
     "/docs/en/api/java/messages/batches/cancel": {
@@ -26436,16 +26436,16 @@
       "content_preview": "## Create a Message Batch  `MessageBatch messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/messages/batches`  Send a batch of M...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -26456,7 +26456,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6127,
+      "word_count": 6225,
       "file_path": "docs/docs__en__api__java__messages__batches__create.md"
     },
     "/docs/en/api/java/messages/batches/delete": {
@@ -26540,7 +26540,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2549,
+      "word_count": 2507,
       "file_path": "docs/docs__en__api__java__messages__batches__results.md"
     },
     "/docs/en/api/java/messages/batches/retrieve": {
@@ -26593,10 +26593,10 @@
         "only",
         "schema",
         "via",
-        "used",
-        "reference"
+        "reference",
+        "name"
       ],
-      "word_count": 4709,
+      "word_count": 4841,
       "file_path": "docs/docs__en__api__java__messages__count_tokens.md"
     },
     "/docs/en/api/java/messages/create": {
@@ -26613,18 +26613,18 @@
         "control",
         "breakpoint",
         "true",
+        "search",
         "used",
         "tokens",
-        "search",
-        "input",
         "blocks",
+        "input",
         "only",
-        "invocation",
         "system",
-        "number",
-        "prompt"
+        "invocation",
+        "prompt",
+        "number"
       ],
-      "word_count": 7291,
+      "word_count": 7381,
       "file_path": "docs/docs__en__api__java__messages__create.md"
     },
     "/docs/en/api/java/models": {
@@ -26730,13 +26730,13 @@
         "text",
         "number",
         "results",
+        "true",
         "invocation",
         "input",
         "used",
-        "true",
         "message"
       ],
-      "word_count": 75213,
+      "word_count": 75876,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -26757,14 +26757,14 @@
         "results",
         "request",
         "invocation",
+        "cache",
         "response",
         "used",
-        "cache",
         "input",
         "which",
         "create"
       ],
-      "word_count": 20230,
+      "word_count": 20217,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -26800,16 +26800,16 @@
       "content_preview": "## Create a Message Batch  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Me...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -26820,7 +26820,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6988,
+      "word_count": 7135,
       "file_path": "docs/docs__en__api__messages__batches__create.md"
     },
     "/docs/en/api/messages/batches/delete": {
@@ -26904,7 +26904,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2825,
+      "word_count": 2785,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -26940,8 +26940,8 @@
       "content_preview": "## Count tokens in a Message  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API can be used to count the number of tokens in a Message, including tool...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
@@ -26960,7 +26960,7 @@
         "via",
         "name"
       ],
-      "word_count": 6091,
+      "word_count": 6238,
       "file_path": "docs/docs__en__api__messages__count_tokens.md"
     },
     "/docs/en/api/messages/create": {
@@ -26978,17 +26978,17 @@
         "breakpoint",
         "true",
         "tokens",
-        "used",
         "search",
-        "input",
+        "used",
         "blocks",
+        "input",
         "only",
         "prompt",
+        "system",
         "invocation",
-        "number",
-        "system"
+        "returned"
       ],
-      "word_count": 9037,
+      "word_count": 9144,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -27100,7 +27100,7 @@
         "message",
         "version"
       ],
-      "word_count": 77875,
+      "word_count": 78209,
       "file_path": "docs/docs__en__api__php__beta.md"
     },
     "/docs/en/api/php/beta/agents": {
@@ -27126,9 +27126,9 @@
         "coordinator",
         "default",
         "maximum",
-        "config"
+        "must"
       ],
-      "word_count": 3968,
+      "word_count": 4009,
       "file_path": "docs/docs__en__api__php__beta__agents.md"
     },
     "/docs/en/api/php/beta/agents/archive": {
@@ -27172,6 +27172,9 @@
         "create",
         "identifier",
         "configuration",
+        "mcp",
+        "servers",
+        "must",
         "chars",
         "coordinator",
         "topology",
@@ -27179,12 +27182,9 @@
         "roster",
         "available",
         "version",
-        "post",
-        "parameters",
-        "accepts",
-        "string"
+        "post"
       ],
-      "word_count": 543,
+      "word_count": 562,
       "file_path": "docs/docs__en__api__php__beta__agents__create.md"
     },
     "/docs/en/api/php/beta/agents/list": {
@@ -27251,8 +27251,8 @@
         "omit",
         "preserve",
         "empty",
-        "null",
         "send",
+        "null",
         "clear",
         "version",
         "string",
@@ -27260,15 +27260,15 @@
         "full",
         "replacement",
         "array",
+        "must",
         "model",
         "timestamp",
         "rfc",
         "format",
         "update",
-        "response",
-        "must"
+        "response"
       ],
-      "word_count": 660,
+      "word_count": 682,
       "file_path": "docs/docs__en__api__php__beta__agents__update.md"
     },
     "/docs/en/api/php/beta/agents/versions": {
@@ -28751,19 +28751,19 @@
         "message",
         "cache",
         "tokens",
-        "number",
         "create",
+        "number",
         "batch",
         "request",
         "control",
         "true",
         "search",
-        "result",
         "breakpoint",
+        "result",
         "input",
         "only"
       ],
-      "word_count": 22267,
+      "word_count": 22509,
       "file_path": "docs/docs__en__api__php__beta__messages.md"
     },
     "/docs/en/api/php/beta/messages/batches": {
@@ -30664,7 +30664,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 1392,
+      "word_count": 1443,
       "file_path": "docs/docs__en__api__php__beta__webhooks.md"
     },
     "/docs/en/api/php/messages": {
@@ -30674,25 +30674,25 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "message",
         "true",
-        "batch",
         "cache",
         "search",
+        "batch",
         "create",
         "control",
         "only",
         "breakpoint",
         "result",
-        "results",
         "blocks",
+        "results",
         "used",
         "tokens",
-        "request"
+        "prompt"
       ],
-      "word_count": 17637,
+      "word_count": 17832,
       "file_path": "docs/docs__en__api__php__messages.md"
     },
     "/docs/en/api/php/messages/batches": {
@@ -31035,8 +31035,8 @@
       "title": "Beta",
       "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `Union[str, Literal[\"message-batches-2024-09-24\", \"prompt-caching-2024-07-31\", \"computer-use-2024-10-22\", 25 more]]`    - `str`    - `Literal[\"message-ba...",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "content",
         "intelligence",
         "block",
@@ -31056,7 +31056,7 @@
         "error",
         "input"
       ],
-      "word_count": 260677,
+      "word_count": 257983,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/agents": {
@@ -31084,7 +31084,7 @@
         "policy",
         "without"
       ],
-      "word_count": 13506,
+      "word_count": 13547,
       "file_path": "docs/docs__en__api__python__beta__agents.md"
     },
     "/docs/en/api/python/beta/agents/archive": {
@@ -31140,7 +31140,7 @@
         "near",
         "combining"
       ],
-      "word_count": 2265,
+      "word_count": 2284,
       "file_path": "docs/docs__en__api__python__beta__agents__create.md"
     },
     "/docs/en/api/python/beta/agents/list": {
@@ -31220,11 +31220,11 @@
         "premium",
         "running",
         "version",
-        "long",
-        "fastest",
-        "near"
+        "server",
+        "mcp",
+        "long"
       ],
-      "word_count": 2374,
+      "word_count": 2396,
       "file_path": "docs/docs__en__api__python__beta__agents__update.md"
     },
     "/docs/en/api/python/beta/agents/versions": {
@@ -32702,8 +32702,8 @@
       "title": "Messages",
       "content_preview": "# Messages  ## Create a Message  `beta.messages.create(MessageCreateParams**kwargs)  -> BetaMessage`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.  The Messages API can be used for",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "block",
         "tokens",
         "content",
@@ -32711,7 +32711,6 @@
         "when",
         "number",
         "intelligence",
-        "docs",
         "input",
         "request",
         "create",
@@ -32721,9 +32720,10 @@
         "breakpoint",
         "output",
         "text",
-        "end"
+        "server",
+        "frontier"
       ],
-      "word_count": 110406,
+      "word_count": 107560,
       "file_path": "docs/docs__en__api__python__beta__messages.md"
     },
     "/docs/en/api/python/beta/messages/batches": {
@@ -32737,8 +32737,8 @@
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -32749,9 +32749,9 @@
         "output",
         "which",
         "results",
-        "processing"
+        "server"
       ],
-      "word_count": 29544,
+      "word_count": 29132,
       "file_path": "docs/docs__en__api__python__beta__messages__batches.md"
     },
     "/docs/en/api/python/beta/messages/batches/cancel": {
@@ -32800,14 +32800,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 8865,
+      "word_count": 8885,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__create.md"
     },
     "/docs/en/api/python/beta/messages/batches/delete": {
@@ -32885,13 +32885,13 @@
         "token",
         "content",
         "results",
-        "docs",
         "which",
         "were",
-        "when",
-        "server"
+        "server",
+        "text",
+        "when"
       ],
-      "word_count": 4684,
+      "word_count": 4576,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__results.md"
     },
     "/docs/en/api/python/beta/messages/batches/retrieve": {
@@ -32927,8 +32927,8 @@
       "content_preview": "## Count tokens in a Message  `beta.messages.count_tokens(MessageCountTokensParams**kwargs)  -> BetaMessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message. ...",
       "keywords": [
         "tool",
-        "model",
         "block",
+        "model",
         "content",
         "when",
         "cache",
@@ -32942,12 +32942,12 @@
         "search",
         "only",
         "schema",
-        "included",
         "name",
         "returned",
+        "included",
         "via"
       ],
-      "word_count": 7562,
+      "word_count": 7582,
       "file_path": "docs/docs__en__api__python__beta__messages__count_tokens.md"
     },
     "/docs/en/api/python/beta/messages/create": {
@@ -32966,16 +32966,16 @@
         "control",
         "request",
         "breakpoint",
-        "input",
         "true",
+        "input",
         "prompt",
         "used",
         "blocks",
+        "response",
         "intelligence",
-        "only",
-        "response"
+        "only"
       ],
-      "word_count": 12751,
+      "word_count": 12663,
       "file_path": "docs/docs__en__api__python__beta__messages__create.md"
     },
     "/docs/en/api/python/beta/models": {
@@ -34618,8 +34618,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent: \u2026`    - `id: str`      Unique event identifier for idempotency.    - `created_at: datetime`      RFC 3339 timestamp when...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -34638,7 +34638,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 2888,
+      "word_count": 2999,
       "file_path": "docs/docs__en__api__python__beta__webhooks.md"
     },
     "/docs/en/api/python/completions": {
@@ -34647,26 +34647,26 @@
       "keywords": [
         "model",
         "intelligence",
-        "docs",
         "coding",
         "frontier",
         "agents",
         "performance",
+        "long",
+        "running",
+        "docs",
+        "maximum",
+        "stop",
+        "fastest",
+        "near",
+        "premium",
+        "combining",
+        "practical",
+        "high",
         "more",
-        "anthropic",
-        "information",
-        "deprecated",
-        "reach",
-        "end",
-        "life",
-        "please",
-        "migrate",
-        "visit",
-        "https",
-        "com",
-        "resources"
+        "prompt",
+        "anthropic"
       ],
-      "word_count": 2231,
+      "word_count": 1805,
       "file_path": "docs/docs__en__api__python__completions.md"
     },
     "/docs/en/api/python/completions/create": {
@@ -34675,26 +34675,26 @@
       "keywords": [
         "model",
         "intelligence",
-        "docs",
         "coding",
         "frontier",
         "agents",
         "performance",
+        "long",
+        "maximum",
+        "running",
+        "docs",
+        "stop",
+        "prompt",
         "more",
-        "anthropic",
-        "information",
-        "deprecated",
-        "reach",
-        "end",
-        "life",
-        "please",
-        "migrate",
-        "visit",
-        "https",
-        "com",
-        "resources"
+        "fastest",
+        "near",
+        "premium",
+        "combining",
+        "practical",
+        "high",
+        "models"
       ],
-      "word_count": 1627,
+      "word_count": 1343,
       "file_path": "docs/docs__en__api__python__completions__create.md"
     },
     "/docs/en/api/python/messages": {
@@ -34702,8 +34702,8 @@
       "content_preview": "# Messages  ## Create a Message  `messages.create(MessageCreateParams**kwargs)  -> Message`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the m...",
       "keywords": [
         "tool",
-        "model",
         "block",
+        "model",
         "content",
         "when",
         "cache",
@@ -34717,12 +34717,12 @@
         "number",
         "intelligence",
         "results",
+        "true",
         "invocation",
         "input",
-        "true",
         "message"
       ],
-      "word_count": 69858,
+      "word_count": 69027,
       "file_path": "docs/docs__en__api__python__messages.md"
     },
     "/docs/en/api/python/messages/batches": {
@@ -34741,16 +34741,16 @@
         "tokens",
         "processing",
         "when",
-        "docs",
         "results",
         "request",
         "coding",
         "invocation",
-        "response",
         "cache",
-        "more"
+        "response",
+        "used",
+        "input"
       ],
-      "word_count": 19786,
+      "word_count": 19198,
       "file_path": "docs/docs__en__api__python__messages__batches.md"
     },
     "/docs/en/api/python/messages/batches/cancel": {
@@ -34794,8 +34794,8 @@
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -34806,7 +34806,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6498,
+      "word_count": 6506,
       "file_path": "docs/docs__en__api__python__messages__batches__create.md"
     },
     "/docs/en/api/python/messages/batches/delete": {
@@ -34873,7 +34873,6 @@
         "tool",
         "intelligence",
         "tokens",
-        "docs",
         "request",
         "block",
         "results",
@@ -34881,16 +34880,17 @@
         "invocation",
         "response",
         "number",
-        "more",
         "output",
-        "information",
         "generated",
         "input",
-        "end",
         "frontier",
-        "agents"
+        "agents",
+        "message",
+        "used",
+        "directly",
+        "text"
       ],
-      "word_count": 2858,
+      "word_count": 2709,
       "file_path": "docs/docs__en__api__python__messages__batches__results.md"
     },
     "/docs/en/api/python/messages/batches/retrieve": {
@@ -34943,10 +34943,10 @@
         "included",
         "only",
         "returned",
-        "intelligence",
-        "via"
+        "via",
+        "intelligence"
       ],
-      "word_count": 5594,
+      "word_count": 5602,
       "file_path": "docs/docs__en__api__python__messages__count_tokens.md"
     },
     "/docs/en/api/python/messages/create": {
@@ -34961,20 +34961,20 @@
         "cache",
         "create",
         "control",
-        "intelligence",
         "breakpoint",
+        "intelligence",
         "true",
-        "docs",
         "tokens",
-        "used",
         "search",
-        "input",
+        "used",
         "blocks",
+        "input",
+        "only",
         "coding",
-        "more",
-        "only"
+        "prompt",
+        "system"
       ],
-      "word_count": 8570,
+      "word_count": 8429,
       "file_path": "docs/docs__en__api__python__messages__create.md"
     },
     "/docs/en/api/python/models": {
@@ -35082,11 +35082,11 @@
         "rfc",
         "error",
         "input",
+        "server",
         "format",
-        "agents",
-        "server"
+        "agents"
       ],
-      "word_count": 248096,
+      "word_count": 248696,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/agents": {
@@ -35114,7 +35114,7 @@
         "require",
         "permission"
       ],
-      "word_count": 11898,
+      "word_count": 11939,
       "file_path": "docs/docs__en__api__ruby__beta__agents.md"
     },
     "/docs/en/api/ruby/beta/agents/archive": {
@@ -35160,17 +35160,17 @@
         "agents",
         "configuration",
         "coding",
-        "tools",
         "mcp",
+        "tools",
+        "server",
         "frontier",
         "performance",
-        "server",
+        "must",
         "version",
         "permission",
-        "policy",
-        "automatically"
+        "policy"
       ],
-      "word_count": 1945,
+      "word_count": 1964,
       "file_path": "docs/docs__en__api__ruby__beta__agents__create.md"
     },
     "/docs/en/api/ruby/beta/agents/list": {
@@ -35245,16 +35245,16 @@
         "configuration",
         "coding",
         "version",
-        "tools",
         "server",
-        "omit",
         "mcp",
-        "preserve",
+        "tools",
+        "omit",
         "must",
+        "preserve",
         "frontier",
         "performance"
       ],
-      "word_count": 2053,
+      "word_count": 2075,
       "file_path": "docs/docs__en__api__ruby__beta__agents__update.md"
     },
     "/docs/en/api/ruby/beta/agents/versions": {
@@ -36748,27 +36748,27 @@
         "breakpoint",
         "output",
         "text",
-        "intelligence",
         "server",
+        "intelligence",
         "response",
         "search"
       ],
-      "word_count": 102485,
+      "word_count": 102937,
       "file_path": "docs/docs__en__api__ruby__beta__messages.md"
     },
     "/docs/en/api/ruby/beta/messages/batches": {
       "title": "Batches",
       "content_preview": "# Batches  ## Create a Message Batch  `beta.messages.batches.create(**kwargs) -> BetaMessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "tokens",
         "number",
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -36778,10 +36778,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 28129,
+      "word_count": 28297,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/cancel": {
@@ -36818,9 +36818,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -36830,14 +36830,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 8654,
+      "word_count": 8806,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__create.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/delete": {
@@ -36959,8 +36959,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -36972,12 +36972,12 @@
         "search",
         "only",
         "schema",
-        "included",
         "name",
         "returned",
+        "included",
         "via"
       ],
-      "word_count": 7343,
+      "word_count": 7495,
       "file_path": "docs/docs__en__api__ruby__beta__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/beta/messages/create": {
@@ -36996,16 +36996,16 @@
         "control",
         "request",
         "breakpoint",
-        "input",
         "true",
+        "input",
         "prompt",
         "used",
         "blocks",
-        "only",
         "response",
-        "output"
+        "only",
+        "server"
       ],
-      "word_count": 12252,
+      "word_count": 12408,
       "file_path": "docs/docs__en__api__ruby__beta__messages__create.md"
     },
     "/docs/en/api/ruby/beta/models": {
@@ -38648,8 +38648,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent`    - `id: String`      Unique event identifier for idempotency.    - `created_at: Time`      RFC 3339 timestamp when the...",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -38668,7 +38668,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 2807,
+      "word_count": 2914,
       "file_path": "docs/docs__en__api__ruby__beta__webhooks.md"
     },
     "/docs/en/api/ruby/completions": {
@@ -38678,13 +38678,10 @@
         "model",
         "intelligence",
         "coding",
-        "performance",
         "frontier",
         "agents",
-        "tasks",
         "stop",
-        "high",
-        "complex",
+        "performance",
         "maximum",
         "prompt",
         "long",
@@ -38694,9 +38691,12 @@
         "running",
         "may",
         "additional",
-        "options"
+        "options",
+        "text",
+        "complete",
+        "tasks"
       ],
-      "word_count": 1364,
+      "word_count": 1262,
       "file_path": "docs/docs__en__api__ruby__completions.md"
     },
     "/docs/en/api/ruby/completions/create": {
@@ -38706,15 +38706,12 @@
         "model",
         "intelligence",
         "coding",
-        "performance",
         "frontier",
         "agents",
         "stop",
-        "tasks",
         "maximum",
         "prompt",
-        "high",
-        "complex",
+        "performance",
         "models",
         "see",
         "details",
@@ -38722,9 +38719,12 @@
         "text",
         "may",
         "additional",
-        "options"
+        "options",
+        "running",
+        "complete",
+        "tasks"
       ],
-      "word_count": 1047,
+      "word_count": 979,
       "file_path": "docs/docs__en__api__ruby__completions__create.md"
     },
     "/docs/en/api/ruby/messages": {
@@ -38746,13 +38746,13 @@
         "text",
         "number",
         "results",
+        "true",
         "invocation",
         "input",
-        "true",
         "message",
         "used"
       ],
-      "word_count": 66475,
+      "word_count": 67059,
       "file_path": "docs/docs__en__api__ruby__messages.md"
     },
     "/docs/en/api/ruby/messages/batches": {
@@ -38773,14 +38773,14 @@
         "results",
         "request",
         "invocation",
-        "response",
         "cache",
+        "response",
         "used",
         "input",
         "which",
         "create"
       ],
-      "word_count": 18239,
+      "word_count": 18213,
       "file_path": "docs/docs__en__api__ruby__messages__batches.md"
     },
     "/docs/en/api/ruby/messages/batches/cancel": {
@@ -38816,16 +38816,16 @@
       "content_preview": "## Create a Message Batch  `messages.batches.create(**kwargs) -> MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to proc...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -38836,7 +38836,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6238,
+      "word_count": 6372,
       "file_path": "docs/docs__en__api__ruby__messages__batches__create.md"
     },
     "/docs/en/api/ruby/messages/batches/delete": {
@@ -38956,8 +38956,8 @@
       "content_preview": "## Count tokens in a Message  `messages.count_tokens(**kwargs) -> MessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
@@ -38976,7 +38976,7 @@
         "via",
         "name"
       ],
-      "word_count": 5325,
+      "word_count": 5459,
       "file_path": "docs/docs__en__api__ruby__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/messages/create": {
@@ -38994,17 +38994,17 @@
         "breakpoint",
         "true",
         "tokens",
-        "used",
         "search",
-        "input",
+        "used",
         "blocks",
+        "input",
         "only",
         "prompt",
+        "system",
         "invocation",
-        "number",
-        "system"
+        "returned"
       ],
-      "word_count": 8010,
+      "word_count": 8104,
       "file_path": "docs/docs__en__api__ruby__messages__create.md"
     },
     "/docs/en/api/ruby/models": {
@@ -44023,6 +44023,34 @@
       ],
       "word_count": 4128,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
+    },
+    "/docs/en/build-with-claude/vision-coordinates": {
+      "title": "Coordinates and bounding boxes",
+      "content_preview": "# Coordinates and bounding boxes  How Claude resizes images, and how to work with the pixel coordinates it returns for bounding boxes, points, and UI elements.  ---  Claude can locate and label regions of an image (for example, returning bounding boxes for tables, form fields, chart elements, or UI",
+      "keywords": [
+        "image",
+        "coordinates",
+        "claude",
+        "resize",
+        "dimensions",
+        "pixel",
+        "resizes",
+        "images",
+        "returns",
+        "example",
+        "see",
+        "bounding",
+        "before",
+        "when",
+        "pre",
+        "need",
+        "model",
+        "resolution",
+        "limits",
+        "rescale"
+      ],
+      "word_count": 1222,
+      "file_path": "docs/docs__en__build-with-claude__vision-coordinates.md"
     },
     "/docs/en/build-with-claude/vision": {
       "title": "Vision",

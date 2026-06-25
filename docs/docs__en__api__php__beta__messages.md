@@ -1685,6 +1685,32 @@ var_dump($betaMessageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+### Beta Code Execution Tool 20260521
+
+- `BetaCodeExecutionTool20260521`
+
+  - `"code_execution" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"code_execution_20260521" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
 ### Beta Code Execution Tool Result Block
 
 - `BetaCodeExecutionToolResultBlock`
@@ -2125,6 +2151,10 @@ var_dump($betaMessageTokensCount);
 
       The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
+    - `BetaFallbackRefusalTrigger trigger`
+
+      What caused the `from` model to hand over at this hop.
+
     - `"fallback" type`
 
 ### Beta Content Block Param
@@ -2425,6 +2455,10 @@ var_dump($betaMessageTokensCount);
 
     - `"fallback" type`
 
+    - `?mixed trigger`
+
+      The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
 ### Beta Content Block Source
 
 - `BetaContentBlockSource`
@@ -2561,6 +2595,10 @@ var_dump($betaMessageTokensCount);
 
     The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
+  - `BetaFallbackRefusalTrigger trigger`
+
+    What caused the `from` model to hand over at this hop.
+
   - `"fallback" type`
 
 ### Beta Fallback Block Param
@@ -2576,6 +2614,10 @@ var_dump($betaMessageTokensCount);
     Identifies one hop of a fallback transition.
 
   - `"fallback" type`
+
+  - `?mixed trigger`
+
+    The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
 ### Beta Fallback Info
 
@@ -2648,6 +2690,16 @@ var_dump($betaMessageTokensCount);
   - `?Speed speed`
 
   - `?Thinking thinking`
+
+### Beta Fallback Refusal Trigger
+
+- `BetaFallbackRefusalTrigger`
+
+  - `?Category category`
+
+    The policy category that triggered a refusal.
+
+  - `"refusal" type`
 
 ### Beta File Document Source
 
@@ -3614,9 +3666,7 @@ var_dump($betaMessageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
   - `?string explanation`
 
@@ -5088,6 +5138,30 @@ var_dump($betaMessageTokensCount);
       This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `"code_execution_20260120" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20260521`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260521" type`
 
     - `?list<AllowedCaller> allowedCallers`
 

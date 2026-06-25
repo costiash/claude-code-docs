@@ -916,26 +916,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Exceptional model for specialized complex tasks
 
-        - `"claude-opus-4-0"ClaudeOpus4_0`
-
-          Powerful model for complex tasks
-
-        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-          Powerful model for complex tasks
-
-        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-          High-performance model with extended thinking
-
-        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-          High-performance model with extended thinking
-
-        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-          Fast and cost-effective model
-
       - `CacheControlEphemeral? CacheControl`
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -1224,6 +1204,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1270,6 +1252,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1302,6 +1286,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1331,6 +1317,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -1364,6 +1352,42 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
+          - `CacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `class CodeExecutionTool20260521:`
+
+          Code execution tool with REPL state persistence.
+
+          - `JsonElement Name "code_execution"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "code_execution_20260521"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1393,6 +1417,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -1426,6 +1452,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1458,6 +1486,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1489,6 +1519,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -1525,6 +1557,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1590,6 +1624,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             List of domains to allow fetching from
@@ -1640,6 +1676,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -1685,6 +1723,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1737,6 +1777,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -1796,6 +1838,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1829,6 +1873,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 

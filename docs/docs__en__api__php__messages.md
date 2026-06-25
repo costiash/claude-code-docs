@@ -1192,6 +1192,32 @@ var_dump($messageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+### Code Execution Tool 20260521
+
+- `CodeExecutionTool20260521`
+
+  - `"code_execution" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"code_execution_20260521" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?CacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
 ### Code Execution Tool Result Block
 
 - `CodeExecutionToolResultBlock`
@@ -2098,6 +2124,30 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+  - `CodeExecutionTool20260521`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260521" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?CacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `MemoryTool20250818`
 
     - `"memory" name`
@@ -2607,26 +2657,6 @@ var_dump($messageTokensCount);
 
     Exceptional model for specialized complex tasks
 
-  - `"claude-opus-4-0"`
-
-    Powerful model for complex tasks
-
-  - `"claude-opus-4-20250514"`
-
-    Powerful model for complex tasks
-
-  - `"claude-sonnet-4-0"`
-
-    High-performance model with extended thinking
-
-  - `"claude-sonnet-4-20250514"`
-
-    High-performance model with extended thinking
-
-  - `"claude-3-haiku-20240307"`
-
-    Fast and cost-effective model
-
 ### Output Config
 
 - `OutputConfig`
@@ -2840,9 +2870,7 @@ var_dump($messageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered the refusal.
-
-    `null` when the refusal doesn't map to a named category.
+    The policy category that triggered a refusal.
 
   - `?string explanation`
 
@@ -3965,6 +3993,30 @@ var_dump($messageTokensCount);
       This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `"code_execution_20260120" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?CacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `CodeExecutionTool20260521`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260521" type`
 
     - `?list<AllowedCaller> allowedCallers`
 

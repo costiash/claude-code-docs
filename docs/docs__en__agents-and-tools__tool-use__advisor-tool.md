@@ -46,7 +46,7 @@ If you request an invalid pair, the API returns a `400 invalid_request_error` na
 
 ## Platform availability
 
-The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on AWS Bedrock, Vertex AI, or Microsoft Foundry.
+The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 
 ## Quick start
 
@@ -644,7 +644,7 @@ If your agent exposes other planner-like tools (for example, a todo list tool), 
 
 #### Suggested system prompt for coding tasks
 
-Without system-prompt steering, the executor tends to under-call the advisor in some domains — coding tasks in particular. For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor.
+Without system-prompt steering, the executor tends to under-call the advisor in some domains, particularly coding tasks. For coding tasks where you want consistent advisor timing and around two to three calls for each task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor.
 
 Timing guidance:
 
@@ -791,4 +791,4 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 - **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
 - **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
 - **The top-level `max_tokens` applies to executor output only.** It does not bound advisor tokens. To cap advisor output, set [`max_tokens` on the tool definition](#capping-advisor-output).
-- **[Priority Tier](/docs/en/api/service-tiers)** is honored for each model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.
+- **[Priority Tier](/docs/en/api/service-tiers)** applies to each model independently. A Priority Tier commitment on the executor model does not extend to the advisor; advisor calls run at Priority Tier only if your organization also holds a commitment on the advisor model.
