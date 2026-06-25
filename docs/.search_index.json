@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-25T05:05:47Z",
+  "generated_at": "2026-06-25T07:56:05Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -224,7 +224,7 @@
         "agent",
         "before"
       ],
-      "word_count": 2109,
+      "word_count": 2094,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -564,31 +564,31 @@
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
-      "title": "LLM gateway configuration",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateway configuration  > Learn how to configure Claude Code to work with LLM gateway solutions. Covers gateway",
+      "title": "LLM gateways",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateways  >...",
       "keywords": [
+        "gateway",
         "claude",
         "code",
-        "gateway",
-        "api",
-        "litellm",
-        "through",
-        "request",
+        "provider",
+        "credential",
+        "organization",
+        "developer",
+        "llm",
+        "usage",
+        "one",
         "model",
-        "endpoint",
+        "each",
+        "api",
         "configuration",
-        "headers",
-        "key",
-        "format",
         "anthropic",
-        "when",
-        "using",
-        "pass",
-        "proxy",
-        "must",
-        "body"
+        "requests",
+        "gateways",
+        "through",
+        "out",
+        "traffic"
       ],
-      "word_count": 1154,
+      "word_count": 1240,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -700,7 +700,7 @@
         "fallback",
         "sonnet"
       ],
-      "word_count": 6944,
+      "word_count": 6942,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -1008,7 +1008,7 @@
         "github",
         "mcp"
       ],
-      "word_count": 12970,
+      "word_count": 12978,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1164,9 +1164,9 @@
         "proxy",
         "environment",
         "configuration",
-        "gateway",
         "more",
         "llm",
+        "gateway",
         "variables",
         "div",
         "teams",
@@ -1176,7 +1176,7 @@
         "learn",
         "organization"
       ],
-      "word_count": 1559,
+      "word_count": 1560,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {

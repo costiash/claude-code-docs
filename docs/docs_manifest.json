@@ -9285,8 +9285,8 @@
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
       "original_md_url": "https://platform.claude.com/docs/en/costs.md",
-      "hash": "a0b3b48bed546b997fb12d2ff6c22048cab202178695f2dff9ec39f986ffa247",
-      "last_updated": "2026-06-16T22:24:12.065292"
+      "hash": "c883ba384379be69c733775c3f7d18a821a4c3258415ef5f5921fecf340d8418",
+      "last_updated": "2026-06-25T07:50:03.362480"
     },
     "claude-code__data-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/data-usage",
@@ -9381,8 +9381,8 @@
     "claude-code__llm-gateway.md": {
       "original_url": "https://platform.claude.com/docs/en/llm-gateway",
       "original_md_url": "https://platform.claude.com/docs/en/llm-gateway.md",
-      "hash": "ce4d8245ea18e16b443b2d36ec9d065bdd9cc9827b63cf58b5a4ec4fbf6d4b3b",
-      "last_updated": "2026-06-10T01:30:53.599913"
+      "hash": "b7166073dd4f7e2e6edf824dd70bab1839dc4e052c4f84e2e841cbd54db9a714",
+      "last_updated": "2026-06-25T07:51:35.097669"
     },
     "docs__en__manage-claude__access-transparency.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency",
@@ -9759,8 +9759,8 @@
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
       "original_md_url": "https://platform.claude.com/docs/en/model-config.md",
-      "hash": "c091548952213cb5b9773c52916a43a7f8390bf8237e8571d4b1d4c580d823fc",
-      "last_updated": "2026-06-25T05:02:20.005269"
+      "hash": "662b53b28c8b8967ac86dc9406ef492cec0044650d1683147cb1e77428b6fd01",
+      "last_updated": "2026-06-25T07:52:41.947363"
     },
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
@@ -9831,8 +9831,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "7048c758919db9d5cd35e15bfd5e5c9e118371a28818cb76c54b2898f5f8c784",
-      "last_updated": "2026-06-25T05:03:43.994719"
+      "hash": "68681b8385681f021012cba6ecd810810971a1ae5c8f663c6f4a2537a32c9d88",
+      "last_updated": "2026-06-25T07:54:02.800554"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -9873,8 +9873,8 @@
     "claude-code__third-party-integrations.md": {
       "original_url": "https://platform.claude.com/docs/en/third-party-integrations",
       "original_md_url": "https://platform.claude.com/docs/en/third-party-integrations.md",
-      "hash": "b7b7771952d3c9327032f7f523e7c127320ddc5e62d81d2916d2f9e65671df51",
-      "last_updated": "2026-06-11T19:39:33.696899"
+      "hash": "ae255fb39e3da8287776e10a53628659f09f78e9c8fe2af8328e116be6f65612",
+      "last_updated": "2026-06-25T07:54:13.932547"
     },
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
@@ -9897,11 +9897,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-25T05:05:43.904363",
-    "fetch_duration_seconds": 2282.560114,
-    "total_pages_discovered": 1902,
+    "last_fetch_completed": "2026-06-25T07:56:01.968947",
+    "fetch_duration_seconds": 2258.032823,
+    "total_pages_discovered": 1905,
     "pages_fetched_successfully": 1649,
-    "pages_failed": 254,
+    "pages_failed": 257,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/advisor",
@@ -10118,6 +10118,9 @@
       "/docs/en/how-claude-code-works",
       "/docs/en/keybindings",
       "/docs/en/large-codebases",
+      "/docs/en/llm-gateway-connect",
+      "/docs/en/llm-gateway-protocol",
+      "/docs/en/llm-gateway-rollout",
       "/docs/en/managed-mcp",
       "/docs/en/mcp-quickstart",
       "/docs/en/permission-modes",
@@ -10163,7 +10166,7 @@
     "total_files": 1649,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-25T05:05:43.904387",
+  "last_updated": "2026-06-25T07:56:01.968971",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
