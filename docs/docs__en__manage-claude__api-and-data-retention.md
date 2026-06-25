@@ -51,7 +51,7 @@ For the most up-to-date information on what products and features are ZDR-eligib
 
 Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. Requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
 
-This requirement applies on the Claude API. For Claude Fable 5 on Amazon Bedrock, Vertex AI, and Microsoft Foundry, data retention requirements are set by each platform.
+This requirement applies on the Claude API. For Claude Fable 5 on Amazon Bedrock, Google Cloud, and Microsoft Foundry, data retention requirements are set by each platform.
 
 Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
 
@@ -95,7 +95,7 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 
 - **Claude consumer products:** Claude Free, Pro, or Max plans
 - **Console and Workbench:** Usage through the Claude Console interface
-- **Partner-operated platforms:** Amazon Bedrock or Vertex AI (refer to those platforms' compliance documentation)
+- **Partner-operated platforms:** Amazon Bedrock or Google Cloud (refer to those platforms' compliance documentation)
 - **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available
 - **Third-party integrations:** Data processed by external tools or services connected to your application
 - **Claude Code:** Claude Code is not covered under HIPAA readiness
@@ -254,9 +254,9 @@ Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss 
 
 </section>
 
-<section title="Does this apply to Amazon Bedrock or Vertex AI?">
+<section title="Does this apply to Amazon Bedrock or Google Cloud?">
 
-No. The ZDR and HIPAA arrangements described on this page apply to the Claude API, where Anthropic is the data processor. On Bedrock and Vertex AI, the cloud provider is the data processor; refer to those platforms' data retention and compliance policies for their equivalent controls.
+No. The ZDR and HIPAA arrangements described on this page apply to the Claude API, where Anthropic is the data processor. On Bedrock and Google Cloud, the cloud provider is the data processor; refer to those platforms' data retention and compliance policies for their equivalent controls.
 
 </section>
 

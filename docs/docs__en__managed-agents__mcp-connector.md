@@ -19,9 +19,9 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Declare MCP servers on the agent
 
-Specify MCP servers in the `mcp_servers` array when creating an agent. Each server needs a `type`, a unique `name`, and a `url`. No auth tokens are provided at this stage.
+Specify MCP servers in the `mcp_servers` array when creating an agent. Each server needs a `type`, a unique `name`, and a `url`. No authentication tokens are provided at this stage.
 
-The `name` you assign in the MCP server array is used to reference the `mcp_toolset` entries in the tools array.
+Each declared server also needs a matching `mcp_toolset` entry in the `tools` array. The toolset's `mcp_server_name` must match the server's `name`.
 
 <CodeGroup defaultLanguage="CLI">
   
@@ -238,7 +238,7 @@ Each entry in the `mcp_servers` array defines one connection.
 | --- | --- |
 | `type` | Required. Must be `"url"`. |
 | `name` | Required. A unique name for this server within the agent (1–255 characters). Used as the `mcp_server_name` in the `tools` array and surfaced on MCP tool events in the [session event stream](/docs/en/managed-agents/events-and-streaming). |
-| `url` | Required. The endpoint of the remote MCP server (up to 2048 characters). |
+| `url` | Required. The endpoint of the remote MCP server (up to 2048 characters). See [Supported MCP server types](/docs/en/managed-agents/reference#supported-mcp-server-types) for transport requirements. |
 
 Constraints:
 
@@ -385,17 +385,29 @@ session = client.beta.sessions.create(
 
 </CodeGroup>
 
-Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`; if none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
+Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`. If none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
 
 ### Handle connection and authentication failures
 
-Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A `session.error` event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
+Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A [`session.error`](/docs/en/managed-agents/events-and-streaming) event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
 
 | Error type | Meaning |
 | --- | --- |
 | `mcp_connection_failed_error` | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure). |
 | `mcp_authentication_failed_error` | The MCP server was reached but rejected the credential from the attached vault. |
 
-You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for details on consuming `session.error` and other events.
+You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition.
 
-See [Supported MCP server types](/docs/en/managed-agents/reference#supported-mcp-server-types) in the reference for transport requirements.
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Permission policies" icon="check" href="/docs/en/managed-agents/permission-policies">
+    Control when agent and MCP tools run.
+  </Card>
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+    Send events, stream responses, and interrupt or redirect your session mid-execution.
+  </Card>
+  <Card title="Supported MCP server types" icon="book" href="/docs/en/managed-agents/reference#supported-mcp-server-types">
+    Transport requirements for remote MCP servers.
+  </Card>
+</CardGroup>

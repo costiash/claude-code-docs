@@ -4,433 +4,31 @@ Claude's vision capabilities allow it to understand and analyze images, opening 
 
 ---
 
-This guide describes how to work with images in Claude, including best practices, code examples, and limitations to keep in mind.
+This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](/docs/en/build-with-claude/vision-coordinates).
 
 ---
 
-## How to use vision
+## Send images to Claude
 
 Use Claude's vision capabilities through:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-- The [Console Workbench](/workbench/). A button to add images appears at the top right of every User message block.
-- API request. See the examples in this guide.
+- The [Anthropic Workbench](/workbench/). A button to add images appears at the top right of every User message block.
+- API request. See the following examples.
 
-Multiple images can be included in a single request, which Claude will analyze jointly when formulating its response. This can be helpful for comparing or contrasting images.
+On the API, provide images to Claude as `image` content blocks using one of three source types:
 
----
-
-## Before you upload
-
-### General limits
-
-The maximal number of images per message or request is:
-  - 20 per message on [claude.ai](https://claude.ai/).
-  - 100 per request on the API, for models with a 200k-token context window.
-  - 600 per request on the API, for all other models.
-
-The maximal dimensions per image are 8000x8000 px.
-
-If a single API request contains more than 20 images, a stricter per-image dimension limit applies. On Amazon Bedrock and Vertex AI, document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references "many-image requests" and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
-
-The maximal size per image is:
-  - 10&nbsp;MB (base64-encoded) when using the Claude API directly.
-  - 5&nbsp;MB (base64-encoded) on Amazon Bedrock and Vertex AI.
-  - 10&nbsp;MB on [claude.ai](https://claude.ai/).
+1. A base64-encoded image embedded in the request body
+2. A URL reference to an image hosted online
+3. A `file_id` returned by the [Files API](/docs/en/build-with-claude/files) (upload once, reference many times)
 
 <Note>
-While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Vertex AI) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
-
-Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
+On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
 </Note>
-
-### Evaluate image size
-
-Claude views images in patches instead of pixels. Each patch is a 28×28 pixel block of the image, referred to as a visual token. An image therefore costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
-
-If Claude receives an image that is too large, it resizes it. The maximal native image resolution is:
-
-- For Claude Fable 5 and Claude Mythos 5: 4784 tokens, and at most 2576 pixels on the long edge.
-- For Claude Opus 4.8: 4784 tokens, and at most 2576 pixels on the long edge.
-- For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
-- For other models: 1568 tokens, and at most 1568 pixels on the long edge.
-
-<Note>
-If your input image is larger than this native resolution, it is first resized to the largest possible size that preserves the aspect ratio. All images, resized or not, are then padded on the bottom and right edges to a multiple of 28 pixels. See [How Claude resizes and pads images](#how-claude-resizes-and-pads-images) for the exact rule.
-
-When asking Claude to output coordinates (points, bounding boxes, and so on), it works best with absolute pixel coordinates expressed with respect to the resized image it sees. See [Working with coordinates and bounding boxes](#working-with-coordinates-and-bounding-boxes) for how to handle this.
-</Note>
-
-To minimize latency and to simplify coordinate-based workflows, you should prefer resizing images before uploading them.
-
-### Calculate image costs
-
-Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the image's visual token count (see [Evaluate image size](#evaluate-image-size)) by the [per-token price of the model](https://claude.com/pricing) you're using.
-
-Here are examples of tokenization and approximate costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
-
-| Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
-| ----------------------------- | ------------ | ------------ | ---------------- |
-| 200x200 px(0.04 megapixels)   | 64           | \~$0.00019   | \~$0.19          |
-| 1000x1000 px(1 megapixel)     | 1296         | \~$0.0039    | \~$3.89          |
-| 1092x1092 px(1.19 megapixels) | 1521         | \~$0.0046    | \~$4.56          |
-| 1920x1080 px(2.07 megapixels) | 1560         | \~$0.0047    | \~$4.68          |
-| 2000x1500 px(3 megapixels)    | 1564         | \~$0.0047    | \~$4.69          |
-| 3840x2160 px(8.29 megapixels) | 1560         | \~$0.0047    | \~$4.68          |
-
-Note that the last three images exceed the native resolution and are downscaled before processing (to 1456x819 px, 1270x952 px, and 1456x819 px respectively), which caps their token cost. The 4K image costs no more than the 1920x1080 image because both downscale to the same size; the extra resolution is discarded.
-
-#### High-resolution image support \{#high-resolution-image-support-on-claude-opus-4-7}
-
-Claude Opus 4.7 is the first Claude model with high-resolution image support; Claude Opus 4.8, Claude Fable 5, Claude Mythos 5, and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
-
-High-resolution support is automatic on Claude Opus 4.7 and later models and requires no beta header or client-side opt-in.
-
-High-resolution images on Claude Opus 4.7, Claude Opus 4.8, Claude Fable 5, and Claude Mythos 5 can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
-
-Here are the same image sizes tokenized for Claude Opus 4.7 and Claude Opus 4.8, based on their per-token price of $5 per million input tokens:
-
-| Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
-| ----------------------------- | ------------ | ------------ | ---------------- |
-| 200x200 px(0.04 megapixels)   | 64           | \~$0.00032   | \~$0.32          |
-| 1000x1000 px(1 megapixel)     | 1296         | \~$0.0065    | \~$6.48          |
-| 1092x1092 px(1.19 megapixels) | 1521         | \~$0.0076    | \~$7.61          |
-| 1920x1080 px(2.07 megapixels) | 2691         | \~$0.013     | \~$13.46         |
-| 2000x1500 px(3 megapixels)    | 3888         | \~$0.019     | \~$19.44         |
-| 3840x2160 px(8.29 megapixels) | 4784         | \~$0.024     | \~$23.92         |
-
-Only the last image exceeds the higher limits: the 4K image is downscaled to 2576x1449 px before processing. High-resolution support raises the resolution limits but does not remove them; images larger than 2576 px on the long edge (or 4784 visual tokens) are still downscaled.
-
-### Ensure image quality
-
-When providing images to Claude, keep the following in mind for best results:
-
-- **Image format**: Use a supported image format: JPEG, PNG, GIF, or WebP.\
-  Animations are unsupported, and only the first frame will be used.
-- **Image clarity**: Ensure images are clear and not too blurry or pixelated.
-- **Text**: If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context just to enlarge the text.
-- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing your images, cropping them, or both.
-- **Image compression**: Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
-
----
-
-## Working with coordinates and bounding boxes
-
-Claude can locate and label regions of an image (for example, returning bounding boxes for tables, form fields, chart elements, or UI components).
-
-<Note>
-**Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
-</Note>
-
-Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
-
-<Note>
-Claude's spatial reasoning has limits (see [Limitations](#limitations)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF uploads](/docs/en/build-with-claude/pdf-support), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
-</Note>
-
-### How Claude resizes and pads images
-
-Claude finds the largest aspect-preserving size that satisfies both of the model's image limits:
-
-1. **Edge limit:** neither side exceeds the maximum edge length (1568 px for most models, 2576 px for Claude Opus 4.7 and later models).
-2. **Visual token limit:** the image's token cost `⌈width / 28⌉ × ⌈height / 28⌉` does not exceed the model's visual token budget (1568 tokens for most models, 4784 for Claude Opus 4.7 and later models).
-
-For most photos and screenshots the edge limit is what triggers a resize. For portrait documents the visual token limit usually triggers first, and overlooking it is the most common cause of misaligned coordinates. For example, an A4 page scanned at 130 DPI is 1075×1520 pixels: both sides are under 1568 px, but it costs `39 × 55 = 2145` visual tokens, so Claude resizes it to 924×1307.
-
-Claude then pads every image, whether or not it was resized, up to the next multiple of 28 pixels on the bottom and right edges (924×1307 becomes 924×1316 in the example). The padding contains no content: Claude perceives the padded image, but the page content only ever occupies the un-padded resized region. **Always normalize or rescale by the resized dimensions, not the padded dimensions**; dividing by the padded dimensions scales every coordinate by a small amount.
-
-### Resize your image before uploading
-
-The most reliable approach is to resize your image yourself before uploading, so the image you have is exactly the image Claude sees and the coordinates Claude returns need no conversion.
-
-The following reference implementation computes the exact size Claude resizes an image to:
-
-```python
-import math
-
-
-def count_image_tokens(width: int, height: int) -> int:
-    """Visual tokens consumed by an image: one token per 28x28 pixel patch."""
-    return math.ceil(width / 28) * math.ceil(height / 28)
-
-
-def resized_size(
-    width: int,
-    height: int,
-    max_edge: int = 1568,
-    max_tokens: int = 1568,
-) -> tuple[int, int]:
-    """The size Claude resizes an image to before padding.
-
-    Defaults are for most models. For Claude Opus 4.7 and later models, use
-    max_edge=2576 and max_tokens=4784. Returns (width, height). Images that
-    already fit within the limits are returned unchanged.
-    """
-
-    def fits(w: int, h: int) -> bool:
-        return (
-            math.ceil(w / 28) * 28 <= max_edge
-            and math.ceil(h / 28) * 28 <= max_edge
-            and count_image_tokens(w, h) <= max_tokens
-        )
-
-    if fits(width, height):
-        return (width, height)
-    if height > width:
-        resized_h, resized_w = resized_size(height, width, max_edge, max_tokens)
-        return (resized_w, resized_h)
-
-    # Binary search along the long edge for the largest aspect-preserving
-    # size that fits.
-    aspect_ratio = width / height
-    lo, hi = 1, width  # lo always fits; hi never fits
-    while lo + 1 < hi:
-        mid = (lo + hi) // 2
-        if fits(mid, max(round(mid / aspect_ratio), 1)):
-            lo = mid
-        else:
-            hi = mid
-    return (lo, max(round(lo / aspect_ratio), 1))
-
-
-# The A4 example from "How Claude resizes and pads images":
-print(resized_size(1075, 1520))  # (924, 1307)
-```
-
-1. Resize the image to the dimensions returned by `resized_size`. If the image already fits within the model's limits, `resized_size` returns its dimensions unchanged and no resize is needed.
-2. Send the resized image to the API. Don't pad it yourself; Claude handles padding, and padding doesn't shift the coordinate origin.
-3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."*
-4. Use the returned coordinates directly against the image you sent. If you need normalized coordinates, divide by the dimensions of the image you sent, not by the original image's dimensions and not by the padded dimensions.
-
-### Rescale coordinates when you cannot pre-resize
-
-If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use `resized_size` from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
-
-```python
-def to_relative_coordinates(
-    x: float,
-    y: float,
-    original_width: int,
-    original_height: int,
-    max_edge: int = 1568,
-    max_tokens: int = 1568,
-) -> tuple[float, float]:
-    """Map a pixel coordinate returned by Claude to relative coordinates in [0, 1].
-
-    Pass the dimensions of the image you uploaded. For Claude Opus 4.7 and
-    later models, use max_edge=2576 and max_tokens=4784.
-    """
-    resized_w, resized_h = resized_size(
-        original_width, original_height, max_edge, max_tokens
-    )
-    return (x / resized_w, y / resized_h)
-
-
-# To express the coordinate in your original image's pixel space, multiply the
-# relative coordinate by your original dimensions:
-# (rel_x * original_width, rel_y * original_height)
-```
-
-Padding is applied only to the bottom and right edges, so the origin doesn't shift and a per-axis linear rescale is sufficient.
-
----
-
-## Prompt examples
-
-Many of the [prompting techniques](/docs/en/build-with-claude/prompt-engineering/overview) that work well for text-based interactions with Claude can also be applied to image-based prompts.
-
-These examples demonstrate best practice prompt structures involving images.
 
 <Tip>
   Just as [placing long documents before your query](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 </Tip>
-
-### About the prompt examples
-
-The following examples demonstrate how to use Claude's vision capabilities using various programming languages and approaches. You can provide images to Claude in three ways:
-
-1. As a base64-encoded image in `image` content blocks
-2. As a URL reference to an image hosted online
-3. Using the Files API (upload once, use multiple times)
-
-<Note>
-On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
-</Note>
-
-The base64 example prompts use these variables:
-
-<CodeGroup>
-```bash cURL
-    # For URL-based images, you can use the URL directly in your JSON request
-
-    # For base64-encoded images, you need to first encode the image
-    # Example of how to encode an image to base64 in bash:
-    BASE64_IMAGE_DATA=$(curl -s "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg" | base64)
-
-    # The encoded data can now be used in your API calls
-```
-
-```python Python
-import base64
-import httpx
-
-# For base64-encoded images
-image1_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-image1_media_type = "image/jpeg"
-image1_data = base64.standard_b64encode(httpx.get(image1_url).content).decode("utf-8")
-
-image2_url = "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg"
-image2_media_type = "image/jpeg"
-image2_data = base64.standard_b64encode(httpx.get(image2_url).content).decode("utf-8")
-
-# For URL-based images, you can use the URLs directly in your requests
-```
-
-```typescript TypeScript nocheck
-import axios from "axios";
-
-// For base64-encoded images
-async function getBase64Image(url: string): Promise<string> {
-  const response = await axios.get(url, { responseType: "arraybuffer" });
-  return Buffer.from(response.data, "binary").toString("base64");
-}
-
-// Usage
-async function prepareImages() {
-  const imageData = await getBase64Image(
-    "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-  );
-  // Now you can use imageData in your API calls
-}
-
-// For URL-based images, you can use the URLs directly in your requests
-```
-
-```csharp C#
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-// For base64-encoded images
-async Task<string> DownloadAndEncodeImageAsync(string url)
-{
-    using var client = new HttpClient();
-    var bytes = await client.GetByteArrayAsync(url);
-    return Convert.ToBase64String(bytes);
-}
-
-// Usage:
-// var imageData = await DownloadAndEncodeImageAsync("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg");
-// For URL-based images, you can use the URLs directly in your requests
-```
-
-```go Go hidelines={1..9,-8..}
-package main
-
-import (
-	"encoding/base64"
-	"fmt"
-	"io"
-	"net/http"
-)
-
-func downloadAndEncodeImage(url string) (string, error) {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return "", err
-	}
-	req.Header.Set("User-Agent", "AnthropicDocsBot/1.0")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	return base64.StdEncoding.EncodeToString(data), nil
-}
-
-func main() {
-	imageData, err := downloadAndEncodeImage("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(imageData[:50])
-}
-```
-
-```java Java nocheck hidelines={1..7,-1}
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Base64;
-
-public class ImageHandlingExample {
-
-  public static void main(String[] args) throws IOException, InterruptedException {
-    // For base64-encoded images
-    String image1Url =
-      "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
-    String image1MediaType = "image/jpeg";
-    String image1Data = downloadAndEncodeImage(image1Url);
-
-    String image2Url =
-      "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg";
-    String image2MediaType = "image/jpeg";
-    String image2Data = downloadAndEncodeImage(image2Url);
-
-    // For URL-based images, you can use the URLs directly in your requests
-  }
-
-  private static String downloadAndEncodeImage(String imageUrl) throws IOException {
-    try (InputStream inputStream = new URL(imageUrl).openStream()) {
-      return Base64.getEncoder().encodeToString(inputStream.readAllBytes());
-    }
-  }
-}
-```
-
-```php PHP nocheck hidelines={1}
-<?php
-// For base64-encoded images
-function downloadAndEncodeImage($url) {
-    $imageData = file_get_contents($url);
-    return base64_encode($imageData);
-}
-
-$image1Url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
-$image1MediaType = "image/jpeg";
-$image1Data = downloadAndEncodeImage($image1Url);
-
-// For URL-based images, you can use the URLs directly in your requests
-```
-
-```ruby Ruby
-require "base64"
-require "net/http"
-require "uri"
-
-# For base64-encoded images
-def download_and_encode_image(url)
-  uri = URI.parse(url)
-  response = Net::HTTP.get_response(uri)
-  Base64.strict_encode64(response.body)
-end
-
-image1_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-image1_media_type = "image/jpeg"
-image1_data = download_and_encode_image(image1_url)
-
-# For URL-based images, you can use the URLs directly in your requests
-```
-</CodeGroup>
-
-Below are examples of how to include images in a Messages API request using base64-encoded images and URL references:
 
 ### Base64-encoded image example
 
@@ -1345,278 +943,135 @@ puts message.content
 
 See [Messages API examples](/docs/en/api/messages/create) for more example code and parameter details.
 
-<section title="Example: One image">
+### Multiple images
 
-It's best to place images earlier in the prompt than questions about them or instructions for tasks that use them.
+You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
-Ask Claude to describe one image.
+```python Python hidelines={1..2}
+import anthropic
 
-| Role | Content                        |
-| ---- | ------------------------------ |
-| User | \[Image\] Describe this image. |
-
-<Tabs>
-  <Tab title="Using Base64">
-    ```python Python hidelines={1..2}
-    import anthropic
-
-    client = anthropic.Anthropic()
-    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
-    image1_media_type = "image/png"
-
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": image1_media_type,
-                            "data": image1_data,
-                        },
+client = anthropic.Anthropic()
+message = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "Image 1:"},
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC",
                     },
-                    {"type": "text", "text": "Describe this image."},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-  <Tab title="Using URL">
-    ```python Python
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "url",
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
-                        },
+                },
+                {"type": "text", "text": "Image 2:"},
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC",
                     },
-                    {"type": "text", "text": "Describe this image."},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-</Tabs>
+                },
+                {"type": "text", "text": "How are these images different?"},
+            ],
+        }
+    ],
+)
+print(message)
+```
 
-</section>
-<section title="Example: Multiple images">
+In a multi-turn conversation, add new images in later `user` turns the same way. Claude has access to every image from earlier turns, so follow-up questions such as "Are these similar to the first two?" work without including the earlier images again in the new turn's content.
 
-In situations where there are multiple images, introduce each image with `Image 1:` and `Image 2:` and so on. You don't need newlines between images or between images and the prompt.
+---
 
-Ask Claude to describe the differences between multiple images.
-| Role | Content |
-| ---- | ------------------------------------------------------------------------- |
-| User | Image 1: \[Image 1\] Image 2: \[Image 2\] How are these images different? |
+## Image limits and costs
 
-<Tabs>
-  <Tab title="Using Base64">
-    ```python Python hidelines={1..2}
-    import anthropic
+### Request limits
 
-    client = anthropic.Anthropic()
-    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
-    image1_media_type = "image/png"
-    image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
-    image2_media_type = "image/png"
+The maximum number of images per message or request is:
+  - 20 per message on [claude.ai](https://claude.ai/).
+  - 100 per request on the API, for models with a 200k-token context window.
+  - 600 per request on the API, for all other models.
 
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Image 1:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": image1_media_type,
-                            "data": image1_data,
-                        },
-                    },
-                    {"type": "text", "text": "Image 2:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": image2_media_type,
-                            "data": image2_data,
-                        },
-                    },
-                    {"type": "text", "text": "How are these images different?"},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-  <Tab title="Using URL">
-    ```python Python
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Image 1:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "url",
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
-                        },
-                    },
-                    {"type": "text", "text": "Image 2:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "url",
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg",
-                        },
-                    },
-                    {"type": "text", "text": "How are these images different?"},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-</Tabs>
+The maximum dimensions per image are 8000x8000 px.
 
-</section>
-<section title="Example: Multiple images with a system prompt">
+If a single API request contains more than 20 images, a stricter per-image dimension limit applies. On Amazon Bedrock and Google Cloud, document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references "many-image requests" and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
 
-Ask Claude to describe the differences between multiple images, while giving it a system prompt for how to respond.
+The maximum size per image is:
+  - 10&nbsp;MB (base64-encoded) when using the Claude API directly.
+  - 5&nbsp;MB (base64-encoded) on Amazon Bedrock and Google Cloud.
+  - 10&nbsp;MB on [claude.ai](https://claude.ai/).
 
-| Content |                                                                           |
-| ------- | ------------------------------------------------------------------------- |
-| System  | Respond only in Spanish.                                                  |
-| User    | Image 1: \[Image 1\] Image 2: \[Image 2\] How are these images different? |
+<Note>
+Although the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
-<Tabs>
-  <Tab title="Using Base64">
-    ```python Python hidelines={1..2}
-    import anthropic
+Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](#evaluate-image-size)).
+</Note>
 
-    client = anthropic.Anthropic()
-    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
-    image1_media_type = "image/png"
-    image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
-    image2_media_type = "image/png"
+### Supported formats
 
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        system="Respond only in Spanish.",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Image 1:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": image1_media_type,
-                            "data": image1_data,
-                        },
-                    },
-                    {"type": "text", "text": "Image 2:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": image2_media_type,
-                            "data": image2_data,
-                        },
-                    },
-                    {"type": "text", "text": "How are these images different?"},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-  <Tab title="Using URL">
-    ```python Python
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        system="Respond only in Spanish.",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Image 1:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "url",
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
-                        },
-                    },
-                    {"type": "text", "text": "Image 2:"},
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "url",
-                            "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg",
-                        },
-                    },
-                    {"type": "text", "text": "How are these images different?"},
-                ],
-            }
-        ],
-    )
-    ```
-  </Tab>
-</Tabs>
+Claude supports JPEG, PNG, GIF, and WebP images (`image/jpeg`, `image/png`, `image/gif`, `image/webp`). Animations are unsupported, and only the first frame is used.
 
-</section>
-<section title="Example: Four images across two conversation turns">
+### Resolution and token cost \{#evaluate-image-size}
 
-Claude's vision capabilities shine in multimodal conversations that mix images and text. You can have extended back-and-forth exchanges with Claude, adding new images or follow-up questions at any point. This enables powerful workflows for iterative image analysis, comparison, or combining visuals with other knowledge.
+Claude views images in patches instead of pixels. Each patch is a 28×28-pixel block of the image, referred to as a visual token. An image, therefore, costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
-Ask Claude to contrast two images, then ask a follow-up question comparing the first images to two new images.
-| Role | Content |
-| --------- | ------------------------------------------------------------------------------------ |
-| User | Image 1: \[Image 1\] Image 2: \[Image 2\] How are these images different? |
-| Assistant | \[Claude's response\] |
-| User | Image 1: \[Image 3\] Image 2: \[Image 4\] Are these images similar to the first two? |
-| Assistant | \[Claude's response\] |
+Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](/docs/en/build-with-claude/vision-coordinates#how-claude-resizes-and-pads-images) for the exact rule.
 
-When using the API, insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages/create) structure.
+| Resolution tier | Models | Max long edge | Max visual tokens |
+| --- | --- | --- | --- |
+| High-resolution | Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7 | 2576 px | 4784 |
+| Standard | All other models | 1568 px | 1568 |
 
-</section>
+High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
+
+The following table shows the visual-token cost for several image sizes on each tier:
+
+| Image size | Standard-tier tokens | High-resolution-tier tokens |
+| --- | --- | --- |
+| 200x200 px (0.04 megapixels) | 64 | 64 |
+| 1000x1000 px (1 megapixel) | 1296 | 1296 |
+| 1092x1092 px (1.19 megapixels) | 1521 | 1521 |
+| 1920x1080 px (2.07 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | 2691 |
+| 2000x1500 px (3 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1564</Tooltip> | 3888 |
+| 3840x2160 px (8.29 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | <Tooltip tooltipContent="Exceeds the high-resolution tier's limit; the image is downscaled before processing, which caps the token cost.">4784</Tooltip> |
+
+To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Sonnet 4.6's $3 per million input tokens (standard tier), the 1000×1000 image costs about \$3.89 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about \$6.48 per thousand and the 4K image about \$23.92 per thousand.
+
+High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](/docs/en/build-with-claude/vision-coordinates), prefer resizing images before uploading them.
+
+### Image quality guidance
+
+When providing images to Claude, keep the following in mind for best results:
+
+- **Image clarity:** Ensure images are clear and not too blurry or pixelated.
+- **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
+- **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both.
+- **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
+
+---
+
+## Coordinates and bounding boxes
+
+For bounding boxes, points, and pixel coordinates, see [Coordinates and bounding boxes](/docs/en/build-with-claude/vision-coordinates). Claude returns absolute pixel coordinates relative to the image it sees after resizing; that guide covers how Claude resizes and pads images and how to pre-resize or rescale so coordinates line up with your original image.
 
 ---
 
 ## Limitations
 
-While Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
+Although Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
-- **People identification**: Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
-- **Accuracy**: Claude may hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
-- **Spatial reasoning**: Claude's coordinate and localization outputs are approximate. Follow the guidance in [Working with coordinates and bounding boxes](#working-with-coordinates-and-bounding-boxes) and verify outputs before relying on them.
-- **Counting**: Claude can give approximate counts of objects in an image but may not always be precisely accurate, especially with large numbers of small objects.
-- **AI generated images**: Claude does not know if an image is AI-generated and may be incorrect if asked. Do not rely on it to detect fake or synthetic images.
-- **Inappropriate content**: Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
-- **Healthcare applications**: While Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
+- **People identification:** Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
+- **Accuracy:** Claude might hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
+- **Spatial reasoning:** Claude's coordinate and localization outputs are approximate. Follow the guidance in [Coordinates and bounding boxes](/docs/en/build-with-claude/vision-coordinates) and verify outputs before relying on them.
+- **Counting:** Claude can give approximate counts of objects in an image but might not always be precisely accurate, especially with large numbers of small objects.
+- **AI-generated images:** Claude cannot determine whether an image is AI-generated and might be incorrect if asked. Do not rely on it to detect fake or synthetic images.
+- **Inappropriate content:** Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
+- **Healthcare applications:** Although Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
 
 Always carefully review and verify Claude's image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.
 
@@ -1626,84 +1081,48 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
   <section title="What image file types does Claude support?">
 
-    Claude currently supports JPEG, PNG, GIF, and WebP image formats, specifically:
-    - `image/jpeg`
-    - `image/png`
-    - `image/gif`
-    - `image/webp`
+    JPEG, PNG, GIF, and WebP. See [Supported formats](#supported-formats).
   
 </section>
 
-{" "}
+  <section title="Can Claude read image URLs?">
 
-<section title="Can Claude read image URLs?">
-
-  Yes, Claude can process images from URLs with URL image source blocks in the API.
-  Simply use the "url" source type instead of "base64" in your API requests.
-  Example:
-  ```json
-  {
-    "type": "image",
-    "source": {
-      "type": "url",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-    }
-  }
-  ```
-
+    Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](#url-based-image-example).
+  
 </section>
 
   <section title="Is there a limit to the image file size I can upload?">
 
-    Yes, there are limits:
-    - Claude API: Maximum 10&nbsp;MB per image
-    - Amazon Bedrock and Vertex AI: Maximum 5&nbsp;MB per image
-    - claude.ai: Maximum 10&nbsp;MB per image
-
-    Images larger than these limits are rejected and return an error when using the API.
-
-    These are per-image limits. The overall [request size limit](/docs/en/api/overview#request-size-limits) (32&nbsp;MB on the Claude API; lower on Amazon Bedrock and Vertex AI) also applies, so requests with many large images can exceed it before reaching the per-image cap. On the Claude API, upload with the [Files API](/docs/en/build-with-claude/files) and reference by `file_id` to keep request payloads small. The Files API is not currently available on Amazon Bedrock or Vertex AI, so reduce image size on those platforms instead.
-
+    Yes. See [Request limits](#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
   
 </section>
 
   <section title="How many images can I include in one request?">
 
-    The image limits are:
-    - Messages API: Up to 600 images per request (100 for models with a 200k-token context window)
-    - claude.ai: Up to 20 images per turn
-
-    Requests exceeding these limits are rejected and return an error. Requests with many large images may also fail before reaching these limits; see [General limits](#general-limits) for details.
-
+    Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
   
 </section>
 
-{" "}
+  <section title="Does Claude read image metadata?">
 
-<section title="Does Claude read image metadata?">
-
-  No, Claude does not parse or receive any metadata from images passed to it.
-
+    No, Claude does not parse or receive any metadata from images passed to it.
+  
 </section>
 
-{" "}
+  <section title="Can I delete images I've uploaded?">
 
-<section title="Can I delete images I've uploaded?">
-
-  No. Image uploads are ephemeral and not stored beyond the duration of the API
-  request. Uploaded images are automatically deleted after they have been
-  processed.
-
+    No. Image uploads are ephemeral and not stored beyond the duration of the API
+    request. Uploaded images are automatically deleted after they have been
+    processed.
+  
 </section>
 
-{" "}
+  <section title="Where can I find details on data privacy for image uploads?">
 
-<section title="Where can I find details on data privacy for image uploads?">
-
-  Refer to the Anthropic privacy policy page for information on how uploaded
-  images and other data are handled. Anthropic does not use uploaded images to
-  train models.
-
+    Refer to the Anthropic privacy policy page for information on how uploaded
+    images and other data are handled. Anthropic does not use uploaded images to
+    train models.
+  
 </section>
 
   <section title="What if Claude's image interpretation seems wrong?">
@@ -1726,11 +1145,22 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ---
 
-## Dive deeper into vision
+## Next steps
 
-Ready to start building with images using Claude? Here are a few helpful resources:
+<CardGroup cols={2}>
+  <Card
+    title="Multimodal cookbook"
+    icon="image"
+    href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision"
+  >
+    Get tips and best-practice techniques for tasks such as interpreting charts and extracting content from forms.
+  </Card>
 
-- [Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision): This cookbook has tips on [getting started with images](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision) and [best practice techniques](https://platform.claude.com/cookbook/multimodal-best-practices-for-vision) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/cookbook/multimodal-reading-charts-graphs-powerpoints) or [extracting content from forms](https://platform.claude.com/cookbook/multimodal-how-to-transcribe-text).
-- [API reference](/docs/en/api/messages/create): Documentation for the Messages API, including example [API calls involving images](/docs/en/build-with-claude/working-with-messages#vision).
-
-If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
+  <Card
+    title="API reference"
+    icon="code"
+    href="/docs/en/api/messages/create"
+  >
+    See the Messages API documentation, including example API calls involving images.
+  </Card>
+</CardGroup>

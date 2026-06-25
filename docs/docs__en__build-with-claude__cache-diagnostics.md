@@ -15,7 +15,7 @@ Cache diagnostics closes that gap. Pass the `id` of your previous response, and 
 <Note>
 Cache diagnostics is in beta. Include the [beta header](/docs/en/api/beta-headers) `cache-diagnosis-2026-04-07` in your API requests to use this feature.
 
-Cache diagnostics is currently available on the Claude API only. It is not supported on Amazon Bedrock or Vertex AI.
+Cache diagnostics is currently available on the Claude API only. It is not supported on Amazon Bedrock or Google Cloud.
 </Note>
 
 ## How cache diagnostics works
@@ -1379,7 +1379,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 ## Limitations
 
 - **Beta:** Field names and semantics may change before general availability.
-- **Claude API only:** Not available on Amazon Bedrock or Vertex AI.
+- **Claude API only:** Not available on Amazon Bedrock or Google Cloud.
 - **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
 - **Same workspace:** The previous request must have been made with an API key from the same organization and workspace.
 - **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response may be `unavailable` rather than a precise location.

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-25T16:30:52Z",
+  "generated_at": "2026-06-25T19:28:38Z",
   "indexed_files": 1713,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "output",
         "requires"
       ],
-      "word_count": 3546,
+      "word_count": 3547,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -448,7 +448,7 @@
         "session",
         "exit"
       ],
-      "word_count": 6580,
+      "word_count": 6611,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -728,7 +728,7 @@
         "counter",
         "set"
       ],
-      "word_count": 10107,
+      "word_count": 10141,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -803,16 +803,16 @@
         "terminal",
         "app",
         "work",
+        "install",
         "windows",
         "icon",
         "files",
         "tools",
         "cli",
-        "install",
-        "review",
-        "web"
+        "see",
+        "review"
       ],
-      "word_count": 1750,
+      "word_count": 1783,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -911,20 +911,20 @@
         "see",
         "accordion",
         "card",
+        "command",
         "tab",
         "run",
         "session",
         "common",
         "terminal",
-        "command",
         "note",
+        "install",
         "windows",
         "git",
         "info",
-        "start",
-        "first"
+        "start"
       ],
-      "word_count": 1542,
+      "word_count": 1575,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1019,16 +1019,16 @@
         "code",
         "claude",
         "windows",
-        "title",
         "install",
+        "title",
         "see",
         "powershell",
         "version",
         "channel",
         "run",
+        "installation",
         "linux",
         "tabs",
-        "installation",
         "wsl",
         "package",
         "updates",
@@ -1036,7 +1036,7 @@
         "settings",
         "native"
       ],
-      "word_count": 3179,
+      "word_count": 3212,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1176,7 +1176,7 @@
         "learn",
         "organization"
       ],
-      "word_count": 1560,
+      "word_count": 1573,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -36916,12 +36916,12 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
-      "word_count": 4382,
+      "word_count": 4386,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__results.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/retrieve": {
@@ -38920,7 +38920,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2537,
+      "word_count": 2497,
       "file_path": "docs/docs__en__api__ruby__messages__batches__results.md"
     },
     "/docs/en/api/ruby/messages/batches/retrieve": {
@@ -39112,11 +39112,11 @@
         "rfc",
         "error",
         "input",
+        "server",
         "format",
-        "agents",
-        "server"
+        "agents"
       ],
-      "word_count": 250824,
+      "word_count": 251448,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/agents": {
@@ -39144,7 +39144,7 @@
         "require",
         "permission"
       ],
-      "word_count": 11905,
+      "word_count": 11946,
       "file_path": "docs/docs__en__api__typescript__beta__agents.md"
     },
     "/docs/en/api/typescript/beta/agents/archive": {
@@ -39191,16 +39191,16 @@
         "configuration",
         "coding",
         "param",
+        "mcp",
         "tools",
         "body",
-        "mcp",
+        "server",
         "frontier",
         "performance",
-        "server",
-        "version",
-        "permission"
+        "must",
+        "version"
       ],
-      "word_count": 1971,
+      "word_count": 1990,
       "file_path": "docs/docs__en__api__typescript__beta__agents__create.md"
     },
     "/docs/en/api/typescript/beta/agents/list": {
@@ -39277,14 +39277,14 @@
         "param",
         "body",
         "version",
-        "tools",
         "server",
-        "omit",
         "mcp",
-        "preserve",
-        "must"
+        "tools",
+        "omit",
+        "must",
+        "preserve"
       ],
-      "word_count": 2091,
+      "word_count": 2113,
       "file_path": "docs/docs__en__api__typescript__beta__agents__update.md"
     },
     "/docs/en/api/typescript/beta/agents/versions": {
@@ -40778,12 +40778,12 @@
         "breakpoint",
         "output",
         "text",
-        "intelligence",
         "server",
+        "intelligence",
         "response",
         "search"
       ],
-      "word_count": 103480,
+      "word_count": 103960,
       "file_path": "docs/docs__en__api__typescript__beta__messages.md"
     },
     "/docs/en/api/typescript/beta/messages/batches": {
@@ -40797,8 +40797,8 @@
         "message",
         "block",
         "request",
-        "batch",
         "content",
+        "batch",
         "when",
         "cache",
         "input",
@@ -40808,10 +40808,10 @@
         "output",
         "which",
         "results",
-        "processing",
-        "server"
+        "server",
+        "processing"
       ],
-      "word_count": 28467,
+      "word_count": 28644,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/cancel": {
@@ -40848,9 +40848,9 @@
       "keywords": [
         "tool",
         "block",
-        "model",
         "content",
         "when",
+        "model",
         "cache",
         "control",
         "create",
@@ -40860,14 +40860,14 @@
         "only",
         "message",
         "blocks",
-        "request",
         "system",
         "search",
+        "request",
         "name",
         "returned",
         "schema"
       ],
-      "word_count": 8817,
+      "word_count": 8970,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__create.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/delete": {
@@ -40946,12 +40946,12 @@
         "results",
         "which",
         "were",
-        "when",
         "server",
         "text",
+        "when",
         "message"
       ],
-      "word_count": 4413,
+      "word_count": 4419,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__results.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/retrieve": {
@@ -40989,8 +40989,8 @@
         "tool",
         "block",
         "content",
-        "model",
         "when",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -41002,12 +41002,12 @@
         "search",
         "only",
         "schema",
-        "included",
         "name",
         "returned",
+        "included",
         "via"
       ],
-      "word_count": 7505,
+      "word_count": 7658,
       "file_path": "docs/docs__en__api__typescript__beta__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/beta/messages/create": {
@@ -41026,16 +41026,16 @@
         "control",
         "request",
         "breakpoint",
-        "input",
         "true",
+        "input",
         "used",
         "prompt",
         "blocks",
         "response",
-        "body",
-        "only"
+        "server",
+        "body"
       ],
-      "word_count": 12538,
+      "word_count": 12697,
       "file_path": "docs/docs__en__api__typescript__beta__messages__create.md"
     },
     "/docs/en/api/typescript/beta/models": {
@@ -42685,8 +42685,8 @@
       "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent`    - `id: string`      Unique event identifier for idempotency.    - `created_at: string`      RFC 3339 timestamp when the event occurred.    - `data: BetaWebhookEventData`      - `BetaWebhookSessionCreatedEventData`        -",
       "keywords": [
         "event",
-        "triggered",
         "session",
+        "triggered",
         "vault",
         "credential",
         "webhook",
@@ -42705,7 +42705,7 @@
         "idempotency",
         "rfc"
       ],
-      "word_count": 2717,
+      "word_count": 2820,
       "file_path": "docs/docs__en__api__typescript__beta__webhooks.md"
     },
     "/docs/en/api/typescript/completions": {
@@ -42715,14 +42715,11 @@
         "model",
         "intelligence",
         "coding",
-        "performance",
         "frontier",
         "agents",
-        "tasks",
         "param",
         "stop",
-        "high",
-        "complex",
+        "performance",
         "body",
         "maximum",
         "long",
@@ -42731,9 +42728,12 @@
         "may",
         "details",
         "text",
-        "prompt"
+        "prompt",
+        "tasks",
+        "completions",
+        "models"
       ],
-      "word_count": 1413,
+      "word_count": 1311,
       "file_path": "docs/docs__en__api__typescript__completions.md"
     },
     "/docs/en/api/typescript/completions/create": {
@@ -42744,24 +42744,24 @@
         "intelligence",
         "coding",
         "param",
-        "performance",
         "body",
         "frontier",
         "agents",
         "stop",
-        "tasks",
         "maximum",
-        "high",
-        "complex",
+        "performance",
         "see",
         "details",
         "long",
         "text",
         "may",
         "prompt",
-        "running"
+        "running",
+        "response",
+        "using",
+        "models"
       ],
-      "word_count": 1111,
+      "word_count": 1043,
       "file_path": "docs/docs__en__api__typescript__completions__create.md"
     },
     "/docs/en/api/typescript/messages": {
@@ -42783,13 +42783,13 @@
         "text",
         "number",
         "results",
+        "true",
         "invocation",
         "input",
-        "true",
         "message",
         "used"
       ],
-      "word_count": 67356,
+      "word_count": 67946,
       "file_path": "docs/docs__en__api__typescript__messages.md"
     },
     "/docs/en/api/typescript/messages/batches": {
@@ -42810,14 +42810,14 @@
         "results",
         "request",
         "invocation",
-        "response",
         "cache",
+        "response",
         "used",
         "input",
         "which",
         "create"
       ],
-      "word_count": 18457,
+      "word_count": 18432,
       "file_path": "docs/docs__en__api__typescript__messages__batches.md"
     },
     "/docs/en/api/typescript/messages/batches/cancel": {
@@ -42853,16 +42853,16 @@
       "content_preview": "## Create a Message Batch  `client.messages.batches.create(BatchCreateParamsbody, RequestOptionsoptions?): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  T...",
       "keywords": [
         "tool",
-        "model",
         "content",
+        "model",
         "block",
         "when",
         "cache",
         "control",
         "create",
         "breakpoint",
-        "message",
         "true",
+        "message",
         "only",
         "batch",
         "blocks",
@@ -42873,7 +42873,7 @@
         "included",
         "returned"
       ],
-      "word_count": 6341,
+      "word_count": 6476,
       "file_path": "docs/docs__en__api__typescript__messages__batches__create.md"
     },
     "/docs/en/api/typescript/messages/batches/delete": {
@@ -42957,7 +42957,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2553,
+      "word_count": 2513,
       "file_path": "docs/docs__en__api__typescript__messages__batches__results.md"
     },
     "/docs/en/api/typescript/messages/batches/retrieve": {
@@ -43013,7 +43013,7 @@
         "via",
         "name"
       ],
-      "word_count": 5419,
+      "word_count": 5554,
       "file_path": "docs/docs__en__api__typescript__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/messages/create": {
@@ -43031,17 +43031,17 @@
         "breakpoint",
         "true",
         "tokens",
-        "used",
         "search",
-        "input",
+        "used",
         "blocks",
+        "input",
         "only",
         "response",
+        "system",
         "invocation",
-        "number",
-        "system"
+        "returned"
       ],
-      "word_count": 8170,
+      "word_count": 8265,
       "file_path": "docs/docs__en__api__typescript__messages__create.md"
     },
     "/docs/en/api/typescript/models": {
@@ -43325,15 +43325,18 @@
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
-      "title": "Claude on Vertex AI",
-      "content_preview": "# Claude on Vertex AI  Anthropic's Claude models are available through [Vertex AI](https://cloud.google.com/vertex-ai).  ---  The Vertex API for accessing Claude is nearly identical to the [Messages A...",
+      "title": "Claude on Google Cloud",
+      "content_preview": "# Claude on Google Cloud  Anthropic's Claude models are available through [Google Cloud's Agent Platform](https://cloud.google.com/vertex-ai).  ---  The API for accessing Claude on Google Cloud's Agen...",
       "keywords": [
         "claude",
-        "vertex",
+        "platform",
+        "agent",
         "opus",
         "endpoints",
         "tab",
         "sonnet",
+        "google",
+        "cloud",
         "model",
         "region",
         "anthropic",
@@ -43344,12 +43347,9 @@
         "api",
         "note",
         "deprecated",
-        "data",
-        "regional",
-        "see",
-        "title"
+        "data"
       ],
-      "word_count": 2609,
+      "word_count": 2623,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -43601,7 +43601,7 @@
         "available",
         "requests"
       ],
-      "word_count": 2643,
+      "word_count": 2645,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43825,7 +43825,7 @@
         "input",
         "note"
       ],
-      "word_count": 15479,
+      "word_count": 16599,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -43881,7 +43881,7 @@
         "web",
         "custom"
       ],
-      "word_count": 5206,
+      "word_count": 5204,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -43949,8 +43949,8 @@
         "claude",
         "outputs",
         "section",
-        "schemas",
         "structured",
+        "schemas",
         "title",
         "response",
         "sdk",
@@ -43965,7 +43965,7 @@
         "java",
         "tab"
       ],
-      "word_count": 10466,
+      "word_count": 10469,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -44026,30 +44026,30 @@
     },
     "/docs/en/build-with-claude/vision": {
       "title": "Vision",
-      "content_preview": "# Vision  Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.  ---  This guide describes how to work with images in Claude, including best practices, code examples, and limitations to keep in mind.  ---  ## How to use",
+      "content_preview": "# Vision  Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.  ---  This guide describes how to send images to Claude,...",
       "keywords": [
         "image",
-        "claude",
         "images",
+        "claude",
         "api",
-        "coordinates",
-        "section",
-        "per",
-        "example",
         "request",
-        "title",
-        "before",
-        "size",
-        "when",
-        "using",
-        "limits",
+        "per",
+        "section",
         "token",
-        "tokens",
+        "resolution",
+        "before",
+        "limit",
         "see",
-        "models",
-        "dimensions"
+        "text",
+        "example",
+        "tier",
+        "title",
+        "cost",
+        "high",
+        "when",
+        "size"
       ],
-      "word_count": 6495,
+      "word_count": 3805,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -44467,9 +44467,9 @@
         "workspace",
         "azure",
         "admin",
-        "google"
+        "organization"
       ],
-      "word_count": 1513,
+      "word_count": 1527,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -44721,7 +44721,7 @@
         "settings",
         "platform"
       ],
-      "word_count": 1197,
+      "word_count": 1199,
       "file_path": "docs/docs__en__manage-claude__data-residency.md"
     },
     "/docs/en/manage-claude/rate-limits-api": {
@@ -44761,23 +44761,23 @@
         "member",
         "request",
         "api",
+        "each",
         "per",
         "requests",
         "increase",
-        "user",
-        "each",
         "organization",
-        "claude",
         "see",
-        "scope",
-        "override",
+        "user",
         "limits",
-        "admin",
+        "claude",
+        "their",
+        "endpoints",
+        "scope",
         "effective",
-        "response",
-        "their"
+        "override",
+        "set"
       ],
-      "word_count": 1976,
+      "word_count": 2532,
       "file_path": "docs/docs__en__manage-claude__spend-limits-api.md"
     },
     "/docs/en/manage-claude/usage-cost-api": {
@@ -44805,7 +44805,7 @@
         "anthropic",
         "tier"
       ],
-      "word_count": 1671,
+      "word_count": 1667,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {
@@ -45113,7 +45113,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1978,
+      "word_count": 1977,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -45122,26 +45122,26 @@
       "keywords": [
         "agent",
         "tools",
+        "agents",
         "version",
-        "new",
-        "claude",
+        "card",
         "reference",
-        "fields",
-        "configuration",
+        "claude",
+        "managed",
+        "new",
         "sessions",
-        "coordinator",
-        "codegroup",
-        "update",
-        "array",
+        "fields",
         "create",
         "reusable",
-        "versioned",
-        "defines",
-        "capabilities",
+        "configuration",
         "model",
-        "system"
+        "mcp",
+        "skills",
+        "session",
+        "coordinator",
+        "cli"
       ],
-      "word_count": 1561,
+      "word_count": 1686,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45346,26 +45346,26 @@
       "keywords": [
         "mcp",
         "server",
+        "agents",
         "servers",
         "agent",
         "session",
+        "managed",
         "credential",
-        "agents",
+        "card",
         "tools",
+        "docs",
         "creation",
         "url",
         "vault",
+        "each",
         "credentials",
-        "array",
+        "authentication",
         "connection",
-        "see",
-        "error",
-        "access",
-        "external",
-        "data",
-        "sources"
+        "types",
+        "events"
       ],
-      "word_count": 1334,
+      "word_count": 1371,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -45484,28 +45484,28 @@
       "title": "Permission policies",
       "content_preview": "# Permission policies  Control when agent and MCP tools execute.  ---  Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically or wait...",
       "keywords": [
-        "event",
-        "tools",
         "agent",
-        "codegroup",
+        "tools",
+        "event",
         "mcp",
         "toolset",
-        "policy",
-        "permission",
-        "session",
         "tool",
-        "confirmation",
-        "policies",
+        "session",
+        "permission",
+        "policy",
+        "codegroup",
         "when",
         "server",
-        "custom",
-        "defaultlanguage",
-        "cli",
         "default",
+        "policies",
+        "confirmation",
+        "set",
+        "cli",
         "execute",
-        "automatically"
+        "custom",
+        "see"
       ],
-      "word_count": 1993,
+      "word_count": 2246,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
@@ -45734,30 +45734,30 @@
     },
     "/docs/en/managed-agents/tools": {
       "title": "Tools",
-      "content_preview": "# Tools  Configure tools available to your agent.  ---  Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a session. You control which tools are available by specifying them in the agent configuration.  Custom, user-defined tools are also supported. Your",
+      "content_preview": "# Tools  Configure tools available to your agent.  ---  Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](/docs/en/managed-agents/sessions). Yo...",
       "keywords": [
         "tools",
         "tool",
+        "agent",
         "claude",
         "when",
-        "agent",
         "custom",
+        "agents",
+        "session",
+        "managed",
+        "them",
+        "mcp",
         "file",
         "what",
+        "card",
         "available",
-        "session",
-        "them",
-        "toolset",
-        "codegroup",
-        "only",
         "set",
-        "defined",
-        "read",
-        "search",
-        "web",
-        "full"
+        "toolset",
+        "each",
+        "codegroup",
+        "only"
       ],
-      "word_count": 1483,
+      "word_count": 1609,
       "file_path": "docs/docs__en__managed-agents__tools.md"
     },
     "/docs/en/managed-agents/vaults": {
@@ -45824,24 +45824,24 @@
         "thinking",
         "models",
         "context",
-        "more",
         "opus",
-        "when",
+        "more",
         "prompt",
+        "when",
         "section",
-        "output",
         "tool",
-        "like",
         "model",
+        "output",
+        "like",
+        "prompting",
         "latest",
         "guidance",
         "instructions",
-        "behavior",
-        "may",
-        "prompting",
-        "examples"
+        "tools",
+        "examples",
+        "fable"
       ],
-      "word_count": 6147,
+      "word_count": 7286,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {

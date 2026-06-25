@@ -23,7 +23,7 @@ Fast mode is supported on the following models:
 - Claude Opus 4.6 (claude-opus-4-6)
 
 <Note>
-Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](/docs/en/managed-agents/overview), only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
+Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](/docs/en/managed-agents/overview), only. It is not available on third-party platforms, including Amazon Bedrock, Google Cloud, and Microsoft Foundry.
 </Note>
 
 <Warning>
@@ -835,7 +835,7 @@ message = create_message_with_fast_fallback(
 - **Supported models:** Fast mode is supported on Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](/docs/en/build-with-claude/batch-processing).
-- **Priority Tier:** Fast mode is not available with [Priority Tier](/docs/en/api/service-tiers).
+- **Priority Tier:** Fast mode is not available with a [Priority Tier](/docs/en/api/service-tiers) commitment.
 - **Claude Platform on AWS:** Fast mode is not currently available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 
 ## Next steps

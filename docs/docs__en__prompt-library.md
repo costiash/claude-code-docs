@@ -73,7 +73,7 @@ Claude is smart enough to generalize from the explanation.
 
 ### Use examples effectively
 
-Examples are one of the most reliable ways to steer Claude's output format, tone, and structure. A few well-crafted examples (known as few-shot or multishot prompting) can dramatically improve accuracy and consistency.
+Examples are one of the most reliable ways to steer Claude's output format, tone, and structure. A few well-crafted examples (known as few-shot or multishot prompting) improve accuracy and consistency.
 
 When adding examples, make them:
 - **Relevant:** Mirror your actual use case closely.
@@ -94,7 +94,32 @@ Best practices:
 
 Setting a role in the system prompt focuses Claude's behavior and tone for your use case. Even a single sentence makes a difference:
 
-```python Python
+<CodeGroup>
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 1024,
+    "system": "You are a helpful coding assistant specializing in Python.",
+    "messages": [
+      {"role": "user", "content": "How do I sort a list of dictionaries by key?"}
+    ]
+  }'
+```
+
+```bash CLI
+ant messages create \
+  --model claude-opus-4-8 \
+  --max-tokens 1024 \
+  --system "You are a helpful coding assistant specializing in Python." \
+  --message '{role: user, content: "How do I sort a list of dictionaries by key?"}'
+```
+
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -107,14 +132,145 @@ message = client.messages.create(
         {"role": "user", "content": "How do I sort a list of dictionaries by key?"}
     ],
 )
+
 print(message.content)
 ```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const message = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  system: "You are a helpful coding assistant specializing in Python.",
+  messages: [{ role: "user", content: "How do I sort a list of dictionaries by key?" }]
+});
+
+console.log(message.content);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    System = "You are a helpful coding assistant specializing in Python.",
+    Messages =
+    [
+        new() { Role = Role.User, Content = "How do I sort a list of dictionaries by key?" }
+    ]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		System: []anthropic.TextBlockParam{
+			{Text: "You are a helpful coding assistant specializing in Python."},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("How do I sort a list of dictionaries by key?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(message.Content)
+}
+```
+
+```java Java hidelines={1..9,-2..}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+public class RolePromptExample {
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(1024)
+            .system("You are a helpful coding assistant specializing in Python.")
+            .addUserMessage("How do I sort a list of dictionaries by key?")
+            .build();
+
+        Message message = client.messages().create(params);
+        System.out.println(message.content());
+    }
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'How do I sort a list of dictionaries by key?']
+    ],
+    model: 'claude-opus-4-8',
+    system: 'You are a helpful coding assistant specializing in Python.',
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  system: "You are a helpful coding assistant specializing in Python.",
+  messages: [
+    { role: "user", content: "How do I sort a list of dictionaries by key?" }
+  ]
+)
+
+puts message.content
+```
+
+</CodeGroup>
 
 ### Long context prompting
 
 When working with large documents or data-rich inputs (20k+ tokens), structure your prompt carefully to get the best results:
 
-- **Put longform data at the top:** Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This can significantly improve performance across all models.
+- **Put longform data at the top:** Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This improves performance across all models.
 
     <Note>Queries at the end can improve response quality by up to 30% in tests, especially with complex, multi-document inputs.</Note>
 
@@ -233,10 +389,10 @@ There are a few particularly effective ways to steer output formatting:
 When writing reports, documents, technical explanations, analyses, or any long-form
 content, write in clear, flowing prose using complete paragraphs and sentences. Use
 standard paragraph breaks for organization and reserve markdown primarily for `inline
-code`, code blocks (```...```), and simple headings (###, and ###). Avoid using **bold**
+code`, code blocks (```...```), and simple headings (## and ###). Avoid using **bold**
 and *italics*.
 
-DO NOT use ordered lists (1. ...) or unordered lists (*) unless : a) you're presenting
+DO NOT use ordered lists (1. ...) or unordered lists (*) unless: a) you're presenting
 truly discrete items where a list format is the best option, or b) the user explicitly
 requests a list or ranking
 
@@ -262,7 +418,7 @@ characters (e.g., "/" for division, "*" for multiplication, and "^" for exponent
 
 ### Document creation
 
-Claude's latest models excel at creating presentations, animations, and visual documents with impressive creative flair and strong instruction following. The models produce polished, usable output on the first try in most cases.
+Claude's latest models create presentations, animations, and visual documents with strong instruction following, and usually produce usable output on the first try.
 
 For best results with document creation:
 
@@ -273,7 +429,7 @@ visual hierarchy, and engaging animations where appropriate.
 
 ### Migrating away from prefilled responses
 
-Starting with Claude 4.6 models and [Claude Mythos Preview](https://anthropic.com/glasswing), prefilled responses on the last assistant turn are no longer supported. Requests with prefilled assistant messages to these models return a 400 error. Model intelligence and instruction following have advanced such that most use cases of prefill no longer require it. Earlier models continue to support prefills, and adding assistant messages elsewhere in the conversation is not affected.
+Starting with Claude 4.6 models and [Claude Mythos Preview](https://anthropic.com/glasswing), prefilled responses (providing a partial assistant message for Claude to continue from) on the last assistant turn are no longer supported. Requests with prefilled assistant messages to these models return a 400 error. Model intelligence and instruction following have advanced such that most use cases of prefill no longer require it. Earlier models continue to support prefills, and adding assistant messages elsewhere in the conversation is not affected.
 
 Here are common prefill scenarios and how to migrate away from them:
 
@@ -281,7 +437,7 @@ Here are common prefill scenarios and how to migrate away from them:
 
 Prefills have been used to force specific output formats like JSON/YAML, classification, and similar patterns where the prefill constrains Claude to a particular structure.
 
-**Migration:** The [Structured Outputs](/docs/en/build-with-claude/structured-outputs) feature is designed specifically to constrain Claude's responses to follow a given schema. Try simply asking the model to conform to your output structure first, as newer models can reliably match complex schemas when told to, especially if implemented with retries. For classification tasks, use either tools with an enum field containing your valid labels or structured outputs.
+**Migration:** The [Structured Outputs](/docs/en/build-with-claude/structured-outputs) feature is designed specifically to constrain Claude's responses to follow a given schema. Try asking the model to conform to your output structure first, as newer models can reliably match complex schemas when told to, especially if implemented with retries. For classification tasks, use either tools with an enum field containing your valid labels or structured outputs.
 
 </section>
 
@@ -313,7 +469,7 @@ Prefills were used to continue partial completions, resume interrupted responses
 
 Prefills were used to periodically ensure refreshed or injected context.
 
-**Migration:** For very long conversations, inject what were previously prefilled-assistant reminders into the user turn. If context hydration is part of a more complex agentic system, consider hydrating via tools (expose or encourage use of tools containing context based on heuristics such as number of turns) or during context compaction.
+**Migration:** For very long conversations, inject what were previously prefilled-assistant reminders into the user turn. If context hydration is part of a more complex agentic system, consider hydrating via tools (expose or encourage use of tools containing context based on heuristics such as number of turns) or during [context compaction](/docs/en/build-with-claude/compaction).
 
 </section>
 
@@ -321,7 +477,7 @@ Prefills were used to periodically ensure refreshed or injected context.
 
 ### Tool usage
 
-Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended.
+Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended. For how to define tools and troubleshoot tool triggering, see [Tool use with Claude](/docs/en/agents-and-tools/tool-use/overview).
 
 For Claude to take action, be more explicit:
 
@@ -355,7 +511,7 @@ call (e.g., file edit or read) is intended or not, and act accordingly.
 </default_to_action>
 ```
 
-On the other hand, if you want the model to be more hesitant by default, less prone to jumping straight into implementations, and only take action if requested, you can steer this behavior with a prompt like the below:
+On the other hand, if you want the model to be more hesitant by default, less prone to jumping straight into implementations, and only take action if requested, you can steer this behavior with a prompt like the following:
 
 ```text Sample prompt for conservative action
 <do_not_act_before_instructions>
@@ -370,13 +526,13 @@ Claude Opus 4.5 and Claude Opus 4.6 are also more responsive to the system promp
 
 ### Optimize parallel tool calling
 
-Claude's latest models excel at parallel tool execution. These models will:
+Claude's latest models run independent tool calls in parallel. These models will:
 
 - Run multiple speculative searches during research
 - Read several files at once to build context faster
 - Execute bash commands in parallel (which can even bottleneck system performance)
 
-This behavior is easily steerable. While the model has a high success rate in parallel tool calling without prompting, you can boost this to ~100% or adjust the aggression level:
+This behavior is steerable. While the model has a high success rate in parallel tool calling without prompting, you can boost this to ~100% or adjust the aggression level:
 
 ```text Sample prompt for maximum parallel efficiency
 <use_parallel_tool_calls>
@@ -400,7 +556,7 @@ Execute operations sequentially with brief pauses between each step to ensure st
 
 ### Overthinking and excessive thoroughness
 
-Claude Opus 4.6 does significantly more upfront exploration than previous models, especially at higher `effort` settings. This initial work often helps to optimize the final results, but the model may gather extensive context or pursue multiple threads of research without being prompted. If your prompts previously encouraged the model to be more thorough, you should tune that guidance for Claude Opus 4.6:
+Claude Opus 4.6 does more upfront exploration than previous models, especially at higher [`effort`](/docs/en/build-with-claude/effort) settings. This initial work often helps to optimize the final results, but the model may gather extensive context or pursue multiple threads of research without being prompted. If your prompts previously encouraged the model to be more thorough, you should tune that guidance for Claude Opus 4.6:
 
 - **Replace blanket defaults with more targeted instructions.** Instead of "Default to using \[tool\]," add guidance like "Use \[tool\] when it would enhance your understanding of the problem."
 - **Remove over-prompting.** Tools that undertriggered in previous models are likely to trigger appropriately now. Instructions like "If in doubt, use \[tool\]" will cause overtriggering.
@@ -415,15 +571,15 @@ contradicts your reasoning. If you're weighing two approaches, pick one and see 
 through. You can always course-correct later if the chosen approach fails.
 ```
 
-If you need a hard ceiling on thinking costs, extended thinking with a `budget_tokens` cap is still functional on Opus 4.6 and Sonnet 4.6 but is deprecated. Prefer lowering the [effort](/docs/en/build-with-claude/effort) setting or using `max_tokens` as a hard limit with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
+If you need a hard ceiling on thinking costs, extended thinking with a `budget_tokens` cap is still functional on Opus 4.6 and Sonnet 4.6 but is deprecated. On Claude Opus 4.7 and later models, and on Claude Fable 5 and Claude Mythos 5, setting `budget_tokens` returns a 400 error. Prefer lowering the [effort](/docs/en/build-with-claude/effort) setting or using `max_tokens` as a hard limit with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
 
 ### Leverage thinking & interleaved thinking capabilities
 
 Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.
 
-Claude Opus 4.6 and Claude Sonnet 4.6 use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
+Claude Opus 4.6, Claude Opus 4.7, Claude Opus 4.8, and Claude Sonnet 4.6 use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. On Claude Fable 5 and Claude Mythos 5, thinking is always on and adaptive thinking is the only mode. Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
 
-Use adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. Older models use manual thinking mode with `budget_tokens`.
+Use adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. Older models use manual [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`; see the [supported models table](/docs/en/build-with-claude/extended-thinking#supported-models) for which mode each model accepts.
 
 You can guide Claude's thinking behavior:
 
@@ -441,36 +597,220 @@ answer quality - typically for problems that require multi-step reasoning. When 
 doubt, respond directly.
 ```
 
-If you are migrating from [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`, replace your thinking configuration and move budget control to `effort`:
+If you are migrating from [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`, replace your thinking configuration and move budget control to `effort`. The following examples show the same request before and after the migration (see [effort](/docs/en/build-with-claude/effort) for the available levels and per-model availability):
 
-**Before (extended thinking, older models):**
+<CodeGroup>
+```bash cURL highlight={9,23,24}
+# Before: extended thinking with a manual budget (older models)
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-sonnet-4-5-20250929",
+    "max_tokens": 16000,
+    "thinking": {"type": "enabled", "budget_tokens": 10000},
+    "messages": [
+      {"role": "user", "content": "..."}
+    ]
+  }'
 
-```python Python nocheck
+# After: adaptive thinking with effort (current models)
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 16000,
+    "thinking": {"type": "adaptive"},
+    "output_config": {"effort": "high"},
+    "messages": [
+      {"role": "user", "content": "..."}
+    ]
+  }'
+```
+
+```bash CLI highlight={5..7,17..20}
+# Before: extended thinking with a manual budget (older models)
+ant messages create <<'YAML'
+model: claude-sonnet-4-5-20250929
+max_tokens: 16000
+thinking:
+  type: enabled
+  budget_tokens: 10000
+messages:
+  - role: user
+    content: "..."
+YAML
+
+# After: adaptive thinking with effort (current models)
+ant messages create <<'YAML'
+model: claude-opus-4-8
+max_tokens: 16000
+thinking:
+  type: adaptive
+output_config:
+  effort: high
+messages:
+  - role: user
+    content: "..."
+YAML
+```
+
+```python Python highlight={5,13,14}
+# Before: extended thinking with a manual budget (older models)
 client.messages.create(
     model="claude-sonnet-4-5-20250929",
-    max_tokens=64000,
-    thinking={"type": "enabled", "budget_tokens": 32000},
+    max_tokens=16000,
+    thinking={"type": "enabled", "budget_tokens": 10000},
     messages=[{"role": "user", "content": "..."}],
 )
-```
 
-**After (adaptive thinking):**
-
-```python Python nocheck
+# After: adaptive thinking with effort (current models)
 client.messages.create(
     model="claude-opus-4-8",
-    max_tokens=64000,
+    max_tokens=16000,
     thinking={"type": "adaptive"},
-    output_config={"effort": "high"},  # or "max", "xhigh", "medium", "low"
+    output_config={"effort": "high"},
     messages=[{"role": "user", "content": "..."}],
 )
 ```
 
-If you are not using extended thinking, no changes are required. Thinking is off by default when you omit the `thinking` parameter.
+```typescript TypeScript highlight={5,13,14}
+// Before: extended thinking with a manual budget (older models)
+await client.messages.create({
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 16000,
+  thinking: { type: "enabled", budget_tokens: 10000 },
+  messages: [{ role: "user", content: "..." }]
+});
+
+// After: adaptive thinking with effort (current models)
+await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  thinking: { type: "adaptive" },
+  output_config: { effort: "high" },
+  messages: [{ role: "user", content: "..." }]
+});
+```
+
+```csharp C# highlight={6,15,16}
+// Before: extended thinking with a manual budget (older models)
+await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-sonnet-4-5-20250929",
+    MaxTokens = 16000,
+    Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
+    Messages = [new() { Role = Role.User, Content = "..." }]
+});
+
+// After: adaptive thinking with effort (current models)
+await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 16000,
+    Thinking = new ThinkingConfigAdaptive(),
+    OutputConfig = new OutputConfig { Effort = Effort.High },
+    Messages = [new() { Role = Role.User, Content = "..." }]
+});
+```
+
+```go Go highlight={5..7,17..22}
+// Before: extended thinking with a manual budget (older models)
+client.Messages.New(ctx, anthropic.MessageNewParams{
+	Model:     "claude-sonnet-4-5-20250929",
+	MaxTokens: 16000,
+	Thinking: anthropic.ThinkingConfigParamUnion{
+		OfEnabled: &anthropic.ThinkingConfigEnabledParam{BudgetTokens: 10000},
+	},
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("...")),
+	},
+})
+
+// After: adaptive thinking with effort (current models)
+client.Messages.New(ctx, anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus4_8,
+	MaxTokens: 16000,
+	Thinking: anthropic.ThinkingConfigParamUnion{
+		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+	},
+	OutputConfig: anthropic.OutputConfigParam{
+		Effort: anthropic.OutputConfigEffortHigh,
+	},
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("...")),
+	},
+})
+```
+
+```java Java highlight={5,13..16}
+// Before: extended thinking with a manual budget (older models)
+client.messages().create(MessageCreateParams.builder()
+    .model("claude-sonnet-4-5-20250929")
+    .maxTokens(16000L)
+    .thinking(ThinkingConfigEnabled.builder().budgetTokens(10000L).build())
+    .addUserMessage("...")
+    .build());
+
+// After: adaptive thinking with effort (current models)
+client.messages().create(MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_8)
+    .maxTokens(16000L)
+    .thinking(ThinkingConfigAdaptive.builder().build())
+    .outputConfig(OutputConfig.builder()
+        .effort(OutputConfig.Effort.HIGH)
+        .build())
+    .addUserMessage("...")
+    .build());
+```
+
+```php PHP highlight={5,13,14}
+// Before: extended thinking with a manual budget (older models)
+$client->messages->create(
+    model: 'claude-sonnet-4-5-20250929',
+    maxTokens: 16000,
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+    messages: [['role' => 'user', 'content' => '...']],
+);
+
+// After: adaptive thinking with effort (current models)
+$client->messages->create(
+    model: 'claude-opus-4-8',
+    maxTokens: 16000,
+    thinking: ['type' => 'adaptive'],
+    outputConfig: ['effort' => 'high'],
+    messages: [['role' => 'user', 'content' => '...']],
+);
+```
+
+```ruby Ruby highlight={5,13,14}
+# Before: extended thinking with a manual budget (older models)
+client.messages.create(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 16000,
+  thinking: { type: "enabled", budget_tokens: 10000 },
+  messages: [{ role: "user", content: "..." }]
+)
+
+# After: adaptive thinking with effort (current models)
+client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 16000,
+  thinking: { type: "adaptive" },
+  output_config: { effort: "high" },
+  messages: [{ role: "user", content: "..." }]
+)
+```
+</CodeGroup>
+
+If you are not using extended thinking, no changes are required. On Claude Opus 4.6 through Claude Opus 4.8 and Claude Sonnet 4.6, thinking is off when you omit the `thinking` parameter. On Claude Fable 5 and Claude Mythos 5, thinking is always on, whether or not you set the `thinking` parameter.
 
 - **Prefer general instructions over prescriptive steps.** A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe.
 - **Multishot examples work with thinking.** Use `<thinking>` tags inside your few-shot examples to show Claude the reasoning pattern. It will generalize that style to its own extended thinking blocks.
-- **Manual CoT as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem. Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output.
+- **Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem. Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output.
 - **Ask Claude to self-check.** Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math.
 
 <Note>When extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word "think" and its variants. Consider using alternatives like "consider," "evaluate," or "reason through" in those cases.</Note>
@@ -483,15 +823,15 @@ If you are not using extended thinking, no changes are required. Thinking is off
 
 ### Long-horizon reasoning and state tracking
 
-Claude's latest models excel at long-horizon reasoning tasks with exceptional state tracking capabilities. Claude maintains orientation across extended sessions by focusing on incremental progress, making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
+Claude's latest models handle long-horizon reasoning tasks with strong state tracking. Claude maintains orientation across extended sessions by focusing on incremental progress, making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
 
 #### Context awareness and multi-window workflows
 
-Claude 4.6 and Claude 4.5 models feature [context awareness](/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-6-sonnet-4-5-and-haiku-4-5), enabling the model to track its remaining context window (i.e. "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work.
+Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature [context awareness](/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-6-sonnet-4-5-and-haiku-4-5), enabling the model to track its remaining context window (that is, its "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work.
 
 **Managing context limits:**
 
-If you are using Claude in an agent harness that compacts context or allows saving context to external files (like in Claude Code), consider adding this information to your prompt so Claude can behave accordingly. Otherwise, Claude may sometimes naturally try to wrap up work as it approaches the context limit. Below is an example prompt:
+If you are using Claude in an agent harness that compacts context or allows saving context to external files (like in Claude Code), consider adding this information to your prompt so Claude can behave accordingly. Otherwise, Claude may sometimes naturally try to wrap up work as it approaches the context limit. The following is an example prompt:
 
 ```text Sample prompt
 Your context window will be automatically compacted as it approaches its limit, allowing
@@ -503,7 +843,7 @@ your budget is approaching. Never artificially stop any task early regardless of
 context remaining.
 ```
 
-The [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) pairs naturally with context awareness for seamless context transitions.
+The [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) pairs well with context awareness for managing context transitions.
 
 #### Multi-context window workflows
 
@@ -589,7 +929,7 @@ in-progress work.
 
 ### Research and information gathering
 
-Claude's latest models demonstrate exceptional agentic search capabilities and can find and synthesize information from multiple sources effectively. For optimal research results:
+Claude's latest models can find and synthesize information from multiple sources effectively. For optimal research results:
 
 1. **Provide clear success criteria:** Define what constitutes a successful answer to your research question
 
@@ -605,11 +945,11 @@ research notes file to persist information and provide transparency. Break down 
 complex research task systematically.
 ```
 
-This structured approach allows Claude to find and synthesize virtually any piece of information and iteratively critique its findings, no matter the size of the corpus.
+This structured approach helps Claude work through large corpora methodically and iteratively critique its findings.
 
 ### Subagent orchestration
 
-Claude's latest models demonstrate significantly improved native subagent orchestration capabilities. These models can recognize when tasks would benefit from delegating work to specialized subagents and do so proactively without requiring explicit instruction.
+Claude's latest models orchestrate subagents natively. These models can recognize when tasks would benefit from delegating work to specialized subagents and do so proactively without requiring explicit instruction.
 
 To take advantage of this behavior:
 
@@ -671,7 +1011,7 @@ complexity is the minimum needed for the current task.
 
 ### Avoid focusing on passing tests and hard-coding
 
-Claude can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and ensure robust, generalizable solutions:
+Claude can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and get solutions that generalize:
 
 ```text Sample prompt
 Please write a high-quality, general-purpose solution using the standard tools
@@ -713,11 +1053,13 @@ One technique that has proven effective to further boost performance is to give 
 
 ### Frontend design
 
-Claude Opus 4.5 and Claude Opus 4.6 excel at building complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the "AI slop" aesthetic. To create distinctive, creative frontends that surprise and delight:
+Claude Opus 4.5 and Claude Opus 4.6 build complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the "AI slop" aesthetic. To create distinctive, creative frontends that surprise and delight:
 
 <Tip>
 For a detailed guide on improving frontend design, see the blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).
 </Tip>
+
+For frontend design work outside the API, [Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design) provides a canvas and design tools where Claude generates and iterates on designs interactively.
 
 Here's a system prompt snippet you can use to encourage better frontend design:
 
@@ -771,10 +1113,21 @@ When migrating to Claude 4.6 models from earlier generations:
 
 5. **Migrate away from prefilled responses:** Prefilled responses on the last assistant turn are no longer supported starting with Claude 4.6 models. See [Migrating away from prefilled responses](#migrating-away-from-prefilled-responses) for detailed guidance on alternatives.
 
-6. **Tune anti-laziness prompting:** If your prompts previously encouraged the model to be more thorough or use tools more aggressively, dial back that guidance. Claude 4.6 models are significantly more proactive and may overtrigger on instructions that were needed for previous models.
+6. **Tune anti-laziness prompting:** If your prompts previously encouraged the model to be more thorough or use tools more aggressively, dial back that guidance. Claude 4.6 models are more proactive and may overtrigger on instructions that were needed for previous models.
 
 For detailed migration steps, see the [Migration guide](/docs/en/about-claude/models/migration-guide).
 
 ### Migrating from Claude Sonnet 4.5 to Claude Sonnet 4.6
 
 See [Migrating from Sonnet 4.5](/docs/en/about-claude/models/migration-guide#migrating-from-sonnet-45) in the migration guide, which covers the effort default change and both extended-thinking migration paths.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Prompting Claude Fable 5" icon="terminal" href="/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5">
+    Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.
+  </Card>
+  <Card title="Prompt engineering overview" icon="edit" href="/docs/en/build-with-claude/prompt-engineering/overview">
+    When to use prompt engineering and how to plan your approach before tuning prompts.
+  </Card>
+</CardGroup>

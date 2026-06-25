@@ -266,12 +266,12 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 | Claude Opus 4.6     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.5   | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
-| Claude Opus 4 ([retired, except on Vertex AI](/docs/en/about-claude/model-deprecations)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
+| Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
 | Claude Sonnet 4.6   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
 | Claude Sonnet 4.5   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
-| Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations)) | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
+| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
 | Claude Haiku 4.5  | $1 / MTok         | $1.25 / MTok    | $2 / MTok       | $0.10 / MTok | $5 / MTok     |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations)) | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok     | $0.08 / MTok | $4 / MTok     |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok     | $0.08 / MTok | $4 / MTok     |
 
 <Note>
 The table above reflects the following pricing multipliers for prompt caching:
@@ -570,7 +570,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 - If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
 
 <Note>
-Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta). Bedrock and Vertex AI do not support automatic caching.
+Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta). Bedrock and Google Cloud do not support automatic caching.
 </Note>
 
 ---
@@ -642,14 +642,14 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 ### Cache limitations
 
-On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta), the minimum cacheable prompt length is:
+On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta), the minimum cacheable prompt length is:
 
 - 512 tokens for Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing)
 - 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7
 - 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5
-- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Opus 4 ([retired, except on Vertex AI](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](/docs/en/about-claude/model-deprecations))
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))
 - 4,096 tokens for Claude Haiku 4.5
-- 2,048 tokens for Claude Haiku 3.5 ([retired, except on Vertex AI](/docs/en/about-claude/model-deprecations))
+- 2,048 tokens for Claude Haiku 3.5 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))
 
 Model availability varies by platform, and so can the minimum for newly released models: on [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), the minimum cacheable prompt length for Claude Fable 5 and Claude Mythos 5 is 1,024 tokens.
 
@@ -785,10 +785,10 @@ For more detailed information, see the [extended thinking documentation](/docs/e
 ### Cache storage and sharing
 
 <Warning>
-As of February 5, 2026, prompt caching uses [workspace](/docs/en/manage-claude/workspaces)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Vertex AI maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
+As of February 5, 2026, prompt caching uses [workspace](/docs/en/manage-claude/workspaces)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
 </Warning>
 
-- **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Vertex AI continue to use organization-level isolation only.
+- **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud continue to use organization-level isolation only.
 
 - **Exact matching:** Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 
@@ -843,7 +843,7 @@ Changes to `tool_choice` or the presence/absence of images anywhere in the promp
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
 
 <Note>
-The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (legacy)](/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta).
+The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (legacy)](/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta).
 </Note>
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
@@ -1198,6 +1198,80 @@ The API returns an empty `content` array:
 
 Fire a pre-warm request when your application starts (or on a scheduled interval), then send real user requests after the pre-warm completes:
 
+<CodeGroup>
+
+```bash cURL
+# Warm the cache at application startup or on a scheduled interval.
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 0,
+    "system": [
+      {
+        "type": "text",
+        "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+        "cache_control": {"type": "ephemeral"}
+      }
+    ],
+    "messages": [{"role": "user", "content": "warmup"}]
+  }'
+
+# Later, when the user submits a message, the system-prompt prefix is already cached.
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 1024,
+    "system": [
+      {
+        "type": "text",
+        "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+        "cache_control": {"type": "ephemeral"}
+      }
+    ],
+    "messages": [{"role": "user", "content": "How do I implement a binary search tree?"}]
+  }'
+```
+
+```bash CLI
+# Warm the cache at application startup or on a scheduled interval.
+ant messages create --transform usage <<'YAML'
+model: claude-opus-4-8
+max_tokens: 0
+system:
+  - type: text
+    text: >-
+      You are an expert software engineer with deep knowledge of
+      distributed systems...
+    cache_control:
+      type: ephemeral
+messages:
+  - role: user
+    content: warmup
+YAML
+
+# Later, when the user submits a message, the system-prompt prefix is already cached.
+ant messages create --transform 'content.0.text' --raw-output <<'YAML'
+model: claude-opus-4-8
+max_tokens: 1024
+system:
+  - type: text
+    text: >-
+      You are an expert software engineer with deep knowledge of
+      distributed systems...
+    cache_control:
+      type: ephemeral
+messages:
+  - role: user
+    content: How do I implement a binary search tree?
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1239,6 +1313,289 @@ prewarm_cache()
 response = respond("How do I implement a binary search tree?")
 print(response.content[0].text)
 ```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const SYSTEM_PROMPT: Anthropic.TextBlockParam[] = [
+  {
+    type: "text",
+    text: "You are an expert software engineer with deep knowledge of distributed systems...",
+    cache_control: { type: "ephemeral" }
+  }
+];
+
+// Call this at application startup or on a scheduled interval.
+async function prewarmCache(): Promise<void> {
+  await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 0,
+    system: SYSTEM_PROMPT,
+    messages: [{ role: "user", content: "warmup" }]
+  });
+}
+
+// The real user request; benefits from a warm cache.
+async function respond(userMessage: string): Promise<Anthropic.Message> {
+  return client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    system: SYSTEM_PROMPT,
+    messages: [{ role: "user", content: userMessage }]
+  });
+}
+
+// Warm the cache before any user traffic arrives.
+await prewarmCache();
+
+// Later, when the user submits a message, the system-prompt prefix is already cached.
+const response = await respond("How do I implement a binary search tree?");
+const textBlock = response.content.find(
+  (block): block is Anthropic.TextBlock => block.type === "text"
+);
+console.log(textBlock?.text);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+List<TextBlockParam> systemPrompt =
+[
+    new TextBlockParam
+    {
+        Text = "You are an expert software engineer with deep knowledge of distributed systems...",
+        CacheControl = new(),
+    },
+];
+
+// Call this at application startup or on a scheduled interval.
+async Task PrewarmCache() =>
+    await client.Messages.Create(
+        new()
+        {
+            Model = Model.ClaudeOpus4_8,
+            MaxTokens = 0,
+            System = new(systemPrompt),
+            Messages = [new() { Role = Role.User, Content = "warmup" }],
+        }
+    );
+
+// The real user request; benefits from a warm cache.
+async Task<Message> Respond(string userMessage) =>
+    await client.Messages.Create(
+        new()
+        {
+            Model = Model.ClaudeOpus4_8,
+            MaxTokens = 1024,
+            System = new(systemPrompt),
+            Messages = [new() { Role = Role.User, Content = userMessage }],
+        }
+    );
+
+// Warm the cache before any user traffic arrives.
+await PrewarmCache();
+
+// Later, when the user submits a message, the system-prompt prefix is already cached.
+var response = await Respond("How do I implement a binary search tree?");
+if (response.Content[0].TryPickText(out var textBlock))
+{
+    Console.WriteLine(textBlock.Text);
+}
+```
+
+```go Go hidelines={1..10}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+var client = anthropic.NewClient()
+
+var systemPrompt = []anthropic.TextBlockParam{
+	{
+		Text:         "You are an expert software engineer with deep knowledge of distributed systems...",
+		CacheControl: anthropic.NewCacheControlEphemeralParam(),
+	},
+}
+
+// Call this at application startup or on a scheduled interval.
+func prewarmCache() error {
+	_, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 0,
+		System:    systemPrompt,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("warmup")),
+		},
+	})
+	return err
+}
+
+// The real user request; benefits from a warm cache.
+func respond(userMessage string) (*anthropic.Message, error) {
+	return client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_8,
+		MaxTokens: 1024,
+		System:    systemPrompt,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(userMessage)),
+		},
+	})
+}
+
+func main() {
+	// Warm the cache before any user traffic arrives.
+	if err := prewarmCache(); err != nil {
+		log.Fatal(err)
+	}
+
+	// Later, when the user submits a message, the system-prompt prefix is already cached.
+	response, err := respond("How do I implement a binary search tree?")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content[0].Text)
+}
+```
+
+```java Java hidelines={1..8}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+List<TextBlockParam> systemPrompt = List.of(TextBlockParam.builder()
+        .text("You are an expert software engineer with deep knowledge of distributed systems...")
+        .cacheControl(CacheControlEphemeral.builder().build())
+        .build());
+
+// Call this at application startup or on a scheduled interval.
+void prewarmCache() {
+    client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(0)
+            .systemOfTextBlockParams(systemPrompt)
+            .addUserMessage("warmup")
+            .build());
+}
+
+// The real user request; benefits from a warm cache.
+Message respond(String userMessage) {
+    return client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_8)
+            .maxTokens(1024)
+            .systemOfTextBlockParams(systemPrompt)
+            .addUserMessage(userMessage)
+            .build());
+}
+
+void main() {
+    // Warm the cache before any user traffic arrives.
+    prewarmCache();
+
+    // Later, when the user submits a message, the system-prompt prefix is already cached.
+    Message response = respond("How do I implement a binary search tree?");
+    IO.println(response.content().get(0).text().get().text());
+}
+```
+
+```php PHP hidelines={1..5}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\Model;
+
+$client = new Client();
+
+$systemPrompt = [
+    [
+        'type' => 'text',
+        'text' => 'You are an expert software engineer with deep knowledge of distributed systems...',
+        'cache_control' => ['type' => 'ephemeral'],
+    ],
+];
+
+// Call this at application startup or on a scheduled interval.
+$prewarmCache = fn () => $client->messages->create(
+    model: Model::CLAUDE_OPUS_4_8,
+    maxTokens: 0,
+    system: $systemPrompt,
+    messages: [['role' => 'user', 'content' => 'warmup']],
+);
+
+// The real user request; benefits from a warm cache.
+$respond = fn (string $userMessage) => $client->messages->create(
+    model: Model::CLAUDE_OPUS_4_8,
+    maxTokens: 1024,
+    system: $systemPrompt,
+    messages: [['role' => 'user', 'content' => $userMessage]],
+);
+
+// Warm the cache before any user traffic arrives.
+$prewarmCache();
+
+// Later, when the user submits a message, the system-prompt prefix is already cached.
+$response = $respond('How do I implement a binary search tree?');
+echo $response->content[0]->text, PHP_EOL;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+SYSTEM_PROMPT = [
+  {
+    type: "text",
+    text: "You are an expert software engineer with deep knowledge of distributed systems...",
+    cache_control: {type: "ephemeral"}
+  }
+]
+
+# Call this at application startup or on a scheduled interval.
+def prewarm_cache(client)
+  client.messages.create(
+    model: Anthropic::Model::CLAUDE_OPUS_4_8,
+    max_tokens: 0,
+    system_: SYSTEM_PROMPT,
+    messages: [{role: "user", content: "warmup"}]
+  )
+end
+
+# The real user request; benefits from a warm cache.
+def respond(client, user_message)
+  client.messages.create(
+    model: Anthropic::Model::CLAUDE_OPUS_4_8,
+    max_tokens: 1024,
+    system_: SYSTEM_PROMPT,
+    messages: [{role: "user", content: user_message}]
+  )
+end
+
+# Warm the cache before any user traffic arrives.
+prewarm_cache(client)
+
+# Later, when the user submits a message, the system-prompt prefix is already cached.
+response = respond(client, "How do I implement a binary search tree?")
+puts response.content[0].text
+```
+
+</CodeGroup>
 
 Keep in mind that the cache TTL still applies. For the default 5-minute cache, send a new pre-warm request at least every 5 minutes to keep the cache warm. For longer gaps between user requests, use the [1-hour cache duration](#1-hour-cache-duration) instead.
 
@@ -3140,7 +3497,7 @@ Prompt caching is designed with strong privacy and data separation measures:
 
 1. Cache keys are generated using a cryptographic hash of the prompts up to the cache control point. This means only requests with identical prompts can access a specific cache.
 
-2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), caches are isolated per workspace within an organization. On Bedrock and Vertex AI, caches are isolated per organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
+2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), caches are isolated per workspace within an organization. On Bedrock and Google Cloud, caches are isolated per organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
 
 3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 

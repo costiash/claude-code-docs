@@ -239,7 +239,7 @@ The `customer_type` field indicates whether the usage is from `api` customers (p
 Historical Claude Code analytics data is retained and accessible through the API. There is no specified deletion period for this data.
 
 ### Which Claude Code deployments are supported?
-This API only tracks Claude Code usage on the Claude API. Usage through [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), or [Claude on Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai) is not included.
+This API only tracks Claude Code usage on the Claude API. Usage through [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), or [Claude on Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai) is not included.
 
 ### What does it cost to use this API?
 The Claude Code Analytics API is free to use for all organizations with access to the Admin API.

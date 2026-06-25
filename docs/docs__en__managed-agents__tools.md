@@ -4,9 +4,9 @@ Configure tools available to your agent.
 
 ---
 
-Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a session. You control which tools are available by specifying them in the agent configuration.
+Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](/docs/en/managed-agents/sessions). You control which tools are available by specifying them in the agent configuration.
 
-Custom, user-defined tools are also supported. Your application executes these tools separately and sends the tool results back to Claude; Claude can use the results to continue the task at hand.
+Claude Managed Agents also supports custom, user-defined tools. Your application executes these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](/docs/en/managed-agents/mcp-connector) instead.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -14,24 +14,24 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Available tools
 
-The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration.
+The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Use the values in the Name column to reference tools in the `configs` array.
 
 | Tool | Name | Description |
 |---|---|---|
 | Bash | `bash` | Execute bash commands in a shell session |
-| Read | `read` | Read a file from the local filesystem |
-| Write | `write` | Write a file to the local filesystem |
+| Read | `read` | Read a file from the sandbox filesystem |
+| Write | `write` | Write a file to the sandbox filesystem |
 | Edit | `edit` | Perform string replacement in a file |
 | Glob | `glob` | Fast file pattern matching using glob patterns |
 | Grep | `grep` | Text search using regex patterns |
 | Web fetch | `web_fetch` | Fetch content from a URL |
 | Web search | `web_search` | Search the web for information |
 
-When a tool output exceeds 100,000 tokens, it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
+When a tool output exceeds 100,000 tokens, it is automatically written to a file in the [sandbox](/docs/en/managed-agents/environments). The model receives a truncated preview with the file path and can read the full content from there.
 
 ## Configuring the toolset
 
-Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings.
+Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings. Each config entry can also set a `permission_policy` that controls whether the tool's calls are auto-approved or require confirmation. See [Permission policies](/docs/en/managed-agents/permission-policies) for the available policy types.
 
 <CodeGroup defaultLanguage="CLI">
 ```bash curl
@@ -153,6 +153,8 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 ```
 
 ```php PHP
+use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolConfigParams;
+use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
 
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
@@ -186,7 +188,7 @@ agent = client.beta.agents.create(
 
 ### Disabling specific tools
 
-To disable a tool, set `enabled: false` in its config entry:
+To disable a tool, set `enabled: false` in its config entry in the toolset object of your agent's `tools` array:
 
 ```json
 {
@@ -200,7 +202,7 @@ To disable a tool, set `enabled: false` in its config entry:
 
 ### Enabling only specific tools
 
-To start with everything off and enable only what you need, set `default_config.enabled` to `false`:
+The `default_config` object sets the baseline for every tool in the set, and per-tool `configs` entries override it. To start with everything off and enable only what you need, set `default_config.enabled` to `false`:
 
 ```json
 {
@@ -218,7 +220,7 @@ To start with everything off and enable only what you need, set `default_config.
 
 In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](/docs/en/agents-and-tools/tool-use/how-tool-use-works#user-defined-tools-client-executed) in the Messages API.
 
-Custom tools allow you to extend Claude's capabilities to perform a wider variety of tasks. Each tool defines a contract: you specify what operations are available and what they return; Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation.
+Each custom tool defines a contract: you specify what operations are available and what they return, and Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation. See [Session event stream](/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls) for how to receive custom tool calls and return results during a session.
 
 <CodeGroup defaultLanguage="CLI">
 ```bash curl
@@ -318,7 +320,6 @@ const agent = await client.beta.agents.create({
 ```
 
 ```csharp C#
-
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Weather Agent",
@@ -336,7 +337,6 @@ var agent = await client.Beta.Agents.Create(new()
             Description = "Get current weather for a location",
             InputSchema = new()
             {
-                Type = "object",
                 Properties = new Dictionary<string, JsonElement>
                 {
                     ["location"] = JsonSerializer.SerializeToElement(
@@ -366,7 +366,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 			Name:        "get_weather",
 			Description: "Get current weather for a location",
 			InputSchema: anthropic.BetaManagedAgentsCustomToolInputSchemaParam{
-				Type: anthropic.BetaManagedAgentsCustomToolInputSchemaTypeObject,
 				Properties: map[string]any{
 					"location": map[string]any{
 						"type":        "string",
@@ -396,7 +395,6 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
         .name("get_weather")
         .description("Get current weather for a location")
         .inputSchema(BetaManagedAgentsCustomToolInputSchema.builder()
-            .type(BetaManagedAgentsCustomToolInputSchema.Type.OBJECT)
             .properties(BetaManagedAgentsCustomToolInputSchema.Properties.builder()
                 .putAdditionalProperty("location", JsonValue.from(Map.of(
                     "type", "string",
@@ -409,6 +407,7 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 ```
 
 ```php PHP
+use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
 use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolInputSchema;
 use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolParams;
 
@@ -424,7 +423,6 @@ $agent = $client->beta->agents->create(
             name: 'get_weather',
             description: 'Get current weather for a location',
             inputSchema: BetaManagedAgentsCustomToolInputSchema::with(
-                type: 'object',
                 properties: ['location' => ['type' => 'string', 'description' => 'City name']],
                 required: ['location'],
             ),
@@ -454,11 +452,25 @@ agent = client.beta.agents.create(
 ```
 </CodeGroup>
 
-Once you've defined the tool at the agent level, the agent invokes the tools through the course of a session. See [Session event stream](/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls) for the full flow.
+Once you've defined custom tools on the agent, the agent invokes them during a session.
 
 ### Best practices for custom tool definitions
 
-- **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain what the tool does, when it should be used (and when it shouldn't), what each parameter means and how it affects the tool's behavior, and any important caveats or limitations. The more context you can give Claude about your tools, the better it is at determining when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.
+- **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain what the tool does and when to use it (and when not to). Explain what each parameter means and how it affects the tool's behavior. Call out any important caveats or limitations. The more context you can give Claude about your tools, the better it is at determining when and how to use them. Aim for three to four sentences for each tool description, more if the tool is complex.
 - **Consolidate related operations into fewer tools.** Rather than creating a separate tool for every action (`create_pr`, `review_pr`, `merge_pr`), group them into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.
 - **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the resource (for example, `db_query` or `storage_read`). This makes tool selection unambiguous as your library grows.
-- **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
+- **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to determine its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="MCP connector" icon="link" href="/docs/en/managed-agents/mcp-connector">
+    Connect MCP servers to your agents for access to external tools and data sources.
+  </Card>
+  <Card title="Permission policies" icon="lock" href="/docs/en/managed-agents/permission-policies">
+    Control when agent and MCP tools execute.
+  </Card>
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+    Send events, stream responses, and interrupt or redirect your session mid-execution.
+  </Card>
+</CardGroup>

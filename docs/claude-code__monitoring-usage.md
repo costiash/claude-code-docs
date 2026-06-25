@@ -436,7 +436,7 @@ Incremented at the start of each session.
 **Attributes**:
 
 * All [standard attributes](#standard-attributes)
-* `start_type`: How the session was started. One of `"fresh"`, `"resume"`, or `"continue"`
+* `start_type`: How the session was started. One of `"fresh"`, `"resume"`, `"continue"`, or `"agents_view"`. The `"agents_view"` value identifies the `claude agents` dashboard process, a user-launched local UI rather than a conversational session. Filter on this value to separate UI process launches from conversational sessions in your dashboards.
 
 #### Lines of code counter
 

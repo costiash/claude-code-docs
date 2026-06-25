@@ -35,7 +35,7 @@ Anthropic personnel access customer content only under defined conditions. Acces
 - **Your own organization's activity:** Your API calls, admin actions, and Compliance API reads are covered by standard [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) event types.
 - **Claude for Enterprise and Claude Apps:** claude.ai Enterprise seats, Claude for Work, Cowork, and Claude in Chrome are not covered.
 - **Claude consumer products:** Claude Free, Pro, or Max plans.
-- **Partner-operated platforms:** Amazon Bedrock and Vertex AI; refer to those platforms' transparency controls.
+- **Partner-operated platforms:** Amazon Bedrock and Google Cloud; refer to those platforms' transparency controls.
 - **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](https://code.claude.com/docs/en/zero-data-retention#what-zdr-does-not-cover) for additional details.
 
 ## Getting started
@@ -136,7 +136,7 @@ The following table lists which surfaces are covered by Access Transparency. Cov
 | Claude Free, Pro, Max | No | Consumer plans are not eligible |
 | Anthropic Workbench | No | The Workbench stores data in data stores that are not covered by Access Transparency |
 | Microsoft Foundry | No | Not available |
-| Amazon Bedrock, Vertex AI | No | Partner-operated platforms; refer to those platforms' transparency controls |
+| Amazon Bedrock, Google Cloud | No | Partner-operated platforms; refer to those platforms' transparency controls |
 
 ## Limitations and exclusions
 
