@@ -45,7 +45,7 @@ Either method works. [`/schedule`](/en/routines) checks for either form of acces
 
 The GitHub App is required for [Auto-fix](#auto-fix-pull-requests), which uses the App to receive PR webhooks. If you connect with `/web-setup` and later want Auto-fix, install the App on those repositories.
 
-Team and Enterprise admins can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
+Team and Enterprise Owners can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 
 <Note>
   Organizations with [Zero Data Retention](/en/zero-data-retention) enabled cannot use `/web-setup` or other cloud session features.
@@ -793,7 +793,7 @@ If a new session fails to start with `Session creation failed` or stalls at prov
 
 * Run `/login` locally to refresh your credentials, then reconnect
 * Confirm you are signed in to the same account that owns the session
-* If you see `Remote Control may not be available for this organization`, your admin has not enabled cloud sessions for your plan
+* If you see `Remote Control may not be available for this organization`, an Owner has not enabled cloud sessions for your organization
 
 ### Environment expired
 
