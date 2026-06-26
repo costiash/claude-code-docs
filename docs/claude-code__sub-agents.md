@@ -24,14 +24,7 @@ Subagents help you:
 
 Claude uses each subagent's description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it.
 
-Claude Code includes several built-in subagents like **Explore**, **Plan**, and **general-purpose**. You can also create custom subagents to handle specific tasks. This page covers:
-
-* [Built-in subagents](#built-in-subagents)
-* [How to create your own](#quickstart-create-your-first-subagent)
-* [Full configuration options](#configure-subagents)
-* [Patterns for working with subagents](#work-with-subagents)
-* [Forked subagents](#fork-the-current-conversation)
-* [Example subagents](#example-subagents)
+Claude Code includes several built-in subagents like **Explore**, **Plan**, and **general-purpose**. You can also create custom subagents to handle specific tasks.
 
 ## Built-in subagents
 

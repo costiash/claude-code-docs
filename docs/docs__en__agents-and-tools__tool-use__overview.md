@@ -1,12 +1,12 @@
 # Tool use with Claude
 
-Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.
+Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
 
 ---
 
-Tool use lets Claude call functions you define or that Anthropic provides. Claude decides when to call a tool based on the user's request and the tool's description, then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
+Tool use lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
 
-Here's the simplest example using a server tool, where Anthropic handles execution:
+Here's a minimal example using a server tool, the [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool), which Anthropic executes for you:
 
 <CodeGroup>
 ```bash cURL
@@ -164,47 +164,37 @@ puts message.content
 ```
 </CodeGroup>
 
----
+Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) and [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls) cover that round trip.
 
 ## How tool use works
 
-Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and Anthropic-schema tools like bash and text_editor) run in your application: Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks, your code executes the operation, and you send back a `tool_result`. **Server tools** (web_search, code_execution, web_fetch, tool_search) run on Anthropic's infrastructure: you see the results directly without handling execution.
+Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code executes the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](/docs/en/build-with-claude/handling-stop-reasons#tool-use)).
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](/docs/en/agents-and-tools/tool-use/how-tool-use-works).
 
-For connecting to MCP servers, see the [MCP connector](/docs/en/agents-and-tools/mcp-connector). For building your own MCP client, see [modelcontextprotocol.io](https://modelcontextprotocol.io/docs/develop/build-client).
+For connecting to Model Context Protocol (MCP) servers, see the [MCP connector](/docs/en/agents-and-tools/mcp-connector). For building your own MCP client, see the Model Context Protocol guide to [building an MCP client](https://modelcontextprotocol.io/docs/develop/build-client).
+
+## When Claude uses tools
+
+With the default `tool_choice` of `{"type": "auto"}`, Claude determines on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
+
+This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction such as `"Use the tools to investigate before responding."` increases tool use. A stronger form such as `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
+
+To require a tool call rather than rely on prompting, set [`tool_choice`](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use).
 
 <Tip>
 **Guarantee schema conformance with strict tool use**
 
-Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
+Add `strict: true` to your custom tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
 </Tip>
 
-Tool access is one of the most effective capabilities you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces large gains, often surpassing human expert baselines.
+Each server tool's page describes its own trigger boundary in more detail.
 
----
+<section title="When required parameters are missing">
 
-## When Claude uses tools
+If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
 
-With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
-
-This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use. A stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
-
-For a hard guarantee rather than a nudge, use [`tool_choice`](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use).
-
-Each server tool's page describes its own trigger boundary in more detail. See for example [the web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool) or [the code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool).
-
----
-
-## Tool use examples
-
-For a complete hands-on walkthrough, see the [tutorial](/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent). For reference examples of individual concepts, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) and [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
-
-<section title="What happens when Claude needs more information">
-
-If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet may ask, especially when prompted to think before outputting a tool request. But it may also do its best to infer a reasonable value.
-
-For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) may make a guess about tool inputs:
+For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn't supply:
 
 ```json JSON
 {
@@ -215,11 +205,74 @@ For example, given a `get_weather` tool that requires a `location` parameter, if
 }
 ```
 
-This behavior is not guaranteed, especially for more ambiguous prompts and for less intelligent models. If Claude Opus doesn't have enough context to fill in the required parameters, it is far more likely to respond with a clarifying question instead of making a tool call.
+This behavior is not guaranteed, especially for more ambiguous prompts and for less capable models.
 
 </section>
 
----
+## Choose a tool
+
+For `type` strings, versions, and beta headers, see [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
+
+### Your own tools
+
+For tools you define, you write the schema and your application executes each call.
+
+<CardGroup cols={2}>
+  <Card title="Define tools" icon="hammer" href="/docs/en/agents-and-tools/tool-use/define-tools">
+    Specify tool schemas, write descriptions, and control when Claude calls your tools.
+  </Card>
+  <Card title="Handle tool calls" icon="arrows-left-right" href="/docs/en/agents-and-tools/tool-use/handle-tool-calls">
+    Parse `tool_use` blocks, format `tool_result` responses, and handle errors.
+  </Card>
+</CardGroup>
+
+### Anthropic-schema client tools
+
+Anthropic publishes the schema and trains Claude on it. Your application still executes each call and returns the `tool_result`.
+
+<CardGroup cols={2}>
+  <Card title="Memory tool" icon="brain" href="/docs/en/agents-and-tools/tool-use/memory-tool">
+    Store and retrieve information across conversations in files you control.
+  </Card>
+  <Card title="Bash tool" icon="terminal" href="/docs/en/agents-and-tools/tool-use/bash-tool">
+    Run shell commands in a persistent session that maintains state.
+  </Card>
+  <Card title="Text editor tool" icon="edit" href="/docs/en/agents-and-tools/tool-use/text-editor-tool">
+    View and modify text files to debug, fix, and improve code.
+  </Card>
+  <Card title="Computer use tool" icon="computer" href="/docs/en/agents-and-tools/tool-use/computer-use-tool">
+    Take screenshots and control the mouse and keyboard in a desktop environment.
+  </Card>
+</CardGroup>
+
+### Server tools
+
+Server tools run on Anthropic's infrastructure, with no handler code in your application. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools) for the mechanics they share.
+
+<CardGroup cols={2}>
+  <Card title="Web search tool" icon="browser" href="/docs/en/agents-and-tools/tool-use/web-search-tool">
+    Search the web for information beyond the knowledge cutoff, with cited sources.
+  </Card>
+  <Card title="Web fetch tool" icon="download" href="/docs/en/agents-and-tools/tool-use/web-fetch-tool">
+    Retrieve the full content of specified web pages and PDF documents.
+  </Card>
+  <Card title="Code execution tool" icon="code" href="/docs/en/agents-and-tools/tool-use/code-execution-tool">
+    Run Python and bash code in a sandboxed container to analyze data and generate files.
+  </Card>
+  <Card title="Advisor tool" icon="lightbulb" href="/docs/en/agents-and-tools/tool-use/advisor-tool">
+    Let a faster executor model consult a higher-intelligence advisor model mid-generation.
+  </Card>
+  <Card title="Tool search tool" icon="library" href="/docs/en/agents-and-tools/tool-use/tool-search-tool">
+    Work with thousands of tools by discovering and loading them on demand.
+  </Card>
+  <Card title="MCP connector" icon="link" href="/docs/en/agents-and-tools/mcp-connector">
+    Connect to remote MCP servers from the Messages API without a separate MCP client.
+  </Card>
+</CardGroup>
+
+<Note>
+[Claude Managed Agents](/docs/en/managed-agents/overview) provides a built-in toolset that Claude uses autonomously within a session. For that toolset and the Managed Agents way to add custom tools, see its [Tools](/docs/en/managed-agents/tools) page.
+</Note>
 
 ## Pricing
 
@@ -254,11 +307,11 @@ When you use `tools`, the API also automatically includes a special system promp
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-Refer to the [models overview table](/docs/en/about-claude/models/overview#latest-models-comparison) for current per-model prices.
+See the [Models overview](/docs/en/about-claude/models/overview#latest-models-comparison) table for current per-model prices.
 
 When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 
----
+Some server tools add usage-based charges on top of tokens: see [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool#usage-and-pricing) and [Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for their rates.
 
 ## Next steps
 

@@ -20,7 +20,7 @@ The endpoints on this page expose the directory side of a Claude Enterprise orga
 
 The [List organizations](/docs/en/api/compliance/organizations/list) endpoint returns every organization under the parent the key is bound to.
 
-The following call lists every organization under your parent. The response is a single `data` array of organization records sorted by `created_at` ascending. The endpoint returns up to 1,000 organizations in one call; if your tree exceeds that, it returns a [500 error](/docs/en/manage-claude/compliance-errors#500-internal-server-error).
+The following call lists every organization under your parent. The response is a `data` array of organization records sorted by `created_at` ascending, plus `has_more` and `next_page` for pagination. When `has_more` is `true`, pass the returned `next_page` token back unchanged as the `page` query parameter on your next request. See [List organizations](/docs/en/api/compliance/organizations/list) in the API reference for the `limit` and `page` parameter defaults and ranges.
 
 <CodeGroup>
 ```bash cURL nocheck
@@ -43,7 +43,9 @@ curl --fail-with-body -sS \
       "name": "Acme Legal",
       "created_at": "2025-07-15T14:30:00Z"
     }
-  ]
+  ],
+  "has_more": false,
+  "next_page": null
 }
 ```
 
@@ -59,7 +61,7 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
-If your tree exceeds the 1,000-organization cap, contact Anthropic support. To track organization-membership changes over time, relist this endpoint periodically. The Activity Feed also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed).
+To track organization-membership changes over time, relist this endpoint periodically, following the `next_page` token through every page on each pass. The Activity Feed also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed).
 
 ## List organization users
 

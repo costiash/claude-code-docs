@@ -8,12 +8,7 @@
 
 A [development container](https://containers.dev/), or dev container, lets you define an identical, isolated environment that every engineer on your team can run. With Claude Code installed in that container, commands Claude runs execute inside it rather than on the host machine, while edits to your project files appear in your local repository as you work.
 
-This page covers [installing Claude Code in a dev container](#add-claude-code-to-your-dev-container) and the configuration topics that follow. Each topic is self-contained, so jump to the ones that match what you need to set up:
-
-* [Persist authentication and settings across rebuilds](#persist-authentication-and-settings-across-rebuilds)
-* [Enforce organization policy](#enforce-organization-policy)
-* [Restrict network egress](#restrict-network-egress)
-* [Run without permission prompts](#run-without-permission-prompts)
+This page covers [installing Claude Code in a dev container](#add-claude-code-to-your-dev-container), then a set of self-contained configuration topics: persisting authentication across rebuilds, enforcing organization policy, restricting network egress, and running without permission prompts. Read the ones that match your setup.
 
 <Warning>
   While the dev container provides substantial protections, no system is completely immune to all attacks.

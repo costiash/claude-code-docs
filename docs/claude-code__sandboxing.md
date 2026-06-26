@@ -8,13 +8,6 @@
 
 The Bash sandbox lets Claude run most shell commands without stopping to ask permission. Instead of approving each command, you define which files and network domains commands can touch, and the operating system enforces that boundary for every Bash command and its child processes.
 
-This page covers how to:
-
-* [Enable the sandbox](#get-started) and choose how sandboxed commands are approved
-* [Configure](#configure-sandboxing) which paths and network domains commands can reach
-* [Combine sandboxing with permission rules and permission modes](#how-sandboxing-relates-to-permissions-and-permission-modes)
-* [Enforce sandboxing across an organization](#configure-the-sandbox-for-your-organization) with managed settings
-
 <Note>
   To compare other isolation approaches such as dev containers, custom containers, and virtual machines, see [Sandbox environments](/en/sandbox-environments). To reduce permission prompts for tools other than Bash, see [permission modes](/en/permission-modes).
 </Note>

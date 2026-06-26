@@ -144,7 +144,7 @@ The `name` must be unique within your organization and workspace.
 
 Pass the environment ID as a string when [creating a session](/docs/en/managed-agents/sessions).
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
 ````bash
 session=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -159,6 +159,13 @@ session=$(curl -fsS https://api.anthropic.com/v1/sessions \
 }
 EOF
 )
+````
+
+  
+````bash
+ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID"
 ````
 
   
@@ -229,7 +236,7 @@ session = client.beta.sessions.create(
 
 ### Packages
 
-The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
+The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version.
 
 <CodeGroup defaultLanguage="CLI">
 ```bash curl
@@ -391,110 +398,158 @@ Supported package managers:
 
 ### Networking
 
-The `networking` field controls the sandbox's outbound network access. It does not impact the `web_search` or `web_fetch` tools' allowed domains.
+The `networking` field controls the sandbox's outbound network access. It does not affect the allowed domains for the `web_search` or `web_fetch` tools.
 
 | Mode | Description |
 | --- | --- |
 | `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default. |
-| `limited` | Restricts sandbox network access to the `allowed_hosts` list. Further access is enabled through the `allow_package_managers` and `allow_mcp_servers` bool.|
+| `limited` | Restricts sandbox network access to the hosts in `allowed_hosts`. Set `allow_package_managers` and `allow_mcp_servers` to `true` to allow additional access. |
 
-<CodeGroup>
+The following example creates an environment with `limited` networking:
+
+<CodeGroup defaultLanguage="CLI">
 ```bash curl
-config=$(cat <<'EOF'
-{
-  "type": "cloud",
-  "networking": {
-    "type": "limited",
-    "allowed_hosts": ["api.example.com"],
-    "allow_mcp_servers": true,
-    "allow_package_managers": true
-  }
-}
-EOF
-)
+curl -fsS https://api.anthropic.com/v1/environments \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "api-access",
+    "config": {
+      "type": "cloud",
+      "networking": {
+        "type": "limited",
+        "allowed_hosts": ["api.example.com"],
+        "allow_mcp_servers": true,
+        "allow_package_managers": true
+      }
+    }
+  }'
+```
+
+```bash CLI
+ant beta:environments create <<'YAML'
+name: api-access
+config:
+  type: cloud
+  networking:
+    type: limited
+    allowed_hosts:
+      - api.example.com
+    allow_mcp_servers: true
+    allow_package_managers: true
+YAML
 ```
 
 ```python Python
-config = {
-    "type": "cloud",
-    "networking": {
-        "type": "limited",
-        "allowed_hosts": ["api.example.com"],
-        "allow_mcp_servers": True,
-        "allow_package_managers": True,
+environment = client.beta.environments.create(
+    name="api-access",
+    config={
+        "type": "cloud",
+        "networking": {
+            "type": "limited",
+            "allowed_hosts": ["api.example.com"],
+            "allow_mcp_servers": True,
+            "allow_package_managers": True,
+        },
     },
-}
+)
 ```
 
 ```typescript TypeScript
-const config = {
-  type: "cloud",
-  networking: {
-    type: "limited",
-    allowed_hosts: ["api.example.com"],
-    allow_mcp_servers: true,
-    allow_package_managers: true
+const environment = await client.beta.environments.create({
+  name: "api-access",
+  config: {
+    type: "cloud",
+    networking: {
+      type: "limited",
+      allowed_hosts: ["api.example.com"],
+      allow_mcp_servers: true,
+      allow_package_managers: true
+    }
   }
-};
+});
 ```
 
 ```csharp C#
-var config = new BetaCloudConfigParams
+var environment = await client.Beta.Environments.Create(new()
 {
-    Networking = new BetaLimitedNetworkParams
+    Name = "api-access",
+    Config = new BetaCloudConfigParams
     {
-        AllowedHosts = ["api.example.com"],
-        AllowMcpServers = true,
-        AllowPackageManagers = true,
+        Networking = new BetaLimitedNetworkParams
+        {
+            AllowedHosts = ["api.example.com"],
+            AllowMcpServers = true,
+            AllowPackageManagers = true,
+        },
     },
-};
+});
 ```
 
 ```go Go
-config := anthropic.BetaCloudConfigParams{
-	Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-		OfLimited: &anthropic.BetaLimitedNetworkParams{
-			AllowedHosts:         []string{"api.example.com"},
-			AllowMCPServers:      anthropic.Bool(true),
-			AllowPackageManagers: anthropic.Bool(true),
+environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
+	Name: "api-access",
+	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
+		OfCloud: &anthropic.BetaCloudConfigParams{
+			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
+				OfLimited: &anthropic.BetaLimitedNetworkParams{
+					AllowedHosts:         []string{"api.example.com"},
+					AllowMCPServers:      anthropic.Bool(true),
+					AllowPackageManagers: anthropic.Bool(true),
+				},
+			},
 		},
 	},
+})
+if err != nil {
+	panic(err)
 }
-_ = config
+_ = environment
 ```
 
 ```java Java
-var config = BetaCloudConfigParams.builder()
-    .networking(BetaLimitedNetworkParams.builder()
-        .allowedHosts(List.of("api.example.com"))
-        .allowMcpServers(true)
-        .allowPackageManagers(true)
+var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
+    .name("api-access")
+    .config(BetaCloudConfigParams.builder()
+        .networking(BetaLimitedNetworkParams.builder()
+            .allowedHosts(List.of("api.example.com"))
+            .allowMcpServers(true)
+            .allowPackageManagers(true)
+            .build())
         .build())
-    .build();
+    .build());
 ```
 
 ```php PHP
-$config = [
-    'type' => 'cloud',
-    'networking' => [
-        'type' => 'limited',
-        'allowed_hosts' => ['api.example.com'],
-        'allow_mcp_servers' => true,
-        'allow_package_managers' => true,
+$environment = $client->beta->environments->create(
+    name: 'api-access',
+    config: [
+        'type' => 'cloud',
+        'networking' => [
+            'type' => 'limited',
+            'allowed_hosts' => ['api.example.com'],
+            'allow_mcp_servers' => true,
+            'allow_package_managers' => true,
+        ],
     ],
-];
+);
 ```
 
 ```ruby Ruby
-config = {
-  type: "cloud",
-  networking: {
-    type: "limited",
-    allowed_hosts: %w[api.example.com],
-    allow_mcp_servers: true,
-    allow_package_managers: true
+environment = client.beta.environments.create(
+  name: "api-access",
+  config: {
+    type: "cloud",
+    networking: {
+      type: "limited",
+      allowed_hosts: %w[api.example.com],
+      allow_mcp_servers: true,
+      allow_package_managers: true
+    }
   }
-}
+)
 ```
 </CodeGroup>
 
@@ -503,16 +558,15 @@ For production deployments, use `limited` networking with an explicit `allowed_h
 </Info>
 
 When using `limited` networking:
-- `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`); do not include a URL scheme.
-- `allow_mcp_servers` permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-- `allow_package_managers` permits outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+- `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path.
+- `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+- `allow_package_managers` allows outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
 ## Environment lifecycle
 
 - Environments persist until explicitly archived or deleted.
-- Multiple sessions can reference the same environment.
-- Each session gets its own sandbox instance. Sessions do not share file system state.
-- Environments are not versioned. If you frequently update your environments, you may want to log these updates on your side, to map environment state with sessions.
+- Each session gets its own sandbox instance, even when multiple sessions reference the same environment. Sessions do not share filesystem state.
+- Environments are not versioned. If you update an environment frequently, keep your own record of the changes so you can tell which configuration each session used.
 
 ## Manage environments
 
@@ -674,4 +728,15 @@ client.beta.environments.delete(environment.id)
 
 ## Pre-installed runtimes
 
-Cloud sandboxes include common runtimes out of the box. See [Sandbox reference](/docs/en/managed-agents/cloud-sandboxes-reference) for the full list of pre-installed languages, databases, and utilities.
+Cloud sandboxes include common runtimes out of the box. See [Cloud sandbox reference](/docs/en/managed-agents/cloud-sandboxes-reference) for the full list of pre-installed languages, databases, and utilities.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Cloud sandbox reference" icon="book" href="/docs/en/managed-agents/cloud-sandboxes-reference">
+    Pre-installed packages, databases, and utilities available in cloud sandboxes.
+  </Card>
+  <Card title="Start a session" icon="play" href="/docs/en/managed-agents/sessions">
+    Create a session to run your agent and start running tasks.
+  </Card>
+</CardGroup>

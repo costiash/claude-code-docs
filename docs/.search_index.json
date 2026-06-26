@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-26T19:22:00Z",
+  "generated_at": "2026-06-26T22:11:58Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "model",
         "command"
       ],
-      "word_count": 59291,
+      "word_count": 59515,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -291,16 +291,16 @@
         "code",
         "claude",
         "dev",
-        "run",
         "containers",
+        "run",
         "step",
         "inside",
         "host",
         "repository",
-        "settings",
         "codespaces",
         "see",
         "devcontainer",
+        "settings",
         "authentication",
         "when",
         "directory",
@@ -308,7 +308,7 @@
         "across",
         "project"
       ],
-      "word_count": 2091,
+      "word_count": 2077,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
@@ -576,19 +576,19 @@
         "developer",
         "llm",
         "usage",
-        "one",
         "model",
         "each",
+        "one",
         "api",
         "configuration",
         "anthropic",
         "requests",
-        "gateways",
         "through",
-        "out",
-        "traffic"
+        "traffic",
+        "set",
+        "gateways"
       ],
-      "word_count": 1240,
+      "word_count": 1205,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -935,24 +935,24 @@
         "commands",
         "settings",
         "claude",
-        "permission",
         "code",
+        "permission",
         "sandboxed",
         "run",
         "access",
         "bash",
         "command",
         "directory",
-        "sandboxing",
-        "network",
-        "rules",
         "mode",
         "only",
         "when",
-        "paths",
-        "managed"
+        "network",
+        "wsl",
+        "sandboxing",
+        "rules",
+        "isolation"
       ],
-      "word_count": 4564,
+      "word_count": 4520,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -997,8 +997,8 @@
         "theme",
         "null",
         "acme",
-        "set",
         "when",
+        "set",
         "project",
         "see",
         "corp",
@@ -1008,7 +1008,7 @@
         "github",
         "mcp"
       ],
-      "word_count": 12978,
+      "word_count": 12960,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1120,7 +1120,7 @@
         "specific",
         "background"
       ],
-      "word_count": 8826,
+      "word_count": 8798,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1857,26 +1857,26 @@
       "keywords": [
         "tool",
         "claude",
-        "section",
-        "blocks",
-        "error",
         "result",
+        "blocks",
+        "section",
+        "error",
         "tools",
         "example",
-        "title",
-        "results",
-        "content",
         "response",
+        "results",
+        "title",
         "user",
-        "errors",
+        "server",
+        "content",
+        "block",
         "message",
-        "tip",
-        "card",
-        "handle",
-        "runner",
+        "errors",
+        "client",
+        "note",
         "when"
       ],
-      "word_count": 1333,
+      "word_count": 1485,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__handle-tool-calls.md"
     },
     "/docs/en/agents-and-tools/tool-use/how-tool-use-works": {
@@ -1886,25 +1886,25 @@
         "tool",
         "tools",
         "model",
-        "schema",
         "loop",
+        "schema",
         "when",
+        "server",
+        "docs",
+        "agents",
         "application",
         "anthropic",
+        "back",
         "response",
         "code",
-        "back",
-        "server",
-        "what",
+        "client",
         "claude",
-        "call",
-        "user",
         "execution",
-        "execute",
-        "request",
-        "client"
+        "calls",
+        "what",
+        "call"
       ],
-      "word_count": 1265,
+      "word_count": 1378,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__how-tool-use-works.md"
     },
     "/docs/en/agents-and-tools/tool-use/manage-tool-context": {
@@ -1965,30 +1965,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
       "title": "Tool use with Claude",
-      "content_preview": "# Tool use with Claude  Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.  ---  Tool use lets Claude call functions you define or that Anthropic prov...",
+      "content_preview": "# Tool use with Claude  Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.  ---  Tool use lets Claude call functions that you de...",
       "keywords": [
         "tool",
-        "tokens",
-        "claude",
         "tools",
+        "claude",
+        "card",
+        "tokens",
+        "agents",
+        "docs",
+        "title",
+        "icon",
+        "href",
         "when",
         "see",
-        "opus",
         "call",
         "anthropic",
-        "request",
         "server",
-        "more",
-        "model",
-        "prompt",
-        "api",
-        "card",
-        "works",
-        "like",
         "search",
-        "sonnet"
+        "model",
+        "calls",
+        "web",
+        "code"
       ],
-      "word_count": 1486,
+      "word_count": 1833,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -2049,30 +2049,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
       "title": "Server tools",
-      "content_preview": "# Server tools  Work with Anthropic-executed tools: server_tool_use blocks, pause_turn continuation, and domain filtering.  ---  This page covers the shared mechanics of server-executed tools: the `se...",
+      "content_preview": "# Server tools  Work with Anthropic-executed tools: server_tool_use blocks, pause_turn continuation, and domain filtering.  ---  Server-executed tools share these mechanics: the `server_tool_use` bloc...",
       "keywords": [
         "tool",
-        "tools",
-        "domain",
-        "server",
         "web",
-        "search",
+        "tools",
+        "server",
+        "domain",
         "execution",
-        "card",
-        "filtering",
-        "block",
-        "when",
-        "request",
         "code",
-        "turn",
-        "zdr",
-        "only",
+        "block",
+        "search",
+        "request",
+        "card",
         "claude",
-        "same",
+        "api",
+        "versions",
+        "turn",
+        "filtering",
         "fetch",
-        "dynamic"
+        "when",
+        "loop",
+        "only"
       ],
-      "word_count": 1735,
+      "word_count": 2101,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__server-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/strict-tool-use": {
@@ -2280,23 +2280,23 @@
         "calls",
         "fix",
         "claude",
+        "message",
         "schema",
         "symptom",
+        "request",
         "card",
         "cause",
-        "add",
-        "message",
-        "request",
-        "likely",
         "see",
+        "add",
+        "blocks",
+        "likely",
         "parallel",
         "one",
-        "errors",
-        "when",
-        "define",
-        "never"
+        "user",
+        "block",
+        "most"
       ],
-      "word_count": 791,
+      "word_count": 886,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__troubleshooting-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -13221,8 +13221,8 @@
         "when",
         "occurred",
         "verified",
-        "api",
         "null",
+        "api",
         "identifier",
         "compliance",
         "uuid",
@@ -13237,7 +13237,7 @@
         "logout",
         "calls"
       ],
-      "word_count": 191363,
+      "word_count": 204309,
       "file_path": "docs/docs__en__api__compliance.md"
     },
     "/docs/en/api/compliance/activities": {
@@ -13265,7 +13265,7 @@
         "logout",
         "calls"
       ],
-      "word_count": 178544,
+      "word_count": 191164,
       "file_path": "docs/docs__en__api__compliance__activities.md"
     },
     "/docs/en/api/compliance/activities/list": {
@@ -13279,9 +13279,9 @@
         "verified",
         "api",
         "null",
+        "identifier",
         "compliance",
         "login",
-        "identifier",
         "uuid",
         "example",
         "events",
@@ -13293,7 +13293,7 @@
         "logout",
         "calls"
       ],
-      "word_count": 92662,
+      "word_count": 99197,
       "file_path": "docs/docs__en__api__compliance__activities__list.md"
     },
     "/docs/en/api/compliance/apps": {
@@ -13302,15 +13302,15 @@
       "keywords": [
         "project",
         "file",
-        "document",
         "when",
+        "document",
         "chat",
         "user",
         "claude",
         "organization",
+        "format",
         "artifact",
         "response",
-        "format",
         "content",
         "timestamp",
         "tool",
@@ -13318,10 +13318,10 @@
         "parameters",
         "tagged",
         "null",
-        "get",
-        "granted"
+        "granted",
+        "get"
       ],
-      "word_count": 8063,
+      "word_count": 8192,
       "file_path": "docs/docs__en__api__compliance__apps.md"
     },
     "/docs/en/api/compliance/apps/artifacts": {
@@ -13414,23 +13414,23 @@
         "when",
         "tool",
         "claude",
+        "messages",
         "generated",
+        "format",
         "message",
         "chats",
-        "messages",
-        "format",
         "time",
         "response",
         "rfc",
+        "opaque",
         "filter",
         "name",
+        "string",
         "user",
         "content",
-        "available",
-        "parameters",
-        "timestamp"
+        "available"
       ],
-      "word_count": 3962,
+      "word_count": 4073,
       "file_path": "docs/docs__en__api__compliance__apps__chats.md"
     },
     "/docs/en/api/compliance/apps/chats/delete": {
@@ -13657,28 +13657,28 @@
       "title": "Untitled",
       "content_preview": "## List chats  **get** `/v1/compliance/apps/chats`  Lists chat metadata with filtering capabilities for targeted compliance review. Results are sorted chronologically (time ascending) by created_at, w...",
       "keywords": [
-        "chat",
-        "chats",
-        "filter",
         "format",
+        "chats",
+        "chat",
+        "filter",
         "ids",
         "time",
         "rfc",
         "user",
         "created",
+        "value",
+        "opaque",
         "org",
         "wide",
-        "after",
-        "before",
+        "may",
         "requires",
         "supported",
         "queries",
         "results",
-        "next",
-        "page",
-        "value"
+        "pagination",
+        "cursor"
       ],
-      "word_count": 629,
+      "word_count": 680,
       "file_path": "docs/docs__en__api__compliance__apps__chats__list.md"
     },
     "/docs/en/api/compliance/apps/chats/messages": {
@@ -13686,13 +13686,13 @@
       "content_preview": "# Messages  ## Get chat messages  **get** `/v1/compliance/apps/chats/{claude_chat_id}/messages`  Retrieves message history and file metadata for a specific chat.  ### Path Parameters  - `claude_chat_id: string`    The chat ID (tagged ID, e.g., claude_chat_abc123)  ### Query Parameters  - `after_id:",
       "keywords": [
         "tool",
-        "file",
         "when",
+        "file",
         "message",
         "chat",
         "messages",
-        "result",
         "text",
+        "result",
         "name",
         "format",
         "generated",
@@ -13702,11 +13702,11 @@
         "claude",
         "pass",
         "opaque",
+        "string",
         "time",
-        "via",
-        "abc"
+        "shortened"
       ],
-      "word_count": 2071,
+      "word_count": 2132,
       "file_path": "docs/docs__en__api__compliance__apps__chats__messages.md"
     },
     "/docs/en/api/compliance/apps/chats/messages/list": {
@@ -13714,9 +13714,9 @@
       "content_preview": "## Get chat messages  **get** `/v1/compliance/apps/chats/{claude_chat_id}/messages`  Retrieves message history and file metadata for a specific chat.  ### Path Parameters  - `claude_chat_id: string`  ...",
       "keywords": [
         "tool",
-        "file",
         "when",
         "chat",
+        "file",
         "messages",
         "format",
         "message",
@@ -13726,15 +13726,15 @@
         "opaque",
         "filter",
         "rfc",
-        "claude",
-        "may",
         "text",
+        "claude",
+        "string",
+        "may",
         "name",
         "value",
-        "string",
         "created"
       ],
-      "word_count": 1407,
+      "word_count": 1439,
       "file_path": "docs/docs__en__api__compliance__apps__chats__messages__list.md"
     },
     "/docs/en/api/compliance/apps/projects": {
@@ -13762,7 +13762,7 @@
         "get",
         "claude"
       ],
-      "word_count": 3738,
+      "word_count": 3756,
       "file_path": "docs/docs__en__api__compliance__apps__projects.md"
     },
     "/docs/en/api/compliance/apps/projects/attachments": {
@@ -13930,7 +13930,7 @@
         "creation",
         "timestamp"
       ],
-      "word_count": 802,
+      "word_count": 808,
       "file_path": "docs/docs__en__api__compliance__apps__projects__documents.md"
     },
     "/docs/en/api/compliance/apps/projects/documents/delete": {
@@ -14014,7 +14014,7 @@
         "header",
         "returns"
       ],
-      "word_count": 152,
+      "word_count": 158,
       "file_path": "docs/docs__en__api__compliance__apps__projects__documents__retrieve.md"
     },
     "/docs/en/api/compliance/apps/projects/list": {
@@ -14070,7 +14070,7 @@
         "specific",
         "path"
       ],
-      "word_count": 257,
+      "word_count": 269,
       "file_path": "docs/docs__en__api__compliance__apps__projects__retrieve.md"
     },
     "/docs/en/api/compliance/code": {
@@ -14098,7 +14098,7 @@
         "list",
         "parent"
       ],
-      "word_count": 1469,
+      "word_count": 1470,
       "file_path": "docs/docs__en__api__compliance__code.md"
     },
     "/docs/en/api/compliance/code/artifacts": {
@@ -14126,7 +14126,7 @@
         "list",
         "parent"
       ],
-      "word_count": 1467,
+      "word_count": 1468,
       "file_path": "docs/docs__en__api__compliance__code__artifacts.md"
     },
     "/docs/en/api/compliance/code/artifacts/delete": {
@@ -14182,7 +14182,7 @@
         "field",
         "next"
       ],
-      "word_count": 753,
+      "word_count": 754,
       "file_path": "docs/docs__en__api__compliance__code__artifacts__list.md"
     },
     "/docs/en/api/compliance/code/artifacts/retrieve_version": {
@@ -14238,7 +14238,7 @@
         "retrieve",
         "results"
       ],
-      "word_count": 758,
+      "word_count": 772,
       "file_path": "docs/docs__en__api__compliance__groups.md"
     },
     "/docs/en/api/compliance/groups/list": {
@@ -14266,7 +14266,7 @@
         "default",
         "max"
       ],
-      "word_count": 230,
+      "word_count": 237,
       "file_path": "docs/docs__en__api__compliance__groups__list.md"
     },
     "/docs/en/api/compliance/groups/members": {
@@ -14350,63 +14350,63 @@
         "assigned",
         "created"
       ],
-      "word_count": 119,
+      "word_count": 126,
       "file_path": "docs/docs__en__api__compliance__groups__retrieve.md"
     },
     "/docs/en/api/compliance/organizations": {
       "title": "Organizations",
-      "content_preview": "# Organizations  ## List organizations  **get** `/v1/compliance/organizations`  List organizations under the parent organization.  Returns a list of organizations sorted by creation date in ascending ...",
+      "content_preview": "# Organizations  ## List organizations  **get** `/v1/compliance/organizations`  List organizations under the parent organization.  Returns organizations sorted by creation date in ascending order. Use...",
       "keywords": [
         "organization",
         "role",
         "key",
         "list",
         "response",
-        "user",
         "parameters",
+        "user",
         "identifier",
+        "next",
         "creation",
+        "page",
+        "retrieve",
         "compliance",
-        "organizations",
+        "value",
         "name",
+        "current",
         "timestamp",
         "enforced",
         "data",
-        "get",
-        "time",
-        "current",
-        "retrieve",
-        "next"
+        "get"
       ],
-      "word_count": 2526,
+      "word_count": 2708,
       "file_path": "docs/docs__en__api__compliance__organizations.md"
     },
     "/docs/en/api/compliance/organizations/list": {
       "title": "Untitled",
-      "content_preview": "## List organizations  **get** `/v1/compliance/organizations`  List organizations under the parent organization.  Returns a list of organizations sorted by creation date in ascending order. This endpo...",
+      "content_preview": "## List organizations  **get** `/v1/compliance/organizations`  List organizations under the parent organization.  Returns organizations sorted by creation date in ascending order. Use `limit` and `pag...",
       "keywords": [
         "organizations",
-        "list",
         "organization",
+        "next",
+        "list",
         "creation",
+        "response",
+        "token",
+        "page",
+        "format",
         "returns",
         "sorted",
         "date",
         "ascending",
-        "response",
-        "format",
-        "get",
-        "under",
-        "parent",
-        "order",
-        "endpoint",
-        "does",
-        "support",
-        "pagination",
-        "return",
-        "error"
+        "pass",
+        "request",
+        "parameters",
+        "results",
+        "opaque",
+        "retrieve",
+        "get"
       ],
-      "word_count": 120,
+      "word_count": 216,
       "file_path": "docs/docs__en__api__compliance__organizations__list.md"
     },
     "/docs/en/api/compliance/organizations/roles": {
@@ -14434,7 +14434,7 @@
         "token",
         "creation"
       ],
-      "word_count": 663,
+      "word_count": 679,
       "file_path": "docs/docs__en__api__compliance__organizations__roles.md"
     },
     "/docs/en/api/compliance/organizations/roles/list": {
@@ -14462,7 +14462,7 @@
         "query",
         "maximum"
       ],
-      "word_count": 202,
+      "word_count": 210,
       "file_path": "docs/docs__en__api__compliance__organizations__roles__list.md"
     },
     "/docs/en/api/compliance/organizations/roles/permissions": {
@@ -14546,7 +14546,7 @@
         "last",
         "updated"
       ],
-      "word_count": 97,
+      "word_count": 105,
       "file_path": "docs/docs__en__api__compliance__organizations__roles__retrieve.md"
     },
     "/docs/en/api/compliance/organizations/settings": {
@@ -14574,7 +14574,7 @@
         "list",
         "hierarchy"
       ],
-      "word_count": 1323,
+      "word_count": 1411,
       "file_path": "docs/docs__en__api__compliance__organizations__settings.md"
     },
     "/docs/en/api/compliance/organizations/settings/retrieve": {
@@ -14602,7 +14602,7 @@
         "effective",
         "returns"
       ],
-      "word_count": 704,
+      "word_count": 748,
       "file_path": "docs/docs__en__api__compliance__organizations__settings__retrieve.md"
     },
     "/docs/en/api/compliance/organizations/users": {
@@ -14630,7 +14630,7 @@
         "creation",
         "timestamp"
       ],
-      "word_count": 356,
+      "word_count": 357,
       "file_path": "docs/docs__en__api__compliance__organizations__users.md"
     },
     "/docs/en/api/compliance/organizations/users/list": {
@@ -14658,7 +14658,7 @@
         "query",
         "maximum"
       ],
-      "word_count": 256,
+      "word_count": 257,
       "file_path": "docs/docs__en__api__compliance__organizations__users__list.md"
     },
     "/docs/en/api/csharp/beta": {
@@ -43214,30 +43214,30 @@
     },
     "/docs/en/build-with-claude/citations": {
       "title": "Citations",
-      "content_preview": "# Citations  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through th...",
+      "content_preview": "# Citations  Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.  ---  <Note> ...",
       "keywords": [
         "citations",
         "content",
-        "documents",
         "document",
         "text",
+        "documents",
+        "claude",
         "citation",
         "title",
-        "provided",
-        "indexed",
-        "plain",
-        "custom",
         "blocks",
+        "plain",
+        "indexed",
+        "api",
+        "provided",
+        "custom",
         "indices",
-        "tab",
-        "into",
-        "chunking",
-        "claude",
         "example",
-        "prompt",
-        "include"
+        "chunking",
+        "files",
+        "support",
+        "codegroup"
       ],
-      "word_count": 2478,
+      "word_count": 6682,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
@@ -43375,9 +43375,9 @@
         "access",
         "yes",
         "authentication",
-        "first"
+        "request"
       ],
-      "word_count": 6537,
+      "word_count": 6539,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -43586,9 +43586,9 @@
         "opus",
         "pricing",
         "tokens",
-        "rate",
         "standard",
         "speed",
+        "rate",
         "output",
         "per",
         "note",
@@ -43596,12 +43596,12 @@
         "api",
         "model",
         "card",
-        "limit",
-        "supported",
         "available",
-        "requests"
+        "requests",
+        "limit",
+        "supported"
       ],
-      "word_count": 2645,
+      "word_count": 2675,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43636,28 +43636,28 @@
       "title": "Stop reasons and fallback",
       "content_preview": "# Stop reasons and fallback  Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.  ---  Every Messages API response includes ...",
       "keywords": [
-        "codegroup",
-        "response",
-        "claude",
         "tool",
+        "response",
+        "codegroup",
+        "claude",
         "stop",
+        "server",
+        "block",
+        "turn",
+        "request",
         "api",
         "when",
-        "request",
+        "result",
+        "after",
         "fallback",
         "reason",
         "retry",
         "model",
-        "turn",
         "limit",
-        "server",
         "responses",
-        "card",
-        "reasons",
-        "errors",
-        "empty"
+        "blocks"
       ],
-      "word_count": 11678,
+      "word_count": 12222,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {
@@ -43797,7 +43797,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3387,
+      "word_count": 3410,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -44006,12 +44006,12 @@
         "count",
         "note",
         "counting",
+        "limits",
         "codegroup",
         "counts",
-        "limits",
         "message",
-        "card",
         "rate",
+        "card",
         "prompts",
         "messages",
         "before",
@@ -44021,7 +44021,7 @@
         "api",
         "same"
       ],
-      "word_count": 4128,
+      "word_count": 4110,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -44479,25 +44479,25 @@
         "key",
         "claude",
         "cmek",
-        "anthropic",
         "data",
+        "anthropic",
         "kms",
         "encryption",
         "aws",
         "cloud",
         "keys",
+        "under",
         "platform",
         "api",
-        "under",
+        "organization",
         "service",
         "disabled",
         "managed",
         "workspace",
         "azure",
-        "admin",
-        "organization"
+        "admin"
       ],
-      "word_count": 1527,
+      "word_count": 1551,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -44525,7 +44525,7 @@
         "admin",
         "keys"
       ],
-      "word_count": 1223,
+      "word_count": 1213,
       "file_path": "docs/docs__en__manage-claude__compliance-activity-feed.md"
     },
     "/docs/en/manage-claude/compliance-api-access": {
@@ -44619,25 +44619,25 @@
         "key",
         "api",
         "compliance",
-        "organization",
         "fix",
+        "organization",
         "cause",
-        "type",
         "access",
-        "endpoint",
+        "type",
         "scope",
         "project",
+        "endpoint",
         "error",
         "admin",
         "deleted",
-        "activity",
         "claude",
         "keys",
         "retry",
-        "without",
-        "header"
+        "activity",
+        "header",
+        "request"
       ],
-      "word_count": 2726,
+      "word_count": 2584,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
@@ -44705,23 +44705,23 @@
         "compliance",
         "endpoint",
         "activity",
-        "one",
-        "returns",
         "feed",
         "settings",
-        "group",
-        "organizations",
         "api",
+        "group",
+        "one",
+        "organizations",
         "role",
+        "returns",
         "users",
         "groups",
+        "see",
         "same",
         "parent",
-        "see",
         "response",
         "codegroup"
       ],
-      "word_count": 1748,
+      "word_count": 1773,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -45169,7 +45169,7 @@
         "coordinator",
         "cli"
       ],
-      "word_count": 1686,
+      "word_count": 1706,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45261,27 +45261,27 @@
       "content_preview": "# Cloud environment setup  Customize cloud sandboxes for your sessions.  ---  Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID...",
       "keywords": [
         "environment",
-        "sandboxes",
-        "cloud",
         "sandbox",
-        "sessions",
-        "environments",
-        "create",
-        "reference",
-        "each",
-        "session",
-        "own",
-        "see",
-        "note",
-        "beta",
-        "header",
         "codegroup",
+        "cloud",
+        "access",
+        "sandboxes",
+        "sessions",
+        "session",
+        "packages",
+        "environments",
+        "agent",
+        "reference",
         "package",
-        "mcp",
+        "each",
+        "own",
+        "defaultlanguage",
+        "cli",
         "pre",
-        "installed"
+        "installed",
+        "networking"
       ],
-      "word_count": 1766,
+      "word_count": 1930,
       "file_path": "docs/docs__en__managed-agents__environments.md"
     },
     "/docs/en/managed-agents/events-and-streaming": {

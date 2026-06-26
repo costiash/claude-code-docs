@@ -245,7 +245,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
     ```bash cURL hidelines={1}
     cd "$(mktemp -d)"
     # Method 1: Fetch and encode a remote PDF
-    curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
+    curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 
     # Method 2: Encode a local PDF file
     # base64 document.pdf | tr -d '\n' > pdf_base64.txt
@@ -280,7 +280,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
     ```
     ```bash CLI hidelines={1..2}
     cd "$(mktemp -d)"
-    curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+    curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
     ant messages create \
       --model claude-opus-4-8 \
       --max-tokens 1024 \
@@ -304,7 +304,9 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
     # First, load and encode the PDF
     pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-    pdf_data = base64.standard_b64encode(httpx.get(pdf_url).content).decode("utf-8")
+    pdf_data = base64.standard_b64encode(
+        httpx.get(pdf_url, follow_redirects=True).content
+    ).decode("utf-8")
 
     # Alternative: Load from a local file
     # with open("document.pdf", "rb") as f:
@@ -408,7 +410,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
         // Method 1: Download and encode a remote PDF
         String pdfUrl =
           "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
-        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(pdfUrl)).GET().build();
 
         HttpResponse<byte[]> response = httpClient.send(
@@ -457,13 +459,13 @@ For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use
 <CodeGroup>
 ```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
-curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
 # First, upload your PDF to the Files API
-curl -X POST https://api.anthropic.com/v1/files \
+FILE_ID=$(curl -sS -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
-  -F "file=@document.pdf"
+  -F "file=@document.pdf" | jq -r '.id')
 
 # Then use the returned file_id in your message
 curl https://api.anthropic.com/v1/messages \
@@ -471,29 +473,30 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1024,
-    "messages": [{
-      "role": "user",
-      "content": [{
-        "type": "document",
-        "source": {
-          "type": "file",
-          "file_id": "file_abc123"
-        }
-      },
-      {
-        "type": "text",
-        "text": "What are the key findings in this document?"
-      }]
+  -d @- <<EOF
+{
+  "model": "claude-opus-4-8",
+  "max_tokens": 1024,
+  "messages": [{
+    "role": "user",
+    "content": [{
+      "type": "document",
+      "source": {
+        "type": "file",
+        "file_id": "$FILE_ID"
+      }
+    },
+    {
+      "type": "text",
+      "text": "What are the key findings in this document?"
     }]
-  }'
+  }]
+}
+EOF
 ```
 
-```bash CLI nocheck hidelines={1..2}
-cd "$(mktemp -d)"
-curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+```bash CLI hidelines={1}
+curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
 # First, upload your PDF to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./document.pdf \
@@ -517,13 +520,13 @@ messages:
 YAML
 ```
 
-```python Python nocheck hidelines={1..2}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
 
 # Upload the PDF file
-with open("document.pdf", "rb") as f:
+with open("/path/to/document.pdf", "rb") as f:
     file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
 
 # Use the uploaded file in a message
@@ -556,7 +559,7 @@ const anthropic = new Anthropic();
 
 // Upload the PDF file
 const fileUpload = await anthropic.beta.files.upload({
-  file: await toFile(fs.createReadStream("document.pdf"), undefined, {
+  file: await toFile(fs.createReadStream("/path/to/document.pdf"), undefined, {
     type: "application/pdf"
   })
 });
@@ -589,9 +592,10 @@ const response = await anthropic.beta.messages.create({
 console.log(response);
 ```
 
-```java Java nocheck hidelines={1..3,6,8,10..19,-2..}
+```java Java hidelines={1..2,4,7,9,11..22,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.MultipartField;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
@@ -601,19 +605,31 @@ import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
 import com.anthropic.models.beta.messages.BetaTextBlockParam;
 import com.anthropic.models.beta.messages.MessageCreateParams;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 public class PdfFilesExample {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     // Upload the PDF file
     FileMetadata file = client
       .beta()
       .files()
-      .upload(FileUploadParams.builder().file(Path.of("document.pdf")).build());
+      .upload(
+        FileUploadParams.builder()
+          .file(
+            MultipartField.<InputStream>builder()
+              .value(Files.newInputStream(Path.of("/path/to/document.pdf")))
+              .filename("document.pdf")
+              .contentType("application/pdf")
+              .build()
+          )
+          .build()
+      );
 
     // Use the uploaded file in a message
     MessageCreateParams params = MessageCreateParams.builder()
@@ -695,7 +711,7 @@ Cache PDFs to improve performance on repeated queries:
 <CodeGroup>
 ```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
-curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
+curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 # Create a JSON request file using the pdf_base64.txt content
 jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
     "model": "claude-opus-4-8",
@@ -729,7 +745,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 ```bash CLI hidelines={1..2}
 cd "$(mktemp -d)"
-curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
 ant messages create <<'YAML'
 model: claude-opus-4-8
 max_tokens: 1024

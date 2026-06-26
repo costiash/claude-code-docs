@@ -443,14 +443,14 @@ Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model`
 This example sets all three variables to make a gateway-routed Opus deployment selectable:
 
 ```bash theme={null}
-export ANTHROPIC_CUSTOM_MODEL_OPTION="my-gateway/claude-opus-4-7"
+export ANTHROPIC_CUSTOM_MODEL_OPTION="my-gateway/claude-opus-4-8"
 export ANTHROPIC_CUSTOM_MODEL_OPTION_NAME="Opus via Gateway"
 export ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION="Custom deployment routed through the internal LLM gateway"
 ```
 
 The custom entry appears at the bottom of the `/model` picker. `ANTHROPIC_CUSTOM_MODEL_OPTION_NAME` and `ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION` are optional. If omitted, the model ID is used as the name and the description defaults to `Custom model (<model-id>)`.
 
-Claude Code skips validation for the model ID set in `ANTHROPIC_CUSTOM_MODEL_OPTION`, so you can use any string your API endpoint accepts. When [`availableModels`](#restrict-model-selection) is set, include the custom model ID in the allowlist as well: the custom entry is filtered from the picker and a `--model` selection of it is rejected like any other excluded model. A custom ID that embeds a family name, such as `my-gateway/claude-opus-4-7`, counts as a specific entry for that family and disables its wildcard, so also list the versions you intend to keep selectable. See [Merge behavior](#merge-behavior).
+Claude Code skips validation for the model ID set in `ANTHROPIC_CUSTOM_MODEL_OPTION`, so you can use any string your API endpoint accepts. When [`availableModels`](#restrict-model-selection) is set, include the custom model ID in the allowlist as well: the custom entry is filtered from the picker and a `--model` selection of it is rejected like any other excluded model. A custom ID that embeds a family name, such as `my-gateway/claude-opus-4-8`, counts as a specific entry for that family and disables its wildcard, so also list the versions you intend to keep selectable. See [Merge behavior](#merge-behavior).
 
 ## Environment variables
 

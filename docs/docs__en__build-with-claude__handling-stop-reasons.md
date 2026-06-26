@@ -15,7 +15,7 @@ For the full response schema, see the [Messages API reference](/docs/en/api/mess
 | [`end_turn`](#end-turn) | Claude finished its response naturally. | Use the response. |
 | [`max_tokens`](#max-tokens) | The response reached your `max_tokens` limit. | Raise `max_tokens` or [continue the response](#ensuring-complete-responses). |
 | [`stop_sequence`](#stop-sequence) | Claude emitted one of your `stop_sequences`. | Read `stop_sequence` to see which one fired. |
-| [`tool_use`](#tool-use) | Claude is calling a tool. | Run the tool and return the result. |
+| [`tool_use`](#tool-use) | Claude is calling a tool. | Run the tool and return the result. A server tool call still missing its result block completes in a later response. |
 | [`pause_turn`](#pause-turn) | A server-tool loop reached its iteration limit. | Send the assistant content back to continue. |
 | [`refusal`](#refusal) | Claude declined to respond. | Read `stop_details` and [retry on a fallback model](/docs/en/build-with-claude/refusals-and-fallback). |
 | [`model_context_window_exceeded`](#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated. |
@@ -1712,10 +1712,59 @@ end
 ```
 </CodeGroup>
 
+A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](/docs/en/agents-and-tools/tool-use/server-tools) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
+
+<Note>
+With [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+</Note>
+
+```json A mixed tool_use response
+{
+  "stop_reason": "tool_use",
+  "content": [
+    {
+      "type": "server_tool_use",
+      "id": "srvtoolu_01HxbWnMRmbWyMfUtJKC45rA",
+      "name": "web_fetch",
+      "input": { "url": "https://example.com/article" }
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01PjgRJLbXrXEMZwDNYLnBqk",
+      "name": "run_command",
+      "input": { "command": "uname -a" }
+    }
+  ]
+}
+```
+
+The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends `but no web_fetch tool was provided`. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
+
+```json The follow-up user message
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01PjgRJLbXrXEMZwDNYLnBqk",
+      "content": "Linux demo-host 6.8.0-52-generic x86_64 GNU/Linux"
+    }
+  ]
+}
+```
+
+Adding anything after the `tool_result` blocks in that user message, such as text, ends the assistant turn; for a server tool Claude called directly, the request then fails with a 400 `invalid_request_error` that names the unresolved server tool:
+
+```text
+`web_fetch` tool use with id `srvtoolu_01HxbWnMRmbWyMfUtJKC45rA` was found without a corresponding `web_fetch_tool_result` block
+```
+
+Leaving out a `tool_result`, or putting one after other content, fails earlier with the standard `tool_use ids were found without tool_result blocks immediately after` error instead. To give Claude more input, send it as a separate user message after the turn completes.
+
 ### pause_turn
 Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/server-tools) like web search or web fetch. The default limit is 10 iterations per request.
 
-When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
+When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
 <CodeGroup>
 ```bash cURL

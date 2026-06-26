@@ -65,31 +65,75 @@ unknown organizations and organizations outside the hierarchy return 404.
 
     A setting whose enforced value is a single true/false flag.
 
-    - `name: "api_workbench_feedback_collection_enabled" or "claude_ai_feedback_collection_enabled" or "claude_code_trusted_devices_required" or 9 more`
+    - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 31 more`
+
+      - `"ai_powered_artifacts_enabled"`
 
       - `"api_workbench_feedback_collection_enabled"`
 
+      - `"artifact_connectors_enabled"`
+
+      - `"ask_your_org_enabled"`
+
       - `"claude_ai_feedback_collection_enabled"`
 
+      - `"claude_code_desktop_auto_permissions_enabled"`
+
+      - `"claude_code_desktop_bypass_permissions_enabled"`
+
+      - `"claude_code_fast_mode_enabled"`
+
+      - `"claude_code_remote_control_enabled"`
+
+      - `"claude_code_review_enabled"`
+
+      - `"claude_code_routines_enabled"`
+
       - `"claude_code_trusted_devices_required"`
+
+      - `"claude_in_slack_enabled"`
 
       - `"code_execution_enabled"`
 
       - `"code_execution_network_egress_enabled"`
 
+      - `"connector_tools_default_always_allow"`
+
       - `"content_redaction_enabled"`
+
+      - `"desktop_extension_allowlist_enabled"`
 
       - `"directory_sync_enabled"`
 
       - `"frontier_data_use_enabled"`
 
+      - `"hipaa_compliance_enabled"`
+
       - `"ip_allowlist_enabled"`
+
+      - `"location_metadata_enabled"`
+
+      - `"memory_enabled"`
+
+      - `"org_wide_skill_sharing_enabled"`
+
+      - `"public_projects_enabled"`
+
+      - `"skill_sharing_enabled"`
+
+      - `"skills_enabled"`
 
       - `"sso_claude_ai_enforced"`
 
       - `"sso_console_enforced"`
 
       - `"sso_enabled"`
+
+      - `"third_party_interactive_content_enabled"`
+
+      - `"user_skill_creation_enabled"`
+
+      - `"web_search_enabled"`
 
     - `value: boolean`
 
@@ -234,7 +278,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "api_workbench_feedback_collection_enabled",
+      "name": "ai_powered_artifacts_enabled",
       "value": true,
       "type": "boolean"
     }

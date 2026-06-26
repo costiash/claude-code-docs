@@ -14,7 +14,7 @@ compliance activities that can be filtered by various criteria.
 
 ### Query Parameters
 
-- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 326 more`
+- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 339 more`
 
   Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
@@ -154,9 +154,17 @@ compliance activities that can be filtered by various criteria.
 
     In-flight Claude Code Security scans were cancelled for a project.
 
+  - `"claude_code_security_scan_created"`
+
+    A Claude Code Security scan was started.
+
   - `"claude_code_security_scan_project_updated"`
 
     A Claude Code Security scan project was archived or unarchived.
+
+  - `"claude_code_security_scan_project_visibility_updated"`
+
+    A Claude Code Security scan project was shared with the organization or made private.
 
   - `"claude_code_security_scan_run_updated"`
 
@@ -169,6 +177,14 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_security_scan_schedule_updated"`
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
+
+  - `"claude_code_security_vulnerability_fix_session_created"`
+
+    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+
+  - `"claude_code_security_vulnerability_updated"`
+
+    A Claude Code Security vulnerability finding was dismissed, restored, marked fixed, or reopened.
 
   - `"claude_code_security_webhook_created"`
 
@@ -189,6 +205,30 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_team_memory_acl_updated"`
 
     An RBAC group was added to or removed from the Claude Code team-memory ACL.
+
+  - `"claude_code_team_memory_updated"`
+
+    Claude Code team memory shared with the organization was updated.
+
+  - `"claude_code_team_onboarding_guide_updated"`
+
+    A Claude Code team onboarding guide was created, updated, or deleted.
+
+  - `"claude_code_user_marketplaces_updated"`
+
+    A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
+
+  - `"claude_code_user_memory_updated"`
+
+    A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
+
+  - `"claude_code_user_plugins_updated"`
+
+    A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
+
+  - `"claude_code_user_settings_updated"`
+
+    A user's synced Claude Code settings were updated or deleted on Anthropic servers.
 
   - `"claude_command_created"`
 
@@ -278,6 +318,10 @@ compliance activities that can be filtered by various criteria.
 
     An attempt to access a document in a Claude project failed.
 
+  - `"claude_project_document_bulk_deletion_audit_truncated"`
+
+    A bulk request to delete documents from a Claude project failed with more documents requested than were individually recorded in the audit log.
+
   - `"claude_project_document_deleted"`
 
     A document was deleted from a Claude project.
@@ -301,6 +345,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_project_file_access_failed"`
 
     An attempt to access a file in a Claude project failed.
+
+  - `"claude_project_file_bulk_deletion_audit_truncated"`
+
+    A bulk request to delete files from a Claude project failed with more files requested than were individually recorded in the audit log.
 
   - `"claude_project_file_deleted"`
 
@@ -369,6 +417,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_user_role_updated"`
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
+
+  - `"claude_user_seat_tier_updated"`
+
+    An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
 
   - `"claude_user_settings_updated"`
 
@@ -1375,7 +1427,7 @@ compliance activities that can be filtered by various criteria.
 
     Filter activities created at or before this time (RFC 3339 format)
 
-- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 326 more`
+- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 339 more`
 
   Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
@@ -1515,9 +1567,17 @@ compliance activities that can be filtered by various criteria.
 
     In-flight Claude Code Security scans were cancelled for a project.
 
+  - `"claude_code_security_scan_created"`
+
+    A Claude Code Security scan was started.
+
   - `"claude_code_security_scan_project_updated"`
 
     A Claude Code Security scan project was archived or unarchived.
+
+  - `"claude_code_security_scan_project_visibility_updated"`
+
+    A Claude Code Security scan project was shared with the organization or made private.
 
   - `"claude_code_security_scan_run_updated"`
 
@@ -1530,6 +1590,14 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_security_scan_schedule_updated"`
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
+
+  - `"claude_code_security_vulnerability_fix_session_created"`
+
+    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+
+  - `"claude_code_security_vulnerability_updated"`
+
+    A Claude Code Security vulnerability finding was dismissed, restored, marked fixed, or reopened.
 
   - `"claude_code_security_webhook_created"`
 
@@ -1550,6 +1618,30 @@ compliance activities that can be filtered by various criteria.
   - `"claude_code_team_memory_acl_updated"`
 
     An RBAC group was added to or removed from the Claude Code team-memory ACL.
+
+  - `"claude_code_team_memory_updated"`
+
+    Claude Code team memory shared with the organization was updated.
+
+  - `"claude_code_team_onboarding_guide_updated"`
+
+    A Claude Code team onboarding guide was created, updated, or deleted.
+
+  - `"claude_code_user_marketplaces_updated"`
+
+    A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
+
+  - `"claude_code_user_memory_updated"`
+
+    A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
+
+  - `"claude_code_user_plugins_updated"`
+
+    A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
+
+  - `"claude_code_user_settings_updated"`
+
+    A user's synced Claude Code settings were updated or deleted on Anthropic servers.
 
   - `"claude_command_created"`
 
@@ -1639,6 +1731,10 @@ compliance activities that can be filtered by various criteria.
 
     An attempt to access a document in a Claude project failed.
 
+  - `"claude_project_document_bulk_deletion_audit_truncated"`
+
+    A bulk request to delete documents from a Claude project failed with more documents requested than were individually recorded in the audit log.
+
   - `"claude_project_document_deleted"`
 
     A document was deleted from a Claude project.
@@ -1662,6 +1758,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_project_file_access_failed"`
 
     An attempt to access a file in a Claude project failed.
+
+  - `"claude_project_file_bulk_deletion_audit_truncated"`
+
+    A bulk request to delete files from a Claude project failed with more files requested than were individually recorded in the audit log.
 
   - `"claude_project_file_deleted"`
 
@@ -1730,6 +1830,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_user_role_updated"`
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
+
+  - `"claude_user_seat_tier_updated"`
+
+    An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
 
   - `"claude_user_settings_updated"`
 
@@ -2732,7 +2836,7 @@ compliance activities that can be filtered by various criteria.
 
 ### Returns
 
-- `data: optional array of object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 326 more`
+- `data: optional array of object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 339 more`
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -3514,7 +3618,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"anonymous_mobile_login_attempted"`
 
-  - `APIKeyCreated object { actor, api_key_id, scopes, 5 more }`
+  - `APIKeyCreated object { actor, api_key_id, scopes, 6 more }`
 
     Activity logged when a new API key is created.
 
@@ -3556,15 +3660,36 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `restricted_to_organization: optional boolean`
+
+      Whether the key was restricted to the creating organization, rather than granted access across the whole parent organization
+
     - `type: optional "api_key_created"`
 
       - `"api_key_created"`
 
-  - `ClaudeArtifactAccessFailed object { actor, claude_artifact_id, claude_artifact_version_id, 5 more }`
+  - `ClaudeArtifactAccessFailed object { actor, id, claude_artifact_id, 6 more }`
 
     An attempt to access an artifact failed.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -3592,13 +3717,82 @@ compliance activities that can be filtered by various criteria.
 
         - `unauthenticated_email_address: optional string`
 
-    - `claude_artifact_id: string`
+      - `AnthropicActor object { email_address, type }`
 
-    - `claude_artifact_version_id: string`
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact's identifier, when known.
+
+    - `claude_artifact_version_id: optional string`
+
+      The version of the artifact the user attempted to access, when known.
 
     - `created_at: optional string`
 
@@ -3611,6 +3805,10 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `reason: optional string`
+
+      The reason access was denied, when recorded.
 
     - `type: optional "claude_artifact_access_failed"`
 
@@ -3794,7 +3992,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_published_artifact_deleted"`
 
-  - `ClaudeArtifactPublished object { actor, artifact_type, claude_published_artifact_id, 8 more }`
+  - `ClaudeArtifactPublished object { actor, artifact_type, claude_published_artifact_id, 9 more }`
 
     An artifact was published and made publicly accessible.
 
@@ -3931,6 +4129,10 @@ compliance activities that can be filtered by various criteria.
     - `created_at: optional string`
 
       When this activity occurred.
+
+    - `description: optional string`
+
+      Optional gallery-card description supplied at publish time. Same provenance as title (caller-authored, reader-visible).
 
     - `is_redeploy: optional boolean`
 
@@ -4126,29 +4328,131 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_artifact_sharing_updated"`
 
-  - `ClaudeArtifactViewed object { actor, claude_artifact_id, id, 4 more }`
+  - `ClaudeArtifactViewed object { actor, claude_artifact_id, id, 5 more }`
 
     An artifact was viewed.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_artifact_id: string`
+
+      The artifact's identifier.
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_version_id: optional string`
+
+      The version of the artifact the user was served, when known.
 
     - `created_at: optional string`
 
@@ -6508,6 +6812,148 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_code_security_scan_cancelled"`
 
+  - `ClaudeCodeSecurityScanCreated object { actor, scan_id, scan_project_id, 5 more }`
+
+    A Claude Code Security scan was started.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the created scan
+
+    - `scan_project_id: string`
+
+      Tagged ID of the scan project the scan belongs to
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_created"`
+
+      - `"claude_code_security_scan_created"`
+
   - `ClaudeCodeSecurityScanProjectUpdated object { action, actor, scan_project_id, 5 more }`
 
     A Claude Code Security scan project was archived or unarchived.
@@ -6655,6 +7101,158 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "claude_code_security_scan_project_updated"`
 
       - `"claude_code_security_scan_project_updated"`
+
+  - `ClaudeCodeSecurityScanProjectVisibilityUpdated object { action, actor, scan_project_id, 6 more }`
+
+    A Claude Code Security scan project was shared with the organization or made private.
+
+    - `action: "shared" or "unshared" or "unspecified"`
+
+      Whether the project was shared with the organization or made private
+
+      - `"shared"`
+
+      - `"unshared"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_project_id: string`
+
+      Tagged ID of the scan project
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_level: optional string`
+
+      Access level granted to organization members (read_only or full); only set when shared
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_project_visibility_updated"`
+
+      - `"claude_code_security_scan_project_visibility_updated"`
 
   - `ClaudeCodeSecurityScanRunUpdated object { action, actor, scan_id, 5 more }`
 
@@ -7081,6 +7679,304 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "claude_code_security_scan_schedule_updated"`
 
       - `"claude_code_security_scan_schedule_updated"`
+
+  - `ClaudeCodeSecurityVulnerabilityFixSessionCreated object { actor, scan_id, session_id, 5 more }`
+
+    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the finding belongs to
+
+    - `session_id: string`
+
+      ID of the created remediation session
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_vulnerability_fix_session_created"`
+
+      - `"claude_code_security_vulnerability_fix_session_created"`
+
+  - `ClaudeCodeSecurityVulnerabilityUpdated object { action, actor, scan_id, 6 more }`
+
+    A Claude Code Security vulnerability finding was dismissed, restored, marked fixed, or reopened.
+
+    - `action: "dismissed" or "fixed" or "restored" or 2 more`
+
+      The state change applied to the finding
+
+      - `"dismissed"`
+
+      - `"fixed"`
+
+      - `"restored"`
+
+      - `"unfixed"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the finding belongs to
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `dismissal_reason: optional string`
+
+      The categorized dismissal reason (only set when the finding was dismissed)
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_vulnerability_updated"`
+
+      - `"claude_code_security_vulnerability_updated"`
 
   - `ClaudeCodeSecurityWebhookCreated object { actor, url, webhook_id, 6 more }`
 
@@ -7803,6 +8699,994 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
+
+  - `ClaudeCodeTeamMemoryUpdated object { actor, deleted_all, id, 12 more }`
+
+    Claude Code team memory shared with the organization was updated.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the entire team memory store for this scope was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of team memory entries removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of team memory entries created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the team memory after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the team memory before this change; null when it did not exist.
+
+    - `repo: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_team_memory_updated"`
+
+      - `"claude_code_team_memory_updated"`
+
+    - `version: optional number`
+
+      Version number of the team memory store after this change.
+
+  - `ClaudeCodeTeamOnboardingGuideUpdated object { action, actor, guide_short_code, 9 more }`
+
+    A Claude Code team onboarding guide was created, updated, or deleted.
+
+    - `action: "created" or "deleted" or "unspecified" or "updated"`
+
+      The state change applied to the onboarding guide.
+
+      - `"created"`
+
+      - `"deleted"`
+
+      - `"unspecified"`
+
+      - `"updated"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `guide_short_code: string`
+
+      Short code identifying the onboarding guide — the public URL handle shown in the share link.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `guide_id: optional string`
+
+      Tagged ID of the onboarding guide.
+
+    - `guide_name: optional string`
+
+      Withdrawn — never populated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the guide content after this change; null when the guide was deleted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the guide content before this change; null when the guide did not exist.
+
+    - `type: optional "claude_code_team_onboarding_guide_updated"`
+
+      - `"claude_code_team_onboarding_guide_updated"`
+
+  - `ClaudeCodeUserMarketplacesUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when all of the user's marketplace selections were removed in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of marketplace selections removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of marketplace selections added or whose source changed.
+
+    - `new_value: optional string`
+
+      Withdrawn — never populated.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_user_marketplaces_updated"`
+
+      - `"claude_code_user_marketplaces_updated"`
+
+  - `ClaudeCodeUserMemoryUpdated object { actor, deleted_all, id, 11 more }`
+
+    A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the user's entire synced memory for this scope was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of memory file paths removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of memory file paths created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the user's synced memory after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the user's synced memory before this change; null when the store did not exist.
+
+    - `repo: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_user_memory_updated"`
+
+      - `"claude_code_user_memory_updated"`
+
+  - `ClaudeCodeUserPluginsUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when all of the user's plugin selections were removed in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of plugin selections removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of plugin selections added or whose enabled state changed.
+
+    - `new_value: optional string`
+
+      The targeted plugin's new enabled state, when a single plugin's state changed.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional string`
+
+      The targeted plugin's previous enabled state, when a single plugin's state changed; null when the plugin did not previously exist or multiple plugins changed.
+
+    - `type: optional "claude_code_user_plugins_updated"`
+
+      - `"claude_code_user_plugins_updated"`
+
+  - `ClaudeCodeUserSettingsUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's synced Claude Code settings were updated or deleted on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the user's entire synced settings store was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of settings entries removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of settings entries created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the user's synced settings after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the user's synced settings before this change; null when the store did not exist.
+
+    - `type: optional "claude_code_user_settings_updated"`
+
+      - `"claude_code_user_settings_updated"`
 
   - `ClaudeFileAccessFailed object { actor, claude_file_id, id, 7 more }`
 
@@ -8553,6 +10437,156 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "claude_project_sync_source_updated"`
 
       - `"claude_project_sync_source_updated"`
+
+  - `ClaudeUserSeatTierUpdated object { actor, user_email, user_id, 7 more }`
+
+    An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `user_email: string`
+
+      Email address of the member at the time of the change.
+
+    - `user_id: string`
+
+      Tagged ID of the member whose seat tier changed.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `current_seat_tier: optional string`
+
+      The member's seat tier after this change, or null if the seat was removed.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_seat_tier: optional string`
+
+      The member's seat tier before this change, or null if no seat was assigned.
+
+    - `type: optional "claude_user_seat_tier_updated"`
+
+      - `"claude_user_seat_tier_updated"`
 
   - `CliPluginExecPolicyUpdated object { actor, cli_name, marketplace_id, 9 more }`
 
@@ -20185,7 +22219,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_sso_provisioning_mode_changed"`
 
-  - `OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 4 more }`
+  - `OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 5 more }`
 
     Organization SSO seat tier assignment was toggled.
 
@@ -20231,11 +22265,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_enabled: optional boolean`
+
+      Whether SSO seat tier assignment was enabled before this change.
+
     - `type: optional "org_sso_seat_tier_assignment_toggled"`
 
       - `"org_sso_seat_tier_assignment_toggled"`
 
-  - `OrgSSOSeatTierMappingsUpdated object { actor, id, created_at, 3 more }`
+  - `OrgSSOSeatTierMappingsUpdated object { actor, id, created_at, 5 more }`
 
     Organization SSO seat tier mappings were updated.
 
@@ -20271,6 +22309,18 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_mappings: optional array of object { idp_group_name, seat_tier }`
+
+      Identity provider group to seat tier mappings after this change.
+
+      - `idp_group_name: string`
+
+        Name of the identity provider group.
+
+      - `seat_tier: optional string`
+
+        Seat tier assigned to members of the identity provider group, or null if the mapping assigns no seat.
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -20278,6 +22328,18 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_mappings: optional array of object { idp_group_name, seat_tier }`
+
+      Identity provider group to seat tier mappings before this change.
+
+      - `idp_group_name: string`
+
+        Name of the identity provider group.
+
+      - `seat_tier: optional string`
+
+        Seat tier assigned to members of the identity provider group, or null if the mapping assigns no seat.
 
     - `type: optional "org_sso_seat_tier_mappings_updated"`
 
@@ -20719,11 +22781,11 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_user_invite_deleted"`
 
-  - `OrgUserInviteReSent object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteReSent object { actor, id, created_at, 6 more }`
 
     Organization user invite was re-sent.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -20747,6 +22809,30 @@ compliance activities that can be filtered by various criteria.
 
           - `"anthropic_actor"`
 
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -20756,6 +22842,14 @@ compliance activities that can be filtered by various criteria.
       When this activity occurred.
 
     - `invited_email: optional string`
+
+    - `invited_role: optional string`
+
+      Role the invited user will receive on joining
+
+    - `invited_seat_tier: optional string`
+
+      Seat tier the invited user will receive on joining
 
     - `organization_id: optional string`
 
@@ -20809,7 +22903,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_user_invite_rejected"`
 
-  - `OrgUserInviteSent object { actor, id, created_at, 5 more }`
+  - `OrgUserInviteSent object { actor, id, created_at, 6 more }`
 
     Organization user invite was sent.
 
@@ -20872,6 +22966,10 @@ compliance activities that can be filtered by various criteria.
     - `invited_email: optional string`
 
     - `invited_role: optional string`
+
+    - `invited_seat_tier: optional string`
+
+      Seat tier the invited user will receive on joining
 
     - `organization_id: optional string`
 
@@ -21615,7 +23713,7 @@ compliance activities that can be filtered by various criteria.
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 57 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 58 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
@@ -22237,6 +24335,22 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "disabled_admin_request_types"`
 
           - `"disabled_admin_request_types"`
+
+      - `MemberUsageDashboardVisible object { current_value, previous_value, type }`
+
+        The member usage dashboard visibility setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "member_usage_dashboard_visible"`
+
+          - `"member_usage_dashboard_visible"`
 
       - `CodeExecutionNetworkEgressEnabled object { current_value, previous_value, type }`
 
@@ -24178,9 +26292,11 @@ compliance activities that can be filtered by various criteria.
 
       - `previous_value: string`
 
-      - `type: "description"`
+      - `type: "description" or "organization_role"`
 
         - `"description"`
+
+        - `"organization_role"`
 
     - `id: optional string`
 
@@ -25838,7 +27954,7 @@ compliance activities that can be filtered by various criteria.
 
       - `previous_value: string`
 
-      - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or "name"`
+      - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or 3 more`
 
         The workspace property that was changed
 
@@ -25847,6 +27963,10 @@ compliance activities that can be filtered by various criteria.
         - `"default_inference_geo"`
 
         - `"display_color"`
+
+        - `"external_key_config_id"`
+
+        - `"inference_data_retention"`
 
         - `"name"`
 
@@ -27032,6 +29152,68 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_project_document_access_failed"`
 
+  - `ClaudeProjectDocumentBulkDeletionAuditTruncated object { actor, audited_count, claude_project_id, 6 more }`
+
+    A bulk request to delete documents from a Claude project failed with more documents requested than were individually recorded in the audit log.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+    - `audited_count: number`
+
+      Number of documents that received an individual audit record.
+
+    - `claude_project_id: string`
+
+    - `requested_count: number`
+
+      Total number of documents the request asked to delete.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_project_document_bulk_deletion_audit_truncated"`
+
+      - `"claude_project_document_bulk_deletion_audit_truncated"`
+
   - `ClaudeProjectDocumentDeleted object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A document was deleted from a Claude project.
@@ -27321,6 +29503,68 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "claude_project_file_access_failed"`
 
       - `"claude_project_file_access_failed"`
+
+  - `ClaudeProjectFileBulkDeletionAuditTruncated object { actor, audited_count, claude_project_id, 6 more }`
+
+    A bulk request to delete files from a Claude project failed with more files requested than were individually recorded in the audit log.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+    - `audited_count: number`
+
+      Number of files that received an individual audit record.
+
+    - `claude_project_id: string`
+
+    - `requested_count: number`
+
+      Total number of files the request asked to delete.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_project_file_bulk_deletion_audit_truncated"`
+
+      - `"claude_project_file_bulk_deletion_audit_truncated"`
 
   - `ClaudeProjectFileDeleted object { actor, claude_file_id, claude_project_id, 5 more }`
 
@@ -33090,7 +35334,7 @@ compliance activities that can be filtered by various criteria.
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }  or object { email_address, type }`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -33129,6 +35373,14 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `current_role: string`
 
@@ -33742,7 +35994,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
 ### Activity List Response
 
-- `ActivityListResponse = object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 326 more`
+- `ActivityListResponse = object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 339 more`
 
   An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
@@ -34524,7 +36776,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"anonymous_mobile_login_attempted"`
 
-  - `APIKeyCreated object { actor, api_key_id, scopes, 5 more }`
+  - `APIKeyCreated object { actor, api_key_id, scopes, 6 more }`
 
     Activity logged when a new API key is created.
 
@@ -34566,15 +36818,36 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `restricted_to_organization: optional boolean`
+
+      Whether the key was restricted to the creating organization, rather than granted access across the whole parent organization
+
     - `type: optional "api_key_created"`
 
       - `"api_key_created"`
 
-  - `ClaudeArtifactAccessFailed object { actor, claude_artifact_id, claude_artifact_version_id, 5 more }`
+  - `ClaudeArtifactAccessFailed object { actor, id, claude_artifact_id, 6 more }`
 
     An attempt to access an artifact failed.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -34602,13 +36875,82 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `unauthenticated_email_address: optional string`
 
-    - `claude_artifact_id: string`
+      - `AnthropicActor object { email_address, type }`
 
-    - `claude_artifact_version_id: string`
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact's identifier, when known.
+
+    - `claude_artifact_version_id: optional string`
+
+      The version of the artifact the user attempted to access, when known.
 
     - `created_at: optional string`
 
@@ -34621,6 +36963,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `reason: optional string`
+
+      The reason access was denied, when recorded.
 
     - `type: optional "claude_artifact_access_failed"`
 
@@ -34804,7 +37150,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_published_artifact_deleted"`
 
-  - `ClaudeArtifactPublished object { actor, artifact_type, claude_published_artifact_id, 8 more }`
+  - `ClaudeArtifactPublished object { actor, artifact_type, claude_published_artifact_id, 9 more }`
 
     An artifact was published and made publicly accessible.
 
@@ -34941,6 +37287,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `created_at: optional string`
 
       When this activity occurred.
+
+    - `description: optional string`
+
+      Optional gallery-card description supplied at publish time. Same provenance as title (caller-authored, reader-visible).
 
     - `is_redeploy: optional boolean`
 
@@ -35136,29 +37486,131 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_artifact_sharing_updated"`
 
-  - `ClaudeArtifactViewed object { actor, claude_artifact_id, id, 4 more }`
+  - `ClaudeArtifactViewed object { actor, claude_artifact_id, id, 5 more }`
 
     An artifact was viewed.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_artifact_id: string`
+
+      The artifact's identifier.
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_version_id: optional string`
+
+      The version of the artifact the user was served, when known.
 
     - `created_at: optional string`
 
@@ -37518,6 +39970,148 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_code_security_scan_cancelled"`
 
+  - `ClaudeCodeSecurityScanCreated object { actor, scan_id, scan_project_id, 5 more }`
+
+    A Claude Code Security scan was started.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the created scan
+
+    - `scan_project_id: string`
+
+      Tagged ID of the scan project the scan belongs to
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_created"`
+
+      - `"claude_code_security_scan_created"`
+
   - `ClaudeCodeSecurityScanProjectUpdated object { action, actor, scan_project_id, 5 more }`
 
     A Claude Code Security scan project was archived or unarchived.
@@ -37665,6 +40259,158 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "claude_code_security_scan_project_updated"`
 
       - `"claude_code_security_scan_project_updated"`
+
+  - `ClaudeCodeSecurityScanProjectVisibilityUpdated object { action, actor, scan_project_id, 6 more }`
+
+    A Claude Code Security scan project was shared with the organization or made private.
+
+    - `action: "shared" or "unshared" or "unspecified"`
+
+      Whether the project was shared with the organization or made private
+
+      - `"shared"`
+
+      - `"unshared"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_project_id: string`
+
+      Tagged ID of the scan project
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_level: optional string`
+
+      Access level granted to organization members (read_only or full); only set when shared
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_project_visibility_updated"`
+
+      - `"claude_code_security_scan_project_visibility_updated"`
 
   - `ClaudeCodeSecurityScanRunUpdated object { action, actor, scan_id, 5 more }`
 
@@ -38091,6 +40837,304 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "claude_code_security_scan_schedule_updated"`
 
       - `"claude_code_security_scan_schedule_updated"`
+
+  - `ClaudeCodeSecurityVulnerabilityFixSessionCreated object { actor, scan_id, session_id, 5 more }`
+
+    A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the finding belongs to
+
+    - `session_id: string`
+
+      ID of the created remediation session
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_vulnerability_fix_session_created"`
+
+      - `"claude_code_security_vulnerability_fix_session_created"`
+
+  - `ClaudeCodeSecurityVulnerabilityUpdated object { action, actor, scan_id, 6 more }`
+
+    A Claude Code Security vulnerability finding was dismissed, restored, marked fixed, or reopened.
+
+    - `action: "dismissed" or "fixed" or "restored" or 2 more`
+
+      The state change applied to the finding
+
+      - `"dismissed"`
+
+      - `"fixed"`
+
+      - `"restored"`
+
+      - `"unfixed"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the finding belongs to
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `dismissal_reason: optional string`
+
+      The categorized dismissal reason (only set when the finding was dismissed)
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_vulnerability_updated"`
+
+      - `"claude_code_security_vulnerability_updated"`
 
   - `ClaudeCodeSecurityWebhookCreated object { actor, url, webhook_id, 6 more }`
 
@@ -38813,6 +41857,994 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
+
+  - `ClaudeCodeTeamMemoryUpdated object { actor, deleted_all, id, 12 more }`
+
+    Claude Code team memory shared with the organization was updated.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the entire team memory store for this scope was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of team memory entries removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of team memory entries created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the team memory after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the team memory before this change; null when it did not exist.
+
+    - `repo: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_team_memory_updated"`
+
+      - `"claude_code_team_memory_updated"`
+
+    - `version: optional number`
+
+      Version number of the team memory store after this change.
+
+  - `ClaudeCodeTeamOnboardingGuideUpdated object { action, actor, guide_short_code, 9 more }`
+
+    A Claude Code team onboarding guide was created, updated, or deleted.
+
+    - `action: "created" or "deleted" or "unspecified" or "updated"`
+
+      The state change applied to the onboarding guide.
+
+      - `"created"`
+
+      - `"deleted"`
+
+      - `"unspecified"`
+
+      - `"updated"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `guide_short_code: string`
+
+      Short code identifying the onboarding guide — the public URL handle shown in the share link.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `guide_id: optional string`
+
+      Tagged ID of the onboarding guide.
+
+    - `guide_name: optional string`
+
+      Withdrawn — never populated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the guide content after this change; null when the guide was deleted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the guide content before this change; null when the guide did not exist.
+
+    - `type: optional "claude_code_team_onboarding_guide_updated"`
+
+      - `"claude_code_team_onboarding_guide_updated"`
+
+  - `ClaudeCodeUserMarketplacesUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when all of the user's marketplace selections were removed in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of marketplace selections removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of marketplace selections added or whose source changed.
+
+    - `new_value: optional string`
+
+      Withdrawn — never populated.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_user_marketplaces_updated"`
+
+      - `"claude_code_user_marketplaces_updated"`
+
+  - `ClaudeCodeUserMemoryUpdated object { actor, deleted_all, id, 11 more }`
+
+    A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the user's entire synced memory for this scope was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of memory file paths removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of memory file paths created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the user's synced memory after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the user's synced memory before this change; null when the store did not exist.
+
+    - `repo: optional string`
+
+      Withdrawn — never populated.
+
+    - `type: optional "claude_code_user_memory_updated"`
+
+      - `"claude_code_user_memory_updated"`
+
+  - `ClaudeCodeUserPluginsUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when all of the user's plugin selections were removed in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of plugin selections removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of plugin selections added or whose enabled state changed.
+
+    - `new_value: optional string`
+
+      The targeted plugin's new enabled state, when a single plugin's state changed.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional string`
+
+      The targeted plugin's previous enabled state, when a single plugin's state changed; null when the plugin did not previously exist or multiple plugins changed.
+
+    - `type: optional "claude_code_user_plugins_updated"`
+
+      - `"claude_code_user_plugins_updated"`
+
+  - `ClaudeCodeUserSettingsUpdated object { actor, deleted_all, id, 10 more }`
+
+    A user's synced Claude Code settings were updated or deleted on Anthropic servers.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_all: boolean`
+
+      True when the user's entire synced settings store was deleted in one request.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `keys_deleted: optional array of string`
+
+      Withdrawn — never populated. See `keys_deleted_count`.
+
+    - `keys_deleted_count: optional number`
+
+      Number of settings entries removed.
+
+    - `keys_written: optional array of string`
+
+      Withdrawn — never populated. See `keys_written_count`.
+
+    - `keys_written_count: optional number`
+
+      Number of settings entries created or updated.
+
+    - `new_checksum: optional string`
+
+      Checksum of the user's synced settings after this change.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_checksum: optional string`
+
+      Checksum of the user's synced settings before this change; null when the store did not exist.
+
+    - `type: optional "claude_code_user_settings_updated"`
+
+      - `"claude_code_user_settings_updated"`
 
   - `ClaudeFileAccessFailed object { actor, claude_file_id, id, 7 more }`
 
@@ -39563,6 +43595,156 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "claude_project_sync_source_updated"`
 
       - `"claude_project_sync_source_updated"`
+
+  - `ClaudeUserSeatTierUpdated object { actor, user_email, user_id, 7 more }`
+
+    An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `user_email: string`
+
+      Email address of the member at the time of the change.
+
+    - `user_id: string`
+
+      Tagged ID of the member whose seat tier changed.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `current_seat_tier: optional string`
+
+      The member's seat tier after this change, or null if the seat was removed.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_seat_tier: optional string`
+
+      The member's seat tier before this change, or null if no seat was assigned.
+
+    - `type: optional "claude_user_seat_tier_updated"`
+
+      - `"claude_user_seat_tier_updated"`
 
   - `CliPluginExecPolicyUpdated object { actor, cli_name, marketplace_id, 9 more }`
 
@@ -51195,7 +55377,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_sso_provisioning_mode_changed"`
 
-  - `OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 4 more }`
+  - `OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 5 more }`
 
     Organization SSO seat tier assignment was toggled.
 
@@ -51241,11 +55423,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_enabled: optional boolean`
+
+      Whether SSO seat tier assignment was enabled before this change.
+
     - `type: optional "org_sso_seat_tier_assignment_toggled"`
 
       - `"org_sso_seat_tier_assignment_toggled"`
 
-  - `OrgSSOSeatTierMappingsUpdated object { actor, id, created_at, 3 more }`
+  - `OrgSSOSeatTierMappingsUpdated object { actor, id, created_at, 5 more }`
 
     Organization SSO seat tier mappings were updated.
 
@@ -51281,6 +55467,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_mappings: optional array of object { idp_group_name, seat_tier }`
+
+      Identity provider group to seat tier mappings after this change.
+
+      - `idp_group_name: string`
+
+        Name of the identity provider group.
+
+      - `seat_tier: optional string`
+
+        Seat tier assigned to members of the identity provider group, or null if the mapping assigns no seat.
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -51288,6 +55486,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_mappings: optional array of object { idp_group_name, seat_tier }`
+
+      Identity provider group to seat tier mappings before this change.
+
+      - `idp_group_name: string`
+
+        Name of the identity provider group.
+
+      - `seat_tier: optional string`
+
+        Seat tier assigned to members of the identity provider group, or null if the mapping assigns no seat.
 
     - `type: optional "org_sso_seat_tier_mappings_updated"`
 
@@ -51729,11 +55939,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_user_invite_deleted"`
 
-  - `OrgUserInviteReSent object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteReSent object { actor, id, created_at, 6 more }`
 
     Organization user invite was re-sent.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -51757,6 +55967,30 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"anthropic_actor"`
 
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -51766,6 +56000,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
       When this activity occurred.
 
     - `invited_email: optional string`
+
+    - `invited_role: optional string`
+
+      Role the invited user will receive on joining
+
+    - `invited_seat_tier: optional string`
+
+      Seat tier the invited user will receive on joining
 
     - `organization_id: optional string`
 
@@ -51819,7 +56061,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_user_invite_rejected"`
 
-  - `OrgUserInviteSent object { actor, id, created_at, 5 more }`
+  - `OrgUserInviteSent object { actor, id, created_at, 6 more }`
 
     Organization user invite was sent.
 
@@ -51882,6 +56124,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `invited_email: optional string`
 
     - `invited_role: optional string`
+
+    - `invited_seat_tier: optional string`
+
+      Seat tier the invited user will receive on joining
 
     - `organization_id: optional string`
 
@@ -52625,7 +56871,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 57 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 58 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
@@ -53247,6 +57493,22 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "disabled_admin_request_types"`
 
           - `"disabled_admin_request_types"`
+
+      - `MemberUsageDashboardVisible object { current_value, previous_value, type }`
+
+        The member usage dashboard visibility setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "member_usage_dashboard_visible"`
+
+          - `"member_usage_dashboard_visible"`
 
       - `CodeExecutionNetworkEgressEnabled object { current_value, previous_value, type }`
 
@@ -55188,9 +59450,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `previous_value: string`
 
-      - `type: "description"`
+      - `type: "description" or "organization_role"`
 
         - `"description"`
+
+        - `"organization_role"`
 
     - `id: optional string`
 
@@ -56848,7 +61112,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `previous_value: string`
 
-      - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or "name"`
+      - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or 3 more`
 
         The workspace property that was changed
 
@@ -56857,6 +61121,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `"default_inference_geo"`
 
         - `"display_color"`
+
+        - `"external_key_config_id"`
+
+        - `"inference_data_retention"`
 
         - `"name"`
 
@@ -58042,6 +62310,68 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_project_document_access_failed"`
 
+  - `ClaudeProjectDocumentBulkDeletionAuditTruncated object { actor, audited_count, claude_project_id, 6 more }`
+
+    A bulk request to delete documents from a Claude project failed with more documents requested than were individually recorded in the audit log.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+    - `audited_count: number`
+
+      Number of documents that received an individual audit record.
+
+    - `claude_project_id: string`
+
+    - `requested_count: number`
+
+      Total number of documents the request asked to delete.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_project_document_bulk_deletion_audit_truncated"`
+
+      - `"claude_project_document_bulk_deletion_audit_truncated"`
+
   - `ClaudeProjectDocumentDeleted object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A document was deleted from a Claude project.
@@ -58331,6 +62661,68 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "claude_project_file_access_failed"`
 
       - `"claude_project_file_access_failed"`
+
+  - `ClaudeProjectFileBulkDeletionAuditTruncated object { actor, audited_count, claude_project_id, 6 more }`
+
+    A bulk request to delete files from a Claude project failed with more files requested than were individually recorded in the audit log.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+    - `audited_count: number`
+
+      Number of files that received an individual audit record.
+
+    - `claude_project_id: string`
+
+    - `requested_count: number`
+
+      Total number of files the request asked to delete.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_project_file_bulk_deletion_audit_truncated"`
+
+      - `"claude_project_file_bulk_deletion_audit_truncated"`
 
   - `ClaudeProjectFileDeleted object { actor, claude_file_id, claude_project_id, 5 more }`
 
@@ -64100,7 +68492,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }  or object { email_address, type }`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -64139,6 +68531,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `current_role: string`
 
@@ -64716,9 +69116,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
 List organizations under the parent organization.
 
-Returns a list of organizations sorted by creation date in ascending order.
-This endpoint does not support pagination and will return an error if the
-response would exceed 1,000 organizations.
+Returns organizations sorted by creation date in ascending order. Use
+`limit` and `page` to paginate: each response includes `has_more` and a
+`next_page` token to pass on the next request.
+
+### Query Parameters
+
+- `limit: optional number`
+
+  Maximum results (default: 1000, max: 1000)
+
+- `page: optional string`
+
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ### Header Parameters
 
@@ -64742,6 +69152,14 @@ response would exceed 1,000 organizations.
 
     Unique identifier for the organization (UUID format)
 
+- `has_more: boolean`
+
+  Whether more records exist beyond the current result set
+
+- `next_page: optional string`
+
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
 ### Example
 
 ```http
@@ -64755,11 +69173,13 @@ curl https://api.anthropic.com/v1/compliance/organizations \
 {
   "data": [
     {
-      "created_at": "created_at",
-      "name": "name",
-      "uuid": "uuid"
+      "created_at": "2025-03-12T18:22:41.123456+00:00",
+      "name": "Acme Corp",
+      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde"
     }
-  ]
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -64767,25 +69187,21 @@ curl https://api.anthropic.com/v1/compliance/organizations \
 
 ### Organization List Response
 
-- `OrganizationListResponse object { data }`
+- `OrganizationListResponse object { created_at, name, uuid }`
 
-  List of organizations under a parent organization.
+  Information about an organization.
 
-  - `data: array of object { created_at, name, uuid }`
+  - `created_at: string`
 
-    List of organizations sorted by creation date, ascending
+    Organization creation time (RFC 3339 format)
 
-    - `created_at: string`
+  - `name: string`
 
-      Organization creation time (RFC 3339 format)
+    Organization name
 
-    - `name: string`
+  - `uuid: string`
 
-      Organization name
-
-    - `uuid: string`
-
-      Unique identifier for the organization (UUID format)
+    Unique identifier for the organization (UUID format)
 
 # Users
 
@@ -64880,15 +69296,15 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "email": "email",
-      "full_name": "full_name",
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "created_at": "2025-03-12T18:22:41.123456Z",
+      "email": "jane.doe@example.com",
+      "full_name": "Jane Doe",
       "organization_role": "admin"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -65013,15 +69429,15 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles \
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "created_at",
-      "description": "description",
-      "name": "name",
-      "updated_at": "updated_at"
+      "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "Full administrative access to organization settings and members",
+      "name": "Organization Admin",
+      "updated_at": "2025-03-14T09:05:17.456789"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -65078,11 +69494,11 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 
 ```json
 {
-  "id": "id",
-  "created_at": "created_at",
-  "description": "description",
-  "name": "name",
-  "updated_at": "updated_at"
+  "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+  "created_at": "2025-03-12T18:22:41.123456",
+  "description": "Full administrative access to organization settings and members",
+  "name": "Organization Admin",
+  "updated_at": "2025-03-14T09:05:17.456789"
 }
 ```
 
@@ -65211,13 +69627,13 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 {
   "data": [
     {
-      "action": "action",
-      "resource_id": "resource_id",
-      "resource_type": "resource_type"
+      "action": "claude_code",
+      "resource_id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "resource_type": "organization"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -65310,31 +69726,75 @@ unknown organizations and organizations outside the hierarchy return 404.
 
     A setting whose enforced value is a single true/false flag.
 
-    - `name: "api_workbench_feedback_collection_enabled" or "claude_ai_feedback_collection_enabled" or "claude_code_trusted_devices_required" or 9 more`
+    - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 31 more`
+
+      - `"ai_powered_artifacts_enabled"`
 
       - `"api_workbench_feedback_collection_enabled"`
 
+      - `"artifact_connectors_enabled"`
+
+      - `"ask_your_org_enabled"`
+
       - `"claude_ai_feedback_collection_enabled"`
 
+      - `"claude_code_desktop_auto_permissions_enabled"`
+
+      - `"claude_code_desktop_bypass_permissions_enabled"`
+
+      - `"claude_code_fast_mode_enabled"`
+
+      - `"claude_code_remote_control_enabled"`
+
+      - `"claude_code_review_enabled"`
+
+      - `"claude_code_routines_enabled"`
+
       - `"claude_code_trusted_devices_required"`
+
+      - `"claude_in_slack_enabled"`
 
       - `"code_execution_enabled"`
 
       - `"code_execution_network_egress_enabled"`
 
+      - `"connector_tools_default_always_allow"`
+
       - `"content_redaction_enabled"`
+
+      - `"desktop_extension_allowlist_enabled"`
 
       - `"directory_sync_enabled"`
 
       - `"frontier_data_use_enabled"`
 
+      - `"hipaa_compliance_enabled"`
+
       - `"ip_allowlist_enabled"`
+
+      - `"location_metadata_enabled"`
+
+      - `"memory_enabled"`
+
+      - `"org_wide_skill_sharing_enabled"`
+
+      - `"public_projects_enabled"`
+
+      - `"skill_sharing_enabled"`
+
+      - `"skills_enabled"`
 
       - `"sso_claude_ai_enforced"`
 
       - `"sso_console_enforced"`
 
       - `"sso_enabled"`
+
+      - `"third_party_interactive_content_enabled"`
+
+      - `"user_skill_creation_enabled"`
+
+      - `"web_search_enabled"`
 
     - `value: boolean`
 
@@ -65479,7 +69939,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
   "organization_id": "organization_id",
   "settings": [
     {
-      "name": "api_workbench_feedback_collection_enabled",
+      "name": "ai_powered_artifacts_enabled",
       "value": true,
       "type": "boolean"
     }
@@ -65541,31 +70001,75 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/sett
 
       A setting whose enforced value is a single true/false flag.
 
-      - `name: "api_workbench_feedback_collection_enabled" or "claude_ai_feedback_collection_enabled" or "claude_code_trusted_devices_required" or 9 more`
+      - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 31 more`
+
+        - `"ai_powered_artifacts_enabled"`
 
         - `"api_workbench_feedback_collection_enabled"`
 
+        - `"artifact_connectors_enabled"`
+
+        - `"ask_your_org_enabled"`
+
         - `"claude_ai_feedback_collection_enabled"`
 
+        - `"claude_code_desktop_auto_permissions_enabled"`
+
+        - `"claude_code_desktop_bypass_permissions_enabled"`
+
+        - `"claude_code_fast_mode_enabled"`
+
+        - `"claude_code_remote_control_enabled"`
+
+        - `"claude_code_review_enabled"`
+
+        - `"claude_code_routines_enabled"`
+
         - `"claude_code_trusted_devices_required"`
+
+        - `"claude_in_slack_enabled"`
 
         - `"code_execution_enabled"`
 
         - `"code_execution_network_egress_enabled"`
 
+        - `"connector_tools_default_always_allow"`
+
         - `"content_redaction_enabled"`
+
+        - `"desktop_extension_allowlist_enabled"`
 
         - `"directory_sync_enabled"`
 
         - `"frontier_data_use_enabled"`
 
+        - `"hipaa_compliance_enabled"`
+
         - `"ip_allowlist_enabled"`
+
+        - `"location_metadata_enabled"`
+
+        - `"memory_enabled"`
+
+        - `"org_wide_skill_sharing_enabled"`
+
+        - `"public_projects_enabled"`
+
+        - `"skill_sharing_enabled"`
+
+        - `"skills_enabled"`
 
         - `"sso_claude_ai_enforced"`
 
         - `"sso_console_enforced"`
 
         - `"sso_enabled"`
+
+        - `"third_party_interactive_content_enabled"`
+
+        - `"user_skill_creation_enabled"`
+
+        - `"web_search_enabled"`
 
       - `value: boolean`
 
@@ -65764,19 +70268,20 @@ curl https://api.anthropic.com/v1/compliance/groups \
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "created_at",
-      "description": "description",
-      "name": "name",
+      "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "All members of the engineering organization",
+      "name": "Engineering Team",
       "roles": [
-        "string"
+        "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+        "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
       ],
-      "source_type": "source_type",
-      "updated_at": "updated_at"
+      "source_type": "scim",
+      "updated_at": "2025-03-14T09:05:17.456789"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -65837,15 +70342,16 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
 ```json
 {
-  "id": "id",
-  "created_at": "created_at",
-  "description": "description",
-  "name": "name",
+  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "created_at": "2025-03-12T18:22:41.123456",
+  "description": "All members of the engineering organization",
+  "name": "Engineering Team",
   "roles": [
-    "string"
+    "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+    "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
   ],
-  "source_type": "source_type",
-  "updated_at": "updated_at"
+  "source_type": "scim",
+  "updated_at": "2025-03-14T09:05:17.456789"
 }
 ```
 
@@ -65990,14 +70496,14 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
 {
   "data": [
     {
-      "created_at": "created_at",
-      "email": "email",
-      "updated_at": "updated_at",
-      "user_id": "user_id"
+      "created_at": "2025-03-12T18:22:41.123456",
+      "email": "jane.doe@example.com",
+      "updated_at": "2025-03-14T09:05:17.456789",
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 
@@ -66151,7 +70657,7 @@ by created_at, with ties broken by id.
 
   - `user: object { id, email_address }`
 
-    User information for the chat creator
+    User information for compliance responses.
 
     - `id: string`
 
@@ -66163,7 +70669,7 @@ by created_at, with ties broken by id.
 
 - `first_id: string`
 
-  First chat ID in the current result set. To get the previous page, use this as before_id in your next request
+  Opaque pagination cursor for the first chat in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 - `has_more: boolean`
 
@@ -66171,7 +70677,7 @@ by created_at, with ties broken by id.
 
 - `last_id: string`
 
-  Last chat ID in the current result set. To get the next page, use this as after_id in your next request
+  Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ### Example
 
@@ -66202,8 +70708,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats \
     }
   ],
   "has_more": false,
-  "first_id": "claude_chat_abc123",
-  "last_id": "claude_chat_abc123"
+  "first_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9",
+  "last_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9"
 }
 ```
 
@@ -66303,7 +70809,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
 
   - `user: object { id, email_address }`
 
-    User information for the chat creator
+    User information for compliance responses.
 
     - `id: string`
 
@@ -66447,17 +70953,21 @@ Retrieves message history and file metadata for a specific chat.
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
+  - `content: array of object { text, truncated, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `Text object { text, type }`
+    - `Text object { text, truncated, type }`
 
       Text content block.
 
       - `text: string`
 
         Text content from human or assistant
+
+      - `truncated: boolean`
+
+        True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
 
       - `type: "text"`
 
@@ -66653,7 +71163,7 @@ Retrieves message history and file metadata for a specific chat.
 
 - `user: object { id, email_address }`
 
-  User information
+  User information for compliance responses.
 
   - `id: string`
 
@@ -66767,17 +71277,21 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
+  - `content: array of object { text, truncated, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `Text object { text, type }`
+    - `Text object { text, truncated, type }`
 
       Text content block.
 
       - `text: string`
 
         Text content from human or assistant
+
+      - `truncated: boolean`
+
+        True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
 
       - `type: "text"`
 
@@ -67520,21 +72034,21 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
 ```json
 {
-  "id": "id",
-  "attachments_count": 0,
-  "chats_count": 0,
-  "created_at": "2019-12-27T18:11:19.117Z",
+  "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
+  "attachments_count": 3,
+  "chats_count": 14,
+  "created_at": "2025-03-12T18:22:41.123456Z",
   "deleted_at": "2019-12-27T18:11:19.117Z",
-  "description": "description",
-  "instructions": "instructions",
+  "description": "Planning and research for the Q3 launch",
+  "instructions": "Focus on concise, actionable answers.",
   "is_private": true,
-  "name": "name",
-  "organization_id": "organization_id",
-  "organization_uuid": "organization_uuid",
-  "updated_at": "2019-12-27T18:11:19.117Z",
+  "name": "Q3 Product Launch",
+  "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
+  "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+  "updated_at": "2025-03-14T09:05:17.456789Z",
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
@@ -68335,13 +72849,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ```json
 {
-  "id": "id",
-  "content": "content",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "filename",
+  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
+  "content": "# Design notes\n\n- Item one\n- Item two\n",
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "filename": "design-notes.txt",
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
@@ -68434,8 +72948,8 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
   "mime_type": "text/plain",
   "size_bytes": 0,
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
@@ -68900,28 +73414,28 @@ curl https://api.anthropic.com/v1/compliance/code/artifacts \
 {
   "data": [
     {
-      "id": "id",
-      "organization_id": "organization_id",
-      "organization_uuid": "organization_uuid",
-      "owner_user_id": "owner_user_id",
-      "published_version_id": "published_version_id",
+      "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
+      "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
+      "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "published_version_id": "1741803761-9f3a",
       "read_mode": "org",
-      "updated_at": "2019-12-27T18:11:19.117Z",
+      "updated_at": "2025-03-14T09:05:17.456789Z",
       "user": {
-        "id": "id",
-        "email_address": "email_address"
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "email_address": "jane.doe@example.com"
       },
       "versions": [
         {
-          "id": "id",
-          "created_at": "2019-12-27T18:11:19.117Z",
-          "name": "name"
+          "id": "1741803761-9f3a",
+          "created_at": "2025-03-12T18:22:41.123456Z",
+          "name": "Team dashboard"
         }
       ]
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 

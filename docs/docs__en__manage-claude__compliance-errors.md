@@ -76,7 +76,7 @@ Invalid `after_id`. No activity found for `after_id` "activity_invalid123"
 
 **Fix:** Treat pagination cursors as opaque strings. Always copy the `first_id` or `last_id` value returned by the previous page; stop when `has_more` is `false`. Do not construct cursors from object IDs.
 
-The directory and project endpoints (users, roles, role permissions, groups, group members, projects, and project attachments) paginate with an opaque `page` token rather than `after_id` and `before_id`. The same advice applies: pass the `next_page` value from the previous response unchanged, and stop when `has_more` is `false`. A malformed `page` token returns the same 400 `invalid_request_error` as a malformed `after_id` or `before_id`.
+The directory and project endpoints (organizations, users, roles, role permissions, groups, group members, projects, and project attachments) paginate with an opaque `page` token rather than `after_id` and `before_id`. The same advice applies: pass the `next_page` value from the previous response unchanged, and stop when `has_more` is `false`. A malformed `page` token returns the same 400 `invalid_request_error` as a malformed `after_id` or `before_id`.
 
 ## 401 Unauthorized
 
@@ -309,18 +309,6 @@ A 500 from the Compliance API carries an `x-should-retry: false` response header
 A 500 without the `x-should-retry: false` header is transient: retry with exponential backoff (start at 1 second, double up to 60 seconds). The same applies to 502, 503, 504, and 529 responses. See [Errors](/docs/en/api/errors) for the platform-wide retry semantics.
 
 For service-wide incidents, check [status.anthropic.com](https://status.anthropic.com).
-
-### Maximum response size exceeded
-
-**Type:** `api_error`
-
-```text
-Response exceeds maximum of 1,000 organizations. Contact support for assistance with larger organization lists.
-```
-
-**Cause:** A list endpoint without pagination (notably `GET /v1/compliance/organizations`) would have returned more than its hard cap of 1,000 records.
-
-**Fix:** The organizations endpoint returns the full tree in one call, up to 1,000 linked organizations. If your tree exceeds 1,000, contact Anthropic support for assistance with larger organization lists. If you were polling this endpoint to track organization-membership changes, periodic relisting remains the most reliable approach once the cap is addressed; it catches additions and removals regardless of which side of the parent-child relationship initiated them. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types, which you can use to trigger an immediate relist instead of waiting for the next polling interval.
 
 ## Next steps
 

@@ -51,10 +51,10 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 
 ```json
 {
-  "id": "id",
-  "created_at": "created_at",
-  "description": "description",
-  "name": "name",
-  "updated_at": "updated_at"
+  "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+  "created_at": "2025-03-12T18:22:41.123456",
+  "description": "Full administrative access to organization settings and members",
+  "name": "Organization Admin",
+  "updated_at": "2025-03-14T09:05:17.456789"
 }
 ```
