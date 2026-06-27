@@ -6,17 +6,17 @@ Understand which analytics API and API key your organization needs, then provisi
 
 Anthropic provides two analytics APIs, and which one you use depends on which Claude product your organization manages:
 
-- The **Claude Code Analytics API** reports daily Claude Code productivity metrics for organizations that use the Claude Platform. It is part of the [Admin API](/docs/en/manage-claude/admin-api) and uses an Admin API key.
-- The **Claude Enterprise Analytics API** reports organization-wide engagement, adoption, and cost data across Claude products (chat, projects, Claude Code, and more) for Claude Enterprise organizations. It uses an Analytics API key created in claude.ai.
+* The **Claude Code Analytics API** reports daily Claude Code productivity metrics for organizations that use the Claude Platform. It is part of the [Admin API](/docs/en/manage-claude/admin-api) and uses an Admin API key.
+* The **Claude Enterprise Analytics API** reports organization-wide engagement, adoption, and cost data across Claude products (chat, projects, Claude Code, and more) for Claude Enterprise organizations. It uses an Analytics API key created in claude.ai.
 
 The two APIs use different key types, created in different places by different roles. This page describes which API fits your organization and how to create the right key.
 
 ## Which API do you need?
 
-| API                                  | Key type                                | Created in                                                                              | Who can create it   | What it covers                                                                                                  |
-| ------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Claude Code Analytics API**        | Admin API key (`sk-ant-admin01-...`)    | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | Organization admin  | Daily Claude Code metrics per user: sessions, lines of code, commits, pull requests, tool acceptance, and estimated cost by model |
-| **Claude Enterprise Analytics API**  | Analytics API key                       | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)                   | Primary owner       | Organization-wide engagement and adoption (user activity, active-user summaries, project, skill, and connector usage), plus cost and usage reports |
+| API                                 | Key type                             | Created in                                                                                | Who can create it  | What it covers                                                                                                                                     |
+| ----------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Claude Code Analytics API**       | Admin API key (`sk-ant-admin01-...`) | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | Organization admin | Daily Claude Code metrics per user: sessions, lines of code, commits, pull requests, tool acceptance, and estimated cost by model                  |
+| **Claude Enterprise Analytics API** | Analytics API key                    | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | Primary owner      | Organization-wide engagement and adoption (user activity, active-user summaries, project, skill, and connector usage), plus cost and usage reports |
 
 The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](/docs/en/api/admin), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
 
@@ -70,10 +70,10 @@ The Claude Enterprise Analytics API is available to Claude Enterprise organizati
 
 The Claude Enterprise Analytics API provides:
 
-- **User activity:** per-user daily metrics across chat (conversations, messages, projects, files, artifacts), Claude Code (sessions, commits, pull requests, lines of code, tool actions), and other Claude products
-- **Activity summaries:** organization-level daily, weekly, and monthly active users, seat counts, and pending invites
-- **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
-- **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
+* **User activity:** per-user daily metrics across chat (conversations, messages, projects, files, artifacts), Claude Code (sessions, commits, pull requests, lines of code, tool actions), and other Claude products
+* **Activity summaries:** organization-level daily, weekly, and monthly active users, seat counts, and pending invites
+* **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
+* **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
 
 For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](/docs/en/api/admin/analytics). The following sections cover data freshness, metric definitions, and operational guidance that apply across those endpoints.
 
@@ -81,7 +81,7 @@ For endpoint details, parameters, and response schemas, see the [Claude Enterpri
 
 Claude Enterprise Analytics API data is available for dates on or after January 1, 2026.
 
-**Engagement and adoption endpoints** (user activity, summaries, projects, skills, connectors) return a per-day snapshot for the date you specify. Data for a given day is aggregated at 10:00 UTC the following day and becomes available for querying three days after aggregation. If data is not available within that timeline, it usually indicates a data pipeline failure on Anthropic's side; contact support if the gap persists.
+**Engagement and adoption endpoints** (user activity, summaries, projects, skills, connectors) return a per-day snapshot for the date you specify. Data for a given day is aggregated at 10UTC the following day and becomes available for querying three days after aggregation. If data is not available within that timeline, it usually indicates a data pipeline failure on Anthropic's side; contact support if the gap persists.
 
 **Cost and usage endpoints** follow a different freshness model. Data is typically available within four hours of the underlying usage but may take up to 24 hours. Values for a given date can be revised for up to 30 days as late events arrive and reconciliation runs. For invoicing-grade totals, query dates at least 30 days in the past.
 
@@ -117,12 +117,15 @@ If your organization uses Claude Code through Amazon Bedrock, the Claude Enterpr
   <Card title="Claude Code Analytics API" href="/docs/en/manage-claude/claude-code-analytics-api">
     Track Claude Code sessions, code changes, and tool usage with an Admin API key.
   </Card>
+
   <Card title="Usage and Cost API" href="/docs/en/manage-claude/usage-cost-api">
     Track API token usage and costs for your organization.
   </Card>
+
   <Card title="Claude Enterprise Analytics API reference" href="/docs/en/api/admin/analytics">
     Endpoint reference for engagement, adoption, and cost data.
   </Card>
+
   <Card title="Get access to the Compliance API" href="/docs/en/manage-claude/compliance-api-access">
     Audit and compliance data uses its own key types.
   </Card>

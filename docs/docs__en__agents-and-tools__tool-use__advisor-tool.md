@@ -9,38 +9,37 @@ The advisor tool lets a faster, lower-cost **executor model** consult a higher-i
 This pattern fits long-horizon agentic workloads (coding agents, computer use, multi-step research pipelines) where most turns are mechanical but having an excellent plan is crucial. You get close to advisor-solo quality while the bulk of token generation happens at executor-model rates.
 
 <Note>
-  The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01`
-  in your requests.
+  The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01` in your requests.
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## When to use it
 
 Early benchmarks show meaningful gains for these configurations:
 
-- **You currently use Sonnet on complex tasks:** Add Opus as the advisor for a quality lift at similar or lower total cost.
-- **You currently use Haiku and want a step up in intelligence:** Add Opus as the advisor. Expect higher cost than Haiku alone, but lower than switching the executor to a larger model.
+* **You currently use Sonnet on complex tasks:** Add Opus as the advisor for a quality lift at similar or lower total cost.
+* **You currently use Haiku and want a step up in intelligence:** Add Opus as the advisor. Expect higher cost than Haiku alone, but lower than switching the executor to a larger model.
 
 Results are task-dependent. Evaluate on your own workload.
 
-The advisor is a weaker fit for single-turn Q&A (nothing to plan), pure pass-through model pickers where your users already choose their own cost and quality tradeoff, or workloads where every turn genuinely requires the advisor model's full capability.
+The advisor is a weaker fit for single-turn Q\&A (nothing to plan), pure pass-through model pickers where your users already choose their own cost and quality tradeoff, or workloads where every turn genuinely requires the advisor model's full capability.
 
 ## Model compatibility
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be at least as capable as the executor.
 
-| Executor models                                               | Advisor models                                                                                         |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Executor models                              | Advisor models                                                       |
+| -------------------------------------------- | -------------------------------------------------------------------- |
 | Claude Haiku 4.5 (claude-haiku-4-5-20251001) | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
 | Claude Sonnet 4.6 (claude-sonnet-4-6)        | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
 | Claude Opus 4.6 (claude-opus-4-6)            | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
 | Claude Opus 4.7 (claude-opus-4-7)            | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
-| Claude Opus 4.8 (claude-opus-4-8)            | Claude Opus 4.8 (claude-opus-4-8)                                                     |
-| Claude Fable 5 (`claude-fable-5`)                             | Claude Fable 5 (`claude-fable-5`)                                                                       |
-| Claude Mythos 5 (`claude-mythos-5`)                           | Claude Mythos 5 (`claude-mythos-5`)                                                                     |
+| Claude Opus 4.8 (claude-opus-4-8)            | Claude Opus 4.8 (claude-opus-4-8)                                    |
+| Claude Fable 5 (`claude-fable-5`)            | Claude Fable 5 (`claude-fable-5`)                                    |
+| Claude Mythos 5 (`claude-mythos-5`)          | Claude Mythos 5 (`claude-mythos-5`)                                  |
 
 If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
 
@@ -51,76 +50,69 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 ## Quick start
 
 <CodeGroup>
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: advisor-tool-2026-03-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-sonnet-4-6",
-        "max_tokens": 4096,
-        "tools": [
-            {
-                "type": "advisor_20260301",
-                "name": "advisor",
-                "model": "claude-opus-4-8"
-            }
-        ],
-        "messages": [{
-            "role": "user",
-            "content": "Build a concurrent worker pool in Go with graceful shutdown."
-        }]
-    }'
-```
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+      --header "x-api-key: $ANTHROPIC_API_KEY" \
+      --header "anthropic-version: 2023-06-01" \
+      --header "anthropic-beta: advisor-tool-2026-03-01" \
+      --header "content-type: application/json" \
+      --data '{
+          "model": "claude-sonnet-4-6",
+          "max_tokens": 4096,
+          "tools": [
+              {
+                  "type": "advisor_20260301",
+                  "name": "advisor",
+                  "model": "claude-opus-4-8"
+              }
+          ],
+          "messages": [{
+              "role": "user",
+              "content": "Build a concurrent worker pool in Go with graceful shutdown."
+          }]
+      }'
+  ```
 
-```bash CLI
-ant beta:messages create --beta advisor-tool-2026-03-01 <<'YAML'
-model: claude-sonnet-4-6
-max_tokens: 4096
-tools:
-  - type: advisor_20260301
-    name: advisor
-    model: claude-opus-4-8
-messages:
-  - role: user
-    content: Build a concurrent worker pool in Go with graceful shutdown.
-YAML
-```
+  ```bash CLI
+  ant beta:messages create --beta advisor-tool-2026-03-01 <<'YAML'
+  model: claude-sonnet-4-6
+  max_tokens: 4096
+  tools:
+    - type: advisor_20260301
+      name: advisor
+      model: claude-opus-4-8
+  messages:
+    - role: user
+      content: Build a concurrent worker pool in Go with graceful shutdown.
+  YAML
+  ```
 
-```python Python hidelines={1..2}
-import anthropic
+  ```python Python
+  client = anthropic.Anthropic()
 
-client = anthropic.Anthropic()
+  response = client.beta.messages.create(
+      model="claude-sonnet-4-6",
+      max_tokens=4096,
+      betas=["advisor-tool-2026-03-01"],
+      tools=[
+          {
+              "type": "advisor_20260301",
+              "name": "advisor",
+              "model": "claude-opus-4-8",
+          }
+      ],
+      messages=[
+          {
+              "role": "user",
+              "content": "Build a concurrent worker pool in Go with graceful shutdown.",
+          }
+      ],
+  )
 
-response = client.beta.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=4096,
-    betas=["advisor-tool-2026-03-01"],
-    tools=[
-        {
-            "type": "advisor_20260301",
-            "name": "advisor",
-            "model": "claude-opus-4-8",
-        }
-    ],
-    messages=[
-        {
-            "role": "user",
-            "content": "Build a concurrent worker pool in Go with graceful shutdown.",
-        }
-    ],
-)
+  print(response)
+  ```
 
-print(response)
-```
-
-```typescript TypeScript hidelines={1..5,-3..-1}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-async function main() {
+  ```typescript TypeScript
   const response = await client.beta.messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 4096,
@@ -141,136 +133,113 @@ async function main() {
   });
 
   console.log(response);
-}
+  ```
 
-main().catch(console.error);
-```
+  ```csharp C#
+  using Anthropic.Models.Beta.Messages;
+  using Messages = Anthropic.Models.Messages;
 
-```csharp C# hidelines={1}
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
-using Messages = Anthropic.Models.Messages;
+  var client = new AnthropicClient();
 
-var client = new AnthropicClient();
+  var parameters = new MessageCreateParams
+  {
+      Model = Messages::Model.ClaudeSonnet4_6,
+      MaxTokens = 4096,
+      Tools = new BetaToolUnion[]
+      {
+          new BetaAdvisorTool20260301
+          {
+              Model = Messages::Model.ClaudeOpus4_8
+          }
+      },
+      Messages =
+      [
+          new BetaMessageParam
+          {
+              Role = Role.User,
+              Content = "Build a concurrent worker pool in Go with graceful shutdown."
+          }
+      ],
+      Betas = ["advisor-tool-2026-03-01"]
+  };
 
-var parameters = new MessageCreateParams
-{
-    Model = Messages::Model.ClaudeSonnet4_6,
-    MaxTokens = 4096,
-    Tools = new BetaToolUnion[]
-    {
-        new BetaAdvisorTool20260301
-        {
-            Model = Messages::Model.ClaudeOpus4_8
-        }
-    },
-    Messages =
-    [
-        new BetaMessageParam
-        {
-            Role = Role.User,
-            Content = "Build a concurrent worker pool in Go with graceful shutdown."
-        }
-    ],
-    Betas = ["advisor-tool-2026-03-01"]
-};
+  var response = await client.Beta.Messages.Create(parameters);
+  Console.WriteLine(response);
+  ```
 
-var response = await client.Beta.Messages.Create(parameters);
-Console.WriteLine(response);
-```
+  ```go Go
+  client := anthropic.NewClient()
 
-```go Go hidelines={1..11,-1}
-package main
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	MaxTokens: 4096,
+  	Tools: []anthropic.BetaToolUnionParam{
+  		{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
+  			Model: anthropic.ModelClaudeOpus4_8,
+  		}},
+  	},
+  	Messages: []anthropic.BetaMessageParam{
+  		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown.")),
+  	},
+  	Betas: []anthropic.AnthropicBeta{
+  		anthropic.AnthropicBetaAdvisorTool2026_03_01,
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
 
-import (
-	"context"
-	"fmt"
-	"log"
+  ```php PHP
+  $client = new Client();
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+  $response = $client->beta->messages->create(
+      maxTokens: 4096,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
+          ],
+      ],
+      model: 'claude-sonnet-4-6',
+      tools: [
+          [
+              'type' => 'advisor_20260301',
+              'name' => 'advisor',
+              'model' => 'claude-opus-4-8',
+          ],
+      ],
+      betas: ['advisor-tool-2026-03-01'],
+  );
 
-func main() {
-	client := anthropic.NewClient()
+  echo $response;
+  ```
 
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeSonnet4_6,
-		MaxTokens: 4096,
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
-				Model: anthropic.ModelClaudeOpus4_8,
-			}},
-		},
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown.")),
-		},
-		Betas: []anthropic.AnthropicBeta{
-			anthropic.AnthropicBetaAdvisorTool2026_03_01,
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
+  ```ruby Ruby
+  client = Anthropic::Client.new
 
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$response = $client->beta->messages->create(
-    maxTokens: 4096,
-    messages: [
-        [
-            'role' => 'user',
-            'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
-        ],
-    ],
-    model: 'claude-sonnet-4-6',
+  response = client.beta.messages.create(
+    model: "claude-sonnet-4-6",
+    max_tokens: 4096,
     tools: [
-        [
-            'type' => 'advisor_20260301',
-            'name' => 'advisor',
-            'model' => 'claude-opus-4-8',
-        ],
+      {
+        type: "advisor_20260301",
+        name: "advisor",
+        model: "claude-opus-4-8"
+      }
     ],
-    betas: ['advisor-tool-2026-03-01'],
-);
+    messages: [
+      {
+        role: "user",
+        content: "Build a concurrent worker pool in Go with graceful shutdown."
+      }
+    ],
+    betas: ["advisor-tool-2026-03-01"]
+  )
 
-echo $response;
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-response = client.beta.messages.create(
-  model: "claude-sonnet-4-6",
-  max_tokens: 4096,
-  tools: [
-    {
-      type: "advisor_20260301",
-      name: "advisor",
-      model: "claude-opus-4-8"
-    }
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "Build a concurrent worker pool in Go with graceful shutdown."
-    }
-  ],
-  betas: ["advisor-tool-2026-03-01"]
-)
-
-puts response
-```
-
+  puts response
+  ```
 </CodeGroup>
 
 ## How it works
@@ -288,14 +257,14 @@ The advisor itself runs without tools and without context management. Its thinki
 
 ## Tool parameters
 
-| Parameter               | Type           | Default      | Description                                                                                                                                        |
-| ----------------------- | -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                  | string         | _required_   | Must be `"advisor_20260301"`.                                                                                                                      |
-| `name`                  | string         | _required_   | Must be `"advisor"`.                                                                                                                               |
-| `model`                 | string         | _required_   | The advisor model ID, such as `"claude-opus-4-8"`. Billed at this model's rates for the sub-inference.                                             |
-| `max_uses`              | integer        | unlimited    | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](#cost-control) for conversation-level limits. |
-| `max_tokens`            | integer        | advisor model's output cap | Caps the advisor's total output (thinking plus text) per call. Minimum 1024. See [Capping advisor output](#capping-advisor-output). |
-| `caching`               | object \| null | `null` (off) | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching). |
+| Parameter    | Type           | Default                    | Description                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------ | -------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`       | string         | *required*                 | Must be `"advisor_20260301"`.                                                                                                                                                                                                                                                                                                                                                  |
+| `name`       | string         | *required*                 | Must be `"advisor"`.                                                                                                                                                                                                                                                                                                                                                           |
+| `model`      | string         | *required*                 | The advisor model ID, such as `"claude-opus-4-8"`. Billed at this model's rates for the sub-inference.                                                                                                                                                                                                                                                                         |
+| `max_uses`   | integer        | unlimited                  | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](#cost-control) for conversation-level limits. |
+| `max_tokens` | integer        | advisor model's output cap | Caps the advisor's total output (thinking plus text) per call. Minimum 1024. See [Capping advisor output](#capping-advisor-output).                                                                                                                                                                                                                                            |
+| `caching`    | object \| null | `null` (off)               | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching).                                                                                                                                                                                                                             |
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker; it is an on/off switch. The server decides where cache boundaries go.
 
@@ -343,9 +312,9 @@ The `server_tool_use.input` is always empty. The server constructs the advisor's
 
 The `advisor_tool_result.content` field is a discriminated union. For successful calls, the variant depends on the advisor model:
 
-| Variant                   | Fields                            | Returned when                                                       |
-| ------------------------- | --------------------------------- | ------------------------------------------------------------------- |
-| `advisor_result`          | `text`, `stop_reason`             | The advisor model returns plaintext (for example, Claude Opus 4.8). |
+| Variant                   | Fields                             | Returned when                                                       |
+| ------------------------- | ---------------------------------- | ------------------------------------------------------------------- |
+| `advisor_result`          | `text`, `stop_reason`              | The advisor model returns plaintext (for example, Claude Opus 4.8). |
 | `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output.                         |
 
 The `stop_reason` field is present on both result variants whenever [`max_tokens`](#capping-advisor-output) is set on the tool definition, carrying the advisor sub-call's stop reason (typically `"end_turn"`; `"max_tokens"` when the cap is hit), matching the top-level Messages API [`stop_reason`](/docs/en/build-with-claude/handling-stop-reasons). The field is absent when `max_tokens` is not set.
@@ -371,14 +340,14 @@ If the advisor call fails, the result carries an error:
 
 The executor sees the error and continues without further advice. The request itself does not fail.
 
-| `error_code`              | Meaning                                                                                                     |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `error_code`              | Meaning                                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `max_uses_exceeded`       | The request reached the `max_uses` cap set on the tool definition. Further advisor calls in the same request return this error. |
-| `too_many_requests`       | The advisor sub-inference was rate-limited.                                                                 |
-| `overloaded`              | The advisor sub-inference hit capacity limits.                                                              |
-| `prompt_too_long`         | The transcript exceeded the advisor model's context window.                                                 |
-| `execution_time_exceeded` | The advisor sub-inference timed out.                                                                        |
-| `unavailable`             | Any other advisor failure.                                                                                  |
+| `too_many_requests`       | The advisor sub-inference was rate-limited.                                                                                     |
+| `overloaded`              | The advisor sub-inference hit capacity limits.                                                                                  |
+| `prompt_too_long`         | The transcript exceeded the advisor model's context window.                                                                     |
+| `execution_time_exceeded` | The advisor sub-inference timed out.                                                                                            |
+| `unavailable`             | Any other advisor failure.                                                                                                      |
 
 Advisor rate limits draw from the same per-model bucket as direct calls to the advisor model. A rate limit on the advisor appears as `too_many_requests` inside the tool result; a rate limit on the executor fails the whole request with HTTP 429.
 
@@ -432,11 +401,7 @@ response = client.beta.messages.create(
 If you omit the advisor tool from `tools` on a follow-up turn while the message history still contains `advisor_tool_result` blocks, the API returns a `400 invalid_request_error`.
 
 <Note>
-  The advisor tool has no built-in conversation-level cap. To limit advisor
-  calls across a conversation, count them client-side. When you reach your
-  ceiling, remove the advisor tool from your `tools` array **and** strip all
-  `advisor_tool_result` blocks from your message history to avoid a
-  `400 invalid_request_error`.
+  The advisor tool has no built-in conversation-level cap. To limit advisor calls across a conversation, count them client-side. When you reach your ceiling, remove the advisor tool from your `tools` array **and** strip all `advisor_tool_result` blocks from your message history to avoid a `400 invalid_request_error`.
 </Note>
 
 ### Mid-conversation nudge for under-calling executors
@@ -582,15 +547,7 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
 <Warning>
-  [`clear_thinking`](/docs/en/build-with-claude/context-editing) with a `keep`
-  value other than `"all"` shifts the advisor's quoted transcript each turn,
-  causing advisor-side cache misses. This is a cost degradation only; advice
-  quality is unaffected. When extended thinking is enabled without explicit
-  `clear_thinking` configuration, the API defaults to
-  `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior
-  (the default on earlier Opus/Sonnet models and all Haiku models; on Opus
-  4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"`
-  to preserve advisor cache stability.
+  [`clear_thinking`](/docs/en/build-with-claude/context-editing) with a `keep` value other than `"all"` shifts the advisor's quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only; advice quality is unaffected. When extended thinking is enabled without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus/Sonnet models and all Haiku models; on Opus 4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
 </Warning>
 
 ## Combining with other tools
@@ -622,12 +579,12 @@ tools = [
 
 The executor can search the web, call the advisor, and use your custom tools in the same turn. The advisor's plan can inform which tools the executor reaches for next.
 
-| Feature                                                          | Interaction                                                                                                                                                                                                                                                                        |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Batch processing](/docs/en/build-with-claude/batch-processing)         | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
-| [Token counting](/docs/en/build-with-claude/token-counting)      | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
-| [Context editing](/docs/en/build-with-claude/context-editing) | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                    |
-| `pause_turn`                                                     | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn). |
+| Feature                                                         | Interaction                                                                                                                                                                                                                                                                        |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Batch processing](/docs/en/build-with-claude/batch-processing) | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
+| [Token counting](/docs/en/build-with-claude/token-counting)     | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
+| [Context editing](/docs/en/build-with-claude/context-editing)   | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                                                                        |
+| `pause_turn`                                                    | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn). |
 
 ## Best practices
 
@@ -648,7 +605,7 @@ Without system-prompt steering, the executor tends to under-call the advisor in 
 
 Timing guidance:
 
-```text
+```text wrap
 You have access to an `advisor` tool backed by a stronger reviewer model. It takes NO parameters — when you call advisor(), your entire conversation history is automatically forwarded. They see the task, every tool call you've made, every result you've seen.
 
 Call advisor BEFORE substantive work — before writing, before committing to an interpretation, before building on an assumption. If the task requires orientation first (finding files, fetching a source, seeing what's there), do that, then call advisor. Orientation is not substantive work. Writing, editing, and declaring an answer are.
@@ -663,7 +620,7 @@ On tasks longer than a few steps, call advisor at least once before committing t
 
 How the executor should treat the advice (place directly after the timing block):
 
-```text
+```text wrap
 Give the advice serious weight. If you follow a step and it fails empirically, or you have primary-source evidence that contradicts a specific claim (the file says X, the paper states Y), adapt. A passing self-test is not evidence the advice is wrong — it's evidence your test doesn't check what the advice is checking.
 
 If you've already retrieved data pointing one way and the advisor points another: don't silently switch. Surface the conflict in one more advisor call — "I found X, you suggest Y, which constraint breaks the tie?" The advisor saw your evidence but may have underweighted it; a reconcile call is cheaper than committing to the wrong branch.
@@ -675,7 +632,7 @@ Claude Haiku 4.5 applies the default advisor guidance conservatively. That keeps
 
 Use this block in place of the timing and advice blocks above when your Haiku executor runs predominantly coding or write-task workloads:
 
-```text
+```text wrap
 Consult a stronger reviewer who sees your full conversation transcript.
 
 No parameters. When you call advisor(), your entire history -- task, every tool call and result, your reasoning -- is automatically forwarded. The advisor sees exactly what you've done.
@@ -704,7 +661,7 @@ Hard rule: your first write_file, edit_file, or state-changing bash call on a ta
 
 Opus executors typically call the advisor at an appropriate rate without additional prompting. If your Opus executor is under-calling on your workload, add the following checkpoint to your system prompt:
 
-```text
+```text wrap
 Call advisor for design, architecture, and risk questions where you won't touch a file. If your response would be analysis or a recommendation with no other tool calls, call advisor first. That judgment call is exactly where a second opinion is highest-value. (This does not apply to simple factual lookups or arithmetic; those you answer directly.)
 
 Hard rule: your first write_file, edit_file, or state-changing bash call on a task must be preceded by an advisor call in the same or an earlier turn. Read-only orientation commands (ls, cat, grep, find) are not state-changing. This is a checkpoint, not a difficulty judgment. It applies to one-line edits too.
@@ -716,16 +673,14 @@ Hard rule: your first write_file, edit_file, or state-changing bash call on a ta
 
 Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
-```text
+```text wrap
 (Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
 ```
 
 This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint; the advisor will occasionally exceed it, so ask for roughly 80 percent of your true ceiling.
 
 <Note>
-  In Anthropic's testing this line also increased how often the executor
-  consults the advisor, but the net effect was still lower total cost
-  (more consults, each shorter).
+  In Anthropic's testing this line also increased how often the executor consults the advisor, but the net effect was still lower total cost (more consults, each shorter).
 </Note>
 
 Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) (or the [alternative Haiku block](#alternative-system-prompt-for-haiku-on-coding-workloads) if you swapped it in) for the strongest cost-versus-quality tradeoff. For a hard ceiling rather than a soft request, see [Capping advisor output](#capping-advisor-output).
@@ -753,9 +708,9 @@ This is not a hard truncation alone. The server also passes the advisor its rema
 
 | `max_tokens` | Mean advisor output tokens | Calls truncated |
 | ------------ | -------------------------- | --------------- |
-| unset        | ~4,200 to 5,900            | n/a             |
-| 2048         | ~630 to 840                | ~0%             |
-| 1024         | ~370 to 480                | ~10%            |
+| unset        | \~4,200 to 5,900           | n/a             |
+| 2048         | \~630 to 840               | \~0%            |
+| 1024         | \~370 to 480               | \~10%           |
 
 Hard reasoning tasks elicit substantially longer advisor output than the [typical 1,400 to 1,800 tokens](#usage-and-billing) quoted earlier for lighter workloads. Use this table to size the savings ratio, not as a universal baseline for advisor output.
 
@@ -783,12 +738,12 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 
 ### Cost control
 
-- For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools` **and** strip all `advisor_tool_result` blocks from your message history to avoid a `400 invalid_request_error`.
-- Enable `caching` only for conversations where you expect three or more advisor calls.
+* For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools` **and** strip all `advisor_tool_result` blocks from your message history to avoid a `400 invalid_request_error`.
+* Enable `caching` only for conversations where you expect three or more advisor calls.
 
 ## Limitations
 
-- **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
-- **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
-- **The top-level `max_tokens` applies to executor output only.** It does not bound advisor tokens. To cap advisor output, set [`max_tokens` on the tool definition](#capping-advisor-output).
-- **[Priority Tier](/docs/en/api/service-tiers)** applies to each model independently. A Priority Tier commitment on the executor model does not extend to the advisor; advisor calls run at Priority Tier only if your organization also holds a commitment on the advisor model.
+* **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
+* **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
+* **The top-level `max_tokens` applies to executor output only.** It does not bound advisor tokens. To cap advisor output, set [`max_tokens` on the tool definition](#capping-advisor-output).
+* **[Priority Tier](/docs/en/api/service-tiers)** applies to each model independently. A Priority Tier commitment on the executor model does not extend to the advisor; advisor calls run at Priority Tier only if your organization also holds a commitment on the advisor model.

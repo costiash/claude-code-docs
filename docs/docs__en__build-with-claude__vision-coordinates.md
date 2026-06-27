@@ -9,13 +9,13 @@ Claude can locate and label regions of an image (for example, returning bounding
 You'll need this for OCR pipelines, form extraction, chart parsing, UI element location, and any task where you act on a specific region of an image. For sending images, supported formats, and per-model resolution limits, see [Vision](/docs/en/build-with-claude/vision).
 
 <Note>
-**Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
+  **Claude works best with absolute pixel coordinates.** Ask for them explicitly in your prompt. For example: *"Return the bounding box of each table as `[x1, y1, x2, y2]` in pixel coordinates."* Claude does not work well when you ask for normalized coordinates, for example: *"Return bounding box coordinates between `0` and `1000`."* Always ask for pixel coordinates and normalize in your own code if you need to.
 </Note>
 
 Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
 
 <Note>
-Claude's spatial reasoning has limits (see [Limitations](/docs/en/build-with-claude/vision#limitations)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF support](/docs/en/build-with-claude/pdf-support), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
+  Claude's spatial reasoning has limits (see [Limitations](/docs/en/build-with-claude/vision#limitations)). Coordinate accuracy is best when you state the expected coordinate format in your prompt and spot-check results visually before processing at scale. For [PDF support](/docs/en/build-with-claude/pdf-support), pages are rasterized to images server-side at dimensions you don't control, so the returned coordinates can't be reliably mapped back onto the page. To work with coordinates on PDF content, rasterize the pages to images yourself and use the pre-resize approach.
 </Note>
 
 ## How Claude resizes and pads images
@@ -127,5 +127,5 @@ Padding is applied only to the bottom and right edges, so the origin doesn't shi
 
 ## Related
 
-- The [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool) requires screenshots to already fit within image size limits (oversized screenshots are rejected, not resized); see its scaling guidance for the client-side resize and coordinate-scaling pattern.
-- [PDF support](/docs/en/build-with-claude/pdf-support): pages are rasterized server-side at dimensions you don't control, so rasterize pages yourself and use the pre-resize approach when you need coordinates on PDF content.
+* The [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool) requires screenshots to already fit within image size limits (oversized screenshots are rejected, not resized); see its scaling guidance for the client-side resize and coordinate-scaling pattern.
+* [PDF support](/docs/en/build-with-claude/pdf-support): pages are rasterized server-side at dimensions you don't control, so rasterize pages yourself and use the pre-resize approach when you need coordinates on PDF content.

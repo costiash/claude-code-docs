@@ -18,9 +18,9 @@ Fine-tuning is the process of further training a pretrained language model using
 
 These three H's represent Anthropic's goals in ensuring that Claude is beneficial to society:
 
-- A **helpful** AI will attempt to perform the task or answer the question posed to the best of its abilities, providing relevant and useful information.
-- An **honest** AI will give accurate information, and not hallucinate or confabulate. It will acknowledge its limitations and uncertainties when appropriate.
-- A **harmless** AI will not be offensive or discriminatory, and when asked to aid in a dangerous or unethical act, the AI should politely refuse and explain why it cannot comply.
+* A **helpful** AI will attempt to perform the task or answer the question posed to the best of its abilities, providing relevant and useful information.
+* An **honest** AI will give accurate information, and not hallucinate or confabulate. It will acknowledge its limitations and uncertainties when appropriate.
+* A **harmless** AI will not be offensive or discriminatory, and when asked to aid in a dangerous or unethical act, the AI should politely refuse and explain why it cannot comply.
 
 ## Latency
 

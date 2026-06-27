@@ -3,7 +3,7 @@
 ---
 
 <Tip>
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
+  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
 The [Admin API](/docs/en/api/admin) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](/).
@@ -15,7 +15,7 @@ The [Admin API](/docs/en/api/admin) allows you to programmatically manage your o
 </Check>
 
 <Note>
-**Claude Platform on AWS:** Most of the Admin API is not available on Claude Platform on AWS. Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other endpoints including organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports are not available. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for details.
+  **Claude Platform on AWS:** Most of the Admin API is not available on Claude Platform on AWS. Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other endpoints including organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports are not available. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for details.
 </Note>
 
 ## Authentication
@@ -24,7 +24,7 @@ Authenticate with either credential. To create an Admin API key for your organiz
 
 **OAuth bearer:**
 
-```bash cURL nocheck
+```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
   --header "anthropic-version: 2023-06-01" \
   --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
@@ -34,7 +34,7 @@ An `org:admin` token grants access to the whole organization, regardless of the 
 
 **Admin API key:**
 
-```bash cURL nocheck
+```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
   --header "anthropic-version: 2023-06-01" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
@@ -45,29 +45,32 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
 When you use the Admin API:
 
 1. You make requests using either credential from the [Authentication](#authentication) section
+
 2. The API allows you to manage:
-   - Organization members and their roles
-   - Organization member invites
-   - Workspaces and their members
-   - API keys
-   - Service accounts, federation issuers, and federation rules (these endpoints require an `org:admin` OAuth token; Admin API keys are not accepted)
+
+   * Organization members and their roles
+   * Organization member invites
+   * Workspaces and their members
+   * API keys
+   * Service accounts, federation issuers, and federation rules (these endpoints require an `org:admin` OAuth token; Admin API keys are not accepted)
 
 This is useful for:
-- Automating user onboarding/offboarding
-- Programmatically managing workspace access
-- Monitoring and managing API key usage
+
+* Automating user onboarding/offboarding
+* Programmatically managing workspace access
+* Monitoring and managing API key usage
 
 ## Organization roles and permissions
 
 There are five organization-level roles. See more details in the [API Console roles and permissions](https://support.claude.com/en/articles/10186004-api-console-roles-and-permissions) article.
 
-| Role | Permissions |
-|------|-------------|
-| user | Can use Workbench |
-| claude_code_user | Can use Workbench and [Claude Code](https://code.claude.com/docs/en/overview) |
-| developer | Can use Workbench and manage API keys |
-| billing | Can use Workbench and manage billing details |
-| admin | Can do all of the preceding, plus manage users |
+| Role               | Permissions                                                                   |
+| ------------------ | ----------------------------------------------------------------------------- |
+| user               | Can use Workbench                                                             |
+| claude\_code\_user | Can use Workbench and [Claude Code](https://code.claude.com/docs/en/overview) |
+| developer          | Can use Workbench and manage API keys                                         |
+| billing            | Can use Workbench and manage billing details                                  |
+| admin              | Can do all of the preceding, plus manage users                                |
 
 Organization owners and primary owners have all admin permissions and can additionally manage admins. All references to the admin role on this page also apply to owners and primary owners.
 
@@ -78,25 +81,24 @@ Organization owners and primary owners have all admin permissions and can additi
 You can list [organization members](/docs/en/api/admin-api/users/get-user), update member roles, and remove members.
 
 <CodeGroup>
-```bash cURL
-# List organization members
-curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  ```bash cURL
+  # List organization members
+  curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
-# Update member role
-curl "https://api.anthropic.com/v1/organizations/users/{user_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{"role": "developer"}'
+  # Update member role
+  curl "https://api.anthropic.com/v1/organizations/users/{user_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+    --data '{"role": "developer"}'
 
-# Remove member
-curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-```
-
+  # Remove member
+  curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  ```
 </CodeGroup>
 
 ### Organization invites
@@ -104,29 +106,27 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id
 You can invite users to organizations and manage those [invites](/docs/en/api/admin-api/invites/get-invite).
 
 <CodeGroup>
+  ```bash cURL
+  # Create invite
+  curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+    --data '{
+      "email": "newuser@domain.com",
+      "role": "developer"
+    }'
 
-```bash cURL
-# Create invite
-curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{
-    "email": "newuser@domain.com",
-    "role": "developer"
-  }'
+  # List invites
+  curl "https://api.anthropic.com/v1/organizations/invites?limit=10" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
-# List invites
-curl "https://api.anthropic.com/v1/organizations/invites?limit=10" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-
-# Delete invite
-curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invite_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-```
-
+  # Delete invite
+  curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invite_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  ```
 </CodeGroup>
 
 ### Workspaces
@@ -138,38 +138,36 @@ For a comprehensive guide to workspaces, including Console and API examples, see
 Manage [user access to specific workspaces](/docs/en/api/admin-api/workspace_members/get-workspace-member):
 
 <CodeGroup>
+  ```bash cURL
+  # Add member to workspace
+  curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+    --data '{
+      "user_id": "user_xxx",
+      "workspace_role": "workspace_developer"
+    }'
 
-```bash cURL
-# Add member to workspace
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{
-    "user_id": "user_xxx",
-    "workspace_role": "workspace_developer"
-  }'
+  # List workspace members
+  curl "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members?limit=10" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
-# List workspace members
-curl "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members?limit=10" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  # Update member role
+  curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+    --data '{
+      "workspace_role": "workspace_admin"
+    }'
 
-# Update member role
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{
-    "workspace_role": "workspace_admin"
-  }'
-
-# Remove member from workspace
-curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-```
-
+  # Remove member from workspace
+  curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  ```
 </CodeGroup>
 
 ### API keys
@@ -177,24 +175,22 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{wo
 Monitor and manage [API keys](/docs/en/api/admin-api/apikeys/get-api-key):
 
 <CodeGroup>
+  ```bash cURL
+  # List API keys
+  curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active&workspace_id=wrkspc_xxx" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
-```bash cURL
-# List API keys
-curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active&workspace_id=wrkspc_xxx" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-
-# Update API key
-curl --request POST "https://api.anthropic.com/v1/organizations/api_keys/{api_key_id}" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{
-    "status": "inactive",
-    "name": "New Key Name"
-  }'
-```
-
+  # Update API key
+  curl --request POST "https://api.anthropic.com/v1/organizations/api_keys/{api_key_id}" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+    --data '{
+      "status": "inactive",
+      "name": "New Key Name"
+    }'
+  ```
 </CodeGroup>
 
 ### Service accounts
@@ -253,42 +249,34 @@ Retrieve audit and activity data for your organization with the [Compliance API]
 
 To effectively use the Admin API:
 
-- Use meaningful names and descriptions for workspaces and API keys
-- Implement proper error handling for failed operations
-- Regularly audit member roles and permissions
-- Clean up unused workspaces and expired invites
-- Monitor API key usage and rotate keys periodically
+* Use meaningful names and descriptions for workspaces and API keys
+* Implement proper error handling for failed operations
+* Regularly audit member roles and permissions
+* Clean up unused workspaces and expired invites
+* Monitor API key usage and rotate keys periodically
 
 ## FAQ
 
-<section title="What permissions are needed to use the Admin API?">
+<AccordionGroup>
+  <Accordion title="What permissions are needed to use the Admin API?">
+    The Admin API accepts either an Admin API key (starting with `sk-ant-admin`) or an OAuth bearer token with the `org:admin` scope. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. See [Authentication](#authentication).
+  </Accordion>
 
-The Admin API accepts either an Admin API key (starting with `sk-ant-admin`) or an OAuth bearer token with the `org:admin` scope. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. See [Authentication](#authentication).
+  <Accordion title="Can I create new API keys through the Admin API?">
+    No, new API keys can only be created through the Claude Console for security reasons. The Admin API can only manage existing API keys.
+  </Accordion>
 
-</section>
+  <Accordion title="What happens to API keys when removing a user?">
+    API keys persist in their current state as they are scoped to the Organization, not to individual users.
+  </Accordion>
 
-<section title="Can I create new API keys through the Admin API?">
+  <Accordion title="Can organization admins be removed through the API?">
+    No, organization members with the admin role cannot be removed through the API for security reasons.
+  </Accordion>
 
-No, new API keys can only be created through the Claude Console for security reasons. The Admin API can only manage existing API keys.
-
-</section>
-
-<section title="What happens to API keys when removing a user?">
-
-API keys persist in their current state as they are scoped to the Organization, not to individual users.
-
-</section>
-
-<section title="Can organization admins be removed through the API?">
-
-No, organization members with the admin role cannot be removed through the API for security reasons.
-
-</section>
-
-<section title="How long do organization invites last?">
-
-Organization invites expire after 21 days. There is currently no way to modify this expiration period.
-
-</section>
+  <Accordion title="How long do organization invites last?">
+    Organization invites expire after 21 days. There is currently no way to modify this expiration period.
+  </Accordion>
+</AccordionGroup>
 
 For workspace-specific questions, see the [Workspaces FAQ](/docs/en/manage-claude/workspaces#faq).

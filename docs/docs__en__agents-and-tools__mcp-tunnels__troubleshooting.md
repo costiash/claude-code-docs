@@ -12,15 +12,15 @@ A request through the tunnel can fail at one of three layers; diagnose them in o
 
 ## Quick reference
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| Tunnel doesn't appear in the agent **+ MCP Server** picker | The picker only lists tunnels in the session's workspace that have at least one active certificate. | Register a CA certificate, or open the session in the workspace the tunnel was created in. |
-| Caller sees HTTP 500; [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) logs `No ingress rules were defined` | cloudflared has no local target. | Add `--url http://localhost:8080` and `network_mode: "service:mcp-proxy"` to the cloudflared service. |
-| Proxy logs `no route for host` | `tunnel_domain` doesn't match the assigned domain, or `config.yaml` was edited without restarting. | Set `tunnel_domain` to the exact domain shown on the tunnel detail page, then restart the proxy (`docker compose restart mcp-proxy`). |
-| Proxy logs `IP validation failed: <ip> is not a private address` | Upstream MCP server resolves outside RFC1918. | See [Upstream IP validation](#upstream-ip-validation). |
-| Proxy exits with `cannot unmarshal !!seq into map[string]string` | `routes` is a YAML list. | Use `routes: { name: http://host:port }`. |
-| Proxy exits with `open /data/tls.key: permission denied` | The key is `0600`; the proxy container runs non-root. | `chmod 644 data/tls.key`. |
-| `curl https://:8080` fails with `wrong version number` | Expected; the listener is plaintext WebSocket. TLS happens inside the WS stream. | Verify through a [Managed Agent or the Messages API](/docs/en/agents-and-tools/mcp-tunnels/overview#use-the-tunneled-mcp-servers) instead. |
+| Symptom                                                                                                                             | Cause                                                                                               | Fix                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Tunnel doesn't appear in the agent **+ MCP Server** picker                                                                          | The picker only lists tunnels in the session's workspace that have at least one active certificate. | Register a CA certificate, or open the session in the workspace the tunnel was created in.                                                 |
+| Caller sees HTTP 500; [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) logs `No ingress rules were defined` | cloudflared has no local target.                                                                    | Add `--url http://localhost:8080` and `network_mode: "service:mcp-proxy"` to the cloudflared service.                                      |
+| Proxy logs `no route for host`                                                                                                      | `tunnel_domain` doesn't match the assigned domain, or `config.yaml` was edited without restarting.  | Set `tunnel_domain` to the exact domain shown on the tunnel detail page, then restart the proxy (`docker compose restart mcp-proxy`).      |
+| Proxy logs `IP validation failed: <ip> is not a private address`                                                                    | Upstream MCP server resolves outside RFC1918.                                                       | See [Upstream IP validation](#upstream-ip-validation).                                                                                     |
+| Proxy exits with `cannot unmarshal !!seq into map[string]string`                                                                    | `routes` is a YAML list.                                                                            | Use `routes: { name: http://host:port }`.                                                                                                  |
+| Proxy exits with `open /data/tls.key: permission denied`                                                                            | The key is `0600`; the proxy container runs non-root.                                               | `chmod 644 data/tls.key`.                                                                                                                  |
+| `curl https://<proxy>:8080` fails with `wrong version number`                                                                       | Expected; the listener is plaintext WebSocket. TLS happens inside the WS stream.                    | Verify through a [Managed Agent or the Messages API](/docs/en/agents-and-tools/mcp-tunnels/overview#use-the-tunneled-mcp-servers) instead. |
 
 The following sections cover failures that need more than a one-line fix.
 
@@ -73,8 +73,8 @@ The [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components)
 
 Tunnels-specific causes:
 
-- The chart's default audience is `api.anthropic.com` (no scheme). If your rule's audience is `https://api.anthropic.com`, set `api.wif.audience` to match.
-- A `403` from the Tunnels API after a successful exchange means the rule's scope doesn't include `org:manage_tunnels`, or the rule's service account isn't a member of the tunnel's workspace. Set the scope and add the service account to the workspace.
+* The chart's default audience is `api.anthropic.com` (no scheme). If your rule's audience is `https://api.anthropic.com`, set `api.wif.audience` to match.
+* A `403` from the Tunnels API after a successful exchange means the rule's scope doesn't include `org:manage_tunnels`, or the rule's service account isn't a member of the tunnel's workspace. Set the scope and add the service account to the workspace.
 
 On Helm, the setup component runs as a pre-install hook Job. On failure, the Job is left behind for inspection (`kubectl logs job/mcp-tunnel-setup -n mcp-tunnel`). Helm doesn't manage hook resources, so delete it before retrying:
 
@@ -87,8 +87,8 @@ kubectl -n mcp-tunnel delete job mcp-tunnel-setup
 
 Check the cloudflared logs first. Common causes:
 
-- The `TUNNEL_TOKEN` is missing, expired, or copied incorrectly.
-- A firewall is blocking outbound TCP/UDP on port 7844 to the tunnel edge.
+* The `TUNNEL_TOKEN` is missing, expired, or copied incorrectly.
+* A firewall is blocking outbound TCP/UDP on port 7844 to the tunnel edge.
 
 cloudflared may also log warnings about UDP receive buffer sizes; this is a QUIC tuning hint, not an error.
 
@@ -96,9 +96,9 @@ cloudflared may also log warnings about UDP receive buffer sizes; this is a QUIC
 
 When Anthropic rejects the proxy's certificate during inner TLS, the proxy logs `tls handshake failed`. Verify that:
 
-- The server certificate has not expired.
-- The certificate's Subject Alternative Name matches `*.<tunnel-domain>`.
-- The signing CA is registered with Anthropic for this tunnel.
+* The server certificate has not expired.
+* The certificate's Subject Alternative Name matches `*.<tunnel-domain>`.
+* The signing CA is registered with Anthropic for this tunnel.
 
 See the [certificate requirements](/docs/en/agents-and-tools/mcp-tunnels/reference#certificate-requirements) for the full validation rules.
 

@@ -9,159 +9,129 @@ Tool use lets Claude call functions that you define or that Anthropic provides. 
 Here's a minimal example using a server tool, the [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool), which Anthropic executes for you:
 
 <CodeGroup>
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1024,
-    "tools": [{"type": "web_search_20260209", "name": "web_search"}],
-    "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
-  }'
-```
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "tools": [{"type": "web_search_20260209", "name": "web_search"}],
+      "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
+    }'
+  ```
 
-```bash CLI
-ant messages create --transform content --format yaml \
-  --model claude-opus-4-8 \
-  --max-tokens 1024 \
-  --tool '{type: web_search_20260209, name: web_search}' \
-  --message '{role: user, content: "What is the latest on the Mars rover?"}'
-```
+  ```bash CLI
+  ant messages create --transform content --format yaml \
+    --model claude-opus-4-8 \
+    --max-tokens 1024 \
+    --tool '{type: web_search_20260209, name: web_search}' \
+    --message '{role: user, content: "What is the latest on the Mars rover?"}'
+  ```
 
-```python Python hidelines={1..2}
-import anthropic
+  ```python Python
+  client = anthropic.Anthropic()
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      tools=[{"type": "web_search_20260209", "name": "web_search"}],
+      messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
+  )
+  print(response.content)
+  ```
 
-client = anthropic.Anthropic()
-response = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    tools=[{"type": "web_search_20260209", "name": "web_search"}],
-    messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
-)
-print(response.content)
-```
+  ```typescript TypeScript
+  const client = new Anthropic();
+  const response = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: [{ type: "web_search_20260209", name: "web_search" }],
+    messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
+  });
+  console.log(response.content);
+  ```
 
-```typescript TypeScript hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
+  ```csharp C#
+  AnthropicClient client = new();
 
-const client = new Anthropic();
-const response = await client.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  tools: [{ type: "web_search_20260209", name: "web_search" }],
-  messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
-});
-console.log(response.content);
-```
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Tools = [new ToolUnion(new WebSearchTool20260209())],
+      Messages = [new() { Role = Role.User, Content = "What's the latest on the Mars rover?" }]
+  };
 
-```csharp C# hidelines={1..3}
-using Anthropic;
-using Anthropic.Models.Messages;
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message.Content);
+  ```
 
-AnthropicClient client = new();
+  ```go Go
+  client := anthropic.NewClient()
 
-var parameters = new MessageCreateParams
-{
-    Model = Model.ClaudeOpus4_8,
-    MaxTokens = 1024,
-    Tools = [new ToolUnion(new WebSearchTool20260209())],
-    Messages = [new() { Role = Role.User, Content = "What's the latest on the Mars rover?" }]
-};
+  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1024,
+  	Tools: []anthropic.ToolUnionParam{
+  		{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
+  	},
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the latest on the Mars rover?")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response.Content)
+  ```
 
-var message = await client.Messages.Create(parameters);
-Console.WriteLine(message.Content);
-```
+  ```java Java
+  import com.anthropic.models.messages.WebSearchTool20260209;
 
-```go Go hidelines={1..11,-1}
-package main
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-import (
-	"context"
-	"fmt"
-	"log"
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addTool(WebSearchTool20260209.builder().build())
+          .addUserMessage("What's the latest on the Mars rover?")
+          .build();
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+      Message response = client.messages().create(params);
+      IO.println(response.content());
+  }
+  ```
 
-func main() {
-	client := anthropic.NewClient()
+  ```php PHP
+  $client = new Client();
 
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 1024,
-		Tools: []anthropic.ToolUnionParam{
-			{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
-		},
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the latest on the Mars rover?")),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response.Content)
-}
-```
+  $message = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      tools: [
+          ['type' => 'web_search_20260209', 'name' => 'web_search'],
+      ],
+      messages: [
+          ['role' => 'user', 'content' => "What's the latest on the Mars rover?"],
+      ],
+  );
 
-```java Java hidelines={1..5}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.WebSearchTool20260209;
+  echo $message;
+  ```
 
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  ```ruby Ruby
+  client = Anthropic::Client.new
 
-    MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024L)
-        .addTool(WebSearchTool20260209.builder().build())
-        .addUserMessage("What's the latest on the Mars rover?")
-        .build();
-
-    Message response = client.messages().create(params);
-    IO.println(response.content());
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$message = $client->messages->create(
-    model: 'claude-opus-4-8',
-    maxTokens: 1024,
-    tools: [
-        ['type' => 'web_search_20260209', 'name' => 'web_search'],
-    ],
-    messages: [
-        ['role' => 'user', 'content' => "What's the latest on the Mars rover?"],
-    ],
-);
-
-echo $message;
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  tools: [{ type: "web_search_20260209", name: "web_search" }],
-  messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
-)
-puts message.content
-```
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: [{ type: "web_search_20260209", name: "web_search" }],
+    messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
+  )
+  puts message.content
+  ```
 </CodeGroup>
 
 Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) and [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls) cover that round trip.
@@ -183,31 +153,29 @@ This boundary is steerable through your system prompt. If Claude isn't calling t
 To require a tool call rather than rely on prompting, set [`tool_choice`](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use).
 
 <Tip>
-**Guarantee schema conformance with strict tool use**
+  **Guarantee schema conformance with strict tool use**
 
-Add `strict: true` to your custom tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
+  Add `strict: true` to your custom tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
 </Tip>
 
 Each server tool's page describes its own trigger boundary in more detail.
 
-<section title="When required parameters are missing">
+<Accordion title="When required parameters are missing">
+  If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
 
-If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
+  For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn't supply:
 
-For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn't supply:
+  ```json JSON
+  {
+    "type": "tool_use",
+    "id": "toolu_01A09q90qw90lq917835lq9",
+    "name": "get_weather",
+    "input": { "location": "New York, NY", "unit": "fahrenheit" }
+  }
+  ```
 
-```json JSON
-{
-  "type": "tool_use",
-  "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "get_weather",
-  "input": { "location": "New York, NY", "unit": "fahrenheit" }
-}
-```
-
-This behavior is not guaranteed, especially for more ambiguous prompts and for less capable models.
-
-</section>
+  This behavior is not guaranteed, especially for more ambiguous prompts and for less capable models.
+</Accordion>
 
 ## Choose a tool
 
@@ -221,6 +189,7 @@ For tools you define, you write the schema and your application executes each ca
   <Card title="Define tools" icon="hammer" href="/docs/en/agents-and-tools/tool-use/define-tools">
     Specify tool schemas, write descriptions, and control when Claude calls your tools.
   </Card>
+
   <Card title="Handle tool calls" icon="arrows-left-right" href="/docs/en/agents-and-tools/tool-use/handle-tool-calls">
     Parse `tool_use` blocks, format `tool_result` responses, and handle errors.
   </Card>
@@ -234,12 +203,15 @@ Anthropic publishes the schema and trains Claude on it. Your application still e
   <Card title="Memory tool" icon="brain" href="/docs/en/agents-and-tools/tool-use/memory-tool">
     Store and retrieve information across conversations in files you control.
   </Card>
+
   <Card title="Bash tool" icon="terminal" href="/docs/en/agents-and-tools/tool-use/bash-tool">
     Run shell commands in a persistent session that maintains state.
   </Card>
+
   <Card title="Text editor tool" icon="edit" href="/docs/en/agents-and-tools/tool-use/text-editor-tool">
     View and modify text files to debug, fix, and improve code.
   </Card>
+
   <Card title="Computer use tool" icon="computer" href="/docs/en/agents-and-tools/tool-use/computer-use-tool">
     Take screenshots and control the mouse and keyboard in a desktop environment.
   </Card>
@@ -253,30 +225,36 @@ Server tools run on Anthropic's infrastructure, with no handler code in your app
   <Card title="Web search tool" icon="browser" href="/docs/en/agents-and-tools/tool-use/web-search-tool">
     Search the web for information beyond the knowledge cutoff, with cited sources.
   </Card>
+
   <Card title="Web fetch tool" icon="download" href="/docs/en/agents-and-tools/tool-use/web-fetch-tool">
     Retrieve the full content of specified web pages and PDF documents.
   </Card>
+
   <Card title="Code execution tool" icon="code" href="/docs/en/agents-and-tools/tool-use/code-execution-tool">
     Run Python and bash code in a sandboxed container to analyze data and generate files.
   </Card>
+
   <Card title="Advisor tool" icon="lightbulb" href="/docs/en/agents-and-tools/tool-use/advisor-tool">
     Let a faster executor model consult a higher-intelligence advisor model mid-generation.
   </Card>
+
   <Card title="Tool search tool" icon="library" href="/docs/en/agents-and-tools/tool-use/tool-search-tool">
     Work with thousands of tools by discovering and loading them on demand.
   </Card>
+
   <Card title="MCP connector" icon="link" href="/docs/en/agents-and-tools/mcp-connector">
     Connect to remote MCP servers from the Messages API without a separate MCP client.
   </Card>
 </CardGroup>
 
 <Note>
-[Claude Managed Agents](/docs/en/managed-agents/overview) provides a built-in toolset that Claude uses autonomously within a session. For that toolset and the Managed Agents way to add custom tools, see its [Tools](/docs/en/managed-agents/tools) page.
+  [Claude Managed Agents](/docs/en/managed-agents/overview) provides a built-in toolset that Claude uses autonomously within a session. For that toolset and the Managed Agents way to add custom tools, see its [Tools](/docs/en/managed-agents/tools) page.
 </Note>
 
 ## Pricing
 
 Tool use requests are priced based on:
+
 1. The total number of input tokens sent to the model (including in the `tools` parameter)
 2. The number of output tokens generated
 3. For server-side tools, additional usage-based pricing (e.g., web search charges per search performed)
@@ -285,25 +263,25 @@ Client-side tools are priced the same as any other Claude API request, while ser
 
 The additional tokens from tool use come from:
 
-- The `tools` parameter in API requests (tool names, descriptions, and schemas)
-- `tool_use` content blocks in API requests and responses
-- `tool_result` content blocks in API requests
+* The `tools` parameter in API requests (tool names, descriptions, and schemas)
+* `tool_use` content blocks in API requests and responses
+* `tool_result` content blocks in API requests
 
 When you use `tools`, the API also automatically includes a special system prompt for the model which enables tool use. The number of tool use tokens required for each model are listed below (excluding the additional tokens listed above). Note that the table assumes at least 1 tool is provided. If no `tools` are provided, then a tool choice of `none` uses 0 additional system prompt tokens.
 
-| Model                    | Tool choice                                          | Tool use system prompt token count          |
-|--------------------------|------------------------------------------------------|---------------------------------------------|
-| Claude Opus 4.8                | `auto`, `none`<hr />`any`, `tool`   | 290 tokens<hr />410 tokens |
-| Claude Opus 4.7                | `auto`, `none`<hr />`any`, `tool`   | 675 tokens<hr />804 tokens |
-| Claude Opus 4.6              | `auto`, `none`<hr />`any`, `tool`   | 497 tokens<hr />589 tokens |
-| Claude Opus 4.5            | `auto`, `none`<hr />`any`, `tool`   | 496 tokens<hr />588 tokens |
-| Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)) | `auto`, `none`<hr />`any`, `tool`   | 313 tokens<hr />315 tokens |
-| Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)) | `auto`, `none`<hr />`any`, `tool`   | 313 tokens<hr />315 tokens |
-| Claude Sonnet 4.6          | `auto`, `none`<hr />`any`, `tool`   | 497 tokens<hr />589 tokens |
-| Claude Sonnet 4.5          | `auto`, `none`<hr />`any`, `tool`   | 496 tokens<hr />588 tokens |
-| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | `auto`, `none`<hr />`any`, `tool`   | 313 tokens<hr />315 tokens |
-| Claude Haiku 4.5         | `auto`, `none`<hr />`any`, `tool`   | 496 tokens<hr />588 tokens |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | `auto`, `none`<hr />`any`, `tool`   | 264 tokens<hr />355 tokens |
+| Model                                                                                                      | Tool choice                    | Tool use system prompt token count |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------- |
+| Claude Opus 4.8                                                                                            | `auto`, `none`***`any`, `tool` | 290 tokens***410 tokens            |
+| Claude Opus 4.7                                                                                            | `auto`, `none`***`any`, `tool` | 675 tokens***804 tokens            |
+| Claude Opus 4.6                                                                                            | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
+| Claude Opus 4.5                                                                                            | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations))                                   | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
+| Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))                | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
+| Claude Sonnet 4.6                                                                                          | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
+| Claude Sonnet 4.5                                                                                          | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))  | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
+| Claude Haiku 4.5                                                                                           | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | `auto`, `none`***`any`, `tool` | 264 tokens***355 tokens            |
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
@@ -319,9 +297,11 @@ Some server tools add usage-based charges on top of tokens: see [Web search tool
   <Card href="/docs/en/agents-and-tools/tool-use/how-tool-use-works" title="How tool use works" icon="compass">
     Understand the tool use loop, where tools execute, and when to use tools instead of prose.
   </Card>
+
   <Card href="/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent" title="Tutorial: Build a tool-using agent" icon="graduation-cap">
     A guided walkthrough from a single tool call to a production-ready agentic loop.
   </Card>
+
   <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Tool reference" icon="book">
     Directory of Anthropic-provided tools and reference for optional tool definition properties.
   </Card>

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-27T05:02:38Z",
+  "generated_at": "2026-06-27T07:46:45Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -1260,7 +1260,7 @@
         "specific",
         "tasks"
       ],
-      "word_count": 5719,
+      "word_count": 5709,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__best-practices.md"
     },
     "/docs/en/agents-and-tools/agent-skills/enterprise": {
@@ -1288,7 +1288,7 @@
         "security",
         "each"
       ],
-      "word_count": 1660,
+      "word_count": 1669,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__enterprise.md"
     },
     "/docs/en/agents-and-tools/agent-skills/overview": {
@@ -1316,7 +1316,7 @@
         "capabilities",
         "when"
       ],
-      "word_count": 2449,
+      "word_count": 2452,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__overview.md"
     },
     "/docs/en/agents-and-tools/agent-skills/quickstart": {
@@ -1326,25 +1326,25 @@
         "skills",
         "claude",
         "create",
-        "code",
-        "agent",
         "api",
         "codegroup",
+        "code",
+        "agent",
         "card",
         "skill",
+        "presentation",
         "file",
         "note",
         "execution",
         "tool",
+        "powerpoint",
         "title",
         "icon",
         "href",
         "learn",
-        "documents",
-        "powerpoint",
-        "presentation"
+        "documents"
       ],
-      "word_count": 4134,
+      "word_count": 3823,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -1372,7 +1372,7 @@
         "sdk",
         "messages"
       ],
-      "word_count": 3061,
+      "word_count": 3034,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1400,7 +1400,7 @@
         "tunnels",
         "request"
       ],
-      "word_count": 884,
+      "word_count": 898,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__concepts.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/console": {
@@ -1428,7 +1428,7 @@
         "certificates",
         "agent"
       ],
-      "word_count": 1594,
+      "word_count": 1602,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__console.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/deploy-compose": {
@@ -1456,7 +1456,7 @@
         "federation",
         "see"
       ],
-      "word_count": 2125,
+      "word_count": 2121,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__deploy-compose.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/deploy-helm": {
@@ -1466,25 +1466,25 @@
         "step",
         "tunnel",
         "mcp",
-        "title",
-        "server",
-        "note",
-        "certificate",
-        "set",
-        "cluster",
-        "rule",
-        "chart",
         "token",
-        "federation",
-        "tunnels",
-        "helm",
+        "chart",
+        "server",
+        "certificate",
+        "title",
+        "note",
+        "access",
         "setup",
-        "install",
+        "component",
+        "set",
+        "helm",
+        "cluster",
+        "programmatic",
+        "federation",
+        "rule",
         "kubernetes",
-        "console",
-        "component"
+        "secret"
       ],
-      "word_count": 2298,
+      "word_count": 2302,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__deploy-helm.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/overview": {
@@ -1512,7 +1512,7 @@
         "provider",
         "see"
       ],
-      "word_count": 1418,
+      "word_count": 1433,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -1568,7 +1568,7 @@
         "path",
         "value"
       ],
-      "word_count": 948,
+      "word_count": 970,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__reference.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/security": {
@@ -1596,7 +1596,7 @@
         "compose",
         "remove"
       ],
-      "word_count": 622,
+      "word_count": 621,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__security.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/troubleshooting": {
@@ -1624,7 +1624,7 @@
         "oauth",
         "doesn"
       ],
-      "word_count": 940,
+      "word_count": 946,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__troubleshooting.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -1680,17 +1680,17 @@
         "only",
         "tokens"
       ],
-      "word_count": 5546,
+      "word_count": 5508,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
       "title": "Bash tool",
-      "content_preview": "# Bash tool  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through th...",
+      "content_preview": "# Bash tool  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through ...",
       "keywords": [
         "tool",
         "bash",
         "command",
-        "section",
+        "accordion",
         "session",
         "commands",
         "title",
@@ -1708,7 +1708,7 @@
         "access",
         "using"
       ],
-      "word_count": 1936,
+      "word_count": 1890,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__bash-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent": {
@@ -1718,25 +1718,25 @@
         "tool",
         "ring",
         "loop",
-        "one",
-        "runner",
-        "tools",
         "claude",
-        "card",
-        "single",
-        "call",
-        "sdk",
-        "note",
-        "code",
         "codegroup",
+        "tools",
+        "runner",
+        "call",
+        "one",
         "error",
-        "schema",
-        "message",
+        "single",
+        "code",
         "result",
-        "agents",
-        "rings"
+        "what",
+        "card",
+        "sdk",
+        "schema",
+        "note",
+        "user",
+        "message"
       ],
-      "word_count": 16528,
+      "word_count": 16578,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md"
     },
     "/docs/en/agents-and-tools/tool-use/code-execution-tool": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5694,
+      "word_count": 5340,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1772,27 +1772,27 @@
       "content_preview": "# Computer use tool  ---  Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interac...",
       "keywords": [
         "tab",
-        "title",
         "claude",
+        "title",
         "computer",
         "tool",
+        "actions",
         "tabs",
         "info",
         "api",
         "see",
-        "actions",
-        "section",
-        "screenshot",
-        "step",
-        "request",
-        "application",
-        "screenshots",
-        "when",
-        "tools",
+        "click",
         "prompt",
-        "note"
+        "accordion",
+        "screenshot",
+        "opus",
+        "tools",
+        "step",
+        "when",
+        "request",
+        "application"
       ],
-      "word_count": 9426,
+      "word_count": 8997,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1820,12 +1820,12 @@
         "more",
         "must"
       ],
-      "word_count": 3661,
+      "word_count": 3559,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
       "title": "Fine-grained tool streaming",
-      "content_preview": "# Fine-grained tool streaming  Stream tool inputs without server-side JSON buffering for latency-sensitive applications.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/...",
+      "content_preview": "# Fine-grained tool streaming  Stream tool inputs without server-side JSON buffering for latency-sensitive applications.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/e...",
       "keywords": [
         "tool",
         "streaming",
@@ -1848,7 +1848,7 @@
         "object",
         "warning"
       ],
-      "word_count": 2743,
+      "word_count": 2620,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md"
     },
     "/docs/en/agents-and-tools/tool-use/handle-tool-calls": {
@@ -1859,7 +1859,7 @@
         "claude",
         "result",
         "blocks",
-        "section",
+        "accordion",
         "error",
         "tools",
         "example",
@@ -1876,7 +1876,7 @@
         "note",
         "when"
       ],
-      "word_count": 1485,
+      "word_count": 1489,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__handle-tool-calls.md"
     },
     "/docs/en/agents-and-tools/tool-use/how-tool-use-works": {
@@ -1932,7 +1932,7 @@
         "approaches",
         "one"
       ],
-      "word_count": 642,
+      "word_count": 638,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__manage-tool-context.md"
     },
     "/docs/en/agents-and-tools/tool-use/memory-tool": {
@@ -1943,24 +1943,24 @@
         "tool",
         "path",
         "context",
+        "retries",
         "claude",
+        "response",
         "file",
+        "url",
+        "requests",
+        "timeout",
+        "time",
         "error",
         "directory",
         "what",
         "session",
         "see",
         "side",
-        "time",
-        "where",
-        "note",
-        "feature",
-        "retries",
-        "editing",
-        "files",
-        "long"
+        "python",
+        "text"
       ],
-      "word_count": 2793,
+      "word_count": 2746,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -1988,7 +1988,7 @@
         "web",
         "code"
       ],
-      "word_count": 1833,
+      "word_count": 1772,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -2007,16 +2007,16 @@
         "execution",
         "when",
         "see",
-        "section",
         "one",
         "single",
         "default",
         "sequentially",
         "return",
         "each",
-        "batch"
+        "batch",
+        "results"
       ],
-      "word_count": 3489,
+      "word_count": 3357,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2044,7 +2044,7 @@
         "field",
         "before"
       ],
-      "word_count": 5381,
+      "word_count": 5166,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2072,7 +2072,7 @@
         "loop",
         "only"
       ],
-      "word_count": 2101,
+      "word_count": 2056,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__server-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/strict-tool-use": {
@@ -2098,37 +2098,37 @@
         "see",
         "define",
         "validated",
-        "section"
+        "accordion"
       ],
-      "word_count": 3406,
+      "word_count": 3217,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
       "title": "Text editor tool",
-      "content_preview": "# Text editor tool  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent thr...",
+      "content_preview": "# Text editor tool  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent t...",
       "keywords": [
-        "tool",
-        "claude",
         "text",
-        "file",
+        "claude",
+        "tool",
         "editor",
-        "section",
-        "title",
+        "file",
+        "command",
         "files",
         "step",
-        "codegroup",
-        "command",
+        "title",
         "code",
-        "create",
-        "when",
-        "fix",
-        "error",
-        "changes",
-        "return",
+        "contents",
+        "line",
+        "example",
         "view",
-        "contents"
+        "fix",
+        "codegroup",
+        "new",
+        "accordion",
+        "create",
+        "uses"
       ],
-      "word_count": 9031,
+      "word_count": 8433,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2156,7 +2156,7 @@
         "web",
         "runs"
       ],
-      "word_count": 659,
+      "word_count": 657,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-combinations.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-reference": {
@@ -2184,7 +2184,7 @@
         "array",
         "user"
       ],
-      "word_count": 938,
+      "word_count": 949,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-reference.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-runner": {
@@ -2198,21 +2198,21 @@
         "message",
         "sdk",
         "loop",
+        "when",
         "claude",
+        "result",
         "results",
         "each",
-        "result",
-        "when",
-        "tabs",
+        "calls",
         "state",
+        "tabs",
+        "over",
         "get",
         "error",
         "json",
-        "tools",
-        "calls",
-        "php"
+        "tools"
       ],
-      "word_count": 7463,
+      "word_count": 6178,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-runner.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -2233,14 +2233,14 @@
         "argument",
         "regex",
         "prompt",
-        "section",
         "card",
         "loading",
         "response",
         "format",
-        "title"
+        "title",
+        "into"
       ],
-      "word_count": 3025,
+      "word_count": 2965,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -2268,12 +2268,12 @@
         "what",
         "place"
       ],
-      "word_count": 714,
+      "word_count": 722,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-use-with-prompt-caching.md"
     },
     "/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use": {
       "title": "Troubleshooting tool use",
-      "content_preview": "# Troubleshooting tool use  Fix the most common tool-use errors with symptom-to-fix diagnostic tables.  ---  Symptom-to-fix tables for the most common tool-use errors. Each fix cross-references the pa...",
+      "content_preview": "# Troubleshooting tool use  Fix the most common tool-use errors with symptom-to-fix diagnostic tables.  ---  Symptom-to-fix tables for the most common tool-use errors. Each fix cross-references the page that owns the feature.  ## Claude calls the wrong tool  | Symptom",
       "keywords": [
         "tool",
         "tools",
@@ -2296,7 +2296,7 @@
         "block",
         "most"
       ],
-      "word_count": 886,
+      "word_count": 928,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__troubleshooting-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -2324,7 +2324,7 @@
         "fetched",
         "available"
       ],
-      "word_count": 3441,
+      "word_count": 3287,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2352,7 +2352,7 @@
         "token",
         "available"
       ],
-      "word_count": 2633,
+      "word_count": 2532,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -43130,7 +43130,7 @@
     },
     "/docs/en/build-with-claude/adaptive-thinking": {
       "title": "Adaptive thinking",
-      "content_preview": "# Adaptive thinking  Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/doc...",
+      "content_preview": "# Adaptive thinking  Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/d...",
       "keywords": [
         "thinking",
         "claude",
@@ -43145,15 +43145,15 @@
         "extended",
         "sonnet",
         "fable",
-        "output",
         "default",
+        "output",
         "only",
         "field",
         "note",
         "preview",
         "see"
       ],
-      "word_count": 4702,
+      "word_count": 4566,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -43171,7 +43171,7 @@
         "mtok",
         "claude",
         "messages",
-        "section",
+        "accordion",
         "codegroup",
         "large",
         "each",
@@ -43181,12 +43181,12 @@
         "may",
         "workspace"
       ],
-      "word_count": 7610,
+      "word_count": 7127,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
       "title": "Cache diagnostics",
-      "content_preview": "# Cache diagnostics  Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.  ---  <Note> This feature qualifies for [Zero D...",
+      "content_preview": "# Cache diagnostics  Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.  ---  <Note>   This feature qualifies for [Zero...",
       "keywords": [
         "request",
         "cache",
@@ -43209,7 +43209,7 @@
         "previous",
         "header"
       ],
-      "word_count": 5119,
+      "word_count": 4374,
       "file_path": "docs/docs__en__build-with-claude__cache-diagnostics.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -43217,27 +43217,27 @@
       "content_preview": "# Citations  Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.  ---  <Note> ...",
       "keywords": [
         "citations",
-        "content",
-        "document",
         "text",
+        "document",
+        "content",
         "documents",
         "claude",
-        "citation",
         "title",
-        "blocks",
-        "plain",
-        "indexed",
+        "codegroup",
+        "citation",
         "api",
-        "provided",
-        "custom",
-        "indices",
-        "example",
-        "chunking",
+        "plain",
+        "blocks",
         "files",
-        "support",
-        "codegroup"
+        "provided",
+        "indexed",
+        "example",
+        "custom",
+        "pdf",
+        "indices",
+        "tab"
       ],
-      "word_count": 6682,
+      "word_count": 6359,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
@@ -43265,7 +43265,7 @@
         "opus",
         "europe"
       ],
-      "word_count": 1842,
+      "word_count": 1818,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -43293,12 +43293,12 @@
         "portal",
         "support"
       ],
-      "word_count": 2517,
+      "word_count": 2500,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
       "title": "Claude on Amazon Bedrock (legacy)",
-      "content_preview": "# Claude on Amazon Bedrock (legacy)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note> This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model",
+      "content_preview": "# Claude on Amazon Bedrock (legacy)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note>   This page covers ...",
       "keywords": [
         "claude",
         "bedrock",
@@ -43316,12 +43316,12 @@
         "endpoints",
         "models",
         "see",
-        "small",
         "regional",
         "pricing",
-        "available"
+        "available",
+        "title"
       ],
-      "word_count": 3150,
+      "word_count": 3052,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -43342,14 +43342,14 @@
         "anthropic",
         "models",
         "codegroup",
-        "small",
         "pricing",
         "api",
         "note",
         "deprecated",
-        "data"
+        "data",
+        "regional"
       ],
-      "word_count": 2623,
+      "word_count": 2544,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -43377,12 +43377,12 @@
         "authentication",
         "request"
       ],
-      "word_count": 6539,
+      "word_count": 6462,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
       "title": "Compaction",
-      "content_preview": "# Compaction  Server-side context compaction for managing long conversations that approach context window limits.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through",
+      "content_preview": "# Compaction  Server-side context compaction for managing long conversations that approach context window limits.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
       "keywords": [
         "compaction",
         "when",
@@ -43405,12 +43405,12 @@
         "after",
         "trigger"
       ],
-      "word_count": 8878,
+      "word_count": 8320,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
       "title": "Context editing",
-      "content_preview": "# Context editing  Automatically manage conversation context as it grows with context editing.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-...",
+      "content_preview": "# Context editing  Automatically manage conversation context as it grows with context editing.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-an...",
       "keywords": [
         "tab",
         "compaction",
@@ -43433,12 +43433,12 @@
         "support",
         "parameter"
       ],
-      "word_count": 9891,
+      "word_count": 9056,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
       "title": "Context windows",
-      "content_preview": "# Context windows  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent thro...",
+      "content_preview": "# Context windows  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent th...",
       "keywords": [
         "context",
         "thinking",
@@ -43466,7 +43466,7 @@
     },
     "/docs/en/build-with-claude/effort": {
       "title": "Effort",
-      "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note> This feature is eligible for [Zero...",
+      "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization",
       "keywords": [
         "claude",
         "effort",
@@ -43489,7 +43489,7 @@
         "fable",
         "recommended"
       ],
-      "word_count": 2570,
+      "word_count": 2524,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -43502,7 +43502,7 @@
         "models",
         "retrieval",
         "see",
-        "section",
+        "accordion",
         "blog",
         "details",
         "post",
@@ -43517,12 +43517,12 @@
         "when",
         "more"
       ],
-      "word_count": 2271,
+      "word_count": 2269,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
       "title": "Extended thinking",
-      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
+      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/bui...",
       "keywords": [
         "thinking",
         "claude",
@@ -43545,7 +43545,7 @@
         "supported",
         "adaptive"
       ],
-      "word_count": 14648,
+      "word_count": 14215,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -43560,7 +43560,7 @@
         "fallback",
         "refused",
         "header",
-        "section",
+        "accordion",
         "claude",
         "model",
         "body",
@@ -43573,7 +43573,7 @@
         "cache",
         "must"
       ],
-      "word_count": 3797,
+      "word_count": 3715,
       "file_path": "docs/docs__en__build-with-claude__fallback-credit.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -43601,7 +43601,7 @@
         "limit",
         "supported"
       ],
-      "word_count": 2675,
+      "word_count": 2501,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43609,27 +43609,27 @@
       "content_preview": "# Files API  ---  The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution t...",
       "keywords": [
         "files",
-        "api",
         "file",
+        "api",
         "codegroup",
         "content",
         "note",
+        "using",
+        "tool",
+        "type",
         "code",
         "execution",
-        "tool",
-        "images",
-        "types",
-        "text",
-        "upload",
-        "claude",
+        "data",
+        "storage",
+        "block",
+        "uploading",
         "download",
-        "supported",
-        "messages",
-        "type",
-        "blocks",
-        "block"
+        "images",
+        "retention",
+        "types",
+        "created"
       ],
-      "word_count": 2747,
+      "word_count": 2663,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -43657,7 +43657,7 @@
         "responses",
         "blocks"
       ],
-      "word_count": 12222,
+      "word_count": 11505,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {
@@ -43666,31 +43666,31 @@
       "keywords": [
         "tool",
         "mode",
-        "run",
         "codegroup",
-        "model",
+        "run",
         "example",
         "out",
+        "bash",
+        "fan",
+        "system",
+        "when",
+        "model",
         "card",
         "orchestration",
-        "fan",
         "effort",
-        "bash",
-        "level",
-        "when",
-        "workflow",
         "subagent",
-        "standing",
-        "consent",
+        "runs",
+        "level",
         "mid",
-        "conversation"
+        "conversation",
+        "messages"
       ],
-      "word_count": 17923,
+      "word_count": 17988,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-effort-example.md"
     },
     "/docs/en/build-with-claude/mid-conversation-system-messages": {
       "title": "Mid-conversation system messages",
-      "content_preview": "# Mid-conversation system messages  Add or update system instructions partway through a conversation without invalidating the cached prefix that came before them.  ---  <Note> This feature is eligible...",
+      "content_preview": "# Mid-conversation system messages  Add or update system instructions partway through a conversation without invalidating the cached prefix that came before them.  ---  <Note>   This feature is eligib...",
       "keywords": [
         "system",
         "message",
@@ -43713,7 +43713,7 @@
         "new",
         "request"
       ],
-      "word_count": 3119,
+      "word_count": 3068,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-system-messages.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -43723,7 +43723,6 @@
         "claude",
         "languages",
         "language",
-        "sup",
         "card",
         "prompt",
         "multilingual",
@@ -43739,14 +43738,15 @@
         "href",
         "docs",
         "strong",
-        "relative"
+        "relative",
+        "capabilities"
       ],
-      "word_count": 1083,
+      "word_count": 1034,
       "file_path": "docs/docs__en__build-with-claude__multilingual-support.md"
     },
     "/docs/en/build-with-claude/overview": {
       "title": "Features overview",
-      "content_preview": "# Features overview  Explore Claude's advanced features and capabilities.  ---  Claude's API surface is organized into five areas:  - **Model capabilities:** Control how Claude reasons and formats res...",
+      "content_preview": "# Features overview  Explore Claude's advanced features and capabilities.  ---  Claude's API surface is organized into five areas:  * **Model capabilities:** Control how Claude reasons and formats res...",
       "keywords": [
         "zdr",
         "eligible",
@@ -43769,12 +43769,12 @@
         "when",
         "claudeapibeta"
       ],
-      "word_count": 1819,
+      "word_count": 1870,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
       "title": "PDF support",
-      "content_preview": "# PDF support  Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent",
+      "content_preview": "# PDF support  Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/...",
       "keywords": [
         "pdf",
         "api",
@@ -43797,7 +43797,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3410,
+      "word_count": 3097,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -43817,7 +43817,7 @@
         "claude",
         "blocks",
         "system",
-        "section",
+        "accordion",
         "user",
         "when",
         "tool",
@@ -43825,15 +43825,15 @@
         "input",
         "note"
       ],
-      "word_count": 16599,
+      "word_count": 16180,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
       "title": "Refusals and fallback",
       "content_preview": "# Refusals and fallback  How Claude Fable 5 returns classifier refusals and how to retry refused requests on a fallback model.  ---  Claude Fable 5 includes safety classifiers that can decline a reque...",
       "keywords": [
-        "fallback",
         "model",
+        "fallback",
         "request",
         "refusal",
         "retry",
@@ -43842,9 +43842,9 @@
         "middleware",
         "claude",
         "response",
-        "side",
         "output",
         "server",
+        "side",
         "note",
         "requests",
         "any",
@@ -43853,12 +43853,12 @@
         "credit",
         "api"
       ],
-      "word_count": 4958,
+      "word_count": 4732,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
       "title": "Search results",
-      "content_preview": "# Search results  Enable natural citations for RAG applications by providing search results with source attribution  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
+      "content_preview": "# Search results  Enable natural citations for RAG applications by providing search results with source attribution  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/bui...",
       "keywords": [
         "search",
         "results",
@@ -43881,7 +43881,7 @@
         "web",
         "custom"
       ],
-      "word_count": 5204,
+      "word_count": 5085,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -43909,7 +43909,7 @@
         "see",
         "when"
       ],
-      "word_count": 12869,
+      "word_count": 12101,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -43937,7 +43937,7 @@
         "partial",
         "json"
       ],
-      "word_count": 5036,
+      "word_count": 4733,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -43948,9 +43948,9 @@
         "json",
         "claude",
         "outputs",
-        "section",
         "structured",
         "schemas",
+        "accordion",
         "title",
         "response",
         "sdk",
@@ -43965,12 +43965,12 @@
         "java",
         "tab"
       ],
-      "word_count": 10469,
+      "word_count": 9971,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
       "title": "Task budgets",
-      "content_preview": "# Task budgets  Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.  ---  <Note> This feature is eligible for [Zero Data Retention (ZD...",
+      "content_preview": "# Task budgets  Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.  ---  <Note>   This feature is eligible for [Zero Data Retention (...",
       "keywords": [
         "budget",
         "claude",
@@ -43993,7 +43993,7 @@
         "token",
         "side"
       ],
-      "word_count": 2696,
+      "word_count": 2650,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -44002,14 +44002,14 @@
       "keywords": [
         "token",
         "tokens",
-        "claude",
         "count",
+        "claude",
         "note",
         "counting",
         "limits",
         "codegroup",
-        "counts",
         "message",
+        "counts",
         "rate",
         "card",
         "prompts",
@@ -44021,7 +44021,7 @@
         "api",
         "same"
       ],
-      "word_count": 4110,
+      "word_count": 3794,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -44062,7 +44062,7 @@
         "api",
         "request",
         "per",
-        "section",
+        "accordion",
         "token",
         "resolution",
         "before",
@@ -44075,14 +44075,14 @@
         "cost",
         "high",
         "when",
-        "size"
+        "standard"
       ],
-      "word_count": 3805,
+      "word_count": 3616,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
       "title": "Using the Messages API",
-      "content_preview": "# Using the Messages API  Practical patterns and examples for using the Messages API effectively  ---  Anthropic offers two ways to build with Claude, each suited to different use cases:  | | Messages...",
+      "content_preview": "# Using the Messages API  Practical patterns and examples for using the Messages API effectively  ---  Anthropic offers two ways to build with Claude, each suited to different use cases:  |           ...",
       "keywords": [
         "claude",
         "messages",
@@ -44105,12 +44105,12 @@
         "agents",
         "note"
       ],
-      "word_count": 3187,
+      "word_count": 2961,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/get-started": {
       "title": "Get started with Claude",
-      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  - An Anthropic [Console account](/) - An [API key](/settings/keys)  ## Ca...",
+      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  * An Anthropic [Console account](/) * An [API key](/settings/keys)  ## Ca...",
       "keywords": [
         "step",
         "title",
@@ -44133,7 +44133,7 @@
         "card",
         "cli"
       ],
-      "word_count": 1686,
+      "word_count": 1693,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
@@ -44166,7 +44166,7 @@
     },
     "/docs/en/intro": {
       "title": "Intro to Claude",
-      "content_preview": "# Intro to Claude  Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.  ---  <Tip>  The latest generation of Claude models:  **Claude Fable 5** - Anthropic's most capable widely",
+      "content_preview": "# Intro to Claude  Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.  ---  <...",
       "keywords": [
         "claude",
         "card",
@@ -44189,7 +44189,7 @@
         "overview",
         "built"
       ],
-      "word_count": 505,
+      "word_count": 511,
       "file_path": "docs/docs__en__intro.md"
     },
     "/docs/en/manage-claude/access-transparency": {
@@ -44205,7 +44205,7 @@
         "covered",
         "feed",
         "activity",
-        "section",
+        "accordion",
         "events",
         "event",
         "human",
@@ -44217,7 +44217,7 @@
         "key",
         "data"
       ],
-      "word_count": 1996,
+      "word_count": 1997,
       "file_path": "docs/docs__en__manage-claude__access-transparency.md"
     },
     "/docs/en/manage-claude/admin-api-keys": {
@@ -44245,12 +44245,12 @@
         "apis",
         "manage"
       ],
-      "word_count": 729,
+      "word_count": 743,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
       "title": "Admin API",
-      "content_preview": "# Admin API  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Ti...",
+      "content_preview": "# Admin API  ---  <Tip>   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Tip>  The [Admin API](/docs/en/api/admin) allows you to programmatically manage your organization's",
       "keywords": [
         "api",
         "admin",
@@ -44259,10 +44259,10 @@
         "manage",
         "members",
         "see",
-        "section",
         "workspaces",
         "claude",
         "key",
+        "accordion",
         "federation",
         "codegroup",
         "only",
@@ -44273,7 +44273,7 @@
         "workspace",
         "usage"
       ],
-      "word_count": 1304,
+      "word_count": 1308,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
     "/docs/en/manage-claude/analytics-api": {
@@ -44301,12 +44301,12 @@
         "available",
         "card"
       ],
-      "word_count": 1340,
+      "word_count": 1339,
       "file_path": "docs/docs__en__manage-claude__analytics-api.md"
     },
     "/docs/en/manage-claude/api-and-data-retention": {
       "title": "API and data retention",
-      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  <Note> Informati...",
+      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  <Note>   Informa...",
       "keywords": [
         "eligible",
         "claude",
@@ -44317,8 +44317,8 @@
         "yes",
         "features",
         "retention",
+        "accordion",
         "tool",
-        "section",
         "anthropic",
         "organization",
         "status",
@@ -44326,15 +44326,15 @@
         "see",
         "code",
         "title",
-        "sup",
-        "phi"
+        "phi",
+        "feature"
       ],
-      "word_count": 3139,
+      "word_count": 3141,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
       "title": "Authentication",
-      "content_preview": "# Authentication  Authenticate to the Claude API with API keys or Workload Identity Federation.  ---  The Claude API supports two ways to authenticate requests:  | Method | Credential | Best for | |--...",
+      "content_preview": "# Authentication  Authenticate to the Claude API with API keys or Workload Identity Federation.  ---  The Claude API supports two ways to authenticate requests:  | Method                                                        | Credential",
       "keywords": [
         "identity",
         "federation",
@@ -44357,12 +44357,12 @@
         "docs",
         "authenticate"
       ],
-      "word_count": 749,
+      "word_count": 722,
       "file_path": "docs/docs__en__manage-claude__authentication.md"
     },
     "/docs/en/manage-claude/claude-code-analytics-api": {
       "title": "Claude Code Analytics API",
-      "content_preview": "# Claude Code Analytics API  Programmatically access your organization's Claude Code usage analytics and productivity metrics with the Claude Code Analytics Admin API.  ---  <Tip> **The Admin API is u...",
+      "content_preview": "# Claude Code Analytics API  Programmatically access your organization's Claude Code usage analytics and productivity metrics with the Claude Code Analytics Admin API.  ---  <Tip>   **The Admin API is...",
       "keywords": [
         "claude",
         "code",
@@ -44385,12 +44385,12 @@
         "users",
         "pagination"
       ],
-      "word_count": 1510,
+      "word_count": 1519,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/cmek-aws-kms": {
       "title": "Configure AWS KMS for CMEK",
-      "content_preview": "# Configure AWS KMS for CMEK  Use AWS KMS to provide an encryption key for your organization.  ---  ```bash title=\"Configure with the /claude-api skill in Claude Code\" claude \"/claude-api help me conf...",
+      "content_preview": "# Configure AWS KMS for CMEK  Use AWS KMS to provide an encryption key for your organization.  ---  ```bash Configure with the /claude-api skill in Claude Code claude \"/claude-api help me configure a ...",
       "keywords": [
         "key",
         "anthropic",
@@ -44413,12 +44413,12 @@
         "data",
         "iam"
       ],
-      "word_count": 1269,
+      "word_count": 1267,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
       "title": "Configure Azure Key Vault for CMEK",
-      "content_preview": "# Configure Azure Key Vault for CMEK  Use Azure Key Vault to provide an encryption key for your organization.  ---  ```bash title=\"Configure with the /claude-api skill in Claude Code\" claude \"/claude-api help me configure a customer-managed encryption key with Azure Key Vault\" ```  This guide walks",
+      "content_preview": "# Configure Azure Key Vault for CMEK  Use Azure Key Vault to provide an encryption key for your organization.  ---  ```bash Configure with the /claude-api skill in Claude Code claude \"/claude-api help me configure a customer-managed encryption key with Azure Key Vault\" ```  This guide walks through",
       "keywords": [
         "key",
         "vault",
@@ -44441,12 +44441,12 @@
         "wrap",
         "unwrap"
       ],
-      "word_count": 1532,
+      "word_count": 1533,
       "file_path": "docs/docs__en__manage-claude__cmek-azure-key-vault.md"
     },
     "/docs/en/manage-claude/cmek-google-cloud-kms": {
       "title": "Configure Google Cloud KMS for CMEK",
-      "content_preview": "# Configure Google Cloud KMS for CMEK  Use Google Cloud KMS to provide an encryption key for your organization.  ---  ```bash title=\"Configure with the /claude-api skill in Claude Code\" claude \"/claud...",
+      "content_preview": "# Configure Google Cloud KMS for CMEK  Use Google Cloud KMS to provide an encryption key for your organization.  ---  ```bash Configure with the /claude-api skill in Claude Code claude \"/claude-api he...",
       "keywords": [
         "key",
         "anthropic",
@@ -44469,12 +44469,12 @@
         "data",
         "level"
       ],
-      "word_count": 1168,
+      "word_count": 1167,
       "file_path": "docs/docs__en__manage-claude__cmek-google-cloud-kms.md"
     },
     "/docs/en/manage-claude/cmek": {
       "title": "Customer-managed encryption keys",
-      "content_preview": "# Customer-managed encryption keys  Encrypt Claude workspace data at rest with a key you control.  ---  ```bash title=\"Learn more with the /claude-api skill in Claude Code\" claude \"/claude-api tell me...",
+      "content_preview": "# Customer-managed encryption keys  Encrypt Claude workspace data at rest with a key you control.  ---  ```bash Learn more with the /claude-api skill in Claude Code claude \"/claude-api tell me about c...",
       "keywords": [
         "key",
         "claude",
@@ -44497,7 +44497,7 @@
         "azure",
         "admin"
       ],
-      "word_count": 1551,
+      "word_count": 1562,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -44525,7 +44525,7 @@
         "admin",
         "keys"
       ],
-      "word_count": 1213,
+      "word_count": 1209,
       "file_path": "docs/docs__en__manage-claude__compliance-activity-feed.md"
     },
     "/docs/en/manage-claude/compliance-api-access": {
@@ -44581,12 +44581,12 @@
         "see",
         "scope"
       ],
-      "word_count": 737,
+      "word_count": 736,
       "file_path": "docs/docs__en__manage-claude__compliance-api.md"
     },
     "/docs/en/manage-claude/compliance-content-data": {
       "title": "Retrieve and delete chats, files, and projects",
-      "content_preview": "# Retrieve and delete chats, files, and projects  Access chat content, file attachments, and projects for claude.ai organizations through the Compliance API.  ---  <Note>   To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access). </Note> :",
+      "content_preview": "# Retrieve and delete chats, files, and projects  Access chat content, file attachments, and projects for claude.ai organizations through the Compliance API.  ---  <Note>   The endpoints on this page ...",
       "keywords": [
         "project",
         "chat",
@@ -44594,22 +44594,22 @@
         "chats",
         "file",
         "list",
-        "compliance",
-        "api",
         "delete",
         "endpoint",
         "files",
+        "compliance",
+        "api",
         "each",
-        "claude",
         "one",
-        "get",
         "messages",
-        "endpoints",
+        "claude",
+        "get",
         "metadata",
-        "only",
-        "artifact"
+        "endpoints",
+        "artifact",
+        "page"
       ],
-      "word_count": 1995,
+      "word_count": 1956,
       "file_path": "docs/docs__en__manage-claude__compliance-content-data.md"
     },
     "/docs/en/manage-claude/compliance-errors": {
@@ -44637,7 +44637,7 @@
         "header",
         "request"
       ],
-      "word_count": 2584,
+      "word_count": 2600,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
@@ -44648,7 +44648,7 @@
         "claude",
         "compliance",
         "organization",
-        "section",
+        "accordion",
         "key",
         "access",
         "console",
@@ -44663,9 +44663,9 @@
         "does",
         "retention",
         "enterprise",
-        "linked"
+        "accordiongroup"
       ],
-      "word_count": 1101,
+      "word_count": 1107,
       "file_path": "docs/docs__en__manage-claude__compliance-faq.md"
     },
     "/docs/en/manage-claude/compliance-integration-patterns": {
@@ -44693,7 +44693,7 @@
         "each",
         "organization"
       ],
-      "word_count": 1410,
+      "word_count": 1407,
       "file_path": "docs/docs__en__manage-claude__compliance-integration-patterns.md"
     },
     "/docs/en/manage-claude/compliance-org-data": {
@@ -44721,12 +44721,12 @@
         "response",
         "codegroup"
       ],
-      "word_count": 1773,
+      "word_count": 1767,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
       "title": "Data residency",
-      "content_preview": "# Data residency  Manage where model inference runs and where data is stored with geographic controls.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/...",
+      "content_preview": "# Data residency  Manage where model inference runs and where data is stored with geographic controls.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claud...",
       "keywords": [
         "workspace",
         "claude",
@@ -44754,7 +44754,7 @@
     },
     "/docs/en/manage-claude/rate-limits-api": {
       "title": "Rate Limits API",
-      "content_preview": "# Rate Limits API  Programmatically query your organization's API rate limits with the Rate Limits API.  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Tip>  The",
+      "content_preview": "# Rate Limits API  Programmatically query your organization's API rate limits with the Rate Limits API.  ---  <Tip>   **The Admin API is unavailable for individual accounts.** To collaborate with team...",
       "keywords": [
         "limits",
         "api",
@@ -44805,12 +44805,12 @@
         "override",
         "set"
       ],
-      "word_count": 2532,
+      "word_count": 2548,
       "file_path": "docs/docs__en__manage-claude__spend-limits-api.md"
     },
     "/docs/en/manage-claude/usage-cost-api": {
       "title": "Usage and Cost API",
-      "content_preview": "# Usage and Cost API  Programmatically access your organization's API usage and cost data with the Usage & Cost Admin API.  ---  <Tip> **The Admin API is unavailable for individual accounts.** To coll...",
+      "content_preview": "# Usage and Cost API  Programmatically access your organization's API usage and cost data with the Usage & Cost Admin API.  ---  <Tip>   **The Admin API is unavailable for individual accounts.** To co...",
       "keywords": [
         "usage",
         "api",
@@ -44833,7 +44833,7 @@
         "anthropic",
         "tier"
       ],
-      "word_count": 1667,
+      "word_count": 1676,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {
@@ -44861,7 +44861,7 @@
         "oauth",
         "workspace"
       ],
-      "word_count": 1600,
+      "word_count": 1595,
       "file_path": "docs/docs__en__manage-claude__wif-admin-api.md"
     },
     "/docs/en/manage-claude/wif-providers/aws": {
@@ -44889,7 +44889,7 @@
         "exchange",
         "path"
       ],
-      "word_count": 2958,
+      "word_count": 2844,
       "file_path": "docs/docs__en__manage-claude__wif-providers__aws.md"
     },
     "/docs/en/manage-claude/wif-providers/azure": {
@@ -44917,7 +44917,7 @@
         "microsoft",
         "cluster"
       ],
-      "word_count": 3326,
+      "word_count": 3223,
       "file_path": "docs/docs__en__manage-claude__wif-providers__azure.md"
     },
     "/docs/en/manage-claude/wif-providers/gcp": {
@@ -44945,7 +44945,7 @@
         "server",
         "functions"
       ],
-      "word_count": 1926,
+      "word_count": 1866,
       "file_path": "docs/docs__en__manage-claude__wif-providers__gcp.md"
     },
     "/docs/en/manage-claude/wif-providers/github-actions": {
@@ -44973,7 +44973,7 @@
         "run",
         "jobs"
       ],
-      "word_count": 1457,
+      "word_count": 1410,
       "file_path": "docs/docs__en__manage-claude__wif-providers__github-actions.md"
     },
     "/docs/en/manage-claude/wif-providers/kubernetes": {
@@ -45001,7 +45001,7 @@
         "url",
         "configure"
       ],
-      "word_count": 1456,
+      "word_count": 1409,
       "file_path": "docs/docs__en__manage-claude__wif-providers__kubernetes.md"
     },
     "/docs/en/manage-claude/wif-providers/okta": {
@@ -45029,7 +45029,7 @@
         "application",
         "api"
       ],
-      "word_count": 2087,
+      "word_count": 2033,
       "file_path": "docs/docs__en__manage-claude__wif-providers__okta.md"
     },
     "/docs/en/manage-claude/wif-providers/spiffe": {
@@ -45057,7 +45057,7 @@
         "every",
         "agent"
       ],
-      "word_count": 3158,
+      "word_count": 3090,
       "file_path": "docs/docs__en__manage-claude__wif-providers__spiffe.md"
     },
     "/docs/en/manage-claude/wif-reference": {
@@ -45113,7 +45113,7 @@
         "tokens",
         "key"
       ],
-      "word_count": 2625,
+      "word_count": 2565,
       "file_path": "docs/docs__en__manage-claude__workload-identity-federation.md"
     },
     "/docs/en/manage-claude/workspaces": {
@@ -45134,14 +45134,14 @@
         "title",
         "keys",
         "members",
-        "section",
+        "accordion",
         "create",
         "note",
         "usage",
         "cannot",
         "rate"
       ],
-      "word_count": 1977,
+      "word_count": 1987,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -45149,27 +45149,27 @@
       "content_preview": "# Define your agent  Create a reusable, versioned agent configuration.  ---  An agent is a reusable, versioned configuration that defines persona and capabilities. It bundles the model, system prompt,...",
       "keywords": [
         "agent",
-        "tools",
-        "agents",
         "version",
-        "card",
-        "reference",
+        "tools",
         "claude",
-        "managed",
+        "agents",
+        "reference",
+        "codegroup",
         "new",
+        "card",
         "sessions",
+        "update",
+        "configuration",
+        "managed",
         "fields",
+        "opus",
+        "cli",
         "create",
         "reusable",
-        "configuration",
-        "model",
         "mcp",
-        "skills",
-        "session",
-        "coordinator",
-        "cli"
+        "skills"
       ],
-      "word_count": 1706,
+      "word_count": 1742,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45197,7 +45197,7 @@
         "languages",
         "these"
       ],
-      "word_count": 381,
+      "word_count": 395,
       "file_path": "docs/docs__en__managed-agents__cloud-sandboxes-reference.md"
     },
     "/docs/en/managed-agents/define-outcomes": {
@@ -45205,55 +45205,55 @@
       "content_preview": "# Define outcomes  Tell the agent what 'done' looks like, and let it iterate until it gets there.  ---  The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and",
       "keywords": [
         "outcome",
-        "rubric",
         "session",
-        "grader",
+        "rubric",
         "agent",
+        "grader",
+        "codegroup",
+        "event",
         "evaluation",
         "note",
-        "event",
-        "define",
         "what",
         "iteration",
+        "after",
         "events",
         "emitted",
+        "define",
+        "work",
         "criteria",
         "next",
-        "codegroup",
-        "new",
-        "after",
-        "one",
-        "until"
+        "api",
+        "files"
       ],
-      "word_count": 2482,
+      "word_count": 2518,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/dreams": {
       "title": "Dreams",
-      "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip> Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-...",
+      "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip>   Dreaming is a research preview feature. [Request access](https://claude.com/form/claud...",
       "keywords": [
-        "memory",
         "store",
         "dream",
-        "claude",
-        "sessions",
-        "input",
+        "memory",
         "output",
-        "pipeline",
-        "session",
         "codegroup",
-        "archived",
+        "pipeline",
+        "input",
         "dreams",
-        "new",
+        "sessions",
         "dreaming",
-        "past",
-        "insights",
-        "value",
+        "session",
+        "archived",
         "api",
-        "beta",
-        "once"
+        "run",
+        "stores",
+        "what",
+        "archiving",
+        "claude",
+        "new",
+        "tip"
       ],
-      "word_count": 2339,
+      "word_count": 2393,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -45261,27 +45261,27 @@
       "content_preview": "# Cloud environment setup  Customize cloud sandboxes for your sessions.  ---  Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID...",
       "keywords": [
         "environment",
-        "sandbox",
         "codegroup",
+        "sandbox",
+        "session",
         "cloud",
         "access",
         "sandboxes",
         "sessions",
-        "session",
-        "packages",
         "environments",
+        "packages",
         "agent",
         "reference",
+        "defaultlanguage",
+        "cli",
         "package",
         "each",
         "own",
-        "defaultlanguage",
-        "cli",
+        "when",
         "pre",
-        "installed",
-        "networking"
+        "installed"
       ],
-      "word_count": 1930,
+      "word_count": 1936,
       "file_path": "docs/docs__en__managed-agents__environments.md"
     },
     "/docs/en/managed-agents/events-and-streaming": {
@@ -45289,27 +45289,27 @@
       "content_preview": "# Session event stream  Send events, stream responses, and interrupt or redirect your session mid-execution.  ---  Communication with Claude Managed Agents is event-based. You send user events to the ...",
       "keywords": [
         "session",
-        "events",
         "event",
-        "agent",
-        "tool",
+        "events",
         "codegroup",
+        "agent",
         "send",
         "system",
-        "tab",
+        "tool",
         "stream",
-        "token",
-        "back",
         "note",
+        "tab",
+        "back",
+        "prompt",
         "full",
-        "after",
-        "idle",
-        "execution",
-        "managed",
-        "agents",
-        "user"
+        "when",
+        "only",
+        "history",
+        "token",
+        "mid",
+        "execution"
       ],
-      "word_count": 5680,
+      "word_count": 5770,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -45317,27 +45317,27 @@
       "content_preview": "# Adding files  Upload files and mount them in your sandbox for reading and processing.  ---  You can provide files to your agent by uploading them through the Files API and mounting them in the sessi...",
       "keywords": [
         "files",
-        "session",
         "codegroup",
-        "agent",
+        "session",
         "file",
+        "agent",
         "them",
-        "api",
         "sandbox",
+        "api",
         "note",
+        "adding",
+        "mount",
         "using",
+        "uploaded",
         "these",
         "paths",
-        "adding",
         "upload",
-        "mount",
         "uploading",
+        "mounting",
         "beta",
-        "header",
-        "automatically",
-        "path"
+        "header"
       ],
-      "word_count": 1792,
+      "word_count": 1810,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -45345,27 +45345,27 @@
       "content_preview": "# Accessing GitHub  Connect your agent to GitHub repositories for cloning, reading, and creating pull requests.  ---  You can mount a GitHub repository to your session sandbox and connect to the GitHu...",
       "keywords": [
         "github",
+        "codegroup",
+        "session",
+        "repositories",
         "mcp",
         "agent",
-        "codegroup",
+        "create",
         "card",
-        "repositories",
+        "repository",
         "pull",
         "requests",
         "managed",
         "agents",
-        "create",
         "connect",
         "mount",
-        "repository",
-        "session",
         "server",
         "token",
         "permissions",
         "required",
         "private"
       ],
-      "word_count": 2026,
+      "word_count": 2061,
       "file_path": "docs/docs__en__managed-agents__github.md"
     },
     "/docs/en/managed-agents/mcp-connector": {
@@ -45374,26 +45374,26 @@
       "keywords": [
         "mcp",
         "server",
-        "agents",
-        "servers",
-        "agent",
-        "session",
-        "managed",
-        "credential",
-        "card",
         "tools",
-        "docs",
-        "creation",
-        "url",
-        "vault",
+        "agent",
+        "servers",
+        "session",
+        "agents",
+        "managed",
         "each",
         "credentials",
-        "authentication",
-        "connection",
-        "types",
-        "events"
+        "array",
+        "when",
+        "must",
+        "credential",
+        "card",
+        "entry",
+        "toolset",
+        "tool",
+        "see",
+        "creation"
       ],
-      "word_count": 1371,
+      "word_count": 1389,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -45402,26 +45402,26 @@
       "keywords": [
         "memory",
         "store",
-        "stores",
         "codegroup",
+        "stores",
         "agent",
         "session",
-        "memories",
-        "api",
-        "beta",
-        "one",
+        "version",
         "defaultlanguage",
         "cli",
-        "full",
-        "docs",
-        "list",
         "reference",
+        "one",
+        "memories",
+        "full",
+        "api",
+        "content",
+        "list",
         "response",
-        "new",
-        "sessions",
-        "when"
+        "read",
+        "versions",
+        "see"
       ],
-      "word_count": 3966,
+      "word_count": 4092,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -45430,26 +45430,26 @@
       "keywords": [
         "thread",
         "agent",
-        "agents",
         "session",
         "codegroup",
-        "servers",
         "coordinator",
-        "mcp",
-        "multiagent",
-        "own",
-        "work",
-        "vault",
-        "primary",
-        "tools",
-        "events",
+        "agents",
         "tab",
-        "status",
+        "primary",
+        "threads",
+        "events",
+        "mcp",
+        "activity",
+        "servers",
         "tool",
-        "sessions",
-        "multiple"
+        "multiple",
+        "work",
+        "list",
+        "own",
+        "each",
+        "stream"
       ],
-      "word_count": 3889,
+      "word_count": 3979,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -45477,12 +45477,12 @@
         "header",
         "model"
       ],
-      "word_count": 424,
+      "word_count": 411,
       "file_path": "docs/docs__en__managed-agents__onboarding.md"
     },
     "/docs/en/managed-agents/overview": {
       "title": "Claude Managed Agents overview",
-      "content_preview": "# Claude Managed Agents overview  Pre-built, configurable agent harness that runs in managed infrastructure. Best for long-running tasks and asynchronous work.  ---  Anthropic offers two ways to build...",
+      "content_preview": "# Claude Managed Agents overview  Pre-built, configurable agent harness that runs in managed infrastructure. Best for long-running tasks and asynchronous work.  ---  Anthropic offers two ways to build with Claude, each suited to different use cases:  |                | Messages API",
       "keywords": [
         "managed",
         "claude",
@@ -45505,7 +45505,7 @@
         "tool",
         "execution"
       ],
-      "word_count": 763,
+      "word_count": 773,
       "file_path": "docs/docs__en__managed-agents__overview.md"
     },
     "/docs/en/managed-agents/permission-policies": {
@@ -45533,35 +45533,35 @@
         "custom",
         "see"
       ],
-      "word_count": 2246,
+      "word_count": 2245,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
       "title": "Get started with Claude Managed Agents",
-      "content_preview": "# Get started with Claude Managed Agents  Create your first autonomous agent.  ---  This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.  <Tip> **Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in",
+      "content_preview": "# Get started with Claude Managed Agents  Create your first autonomous agent.  ---  This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent r...",
       "keywords": [
         "agent",
         "tab",
         "title",
-        "managed",
-        "sandbox",
-        "card",
-        "agents",
         "create",
-        "session",
         "tools",
+        "sandbox",
+        "managed",
         "environment",
+        "session",
         "step",
         "codegroup",
+        "card",
+        "agents",
         "events",
+        "tool",
         "claude",
         "tip",
         "run",
-        "tabs",
-        "event",
-        "icon"
+        "cli",
+        "tabs"
       ],
-      "word_count": 2359,
+      "word_count": 2400,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/reference": {
@@ -45589,7 +45589,7 @@
         "includes",
         "error"
       ],
-      "word_count": 1014,
+      "word_count": 1042,
       "file_path": "docs/docs__en__managed-agents__reference.md"
     },
     "/docs/en/managed-agents/scheduled-deployments": {
@@ -45597,27 +45597,27 @@
       "content_preview": "# Scheduled deployments  Run an agent on a recurring cron schedule and inspect its run history.  ---  A **scheduled deployment** allows an [agent](/docs/en/managed-agents/agent-setup) to kick off [ses...",
       "keywords": [
         "deployment",
-        "run",
         "codegroup",
-        "agent",
-        "schedule",
+        "run",
         "session",
+        "schedule",
         "scheduled",
-        "archived",
+        "deployments",
         "defaultlanguage",
         "cli",
-        "deployments",
+        "agent",
+        "cron",
+        "note",
+        "next",
+        "runs",
+        "archived",
+        "sessions",
         "require",
         "automatically",
-        "rate",
-        "next",
-        "cron",
-        "allows",
-        "note",
-        "api",
-        "beta"
+        "times",
+        "timezone"
       ],
-      "word_count": 1824,
+      "word_count": 1886,
       "file_path": "docs/docs__en__managed-agents__scheduled-deployments.md"
     },
     "/docs/en/managed-agents/self-hosted-sandboxes-security": {
@@ -45657,51 +45657,51 @@
         "environment",
         "tool",
         "work",
-        "run",
-        "agent",
-        "self",
-        "sandbox",
-        "managed",
-        "hosted",
-        "anthropic",
-        "sdk",
-        "host",
-        "queue",
         "key",
+        "self",
+        "agent",
+        "step",
         "codegroup",
-        "claude",
-        "execution",
-        "when"
+        "sandbox",
+        "queue",
+        "hosted",
+        "run",
+        "managed",
+        "anthropic",
+        "host",
+        "sdk",
+        "title",
+        "claude"
       ],
-      "word_count": 4482,
+      "word_count": 4436,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
       "title": "Session operations",
-      "content_preview": "# Session operations  Retrieve, list, update, archive, and delete Claude Managed Agents sessions.  ---  Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](/docs/en/managed-agents/sessions) for creating a session and sending it work.  <Note> All",
+      "content_preview": "# Session operations  Retrieve, list, update, archive, and delete Claude Managed Agents sessions.  ---  Once a session exists, use these operations to read, update, archive, or delete it. See [Start a...",
       "keywords": [
         "session",
+        "codegroup",
         "agent",
         "update",
-        "codegroup",
+        "defaultlanguage",
+        "cli",
+        "archive",
         "delete",
         "sessions",
         "agents",
         "start",
-        "defaultlanguage",
-        "cli",
+        "new",
+        "interrupt",
+        "need",
         "operations",
-        "archive",
         "managed",
         "these",
         "see",
         "creating",
-        "note",
-        "beta",
-        "header",
-        "automatically"
+        "note"
       ],
-      "word_count": 1002,
+      "word_count": 1051,
       "file_path": "docs/docs__en__managed-agents__session-operations.md"
     },
     "/docs/en/managed-agents/sessions": {
@@ -45711,25 +45711,25 @@
         "session",
         "agent",
         "codegroup",
-        "see",
-        "create",
-        "mcp",
-        "vaults",
-        "start",
-        "within",
-        "environment",
-        "sessions",
-        "event",
-        "note",
-        "agents",
-        "require",
-        "beta",
-        "header",
         "defaultlanguage",
         "cli",
-        "tip"
+        "see",
+        "start",
+        "create",
+        "environment",
+        "event",
+        "version",
+        "mcp",
+        "vaults",
+        "within",
+        "sessions",
+        "sandbox",
+        "send",
+        "user",
+        "work",
+        "note"
       ],
-      "word_count": 1057,
+      "word_count": 1093,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -45757,7 +45757,7 @@
         "best",
         "practices"
       ],
-      "word_count": 627,
+      "word_count": 625,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {
@@ -45785,35 +45785,35 @@
         "codegroup",
         "only"
       ],
-      "word_count": 1609,
+      "word_count": 1615,
       "file_path": "docs/docs__en__managed-agents__tools.md"
     },
     "/docs/en/managed-agents/vaults": {
       "title": "Authenticate with vaults",
       "content_preview": "# Authenticate with vaults  Register per-user credentials when creating sessions.  ---  Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret",
       "keywords": [
-        "vault",
         "credential",
+        "vault",
         "credentials",
-        "session",
-        "token",
         "codegroup",
-        "server",
-        "refresh",
         "secret",
-        "key",
-        "vaults",
-        "user",
-        "mcp",
-        "per",
+        "session",
         "when",
-        "creating",
-        "reference",
         "agent",
+        "mcp",
+        "token",
+        "environment",
+        "refresh",
         "note",
-        "api"
+        "key",
+        "api",
+        "defaultlanguage",
+        "cli",
+        "server",
+        "variable",
+        "tab"
       ],
-      "word_count": 3107,
+      "word_count": 3170,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {
@@ -45841,7 +45841,7 @@
         "error",
         "multiagent"
       ],
-      "word_count": 1409,
+      "word_count": 1395,
       "file_path": "docs/docs__en__managed-agents__webhooks.md"
     },
     "/docs/en/prompt-library": {
@@ -45849,27 +45849,27 @@
       "content_preview": "# Prompting best practices  Comprehensive guide to prompt engineering techniques for Claude's latest models, covering clarity, examples, XML structuring, thinking, and agentic systems.  ---  This is t...",
       "keywords": [
         "claude",
-        "thinking",
-        "models",
-        "context",
-        "opus",
-        "more",
         "prompt",
-        "when",
-        "section",
-        "tool",
-        "model",
-        "output",
-        "like",
+        "more",
         "prompting",
-        "latest",
-        "guidance",
-        "instructions",
-        "tools",
+        "models",
         "examples",
-        "fable"
+        "fable",
+        "opus",
+        "output",
+        "formatting",
+        "prompts",
+        "accordion",
+        "tags",
+        "thinking",
+        "guidance",
+        "migration",
+        "see",
+        "response",
+        "instructions",
+        "when"
       ],
-      "word_count": 7286,
+      "word_count": 7257,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {
@@ -47689,7 +47689,7 @@
         "context",
         "request"
       ],
-      "word_count": 1424,
+      "word_count": 1385,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

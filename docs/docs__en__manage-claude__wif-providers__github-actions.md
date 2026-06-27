@@ -10,10 +10,10 @@ The token's `sub` claim encodes the repository and trigger context. For a push t
 
 ## Prerequisites
 
-- Familiarity with [WIF concepts](/docs/en/manage-claude/workload-identity-federation#concepts): service accounts, federation issuers, and federation rules.
-- A GitHub repository where you can edit workflow files and grant the `id-token: write` permission.
-- Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
-- Your Anthropic organization ID. You can find it in the Claude Console under **Settings → Organization**.
+* Familiarity with [WIF concepts](/docs/en/manage-claude/workload-identity-federation#concepts): service accounts, federation issuers, and federation rules.
+* A GitHub repository where you can edit workflow files and grant the `id-token: write` permission.
+* Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
+* Your Anthropic organization ID. You can find it in the Claude Console under **Settings → Organization**.
 
 ## Configure your workflow
 
@@ -27,7 +27,7 @@ permissions:
 
 Inside the job, the runner exposes two environment variables: `ACTIONS_ID_TOKEN_REQUEST_URL` and `ACTIONS_ID_TOKEN_REQUEST_TOKEN`. Call the request URL with the request token as a bearer credential and your chosen audience as a query parameter, then write the returned JSON Web Token (JWT) to a file:
 
-```yaml nocheck
+```yaml
 - name: Fetch GitHub OIDC token
   run: |
     curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
@@ -37,7 +37,7 @@ Inside the job, the runner exposes two environment variables: `ACTIONS_ID_TOKEN_
 
 If you prefer JavaScript, `actions/github-script` exposes the same capability through `core.getIDToken(audience)`:
 
-```yaml nocheck
+```yaml
 - name: Fetch GitHub OIDC token
   uses: actions/github-script@v8
   with:
@@ -112,220 +112,194 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `repo:your-org
 Set the federation environment variables on the job and call the SDK normally. `Anthropic()` reads `ANTHROPIC_IDENTITY_TOKEN_FILE`, exchanges the JWT on the first request, and refreshes the access token automatically before it expires.
 
 <CodeGroup>
+  ```yaml Workflow
+  name: Call Claude
+  on: push
 
-```yaml Workflow nocheck
-name: Call Claude
-on: push
+  permissions:
+    id-token: write
+    contents: read
 
-permissions:
-  id-token: write
-  contents: read
+  jobs:
+    call-claude:
+      runs-on: ubuntu-latest
+      env:
+        ANTHROPIC_FEDERATION_RULE_ID: fdrl_...
+        ANTHROPIC_ORGANIZATION_ID: 00000000-0000-0000-0000-000000000000
+        ANTHROPIC_SERVICE_ACCOUNT_ID: svac_...
+        ANTHROPIC_WORKSPACE_ID: wrkspc_...  # required when the rule covers multiple workspaces
+        ANTHROPIC_IDENTITY_TOKEN_FILE: /tmp/gha-jwt
+      steps:
+        - uses: actions/checkout@v5
+        - name: Fetch GitHub OIDC token
+          run: |
+            curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+              "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+              | jq -r .value > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
+        - name: Run your script
+          run: |
+            pip install anthropic
+            python your_script.py
+  ```
 
-jobs:
-  call-claude:
-    runs-on: ubuntu-latest
-    env:
-      ANTHROPIC_FEDERATION_RULE_ID: fdrl_...
-      ANTHROPIC_ORGANIZATION_ID: 00000000-0000-0000-0000-000000000000
-      ANTHROPIC_SERVICE_ACCOUNT_ID: svac_...
-      ANTHROPIC_WORKSPACE_ID: wrkspc_...  # required when the rule covers multiple workspaces
-      ANTHROPIC_IDENTITY_TOKEN_FILE: /tmp/gha-jwt
-    steps:
-      - uses: actions/checkout@v5
-      - name: Fetch GitHub OIDC token
-        run: |
-          curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
-            | jq -r .value > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-      - name: Run your script
-        run: |
-          pip install anthropic
-          python your_script.py
-```
+  ```bash cURL
+  JWT=$(cat /tmp/gha-jwt)
 
-```bash cURL nocheck
-JWT=$(cat /tmp/gha-jwt)
-
-RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
-  -H "content-type: application/json" \
-  --data @- <<JSON
-{
-  "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
-  "assertion": "$JWT",
-  "federation_rule_id": "$ANTHROPIC_FEDERATION_RULE_ID",
-  "organization_id": "$ANTHROPIC_ORGANIZATION_ID",
-  "service_account_id": "$ANTHROPIC_SERVICE_ACCOUNT_ID",
-  "workspace_id": "$ANTHROPIC_WORKSPACE_ID"
-}
-JSON
-)
-
-ACCESS_TOKEN=$(echo "$RESPONSE" | jq -r .access_token)
-
-curl https://api.anthropic.com/v1/messages \
-  -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }' | jq -r '.content[0].text'
-```
-
-```python Python nocheck
-import anthropic
-
-# Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-# ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-# from the job environment.
-client = anthropic.Anthropic()
-
-message = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-print(message.content[0].text)
-```
-
-```typescript TypeScript nocheck
-import Anthropic from "@anthropic-ai/sdk";
-
-// Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-// ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-// from the job environment.
-const client = new Anthropic();
-
-const message = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Hello, Claude" }]
-});
-for (const block of message.content) {
-  if (block.type === "text") {
-    console.log(block.text);
+  RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
+    -H "content-type: application/json" \
+    --data @- <<JSON
+  {
+    "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+    "assertion": "$JWT",
+    "federation_rule_id": "$ANTHROPIC_FEDERATION_RULE_ID",
+    "organization_id": "$ANTHROPIC_ORGANIZATION_ID",
+    "service_account_id": "$ANTHROPIC_SERVICE_ACCOUNT_ID",
+    "workspace_id": "$ANTHROPIC_WORKSPACE_ID"
   }
-}
-```
+  JSON
+  )
 
-```go Go nocheck hidelines={1..10,-1}
-package main
+  ACCESS_TOKEN=$(echo "$RESPONSE" | jq -r .access_token)
 
-import (
-	"context"
-	"fmt"
+  curl https://api.anthropic.com/v1/messages \
+    -H "authorization: Bearer $ACCESS_TOKEN" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-sonnet-4-6",
+      "max_tokens": 1024,
+      "messages": [{"role": "user", "content": "Hello, Claude"}]
+    }' | jq -r '.content[0].text'
+  ```
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+  ```python Python
+  import anthropic
 
-func main() {
-	// Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-	// ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-	// from the job environment.
-	client := anthropic.NewClient()
+  # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  # from the job environment.
+  client = anthropic.Anthropic()
 
-	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeSonnet4_6,
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
-		},
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(message.Content[0].Text)
-}
-```
+  message = client.messages.create(
+      model="claude-sonnet-4-6",
+      max_tokens=1024,
+      messages=[{"role": "user", "content": "Hello, Claude"}],
+  )
+  print(message.content[0].text)
+  ```
 
-```java Java nocheck hidelines={1..6,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
+  ```typescript TypeScript
+  import Anthropic from "@anthropic-ai/sdk";
 
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  // Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  // ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  // from the job environment.
+  const client = new Anthropic();
 
-    var message = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_SONNET_4_6)
-            .maxTokens(1024)
-            .addUserMessage("Hello, Claude")
-            .build());
-
-    IO.println(message.content());
-}
-```
-
-```csharp C# nocheck hidelines={1..3}
-using Anthropic.Models.Messages;
-using Anthropic.Oidc;
-
-var result = AnthropicCredentials.Resolve()
-    ?? throw new InvalidOperationException("No federation credentials found in environment");
-using var client = new AnthropicOidcClient(result);
-
-var message = await client.Messages.Create(new()
-{
-    Model = Model.ClaudeSonnet4_6,
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
-});
-foreach (var block in message.Content)
-{
-    if (block.Value is TextBlock textBlock)
-    {
-        Console.WriteLine(textBlock.Text);
+  const message = await client.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello, Claude" }]
+  });
+  for (const block of message.content) {
+    if (block.type === "text") {
+      console.log(block.text);
     }
-}
-```
+  }
+  ```
 
-```bash CLI nocheck
-# Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-# ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-# from the job environment.
-ant messages create \
-  --model claude-sonnet-4-6 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello, Claude"}'
-```
+  ```go Go
+  // Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  // ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  // from the job environment.
+  client := anthropic.NewClient()
 
-```php PHP nocheck hidelines={1..3}
-<?php
-require 'vendor/autoload.php';
+  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+  	},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  fmt.Println(message.Content[0].Text)
+  ```
 
-use Anthropic\Client;
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-// Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-// ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-// from the job environment.
-$client = new Client();
+  var message = client.messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(1024)
+          .addUserMessage("Hello, Claude")
+          .build());
 
-$message = $client->messages->create(
-    model: 'claude-sonnet-4-6',
-    maxTokens: 1024,
-    messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-);
-echo $message->content[0]->text, PHP_EOL;
-```
+  IO.println(message.content());
+  ```
 
-```ruby Ruby nocheck
-require "anthropic"
+  ```csharp C#
+  var result = AnthropicCredentials.Resolve()
+      ?? throw new InvalidOperationException("No federation credentials found in environment");
+  using var client = new AnthropicOidcClient(result);
 
-# Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-# ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
-# from the job environment.
-client = Anthropic::Client.new
+  var message = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeSonnet4_6,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+  });
+  foreach (var block in message.Content)
+  {
+      if (block.Value is TextBlock textBlock)
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+  ```
 
-message = client.messages.create(
-  model: "claude-sonnet-4-6",
-  max_tokens: 1024,
-  messages: [{role: "user", content: "Hello, Claude"}]
-)
-puts message.content.first.text
-```
+  ```bash CLI
+  # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  # from the job environment.
+  ant messages create \
+    --model claude-sonnet-4-6 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
+  ```
 
+  ```php PHP
+  use Anthropic\Client;
+
+  // Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  // ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  // from the job environment.
+  $client = new Client();
+
+  $message = $client->messages->create(
+      model: 'claude-sonnet-4-6',
+      maxTokens: 1024,
+      messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+  );
+  echo $message->content[0]->text, PHP_EOL;
+  ```
+
+  ```ruby Ruby
+  require "anthropic"
+
+  # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  # from the job environment.
+  client = Anthropic::Client.new
+
+  message = client.messages.create(
+    model: "claude-sonnet-4-6",
+    max_tokens: 1024,
+    messages: [{role: "user", content: "Hello, Claude"}]
+  )
+  puts message.content.first.text
+  ```
 </CodeGroup>
 
 Each GitHub-issued identity token expires roughly five minutes after issuance. The token-request endpoint (`ACTIONS_ID_TOKEN_REQUEST_URL`) stays valid for the entire job, so you can fetch a fresh token at any point. The SDK exchanges the token on first use and caches the resulting Anthropic access token. For jobs that run longer than the Anthropic token's lifetime, the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on each refresh, so re-run the fetch step periodically (or wrap it in a background loop) to keep the file current. Alternatively, pass a token-provider callback to the SDK that calls `ACTIONS_ID_TOKEN_REQUEST_URL` directly instead of using the file path.
@@ -337,17 +311,17 @@ A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` a
 ## Restrict which workflows can authenticate
 
 <Warning>
-A `subject_prefix` of `repo:your-org/*` alone matches every repository in your organization, and without a `ref` constraint it also matches `pull_request` runs triggered from forks. Anyone who can open a pull request against a matching repository could obtain a federated Anthropic token.
+  A `subject_prefix` of `repo:your-org/*` alone matches every repository in your organization, and without a `ref` constraint it also matches `pull_request` runs triggered from forks. Anyone who can open a pull request against a matching repository could obtain a federated Anthropic token.
 </Warning>
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
-- **Pin to a single repository:** Use `subject_prefix: "repo:your-org/your-repo:*"` so other repositories in the organization do not match.
-- **Pin to a protected branch:** Add `"ref": "refs/heads/main"` (or your release branch) under `claims` so pull-request runs and feature branches do not match.
-- **Pin the owner explicitly:** Add `"repository_owner": "your-org"` under `claims` as a defense-in-depth check against `sub` parsing edge cases.
-- **Pin to a deployment environment:** For deploy jobs, match `subject_prefix: "repo:your-org/your-repo:environment:production"` and gate that environment with required reviewers in GitHub.
+* **Pin to a single repository:** Use `subject_prefix: "repo:your-org/your-repo:*"` so other repositories in the organization do not match.
+* **Pin to a protected branch:** Add `"ref": "refs/heads/main"` (or your release branch) under `claims` so pull-request runs and feature branches do not match.
+* **Pin the owner explicitly:** Add `"repository_owner": "your-org"` under `claims` as a defense-in-depth check against `sub` parsing edge cases.
+* **Pin to a deployment environment:** For deploy jobs, match `subject_prefix: "repo:your-org/your-repo:environment:production"` and gate that environment with required reviewers in GitHub.
 
 ## Next steps
 
-- [Workload Identity Federation](/docs/en/manage-claude/workload-identity-federation): full setup walkthrough, environment variables, and credential precedence.
-- [Authentication](/docs/en/manage-claude/authentication): how federation compares to API keys.
+* [Workload Identity Federation](/docs/en/manage-claude/workload-identity-federation): full setup walkthrough, environment variables, and credential precedence.
+* [Authentication](/docs/en/manage-claude/authentication): how federation compares to API keys.

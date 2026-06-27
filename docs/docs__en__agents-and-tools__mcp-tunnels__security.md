@@ -12,15 +12,15 @@ The tunnel architecture provides strong defaults (outbound-only connectivity, en
 
 ## Best practices
 
-- **Require OAuth on every MCP server.** Configure each [upstream MCP server](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) to require OAuth as described in the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). OAuth provides defense in depth on top of the tunnel's transport authentication and enables user-level authorization at the data layer.
-- **Enable SSO for your organization.** Tunnels, federation rules, and service accounts are managed in the Claude Console. SSO enforces your identity provider's session controls on the admins who can change them.
-- **Restrict `upstream.allowed_ips`.** Use the smallest CIDR ranges that cover your MCP servers. This is the [proxy](/docs/en/agents-and-tools/mcp-tunnels/concepts#components)'s primary SSRF defense.
-- **Monitor logs.** Alert on warnings, errors, and unusual traffic patterns from the tunnel stack.
-- **Rotate credentials.** Rotate the server certificate and tunnel token on a regular schedule, and immediately if you suspect compromise.
-- **Keep images updated.** Track new proxy releases and pin images by SHA-256 digest.
-- **Limit network reach.** The proxy and [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) should only be able to reach the destinations listed in the [network requirements](/docs/en/agents-and-tools/mcp-tunnels/overview#network-requirements). Use NetworkPolicy (Kubernetes) or host firewall rules (Compose).
-- **Limit MCP server scope.** Each server should expose only the tools and data required for its purpose.
-- **Protect credentials at rest.** Apply your organization's secrets-management practices to private keys and tunnel tokens.
+* **Require OAuth on every MCP server.** Configure each [upstream MCP server](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) to require OAuth as described in the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). OAuth provides defense in depth on top of the tunnel's transport authentication and enables user-level authorization at the data layer.
+* **Enable SSO for your organization.** Tunnels, federation rules, and service accounts are managed in the Claude Console. SSO enforces your identity provider's session controls on the admins who can change them.
+* **Restrict `upstream.allowed_ips`.** Use the smallest CIDR ranges that cover your MCP servers. This is the [proxy](/docs/en/agents-and-tools/mcp-tunnels/concepts#components)'s primary SSRF defense.
+* **Monitor logs.** Alert on warnings, errors, and unusual traffic patterns from the tunnel stack.
+* **Rotate credentials.** Rotate the server certificate and tunnel token on a regular schedule, and immediately if you suspect compromise.
+* **Keep images updated.** Track new proxy releases and pin images by SHA-256 digest.
+* **Limit network reach.** The proxy and [cloudflared](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) should only be able to reach the destinations listed in the [network requirements](/docs/en/agents-and-tools/mcp-tunnels/overview#network-requirements). Use NetworkPolicy (Kubernetes) or host firewall rules (Compose).
+* **Limit MCP server scope.** Each server should expose only the tools and data required for its purpose.
+* **Protect credentials at rest.** Apply your organization's secrets-management practices to private keys and tunnel tokens.
 
 ## Respond to a suspected breach
 
@@ -34,6 +34,7 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
         helm uninstall mcp-tunnel -n mcp-tunnel
         ```
       </Tab>
+
       <Tab title="Docker Compose">
         ```bash
         docker compose down --timeout 0
@@ -41,18 +42,23 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
       </Tab>
     </Tabs>
   </Step>
+
   <Step title="Detach the upstream MCP servers">
     Remove the upstream MCP servers from any Managed Agent sessions that use them, and stop passing their URLs in the `mcp_servers` block of Messages API requests.
   </Step>
+
   <Step title="Archive the tunnel">
     Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#archive-a-tunnel) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](/docs/en/api/admin/mcp_tunnels/archive).
   </Step>
+
   <Step title="Contact Anthropic">
     Report the suspected compromise to Anthropic support.
   </Step>
+
   <Step title="Rotate downstream credentials">
     Re-provision a fresh tunnel and rotate any OAuth tokens that the affected MCP servers issued.
   </Step>
+
   <Step title="Review logs before restoring service">
     Inspect proxy, cloudflared, and MCP server logs for the window of suspected compromise before bringing the new tunnel online.
   </Step>
@@ -70,6 +76,7 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
         helm uninstall mcp-tunnel -n mcp-tunnel
         ```
       </Tab>
+
       <Tab title="Docker Compose">
         ```bash
         docker compose down
@@ -93,11 +100,11 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
           --ignore-not-found
         ```
       </Tab>
+
       <Tab title="Docker Compose">
         Private keys and certificates live in `data/`. The tunnel token lives in `data/tunnel-token` (programmatic flow) or in your shell environment (manual flow). The `config/` directory and `docker-compose.yaml` contain no secrets; keep them if you plan to re-provision, or remove them as well.
 
-        
-        ```bash nocheck
+        ```bash
         sudo rm -rf data
         ```
       </Tab>

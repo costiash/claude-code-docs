@@ -4,7 +4,7 @@ Use Azure Key Vault to provide an encryption key for your organization.
 
 ---
 
-```bash title="Configure with the /claude-api skill in Claude Code"
+```bash Configure with the /claude-api skill in Claude Code
 claude "/claude-api help me configure a customer-managed encryption key with Azure Key Vault"
 ```
 
@@ -16,22 +16,22 @@ This guide walks through configuring an Azure Key Vault key as a [customer-manag
 
 ## Prerequisites
 
-- An Azure Key Vault with **RBAC authorization enabled** (`enableRbacAuthorization: true`) and **public network access allowed**. Anthropic calls your vault over the public data-plane endpoint; private endpoints are not supported.
-- **Purge protection enabled** (`enablePurgeProtection: true`) on the vault. Without it, a deleted key can be permanently purged during the soft-delete retention window, causing irreversible loss of your CMEK-protected data. Purge protection cannot be disabled once enabled.
-- Permissions to create keys in the vault and to assign RBAC roles on it.
-- Permissions to create service principals in your Entra tenant (`Application Administrator`, `Cloud Application Administrator`, or an equivalent custom role).
-- An Anthropic Admin API key for your organization.
-- The [`az` CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) installed and authenticated.
-- **Diagnostic Settings** configured on the vault to route the `AuditEvent` log category to Log Analytics, a storage account, or an event hub. Azure Key Vault does not emit data-plane audit logs (such as `KeyWrap`, `KeyUnwrap`, and `KeyGet`) by default, so without this you get no audit trail for Anthropic's key operations.
+* An Azure Key Vault with **RBAC authorization enabled** (`enableRbacAuthorization: true`) and **public network access allowed**. Anthropic calls your vault over the public data-plane endpoint; private endpoints are not supported.
+* **Purge protection enabled** (`enablePurgeProtection: true`) on the vault. Without it, a deleted key can be permanently purged during the soft-delete retention window, causing irreversible loss of your CMEK-protected data. Purge protection cannot be disabled once enabled.
+* Permissions to create keys in the vault and to assign RBAC roles on it.
+* Permissions to create service principals in your Entra tenant (`Application Administrator`, `Cloud Application Administrator`, or an equivalent custom role).
+* An Anthropic Admin API key for your organization.
+* The [`az` CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) installed and authenticated.
+* **Diagnostic Settings** configured on the vault to route the `AuditEvent` log category to Log Analytics, a storage account, or an event hub. Azure Key Vault does not emit data-plane audit logs (such as `KeyWrap`, `KeyUnwrap`, and `KeyGet`) by default, so without this you get no audit trail for Anthropic's key operations.
 
 ## Anthropic app information
 
 In order to have Anthropic use your encryption key, you must configure an Anthropic multi-tenant application ID and display name. Those values are:
 
-| Field | Value |
-|:------|:------|
+| Field                           | Value                                  |
+| ------------------------------- | -------------------------------------- |
 | Multi-tenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
-| App display name | `anthropic-cmek-client-us` |
+| App display name                | `anthropic-cmek-client-us`             |
 
 <Warning>
   Use only this published client ID and display name. Never trust an identifier provided over email, chat, or any onboarding channel.
@@ -128,14 +128,13 @@ In order to have Anthropic use your encryption key, you must configure an Anthro
 
     Confirm that:
 
-    - `rbac` is `true`.
-    - `purge` is `true`. If it is `false` or `null`, enable purge protection on the vault before proceeding. Without it, a soft-deleted key can be permanently purged during the retention window, making your CMEK-protected data unrecoverable.
-    - `pub` is `"Enabled"`. If it is `"Disabled"`, Anthropic cannot reach the vault over its public data-plane endpoint and validation fails.
-    - `net` is `"Allow"`, or, if it is `"Deny"`, that `ipRules` include Anthropic's egress ranges (contact Anthropic for the current list).
-    - `uri` is the vault URI you use when you register the key.
-    - `tenantId` is the tenant that governs the vault. Use this value as `tenant_id` when you register the key, not the tenant of your currently-active subscription (the two can differ in cross-tenant setups).
+    * `rbac` is `true`.
+    * `purge` is `true`. If it is `false` or `null`, enable purge protection on the vault before proceeding. Without it, a soft-deleted key can be permanently purged during the retention window, making your CMEK-protected data unrecoverable.
+    * `pub` is `"Enabled"`. If it is `"Disabled"`, Anthropic cannot reach the vault over its public data-plane endpoint and validation fails.
+    * `net` is `"Allow"`, or, if it is `"Deny"`, that `ipRules` include Anthropic's egress ranges (contact Anthropic for the current list).
+    * `uri` is the vault URI you use when you register the key.
+    * `tenantId` is the tenant that governs the vault. Use this value as `tenant_id` when you register the key, not the tenant of your currently-active subscription (the two can differ in cross-tenant setups).
   </Step>
-
 </Steps>
 
 ## Register the key with Anthropic
@@ -148,8 +147,7 @@ How you register the key depends on which product you use.
       <Step title="Register the key with Anthropic">
         Create an external key configuration through the Admin API.
 
-        
-        ```bash nocheck
+        ```bash
         curl -sS https://api.anthropic.com/v1/organizations/external_keys \
           -H "x-api-key: <anthropic-admin-api-key>" \
           -H "anthropic-version: 2023-06-01" \
@@ -180,8 +178,7 @@ How you register the key depends on which product you use.
       <Step title="Validate the key">
         Trigger an encrypt and decrypt round-trip against your key. This confirms that Anthropic can authenticate to your tenant and perform wrap and unwrap operations.
 
-        
-        ```bash nocheck
+        ```bash
         curl -sS -X POST https://api.anthropic.com/v1/organizations/external_keys/ekey_<id>/validate \
           -H "x-api-key: <anthropic-admin-api-key>" \
           -H "anthropic-version: 2023-06-01" \
@@ -196,16 +193,15 @@ How you register the key depends on which product you use.
 
         If validation fails, the `error` field describes the problem. Common causes are:
 
-        - **RBAC propagation delay:** role assignments can take a few minutes to take effect. Wait and retry.
-        - **Network ACLs blocking Anthropic:** confirm public network access and `ipRules` as described in the verification step.
-        - **Conditional access policies on workload identities:** if your tenant has conditional access policies that target service principals, exclude the Anthropic service principal or add Anthropic's egress ranges to the policy's named locations.
+        * **RBAC propagation delay:** role assignments can take a few minutes to take effect. Wait and retry.
+        * **Network ACLs blocking Anthropic:** confirm public network access and `ipRules` as described in the verification step.
+        * **Conditional access policies on workload identities:** if your tenant has conditional access policies that target service principals, exclude the Anthropic service principal or add Anthropic's egress ranges to the policy's named locations.
       </Step>
 
       <Step title="Attach the key to a workspace">
         Once the key is validated, attach it to a workspace to enable CMEK for that workspace's data.
 
-        
-        ```bash nocheck
+        ```bash
         curl -sS -X POST https://api.anthropic.com/v1/organizations/workspaces/<workspace-id> \
           -H "x-api-key: <anthropic-admin-api-key>" \
           -H "anthropic-version: 2023-06-01" \

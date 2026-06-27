@@ -3,7 +3,7 @@
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
@@ -11,208 +11,197 @@ The bash tool enables Claude to execute shell commands in a persistent bash sess
 ## Overview
 
 The bash tool provides Claude with:
-- Persistent bash session that maintains state
-- Ability to run any shell command
-- Access to environment variables and working directory
-- Command chaining and scripting capabilities
+
+* Persistent bash session that maintains state
+* Ability to run any shell command
+* Access to environment variables and working directory
+* Command chaining and scripting capabilities
 
 For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Use cases
 
-- **Development workflows:** Run build commands, tests, and development tools
-- **System automation:** Execute scripts, manage files, automate tasks
-- **Data processing:** Process files, run analysis scripts, manage datasets
-- **Environment setup:** Install packages, configure environments
+* **Development workflows:** Run build commands, tests, and development tools
+* **System automation:** Execute scripts, manage files, automate tasks
+* **Data processing:** Process files, run analysis scripts, manage datasets
+* **Environment setup:** Install packages, configure environments
 
 ## Quick start
 
 <CodeGroup>
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1024,
-    "tools": [
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "tools": [
+        {
+          "type": "bash_20250124",
+          "name": "bash"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "List all Python files in the current directory."
+        }
+      ]
+    }'
+  ```
+
+  ```bash CLI
+  ant messages create \
+    --model claude-opus-4-8 \
+    --max-tokens 1024 \
+    --tool '{type: bash_20250124, name: bash}' \
+    --message '{role: user, content: List all Python files in the current directory.}'
+  ```
+
+  ```python Python
+  import anthropic
+
+  client = anthropic.Anthropic()
+
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      tools=[{"type": "bash_20250124", "name": "bash"}],
+      messages=[
+          {"role": "user", "content": "List all Python files in the current directory."}
+      ],
+  )
+
+  print(response)
+  ```
+
+  ```typescript TypeScript
+  import Anthropic from "@anthropic-ai/sdk";
+
+  const client = new Anthropic();
+
+  const response = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: [{ type: "bash_20250124", name: "bash" }],
+    messages: [
       {
-        "type": "bash_20250124",
-        "name": "bash"
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "List all Python files in the current directory."
+        role: "user",
+        content: "List all Python files in the current directory."
       }
     ]
-  }'
-```
+  });
 
-```bash CLI
-ant messages create \
-  --model claude-opus-4-8 \
-  --max-tokens 1024 \
-  --tool '{type: bash_20250124, name: bash}' \
-  --message '{role: user, content: List all Python files in the current directory.}'
-```
+  console.log(response);
+  ```
 
-```python Python
-import anthropic
+  ```csharp C#
+  using Anthropic;
+  using Anthropic.Models.Messages;
 
-client = anthropic.Anthropic()
+  var client = new AnthropicClient();
 
-response = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    tools=[{"type": "bash_20250124", "name": "bash"}],
-    messages=[
-        {"role": "user", "content": "List all Python files in the current directory."}
-    ],
-)
+  var response = await client.Messages.Create(
+      new()
+      {
+          Model = Model.ClaudeOpus4_8,
+          MaxTokens = 1024,
+          Tools = [new ToolBash20250124()],
+          Messages =
+          [
+              new()
+              {
+                  Role = Role.User,
+                  Content = "List all Python files in the current directory.",
+              },
+          ],
+      }
+  );
 
-print(response)
-```
+  Console.WriteLine(response);
+  ```
 
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
+  ```go Go
+  func main() {
+  	client := anthropic.NewClient()
 
-const client = new Anthropic();
+  	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_8,
+  		MaxTokens: 1024,
+  		Tools: []anthropic.ToolUnionParam{
+  			{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
+  		},
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(anthropic.NewTextBlock("List all Python files in the current directory.")),
+  		},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(response)
+  ```
 
-const response = await client.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  tools: [{ type: "bash_20250124", name: "bash" }],
-  messages: [
-    {
-      role: "user",
-      content: "List all Python files in the current directory."
-    }
-  ]
-});
+  ```java Java
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.Message;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
+  import com.anthropic.models.messages.ToolBash20250124;
 
-console.log(response);
-```
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-```csharp C#
-using Anthropic;
-using Anthropic.Models.Messages;
+      Message response = client.messages().create(
+          MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(1024)
+              .addTool(ToolBash20250124.builder().build())
+              .addUserMessage("List all Python files in the current directory.")
+              .build()
+      );
 
-var client = new AnthropicClient();
+      IO.println(response);
+  }
+  ```
 
-var response = await client.Messages.Create(
-    new()
-    {
-        Model = Model.ClaudeOpus4_8,
-        MaxTokens = 1024,
-        Tools = [new ToolBash20250124()],
-        Messages =
-        [
-            new()
-            {
-                Role = Role.User,
-                Content = "List all Python files in the current directory.",
-            },
-        ],
-    }
-);
+  ```php PHP
 
-Console.WriteLine(response);
-```
+  use Anthropic\Client;
+  use Anthropic\Messages\ToolBash20250124;
 
-```go Go hidelines={1..10,-1}
-package main
+  $client = new Client();
 
-import (
-	"context"
-	"fmt"
-	"log"
+  $response = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      tools: [new ToolBash20250124()],
+      messages: [
+          ['role' => 'user', 'content' => 'List all Python files in the current directory.'],
+      ],
+  );
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+  echo $response;
+  ```
 
-func main() {
-	client := anthropic.NewClient()
+  ```ruby Ruby
+  require "anthropic"
 
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 1024,
-		Tools: []anthropic.ToolUnionParam{
-			{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
-		},
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("List all Python files in the current directory.")),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
+  client = Anthropic::Client.new
 
-```java Java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.ToolBash20250124;
-
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    Message response = client.messages().create(
-        MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(1024)
-            .addTool(ToolBash20250124.builder().build())
-            .addUserMessage("List all Python files in the current directory.")
-            .build()
-    );
-
-    IO.println(response);
-}
-```
-
-```php PHP hidelines={1}
-<?php
-
-use Anthropic\Client;
-use Anthropic\Messages\ToolBash20250124;
-
-$client = new Client();
-
-$response = $client->messages->create(
-    model: 'claude-opus-4-8',
-    maxTokens: 1024,
-    tools: [new ToolBash20250124()],
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: [{type: "bash_20250124", name: "bash"}],
     messages: [
-        ['role' => 'user', 'content' => 'List all Python files in the current directory.'],
-    ],
-);
+      {role: "user", content: "List all Python files in the current directory."}
+    ]
+  )
 
-echo $response;
-```
-
-```ruby Ruby
-require "anthropic"
-
-client = Anthropic::Client.new
-
-response = client.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  tools: [{type: "bash_20250124", name: "bash"}],
-  messages: [
-    {role: "user", content: "List all Python files in the current directory."}
-  ]
-)
-
-puts response
-```
+  puts response
+  ```
 </CodeGroup>
 
 ## How it works
@@ -226,38 +215,36 @@ The bash tool maintains a persistent session:
 
 ## Parameters
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `command` | Yes* | The bash command to run |
-| `restart` | No | Set to `true` to restart the bash session |
+| Parameter | Required | Description                               |
+| --------- | -------- | ----------------------------------------- |
+| `command` | Yes\*    | The bash command to run                   |
+| `restart` | No       | Set to `true` to restart the bash session |
 
-*Required unless using `restart`
+\*Required unless using `restart`
 
-<section title="Example usage">
+<Accordion title="Example usage">
+  Run a command:
 
-Run a command:
+  ```json
+  {
+    "command": "ls -la *.py"
+  }
+  ```
 
-```json
-{
-  "command": "ls -la *.py"
-}
-```
+  Restart the session:
 
-Restart the session:
-
-```json
-{
-  "restart": true
-}
-```
-
-</section>
+  ```json
+  {
+    "restart": true
+  }
+  ```
+</Accordion>
 
 ## Example: Multi-step automation
 
 Claude can chain commands to complete complex tasks:
 
-```text nowrap
+```text
 User request:
 "Install the requests library and create a simple Python script that
 fetches a joke from an API, then run it."
@@ -282,7 +269,8 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 <Steps>
   <Step title="Set up a bash environment">
     Create a persistent bash session that Claude can interact with:
-    ```python hidelines={-2..-1}
+
+    ```python
     import subprocess
     import threading
     import queue
@@ -301,36 +289,29 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
             self.output_queue = queue.Queue()
             self.error_queue = queue.Queue()
             self._start_readers()
-
-        def _start_readers(self): ...
     ```
   </Step>
+
   <Step title="Handle command execution">
     Create a function to execute commands and capture output:
-    ```python hidelines={1..2,-1}
-    class BashSession:
-        def _read_output(self, timeout): ...
-        def execute_command(self, command):
-            # Send command to bash
-            self.process.stdin.write(command + "\n")
-            self.process.stdin.flush()
 
-            # Capture output with timeout
-            output = self._read_output(timeout=10)
-            return output
+    ```python
+    def execute_command(self, command):
+        # Send command to bash
+        self.process.stdin.write(command + "\n")
+        self.process.stdin.flush()
 
-        process = None
+        # Capture output with timeout
+        output = self._read_output(timeout=10)
+        return output
+
     ```
   </Step>
+
   <Step title="Process Claude's tool calls">
     Extract and execute commands from Claude's responses:
-    ```python hidelines={1..6}
-    from types import SimpleNamespace as _SN
 
-    response = _SN(
-        content=[_SN(type="tool_use", name="bash", input={"command": "ls"}, id="toolu_01")]
-    )
-    bash_session = _SN(restart=lambda: None, execute_command=lambda c: "output")
+    ```python
     for content in response.content:
         if content.type == "tool_use" and content.name == "bash":
             if content.input.get("restart"):
@@ -348,8 +329,10 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
             }
     ```
   </Step>
+
   <Step title="Implement safety measures">
     Add validation and restrictions. Use an allowlist rather than a blocklist, since blocklists are easy to bypass. Reject shell operators so chained commands can't slip past the allowlist:
+
     ```python
     import shlex
 
@@ -378,6 +361,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 
         return True, None
     ```
+
     This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
   </Step>
 </Steps>
@@ -386,232 +370,220 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 
 When implementing the bash tool, handle various error scenarios:
 
-<section title="Command execution timeout">
+<AccordionGroup>
+  <Accordion title="Command execution timeout">
+    If a command takes too long to execute:
 
-If a command takes too long to execute:
-
-```json
-{
-  "role": "user",
-  "content": [
+    ```json
     {
-      "type": "tool_result",
-      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
-      "content": "Error: Command timed out after 30 seconds",
-      "is_error": true
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+          "content": "Error: Command timed out after 30 seconds",
+          "is_error": true
+        }
+      ]
     }
-  ]
-}
-```
+    ```
+  </Accordion>
 
-</section>
+  <Accordion title="Command not found">
+    If a command doesn't exist:
 
-<section title="Command not found">
-
-If a command doesn't exist:
-
-```json
-{
-  "role": "user",
-  "content": [
+    ```json
     {
-      "type": "tool_result",
-      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
-      "content": "bash: nonexistentcommand: command not found",
-      "is_error": true
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+          "content": "bash: nonexistentcommand: command not found",
+          "is_error": true
+        }
+      ]
     }
-  ]
-}
-```
+    ```
+  </Accordion>
 
-</section>
+  <Accordion title="Permission denied">
+    If there are permission issues:
 
-<section title="Permission denied">
-
-If there are permission issues:
-
-```json
-{
-  "role": "user",
-  "content": [
+    ```json
     {
-      "type": "tool_result",
-      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
-      "content": "bash: /root/sensitive-file: Permission denied",
-      "is_error": true
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+          "content": "bash: /root/sensitive-file: Permission denied",
+          "is_error": true
+        }
+      ]
     }
-  ]
-}
-```
-
-</section>
+    ```
+  </Accordion>
+</AccordionGroup>
 
 ### Follow implementation best practices
 
-<section title="Use command timeouts">
+<AccordionGroup>
+  <Accordion title="Use command timeouts">
+    Implement timeouts to prevent hanging commands:
 
-Implement timeouts to prevent hanging commands:
-```python hidelines={1..3}
-import subprocess
+    ```python
+    def execute_with_timeout(command, timeout=30):
+        try:
+            result = subprocess.run(
+                command, shell=True, capture_output=True, text=True, timeout=timeout
+            )
+            return result.stdout + result.stderr
+        except subprocess.TimeoutExpired:
+            return f"Command timed out after {timeout} seconds"
+    ```
+  </Accordion>
+
+  <Accordion title="Maintain session state">
+    Keep the bash session persistent to maintain environment variables and working directory:
+
+    ```python
+    # Commands run in the same session maintain state
+    commands = [
+        "cd /tmp",
+        "echo 'Hello' > test.txt",
+        "cat test.txt",  # This works because we're still in /tmp
+    ]
+    ```
+  </Accordion>
+
+  <Accordion title="Handle large outputs">
+    Truncate very large outputs to prevent token limit issues:
+
+    ```python
+    def truncate_output(output, max_lines=100):
+        lines = output.split("\n")
+        if len(lines) > max_lines:
+            truncated = "\n".join(lines[:max_lines])
+            return f"{truncated}\n\n... Output truncated ({len(lines)} total lines) ..."
+        return output
+    ```
+  </Accordion>
+
+  <Accordion title="Log all commands">
+    Keep an audit trail of executed commands:
+
+    ```python
+    import logging
 
 
-def execute_with_timeout(command, timeout=30):
-    try:
-        result = subprocess.run(
-            command, shell=True, capture_output=True, text=True, timeout=timeout
+    def log_command(command, output, user_id):
+        logging.info(f"User {user_id} executed: {command}")
+        logging.info(f"Output: {output[:200]}...")  # Log first 200 chars
+    ```
+  </Accordion>
+
+  <Accordion title="Sanitize outputs">
+    Remove sensitive information from command outputs:
+
+    ```python
+    def sanitize_output(output):
+        # Remove potential secrets or credentials
+        import re
+
+        # Example: Remove AWS credentials
+        output = re.sub(r"aws_access_key_id\s*=\s*\S+", "aws_access_key_id=***", output)
+        output = re.sub(
+            r"aws_secret_access_key\s*=\s*\S+", "aws_secret_access_key=***", output
         )
-        return result.stdout + result.stderr
-    except subprocess.TimeoutExpired:
-        return f"Command timed out after {timeout} seconds"
-```
-
-</section>
-
-<section title="Maintain session state">
-
-Keep the bash session persistent to maintain environment variables and working directory:
-```python
-# Commands run in the same session maintain state
-commands = [
-    "cd /tmp",
-    "echo 'Hello' > test.txt",
-    "cat test.txt",  # This works because we're still in /tmp
-]
-```
-
-</section>
-
-<section title="Handle large outputs">
-
-Truncate very large outputs to prevent token limit issues:
-```python
-def truncate_output(output, max_lines=100):
-    lines = output.split("\n")
-    if len(lines) > max_lines:
-        truncated = "\n".join(lines[:max_lines])
-        return f"{truncated}\n\n... Output truncated ({len(lines)} total lines) ..."
-    return output
-```
-
-</section>
-
-<section title="Log all commands">
-
-Keep an audit trail of executed commands:
-```python
-import logging
-
-
-def log_command(command, output, user_id):
-    logging.info(f"User {user_id} executed: {command}")
-    logging.info(f"Output: {output[:200]}...")  # Log first 200 chars
-```
-
-</section>
-
-<section title="Sanitize outputs">
-
-Remove sensitive information from command outputs:
-```python
-def sanitize_output(output):
-    # Remove potential secrets or credentials
-    import re
-
-    # Example: Remove AWS credentials
-    output = re.sub(r"aws_access_key_id\s*=\s*\S+", "aws_access_key_id=***", output)
-    output = re.sub(
-        r"aws_secret_access_key\s*=\s*\S+", "aws_secret_access_key=***", output
-    )
-    return output
-```
-
-</section>
+        return output
+    ```
+  </Accordion>
+</AccordionGroup>
 
 ## Security
 
 <Warning>
-The bash tool provides direct system access. Implement these essential safety measures:
-- Running in isolated environments (Docker/VM)
-- Implementing command filtering and allowlists
-- Setting resource limits (CPU, memory, disk)
-- Logging all executed commands
+  The bash tool provides direct system access. Implement these essential safety measures:
+
+  * Running in isolated environments (Docker/VM)
+  * Implementing command filtering and allowlists
+  * Setting resource limits (CPU, memory, disk)
+  * Logging all executed commands
 </Warning>
 
 ### Key recommendations
-- Use `ulimit` to set resource constraints
-- Filter dangerous commands (`sudo`, `rm -rf`, etc.)
-- Run with minimal user permissions
-- Monitor and log all command execution
+
+* Use `ulimit` to set resource constraints
+* Filter dangerous commands (`sudo`, `rm -rf`, etc.)
+* Run with minimal user permissions
+* Monitor and log all command execution
 
 ## Pricing
 
 The bash tool adds **245 input tokens** to your API calls.
 
 Additional tokens are consumed by:
-- Command outputs (stdout/stderr)
-- Error messages
-- Large file contents
+
+* Command outputs (stdout/stderr)
+* Error messages
+* Large file contents
 
 See [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing) for complete pricing details.
 
 ## Common patterns
 
 ### Development workflows
-- Running tests: `pytest && coverage report`
-- Building projects: `npm install && npm run build`
-- Git operations: `git status && git add . && git commit -m "message"`
+
+* Running tests: `pytest && coverage report`
+* Building projects: `npm install && npm run build`
+* Git operations: `git status && git add . && git commit -m "message"`
 
 #### Git-based checkpointing
 
 Git serves as a structured recovery mechanism in long-running agent workflows, not just a way to save changes:
 
-- **Capture a baseline:** Before any agent work begins, commit the current state. This is the known-good starting point.
-- **Commit per feature:** Each completed feature gets its own commit. These serve as rollback points if something goes wrong later.
-- **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
-- **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
+* **Capture a baseline:** Before any agent work begins, commit the current state. This is the known-good starting point.
+* **Commit per feature:** Each completed feature gets its own commit. These serve as rollback points if something goes wrong later.
+* **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
+* **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
 
 ### File operations
-- Processing data: `wc -l *.csv && ls -lh *.csv`
-- Searching files: `find . -name "*.py" | xargs grep "pattern"`
-- Creating backups: `tar -czf backup.tar.gz ./data`
+
+* Processing data: `wc -l *.csv && ls -lh *.csv`
+* Searching files: `find . -name "*.py" | xargs grep "pattern"`
+* Creating backups: `tar -czf backup.tar.gz ./data`
 
 ### System tasks
-- Checking resources: `df -h && free -m`
-- Process management: `ps aux | grep python`
-- Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
+
+* Checking resources: `df -h && free -m`
+* Process management: `ps aux | grep python`
+* Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
 
 ## Limitations
 
-- **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
-- **No GUI applications:** Command-line only
-- **Session scope:** Bash session state is client-side. The API is stateless. Your application is responsible for maintaining the shell session between turns.
-- **Output limits:** Large outputs may be truncated
-- **No streaming:** Results returned after completion
+* **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
+* **No GUI applications:** Command-line only
+* **Session scope:** Bash session state is client-side. The API is stateless. Your application is responsible for maintaining the shell session between turns.
+* **Output limits:** Large outputs may be truncated
+* **No streaming:** Results returned after completion
 
 ## Combining with other tools
 
 The bash tool is most powerful when combined with the [text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool) and other tools.
 
 <Note>
-If you're also using the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](/docs/en/agents-and-tools/tool-use/code-execution-tool#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
+  If you're also using the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](/docs/en/agents-and-tools/tool-use/code-execution-tool#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
 </Note>
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Tool use overview"
-    icon="tool"
-    href="/docs/en/agents-and-tools/tool-use/overview"
-  >
+  <Card title="Tool use overview" icon="tool" href="/docs/en/agents-and-tools/tool-use/overview">
     Learn about tool use with Claude
   </Card>
 
-  <Card
-    title="Text editor tool"
-    icon="file"
-    href="/docs/en/agents-and-tools/tool-use/text-editor-tool"
-  >
+  <Card title="Text editor tool" icon="file" href="/docs/en/agents-and-tools/tool-use/text-editor-tool">
     View and edit text files with Claude
   </Card>
 </CardGroup>

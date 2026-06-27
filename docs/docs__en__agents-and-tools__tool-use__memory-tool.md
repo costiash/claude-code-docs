@@ -9,19 +9,19 @@ This is the key primitive for just-in-time context retrieval: rather than loadin
 The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
 
 <Note>
-Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+  Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Use cases
 
-- Maintain project context across multiple agent executions
-- Learn from past interactions, decisions, and feedback
-- Build knowledge bases over time
-- Enable cross-conversation learning where Claude improves at recurring workflows
+* Maintain project context across multiple agent executions
+* Learn from past interactions, decisions, and feedback
+* Build knowledge bases over time
+* Enable cross-conversation learning where Claude improves at recurring workflows
 
 ## How it works
 
@@ -34,16 +34,19 @@ Since this is a client-side tool, Claude makes tool calls to perform memory oper
 When you ask Claude to help with a task, Claude automatically checks its memory directory first. Here's what a typical interaction looks like:
 
 **1. User request:**
-```text
+
+```text wrap
 "Help me respond to this customer service ticket."
 ```
 
 **2. Claude checks the memory directory:**
-```text
+
+```text wrap
 "I'll help you respond to the customer service ticket. Let me check my memory for any previous context."
 ```
 
 Claude calls the memory tool:
+
 ```json
 {
   "type": "tool_use",
@@ -57,6 +60,7 @@ Claude calls the memory tool:
 ```
 
 **3. Your application returns the directory contents:**
+
 ```json
 {
   "type": "tool_result",
@@ -66,6 +70,7 @@ Claude calls the memory tool:
 ```
 
 **4. Claude reads relevant files:**
+
 ```json
 {
   "type": "tool_use",
@@ -79,6 +84,7 @@ Claude calls the memory tool:
 ```
 
 **5. Your application returns the file contents:**
+
 ```json
 {
   "type": "tool_result",
@@ -88,7 +94,8 @@ Claude calls the memory tool:
 ```
 
 **6. Claude uses the memory to help:**
-```text
+
+```text wrap
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
@@ -102,252 +109,220 @@ To use the memory tool:
 2. Implement client-side handlers for memory operations
 
 <Note>
-To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python and C#), use `betaMemoryTool` (TypeScript), or implement `BetaMemoryToolHandler` (Java) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
+  To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python and C#), use `betaMemoryTool` (TypeScript), or implement `BetaMemoryToolHandler` (Java) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
 
-For working examples, see:
-- Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
-- TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
-- Java: [BetaMemoryToolExample.java](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaMemoryToolExample.java)
-- C#: [MemoryToolExample](https://github.com/anthropics/anthropic-sdk-csharp/tree/main/examples/MemoryToolExample)
+  For working examples, see:
+
+  * Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
+  * TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
+  * Java: [BetaMemoryToolExample.java](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaMemoryToolExample.java)
+  * C#: [MemoryToolExample](https://github.com/anthropics/anthropic-sdk-csharp/tree/main/examples/MemoryToolExample)
 </Note>
 
 ## Basic usage
 
 <CodeGroup>
+  ````bash cURL
+  curl https://api.anthropic.com/v1/messages \
+      --header "x-api-key: $ANTHROPIC_API_KEY" \
+      --header "anthropic-version: 2023-06-01" \
+      --header "content-type: application/json" \
+      --data '{
+          "model": "claude-opus-4-8",
+          "max_tokens": 2048,
+          "messages": [
+              {
+                  "role": "user",
+                  "content": "I'\''m working on a Python web scraper that keeps crashing with a timeout error. Here'\''s the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+              }
+          ],
+          "tools": [{
+              "type": "memory_20250818",
+              "name": "memory"
+          }]
+      }'
+  ````
 
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-8",
-        "max_tokens": 2048,
-        "messages": [
-            {
-                "role": "user",
-                "content": "I'\''m working on a Python web scraper that keeps crashing with a timeout error. Here'\''s the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
-            }
-        ],
-        "tools": [{
-            "type": "memory_20250818",
-            "name": "memory"
-        }]
-    }'
-```
+  ````bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 2048
+  tools:
+    - type: memory_20250818
+      name: memory
+  messages:
+    - role: user
+      content: |
+        I'm working on a Python web scraper that keeps crashing with a
+        timeout error. Here's the problematic function:
 
-````bash CLI
-ant messages create <<'YAML'
-model: claude-opus-4-8
-max_tokens: 2048
-tools:
-  - type: memory_20250818
-    name: memory
-messages:
-  - role: user
-    content: |
-      I'm working on a Python web scraper that keeps crashing with a
-      timeout error. Here's the problematic function:
+        ```python
+        def fetch_page(url, retries=3):
+            for i in range(retries):
+                try:
+                    response = requests.get(url, timeout=5)
+                    return response.text
+                except requests.exceptions.Timeout:
+                    if i == retries - 1:
+                        raise
+                    time.sleep(1)
+        ```
 
-      ```python
-      def fetch_page(url, retries=3):
-          for i in range(retries):
-              try:
-                  response = requests.get(url, timeout=5)
-                  return response.text
-              except requests.exceptions.Timeout:
-                  if i == retries - 1:
-                      raise
-                  time.sleep(1)
-      ```
+        Please help me debug this.
+  YAML
+  ````
 
-      Please help me debug this.
-YAML
-````
+  ````python Python
+  client = anthropic.Anthropic()
 
-```python Python hidelines={1..2}
-import anthropic
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=2048,
+      messages=[
+          {
+              "role": "user",
+              "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
+          }
+      ],
+      tools=[{"type": "memory_20250818", "name": "memory"}],
+  )
 
-client = anthropic.Anthropic()
+  print(message)
+  ````
 
-message = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=2048,
-    messages=[
-        {
-            "role": "user",
-            "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
-        }
-    ],
-    tools=[{"type": "memory_20250818", "name": "memory"}],
-)
+  ````typescript TypeScript
+  const anthropic = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY
+  });
 
-print(message)
-```
-
-```typescript TypeScript hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-});
-
-const message = await anthropic.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 2048,
-  messages: [
-    {
-      role: "user",
-      content:
-        "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
-    }
-  ],
-  tools: [{ type: "memory_20250818", name: "memory" }]
-});
-
-console.log(message);
-```
-
-```csharp C#
-using System;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-public class Program
-{
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_8,
-            MaxTokens = 2048,
-            Messages = [
-                new()
-                {
-                    Role = Role.User,
-                    Content = "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
-                }
-            ],
-            Tools = [new ToolUnion(new MemoryTool20250818())]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 2048,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")),
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfMemoryTool20250818: &anthropic.BetaMemoryTool20250818Param{}},
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..2,4..9,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MemoryTool20250818;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-
-public class MemoryToolExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
-            .maxTokens(2048L)
-            .addUserMessage("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")
-            .addTool(MemoryTool20250818.builder().build())
-            .build();
-
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$message = $client->messages->create(
-    maxTokens: 2048,
+  const message = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 2048,
     messages: [
-        [
-            'role' => 'user',
-            'content' => "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
-        ],
+      {
+        role: "user",
+        content:
+          "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+      }
     ],
-    model: 'claude-opus-4-8',
+    tools: [{ type: "memory_20250818", name: "memory" }]
+  });
+
+  console.log(message);
+  ````
+
+  ````csharp C#
+  using System;
+  using System.Threading.Tasks;
+  using Anthropic;
+  using Anthropic.Models.Messages;
+
+  public class Program
+  {
+      public static async Task Main(string[] args)
+      {
+          AnthropicClient client = new()
+          {
+              ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+          };
+
+          var parameters = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_8,
+              MaxTokens = 2048,
+              Messages = [
+                  new()
+                  {
+                      Role = Role.User,
+                      Content = "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+                  }
+              ],
+              Tools = [new ToolUnion(new MemoryTool20250818())]
+          };
+
+          var message = await client.Messages.Create(parameters);
+          Console.WriteLine(message);
+      }
+  }
+  ````
+
+  ````go Go
+  client := anthropic.NewClient()
+
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 2048,
+  	Messages: []anthropic.BetaMessageParam{
+  		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")),
+  	},
+  	Tools: []anthropic.BetaToolUnionParam{
+  		{OfMemoryTool20250818: &anthropic.BetaMemoryTool20250818Param{}},
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ````
+
+  ````java Java
+  import com.anthropic.models.messages.MemoryTool20250818;
+  // ...
+          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+          MessageCreateParams params = MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(2048L)
+              .addUserMessage("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")
+              .addTool(MemoryTool20250818.builder().build())
+              .build();
+
+          Message response = client.messages().create(params);
+          System.out.println(response);
+  ````
+
+  ````php PHP
+  $client = new Client();
+
+  $message = $client->messages->create(
+      maxTokens: 2048,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
+          ],
+      ],
+      model: 'claude-opus-4-8',
+      tools: [
+          [
+              'type' => 'memory_20250818',
+              'name' => 'memory',
+          ],
+      ],
+  );
+  ````
+
+  ````ruby Ruby
+  client = Anthropic::Client.new
+
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 2048,
+    messages: [
+      {
+        role: "user",
+        content: "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+      }
+    ],
     tools: [
-        [
-            'type' => 'memory_20250818',
-            'name' => 'memory',
-        ],
-    ],
-);
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 2048,
-  messages: [
-    {
-      role: "user",
-      content: "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
-    }
-  ],
-  tools: [
-    {
-      type: "memory_20250818",
-      name: "memory"
-    }
-  ]
-)
-puts message
-```
-
+      {
+        type: "memory_20250818",
+        name: "memory"
+      }
+    ]
+  )
+  puts message
+  ````
 </CodeGroup>
 
 ## Tool commands
@@ -355,6 +330,7 @@ puts message
 Your client-side implementation needs to handle these memory tool commands. While these specifications describe the recommended behaviors that Claude is most familiar with, you can modify your implementation and return strings as needed for your use case.
 
 ### view
+
 Shows directory contents or file contents with optional line ranges:
 
 ```json
@@ -368,32 +344,36 @@ Shows directory contents or file contents with optional line ranges:
 #### Return values
 
 **For directories:** Return a listing that shows files and directories with their sizes:
-```text nowrap
+
+```text
 Here're the files and directories up to 2 levels deep in {path}, excluding hidden items and node_modules:
 {size}    {path}
 {size}    {path}/{filename1}
 {size}    {path}/{filename2}
 ```
 
-- Lists files up to 2 levels deep
-- Shows human-readable sizes (for example, `5.5K`, `1.2M`)
-- Excludes hidden items (files starting with `.`) and `node_modules`
-- Uses tab character between size and path
+* Lists files up to 2 levels deep
+* Shows human-readable sizes (for example, `5.5K`, `1.2M`)
+* Excludes hidden items (files starting with `.`) and `node_modules`
+* Uses tab character between size and path
 
 **For files:** Return file contents with a header and line numbers:
-```text
+
+```text wrap
 Here's the content of {path} with line numbers:
 {line_numbers}{tab}{content}
 ```
 
 Line number formatting:
-- **Width**: 6 characters, right-aligned with space padding
-- **Separator**: Tab character between line number and content
-- **Indexing**: 1-indexed (first line is line 1)
-- **Line limit**: Files with more than 999,999 lines should return an error: `"File {path} exceeds maximum line limit of 999,999 lines."`
+
+* **Width**: 6 characters, right-aligned with space padding
+* **Separator**: Tab character between line number and content
+* **Indexing**: 1-indexed (first line is line 1)
+* **Line limit**: Files with more than 999,999 lines should return an error: `"File {path} exceeds maximum line limit of 999,999 lines."`
 
 **Example output:**
-```text nowrap
+
+```text
 Here's the content of /memories/notes.txt with line numbers:
      1	Hello World
      2	This is line two
@@ -403,9 +383,10 @@ Here's the content of /memories/notes.txt with line numbers:
 
 #### Error handling
 
-- **File/directory does not exist**: `"The path {path} does not exist. Please provide a valid path."`
+* **File/directory does not exist**: `"The path {path} does not exist. Please provide a valid path."`
 
 ### create
+
 Create a new file:
 
 ```json
@@ -418,13 +399,14 @@ Create a new file:
 
 #### Return values
 
-- **Success**: `"File created successfully at: {path}"`
+* **Success**: `"File created successfully at: {path}"`
 
 #### Error handling
 
-- **File already exists**: `"Error: File {path} already exists"`
+* **File already exists**: `"Error: File {path} already exists"`
 
-### str_replace
+### str\_replace
+
 Replace text in a file:
 
 ```json
@@ -438,19 +420,20 @@ Replace text in a file:
 
 #### Return values
 
-- **Success**: `"The memory file has been edited."` followed by a snippet of the edited file with line numbers
+* **Success**: `"The memory file has been edited."` followed by a snippet of the edited file with line numbers
 
 #### Error handling
 
-- **File does not exist**: `"Error: The path {path} does not exist. Please provide a valid path."`
-- **Text not found**: ``"No replacement was performed, old_str `{old_str}` did not appear verbatim in {path}."``
-- **Duplicate text**: When `old_str` appears multiple times, return: ``"No replacement was performed. Multiple occurrences of old_str `{old_str}` in lines: {line_numbers}. Please ensure it is unique"``
+* **File does not exist**: `"Error: The path {path} does not exist. Please provide a valid path."`
+* **Text not found**: ``"No replacement was performed, old_str `\{old_str}` did not appear verbatim in {path}."``
+* **Duplicate text**: When `old_str` appears multiple times, return: ``"No replacement was performed. Multiple occurrences of old_str `\{old_str}` in lines: {line_numbers}. Please ensure it is unique"``
 
 #### Directory handling
 
 If the path is a directory, return a "file does not exist" error.
 
 ### insert
+
 Insert text at a specific line:
 
 ```json
@@ -464,18 +447,19 @@ Insert text at a specific line:
 
 #### Return values
 
-- **Success**: `"The file {path} has been edited."`
+* **Success**: `"The file {path} has been edited."`
 
 #### Error handling
 
-- **File does not exist**: `"Error: The path {path} does not exist"`
-- **Invalid line number**: ``"Error: Invalid `insert_line` parameter: {insert_line}. It should be within the range of lines of the file: [0, {n_lines}]"``
+* **File does not exist**: `"Error: The path {path} does not exist"`
+* **Invalid line number**: ``"Error: Invalid `insert_line` parameter: {insert_line}. It should be within the range of lines of the file: [0, {n_lines}]"``
 
 #### Directory handling
 
 If the path is a directory, return a "file does not exist" error.
 
 ### delete
+
 Delete a file or directory:
 
 ```json
@@ -487,17 +471,18 @@ Delete a file or directory:
 
 #### Return values
 
-- **Success**: `"Successfully deleted {path}"`
+* **Success**: `"Successfully deleted {path}"`
 
 #### Error handling
 
-- **File/directory does not exist**: `"Error: The path {path} does not exist"`
+* **File/directory does not exist**: `"Error: The path {path} does not exist"`
 
 #### Directory handling
 
 Deletes the directory and all its contents recursively.
 
 ### rename
+
 Rename or move a file/directory:
 
 ```json
@@ -510,12 +495,12 @@ Rename or move a file/directory:
 
 #### Return values
 
-- **Success**: `"Successfully renamed {old_path} to {new_path}"`
+* **Success**: `"Successfully renamed {old_path} to {new_path}"`
 
 #### Error handling
 
-- **Source does not exist**: `"Error: The path {old_path} does not exist"`
-- **Destination already exists**: Return an error (do not overwrite): `"Error: The destination {new_path} already exists"`
+* **Source does not exist**: `"Error: The path {old_path} does not exist"`
+* **Destination already exists**: Return an error (do not overwrite): `"Error: The destination {new_path} already exists"`
 
 #### Directory handling
 
@@ -525,7 +510,7 @@ Renames the directory.
 
 This instruction is automatically included in the system prompt when the memory tool is enabled:
 
-```text
+```text wrap
 IMPORTANT: ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE.
 MEMORY PROTOCOL:
 1. Use the `view` command of your `memory` tool to check for earlier progress.
@@ -538,34 +523,37 @@ If you observe Claude creating cluttered memory files, you can include this inst
 
 > Note: when editing your memory folder, always try to keep its content up-to-date, coherent and organized. You can rename or delete files that are no longer relevant. Do not create new files unless necessary.
 
-You can also guide what Claude writes to memory. For example: "Only write down information relevant to \<topic\> in your memory system."
+You can also guide what Claude writes to memory. For example: "Only write down information relevant to \<topic> in your memory system."
 
 ## Security considerations
 
 Here are important security concerns when implementing your memory store:
 
 ### Sensitive information
+
 Claude will usually refuse to write down sensitive information in memory files. However, you may want to implement stricter validation that strips out potentially sensitive information.
 
 ### File storage size
+
 Consider tracking memory file sizes and preventing files from growing too large. Consider adding a maximum number of characters the memory read command can return, and let Claude paginate through contents.
 
 ### Memory expiration
+
 Consider clearing out memory files periodically that haven't been accessed in an extended time.
 
 ### Path traversal protection
 
 <Warning>
-Malicious path inputs could attempt to access files outside the `/memories` directory. Your implementation **MUST** validate all paths to prevent directory traversal attacks.
+  Malicious path inputs could attempt to access files outside the `/memories` directory. Your implementation **MUST** validate all paths to prevent directory traversal attacks.
 </Warning>
 
 Consider these safeguards:
 
-- Validate that all paths start with `/memories`
-- Resolve paths to their canonical form and verify they remain within the memory directory
-- Reject paths containing sequences like `../`, `..\\`, or other traversal patterns
-- Watch for URL-encoded traversal sequences (`%2e%2e%2f`)
-- Use your language's built-in path security utilities (for example, Python's `pathlib.Path.resolve()` and `relative_to()`)
+* Validate that all paths start with `/memories`
+* Resolve paths to their canonical form and verify they remain within the memory directory
+* Reject paths containing sequences like `../`, `..\\`, or other traversal patterns
+* Watch for URL-encoded traversal sequences (`%2e%2e%2f`)
+* Use your language's built-in path security utilities (for example, Python's `pathlib.Path.resolve()` and `relative_to()`)
 
 ## Error handling
 
@@ -598,7 +586,7 @@ For long-running software projects that span multiple agent sessions, memory fil
 Work on one feature at a time. Only mark a feature complete after end-to-end verification confirms it works, not just after the code is written. This keeps the progress log trustworthy and prevents scope creep from compounding across sessions.
 
 <Tip>
-For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
+  For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 </Tip>
 
 ## Next steps
@@ -607,6 +595,7 @@ For a detailed case study of this pattern in practice, including the initializer
   <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="See all tools">
     Directory of Anthropic-provided tools and their properties.
   </Card>
+
   <Card href="/docs/en/build-with-claude/context-editing" title="Context editing">
     Manage conversation length alongside memory.
   </Card>

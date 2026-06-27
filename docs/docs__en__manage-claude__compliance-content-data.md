@@ -5,12 +5,6 @@ Access chat content, file attachments, and projects for claude.ai organizations 
 ---
 
 <Note>
-  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
-</Note>
-:
-    the chat/file/project endpoints read claude.ai content, so unlike the rest of
-    the Compliance API they really are Claude Enterprise-only. */}
-<Note>
   The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations, which have self-service access to the Compliance API. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
@@ -33,15 +27,15 @@ Use [List chats](/docs/en/api/compliance/apps/chats/list) to page through chat m
 The chat list endpoint requires at least one `user_ids[]` value (and accepts up to 10 in one request), so enumerate user IDs first with [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users), then list chats for each user or for each batch of users. The following request lists chats owned by a specific user since a given date.
 
 <CodeGroup>
-```bash cURL nocheck
-curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/apps/chats" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
-  --data-urlencode "organization_ids[]=91012d09-e48b-438e-a489-1bebfd8fa6f9" \
-  --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
-  --data-urlencode "limit=100"
-```
+  ```bash cURL
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/apps/chats" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+    --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
+    --data-urlencode "organization_ids[]=91012d09-e48b-438e-a489-1bebfd8fa6f9" \
+    --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
+    --data-urlencode "limit=100"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -76,13 +70,13 @@ Chat results are sorted by `created_at` ascending (oldest first), with ties brok
 To pull the actual chat content, attached files, and inline artifacts (structured documents Claude generates inside a chat), follow up with the messages endpoint for each chat ID:
 
 <CodeGroup>
-```bash cURL nocheck
-chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
+  ```bash cURL
+  chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id/messages" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  curl --fail-with-body -sS \
+    "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id/messages" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 The messages endpoint returns the chat's metadata plus a `chat_messages` array sorted by `created_at`. When `limit` is omitted, the full message set is returned in one response; pass `limit`, `after_id`, or `before_id` to page through very long chats. The endpoint also accepts `created_at.*` and `updated_at.*` range bounds (`gt`, `gte`, `lt`, `lte`) and an `order` parameter (`asc` or `desc`). See [Get chat messages](/docs/en/api/compliance/apps/chats/messages/list) for the full parameter list. For user messages, `created_at` is when the message was sent; for assistant messages, it is when Claude finished generating the message. Each message carries its text content and, when present, any uploaded files (typically on user messages), any tool-generated files, and any artifacts the assistant produced or updated (typically on assistant messages):
@@ -162,32 +156,32 @@ Files and artifacts are downloaded by ID, not listed independently. The IDs come
 
 Pick the endpoint that matches your ID type and the data you need. The same file content endpoint serves both chat files and project files.
 
-| You have | You want | Use this endpoint |
-| --- | --- | --- |
-| `claude_file_*` ID | The file's binary content | [Download file content](/docs/en/api/compliance/apps/chats/files/download) |
-| `claude_file_*` ID | The file's metadata only | [Get file metadata](/docs/en/api/compliance/apps/chats/files/retrieve) |
-| `claude_gen_file_*` ID | A tool-generated file's binary content | [Download a Claude-generated file](/docs/en/api/compliance/apps/chats/generated_files/download) |
-| `claude_gen_file_*` ID | A tool-generated file's metadata only | [Get generated-file metadata](/docs/en/api/compliance/apps/chats/generated_files/retrieve) |
-| `claude_artifact_version_*` ID | One artifact version's text | [Download artifact content](/docs/en/api/compliance/apps/artifacts/download) |
-| `claude_artifact_version_*` ID | The artifact version's metadata only | [Get artifact metadata](/docs/en/api/compliance/apps/artifacts/retrieve) |
-| `claude_proj_doc_*` ID | A project document's plain-text content | [Get project document content](/docs/en/api/compliance/apps/projects/documents/retrieve) |
-| `claude_proj_doc_*` ID | A project document's metadata only | [Get project document metadata](/docs/en/api/compliance/apps/projects/documents/metadata) |
+| You have                       | You want                                | Use this endpoint                                                                               |
+| ------------------------------ | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `claude_file_*` ID             | The file's binary content               | [Download file content](/docs/en/api/compliance/apps/chats/files/download)                      |
+| `claude_file_*` ID             | The file's metadata only                | [Get file metadata](/docs/en/api/compliance/apps/chats/files/retrieve)                          |
+| `claude_gen_file_*` ID         | A tool-generated file's binary content  | [Download a Claude-generated file](/docs/en/api/compliance/apps/chats/generated_files/download) |
+| `claude_gen_file_*` ID         | A tool-generated file's metadata only   | [Get generated-file metadata](/docs/en/api/compliance/apps/chats/generated_files/retrieve)      |
+| `claude_artifact_version_*` ID | One artifact version's text             | [Download artifact content](/docs/en/api/compliance/apps/artifacts/download)                    |
+| `claude_artifact_version_*` ID | The artifact version's metadata only    | [Get artifact metadata](/docs/en/api/compliance/apps/artifacts/retrieve)                        |
+| `claude_proj_doc_*` ID         | A project document's plain-text content | [Get project document content](/docs/en/api/compliance/apps/projects/documents/retrieve)        |
+| `claude_proj_doc_*` ID         | A project document's metadata only      | [Get project document metadata](/docs/en/api/compliance/apps/projects/documents/metadata)       |
 
 The file content endpoint streams the original upload as a chunked binary response with these headers:
 
-- `Content-Disposition: attachment; filename*=utf-8''` carries the original upload file name in RFC 5987 extended form. The extended form is used for every file name, not only non-ASCII ones.
-- `Content-Type` carries the upload's MIME type.
-- `Content-MD5` carries the file's MD5 digest, base64-encoded as specified in RFC 1864.
-- `Transfer-Encoding: chunked` is always set.
+* `Content-Disposition: attachment; filename*=utf-8''<percent-encoded filename>` carries the original upload file name in RFC 5987 extended form. The extended form is used for every file name, not only non-ASCII ones.
+* `Content-Type` carries the upload's MIME type.
+* `Content-MD5` carries the file's MD5 digest, base64-encoded as specified in RFC 1864.
+* `Transfer-Encoding: chunked` is always set.
 
 <CodeGroup>
-```bash cURL nocheck
-file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
+  ```bash cURL
+  file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
 
-curl --fail-with-body -sS -OJ \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
-```
+  curl --fail-with-body -sS -OJ \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+    "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
+  ```
 </CodeGroup>
 
 The `-OJ` flags tell curl to save the response under the file name from `Content-Disposition`, which is the original file name the user uploaded.
@@ -198,10 +192,10 @@ The artifact content endpoint returns the text body of one artifact version. Pas
 
 Projects bundle related chats together with custom instructions, knowledge base content, and attached files or text documents. The Compliance API exposes project metadata, project details, and the list of attachments belonging to a project.
 
-- [List projects](/docs/en/api/compliance/apps/projects/list)
-- [Get project details](/docs/en/api/compliance/apps/projects/retrieve)
-- [List project attachments](/docs/en/api/compliance/apps/projects/attachments/list)
-- [Get project document content](/docs/en/api/compliance/apps/projects/documents/retrieve)
+* [List projects](/docs/en/api/compliance/apps/projects/list)
+* [Get project details](/docs/en/api/compliance/apps/projects/retrieve)
+* [List project attachments](/docs/en/api/compliance/apps/projects/attachments/list)
+* [Get project document content](/docs/en/api/compliance/apps/projects/documents/retrieve)
 
 Project results are sorted by creation date ascending. Attachment results are sorted by `created_at` ascending, with ties broken by `id`. Project list and attachment list responses paginate with an opaque `next_page` page token instead of the `first_id`/`last_id` cursors used by chats and the Activity Feed. Pass the token back as the `page` query parameter on the next request.
 
@@ -214,13 +208,13 @@ Entries with `type` of `project_file` are binary uploads (PDFs, images, spreadsh
 A consumer that walks the attachment list must branch on `type` and call the matching content endpoint for each entry. The following request lists one page of attachments; paginate by passing `next_page` back as the `page` parameter until `has_more` is `false`.
 
 <CodeGroup>
-```bash cURL nocheck
-project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
+  ```bash cURL
+  project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
 
-curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/apps/projects/$project_id/attachments" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/apps/projects/$project_id/attachments" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -254,29 +248,29 @@ curl --fail-with-body -sS -G \
 
 The Compliance API exposes hard-delete endpoints for chats, files, project documents, and entire projects. A hard-deleted chat cannot be restored, and it stops appearing in list responses afterward (whereas a chat soft-deleted from claude.ai still appears with `deleted_at` populated).
 
-- [Delete chat](/docs/en/api/compliance/apps/chats/delete): also removes the chat's messages and any files attached to those messages.
-- [Delete file](/docs/en/api/compliance/apps/chats/files/delete): handles both chat files and project files.
-- [Delete project document](/docs/en/api/compliance/apps/projects/documents/delete): removes a single project document by ID.
-- [Delete project](/docs/en/api/compliance/apps/projects/delete): see [Detach chats before deleting a project](#detach-chats-before-deleting-a-project).
+* [Delete chat](/docs/en/api/compliance/apps/chats/delete): also removes the chat's messages and any files attached to those messages.
+* [Delete file](/docs/en/api/compliance/apps/chats/files/delete): handles both chat files and project files.
+* [Delete project document](/docs/en/api/compliance/apps/projects/documents/delete): removes a single project document by ID.
+* [Delete project](/docs/en/api/compliance/apps/projects/delete): see [Detach chats before deleting a project](#detach-chats-before-deleting-a-project).
 
 All four endpoints require the `delete:compliance_user_data` scope, which is granted separately from the read scope when the Compliance Access Key is created.
 
 The following request deletes one chat. The same pattern applies to the other delete endpoints; only the URL changes.
 
 <CodeGroup>
-```bash cURL nocheck
-# WARNING: This operation PERMANENTLY deletes the chat, all of its messages,
-# and any attached files. Deletion is immediate and cannot be undone. It
-# requires the `delete:compliance_user_data` scope, which is granted separately
-# from `read:compliance_user_data` when the Compliance Access Key is created.
-# Ensure you have explicit authorization before running this.
+  ```bash cURL
+  # WARNING: This operation PERMANENTLY deletes the chat, all of its messages,
+  # and any attached files. Deletion is immediate and cannot be undone. It
+  # requires the `delete:compliance_user_data` scope, which is granted separately
+  # from `read:compliance_user_data` when the Compliance Access Key is created.
+  # Ensure you have explicit authorization before running this.
 
-chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
+  chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
-curl --fail-with-body -sS -X DELETE \
-  "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  curl --fail-with-body -sS -X DELETE \
+    "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -309,6 +303,7 @@ To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_id
   <Card title="API reference" href="/docs/en/api/compliance/apps">
     The full request and response schema for every chat, file, project, and artifact endpoint.
   </Card>
+
   <Card title="List organizations, users, roles, groups, and settings" href="/docs/en/manage-claude/compliance-org-data">
     Enumerate the people and teams associated with the chats and projects on this page.
   </Card>

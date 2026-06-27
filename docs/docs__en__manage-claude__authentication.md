@@ -6,9 +6,9 @@ Authenticate to the Claude API with API keys or Workload Identity Federation.
 
 The Claude API supports two ways to authenticate requests:
 
-| Method | Credential | Best for |
-|---|---|---|
-| [API key](#api-keys) | Long-lived `sk-ant-api...` secret in the `x-api-key` header | Local development, prototyping, scripts, and single-tenant servers where you control secret storage |
+| Method                                                        | Credential                                                                      | Best for                                                                                                                                        |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [API key](#api-keys)                                          | Long-lived `sk-ant-api...` secret in the `x-api-key` header                     | Local development, prototyping, scripts, and single-tenant servers where you control secret storage                                             |
 | [Workload Identity Federation](#workload-identity-federation) | Short-lived bearer token exchanged from your identity provider's identity token | Production workloads on cloud platforms (AWS, Google Cloud, Azure), CI/CD pipelines, and Kubernetes, where you want to eliminate static secrets |
 
 Both methods grant the same access to Claude API endpoints. Choose API keys to get started quickly, and move to Workload Identity Federation when your workload already has a platform-issued identity you can federate.
@@ -17,8 +17,8 @@ Both methods grant the same access to Claude API endpoints. Choose API keys to g
 
 API keys are static secrets that you generate in the Claude Console and pass on every request.
 
-- **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
-- **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](/docs/en/cli-sdks-libraries/overview) pick it up automatically.
+* **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
+* **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](/docs/en/cli-sdks-libraries/overview) pick it up automatically.
 
 ```http
 POST /v1/messages
@@ -30,96 +30,74 @@ content-type: application/json
 API keys have no expiry. Store them in a secrets manager, rotate them periodically, and revoke any key you suspect has leaked.
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [{"role": "user", "content": "Hello, Claude"}]
+    }'
+  ```
 
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }'
-```
+  ```python Python
+  client = Anthropic(api_key="my-anthropic-api-key")
+  # or, with ANTHROPIC_API_KEY set in the environment:
+  client = Anthropic()
+  ```
 
-```python Python hidelines={1..2}
-from anthropic import Anthropic
+  ```typescript TypeScript
+  const client = new Anthropic({ apiKey: "my-anthropic-api-key" });
+  // or, with ANTHROPIC_API_KEY set in the environment:
+  // const client = new Anthropic();
+  ```
 
-client = Anthropic(api_key="my-anthropic-api-key")
-# or, with ANTHROPIC_API_KEY set in the environment:
-client = Anthropic()
-```
+  ```go Go
+  client := anthropic.NewClient(
+  	option.WithAPIKey("sk-ant-api03-..."), // defaults to os.LookupEnv("ANTHROPIC_API_KEY")
+  )
+  ```
 
-```typescript TypeScript hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
+  ```java Java
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
-const client = new Anthropic({ apiKey: "my-anthropic-api-key" });
-// or, with ANTHROPIC_API_KEY set in the environment:
-// const client = new Anthropic();
-```
+  // Explicit
+  AnthropicClient client = AnthropicOkHttpClient.builder()
+    .apiKey("my-anthropic-api-key")
+    .build();
 
-```go Go hidelines={1..8,12..13}
-package main
+  // From ANTHROPIC_API_KEY (or anthropic.apiKey system property)
+  AnthropicClient clientFromEnv = AnthropicOkHttpClient.fromEnv();
+  ```
 
-import (
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
-)
+  ```csharp C#
+  using Anthropic;
 
-func main() {
-	client := anthropic.NewClient(
-		option.WithAPIKey("sk-ant-api03-..."), // defaults to os.LookupEnv("ANTHROPIC_API_KEY")
-	)
-	_ = client
-}
-```
+  AnthropicClient client = new() { ApiKey = "my-anthropic-api-key" };
+  // Or, with ANTHROPIC_API_KEY set in the environment:
+  // AnthropicClient client = new();
+  ```
 
-```java Java nocheck
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  ```php PHP
+  // Reads ANTHROPIC_API_KEY from the environment
+  $client = new Client();
+  // Or pass the key explicitly:
+  $client = new Client(apiKey: 'my-anthropic-api-key');
+  ```
 
-// Explicit
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .apiKey("my-anthropic-api-key")
-  .build();
+  ```ruby Ruby
+  anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+  # or, with ANTHROPIC_API_KEY set in the environment:
+  anthropic = Anthropic::Client.new
+  ```
 
-// From ANTHROPIC_API_KEY (or anthropic.apiKey system property)
-AnthropicClient clientFromEnv = AnthropicOkHttpClient.fromEnv();
-```
-
-```csharp C#
-using Anthropic;
-
-AnthropicClient client = new() { ApiKey = "my-anthropic-api-key" };
-// Or, with ANTHROPIC_API_KEY set in the environment:
-// AnthropicClient client = new();
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-// Reads ANTHROPIC_API_KEY from the environment
-$client = new Client();
-// Or pass the key explicitly:
-$client = new Client(apiKey: 'my-anthropic-api-key');
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
-# or, with ANTHROPIC_API_KEY set in the environment:
-anthropic = Anthropic::Client.new
-```
-
-```bash CLI
-# See /docs/en/cli-sdks-libraries/cli/authentication#api-key for zsh, bash, and Windows variants
-export ANTHROPIC_API_KEY=sk-ant-api03-...
-```
-
+  ```bash CLI
+  # See /docs/en/cli-sdks-libraries/cli/authentication#api-key for zsh, bash, and Windows variants
+  export ANTHROPIC_API_KEY=sk-ant-api03-...
+  ```
 </CodeGroup>
 
 ## Workload Identity Federation
@@ -136,12 +114,15 @@ To configure federation, you create three resources in the Claude Console (a ser
   <Card title="Set up Workload Identity Federation" icon="lock" href="/docs/en/manage-claude/workload-identity-federation">
     Configure issuers, rules, and service accounts, then exchange tokens
   </Card>
+
   <Card title="Identity provider guides" icon="cloud" href="/docs/en/manage-claude/workload-identity-federation#identity-providers">
     Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SPIFFE, and Okta
   </Card>
+
   <Card title="WIF reference" icon="book" href="/docs/en/manage-claude/wif-reference">
     Environment variables, validation rules, profile configuration, and error reference
   </Card>
+
   <Card title="Client SDKs" icon="code" href="/docs/en/cli-sdks-libraries/overview">
     Python, TypeScript, C#, Go, Java, PHP, Ruby, and the CLI
   </Card>

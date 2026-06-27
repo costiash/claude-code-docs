@@ -5,30 +5,32 @@ Process PDFs with Claude. Extract text, analyze charts, and understand visual co
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
-- Analyzing financial reports and understanding charts/tables
-- Extracting key information from legal documents
-- Translation assistance for documents
-- Converting document information into structured formats
+
+* Analyzing financial reports and understanding charts/tables
+* Extracting key information from legal documents
+* Translation assistance for documents
+* Converting document information into structured formats
 
 ## Before you begin
 
 ### Check PDF requirements
+
 Claude works with any standard PDF. Ensure your request size meets these requirements:
 
-| Requirement | Limit |
-|------------|--------|
-| Maximum request size | 32&nbsp;MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
-| Maximum pages per request | 600 (100 for models with a 200k-token context window) |
-| Format | Standard PDF (no passwords/encryption) |
+| Requirement               | Limit                                                                   |
+| ------------------------- | ----------------------------------------------------------------------- |
+| Maximum request size      | 32 MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
+| Maximum pages per request | 600 (100 for models with a 200k-token context window)                   |
+| Format                    | Standard PDF (no passwords/encryption)                                  |
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
 
 <Tip>
-Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, since each page is processed as an image, downsampling embedded images can also help.
+  Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, since each page is processed as an image, downsampling embedded images can also help.
 </Tip>
 
 Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](/docs/en/build-with-claude/vision#limitations) as other vision tasks.
@@ -42,39 +44,41 @@ PDF support is available on the Claude API, [Claude Platform on AWS](/docs/en/bu
 When using PDF support through Bedrock's Converse API, there are two distinct document processing modes:
 
 <Note>
-**Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).
+  **Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).
 </Note>
 
 #### Document processing modes
 
 1. **Converse Document Chat** (Original mode - Text extraction only)
-   - Provides basic text extraction from PDFs
-   - Cannot analyze images, charts, or visual layouts within PDFs
-   - Uses approximately 1,000 tokens for a 3-page PDF
-   - Automatically used when citations are not enabled
+
+   * Provides basic text extraction from PDFs
+   * Cannot analyze images, charts, or visual layouts within PDFs
+   * Uses approximately 1,000 tokens for a 3-page PDF
+   * Automatically used when citations are not enabled
 
 2. **Claude PDF Chat** (New mode - Full visual understanding)
-   - Provides complete visual analysis of PDFs
-   - Can understand and analyze charts, graphs, images, and visual layouts
-   - Processes each page as both text and image for comprehensive understanding
-   - Uses approximately 7,000 tokens for a 3-page PDF
-   - **Requires citations to be enabled** in the Converse API
+
+   * Provides complete visual analysis of PDFs
+   * Can understand and analyze charts, graphs, images, and visual layouts
+   * Processes each page as both text and image for comprehensive understanding
+   * Uses approximately 7,000 tokens for a 3-page PDF
+   * **Requires citations to be enabled** in the Converse API
 
 #### Key limitations
 
-- **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
-- **InvokeModel API**: Provides full control over PDF processing without forced citations.
+* **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
+* **InvokeModel API**: Provides full control over PDF processing without forced citations.
 
 #### Common issues
 
 If Claude isn't seeing images or charts in your PDFs when using the Converse API, you likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
 <Note>
-This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
+  This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
 </Note>
 
 <Note>
-For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](/docs/en/build-with-claude/files#working-with-other-file-formats).
+  For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](/docs/en/build-with-claude/files#working-with-other-file-formats).
 </Note>
 
 ***
@@ -82,6 +86,7 @@ For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with
 ## Process PDFs with Claude
 
 ### Send your first PDF request
+
 Let's start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
 
 1. As a URL reference to a PDF hosted online
@@ -89,7 +94,7 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 3. By a `file_id` from the [Files API](/docs/en/build-with-claude/files)
 
 <Note>
-On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
+  On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
 </Note>
 
 #### Option 1: URL-based PDF document
@@ -97,144 +102,132 @@ On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently av
 The simplest approach is to reference a PDF directly from a URL:
 
 <CodeGroup>
-   ```bash cURL
-    curl https://api.anthropic.com/v1/messages \
-      -H "content-type: application/json" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -d '{
-        "model": "claude-opus-4-8",
-        "max_tokens": 1024,
-        "messages": [{
-            "role": "user",
-            "content": [{
-                "type": "document",
-                "source": {
-                    "type": "url",
-                    "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-                }
-            },
-            {
-                "type": "text",
-                "text": "What are the key findings in this document?"
-            }]
-        }]
-    }'
-    ```
-    ```bash CLI
-    ant messages create --transform content --format yaml <<'YAML'
-    model: claude-opus-4-8
-    max_tokens: 1024
-    messages:
-      - role: user
-        content:
-          - type: document
-            source:
-              type: url
-              url: https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-          - type: text
-            text: What are the key findings in this document?
-    YAML
-    ```
-    ```python Python hidelines={1..2}
-    import anthropic
+  ```bash cURL
+   curl https://api.anthropic.com/v1/messages \
+     -H "content-type: application/json" \
+     -H "x-api-key: $ANTHROPIC_API_KEY" \
+     -H "anthropic-version: 2023-06-01" \
+     -d '{
+       "model": "claude-opus-4-8",
+       "max_tokens": 1024,
+       "messages": [{
+           "role": "user",
+           "content": [{
+               "type": "document",
+               "source": {
+                   "type": "url",
+                   "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+               }
+           },
+           {
+               "type": "text",
+               "text": "What are the key findings in this document?"
+           }]
+       }]
+   }'
+  ```
 
-    client = anthropic.Anthropic()
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "document",
-                        "source": {
-                            "type": "url",
-                            "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
-                        },
-                    },
-                    {"type": "text", "text": "What are the key findings in this document?"},
-                ],
+  ```bash CLI
+  ant messages create --transform content --format yaml <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: document
+          source:
+            type: url
+            url: https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+        - type: text
+          text: What are the key findings in this document?
+  YAML
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {
+                      "type": "document",
+                      "source": {
+                          "type": "url",
+                          "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+                      },
+                  },
+                  {"type": "text", "text": "What are the key findings in this document?"},
+              ],
+          }
+      ],
+  )
+
+  print(message.content)
+  ```
+
+  ```typescript TypeScript
+  const response = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "document",
+            source: {
+              type: "url",
+              url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
             }
-        ],
-    )
-
-    print(message.content)
-    ```
-    ```typescript TypeScript hidelines={1..4}
-    import Anthropic from "@anthropic-ai/sdk";
-
-    const anthropic = new Anthropic();
-
-    const response = await anthropic.messages.create({
-      model: "claude-opus-4-8",
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "document",
-              source: {
-                type: "url",
-                url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-              }
-            },
-            {
-              type: "text",
-              text: "What are the key findings in this document?"
-            }
-          ]
-        }
-      ]
-    });
-
-    console.log(response);
-    ```
-    ```java Java hidelines={1..8,-2..}
-    import com.anthropic.client.AnthropicClient;
-    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-    import com.anthropic.models.messages.*;
-    import java.util.List;
-
-    public class PdfUrlExample {
-
-      public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        // Create document block with URL
-        DocumentBlockParam documentParam = DocumentBlockParam.builder()
-          .source(
-            UrlPdfSource.builder()
-              .url(
-                "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-              )
-              .build()
-          )
-          .build();
-
-        // Create a message with document and text content blocks
-        MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
-          .maxTokens(1024)
-          .addUserMessageOfBlockParams(
-            List.of(
-              ContentBlockParam.ofDocument(documentParam),
-              ContentBlockParam.ofText(
-                TextBlockParam.builder()
-                  .text("What are the key findings in this document?")
-                  .build()
-              )
-            )
-          )
-          .build();
-
-        Message message = client.messages().create(params);
-        System.out.println(message.content());
+          },
+          {
+            type: "text",
+            text: "What are the key findings in this document?"
+          }
+        ]
       }
-    }
-    ```
+    ]
+  });
+
+  console.log(response);
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  // Create document block with URL
+  DocumentBlockParam documentParam = DocumentBlockParam.builder()
+    .source(
+      UrlPdfSource.builder()
+        .url(
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+        )
+        .build()
+    )
+    .build();
+
+  // Create a message with document and text content blocks
+  MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_8)
+    .maxTokens(1024)
+    .addUserMessageOfBlockParams(
+      List.of(
+        ContentBlockParam.ofDocument(documentParam),
+        ContentBlockParam.ofText(
+          TextBlockParam.builder()
+            .text("What are the key findings in this document?")
+            .build()
+        )
+      )
+    )
+    .build();
+
+  Message message = client.messages().create(params);
+  System.out.println(message.content());
+  ```
 </CodeGroup>
 
 #### Option 2: Base64-encoded PDF document
@@ -242,214 +235,186 @@ The simplest approach is to reference a PDF directly from a URL:
 If you need to send PDFs from your local system or when a URL isn't available:
 
 <CodeGroup>
-    ```bash cURL hidelines={1}
-    cd "$(mktemp -d)"
-    # Method 1: Fetch and encode a remote PDF
-    curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
+  ```bash cURL
+  # Method 1: Fetch and encode a remote PDF
+  curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 
-    # Method 2: Encode a local PDF file
-    # base64 document.pdf | tr -d '\n' > pdf_base64.txt
+  # Method 2: Encode a local PDF file
+  # base64 document.pdf | tr -d '\n' > pdf_base64.txt
 
-    # Create a JSON request file using the pdf_base64.txt content
-    jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-        "model": "claude-opus-4-8",
-        "max_tokens": 1024,
-        "messages": [{
-            "role": "user",
-            "content": [{
-                "type": "document",
-                "source": {
-                    "type": "base64",
-                    "media_type": "application/pdf",
-                    "data": $PDF_BASE64
-                }
-            },
-            {
-                "type": "text",
-                "text": "What are the key findings in this document?"
-            }]
-        }]
-    }' > request.json
-
-    # Send the API request using the JSON file
-    curl https://api.anthropic.com/v1/messages \
-      -H "content-type: application/json" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -d @request.json
-    ```
-    ```bash CLI hidelines={1..2}
-    cd "$(mktemp -d)"
-    curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-    ant messages create \
-      --model claude-opus-4-8 \
-      --max-tokens 1024 \
-      --transform content --format yaml <<'YAML'
-    messages:
-      - role: user
-        content:
-          - type: document
-            source:
-              type: base64
-              media_type: application/pdf
-              data: "@./document.pdf"
-          - type: text
-            text: What are the key findings in this document?
-    YAML
-    ```
-    ```python Python hidelines={1}
-    import anthropic
-    import base64
-    import httpx
-
-    # First, load and encode the PDF
-    pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-    pdf_data = base64.standard_b64encode(
-        httpx.get(pdf_url, follow_redirects=True).content
-    ).decode("utf-8")
-
-    # Alternative: Load from a local file
-    # with open("document.pdf", "rb") as f:
-    #     pdf_data = base64.standard_b64encode(f.read()).decode("utf-8")
-
-    # Send to Claude using base64 encoding
-    client = anthropic.Anthropic()
-    message = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=1024,
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "document",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "application/pdf",
-                            "data": pdf_data,
-                        },
-                    },
-                    {"type": "text", "text": "What are the key findings in this document?"},
-                ],
-            }
-        ],
-    )
-
-    print(message.content)
-    ```
-    ```typescript TypeScript hidelines={1..3,-3..-1}
-    import Anthropic from "@anthropic-ai/sdk";
-
-    async function main() {
-      // Method 1: Fetch and encode a remote PDF
-      const pdfURL =
-        "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
-      const pdfResponse = await fetch(pdfURL);
-      const arrayBuffer = await pdfResponse.arrayBuffer();
-      const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
-
-      // Method 2: Load from a local file
-      // import { readFile } from "node:fs/promises";
-      // const pdfBase64 = (await readFile('document.pdf')).toString('base64');
-
-      // Send the API request with base64-encoded PDF
-      const anthropic = new Anthropic();
-      const response = await anthropic.messages.create({
-        model: "claude-opus-4-8",
-        max_tokens: 1024,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "document",
-                source: {
-                  type: "base64",
-                  media_type: "application/pdf",
-                  data: pdfBase64
-                }
-              },
-              {
-                type: "text",
-                text: "What are the key findings in this document?"
+  # Create a JSON request file using the pdf_base64.txt content
+  jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [{
+          "role": "user",
+          "content": [{
+              "type": "document",
+              "source": {
+                  "type": "base64",
+                  "media_type": "application/pdf",
+                  "data": $PDF_BASE64
               }
-            ]
+          },
+          {
+              "type": "text",
+              "text": "What are the key findings in this document?"
+          }]
+      }]
+  }' > request.json
+
+  # Send the API request using the JSON file
+  curl https://api.anthropic.com/v1/messages \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -d @request.json
+  ```
+
+  ```bash CLI
+  ant messages create \
+    --model claude-opus-4-8 \
+    --max-tokens 1024 \
+    --transform content --format yaml <<'YAML'
+  messages:
+    - role: user
+      content:
+        - type: document
+          source:
+            type: base64
+            media_type: application/pdf
+            data: "@./document.pdf"
+        - type: text
+          text: What are the key findings in this document?
+  YAML
+  ```
+
+  ```python Python
+  import base64
+  import httpx
+
+  # First, load and encode the PDF
+  pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+  pdf_data = base64.standard_b64encode(
+      httpx.get(pdf_url, follow_redirects=True).content
+  ).decode("utf-8")
+
+  # Alternative: Load from a local file
+  # with open("document.pdf", "rb") as f:
+  #     pdf_data = base64.standard_b64encode(f.read()).decode("utf-8")
+
+  # Send to Claude using base64 encoding
+  client = anthropic.Anthropic()
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {
+                      "type": "document",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "application/pdf",
+                          "data": pdf_data,
+                      },
+                  },
+                  {"type": "text", "text": "What are the key findings in this document?"},
+              ],
+          }
+      ],
+  )
+
+  print(message.content)
+  ```
+
+  ```typescript TypeScript
+  // Method 1: Fetch and encode a remote PDF
+  const pdfURL =
+    "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
+  const pdfResponse = await fetch(pdfURL);
+  const arrayBuffer = await pdfResponse.arrayBuffer();
+  const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
+
+  // Method 2: Load from a local file
+  // import { readFile } from "node:fs/promises";
+  // const pdfBase64 = (await readFile('document.pdf')).toString('base64');
+
+  // Send the API request with base64-encoded PDF
+  const anthropic = new Anthropic();
+  const response = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "document",
+            source: {
+              type: "base64",
+              media_type: "application/pdf",
+              data: pdfBase64
+            }
+          },
+          {
+            type: "text",
+            text: "What are the key findings in this document?"
           }
         ]
-      });
+      }
+    ]
+  });
 
-      console.log(response);
-    }
+  console.log(response);
+  ```
 
-    main();
-    ```
+  ```java Java
+  import com.anthropic.models.messages.Base64PdfSource;
+  // ...
+  import com.anthropic.models.messages.DocumentBlockParam;
+  // ...
+      // Method 1: Download and encode a remote PDF
+      String pdfUrl =
+        "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
+      HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
+      HttpRequest request = HttpRequest.newBuilder().uri(URI.create(pdfUrl)).GET().build();
 
-    ```java Java hidelines={1..2,4,6..22,-2..}
-    import com.anthropic.client.AnthropicClient;
-    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-    import com.anthropic.models.messages.Base64PdfSource;
-    import com.anthropic.models.messages.ContentBlockParam;
-    import com.anthropic.models.messages.DocumentBlockParam;
-    import com.anthropic.models.messages.Message;
-    import com.anthropic.models.messages.MessageCreateParams;
-    import com.anthropic.models.messages.Model;
-    import com.anthropic.models.messages.TextBlockParam;
-    import java.io.IOException;
-    import java.net.URI;
-    import java.net.http.HttpClient;
-    import java.net.http.HttpRequest;
-    import java.net.http.HttpResponse;
-    import java.util.Base64;
-    import java.util.List;
+      HttpResponse<byte[]> response = httpClient.send(
+        request,
+        HttpResponse.BodyHandlers.ofByteArray()
+      );
+      String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
 
-    public class PdfBase64Example {
+      // Method 2: Load from a local file
+      // byte[] fileBytes = Files.readAllBytes(Path.of("document.pdf"));
+      // String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
 
-      public static void main(String[] args) throws IOException, InterruptedException {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+      // Create document block with base64 data
+      DocumentBlockParam documentParam = DocumentBlockParam.builder()
+        .source(Base64PdfSource.builder().data(pdfBase64).build())
+        .build();
 
-        // Method 1: Download and encode a remote PDF
-        String pdfUrl =
-          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
-        HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(pdfUrl)).GET().build();
-
-        HttpResponse<byte[]> response = httpClient.send(
-          request,
-          HttpResponse.BodyHandlers.ofByteArray()
-        );
-        String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
-
-        // Method 2: Load from a local file
-        // byte[] fileBytes = Files.readAllBytes(Path.of("document.pdf"));
-        // String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
-
-        // Create document block with base64 data
-        DocumentBlockParam documentParam = DocumentBlockParam.builder()
-          .source(Base64PdfSource.builder().data(pdfBase64).build())
-          .build();
-
-        // Create a message with document and text content blocks
-        MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
-          .maxTokens(1024)
-          .addUserMessageOfBlockParams(
-            List.of(
-              ContentBlockParam.ofDocument(documentParam),
-              ContentBlockParam.ofText(
-                TextBlockParam.builder()
-                  .text("What are the key findings in this document?")
-                  .build()
-              )
+      // Create a message with document and text content blocks
+      MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024)
+        .addUserMessageOfBlockParams(
+          List.of(
+            ContentBlockParam.ofDocument(documentParam),
+            ContentBlockParam.ofText(
+              TextBlockParam.builder()
+                .text("What are the key findings in this document?")
+                .build()
             )
           )
-          .build();
+        )
+        .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message.content());
-      }
-    }
-    ```
-
+      Message message = client.messages().create(params);
+      System.out.println(message.content());
+  ```
 </CodeGroup>
 
 #### Option 3: Files API
@@ -457,235 +422,222 @@ If you need to send PDFs from your local system or when a URL isn't available:
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):
 
 <CodeGroup>
-```bash cURL hidelines={1..2}
-cd "$(mktemp -d)"
-curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-# First, upload your PDF to the Files API
-FILE_ID=$(curl -sS -X POST https://api.anthropic.com/v1/files \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -F "file=@document.pdf" | jq -r '.id')
+  ```bash cURL
+  # First, upload your PDF to the Files API
+  FILE_ID=$(curl -sS -X POST https://api.anthropic.com/v1/files \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: files-api-2025-04-14" \
+    -F "file=@document.pdf" | jq -r '.id')
 
-# Then use the returned file_id in your message
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-4-8",
-  "max_tokens": 1024,
-  "messages": [{
-    "role": "user",
-    "content": [{
-      "type": "document",
-      "source": {
-        "type": "file",
-        "file_id": "$FILE_ID"
-      }
-    },
-    {
-      "type": "text",
-      "text": "What are the key findings in this document?"
+  # Then use the returned file_id in your message
+  curl https://api.anthropic.com/v1/messages \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: files-api-2025-04-14" \
+    -d @- <<EOF
+  {
+    "model": "claude-opus-4-8",
+    "max_tokens": 1024,
+    "messages": [{
+      "role": "user",
+      "content": [{
+        "type": "document",
+        "source": {
+          "type": "file",
+          "file_id": "$FILE_ID"
+        }
+      },
+      {
+        "type": "text",
+        "text": "What are the key findings in this document?"
+      }]
     }]
-  }]
-}
-EOF
-```
+  }
+  EOF
+  ```
 
-```bash CLI hidelines={1}
-curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-# First, upload your PDF to the Files API
-FILE_ID=$(ant beta:files upload \
-  --file ./document.pdf \
-  --transform id --raw-output)
+  ```bash CLI
+  # First, upload your PDF to the Files API
+  FILE_ID=$(ant beta:files upload \
+    --file ./document.pdf \
+    --transform id --raw-output)
 
-# Then use the returned file_id in your message
-ant beta:messages create \
-  --beta files-api-2025-04-14 \
-  --transform content --format yaml <<YAML
-model: claude-opus-4-8
-max_tokens: 1024
-messages:
-  - role: user
-    content:
-      - type: document
-        source:
-          type: file
-          file_id: $FILE_ID
-      - type: text
-        text: What are the key findings in this document?
-YAML
-```
+  # Then use the returned file_id in your message
+  ant beta:messages create \
+    --beta files-api-2025-04-14 \
+    --transform content --format yaml <<YAML
+  model: claude-opus-4-8
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: document
+          source:
+            type: file
+            file_id: $FILE_ID
+        - type: text
+          text: What are the key findings in this document?
+  YAML
+  ```
 
-```python Python hidelines={1..2}
-import anthropic
+  ```python Python
+  client = anthropic.Anthropic()
 
-client = anthropic.Anthropic()
+  # Upload the PDF file
+  with open("/path/to/document.pdf", "rb") as f:
+      file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
 
-# Upload the PDF file
-with open("/path/to/document.pdf", "rb") as f:
-    file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
-
-# Use the uploaded file in a message
-message = client.beta.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    betas=["files-api-2025-04-14"],
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "document",
-                    "source": {"type": "file", "file_id": file_upload.id},
-                },
-                {"type": "text", "text": "What are the key findings in this document?"},
-            ],
-        }
-    ],
-)
-
-print(message.content)
-```
-
-```typescript TypeScript nocheck
-import Anthropic, { toFile } from "@anthropic-ai/sdk";
-import fs from "fs";
-
-const anthropic = new Anthropic();
-
-// Upload the PDF file
-const fileUpload = await anthropic.beta.files.upload({
-  file: await toFile(fs.createReadStream("/path/to/document.pdf"), undefined, {
-    type: "application/pdf"
-  })
-});
-
-// Use the uploaded file in a message
-const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  betas: ["files-api-2025-04-14"],
-  messages: [
-    {
-      role: "user",
-      content: [
-        {
-          type: "document",
-          source: {
-            type: "file",
-            file_id: fileUpload.id
+  # Use the uploaded file in a message
+  message = client.beta.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      betas=["files-api-2025-04-14"],
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {
+                      "type": "document",
+                      "source": {"type": "file", "file_id": file_upload.id},
+                  },
+                  {"type": "text", "text": "What are the key findings in this document?"},
+              ],
           }
-        },
-        {
-          type: "text",
-          text: "What are the key findings in this document?"
-        }
-      ]
-    }
-  ]
-});
+      ],
+  )
 
-console.log(response);
-```
+  print(message.content)
+  ```
 
-```java Java hidelines={1..2,4,7,9,11..22,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.core.MultipartField;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.beta.files.FileMetadata;
-import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
-import com.anthropic.models.beta.messages.BetaFileDocumentSource;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
-import com.anthropic.models.beta.messages.BetaTextBlockParam;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+  ```typescript TypeScript
+  import Anthropic, { toFile } from "@anthropic-ai/sdk";
+  import fs from "fs";
 
-public class PdfFilesExample {
+  const anthropic = new Anthropic();
 
-  public static void main(String[] args) throws Exception {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  // Upload the PDF file
+  const fileUpload = await anthropic.beta.files.upload({
+    file: await toFile(fs.createReadStream("/path/to/document.pdf"), undefined, {
+      type: "application/pdf"
+    })
+  });
 
-    // Upload the PDF file
-    FileMetadata file = client
-      .beta()
-      .files()
-      .upload(
-        FileUploadParams.builder()
-          .file(
-            MultipartField.<InputStream>builder()
-              .value(Files.newInputStream(Path.of("/path/to/document.pdf")))
-              .filename("document.pdf")
-              .contentType("application/pdf")
-              .build()
-          )
-          .build()
-      );
+  // Use the uploaded file in a message
+  const response = await anthropic.beta.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    betas: ["files-api-2025-04-14"],
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "document",
+            source: {
+              type: "file",
+              file_id: fileUpload.id
+            }
+          },
+          {
+            type: "text",
+            text: "What are the key findings in this document?"
+          }
+        ]
+      }
+    ]
+  });
 
-    // Use the uploaded file in a message
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
-      .addBeta("files-api-2025-04-14")
-      .maxTokens(1024)
-      .addUserMessageOfBetaContentBlockParams(
-        List.of(
-          BetaContentBlockParam.ofDocument(
-            BetaRequestDocumentBlock.builder()
-              .source(
-                BetaFileDocumentSource.builder()
-                  .fileId(file.id())
-                  .build()
-              )
-              .build()
-          ),
-          BetaContentBlockParam.ofText(
-            BetaTextBlockParam.builder()
-              .text("What are the key findings in this document?")
-              .build()
+  console.log(response);
+  ```
+
+  ```java Java
+  import com.anthropic.core.MultipartField;
+  // ...
+  import com.anthropic.models.beta.files.FileMetadata;
+  import com.anthropic.models.beta.files.FileUploadParams;
+  // ...
+  import com.anthropic.models.beta.messages.BetaFileDocumentSource;
+  // ...
+  import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
+  // ...
+      // Upload the PDF file
+      FileMetadata file = client
+        .beta()
+        .files()
+        .upload(
+          FileUploadParams.builder()
+            .file(
+              MultipartField.<InputStream>builder()
+                .value(Files.newInputStream(Path.of("/path/to/document.pdf")))
+                .filename("document.pdf")
+                .contentType("application/pdf")
+                .build()
+            )
+            .build()
+        );
+
+      // Use the uploaded file in a message
+      MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .addBeta("files-api-2025-04-14")
+        .maxTokens(1024)
+        .addUserMessageOfBetaContentBlockParams(
+          List.of(
+            BetaContentBlockParam.ofDocument(
+              BetaRequestDocumentBlock.builder()
+                .source(
+                  BetaFileDocumentSource.builder()
+                    .fileId(file.id())
+                    .build()
+                )
+                .build()
+            ),
+            BetaContentBlockParam.ofText(
+              BetaTextBlockParam.builder()
+                .text("What are the key findings in this document?")
+                .build()
+            )
           )
         )
-      )
-      .build();
+        .build();
 
-    BetaMessage message = client.beta().messages().create(params);
-    System.out.println(message.content());
-  }
-}
-```
+      BetaMessage message = client.beta().messages().create(params);
+      System.out.println(message.content());
+  ```
 </CodeGroup>
 
 ### How PDF support works
+
 When you send a PDF to Claude, the following steps occur:
+
 <Steps>
   <Step title="The system extracts the contents of the document.">
-    - The system converts each page of the document into an image.
-    - The text from each page is extracted and provided alongside each page's image.
+    * The system converts each page of the document into an image.
+    * The text from each page is extracted and provided alongside each page's image.
   </Step>
+
   <Step title="Claude analyzes both the text and images to better understand the document.">
-    - Documents are provided as a combination of text and images for analysis.
-    - This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
+    * Documents are provided as a combination of text and images for analysis.
+    * This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
   </Step>
+
   <Step title="Claude responds, referencing the PDF's contents if relevant.">
     Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
-    - **Prompt caching**: To improve performance for repeated analysis.
-    - **Batch processing**: For high-volume document processing.
-    - **Tool use**: To extract specific information from documents for use as tool inputs.
+
+    * **Prompt caching**: To improve performance for repeated analysis.
+    * **Batch processing**: For high-volume document processing.
+    * **Tool use**: To extract specific information from documents for use as tool inputs.
   </Step>
 </Steps>
 
 ### Estimate your costs
+
 The token count of a PDF file depends on the total text extracted from the document as well as the number of pages:
-- Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
-- Image token costs: Since each page is converted into an image, the same [image-based cost calculations](/docs/en/build-with-claude/vision#evaluate-image-size) are applied.
+
+* Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
+* Image token costs: Since each page is converted into an image, the same [image-based cost calculations](/docs/en/build-with-claude/vision#evaluate-image-size) are applied.
 
 You can use [token counting](/docs/en/build-with-claude/token-counting) to estimate costs for your specific PDFs.
 
@@ -694,506 +646,446 @@ You can use [token counting](/docs/en/build-with-claude/token-counting) to estim
 ## Optimize PDF processing
 
 ### Improve performance
+
 Follow these best practices for optimal results:
-- Place PDFs before text in your requests
-- Use standard fonts
-- Ensure text is clear and legible
-- Rotate pages to proper upright orientation
-- Use logical page numbers (from PDF viewer) in prompts
-- Split large PDFs into chunks when needed
-- Enable prompt caching for repeated analysis
+
+* Place PDFs before text in your requests
+* Use standard fonts
+* Ensure text is clear and legible
+* Rotate pages to proper upright orientation
+* Use logical page numbers (from PDF viewer) in prompts
+* Split large PDFs into chunks when needed
+* Enable prompt caching for repeated analysis
 
 ### Scale your implementation
+
 For high-volume processing, consider these approaches:
 
 #### Use prompt caching
+
 Cache PDFs to improve performance on repeated queries:
+
 <CodeGroup>
-```bash cURL hidelines={1..2}
-cd "$(mktemp -d)"
-curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
-# Create a JSON request file using the pdf_base64.txt content
-jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1024,
-    "messages": [{
-        "role": "user",
-        "content": [{
-            "type": "document",
-            "source": {
-                "type": "base64",
-                "media_type": "application/pdf",
-                "data": $PDF_BASE64
-            },
-            "cache_control": {
-              "type": "ephemeral"
-            }
-        },
-        {
-            "type": "text",
-            "text": "Which model has the highest human preference win rates across each use-case?"
-        }]
-    }]
-}' > request.json
-
-# Then make the API call using the JSON file
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @request.json
-```
-```bash CLI hidelines={1..2}
-cd "$(mktemp -d)"
-curl -sSLo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-ant messages create <<'YAML'
-model: claude-opus-4-8
-max_tokens: 1024
-messages:
-  - role: user
-    content:
-      - type: document
-        source:
-          type: base64
-          media_type: application/pdf
-          data: "@./document.pdf"
-        cache_control:
-          type: ephemeral
-      - type: text
-        text: Which model has the highest human preference win rates across each use-case?
-YAML
-```
-
-```python Python nocheck hidelines={1..5,7..13}
-import anthropic
-import base64
-from pypdf import PdfWriter
-import io
-
-client = anthropic.Anthropic()
-
-buf = io.BytesIO()
-writer = PdfWriter()
-writer.add_blank_page(width=72, height=72)
-writer.write(buf)
-pdf_data = base64.standard_b64encode(buf.getvalue()).decode("utf-8")
-
-message = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "document",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "application/pdf",
-                        "data": pdf_data,
-                    },
-                    "cache_control": {"type": "ephemeral"},
-                },
-                {"type": "text", "text": "Analyze this document."},
-            ],
-        }
-    ],
-)
-```
-
-```typescript TypeScript nocheck
-const response = await anthropic.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  messages: [
-    {
-      content: [
-        {
-          type: "document",
-          source: {
-            media_type: "application/pdf",
-            type: "base64",
-            data: pdfBase64
+  ```bash cURL
+  # Create a JSON request file using the pdf_base64.txt content
+  jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [{
+          "role": "user",
+          "content": [{
+              "type": "document",
+              "source": {
+                  "type": "base64",
+                  "media_type": "application/pdf",
+                  "data": $PDF_BASE64
+              },
+              "cache_control": {
+                "type": "ephemeral"
+              }
           },
-          cache_control: { type: "ephemeral" }
-        },
-        {
-          type: "text",
-          text: "Which model has the highest human preference win rates across each use-case?"
-        }
+          {
+              "type": "text",
+              "text": "Which model has the highest human preference win rates across each use-case?"
+          }]
+      }]
+  }' > request.json
+
+  # Then make the API call using the JSON file
+  curl https://api.anthropic.com/v1/messages \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -d @request.json
+  ```
+
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: document
+          source:
+            type: base64
+            media_type: application/pdf
+            data: "@./document.pdf"
+          cache_control:
+            type: ephemeral
+        - type: text
+          text: Which model has the highest human preference win rates across each use-case?
+  YAML
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+  # ...
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {
+                      "type": "document",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "application/pdf",
+                          "data": pdf_data,
+                      },
+                      "cache_control": {"type": "ephemeral"},
+                  },
+                  {"type": "text", "text": "Analyze this document."},
+              ],
+          }
       ],
-      role: "user"
-    }
-  ]
-});
-console.log(response);
-```
+  )
+  ```
 
-```java Java nocheck hidelines={1..2,5,7..20,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Base64PdfSource;
-import com.anthropic.models.messages.CacheControlEphemeral;
-import com.anthropic.models.messages.ContentBlockParam;
-import com.anthropic.models.messages.DocumentBlockParam;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.TextBlockParam;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+  ```typescript TypeScript
+  const response = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        content: [
+          {
+            type: "document",
+            source: {
+              media_type: "application/pdf",
+              type: "base64",
+              data: pdfBase64
+            },
+            cache_control: { type: "ephemeral" }
+          },
+          {
+            type: "text",
+            text: "Which model has the highest human preference win rates across each use-case?"
+          }
+        ],
+        role: "user"
+      }
+    ]
+  });
+  console.log(response);
+  ```
 
-public class MessagesDocumentExample {
+  ```java Java
+  import com.anthropic.models.messages.Base64PdfSource;
+  import com.anthropic.models.messages.CacheControlEphemeral;
+  // ...
+  import com.anthropic.models.messages.DocumentBlockParam;
+  // ...
+      // Read PDF file as base64
+      byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
+      String pdfBase64 = new String(pdfBytes);
 
-  public static void main(String[] args) throws IOException {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    // Read PDF file as base64
-    byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
-    String pdfBase64 = new String(pdfBytes);
-
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
-      .maxTokens(1024)
-      .addUserMessageOfBlockParams(
-        List.of(
-          ContentBlockParam.ofDocument(
-            DocumentBlockParam.builder()
-              .source(Base64PdfSource.builder().data(pdfBase64).build())
-              .cacheControl(CacheControlEphemeral.builder().build())
-              .build()
-          ),
-          ContentBlockParam.ofText(
-            TextBlockParam.builder()
-              .text(
-                "Which model has the highest human preference win rates across each use-case?"
-              )
-              .build()
+      MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024)
+        .addUserMessageOfBlockParams(
+          List.of(
+            ContentBlockParam.ofDocument(
+              DocumentBlockParam.builder()
+                .source(Base64PdfSource.builder().data(pdfBase64).build())
+                .cacheControl(CacheControlEphemeral.builder().build())
+                .build()
+            ),
+            ContentBlockParam.ofText(
+              TextBlockParam.builder()
+                .text(
+                  "Which model has the highest human preference win rates across each use-case?"
+                )
+                .build()
+            )
           )
         )
-      )
-      .build();
+        .build();
 
-    Message message = client.messages().create(params);
-    System.out.println(message);
-  }
-}
-```
+      Message message = client.messages().create(params);
+      System.out.println(message);
+  ```
 </CodeGroup>
 
 #### Process document batches
+
 Use the Message Batches API for high-volume workflows:
+
 <CodeGroup>
-```bash cURL hidelines={1..2}
-cd "$(mktemp -d)"
-curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
-# Create a JSON request file using the pdf_base64.txt content
-jq -n --rawfile PDF_BASE64 pdf_base64.txt '
-{
-  "requests": [
-      {
-          "custom_id": "my-first-request",
-          "params": {
-              "model": "claude-opus-4-8",
-              "max_tokens": 1024,
-              "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "document",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "application/pdf",
-                                "data": $PDF_BASE64
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": "Which model has the highest human preference win rates across each use-case?"
-                        }
-                    ]
-                }
-              ]
-          }
-      },
-      {
-          "custom_id": "my-second-request",
-          "params": {
-              "model": "claude-opus-4-8",
-              "max_tokens": 1024,
-              "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "document",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "application/pdf",
-                                "data": $PDF_BASE64
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": "Extract 5 key insights from this document."
-                        }
-                    ]
-                }
-              ]
-          }
-      }
-  ]
-}
-' > request.json
-
-# Then make the API call using the JSON file
-curl https://api.anthropic.com/v1/messages/batches \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @request.json
-```
-```bash CLI hidelines={1..2}
-cd "$(mktemp -d)"
-curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
-ant messages:batches create <<'YAML'
-requests:
-  - custom_id: my-first-request
-    params:
-      model: claude-opus-4-8
-      max_tokens: 1024
-      messages:
-        - role: user
-          content:
-            - type: document
-              source:
-                type: base64
-                media_type: application/pdf
-                data: "@./document.pdf"
-            - type: text
-              text: >-
-                Which model has the highest human preference win rates
-                across each use-case?
-  - custom_id: my-second-request
-    params:
-      model: claude-opus-4-8
-      max_tokens: 1024
-      messages:
-        - role: user
-          content:
-            - type: document
-              source:
-                type: base64
-                media_type: application/pdf
-                data: "@./document.pdf"
-            - type: text
-              text: Extract 5 key insights from this document.
-YAML
-```
-
-```python Python nocheck hidelines={1..5,7..13}
-import anthropic
-import base64
-from pypdf import PdfWriter
-import io
-
-client = anthropic.Anthropic()
-
-buf = io.BytesIO()
-writer = PdfWriter()
-writer.add_blank_page(width=72, height=72)
-writer.write(buf)
-pdf_data = base64.standard_b64encode(buf.getvalue()).decode("utf-8")
-
-message_batch = client.messages.batches.create(
-    requests=[
+  ```bash cURL
+  # Create a JSON request file using the pdf_base64.txt content
+  jq -n --rawfile PDF_BASE64 pdf_base64.txt '
+  {
+    "requests": [
         {
-            "custom_id": "doc1",
+            "custom_id": "my-first-request",
             "params": {
                 "model": "claude-opus-4-8",
                 "max_tokens": 1024,
                 "messages": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "document",
-                                "source": {
-                                    "type": "base64",
-                                    "media_type": "application/pdf",
-                                    "data": pdf_data,
-                                },
-                            },
-                            {"type": "text", "text": "Summarize this document."},
-                        ],
-                    }
-                ],
-            },
+                  {
+                      "role": "user",
+                      "content": [
+                          {
+                              "type": "document",
+                              "source": {
+                                  "type": "base64",
+                                  "media_type": "application/pdf",
+                                  "data": $PDF_BASE64
+                              }
+                          },
+                          {
+                              "type": "text",
+                              "text": "Which model has the highest human preference win rates across each use-case?"
+                          }
+                      ]
+                  }
+                ]
+            }
+        },
+        {
+            "custom_id": "my-second-request",
+            "params": {
+                "model": "claude-opus-4-8",
+                "max_tokens": 1024,
+                "messages": [
+                  {
+                      "role": "user",
+                      "content": [
+                          {
+                              "type": "document",
+                              "source": {
+                                  "type": "base64",
+                                  "media_type": "application/pdf",
+                                  "data": $PDF_BASE64
+                              }
+                          },
+                          {
+                              "type": "text",
+                              "text": "Extract 5 key insights from this document."
+                          }
+                      ]
+                  }
+                ]
+            }
         }
     ]
-)
-```
-
-```typescript TypeScript nocheck
-const response = await anthropic.messages.batches.create({
-  requests: [
-    {
-      custom_id: "my-first-request",
-      params: {
-        max_tokens: 1024,
-        messages: [
-          {
-            content: [
-              {
-                type: "document",
-                source: {
-                  media_type: "application/pdf",
-                  type: "base64",
-                  data: pdfBase64
-                }
-              },
-              {
-                type: "text",
-                text: "Which model has the highest human preference win rates across each use-case?"
-              }
-            ],
-            role: "user"
-          }
-        ],
-        model: "claude-opus-4-8"
-      }
-    },
-    {
-      custom_id: "my-second-request",
-      params: {
-        max_tokens: 1024,
-        messages: [
-          {
-            content: [
-              {
-                type: "document",
-                source: {
-                  media_type: "application/pdf",
-                  type: "base64",
-                  data: pdfBase64
-                }
-              },
-              {
-                type: "text",
-                text: "Extract 5 key insights from this document."
-              }
-            ],
-            role: "user"
-          }
-        ],
-        model: "claude-opus-4-8"
-      }
-    }
-  ]
-});
-console.log(response);
-```
-
-```java Java nocheck hidelines={1..3,5..14,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.*;
-import com.anthropic.models.messages.batches.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-public class MessagesBatchDocumentExample {
-
-  public static void main(String[] args) throws IOException {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    // Read PDF file as base64
-    byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
-    String pdfBase64 = new String(pdfBytes);
-
-    BatchCreateParams params = BatchCreateParams.builder()
-      .addRequest(
-        BatchCreateParams.Request.builder()
-          .customId("my-first-request")
-          .params(
-            BatchCreateParams.Request.Params.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024)
-              .addUserMessageOfBlockParams(
-                List.of(
-                  ContentBlockParam.ofDocument(
-                    DocumentBlockParam.builder()
-                      .source(Base64PdfSource.builder().data(pdfBase64).build())
-                      .build()
-                  ),
-                  ContentBlockParam.ofText(
-                    TextBlockParam.builder()
-                      .text(
-                        "Which model has the highest human preference win rates across each use-case?"
-                      )
-                      .build()
-                  )
-                )
-              )
-              .build()
-          )
-          .build()
-      )
-      .addRequest(
-        BatchCreateParams.Request.builder()
-          .customId("my-second-request")
-          .params(
-            BatchCreateParams.Request.Params.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024)
-              .addUserMessageOfBlockParams(
-                List.of(
-                  ContentBlockParam.ofDocument(
-                    DocumentBlockParam.builder()
-                      .source(Base64PdfSource.builder().data(pdfBase64).build())
-                      .build()
-                  ),
-                  ContentBlockParam.ofText(
-                    TextBlockParam.builder()
-                      .text("Extract 5 key insights from this document.")
-                      .build()
-                  )
-                )
-              )
-              .build()
-          )
-          .build()
-      )
-      .build();
-
-    MessageBatch batch = client.messages().batches().create(params);
-    System.out.println(batch);
   }
-}
-```
+  ' > request.json
+
+  # Then make the API call using the JSON file
+  curl https://api.anthropic.com/v1/messages/batches \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -d @request.json
+  ```
+
+  ```bash CLI
+  ant messages:batches create <<'YAML'
+  requests:
+    - custom_id: my-first-request
+      params:
+        model: claude-opus-4-8
+        max_tokens: 1024
+        messages:
+          - role: user
+            content:
+              - type: document
+                source:
+                  type: base64
+                  media_type: application/pdf
+                  data: "@./document.pdf"
+              - type: text
+                text: >-
+                  Which model has the highest human preference win rates
+                  across each use-case?
+    - custom_id: my-second-request
+      params:
+        model: claude-opus-4-8
+        max_tokens: 1024
+        messages:
+          - role: user
+            content:
+              - type: document
+                source:
+                  type: base64
+                  media_type: application/pdf
+                  data: "@./document.pdf"
+              - type: text
+                text: Extract 5 key insights from this document.
+  YAML
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+  # ...
+  message_batch = client.messages.batches.create(
+      requests=[
+          {
+              "custom_id": "doc1",
+              "params": {
+                  "model": "claude-opus-4-8",
+                  "max_tokens": 1024,
+                  "messages": [
+                      {
+                          "role": "user",
+                          "content": [
+                              {
+                                  "type": "document",
+                                  "source": {
+                                      "type": "base64",
+                                      "media_type": "application/pdf",
+                                      "data": pdf_data,
+                                  },
+                              },
+                              {"type": "text", "text": "Summarize this document."},
+                          ],
+                      }
+                  ],
+              },
+          }
+      ]
+  )
+  ```
+
+  ```typescript TypeScript
+  const response = await anthropic.messages.batches.create({
+    requests: [
+      {
+        custom_id: "my-first-request",
+        params: {
+          max_tokens: 1024,
+          messages: [
+            {
+              content: [
+                {
+                  type: "document",
+                  source: {
+                    media_type: "application/pdf",
+                    type: "base64",
+                    data: pdfBase64
+                  }
+                },
+                {
+                  type: "text",
+                  text: "Which model has the highest human preference win rates across each use-case?"
+                }
+              ],
+              role: "user"
+            }
+          ],
+          model: "claude-opus-4-8"
+        }
+      },
+      {
+        custom_id: "my-second-request",
+        params: {
+          max_tokens: 1024,
+          messages: [
+            {
+              content: [
+                {
+                  type: "document",
+                  source: {
+                    media_type: "application/pdf",
+                    type: "base64",
+                    data: pdfBase64
+                  }
+                },
+                {
+                  type: "text",
+                  text: "Extract 5 key insights from this document."
+                }
+              ],
+              role: "user"
+            }
+          ],
+          model: "claude-opus-4-8"
+        }
+      }
+    ]
+  });
+  console.log(response);
+  ```
+
+  ```java Java
+  import com.anthropic.models.messages.batches.*;
+  // ...
+      // Read PDF file as base64
+      byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
+      String pdfBase64 = new String(pdfBytes);
+
+      BatchCreateParams params = BatchCreateParams.builder()
+        .addRequest(
+          BatchCreateParams.Request.builder()
+            .customId("my-first-request")
+            .params(
+              BatchCreateParams.Request.Params.builder()
+                .model(Model.CLAUDE_OPUS_4_8)
+                .maxTokens(1024)
+                .addUserMessageOfBlockParams(
+                  List.of(
+                    ContentBlockParam.ofDocument(
+                      DocumentBlockParam.builder()
+                        .source(Base64PdfSource.builder().data(pdfBase64).build())
+                        .build()
+                    ),
+                    ContentBlockParam.ofText(
+                      TextBlockParam.builder()
+                        .text(
+                          "Which model has the highest human preference win rates across each use-case?"
+                        )
+                        .build()
+                    )
+                  )
+                )
+                .build()
+            )
+            .build()
+        )
+        .addRequest(
+          BatchCreateParams.Request.builder()
+            .customId("my-second-request")
+            .params(
+              BatchCreateParams.Request.Params.builder()
+                .model(Model.CLAUDE_OPUS_4_8)
+                .maxTokens(1024)
+                .addUserMessageOfBlockParams(
+                  List.of(
+                    ContentBlockParam.ofDocument(
+                      DocumentBlockParam.builder()
+                        .source(Base64PdfSource.builder().data(pdfBase64).build())
+                        .build()
+                    ),
+                    ContentBlockParam.ofText(
+                      TextBlockParam.builder()
+                        .text("Extract 5 key insights from this document.")
+                        .build()
+                    )
+                  )
+                )
+                .build()
+            )
+            .build()
+        )
+        .build();
+
+      MessageBatch batch = client.messages().batches().create(params);
+      System.out.println(batch);
+  ```
 </CodeGroup>
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card
-    title="Try PDF examples"
-    icon="file"
-    href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision"
-  >
+  <Card title="Try PDF examples" icon="file" href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision">
     Explore practical examples of PDF processing in the cookbook recipe.
   </Card>
 
-  <Card
-    title="View API reference"
-    icon="code"
-    href="/docs/en/api/messages/create"
-  >
+  <Card title="View API reference" icon="code" href="/docs/en/api/messages/create">
     See complete API documentation for PDF support.
   </Card>
 </CardGroup>

@@ -14,7 +14,7 @@ MCP configuration is split across two steps:
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 
 <Note>
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 </Note>
 
 ## Declare MCP servers on the agent
@@ -24,226 +24,216 @@ Specify MCP servers in the `mcp_servers` array when creating an agent. Each serv
 Each declared server also needs a matching `mcp_toolset` entry in the `tools` array. The toolset's `mcp_server_name` must match the server's `name`.
 
 <CodeGroup defaultLanguage="CLI">
-  
-````bash
-agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "name": "GitHub Assistant",
-  "model": "claude-opus-4-8",
-  "mcp_servers": [
-    {
-      "type": "url",
-      "name": "github",
-      "url": "https://api.githubcopilot.com/mcp/"
-    }
-  ],
-  "tools": [
-    {"type": "agent_toolset_20260401"},
-    {"type": "mcp_toolset", "mcp_server_name": "github"}
-  ]
-}
-EOF
-)
-agent_id=$(jq -r '.id' <<<"$agent_response")
-````
-
-  
-````bash
-AGENT_ID=$(ant beta:agents create \
-  --name "GitHub Assistant" \
-  --model claude-opus-4-8 \
-  --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
-  --tool '{type: agent_toolset_20260401}' \
-  --tool '{type: mcp_toolset, mcp_server_name: github}' \
-  --transform id --raw-output)
-````
-
-  
-````python
-agent = client.beta.agents.create(
-    name="GitHub Assistant",
-    model="claude-opus-4-8",
-    mcp_servers=[
-        {
-            "type": "url",
-            "name": "github",
-            "url": "https://api.githubcopilot.com/mcp/",
-        },
+  ```bash curl
+  agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<'EOF'
+  {
+    "name": "GitHub Assistant",
+    "model": "claude-opus-4-8",
+    "mcp_servers": [
+      {
+        "type": "url",
+        "name": "github",
+        "url": "https://api.githubcopilot.com/mcp/"
+      }
     ],
-    tools=[
-        {"type": "agent_toolset_20260401"},
-        {"type": "mcp_toolset", "mcp_server_name": "github"},
-    ],
-)
-````
+    "tools": [
+      {"type": "agent_toolset_20260401"},
+      {"type": "mcp_toolset", "mcp_server_name": "github"}
+    ]
+  }
+  EOF
+  )
+  agent_id=$(jq -r '.id' <<<"$agent_response")
+  ```
 
-  
-````typescript
-const agent = await client.beta.agents.create({
-  name: "GitHub Assistant",
-  model: "claude-opus-4-8",
-  mcp_servers: [
-    {
-      type: "url",
-      name: "github",
-      url: "https://api.githubcopilot.com/mcp/",
-    },
-  ],
-  tools: [
-    { type: "agent_toolset_20260401" },
-    { type: "mcp_toolset", mcp_server_name: "github" },
-  ],
-});
-````
+  ```bash CLI
+  AGENT_ID=$(ant beta:agents create \
+    --name "GitHub Assistant" \
+    --model claude-opus-4-8 \
+    --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
+    --tool '{type: agent_toolset_20260401}' \
+    --tool '{type: mcp_toolset, mcp_server_name: github}' \
+    --transform id --raw-output)
+  ```
 
-  
-````csharp
-var agent = await client.Beta.Agents.Create(new()
-{
-    Name = "GitHub Assistant",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
-    McpServers =
-    [
-        new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
-    ],
-    Tools =
-    [
-        new BetaManagedAgentsAgentToolset20260401Params
-        {
-            Type = "agent_toolset_20260401",
-        },
-        new BetaManagedAgentsMcpToolsetParams { Type = "mcp_toolset", McpServerName = "github" },
-    ],
-});
-````
+  ```python Python
+  agent = client.beta.agents.create(
+      name="GitHub Assistant",
+      model="claude-opus-4-8",
+      mcp_servers=[
+          {
+              "type": "url",
+              "name": "github",
+              "url": "https://api.githubcopilot.com/mcp/",
+          },
+      ],
+      tools=[
+          {"type": "agent_toolset_20260401"},
+          {"type": "mcp_toolset", "mcp_server_name": "github"},
+      ],
+  )
+  ```
 
-  
-````go
-agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
-	Name: "GitHub Assistant",
-	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
-	},
-	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
-		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
-		Name: "github",
-		URL:  "https://api.githubcopilot.com/mcp/",
-	}},
-	Tools: []anthropic.BetaAgentNewParamsToolUnion{
-		{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-			},
-		},
-		{
-			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
-				MCPServerName: "github",
-			},
-		},
-	},
-})
-if err != nil {
-	panic(err)
-}
-````
-
-  
-````java
-var agent = client.beta().agents().create(
-    AgentCreateParams.builder()
-        .name("GitHub Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
-        .addMcpServer(
-            BetaManagedAgentsUrlMcpServerParams.builder()
-                .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
-                .name("github")
-                .url("https://api.githubcopilot.com/mcp/")
-                .build()
-        )
-        .addTool(
-            BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                .build()
-        )
-        .addTool(
-            BetaManagedAgentsMcpToolsetParams.builder()
-                .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
-                .mcpServerName("github")
-                .build()
-        )
-        .build()
-);
-````
-
-  
-````php
-$agent = $client->beta->agents->create(
-    name: 'GitHub Assistant',
-    model: 'claude-opus-4-8',
-    mcpServers: [
-        BetaManagedAgentsURLMCPServerParams::with(
-            type: 'url',
-            name: 'github',
-            url: 'https://api.githubcopilot.com/mcp/',
-        ),
+  ```typescript TypeScript
+  const agent = await client.beta.agents.create({
+    name: "GitHub Assistant",
+    model: "claude-opus-4-8",
+    mcp_servers: [
+      {
+        type: "url",
+        name: "github",
+        url: "https://api.githubcopilot.com/mcp/",
+      },
     ],
     tools: [
-        BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
-        ),
-        BetaManagedAgentsMCPToolsetParams::with(
-            type: 'mcp_toolset',
-            mcpServerName: 'github',
-        ),
+      { type: "agent_toolset_20260401" },
+      { type: "mcp_toolset", mcp_server_name: "github" },
     ],
-);
-````
+  });
+  ```
 
-  
-````ruby
-agent = client.beta.agents.create(
-  name: "GitHub Assistant",
-  model: "claude-opus-4-8",
-  mcp_servers: [
-    {
-      type: "url",
-      name: "github",
-      url: "https://api.githubcopilot.com/mcp/"
-    }
-  ],
-  tools: [
-    {type: "agent_toolset_20260401"},
-    {type: "mcp_toolset", mcp_server_name: "github"}
-  ]
-)
-````
+  ```csharp C#
+  var agent = await client.Beta.Agents.Create(new()
+  {
+      Name = "GitHub Assistant",
+      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      McpServers =
+      [
+          new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
+      ],
+      Tools =
+      [
+          new BetaManagedAgentsAgentToolset20260401Params
+          {
+              Type = "agent_toolset_20260401",
+          },
+          new BetaManagedAgentsMcpToolsetParams { Type = "mcp_toolset", McpServerName = "github" },
+      ],
+  });
+  ```
 
+  ```go Go
+  agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
+  	Name: "GitHub Assistant",
+  	Model: anthropic.BetaManagedAgentsModelConfigParams{
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+  	},
+  	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
+  		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
+  		Name: "github",
+  		URL:  "https://api.githubcopilot.com/mcp/",
+  	}},
+  	Tools: []anthropic.BetaAgentNewParamsToolUnion{
+  		{
+  			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
+  				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
+  			},
+  		},
+  		{
+  			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
+  				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
+  				MCPServerName: "github",
+  			},
+  		},
+  	},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  ```
+
+  ```java Java
+  var agent = client.beta().agents().create(
+      AgentCreateParams.builder()
+          .name("GitHub Assistant")
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .addMcpServer(
+              BetaManagedAgentsUrlMcpServerParams.builder()
+                  .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
+                  .name("github")
+                  .url("https://api.githubcopilot.com/mcp/")
+                  .build()
+          )
+          .addTool(
+              BetaManagedAgentsAgentToolset20260401Params.builder()
+                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
+                  .build()
+          )
+          .addTool(
+              BetaManagedAgentsMcpToolsetParams.builder()
+                  .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
+                  .mcpServerName("github")
+                  .build()
+          )
+          .build()
+  );
+  ```
+
+  ```php PHP
+  $agent = $client->beta->agents->create(
+      name: 'GitHub Assistant',
+      model: 'claude-opus-4-8',
+      mcpServers: [
+          BetaManagedAgentsURLMCPServerParams::with(
+              type: 'url',
+              name: 'github',
+              url: 'https://api.githubcopilot.com/mcp/',
+          ),
+      ],
+      tools: [
+          BetaManagedAgentsAgentToolset20260401Params::with(
+              type: 'agent_toolset_20260401',
+          ),
+          BetaManagedAgentsMCPToolsetParams::with(
+              type: 'mcp_toolset',
+              mcpServerName: 'github',
+          ),
+      ],
+  );
+  ```
+
+  ```ruby Ruby
+  agent = client.beta.agents.create(
+    name: "GitHub Assistant",
+    model: "claude-opus-4-8",
+    mcp_servers: [
+      {
+        type: "url",
+        name: "github",
+        url: "https://api.githubcopilot.com/mcp/"
+      }
+    ],
+    tools: [
+      {type: "agent_toolset_20260401"},
+      {type: "mcp_toolset", mcp_server_name: "github"}
+    ]
+  )
+  ```
 </CodeGroup>
 
 <Tip>
-The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](/docs/en/managed-agents/permission-policies) to configure this behavior.
+  The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](/docs/en/managed-agents/permission-policies) to configure this behavior.
 </Tip>
 
 ### `mcp_servers` field reference
 
 Each entry in the `mcp_servers` array defines one connection.
 
-| Field | Description |
-| --- | --- |
-| `type` | Required. Must be `"url"`. |
+| Field  | Description                                                                                                                                                                                                                                  |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` | Required. Must be `"url"`.                                                                                                                                                                                                                   |
 | `name` | Required. A unique name for this server within the agent (1–255 characters). Used as the `mcp_server_name` in the `tools` array and surfaced on MCP tool events in the [session event stream](/docs/en/managed-agents/events-and-streaming). |
-| `url` | Required. The endpoint of the remote MCP server (up to 2048 characters). See [Supported MCP server types](/docs/en/managed-agents/reference#supported-mcp-server-types) for transport requirements. |
+| `url`  | Required. The endpoint of the remote MCP server (up to 2048 characters). See [Supported MCP server types](/docs/en/managed-agents/reference#supported-mcp-server-types) for transport requirements.                                          |
 
 Constraints:
 
-- An agent can declare up to 20 MCP servers. Server names must be unique within the array.
-- Every `mcp_servers` entry must be referenced by an `mcp_toolset` in the `tools` array, and every `mcp_toolset` must reference a declared server. The API rejects agent definitions with unreferenced servers or dangling toolsets.
+* An agent can declare up to 20 MCP servers. Server names must be unique within the array.
+* Every `mcp_servers` entry must be referenced by an `mcp_toolset` in the `tools` array, and every `mcp_toolset` must reference a declared server. The API rejects agent definitions with unreferenced servers or dangling toolsets.
 
 ## Configure which MCP tools are available
 
@@ -287,102 +277,92 @@ When an MCP tool output exceeds 100,000 tokens, it is automatically written to a
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](/docs/en/managed-agents/vaults) for how to create vaults and manage credentials.
 
 <CodeGroup>
-  
-````bash
-session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"]
-}
-EOF
-)
-session_id=$(jq -r '.id' <<<"$session_response")
-````
+  ```bash curl
+  session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<EOF
+  {
+    "agent": "$agent_id",
+    "environment_id": "$environment_id",
+    "vault_ids": ["$vault_id"]
+  }
+  EOF
+  )
+  session_id=$(jq -r '.id' <<<"$session_response")
+  ```
 
-  
-````bash
-SESSION_ID=$(ant beta:sessions create \
-  --agent "$AGENT_ID" \
-  --environment-id "$ENVIRONMENT_ID" \
-  --vault-id "$VAULT_ID" \
-  --transform id --raw-output)
-````
+  ```bash CLI
+  SESSION_ID=$(ant beta:sessions create \
+    --agent "$AGENT_ID" \
+    --environment-id "$ENVIRONMENT_ID" \
+    --vault-id "$VAULT_ID" \
+    --transform id --raw-output)
+  ```
 
-  
-````python
-session = client.beta.sessions.create(
-    agent=agent.id,
-    environment_id=environment.id,
-    vault_ids=[vault.id],
-)
-````
+  ```python Python
+  session = client.beta.sessions.create(
+      agent=agent.id,
+      environment_id=environment.id,
+      vault_ids=[vault.id],
+  )
+  ```
 
-  
-````typescript
-const session = await client.beta.sessions.create({
-  agent: agent.id,
-  environment_id: environment.id,
-  vault_ids: [vault.id],
-});
-````
+  ```typescript TypeScript
+  const session = await client.beta.sessions.create({
+    agent: agent.id,
+    environment_id: environment.id,
+    vault_ids: [vault.id],
+  });
+  ```
 
-  
-````csharp
-var session = await client.Beta.Sessions.Create(new()
-{
-    Agent = agent.ID,
-    EnvironmentID = environment.ID,
-    VaultIds = [vault.ID],
-});
-````
+  ```csharp C#
+  var session = await client.Beta.Sessions.Create(new()
+  {
+      Agent = agent.ID,
+      EnvironmentID = environment.ID,
+      VaultIds = [vault.ID],
+  });
+  ```
 
-  
-````go
-session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
-	Agent:         anthropic.BetaSessionNewParamsAgentUnion{OfString: anthropic.String(agent.ID)},
-	EnvironmentID: environment.ID,
-	VaultIDs:      []string{vault.ID},
-})
-if err != nil {
-	panic(err)
-}
-````
+  ```go Go
+  session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+  	Agent:         anthropic.BetaSessionNewParamsAgentUnion{OfString: anthropic.String(agent.ID)},
+  	EnvironmentID: environment.ID,
+  	VaultIDs:      []string{vault.ID},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  ```
 
-  
-````java
-var session = client.beta().sessions().create(
-    SessionCreateParams.builder()
-        .agent(agent.id())
-        .environmentId(environment.id())
-        .addVaultId(vault.id())
-        .build()
-);
-````
+  ```java Java
+  var session = client.beta().sessions().create(
+      SessionCreateParams.builder()
+          .agent(agent.id())
+          .environmentId(environment.id())
+          .addVaultId(vault.id())
+          .build()
+  );
+  ```
 
-  
-````php
-$session = $client->beta->sessions->create(
-    agent: $agent->id,
-    environmentID: $environment->id,
-    vaultIDs: [$vault->id],
-);
-````
+  ```php PHP
+  $session = $client->beta->sessions->create(
+      agent: $agent->id,
+      environmentID: $environment->id,
+      vaultIDs: [$vault->id],
+  );
+  ```
 
-  
-````ruby
-session = client.beta.sessions.create(
-  agent: agent.id,
-  environment_id: environment.id,
-  vault_ids: [vault.id]
-)
-````
-
+  ```ruby Ruby
+  session = client.beta.sessions.create(
+    agent: agent.id,
+    environment_id: environment.id,
+    vault_ids: [vault.id]
+  )
+  ```
 </CodeGroup>
 
 Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`. If none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
@@ -391,10 +371,10 @@ Credentials are matched by URL, so the vault must contain a credential whose `mc
 
 Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A [`session.error`](/docs/en/managed-agents/events-and-streaming) event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
 
-| Error type | Meaning |
-| --- | --- |
-| `mcp_connection_failed_error` | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure). |
-| `mcp_authentication_failed_error` | The MCP server was reached but rejected the credential from the attached vault. |
+| Error type                        | Meaning                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `mcp_connection_failed_error`     | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure). |
+| `mcp_authentication_failed_error` | The MCP server was reached but rejected the credential from the attached vault.                   |
 
 You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition.
 
@@ -404,9 +384,11 @@ You can decide whether to block further interaction on this error, trigger a cre
   <Card title="Permission policies" icon="check" href="/docs/en/managed-agents/permission-policies">
     Control when agent and MCP tools run.
   </Card>
+
   <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
     Send events, stream responses, and interrupt or redirect your session mid-execution.
   </Card>
+
   <Card title="Supported MCP server types" icon="book" href="/docs/en/managed-agents/reference#supported-mcp-server-types">
     Transport requirements for remote MCP servers.
   </Card>

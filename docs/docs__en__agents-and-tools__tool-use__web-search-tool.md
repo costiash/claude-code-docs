@@ -7,7 +7,7 @@ The web search tool gives Claude direct access to real-time web content, allowin
 The latest web search tool version (`web_search_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. `web_search_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_search_20260209` for dynamic filtering only, `web_search_20250305` for basic search) remain available.
 
 <Note>
-For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Google Cloud, and Microsoft Foundry. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
+  For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Google Cloud, and Microsoft Foundry. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 </Note>
 
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers).
@@ -26,17 +26,17 @@ When you add the web search tool to your API request:
 
 Claude searches when the request depends on information that is current, changing, or outside its training data:
 
-- Recent events, news, or announcements
-- Current prices, rates, scores, or statistics
-- Information about specific organizations, people, or products that might have changed
-- Explicit requests to search or look something up
+* Recent events, news, or announcements
+* Current prices, rates, scores, or statistics
+* Information about specific organizations, people, or products that might have changed
+* Explicit requests to search or look something up
 
 Claude answers directly without searching when the request draws on stable knowledge:
 
-- Established facts, math, science fundamentals, or coding concepts
-- Creative writing or brainstorming
-- Analysis of content already provided in the conversation
-- Conversational turns and greetings
+* Established facts, math, science fundamentals, or coding concepts
+* Creative writing or brainstorming
+* Analysis of content already provided in the conversation
+* Conversational turns and greetings
 
 Triggering is steerable through your system prompt: you can encourage Claude to search more readily or to prefer answering directly. For a hard constraint, use `max_uses` to cap the number of searches for each request.
 
@@ -47,269 +47,233 @@ Web search is a token-intensive task. With basic web search, Claude needs to pul
 With `web_search_20260209` or later, Claude can write and execute code to post-process query results. Instead of reasoning over full HTML files, Claude dynamically filters search results before loading them into context, keeping only what's relevant and discarding the rest.
 
 Dynamic filtering is particularly effective for:
-- Searching through technical documentation
-- Literature review and citation verification
-- Technical research
-- Response grounding and verification
+
+* Searching through technical documentation
+* Literature review and citation verification
+* Technical research
+* Response grounding and verification
 
 <Note>
-Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
+  Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 </Note>
 
 To enable dynamic filtering, use `web_search_20260209` or any later version. The following examples use `web_search_20260209`:
 
 <CodeGroup>
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-8",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
-            }
-        ],
-        "tools": [{
-            "type": "web_search_20260209",
-            "name": "web_search"
-        }]
-    }'
-```
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+      --header "x-api-key: $ANTHROPIC_API_KEY" \
+      --header "anthropic-version: 2023-06-01" \
+      --header "content-type: application/json" \
+      --data '{
+          "model": "claude-opus-4-8",
+          "max_tokens": 4096,
+          "messages": [
+              {
+                  "role": "user",
+                  "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
+              }
+          ],
+          "tools": [{
+              "type": "web_search_20260209",
+              "name": "web_search"
+          }]
+      }'
+  ```
 
-```bash CLI
-ant messages create <<'YAML'
-model: claude-opus-4-8
-max_tokens: 4096
-messages:
-  - role: user
-    content: >-
-      Search for the current prices of AAPL and GOOGL, then calculate
-      which has a better P/E ratio.
-tools:
-  - type: web_search_20260209
-    name: web_search
-YAML
-```
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 4096
+  messages:
+    - role: user
+      content: >-
+        Search for the current prices of AAPL and GOOGL, then calculate
+        which has a better P/E ratio.
+  tools:
+    - type: web_search_20260209
+      name: web_search
+  YAML
+  ```
 
-```python Python hidelines={1..2}
-import anthropic
+  ```python Python
+  client = anthropic.Anthropic()
 
-client = anthropic.Anthropic()
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=4096,
+      messages=[
+          {
+              "role": "user",
+              "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.",
+          }
+      ],
+      tools=[{"type": "web_search_20260209", "name": "web_search"}],
+  )
+  print(response)
+  ```
 
-response = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.",
-        }
-    ],
-    tools=[{"type": "web_search_20260209", "name": "web_search"}],
-)
-print(response)
-```
+  ```typescript TypeScript
+  const anthropic = new Anthropic();
 
-```typescript TypeScript hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-const response = await anthropic.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 4096,
-  messages: [
-    {
-      role: "user",
-      content:
-        "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
-    }
-  ],
-  tools: [{ type: "web_search_20260209", name: "web_search" }]
-});
-
-console.log(response);
-```
-
-```csharp C# hidelines={1..3}
-using Anthropic;
-using Anthropic.Models.Messages;
-
-AnthropicClient client = new();
-
-var parameters = new MessageCreateParams
-{
-    Model = Model.ClaudeOpus4_8,
-    MaxTokens = 4096,
-    Messages = [new() { Role = Role.User, Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
-    Tools = [new ToolUnion(new WebSearchTool20260209())]
-};
-
-var message = await client.Messages.Create(parameters);
-Console.WriteLine(message);
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 4096,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")),
-		},
-		Tools: []anthropic.ToolUnionParam{
-			{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..5}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.WebSearchTool20260209;
-
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(4096L)
-        .addUserMessage("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")
-        .addTool(WebSearchTool20260209.builder().build())
-        .build();
-
-    Message response = client.messages().create(params);
-    IO.println(response);
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$message = $client->messages->create(
-    maxTokens: 4096,
+  const response = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
     messages: [
-        ['role' => 'user', 'content' => 'Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.'],
+      {
+        role: "user",
+        content:
+          "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
+      }
     ],
-    model: 'claude-opus-4-8',
-    tools: [
-        [
-            'type' => 'web_search_20260209',
-            'name' => 'web_search',
-        ],
+    tools: [{ type: "web_search_20260209", name: "web_search" }]
+  });
+
+  console.log(response);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 4096,
+      Messages = [new() { Role = Role.User, Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
+      Tools = [new ToolUnion(new WebSearchTool20260209())]
+  };
+
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 4096,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")),
+  	},
+  	Tools: []anthropic.ToolUnionParam{
+  		{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
+
+  ```java Java
+  import com.anthropic.models.messages.WebSearchTool20260209;
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(4096L)
+          .addUserMessage("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")
+          .addTool(WebSearchTool20260209.builder().build())
+          .build();
+
+      Message response = client.messages().create(params);
+      IO.println(response);
+  }
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $message = $client->messages->create(
+      maxTokens: 4096,
+      messages: [
+          ['role' => 'user', 'content' => 'Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.'],
+      ],
+      model: 'claude-opus-4-8',
+      tools: [
+          [
+              'type' => 'web_search_20260209',
+              'name' => 'web_search',
+          ],
+      ],
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
+    messages: [
+      { role: "user", content: "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }
     ],
-);
-
-echo $message;
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 4096,
-  messages: [
-    { role: "user", content: "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }
-  ],
-  tools: [{
-    type: "web_search_20260209",
-    name: "web_search"
-  }]
-)
-puts message
-```
+    tools: [{
+      type: "web_search_20260209",
+      name: "web_search"
+    }]
+  )
+  puts message
+  ```
 </CodeGroup>
 
 ## How to use web search
 
 <Note>
-Your organization's administrator must enable web search in the [Claude Console](/settings/privacy).
+  Your organization's administrator must enable web search in the [Claude Console](/settings/privacy).
 </Note>
 
 Provide the web search tool in your API request:
 
 <CodeGroup>
-```bash cURL
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-8",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": "What is the weather in NYC?"
-            }
-        ],
-        "tools": [{
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 5
-        }]
-    }'
-```
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+      --header "x-api-key: $ANTHROPIC_API_KEY" \
+      --header "anthropic-version: 2023-06-01" \
+      --header "content-type: application/json" \
+      --data '{
+          "model": "claude-opus-4-8",
+          "max_tokens": 1024,
+          "messages": [
+              {
+                  "role": "user",
+                  "content": "What is the weather in NYC?"
+              }
+          ],
+          "tools": [{
+              "type": "web_search_20250305",
+              "name": "web_search",
+              "max_uses": 5
+          }]
+      }'
+  ```
 
-```bash CLI
-ant messages create \
-  --model claude-opus-4-8 \
-  --max-tokens 1024 \
-  --message '{role: user, content: What is the weather in NYC?}' \
-  --tool '{type: web_search_20250305, name: web_search, max_uses: 5}'
-```
+  ```bash CLI
+  ant messages create \
+    --model claude-opus-4-8 \
+    --max-tokens 1024 \
+    --message '{role: user, content: What is the weather in NYC?}' \
+    --tool '{type: web_search_20250305, name: web_search, max_uses: 5}'
+  ```
 
-```python Python hidelines={1..2}
-import anthropic
+  ```python Python
+  client = anthropic.Anthropic()
 
-client = anthropic.Anthropic()
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[{"role": "user", "content": "What's the weather in NYC?"}],
+      tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+  )
+  print(response)
+  ```
 
-response = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "What's the weather in NYC?"}],
-    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
-)
-print(response)
-```
-
-```typescript TypeScript hidelines={1..5,-3..-1}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-async function main() {
+  ```typescript TypeScript
   const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
@@ -329,131 +293,102 @@ async function main() {
   });
 
   console.log(response);
-}
+  ```
 
-main().catch(console.error);
-```
+  ```csharp C#
+  AnthropicClient client = new();
 
-```csharp C# hidelines={1..3}
-using Anthropic;
-using Anthropic.Models.Messages;
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "What's the weather in NYC?" }],
+      Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 5 })]
+  };
 
-AnthropicClient client = new();
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
+  ```
 
-var parameters = new MessageCreateParams
-{
-    Model = Model.ClaudeOpus4_8,
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "What's the weather in NYC?" }],
-    Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 5 })]
-};
+  ```go Go
+  client := anthropic.NewClient()
 
-var message = await client.Messages.Create(parameters);
-Console.WriteLine(message);
-```
+  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in NYC?")),
+  	},
+  	Tools: []anthropic.ToolUnionParam{
+  		{OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
+  			MaxUses: anthropic.Int(5),
+  		}},
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
 
-```go Go hidelines={1..11,-1}
-package main
+  ```java Java
+  import com.anthropic.models.messages.WebSearchTool20250305;
 
-import (
-	"context"
-	"fmt"
-	"log"
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addUserMessage("What's the weather in NYC?")
+          .addTool(WebSearchTool20250305.builder()
+              .maxUses(5L)
+              .build())
+          .build();
 
-func main() {
-	client := anthropic.NewClient()
+      Message response = client.messages().create(params);
+      IO.println(response);
+  }
+  ```
 
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in NYC?")),
-		},
-		Tools: []anthropic.ToolUnionParam{
-			{OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
-				MaxUses: anthropic.Int(5),
-			}},
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
+  ```php PHP
+  $client = new Client();
 
-```java Java hidelines={1..5}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.WebSearchTool20250305;
+  $message = $client->messages->create(
+      maxTokens: 1024,
+      messages: [
+          ['role' => 'user', 'content' => "What's the weather in NYC?"],
+      ],
+      model: 'claude-opus-4-8',
+      tools: [
+          [
+              'type' => 'web_search_20250305',
+              'name' => 'web_search',
+              'max_uses' => 5,
+          ],
+      ],
+  );
 
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  echo $message;
+  ```
 
-    MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024L)
-        .addUserMessage("What's the weather in NYC?")
-        .addTool(WebSearchTool20250305.builder()
-            .maxUses(5L)
-            .build())
-        .build();
+  ```ruby Ruby
+  client = Anthropic::Client.new
 
-    Message response = client.messages().create(params);
-    IO.println(response);
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$message = $client->messages->create(
-    maxTokens: 1024,
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
     messages: [
-        ['role' => 'user', 'content' => "What's the weather in NYC?"],
+      { role: "user", content: "What's the weather in NYC?" }
     ],
-    model: 'claude-opus-4-8',
-    tools: [
-        [
-            'type' => 'web_search_20250305',
-            'name' => 'web_search',
-            'max_uses' => 5,
-        ],
-    ],
-);
-
-echo $message;
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 1024,
-  messages: [
-    { role: "user", content: "What's the weather in NYC?" }
-  ],
-  tools: [{
-    type: "web_search_20250305",
-    name: "web_search",
-    max_uses: 5
-  }]
-)
-puts message
-```
+    tools: [{
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 5
+    }]
+  )
+  puts message
+  ```
 </CodeGroup>
 
 ## Tool definition
@@ -499,16 +434,16 @@ For domain filtering with `allowed_domains` and `blocked_domains`, see [Server t
 
 The `user_location` parameter allows you to localize search results based on a user's location.
 
-- `type`: The type of location (must be `approximate`)
-- `city`: The city name
-- `region`: The region or state
-- `country`: The country
-- `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+* `type`: The type of location (must be `approximate`)
+* `city`: The city name
+* `region`: The region or state
+* `country`: The country
+* `timezone`: The [IANA timezone ID](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ### Response inclusion
 
 <Note>
-Requires `web_search_20260318` or later.
+  Requires `web_search_20260318` or later.
 </Note>
 
 The `response_inclusion` parameter controls how search result blocks appear in the API response when the result was consumed by a completed [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw search content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
@@ -596,19 +531,19 @@ Here's an example response structure:
 
 Search results include:
 
-- `url`: The URL of the source page
-- `title`: The title of the source page
-- `page_age`: When the site was last updated
-- `encrypted_content`: Encrypted content that must be passed back in multi-turn conversations for citations
+* `url`: The URL of the source page
+* `title`: The title of the source page
+* `page_age`: When the site was last updated
+* `encrypted_content`: Encrypted content that must be passed back in multi-turn conversations for citations
 
 ### Citations
 
 Citations are always enabled for web search, and each `web_search_result_location` includes:
 
-- `url`: The URL of the cited source
-- `title`: The title of the cited source
-- `encrypted_index`: A reference that must be passed back for multi-turn conversations.
-- `cited_text`: Up to 150 characters of the cited content
+* `url`: The URL of the cited source
+* `title`: The title of the cited source
+* `encrypted_index`: A reference that must be passed back for multi-turn conversations.
+* `cited_text`: Up to 150 characters of the cited content
 
 The web search citation fields `cited_text`, `title`, and `url` do not count towards input or output token usage.
 
@@ -633,11 +568,11 @@ When the web search tool encounters an error (such as hitting rate limits), the 
 
 These are the possible error codes:
 
-- `too_many_requests`: Rate limit exceeded
-- `invalid_input`: Invalid search query parameter
-- `max_uses_exceeded`: Maximum web search tool uses exceeded
-- `query_too_long`: Query exceeds maximum length
-- `unavailable`: An internal error occurred
+* `too_many_requests`: Rate limit exceeded
+* `invalid_input`: Invalid search query parameter
+* `max_uses_exceeded`: Maximum web search tool uses exceeded
+* `query_too_long`: Query exceeds maximum length
+* `unavailable`: An internal error occurred
 
 ### `pause_turn` stop reason
 
@@ -710,6 +645,7 @@ Each web search counts as one use, regardless of the number of results returned.
   <Card href="/docs/en/agents-and-tools/tool-use/server-tools" title="Server tools">
     Shared mechanics for Anthropic-executed tools.
   </Card>
+
   <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Tool reference">
     Directory of all Anthropic-provided tools.
   </Card>

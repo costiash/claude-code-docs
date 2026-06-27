@@ -6,8 +6,8 @@ Make your first API call to Claude and build a simple web search assistant.
 
 ## Prerequisites
 
-- An Anthropic [Console account](/)
-- An [API key](/settings/keys)
+* An Anthropic [Console account](/)
+* An [API key](/settings/keys)
 
 ## Call the API
 
@@ -175,7 +175,7 @@ Make your first API call to Claude and build a simple web search assistant.
         python quickstart.py
         ```
 
-        ```text Output
+        ```text Output wrap
         [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
         ```
       </Step>
@@ -228,7 +228,7 @@ Make your first API call to Claude and build a simple web search assistant.
         npx tsx quickstart.ts
         ```
 
-        ```text Output
+        ```text Output wrap
         [
           {
             type: 'text',
@@ -299,7 +299,7 @@ Make your first API call to Claude and build a simple web search assistant.
         dotnet run
         ```
 
-        ```text Output
+        ```text Output wrap
         {
           "type": "text",
           "text": "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."
@@ -367,7 +367,7 @@ Make your first API call to Claude and build a simple web search assistant.
         go run .
         ```
 
-        ```text Output
+        ```text Output wrap
         [{"type":"text","text":"Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."}]
         ```
       </Step>
@@ -421,6 +421,7 @@ Make your first API call to Claude and build a simple web search assistant.
             }
             ```
           </Tab>
+
           <Tab title="Maven">
             Save this as `pom.xml`:
 
@@ -480,6 +481,7 @@ Make your first API call to Claude and build a simple web search assistant.
             gradle run
             ```
           </Tab>
+
           <Tab title="Maven">
             ```bash
             mvn compile exec:java -Dexec.mainClass=QuickStart
@@ -487,7 +489,7 @@ Make your first API call to Claude and build a simple web search assistant.
           </Tab>
         </Tabs>
 
-        ```text Output
+        ```text Output wrap
         [ContentBlock{text=TextBlock{citations=, text=Here are some effective search strategies to find the latest developments in renewable energy:
 
         ## General Search Terms
@@ -547,7 +549,7 @@ Make your first API call to Claude and build a simple web search assistant.
         php quickstart.php
         ```
 
-        ```text Output
+        ```text Output wrap
         Array
         (
             [0] => Anthropic\Messages\TextBlock Object
@@ -613,7 +615,7 @@ Make your first API call to Claude and build a simple web search assistant.
         bundle exec ruby quickstart.rb
         ```
 
-        ```text Output
+        ```text Output wrap
         [#<Anthropic::Models::TextBlock:0xc8 {text: "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ...", type: :text}>]
         ```
       </Step>
@@ -635,9 +637,11 @@ Once you're comfortable with the basics, explore further:
   <Card title="Models overview" icon="brain" href="/docs/en/about-claude/models/overview">
     Compare Claude models by capability and cost.
   </Card>
+
   <Card title="Features overview" icon="list" href="/docs/en/build-with-claude/overview">
     Browse all Claude capabilities: tools, context management, structured outputs, and more.
   </Card>
+
   <Card title="Client SDKs" icon="code-brackets" href="/docs/en/cli-sdks-libraries/overview">
     Reference documentation for Python, TypeScript, C#, and other client libraries.
   </Card>

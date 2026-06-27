@@ -11,17 +11,17 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 </Note>
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
+  This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Key features
 
-- **Direct API integration**: Connect to MCP servers without implementing an MCP client
-- **Tool calling support**: Access MCP tools through the Messages API
-- **Flexible tool configuration**: Enable all tools, allowlist specific tools, or denylist unwanted tools
-- **Per-tool configuration**: Configure individual tools with custom settings
-- **OAuth authentication**: Support for OAuth Bearer tokens for authenticated servers
-- **Multiple servers**: Connect to multiple MCP servers in a single request
+* **Direct API integration**: Connect to MCP servers without implementing an MCP client
+* **Tool calling support**: Access MCP tools through the Messages API
+* **Flexible tool configuration**: Enable all tools, allowlist specific tools, or denylist unwanted tools
+* **Per-tool configuration**: Configure individual tools with custom settings
+* **OAuth authentication**: Support for OAuth Bearer tokens for authenticated servers
+* **Multiple servers**: Connect to multiple MCP servers in a single request
 
 ## When Claude uses MCP tools
 
@@ -33,9 +33,9 @@ You can steer how readily Claude calls MCP tools through your system prompt. See
 
 ## Limitations
 
-- Of the feature set of the [MCP specification](https://modelcontextprotocol.io/introduction#explore-mcp), only [tool calls](https://modelcontextprotocol.io/docs/concepts/tools) are currently supported.
-- The server must be publicly exposed through HTTP (supports both Streamable HTTP and SSE transports). Local STDIO servers cannot be connected directly.
-- The MCP connector is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Google Cloud.
+* Of the feature set of the [MCP specification](https://modelcontextprotocol.io/introduction#explore-mcp), only [tool calls](https://modelcontextprotocol.io/docs/concepts/tools) are currently supported.
+* The server must be publicly exposed through HTTP (supports both Streamable HTTP and SSE transports). Local STDIO servers cannot be connected directly.
+* The MCP connector is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ## Using the MCP connector in the Messages API
 
@@ -49,285 +49,253 @@ The MCP connector uses two components:
 This example enables all tools from an MCP server with default configuration:
 
 <CodeGroup>
-
-```bash cURL nocheck
-curl https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "X-API-Key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: mcp-client-2025-11-20" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1000,
-    "messages": [{"role": "user", "content": "What tools do you have available?"}],
-    "mcp_servers": [
-      {
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse",
-        "name": "example-mcp",
-        "authorization_token": "YOUR_TOKEN"
-      }
-    ],
-    "tools": [
-      {
-        "type": "mcp_toolset",
-        "mcp_server_name": "example-mcp"
-      }
-    ]
-  }'
-```
-
-```bash CLI nocheck
-ant beta:messages create --beta mcp-client-2025-11-20 <<'YAML'
-model: claude-opus-4-8
-max_tokens: 1000
-messages:
-  - role: user
-    content: What tools do you have available?
-mcp_servers:
-  - type: url
-    url: https://example-server.modelcontextprotocol.io/sse
-    name: example-mcp
-    authorization_token: YOUR_TOKEN
-tools:
-  - type: mcp_toolset
-    mcp_server_name: example-mcp
-YAML
-```
-
-```python Python nocheck hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1000,
-    messages=[{"role": "user", "content": "What tools do you have available?"}],
-    mcp_servers=[
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: mcp-client-2025-11-20" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1000,
+      "messages": [{"role": "user", "content": "What tools do you have available?"}],
+      "mcp_servers": [
         {
-            "type": "url",
-            "url": "https://example-server.modelcontextprotocol.io/sse",
-            "name": "example-mcp",
-            "authorization_token": "YOUR_TOKEN",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse",
+          "name": "example-mcp",
+          "authorization_token": "YOUR_TOKEN"
         }
-    ],
-    tools=[{"type": "mcp_toolset", "mcp_server_name": "example-mcp"}],
-    betas=["mcp-client-2025-11-20"],
-)
-
-print(response)
-```
-
-```typescript TypeScript nocheck hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-8",
-  max_tokens: 1000,
-  messages: [
-    {
-      role: "user",
-      content: "What tools do you have available?"
-    }
-  ],
-  mcp_servers: [
-    {
-      type: "url",
-      url: "https://example-server.modelcontextprotocol.io/sse",
-      name: "example-mcp",
-      authorization_token: "YOUR_TOKEN"
-    }
-  ],
-  tools: [
-    {
-      type: "mcp_toolset",
-      mcp_server_name: "example-mcp"
-    }
-  ],
-  betas: ["mcp-client-2025-11-20"]
-});
-
-console.log(response);
-```
-
-```csharp C# nocheck hidelines={1..6}
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-AnthropicClient client = new();
-
-var parameters = new MessageCreateParams
-{
-    Model = Model.ClaudeOpus4_8,
-    MaxTokens = 1000,
-    Messages = new List<BetaMessageParam>
-    {
-        new() { Role = Role.User, Content = "What tools do you have available?" }
-    },
-    McpServers = new List<BetaRequestMcpServerUrlDefinition>
-    {
-        new()
+      ],
+      "tools": [
         {
-            Url = "https://example-server.modelcontextprotocol.io/sse",
-            Name = "example-mcp",
-            AuthorizationToken = "YOUR_TOKEN"
+          "type": "mcp_toolset",
+          "mcp_server_name": "example-mcp"
         }
-    },
-    Tools = new List<BetaToolUnion>
-    {
-        new BetaMcpToolset("example-mcp")
-    },
-    Betas = new List<string> { "mcp-client-2025-11-20" }
-};
+      ]
+    }'
+  ```
 
-var message = await client.Beta.Messages.Create(parameters);
-Console.WriteLine(message);
-```
+  ```bash CLI
+  ant beta:messages create --beta mcp-client-2025-11-20 <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1000
+  messages:
+    - role: user
+      content: What tools do you have available?
+  mcp_servers:
+    - type: url
+      url: https://example-server.modelcontextprotocol.io/sse
+      name: example-mcp
+      authorization_token: YOUR_TOKEN
+  tools:
+    - type: mcp_toolset
+      mcp_server_name: example-mcp
+  YAML
+  ```
 
-```go Go nocheck hidelines={1..11,-1}
-package main
+  ```python Python
+  client = anthropic.Anthropic()
 
-import (
-	"context"
-	"fmt"
-	"log"
+  response = client.beta.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1000,
+      messages=[{"role": "user", "content": "What tools do you have available?"}],
+      mcp_servers=[
+          {
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse",
+              "name": "example-mcp",
+              "authorization_token": "YOUR_TOKEN",
+          }
+      ],
+      tools=[{"type": "mcp_toolset", "mcp_server_name": "example-mcp"}],
+      betas=["mcp-client-2025-11-20"],
+  )
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+  print(response)
+  ```
 
-func main() {
-	client := anthropic.NewClient()
+  ```typescript TypeScript
+  const anthropic = new Anthropic();
 
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
-		MaxTokens: 1000,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What tools do you have available?")),
-		},
-		MCPServers: []anthropic.BetaRequestMCPServerURLDefinitionParam{
-			{
-				URL:                "https://example-server.modelcontextprotocol.io/sse",
-				Name:               "example-mcp",
-				AuthorizationToken: anthropic.String("YOUR_TOKEN"),
-			},
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
-				MCPServerName: "example-mcp",
-			}},
-		},
-		Betas: []anthropic.AnthropicBeta{
-			anthropic.AnthropicBetaMCPClient2025_11_20,
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java nocheck hidelines={1..2,4,6..7}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.messages.BetaMcpToolset;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1000L)
-        .addUserMessage("What tools do you have available?")
-        .addMcpServer(BetaRequestMcpServerUrlDefinition.builder()
-            .url("https://example-server.modelcontextprotocol.io/sse")
-            .name("example-mcp")
-            .authorizationToken("YOUR_TOKEN")
-            .build())
-        .addTool(BetaMcpToolset.builder()
-            .mcpServerName("example-mcp")
-            .build())
-        .addBeta("mcp-client-2025-11-20")
-        .build();
-
-    BetaMessage response = client.beta().messages().create(params);
-    IO.println(response);
-}
-```
-
-```php PHP nocheck hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client();
-
-$message = $client->beta->messages->create(
-    maxTokens: 1000,
+  const response = await anthropic.beta.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1000,
     messages: [
-        ['role' => 'user', 'content' => 'What tools do you have available?']
+      {
+        role: "user",
+        content: "What tools do you have available?"
+      }
     ],
-    model: 'claude-opus-4-8',
-    mcpServers: [
-        [
-            'type' => 'url',
-            'url' => 'https://example-server.modelcontextprotocol.io/sse',
-            'name' => 'example-mcp',
-            'authorization_token' => 'YOUR_TOKEN',
-        ],
+    mcp_servers: [
+      {
+        type: "url",
+        url: "https://example-server.modelcontextprotocol.io/sse",
+        name: "example-mcp",
+        authorization_token: "YOUR_TOKEN"
+      }
     ],
     tools: [
-        [
-            'type' => 'mcp_toolset',
-            'mcp_server_name' => 'example-mcp',
-        ],
+      {
+        type: "mcp_toolset",
+        mcp_server_name: "example-mcp"
+      }
     ],
-    betas: ['mcp-client-2025-11-20'],
-);
+    betas: ["mcp-client-2025-11-20"]
+  });
 
-echo $message;
-```
+  console.log(response);
+  ```
 
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
+  ```csharp C#
+  AnthropicClient client = new();
 
-client = Anthropic::Client.new
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1000,
+      Messages = new List<BetaMessageParam>
+      {
+          new() { Role = Role.User, Content = "What tools do you have available?" }
+      },
+      McpServers = new List<BetaRequestMcpServerUrlDefinition>
+      {
+          new()
+          {
+              Url = "https://example-server.modelcontextprotocol.io/sse",
+              Name = "example-mcp",
+              AuthorizationToken = "YOUR_TOKEN"
+          }
+      },
+      Tools = new List<BetaToolUnion>
+      {
+          new BetaMcpToolset("example-mcp")
+      },
+      Betas = new List<string> { "mcp-client-2025-11-20" }
+  };
 
-response = client.beta.messages.create(
-  model: "claude-opus-4-8",
-  max_tokens: 1000,
-  messages: [
-    { role: "user", content: "What tools do you have available?" }
-  ],
-  mcp_servers: [
-    {
-      type: "url",
-      url: "https://example-server.modelcontextprotocol.io/sse",
-      name: "example-mcp",
-      authorization_token: "YOUR_TOKEN"
-    }
-  ],
-  tools: [
-    {
-      type: "mcp_toolset",
-      mcp_server_name: "example-mcp"
-    }
-  ],
-  betas: ["mcp-client-2025-11-20"]
-)
+  var message = await client.Beta.Messages.Create(parameters);
+  Console.WriteLine(message);
+  ```
 
-puts response
-```
+  ```go Go
+  client := anthropic.NewClient()
+
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1000,
+  	Messages: []anthropic.BetaMessageParam{
+  		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What tools do you have available?")),
+  	},
+  	MCPServers: []anthropic.BetaRequestMCPServerURLDefinitionParam{
+  		{
+  			URL:                "https://example-server.modelcontextprotocol.io/sse",
+  			Name:               "example-mcp",
+  			AuthorizationToken: anthropic.String("YOUR_TOKEN"),
+  		},
+  	},
+  	Tools: []anthropic.BetaToolUnionParam{
+  		{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
+  			MCPServerName: "example-mcp",
+  		}},
+  	},
+  	Betas: []anthropic.AnthropicBeta{
+  		anthropic.AnthropicBetaMCPClient2025_11_20,
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaMcpToolset;
+  // ...
+  import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
+  // ...
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1000L)
+          .addUserMessage("What tools do you have available?")
+          .addMcpServer(BetaRequestMcpServerUrlDefinition.builder()
+              .url("https://example-server.modelcontextprotocol.io/sse")
+              .name("example-mcp")
+              .authorizationToken("YOUR_TOKEN")
+              .build())
+          .addTool(BetaMcpToolset.builder()
+              .mcpServerName("example-mcp")
+              .build())
+          .addBeta("mcp-client-2025-11-20")
+          .build();
+
+      BetaMessage response = client.beta().messages().create(params);
+      IO.println(response);
+  }
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $message = $client->beta->messages->create(
+      maxTokens: 1000,
+      messages: [
+          ['role' => 'user', 'content' => 'What tools do you have available?']
+      ],
+      model: 'claude-opus-4-8',
+      mcpServers: [
+          [
+              'type' => 'url',
+              'url' => 'https://example-server.modelcontextprotocol.io/sse',
+              'name' => 'example-mcp',
+              'authorization_token' => 'YOUR_TOKEN',
+          ],
+      ],
+      tools: [
+          [
+              'type' => 'mcp_toolset',
+              'mcp_server_name' => 'example-mcp',
+          ],
+      ],
+      betas: ['mcp-client-2025-11-20'],
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.beta.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1000,
+    messages: [
+      { role: "user", content: "What tools do you have available?" }
+    ],
+    mcp_servers: [
+      {
+        type: "url",
+        url: "https://example-server.modelcontextprotocol.io/sse",
+        name: "example-mcp",
+        authorization_token: "YOUR_TOKEN"
+      }
+    ],
+    tools: [
+      {
+        type: "mcp_toolset",
+        mcp_server_name: "example-mcp"
+      }
+    ],
+    betas: ["mcp-client-2025-11-20"]
+  )
+
+  puts response
+  ```
 </CodeGroup>
 
 ## MCP server configuration
@@ -345,12 +313,12 @@ Each MCP server in the `mcp_servers` array defines the connection details:
 
 ### Field descriptions
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `type` | string | Yes | Currently only "url" is supported. |
-| `url` | string | Yes | The URL of the MCP server. Must start with https://. |
-| `name` | string | Yes | A unique identifier for this MCP server. Must be referenced by exactly one MCPToolset in the `tools` array. |
-| `authorization_token` | string | No | OAuth authorization token if required by the MCP server. See [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). |
+| Property              | Type   | Required | Description                                                                                                                                                     |
+| --------------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                | string | Yes      | Currently only "url" is supported.                                                                                                                              |
+| `url`                 | string | Yes      | The URL of the MCP server. Must start with https\://.                                                                                                           |
+| `name`                | string | Yes      | A unique identifier for this MCP server. Must be referenced by exactly one MCPToolset in the `tools` array.                                                     |
+| `authorization_token` | string | No       | OAuth authorization token if required by the MCP server. See [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). |
 
 ## MCP toolset configuration
 
@@ -377,21 +345,21 @@ The MCPToolset lives in the `tools` array and configures which tools from the MC
 
 ### Field descriptions
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `type` | string | Yes | Must be "mcp_toolset". |
-| `mcp_server_name` | string | Yes | Must match a server name defined in the `mcp_servers` array. |
-| `default_config` | object | No | Default configuration applied to all tools in this set. Individual tool configs in `configs` override these defaults. |
-| `configs` | object | No | Per-tool configuration overrides. Keys are tool names, values are configuration objects. |
-| `cache_control` | object | No | [Prompt caching](/docs/en/build-with-claude/prompt-caching) cache breakpoint configuration for this toolset. |
+| Property          | Type   | Required | Description                                                                                                           |
+| ----------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| `type`            | string | Yes      | Must be "mcp\_toolset".                                                                                               |
+| `mcp_server_name` | string | Yes      | Must match a server name defined in the `mcp_servers` array.                                                          |
+| `default_config`  | object | No       | Default configuration applied to all tools in this set. Individual tool configs in `configs` override these defaults. |
+| `configs`         | object | No       | Per-tool configuration overrides. Keys are tool names, values are configuration objects.                              |
+| `cache_control`   | object | No       | [Prompt caching](/docs/en/build-with-claude/prompt-caching) cache breakpoint configuration for this toolset.          |
 
 ### Tool configuration options
 
 Each tool (whether configured in `default_config` or in `configs`) supports the following fields:
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `enabled` | boolean | `true` | Whether this tool is enabled. |
+| Property        | Type    | Default | Description                                                                                                                                      |
+| --------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `enabled`       | boolean | `true`  | Whether this tool is enabled.                                                                                                                    |
 | `defer_loading` | boolean | `false` | If true, tool description is not sent to the model initially. Used with [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool). |
 
 For the full directory of Anthropic-provided tools and optional properties such as `defer_loading`, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference). For searching across large tool sets, see [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool).
@@ -422,8 +390,9 @@ Example:
 ```
 
 Results in:
-- `search_events`: `enabled: false` (from configs), `defer_loading: true` (from default_config)
-- All other tools: `enabled: true` (system default), `defer_loading: true` (from default_config)
+
+* `search_events`: `enabled: false` (from configs), `defer_loading: true` (from default\_config)
+* All other tools: `enabled: true` (system default), `defer_loading: true` (from default\_config)
 
 ## Common configuration patterns
 
@@ -504,18 +473,19 @@ Combine allowlisting with custom configuration for each tool:
 ```
 
 In this example:
-- `search_events` is enabled with `defer_loading: false`
-- `list_events` is enabled with `defer_loading: true` (inherited from default_config)
-- All other tools are disabled
+
+* `search_events` is enabled with `defer_loading: false`
+* `list_events` is enabled with `defer_loading: true` (inherited from default\_config)
+* All other tools are disabled
 
 ## Validation rules
 
 The API enforces these validation rules:
 
-- **Server must exist**: The `mcp_server_name` in an MCPToolset must match a server defined in the `mcp_servers` array
-- **Server must be used**: Every MCP server defined in `mcp_servers` must be referenced by exactly one MCPToolset
-- **Unique toolset per server**: Each MCP server can only be referenced by one MCPToolset
-- **Unknown tool names**: If a tool name in `configs` doesn't exist on the MCP server, a backend warning is logged but no error is returned (MCP servers may have dynamic tool availability)
+* **Server must exist**: The `mcp_server_name` in an MCPToolset must match a server defined in the `mcp_servers` array
+* **Server must be used**: Every MCP server defined in `mcp_servers` must be referenced by exactly one MCPToolset
+* **Unique toolset per server**: Each MCP server can only be referenced by one MCPToolset
+* **Unknown tool names**: If a tool name in `configs` doesn't exist on the MCP server, a backend warning is logged but no error is returned (MCP servers may have dynamic tool availability)
 
 ## Response content types
 
@@ -597,8 +567,7 @@ With many tools available, Claude selects based on tool names and descriptions. 
 
 ## Authentication
 
-For MCP servers that require OAuth authentication, you'll need to obtain an access token. The MCP connector beta supports passing an `authorization_token` parameter in the MCP server definition.
-API consumers are expected to handle the OAuth flow and obtain the access token prior to making the API call, and to refresh the token as needed.
+For MCP servers that require OAuth authentication, you'll need to obtain an access token. The MCP connector beta supports passing an `authorization_token` parameter in the MCP server definition. API consumers are expected to handle the OAuth flow and obtain the access token prior to making the API call, and to refresh the token as needed.
 
 ### Obtaining an access token for testing
 
@@ -611,11 +580,17 @@ The MCP inspector can guide you through the process of obtaining an access token
    ```
 
 2. In the sidebar on the left, for "Transport type", select either "SSE" or "Streamable HTTP".
+
 3. Enter the URL of the MCP server.
+
 4. In the right area, click the "Open Auth Settings" button after "Need to configure authentication?".
+
 5. Click "Quick OAuth Flow" and authorize on the OAuth screen.
+
 6. Follow the steps in the "OAuth Flow Progress" section of the inspector and click "Continue" until you reach "Authentication complete".
+
 7. Copy the `access_token` value.
+
 8. Paste it into the `authorization_token` field in your MCP server configuration.
 
 ### Using the access token
@@ -644,12 +619,13 @@ If you manage your own MCP client connection (for example, with local stdio serv
 <Note>
   These helpers are available in the Python, TypeScript, Java, Go, Ruby, and PHP SDKs. They are not yet available in the C# SDK. The examples in this section use TypeScript; in other languages, import the equivalent helpers from:
 
-  - **Python:** `anthropic.lib.tools.mcp` (install with `pip install anthropic[mcp]`)
-  - **Java:** `com.anthropic.mcp.BetaMcp` in the `anthropic-java-mcp` module
-  - **Go:** `github.com/anthropics/anthropic-sdk-go/mcp`
-  - **Ruby:** `Anthropic::Mcp` (requires the `mcp` gem)
-  - **PHP:** `Anthropic\Lib\Tools\BetaMcp`
+  * **Python:** `anthropic.lib.tools.mcp` (install with `pip install anthropic[mcp]`)
+  * **Java:** `com.anthropic.mcp.BetaMcp` in the `anthropic-java-mcp` module
+  * **Go:** `github.com/anthropics/anthropic-sdk-go/mcp`
+  * **Ruby:** `Anthropic::Mcp` (requires the `mcp` gem)
+  * **PHP:** `Anthropic\Lib\Tools\BetaMcp`
 </Note>
+
 <Note>
   Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-api) when you have remote servers accessible by URL and only need tool support. Use the client-side helpers when you need local servers, prompts, resources, or more control over the connection with the base SDK.
 </Note>
@@ -666,7 +642,7 @@ npm install @anthropic-ai/sdk @modelcontextprotocol/sdk
 
 Import the helpers from the beta namespace:
 
-```typescript nocheck
+```typescript
 import {
   mcpTools,
   mcpMessages,
@@ -675,19 +651,18 @@ import {
 } from "@anthropic-ai/sdk/helpers/beta/mcp";
 ```
 
-| Helper | Description |
-|--------|-------------|
-| `mcpTools(tools, mcpClient)` | Converts MCP tools to Claude API tools for use with `client.beta.messages.toolRunner()` |
-| `mcpMessages(messages)` | Converts MCP prompt messages to Claude API message format |
-| `mcpResourceToContent(resource)` | Converts an MCP resource to a Claude API content block |
-| `mcpResourceToFile(resource)` | Converts an MCP resource to a file object for upload |
+| Helper                           | Description                                                                             |
+| -------------------------------- | --------------------------------------------------------------------------------------- |
+| `mcpTools(tools, mcpClient)`     | Converts MCP tools to Claude API tools for use with `client.beta.messages.toolRunner()` |
+| `mcpMessages(messages)`          | Converts MCP prompt messages to Claude API message format                               |
+| `mcpResourceToContent(resource)` | Converts an MCP resource to a Claude API content block                                  |
+| `mcpResourceToFile(resource)`    | Converts an MCP resource to a file object for upload                                    |
 
 ### Use MCP tools
 
 Convert MCP tools for use with the SDK's [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner), which handles tool execution automatically:
 
-```typescript nocheck hidelines={1}
-import Anthropic from "@anthropic-ai/sdk";
+```typescript
 import { mcpTools } from "@anthropic-ai/sdk/helpers/beta/mcp";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
@@ -715,7 +690,7 @@ console.log(finalMessage);
 
 Convert MCP prompt messages into Claude API message format:
 
-```typescript nocheck
+```typescript
 import { mcpMessages } from "@anthropic-ai/sdk/helpers/beta/mcp";
 
 const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
@@ -732,7 +707,7 @@ console.log(response);
 
 Convert MCP resources into content blocks to include in messages, or into file objects for upload:
 
-```typescript nocheck
+```typescript
 import { mcpResourceToContent, mcpResourceToFile } from "@anthropic-ai/sdk/helpers/beta/mcp";
 
 // As a content block in a message
@@ -845,11 +820,11 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ### Common migration patterns
 
-| Old pattern | New pattern |
-|-------------|-------------|
-| No `tool_configuration` (all tools enabled) | MCPToolset with no `default_config` or `configs` |
-| `tool_configuration.enabled: false` | MCPToolset with `default_config.enabled: false` |
-| `tool_configuration.allowed_tools: [...]` | MCPToolset with `default_config.enabled: false` and specific tools enabled in `configs` |
+| Old pattern                                 | New pattern                                                                             |
+| ------------------------------------------- | --------------------------------------------------------------------------------------- |
+| No `tool_configuration` (all tools enabled) | MCPToolset with no `default_config` or `configs`                                        |
+| `tool_configuration.enabled: false`         | MCPToolset with `default_config.enabled: false`                                         |
+| `tool_configuration.allowed_tools: [...]`   | MCPToolset with `default_config.enabled: false` and specific tools enabled in `configs` |
 
 ## Deprecated version: mcp-client-2025-04-04
 
@@ -878,8 +853,8 @@ The previous version of the MCP connector included tool configuration directly i
 
 ### Deprecated field descriptions
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `tool_configuration` | object | **Deprecated**: Use MCPToolset in the `tools` array instead |
-| `tool_configuration.enabled` | boolean | **Deprecated**: Use `default_config.enabled` in MCPToolset |
-| `tool_configuration.allowed_tools` | array | **Deprecated**: Use allowlist pattern with `configs` in MCPToolset |
+| Property                           | Type    | Description                                                        |
+| ---------------------------------- | ------- | ------------------------------------------------------------------ |
+| `tool_configuration`               | object  | **Deprecated**: Use MCPToolset in the `tools` array instead        |
+| `tool_configuration.enabled`       | boolean | **Deprecated**: Use `default_config.enabled` in MCPToolset         |
+| `tool_configuration.allowed_tools` | array   | **Deprecated**: Use allowlist pattern with `configs` in MCPToolset |

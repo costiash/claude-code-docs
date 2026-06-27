@@ -8,13 +8,13 @@ Skills are reusable, filesystem-based resources that give your agent domain-spec
 
 You can attach two types of skill. Both work the same way: your agent invokes them automatically when they are relevant to the task.
 
-- **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling.
-- **Custom skills:** Skills you author and upload to your workspace.
+* **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling.
+* **Custom skills:** Skills you author and upload to your workspace.
 
 To learn how to author custom skills, see [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) and [Skill authoring best practices](/docs/en/agents-and-tools/agent-skills/best-practices). This page assumes you already have skills available in your workspace or are using Anthropic pre-built skills.
 
 <Note>
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 </Note>
 
 ## Attach skills to an agent
@@ -23,167 +23,167 @@ Attach skills when creating an agent. Each session supports up to 20 skills tota
 
 Each entry in the `skills` array uses the following fields:
 
-| Field | Description |
-| --- | --- |
-| `type` | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills. |
+| Field      | Description                                                                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`     | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills.                                                                  |
 | `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation. |
-| `version` | Custom skills only. Pin to a specific version or use `latest`. |
+| `version`  | Custom skills only. Pin to a specific version or use `latest`.                                                                                      |
 
 <CodeGroup defaultLanguage="CLI">
-```bash curl
-agent=$(curl -sS https://api.anthropic.com/v1/agents \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json @- <<'EOF'
-{
-  "name": "Financial Analyst",
-  "model": "claude-opus-4-8",
-  "system": "You are a financial analysis agent.",
-  "skills": [
-    {"type": "anthropic", "skill_id": "xlsx"},
-    {"type": "custom", "skill_id": "skill_abc123", "version": "latest"}
-  ]
-}
-EOF
-)
-```
+  ```bash curl
+  agent=$(curl -sS https://api.anthropic.com/v1/agents \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    --json @- <<'EOF'
+  {
+    "name": "Financial Analyst",
+    "model": "claude-opus-4-8",
+    "system": "You are a financial analysis agent.",
+    "skills": [
+      {"type": "anthropic", "skill_id": "xlsx"},
+      {"type": "custom", "skill_id": "skill_abc123", "version": "latest"}
+    ]
+  }
+  EOF
+  )
+  ```
 
-```bash CLI nocheck
-ant beta:agents create <<'YAML'
-name: Financial Analyst
-model: claude-opus-4-8
-system: You are a financial analysis agent.
-skills:
-  - type: anthropic
-    skill_id: xlsx
-  - type: custom
-    skill_id: skill_abc123
-    version: latest
-YAML
-```
+  ```bash CLI
+  ant beta:agents create <<'YAML'
+  name: Financial Analyst
+  model: claude-opus-4-8
+  system: You are a financial analysis agent.
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+    - type: custom
+      skill_id: skill_abc123
+      version: latest
+  YAML
+  ```
 
-```python Python
-agent = client.beta.agents.create(
-    name="Financial Analyst",
-    model="claude-opus-4-8",
-    system="You are a financial analysis agent.",
-    skills=[
-        {
-            "type": "anthropic",
-            "skill_id": "xlsx",
-        },
-        {
-            "type": "custom",
-            "skill_id": "skill_abc123",
-            "version": "latest",
-        },
-    ],
-)
-```
+  ```python Python
+  agent = client.beta.agents.create(
+      name="Financial Analyst",
+      model="claude-opus-4-8",
+      system="You are a financial analysis agent.",
+      skills=[
+          {
+              "type": "anthropic",
+              "skill_id": "xlsx",
+          },
+          {
+              "type": "custom",
+              "skill_id": "skill_abc123",
+              "version": "latest",
+          },
+      ],
+  )
+  ```
 
-```typescript TypeScript
-const agent = await client.beta.agents.create({
-  name: "Financial Analyst",
-  model: "claude-opus-4-8",
-  system: "You are a financial analysis agent.",
-  skills: [
-    {
-      type: "anthropic",
-      skill_id: "xlsx"
-    },
-    {
-      type: "custom",
-      skill_id: "skill_abc123",
-      version: "latest"
-    }
-  ]
-});
-```
-
-```csharp C#
-var agent = await client.Beta.Agents.Create(new()
-{
-    Name = "Financial Analyst",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
-    System = "You are a financial analysis agent.",
-    Skills =
-    [
-        new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
-        new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_abc123", Version = "latest" },
-    ],
-});
-```
-
-```go Go nocheck
-agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
-	Name: "Financial Analyst",
-	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-4-8",
-	},
-	System: anthropic.String("You are a financial analysis agent."),
-	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
-		{OfAnthropic: &anthropic.BetaManagedAgentsAnthropicSkillParams{
-			SkillID: "xlsx",
-			Type:    anthropic.BetaManagedAgentsAnthropicSkillParamsTypeAnthropic,
-		}},
-		{OfCustom: &anthropic.BetaManagedAgentsCustomSkillParams{
-			SkillID: "skill_abc123",
-			Type:    anthropic.BetaManagedAgentsCustomSkillParamsTypeCustom,
-			Version: anthropic.String("latest"),
-		}},
-	},
-})
-if err != nil {
-	panic(err)
-}
-_ = agent
-```
-
-```java Java
-var agent = client.beta().agents().create(
-    AgentCreateParams.builder()
-        .name("Financial Analyst")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
-        .system("You are a financial analysis agent.")
-        .addSkill(
-            BetaManagedAgentsAnthropicSkillParams.builder()
-                .type(BetaManagedAgentsAnthropicSkillParams.Type.ANTHROPIC)
-                .skillId("xlsx")
-                .build()
-        )
-        .addSkill(
-            BetaManagedAgentsCustomSkillParams.builder()
-                .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
-                .skillId("skill_abc123")
-                .version("latest")
-                .build()
-        )
-        .build()
-);
-```
-
-```php PHP
-$agent = $client->beta->agents->create(
-    name: 'Financial Analyst',
-    model: 'claude-opus-4-8',
-    system: 'You are a financial analysis agent.',
+  ```typescript TypeScript
+  const agent = await client.beta.agents.create({
+    name: "Financial Analyst",
+    model: "claude-opus-4-8",
+    system: "You are a financial analysis agent.",
     skills: [
-        ['type' => 'anthropic', 'skill_id' => 'xlsx'],
-        ['type' => 'custom', 'skill_id' => 'skill_abc123', 'version' => 'latest'],
-    ],
-);
-```
+      {
+        type: "anthropic",
+        skill_id: "xlsx"
+      },
+      {
+        type: "custom",
+        skill_id: "skill_abc123",
+        version: "latest"
+      }
+    ]
+  });
+  ```
 
-```ruby Ruby
-agent = client.beta.agents.create(
-  name: "Financial Analyst",
-  model: "claude-opus-4-8",
-  system_: "You are a financial analysis agent.",
-  skills: [
-    {type: "anthropic", skill_id: "xlsx"},
-    {type: "custom", skill_id: "skill_abc123", version: "latest"}
-  ]
-)
-```
+  ```csharp C#
+  var agent = await client.Beta.Agents.Create(new()
+  {
+      Name = "Financial Analyst",
+      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      System = "You are a financial analysis agent.",
+      Skills =
+      [
+          new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
+          new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_abc123", Version = "latest" },
+      ],
+  });
+  ```
+
+  ```go Go
+  agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
+  	Name: "Financial Analyst",
+  	Model: anthropic.BetaManagedAgentsModelConfigParams{
+  		ID: "claude-opus-4-8",
+  	},
+  	System: anthropic.String("You are a financial analysis agent."),
+  	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
+  		{OfAnthropic: &anthropic.BetaManagedAgentsAnthropicSkillParams{
+  			SkillID: "xlsx",
+  			Type:    anthropic.BetaManagedAgentsAnthropicSkillParamsTypeAnthropic,
+  		}},
+  		{OfCustom: &anthropic.BetaManagedAgentsCustomSkillParams{
+  			SkillID: "skill_abc123",
+  			Type:    anthropic.BetaManagedAgentsCustomSkillParamsTypeCustom,
+  			Version: anthropic.String("latest"),
+  		}},
+  	},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  _ = agent
+  ```
+
+  ```java Java
+  var agent = client.beta().agents().create(
+      AgentCreateParams.builder()
+          .name("Financial Analyst")
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .system("You are a financial analysis agent.")
+          .addSkill(
+              BetaManagedAgentsAnthropicSkillParams.builder()
+                  .type(BetaManagedAgentsAnthropicSkillParams.Type.ANTHROPIC)
+                  .skillId("xlsx")
+                  .build()
+          )
+          .addSkill(
+              BetaManagedAgentsCustomSkillParams.builder()
+                  .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
+                  .skillId("skill_abc123")
+                  .version("latest")
+                  .build()
+          )
+          .build()
+  );
+  ```
+
+  ```php PHP
+  $agent = $client->beta->agents->create(
+      name: 'Financial Analyst',
+      model: 'claude-opus-4-8',
+      system: 'You are a financial analysis agent.',
+      skills: [
+          ['type' => 'anthropic', 'skill_id' => 'xlsx'],
+          ['type' => 'custom', 'skill_id' => 'skill_abc123', 'version' => 'latest'],
+      ],
+  );
+  ```
+
+  ```ruby Ruby
+  agent = client.beta.agents.create(
+    name: "Financial Analyst",
+    model: "claude-opus-4-8",
+    system_: "You are a financial analysis agent.",
+    skills: [
+      {type: "anthropic", skill_id: "xlsx"},
+      {type: "custom", skill_id: "skill_abc123", version: "latest"}
+    ]
+  )
+  ```
 </CodeGroup>

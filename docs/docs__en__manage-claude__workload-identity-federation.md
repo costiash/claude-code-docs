@@ -26,8 +26,8 @@ A **federation issuer** (`fdis_...`) registers an OIDC identity provider with yo
 
 An issuer has two pieces of configuration:
 
-- **Issuer URL:** The exact `iss` claim value that appears in the provider's JWTs, for example `https://token.actions.githubusercontent.com` or `https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLE`.
-- **JWKS source:** How Anthropic fetches the public keys to verify JWT signatures. Use `discovery` (the default) for any provider that serves `/.well-known/openid-configuration` at its issuer URL. Use `explicit_url` to point at a JWKS endpoint directly, or `inline` to upload the key set for issuers that are not reachable from the public internet (for example, a private Kubernetes cluster).
+* **Issuer URL:** The exact `iss` claim value that appears in the provider's JWTs, for example `https://token.actions.githubusercontent.com` or `https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLE`.
+* **JWKS source:** How Anthropic fetches the public keys to verify JWT signatures. Use `discovery` (the default) for any provider that serves `/.well-known/openid-configuration` at its issuer URL. Use `explicit_url` to point at a JWKS endpoint directly, or `inline` to upload the key set for issuers that are not reachable from the public internet (for example, a private Kubernetes cluster).
 
 Issuer and JWKS URLs must be `https`, on port 443, and use a public DNS host name that resolves to public IP addresses; IP literals are not accepted. These constraints apply only to URLs Anthropic fetches; in `explicit_url` and `inline` modes the `issuer_url` is compared as a string and may reference an internal hostname.
 
@@ -39,9 +39,9 @@ A **federation rule** (`fdrl_...`) is the bridge between an issuer and a service
 
 A rule defines match conditions, a target, and the authorization scope and token lifetime that apply when the rule matches:
 
-- **Match:** The conditions an incoming JWT must satisfy. You can match on a `subject_prefix` (for example, `system:serviceaccount:prod:worker`, or with a trailing `*` for a prefix match), an exact `audience`, a map of exact claim values, a [CEL](https://cel.dev/) `condition` expression for complex logic, or any combination. At least one of `subject_prefix`, `claims`, or `condition` must be set, and all configured matchers must pass for the JWT to be accepted.
-- **Target:** The service account the matched JWT maps to.
-- **Authorization:** The OAuth `scope` granted on the minted token. The default is `workspace:developer`, which grants the same access as an API key issued for that workspace. Some products lock the scope when you create a rule from their flow; for example, the [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) create-tunnel modal creates rules scoped to `org:manage_tunnels`. See [OAuth scopes](/docs/en/manage-claude/wif-reference#oauth-scopes). The rule also sets `token_lifetime_seconds` (60 to 86400, default 3600).
+* **Match:** The conditions an incoming JWT must satisfy. You can match on a `subject_prefix` (for example, `system:serviceaccount:prod:worker`, or with a trailing `*` for a prefix match), an exact `audience`, a map of exact claim values, a [CEL](https://cel.dev/) `condition` expression for complex logic, or any combination. At least one of `subject_prefix`, `claims`, or `condition` must be set, and all configured matchers must pass for the JWT to be accepted.
+* **Target:** The service account the matched JWT maps to.
+* **Authorization:** The OAuth `scope` granted on the minted token. The default is `workspace:developer`, which grants the same access as an API key issued for that workspace. Some products lock the scope when you create a rule from their flow; for example, the [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) create-tunnel modal creates rules scoped to `org:manage_tunnels`. See [OAuth scopes](/docs/en/manage-claude/wif-reference#oauth-scopes). The rule also sets `token_lifetime_seconds` (60 to 86400, default 3600).
 
 A single issuer can have many rules: one per team, namespace, or permission level. Rules are evaluated by ID: the client specifies which rule to use in the exchange request, and Anthropic verifies the JWT satisfies that rule's match criteria. There is no implicit rule search.
 
@@ -90,258 +90,222 @@ With federation configured, your workload exchanges its IdP-issued JWT for an An
 You can construct the client with explicit credentials or with no arguments. With no arguments, the SDK resolves credentials from environment variables or the active profile, as described under [Credential precedence](#credential-precedence). The zero-argument form is the recommended pattern for production workloads: ship the same container image everywhere and inject `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, `ANTHROPIC_WORKSPACE_ID`, and `ANTHROPIC_IDENTITY_TOKEN_FILE` per environment.
 
 <CodeGroup>
+  ```bash cURL
+  # 1. Acquire your IdP's JWT (platform-specific; see the per-provider guides).
+  JWT=$(cat /var/run/secrets/anthropic.com/token)
 
-```bash cURL nocheck
-# 1. Acquire your IdP's JWT (platform-specific; see the per-provider guides).
-JWT=$(cat /var/run/secrets/anthropic.com/token)
-
-# 2. Exchange it for a short-lived Anthropic access token.
-RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
-  -H "content-type: application/json" \
-  --data @- <<JSON
-{
-  "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
-  "assertion": "$JWT",
-  "federation_rule_id": "fdrl_...",
-  "organization_id": "00000000-0000-0000-0000-000000000000",
-  "service_account_id": "svac_...",
-  "workspace_id": "wrkspc_..."
-}
-JSON
-)
-
-ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
-EXPIRES_IN=$(jq -r .expires_in <<<"$RESPONSE")  # seconds; re-exchange before this elapses
-
-# 3. Call the API with the access token in the Authorization: Bearer header.
-curl -sS https://api.anthropic.com/v1/messages \
-  -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  --data @- <<'JSON' | jq -r '.content[0].text'
-{
-  "model": "claude-sonnet-4-6",
-  "max_tokens": 1024,
-  "messages": [{"role": "user", "content": "Hello, Claude"}]
-}
-JSON
-```
-
-```python Python nocheck
-from anthropic import Anthropic, WorkloadIdentityCredentials, IdentityTokenFile
-
-client = Anthropic(
-    credentials=WorkloadIdentityCredentials(
-        identity_token_provider=IdentityTokenFile(
-            "/var/run/secrets/anthropic.com/token"
-        ),
-        federation_rule_id="fdrl_...",
-        organization_id="00000000-0000-0000-0000-000000000000",
-        service_account_id="svac_...",
-        workspace_id="wrkspc_...",
-    ),
-)
-
-message = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-print(message.content[0].text)
-```
-
-```typescript TypeScript nocheck
-import Anthropic from "@anthropic-ai/sdk";
-import { oidcFederationProvider } from "@anthropic-ai/sdk/lib/credentials/oidc-federation";
-import { identityTokenFromFile } from "@anthropic-ai/sdk/lib/credentials/identity-token";
-
-const client = new Anthropic({
-  credentials: oidcFederationProvider({
-    identityTokenProvider: identityTokenFromFile("/var/run/secrets/anthropic.com/token"),
-    federationRuleId: "fdrl_...",
-    organizationId: "00000000-0000-0000-0000-000000000000",
-    serviceAccountId: "svac_...",
-    workspaceId: "wrkspc_...",
-    baseURL: "https://api.anthropic.com",
-    fetch
-  })
-});
-
-const message = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Hello, Claude" }]
-});
-for (const block of message.content) {
-  if (block.type === "text") {
-    console.log(block.text);
+  # 2. Exchange it for a short-lived Anthropic access token.
+  RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
+    -H "content-type: application/json" \
+    --data @- <<JSON
+  {
+    "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+    "assertion": "$JWT",
+    "federation_rule_id": "fdrl_...",
+    "organization_id": "00000000-0000-0000-0000-000000000000",
+    "service_account_id": "svac_...",
+    "workspace_id": "wrkspc_..."
   }
-}
-```
-
-```go Go nocheck hidelines={1..12,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
-)
-
-func main() {
-	client := anthropic.NewClient(
-		option.WithFederationTokenProvider(
-			option.IdentityTokenFile("/var/run/secrets/anthropic.com/token"),
-			option.FederationOptions{
-				FederationRuleID: "fdrl_...",
-				OrganizationID:   "00000000-0000-0000-0000-000000000000",
-				ServiceAccountID: "svac_...",
-				WorkspaceID:      "wrkspc_...",
-			},
-		),
-	)
-
-	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeSonnet4_6,
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(message.Content[0].Text)
-}
-```
-
-```java Java nocheck hidelines={1..11,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.config.AuthenticationConfig;
-import com.anthropic.config.AuthenticationType;
-import com.anthropic.config.IdentityTokenConfig;
-import com.anthropic.config.InMemoryProfileConfigProvider;
-import com.anthropic.config.ProfileConfig;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-
-void main() {
-    AnthropicClient client = AnthropicOkHttpClient.builder()
-            .fromEnv()
-            .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
-                    .organizationId("00000000-0000-0000-0000-000000000000")
-                    .workspaceId("wrkspc_...")
-                    .authentication(AuthenticationConfig.builder()
-                            .type(AuthenticationType.OIDC_FEDERATION)
-                            .federationRuleId("fdrl_...")
-                            .serviceAccountId("svac_...")
-                            .identityToken(IdentityTokenConfig.builder()
-                                    .source("file")
-                                    .path("/var/run/secrets/anthropic.com/token")
-                                    .build())
-                            .build())
-                    .build()))
-            .build();
-
-    var message = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_SONNET_4_6)
-            .maxTokens(1024)
-            .addUserMessage("Hello, Claude")
-            .build());
-
-    IO.println(message.content());
-}
-```
-
-```csharp C# nocheck hidelines={1..3}
-using Anthropic.Models.Messages;
-using Anthropic.Oidc;
-
-var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
-{
-    FederationRuleId = "fdrl_...",
-    OrganizationId = "00000000-0000-0000-0000-000000000000",
-    ServiceAccountId = "svac_...",
-    WorkspaceId = "wrkspc_...",
-    IdentityTokenProvider = new FileIdentityTokenProvider("/var/run/secrets/anthropic.com/token"),
-});
-using var client = new AnthropicOidcClient(credentials);
-
-var message = await client.Messages.Create(new()
-{
-    Model = Model.ClaudeSonnet4_6,
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
-});
-foreach (var block in message.Content)
-{
-    if (block.Value is TextBlock textBlock)
-    {
-        Console.WriteLine(textBlock.Text);
-    }
-}
-```
-
-```php PHP nocheck hidelines={1..4}
-<?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use Anthropic\Client;
-use Anthropic\Lib\Credentials\CredentialResult;
-use Anthropic\Lib\Credentials\IdentityTokenFile;
-use Anthropic\Lib\Credentials\TokenCache;
-use Anthropic\Lib\Credentials\WorkloadIdentityCredentials;
-
-$client = new Client(credentials: new CredentialResult(
-    provider: new TokenCache(
-        new WorkloadIdentityCredentials(
-            identityProvider: new IdentityTokenFile('/var/run/secrets/anthropic.com/token'),
-            federationRuleId: 'fdrl_...',
-            organizationId: '00000000-0000-0000-0000-000000000000',
-            serviceAccountId: 'svac_...',
-            workspaceId: 'wrkspc_...',
-        ),
-    ),
-));
-
-$message = $client->messages->create(
-    model: 'claude-sonnet-4-6',
-    maxTokens: 1024,
-    messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-);
-
-echo $message->content[0]->text . PHP_EOL;
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new(
-  credentials: Anthropic::Credentials::WorkloadIdentity.new(
-    identity_token_provider: Anthropic::Credentials::IdentityTokenFile.new(
-      "/var/run/secrets/anthropic.com/token"
-    ),
-    federation_rule_id: "fdrl_...",
-    organization_id: "00000000-0000-0000-0000-000000000000",
-    service_account_id: "svac_...",
-    workspace_id: "wrkspc_..."
+  JSON
   )
-)
 
-message = client.messages.create(
-  model: "claude-sonnet-4-6",
-  max_tokens: 1024,
-  messages: [{role: "user", content: "Hello, Claude"}]
-)
+  ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
+  EXPIRES_IN=$(jq -r .expires_in <<<"$RESPONSE")  # seconds; re-exchange before this elapses
 
-puts message.content.first.text
-```
+  # 3. Call the API with the access token in the Authorization: Bearer header.
+  curl -sS https://api.anthropic.com/v1/messages \
+    -H "authorization: Bearer $ACCESS_TOKEN" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    --data @- <<'JSON' | jq -r '.content[0].text'
+  {
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "Hello, Claude"}]
+  }
+  JSON
+  ```
 
+  ```python Python
+  from anthropic import Anthropic, WorkloadIdentityCredentials, IdentityTokenFile
+
+  client = Anthropic(
+      credentials=WorkloadIdentityCredentials(
+          identity_token_provider=IdentityTokenFile(
+              "/var/run/secrets/anthropic.com/token"
+          ),
+          federation_rule_id="fdrl_...",
+          organization_id="00000000-0000-0000-0000-000000000000",
+          service_account_id="svac_...",
+          workspace_id="wrkspc_...",
+      ),
+  )
+
+  message = client.messages.create(
+      model="claude-sonnet-4-6",
+      max_tokens=1024,
+      messages=[{"role": "user", "content": "Hello, Claude"}],
+  )
+  print(message.content[0].text)
+  ```
+
+  ```typescript TypeScript
+  import Anthropic from "@anthropic-ai/sdk";
+  import { oidcFederationProvider } from "@anthropic-ai/sdk/lib/credentials/oidc-federation";
+  import { identityTokenFromFile } from "@anthropic-ai/sdk/lib/credentials/identity-token";
+
+  const client = new Anthropic({
+    credentials: oidcFederationProvider({
+      identityTokenProvider: identityTokenFromFile("/var/run/secrets/anthropic.com/token"),
+      federationRuleId: "fdrl_...",
+      organizationId: "00000000-0000-0000-0000-000000000000",
+      serviceAccountId: "svac_...",
+      workspaceId: "wrkspc_...",
+      baseURL: "https://api.anthropic.com",
+      fetch
+    })
+  });
+
+  const message = await client.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello, Claude" }]
+  });
+  for (const block of message.content) {
+    if (block.type === "text") {
+      console.log(block.text);
+    }
+  }
+  ```
+
+  ```go Go
+  client := anthropic.NewClient(
+  	option.WithFederationTokenProvider(
+  		option.IdentityTokenFile("/var/run/secrets/anthropic.com/token"),
+  		option.FederationOptions{
+  			FederationRuleID: "fdrl_...",
+  			OrganizationID:   "00000000-0000-0000-0000-000000000000",
+  			ServiceAccountID: "svac_...",
+  			WorkspaceID:      "wrkspc_...",
+  		},
+  	),
+  )
+
+  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(message.Content[0].Text)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.builder()
+          .fromEnv()
+          .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
+                  .organizationId("00000000-0000-0000-0000-000000000000")
+                  .workspaceId("wrkspc_...")
+                  .authentication(AuthenticationConfig.builder()
+                          .type(AuthenticationType.OIDC_FEDERATION)
+                          .federationRuleId("fdrl_...")
+                          .serviceAccountId("svac_...")
+                          .identityToken(IdentityTokenConfig.builder()
+                                  .source("file")
+                                  .path("/var/run/secrets/anthropic.com/token")
+                                  .build())
+                          .build())
+                  .build()))
+          .build();
+
+  var message = client.messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(1024)
+          .addUserMessage("Hello, Claude")
+          .build());
+
+  IO.println(message.content());
+  ```
+
+  ```csharp C#
+  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
+  {
+      FederationRuleId = "fdrl_...",
+      OrganizationId = "00000000-0000-0000-0000-000000000000",
+      ServiceAccountId = "svac_...",
+      WorkspaceId = "wrkspc_...",
+      IdentityTokenProvider = new FileIdentityTokenProvider("/var/run/secrets/anthropic.com/token"),
+  });
+  using var client = new AnthropicOidcClient(credentials);
+
+  var message = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeSonnet4_6,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+  });
+  foreach (var block in message.Content)
+  {
+      if (block.Value is TextBlock textBlock)
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+  ```
+
+  ```php PHP
+  use Anthropic\Client;
+  use Anthropic\Lib\Credentials\CredentialResult;
+  use Anthropic\Lib\Credentials\IdentityTokenFile;
+  use Anthropic\Lib\Credentials\TokenCache;
+  use Anthropic\Lib\Credentials\WorkloadIdentityCredentials;
+
+  $client = new Client(credentials: new CredentialResult(
+      provider: new TokenCache(
+          new WorkloadIdentityCredentials(
+              identityProvider: new IdentityTokenFile('/var/run/secrets/anthropic.com/token'),
+              federationRuleId: 'fdrl_...',
+              organizationId: '00000000-0000-0000-0000-000000000000',
+              serviceAccountId: 'svac_...',
+              workspaceId: 'wrkspc_...',
+          ),
+      ),
+  ));
+
+  $message = $client->messages->create(
+      model: 'claude-sonnet-4-6',
+      maxTokens: 1024,
+      messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+  );
+
+  echo $message->content[0]->text . PHP_EOL;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new(
+    credentials: Anthropic::Credentials::WorkloadIdentity.new(
+      identity_token_provider: Anthropic::Credentials::IdentityTokenFile.new(
+        "/var/run/secrets/anthropic.com/token"
+      ),
+      federation_rule_id: "fdrl_...",
+      organization_id: "00000000-0000-0000-0000-000000000000",
+      service_account_id: "svac_...",
+      workspace_id: "wrkspc_..."
+    )
+  )
+
+  message = client.messages.create(
+    model: "claude-sonnet-4-6",
+    max_tokens: 1024,
+    messages: [{role: "user", content: "Hello, Claude"}]
+  )
+
+  puts message.content.first.text
+  ```
 </CodeGroup>
 
 The token-exchange response follows [RFC 6749 §5.1](https://www.rfc-editor.org/rfc/rfc6749#section-5.1). See [Token exchange response](/docs/en/manage-claude/wif-reference#token-exchange-response) for the field reference.
@@ -351,11 +315,7 @@ The token-exchange response follows [RFC 6749 §5.1](https://www.rfc-editor.org/
 Every SDK resolves credentials in the same five-tier order: constructor arguments, then `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN`, then an explicit `ANTHROPIC_PROFILE`, then the federation environment variables, then the implicit active profile. The first source that yields a credential wins.
 
 <Warning>
-  `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the
-  environment silently shadows federation. When migrating a workload from API
-  keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload
-  runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status)
-  command reports which source won.
+  `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the environment silently shadows federation. When migrating a workload from API keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) command reports which source won.
 </Warning>
 
 For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence](/docs/en/manage-claude/wif-reference#credential-precedence) in the WIF reference.
@@ -375,8 +335,8 @@ The minted Anthropic token's lifetime is the lesser of (a) the rule's `token_lif
 
 The SDKs cache the token and refresh it on a two-tier schedule modeled on `botocore`:
 
-- **Advisory refresh** at expiry minus 120 seconds. The SDK attempts a new exchange. If the token endpoint is unreachable, the SDK continues serving the cached token, which is still valid for roughly 90 more seconds.
-- **Mandatory refresh** at expiry minus 30 seconds. A failed exchange at this point raises an error. The cached token is too close to expiry to be safe.
+* **Advisory refresh** at expiry minus 120 seconds. The SDK attempts a new exchange. If the token endpoint is unreachable, the SDK continues serving the cached token, which is still valid for roughly 90 more seconds.
+* **Mandatory refresh** at expiry minus 30 seconds. A failed exchange at this point raises an error. The cached token is too close to expiry to be safe.
 
 Because the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on every exchange, it transparently picks up rotated projected tokens (Kubernetes service-account tokens, for example, rotate well before their `exp`).
 
@@ -388,21 +348,27 @@ Each guide covers where the JWT comes from on that platform, what its claims loo
   <Card title="AWS" icon="cloud" href="/docs/en/manage-claude/wif-providers/aws">
     STS web identity tokens, or EKS IRSA projected tokens.
   </Card>
+
   <Card title="Google Cloud" icon="cloud" href="/docs/en/manage-claude/wif-providers/gcp">
     Google-signed identity tokens from the metadata server.
   </Card>
+
   <Card title="Microsoft Entra ID" icon="cloud" href="/docs/en/manage-claude/wif-providers/azure">
     Managed Identity (IMDS) and Entra Workload ID on AKS.
   </Card>
+
   <Card title="GitHub Actions" icon="github-logo" href="/docs/en/manage-claude/wif-providers/github-actions">
     Keyless CI authentication with the Actions OIDC token.
   </Card>
+
   <Card title="Kubernetes" icon="cube" href="/docs/en/manage-claude/wif-providers/kubernetes">
     Self-managed and on-premises clusters using projected service-account tokens.
   </Card>
+
   <Card title="SPIFFE" icon="fingerprint" href="/docs/en/manage-claude/wif-providers/spiffe">
     Workloads with SPIFFE JWT-SVIDs from SPIRE or another conformant issuer.
   </Card>
+
   <Card title="Okta" icon="lock" href="/docs/en/manage-claude/wif-providers/okta">
     Okta service applications using client-credentials flow.
   </Card>
@@ -410,7 +376,7 @@ Each guide covers where the JWT comes from on that platform, what its claims loo
 
 ## See also
 
-- [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api): create issuers, service accounts, and rules from infrastructure as code
-- [WIF reference](/docs/en/manage-claude/wif-reference): environment variables, profile file schema, validation rules, and error codes
-- [Authentication](/docs/en/manage-claude/authentication): all authentication options across the Anthropic SDKs
-- [Admin API reference](/docs/en/api/admin): generated request and response schemas for every Admin API endpoint
+* [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api): create issuers, service accounts, and rules from infrastructure as code
+* [WIF reference](/docs/en/manage-claude/wif-reference): environment variables, profile file schema, validation rules, and error codes
+* [Authentication](/docs/en/manage-claude/authentication): all authentication options across the Anthropic SDKs
+* [Admin API reference](/docs/en/api/admin): generated request and response schemas for every Admin API endpoint

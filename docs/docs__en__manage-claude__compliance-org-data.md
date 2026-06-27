@@ -23,11 +23,11 @@ The [List organizations](/docs/en/api/compliance/organizations/list) endpoint re
 The following call lists every organization under your parent. The response is a `data` array of organization records sorted by `created_at` ascending, plus `has_more` and `next_page` for pagination. When `has_more` is `true`, pass the returned `next_page` token back unchanged as the `page` query parameter on your next request. See [List organizations](/docs/en/api/compliance/organizations/list) in the API reference for the `limit` and `page` parameter defaults and ranges.
 
 <CodeGroup>
-```bash cURL nocheck
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/organizations" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  ```bash cURL
+  curl --fail-with-body -sS \
+    "https://api.anthropic.com/v1/compliance/organizations" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -51,13 +51,13 @@ curl --fail-with-body -sS \
 
 The `uuid` field is the canonical identifier for downstream lookups. The following table maps it to the other organization identifiers across the Compliance API:
 
-| Field                | Where                                                                                                                                                                                                  | Relationship to `uuid`                       |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| `{org_uuid}`         | Path parameter on per-organization endpoints on this page                                                                                                                                              | Same value                                   |
-| `organization_uuid`  | Activity Feed, chat, and project records                                                                                                                                                               | Same value; join on these two fields directly |
-| `organization_id`    | Activity Feed, chat, and project records                                                                                                                                                               | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
-| `organization_ids[]` | Filter on [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) and [Retrieve chats and messages](/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) | Accepts `uuid` or the `org_`-prefixed form   |
-| `organization_id`    | [Get effective organization settings](#get-effective-organization-settings) response                                                                                                                  | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
+| Field                | Where                                                                                                                                                                                              | Relationship to `uuid`                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{org_uuid}`         | Path parameter on per-organization endpoints on this page                                                                                                                                          | Same value                                                                                                                                                |
+| `organization_uuid`  | Activity Feed, chat, and project records                                                                                                                                                           | Same value; join on these two fields directly                                                                                                             |
+| `organization_id`    | Activity Feed, chat, and project records                                                                                                                                                           | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead.                                              |
+| `organization_ids[]` | Filter on [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) and [Retrieve chats and messages](/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) | Accepts `uuid` or the `org_`-prefixed form                                                                                                                |
+| `organization_id`    | [Get effective organization settings](#get-effective-organization-settings) response                                                                                                               | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
@@ -74,14 +74,14 @@ See [List organization users](/docs/en/api/compliance/organizations/users/list) 
 Results are sorted by organization join date ascending. Unlike the Activity Feed's `before_id`/`after_id` cursors (see [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results)), the directory endpoints paginate with a `next_page` token: when `has_more` is `true`, pass `next_page` back unchanged as the `page` query parameter on the next request.
 
 <CodeGroup>
-```bash cURL nocheck
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
+  ```bash cURL
+  org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
-curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --data-urlencode "limit=500"
-```
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+    --data-urlencode "limit=500"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -111,13 +111,13 @@ The [List Compliance Roles](/docs/en/api/compliance/organizations/roles/list) en
 Both role endpoints require `read:compliance_org_data`. The list endpoint accepts the same `limit` and `page` parameters as [List organization users](#list-organization-users).
 
 <CodeGroup>
-```bash cURL nocheck
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
+  ```bash cURL
+  org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  curl --fail-with-body -sS \
+    "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -149,11 +149,11 @@ See the [List Compliance Groups](/docs/en/api/compliance/groups/list) response s
 List groups, then for each group list its members:
 
 <CodeGroup>
-```bash cURL nocheck
-curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/groups" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  ```bash cURL
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/groups" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -177,13 +177,13 @@ curl --fail-with-body -sS -G \
 For each group ID, list its members:
 
 <CodeGroup>
-```bash cURL nocheck
-group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
+  ```bash cURL
+  group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
 
-curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-```
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  ```
 </CodeGroup>
 
 ```json Response
@@ -209,7 +209,7 @@ The [Get effective organization settings](/docs/en/api/compliance/organizations/
 
 This endpoint requires `read:compliance_org_settings`, not `read:compliance_org_data`; a key without that scope returns [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](/docs/en/manage-claude/compliance-errors#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
 
-```bash cURL nocheck
+```bash cURL
 org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
 curl --fail-with-body -sS \
@@ -263,6 +263,7 @@ The response reflects the state at read time; nothing is snapshotted. Changes to
   <Card title="Compliance organizations API reference" href="/docs/en/api/compliance/organizations">
     The full request and response schema for every organization, user, role, group, and settings endpoint.
   </Card>
+
   <Card title="Handle Compliance API errors" href="/docs/en/manage-claude/compliance-errors">
     Verbatim error payloads and the fix for each.
   </Card>

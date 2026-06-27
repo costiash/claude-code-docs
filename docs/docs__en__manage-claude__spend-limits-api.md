@@ -22,17 +22,17 @@ For per-user and time-bucketed usage and cost *reporting*, see [Analytics APIs](
 
 The API exposes eight endpoints across two resources:
 
-| Resource | Endpoints | Use for |
-|---|---|---|
-| **Spend limits** | `GET /v1/organizations/spend_limits/effective`<br/>`GET /v1/organizations/spend_limits/{spend_limit_id}`<br/>`POST /v1/organizations/spend_limits`<br/>`DELETE /v1/organizations/spend_limits/{spend_limit_id}` | Read each member's effective spend limit and period-to-date spend; set or clear a per-user override. |
-| **Spend limit increase requests** | `GET /v1/organizations/spend_limit_increase_requests`<br/>`GET /v1/organizations/spend_limit_increase_requests/{id}`<br/>`POST /v1/organizations/spend_limit_increase_requests/{id}/approve`<br/>`POST /v1/organizations/spend_limit_increase_requests/{id}/deny` | List members' requests for a higher spend limit, with the context needed to decide; approve or deny each request. |
+| Resource                          | Endpoints                                                                                                                                                                                                                                             | Use for                                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Spend limits**                  | `GET /v1/organizations/spend_limits/effective` `GET /v1/organizations/spend_limits/{spend_limit_id}` `POST /v1/organizations/spend_limits` `DELETE /v1/organizations/spend_limits/{spend_limit_id}`                                                   | Read each member's effective spend limit and period-to-date spend; set or clear a per-user override.              |
+| **Spend limit increase requests** | `GET /v1/organizations/spend_limit_increase_requests` `GET /v1/organizations/spend_limit_increase_requests/{id}` `POST /v1/organizations/spend_limit_increase_requests/{id}/approve` `POST /v1/organizations/spend_limit_increase_requests/{id}/deny` | List members' requests for a higher spend limit, with the context needed to decide; approve or deny each request. |
 
 Use the **spend limits** endpoints to answer "what spend limit applies to each member, where does it come from, and how close are they to it?" and to set a per-user override. Use the **spend limit increase requests** endpoints to work the queue of member-submitted requests.
 
 ## Prerequisites
 
-- Your organization must be on a Claude Enterprise plan.
-- Usage credits must be turned on for your organization. Your primary owner can turn them on in claude.ai billing settings.
+* Your organization must be on a Claude Enterprise plan.
+* Usage credits must be turned on for your organization. Your primary owner can turn them on in claude.ai billing settings.
 
 ## Quick start
 
@@ -55,7 +55,7 @@ The `source` field on each member's row tells you which level their spend limit 
 
 ### Period
 
-`period` is the recurring window over which the spend limit is enforced and spend resets. A spend limit is identified by its `(scope, period)` pair. Currently `monthly` is the only supported period; monthly spend resets at 00:00 UTC on the first of each calendar month. Treat `period` as an open set.
+`period` is the recurring window over which the spend limit is enforced and spend resets. A spend limit is identified by its `(scope, period)` pair. Currently `monthly` is the only supported period; monthly spend resets at 00UTC on the first of each calendar month. Treat `period` as an open set.
 
 ### Amounts and currency
 
@@ -69,11 +69,11 @@ All monetary values are strings in **minor units of the organization's billing c
 
 A **spend limit increase request** is created when a member clicks **Request more usage** in claude.ai. Requests are not created through this API. A request's `status` is one of:
 
-| Status | Meaning |
-|---|---|
-| `pending` | Awaiting admin action. The request normally carries a live `spend_summary` so you can see the member's current effective spend limit and period-to-date spend while deciding; `spend_summary` may be `null` if it could not be computed. |
+| Status     | Meaning                                                                                                                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pending`  | Awaiting admin action. The request normally carries a live `spend_summary` so you can see the member's current effective spend limit and period-to-date spend while deciding; `spend_summary` may be `null` if it could not be computed. |
 | `approved` | The request was resolved with approval: either an admin approved it explicitly, another admin action raised the member's spend limit, or Anthropic support raised a spend limit on the organization's behalf. `spend_summary` is `null`. |
-| `denied` | An admin declined. `spend_summary` is `null`. claude.ai hides that member's request button for 30 days from `resolved_at`; an admin can still raise the member's spend limit directly at any time. |
+| `denied`   | An admin declined. `spend_summary` is `null`. claude.ai hides that member's request button for 30 days from `resolved_at`; an admin can still raise the member's spend limit directly at any time.                                       |
 
 Both `approved` and `denied` are terminal. A member has at most one `pending` request at a time.
 
@@ -95,7 +95,7 @@ All eight endpoints share a single per-organization limit of **60 requests per m
 
 List parameters use bracket notation: repeat the parameter name with `[]` for each value.
 
-```text
+```text wrap
 user_ids[]=user_01AbCdEfGh&user_ids[]=user_01JkLmNoPq
 ```
 
@@ -339,9 +339,11 @@ The spend reading can be temporarily unavailable, in which case the field reads 
   <Card title="Spend Limits API reference" href="/docs/en/api/admin/spend_limits">
     Generated request and response schemas for every Spend Limits API endpoint.
   </Card>
+
   <Card title="Spend Limit Increase Requests API reference" href="/docs/en/api/admin/spend_limits/increase_requests">
     Generated request and response schemas for the increase-request endpoints.
   </Card>
+
   <Card title="Analytics APIs" href="/docs/en/manage-claude/analytics-api">
     Per-user and time-bucketed usage and cost reporting for Claude Enterprise.
   </Card>

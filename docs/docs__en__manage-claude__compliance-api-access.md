@@ -16,12 +16,12 @@ The Compliance API uses two key types, and which one you create depends on which
 
 ## Which key do you need?
 
-| Key type                                       | Created in                              | Used for                                                                                                       | Works with the Compliance API? |
-| ---------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)  | Activity Feed, chats, files, projects, users, organization metadata, and organization settings                 | Yes (all endpoints)            |
-| **Admin API key** (`sk-ant-admin01-...`)           | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys)  | The [Admin API](/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed  | Activity Feed only             |
-| **Analytics API key**                          | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)        | The Claude Enterprise Analytics API (see [Analytics APIs](/docs/en/manage-claude/analytics-api))                                                                            | No                             |
-| **Claude API key** (`sk-ant-api03-...`)        | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys)    | Calling Claude models through the [Claude API](/docs/en/api/overview)                                          | No                             |
+| Key type                                       | Created in                                                                                | Used for                                                                                         | Works with the Compliance API? |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------ |
+| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | Activity Feed, chats, files, projects, users, organization metadata, and organization settings   | Yes (all endpoints)            |
+| **Admin API key** (`sk-ant-admin01-...`)       | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | The [Admin API](/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed           | Activity Feed only             |
+| **Analytics API key**                          | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | The Claude Enterprise Analytics API (see [Analytics APIs](/docs/en/manage-claude/analytics-api)) | No                             |
+| **Claude API key** (`sk-ant-api03-...`)        | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys)         | Calling Claude models through the [Claude API](/docs/en/api/overview)                            | No                             |
 
 A Claude Enterprise tenant has one **parent organization** that centralizes identity, SSO, and SCIM for every workload organization beneath it. These workload organizations are the parent's **linked organizations**.
 
@@ -48,12 +48,7 @@ After Anthropic enables the Compliance API for your parent organization, Admin A
 </Note>
 
 <Warning>
-  A Compliance Access Key with `read:compliance_user_data` can read every chat,
-  file, and project in every linked organization, including content the primary
-  owner has not seen. A key with `delete:compliance_user_data` can permanently
-  delete that content. Treat Compliance Access Keys like production database
-  credentials: store them in a secrets manager, never in source control or SIEM
-  forwarder configuration.
+  A Compliance Access Key with `read:compliance_user_data` can read every chat, file, and project in every linked organization, including content the primary owner has not seen. A key with `delete:compliance_user_data` can permanently delete that content. Treat Compliance Access Keys like production database credentials: store them in a secrets manager, never in source control or SIEM forwarder configuration.
 </Warning>
 
 <Steps>
@@ -68,19 +63,19 @@ After Anthropic enables the Compliance API for your parent organization, Admin A
   <Step title="Create the key">
     Click **Create key**, name the key, and select one or more scopes from the following table. Click **Create**.
 
-    | Scope                          | Grants                                                                          |
-    | ------------------------------ | ------------------------------------------------------------------------------- |
-    | `read:compliance_activities`   | Read the Activity Feed for the parent organization and all linked organizations |
-    | `read:compliance_user_data`    | Read user chats, messages, files, projects, organization users, and group members |
-    | `delete:compliance_user_data`  | Delete user chats, files, and projects                                          |
+    | Scope                          | Grants                                                                                                                                |
+    | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+    | `read:compliance_activities`   | Read the Activity Feed for the parent organization and all linked organizations                                                       |
+    | `read:compliance_user_data`    | Read user chats, messages, files, projects, organization users, and group members                                                     |
+    | `delete:compliance_user_data`  | Delete user chats, files, and projects                                                                                                |
     | `read:compliance_org_data`     | Read organization metadata (names, types, roles, and groups). User listings and group membership require `read:compliance_user_data`. |
     | `read:compliance_org_settings` | Read the effective settings in force for organizations under the parent organization                                                  |
 
     Choose the smallest scope set that your integration needs:
 
-    - An audit pipeline that reads the Activity Feed only needs `read:compliance_activities`.
-    - An eDiscovery tool that reads chats and files but never deletes them does not need `delete:compliance_user_data`.
-    - If your workflow both reads and deletes, use **two keys** with separate scopes so a leaked read key cannot delete data.
+    * An audit pipeline that reads the Activity Feed only needs `read:compliance_activities`.
+    * An eDiscovery tool that reads chats and files but never deletes them does not need `delete:compliance_user_data`.
+    * If your workflow both reads and deletes, use **two keys** with separate scopes so a leaked read key cannot delete data.
 
     Compliance Access Key scopes are immutable after creation. To change scopes, create a new key with the scopes you want, then delete the old one.
   </Step>
@@ -120,9 +115,9 @@ For the same key's role in managing your Claude Console organization, see [Admin
 
 To inspect the scopes on a key you already have, use one of the following signals.
 
-- **Key prefix.** `sk-ant-admin01-` is an Admin API key (carries `read:compliance_activities` only, subject to the enablement timing in the preceding section). `sk-ant-api01-` is a Compliance Access Key; its scopes are the subset you selected at creation.
-- **Settings UI.** Open the **Keys** section in [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access), or the **Admin keys** section in [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys), and read the **Scopes** column for the key.
-- **Error responses.** A call that exceeds the key's scopes returns a 403 with a message in the format `Missing required scopes. Got: [<scopes the key carries>] Needed: [<scopes the endpoint requires>]`. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full error catalog.
+* **Key prefix.** `sk-ant-admin01-` is an Admin API key (carries `read:compliance_activities` only, subject to the enablement timing in the preceding section). `sk-ant-api01-` is a Compliance Access Key; its scopes are the subset you selected at creation.
+* **Settings UI.** Open the **Keys** section in [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access), or the **Admin keys** section in [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys), and read the **Scopes** column for the key.
+* **Error responses.** A call that exceeds the key's scopes returns a 403 with a message in the format `Missing required scopes. Got: [<scopes the key carries>] Needed: [<scopes the endpoint requires>]`. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full error catalog.
 
 ```json
 {
@@ -156,6 +151,7 @@ If a Compliance Access Key leaks, delete it immediately, audit the [Activity Fee
   <Card title="Query the Activity Feed" href="/docs/en/manage-claude/compliance-activity-feed">
     Read organization-wide activity events with any key that has `read:compliance_activities`.
   </Card>
+
   <Card title="Retrieve and delete chats, files, and projects" href="/docs/en/manage-claude/compliance-content-data">
     Use a Compliance Access Key with `read:compliance_user_data` to retrieve claude.ai content, and `delete:compliance_user_data` to delete it.
   </Card>
