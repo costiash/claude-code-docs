@@ -292,6 +292,10 @@ Each object in the inner `hooks` array is a hook handler: the shell command, HTT
 * **[Prompt hooks](#prompt-and-agent-hook-fields)** (`type: "prompt"`): send a prompt to a Claude model for single-turn evaluation. The model returns a yes/no decision as JSON. See [Prompt-based hooks](#prompt-based-hooks).
 * **[Agent hooks](#prompt-and-agent-hook-fields)** (`type: "agent"`): spawn a subagent that can use tools like Read, Grep, and Glob to verify conditions before returning a decision. Agent hooks are experimental and may change. See [Agent-based hooks](#agent-based-hooks).
 
+All matching hooks run in parallel, and identical handlers are deduplicated automatically. Command hooks are deduplicated by command string and `args`, and HTTP hooks are deduplicated by URL.
+
+Handlers run in the current directory with Claude Code's environment. The `$CLAUDE_CODE_REMOTE` environment variable is set to `"true"` in remote web environments and not set in the local CLI.
+
 #### Common fields
 
 These fields apply to all hook types:
@@ -452,8 +456,6 @@ In addition to the [common fields](#common-fields), prompt and agent hooks accep
 | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `prompt` | yes      | Prompt text to send to the model. Use `$ARGUMENTS` as a placeholder for the hook input JSON. Escape with a backslash to include literal text: `\$1.00` renders as `$1.00` |
 | `model`  | no       | Model to use for evaluation. Defaults to a fast model                                                                                                                     |
-
-All matching hooks run in parallel, and identical handlers are deduplicated automatically. Command hooks are deduplicated by command string and `args`, and HTTP hooks are deduplicated by URL. Handlers run in the current directory with Claude Code's environment. The `$CLAUDE_CODE_REMOTE` environment variable is set to `"true"` in remote web environments and not set in the local CLI.
 
 ### Reference scripts by path
 
@@ -815,10 +817,10 @@ Not every event supports blocking or controlling behavior through JSON. The even
 
 A few events can also rewrite content rather than only allow or block it:
 
-* `PreToolUse` — `updatedInput` directly under `hookSpecificOutput` replaces a tool's arguments before it runs ([details](#pretooluse-decision-control))
-* `PermissionRequest` — `updatedInput` inside the `decision` object ([details](#permissionrequest-decision-control))
-* `PostToolUse` — `updatedToolOutput` replaces the tool's result ([details](#posttooluse-decision-control))
-* `UserPromptSubmit` — cannot replace the prompt; only injects `additionalContext` alongside it
+* `PreToolUse`: `updatedInput` directly under `hookSpecificOutput` replaces a tool's arguments before it runs. See [PreToolUse decision control](#pretooluse-decision-control)
+* `PermissionRequest`: `updatedInput` inside the `decision` object. See [PermissionRequest decision control](#permissionrequest-decision-control)
+* `PostToolUse`: `updatedToolOutput` replaces the tool's result. See [PostToolUse decision control](#posttooluse-decision-control)
+* `UserPromptSubmit`: cannot replace the prompt; it only injects `additionalContext` alongside it
 
 For redaction or transformation use cases, intercept at `PreToolUse` for outbound tool inputs and `PostToolUse` for inbound tool results.
 
@@ -2791,7 +2793,7 @@ What happens on `ok: false` depends on the event:
 * `PostToolUseFailure`, `TaskCreated`, and `TaskCompleted`: the reason is returned to Claude as a tool error, similar to `PreToolUse`
 * `TeammateIdle`: by default the teammate stops and the reason appears as a warning line. Set `continueOnBlock: true` to feed the reason back to the teammate and keep it working instead
 * `PermissionRequest`: `ok: false` has no effect. To deny an approval from a hook, use a [command hook](#command-hook-fields) returning `hookSpecificOutput.decision.behavior: "deny"`
-* `PermissionDenied`: `ok: false` has no effect because the denial already happened. The only output this event reads is `hookSpecificOutput.retry`, which prompt and agent hooks cannot set — they run on this event, but their output is discarded. Use a [command hook](#command-hook-fields) to return `retry`
+* `PermissionDenied`: `ok: false` has no effect because the denial already happened. The only output this event reads is `hookSpecificOutput.retry`, which prompt and agent hooks cannot set. They run on this event, but their output is discarded. Use a [command hook](#command-hook-fields) to return `retry`
 
 If you need finer control on any event, use a [command hook](#command-hook-fields) with the per-event fields described in [Decision control](#decision-control).
 

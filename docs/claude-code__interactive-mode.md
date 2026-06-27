@@ -32,7 +32,7 @@
 | `Ctrl+O`                                                  | Toggle transcript viewer                                                                                                                                   | Shows detailed tool usage and execution. Also expands MCP calls, which collapse to a single line like "Called slack 3 times" by default                                                                                                                                                                                  |
 | `Ctrl+R`                                                  | Reverse search command history                                                                                                                             | Search through previous commands interactively                                                                                                                                                                                                                                                                           |
 | `Ctrl+V` or `Cmd+V` (iTerm2) or `Alt+V` (Windows and WSL) | Paste image from clipboard                                                                                                                                 | Inserts an `[Image #N]` chip at the cursor so you can reference it positionally in your prompt. On WSL, both `Ctrl+V` and `Alt+V` are bound; use `Alt+V` if your terminal intercepts `Ctrl+V`                                                                                                                            |
-| `Ctrl+B`                                                  | Background running tasks                                                                                                                                   | Backgrounds bash commands and agents. Tmux users press twice                                                                                                                                                                                                                                                             |
+| `Ctrl+B`                                                  | Background running tasks                                                                                                                                   | Backgrounds Bash commands and agents. Tmux users press twice                                                                                                                                                                                                                                                             |
 | `Ctrl+T`                                                  | Toggle task list                                                                                                                                           | Show or hide the [task list](#task-list) in the terminal status area                                                                                                                                                                                                                                                     |
 | `Left/Right arrows`                                       | Cycle through dialog tabs                                                                                                                                  | Navigate between tabs in permission dialogs and menus                                                                                                                                                                                                                                                                    |
 | `Up/Down arrows` or `Ctrl+P`/`Ctrl+N`                     | Move cursor or navigate command history                                                                                                                    | When the input spans more than one visual row, whether wrapped or multiline, first moves the cursor within the prompt. Once the cursor is on the first or last visual row, pressing again navigates command history. {/* min-version: 2.1.169 */}As of v2.1.169, wrapped single-line input behaves the same as multiline |
@@ -151,7 +151,7 @@ Enable vim-style editing via `/config` → Editor mode.
 | `/`             | Open reverse history search, same as `Ctrl+R`. {/* min-version: 2.1.191 */}As of v2.1.191, the empty search prompt shows a hint: press `Esc` then `i` then `/` to open the command menu instead |
 
 <Note>
-  In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, `j`/`k` and the arrow keys navigate command history instead.
+  In vim normal mode, if the cursor is at the beginning or end of input and can't move further, `j`/`k` and the arrow keys navigate command history instead.
 </Note>
 
 ### Editing (NORMAL mode)
@@ -217,7 +217,7 @@ Claude Code maintains command history for the current session:
 * Input history resets when you run `/clear` to start a new session. The previous session's conversation is preserved and can be resumed.
 * Submitting the same prompt twice in a row records one history entry, so pressing Up steps to the previous distinct prompt
 * Use Up/Down arrows to navigate (see keyboard shortcuts above)
-* **Note**: history expansion (`!`) is disabled by default
+* History expansion with `!` is disabled by default
 
 ### Reverse search with Ctrl+R
 
@@ -236,9 +236,9 @@ Press `Ctrl+R` to interactively search through your command history:
 
 The search loads the 100 most recent unique prompts in the selected scope, with duplicates collapsed to the newest occurrence. Matching prompts display with the search term highlighted, so you can find and reuse previous inputs.
 
-## Background bash commands
+## Background Bash commands
 
-Claude Code supports running bash commands in the background, allowing you to continue working while long-running processes execute.
+Claude Code supports running Bash commands in the background, allowing you to continue working while long-running processes execute.
 
 ### How backgrounding works
 
@@ -247,7 +247,7 @@ When Claude Code runs a command in the background, it runs the command asynchron
 To run commands in the background, you can either:
 
 * Prompt Claude Code to run a command in the background
-* Press Ctrl+B to move a regular Bash tool invocation to the background. (Tmux users must press Ctrl+B twice due to tmux's prefix key.)
+* Press `Ctrl+B` to move a regular Bash tool invocation to the background. Tmux users must press `Ctrl+B` twice due to tmux's prefix key.
 
 **Key features:**
 
@@ -281,8 +281,8 @@ Shell mode:
 * Adds the command and its output to the conversation context
 * Shows real-time progress and output
 * Supports the same `Ctrl+B` backgrounding for long-running commands
-* Does not require Claude to interpret or approve the command
-* Supports history-based autocomplete: type a partial command and press **Tab** to complete from previous `!` commands in the current project
+* Doesn't require Claude to interpret or approve the command
+* Supports history-based autocomplete: type a partial command and press `Tab` to complete from previous `!` commands in the current project
 * Exit with `Escape`, `Backspace`, or `Ctrl+U` on an empty prompt
 * Pasting text that starts with `!` into an empty prompt enters shell mode automatically, matching typed `!` behavior
 
@@ -296,12 +296,14 @@ When you first open a session, a grayed-out example command appears in the promp
 
 After Claude responds, suggestions continue to appear based on your conversation history, such as a follow-up step from a multi-part request or a natural continuation of your workflow.
 
-* Press **Tab** or **Right arrow** to place the suggestion in the prompt input, then **Enter** to submit
+* Press `Tab` or `Right arrow` to place the suggestion in the prompt input, then `Enter` to submit
 * Start typing to dismiss it
 
 The suggestion runs as a background request that reuses the parent conversation's prompt cache, so the additional cost is minimal. Claude Code skips suggestion generation when the cache is cold to avoid unnecessary cost.
 
-Suggestions are automatically skipped after the first turn of a conversation and in plan mode. In print mode they are off by default. Pass [`--prompt-suggestions`](/en/cli-reference#cli-flags) with `--output-format stream-json --verbose` to emit a `prompt_suggestion` message after each turn instead.
+Suggestions are automatically skipped after the first turn of a conversation and in plan mode.
+
+In print mode they are off by default. Pass [`--prompt-suggestions`](/en/cli-reference#cli-flags) with `--output-format stream-json --verbose` to emit a `prompt_suggestion` message after each turn instead.
 
 To disable prompt suggestions entirely, set the environment variable or toggle the setting in `/config`:
 
@@ -319,12 +321,14 @@ Use `/btw` to ask a quick question about your current work without adding to the
 
 Side questions have full visibility into the current conversation, so you can ask about code Claude has already read, decisions it made earlier, or anything else from the session. The question and answer are ephemeral: they appear in a dismissible overlay and never enter the conversation history.
 
-* **Available while Claude is working**: you can run `/btw` even while Claude is processing a response. The side question runs independently and does not interrupt the main turn.
-* **No tool access**: side questions answer only from what is already in context. Claude cannot read files, run commands, or search when answering a side question.
+* **Available while Claude is working**: you can run `/btw` even while Claude is processing a response. The side question runs independently and doesn't interrupt the main turn.
+* **No tool access**: side questions answer only from what is already in context. Claude can't read files, run commands, or search when answering a side question.
 * **Single response**: there are no follow-up turns in the overlay. To continue the thread, fork it into its own session with `f`.
 * **Low cost**: the side question reuses the parent conversation's prompt cache, so the additional cost is minimal.
 
-Once the answer appears, the overlay accepts these keys. Earlier side questions from the same session appear as a dimmed list above the current answer; they stay out of the conversation history but remain visible in the overlay until you clear them.
+Earlier side questions from the same session appear as a dimmed list above the current answer. They stay out of the conversation history but remain visible in the overlay until you clear them.
+
+Once the answer appears, the overlay accepts these keys.
 
 | Key                        | Action                                                                                                                                                                                                                                                                    |
 | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -356,14 +360,14 @@ Session recap is on by default for every plan and provider. The recap is always 
 
 ## PR review status
 
-When working on a branch with an open pull request, Claude Code displays a clickable PR link in the footer (for example, "PR #446"). The link has a colored underline indicating the review state:
+When working on a branch with an open pull request, Claude Code displays a clickable PR link in the footer, such as "PR #446". The link has a colored underline indicating the review state:
 
 * Green: approved
 * Yellow: pending review
 * Red: changes requested
 * Gray: draft
 
-The badge disappears once the pull request merges or closes. `Cmd+click` (Mac) or `Ctrl+click` (Windows/Linux) the link to open the pull request in your browser. The status refreshes every 60 seconds, and immediately after a `gh pr` or `git push` command runs in the session.
+The badge disappears once the pull request merges or closes. `Cmd+click` (macOS) or `Ctrl+click` (Windows/Linux) the link to open the pull request in your browser. The status refreshes every 60 seconds, and immediately after a `gh pr` or `git push` command runs in the session.
 
 <Note>
   PR status requires the `gh` CLI to be installed and authenticated (`gh auth login`).

@@ -48,7 +48,7 @@ The GitHub App is required for [Auto-fix](#auto-fix-pull-requests), which uses t
 Team and Enterprise Owners can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 
 <Note>
-  Organizations with [Zero Data Retention](/en/zero-data-retention) enabled cannot use `/web-setup` or other cloud session features.
+  Organizations with [Zero Data Retention](/en/zero-data-retention) enabled can't use `/web-setup` or other cloud session features.
 </Note>
 
 ## The cloud environment
@@ -57,25 +57,27 @@ Each session runs in a fresh Anthropic-managed VM with your repository cloned. T
 
 ### What's available in cloud sessions
 
-Cloud sessions start from a fresh clone of your repository. Anything committed to the repo is available. Anything you've installed or configured only on your own machine is not; your organization's policy arrives separately through [server-managed settings](/en/server-managed-settings).
+Cloud sessions start from a fresh clone of your repository. Anything committed to the repo is available. Anything you've installed or configured only on your own machine isn't available in the session. Your organization's policy arrives separately through [server-managed settings](/en/server-managed-settings).
 
-|                                                                            | Available in cloud sessions | Why                                                                                                                                                                                                                                                                                                                   |
-| :------------------------------------------------------------------------- | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Your repo's `CLAUDE.md`                                                    | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                     |
-| Your repo's `.claude/settings.json` hooks                                  | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                     |
-| Your repo's `.mcp.json` MCP servers                                        | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                     |
-| Your repo's `.claude/rules/`                                               | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                     |
-| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/`      | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                     |
-| Plugins declared in `.claude/settings.json`                                | Yes                         | Installed at session start from the [marketplace](/en/plugin-marketplaces) you declared. Requires network access to reach the marketplace source                                                                                                                                                                      |
-| Your organization's [server-managed settings](/en/server-managed-settings) | Yes                         | Fetched from Anthropic's servers when the session starts. See [Surface coverage](/en/model-config#surface-coverage) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files do not apply, because the session runs on an Anthropic-managed VM |
-| Your user `~/.claude/CLAUDE.md`                                            | No                          | Lives on your machine, not in the repo                                                                                                                                                                                                                                                                                |
-| Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`  | No                          | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Skills you enable on claude.ai are loaded into cloud sessions automatically                                                                                                                                            |
-| Plugins enabled only in your user settings                                 | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                                                                                                                                                                                           |
-| MCP servers you added with `claude mcp add`                                | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](/en/mcp#project-scope) instead                                                                                                                                                                                               |
-| Static API tokens and credentials                                          | No                          | No dedicated secrets store exists yet. See below                                                                                                                                                                                                                                                                      |
-| Interactive auth like AWS SSO                                              | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                                                                                                                                                                                     |
+|                                                                            | Available in cloud sessions | Why                                                                                                                                                                                                                                                                                                                  |
+| :------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Your repo's `CLAUDE.md`                                                    | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/settings.json` hooks                                  | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.mcp.json` MCP servers                                        | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/rules/`                                               | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/`      | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Plugins declared in `.claude/settings.json`                                | Yes                         | Installed at session start from the [marketplace](/en/plugin-marketplaces) you declared. Requires network access to reach the marketplace source                                                                                                                                                                     |
+| Your organization's [server-managed settings](/en/server-managed-settings) | Yes                         | Fetched from Anthropic's servers when the session starts. See [Surface coverage](/en/model-config#surface-coverage) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don't apply, because the session runs on an Anthropic-managed VM |
+| Your user `~/.claude/CLAUDE.md`                                            | No                          | Lives on your machine, not in the repo                                                                                                                                                                                                                                                                               |
+| Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`  | No                          | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Skills you enable on claude.ai are loaded into cloud sessions automatically                                                                                                                                           |
+| Plugins enabled only in your user settings                                 | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                                                                                                                                                                                          |
+| MCP servers you added with `claude mcp add`                                | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](/en/mcp#project-scope) instead                                                                                                                                                                                              |
+| Static API tokens and credentials                                          | No                          | No dedicated secrets store exists yet. See below                                                                                                                                                                                                                                                                     |
+| Interactive auth like AWS SSO                                              | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                                                                                                                                                                                    |
 
-To make your own configuration available in cloud sessions, commit it to the repo; organization policy arrives separately through [server-managed settings](/en/server-managed-settings). A dedicated secrets store is not yet available. Both environment variables and setup scripts are stored in the environment configuration, visible to anyone who can edit that environment. If you need secrets in a cloud session, add them as environment variables with that visibility in mind.
+To make your own configuration available in cloud sessions, commit it to the repo; organization policy arrives separately through [server-managed settings](/en/server-managed-settings).
+
+A dedicated secrets store is not yet available. Both environment variables and setup scripts are stored in the environment configuration, visible to anyone who can edit that environment. If you need secrets in a cloud session, add them as environment variables with that visibility in mind.
 
 ### Installed tools
 
@@ -103,7 +105,7 @@ For exact versions, ask Claude to run `check-tools` in a cloud session. This com
 
 Cloud sessions include built-in GitHub tools that let Claude read issues, list pull requests, fetch diffs, and post comments without any setup. These tools authenticate through the [GitHub proxy](#github-proxy) using whichever method you configured under [GitHub authentication options](#github-authentication-options), so your token never enters the container.
 
-The `gh` CLI is not pre-installed. If you need a `gh` command the built-in tools don't cover, like `gh release` or `gh workflow run`, install and authenticate it yourself:
+The `gh` CLI isn't pre-installed. If you need a `gh` command the built-in tools don't cover, like `gh release` or `gh workflow run`, install and authenticate it yourself:
 
 <Steps>
   <Step title="Install gh in your setup script">
@@ -129,7 +131,7 @@ echo "https://claude.ai/code/${CLAUDE_CODE_REMOTE_SESSION_ID/#cse_/session_}"
 
 ### Run tests, start services, and add packages
 
-Claude runs tests as part of working on a task. Ask for it in your prompt, like "fix the failing tests in `tests/`" or "run pytest after each change." Test runners like pytest, jest, and cargo test work out of the box since they're pre-installed.
+Claude runs tests as part of working on a task. Ask for it in your prompt, like "fix the failing tests in `tests/`" or "run pytest after each change." Test runners like pytest, jest, and cargo test are pre-installed and work without additional setup.
 
 PostgreSQL and Redis are pre-installed but not running by default. Ask Claude to start each one during the session:
 
@@ -168,7 +170,7 @@ Environments control [network access](#network-access), environment variables, a
 | Archive an environment         | Open the environment for editing and select **Archive**. Archived environments are hidden from the selector but existing sessions keep running.                                                                          |
 | Set the default for `--remote` | Run `/remote-env` in your terminal. If you have a single environment, this command shows your current configuration. `/remote-env` only selects the default; add, edit, and archive environments from the web interface. |
 
-Environment variables use `.env` format with one `KEY=value` pair per line. Don't wrap values in quotes, since quotes are stored as part of the value.
+Environment variables use `.env` format with one `KEY=value` pair per line. Don't wrap values in quotes, since quotes are stored as part of the value. This example defines three variables:
 
 ```text theme={null}
 NODE_ENV=development
@@ -196,14 +198,14 @@ If the script exits non-zero, the session fails to start. Append `|| true` to no
 Keep the script's total runtime under roughly five minutes so the [environment cache](#environment-caching) can build. Run independent installs in parallel with `&` and `wait`. If a single download won't fit in the five-minute limit, move it to a [SessionStart hook](#setup-scripts-vs-sessionstart-hooks) that launches it in the background.
 
 <Note>
-  Setup scripts that install packages need network access to reach registries. The default **Trusted** network access allows connections to [common package registries](#default-allowed-domains) including npm, PyPI, RubyGems, and crates.io. Scripts will fail to install packages if your environment uses **None** network access.
+  Setup scripts that install packages need network access to reach registries. The default **Trusted** network access allows connections to [common package registries](#default-allowed-domains) including npm, PyPI, RubyGems, and crates.io. Scripts fail to install packages if your environment uses **None** network access.
 </Note>
 
 ### Environment caching
 
 The setup script runs the first time you start a session in an environment. After it completes, Anthropic snapshots the filesystem and reuses that snapshot as the starting point for later sessions. New sessions start with your dependencies, tools, and Docker images already on disk, and the setup script step is skipped. This keeps startup fast even when the script installs large toolchains or pulls container images.
 
-The cache captures files, not running processes. Anything the setup script writes to disk carries over. Services or containers it starts do not, so start those per session by asking Claude or with a [SessionStart hook](#setup-scripts-vs-sessionstart-hooks).
+The cache captures files, not running processes. Anything the setup script writes to disk carries over. Services or containers it starts don't, so start those per session by asking Claude or with a [SessionStart hook](#setup-scripts-vs-sessionstart-hooks).
 
 The setup script runs again to rebuild the cache when you change the environment's setup script or allowed network hosts, and when the cache reaches its expiry after roughly seven days. Resuming an existing session never re-runs the setup script.
 
@@ -655,9 +657,9 @@ Bundled repositories must meet these limits:
 Pull a cloud session into your terminal using any of these:
 
 * **Using `--teleport`**: from the command line, run `claude --teleport` for an interactive session picker, or `claude --teleport <session-id>` to resume a specific session directly. If you have uncommitted changes, you'll be prompted to stash them first.
-* **Using `/teleport`**: inside an existing CLI session, run `/teleport` (or `/tp`) to open the same session picker without restarting Claude Code.
-* **From `/tasks`**: run `/tasks` to see your background sessions, then press `t` to teleport into one
-* **From the web interface**: select **Open in CLI** to copy a command you can paste into your terminal
+* **Using `/teleport`**: inside an existing CLI session, run `/teleport` or `/tp` to open the same session picker without restarting Claude Code.
+* **From `/tasks`**: run `/tasks` to see your background sessions, then press `t` to teleport into one.
+* **From the web interface**: select **Open in CLI** to copy a command you can paste into your terminal.
 
 When you teleport a session, Claude verifies you're in the correct repository, fetches and checks out the branch from the cloud session, and loads the full conversation history into your terminal.
 
@@ -696,7 +698,9 @@ For context management specifically:
 
 Auto-compaction runs automatically when the context window approaches capacity. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](/en/env-vars) in your [environment variables](#configure-your-environment). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of waiting until the window is nearly full. To change the effective window size for compaction calculations, use [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](/en/env-vars).
 
-[Subagents](/en/sub-agents) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo's `.claude/agents/` are picked up automatically. [Agent teams](/en/agent-teams) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](#configure-your-environment).
+[Subagents](/en/sub-agents) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo's `.claude/agents/` are picked up automatically.
+
+[Agent teams](/en/agent-teams) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](#configure-your-environment).
 
 ### Review changes
 
@@ -708,7 +712,9 @@ To share a session, toggle its visibility according to the account types below. 
 
 #### Share from an Enterprise or Team account
 
-For Enterprise and Team accounts, the two visibility options are **Private** and **Team**. Team visibility makes the session visible to other members of your claude.ai organization. Repository access verification is enabled by default, based on the GitHub account connected to the recipient's account. Your account's display name is visible to all recipients with access. [Claude in Slack](/en/slack) sessions are automatically shared with Team visibility.
+For Enterprise and Team accounts, the two visibility options are **Private** and **Team**. Team visibility makes the session visible to other members of your claude.ai organization. [Claude in Slack](/en/slack) sessions are automatically shared with Team visibility.
+
+Repository access verification is enabled by default, based on the GitHub account connected to the recipient's account. Your account's display name is visible to all recipients with access.
 
 #### Share from a Max or Pro account
 
@@ -726,7 +732,7 @@ To archive a session, hover over the session in the sidebar and select the archi
 
 ### Delete sessions
 
-Deleting a session permanently removes the session and its data. This action cannot be undone. You can delete a session in two ways:
+Deleting a session permanently removes the session and its data. This action can't be undone. You can delete a session in two ways:
 
 * **From the sidebar**: filter for archived sessions, then hover over the session you want to delete and select the delete icon
 * **From the session menu**: open a session, select the dropdown next to the session title, and select **Delete**
@@ -758,7 +764,7 @@ When auto-fix is active, Claude receives GitHub events for the PR including new 
 * **Ambiguous requests**: if a reviewer's comment could be interpreted multiple ways or involves something architecturally significant, Claude asks you before acting
 * **Duplicate or no-action events**: if an event is a duplicate or requires no change, Claude notes it in the session and moves on
 
-GitHub does not emit a webhook when the base branch advances and creates a merge conflict, so auto-fix cannot react to conflicts on its own. To resolve a conflict, open the session and ask Claude to rebase.
+GitHub does not emit a webhook when the base branch advances and creates a merge conflict, so auto-fix can't react to conflicts on its own. To resolve a conflict, open the session and ask Claude to rebase.
 
 Claude may reply to review comment threads on GitHub as part of resolving them. These replies are posted using your GitHub account, so they appear under your username, but each reply is labeled as coming from Claude Code so reviewers know it was written by the agent and not by you directly.
 
@@ -785,7 +791,7 @@ If a new session fails to start with `Session creation failed` or stalls at prov
 
 * Check [status.claude.com](https://status.claude.com) for cloud session incidents
 * Retry after a minute, as capacity is provisioned on demand
-* Confirm your repository is reachable. The connecting GitHub account must have access to the repository on GitHub, either through the Claude GitHub App authorization or a `gh` token synced via `/web-setup` — installing the App on the repository is not required. See [GitHub authentication options](#github-authentication-options).
+* Confirm your repository is reachable. The connecting GitHub account must have access to the repository on GitHub, either through the Claude GitHub App authorization or a `gh` token synced via `/web-setup`. Installing the App on the repository isn't required. See [GitHub authentication options](#github-authentication-options).
 
 ### Remote Control session expired or access denied
 

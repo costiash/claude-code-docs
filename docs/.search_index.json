@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-26T22:11:58Z",
+  "generated_at": "2026-06-27T01:33:04Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -140,7 +140,7 @@
         "fix",
         "repo"
       ],
-      "word_count": 6480,
+      "word_count": 6481,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -476,7 +476,7 @@
         "user",
         "control"
       ],
-      "word_count": 22041,
+      "word_count": 22046,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "previous",
         "word"
       ],
-      "word_count": 3742,
+      "word_count": 3740,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "authentication",
         "variable"
       ],
-      "word_count": 7281,
+      "word_count": 7265,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -700,7 +700,7 @@
         "fallback",
         "sonnet"
       ],
-      "word_count": 6942,
+      "word_count": 6936,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -708,8 +708,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
-        "attributes",
         "event",
+        "attributes",
         "tool",
         "events",
         "request",
@@ -718,17 +718,17 @@
         "plugin",
         "session",
         "name",
+        "only",
         "metrics",
         "api",
-        "only",
         "standard",
         "user",
         "such",
         "mcp",
-        "counter",
-        "set"
+        "set",
+        "counter"
       ],
-      "word_count": 10170,
+      "word_count": 10174,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -824,8 +824,8 @@
         "plugins",
         "git",
         "code",
-        "string",
         "claude",
+        "string",
         "see",
         "marketplaces",
         "directory",
@@ -833,14 +833,14 @@
         "when",
         "url",
         "paths",
-        "github",
         "version",
+        "github",
         "repository",
-        "sources",
         "source",
+        "sources",
         "users"
       ],
-      "word_count": 6643,
+      "word_count": 6662,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1008,7 +1008,7 @@
         "github",
         "mcp"
       ],
-      "word_count": 12960,
+      "word_count": 12953,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1111,8 +1111,8 @@
         "code",
         "prompt",
         "context",
-        "tools",
         "only",
+        "tools",
         "same",
         "fork",
         "model",
@@ -1120,7 +1120,7 @@
         "specific",
         "background"
       ],
-      "word_count": 8798,
+      "word_count": 8799,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {

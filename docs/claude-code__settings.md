@@ -10,7 +10,7 @@ Claude Code offers a variety of settings to configure its behavior to meet your 
 
 ## Configuration scopes
 
-Claude Code uses a **scope system** to determine where configurations apply and who they're shared with. Understanding scopes helps you decide how to configure Claude Code for personal use, team collaboration, or enterprise deployment.
+Claude Code uses a scope system to determine where configurations apply and who they're shared with. Understanding scopes helps you decide how to configure Claude Code for personal use, team collaboration, or enterprise deployment.
 
 ### Available scopes
 
@@ -51,11 +51,11 @@ Claude Code uses a **scope system** to determine where configurations apply and 
 
 When the same setting appears in multiple scopes, Claude Code applies them in priority order:
 
-1. **Managed** (highest) - can't be overridden by anything
-2. **Command line arguments** - temporary session overrides
-3. **Local** - overrides project and user settings
-4. **Project** - overrides user settings
-5. **User** (lowest) - applies when nothing else specifies the setting
+1. **Managed** (highest): can't be overridden by anything
+2. **Command line arguments**: temporary session overrides
+3. **Local**: overrides project and user settings
+4. **Project**: overrides user settings
+5. **User** (lowest): applies when nothing else specifies the setting
 
 For example, if your user settings set `spinnerTipsEnabled` to `true` and project settings set it to `false`, the project value applies. Permission rules behave differently because they merge across scopes rather than override. See [Settings precedence](#settings-precedence).
 
@@ -104,7 +104,7 @@ Code through hierarchical settings:
 
     File-based managed settings also support a drop-in directory at `managed-settings.d/` in the same system directory alongside `managed-settings.json`. This lets separate teams deploy independent policy fragments without coordinating edits to a single file.
 
-    Following the systemd convention, `managed-settings.json` is merged first as the base, then all `*.json` files in the drop-in directory are sorted alphabetically and merged on top. Later files override earlier ones for scalar values; arrays are concatenated and de-duplicated; objects are deep-merged. Hidden files starting with `.` are ignored.
+    Following the systemd convention, `managed-settings.json` is merged first as the base, then all `*.json` files in the drop-in directory are sorted alphabetically and merged on top. Later files override earlier ones for scalar values, arrays are concatenated and de-duplicated, and objects are deep-merged. Hidden files starting with `.` are ignored.
 
     Use numeric prefixes to control merge order, for example `10-telemetry.json` and `20-security.json`.
 
@@ -165,7 +165,9 @@ A few keys are read once at session start and apply on the next restart instead:
 
 ### Invalid entries in managed settings
 
-Managed settings parse tolerantly. When a managed configuration contains an entry that fails schema validation, Claude Code strips that entry, records a warning, and enforces every remaining valid policy. A single typo cannot disable the rest of your organization's policy. This behavior is consistent across all three delivery mechanisms: [server-managed settings](/en/server-managed-settings), plist and registry policies deployed through MDM, and `managed-settings.json` files. Requires Claude Code v2.1.169 or later.
+Managed settings parse tolerantly. When a managed configuration contains an entry that fails schema validation, Claude Code strips that entry, records a warning, and enforces every remaining valid policy. A single typo cannot disable the rest of your organization's policy.
+
+This behavior is consistent across all three delivery mechanisms: [server-managed settings](/en/server-managed-settings), plist and registry policies deployed through MDM, and `managed-settings.json` files. Requires Claude Code v2.1.169 or later.
 
 Security-enforcement fields are handled per field instead of being stripped wholesale when they are present but invalid:
 
@@ -202,7 +204,7 @@ This tolerance applies only to managed settings. User, project, and local settin
 | `agentPushNotifEnabled`           | {/* min-version: 2.1.119 */}**Default**: `false`. When [Remote Control](/en/remote-control) is connected, allow Claude to send proactive push notifications to your phone, for example when a long task finishes. Appears in `/config` as **Push when Claude decides**. See [Mobile push notifications](/en/remote-control#mobile-push-notifications). Requires Claude Code v2.1.119 or later                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `true`                                                                                                                          |
 | `allowAllClaudeAiMcps`            | (Managed settings only) Load claude.ai connectors alongside a deployed `managed-mcp.json`, which otherwise takes exclusive control and suppresses them. See [Managed MCP configuration](/en/managed-mcp)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `true`                                                                                                                          |
 | `allowedChannelPlugins`           | (Managed settings only) Allowlist of channel plugins that may push messages. Replaces the default Anthropic allowlist when set. Undefined = fall back to the default, empty array = block all channel plugins. Requires `channelsEnabled: true`. See [Restrict which channel plugins can run](/en/channels#restrict-which-channel-plugins-can-run)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `[{ "marketplace": "claude-plugins-official", "plugin": "telegram" }]`                                                          |
-| `allowedHttpHookUrls`             | Allowlist of URL patterns that HTTP hooks may target. Supports `*` as a wildcard. When set, hooks with non-matching URLs are blocked. Undefined = no restriction, empty array = block all HTTP hooks. Arrays merge across settings sources. See [Hook configuration](#hook-configuration)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `["https://hooks.example.com/*"]`                                                                                               |
+| `allowedHttpHookUrls`             | Allowlist of URL patterns that HTTP hooks may target. Supports `*` as a wildcard. When set, hooks with non-matching URLs are blocked. Undefined = no restrictions, empty array = block all HTTP hooks. Arrays merge across settings sources. See [Hook configuration](#hook-configuration)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `["https://hooks.example.com/*"]`                                                                                               |
 | `allowedMcpServers`               | When set in managed-settings.json, allowlist of MCP servers users can configure. Undefined = no restrictions, empty array = lockdown. Applies to all scopes. Denylist takes precedence. See [Managed MCP configuration](/en/managed-mcp)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `[{ "serverName": "github" }]`                                                                                                  |
 | `allowManagedHooksOnly`           | (Managed settings only) Only managed hooks, SDK hooks, and hooks from plugins force-enabled in managed settings `enabledPlugins` are loaded. User, project, and all other plugin hooks are blocked. See [Hook configuration](#hook-configuration)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `true`                                                                                                                          |
 | `allowManagedMcpServersOnly`      | (Managed settings only) Only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. Users can still add MCP servers, but only the admin-defined allowlist applies. See [Managed MCP configuration](/en/managed-mcp)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `true`                                                                                                                          |
@@ -407,7 +409,9 @@ Paths in `filesystem.allowWrite`, `filesystem.denyWrite`, `filesystem.denyRead`,
 | `~/`              | Relative to home directory                                                             | `~/.kube` becomes `$HOME/.kube`                                           |
 | `./` or no prefix | Relative to the project root for project settings, or to `~/.claude` for user settings | `./output` in `.claude/settings.json` resolves to `<project-root>/output` |
 
-The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](/en/permissions#read-and-edit), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
+The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`.
+
+This syntax differs from [Read and Edit permission rules](/en/permissions#read-and-edit), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 
 **Configuration example:**
 
@@ -666,7 +670,7 @@ If a settings file contains errors, such as invalid JSON or a value that fails v
 
 Claude Code's internal system prompt is not published. To add custom instructions, use `CLAUDE.md` files or the `--append-system-prompt` flag.
 
-### Excluding sensitive files
+### Exclude sensitive files
 
 To prevent Claude Code from accessing files containing sensitive information like API keys, secrets, and environment files, use the `permissions.deny` setting in your `.claude/settings.json` file:
 
@@ -690,8 +694,8 @@ This replaces the deprecated `ignorePatterns` configuration. Files matching thes
 
 Claude Code supports custom AI subagents that can be configured at both user and project levels. These subagents are stored as Markdown files with YAML frontmatter:
 
-* **User subagents**: `~/.claude/agents/` - Available across all your projects
-* **Project subagents**: `.claude/agents/` - Specific to your project and can be shared with your team
+* **User subagents**: `~/.claude/agents/`, available across all your projects
+* **Project subagents**: `.claude/agents/`, specific to your project and shareable with your team
 
 Subagent files define specialized AI assistants with custom prompts and tool permissions. Learn more about creating and using subagents in the [subagents documentation](/en/sub-agents).
 
@@ -834,14 +838,14 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 
 * Only available in managed settings (`managed-settings.json`)
 * Cannot be overridden by user or project settings (highest precedence)
-* Enforced BEFORE network/filesystem operations (blocked sources never execute)
+* Enforced before network and filesystem operations, so blocked sources never run
 * Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern` and `pathPattern`, which use regex matching
 
 **Allowlist behavior**:
 
-* `undefined` (default): No restrictions - users can add any marketplace
-* Empty array `[]`: Complete lockdown - users cannot add any new marketplaces
-* List of sources: Users can only add marketplaces that match exactly
+* `undefined` (default): no restrictions, so users can add any marketplace
+* Empty array `[]`: complete lockdown, so users can't add any new marketplaces
+* List of sources: users can only add marketplaces that match exactly
 
 **All supported source types**:
 
@@ -964,7 +968,7 @@ Example: allow specific marketplaces only:
 }
 ```
 
-Example - Disable all marketplace additions:
+Example: disable all marketplace additions:
 
 ```json theme={null}
 {
@@ -987,13 +991,13 @@ Example: allow all marketplaces from an internal git server:
 
 **Exact matching requirements**:
 
-Marketplace sources must match **exactly** for a user's addition to be allowed. For git-based sources (`github` and `git`), this includes all optional fields:
+Marketplace sources must match exactly for a user's addition to be allowed. For git-based sources (`github` and `git`), this includes all optional fields:
 
 * The `repo` or `url` must match exactly
 * The `ref` field must match exactly (or both be undefined)
 * The `path` field must match exactly (or both be undefined)
 
-Examples of sources that **do NOT match**:
+Examples of sources that don't match:
 
 ```json theme={null}
 // These are DIFFERENT sources:
@@ -1062,7 +1066,7 @@ With only `strictKnownMarketplaces` set, users can still add the allowed marketp
 
 **Important notes**:
 
-* Restrictions are checked BEFORE any network requests or filesystem operations
+* Restrictions are checked before any network requests or filesystem operations
 * When blocked, users see clear error messages indicating the source is blocked by managed policy
 * The restriction is enforced on marketplace add and on plugin install, update, refresh, and auto-update. A marketplace added before the policy was set cannot be used to install or update plugins once its source no longer matches the allowlist
 * Managed settings have the highest precedence and cannot be overridden
@@ -1096,7 +1100,7 @@ For each locked surface, Claude Code skips user-level and project-level sources 
 
 Surface names that a Claude Code version doesn't recognize are ignored rather than failing the settings file, so you can add new surface names before all clients have updated.
 
-### Managing plugins
+### Manage plugins
 
 Use the `/plugin` command to manage plugins interactively:
 
