@@ -1,12 +1,12 @@
 # Tool Runner (SDK)
 
-Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping, and type safety automatically.
+Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 
 ---
 
-Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](/docs/en/agents-and-tools/tool-use/handle-tool-calls) instead.
+The tool runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](/docs/en/agents-and-tools/tool-use/handle-tool-calls) instead.
 
-The tool runner provides an out-of-the-box solution for running tools with Claude. The tool runner can simplify most tool use implementations. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
+Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
 
 * Runs tools when Claude calls them
 * Handles the request/response cycle
@@ -14,12 +14,14 @@ The tool runner provides an out-of-the-box solution for running tools with Claud
 * Provides type safety and validation
 
 <Note>
-  The tool runner is currently in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
+  The tool runner is in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
 </Note>
 
 ## Basic usage
 
 Define tools using the SDK helpers, then use the tool runner to run them.
+
+Depending on the SDK's tool signature, a tool returns its result as a string or as content blocks (text, image, or document blocks), so a tool can return multimodal results. A returned string becomes a single text content block. To return structured data, such as a JSON object or a number, encode it as a string first.
 
 <Tabs>
   <Tab title="Python">
@@ -84,6 +86,7 @@ Define tools using the SDK helpers, then use the tool runner to run them.
     **Using Zod (recommended)** - Use `betaZodTool()` for type-safe tool definitions with Zod validation (requires Zod 3.25.0 or higher):
 
     ```typescript
+    import Anthropic from "@anthropic-ai/sdk";
     import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
     import { z } from "zod";
 
@@ -122,6 +125,7 @@ Define tools using the SDK helpers, then use the tool runner to run them.
     </Note>
 
     ```typescript
+    import Anthropic from "@anthropic-ai/sdk";
     import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
     const client = new Anthropic();
@@ -249,7 +253,7 @@ Define tools using the SDK helpers, then use the tool runner to run them.
   </Tab>
 
   <Tab title="Go">
-    Define a tool with `toolrunner.NewBetaToolFromJSONSchema`. The handler's input type is a struct with `jsonschema:` tags; the SDK reflects on it to generate the JSON schema.
+    Define a tool with `toolrunner.NewBetaToolFromJSONSchema`. The handler's input type is a struct with `jsonschema:` tags. The SDK reflects on it to generate the JSON schema.
 
     ```go
     package main
@@ -346,7 +350,7 @@ Define tools using the SDK helpers, then use the tool runner to run them.
   </Tab>
 
   <Tab title="Java">
-    Define each tool as a class implementing `Supplier<String>`. Annotate the class with `@JsonClassDescription` for the tool description, and each public field with `@JsonPropertyDescription` for parameter descriptions. The SDK derives the JSON schema, tool name (snake-cased class name), and input parsing from the class.
+    Define each tool as a class implementing `Supplier<String>`. Annotate the class with `@JsonClassDescription` for the tool description, and each public field with `@JsonPropertyDescription` for parameter descriptions. The SDK derives the JSON schema, tool name (snake-cased class name), and input parsing from the class, and marks the tool with `strict: true` ([strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use)).
 
     ```java
     import com.anthropic.client.AnthropicClient;
@@ -421,7 +425,8 @@ Define tools using the SDK helpers, then use the tool runner to run them.
         },
         "required": ["a", "b"],
         "additionalProperties": false
-      }
+      },
+      "strict": true
     }
     ```
   </Tab>
@@ -562,13 +567,11 @@ Define tools using the SDK helpers, then use the tool runner to run them.
   </Tab>
 </Tabs>
 
-The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, Booleans, or other non-string primitives must also be converted to strings.
-
 ## Iterating over the tool runner
 
-The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop." Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
+The tool runner is an iterable that yields messages from Claude. On each iteration, the runner checks whether Claude requested a tool use. If so, it runs the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
 
-You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use.
+You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use, or until it reaches `max_iterations` if you set it.
 
 If you don't need intermediate messages, you can get the final message directly:
 
@@ -577,6 +580,8 @@ If you don't need intermediate messages, you can get the final message directly:
     Use `runner.until_done()` to get the final message.
 
     ```python
+    client = anthropic.Anthropic()
+    # ...
     runner = client.beta.messages.tool_runner(
         model="claude-opus-4-8",
         max_tokens=1024,
@@ -599,6 +604,8 @@ If you don't need intermediate messages, you can get the final message directly:
     `await` the runner to get the final message.
 
     ```typescript
+    const client = new Anthropic();
+    // ...
     const runner = client.beta.messages.toolRunner({
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -619,6 +626,8 @@ If you don't need intermediate messages, you can get the final message directly:
     Use `runner.RunUntilDoneAsync()` to get the final message.
 
     ```csharp
+    var client = new AnthropicClient();
+    // ...
     var runner = client.Beta.Messages.ToolRunner(
         new MessageCreateParams
         {
@@ -651,6 +660,9 @@ If you don't need intermediate messages, you can get the final message directly:
     Use `runner.RunToCompletion(ctx)` to get the final message.
 
     ```go
+    client := anthropic.NewClient()
+    ctx := context.Background()
+    // ...
     runner := client.Beta.Messages.NewToolRunner(
     	[]anthropic.BetaTool{getWeather},
     	anthropic.BetaToolRunnerParams{
@@ -682,6 +694,8 @@ If you don't need intermediate messages, you can get the final message directly:
     The Java SDK has no `until_done()` shortcut. Iterate to exhaustion and keep the last message.
 
     ```java
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
     BetaToolRunner runner = client.beta()
             .messages()
             .toolRunner(MessageCreateParams.builder()
@@ -707,6 +721,8 @@ If you don't need intermediate messages, you can get the final message directly:
     Use `runUntilDone()` to get the final message.
 
     ```php
+    $client = new Client();
+    // ...
     $runner = $client->beta->messages->toolRunner(
         maxTokens: 1024,
         messages: [
@@ -729,6 +745,8 @@ If you don't need intermediate messages, you can get the final message directly:
     Use `runner.run_until_finished` to get all messages.
 
     ```ruby
+    client = Anthropic::Client.new
+    # ...
     runner = client.beta.messages.tool_runner(
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -783,7 +801,7 @@ sequenceDiagram
 
 By default, the runner manages conversation state for you: after each turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
 
-You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK; see the per-language tabs that follow.
+You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK. See the per-language tabs that follow.
 
 When you take over for an iteration, the runner does not append the assistant message or tool results from that turn. You become responsible for keeping the conversation valid: append the assistant message and a tool result yourself (if you want the turn to count), modify state conditionally so the loop can still exit when there are no tool calls, and pass `max_iterations` to bound the loop. All seven SDKs support `max_iterations`.
 
@@ -863,7 +881,7 @@ When you take over for an iteration, the runner does not append the assistant me
   </Tab>
 
   <Tab title="C#">
-    Calling `SetParams()` or `PushMessages()` flags state as modified, which causes the runner to skip its auto-append for that turn. When you take over, push the assistant message and a tool result yourself; otherwise the conversation won't make forward progress. The C# runner always exits when a response has no tool calls, so condition any state mutation on the presence of a `tool_use` block.
+    Calling `SetParams()` or `PushMessages()` flags state as modified, which causes the runner to skip its auto-append for that turn. The C# runner still runs the matched tools for that turn and discards their auto-built results, so a tool you also run yourself inside the loop body runs twice unless you account for it. When you take over, push the assistant message and a tool result yourself. Otherwise the conversation won't make forward progress. The C# runner always exits when a response has no tool calls, so condition any state mutation on the presence of a `tool_use` block.
 
     ```csharp
     var runner = client.Beta.Messages.ToolRunner(
@@ -919,7 +937,7 @@ When you take over for an iteration, the runner does not append the assistant me
   </Tab>
 
   <Tab title="Go">
-    The Go runner exposes parameters as a public `Params` field. Modifying `runner.Params` between calls to `NextMessage(ctx)` applies to the next API request. Unlike other SDKs, the Go runner always appends the assistant message and tool results unconditionally; modifying `Params` does not suppress that step.
+    The Go runner exposes parameters as a public `Params` field. Modifying `runner.Params` between calls to `NextMessage(ctx)` applies to the next API request. Unlike other SDKs, the Go runner always appends the assistant message and tool results unconditionally. Modifying `Params` does not suppress that step.
 
     ```go
     runner := client.Beta.Messages.NewToolRunner(
@@ -1040,7 +1058,7 @@ When you take over for an iteration, the runner does not append the assistant me
   <Tab title="Ruby">
     Use `next_message` for step-by-step control. By the time `next_message` returns, the assistant message and tool result for that turn are already appended. Use `feed_messages` to inject follow-up messages between turns, and `runner.params.update(...)` to change request parameters in place.
 
-    You take over message history when you reassign `runner.params[:messages]`, or call `feed_messages` from inside an `each_message` block. The following pattern calls `feed_messages` between `next_message` calls, which does not take over.
+    You take over message history when, from inside an `each_message` or `each_streaming` block, you reassign `runner.params[:messages]` or call `feed_messages`. The following pattern calls `feed_messages` between `next_message` calls, which does not take over.
 
     ```ruby
     runner = client.beta.messages.tool_runner(
@@ -1059,8 +1077,8 @@ When you take over for an iteration, the runner does not append the assistant me
     # Inject a follow-up before continuing. feed_messages takes a splat, not an array.
     runner.feed_messages({role: "user", content: "Also check Boston."})
 
-    # Change parameters in place. Reassigning runner.params[:messages] would tell
-    # the runner to skip its automatic append on the next turn.
+    # Change parameters in place. Reassigning runner.params[:messages] takes over
+    # message history only when it happens inside an each_message or each_streaming block.
     runner.params.update(max_tokens: 2048)
 
     runner.run_until_finished
@@ -1070,33 +1088,35 @@ When you take over for an iteration, the runner does not append the assistant me
 
 ### Automatic context management
 
-For long-running agentic tasks, the tool runner supports automatic [compaction](/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits.
+For long-running agentic tasks, the Python, TypeScript, and Ruby tool runners support automatic [compaction](/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. All three SDKs have deprecated this client-side option in favor of server-side [context editing](/docs/en/build-with-claude/context-editing), which is available in every SDK. The Go, Java, C#, and PHP tool runners don't include client-side compaction.
 
 ### Debugging tool execution
 
-When a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. By default, only the exception message is included, not the full stack trace.
+When a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. The tool result carries the exception's message (in Python, its type and message), not the full stack trace.
 
-To view full stack traces and debug information, set the `ANTHROPIC_LOG` environment variable:
+What the SDK logs is language-specific. The Python SDK logs the full exception, including its stack trace, through the standard `logging` module whenever a tool raises an unhandled exception. The Python, TypeScript, and Java SDKs read the `ANTHROPIC_LOG` environment variable to turn on the SDK's logging, which includes request and response detail:
 
 ```bash
-# View info-level logs including tool errors
+# Log at info level
 export ANTHROPIC_LOG=info
 
-# View debug-level logs for more verbose output
+# Log at debug level for more verbose output
 export ANTHROPIC_LOG=debug
 ```
 
-When enabled, the SDK logs full exception details to your language's standard logging facility, including the complete stack trace when a tool fails.
+The Go, Ruby, C#, and PHP SDKs don't read `ANTHROPIC_LOG`. Outside Python, no SDK logs a failed tool: to see why a tool failed, catch and log the exception inside the tool function before returning or rethrowing it.
 
 ### Intercepting tool errors
 
 By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
 
-Use the tool response method to intercept tool results and check for errors before they're sent to Claude:
+In the Python and TypeScript SDKs, use the tool response method (`generate_tool_call_response()` in Python, `generateToolResponse()` in TypeScript) to intercept tool results and check for errors before they're sent to Claude. The other SDKs don't expose that hook. Their tabs describe the closest alternative:
 
 <Tabs>
   <Tab title="Python">
     ```python
+    client = anthropic.Anthropic()
+    # ...
     runner = client.beta.messages.tool_runner(
         model="claude-opus-4-8",
         max_tokens=1024,
@@ -1125,6 +1145,8 @@ Use the tool response method to intercept tool results and check for errors befo
 
   <Tab title="TypeScript">
     ```typescript
+    const client = new Anthropic();
+    // ...
     const runner = client.beta.messages.toolRunner({
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1135,7 +1157,7 @@ Use the tool response method to intercept tool results and check for errors befo
     for await (const message of runner) {
       const toolResultMessage = await runner.generateToolResponse();
 
-      if (toolResultMessage) {
+      if (toolResultMessage && typeof toolResultMessage.content !== "string") {
         // Check if any tool result has an error
         for (const block of toolResultMessage.content) {
           if (block.type === "tool_result" && block.is_error) {
@@ -1155,9 +1177,11 @@ Use the tool response method to intercept tool results and check for errors befo
   </Tab>
 
   <Tab title="C#">
-    The C# tool runner doesn't expose a hook for inspecting the tool result before it's sent to Claude. To control error content, throw `BetaToolError` from inside the tool body; the runner converts it to a `tool_result` with `is_error: true` and the content you supply.
+    The C# tool runner doesn't expose a hook for inspecting the tool result before it's sent to Claude. To control error content, throw `BetaToolError` from inside the tool body. The runner converts it to a `tool_result` with `is_error: true` and the content you supply.
 
     ```csharp
+    var client = new AnthropicClient();
+
     var getWeatherTool = new BetaRunnableTool
     {
         Name = "get_weather",
@@ -1222,6 +1246,8 @@ Use the tool response method to intercept tool results and check for errors befo
 
   <Tab title="Ruby">
     ```ruby
+    client = Anthropic::Client.new
+    # ...
     runner = client.beta.messages.tool_runner(
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1229,10 +1255,13 @@ Use the tool response method to intercept tool results and check for errors befo
       messages: [{role: "user", content: "Run my_tool with the query 'hello'."}]
     )
 
-    runner.each_message do |message|
-      # Get the tool response to check for errors
-      # Note: The runner automatically handles tool execution and appends results
-      # This is just for error checking/logging purposes
+    loop do
+      message = runner.next_message
+      break unless message
+
+      # By the time next_message returns, the runner has run this turn's tools and
+      # appended their results as the last (user-role) message. Inspect them here,
+      # before the next request sends them to Claude.
       tool_results = runner.params[:messages].last
 
       if tool_results && tool_results[:role] == :user && tool_results[:content].is_a?(Array)
@@ -1248,6 +1277,7 @@ Use the tool response method to intercept tool results and check for errors befo
       end
 
       puts message.content
+      break if message.stop_reason != :tool_use
     end
     ```
   </Tab>
@@ -1257,11 +1287,13 @@ Use the tool response method to intercept tool results and check for errors befo
 
 You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](/docs/en/build-with-claude/prompt-caching) on tool results, or for transforming the tool output.
 
-Use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK; see the code comments in each tab.
+In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
 
 <Tabs>
   <Tab title="Python">
     ```python
+    client = anthropic.Anthropic()
+    # ...
     runner = client.beta.messages.tool_runner(
         model="claude-opus-4-8",
         max_tokens=1024,
@@ -1294,6 +1326,8 @@ Use the tool response method to get the tool result, then modify it before the r
 
   <Tab title="TypeScript">
     ```typescript
+    const client = new Anthropic();
+    // ...
     const runner = client.beta.messages.toolRunner({
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1331,6 +1365,9 @@ Use the tool response method to get the tool result, then modify it before the r
     The Go runner does not expose a hook to modify the outer `tool_result` block. You can, however, set `cache_control` on the inner content blocks your handler returns.
 
     ```go
+    client := anthropic.NewClient()
+    ctx := context.Background()
+
     searchDocuments, err := toolrunner.NewBetaToolFromJSONSchema(
     	"search_documents",
     	"Search documents for relevant information.",
@@ -1400,6 +1437,8 @@ Use the tool response method to get the tool result, then modify it before the r
     The PHP tool runner has no callback to mutate the auto-generated `tool_result` block. To add fields such as `cache_control`, build the tool result yourself and push it. Calling `pushMessages()` skips the runner's auto-append for that turn.
 
     ```php
+    $client = new Client();
+    // ...
     $runner = $client->beta->messages->toolRunner(
         maxTokens: 1024,
         messages: [
@@ -1438,6 +1477,8 @@ Use the tool response method to get the tool result, then modify it before the r
 
   <Tab title="Ruby">
     ```ruby
+    client = Anthropic::Client.new
+    # ...
     runner = client.beta.messages.tool_runner(
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1482,6 +1523,8 @@ Enable streaming to process each turn's response incrementally. Each iteration y
     Set `stream=True` and use `get_final_message()` to get the accumulated message.
 
     ```python
+    client = anthropic.Anthropic()
+    # ...
     runner = client.beta.messages.tool_runner(
         model="claude-opus-4-8",
         max_tokens=1024,
@@ -1504,6 +1547,8 @@ Enable streaming to process each turn's response incrementally. Each iteration y
     Set `stream: true` and use `finalMessage()` to get the accumulated message.
 
     ```typescript
+    const client = new Anthropic();
+    // ...
     const runner = client.beta.messages.toolRunner({
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1528,6 +1573,8 @@ Enable streaming to process each turn's response incrementally. Each iteration y
     Call `runner.Streaming()` to get a nested async sequence: one inner stream for each API call.
 
     ```csharp
+    var client = new AnthropicClient();
+    // ...
     var runner = client.Beta.Messages.ToolRunner(
         new MessageCreateParams
         {
@@ -1562,6 +1609,9 @@ Enable streaming to process each turn's response incrementally. Each iteration y
     Use `NewToolRunnerStreaming` and iterate `runner.AllStreaming(ctx)`. Each outer iteration yields a stream of events for one API call.
 
     ```go
+    client := anthropic.NewClient()
+    ctx := context.Background()
+    // ...
     runner := client.Beta.Messages.NewToolRunnerStreaming(
     	[]anthropic.BetaTool{calculateSum},
     	anthropic.BetaToolRunnerParams{
@@ -1633,6 +1683,8 @@ Enable streaming to process each turn's response incrementally. Each iteration y
     Use `each_streaming` to iterate over streaming events.
 
     ```ruby
+    client = Anthropic::Client.new
+    # ...
     runner = client.beta.messages.tool_runner(
       model: "claude-opus-4-8",
       max_tokens: 1024,
@@ -1657,6 +1709,20 @@ Enable streaming to process each turn's response incrementally. Each iteration y
 
 ## Next steps
 
-* For manual control over the tool-call loop, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
-* For running multiple tools concurrently, see [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use).
-* For the full tool-use workflow, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).
+<CardGroup cols={2}>
+  <Card title="Strict tool use" icon="check" href="/docs/en/agents-and-tools/tool-use/strict-tool-use">
+    Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
+  </Card>
+
+  <Card title="Handle tool calls" icon="arrows-left-right" href="/docs/en/agents-and-tools/tool-use/handle-tool-calls">
+    Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.
+  </Card>
+
+  <Card title="Parallel tool use" icon="grid" href="/docs/en/agents-and-tools/tool-use/parallel-tool-use">
+    Enable and format parallel tool calls, with message-history guidance and troubleshooting.
+  </Card>
+
+  <Card title="Define tools" icon="hammer" href="/docs/en/agents-and-tools/tool-use/define-tools">
+    Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
+  </Card>
+</CardGroup>

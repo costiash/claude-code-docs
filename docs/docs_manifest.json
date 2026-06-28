@@ -93,8 +93,8 @@
     "docs__en__agents-and-tools__tool-use__advisor-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool.md",
-      "hash": "fa5f0c85ae7317fe7bcca40bc3d8e619d3790a40952908ea5b8d7fff708afb44",
-      "last_updated": "2026-06-27T07:11:12.436097"
+      "hash": "66be5d447d1ec28e0f749da78794ac39170db052a7654523b68cc4b5256da211",
+      "last_updated": "2026-06-28T00:57:49.773526"
     },
     "docs__en__agents-and-tools__tool-use__bash-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool",
@@ -153,8 +153,8 @@
     "docs__en__agents-and-tools__tool-use__memory-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool.md",
-      "hash": "a1b8d0ab47d55822e2f70519b14e87502230add38025fab124d3dd3e5fbf5129",
-      "last_updated": "2026-06-27T07:11:18.980227"
+      "hash": "ca8df107bd8def7fc2be46281cf5dbb8f95647bbd88916122876b856332feea8",
+      "last_updated": "2026-06-28T00:57:56.061447"
     },
     "docs__en__agents-and-tools__tool-use__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
@@ -165,20 +165,20 @@
     "docs__en__agents-and-tools__tool-use__parallel-tool-use.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use.md",
-      "hash": "1b9aeb764e0b8d78028e712f4e12e4cb9883d6d0774e9c50fdfa91067f9d0c43",
-      "last_updated": "2026-06-27T07:11:20.269853"
+      "hash": "cf2d3856630b5a1529f47edb1b38b80d5b0015a17767d67d2084df49e498d280",
+      "last_updated": "2026-06-28T00:57:57.315720"
     },
     "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling.md",
-      "hash": "119795c90fd4fade2a25d2eca83c44632a69d18b4c8cc6f5cbad65bd317368b2",
-      "last_updated": "2026-06-27T07:11:20.941306"
+      "hash": "e47ead47836322513364198c2642ba44f02b46e74a1a8d2a34eb1e1d7457e100",
+      "last_updated": "2026-06-28T00:57:57.958388"
     },
     "docs__en__agents-and-tools__tool-use__server-tools.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md",
-      "hash": "cb5c0d1e620d68956ec5609f7a1236c93fbc47efc7da9d4fc03b5b5acce75620",
-      "last_updated": "2026-06-27T07:11:21.560503"
+      "hash": "bf502386e0c841dbf4866c6e0e677652b5381af62896ba38d5b89f3d2c2e15c2",
+      "last_updated": "2026-06-28T00:57:58.573496"
     },
     "docs__en__agents-and-tools__tool-use__strict-tool-use.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use",
@@ -207,8 +207,8 @@
     "docs__en__agents-and-tools__tool-use__tool-runner.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner.md",
-      "hash": "033972eb64ab922d6f88c001afca7280c1927588fab836459a8ea6f10e968cdc",
-      "last_updated": "2026-06-27T07:11:24.792425"
+      "hash": "8e5eb66ee746249e15ec42049c619d17ade9e47971b233c664e9bab420babcdf",
+      "last_updated": "2026-06-28T00:58:01.592974"
     },
     "docs__en__agents-and-tools__tool-use__tool-search-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool",
@@ -231,8 +231,8 @@
     "docs__en__agents-and-tools__tool-use__web-fetch-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool.md",
-      "hash": "ad4503ee9671d0ab719e7c3a4cbbad72503171e89ed38b2c20b6e39acd51863b",
-      "last_updated": "2026-06-27T07:11:27.285883"
+      "hash": "a8e69238efaef2d052deda6e568aa8d5ee9c84285cc87ade9d6a093247f360d5",
+      "last_updated": "2026-06-28T00:58:04.083169"
     },
     "docs__en__agents-and-tools__tool-use__web-search-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool",
@@ -9435,8 +9435,8 @@
     "docs__en__manage-claude__cmek.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/cmek",
       "original_md_url": "https://platform.claude.com/docs/en/manage-claude/cmek.md",
-      "hash": "cc51d440965f9a44bfc3bac657decfdac380ea58f53d9cdcc03c9fb07da48c6f",
-      "last_updated": "2026-06-27T07:42:21.125395"
+      "hash": "18fd6ac553a9381da9598c281755c7f6ed02d3e908ebcd25da551813f896701b",
+      "last_updated": "2026-06-28T01:28:36.761104"
     },
     "docs__en__manage-claude__cmek-aws-kms.md": {
       "original_url": "https://platform.claude.com/docs/en/manage-claude/cmek-aws-kms",
@@ -9903,8 +9903,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-06-27T22:03:59.434149",
-    "fetch_duration_seconds": 2259.390262,
+    "last_fetch_completed": "2026-06-28T01:32:47.657066",
+    "fetch_duration_seconds": 2138.789096,
     "total_pages_discovered": 1909,
     "pages_fetched_successfully": 1650,
     "pages_failed": 260,
@@ -10175,7 +10175,7 @@
     "total_files": 1650,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-06-27T22:03:59.434172",
+  "last_updated": "2026-06-28T01:32:47.657090",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
