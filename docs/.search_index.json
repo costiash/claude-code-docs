@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-29T19:21:20Z",
+  "generated_at": "2026-06-29T22:09:01Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -152,23 +152,23 @@
         "mode",
         "prompt",
         "settings",
-        "see",
         "code",
+        "see",
         "sessions",
         "only",
         "default",
+        "available",
         "model",
         "mcp",
         "file",
-        "available",
         "interactive",
         "background",
         "print",
         "version",
-        "output",
-        "requires"
+        "requires",
+        "start"
       ],
-      "word_count": 3547,
+      "word_count": 3594,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -206,8 +206,8 @@
         "claude",
         "code",
         "usage",
-        "context",
         "per",
+        "context",
         "costs",
         "when",
         "token",
@@ -215,16 +215,16 @@
         "team",
         "users",
         "session",
+        "limits",
         "teams",
+        "user",
         "tasks",
         "work",
-        "limits",
         "thinking",
         "workspace",
-        "agent",
-        "before"
+        "agent"
       ],
-      "word_count": 2094,
+      "word_count": 2116,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -249,10 +249,10 @@
         "see",
         "using",
         "feedback",
-        "set",
-        "including"
+        "survey",
+        "sessions"
       ],
-      "word_count": 1944,
+      "word_count": 2007,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -564,31 +564,31 @@
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
-      "title": "LLM gateways",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateways  >...",
+      "title": "Other LLM gateways",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Other LLM gatew...",
       "keywords": [
         "gateway",
         "claude",
         "code",
+        "organization",
         "provider",
         "credential",
-        "organization",
         "developer",
         "llm",
-        "usage",
-        "model",
-        "each",
         "one",
-        "api",
-        "configuration",
+        "out",
+        "product",
         "anthropic",
-        "requests",
+        "usage",
+        "configuration",
         "through",
-        "traffic",
-        "set",
-        "gateways"
+        "what",
+        "each",
+        "apps",
+        "connect",
+        "reference"
       ],
-      "word_count": 1205,
+      "word_count": 795,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -708,12 +708,12 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
-        "event",
         "attributes",
+        "event",
         "tool",
         "events",
-        "request",
         "claude",
+        "request",
         "code",
         "plugin",
         "session",
@@ -724,11 +724,11 @@
         "standard",
         "user",
         "such",
-        "mcp",
         "set",
+        "mcp",
         "counter"
       ],
-      "word_count": 10174,
+      "word_count": 10298,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -744,19 +744,19 @@
         "certificate",
         "variables",
         "note",
-        "configuration",
         "store",
+        "configuration",
+        "native",
+        "set",
         "trust",
         "access",
         "anthropic",
         "network",
         "custom",
         "security",
-        "set",
-        "native",
         "github"
       ],
-      "word_count": 775,
+      "word_count": 823,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -924,7 +924,7 @@
         "info",
         "start"
       ],
-      "word_count": 1575,
+      "word_count": 1609,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1008,7 +1008,7 @@
         "github",
         "mcp"
       ],
-      "word_count": 12953,
+      "word_count": 13111,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1161,12 +1161,12 @@
         "aws",
         "enterprise",
         "tab",
+        "gateway",
         "proxy",
         "environment",
         "configuration",
         "more",
         "llm",
-        "gateway",
         "variables",
         "div",
         "teams",
@@ -1176,7 +1176,7 @@
         "learn",
         "organization"
       ],
-      "word_count": 1573,
+      "word_count": 1598,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
