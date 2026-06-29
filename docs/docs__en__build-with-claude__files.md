@@ -464,7 +464,7 @@ For file types that are not supported as `document` blocks (.csv, .txt, .md, .do
   ```
 
   ```typescript TypeScript
-  import fs from "fs/promises";
+  import fs from "node:fs/promises";
 
   const anthropic = new Anthropic();
 

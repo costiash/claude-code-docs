@@ -2362,7 +2362,7 @@ Upload your custom Skill to make it available in your workspace. You can upload 
 
   ```typescript TypeScript
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import fs from "fs";
+  import fs from "node:fs";
 
   const client = new Anthropic();
 
@@ -3175,7 +3175,7 @@ Skills support versioning to manage updates safely:
   ```
 
   ```typescript TypeScript
-  import fs from "fs";
+  import fs from "node:fs";
 
   const client = new Anthropic();
 
@@ -3711,7 +3711,7 @@ Combine Excel and custom DCF analysis Skills:
   ```typescript TypeScript
   // Create custom DCF analysis Skill
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import fs from "fs";
+  import fs from "node:fs";
 
   const client = new Anthropic();
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-29T16:57:43Z",
+  "generated_at": "2026-06-29T19:21:20Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -2016,7 +2016,7 @@
         "formatting",
         "runner"
       ],
-      "word_count": 5583,
+      "word_count": 5586,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -43270,30 +43270,30 @@
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
       "title": "Claude in Microsoft Foundry",
-      "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide walks you through the process of setting up and making API calls to Claude in Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you",
+      "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide walks you through the process of setting up and making AP...",
       "keywords": [
         "claude",
         "foundry",
-        "tab",
         "azure",
+        "tab",
         "api",
-        "title",
         "model",
-        "resource",
-        "microsoft",
-        "opus",
         "deployment",
-        "note",
-        "access",
+        "microsoft",
         "anthropic",
-        "authentication",
-        "name",
+        "title",
+        "note",
+        "resource",
+        "hosted",
+        "models",
+        "opus",
+        "access",
         "through",
-        "entra",
+        "authentication",
         "portal",
-        "support"
+        "name"
       ],
-      "word_count": 2500,
+      "word_count": 3145,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -43601,7 +43601,7 @@
         "limit",
         "supported"
       ],
-      "word_count": 2501,
+      "word_count": 2498,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43752,24 +43752,24 @@
         "eligible",
         "platformavailability",
         "claude",
-        "azureaibeta",
         "claudeapi",
         "claudeplatformaws",
+        "azureai",
         "api",
         "bedrock",
         "vertexai",
         "feature",
         "model",
         "tool",
+        "availability",
         "tools",
         "context",
-        "availability",
         "features",
         "web",
         "when",
         "claudeapibeta"
       ],
-      "word_count": 1870,
+      "word_count": 1896,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -43825,7 +43825,7 @@
         "input",
         "note"
       ],
-      "word_count": 16180,
+      "word_count": 16173,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -45141,7 +45141,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1987,
+      "word_count": 1982,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -45738,26 +45738,26 @@
       "keywords": [
         "skills",
         "agent",
-        "attach",
-        "custom",
-        "specific",
-        "when",
         "skill",
+        "custom",
+        "api",
+        "card",
+        "when",
+        "workspace",
+        "see",
+        "files",
+        "attach",
+        "create",
+        "title",
         "pre",
         "built",
-        "anthropic",
-        "workspace",
-        "reusable",
-        "filesystem",
-        "based",
-        "expertise",
-        "domain",
-        "workflows",
-        "context",
-        "best",
-        "practices"
+        "upload",
+        "codegroup",
+        "icon",
+        "href",
+        "docs"
       ],
-      "word_count": 625,
+      "word_count": 1198,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {

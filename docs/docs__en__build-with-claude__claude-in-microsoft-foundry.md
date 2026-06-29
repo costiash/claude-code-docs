@@ -4,17 +4,24 @@ Access Claude models through Microsoft Foundry with Azure-native endpoints and a
 
 ---
 
-This guide walks you through the process of setting up and making API calls to Claude in Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you can access Claude in Foundry, you are billed for Claude usage in the Microsoft Marketplace, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
+This guide walks you through the process of setting up and making API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
 
-Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources. Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit [Pricing](https://claude.com/pricing#api) for details.
+Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Pricing](https://claude.com/pricing#api) for details.
+
+## Hosting options
+
+Claude models in Microsoft Foundry are available in two hosting options. You choose the hosting option when you configure the deployment.
+
+|                      | Hosted on Azure                                            | Hosted on Anthropic                                                                                             |
+| -------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Where inference runs | Anthropic-operated service running on Azure infrastructure | Anthropic-operated service running on Anthropic infrastructure                                                  |
+| Model availability   | The latest models in the Opus, Sonnet, and Haiku families  | All Claude models available on Microsoft Foundry                                                                |
+| Deployment types     | Global Standard, US Data Zone Standard                     | Global Standard                                                                                                 |
+| Recommended for      | Most workloads                                             | [Access to features or models not yet hosted on Azure](#additional-features-not-supported-when-hosted-on-azure) |
 
 <Note>
-  Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry.
+  Anthropic acts as an independent processor for Microsoft. Customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. For deployments hosted on Azure, prompts and completions remain within Azure; only usage metadata and content flagged by Anthropic's safety systems egress to Anthropic. Anthropic continues to provide its safety and data commitments.
 </Note>
-
-## Preview
-
-In this preview platform integration, Claude models run on Anthropic's infrastructure. This is a commercial integration for billing and access through Azure. As an independent processor for Microsoft, customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. Anthropic continues to provide its industry-leading safety and data commitments, including zero data retention availability.
 
 ## Prerequisites
 
@@ -27,6 +34,10 @@ Before you begin, ensure you have:
 ## Install an SDK
 
 Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Foundry through a platform-specific package or client class.
+
+<Note>
+  Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Go and Ruby SDKs.
+</Note>
 
 <Tabs>
   <Tab title="Python">
@@ -76,11 +87,11 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Foundry 
 
 ## Provisioning
 
-Foundry uses a two-level hierarchy: **resources** contain your security and billing configuration, while **deployments** are the model instances you call via API. You'll first create a Foundry resource, then create one or more Claude deployments within it.
+Foundry uses a two-level hierarchy: **resources** contain your security and billing configuration, while **deployments** are the model instances you call through the API. You'll first create a Foundry resource, then create one or more Claude deployments within it.
 
 ### Provisioning Foundry resources
 
-Create a Foundry resource, which is required to use and manage services in Azure. You can follow these instructions to create a [Foundry resource](https://learn.microsoft.com/en-us/azure/ai-services/multi-service-resource?pivots=azportal#create-a-new-azure-ai-foundry-resource). Alternatively, you can start by creating a [Foundry project](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/create-projects?tabs=ai-foundry), which involves creating a Foundry resource.
+Create a Foundry resource, which is required to use and manage services in Azure. You can follow these instructions to create a [Foundry resource](https://learn.microsoft.com/en-us/azure/ai-services/multi-service-resource?pivots=azportal#create-a-new-azure-ai-foundry-resource). Alternatively, you can start by creating a [Foundry project](https://learn.microsoft.com/en-us/azure/foundry/how-to/create-projects), which involves creating a Foundry resource.
 
 To provision your resource:
 
@@ -92,22 +103,29 @@ To provision your resource:
 
 ### Creating Foundry deployments
 
-After creating your resource, deploy a Claude model to make it available for API calls:
+After creating your resource, deploy a Claude model to make it available for API calls. These steps describe the new Foundry portal (the **New Foundry** toggle is on):
 
-1. In the Foundry portal, navigate to your resource
+1. Sign in to the Foundry portal. From the portal homepage, select **Discover** in the upper-right navigation, then **Models** in the left pane to open the model catalog.
 
-2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**
+2. Search for and select a Claude model (for example, `claude-opus-4-8`). Each model appears once in the catalog regardless of how many hosting options it supports.
 
-3. Search for and select a Claude model (for example, `claude-sonnet-4-6`)
+3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure.
 
-4. Configure deployment settings:
+4. On your first Claude deployment, review the Azure Marketplace terms, select an industry, and select **Agree and Proceed** to accept the terms and subscribe to the Azure Marketplace offer.
 
-   * **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after it has been created.
-   * **Deployment type:** Select Global Standard (recommended for Claude)
+5. Configure the deployment:
 
-5. Select **Deploy** and wait for provisioning to complete
+   * **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after creation.
+   * **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting `inference_geo: "us"` on the Claude API.
+   * **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
 
-6. Once deployed, you can find your endpoint URL and keys under **Keys and Endpoint**
+6. Select **Deploy** and wait for provisioning to complete.
+
+7. Once deployed, select **Build** in the upper-right navigation, then **Models** in the left pane, and open your deployment. The **Details** tab shows the **Target URI** (your endpoint URL) and **Key** (your API key).
+
+<Note>
+  If the **New Foundry** toggle is off, you are in the classic portal layout. There, open **Model catalog** in the left pane to find and deploy a model, and open **Models + endpoints** (under **My assets**) to view your deployments and their endpoint details.
+</Note>
 
 <Note>
   The deployment name you choose becomes the value you pass in the `model` parameter of your API requests. You can create multiple deployments of the same model with different names to manage separate configurations or rate limits.
@@ -115,16 +133,16 @@ After creating your resource, deploy a Claude model to make it available for API
 
 ## Authentication
 
-Claude in Foundry supports two authentication methods: API keys and Entra ID tokens. Both methods use Azure-hosted endpoints in the format `https://{resource}.services.ai.azure.com/anthropic/v1/*`.
+Claude in Microsoft Foundry supports two authentication methods: API keys and Entra ID tokens. Both methods use Azure-hosted endpoints in the format `https://{resource}.services.ai.azure.com/anthropic/v1/*`.
 
 ### API key authentication
 
 After provisioning your Foundry Claude resource, you can obtain an API key from the Foundry portal:
 
-1. Navigate to your resource in the Foundry portal
-2. Go to **Keys and Endpoint** section
-3. Copy one of the provided API keys
-4. Use either the `api-key` or `x-api-key` header in your requests, or provide it to the SDK
+1. In the Foundry portal, select **Build** in the upper-right navigation, then **Models** in the left pane.
+2. Open your Claude deployment and select the **Details** tab.
+3. Copy the **Key** value (and note the **Target URI** for your endpoint).
+4. Use either the `api-key` or `x-api-key` header in your requests, or provide it to the SDK.
 
 The Foundry SDKs require an API key and either a resource name or base URL. The C#, Java, PHP, Python, and TypeScript SDKs automatically read these from the following environment variables if they are defined:
 
@@ -306,7 +324,7 @@ For enhanced security and centralized access management, you can use Entra ID to
   <Tab title="cURL">
     ```bash cURL
     # Get Microsoft Entra ID token
-    ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)
+    ACCESS_TOKEN=$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)
 
     # Make request with token. Replace {resource} with your resource name
     curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
@@ -331,7 +349,7 @@ For enhanced security and centralized access management, you can use Entra ID to
 
     # Get Microsoft Entra ID token using token provider pattern
     token_provider = get_bearer_token_provider(
-        DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+        DefaultAzureCredential(), "https://ai.azure.com/.default"
     )
 
     # Create client with Entra ID authentication
@@ -357,10 +375,7 @@ For enhanced security and centralized access management, you can use Entra ID to
 
     // Get Entra ID token using token provider pattern
     const credential = new DefaultAzureCredential();
-    const tokenProvider = getBearerTokenProvider(
-      credential,
-      "https://cognitiveservices.azure.com/.default"
-    );
+    const tokenProvider = getBearerTokenProvider(credential, "https://ai.azure.com/.default");
 
     // Create client with Entra ID authentication
     const client = new AnthropicFoundry({
@@ -417,7 +432,7 @@ For enhanced security and centralized access management, you can use Entra ID to
     void main() {
         Supplier<String> bearerTokenSupplier = AuthenticationUtil.getBearerTokenSupplier(
             new DefaultAzureCredentialBuilder().build(),
-            "https://cognitiveservices.azure.com/.default"
+            "https://ai.azure.com/.default"
         );
 
         AnthropicClient client = AnthropicOkHttpClient.builder()
@@ -446,8 +461,8 @@ For enhanced security and centralized access management, you can use Entra ID to
 
     use Anthropic\Foundry;
 
-    // Obtain an Entra ID access token, for example via the Azure CLI:
-    //   az account get-access-token --resource https://cognitiveservices.azure.com \
+    // Obtain an Entra ID access token, for example using the Azure CLI:
+    //   az account get-access-token --resource https://ai.azure.com \
     //     --query accessToken -o tsv
     $token = getenv('AZURE_ACCESS_TOKEN');
 
@@ -484,23 +499,38 @@ Foundry includes request identifiers in HTTP response headers for debugging and 
 
 ## Feature support
 
-Claude in Foundry supports most of Claude's powerful features. You can find all the features currently supported in [Features overview](/docs/en/build-with-claude/overview).
+Claude in Microsoft Foundry supports most of Claude's powerful features. You can find all the features currently supported in [Features overview](/docs/en/build-with-claude/overview).
 
 ### Context window
 
-Claude Fable 5, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Opus 4.8 and Sonnet 4.5, have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
 
-### Features not supported
+### Claude features not supported for Claude in Microsoft Foundry
 
 * Admin API
+* Advisor tool
+* Claude Managed Agents
 * Compliance API
 * Models API
 * Message Batches API
 * Server-side fallback (the [`fallbacks` parameter](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 
+### Additional features not supported when hosted on Azure
+
+The following features are available for deployments hosted on Anthropic but are not supported for deployments hosted on Azure:
+
+* Structured outputs
+* Server-side tools (web search, web fetch, code execution, and tool search)
+* MCP connector
+* Agent Skills
+* Programmatic tool calling
+* Files API
+
+Requests that use these features against a deployment hosted on Azure return a `400 Bad Request` error by design. Claude Code detects deployments hosted on Azure and automatically adapts its feature set.
+
 ## API responses
 
-API responses from Claude in Foundry follow the standard [Claude API response format](/docs/en/api/messages/create). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (Claude API, Foundry, Claude Platform on AWS, Amazon Bedrock, and Google Cloud).
+API responses from Claude in Microsoft Foundry follow the standard [Claude API response format](/docs/en/api/messages/create). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (Claude API, Foundry, Claude Platform on AWS, Amazon Bedrock, and Google Cloud).
 
 For details on response headers specific to Foundry, see [Correlation request IDs](#correlation-request-ids).
 
@@ -508,25 +538,41 @@ For details on response headers specific to Foundry, see [Correlation request ID
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations). Microsoft Foundry follows the Claude API lifecycle schedule.
 
-The following Claude models are available through Foundry. The latest generation models (Claude Fable 5, Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
+The following Claude models are available through Foundry:
 
-| Model                                                | Default deployment name |
-| ---------------------------------------------------- | ----------------------- |
-| Claude Fable 5                                       | claude-fable-5          |
-| Claude Opus 4.8                                      | claude-opus-4-8         |
-| Claude Opus 4.7                                      | claude-opus-4-7         |
-| Claude Opus 4.6                                      | claude-opus-4-6         |
-| Claude Opus 4.5                                      | claude-opus-4-5         |
-| Claude Opus 4.1 Deprecated. Retiring August 5, 2026. | claude-opus-4-1         |
-| Claude Sonnet 4.6                                    | claude-sonnet-4-6       |
-| Claude Sonnet 4.5                                    | claude-sonnet-4-5       |
-| Claude Haiku 4.5                                     | claude-haiku-4-5        |
+| Model                                                | Default deployment name | Hosted on Azure | Hosted on Anthropic |
+| ---------------------------------------------------- | ----------------------- | --------------- | ------------------- |
+| Claude Fable 5                                       | claude-fable-5          |                 | ✓                   |
+| Claude Opus 4.8                                      | claude-opus-4-8         | ✓               | ✓                   |
+| Claude Opus 4.7                                      | claude-opus-4-7         |                 | ✓                   |
+| Claude Opus 4.6                                      | claude-opus-4-6         |                 | ✓                   |
+| Claude Opus 4.5                                      | claude-opus-4-5         |                 | ✓                   |
+| Claude Opus 4.1 Deprecated. Retiring August 5, 2026. | claude-opus-4-1         |                 | ✓                   |
+| Claude Sonnet 4.6                                    | claude-sonnet-4-6       |                 | ✓                   |
+| Claude Sonnet 4.5                                    | claude-sonnet-4-5       |                 | ✓                   |
+| Claude Haiku 4.5                                     | claude-haiku-4-5        | ✓               | ✓                   |
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 
 <Tip>
   Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).
 </Tip>
+
+## Billing
+
+Claude in Microsoft Foundry bills through the [Azure Marketplace](https://azuremarketplace.microsoft.com/). Usage is denominated in Claude Consumption Units (CCUs), metered hourly, and invoiced monthly in arrears on your Azure bill. CCUs are not prepaid credits; there is no CCU balance or commitment.
+
+For the CCU price, conversion mechanics, and per-model token rates, see [Claude in Microsoft Foundry pricing](/docs/en/about-claude/pricing#claude-in-microsoft-foundry-pricing).
+
+## Migrating between hosting options
+
+To move an existing deployment from one hosting option to the other:
+
+1. Create a new deployment of the model's other hosting version (Hosted on Azure or Hosted on Anthropic). This can be in the same Foundry resource, or a new one.
+2. Update your application to pass the new deployment name in the `model` parameter.
+3. Delete the old deployment once traffic has moved.
+
+If the new deployment is in the same Foundry resource, your endpoint URL and authentication are unchanged. If you created a new resource, update your application's endpoint and credentials to point to it.
 
 ## Monitoring and logging
 
@@ -548,12 +594,12 @@ Anthropic recommends logging your activity on at least a 30-day rolling basis to
 
 **Error:** `401 Unauthorized` or `Invalid API key`
 
-* **Solution:** Verify your API key is correct. You can obtain a new API key from the Foundry portal under **Keys and Endpoint** for your Foundry resource.
+* **Solution:** Verify your API key is correct. You can find it in the Foundry portal on your deployment's **Details** tab (under **Build** > **Models**).
 * **Solution:** If using Microsoft Entra ID, ensure your access token is valid and hasn't expired. Tokens typically expire after 1 hour.
 
 **Error:** `403 Forbidden`
 
-* **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (for example, "Cognitive Services OpenAI User").
+* **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (for example, **Foundry User** (formerly Azure AI User) or **Cognitive Services User**).
 
 ### Rate limiting
 

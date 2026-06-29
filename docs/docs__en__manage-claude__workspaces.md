@@ -204,7 +204,7 @@ Some resources are managed at the organization level and cannot be managed with 
 * **Workspaces** themselves and **organization members** are managed through the [Admin API](/docs/en/manage-claude/admin-api), which requires an Admin API key.
 
 <Note>
-  [Prompt caches](/docs/en/build-with-claude/prompt-caching) are also isolated per workspace on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (where Claude is in beta). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.
+  [Prompt caches](/docs/en/build-with-claude/prompt-caching) are also isolated per workspace on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.
 </Note>
 
 <Tip>

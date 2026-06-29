@@ -392,7 +392,7 @@ The Python environment can process various file types uploaded through the Files
 
   ```typescript TypeScript
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import { createReadStream } from "fs";
+  import { createReadStream } from "node:fs";
 
   const client = new Anthropic();
   // ...
@@ -686,7 +686,7 @@ When Claude creates files during code execution, you can retrieve these files us
 
   ```typescript TypeScript
   import Anthropic from "@anthropic-ai/sdk";
-  import { writeFile } from "fs/promises";
+  import { writeFile } from "node:fs/promises";
 
   const client = new Anthropic();
   // ...

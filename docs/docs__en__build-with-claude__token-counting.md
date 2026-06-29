@@ -1206,7 +1206,7 @@ All [active models](/docs/en/about-claude/models/overview) support token countin
   ```
 
   ```typescript TypeScript
-  import { readFile } from "fs/promises";
+  import { readFile } from "node:fs/promises";
 
   const client = new Anthropic();
 

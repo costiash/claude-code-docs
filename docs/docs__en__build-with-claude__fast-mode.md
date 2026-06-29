@@ -23,7 +23,7 @@ Fast mode is supported on the following models:
 * Claude Opus 4.6 (claude-opus-4-6)
 
 <Note>
-  Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](/docs/en/managed-agents/overview), only. It is not available on third-party platforms, including Amazon Bedrock, Google Cloud, and Microsoft Foundry.
+  Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](/docs/en/managed-agents/overview), only. It is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 </Note>
 
 <Warning>

@@ -203,11 +203,11 @@ The following script sends a request that should trigger parallel tool calls, ve
 
     if (toolUses.length > 1) {
       console.log("✓ Parallel tool calls detected!");
-      toolUses.forEach((tool) => {
+      for (const tool of toolUses) {
         if (tool.type === "tool_use") {
           console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
         }
-      });
+      }
     } else {
       console.log("✗ No parallel tool calls detected");
     }

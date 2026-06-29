@@ -513,7 +513,7 @@ For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use
 
   ```typescript TypeScript
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import fs from "fs";
+  import fs from "node:fs";
 
   const anthropic = new Anthropic();
 
