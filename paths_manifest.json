@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-06-29T18:45:38.131674Z",
-    "total_paths": 1909,
+    "generated_at": "2026-06-29T21:33:10.000282Z",
+    "total_paths": 1915,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-06-29T18:45:38.131680Z"
+    "last_regenerated": "2026-06-29T21:33:10.000292Z"
   },
   "categories": {
     "core_documentation": [
@@ -96,6 +96,11 @@
       "/docs/en/channels",
       "/docs/en/channels-reference",
       "/docs/en/chrome",
+      "/docs/en/claude-apps-gateway",
+      "/docs/en/claude-apps-gateway-config",
+      "/docs/en/claude-apps-gateway-deploy",
+      "/docs/en/claude-apps-gateway-on-gcp",
+      "/docs/en/claude-apps-gateway-spend-limits",
       "/docs/en/claude-directory",
       "/docs/en/claude-platform-on-aws",
       "/docs/en/code-review",
@@ -114,6 +119,7 @@
       "/docs/en/feature-availability",
       "/docs/en/features-overview",
       "/docs/en/fullscreen",
+      "/docs/en/gateways",
       "/docs/en/get-started",
       "/docs/en/github-enterprise-server",
       "/docs/en/glossary",
