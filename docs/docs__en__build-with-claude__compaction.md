@@ -9,10 +9,10 @@ Server-side context compaction for managing long conversations that approach con
 </Note>
 
 <Tip>
-  Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically with minimal integration work.
+  Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically, without client-side summarization code.
 </Tip>
 
-Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit. This isn't just about staying under a token cap. As conversations get longer, models struggle to maintain focus across the full history. Compaction keeps the active context focused and performant by replacing stale content with concise summaries.
+Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit. It also keeps the active context small: as a conversation grows, response quality degrades, so compaction replaces older content with a concise summary.
 
 <Tip>
   For a deeper look at why long contexts degrade and how compaction helps, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
@@ -21,7 +21,7 @@ Compaction extends the effective context length for long-running conversations a
 This is ideal for:
 
 * Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
-* Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the context window
+* Task-oriented prompts that require a lot of follow-up work (often tool use) that might exceed the context window
 
 <Note>
   Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.
@@ -31,8 +31,8 @@ This is ideal for:
 
 Compaction is supported on the following models:
 
-* Claude Fable 5 (`claude-fable-5`)
-* [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`)
+* Claude Fable 5 (claude-fable-5)
+* [Claude Mythos 5](https://anthropic.com/glasswing) (claude-mythos-5)
 * [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
 * Claude Opus 4.8 (claude-opus-4-8)
 * Claude Opus 4.7 (claude-opus-4-7)
@@ -41,16 +41,16 @@ Compaction is supported on the following models:
 
 ## How compaction works
 
-When compaction is enabled, Claude automatically summarizes your conversation when it approaches the configured token threshold. The API:
+When compaction is enabled, Claude automatically summarizes your conversation when it reaches the configured token threshold. The API:
 
-1. Detects when input tokens exceed your specified trigger threshold.
+1. Detects when input tokens reach your specified trigger threshold.
 2. Generates a summary of the current conversation.
 3. Creates a `compaction` block containing the summary.
 4. Continues the response with the compacted context.
 
-On subsequent requests, append the response to your messages. The API automatically drops all message blocks prior to the `compaction` block, continuing the conversation from the summary.
+On subsequent requests, append the response to your messages. The API automatically drops all content blocks prior to the `compaction` block, continuing the conversation from the summary.
 
-![Flow diagram showing the compaction process: when input tokens exceed the trigger threshold, Claude generates a summary in a compaction block and continues the response with the compacted context](/docs/images/compaction-flow.svg)
+![Compaction flow: when input tokens reach the trigger, Claude writes a summary into a compaction block and continues](/docs/images/compaction-flow.svg)
 
 ## Basic usage
 
@@ -59,28 +59,27 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "anthropic-beta: compact-2026-01-12" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 4096,
       "messages": [
-          {
-              "role": "user",
-              "content": "Help me build a website"
-          }
+        {
+          "role": "user",
+          "content": "Help me build a website"
+        }
       ],
       "context_management": {
-          "edits": [
-              {
-                  "type": "compact_20260112"
-              }
-          ]
+        "edits": [
+          {
+            "type": "compact_20260112"
+          }
+        ]
       }
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -288,18 +287,47 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
 ## Parameters
 
-| Parameter                | Type    | Default        | Description                                                                        |
-| ------------------------ | ------- | -------------- | ---------------------------------------------------------------------------------- |
-| `type`                   | string  | Required       | Must be `"compact_20260112"`                                                       |
-| `trigger`                | object  | 150,000 tokens | When to trigger compaction. Must be at least 50,000 tokens.                        |
-| `pause_after_compaction` | boolean | `false`        | Whether to pause after generating the compaction summary                           |
-| `instructions`           | string  | `null`         | Custom summarization prompt. Completely replaces the default prompt when provided. |
+| Parameter                | Type    | Default                                     | Description                                                                                                            |
+| ------------------------ | ------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `type`                   | string  | Required                                    | Must be `"compact_20260112"`                                                                                           |
+| `trigger`                | object  | `{"type": "input_tokens", "value": 150000}` | When to trigger compaction. `input_tokens` is the only supported trigger type. `value` must be at least 50,000 tokens. |
+| `pause_after_compaction` | boolean | `false`                                     | Whether to pause after generating the compaction summary                                                               |
+| `instructions`           | string  | `null`                                      | Custom summarization prompt. Completely replaces the default prompt when provided.                                     |
 
 ### Trigger configuration
 
 Configure when compaction triggers using the `trigger` parameter:
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112",
+            "trigger": {
+              "type": "input_tokens",
+              "value": 150000
+            }
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
   model: claude-opus-4-8
@@ -337,7 +365,9 @@ Configure when compaction triggers using the `trigger` parameter:
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
@@ -359,6 +389,9 @@ Configure when compaction triggers using the `trigger` parameter:
   ```
 
   ```csharp C#
+  AnthropicClient client = new();
+  List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
+
   var parameters = new MessageCreateParams
   {
       Model = "claude-opus-4-8",
@@ -478,15 +511,41 @@ Configure when compaction triggers using the `trigger` parameter:
 
 ### Custom summarization instructions
 
-By default, compaction uses the following summarization prompt:
+The default summarization prompt varies by model. Each default instructs Claude to write a summary inside `<summary></summary>` tags with the information needed to continue the task in a future context window. For example, some models use the following prompt:
 
 ```text wrap
 You have written a partial transcript for the initial task above. Please write a summary of the transcript. The purpose of this summary is to provide continuity so you can continue to make progress towards solving the task in a future context, where the raw history above may not be accessible and will be replaced with this summary. Write down anything that would be helpful, including the state, next steps, learnings etc. You must wrap your summary in a <summary></summary> block.
 ```
 
-You can provide custom instructions via the `instructions` parameter to replace this prompt entirely. Custom instructions don't supplement the default; they completely replace it:
+You can provide custom instructions through the `instructions` parameter. Custom instructions don't supplement the default prompt. They replace it completely:
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112",
+            "instructions": "Focus on preserving code snippets, variable names, and technical decisions."
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
   model: claude-opus-4-8
@@ -524,7 +583,9 @@ You can provide custom instructions via the `instructions` parameter to replace 
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
@@ -690,41 +751,54 @@ Use `pause_after_compaction` to pause the API after generating the compaction su
 When enabled, the API returns a message with the `compaction` stop reason after generating the compaction block:
 
 <CodeGroup>
+  ```bash cURL
+  # pause_after_compaction stops the response right after the compaction
+  # summary so you can adjust the messages before continuing. The continue
+  # step doesn't translate well to a one-off shell command; see the SDK tabs
+  # for the full pause-and-continue flow. Single paused request:
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112",
+            "pause_after_compaction": true
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
-  ant beta:messages create --beta compact-2026-01-12 \
-    --transform '{stop_reason,content}' --format jsonl <<'YAML' > resp.json
+  # pause_after_compaction stops the response right after the compaction
+  # summary so you can adjust the messages before continuing. The continue
+  # step doesn't translate well to a one-off CLI command; see the SDK tabs
+  # for the full pause-and-continue flow. Single paused request:
+  ant beta:messages create \
+    --beta compact-2026-01-12 \
+    --format jsonl <<'YAML'
   model: claude-opus-4-8
   max_tokens: 4096
   messages:
     - role: user
-      content: "Hello, Claude"
+      content: Hello, Claude
   context_management:
     edits:
       - type: compact_20260112
         pause_after_compaction: true
   YAML
-
-  # Check if compaction triggered a pause
-  if grep -q '"stop_reason":"compaction"' resp.json; then
-    # Response contains only the compaction block
-    RESP=$(cat resp.json)
-    CONTENT="${RESP#*\"content\":}"
-    printf '%s' "${CONTENT%\}}" > content.json
-
-    # Continue the request
-    ant beta:messages create --beta compact-2026-01-12 <<YAML > /dev/null
-  model: claude-opus-4-8
-  max_tokens: 4096
-  messages:
-    - role: user
-      content: "Hello, Claude"
-    - role: assistant
-      content: $(cat content.json)
-  context_management:
-    edits:
-      - type: compact_20260112
-  YAML
-  fi
   ```
 
   ```python Python
@@ -1028,50 +1102,307 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
 #### Enforcing a total token budget
 
-When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached:
+When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached.
 
-```python Python
-client = anthropic.Anthropic()
-messages = [{"role": "user", "content": "Hello, Claude"}]
-TRIGGER_THRESHOLD = 100_000
-TOTAL_TOKEN_BUDGET = 3_000_000
-n_compactions = 0
+This example appears in the SDK languages only: its value is the budget-tracking logic around the request. The raw request combines the `trigger` from [Trigger configuration](#trigger-configuration) with `pause_after_compaction` from [Pausing after compaction](#pausing-after-compaction).
 
-response = client.beta.messages.create(
-    betas=["compact-2026-01-12"],
-    model="claude-opus-4-8",
-    max_tokens=4096,
-    messages=messages,
-    context_management={
-        "edits": [
-            {
-                "type": "compact_20260112",
-                "trigger": {"type": "input_tokens", "value": TRIGGER_THRESHOLD},
-                "pause_after_compaction": True,
-            }
-        ]
-    },
-)
+<CodeGroup>
+  ```python Python
+  client = anthropic.Anthropic()
+  messages = [{"role": "user", "content": "Hello, Claude"}]
+  TRIGGER_THRESHOLD = 100_000
+  TOTAL_TOKEN_BUDGET = 3_000_000
+  n_compactions = 0
 
-if response.stop_reason == "compaction":
-    n_compactions += 1
-    messages.append({"role": "assistant", "content": response.content})
+  response = client.beta.messages.create(
+      betas=["compact-2026-01-12"],
+      model="claude-opus-4-8",
+      max_tokens=4096,
+      messages=messages,
+      context_management={
+          "edits": [
+              {
+                  "type": "compact_20260112",
+                  "trigger": {"type": "input_tokens", "value": TRIGGER_THRESHOLD},
+                  "pause_after_compaction": True,
+              }
+          ]
+      },
+  )
+
+  if response.stop_reason == "compaction":
+      n_compactions += 1
+      messages.append({"role": "assistant", "content": response.content})
+
+      # Estimate total tokens consumed; prompt wrap-up if over budget
+      if n_compactions * TRIGGER_THRESHOLD >= TOTAL_TOKEN_BUDGET:
+          messages.append(
+              {
+                  "role": "user",
+                  "content": "Please wrap up your current work and summarize the final state.",
+              }
+          )
+  ```
+
+  ```typescript TypeScript
+  const client = new Anthropic();
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
+  const TRIGGER_THRESHOLD = 100_000;
+  const TOTAL_TOKEN_BUDGET = 3_000_000;
+  let compactionCount = 0;
+
+  const response = await client.beta.messages.create({
+    betas: ["compact-2026-01-12"],
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
+    messages,
+    context_management: {
+      edits: [
+        {
+          type: "compact_20260112",
+          trigger: { type: "input_tokens", value: TRIGGER_THRESHOLD },
+          pause_after_compaction: true
+        }
+      ]
+    }
+  });
+
+  if (response.stop_reason === "compaction") {
+    compactionCount += 1;
+    messages.push({ role: "assistant", content: response.content });
+
+    // Estimate total tokens consumed; prompt wrap-up if over budget
+    if (compactionCount * TRIGGER_THRESHOLD >= TOTAL_TOKEN_BUDGET) {
+      messages.push({
+        role: "user",
+        content: "Please wrap up your current work and summarize the final state."
+      });
+    }
+  }
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+  List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello, Claude" }];
+
+  const int TriggerThreshold = 100_000;
+  const int TotalTokenBudget = 3_000_000;
+  int compactionCount = 0;
+
+  var response = await client.Beta.Messages.Create(new()
+  {
+      Betas = ["compact-2026-01-12"],
+      Model = "claude-opus-4-8",
+      MaxTokens = 4096,
+      Messages = messages,
+      ContextManagement = new BetaContextManagementConfig
+      {
+          Edits = [new BetaCompact20260112Edit
+          {
+              Trigger = new BetaInputTokensTrigger(TriggerThreshold),
+              PauseAfterCompaction = true
+          }]
+      }
+  });
+
+  if (response.StopReason == BetaStopReason.Compaction)
+  {
+      compactionCount += 1;
+      messages.Add(new()
+      {
+          Role = Role.Assistant,
+          Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
+      });
+
+      // Estimate total tokens consumed; prompt wrap-up if over budget
+      if (compactionCount * TriggerThreshold >= TotalTokenBudget)
+      {
+          messages.Add(new()
+          {
+              Role = Role.User,
+              Content = "Please wrap up your current work and summarize the final state."
+          });
+      }
+  }
+
+  Console.WriteLine(response);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+  messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
+
+  const triggerThreshold = 100_000
+  const totalTokenBudget = 3_000_000
+  compactionCount := 0
+
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 4096,
+  	Messages:  messages,
+  	ContextManagement: anthropic.BetaContextManagementConfigParam{
+  		Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
+  			{OfCompact20260112: &anthropic.BetaCompact20260112EditParam{
+  				Trigger:              anthropic.BetaInputTokensTriggerParam{Value: triggerThreshold},
+  				PauseAfterCompaction: anthropic.Bool(true),
+  			}},
+  		},
+  	},
+  	Betas: []anthropic.AnthropicBeta{"compact-2026-01-12"},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  if response.StopReason == "compaction" {
+  	compactionCount++
+  	messages = append(messages, response.ToParam())
+
+  	// Estimate total tokens consumed; prompt wrap-up if over budget
+  	if compactionCount*triggerThreshold >= totalTokenBudget {
+  		messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Please wrap up your current work and summarize the final state.")))
+  	}
+  }
+
+  fmt.Println(response)
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaContextManagementConfig;
+  import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
+  import com.anthropic.models.beta.messages.BetaInputTokensTrigger;
+  import com.anthropic.models.beta.messages.BetaStopReason;
+  // ...
+          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+          long triggerThreshold = 100_000;
+          long totalTokenBudget = 3_000_000;
+          int compactionCount = 0;
+
+          List<BetaMessageParam> messages = new ArrayList<>();
+          messages.add(BetaMessageParam.builder()
+              .role(BetaMessageParam.Role.USER)
+              .content("Hello, Claude")
+              .build());
+
+          MessageCreateParams params = MessageCreateParams.builder()
+              .addBeta("compact-2026-01-12")
+              .model("claude-opus-4-8")
+              .maxTokens(4096L)
+              .messages(messages)
+              .contextManagement(BetaContextManagementConfig.builder()
+                  .addEdit(BetaCompact20260112Edit.builder()
+                      .trigger(BetaInputTokensTrigger.builder()
+                          .value(triggerThreshold)
+                          .build())
+                      .pauseAfterCompaction(true)
+                      .build())
+                  .build())
+              .build();
+
+          BetaMessage response = client.beta().messages().create(params);
+
+          if (response.stopReason().isPresent()
+                  && response.stopReason().get().equals(BetaStopReason.COMPACTION)) {
+              compactionCount += 1;
+              messages.add(response.toParam());
+
+              // Estimate total tokens consumed; prompt wrap-up if over budget
+              if (compactionCount * triggerThreshold >= totalTokenBudget) {
+                  messages.add(BetaMessageParam.builder()
+                      .role(BetaMessageParam.Role.USER)
+                      .content("Please wrap up your current work and summarize the final state.")
+                      .build());
+              }
+          }
+
+          System.out.println(response);
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $triggerThreshold = 100_000;
+  $totalTokenBudget = 3_000_000;
+  $compactionCount = 0;
+
+  $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
+
+  $response = $client->beta->messages->create(
+      maxTokens: 4096,
+      messages: $messages,
+      model: 'claude-opus-4-8',
+      betas: ['compact-2026-01-12'],
+      contextManagement: [
+          'edits' => [
+              [
+                  'type' => 'compact_20260112',
+                  'trigger' => ['type' => 'input_tokens', 'value' => $triggerThreshold],
+                  'pause_after_compaction' => true
+              ]
+          ]
+      ]
+  );
+
+  if ($response->stopReason === 'compaction') {
+      $compactionCount += 1;
+      $messages[] = ['role' => 'assistant', 'content' => $response->content];
+
+      // Estimate total tokens consumed; prompt wrap-up if over budget
+      if ($compactionCount * $triggerThreshold >= $totalTokenBudget) {
+          $messages[] = [
+              'role' => 'user',
+              'content' => 'Please wrap up your current work and summarize the final state.'
+          ];
+      }
+  }
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+  messages = [{ role: "user", content: "Hello, Claude" }]
+  TRIGGER_THRESHOLD = 100_000
+  TOTAL_TOKEN_BUDGET = 3_000_000
+  compaction_count = 0
+
+  response = client.beta.messages.create(
+    betas: ["compact-2026-01-12"],
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
+    messages: messages,
+    context_management: {
+      edits: [
+        {
+          type: "compact_20260112",
+          trigger: { type: "input_tokens", value: TRIGGER_THRESHOLD },
+          pause_after_compaction: true
+        }
+      ]
+    }
+  )
+
+  if response.stop_reason == :compaction
+    compaction_count += 1
+    messages << { role: "assistant", content: response.content }
 
     # Estimate total tokens consumed; prompt wrap-up if over budget
-    if n_compactions * TRIGGER_THRESHOLD >= TOTAL_TOKEN_BUDGET:
-        messages.append(
-            {
-                "role": "user",
-                "content": "Please wrap up your current work and summarize the final state.",
-            }
-        )
-```
+    if compaction_count * TRIGGER_THRESHOLD >= TOTAL_TOKEN_BUDGET
+      messages << {
+        role: "user",
+        content: "Please wrap up your current work and summarize the final state."
+      }
+    end
+  end
+  ```
+</CodeGroup>
 
 ## Working with compaction blocks
 
 When compaction is triggered, the API returns a `compaction` block at the start of the assistant response.
 
-A long-running conversation may result in multiple compactions. The last compaction block reflects the final state of the prompt, replacing content prior to it with the generated summary.
+A long-running conversation might result in multiple compactions. The last compaction block reflects the final state of the prompt, replacing content prior to it with the generated summary.
 
 ```json Output
 {
@@ -1093,9 +1424,40 @@ A long-running conversation may result in multiple compactions. The last compact
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
 <CodeGroup>
+  ```bash cURL
+  # The response content, including the compaction block, must go back to the
+  # API as the assistant turn of the next request. Managing that message list
+  # doesn't translate well to a one-off shell command; see the CLI and SDK
+  # tabs for the full flow. First request:
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112"
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
-  ant beta:messages create --beta compact-2026-01-12 \
-    --transform content --format jsonl <<'YAML' > content.json
+  ant beta:messages create \
+    --beta compact-2026-01-12 \
+    --transform content \
+    --format jsonl <<'YAML' > content.json
   model: claude-opus-4-8
   max_tokens: 4096
   messages:
@@ -1151,9 +1513,10 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
 
-  // Assume we already have a response from a previous request
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
     model: "claude-opus-4-8",
@@ -1394,12 +1757,40 @@ When the API receives a `compaction` block, all content blocks before it are ign
 
 ### Streaming
 
-When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
+The compaction block streams differently from text blocks. You receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "stream": true,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112"
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
-  ant beta:messages create --stream --format jsonl \
-    --beta compact-2026-01-12 <<'YAML'
+  ant beta:messages create \
+    --stream \
+    --beta compact-2026-01-12 \
+    --format jsonl <<'YAML'
   model: claude-opus-4-8
   max_tokens: 4096
   messages:
@@ -1442,7 +1833,9 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
 
   const stream = await client.beta.messages.stream({
     betas: ["compact-2026-01-12"],
@@ -1479,6 +1872,9 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
   ```
 
   ```csharp C#
+  var client = new AnthropicClient();
+  List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
+
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
@@ -1665,7 +2061,7 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
 
 ### Prompt caching
 
-Compaction works well with [prompt caching](/docs/en/build-with-claude/prompt-caching). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content. The original compacted content is ignored.
+Compaction works well with [prompt caching](/docs/en/build-with-claude/prompt-caching). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content.
 
 ```json
 {
@@ -1694,6 +2090,40 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 * Only the compaction summary needs to be written as a new cache entry
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "system": [
+        {
+          "type": "text",
+          "text": "You are a helpful coding assistant...",
+          "cache_control": {
+            "type": "ephemeral"
+          }
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112"
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
   model: claude-opus-4-8
@@ -1735,7 +2165,9 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    { role: "user", content: "Hello, Claude" }
+  ];
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
@@ -1781,7 +2213,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
                       CacheControl = new BetaCacheControlEphemeral()
                   }
               },
-              Messages = [],
+              Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
               ContextManagement = new BetaContextManagementConfig
               {
                   Edits = [new BetaCompact20260112Edit()]
@@ -1890,7 +2322,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
         }
       }
     ],
-    messages: [],
+    messages: [{ role: "user", content: "Hello, Claude" }],
     context_management: {
       edits: [{ type: "compact_20260112" }]
     }
@@ -1899,7 +2331,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   ```
 </CodeGroup>
 
-This approach is particularly beneficial for long system prompts, as they remain cached even across multiple compaction events throughout a conversation.
+This keeps long system prompts cached across multiple compaction events throughout a conversation.
 
 ## Understanding usage
 
@@ -1931,20 +2363,44 @@ The `iterations` array shows usage for each sampling iteration. When compaction 
 <Note>
   The top-level `input_tokens` and `output_tokens` do not include compaction iteration usage. They reflect the sum of all non-compaction iterations. To calculate total tokens consumed and billed for a request, sum across all entries in the `usage.iterations` array.
 
-  If you previously relied on `usage.input_tokens` and `usage.output_tokens` for cost tracking or auditing, you'll need to update your tracking logic to aggregate across `usage.iterations` when compaction is enabled. The `iterations` array is only populated when a new compaction is triggered during the request. Re-applying a previous `compaction` block incurs no additional compaction cost, and the top-level usage fields remain accurate in that case.
+  If you previously relied on `usage.input_tokens` and `usage.output_tokens` for cost tracking or auditing, you'll need to update your tracking logic to aggregate across `usage.iterations` when compaction is enabled. With the compaction beta enabled, every response includes `usage.iterations`, even if no compaction occurred. A `compaction` entry appears only when a new compaction is triggered during the request. Re-applying a previous `compaction` block incurs no additional compaction cost, and the top-level usage fields remain accurate in that case.
 </Note>
 
 ## Combining with other features
 
 ### Server tools
 
-When using server tools (like web search), the compaction trigger is checked at the start of each sampling iteration. Compaction may occur multiple times within a single request depending on your trigger threshold and the amount of output generated.
+When using server tools (such as web search), the compaction trigger is checked at the start of each sampling iteration. Compaction might occur multiple times within a single request depending on your trigger threshold and the amount of output generated.
 
 ### Token counting
 
 The token counting endpoint (`/v1/messages/count_tokens`) applies existing `compaction` blocks in your prompt but does not trigger new compactions. Use it to check your effective token count after previous compactions:
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages/count_tokens \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, Claude"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112"
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   cat > request.yaml <<'YAML'
   model: claude-opus-4-8
@@ -1958,7 +2414,8 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   CURRENT=$(ant beta:messages count-tokens \
     --beta compact-2026-01-12 \
-    --transform input_tokens --raw-output < request.yaml)
+    --transform input_tokens \
+    --raw-output < request.yaml)
 
   ORIGINAL=$(ant beta:messages count-tokens \
     --beta compact-2026-01-12 \
@@ -2003,6 +2460,9 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
   ```
 
   ```csharp C#
+  AnthropicClient client = new();
+  List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
+
   var countParams = new MessageCountTokensParams
   {
       Model = "claude-opus-4-8",
@@ -2105,12 +2565,46 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 Here's a complete example of a long-running conversation with compaction:
 
 <CodeGroup>
+  ```bash cURL
+  # curl sends individual requests; maintain the messages array in the
+  # calling script. See the SDK tabs for the full chat() loop. Single-turn
+  # request shape:
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Help me build a Python web scraper"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112",
+            "trigger": {
+              "type": "input_tokens",
+              "value": 100000
+            }
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   # The CLI handles individual turns; maintain the messages array in the
   # calling script. See the SDK tabs for the full chat() loop. Single-turn
   # request shape:
-  ant beta:messages create --beta compact-2026-01-12 \
-    --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+  ant beta:messages create \
+    --beta compact-2026-01-12 \
+    --transform 'content.#(type=="text").text' \
+    --raw-output <<'YAML'
   model: claude-opus-4-8
   max_tokens: 4096
   messages:
@@ -2160,13 +2654,13 @@ Here's a complete example of a long-running conversation with compaction:
   print(chat("Help me build a Python web scraper"))
   print(chat("Add support for JavaScript-rendered pages"))
   print(chat("Now add rate limiting and error handling"))
-  # ... continue as long as needed
+  # Continue calling chat() for as long as the conversation needs
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const messages: Anthropic.Beta.BetaMessageParam[] = [];
+  const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
 
   async function chat(userMessage: string): Promise<string> {
     messages.push({ role: "user", content: userMessage });
@@ -2198,7 +2692,7 @@ Here's a complete example of a long-running conversation with compaction:
   console.log(await chat("Help me build a Python web scraper"));
   console.log(await chat("Add support for JavaScript-rendered pages"));
   console.log(await chat("Now add rate limiting and error handling"));
-  // ... continue as long as needed
+  // Continue calling chat() for as long as the conversation needs
   ```
 
   ```csharp C#
@@ -2430,12 +2924,47 @@ Here's a complete example of a long-running conversation with compaction:
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 <CodeGroup>
+  ```bash cURL
+  # curl sends individual requests; maintain the messages array in the
+  # calling script. See the SDK tabs for the full chat() loop with
+  # pause-and-preserve handling. Single-turn request shape:
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-01-12" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Help me build a Python web scraper"
+        }
+      ],
+      "context_management": {
+        "edits": [
+          {
+            "type": "compact_20260112",
+            "trigger": {
+              "type": "input_tokens",
+              "value": 100000
+            },
+            "pause_after_compaction": true
+          }
+        ]
+      }
+    }'
+  ```
+
   ```bash CLI
   # The CLI handles individual turns; maintain the messages array in the
   # calling script. See the SDK tabs for the full chat() loop with
   # pause-and-preserve handling. Single-turn request shape:
-  ant beta:messages create --beta compact-2026-01-12 \
-    --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+  ant beta:messages create \
+    --beta compact-2026-01-12 \
+    --transform 'content.#(type=="text").text' \
+    --raw-output <<'YAML'
   model: claude-opus-4-8
   max_tokens: 4096
   messages:
@@ -2517,13 +3046,13 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
   print(chat("Help me build a Python web scraper"))
   print(chat("Add support for JavaScript-rendered pages"))
   print(chat("Now add rate limiting and error handling"))
-  # ... continue as long as needed
+  # Continue calling chat() for as long as the conversation needs
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
 
-  let messages: Anthropic.Beta.BetaMessageParam[] = [];
+  let messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
 
   async function chat(userMessage: string): Promise<string> {
     messages.push({ role: "user", content: userMessage });
@@ -2554,7 +3083,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
       const preservedMessages = messages.length >= 3 ? messages.slice(-3) : [...messages];
 
       // Build new message list: compaction + preserved messages
-      const messagesAfterCompaction: Anthropic.Beta.BetaMessageParam[] = [
+      const messagesAfterCompaction: Anthropic.Beta.Messages.BetaMessageParam[] = [
         { role: "assistant", content: [compactionBlock] },
         ...preservedMessages
       ];
@@ -2586,7 +3115,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
   console.log(await chat("Help me build a Python web scraper"));
   console.log(await chat("Add support for JavaScript-rendered pages"));
   console.log(await chat("Now add rate limiting and error handling"));
-  // ... continue as long as needed
+  // Continue calling chat() for as long as the conversation needs
   ```
 
   ```csharp C#
@@ -2624,7 +3153,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
           if (response.StopReason == BetaStopReason.Compaction)
           {
-              if (!response.Content[0].TryPickCompaction(out var cb))
+              if (!response.Content[0].TryPickCompaction(out _))
                   throw new InvalidOperationException("Expected compaction block");
 
               var preserved = messages.Count >= 3
@@ -2636,7 +3165,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
                   new()
                   {
                       Role = Role.Assistant,
-                      Content = new List<BetaContentBlockParam> { new BetaCompactionBlockParam(cb.Content) }
+                      Content = new List<BetaContentBlockParam> { new BetaContentBlockParam(response.Content[0].Json) }
                   }
               };
               messagesAfterCompaction.AddRange(preserved);
@@ -2979,16 +3508,16 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
 ## Next steps
 
-<CardGroup>
-  <Card title="Session memory compaction cookbook" icon="book" href="https://platform.claude.com/cookbook/misc-session-memory-compaction">
-    Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
+<CardGroup cols={3}>
+  <Card title="Context editing" icon="edit" href="/docs/en/build-with-claude/context-editing">
+    Automatically manage conversation context as it grows with context editing.
   </Card>
 
-  <Card title="Context windows" icon="arrows-maximize" href="/docs/en/build-with-claude/context-windows">
+  <Card title="Context windows" icon="arrows-left-right" href="/docs/en/build-with-claude/context-windows">
     Learn about context window sizes and management strategies.
   </Card>
 
-  <Card title="Context editing" icon="pen" href="/docs/en/build-with-claude/context-editing">
-    Explore other strategies for managing conversation context like tool result clearing and thinking block clearing.
+  <Card title="Session memory compaction cookbook" icon="book" href="https://platform.claude.com/cookbook/misc-session-memory-compaction">
+    Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
   </Card>
 </CardGroup>
