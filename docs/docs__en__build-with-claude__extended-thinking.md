@@ -1362,7 +1362,7 @@ By completing the assistant turn before toggling thinking, you ensure that think
       )
 
       TOOL_USE_ID=$(printf '%s' "$ASSISTANT_CONTENT" \
-        | grep -o 'toolu_[A-Za-z0-9]*')
+        | jq -r '.[] | select(.type == "tool_use") | .id')
 
       # Second turn: pass the captured blocks back as the assistant message.
       # The thinking block MUST accompany the tool_use block.

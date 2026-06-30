@@ -258,7 +258,7 @@ A maximum of **1,000 scheduled deployments** is supported per organization. Cont
 
 Deployments can fail to trigger for a variety of reasons: for example, if the `environment` resource has been archived, or if session creation is rate-limited. Each attempt at executing a deployment generates a **deployment run** record, allowing you to track successes and failures independent of the session lifecycle.
 
-Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id`. To follow a session's lifecycle, track the session events through the [event stream](/docs/en/managed-agents/events-and-streaming) or [webhooks](/docs/en/managed-agents/webhooks).
+Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id`. To follow a session's lifecycle, track the session events through the [event stream](/docs/en/managed-agents/events-and-streaming) or [webhooks](/docs/en/managed-agents/webhooks). Deployment lifecycle changes and the outcome of each scheduled run are also delivered as webhook events, listed in the Deployment events and Deployment run events tabs of [Supported event types](/docs/en/managed-agents/webhooks#supported-event-types).
 
 List all deployment runs for a deployment as follows:
 
@@ -453,7 +453,11 @@ A failed run includes an `error` with a `type` describing why session creation w
 }
 ```
 
+To retrieve a single run by ID, call `GET /v1/deployment_runs/{deployment_run_id}`. A [`deployment_run` webhook event](/docs/en/managed-agents/webhooks#supported-event-types) carries the run ID as its `data.id`.
+
 ## Managing deployment lifecycle
+
+Each lifecycle change emits a [webhook event](/docs/en/managed-agents/webhooks#supported-event-types), so you can react to a paused, unpaused, or archived deployment without polling; see the Deployment events tab.
 
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
@@ -594,7 +598,7 @@ A failed run includes an `error` with a `type` describing why session creation w
 
 Session creation rate-limit responses are recorded immediately as a `session_rate_limited_error` run without retry; the schedule attempts again at the next scheduled occurrence. Rate limits on underlying API calls within a session are handled by the session itself.
 
-If a deployment's agent has been archived or deleted, the deployment is automatically archived in the same operation; no deployment run is recorded. If a subagent referenced by the agent has been archived, the next trigger records a failed run with `error.type: "agent_archived_error"` and the deployment is automatically paused so you can update the agent and resume.
+If a deployment's agent has been archived or deleted, the deployment is automatically archived in the same operation; no deployment run is recorded. If a subagent referenced by the agent has been archived, the next trigger records a failed run with `error.type: "agent_archived_error"` and the deployment is automatically paused so you can update the agent and resume. Other unrecoverable session-creation errors, such as an archived environment or vault, behave the same way: the trigger records a failed run and the deployment is automatically paused. The deployment's `paused_reason.error.type` mirrors the failed run's `error.type`.
 
 ## Trigger a manual run
 

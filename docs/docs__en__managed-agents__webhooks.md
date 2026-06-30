@@ -12,30 +12,60 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
 <Tabs>
   <Tab title="Session events">
-    | Event                              | Trigger                                                                                                                                         |
-    | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                      |
-    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                             |
-    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                           |
-    | `session.status_terminated`        | The session hit a terminal error.                                                                                                               |
-    | `session.thread_created`           | New [multiagent thread](/docs/en/managed-agents/multi-agent) opened, meaning an additional agent called by the coordinator is kicking off work. |
-    | `session.thread_idled`             | An agent in a [multiagent interaction](/docs/en/managed-agents/multi-agent) is waiting for input.                                               |
-    | `session.thread_terminated`        | A [multiagent thread](/docs/en/managed-agents/multi-agent) was archived.                                                                        |
-    | `session.outcome_evaluation_ended` | [Outcome evaluation](/docs/en/managed-agents/define-outcomes) for a single iteration completed.                                                 |
-    | `session.updated`                  | Session properties changed, for example its name or configuration was updated.                                                                  |
-    | `session.deleted`                  | Session permanently deleted. Unlike other events, there is no object left to fetch. Treat the event itself as final.                            |
+    | Event                              | Trigger                                                                                                                                          |
+    | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                       |
+    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                              |
+    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                            |
+    | `session.status_terminated`        | The session hit a terminal error.                                                                                                                |
+    | `session.thread_created`           | New [multi-agent thread](/docs/en/managed-agents/multi-agent) opened, meaning an additional agent called by the coordinator is kicking off work. |
+    | `session.thread_idled`             | An agent in a [multi-agent interaction](/docs/en/managed-agents/multi-agent) is waiting for input.                                               |
+    | `session.thread_terminated`        | A [multi-agent thread](/docs/en/managed-agents/multi-agent) was archived.                                                                        |
+    | `session.outcome_evaluation_ended` | [Outcome evaluation](/docs/en/managed-agents/define-outcomes) for a single iteration completed.                                                  |
+    | `session.updated`                  | Session properties changed (for example, its name or configuration was updated).                                                                 |
+    | `session.deleted`                  | Session permanently deleted. There is no object left to fetch, so treat the event itself as final.                                               |
   </Tab>
 
   <Tab title="Vault events">
-    | Event                             | Trigger                                                                                                             |
-    | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-    | `vault.created`                   | Vault successfully created.                                                                                         |
-    | `vault.archived`                  | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential.                 |
-    | `vault.deleted`                   | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential.                   |
-    | `vault_credential.created`        | Credential successfully created.                                                                                    |
-    | `vault_credential.archived`       | Credential archived, either directly or as a result of vault archival.                                              |
-    | `vault_credential.deleted`        | Credential deleted, either directly or as a result of vault deletion.                                               |
-    | `vault_credential.refresh_failed` | A `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+    | Event                             | Trigger                                                                                                              |
+    | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+    | `vault.created`                   | Vault created.                                                                                                       |
+    | `vault.archived`                  | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential.                  |
+    | `vault.deleted`                   | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential.                    |
+    | `vault_credential.created`        | Credential created.                                                                                                  |
+    | `vault_credential.archived`       | Credential archived, either directly or as a result of vault archival.                                               |
+    | `vault_credential.deleted`        | Credential deleted, either directly or as a result of vault deletion.                                                |
+    | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+  </Tab>
+
+  <Tab title="Agent events">
+    These events track the lifecycle of the agent resources in your workspace, and are distinct from the agent events delivered on a session's event stream.
+
+    | Event            | Trigger                                                                                                                                                              |
+    | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `agent.created`  | Agent created.                                                                                                                                                       |
+    | `agent.updated`  | A [new version of the agent](/docs/en/managed-agents/agent-setup#update-an-agent) was published. Updates that do not create a new version do not trigger this event. |
+    | `agent.archived` | Agent archived.                                                                                                                                                      |
+    | `agent.deleted`  | Agent permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                                     |
+  </Tab>
+
+  <Tab title="Deployment events">
+    | Event                 | Trigger                                                                                                                                                                                                                                                                                                                                 |
+    | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `deployment.created`  | [Scheduled deployment](/docs/en/managed-agents/scheduled-deployments) created.                                                                                                                                                                                                                                                          |
+    | `deployment.updated`  | Deployment properties changed (for example, its schedule was updated).                                                                                                                                                                                                                                                                  |
+    | `deployment.paused`   | Deployment paused, either by request or automatically when a scheduled run fails with an unrecoverable error, such as an archived subagent or an archived environment. Recoverable failures, including rate limits, don't pause the deployment. See [Failure behavior](/docs/en/managed-agents/scheduled-deployments#failure-behavior). |
+    | `deployment.unpaused` | Deployment unpaused, resuming its schedule.                                                                                                                                                                                                                                                                                             |
+    | `deployment.archived` | Deployment archived, either directly or as a result of agent archival or deletion.                                                                                                                                                                                                                                                      |
+    | `deployment.deleted`  | Deployment permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                                                                                                                                                                                                   |
+  </Tab>
+
+  <Tab title="Deployment run events">
+    | Event                      | Trigger                                                                                                                                                                                                                                                                                                                                        |
+    | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `deployment_run.started`   | A scheduled run started. Only scheduled runs emit `deployment_run` events; [manual runs](/docs/en/managed-agents/scheduled-deployments#trigger-a-manual-run) do not.                                                                                                                                                                           |
+    | `deployment_run.succeeded` | A scheduled run created its session. The event carries the same `data.id` (the run ID) as the run's `deployment_run.started` event. To follow the session's work, subscribe to its session events (the Session events tab), or fetch the [deployment run](/docs/en/managed-agents/scheduled-deployments#deployment-runs) for its `session_id`. |
+    | `deployment_run.failed`    | A scheduled run did not create a session. The event carries the same `data.id` as the run's `deployment_run.started` event. Fetch the [deployment run](/docs/en/managed-agents/scheduled-deployments#deployment-runs) for the error details.                                                                                                   |
   </Tab>
 </Tabs>
 

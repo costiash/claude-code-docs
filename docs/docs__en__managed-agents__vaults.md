@@ -484,7 +484,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
   </Tab>
 
   <Tab title="Environment variable">
-    Use `environment_variable` to authenticate to external services through an environment variable, such as CLIs, SDKs, or direct API calls.
+    Use `environment_variable` to authenticate to external services through an environment variable, such as CLIs, SDKs, or direct API calls. Environment variable credentials work for clients that send the secret value verbatim in an outbound request, so check the client eligibility criteria in this tab before configuring one.
 
     The `networking.allowed_hosts` array controls which outbound hosts the secret can be substituted for. Use `"type": "limited"` with a specific list, or `"type": "unrestricted"` if the caller reaches domains you can't enumerate in advance.
 
@@ -494,6 +494,8 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       `networking.allowed_hosts` on a vault credential controls which requests use the secret, not which requests are allowed. For the agent to actually reach a domain, it must also be allowed at the [environment level](/docs/en/managed-agents/environments). Both levels must include the domain (either through `unrestricted` networking or by explicitly listing the domain in `allowed_hosts`) for a secret-substituted request to succeed.
     </Note>
 
+    The optional `injection_location` field scopes where the secret is substituted; the full semantics follow the example.
+
     <CodeGroup defaultLanguage="CLI">
       ```bash curl
       curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
@@ -501,16 +503,17 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
         -H "anthropic-version: 2023-06-01" \
         -H "anthropic-beta: managed-agents-2026-04-01" \
         -H "content-type: application/json" \
-        --data @- <<'EOF'
+        --data @- <<'EOF' | jq '.auth.injection_location'
       {
         "auth": {
           "type": "environment_variable",
           "secret_name": "NOTION_API_KEY",
-          "secret_value": "sk-your-secret-here",
+          "secret_value": "ntn_your-secret-here",
           "networking": {
             "type": "limited",
             "allowed_hosts": ["api.notion.com"]
-          }
+          },
+          "injection_location": {"header": true}
         },
         "display_name": "Notion API key for sandbox"
       }
@@ -518,12 +521,16 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       ```
 
       ```bash CLI
-      ant beta:vaults:credentials create --vault-id "$VAULT_ID" <<'YAML'
+      ant beta:vaults:credentials create \
+        --vault-id "$VAULT_ID" \
+        --transform 'auth.injection_location' --format json <<'YAML'
       display_name: Notion API key for sandbox
       auth:
         type: environment_variable
         secret_name: NOTION_API_KEY
-        secret_value: sk-your-secret-here
+        secret_value: ntn_your-secret-here
+        injection_location:
+          header: true
         networking:
           type: limited
           allowed_hosts: [api.notion.com]
@@ -533,32 +540,40 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       ```python Python
       env_credential = client.beta.vaults.credentials.create(
           vault_id=vault.id,
+          display_name="Notion API key for sandbox",
           auth={
               "type": "environment_variable",
               "secret_name": "NOTION_API_KEY",
-              "secret_value": "sk-your-secret-here",
+              "secret_value": "ntn_your-secret-here",
               "networking": {
                   "type": "limited",
                   "allowed_hosts": ["api.notion.com"],
               },
+              "injection_location": {"header": True},
           },
-          display_name="Notion API key for sandbox",
       )
+      if env_credential.auth.type == "environment_variable":
+          location = env_credential.auth.injection_location
+          print(f"header: {location.header}, body: {location.body}")  # header: True, body: False
       ```
 
       ```typescript TypeScript
       const envVarCredential = await client.beta.vaults.credentials.create(vault.id, {
+        display_name: "Notion API key for sandbox",
         auth: {
           type: "environment_variable",
           secret_name: "NOTION_API_KEY",
-          secret_value: "sk-your-secret-here",
+          secret_value: "ntn_your-secret-here",
           networking: {
             type: "limited",
             allowed_hosts: ["api.notion.com"],
           },
+          injection_location: { header: true },
         },
-        display_name: "Notion API key for sandbox",
       });
+      if (envVarCredential.auth.type === "environment_variable") {
+        console.log(envVarCredential.auth.injection_location); // { header: true, body: false }
+      }
       ```
 
       ```csharp C#
@@ -569,14 +584,20 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
           {
               Type = BetaManagedAgentsEnvironmentVariableCreateParamsType.EnvironmentVariable,
               SecretName = "NOTION_API_KEY",
-              SecretValue = "sk-your-secret-here",
+              SecretValue = "ntn_your-secret-here",
               Networking = new BetaManagedAgentsLimitedCredentialNetworkingParams
               {
                   Type = BetaManagedAgentsLimitedCredentialNetworkingParamsType.Limited,
                   AllowedHosts = ["api.notion.com"],
               },
+              InjectionLocation = new() { Header = true },
           },
       });
+      if (envVarCredential.Auth.TryPickBetaManagedAgentsEnvironmentVariableAuthResponse(out var envVarAuth))
+      {
+          var injectionLocation = envVarAuth.InjectionLocation;
+          Console.WriteLine($"Header: {injectionLocation.Header}, Body: {injectionLocation.Body}"); // "Header: True, Body: False"
+      }
       ```
 
       ```go Go
@@ -586,12 +607,15 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       		OfEnvironmentVariable: &anthropic.BetaManagedAgentsEnvironmentVariableCreateParams{
       			Type:        anthropic.BetaManagedAgentsEnvironmentVariableCreateParamsTypeEnvironmentVariable,
       			SecretName:  "NOTION_API_KEY",
-      			SecretValue: "sk-your-secret-here",
+      			SecretValue: "ntn_your-secret-here",
       			Networking: anthropic.BetaManagedAgentsCredentialNetworkingParamsUnion{
       				OfLimited: &anthropic.BetaManagedAgentsLimitedCredentialNetworkingParams{
       					Type:         anthropic.BetaManagedAgentsLimitedCredentialNetworkingParamsTypeLimited,
       					AllowedHosts: []string{"api.notion.com"},
       				},
+      			},
+      			InjectionLocation: anthropic.BetaManagedAgentsInjectionLocationParams{
+      				Header: anthropic.Bool(true),
       			},
       		},
       	},
@@ -599,7 +623,10 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       if err != nil {
       	panic(err)
       }
-      _ = envVarCredential
+      if envVarAuth, ok := envVarCredential.Auth.AsAny().(anthropic.BetaManagedAgentsEnvironmentVariableAuthResponse); ok {
+      	injectionLocation := envVarAuth.InjectionLocation
+      	fmt.Printf("Header:%t Body:%t\n", injectionLocation.Header, injectionLocation.Body) // "Header:true Body:false"
+      }
       ```
 
       ```java Java
@@ -609,10 +636,17 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
               .auth(BetaManagedAgentsEnvironmentVariableCreateParams.builder()
                   .type(BetaManagedAgentsEnvironmentVariableCreateParams.Type.ENVIRONMENT_VARIABLE)
                   .secretName("NOTION_API_KEY")
-                  .secretValue("sk-your-secret-here")
+                  .secretValue("ntn_your-secret-here")
                   .limitedNetworking(List.of("api.notion.com"))
+                  .injectionLocation(BetaManagedAgentsInjectionLocationParams.builder()
+                      .header(true)
+                      .build())
                   .build())
               .build());
+      envVarCredential.auth().environmentVariable().ifPresent(envVarAuth -> {
+          var injectionLocation = envVarAuth.injectionLocation();
+          IO.println("header=" + injectionLocation.header() + " body=" + injectionLocation.body()); // header=true body=false
+      });
       ```
 
       ```php PHP
@@ -620,15 +654,21 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
           vaultID: $vault->id,
           displayName: 'Notion API key for sandbox',
           auth: ManagedAgentsEnvironmentVariableCreateParams::with(
-              type: 'environment_variable',
+              type: ManagedAgentsEnvironmentVariableCreateParams\Type::ENVIRONMENT_VARIABLE,
               secretName: 'NOTION_API_KEY',
-              secretValue: 'sk-your-secret-here',
+              secretValue: 'ntn_your-secret-here',
               networking: ManagedAgentsLimitedCredentialNetworkingParams::with(
-                  type: 'limited',
+                  type: ManagedAgentsLimitedCredentialNetworkingParams\Type::LIMITED,
                   allowedHosts: ['api.notion.com'],
               ),
+              injectionLocation: ManagedAgentsInjectionLocationParams::with(header: true),
           ),
       );
+      if ($envVarCredential->auth instanceof ManagedAgentsEnvironmentVariableAuthResponse) {
+          $injectionLocation = $envVarCredential->auth->injectionLocation;
+          echo 'header: ' . json_encode($injectionLocation->header) . "\n"; // header: true
+          echo 'body: ' . json_encode($injectionLocation->body) . "\n"; // body: false
+      }
       ```
 
       ```ruby Ruby
@@ -638,17 +678,37 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
         auth: {
           type: "environment_variable",
           secret_name: "NOTION_API_KEY",
-          secret_value: "sk-your-secret-here",
+          secret_value: "ntn_your-secret-here",
           networking: {
             type: "limited",
             allowed_hosts: ["api.notion.com"]
-          }
+          },
+          injection_location: {header: true}
         }
       )
+      if env_credential.auth.type == :environment_variable
+        env_credential.auth.injection_location => {header:, body:}
+        puts "header: #{header}, body: #{body}" # header: true, body: false
+      end
       ```
     </CodeGroup>
 
-    The substitution happens at egress, not inside the sandbox. Anything that processes the credential locally sees the opaque placeholder, not the real value: clients that validate the credential format at startup may reject it, and clients that compute a request signature from the secret (for example, AWS SigV4) produce an invalid signature. Environment variable credentials work for clients that send the secret value verbatim in an outbound request.
+    Request payloads are often assembled from content the agent is working with, so the request body is the broader exposure surface. Most services read an API key from a request header, so enabling only `header` is the narrower configuration. It scopes substitution to request header values for that credential.
+
+    The credential's `injection_location` controls which parts of an outbound request the secret is substituted into. It is an optional object, a sibling of `networking`, with two Boolean fields: `header` (request headers) and `body` (request body). `injection_location` is independent of `networking.allowed_hosts`: `allowed_hosts` scopes which hosts the secret is substituted for, and `injection_location` scopes which parts of the request it is substituted into.
+
+    `injection_location` behaves differently on create and on update:
+
+    | Operation         | `injection_location` behavior                                                                                                                                                              |
+    | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | Create credential | If you provide the object, any field you omit inside it defaults to `false`: `{"header": true}` creates a header-only credential. Omit the object entirely and both locations are enabled. |
+    | Update credential | Fields merge individually: `{"body": false}` disables body substitution and leaves `header` unchanged.                                                                                     |
+
+    A credential must have at least one location enabled, so a create or update that would disable both locations returns a 400 error. Passing an explicit `null` for the `injection_location` object or for either field also returns a 400 error ("omit the field instead"). The response always returns both fields with their resolved values.
+
+    A placeholder in a disabled location is neither substituted nor stripped. The request is sent to the third party with the literal opaque placeholder string in that location. If a request arrives at the third party containing the literal placeholder string, either that location is disabled for the credential or the destination host is not covered by the credential's `networking.allowed_hosts`.
+
+    The substitution happens at egress, not inside the sandbox. Anything that processes the credential locally sees the opaque placeholder, not the real value: clients that validate the credential format at startup may reject it, and clients that compute a request signature from the secret (for example, AWS SigV4) produce an invalid signature. Environment variable credentials work for clients that send the secret value verbatim in an outbound request, in a location the credential's `injection_location` enables.
 
     Substitution is outbound only. If a client uses the stored secret to fetch a session token (for example, an OAuth client-credentials grant), the returned token arrives in the sandbox unredacted. For exchange-based flows, perform the exchange yourself and store the resulting token in the vault instead.
 
@@ -775,7 +835,7 @@ Runtime behavior:
 
 ## Rotate a credential
 
-Secret values and `display_name` can be updated. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
+Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl

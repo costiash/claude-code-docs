@@ -199,7 +199,10 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
         ```bash
         VERSION=1.12.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-        ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+        case $(uname -m) in
+          x86_64) ARCH=amd64 ;;
+          aarch64) ARCH=arm64 ;;
+        esac
         curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
           | sudo tar -xz -C /usr/local/bin ant
         ```

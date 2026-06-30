@@ -15,11 +15,11 @@ Communication with Claude Managed Agents is event-based. You send user events to
 Events flow in two directions.
 
 * **User events** and **system events** are what you send to the agent: `user.*` events kick off a session and steer it as it progresses; `system.message` updates the agent's system prompt between turns.
-* **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress.
+* **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress. Stream connections that opt in also receive [event deltas](#event-deltas).
 
-Event type strings follow a `{domain}.{action}` naming convention. See [Event types](/docs/en/managed-agents/reference#event-types) in the reference for the full catalog.
+Session, span, agent, user, and system event type strings follow a `{domain}.{action}` naming convention. The stream-only delta preview events (`event_start`, `event_delta`) are the exception. See [Event types](/docs/en/managed-agents/reference#event-types) in the reference for the full catalog.
 
-Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
+Every persisted event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
 
 ## Integrating events
 
@@ -713,6 +713,9 @@ Every event includes a `processed_at` timestamp indicating when the event was re
 
           # Tail live events, skipping anything already seen
           for event in stream:
+              if event.type == "event_start" or event.type == "event_delta":
+                  # Delta previews aren't enabled on this connection.
+                  continue
               if event.id in seen_event_ids:
                   continue
               seen_event_ids.add(event.id)
@@ -736,6 +739,8 @@ Every event includes a `processed_at` timestamp indicating when the event was re
 
       // Tail live events, skipping anything already seen
       for await (const event of stream) {
+        // Preview events (event_start/event_delta) carry no top-level id
+        if (event.type === "event_start" || event.type === "event_delta") continue;
         if (seenEventIds.has(event.id)) continue;
         seenEventIds.add(event.id);
         if (event.type === "agent.message") {
@@ -1060,6 +1065,528 @@ Every event includes a `processed_at` timestamp indicating when the event was re
   </Tab>
 </Tabs>
 
+## Event deltas
+
+By default, the agent's response text reaches the stream as buffered `agent.message` events, each emitted only after the model request that produced it finishes. Event deltas let you render that text incrementally, as a live preview, while the model is still generating it. A preview is not the response: previews are a best-effort display aid, and the buffered `agent.message` is always the authoritative record. A client that ignores previews still receives a complete, correct stream.
+
+### Opt in to previews
+
+Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to `GET /v1/sessions/{session_id}/events/stream`, repeating it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error. Only the session-level event stream supports the parameter. [Session thread](/docs/en/managed-agents/multi-agent) event streams reject it.
+
+When a previewed event begins, the stream emits an `event_start` carrying the upcoming event's type and `id`:
+
+```json
+{
+  "type": "event_start",
+  "event": {
+    "type": "agent.message",
+    "id": "sevt_01abc..."
+  }
+}
+```
+
+For `agent.message`, the start is followed by `event_delta` events carrying incremental text. Each delta names the event it extends in `event_id` and the content block it extends in `delta.index`:
+
+```json
+{
+  "type": "event_delta",
+  "event_id": "sevt_01abc...",
+  "delta": {
+    "type": "content_delta",
+    "index": 0,
+    "content": {
+      "type": "text",
+      "text": "Here is the summary"
+    }
+  }
+}
+```
+
+When an `agent.thinking` event is previewed, only the `event_start` is emitted. No `event_delta` events follow, and the content arrives in the buffered `agent.thinking` event as usual.
+
+Unlike persisted events, `event_start` and `event_delta` have no `id` or `processed_at` of their own. The only identifier they carry is the `id` of the event they preview.
+
+<Note>
+  Event deltas use a different wire format from [Streaming messages](/docs/en/build-with-claude/streaming), and the difference is intentional. A previewed `agent.message` gets a single `event_start` followed only by `event_delta` events. There are no per-content-block start or stop events and no stop event for the previewed event itself. The delta type is `content_delta`, not `content_block_delta`. Accumulator code written for the Messages API does not carry over unchanged.
+</Note>
+
+### Accumulate and reconcile
+
+The Python, TypeScript, and Go SDKs include an accumulator helper that keys the preview by the event's `id` and handles the `index` bookkeeping for you. The manual pattern works in every language: in the other SDKs, apply it to the generated event types.
+
+In the manual pattern, treat the preview as a scratch buffer and the buffered event as the record. Key the buffer by `(event_id, index)`. Reconcile per model request: a turn opens with a single `session.status_running` event, then on a turn that completes normally each model request produces, in order, `span.model_request_start`, `event_start`, the `event_delta` events, the buffered `agent.message`, and finally [`span.model_request_end`](/docs/en/managed-agents/reference#event-types) (in the Span events tab). Process each event as it arrives:
+
+1. On `event_start`, note the announced `id`. The identifiers always line up: `event_start.event.id`, every `event_delta.event_id`, and the buffered `agent.message`'s `id` are the same value.
+2. On each `event_delta`, append `delta.content.text` to the entry at `(event_id, delta.index)` and render the running text. The first delta for an `index` creates that entry.
+3. When the buffered `agent.message` arrives, match it by `id`, discard the accumulated preview, and render the message's content instead.
+4. On `span.model_request_end`, close any preview that has not been reconciled by its buffered event. No more deltas are coming for it. If the turn errors or is interrupted, the buffered event may never arrive; `span.model_request_end` still does.
+
+<CodeGroup>
+  ```bash curl
+  # Opt in to agent.message previews via event_deltas, then accumulate manually.
+  exec {stream}< <(
+    curl --fail-with-body -sS -N \
+      "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true&event_deltas%5B%5D=agent.message" \
+      -H "x-api-key: $ANTHROPIC_API_KEY" \
+      -H "anthropic-version: 2023-06-01" \
+      -H "anthropic-beta: managed-agents-2026-04-01" \
+      -H "accept: text/event-stream"
+  )
+
+  curl --fail-with-body -sS \
+    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- >/dev/null <<'EOF'
+  {
+    "events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "In one short sentence, describe what an event delta is."}]
+      }
+    ]
+  }
+  EOF
+
+  # Accumulate deltas keyed by (message id, content index); the final
+  # agent.message carries the full text, so it replaces every preview for that id.
+  declare -A preview
+  while IFS= read -r -u "$stream" event_line; do
+    [[ $event_line == data:* ]] || continue
+    event_json=${event_line#data: }
+    case $(jq -r '.type' <<<"$event_json") in
+      event_start)
+        preview_id=$(jq -r '.event.id' <<<"$event_json")
+        printf '[event_start id=%s]\n' "$preview_id"
+        ;;
+      event_delta)
+        preview_key=$(jq -r '.event_id + ":" + (.delta.index | tostring)' <<<"$event_json")
+        preview[$preview_key]+=$(jq -r '.delta.content.text' <<<"$event_json")
+        printf '[event_delta] %s\n' "${preview[$preview_key]}"
+        ;;
+      agent.message)
+        msg_id=$(jq -r '.id' <<<"$event_json")
+        for preview_key in "${!preview[@]}"; do
+          [[ $preview_key == "$msg_id":* ]] && unset "preview[$preview_key]"
+        done
+        printf '[agent.message id=%s] ' "$msg_id"
+        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
+        printf '\n'
+        ;;
+      span.model_request_end)
+        for preview_key in "${!preview[@]}"; do
+          printf '[closing unreconciled preview for %s]\n' "${preview_key%%:*}"
+        done
+        preview=()
+        ;;
+      session.status_idle)
+        break
+        ;;
+    esac
+  done
+  exec {stream}<&-
+  ```
+
+  ```bash CLI
+  # This workflow does not translate well to a one-off shell command.
+  # Use one of the SDK examples in this code group instead.
+  ```
+
+  ```python Python
+  # Preview snapshots, keyed by event id. accumulate_managed_agents_event folds each
+  # event_start / event_delta into an agent.message snapshot; the buffered
+  # agent.message replaces it.
+  previews: dict[str, BetaManagedAgentsAgentMessageEvent] = {}
+
+  # Opt in to agent.message previews on this connection
+  with client.beta.sessions.events.stream(
+      session.id, event_deltas=["agent.message"]
+  ) as stream:
+      client.beta.sessions.events.send(
+          session.id,
+          events=[
+              {
+                  "type": "user.message",
+                  "content": [{"type": "text", "text": "Describe the repo in one sentence."}],
+              },
+          ],
+      )
+
+      for event in stream:
+          match event.type:
+              case "event_start":
+                  snapshot = accumulate_managed_agents_event(None, event)
+                  if snapshot is not None:
+                      previews[event.event.id] = snapshot
+                  print(f"event_start             {event.event.type} {event.event.id}")
+              case "event_delta":
+                  preview = accumulate_managed_agents_event(previews.get(event.event_id), event)
+                  if preview is not None:
+                      previews[event.event_id] = preview
+                      text = "".join(block.text for block in preview.content)
+                      print(f"event_delta             preview: {text!r}")
+              case "agent.message":
+                  # The buffered event is the record: it replaces and closes the preview
+                  preview = accumulate_managed_agents_event(previews.pop(event.id, None), event)
+                  text = "".join(block.text for block in preview.content)
+                  print(f"agent.message           {event.id} {text!r}")
+              case "span.model_request_end":
+                  # No more deltas are coming. Close any preview whose
+                  # buffered event never arrived.
+                  for event_id in previews:
+                      print(f"span.model_request_end  closing preview for {event_id}")
+                  previews.clear()
+              case "session.status_idle":
+                  break
+  ```
+
+  ```typescript TypeScript
+  // Preview snapshots, keyed by event id. `accumulateManagedAgentsEvent`
+  // folds event_start / event_delta previews into an agent.message snapshot.
+  const previews = new Map<string, BetaManagedAgentsAgentMessageEvent>();
+
+  // Opt in to agent.message previews for this connection only
+  const stream = await client.beta.sessions.events.stream(session.id, {
+    event_deltas: ["agent.message"],
+  });
+  await client.beta.sessions.events.send(session.id, {
+    events: [
+      {
+        type: "user.message",
+        content: [{ type: "text", text: "Summarize the repo README" }]
+      }
+    ]
+  });
+
+  for await (const event of stream) {
+    if (event.type === "event_start") {
+      // 1. Note the announced id and open the snapshot. Deltas and the
+      //    buffered event carry the same id.
+      const preview = accumulateManagedAgentsEvent(undefined, event);
+      if (preview) previews.set(event.event.id, preview);
+      console.log(`event_start             ${event.event.type} ${event.event.id}`);
+    } else if (event.type === "event_delta") {
+      // 2. Fold the fragment into the snapshot and render it
+      const preview = accumulateManagedAgentsEvent(previews.get(event.event_id), event);
+      if (preview) {
+        previews.set(event.event_id, preview);
+        const text = preview.content.map((block) => block.text).join("");
+        console.log(`event_delta             preview: ${JSON.stringify(text)}`);
+      }
+    } else if (event.type === "agent.message") {
+      // 3. The buffered event is the record: it replaces and closes the preview
+      const message = accumulateManagedAgentsEvent(previews.get(event.id), event);
+      previews.delete(event.id);
+      const text = message.content.map((block) => block.text).join("");
+      console.log(`agent.message           ${event.id} ${JSON.stringify(text)}`);
+    } else if (event.type === "span.model_request_end") {
+      // 4. No more deltas are coming. Close any preview that was never reconciled.
+      for (const eventId of previews.keys()) {
+        console.log(`span.model_request_end  closing preview for ${eventId}`);
+      }
+      previews.clear();
+    } else if (event.type === "session.status_idle") {
+      break;
+    }
+  }
+  stream.controller.abort();
+  ```
+
+  ```csharp C#
+  // Opt in to event deltas: agent.message events are previewed as they are produced.
+  using var stream = await client.Beta.Sessions.Events.WithRawResponse.StreamStreaming(
+      session.ID,
+      new() { EventDeltas = [BetaManagedAgentsDeltaType.AgentMessage] }
+  );
+  await client.Beta.Sessions.Events.Send(session.ID, new()
+  {
+      Events =
+      [
+          new BetaManagedAgentsUserMessageEventParams
+          {
+              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
+              Content =
+              [
+                  new BetaManagedAgentsTextBlock
+                  {
+                      Type = BetaManagedAgentsTextBlockType.Text,
+                      Text = "Write a haiku about event streams.",
+                  },
+              ],
+          },
+      ],
+  });
+
+  // Accumulate preview fragments per (event id, content index). The buffered
+  // agent.message that follows carries the complete content, so it replaces the
+  // accumulated preview rather than appending to it.
+  Dictionary<string, SortedDictionary<long, string>> previews = [];
+
+  await foreach (var streamEvent in stream.Enumerate())
+  {
+      if (streamEvent.TryPickStartEvent(out var start))
+      {
+          // A preview opened for the event with this id
+          Console.WriteLine($"event_start             {start.Event.Type} {start.Event.ID}");
+      }
+      else if (streamEvent.TryPickDeltaEvent(out var delta))
+      {
+          // Insert at a new index, append at an existing one
+          if (!previews.TryGetValue(delta.EventID, out var fragments))
+          {
+              previews[delta.EventID] = fragments = [];
+          }
+          var index = delta.Delta.Index ?? 0;
+          fragments[index] = fragments.GetValueOrDefault(index, "") + delta.Delta.Content.Text;
+          Console.WriteLine($"event_delta             preview: {fragments[index]}");
+      }
+      else if (streamEvent.TryPickAgentMessageEvent(out var message))
+      {
+          // Deltas are best-effort: discard the preview and use the buffered event
+          previews.Remove(message.ID);
+          Console.WriteLine($"agent.message           {message.ID} {string.Concat(message.Content.Select(block => block.Text))}");
+      }
+      else if (streamEvent.TryPickSpanModelRequestEndEvent(out _))
+      {
+          // No more deltas are coming; close any preview that was never reconciled.
+          foreach (var eventId in previews.Keys)
+          {
+              Console.WriteLine($"span.model_request_end  closing preview for {eventId}");
+          }
+          previews.Clear();
+      }
+      else if (streamEvent.TryPickSessionStatusIdleEvent(out _))
+      {
+          break;
+      }
+  }
+  ```
+
+  ```go Go
+  	// Opt in to incremental previews of agent.message events
+  	stream := client.Beta.Sessions.Events.StreamEvents(ctx, session.ID, anthropic.BetaSessionEventStreamParams{
+  		EventDeltas: []anthropic.BetaManagedAgentsDeltaType{
+  			anthropic.BetaManagedAgentsDeltaTypeAgentMessage,
+  		},
+  	})
+
+  	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
+  		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
+  			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
+  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
+  				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
+  					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+  						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+  						Text: "Write a haiku about the ocean.",
+  					},
+  				}},
+  			},
+  		}},
+  	}); err != nil {
+  		panic(err)
+  	}
+
+  	// The accumulator folds event_start / event_delta fragments into
+  	// per-event-id agent.message snapshots. The zero value is ready to use.
+  	var previews anthropic.BetaManagedAgentsEventAccumulator
+
+  deltas:
+  	for stream.Next() {
+  		event := stream.Current()
+  		previews.Accumulate(event)
+
+  		switch event := event.AsAny().(type) {
+  		case anthropic.BetaManagedAgentsStartEvent:
+  			fmt.Printf("event_start             %s %s\n", event.Event.Type, event.Event.ID)
+  		case anthropic.BetaManagedAgentsDeltaEvent:
+  			fmt.Printf("event_delta             preview: %q\n", previews.AgentMessageText(event.EventID))
+  		case anthropic.BetaManagedAgentsAgentMessageEvent:
+  			// The buffered event carries the complete content: the accumulator
+  			// replaces the preview with it
+  			fmt.Printf("agent.message           %s %q\n", event.ID, previews.AgentMessageText(event.ID))
+  		case anthropic.BetaManagedAgentsSpanModelRequestEndEvent:
+  			// No more deltas are coming for this request. The accumulator
+  			// drops its snapshots here, closing any preview that was never
+  			// reconciled by a buffered agent.message.
+  			fmt.Println("span.model_request_end  no more deltas for this request")
+  		case anthropic.BetaManagedAgentsSessionStatusIdleEvent:
+  			break deltas
+  		}
+  	}
+  	if err := stream.Err(); err != nil {
+  		panic(err)
+  	}
+  	stream.Close()
+  ```
+
+  ```java Java
+  // Preview text, keyed by event ID then content index. The buffered agent.message replaces it.
+  Map<String, Map<Long, StringBuilder>> previews = new HashMap<>();
+
+  // Opt in to agent.message previews on this connection
+  try (var stream = client.beta().sessions().events().streamStreaming(
+          session.id(),
+          EventStreamParams.builder()
+              .addEventDelta(BetaManagedAgentsDeltaType.AGENT_MESSAGE)
+              .build()
+  )) {
+      client.beta().sessions().events().send(
+          session.id(),
+          EventSendParams.builder()
+              .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
+                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
+                  .addTextContent("Describe the repo in one sentence.")
+                  .build())
+              .build()
+      );
+
+      Iterable<BetaManagedAgentsStreamSessionEvents> events = stream.stream()::iterator;
+      for (var event : events) {
+          if (event.isEventStart() && event.asEventStart().event().isAgentMessage()) {
+              var preview = event.asEventStart().event().asAgentMessage();
+              IO.println("event_start             " + preview.type().asString() + " " + preview.id());
+          } else if (event.isEventDelta()) {
+              var eventDelta = event.asEventDelta();
+              var fragment = eventDelta.delta();
+              var buffer = previews
+                  .computeIfAbsent(eventDelta.eventId(), _ -> new HashMap<>())
+                  .computeIfAbsent(fragment.index().orElse(0L), _ -> new StringBuilder());
+              buffer.append(fragment.content().text());
+              IO.println("event_delta             preview: " + buffer);
+          } else if (event.isAgentMessage()) {
+              // The buffered event is the record: drop its preview, render its content
+              var message = event.asAgentMessage();
+              previews.remove(message.id());
+              var text = message.content().stream()
+                  .map(block -> block.text())
+                  .collect(Collectors.joining());
+              IO.println("agent.message           " + message.id() + " " + text);
+          } else if (event.isSpanModelRequestEnd()) {
+              // No more deltas are coming. Close any preview whose buffered event never arrived.
+              previews.keySet().forEach(eventId ->
+                  IO.println("span.model_request_end  closing preview for " + eventId));
+              previews.clear();
+          } else if (event.isSessionStatusIdle()) {
+              break;
+          }
+      }
+  }
+  ```
+
+  ```php PHP
+  // Opt in to event deltas: agent.message previews stream as incremental fragments.
+  $stream = $client->beta->sessions->events->streamStream(
+      $session->id,
+      eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  );
+
+  $client->beta->sessions->events->send(
+      $session->id,
+      events: [
+          [
+              'type' => 'user.message',
+              'content' => [['type' => 'text', 'text' => 'Give a one-sentence project tagline.']],
+          ],
+      ],
+  );
+
+  // Accumulate preview fragments by (event id, index). The buffered agent.message
+  // with the same id is authoritative and replaces whatever the deltas built up.
+  $buffers = [];
+
+  foreach ($stream as $event) {
+      if ($event->type === 'event_start') {
+          printf("event_start             %s %s\n", $event->event->type, $event->event->id);
+      } elseif ($event->type === 'event_delta') {
+          // index is optional on the wire; a single-element preview omits it.
+          $index = $event->delta->index ?? 0;
+          $fragment = $event->delta->content->text;
+          $buffers[$event->eventID][$index] ??= '';
+          $buffers[$event->eventID][$index] .= $fragment;
+          printf("event_delta             preview: %s\n", json_encode($buffers[$event->eventID][$index]));
+      } elseif ($event->type === 'agent.message') {
+          // Replace: drop the accumulated preview and render the complete event.
+          unset($buffers[$event->id]);
+          $text = '';
+          foreach ($event->content as $block) {
+              if ($block->type === 'text') {
+                  $text .= $block->text;
+              }
+          }
+          printf("agent.message           %s %s\n", $event->id, json_encode($text));
+      } elseif ($event->type === 'span.model_request_end') {
+          // No more deltas are coming. Close any preview that was never reconciled.
+          foreach (array_keys($buffers) as $eventID) {
+              printf("span.model_request_end  closing preview for %s\n", $eventID);
+          }
+          $buffers = [];
+      } elseif ($event->type === 'session.status_idle') {
+          break;
+      }
+  }
+  $stream->close();
+  ```
+
+  ```ruby Ruby
+  # Opt in to event deltas: agent.message previews stream as incremental fragments.
+  stream = client.beta.sessions.events.stream_events(
+    session.id,
+    event_deltas: [Anthropic::Beta::BetaManagedAgentsDeltaType::AGENT_MESSAGE]
+  )
+
+  client.beta.sessions.events.send_(
+    session.id,
+    events: [{
+      type: "user.message",
+      content: [{type: "text", text: "Give a one-sentence project tagline."}]
+    }]
+  )
+
+  # Accumulate preview fragments by (event_id, index) into explicitly mutable
+  # (`+""`) buffers so `<<` can append in place. The buffered agent.message with
+  # the same id is authoritative and replaces whatever the deltas built up.
+  buffers = Hash.new do |by_event, event_id|
+    by_event[event_id] = Hash.new { |fragments, index| fragments[index] = +"" }
+  end
+
+  stream.each do |event|
+    case event.type
+    in :event_start
+      puts "event_start             #{event.event.type} #{event.event.id}"
+    in :event_delta
+      delta = event.delta
+      fragment = delta.content.text
+      buffers[event.event_id][delta.index || 0] << fragment
+      puts "event_delta             preview: #{buffers[event.event_id][delta.index || 0].inspect}"
+    in :"agent.message"
+      # Replace: drop the accumulated preview and render the complete event.
+      buffers.delete(event.id)
+      puts "agent.message           #{event.id} #{event.content.map(&:text).join.inspect}"
+    in :"span.model_request_end"
+      # No more deltas are coming. Close any preview that was never reconciled.
+      buffers.each_key { |event_id| puts "span.model_request_end  closing preview for #{event_id}" }
+      buffers.clear
+    in :"session.status_idle"
+      break
+    else
+      # ignore other event types
+    end
+  end
+  ```
+</CodeGroup>
+
+### Limitations
+
+Previews are tuned for responsiveness. Build against these constraints:
+
+* **Best effort:** Under load, the server may shed deltas for an event. When it does, you receive a contiguous prefix of the text and then no further deltas for that event. The buffered `agent.message` still arrives complete. Never treat an accumulated preview as final.
+* **No replay on reconnect:** Deltas are delivered only to the connection that opted in, while it is open. If the stream drops, follow the [reconnect procedure](#integrating-events) in the Streaming events tab: reopen the stream and list the event history. The history includes any buffered events emitted while you were disconnected, including the `agent.message` your preview was waiting for. There is no way to re-request missed deltas.
+* **Primary thread, text only:** Previews cover assistant text on the session's primary thread. Tool use, tool results, MCP results, and activity on other [session threads](/docs/en/managed-agents/multi-agent) are never previewed.
+* **Start-only `agent.thinking`:** An `agent.thinking` preview emits only the `event_start` as a signal that a thinking block has started; no `event_delta` events follow it.
+* **Never persisted:** `event_start` and `event_delta` exist only on the live stream. They do not appear in the session's event history (`GET /v1/sessions/{session_id}/events`).
+
 ## Additional scenarios
 
 ### Handling custom tool calls
@@ -1068,7 +1595,7 @@ When the agent invokes a [custom tool](/docs/en/managed-agents/tools#custom-tool
 
 1. The session emits an `agent.custom_tool_use` event containing the tool name and input.
 2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
-3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` param along with the result content.
+3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` parameter along with the result content.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 <CodeGroup>
@@ -1344,7 +1871,7 @@ When a [permission policy](/docs/en/managed-agents/permission-policies) requires
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
 2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
-3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
+3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` parameter. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 <CodeGroup>

@@ -16,11 +16,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     --model claude-opus-4-8 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello"}' \
-    | while IFS= read -r event; do
-        [[ $event == *'"text_delta"'* ]] || continue
-        text=${event#*'"text":"'}
-        printf '%b' "${text%\"*}"
-      done
+    | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
   ```
 
   ```python Python

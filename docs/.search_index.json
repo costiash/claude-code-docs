@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-30T19:19:11Z",
+  "generated_at": "2026-06-30T22:14:35Z",
   "indexed_files": 1726,
   "index": {
     "/changelog": {
@@ -40,23 +40,23 @@
         "bedrock",
         "code",
         "aws",
-        "credentials",
         "mantle",
+        "credentials",
         "when",
         "account",
         "region",
         "set",
+        "models",
         "profile",
         "settings",
         "version",
         "inference",
-        "models",
         "see",
         "variables",
         "default",
         "file"
       ],
-      "word_count": 3435,
+      "word_count": 3464,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -1008,7 +1008,7 @@
         "user",
         "github"
       ],
-      "word_count": 13503,
+      "word_count": 13525,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -43881,7 +43881,7 @@
         "mythos",
         "adaptive"
       ],
-      "word_count": 14338,
+      "word_count": 14344,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -44245,7 +44245,7 @@
         "see",
         "when"
       ],
-      "word_count": 12101,
+      "word_count": 12042,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -44273,7 +44273,7 @@
         "partial",
         "json"
       ],
-      "word_count": 4733,
+      "word_count": 4722,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -44885,11 +44885,11 @@
         "organizations",
         "parent",
         "step",
-        "read",
         "delete",
+        "read",
         "primary"
       ],
-      "word_count": 1456,
+      "word_count": 1452,
       "file_path": "docs/docs__en__manage-claude__compliance-api-access.md"
     },
     "/docs/en/manage-claude/compliance-api": {
@@ -44953,27 +44953,27 @@
       "content_preview": "# Handle Compliance API errors  Every Compliance API error message with cause and fix, organized by HTTP status code.  ---  <Note>   To enable the Compliance API, see [Get access to the Compliance API...",
       "keywords": [
         "key",
-        "api",
         "compliance",
+        "api",
         "fix",
         "organization",
+        "scope",
         "cause",
         "access",
         "type",
-        "scope",
-        "project",
         "endpoint",
+        "project",
         "error",
-        "admin",
         "deleted",
         "claude",
-        "keys",
         "retry",
         "activity",
+        "admin",
         "header",
-        "request"
+        "request",
+        "keys"
       ],
-      "word_count": 2600,
+      "word_count": 2637,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
@@ -45001,7 +45001,7 @@
         "enterprise",
         "accordiongroup"
       ],
-      "word_count": 1107,
+      "word_count": 1101,
       "file_path": "docs/docs__en__manage-claude__compliance-faq.md"
     },
     "/docs/en/manage-claude/compliance-integration-patterns": {
@@ -45041,23 +45041,23 @@
         "compliance",
         "endpoint",
         "activity",
+        "key",
         "feed",
-        "settings",
         "api",
+        "access",
         "group",
         "one",
-        "organizations",
-        "role",
         "returns",
+        "organizations",
+        "settings",
+        "role",
+        "same",
         "users",
         "groups",
-        "see",
-        "same",
         "parent",
-        "response",
-        "codegroup"
+        "see"
       ],
-      "word_count": 1767,
+      "word_count": 1940,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -45167,9 +45167,9 @@
         "console",
         "token",
         "anthropic",
-        "tier"
+        "code"
       ],
-      "word_count": 1676,
+      "word_count": 1673,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {
@@ -45493,19 +45493,19 @@
         "codegroup",
         "new",
         "card",
+        "configuration",
         "sessions",
         "update",
-        "configuration",
+        "session",
         "managed",
         "fields",
         "cli",
         "create",
         "reusable",
         "mcp",
-        "skills",
-        "session"
+        "skills"
       ],
-      "word_count": 1736,
+      "word_count": 1761,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45624,28 +45624,28 @@
       "title": "Session event stream",
       "content_preview": "# Session event stream  Send events, stream responses, and interrupt or redirect your session mid-execution.  ---  Communication with Claude Managed Agents is event-based. You send user events to the ...",
       "keywords": [
-        "session",
         "event",
+        "session",
         "events",
         "codegroup",
         "agent",
-        "send",
-        "system",
-        "tool",
         "stream",
-        "note",
-        "tab",
-        "back",
-        "prompt",
-        "full",
-        "when",
         "only",
+        "tool",
+        "system",
+        "preview",
+        "buffered",
+        "send",
+        "note",
+        "deltas",
+        "when",
+        "each",
+        "tab",
         "history",
-        "token",
-        "mid",
-        "execution"
+        "text",
+        "model"
       ],
-      "word_count": 5770,
+      "word_count": 8264,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -45761,31 +45761,31 @@
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
-      "title": "Multiagent sessions",
-      "content_preview": "# Multiagent sessions  Coordinate multiple agents within a single session.  ---  Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel wit...",
+      "title": "Multi-agent sessions",
+      "content_preview": "# Multi-agent sessions  Coordinate multiple agents within a single session.  ---  Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel w...",
       "keywords": [
-        "thread",
         "agent",
+        "thread",
         "session",
-        "codegroup",
         "coordinator",
+        "codegroup",
         "agents",
         "tab",
         "primary",
         "threads",
-        "events",
         "mcp",
-        "activity",
+        "events",
         "servers",
+        "activity",
         "tool",
         "multiple",
         "work",
+        "copies",
+        "roster",
         "list",
-        "own",
-        "each",
-        "stream"
+        "own"
       ],
-      "word_count": 3979,
+      "word_count": 4029,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -45897,7 +45897,7 @@
         "cli",
         "tabs"
       ],
-      "word_count": 2400,
+      "word_count": 2403,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/reference": {
@@ -45906,26 +45906,26 @@
       "keywords": [
         "agent",
         "claude",
-        "mcp",
-        "session",
-        "tab",
-        "agents",
-        "events",
-        "tool",
-        "multiagent",
         "event",
-        "managed",
+        "session",
+        "mcp",
+        "tab",
+        "events",
+        "agents",
+        "stream",
+        "see",
         "type",
+        "only",
         "description",
+        "tool",
+        "multi",
+        "managed",
+        "title",
         "worker",
         "branding",
-        "see",
-        "title",
-        "call",
-        "includes",
-        "error"
+        "deltas"
       ],
-      "word_count": 1042,
+      "word_count": 1148,
       "file_path": "docs/docs__en__managed-agents__reference.md"
     },
     "/docs/en/managed-agents/scheduled-deployments": {
@@ -45933,8 +45933,8 @@
       "content_preview": "# Scheduled deployments  Run an agent on a recurring cron schedule and inspect its run history.  ---  A **scheduled deployment** allows an [agent](/docs/en/managed-agents/agent-setup) to kick off [ses...",
       "keywords": [
         "deployment",
-        "codegroup",
         "run",
+        "codegroup",
         "session",
         "schedule",
         "scheduled",
@@ -45943,17 +45943,17 @@
         "cli",
         "agent",
         "cron",
+        "archived",
+        "event",
+        "lifecycle",
+        "events",
         "note",
+        "automatically",
         "next",
         "runs",
-        "archived",
-        "sessions",
-        "require",
-        "automatically",
-        "times",
-        "timezone"
+        "trigger"
       ],
-      "word_count": 1886,
+      "word_count": 1997,
       "file_path": "docs/docs__en__managed-agents__scheduled-deployments.md"
     },
     "/docs/en/managed-agents/self-hosted-sandboxes-security": {
@@ -46009,7 +46009,7 @@
         "title",
         "claude"
       ],
-      "word_count": 4436,
+      "word_count": 4439,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
@@ -46017,27 +46017,27 @@
       "content_preview": "# Session operations  Retrieve, list, update, archive, and delete Claude Managed Agents sessions.  ---  Once a session exists, use these operations to read, update, archive, or delete it. See [Start a...",
       "keywords": [
         "session",
-        "codegroup",
         "agent",
+        "codegroup",
         "update",
         "defaultlanguage",
         "cli",
         "archive",
         "delete",
         "sessions",
+        "parameter",
+        "page",
         "agents",
-        "start",
-        "new",
-        "interrupt",
-        "need",
-        "operations",
-        "managed",
-        "these",
         "see",
-        "creating",
-        "note"
+        "start",
+        "including",
+        "error",
+        "new",
+        "back",
+        "when",
+        "event"
       ],
-      "word_count": 1051,
+      "word_count": 2152,
       "file_path": "docs/docs__en__managed-agents__session-operations.md"
     },
     "/docs/en/managed-agents/sessions": {
@@ -46047,25 +46047,25 @@
         "session",
         "agent",
         "codegroup",
+        "version",
+        "overrides",
+        "field",
+        "create",
         "defaultlanguage",
         "cli",
+        "pass",
+        "object",
+        "configuration",
+        "tool",
+        "value",
         "see",
         "start",
-        "create",
         "environment",
-        "event",
-        "version",
-        "mcp",
-        "vaults",
-        "within",
         "sessions",
-        "sandbox",
-        "send",
-        "user",
-        "work",
-        "note"
+        "event",
+        "require"
       ],
-      "word_count": 1093,
+      "word_count": 1523,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -46129,27 +46129,27 @@
       "content_preview": "# Authenticate with vaults  Register per-user credentials when creating sessions.  ---  Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret",
       "keywords": [
         "credential",
-        "vault",
         "credentials",
-        "codegroup",
+        "vault",
         "secret",
+        "request",
         "session",
-        "when",
+        "codegroup",
+        "environment",
         "agent",
+        "when",
         "mcp",
         "token",
-        "environment",
-        "refresh",
-        "note",
-        "key",
-        "api",
-        "defaultlanguage",
-        "cli",
-        "server",
         "variable",
+        "key",
+        "refresh",
+        "which",
+        "note",
+        "api",
+        "substituted",
         "tab"
       ],
-      "word_count": 3170,
+      "word_count": 3751,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {
@@ -46157,27 +46157,27 @@
       "content_preview": "# Subscribe to webhooks  Get notified when major events happen without polling.  ---  Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](/d...",
       "keywords": [
         "event",
-        "endpoint",
+        "agent",
         "events",
         "session",
-        "vault",
-        "credential",
-        "delivery",
-        "webhook",
-        "object",
-        "every",
         "tab",
-        "agent",
-        "codegroup",
-        "webhooks",
-        "when",
+        "deployment",
+        "run",
+        "endpoint",
         "fetch",
-        "directly",
-        "retries",
+        "archived",
+        "object",
+        "trigger",
+        "vault",
+        "created",
+        "credential",
+        "scheduled",
+        "delivery",
+        "title",
         "error",
-        "multiagent"
+        "deleted"
       ],
-      "word_count": 1395,
+      "word_count": 1720,
       "file_path": "docs/docs__en__managed-agents__webhooks.md"
     },
     "/docs/en/prompt-library": {

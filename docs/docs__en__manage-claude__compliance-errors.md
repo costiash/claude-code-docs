@@ -121,27 +121,24 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compliance_org_data']
 ```
 
-**Cause:** A key without `read:compliance_org_data` was used to call an organizations, roles, or groups endpoint. There are two common paths to this error:
+**Cause:** A key without `read:compliance_org_data` was used to call an organizations, roles, groups, or effective-settings endpoint. There are two common paths to this error:
 
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_org_data` scope.
 * A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot read organization metadata.
 
 **Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
 
-### Insufficient scope: organization settings
+### Retired scope: organization settings
 
 **Type:** `permission_error`
 
 ```text wrap
-Missing required scopes. Got: ['read:compliance_org_data'] Needed: ['read:compliance_org_settings']
+Missing required scopes. Got: ['read:compliance_org_settings'] Needed: ['read:compliance_org_data']
 ```
 
-**Cause:** A key without `read:compliance_org_settings` was used to call `GET /v1/compliance/organizations/{organization_id}/settings`. There are two common paths to this error:
+**Cause:** The `read:compliance_org_settings` scope was retired on June 30, 2026. `GET /v1/compliance/organizations/{organization_id}/settings` now requires `read:compliance_org_data`, the same scope as the other organization endpoints, and the retired scope no longer authorizes anything. A Compliance Access Key that carries only `read:compliance_org_settings` returns this error on every call to the settings endpoint, even though the key worked before the retirement. The retired scope can no longer be selected or granted when creating a key.
 
-* A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_org_settings` scope.
-* A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot read organization settings.
-
-**Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_org_settings` selected. Admin API keys cannot read organization settings; the Compliance Access Key is required.
+**Fix:** Compliance Access Key scopes are immutable after creation. [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_org_data` selected, update your integration to use it, then delete the old key. A key that already carries `read:compliance_org_data` is unaffected by the retirement.
 
 ### Insufficient scope: user data
 

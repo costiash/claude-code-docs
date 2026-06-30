@@ -12,7 +12,7 @@ This page collects reference material for Claude Managed Agents. For task-orient
 
 ## Event types
 
-Event type strings follow a `{domain}.{action}` naming convention. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for sending, streaming, and listing events.
+Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for sending, streaming, and listing events.
 
 <Tabs>
   <Tab title="User events">
@@ -27,35 +27,35 @@ Event type strings follow a `{domain}.{action}` naming convention. See [Session 
   </Tab>
 
   <Tab title="Agent events">
-    | Type                             | Description                                                                                                        |
-    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-    | `agent.message`                  | Agent response containing text content blocks.                                                                     |
-    | `agent.thinking`                 | Agent thinking content, emitted separately from messages.                                                          |
-    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                           |
-    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                        |
-    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                  |
-    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                   |
-    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                            |
-    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                      |
-    | `agent.thread_message_received`  | In a [multiagent](/docs/en/managed-agents/multi-agent) session, an agent delivered its result to the coordinator.  |
-    | `agent.thread_message_sent`      | In a [multiagent](/docs/en/managed-agents/multi-agent) session, the coordinator sent a follow-up to another agent. |
+    | Type                             | Description                                                                                                         |
+    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+    | `agent.message`                  | Agent response containing text content blocks.                                                                      |
+    | `agent.thinking`                 | Agent thinking content, emitted separately from messages.                                                           |
+    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                            |
+    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                         |
+    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                   |
+    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                    |
+    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                             |
+    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                       |
+    | `agent.thread_message_received`  | In a [multi-agent](/docs/en/managed-agents/multi-agent) session, an agent delivered its result to the coordinator.  |
+    | `agent.thread_message_sent`      | In a [multi-agent](/docs/en/managed-agents/multi-agent) session, the coordinator sent a follow-up to another agent. |
   </Tab>
 
   <Tab title="Session events">
-    | Type                                | Description                                                                                                                 |
-    | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-    | `session.status_running`            | Agent is actively processing.                                                                                               |
-    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.        |
-    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                       |
-    | `session.status_terminated`         | Session ended because of an unrecoverable error.                                                                            |
-    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                    |
-    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.   |
-    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                 |
-    | `session.thread_created`            | A [multiagent](/docs/en/managed-agents/multi-agent) thread was created.                                                     |
-    | `session.thread_status_running`     | A [multiagent](/docs/en/managed-agents/multi-agent) thread started activity.                                                |
-    | `session.thread_status_idle`        | A [multiagent](/docs/en/managed-agents/multi-agent) thread finished its turn and is awaiting input. Includes `stop_reason`. |
-    | `session.thread_status_rescheduled` | A [multiagent](/docs/en/managed-agents/multi-agent) thread hit a transient error and is retrying automatically.             |
-    | `session.thread_status_terminated`  | A [multiagent](/docs/en/managed-agents/multi-agent) thread was archived or reached a terminal error.                        |
+    | Type                                | Description                                                                                                                  |
+    | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+    | `session.status_running`            | Agent is actively processing.                                                                                                |
+    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.         |
+    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                        |
+    | `session.status_terminated`         | Session ended because of an unrecoverable error.                                                                             |
+    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                     |
+    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.    |
+    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                  |
+    | `session.thread_created`            | A [multi-agent](/docs/en/managed-agents/multi-agent) thread was created.                                                     |
+    | `session.thread_status_running`     | A [multi-agent](/docs/en/managed-agents/multi-agent) thread started activity.                                                |
+    | `session.thread_status_idle`        | A [multi-agent](/docs/en/managed-agents/multi-agent) thread finished its turn and is awaiting input. Includes `stop_reason`. |
+    | `session.thread_status_rescheduled` | A [multi-agent](/docs/en/managed-agents/multi-agent) thread hit a transient error and is retrying automatically.             |
+    | `session.thread_status_terminated`  | A [multi-agent](/docs/en/managed-agents/multi-agent) thread was archived or reached a terminal error.                        |
   </Tab>
 
   <Tab title="Span events">
@@ -74,6 +74,15 @@ Event type strings follow a `{domain}.{action}` naming convention. See [Session 
     | Type             | Description                                                                        |
     | ---------------- | ---------------------------------------------------------------------------------- |
     | `system.message` | Update the agent's system prompt between turns. Only supported on Claude Opus 4.8. |
+  </Tab>
+
+  <Tab title="Event deltas">
+    Event deltas are stream-only preview events. They are emitted on session event stream connections that opt in with the `event_deltas[]` parameter, and they are never persisted to the session's event history. See [Event deltas](/docs/en/managed-agents/events-and-streaming#event-deltas) for opting in, accumulating, and reconciling them.
+
+    | Type          | Description                                                                                                              |
+    | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+    | `event_start` | A previewed event has started generating. Carries the upcoming event's `type` and `id`. Stream-only and never persisted. |
+    | `event_delta` | Incremental content for a previewed event, identified by `event_id`. Stream-only and never persisted.                    |
   </Tab>
 </Tabs>
 

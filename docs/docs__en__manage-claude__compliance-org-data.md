@@ -9,7 +9,7 @@ Enumerate organizations under your parent organization (their users, roles, and 
 </Note>
 
 <Check>
-  **Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user and group-member endpoints require `read:compliance_user_data` instead, and the effective-settings endpoint requires `read:compliance_org_settings`.
+  **Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user and group-member endpoints require `read:compliance_user_data` instead.
 
   Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai are the only key type accepted; see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access) to provision one. Calls authenticated with an Admin API key (`sk-ant-admin01-...`) return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
 </Check>
@@ -207,7 +207,11 @@ See the [List Compliance Group Members](/docs/en/api/compliance/groups/members/l
 
 The [Get effective organization settings](/docs/en/api/compliance/organizations/settings/retrieve) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
 
-This endpoint requires `read:compliance_org_settings`, not `read:compliance_org_data`; a key without that scope returns [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](/docs/en/manage-claude/compliance-errors#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
+This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](/docs/en/manage-claude/compliance-errors#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
+
+<Note>
+  Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden) — create a new Compliance Access Key with `read:compliance_org_data` instead.
+</Note>
 
 ```bash cURL
 org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
@@ -245,11 +249,25 @@ The response is a list of typed setting rows, and which rows appear varies by or
       "type": "string_list",
       "value": ["10.0.0.0/8", "203.0.113.0/24"]
     }
+  ],
+  "api_keys": [
+    {
+      "type": "compliance_api_key",
+      "id": "apikey_01Hx7k2mP9nQ4rS6tU8vW0xY",
+      "name": "Compliance Export Key",
+      "scopes": ["read:compliance_activities", "read:compliance_org_data"],
+      "is_active": true,
+      "created_at": "2026-03-14T09:30:00Z",
+      "created_by_id": "user_01Jz3a4bC5dE6fG7hI8jK9lM",
+      "expires_at": null
+    }
   ]
 }
 ```
 
 Each row carries `name`, `type`, and `value`; the `type` field (`boolean`, `integer`, `string_list`, `provisioning_mode`, or `data_retention`) tells you the shape of `value`. The full list of setting names, and the `value` schema for each type, is in [Get effective organization settings](/docs/en/api/compliance/organizations/settings/retrieve) in the API reference.
+
+The `api_keys` array lists every Compliance Access Key configured for your parent organization, so the same list is returned regardless of which linked organization you query. Each entry carries the key's `type` (`compliance_api_key`), `id`, `name`, `scopes`, `is_active` flag, `created_at` and `expires_at` timestamps, and `created_by_id` (the ID of the user who created the key; may be `null`). The key's secret value is never returned. Deactivated keys are included with `is_active: false` so you can review keys that previously had access, and keys that carry only the retired `read:compliance_org_settings` scope remain in the list for audit and cleanup visibility even though that scope no longer grants access.
 
 The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the identifier table in [List organizations](#list-organizations)).
 
