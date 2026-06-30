@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-30T14:36:21Z",
+  "generated_at": "2026-06-30T16:30:56Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -262,8 +262,8 @@
         "claude",
         "code",
         "mode",
-        "file",
         "desktop",
+        "file",
         "session",
         "auto",
         "changes",
@@ -271,16 +271,16 @@
         "diff",
         "files",
         "settings",
-        "app",
+        "see",
         "open",
         "sessions",
         "review",
+        "app",
         "windows",
-        "see",
         "permissions",
         "before"
       ],
-      "word_count": 8750,
+      "word_count": 8781,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -1024,10 +1024,10 @@
         "see",
         "powershell",
         "version",
+        "linux",
         "channel",
         "run",
         "installation",
-        "linux",
         "tabs",
         "wsl",
         "package",
@@ -1036,7 +1036,7 @@
         "settings",
         "native"
       ],
-      "word_count": 3212,
+      "word_count": 3213,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
