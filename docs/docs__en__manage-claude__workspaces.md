@@ -198,10 +198,10 @@ Resources scoped to workspaces include:
 * **Message Batches** created through the [Batch API](/docs/en/build-with-claude/batch-processing)
 * **Skills** created through the [Skills API](/docs/en/build-with-claude/skills-guide)
 
-Some resources are managed at the organization level and cannot be managed with a workspace API key:
+Some resources cannot be managed with a workspace API key:
 
-* **[MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview)** are managed with an org-scoped OAuth token (`org:manage_tunnels`) obtained through [Workload Identity Federation](/docs/en/manage-claude/workload-identity-federation), not a workspace API key, and the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only.
-* **Workspaces** themselves and **organization members** are managed through the [Admin API](/docs/en/manage-claude/admin-api), which requires an Admin API key.
+* **[MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](/docs/en/manage-claude/workload-identity-federation), not a workspace API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
+* **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](/docs/en/manage-claude/admin-api), which requires an Admin API key.
 
 <Note>
   [Prompt caches](/docs/en/build-with-claude/prompt-caching) are also isolated per workspace on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Amazon Bedrock and Google Cloud, prompt caches are isolated per organization.

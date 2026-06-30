@@ -335,7 +335,10 @@ Run Deployment Now
 ### Example
 
 ```csharp
-DeploymentRunParams parameters = new() { DeploymentID = "deployment_id" };
+DeploymentRunParams parameters = new()
+{
+    DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
+};
 
 var betaManagedAgentsDeploymentRun = await client.Beta.Deployments.Run(parameters);
 

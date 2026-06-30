@@ -10,7 +10,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
+Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started)
 
 ### Parameters
 
@@ -18,17 +18,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `required Long maxTokens`
 
-    The maximum number of tokens to generate before stopping.
+    Body param: The maximum number of tokens to generate before stopping.
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-    Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+    Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-    Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+    Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
   - `required IReadOnlyList<MessageParam> messages`
 
-    Input messages.
+    Body param: Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -71,9 +71,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
     ```
 
-    See [input examples](https://docs.claude.com/en/api/messages-examples).
+    See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-    Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
     There is a limit of 100,000 messages in a single request.
 
@@ -104,7 +104,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `5m`: 5 minutes
               - `1h`: 1 hour
 
-              Defaults to `5m`.
+              Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
               - `"5m"Ttl5m`
 
@@ -838,35 +838,35 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `required Model model`
 
-    The model that will complete your prompt.
+    Body param: The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `CacheControlEphemeral? cacheControl`
 
-    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `string? container`
 
-    Container identifier for reuse across requests.
+    Body param: Container identifier for reuse across requests.
 
   - `string? inferenceGeo`
 
-    Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+    Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
   - `Metadata metadata`
 
-    An object describing metadata about the request.
+    Body param: An object describing metadata about the request.
 
   - `OutputConfig outputConfig`
 
-    Configuration options for the model's output, such as the output format.
+    Body param: Configuration options for the model's output, such as the output format.
 
   - `ServiceTier serviceTier`
 
-    Determines whether to use priority capacity (if available) or standard capacity for this request.
+    Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-    Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+    Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
     - `"auto"Auto`
 
@@ -874,7 +874,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `IReadOnlyList<string> stopSequences`
 
-    Custom text sequences that will cause the model to stop generating.
+    Body param: Custom text sequences that will cause the model to stop generating.
 
     Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
@@ -882,9 +882,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `System system`
 
-    System prompt.
+    Body param: System prompt.
 
-    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     - `string`
 
@@ -902,7 +902,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `Double temperature`
 
-    Amount of randomness injected into the response.
+    Body param: Amount of randomness injected into the response.
 
     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -910,23 +910,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `ThinkingConfigParam thinking`
 
-    Configuration for enabling Claude's extended thinking.
+    Body param: Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `ToolChoice toolChoice`
 
-    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `IReadOnlyList<ToolUnion> tools`
 
-    Definitions of tools that the model may use.
+    Body param: Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
     Each tool definition includes:
 
@@ -982,7 +982,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-    See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+    See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
     - `class Tool:`
 
@@ -1624,6 +1624,126 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class WebSearchTool20260318:`
+
+      - `JsonElement Name "web_search"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "web_search_20260318"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `IReadOnlyList<string>? AllowedDomains`
+
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+      - `IReadOnlyList<string>? BlockedDomains`
+
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `"full"Full`
+
+        - `"excluded"Excluded`
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `UserLocation? UserLocation`
+
+        Parameters for the user's location. Used to provide more relevant search results.
+
+    - `class WebFetchTool20260318:`
+
+      - `JsonElement Name "web_fetch"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "web_fetch_20260318"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `IReadOnlyList<string>? AllowedDomains`
+
+        List of domains to allow fetching from
+
+      - `IReadOnlyList<string>? BlockedDomains`
+
+        List of domains to block fetching from
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `CitationsConfigParam? Citations`
+
+        Citations configuration for fetched documents. Citations are disabled by default.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxContentTokens`
+
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `"full"Full`
+
+        - `"excluded"Excluded`
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Boolean UseCache`
+
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
     - `class ToolSearchToolBm25_20251119:`
 
       - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -1698,7 +1818,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `Long topK`
 
-    Only sample from the top K options for each subsequent token.
+    Body param: Only sample from the top K options for each subsequent token.
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
@@ -1706,11 +1826,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `Double topP`
 
-    Use nucleus sampling.
+    Body param: Use nucleus sampling.
 
     In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
     Recommended for advanced use cases only.
+
+  - `string userProfileID`
+
+    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 
@@ -2397,6 +2521,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"reasoning_extraction"ReasoningExtraction`
 
+      - `"military_weapons"MilitaryWeapons`
+
     - `required string? Explanation`
 
       Human-readable explanation of the refusal.
@@ -2620,7 +2746,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
+Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
 
 ### Parameters
 
@@ -2628,7 +2754,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `required IReadOnlyList<MessageParam> messages`
 
-    Input messages.
+    Body param: Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -2671,9 +2797,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
     ```
 
-    See [input examples](https://docs.claude.com/en/api/messages-examples).
+    See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-    Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
     There is a limit of 100,000 messages in a single request.
 
@@ -2704,7 +2830,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `5m`: 5 minutes
               - `1h`: 1 hour
 
-              Defaults to `5m`.
+              Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
               - `"5m"Ttl5m`
 
@@ -3438,23 +3564,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `required Model model`
 
-    The model that will complete your prompt.
+    Body param: The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `CacheControlEphemeral? cacheControl`
 
-    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `OutputConfig outputConfig`
 
-    Configuration options for the model's output, such as the output format.
+    Body param: Configuration options for the model's output, such as the output format.
 
   - `System system`
 
-    System prompt.
+    Body param: System prompt.
 
-    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     - `string`
 
@@ -3472,23 +3598,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `ThinkingConfigParam thinking`
 
-    Configuration for enabling Claude's extended thinking.
+    Body param: Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `ToolChoice toolChoice`
 
-    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `IReadOnlyList<MessageCountTokensTool> tools`
 
-    Definitions of tools that the model may use.
+    Body param: Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
     Each tool definition includes:
 
@@ -3544,7 +3670,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-    See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+    See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
     - `class Tool:`
 
@@ -4186,6 +4312,126 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class WebSearchTool20260318:`
+
+      - `JsonElement Name "web_search"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "web_search_20260318"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `IReadOnlyList<string>? AllowedDomains`
+
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+      - `IReadOnlyList<string>? BlockedDomains`
+
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `"full"Full`
+
+        - `"excluded"Excluded`
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `UserLocation? UserLocation`
+
+        Parameters for the user's location. Used to provide more relevant search results.
+
+    - `class WebFetchTool20260318:`
+
+      - `JsonElement Name "web_fetch"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "web_fetch_20260318"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+        - `"code_execution_20260521"CodeExecution20260521`
+
+      - `IReadOnlyList<string>? AllowedDomains`
+
+        List of domains to allow fetching from
+
+      - `IReadOnlyList<string>? BlockedDomains`
+
+        List of domains to block fetching from
+
+      - `CacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `CitationsConfigParam? Citations`
+
+        Citations configuration for fetched documents. Citations are disabled by default.
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxContentTokens`
+
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `ResponseInclusion ResponseInclusion`
+
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+        - `"full"Full`
+
+        - `"excluded"Excluded`
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
+      - `Boolean UseCache`
+
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
     - `class ToolSearchToolBm25_20251119:`
 
       - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -4257,6 +4503,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `Boolean Strict`
 
         When true, guarantees schema validation on tool names and inputs
+
+  - `string userProfileID`
+
+    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 ### Returns
 
@@ -4476,7 +4726,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -4547,7 +4797,7 @@ Console.WriteLine(messageTokensCount);
     - `5m`: 5 minutes
     - `1h`: 1 hour
 
-    Defaults to `5m`.
+    Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
     - `"5m"Ttl5m`
 
@@ -4988,7 +5238,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -5039,7 +5289,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -5092,7 +5342,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -5145,7 +5395,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -5348,7 +5598,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -5502,7 +5752,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -6087,7 +6337,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -6842,7 +7092,7 @@ Console.WriteLine(messageTokensCount);
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `"5m"Ttl5m`
 
@@ -7003,7 +7253,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -7230,7 +7480,7 @@ Console.WriteLine(messageTokensCount);
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`.
+                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                 - `"5m"Ttl5m`
 
@@ -7471,7 +7721,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -7532,7 +7782,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -8233,6 +8483,8 @@ Console.WriteLine(messageTokensCount);
 
       - `"reasoning_extraction"ReasoningExtraction`
 
+      - `"military_weapons"MilitaryWeapons`
+
     - `required string? Explanation`
 
       Human-readable explanation of the refusal.
@@ -8417,7 +8669,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -9031,6 +9283,126 @@ Console.WriteLine(messageTokensCount);
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class WebSearchTool20260318:`
+
+    - `JsonElement Name "web_search"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "web_search_20260318"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `IReadOnlyList<string>? AllowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `IReadOnlyList<string>? BlockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Long? MaxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `ResponseInclusion ResponseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `"full"Full`
+
+      - `"excluded"Excluded`
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `UserLocation? UserLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `class WebFetchTool20260318:`
+
+    - `JsonElement Name "web_fetch"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "web_fetch_20260318"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `IReadOnlyList<string>? AllowedDomains`
+
+      List of domains to allow fetching from
+
+    - `IReadOnlyList<string>? BlockedDomains`
+
+      List of domains to block fetching from
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `CitationsConfigParam? Citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Long? MaxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `Long? MaxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `ResponseInclusion ResponseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `"full"Full`
+
+      - `"excluded"Excluded`
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `Boolean UseCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
   - `class ToolSearchToolBm25_20251119:`
 
     - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -9186,7 +9558,7 @@ Console.WriteLine(messageTokensCount);
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `"5m"Ttl5m`
 
@@ -9968,7 +10340,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -11003,6 +11375,8 @@ Console.WriteLine(messageTokensCount);
 
         - `"reasoning_extraction"ReasoningExtraction`
 
+        - `"military_weapons"MilitaryWeapons`
+
       - `required string? Explanation`
 
         Human-readable explanation of the refusal.
@@ -11775,6 +12149,8 @@ Console.WriteLine(messageTokensCount);
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
+
+        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 
@@ -12606,6 +12982,8 @@ Console.WriteLine(messageTokensCount);
 
           - `"reasoning_extraction"ReasoningExtraction`
 
+          - `"military_weapons"MilitaryWeapons`
+
         - `required string? Explanation`
 
           Human-readable explanation of the refusal.
@@ -12928,6 +13306,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"reasoning_extraction"ReasoningExtraction`
 
+    - `"military_weapons"MilitaryWeapons`
+
   - `required string? Explanation`
 
     Human-readable explanation of the refusal.
@@ -12961,7 +13341,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -13198,7 +13578,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -13389,7 +13769,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -13900,7 +14280,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14054,7 +14434,7 @@ Console.WriteLine(messageTokensCount);
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `JsonElement Type "enabled"constant`
 
@@ -14074,7 +14454,7 @@ Console.WriteLine(messageTokensCount);
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
   - `class ThinkingConfigEnabled:`
 
@@ -14084,7 +14464,7 @@ Console.WriteLine(messageTokensCount);
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
     - `JsonElement Type "enabled"constant`
 
@@ -14167,7 +14547,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14234,7 +14614,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14389,7 +14769,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14418,7 +14798,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14703,7 +15083,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14758,7 +15138,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -14853,7 +15233,7 @@ Console.WriteLine(messageTokensCount);
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
             - `"5m"Ttl5m`
 
@@ -14954,7 +15334,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -14999,7 +15379,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -15052,7 +15432,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -15105,7 +15485,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -15176,7 +15556,7 @@ Console.WriteLine(messageTokensCount);
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
         - `"5m"Ttl5m`
 
@@ -15790,6 +16170,126 @@ Console.WriteLine(messageTokensCount);
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class WebSearchTool20260318:`
+
+    - `JsonElement Name "web_search"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "web_search_20260318"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `IReadOnlyList<string>? AllowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `IReadOnlyList<string>? BlockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Long? MaxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `ResponseInclusion ResponseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `"full"Full`
+
+      - `"excluded"Excluded`
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `UserLocation? UserLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `class WebFetchTool20260318:`
+
+    - `JsonElement Name "web_fetch"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "web_fetch_20260318"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+      - `"code_execution_20260521"CodeExecution20260521`
+
+    - `IReadOnlyList<string>? AllowedDomains`
+
+      List of domains to allow fetching from
+
+    - `IReadOnlyList<string>? BlockedDomains`
+
+      List of domains to block fetching from
+
+    - `CacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `CitationsConfigParam? Citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Long? MaxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `Long? MaxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `ResponseInclusion ResponseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+      - `"full"Full`
+
+      - `"excluded"Excluded`
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `Boolean UseCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
   - `class ToolSearchToolBm25_20251119:`
 
     - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -15925,7 +16425,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -16170,7 +16670,7 @@ Console.WriteLine(messageTokensCount);
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`.
+                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                   - `"5m"Ttl5m`
 
@@ -16381,7 +16881,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -16454,7 +16954,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -16529,7 +17029,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -16552,6 +17052,91 @@ Console.WriteLine(messageTokensCount);
   - `Long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
+
+  - `Boolean Strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `Boolean UseCache`
+
+    Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+### Web Fetch Tool 20260318
+
+- `class WebFetchTool20260318:`
+
+  - `JsonElement Name "web_fetch"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `JsonElement Type "web_fetch_20260318"constant`
+
+  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+    - `"direct"Direct`
+
+    - `"code_execution_20250825"CodeExecution20250825`
+
+    - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
+
+  - `IReadOnlyList<string>? AllowedDomains`
+
+    List of domains to allow fetching from
+
+  - `IReadOnlyList<string>? BlockedDomains`
+
+    List of domains to block fetching from
+
+  - `CacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+  - `CitationsConfigParam? Citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Boolean Enabled`
+
+  - `Boolean DeferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Long? MaxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `Long? MaxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `ResponseInclusion ResponseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `"full"Full`
+
+    - `"excluded"Excluded`
 
   - `Boolean Strict`
 
@@ -16744,7 +17329,7 @@ Console.WriteLine(messageTokensCount);
                       - `5m`: 5 minutes
                       - `1h`: 1 hour
 
-                      Defaults to `5m`.
+                      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                       - `"5m"Ttl5m`
 
@@ -17089,7 +17674,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -17174,7 +17759,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -17187,6 +17772,99 @@ Console.WriteLine(messageTokensCount);
   - `Long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
+
+  - `Boolean Strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `UserLocation? UserLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+    - `JsonElement Type "approximate"constant`
+
+    - `string? City`
+
+      The city of the user.
+
+    - `string? Country`
+
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+    - `string? Region`
+
+      The region of the user.
+
+    - `string? Timezone`
+
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+### Web Search Tool 20260318
+
+- `class WebSearchTool20260318:`
+
+  - `JsonElement Name "web_search"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `JsonElement Type "web_search_20260318"constant`
+
+  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+    - `"direct"Direct`
+
+    - `"code_execution_20250825"CodeExecution20250825`
+
+    - `"code_execution_20260120"CodeExecution20260120`
+
+    - `"code_execution_20260521"CodeExecution20260521`
+
+  - `IReadOnlyList<string>? AllowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `IReadOnlyList<string>? BlockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `CacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+  - `Boolean DeferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Long? MaxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `ResponseInclusion ResponseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `"full"Full`
+
+    - `"excluded"Excluded`
 
   - `Boolean Strict`
 
@@ -17387,7 +18065,7 @@ Console.WriteLine(messageTokensCount);
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
       - `"5m"Ttl5m`
 
@@ -17499,7 +18177,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -17507,7 +18185,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `required IReadOnlyList<Request> requests`
 
-    List of requests for prompt completion. Each is an individual request to create a Message.
+    Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
     - `required string CustomID`
 
@@ -17519,7 +18197,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Messages API creation parameters for the individual request.
 
-      See the [Messages API reference](https://docs.claude.com/en/api/messages) for full documentation on available parameters.
+      See the [Messages API reference](https://platform.claude.com/docs/en/api/messages) for full documentation on available parameters.
 
       - `required Long MaxTokens`
 
@@ -17527,9 +18205,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-        Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+        Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-        Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
+        Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
 
       - `required IReadOnlyList<MessageParam> Messages`
 
@@ -17576,9 +18254,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
         ```
 
-        See [input examples](https://docs.claude.com/en/api/messages-examples).
+        See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
-        Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+        Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
         There is a limit of 100,000 messages in a single request.
 
@@ -17609,7 +18287,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`.
+                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
 
                   - `"5m"Ttl5m`
 
@@ -18461,7 +19139,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-        Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
+        Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
 
         - `"auto"Auto`
 
@@ -18479,13 +19157,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Whether to incrementally stream the response using server-sent events.
 
-        See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
+        See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
       - `System System`
 
         System prompt.
 
-        A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
+        A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
         - `string`
 
@@ -18515,7 +19193,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-        See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
         - `class ThinkingConfigEnabled:`
 
@@ -18525,7 +19203,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Must be ≥1024 and less than `max_tokens`.
 
-            See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
 
           - `JsonElement Type "enabled"constant`
 
@@ -18609,7 +19287,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-        There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+        There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
 
         Each tool definition includes:
 
@@ -18665,7 +19343,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-        See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
+        See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
 
         - `class Tool:`
 
@@ -19307,6 +19985,126 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+        - `class WebSearchTool20260318:`
+
+          - `JsonElement Name "web_search"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "web_search_20260318"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
+
+          - `IReadOnlyList<string>? AllowedDomains`
+
+            If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+          - `IReadOnlyList<string>? BlockedDomains`
+
+            If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+          - `CacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Long? MaxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `ResponseInclusion ResponseInclusion`
+
+            How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+            - `"full"Full`
+
+            - `"excluded"Excluded`
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+          - `UserLocation? UserLocation`
+
+            Parameters for the user's location. Used to provide more relevant search results.
+
+        - `class WebFetchTool20260318:`
+
+          - `JsonElement Name "web_fetch"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "web_fetch_20260318"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
+
+          - `IReadOnlyList<string>? AllowedDomains`
+
+            List of domains to allow fetching from
+
+          - `IReadOnlyList<string>? BlockedDomains`
+
+            List of domains to block fetching from
+
+          - `CacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `CitationsConfigParam? Citations`
+
+            Citations configuration for fetched documents. Citations are disabled by default.
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Long? MaxContentTokens`
+
+            Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          - `Long? MaxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `ResponseInclusion ResponseInclusion`
+
+            How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+            - `"full"Full`
+
+            - `"excluded"Excluded`
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+          - `Boolean UseCache`
+
+            Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
         - `class ToolSearchToolBm25_20251119:`
 
           - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -19394,6 +20192,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
         Recommended for advanced use cases only.
+
+  - `string userProfileID`
+
+    Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 ### Returns
 
@@ -19528,7 +20330,7 @@ BatchCreateParams parameters = new()
                 [
                     "string"
                 ],
-                Stream = true,
+                Stream = false,
                 System = new(
 
                     [
@@ -19638,7 +20440,7 @@ Console.WriteLine(messageBatch);
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -19777,7 +20579,7 @@ Console.WriteLine(messageBatch);
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -19951,7 +20753,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -20092,7 +20894,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -20145,7 +20947,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
@@ -20857,6 +21659,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"frontier_llm"FrontierLlm`
 
             - `"reasoning_extraction"ReasoningExtraction`
+
+            - `"military_weapons"MilitaryWeapons`
 
           - `required string? Explanation`
 
@@ -21965,6 +22769,8 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `"reasoning_extraction"ReasoningExtraction`
 
+            - `"military_weapons"MilitaryWeapons`
+
           - `required string? Explanation`
 
             Human-readable explanation of the refusal.
@@ -22899,6 +23705,8 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `"reasoning_extraction"ReasoningExtraction`
 
+          - `"military_weapons"MilitaryWeapons`
+
         - `required string? Explanation`
 
           Human-readable explanation of the refusal.
@@ -23794,6 +24602,8 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
+
+        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 

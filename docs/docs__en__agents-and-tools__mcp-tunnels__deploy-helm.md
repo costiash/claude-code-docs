@@ -8,17 +8,17 @@ Install the tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.
   MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 </Note>
 
-The Anthropic Helm chart installs the [tunnel stack](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) as a single Deployment and attaches it to the tunnel you created in the [Console](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel).
+The Anthropic Helm chart installs the [tunnel stack](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Console](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel).
 
 ## Before you begin
 
 You need:
 
-* **A tunnel created in the Console.** Complete [Create a tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) first and record the tunnel ID (`tnl_...`). For manual provisioning you also need the tunnel token and tunnel domain from that step.
+* **A tunnel.** With programmatic access, the chart's setup hook creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel; you'll also need its tunnel token and tunnel domain.
 
 * **A way for the chart to authenticate to the Tunnels API.**
 
-  * **[Programmatic access](/docs/en/agents-and-tools/mcp-tunnels/concepts#credential-provisioning) (recommended).** The [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) authenticates through Workload Identity Federation, fetches the tunnel token, generates a CA, registers it with Anthropic, and stores everything in a Secret. You'll need a federation rule scoped to `org:manage_tunnels`.
+  * **[Programmatic access](/docs/en/agents-and-tools/mcp-tunnels/concepts#credential-provisioning) (recommended).** The [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) authenticates through Workload Identity Federation, fetches the tunnel token, generates a CA, registers it with Anthropic, and stores everything in a Secret. You'll need a federation rule scoped to `workspace:manage_tunnels`.
   * **[Manual](/docs/en/agents-and-tools/mcp-tunnels/concepts#credential-provisioning).** Skip programmatic access. You'll [get the tunnel token from the Console](/docs/en/agents-and-tools/mcp-tunnels/console#get-the-connection-details), generate a CA and server certificate yourself, [register the CA in the Console](/docs/en/agents-and-tools/mcp-tunnels/console#add-a-ca-certificate), and supply the credentials to the cluster as Secrets.
 
 * **A Kubernetes cluster** you can deploy to with `helm` and `kubectl`. The **Without programmatic access** tab also uses `openssl` (1.1.1 or later).
@@ -105,7 +105,7 @@ The Install steps that follow note where to add the corresponding route.
         | -------- | ---------------------------------------------------- |
         | Subject  | `system:serviceaccount:mcp-tunnel:mcp-tunnel-setup`  |
         | Audience | `api.anthropic.com` (the chart's default; no scheme) |
-        | Scope    | `org:manage_tunnels`                                 |
+        | Scope    | `workspace:manage_tunnels`                           |
 
         <Note>
           The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
@@ -124,17 +124,16 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm show values \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 > values.yaml
+          --version 2.0.0 > values.yaml
         ```
       </Step>
 
       <Step title="Configure tunnel attachment and routes">
-        Edit `values.yaml` and set the `api.wif.*` keys with the tunnel ID, federation rule ID, and organization ID, plus a `routes` entry for each [upstream MCP server](/docs/en/agents-and-tools/mcp-tunnels/concepts#components):
+        Edit `values.yaml` and set the `api.wif.*` keys with the federation rule ID and organization ID, plus a `routes` entry for each [upstream MCP server](/docs/en/agents-and-tools/mcp-tunnels/concepts#components):
 
         ```yaml values.yaml
         api:
           wif:
-            tunnelId: "tnl_..."
             federationRuleId: "fdrl_..."
             organizationId: "00000000-0000-0000-0000-000000000000"
             # Set when the tunnel is in a non-default workspace and the
@@ -142,6 +141,9 @@ The Install steps that follow note where to add the corresponding route.
             # workspaceId: "wrkspc_..."
 
         tunnel:
+          # Leave empty to have the setup hook create a tunnel during install.
+          # Set to attach to an existing tunnel from the Console.
+          id: ""
           # Increment to rotate the tunnel token on the next upgrade.
           # See the "Rotate the tunnel token" section.
           tokenVersion: "1"
@@ -166,7 +168,7 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm template mcp-tunnel \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 \
+          --version 2.0.0 \
           -n mcp-tunnel \
           -f values.yaml > rendered.yaml
         ```
@@ -176,12 +178,21 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm install mcp-tunnel \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 \
+          --version 2.0.0 \
           --namespace mcp-tunnel --create-namespace \
           -f values.yaml
         ```
 
         The setup component runs as a Helm pre-install hook Job, so `helm install` blocks until it completes. On success Helm deletes the Job automatically. If `helm install` fails with a hook error, see [Setup component authentication failures](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting#setup-component-authentication-failures).
+
+        When `tunnel.id` is empty, the setup component creates the tunnel in the workspace your federation rule targets (the organization's default workspace unless you set `api.wif.workspaceId`) and stores its ID and domain in the `mcp-tunnel` Secret. Find the domain you'll need for [verification](#verify-the-deployment) on the tunnel's detail page in the Console under **Manage > MCP tunnels**, or read it from the Secret:
+
+        ```bash
+        kubectl -n mcp-tunnel get secret mcp-tunnel \
+          -o jsonpath='{.data.tunnel-domain}' | base64 -d
+        ```
+
+        Re-running the setup component (during [upgrades](#upgrades) or [token rotation](#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
 
         <Warning>
           The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization's standard practices for protecting Kubernetes Secrets to this namespace.
@@ -258,7 +269,7 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm show values \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 > values.yaml
+          --version 2.0.0 > values.yaml
         ```
       </Step>
 
@@ -296,7 +307,7 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm template mcp-tunnel \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 \
+          --version 2.0.0 \
           -n mcp-tunnel \
           -f values.yaml > rendered.yaml
         ```
@@ -306,7 +317,7 @@ The Install steps that follow note where to add the corresponding route.
         ```bash
         helm install mcp-tunnel \
           oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-          --version 1.0.0 \
+          --version 2.0.0 \
           --namespace mcp-tunnel --create-namespace \
           -f values.yaml
         ```
@@ -339,6 +350,10 @@ By default the chart projects a Kubernetes ServiceAccount token for the setup co
 
 Always pass `--version` to `helm upgrade` so you don't pull a newer chart unexpectedly.
 
+### Upgrade from chart 1.x
+
+Chart 2.0.0 moves the tunnel ID from `api.wif.tunnelId` to `tunnel.id`. Before upgrading, edit your `values.yaml`: move the `tnl_...` value to `tunnel.id` and remove `api.wif.tunnelId`. Leaving `tunnel.id` unset is safe (the setup component reuses the tunnel ID already stored in the `mcp-tunnel` Secret on re-run), but the explicit move keeps your `values.yaml` accurate. Also update your federation rule's scope from `org:manage_tunnels` to `workspace:manage_tunnels` in the Console.
+
 ### Change configuration
 
 For routine changes such as routes, replica count, or NetworkPolicy:
@@ -346,7 +361,7 @@ For routine changes such as routes, replica count, or NetworkPolicy:
 ```bash
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 1.0.0 \
+  --version 2.0.0 \
   -n mcp-tunnel \
   -f values.yaml
 ```
@@ -362,7 +377,7 @@ With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and u
 ```bash
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 1.0.0 \
+  --version 2.0.0 \
   -n mcp-tunnel \
   -f values.yaml \
   --set setup.force=true

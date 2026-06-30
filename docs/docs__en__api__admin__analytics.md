@@ -32,7 +32,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `assigned_seat_count: number`
 
-      Number of seats currently assigned to members
+      Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
     - `cowork_daily_active_user_count: number`
 
@@ -52,7 +52,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `daily_adoption_rate: number`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -64,11 +64,11 @@ Requires an API key with the `read:analytics` scope.
 
     - `monthly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `pending_invite_count: number`
 
-      Number of pending invitations to join the organization
+      Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
     - `starting_at: string`
 
@@ -80,7 +80,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `weekly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
 ### Example
 
@@ -126,7 +126,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `assigned_seat_count: number`
 
-      Number of seats currently assigned to members
+      Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
     - `cowork_daily_active_user_count: number`
 
@@ -146,7 +146,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `daily_adoption_rate: number`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -158,11 +158,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `monthly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `pending_invite_count: number`
 
-      Number of pending invitations to join the organization
+      Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
     - `starting_at: string`
 
@@ -174,7 +174,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `weekly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
 ### Analytics User
 
@@ -503,9 +503,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/usage_report \
 Get per-user token usage across a date range.
 
 Returns one row per user, ranked by the chosen token metric. Use this to
-see which users consume the most tokens. Available to organizations on
-a Claude Enterprise plan. Requires an API key with the `read:analytics`
-scope.
+see which users consume the most tokens. Only usage attributable to a
+seat user is included; for organization-wide totals including direct
+API-key and automation traffic, use the bucketed
+`/v1/organizations/analytics/usage_report` endpoint. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -1182,8 +1185,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
 Get per-user cost in USD across a date range.
 
 Returns one row per user, ranked by spend. Use this to see which users
-account for the most cost. Available to organizations on a Claude
-Enterprise plan. Requires an API key with the `read:analytics` scope.
+account for the most cost. Only cost attributable to a seat user is
+included; for organization-wide totals including direct API-key and
+automation traffic, use the bucketed
+`/v1/organizations/analytics/cost_report` endpoint. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -1670,19 +1677,47 @@ an API key with the `read:analytics` scope.
 
   Response for GET /v1/organizations/analytics/users.
 
-  - `data: array of object { chat_metrics, claude_code_metrics, cowork_metrics, 4 more }`
+  - `data: array of object { bioscience_metrics, chat_metrics, claude_code_metrics, 5 more }`
 
-    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_conversation_count, 8 more }`
+    - `bioscience_metrics: object { delegation_count, distinct_session_count, message_count, 2 more }`
+
+      Claude Bioscience activity metrics for a single user on a given day.
+
+      - `delegation_count: number`
+
+        Number of delegations (handoffs to a specialized agent) in Claude Bioscience sessions
+
+      - `distinct_session_count: number`
+
+        Number of distinct Claude Bioscience sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `message_count: number`
+
+        Number of messages sent in Claude Bioscience sessions
+
+      - `remote_compute_job_count: number`
+
+        Number of remote compute jobs launched from Claude Bioscience sessions
+
+      - `skills_used_count: number`
+
+        Total number of skill invocations in Claude Bioscience sessions
+
+    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_connectors_used_count, 9 more }`
 
       Claude.ai activity metrics for a single user on a given day.
 
       - `connectors_used_count: number`
 
-        Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+        Number of MCP connector invocations.
 
       - `distinct_artifacts_created_count: number`
 
         Number of distinct artifacts created
+
+      - `distinct_connectors_used_count: number`
+
+        Distinct claude.ai connectors this user used. Excludes calls whose connector could not be identified and all calls from organizations with zero data retention. Null on aggregated rows where a distinct count cannot be computed.
 
       - `distinct_conversation_count: number`
 
@@ -1914,9 +1949,17 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 {
   "data": [
     {
+      "bioscience_metrics": {
+        "delegation_count": 0,
+        "distinct_session_count": 0,
+        "message_count": 0,
+        "remote_compute_job_count": 0,
+        "skills_used_count": 0
+      },
       "chat_metrics": {
         "connectors_used_count": 0,
         "distinct_artifacts_created_count": 0,
+        "distinct_connectors_used_count": 0,
         "distinct_conversation_count": 0,
         "distinct_files_uploaded_count": 0,
         "distinct_projects_created_count": 0,
@@ -2025,19 +2068,47 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 
   Response for GET /v1/organizations/analytics/users.
 
-  - `data: array of object { chat_metrics, claude_code_metrics, cowork_metrics, 4 more }`
+  - `data: array of object { bioscience_metrics, chat_metrics, claude_code_metrics, 5 more }`
 
-    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_conversation_count, 8 more }`
+    - `bioscience_metrics: object { delegation_count, distinct_session_count, message_count, 2 more }`
+
+      Claude Bioscience activity metrics for a single user on a given day.
+
+      - `delegation_count: number`
+
+        Number of delegations (handoffs to a specialized agent) in Claude Bioscience sessions
+
+      - `distinct_session_count: number`
+
+        Number of distinct Claude Bioscience sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `message_count: number`
+
+        Number of messages sent in Claude Bioscience sessions
+
+      - `remote_compute_job_count: number`
+
+        Number of remote compute jobs launched from Claude Bioscience sessions
+
+      - `skills_used_count: number`
+
+        Total number of skill invocations in Claude Bioscience sessions
+
+    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_connectors_used_count, 9 more }`
 
       Claude.ai activity metrics for a single user on a given day.
 
       - `connectors_used_count: number`
 
-        Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+        Number of MCP connector invocations.
 
       - `distinct_artifacts_created_count: number`
 
         Number of distinct artifacts created
+
+      - `distinct_connectors_used_count: number`
+
+        Distinct claude.ai connectors this user used. Excludes calls whose connector could not be identified and all calls from organizations with zero data retention. Null on aggregated rows where a distinct count cannot be computed.
 
       - `distinct_conversation_count: number`
 
@@ -2707,11 +2778,7 @@ Requires an API key with the `read:analytics` scope.
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_conversation_count, distinct_user_count, message_count, 4 more }`
-
-    - `distinct_conversation_count: number`
-
-      Number of distinct conversations in the project on the requested day
+  - `data: array of object { distinct_user_count, message_count, project_id, 4 more }`
 
     - `distinct_user_count: number`
 
@@ -2744,6 +2811,10 @@ Requires an API key with the `read:analytics` scope.
       - `email_address: string`
 
         Email address of the user
+
+    - `distinct_conversation_count: optional number`
+
+      Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
 
   - `next_page: string`
 
@@ -2763,7 +2834,6 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 {
   "data": [
     {
-      "distinct_conversation_count": 0,
       "distinct_user_count": 0,
       "message_count": 0,
       "project_id": "project_id",
@@ -2772,7 +2842,8 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       "created_by": {
         "id": "id",
         "email_address": "email_address"
-      }
+      },
+      "distinct_conversation_count": 0
     }
   ],
   "next_page": "next_page"
@@ -2787,11 +2858,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_conversation_count, distinct_user_count, message_count, 4 more }`
-
-    - `distinct_conversation_count: number`
-
-      Number of distinct conversations in the project on the requested day
+  - `data: array of object { distinct_user_count, message_count, project_id, 4 more }`
 
     - `distinct_user_count: number`
 
@@ -2824,6 +2891,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       - `email_address: string`
 
         Email address of the user
+
+    - `distinct_conversation_count: optional number`
+
+      Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
 
   - `next_page: string`
 

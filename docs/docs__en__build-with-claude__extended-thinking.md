@@ -20,6 +20,7 @@ Extended thinking is available on all current Claude models. How you enable it d
 | [Claude Mythos Preview](https://anthropic.com/glasswing) | Supported                                                              | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), on by default                                                               |
 | Claude Opus 4.8                                          | Not supported (400 error)                                              | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with [effort](/docs/en/build-with-claude/effort)                             |
 | Claude Opus 4.7                                          | Not supported (400 error)                                              | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with [effort](/docs/en/build-with-claude/effort)                             |
+| Claude Sonnet 5                                          | Not supported (400 error)                                              | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with [effort](/docs/en/build-with-claude/effort)                             |
 | Claude Opus 4.6                                          | [Deprecated](/docs/en/build-with-claude/overview#feature-availability) | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with [effort](/docs/en/build-with-claude/effort)                             |
 | Claude Sonnet 4.6                                        | [Deprecated](/docs/en/build-with-claude/overview#feature-availability) | [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with [effort](/docs/en/build-with-claude/effort)                             |
 | Claude Opus 4.5                                          | Supported                                                              | N/A                                                                                                                                            |
@@ -66,28 +67,33 @@ Here is an example of using extended thinking in the Messages API:
        --header "content-type: application/json" \
        --data \
   '{
-      "model": "claude-sonnet-4-6",
-      "max_tokens": 16000,
-      "thinking": {
-          "type": "enabled",
-          "budget_tokens": 10000
-      },
-      "messages": [
-          {
-              "role": "user",
-              "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-          }
-      ]
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 16000,
+    "thinking": {
+      "type": "enabled",
+      "budget_tokens": 10000
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+      }
+    ]
   }'
   ```
 
   ```bash CLI
   ant messages create \
-    --transform content --format yaml \
-      --model claude-sonnet-4-6 \
-      --max-tokens 16000 \
-      --thinking '{type: enabled, budget_tokens: 10000}' \
-      --message '{role: user, content: Are there an infinite number of prime numbers such that n mod 4 == 3?}'
+    --transform content --format yaml <<'YAML'
+  model: claude-sonnet-4-6
+  max_tokens: 16000
+  thinking:
+    type: enabled
+    budget_tokens: 10000
+  messages:
+    - role: user
+      content: Are there an infinite number of prime numbers such that n mod 4 == 3?
+  YAML
   ```
 
   ```python Python
@@ -107,10 +113,11 @@ Here is an example of using extended thinking in the Messages API:
 
   # The response contains summarized thinking blocks and text blocks
   for block in response.content:
-      if block.type == "thinking":
-          print(f"\nThinking summary: {block.thinking}")
-      elif block.type == "text":
-          print(f"\nResponse: {block.text}")
+      match block.type:
+          case "thinking":
+              print(f"\nThinking summary: {block.thinking}")
+          case "text":
+              print(f"\nResponse: {block.text}")
   ```
 
   ```typescript TypeScript
@@ -121,14 +128,14 @@ Here is an example of using extended thinking in the Messages API:
     max_tokens: 16000,
     thinking: {
       type: "enabled",
-      budget_tokens: 10000
+      budget_tokens: 10000,
     },
     messages: [
       {
         role: "user",
-        content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-      }
-    ]
+        content: "Are there an infinite number of prime numbers such that n mod 4 == 3?",
+      },
+    ],
   });
 
   // The response contains summarized thinking blocks and text blocks
@@ -144,28 +151,29 @@ Here is an example of using extended thinking in the Messages API:
   ```csharp C#
   AnthropicClient client = new();
 
-  var parameters = new MessageCreateParams
+  var response = await client.Messages.Create(new()
   {
       Model = Model.ClaudeSonnet4_6,
       MaxTokens = 16000,
       Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
-      Messages = [
-          new() {
+      Messages =
+      [
+          new()
+          {
               Role = Role.User,
-              Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-          }
-      ]
-  };
+              Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?",
+          },
+      ],
+  });
 
-  var message = await client.Messages.Create(parameters);
-
-  foreach (var block in message.Content)
+  // The response contains summarized thinking blocks and text blocks
+  foreach (var block in response.Content)
   {
-      if (block.TryPickThinking(out ThinkingBlock? thinking))
+      if (block.TryPickThinking(out var thinking))
       {
           Console.WriteLine($"\nThinking summary: {thinking.Thinking}");
       }
-      else if (block.TryPickText(out TextBlock? text))
+      else if (block.TryPickText(out var text))
       {
           Console.WriteLine($"\nResponse: {text.Text}");
       }
@@ -175,7 +183,7 @@ Here is an example of using extended thinking in the Messages API:
   ```go Go
   client := anthropic.NewClient()
 
-  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
   	Model:     anthropic.ModelClaudeSonnet4_6,
   	MaxTokens: 16000,
   	Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
@@ -187,86 +195,97 @@ Here is an example of using extended thinking in the Messages API:
   	log.Fatal(err)
   }
 
+  // The response contains summarized thinking blocks and text blocks
   for _, block := range response.Content {
-  	switch v := block.AsAny().(type) {
+  	switch block := block.AsAny().(type) {
   	case anthropic.ThinkingBlock:
-  		fmt.Printf("\nThinking summary: %s", v.Thinking)
+  		fmt.Printf("\nThinking summary: %s", block.Thinking)
   	case anthropic.TextBlock:
-  		fmt.Printf("\nResponse: %s", v.Text)
+  		fmt.Printf("\nResponse: %s", block.Text)
   	}
   }
   ```
 
   ```java Java
-  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
 
-  MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_SONNET_4_6)
-      .maxTokens(16000L)
-      .enabledThinking(10000L)
-      .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
-      .build();
+  void main() {
+      var client = AnthropicOkHttpClient.fromEnv();
 
-  Message response = client.messages().create(params);
+      var params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(16_000)
+          .enabledThinking(10_000)
+          .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
+          .build();
 
-  response.content().forEach(block -> {
-      block.thinking().ifPresent(thinkingBlock ->
-          IO.println("\nThinking summary: " + thinkingBlock.thinking())
-      );
-      block.text().ifPresent(textBlock ->
-          IO.println("\nResponse: " + textBlock.text())
-      );
-  });
+      var response = client.messages().create(params);
+
+      // The response contains summarized thinking blocks and text blocks
+      for (var block : response.content()) {
+          block.thinking().ifPresent(thinkingBlock ->
+              IO.println("\nThinking summary: " + thinkingBlock.thinking())
+          );
+          block.text().ifPresent(textBlock ->
+              IO.println("\nResponse: " + textBlock.text())
+          );
+      }
+  }
   ```
 
   ```php PHP
   $client = new Client();
 
-  $message = $client->messages->create(
+  $response = $client->messages->create(
+      model: 'claude-sonnet-4-6',
       maxTokens: 16000,
+      thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
       messages: [
           [
               'role' => 'user',
-              'content' => 'Are there an infinite number of prime numbers such that n mod 4 == 3?'
-          ]
+              'content' => 'Are there an infinite number of prime numbers such that n mod 4 == 3?',
+          ],
       ],
-      model: 'claude-sonnet-4-6',
-      thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
   );
 
-  foreach ($message->content as $block) {
-      if ($block->type === 'thinking') {
-          echo "\nThinking summary: " . $block->thinking;
-      } elseif ($block->type === 'text') {
-          echo "\nResponse: " . $block->text;
-      }
+  // The response contains summarized thinking blocks and text blocks
+  foreach ($response->content as $block) {
+      echo match ($block->type) {
+          'thinking' => "\nThinking summary: {$block->thinking}",
+          'text' => "\nResponse: {$block->text}",
+          default => '',
+      };
   }
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  message = client.messages.create(
+  response = client.messages.create(
     model: "claude-sonnet-4-6",
-    max_tokens: 16000,
+    max_tokens: 16_000,
     thinking: {
-      type: "enabled",
-      budget_tokens: 10000
+      type: :enabled,
+      budget_tokens: 10_000
     },
     messages: [
       {
-        role: "user",
+        role: :user,
         content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
       }
     ]
   )
 
-  message.content.each do |block|
-    case block.type
-    when :thinking
-      puts "\nThinking summary: #{block.thinking}"
-    when :text
-      puts "\nResponse: #{block.text}"
+  # The response contains summarized thinking blocks and text blocks
+  response.content.each do |block|
+    case block
+    in {type: :thinking, thinking:}
+      puts "\nThinking summary: #{thinking}"
+    in {type: :text, text:}
+      puts "\nResponse: #{text}"
+    else
     end
   end
   ```
@@ -281,7 +300,7 @@ The `budget_tokens` parameter sets the maximum number of tokens Claude can use f
 </Warning>
 
 <Note>
-  [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens. Claude Haiku 4.5 supports up to 64k. See the [models overview](/docs/en/about-claude/models/overview) for limits on legacy models. On the [Message Batches API](/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](/docs/en/api/beta-headers) raises the output limit to 300k for Claude Opus 4.8, Opus 4.7, Opus 4.6, and Sonnet 4.6.
+  [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens. Claude Haiku 4.5 supports up to 64k. See the [models overview](/docs/en/about-claude/models/overview) for limits on legacy models. On the [Message Batches API](/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](/docs/en/api/beta-headers) raises the output limit to 300k for Claude Opus 4.8, Opus 4.7, Sonnet 5, Opus 4.6, and Sonnet 4.6.
 </Note>
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window. Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache)).
@@ -291,7 +310,7 @@ The `budget_tokens` parameter sets the maximum number of tokens Claude can use f
 The `display` field on the thinking configuration controls how thinking content is returned in API responses. It accepts two values:
 
 * `"summarized"`: Thinking blocks contain summarized thinking text. See [Summarized thinking](#summarized-thinking) for details. This is the default on Claude Opus 4.6, Claude Sonnet 4.6, and earlier Claude 4 models.
-* `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
+* `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Setting `display: "omitted"` is useful when your application doesn't surface thinking content to users. The primary benefit is **faster time-to-first-text-token when streaming:** The server skips streaming thinking tokens entirely and delivers only the signature, so the final text response begins streaming sooner.
 
@@ -579,7 +598,7 @@ When streaming with `display: "omitted"`, no `thinking_delta` events are emitted
 
 ### Summarized thinking
 
-With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
+With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
 
 Here are some important considerations for summarized thinking:
 
@@ -1894,6 +1913,7 @@ How you enable interleaved thinking depends on the model:
 | Claude Opus 4.8                                          | Automatic with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (the only supported thinking mode). No beta header needed.                                       |
 | Claude Opus 4.7                                          | Automatic with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (the only supported thinking mode). No beta header needed.                                       |
 | Claude Opus 4.6                                          | Automatic with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking). The `interleaved-thinking-2025-05-14` beta header is deprecated and safely ignored if included. |
+| Claude Sonnet 5                                          | Automatic with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking). The `interleaved-thinking-2025-05-14` beta header is deprecated and safely ignored if included. |
 | Claude Sonnet 4.6                                        | Automatic with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (recommended). The beta header with manual `type: "enabled"` is still functional but deprecated. |
 | Claude Opus 4.5                                          | Add the `interleaved-thinking-2025-05-14` [beta header](/docs/en/api/beta-headers) to your API request.                                                                           |
 | Claude Haiku 4.5                                         | Not supported. The beta header is accepted on the Claude API but ignored.                                                                                                         |
@@ -1905,8 +1925,8 @@ Here are some important considerations for interleaved thinking:
 
 * With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 * Interleaved thinking is only supported for [tools used via the Messages API](/docs/en/agents-and-tools/tool-use/overview).
-* The Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
-* On partner-operated platforms (for example, [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)), your request will fail.
+* The Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 5, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
+* On partner-operated platforms (for example, [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)), your request will fail.
 
 <AccordionGroup>
   <Accordion title="Tool use without interleaved thinking">
@@ -3494,6 +3514,7 @@ The Messages API handles thinking differently across Claude model versions. The 
 | [Claude Mythos Preview](https://anthropic.com/glasswing) | Supported       | Omitted by default1 | Automatic2                | Preserved3                                                            |
 | Claude Opus 4.8                                          | Not supported   | Omitted by default1 | Automatic2                | Preserved                                                             |
 | Claude Opus 4.7                                          | Not supported   | Omitted by default1 | Automatic2                | Preserved                                                             |
+| Claude Sonnet 5                                          | Not supported   | Omitted by default1 | Automatic2                | Preserved                                                             |
 | Claude Opus 4.6                                          | Deprecated      | Summarized          | Automatic2                | Preserved                                                             |
 | Claude Sonnet 4.6                                        | Deprecated      | Summarized          | Automatic, or beta header | Preserved                                                             |
 | Claude Opus 4.5                                          | Supported       | Summarized          | Beta header               | Preserved                                                             |

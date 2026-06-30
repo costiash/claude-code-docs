@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-30T16:30:56Z",
-  "indexed_files": 1714,
+  "generated_at": "2026-06-30T19:19:11Z",
+  "indexed_files": 1726,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -28,7 +28,7 @@
         "model",
         "command"
       ],
-      "word_count": 60144,
+      "word_count": 60181,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "permissions",
         "before"
       ],
-      "word_count": 8781,
+      "word_count": 8790,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -336,7 +336,7 @@
         "tip",
         "configuration"
       ],
-      "word_count": 3342,
+      "word_count": 3343,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -392,7 +392,7 @@
         "div",
         "wizard"
       ],
-      "word_count": 2017,
+      "word_count": 2037,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -688,19 +688,19 @@
         "set",
         "code",
         "session",
+        "sonnet",
         "models",
         "fable",
-        "managed",
         "picker",
+        "managed",
         "effort",
         "setting",
-        "version",
-        "level",
         "context",
-        "environment",
-        "fallback"
+        "version",
+        "sessions",
+        "level"
       ],
-      "word_count": 6962,
+      "word_count": 7141,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -728,7 +728,7 @@
         "counter",
         "mcp"
       ],
-      "word_count": 10556,
+      "word_count": 10547,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1120,7 +1120,7 @@
         "field",
         "specific"
       ],
-      "word_count": 8970,
+      "word_count": 8980,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1435,56 +1435,56 @@
       "title": "Deploy MCP tunnels with Docker Compose",
       "content_preview": "# Deploy MCP tunnels with Docker Compose  Install the MCP tunnel stack on a VM using Docker Compose.  ---  <Note>   MCP tunnels are in research preview. [Request access](https://claude.com/form/claude...",
       "keywords": [
-        "step",
         "tunnel",
+        "step",
         "mcp",
         "server",
         "title",
-        "host",
         "access",
+        "host",
         "programmatic",
-        "token",
-        "console",
-        "certificate",
-        "set",
-        "proxy",
         "setup",
-        "compose",
+        "console",
+        "token",
         "component",
-        "docker",
-        "identity",
+        "set",
+        "certificate",
+        "proxy",
+        "compose",
         "federation",
-        "see"
+        "identity",
+        "docker",
+        "one"
       ],
-      "word_count": 2121,
+      "word_count": 2222,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__deploy-compose.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/deploy-helm": {
       "title": "Deploy MCP tunnels with Helm",
       "content_preview": "# Deploy MCP tunnels with Helm  Install the tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.  ---  <Note>   MCP tunnels are in research preview. [Request access](https://claude.com...",
       "keywords": [
-        "step",
         "tunnel",
+        "step",
+        "chart",
         "mcp",
         "token",
-        "chart",
         "server",
         "certificate",
         "title",
-        "note",
-        "access",
         "setup",
+        "note",
         "component",
-        "set",
-        "helm",
-        "cluster",
-        "programmatic",
+        "secret",
+        "access",
         "federation",
         "rule",
-        "kubernetes",
-        "secret"
+        "set",
+        "console",
+        "programmatic",
+        "helm",
+        "cluster"
       ],
-      "word_count": 2302,
+      "word_count": 2527,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__deploy-helm.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/overview": {
@@ -1496,10 +1496,10 @@
         "tunnels",
         "server",
         "card",
+        "api",
         "network",
         "anthropic",
         "cloudflare",
-        "api",
         "proxy",
         "servers",
         "certificate",
@@ -1512,7 +1512,7 @@
         "provider",
         "see"
       ],
-      "word_count": 1433,
+      "word_count": 1451,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -1548,27 +1548,27 @@
       "content_preview": "# MCP tunnels reference  Proxy configuration fields, the Tunnels REST API, certificate requirements, and the setup component.  ---  <Note>   MCP tunnels are in research preview. [Request access](https...",
       "keywords": [
         "certificate",
+        "tunnel",
+        "api",
         "required",
+        "tunnels",
+        "when",
         "server",
         "upstream",
         "proxy",
         "validity",
-        "tunnels",
-        "api",
         "setup",
         "component",
-        "when",
-        "mcp",
+        "token",
         "helm",
-        "tunnel",
+        "path",
         "tls",
         "matching",
-        "request",
-        "keys",
-        "path",
-        "value"
+        "mcp",
+        "reference",
+        "note"
       ],
-      "word_count": 970,
+      "word_count": 1071,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__reference.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/security": {
@@ -1673,14 +1673,14 @@
         "block",
         "prompt",
         "calls",
+        "sonnet",
         "tasks",
         "request",
         "cost",
-        "sonnet",
-        "cap",
-        "haiku"
+        "fable",
+        "mythos"
       ],
-      "word_count": 7642,
+      "word_count": 7665,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5346,
+      "word_count": 5356,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1792,7 +1792,7 @@
         "request",
         "application"
       ],
-      "word_count": 8997,
+      "word_count": 9008,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1970,8 +1970,8 @@
         "tool",
         "tools",
         "claude",
-        "card",
         "tokens",
+        "card",
         "agents",
         "docs",
         "title",
@@ -1988,7 +1988,7 @@
         "web",
         "code"
       ],
-      "word_count": 1772,
+      "word_count": 1785,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -2024,8 +2024,8 @@
       "content_preview": "# Programmatic tool calling  Let Claude call your tools from code in the code execution container, cutting model round trips and token use in multi-tool workflows.  ---  Programmatic tool calling allo...",
       "keywords": [
         "tool",
-        "code",
         "claude",
+        "code",
         "programmatic",
         "execution",
         "calling",
@@ -2044,7 +2044,7 @@
         "note",
         "request"
       ],
-      "word_count": 6234,
+      "word_count": 6240,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2324,7 +2324,7 @@
         "results",
         "specific"
       ],
-      "word_count": 3571,
+      "word_count": 3574,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2352,7 +2352,7 @@
         "token",
         "available"
       ],
-      "word_count": 2543,
+      "word_count": 2546,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -2366,21 +2366,21 @@
         "number",
         "service",
         "user",
+        "response",
         "tagged",
         "rule",
-        "response",
         "null",
         "parameters",
+        "claude",
         "issuer",
+        "api",
         "returns",
         "tunnel",
         "organization",
-        "claude",
         "distinct",
-        "archived",
-        "single"
+        "header"
       ],
-      "word_count": 46825,
+      "word_count": 47847,
       "file_path": "docs/docs__en__api__admin.md"
     },
     "/docs/en/api/admin/analytics": {
@@ -2390,25 +2390,25 @@
         "number",
         "distinct",
         "null",
-        "day",
         "claude",
-        "office",
+        "day",
         "rows",
+        "office",
         "user",
         "activity",
         "count",
         "single",
         "metrics",
         "given",
-        "product",
         "cannot",
-        "code",
-        "agent",
+        "product",
         "where",
-        "usage",
-        "per"
+        "code",
+        "when",
+        "agent",
+        "aggregated"
       ],
-      "word_count": 10040,
+      "word_count": 10475,
       "file_path": "docs/docs__en__api__admin__analytics.md"
     },
     "/docs/en/api/admin/analytics/chat_projects": {
@@ -2416,19 +2416,19 @@
       "content_preview": "# Chat Projects  ## Get Chat Project Usage  **get** `/v1/organizations/analytics/apps/chat/projects`  Get per-project activity for a given day, with cursor-based pagination.  Returns activity metrics ...",
       "keywords": [
         "project",
-        "day",
         "user",
+        "day",
         "number",
         "get",
-        "requested",
+        "distinct",
         "identifier",
+        "null",
         "chat",
         "cursor",
         "page",
         "response",
-        "distinct",
+        "requested",
         "tagged",
-        "null",
         "projects",
         "activity",
         "organizations",
@@ -2436,7 +2436,7 @@
         "results",
         "opaque"
       ],
-      "word_count": 442,
+      "word_count": 458,
       "file_path": "docs/docs__en__api__admin__analytics__chat_projects.md"
     },
     "/docs/en/api/admin/analytics/chat_projects/list": {
@@ -2444,16 +2444,17 @@
       "content_preview": "## Get Chat Project Usage  **get** `/v1/organizations/analytics/apps/chat/projects`  Get per-project activity for a given day, with cursor-based pagination.  Returns activity metrics for each project ...",
       "keywords": [
         "project",
-        "day",
         "get",
+        "day",
         "number",
         "user",
         "activity",
         "cursor",
         "page",
         "response",
-        "requested",
+        "distinct",
         "identifier",
+        "null",
         "chat",
         "per",
         "returns",
@@ -2461,10 +2462,9 @@
         "claude",
         "results",
         "opaque",
-        "next",
-        "distinct"
+        "next"
       ],
-      "word_count": 295,
+      "word_count": 303,
       "file_path": "docs/docs__en__api__admin__analytics__chat_projects__list.md"
     },
     "/docs/en/api/admin/analytics/connectors": {
@@ -2535,11 +2535,11 @@
         "rows",
         "usage",
         "values",
+        "user",
         "product",
         "out",
         "response",
         "code",
-        "user",
         "surface",
         "break",
         "row",
@@ -2548,7 +2548,7 @@
         "days",
         "defaults"
       ],
-      "word_count": 2461,
+      "word_count": 2484,
       "file_path": "docs/docs__en__api__admin__analytics__cost.md"
     },
     "/docs/en/api/admin/analytics/cost/list": {
@@ -2587,9 +2587,9 @@
         "when",
         "rows",
         "cost",
+        "user",
         "row",
         "null",
-        "user",
         "one",
         "claude",
         "values",
@@ -2604,7 +2604,7 @@
         "code",
         "account"
       ],
-      "word_count": 1023,
+      "word_count": 1046,
       "file_path": "docs/docs__en__api__admin__analytics__cost__list_by_user.md"
     },
     "/docs/en/api/admin/analytics/retrieve_summaries": {
@@ -2615,24 +2615,24 @@
         "activity",
         "date",
         "number",
+        "when",
+        "response",
         "assigned",
+        "group",
         "users",
         "rolling",
         "window",
         "data",
         "finalized",
+        "null",
+        "scoped",
+        "rbac",
         "get",
         "range",
         "days",
-        "most",
-        "utc",
-        "seats",
-        "summaries",
-        "entry",
-        "lag",
-        "cowork"
+        "most"
       ],
-      "word_count": 425,
+      "word_count": 485,
       "file_path": "docs/docs__en__api__admin__analytics__retrieve_summaries.md"
     },
     "/docs/en/api/admin/analytics/skills": {
@@ -2705,9 +2705,9 @@
         "input",
         "when",
         "null",
+        "user",
         "product",
         "out",
-        "user",
         "cache",
         "surface",
         "requests",
@@ -2716,7 +2716,7 @@
         "range",
         "days"
       ],
-      "word_count": 2433,
+      "word_count": 2456,
       "file_path": "docs/docs__en__api__admin__analytics__usage.md"
     },
     "/docs/en/api/admin/analytics/usage/list": {
@@ -2754,9 +2754,9 @@
         "rows",
         "per",
         "when",
-        "number",
         "user",
         "usage",
+        "number",
         "tokens",
         "claude",
         "actor",
@@ -2772,7 +2772,7 @@
         "deleted",
         "null"
       ],
-      "word_count": 997,
+      "word_count": 1020,
       "file_path": "docs/docs__en__api__admin__analytics__usage__list_by_user.md"
     },
     "/docs/en/api/admin/analytics/users": {
@@ -2781,9 +2781,10 @@
       "keywords": [
         "number",
         "distinct",
-        "user",
         "claude",
+        "user",
         "null",
+        "sessions",
         "aggregated",
         "rows",
         "where",
@@ -2794,13 +2795,12 @@
         "code",
         "activity",
         "day",
-        "sessions",
-        "office",
         "given",
         "metrics",
-        "used"
+        "office",
+        "agent"
       ],
-      "word_count": 2037,
+      "word_count": 2290,
       "file_path": "docs/docs__en__api__admin__analytics__users.md"
     },
     "/docs/en/api/admin/analytics/users/list": {
@@ -2809,9 +2809,10 @@
       "keywords": [
         "number",
         "distinct",
-        "user",
         "claude",
+        "user",
         "null",
+        "sessions",
         "aggregated",
         "rows",
         "where",
@@ -2820,15 +2821,14 @@
         "computed",
         "activity",
         "single",
-        "code",
         "day",
+        "code",
         "given",
         "metrics",
-        "sessions",
         "office",
-        "used"
+        "agent"
       ],
-      "word_count": 1172,
+      "word_count": 1306,
       "file_path": "docs/docs__en__api__admin__analytics__users__list.md"
     },
     "/docs/en/api/admin/api_keys": {
@@ -3013,6 +3013,7 @@
         "anthropic",
         "full",
         "aws",
+        "role",
         "vault",
         "azure",
         "app",
@@ -3021,15 +3022,14 @@
         "response",
         "provider",
         "only",
-        "customer",
-        "organization"
+        "customer"
       ],
-      "word_count": 2994,
+      "word_count": 3082,
       "file_path": "docs/docs__en__api__admin__external_keys.md"
     },
     "/docs/en/api/admin/external_keys/create": {
       "title": "Untitled",
-      "content_preview": "## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `display_name: string`    Human-friendly display name.  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name,",
+      "content_preview": "## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `display_name: string`    Human-friendly display name.  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name,",
       "keywords": [
         "key",
         "kms",
@@ -3038,6 +3038,7 @@
         "tenant",
         "full",
         "aws",
+        "role",
         "anthropic",
         "vault",
         "azure",
@@ -3049,10 +3050,9 @@
         "human",
         "friendly",
         "display",
-        "provider",
-        "identity"
+        "provider"
       ],
-      "word_count": 479,
+      "word_count": 495,
       "file_path": "docs/docs__en__api__admin__external_keys__create.md"
     },
     "/docs/en/api/admin/external_keys/delete": {
@@ -3098,13 +3098,13 @@
         "opaque",
         "full",
         "aws",
+        "role",
         "anthropic",
         "vault",
         "azure",
-        "app",
-        "next"
+        "app"
       ],
-      "word_count": 353,
+      "word_count": 362,
       "file_path": "docs/docs__en__api__admin__external_keys__list.md"
     },
     "/docs/en/api/admin/external_keys/retrieve": {
@@ -3122,6 +3122,7 @@
         "config",
         "full",
         "aws",
+        "role",
         "anthropic",
         "vault",
         "azure",
@@ -3129,10 +3130,9 @@
         "retrieve",
         "caller",
         "organization",
-        "path",
-        "parameters"
+        "path"
       ],
-      "word_count": 284,
+      "word_count": 293,
       "file_path": "docs/docs__en__api__admin__external_keys__retrieve.md"
     },
     "/docs/en/api/admin/external_keys/update": {
@@ -3147,6 +3147,7 @@
         "external",
         "full",
         "aws",
+        "role",
         "anthropic",
         "vault",
         "azure",
@@ -3157,10 +3158,9 @@
         "data",
         "identity",
         "only",
-        "decrypt",
-        "parameters"
+        "decrypt"
       ],
-      "word_count": 510,
+      "word_count": 528,
       "file_path": "docs/docs__en__api__admin__external_keys__update.md"
     },
     "/docs/en/api/admin/external_keys/validate": {
@@ -3773,7 +3773,7 @@
     },
     "/docs/en/api/admin/mcp_tunnels": {
       "title": "MCP Tunnels",
-      "content_preview": "# MCP Tunnels  ## Get Tunnel  **get** `/v1/organizations/tunnels/{tunnel_id}`  Retrieve a single tunnel in the caller's organization by ID.  ### Path Parameters  - `tunnel_id: string`    ID of the Tun...",
+      "content_preview": "# MCP Tunnels  ## Get Tunnel  **get** `/v1/organizations/tunnels/{tunnel_id}`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migr...",
       "keywords": [
         "tunnel",
         "certificate",
@@ -3783,113 +3783,119 @@
         "rfc",
         "datetime",
         "indicating",
-        "parameters",
         "token",
-        "response",
-        "object",
-        "type",
-        "always",
-        "registered",
-        "certificates",
+        "api",
+        "header",
         "tunnels",
-        "workspace",
-        "value",
-        "mcp"
+        "after",
+        "parameters",
+        "response",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
+        "object"
       ],
-      "word_count": 2897,
+      "word_count": 3392,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels.md"
     },
     "/docs/en/api/admin/mcp_tunnels/archive": {
       "title": "Untitled",
-      "content_preview": "## Archive Tunnel  **post** `/v1/organizations/tunnels/{tunnel_id}/archive`  Archive a tunnel. Archival is irreversible.  Every non-archived certificate on the tunnel is archived in the same operation...",
+      "content_preview": "## Archive Tunnel  **post** `/v1/organizations/tunnels/{tunnel_id}/archive`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migrat...",
       "keywords": [
         "tunnel",
         "archived",
+        "api",
+        "after",
+        "header",
         "archive",
+        "migration",
+        "window",
+        "integrations",
+        "tunnels",
+        "token",
+        "scope",
+        "existing",
         "hostname",
         "never",
         "returns",
         "parameters",
         "rfc",
         "datetime",
-        "string",
-        "indicating",
-        "when",
-        "after",
-        "workspace",
-        "post",
-        "archival",
-        "irreversible",
-        "every",
-        "non",
-        "certificate"
+        "string"
       ],
-      "word_count": 231,
+      "word_count": 286,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__archive.md"
     },
     "/docs/en/api/admin/mcp_tunnels/list": {
       "title": "Untitled",
-      "content_preview": "## List Tunnels  **get** `/v1/organizations/tunnels`  List the organization's tunnels.  Results span the caller's organization, ordered by creation time (newest first). Use `workspace_id` to filter to...",
+      "content_preview": "## List Tunnels  **get** `/v1/organizations/tunnels`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integra...",
       "keywords": [
         "tunnels",
         "tunnel",
         "archived",
         "workspace",
         "list",
+        "api",
+        "after",
+        "header",
         "results",
         "page",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "organization",
         "creation",
         "first",
         "single",
         "excluded",
-        "parameters",
-        "default",
-        "return",
-        "opaque",
-        "cursor",
-        "response",
-        "omit",
-        "rfc"
+        "parameters"
       ],
-      "word_count": 317,
+      "word_count": 372,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__list.md"
     },
     "/docs/en/api/admin/mcp_tunnels/retrieve": {
       "title": "Untitled",
-      "content_preview": "## Get Tunnel  **get** `/v1/organizations/tunnels/{tunnel_id}`  Retrieve a single tunnel in the caller's organization by ID.  ### Path Parameters  - `tunnel_id: string`    ID of the Tunnel.  ### Heade...",
+      "content_preview": "## Get Tunnel  **get** `/v1/organizations/tunnels/{tunnel_id}`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. N...",
       "keywords": [
         "tunnel",
+        "api",
+        "after",
+        "header",
         "archived",
         "get",
+        "migration",
+        "window",
+        "integrations",
+        "tunnels",
+        "scope",
         "parameters",
         "rfc",
         "datetime",
         "string",
         "indicating",
         "when",
-        "after",
         "workspace",
-        "retrieve",
-        "single",
-        "caller",
-        "organization",
-        "path",
-        "header",
-        "required",
-        "endpoints",
-        "returns"
+        "deprecated",
+        "admin"
       ],
-      "word_count": 197,
+      "word_count": 252,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__retrieve.md"
     },
     "/docs/en/api/admin/mcp_tunnels/reveal_token": {
       "title": "Untitled",
-      "content_preview": "## Reveal Tunnel Token  **post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`  Return the tunnel's current connection token.  The value is fetched live on each call; Anthropic does not store i...",
+      "content_preview": "## Reveal Tunnel Token  **post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed afte...",
       "keywords": [
         "token",
         "tunnel",
+        "api",
+        "header",
         "value",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "return",
         "current",
         "connection",
@@ -3898,50 +3904,44 @@
         "parameters",
         "reveal",
         "post",
-        "fetched",
-        "live",
-        "each",
-        "call",
-        "anthropic",
-        "store",
-        "repeated",
-        "calls",
-        "same"
+        "deprecated",
+        "admin",
+        "endpoint"
       ],
-      "word_count": 141,
+      "word_count": 196,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__reveal_token.md"
     },
     "/docs/en/api/admin/mcp_tunnels/rotate_token": {
       "title": "Untitled",
-      "content_preview": "## Rotate Tunnel Token  **post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`  Invalidate the tunnel's current token for new connections and return a fresh value.  Established connections are ...",
+      "content_preview": "## Rotate Tunnel Token  **post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed afte...",
       "keywords": [
         "tunnel",
         "token",
+        "api",
+        "new",
+        "header",
         "value",
         "rotation",
         "parameters",
+        "after",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "current",
-        "new",
         "connections",
         "optional",
         "rotate",
         "post",
-        "invalidate",
-        "return",
-        "fresh",
-        "established",
-        "severed",
-        "connector",
-        "restarted",
-        "after",
-        "must"
+        "deprecated",
+        "admin"
       ],
-      "word_count": 152,
+      "word_count": 207,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__rotate_token.md"
     },
     "/docs/en/api/admin/mcp_tunnels/tunnel_certificates": {
       "title": "Tunnel Certificates",
-      "content_preview": "# Tunnel Certificates  ## Create Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`  Register a public CA certificate for the tunnel.  Anthropic verifies the gateway's s...",
+      "content_preview": "# Tunnel Certificates  ## Create Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude...",
       "keywords": [
         "certificate",
         "tunnel",
@@ -3953,79 +3953,79 @@
         "archived",
         "registered",
         "certificates",
+        "api",
+        "header",
         "parameters",
         "against",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "expires",
-        "does",
-        "expire",
-        "sha",
-        "fingerprint",
-        "lowercase",
-        "hex",
-        "object"
+        "does"
       ],
-      "word_count": 1350,
+      "word_count": 1570,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__tunnel_certificates.md"
     },
     "/docs/en/api/admin/mcp_tunnels/tunnel_certificates/archive": {
       "title": "Untitled",
-      "content_preview": "## Archive Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`  Archive a certificate, removing it from the set Anthropic trusts for this tunnel.  The certificate record is retained. Archiving the last non-archived certificate is permitted; the",
+      "content_preview": "## Archive Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Cla...",
       "keywords": [
         "certificate",
         "tunnel",
         "string",
+        "api",
+        "header",
         "archived",
         "rfc",
         "datetime",
         "indicating",
         "when",
         "archive",
+        "migration",
+        "window",
+        "new",
+        "integrations",
+        "scope",
         "parameters",
         "registered",
         "post",
-        "removing",
-        "set",
-        "anthropic",
-        "trusts",
-        "record",
-        "retained",
-        "archiving",
-        "last"
+        "deprecated"
       ],
-      "word_count": 211,
+      "word_count": 266,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__tunnel_certificates__archive.md"
     },
     "/docs/en/api/admin/mcp_tunnels/tunnel_certificates/create": {
       "title": "Untitled",
-      "content_preview": "## Create Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`  Register a public CA certificate for the tunnel.  Anthropic verifies the gateway's server certificate again...",
+      "content_preview": "## Create Tunnel Certificate  **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be remove...",
       "keywords": [
         "certificate",
         "tunnel",
         "when",
         "string",
+        "api",
+        "header",
         "archived",
         "parameters",
         "rfc",
         "datetime",
         "indicating",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "against",
         "pem",
         "body",
         "must",
-        "contain",
-        "exactly",
-        "one",
-        "private",
-        "key",
-        "material",
-        "certificates"
+        "contain"
       ],
-      "word_count": 245,
+      "word_count": 300,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__tunnel_certificates__create.md"
     },
     "/docs/en/api/admin/mcp_tunnels/tunnel_certificates/list": {
       "title": "Untitled",
-      "content_preview": "## List Tunnel Certificates  **get** `/v1/organizations/tunnels/{tunnel_id}/certificates`  List the certificates registered on a tunnel.  Archived certificates are excluded unless `include_archived` i...",
+      "content_preview": "## List Tunnel Certificates  **get** `/v1/organizations/tunnels/{tunnel_id}/certificates`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed ...",
       "keywords": [
         "tunnel",
         "certificates",
@@ -4033,50 +4033,50 @@
         "archived",
         "string",
         "list",
+        "api",
+        "header",
         "registered",
         "parameters",
         "rfc",
         "datetime",
         "indicating",
         "when",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "excluded",
-        "results",
-        "get",
-        "unless",
-        "set",
-        "path",
-        "query",
-        "include"
+        "results"
       ],
-      "word_count": 262,
+      "word_count": 317,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__tunnel_certificates__list.md"
     },
     "/docs/en/api/admin/mcp_tunnels/tunnel_certificates/retrieve": {
       "title": "Untitled",
-      "content_preview": "## Get Tunnel Certificate  **get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`  Retrieve a single certificate registered on a tunnel by ID.  ### Path Parameters  - `tunnel_id...",
+      "content_preview": "## Get Tunnel Certificate  **get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`  **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and w...",
       "keywords": [
         "certificate",
         "tunnel",
         "string",
+        "api",
+        "header",
         "registered",
         "rfc",
         "datetime",
         "indicating",
         "when",
         "get",
+        "migration",
+        "window",
+        "integrations",
+        "scope",
         "parameters",
         "archived",
-        "retrieve",
-        "single",
-        "path",
-        "header",
-        "required",
-        "endpoints",
-        "returns",
-        "expires",
-        "does"
+        "deprecated",
+        "admin",
+        "endpoint"
       ],
-      "word_count": 182,
+      "word_count": 237,
       "file_path": "docs/docs__en__api__admin__mcp_tunnels__tunnel_certificates__retrieve.md"
     },
     "/docs/en/api/admin/organizations": {
@@ -4475,8 +4475,8 @@
       "keywords": [
         "deleted",
         "spend",
-        "organization",
         "limit",
+        "organization",
         "user",
         "only",
         "within",
@@ -4494,7 +4494,7 @@
         "request",
         "get"
       ],
-      "word_count": 4795,
+      "word_count": 4799,
       "file_path": "docs/docs__en__api__admin__spend_limits.md"
     },
     "/docs/en/api/admin/spend_limits/create": {
@@ -4527,11 +4527,11 @@
     },
     "/docs/en/api/admin/spend_limits/delete": {
       "title": "Untitled",
-      "content_preview": "## Delete Spend Limit  **delete** `/v1/organizations/spend_limits/{spend_limit_id}`  Delete a per-user spend limit override.  The member falls back to any inherited cap at that period. Seat-tier, grou...",
+      "content_preview": "## Delete Spend Limit  **delete** `/v1/organizations/spend_limits/{spend_limit_id}`  Delete a per-user spend limit override.  The member falls back to any inherited spend limit at that period. Seat-tier, group, and organization-level rows cannot be deleted via this endpoint.  ### Path Parameters  -",
       "keywords": [
-        "delete",
         "spend",
         "limit",
+        "delete",
         "per",
         "user",
         "override",
@@ -4540,7 +4540,6 @@
         "back",
         "any",
         "inherited",
-        "cap",
         "period",
         "seat",
         "tier",
@@ -4548,9 +4547,10 @@
         "organization",
         "level",
         "rows",
-        "cannot"
+        "cannot",
+        "deleted"
       ],
-      "word_count": 83,
+      "word_count": 84,
       "file_path": "docs/docs__en__api__admin__spend_limits__delete.md"
     },
     "/docs/en/api/admin/spend_limits/increase_requests": {
@@ -4578,7 +4578,7 @@
         "get",
         "member"
       ],
-      "word_count": 3532,
+      "word_count": 3533,
       "file_path": "docs/docs__en__api__admin__spend_limits__increase_requests.md"
     },
     "/docs/en/api/admin/spend_limits/increase_requests/approve": {
@@ -4586,9 +4586,9 @@
       "content_preview": "## Approve Spend Limit Increase Request  **post** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/approve`  Approve a pending spend limit increase request.  Writes a...",
       "keywords": [
         "deleted",
-        "user",
         "spend",
         "limit",
+        "user",
         "organization",
         "request",
         "within",
@@ -4606,7 +4606,7 @@
         "approve",
         "requester"
       ],
-      "word_count": 774,
+      "word_count": 775,
       "file_path": "docs/docs__en__api__admin__spend_limits__increase_requests__approve.md"
     },
     "/docs/en/api/admin/spend_limits/increase_requests/deny": {
@@ -4697,18 +4697,17 @@
       "title": "Untitled",
       "content_preview": "## List Effective Spend Limits  **get** `/v1/organizations/spend_limits/effective`  List each member's effective spend limit and period-to-date spend.  Returns one row per (member, period) the member ...",
       "keywords": [
-        "member",
         "spend",
+        "member",
+        "limit",
         "list",
         "effective",
         "period",
         "returns",
-        "cap",
         "deleted",
         "limits",
         "get",
         "each",
-        "limit",
         "date",
         "one",
         "row",
@@ -4716,9 +4715,10 @@
         "resolves",
         "scope",
         "inherited",
-        "paginates"
+        "paginates",
+        "periods"
       ],
-      "word_count": 333,
+      "word_count": 335,
       "file_path": "docs/docs__en__api__admin__spend_limits__list_effective.md"
     },
     "/docs/en/api/admin/spend_limits/retrieve": {
@@ -5506,8 +5506,8 @@
         "tool",
         "model",
         "content",
-        "block",
         "when",
+        "block",
         "session",
         "text",
         "event",
@@ -5515,16 +5515,16 @@
         "tokens",
         "cache",
         "beta",
-        "user",
         "timestamp",
+        "user",
         "rfc",
         "error",
-        "input",
-        "server",
         "format",
+        "server",
+        "input",
         "agents"
       ],
-      "word_count": 275831,
+      "word_count": 282637,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -5860,7 +5860,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 21197,
+      "word_count": 21281,
       "file_path": "docs/docs__en__api__beta__deployments.md"
     },
     "/docs/en/api/beta/deployments/archive": {
@@ -5888,7 +5888,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1722,
+      "word_count": 1734,
       "file_path": "docs/docs__en__api__beta__deployments__archive.md"
     },
     "/docs/en/api/beta/deployments/create": {
@@ -5916,7 +5916,7 @@
         "store",
         "encoded"
       ],
-      "word_count": 2904,
+      "word_count": 2916,
       "file_path": "docs/docs__en__api__beta__deployments__create.md"
     },
     "/docs/en/api/beta/deployments/list": {
@@ -5944,7 +5944,7 @@
         "rubric",
         "longer"
       ],
-      "word_count": 1801,
+      "word_count": 1813,
       "file_path": "docs/docs__en__api__beta__deployments__list.md"
     },
     "/docs/en/api/beta/deployments/pause": {
@@ -5972,7 +5972,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1722,
+      "word_count": 1734,
       "file_path": "docs/docs__en__api__beta__deployments__pause.md"
     },
     "/docs/en/api/beta/deployments/retrieve": {
@@ -6000,7 +6000,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1719,
+      "word_count": 1731,
       "file_path": "docs/docs__en__api__beta__deployments__retrieve.md"
     },
     "/docs/en/api/beta/deployments/run": {
@@ -6056,7 +6056,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1722,
+      "word_count": 1734,
       "file_path": "docs/docs__en__api__beta__deployments__unpause.md"
     },
     "/docs/en/api/beta/deployments/update": {
@@ -6084,7 +6084,7 @@
         "store",
         "preserve"
       ],
-      "word_count": 2925,
+      "word_count": 2937,
       "file_path": "docs/docs__en__api__beta__deployments__update.md"
     },
     "/docs/en/api/beta/environments": {
@@ -7181,19 +7181,19 @@
         "when",
         "number",
         "input",
+        "used",
         "request",
         "create",
-        "used",
         "control",
         "breakpoint",
+        "prompt",
         "output",
         "text",
         "server",
-        "intelligence",
-        "response",
-        "search"
+        "search",
+        "intelligence"
       ],
-      "word_count": 114417,
+      "word_count": 117897,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -7204,10 +7204,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -7216,12 +7216,12 @@
         "response",
         "requests",
         "output",
-        "which",
         "results",
+        "which",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 31055,
+      "word_count": 31686,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -7257,8 +7257,8 @@
       "content_preview": "## Create a Message Batch  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Me...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -7268,16 +7268,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 9841,
+      "word_count": 10448,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -7361,7 +7361,7 @@
         "when",
         "message"
       ],
-      "word_count": 4793,
+      "word_count": 4799,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -7397,8 +7397,8 @@
       "content_preview": "## Count tokens in a Message  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API can be used to count the number of tokens in a Message, including tool...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -7411,13 +7411,13 @@
         "system",
         "search",
         "only",
-        "schema",
-        "name",
         "returned",
+        "schema",
         "included",
+        "name",
         "via"
       ],
-      "word_count": 8513,
+      "word_count": 9122,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -7437,15 +7437,15 @@
         "request",
         "breakpoint",
         "true",
-        "input",
-        "prompt",
         "used",
+        "prompt",
+        "input",
         "blocks",
-        "response",
         "only",
+        "response",
         "server"
       ],
-      "word_count": 13830,
+      "word_count": 14422,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -8505,6 +8505,342 @@
       "word_count": 320,
       "file_path": "docs/docs__en__api__beta__skills__versions__retrieve.md"
     },
+    "/docs/en/api/beta/tunnels": {
+      "title": "Tunnels",
+      "content_preview": "# Tunnels  ## Create Tunnel  **post** `/v1/tunnels`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period...",
+      "keywords": [
+        "tunnel",
+        "certificate",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "parameters",
+        "token",
+        "api",
+        "tunnels",
+        "archived",
+        "unique",
+        "beta",
+        "identifier",
+        "optional",
+        "returns",
+        "value",
+        "response",
+        "mcp",
+        "research"
+      ],
+      "word_count": 3242,
+      "file_path": "docs/docs__en__api__beta__tunnels.md"
+    },
+    "/docs/en/api/beta/tunnels/archive": {
+      "title": "Untitled",
+      "content_preview": "## Archive Tunnel  **post** `/v1/tunnels/{tunnel_id}/archive`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecat...",
+      "keywords": [
+        "tunnel",
+        "archived",
+        "header",
+        "api",
+        "hostname",
+        "never",
+        "returns",
+        "parameters",
+        "mcp",
+        "unique",
+        "timestamp",
+        "rfc",
+        "format",
+        "archive",
+        "post",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may"
+      ],
+      "word_count": 310,
+      "file_path": "docs/docs__en__api__beta__tunnels__archive.md"
+    },
+    "/docs/en/api/beta/tunnels/certificates": {
+      "title": "Certificates",
+      "content_preview": "# Certificates  ## Create Tunnel Certificate  **post** `/v1/tunnels/{tunnel_id}/certificates`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header a...",
+      "keywords": [
+        "certificate",
+        "tunnel",
+        "timestamp",
+        "rfc",
+        "format",
+        "header",
+        "parameters",
+        "certificates",
+        "api",
+        "against",
+        "registered",
+        "archived",
+        "beta",
+        "unique",
+        "identifier",
+        "prefixed",
+        "lowercase",
+        "hex",
+        "sha",
+        "fingerprint"
+      ],
+      "word_count": 1319,
+      "file_path": "docs/docs__en__api__beta__tunnels__certificates.md"
+    },
+    "/docs/en/api/beta/tunnels/certificates/archive": {
+      "title": "Untitled",
+      "content_preview": "## Archive Tunnel Certificate  **post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22...",
+      "keywords": [
+        "certificate",
+        "tunnel",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "api",
+        "parameters",
+        "archive",
+        "post",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may",
+        "change",
+        "without",
+        "deprecation",
+        "period",
+        "supersedes"
+      ],
+      "word_count": 301,
+      "file_path": "docs/docs__en__api__beta__tunnels__certificates__archive.md"
+    },
+    "/docs/en/api/beta/tunnels/certificates/create": {
+      "title": "Untitled",
+      "content_preview": "## Create Tunnel Certificate  **post** `/v1/tunnels/{tunnel_id}/certificates`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change wi...",
+      "keywords": [
+        "certificate",
+        "tunnel",
+        "header",
+        "parameters",
+        "timestamp",
+        "rfc",
+        "format",
+        "api",
+        "against",
+        "create",
+        "post",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may",
+        "change",
+        "without",
+        "deprecation",
+        "period"
+      ],
+      "word_count": 321,
+      "file_path": "docs/docs__en__api__beta__tunnels__certificates__create.md"
+    },
+    "/docs/en/api/beta/tunnels/certificates/list": {
+      "title": "Untitled",
+      "content_preview": "## List Tunnel Certificates  **get** `/v1/tunnels/{tunnel_id}/certificates`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change with...",
+      "keywords": [
+        "certificates",
+        "tunnel",
+        "header",
+        "archived",
+        "parameters",
+        "certificate",
+        "timestamp",
+        "rfc",
+        "format",
+        "list",
+        "api",
+        "registered",
+        "include",
+        "results",
+        "defaults",
+        "maximum",
+        "page",
+        "pagination",
+        "cursor",
+        "response"
+      ],
+      "word_count": 337,
+      "file_path": "docs/docs__en__api__beta__tunnels__certificates__list.md"
+    },
+    "/docs/en/api/beta/tunnels/certificates/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Get Tunnel Certificate  **get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and ...",
+      "keywords": [
+        "certificate",
+        "tunnel",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "api",
+        "parameters",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may",
+        "change",
+        "without",
+        "deprecation",
+        "period",
+        "supersedes",
+        "admin"
+      ],
+      "word_count": 267,
+      "file_path": "docs/docs__en__api__beta__tunnels__certificates__retrieve.md"
+    },
+    "/docs/en/api/beta/tunnels/create": {
+      "title": "Untitled",
+      "content_preview": "## Create Tunnel  **post** `/v1/tunnels`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supers...",
+      "keywords": [
+        "tunnel",
+        "header",
+        "mcp",
+        "api",
+        "hostname",
+        "parameters",
+        "optional",
+        "human",
+        "readable",
+        "name",
+        "characters",
+        "unique",
+        "timestamp",
+        "rfc",
+        "format",
+        "create",
+        "post",
+        "tunnels",
+        "research",
+        "preview"
+      ],
+      "word_count": 312,
+      "file_path": "docs/docs__en__api__beta__tunnels__create.md"
+    },
+    "/docs/en/api/beta/tunnels/list": {
+      "title": "Untitled",
+      "content_preview": "## List Tunnels  **get** `/v1/tunnels`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersed...",
+      "keywords": [
+        "tunnels",
+        "tunnel",
+        "archived",
+        "header",
+        "results",
+        "list",
+        "api",
+        "ordered",
+        "include",
+        "parameters",
+        "defaults",
+        "maximum",
+        "page",
+        "pagination",
+        "cursor",
+        "response",
+        "unique",
+        "timestamp",
+        "rfc",
+        "format"
+      ],
+      "word_count": 346,
+      "file_path": "docs/docs__en__api__beta__tunnels__list.md"
+    },
+    "/docs/en/api/beta/tunnels/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Get Tunnel  **get** `/v1/tunnels/{tunnel_id}`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. I...",
+      "keywords": [
+        "tunnel",
+        "header",
+        "get",
+        "api",
+        "parameters",
+        "mcp",
+        "unique",
+        "timestamp",
+        "rfc",
+        "format",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may",
+        "change",
+        "without",
+        "deprecation",
+        "period",
+        "supersedes"
+      ],
+      "word_count": 271,
+      "file_path": "docs/docs__en__api__beta__tunnels__retrieve.md"
+    },
+    "/docs/en/api/beta/tunnels/reveal_token": {
+      "title": "Untitled",
+      "content_preview": "## Reveal Tunnel Token  **post** `/v1/tunnels/{tunnel_id}/reveal_token`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without ...",
+      "keywords": [
+        "token",
+        "tunnel",
+        "header",
+        "connector",
+        "value",
+        "post",
+        "api",
+        "does",
+        "rotated",
+        "parameters",
+        "reveal",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may",
+        "change",
+        "without",
+        "deprecation",
+        "period"
+      ],
+      "word_count": 259,
+      "file_path": "docs/docs__en__api__beta__tunnels__reveal_token.md"
+    },
+    "/docs/en/api/beta/tunnels/rotate_token": {
+      "title": "Untitled",
+      "content_preview": "## Rotate Tunnel Token  **post** `/v1/tunnels/{tunnel_id}/rotate_token`  The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without ...",
+      "keywords": [
+        "token",
+        "tunnel",
+        "connector",
+        "header",
+        "rotation",
+        "value",
+        "parameters",
+        "api",
+        "current",
+        "new",
+        "connections",
+        "returns",
+        "optional",
+        "rotate",
+        "post",
+        "tunnels",
+        "research",
+        "preview",
+        "requires",
+        "may"
+      ],
+      "word_count": 270,
+      "file_path": "docs/docs__en__api__beta__tunnels__rotate_token.md"
+    },
     "/docs/en/api/beta/user_profiles": {
       "title": "User Profiles",
       "content_preview": "# User Profiles  ## Create User Profile  **post** `/v1/user_profiles`  Create User Profile  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify t...",
@@ -9140,7 +9476,7 @@
         "timestamp",
         "number"
       ],
-      "word_count": 250605,
+      "word_count": 253092,
       "file_path": "docs/docs__en__api__cli__beta.md"
     },
     "/docs/en/api/cli/beta/agents": {
@@ -9476,7 +9812,7 @@
         "type",
         "rubric"
       ],
-      "word_count": 18907,
+      "word_count": 18991,
       "file_path": "docs/docs__en__api__cli__beta__deployments.md"
     },
     "/docs/en/api/cli/beta/deployments/archive": {
@@ -9504,7 +9840,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1673,
+      "word_count": 1685,
       "file_path": "docs/docs__en__api__cli__beta__deployments__archive.md"
     },
     "/docs/en/api/cli/beta/deployments/create": {
@@ -9532,7 +9868,7 @@
         "sessions",
         "created"
       ],
-      "word_count": 1881,
+      "word_count": 1893,
       "file_path": "docs/docs__en__api__cli__beta__deployments__create.md"
     },
     "/docs/en/api/cli/beta/deployments/list": {
@@ -9560,7 +9896,7 @@
         "each",
         "type"
       ],
-      "word_count": 1774,
+      "word_count": 1786,
       "file_path": "docs/docs__en__api__cli__beta__deployments__list.md"
     },
     "/docs/en/api/cli/beta/deployments/pause": {
@@ -9588,7 +9924,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1673,
+      "word_count": 1685,
       "file_path": "docs/docs__en__api__cli__beta__deployments__pause.md"
     },
     "/docs/en/api/cli/beta/deployments/retrieve": {
@@ -9616,7 +9952,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1673,
+      "word_count": 1685,
       "file_path": "docs/docs__en__api__cli__beta__deployments__retrieve.md"
     },
     "/docs/en/api/cli/beta/deployments/run": {
@@ -9672,7 +10008,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1673,
+      "word_count": 1685,
       "file_path": "docs/docs__en__api__cli__beta__deployments__unpause.md"
     },
     "/docs/en/api/cli/beta/deployments/update": {
@@ -9700,7 +10036,7 @@
         "data",
         "archived"
       ],
-      "word_count": 1912,
+      "word_count": 1924,
       "file_path": "docs/docs__en__api__cli__beta__deployments__update.md"
     },
     "/docs/en/api/cli/beta/environments": {
@@ -10803,11 +11139,11 @@
         "frontier",
         "agents",
         "output",
-        "text",
         "control",
-        "breakpoint"
+        "prompt",
+        "text"
       ],
-      "word_count": 101051,
+      "word_count": 103450,
       "file_path": "docs/docs__en__api__cli__beta__messages.md"
     },
     "/docs/en/api/cli/beta/messages/batches": {
@@ -10819,8 +11155,8 @@
         "number",
         "intelligence",
         "message",
-        "input",
         "batch",
+        "input",
         "coding",
         "used",
         "request",
@@ -10835,7 +11171,7 @@
         "processing",
         "entry"
       ],
-      "word_count": 24227,
+      "word_count": 24306,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches.md"
     },
     "/docs/en/api/cli/beta/messages/batches/cancel": {
@@ -10878,6 +11214,7 @@
         "which",
         "number",
         "once",
+        "header",
         "rfc",
         "datetime",
         "string",
@@ -10885,13 +11222,12 @@
         "ended",
         "entire",
         "batches",
+        "request",
         "results",
         "only",
-        "ends",
-        "zero",
-        "until"
+        "ends"
       ],
-      "word_count": 578,
+      "word_count": 633,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches__create.md"
     },
     "/docs/en/api/cli/beta/messages/batches/delete": {
@@ -10975,7 +11311,7 @@
         "content",
         "long"
       ],
-      "word_count": 5417,
+      "word_count": 5423,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches__results.md"
     },
     "/docs/en/api/cli/beta/messages/batches/retrieve": {
@@ -11019,9 +11355,9 @@
         "tool",
         "input",
         "messages",
+        "request",
         "see",
         "tokens",
-        "request",
         "claude",
         "blocks",
         "output",
@@ -11031,7 +11367,7 @@
         "each",
         "include"
       ],
-      "word_count": 1093,
+      "word_count": 1125,
       "file_path": "docs/docs__en__api__cli__beta__messages__count_tokens.md"
     },
     "/docs/en/api/cli/beta/messages/create": {
@@ -11046,8 +11382,8 @@
         "tool",
         "request",
         "used",
-        "body",
         "coding",
+        "body",
         "cache",
         "response",
         "content",
@@ -11059,7 +11395,7 @@
         "token",
         "when"
       ],
-      "word_count": 6874,
+      "word_count": 6885,
       "file_path": "docs/docs__en__api__cli__beta__messages__create.md"
     },
     "/docs/en/api/cli/beta/models": {
@@ -12766,7 +13102,7 @@
     },
     "/docs/en/api/cli/completions/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Text Completion  `$ ant completions create`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](ht...",
+      "content_preview": "## Create a Text Completion  `$ ant completions create`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.  Future models and features will not",
       "keywords": [
         "model",
         "intelligence",
@@ -12808,16 +13144,16 @@
         "cited",
         "text",
         "number",
+        "prompt",
         "search",
-        "may",
-        "message",
-        "one",
         "results",
+        "may",
+        "one",
+        "message",
         "create",
-        "input",
-        "invocation"
+        "time"
       ],
-      "word_count": 62026,
+      "word_count": 65105,
       "file_path": "docs/docs__en__api__cli__messages.md"
     },
     "/docs/en/api/cli/messages/batches": {
@@ -12833,8 +13169,8 @@
         "processing",
         "tokens",
         "results",
-        "block",
         "request",
+        "block",
         "which",
         "invocation",
         "response",
@@ -12845,7 +13181,7 @@
         "input",
         "intelligence"
       ],
-      "word_count": 13576,
+      "word_count": 13645,
       "file_path": "docs/docs__en__api__cli__messages__batches.md"
     },
     "/docs/en/api/cli/messages/batches/cancel": {
@@ -12895,13 +13231,13 @@
         "ended",
         "entire",
         "batches",
+        "request",
         "results",
         "only",
         "ends",
-        "zero",
-        "until"
+        "zero"
       ],
-      "word_count": 557,
+      "word_count": 614,
       "file_path": "docs/docs__en__api__cli__messages__batches__create.md"
     },
     "/docs/en/api/cli/messages/batches/delete": {
@@ -12985,7 +13321,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2768,
+      "word_count": 2771,
       "file_path": "docs/docs__en__api__cli__messages__batches__results.md"
     },
     "/docs/en/api/cli/messages/batches/retrieve": {
@@ -13023,25 +13359,25 @@
         "model",
         "tools",
         "message",
+        "param",
         "content",
         "tool",
+        "body",
         "input",
         "messages",
         "blocks",
         "see",
         "tokens",
         "then",
+        "request",
         "single",
         "each",
         "include",
         "response",
         "example",
-        "system",
-        "prompt",
-        "count",
-        "our"
+        "system"
       ],
-      "word_count": 914,
+      "word_count": 962,
       "file_path": "docs/docs__en__api__cli__messages__count_tokens.md"
     },
     "/docs/en/api/cli/messages/create": {
@@ -13052,6 +13388,8 @@
         "tool",
         "tokens",
         "input",
+        "body",
+        "param",
         "response",
         "content",
         "block",
@@ -13065,11 +13403,9 @@
         "messages",
         "generated",
         "message",
-        "single",
-        "intelligence",
-        "api"
+        "single"
       ],
-      "word_count": 3728,
+      "word_count": 3797,
       "file_path": "docs/docs__en__api__cli__messages__create.md"
     },
     "/docs/en/api/cli/models": {
@@ -13158,7 +13494,7 @@
     },
     "/docs/en/api/completions": {
       "title": "Completions",
-      "content_preview": "# Completions  ## Create a Text Completion  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.cl...",
+      "content_preview": "# Completions  ## Create a Text Completion  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://platfor...",
       "keywords": [
         "model",
         "intelligence",
@@ -13186,7 +13522,7 @@
     },
     "/docs/en/api/completions/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Text Completion  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.  Future models and features will not be compatible with Text Completions.",
+      "content_preview": "## Create a Text Completion  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/do...",
       "keywords": [
         "model",
         "intelligence",
@@ -14681,12 +15017,12 @@
         "timestamp",
         "error",
         "rfc",
-        "input",
         "server",
+        "input",
         "agents",
-        "format"
+        "request"
       ],
-      "word_count": 247227,
+      "word_count": 250427,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/agents": {
@@ -15022,7 +15358,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 19631,
+      "word_count": 19715,
       "file_path": "docs/docs__en__api__csharp__beta__deployments.md"
     },
     "/docs/en/api/csharp/beta/deployments/archive": {
@@ -15050,7 +15386,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1610,
+      "word_count": 1622,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__archive.md"
     },
     "/docs/en/api/csharp/beta/deployments/create": {
@@ -15078,7 +15414,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2639,
+      "word_count": 2651,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__create.md"
     },
     "/docs/en/api/csharp/beta/deployments/list": {
@@ -15106,7 +15442,7 @@
         "each",
         "type"
       ],
-      "word_count": 1708,
+      "word_count": 1720,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__list.md"
     },
     "/docs/en/api/csharp/beta/deployments/pause": {
@@ -15134,7 +15470,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1610,
+      "word_count": 1622,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__pause.md"
     },
     "/docs/en/api/csharp/beta/deployments/retrieve": {
@@ -15162,7 +15498,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1610,
+      "word_count": 1622,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__retrieve.md"
     },
     "/docs/en/api/csharp/beta/deployments/run": {
@@ -15218,7 +15554,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1610,
+      "word_count": 1622,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__unpause.md"
     },
     "/docs/en/api/csharp/beta/deployments/update": {
@@ -15246,7 +15582,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2647,
+      "word_count": 2659,
       "file_path": "docs/docs__en__api__csharp__beta__deployments__update.md"
     },
     "/docs/en/api/csharp/beta/environments": {
@@ -16334,25 +16670,25 @@
         "tool",
         "block",
         "model",
-        "tokens",
         "content",
+        "tokens",
         "cache",
         "when",
         "number",
         "input",
         "request",
-        "create",
         "used",
+        "create",
         "control",
         "breakpoint",
-        "output",
         "text",
+        "output",
+        "prompt",
         "server",
-        "intelligence",
         "search",
         "response"
       ],
-      "word_count": 99697,
+      "word_count": 102809,
       "file_path": "docs/docs__en__api__csharp__beta__messages.md"
     },
     "/docs/en/api/csharp/beta/messages/batches": {
@@ -16363,10 +16699,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -16375,12 +16711,12 @@
         "response",
         "requests",
         "output",
-        "which",
         "results",
+        "which",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 28448,
+      "word_count": 29004,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/cancel": {
@@ -16416,8 +16752,8 @@
       "content_preview": "## Create a Message Batch  `BetaMessageBatch Beta.Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages/batches`  Send a batch of ...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -16427,16 +16763,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 8894,
+      "word_count": 9434,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__create.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/delete": {
@@ -16520,7 +16856,7 @@
         "when",
         "message"
       ],
-      "word_count": 4378,
+      "word_count": 4382,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__results.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/retrieve": {
@@ -16565,18 +16901,18 @@
         "breakpoint",
         "create",
         "true",
-        "prompt",
         "blocks",
+        "prompt",
         "system",
         "search",
+        "only",
         "included",
         "name",
-        "only",
         "schema",
-        "via",
-        "reference"
+        "returned",
+        "via"
       ],
-      "word_count": 6558,
+      "word_count": 7102,
       "file_path": "docs/docs__en__api__csharp__beta__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/beta/messages/create": {
@@ -16594,17 +16930,17 @@
         "control",
         "number",
         "breakpoint",
-        "request",
         "true",
-        "input",
         "used",
+        "request",
+        "input",
         "prompt",
         "blocks",
         "only",
         "response",
-        "body"
+        "search"
       ],
-      "word_count": 11615,
+      "word_count": 12137,
       "file_path": "docs/docs__en__api__csharp__beta__messages__create.md"
     },
     "/docs/en/api/csharp/beta/models": {
@@ -18296,17 +18632,17 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
         "results",
+        "text",
+        "cited",
+        "used",
         "true",
         "invocation",
         "input",
-        "used",
         "message"
       ],
-      "word_count": 65297,
+      "word_count": 68935,
       "file_path": "docs/docs__en__api__csharp__messages.md"
     },
     "/docs/en/api/csharp/messages/batches": {
@@ -18318,23 +18654,23 @@
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 18416,
+      "word_count": 18993,
       "file_path": "docs/docs__en__api__csharp__messages__batches.md"
     },
     "/docs/en/api/csharp/messages/batches/cancel": {
@@ -18381,16 +18717,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
-        "system",
+        "batch",
         "search",
         "prompt",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 6389,
+      "word_count": 6958,
       "file_path": "docs/docs__en__api__csharp__messages__batches__create.md"
     },
     "/docs/en/api/csharp/messages/batches/delete": {
@@ -18474,7 +18810,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2518,
+      "word_count": 2520,
       "file_path": "docs/docs__en__api__csharp__messages__batches__results.md"
     },
     "/docs/en/api/csharp/messages/batches/retrieve": {
@@ -18523,14 +18859,14 @@
         "system",
         "search",
         "prompt",
-        "included",
         "only",
+        "included",
+        "used",
         "schema",
         "via",
-        "reference",
-        "name"
+        "returned"
       ],
-      "word_count": 4775,
+      "word_count": 5335,
       "file_path": "docs/docs__en__api__csharp__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/messages/create": {
@@ -18539,26 +18875,26 @@
       "keywords": [
         "tool",
         "model",
-        "block",
         "content",
+        "block",
         "when",
         "cache",
         "create",
         "control",
         "breakpoint",
         "true",
-        "search",
         "used",
-        "tokens",
+        "search",
         "blocks",
-        "input",
         "only",
-        "system",
-        "invocation",
+        "tokens",
+        "input",
         "prompt",
-        "number"
+        "system",
+        "number",
+        "included"
       ],
-      "word_count": 7360,
+      "word_count": 7940,
       "file_path": "docs/docs__en__api__csharp__messages__create.md"
     },
     "/docs/en/api/csharp/models": {
@@ -18657,20 +18993,20 @@
         "int",
         "tool",
         "execution",
-        "model",
         "code",
+        "model",
         "claude",
         "error",
         "result",
-        "text",
         "string",
+        "text",
         "message",
         "content",
+        "allowedcaller",
         "block",
-        "url",
-        "thinking"
+        "url"
       ],
-      "word_count": 287666,
+      "word_count": 291338,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/agents": {
@@ -19006,7 +19342,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 22358,
+      "word_count": 22442,
       "file_path": "docs/docs__en__api__go__beta__deployments.md"
     },
     "/docs/en/api/go/beta/deployments/archive": {
@@ -19034,7 +19370,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1877,
+      "word_count": 1889,
       "file_path": "docs/docs__en__api__go__beta__deployments__archive.md"
     },
     "/docs/en/api/go/beta/deployments/create": {
@@ -19062,7 +19398,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2970,
+      "word_count": 2982,
       "file_path": "docs/docs__en__api__go__beta__deployments__create.md"
     },
     "/docs/en/api/go/beta/deployments/list": {
@@ -19090,7 +19426,7 @@
         "environment",
         "each"
       ],
-      "word_count": 1977,
+      "word_count": 1989,
       "file_path": "docs/docs__en__api__go__beta__deployments__list.md"
     },
     "/docs/en/api/go/beta/deployments/pause": {
@@ -19118,7 +19454,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1877,
+      "word_count": 1889,
       "file_path": "docs/docs__en__api__go__beta__deployments__pause.md"
     },
     "/docs/en/api/go/beta/deployments/retrieve": {
@@ -19146,7 +19482,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1877,
+      "word_count": 1889,
       "file_path": "docs/docs__en__api__go__beta__deployments__retrieve.md"
     },
     "/docs/en/api/go/beta/deployments/run": {
@@ -19202,7 +19538,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1877,
+      "word_count": 1889,
       "file_path": "docs/docs__en__api__go__beta__deployments__unpause.md"
     },
     "/docs/en/api/go/beta/deployments/update": {
@@ -19230,7 +19566,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2984,
+      "word_count": 2996,
       "file_path": "docs/docs__en__api__go__beta__deployments__update.md"
     },
     "/docs/en/api/go/beta/environments": {
@@ -20326,18 +20662,18 @@
         "tool",
         "model",
         "result",
-        "block",
         "allowedcaller",
+        "block",
         "claude",
         "content",
-        "search",
         "allowedcallercodeexecution",
+        "search",
         "text",
         "codeexecution",
         "index",
-        "anthropicbeta"
+        "web"
       ],
-      "word_count": 117901,
+      "word_count": 121485,
       "file_path": "docs/docs__en__api__go__beta__messages.md"
     },
     "/docs/en/api/go/beta/messages/batches": {
@@ -20348,10 +20684,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -20363,9 +20699,9 @@
         "which",
         "results",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 32787,
+      "word_count": 33448,
       "file_path": "docs/docs__en__api__go__beta__messages__batches.md"
     },
     "/docs/en/api/go/beta/messages/batches/cancel": {
@@ -20401,8 +20737,8 @@
       "content_preview": "## Create a Message Batch  `client.Beta.Messages.Batches.New(ctx, params) (*BetaMessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created,",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -20412,16 +20748,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 9985,
+      "word_count": 10598,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__create.md"
     },
     "/docs/en/api/go/beta/messages/batches/delete": {
@@ -20505,7 +20841,7 @@
         "when",
         "message"
       ],
-      "word_count": 5170,
+      "word_count": 5182,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__results.md"
     },
     "/docs/en/api/go/beta/messages/batches/retrieve": {
@@ -20554,14 +20890,14 @@
         "blocks",
         "system",
         "search",
+        "only",
         "included",
         "name",
-        "only",
         "schema",
-        "via",
-        "reference"
+        "returned",
+        "via"
       ],
-      "word_count": 7902,
+      "word_count": 8516,
       "file_path": "docs/docs__en__api__go__beta__messages__count_tokens.md"
     },
     "/docs/en/api/go/beta/messages/create": {
@@ -20569,27 +20905,27 @@
       "content_preview": "## Create a Message  `client.Beta.Messages.New(ctx, params) (*BetaMessage, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will...",
       "keywords": [
         "const",
-        "type",
         "execution",
+        "type",
         "code",
-        "struct",
         "allowedcaller",
+        "struct",
         "int",
         "tool",
-        "block",
         "allowedcallercodeexecution",
+        "block",
         "content",
         "model",
         "stringtype",
+        "betawebfetchtool",
         "betacodeexecutiontool",
         "betatooltexteditor",
         "cache",
         "result",
-        "anthropicbeta",
-        "control",
-        "codeexecution"
+        "betawebsearchtool",
+        "anthropicbeta"
       ],
-      "word_count": 13623,
+      "word_count": 14223,
       "file_path": "docs/docs__en__api__go__beta__messages__create.md"
     },
     "/docs/en/api/go/beta/models": {
@@ -22320,7 +22656,7 @@
     },
     "/docs/en/api/go/messages": {
       "title": "Messages",
-      "content_preview": "# Messages  ## Create a Message  `client.Messages.New(ctx, body) (*Message, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model wil...",
+      "content_preview": "# Messages  ## Create a Message  `client.Messages.New(ctx, params) (*Message, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model w...",
       "keywords": [
         "const",
         "type",
@@ -22331,47 +22667,47 @@
         "stringtype",
         "tool",
         "result",
-        "block",
         "allowedcaller",
+        "block",
         "search",
+        "allowedcallercodeexecution",
         "content",
         "base",
         "codeexecution",
         "text",
-        "allowedcallercodeexecution",
+        "webfetchtool",
         "index",
-        "codeexecutiontool",
         "web"
       ],
-      "word_count": 77747,
+      "word_count": 81876,
       "file_path": "docs/docs__en__api__go__messages.md"
     },
     "/docs/en/api/go/messages/batches": {
       "title": "Batches",
-      "content_preview": "# Batches  ## Create a Message Batch  `client.Messages.Batches.New(ctx, body) (*MessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created,",
+      "content_preview": "# Batches  ## Create a Message Batch  `client.Messages.Batches.New(ctx, params) (*MessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batche...",
       "keywords": [
         "tool",
         "model",
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 21345,
+      "word_count": 22008,
       "file_path": "docs/docs__en__api__go__messages__batches.md"
     },
     "/docs/en/api/go/messages/batches/cancel": {
@@ -22404,7 +22740,7 @@
     },
     "/docs/en/api/go/messages/batches/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message Batch  `client.Messages.Batches.New(ctx, body) (*MessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be ...",
+      "content_preview": "## Create a Message Batch  `client.Messages.Batches.New(ctx, params) (*MessageBatch, error)`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can b...",
       "keywords": [
         "tool",
         "content",
@@ -22418,16 +22754,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
+        "batch",
         "prompt",
-        "system",
         "search",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 7232,
+      "word_count": 7871,
       "file_path": "docs/docs__en__api__go__messages__batches__create.md"
     },
     "/docs/en/api/go/messages/batches/delete": {
@@ -22511,7 +22847,7 @@
         "always",
         "batch"
       ],
-      "word_count": 3049,
+      "word_count": 3055,
       "file_path": "docs/docs__en__api__go__messages__batches__results.md"
     },
     "/docs/en/api/go/messages/batches/retrieve": {
@@ -22544,7 +22880,7 @@
     },
     "/docs/en/api/go/messages/count_tokens": {
       "title": "Untitled",
-      "content_preview": "## Count tokens in a Message  `client.Messages.CountTokens(ctx, body) (*MessageTokensCount, error)`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API...",
+      "content_preview": "## Count tokens in a Message  `client.Messages.CountTokens(ctx, params) (*MessageTokensCount, error)`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count A...",
       "keywords": [
         "tool",
         "content",
@@ -22560,42 +22896,42 @@
         "system",
         "search",
         "prompt",
-        "included",
         "only",
+        "included",
+        "used",
         "schema",
         "via",
-        "reference",
-        "name"
+        "returned"
       ],
-      "word_count": 5677,
+      "word_count": 6307,
       "file_path": "docs/docs__en__api__go__messages__count_tokens.md"
     },
     "/docs/en/api/go/messages/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message  `client.Messages.New(ctx, body) (*Message, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate t...",
+      "content_preview": "## Create a Message  `client.Messages.New(ctx, params) (*Message, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate...",
       "keywords": [
         "const",
         "execution",
         "code",
+        "allowedcaller",
         "type",
         "tool",
-        "allowedcaller",
         "struct",
-        "block",
         "allowedcallercodeexecution",
-        "content",
+        "block",
+        "webfetchtool",
         "int",
+        "content",
         "codeexecutiontool",
+        "websearchtool",
         "model",
         "stringtype",
-        "webfetchtool",
+        "search",
         "result",
         "codeexecution",
-        "search",
-        "tooltexteditor",
-        "text"
+        "tooltexteditor"
       ],
-      "word_count": 8714,
+      "word_count": 9368,
       "file_path": "docs/docs__en__api__go__messages__create.md"
     },
     "/docs/en/api/go/models": {
@@ -22702,12 +23038,12 @@
         "timestamp",
         "error",
         "rfc",
-        "input",
         "server",
+        "input",
         "agents",
         "format"
       ],
-      "word_count": 240179,
+      "word_count": 243424,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/agents": {
@@ -23043,7 +23379,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 18664,
+      "word_count": 18748,
       "file_path": "docs/docs__en__api__java__beta__deployments.md"
     },
     "/docs/en/api/java/beta/deployments/archive": {
@@ -23071,7 +23407,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1541,
+      "word_count": 1553,
       "file_path": "docs/docs__en__api__java__beta__deployments__archive.md"
     },
     "/docs/en/api/java/beta/deployments/create": {
@@ -23099,7 +23435,7 @@
         "store",
         "encoded"
       ],
-      "word_count": 2485,
+      "word_count": 2497,
       "file_path": "docs/docs__en__api__java__beta__deployments__create.md"
     },
     "/docs/en/api/java/beta/deployments/list": {
@@ -23127,7 +23463,7 @@
         "type",
         "rubric"
       ],
-      "word_count": 1629,
+      "word_count": 1641,
       "file_path": "docs/docs__en__api__java__beta__deployments__list.md"
     },
     "/docs/en/api/java/beta/deployments/pause": {
@@ -23155,7 +23491,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1541,
+      "word_count": 1553,
       "file_path": "docs/docs__en__api__java__beta__deployments__pause.md"
     },
     "/docs/en/api/java/beta/deployments/retrieve": {
@@ -23183,7 +23519,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1541,
+      "word_count": 1553,
       "file_path": "docs/docs__en__api__java__beta__deployments__retrieve.md"
     },
     "/docs/en/api/java/beta/deployments/run": {
@@ -23239,7 +23575,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1541,
+      "word_count": 1553,
       "file_path": "docs/docs__en__api__java__beta__deployments__unpause.md"
     },
     "/docs/en/api/java/beta/deployments/update": {
@@ -23267,7 +23603,7 @@
         "store",
         "preserve"
       ],
-      "word_count": 2506,
+      "word_count": 2518,
       "file_path": "docs/docs__en__api__java__beta__deployments__update.md"
     },
     "/docs/en/api/java/beta/environments": {
@@ -24355,8 +24691,8 @@
         "tool",
         "block",
         "model",
-        "tokens",
         "content",
+        "tokens",
         "cache",
         "when",
         "number",
@@ -24366,14 +24702,14 @@
         "used",
         "control",
         "breakpoint",
-        "output",
         "text",
+        "output",
+        "prompt",
         "server",
-        "intelligence",
         "search",
         "response"
       ],
-      "word_count": 99005,
+      "word_count": 102162,
       "file_path": "docs/docs__en__api__java__beta__messages.md"
     },
     "/docs/en/api/java/beta/messages/batches": {
@@ -24384,10 +24720,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -24399,9 +24735,9 @@
         "which",
         "results",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 27893,
+      "word_count": 28458,
       "file_path": "docs/docs__en__api__java__beta__messages__batches.md"
     },
     "/docs/en/api/java/beta/messages/batches/cancel": {
@@ -24437,8 +24773,8 @@
       "content_preview": "## Create a Message Batch  `BetaMessageBatch beta().messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/messages/batches`  Send a...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -24448,16 +24784,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 8564,
+      "word_count": 9113,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__create.md"
     },
     "/docs/en/api/java/beta/messages/batches/delete": {
@@ -24541,7 +24877,7 @@
         "when",
         "message"
       ],
-      "word_count": 4345,
+      "word_count": 4349,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__results.md"
     },
     "/docs/en/api/java/beta/messages/batches/retrieve": {
@@ -24586,18 +24922,18 @@
         "breakpoint",
         "create",
         "true",
-        "prompt",
         "blocks",
+        "prompt",
         "system",
         "search",
+        "only",
         "included",
         "name",
-        "only",
         "schema",
-        "via",
-        "reference"
+        "returned",
+        "via"
       ],
-      "word_count": 6611,
+      "word_count": 7161,
       "file_path": "docs/docs__en__api__java__beta__messages__count_tokens.md"
     },
     "/docs/en/api/java/beta/messages/create": {
@@ -24615,17 +24951,17 @@
         "control",
         "number",
         "breakpoint",
-        "request",
         "true",
-        "input",
         "used",
+        "request",
+        "input",
         "prompt",
         "blocks",
         "only",
         "response",
         "search"
       ],
-      "word_count": 11580,
+      "word_count": 12110,
       "file_path": "docs/docs__en__api__java__beta__messages__create.md"
     },
     "/docs/en/api/java/beta/models": {
@@ -26362,17 +26698,17 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
         "results",
+        "text",
+        "cited",
         "true",
+        "used",
         "invocation",
         "input",
-        "message",
-        "used"
+        "message"
       ],
-      "word_count": 65149,
+      "word_count": 68783,
       "file_path": "docs/docs__en__api__java__messages.md"
     },
     "/docs/en/api/java/messages/batches": {
@@ -26384,23 +26720,23 @@
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 18123,
+      "word_count": 18704,
       "file_path": "docs/docs__en__api__java__messages__batches.md"
     },
     "/docs/en/api/java/messages/batches/cancel": {
@@ -26447,16 +26783,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
-        "system",
+        "batch",
         "search",
         "prompt",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 6225,
+      "word_count": 6798,
       "file_path": "docs/docs__en__api__java__messages__batches__create.md"
     },
     "/docs/en/api/java/messages/batches/delete": {
@@ -26540,7 +26876,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2507,
+      "word_count": 2509,
       "file_path": "docs/docs__en__api__java__messages__batches__results.md"
     },
     "/docs/en/api/java/messages/batches/retrieve": {
@@ -26589,14 +26925,14 @@
         "system",
         "search",
         "prompt",
-        "included",
         "only",
+        "included",
+        "used",
         "schema",
         "via",
-        "reference",
-        "name"
+        "returned"
       ],
-      "word_count": 4841,
+      "word_count": 5391,
       "file_path": "docs/docs__en__api__java__messages__count_tokens.md"
     },
     "/docs/en/api/java/messages/create": {
@@ -26605,26 +26941,26 @@
       "keywords": [
         "tool",
         "model",
-        "block",
         "content",
+        "block",
         "when",
         "cache",
         "create",
         "control",
         "breakpoint",
         "true",
-        "search",
         "used",
-        "tokens",
+        "search",
         "blocks",
-        "input",
         "only",
-        "system",
-        "invocation",
+        "tokens",
+        "input",
         "prompt",
-        "number"
+        "system",
+        "number",
+        "included"
       ],
-      "word_count": 7381,
+      "word_count": 7933,
       "file_path": "docs/docs__en__api__java__messages__create.md"
     },
     "/docs/en/api/java/models": {
@@ -26726,17 +27062,17 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
         "results",
+        "text",
+        "cited",
+        "used",
         "true",
         "invocation",
         "input",
-        "used",
-        "message"
+        "prompt"
       ],
-      "word_count": 75876,
+      "word_count": 79890,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -26748,23 +27084,23 @@
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 20217,
+      "word_count": 20864,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -26811,16 +27147,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
+        "batch",
         "prompt",
-        "system",
         "search",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 7135,
+      "word_count": 7770,
       "file_path": "docs/docs__en__api__messages__batches__create.md"
     },
     "/docs/en/api/messages/batches/delete": {
@@ -26904,7 +27240,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2785,
+      "word_count": 2788,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -26941,8 +27277,8 @@
       "keywords": [
         "tool",
         "content",
-        "model",
         "block",
+        "model",
         "when",
         "cache",
         "control",
@@ -26953,14 +27289,14 @@
         "system",
         "search",
         "prompt",
-        "schema",
-        "included",
         "only",
         "returned",
-        "via",
-        "name"
+        "included",
+        "schema",
+        "used",
+        "via"
       ],
-      "word_count": 6238,
+      "word_count": 6850,
       "file_path": "docs/docs__en__api__messages__count_tokens.md"
     },
     "/docs/en/api/messages/create": {
@@ -26977,18 +27313,18 @@
         "control",
         "breakpoint",
         "true",
-        "tokens",
-        "search",
         "used",
+        "search",
         "blocks",
-        "input",
+        "tokens",
         "only",
         "prompt",
-        "system",
-        "invocation",
-        "returned"
+        "returned",
+        "input",
+        "number",
+        "system"
       ],
-      "word_count": 9144,
+      "word_count": 9761,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -27079,8 +27415,8 @@
       "title": "Beta",
       "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta`    - `\"message-batches-2024-09-24\"`    - `\"prompt-caching-2024-07-31\"`    - `\"computer-use-2024-10-22\"`    - `\"computer-use-2025-01-24\"` ...",
       "keywords": [
-        "beta",
         "tool",
+        "beta",
         "event",
         "rfc",
         "timestamp",
@@ -27100,7 +27436,7 @@
         "message",
         "version"
       ],
-      "word_count": 78209,
+      "word_count": 79372,
       "file_path": "docs/docs__en__api__php__beta.md"
     },
     "/docs/en/api/php/beta/agents": {
@@ -27436,7 +27772,7 @@
         "credentials",
         "session"
       ],
-      "word_count": 4532,
+      "word_count": 4628,
       "file_path": "docs/docs__en__api__php__beta__deployments.md"
     },
     "/docs/en/api/php/beta/deployments/archive": {
@@ -27464,7 +27800,7 @@
         "identifier",
         "resolved"
       ],
-      "word_count": 314,
+      "word_count": 326,
       "file_path": "docs/docs__en__api__php__beta__deployments__archive.md"
     },
     "/docs/en/api/php/beta/deployments/create": {
@@ -27492,7 +27828,7 @@
         "human",
         "readable"
       ],
-      "word_count": 537,
+      "word_count": 555,
       "file_path": "docs/docs__en__api__php__beta__deployments__create.md"
     },
     "/docs/en/api/php/beta/deployments/list": {
@@ -27520,7 +27856,7 @@
         "status",
         "paused"
       ],
-      "word_count": 429,
+      "word_count": 441,
       "file_path": "docs/docs__en__api__php__beta__deployments__list.md"
     },
     "/docs/en/api/php/beta/deployments/pause": {
@@ -27548,7 +27884,7 @@
         "identifier",
         "resolved"
       ],
-      "word_count": 314,
+      "word_count": 326,
       "file_path": "docs/docs__en__api__php__beta__deployments__pause.md"
     },
     "/docs/en/api/php/beta/deployments/retrieve": {
@@ -27576,7 +27912,7 @@
         "resolved",
         "agent"
       ],
-      "word_count": 314,
+      "word_count": 326,
       "file_path": "docs/docs__en__api__php__beta__deployments__retrieve.md"
     },
     "/docs/en/api/php/beta/deployments/run": {
@@ -27632,7 +27968,7 @@
         "identifier",
         "resolved"
       ],
-      "word_count": 314,
+      "word_count": 326,
       "file_path": "docs/docs__en__api__php__beta__deployments__unpause.md"
     },
     "/docs/en/api/php/beta/deployments/update": {
@@ -27660,7 +27996,7 @@
         "format",
         "update"
       ],
-      "word_count": 581,
+      "word_count": 599,
       "file_path": "docs/docs__en__api__php__beta__deployments__update.md"
     },
     "/docs/en/api/php/beta/environments": {
@@ -28746,29 +29082,29 @@
         "block",
         "beta",
         "content",
-        "model",
         "when",
-        "message",
+        "model",
         "cache",
+        "message",
         "tokens",
-        "create",
         "number",
-        "batch",
+        "create",
         "request",
-        "control",
         "true",
+        "control",
+        "batch",
+        "result",
         "search",
         "breakpoint",
-        "result",
-        "input",
+        "used",
         "only"
       ],
-      "word_count": 22509,
+      "word_count": 23572,
       "file_path": "docs/docs__en__api__php__beta__messages.md"
     },
     "/docs/en/api/php/beta/messages/batches": {
       "title": "Batches",
-      "content_preview": "# Batches  ## Create a Message Batch  `$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Mes...",
+      "content_preview": "# Batches  ## Create a Message Batch  `$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`  **post** `/v1/messages/batche...",
       "keywords": [
         "message",
         "batch",
@@ -28787,11 +29123,11 @@
         "once",
         "request",
         "object",
-        "specified",
         "beta",
+        "specified",
         "cancellation"
       ],
-      "word_count": 3033,
+      "word_count": 3086,
       "file_path": "docs/docs__en__api__php__beta__messages__batches.md"
     },
     "/docs/en/api/php/beta/messages/batches/cancel": {
@@ -28824,7 +29160,7 @@
     },
     "/docs/en/api/php/beta/messages/batches/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message Batch  `$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creati...",
+      "content_preview": "## Create a Message Batch  `$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`  **post** `/v1/messages/batches`  Send a ...",
       "keywords": [
         "message",
         "batch",
@@ -28838,16 +29174,16 @@
         "string",
         "representing",
         "batches",
+        "request",
         "results",
         "only",
         "ends",
         "api",
+        "header",
         "specified",
-        "create",
-        "creation",
-        "created"
+        "create"
       ],
-      "word_count": 815,
+      "word_count": 868,
       "file_path": "docs/docs__en__api__php__beta__messages__batches__create.md"
     },
     "/docs/en/api/php/beta/messages/batches/delete": {
@@ -28973,9 +29309,9 @@
         "tool",
         "input",
         "messages",
+        "request",
         "see",
         "tokens",
-        "request",
         "claude",
         "blocks",
         "output",
@@ -28987,7 +29323,7 @@
         "example",
         "system"
       ],
-      "word_count": 1248,
+      "word_count": 1281,
       "file_path": "docs/docs__en__api__php__beta__messages__count_tokens.md"
     },
     "/docs/en/api/php/beta/messages/create": {
@@ -29015,7 +29351,7 @@
         "example",
         "blocks"
       ],
-      "word_count": 2593,
+      "word_count": 2598,
       "file_path": "docs/docs__en__api__php__beta__messages__create.md"
     },
     "/docs/en/api/php/beta/models": {
@@ -30682,22 +31018,22 @@
         "search",
         "batch",
         "create",
-        "control",
         "only",
-        "breakpoint",
+        "control",
         "result",
-        "blocks",
+        "breakpoint",
         "results",
         "used",
-        "tokens",
-        "prompt"
+        "blocks",
+        "returned",
+        "request"
       ],
-      "word_count": 17832,
+      "word_count": 19401,
       "file_path": "docs/docs__en__api__php__messages.md"
     },
     "/docs/en/api/php/messages/batches": {
       "title": "Batches",
-      "content_preview": "# Batches  ## Create a Message Batch  `$client->messages->batches->create(list<Request> requests): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Messa...",
+      "content_preview": "# Batches  ## Create a Message Batch  `$client->messages->batches->create(list<Request> requests, ?string userProfileID): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creati...",
       "keywords": [
         "message",
         "batch",
@@ -30720,7 +31056,7 @@
         "cancellation",
         "always"
       ],
-      "word_count": 2721,
+      "word_count": 2777,
       "file_path": "docs/docs__en__api__php__messages__batches.md"
     },
     "/docs/en/api/php/messages/batches/cancel": {
@@ -30753,7 +31089,7 @@
     },
     "/docs/en/api/php/messages/batches/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message Batch  `$client->messages->batches->create(list<Request> requests): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created,",
+      "content_preview": "## Create a Message Batch  `$client->messages->batches->create(list<Request> requests, ?string userProfileID): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests...",
       "keywords": [
         "message",
         "batch",
@@ -30767,16 +31103,16 @@
         "string",
         "representing",
         "batches",
+        "request",
         "results",
         "only",
         "ends",
         "api",
         "specified",
         "create",
-        "creation",
-        "created"
+        "creation"
       ],
-      "word_count": 610,
+      "word_count": 666,
       "file_path": "docs/docs__en__api__php__messages__batches__create.md"
     },
     "/docs/en/api/php/messages/batches/delete": {
@@ -30906,6 +31242,7 @@
         "see",
         "tokens",
         "then",
+        "request",
         "single",
         "each",
         "include",
@@ -30913,10 +31250,9 @@
         "example",
         "system",
         "prompt",
-        "count",
-        "our"
+        "count"
       ],
-      "word_count": 1036,
+      "word_count": 1069,
       "file_path": "docs/docs__en__api__php__messages__count_tokens.md"
     },
     "/docs/en/api/php/messages/create": {
@@ -30944,7 +31280,7 @@
         "may",
         "stop"
       ],
-      "word_count": 1938,
+      "word_count": 1971,
       "file_path": "docs/docs__en__api__php__messages__create.md"
     },
     "/docs/en/api/php/models": {
@@ -31038,9 +31374,9 @@
         "tool",
         "model",
         "content",
-        "intelligence",
-        "block",
         "when",
+        "block",
+        "intelligence",
         "session",
         "agents",
         "text",
@@ -31049,14 +31385,14 @@
         "tokens",
         "coding",
         "cache",
-        "beta",
         "user",
+        "beta",
         "timestamp",
         "rfc",
         "error",
         "input"
       ],
-      "word_count": 257983,
+      "word_count": 261279,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/agents": {
@@ -31392,7 +31728,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 19224,
+      "word_count": 19308,
       "file_path": "docs/docs__en__api__python__beta__deployments.md"
     },
     "/docs/en/api/python/beta/deployments/archive": {
@@ -31420,7 +31756,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1574,
+      "word_count": 1586,
       "file_path": "docs/docs__en__api__python__beta__deployments__archive.md"
     },
     "/docs/en/api/python/beta/deployments/create": {
@@ -31448,7 +31784,7 @@
         "store",
         "encoded"
       ],
-      "word_count": 2616,
+      "word_count": 2628,
       "file_path": "docs/docs__en__api__python__beta__deployments__create.md"
     },
     "/docs/en/api/python/beta/deployments/list": {
@@ -31476,7 +31812,7 @@
         "type",
         "rubric"
       ],
-      "word_count": 1668,
+      "word_count": 1680,
       "file_path": "docs/docs__en__api__python__beta__deployments__list.md"
     },
     "/docs/en/api/python/beta/deployments/pause": {
@@ -31504,7 +31840,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1574,
+      "word_count": 1586,
       "file_path": "docs/docs__en__api__python__beta__deployments__pause.md"
     },
     "/docs/en/api/python/beta/deployments/retrieve": {
@@ -31532,7 +31868,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1574,
+      "word_count": 1586,
       "file_path": "docs/docs__en__api__python__beta__deployments__retrieve.md"
     },
     "/docs/en/api/python/beta/deployments/run": {
@@ -31588,7 +31924,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1574,
+      "word_count": 1586,
       "file_path": "docs/docs__en__api__python__beta__deployments__unpause.md"
     },
     "/docs/en/api/python/beta/deployments/update": {
@@ -31616,7 +31952,7 @@
         "store",
         "preserve"
       ],
-      "word_count": 2641,
+      "word_count": 2653,
       "file_path": "docs/docs__en__api__python__beta__deployments__update.md"
     },
     "/docs/en/api/python/beta/environments": {
@@ -32713,17 +33049,17 @@
         "intelligence",
         "input",
         "request",
-        "create",
         "used",
+        "create",
         "coding",
         "control",
         "breakpoint",
+        "prompt",
         "output",
         "text",
-        "server",
-        "frontier"
+        "server"
       ],
-      "word_count": 107560,
+      "word_count": 110768,
       "file_path": "docs/docs__en__api__python__beta__messages.md"
     },
     "/docs/en/api/python/beta/messages/batches": {
@@ -32734,24 +33070,24 @@
         "tool",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
         "input",
         "used",
         "response",
-        "intelligence",
         "requests",
+        "intelligence",
         "output",
         "which",
         "results",
         "server"
       ],
-      "word_count": 29132,
+      "word_count": 29711,
       "file_path": "docs/docs__en__api__python__beta__messages__batches.md"
     },
     "/docs/en/api/python/beta/messages/batches/cancel": {
@@ -32788,8 +33124,8 @@
       "keywords": [
         "tool",
         "model",
-        "block",
         "content",
+        "block",
         "when",
         "cache",
         "control",
@@ -32798,16 +33134,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 8885,
+      "word_count": 9440,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__create.md"
     },
     "/docs/en/api/python/beta/messages/batches/delete": {
@@ -32891,7 +33227,7 @@
         "text",
         "when"
       ],
-      "word_count": 4576,
+      "word_count": 4582,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__results.md"
     },
     "/docs/en/api/python/beta/messages/batches/retrieve": {
@@ -32927,9 +33263,9 @@
       "content_preview": "## Count tokens in a Message  `beta.messages.count_tokens(MessageCountTokensParams**kwargs)  -> BetaMessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message. ...",
       "keywords": [
         "tool",
+        "content",
         "block",
         "model",
-        "content",
         "when",
         "cache",
         "control",
@@ -32941,13 +33277,13 @@
         "system",
         "search",
         "only",
-        "schema",
-        "name",
         "returned",
+        "schema",
         "included",
+        "name",
         "via"
       ],
-      "word_count": 7582,
+      "word_count": 8138,
       "file_path": "docs/docs__en__api__python__beta__messages__count_tokens.md"
     },
     "/docs/en/api/python/beta/messages/create": {
@@ -32967,15 +33303,15 @@
         "request",
         "breakpoint",
         "true",
-        "input",
-        "prompt",
         "used",
+        "prompt",
+        "input",
         "blocks",
+        "only",
         "response",
-        "intelligence",
-        "only"
+        "server"
       ],
-      "word_count": 12663,
+      "word_count": 13201,
       "file_path": "docs/docs__en__api__python__beta__messages__create.md"
     },
     "/docs/en/api/python/beta/models": {
@@ -34712,45 +35048,45 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
-        "intelligence",
         "results",
+        "text",
+        "cited",
         "true",
+        "used",
+        "intelligence",
         "invocation",
-        "input",
-        "message"
+        "input"
       ],
-      "word_count": 69027,
+      "word_count": 72706,
       "file_path": "docs/docs__en__api__python__messages.md"
     },
     "/docs/en/api/python/messages/batches": {
       "title": "Batches",
       "content_preview": "# Batches  ## Create a Message Batch  `messages.batches.create(BatchCreateParams**kwargs)  -> MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Ba...",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "message",
         "batch",
         "block",
-        "intelligence",
-        "number",
         "content",
+        "number",
+        "intelligence",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
         "coding",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input"
       ],
-      "word_count": 19198,
+      "word_count": 19789,
       "file_path": "docs/docs__en__api__python__messages__batches.md"
     },
     "/docs/en/api/python/messages/batches/cancel": {
@@ -34797,16 +35133,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
+        "batch",
         "prompt",
-        "system",
         "search",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 6506,
+      "word_count": 7085,
       "file_path": "docs/docs__en__api__python__messages__batches__create.md"
     },
     "/docs/en/api/python/messages/batches/delete": {
@@ -34890,7 +35226,7 @@
         "directly",
         "text"
       ],
-      "word_count": 2709,
+      "word_count": 2712,
       "file_path": "docs/docs__en__api__python__messages__batches__results.md"
     },
     "/docs/en/api/python/messages/batches/retrieve": {
@@ -34939,14 +35275,14 @@
         "system",
         "search",
         "prompt",
-        "schema",
-        "included",
         "only",
         "returned",
-        "via",
-        "intelligence"
+        "included",
+        "schema",
+        "used",
+        "via"
       ],
-      "word_count": 5602,
+      "word_count": 6158,
       "file_path": "docs/docs__en__api__python__messages__count_tokens.md"
     },
     "/docs/en/api/python/messages/create": {
@@ -34962,19 +35298,19 @@
         "create",
         "control",
         "breakpoint",
-        "intelligence",
         "true",
-        "tokens",
-        "search",
+        "intelligence",
         "used",
+        "search",
         "blocks",
-        "input",
+        "tokens",
         "only",
-        "coding",
         "prompt",
-        "system"
+        "returned",
+        "input",
+        "number"
       ],
-      "word_count": 8429,
+      "word_count": 8988,
       "file_path": "docs/docs__en__api__python__messages__create.md"
     },
     "/docs/en/api/python/models": {
@@ -35068,16 +35404,16 @@
         "tool",
         "model",
         "content",
-        "block",
         "when",
+        "block",
         "session",
         "text",
         "event",
         "agent",
         "tokens",
         "cache",
-        "beta",
         "user",
+        "beta",
         "timestamp",
         "rfc",
         "error",
@@ -35086,7 +35422,7 @@
         "format",
         "agents"
       ],
-      "word_count": 248696,
+      "word_count": 252024,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/agents": {
@@ -35422,7 +35758,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 18976,
+      "word_count": 19060,
       "file_path": "docs/docs__en__api__ruby__beta__deployments.md"
     },
     "/docs/en/api/ruby/beta/deployments/archive": {
@@ -35450,7 +35786,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1547,
+      "word_count": 1559,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__archive.md"
     },
     "/docs/en/api/ruby/beta/deployments/create": {
@@ -35478,7 +35814,7 @@
         "store",
         "encoded"
       ],
-      "word_count": 2597,
+      "word_count": 2609,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__create.md"
     },
     "/docs/en/api/ruby/beta/deployments/list": {
@@ -35506,7 +35842,7 @@
         "type",
         "rubric"
       ],
-      "word_count": 1638,
+      "word_count": 1650,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__list.md"
     },
     "/docs/en/api/ruby/beta/deployments/pause": {
@@ -35534,7 +35870,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1547,
+      "word_count": 1559,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__pause.md"
     },
     "/docs/en/api/ruby/beta/deployments/retrieve": {
@@ -35562,7 +35898,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1547,
+      "word_count": 1559,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__retrieve.md"
     },
     "/docs/en/api/ruby/beta/deployments/run": {
@@ -35618,7 +35954,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1547,
+      "word_count": 1559,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__unpause.md"
     },
     "/docs/en/api/ruby/beta/deployments/update": {
@@ -35646,7 +35982,7 @@
         "store",
         "preserve"
       ],
-      "word_count": 2620,
+      "word_count": 2632,
       "file_path": "docs/docs__en__api__ruby__beta__deployments__update.md"
     },
     "/docs/en/api/ruby/beta/environments": {
@@ -36742,18 +37078,18 @@
         "number",
         "input",
         "request",
-        "create",
         "used",
+        "create",
         "control",
         "breakpoint",
+        "prompt",
         "output",
         "text",
         "server",
-        "intelligence",
-        "response",
-        "search"
+        "search",
+        "intelligence"
       ],
-      "word_count": 102937,
+      "word_count": 106177,
       "file_path": "docs/docs__en__api__ruby__beta__messages.md"
     },
     "/docs/en/api/ruby/beta/messages/batches": {
@@ -36764,10 +37100,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -36779,9 +37115,9 @@
         "which",
         "results",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 28297,
+      "word_count": 28882,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/cancel": {
@@ -36817,8 +37153,8 @@
       "content_preview": "## Create a Message Batch  `beta.messages.batches.create(**kwargs) -> BetaMessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be use...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -36828,16 +37164,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 8806,
+      "word_count": 9367,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__create.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/delete": {
@@ -36921,7 +37257,7 @@
         "when",
         "message"
       ],
-      "word_count": 4386,
+      "word_count": 4392,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__results.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/retrieve": {
@@ -36957,8 +37293,8 @@
       "content_preview": "## Count tokens in a Message  `beta.messages.count_tokens(**kwargs) -> BetaMessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -36971,13 +37307,13 @@
         "system",
         "search",
         "only",
-        "schema",
-        "name",
         "returned",
+        "schema",
         "included",
+        "name",
         "via"
       ],
-      "word_count": 7495,
+      "word_count": 8057,
       "file_path": "docs/docs__en__api__ruby__beta__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/beta/messages/create": {
@@ -36997,15 +37333,15 @@
         "request",
         "breakpoint",
         "true",
-        "input",
-        "prompt",
         "used",
+        "prompt",
+        "input",
         "blocks",
-        "response",
         "only",
+        "response",
         "server"
       ],
-      "word_count": 12408,
+      "word_count": 12952,
       "file_path": "docs/docs__en__api__ruby__beta__messages__create.md"
     },
     "/docs/en/api/ruby/beta/models": {
@@ -38701,7 +39037,7 @@
     },
     "/docs/en/api/ruby/completions/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Text Completion  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.  Future models and features",
+      "content_preview": "## Create a Text Completion  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.  Future models and",
       "keywords": [
         "model",
         "intelligence",
@@ -38742,17 +39078,17 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
         "results",
+        "text",
+        "cited",
         "true",
+        "used",
         "invocation",
         "input",
-        "message",
-        "used"
+        "prompt"
       ],
-      "word_count": 67059,
+      "word_count": 70776,
       "file_path": "docs/docs__en__api__ruby__messages.md"
     },
     "/docs/en/api/ruby/messages/batches": {
@@ -38764,23 +39100,23 @@
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 18213,
+      "word_count": 18810,
       "file_path": "docs/docs__en__api__ruby__messages__batches.md"
     },
     "/docs/en/api/ruby/messages/batches/cancel": {
@@ -38827,16 +39163,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
+        "batch",
         "prompt",
-        "system",
         "search",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 6372,
+      "word_count": 6957,
       "file_path": "docs/docs__en__api__ruby__messages__batches__create.md"
     },
     "/docs/en/api/ruby/messages/batches/delete": {
@@ -38920,7 +39256,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2497,
+      "word_count": 2500,
       "file_path": "docs/docs__en__api__ruby__messages__batches__results.md"
     },
     "/docs/en/api/ruby/messages/batches/retrieve": {
@@ -38957,8 +39293,8 @@
       "keywords": [
         "tool",
         "content",
-        "model",
         "block",
+        "model",
         "when",
         "cache",
         "control",
@@ -38969,14 +39305,14 @@
         "system",
         "search",
         "prompt",
-        "schema",
-        "included",
         "only",
         "returned",
-        "via",
-        "name"
+        "included",
+        "schema",
+        "used",
+        "via"
       ],
-      "word_count": 5459,
+      "word_count": 6021,
       "file_path": "docs/docs__en__api__ruby__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/messages/create": {
@@ -38993,18 +39329,18 @@
         "control",
         "breakpoint",
         "true",
-        "tokens",
-        "search",
         "used",
+        "search",
         "blocks",
-        "input",
+        "tokens",
         "only",
         "prompt",
-        "system",
-        "invocation",
-        "returned"
+        "returned",
+        "input",
+        "number",
+        "system"
       ],
-      "word_count": 8104,
+      "word_count": 8669,
       "file_path": "docs/docs__en__api__ruby__messages__create.md"
     },
     "/docs/en/api/ruby/models": {
@@ -39106,8 +39442,8 @@
         "tokens",
         "agent",
         "cache",
-        "beta",
         "user",
+        "beta",
         "timestamp",
         "rfc",
         "error",
@@ -39116,7 +39452,7 @@
         "format",
         "agents"
       ],
-      "word_count": 251448,
+      "word_count": 254896,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/agents": {
@@ -39452,7 +39788,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 19014,
+      "word_count": 19110,
       "file_path": "docs/docs__en__api__typescript__beta__deployments.md"
     },
     "/docs/en/api/typescript/beta/deployments/archive": {
@@ -39480,7 +39816,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1554,
+      "word_count": 1568,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__archive.md"
     },
     "/docs/en/api/typescript/beta/deployments/create": {
@@ -39508,7 +39844,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2627,
+      "word_count": 2639,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__create.md"
     },
     "/docs/en/api/typescript/beta/deployments/list": {
@@ -39536,7 +39872,7 @@
         "environment",
         "each"
       ],
-      "word_count": 1671,
+      "word_count": 1683,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__list.md"
     },
     "/docs/en/api/typescript/beta/deployments/pause": {
@@ -39564,7 +39900,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1554,
+      "word_count": 1568,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__pause.md"
     },
     "/docs/en/api/typescript/beta/deployments/retrieve": {
@@ -39592,7 +39928,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1554,
+      "word_count": 1568,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__retrieve.md"
     },
     "/docs/en/api/typescript/beta/deployments/run": {
@@ -39620,7 +39956,7 @@
         "timestamp",
         "rfc"
       ],
-      "word_count": 735,
+      "word_count": 737,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__run.md"
     },
     "/docs/en/api/typescript/beta/deployments/unpause": {
@@ -39648,7 +39984,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1554,
+      "word_count": 1568,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__unpause.md"
     },
     "/docs/en/api/typescript/beta/deployments/update": {
@@ -39676,7 +40012,7 @@
         "system",
         "memory"
       ],
-      "word_count": 2652,
+      "word_count": 2666,
       "file_path": "docs/docs__en__api__typescript__beta__deployments__update.md"
     },
     "/docs/en/api/typescript/beta/environments": {
@@ -40772,18 +41108,18 @@
         "number",
         "input",
         "request",
-        "create",
         "used",
+        "create",
         "control",
         "breakpoint",
         "output",
         "text",
+        "prompt",
         "server",
-        "intelligence",
-        "response",
-        "search"
+        "search",
+        "response"
       ],
-      "word_count": 103960,
+      "word_count": 107308,
       "file_path": "docs/docs__en__api__typescript__beta__messages.md"
     },
     "/docs/en/api/typescript/beta/messages/batches": {
@@ -40794,10 +41130,10 @@
         "model",
         "tokens",
         "number",
-        "message",
         "block",
-        "request",
+        "message",
         "content",
+        "request",
         "batch",
         "when",
         "cache",
@@ -40809,9 +41145,9 @@
         "which",
         "results",
         "server",
-        "processing"
+        "create"
       ],
-      "word_count": 28644,
+      "word_count": 29249,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/cancel": {
@@ -40847,8 +41183,8 @@
       "content_preview": "## Create a Message Batch  `client.beta.messages.batches.create(BatchCreateParamsparams, RequestOptionsoptions?): BetaMessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation r...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -40858,16 +41194,16 @@
         "true",
         "prompt",
         "only",
-        "message",
         "blocks",
-        "system",
+        "message",
         "search",
-        "request",
-        "name",
         "returned",
+        "request",
+        "system",
+        "name",
         "schema"
       ],
-      "word_count": 8970,
+      "word_count": 9551,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__create.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/delete": {
@@ -40951,7 +41287,7 @@
         "when",
         "message"
       ],
-      "word_count": 4419,
+      "word_count": 4425,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__results.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/retrieve": {
@@ -40987,8 +41323,8 @@
       "content_preview": "## Count tokens in a Message  `client.beta.messages.countTokens(MessageCountTokensParamsparams, RequestOptionsoptions?): BetaMessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number...",
       "keywords": [
         "tool",
-        "block",
         "content",
+        "block",
         "when",
         "model",
         "cache",
@@ -41001,13 +41337,13 @@
         "system",
         "search",
         "only",
-        "schema",
-        "name",
         "returned",
+        "schema",
         "included",
+        "name",
         "via"
       ],
-      "word_count": 7658,
+      "word_count": 8242,
       "file_path": "docs/docs__en__api__typescript__beta__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/beta/messages/create": {
@@ -41027,15 +41363,15 @@
         "request",
         "breakpoint",
         "true",
-        "input",
         "used",
         "prompt",
+        "input",
         "blocks",
         "response",
-        "server",
-        "body"
+        "only",
+        "server"
       ],
-      "word_count": 12697,
+      "word_count": 13259,
       "file_path": "docs/docs__en__api__typescript__beta__messages__create.md"
     },
     "/docs/en/api/typescript/beta/models": {
@@ -42766,7 +43102,7 @@
     },
     "/docs/en/api/typescript/messages": {
       "title": "Messages",
-      "content_preview": "# Messages  ## Create a Message  `client.messages.create(MessageCreateParamsbody, RequestOptionsoptions?): Message | Stream<RawMessageStreamEvent>`  **post** `/v1/messages`  Send a structured list of ...",
+      "content_preview": "# Messages  ## Create a Message  `client.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): Message | Stream<RawMessageStreamEvent>`  **post** `/v1/messages`  Send a structured list o...",
       "keywords": [
         "tool",
         "block",
@@ -42779,45 +43115,45 @@
         "breakpoint",
         "create",
         "search",
-        "cited",
-        "text",
         "number",
         "results",
+        "text",
+        "cited",
         "true",
+        "used",
         "invocation",
         "input",
-        "message",
-        "used"
+        "message"
       ],
-      "word_count": 67946,
+      "word_count": 71855,
       "file_path": "docs/docs__en__api__typescript__messages.md"
     },
     "/docs/en/api/typescript/messages/batches": {
       "title": "Batches",
-      "content_preview": "# Batches  ## Create a Message Batch  `client.messages.batches.create(BatchCreateParamsbody, RequestOptionsoptions?): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation r...",
+      "content_preview": "# Batches  ## Create a Message Batch  `client.messages.batches.create(BatchCreateParamsparams, RequestOptionsoptions?): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation...",
       "keywords": [
         "tool",
         "model",
         "message",
         "batch",
         "block",
-        "number",
         "content",
+        "number",
         "requests",
+        "when",
         "tokens",
         "processing",
-        "when",
         "results",
         "request",
-        "invocation",
+        "used",
         "cache",
         "response",
-        "used",
+        "invocation",
         "input",
-        "which",
+        "only",
         "create"
       ],
-      "word_count": 18432,
+      "word_count": 19053,
       "file_path": "docs/docs__en__api__typescript__messages__batches.md"
     },
     "/docs/en/api/typescript/messages/batches/cancel": {
@@ -42850,7 +43186,7 @@
     },
     "/docs/en/api/typescript/messages/batches/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message Batch  `client.messages.batches.create(BatchCreateParamsbody, RequestOptionsoptions?): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  T...",
+      "content_preview": "## Create a Message Batch  `client.messages.batches.create(BatchCreateParamsparams, RequestOptionsoptions?): MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests. ...",
       "keywords": [
         "tool",
         "content",
@@ -42864,16 +43200,16 @@
         "true",
         "message",
         "only",
-        "batch",
         "blocks",
-        "system",
+        "batch",
         "search",
         "prompt",
-        "schema",
-        "included",
-        "returned"
+        "system",
+        "used",
+        "returned",
+        "included"
       ],
-      "word_count": 6476,
+      "word_count": 7085,
       "file_path": "docs/docs__en__api__typescript__messages__batches__create.md"
     },
     "/docs/en/api/typescript/messages/batches/delete": {
@@ -42957,7 +43293,7 @@
         "always",
         "batch"
       ],
-      "word_count": 2513,
+      "word_count": 2516,
       "file_path": "docs/docs__en__api__typescript__messages__batches__results.md"
     },
     "/docs/en/api/typescript/messages/batches/retrieve": {
@@ -42990,12 +43326,12 @@
     },
     "/docs/en/api/typescript/messages/count_tokens": {
       "title": "Untitled",
-      "content_preview": "## Count tokens in a Message  `client.messages.countTokens(MessageCountTokensParamsbody, RequestOptionsoptions?): MessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens ...",
+      "content_preview": "## Count tokens in a Message  `client.messages.countTokens(MessageCountTokensParamsparams, RequestOptionsoptions?): MessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of token...",
       "keywords": [
         "tool",
         "content",
-        "model",
         "block",
+        "model",
         "when",
         "cache",
         "control",
@@ -43006,19 +43342,19 @@
         "system",
         "search",
         "prompt",
-        "schema",
-        "included",
         "only",
         "returned",
-        "via",
-        "name"
+        "included",
+        "schema",
+        "used",
+        "via"
       ],
-      "word_count": 5554,
+      "word_count": 6154,
       "file_path": "docs/docs__en__api__typescript__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/messages/create": {
       "title": "Untitled",
-      "content_preview": "## Create a Message  `client.messages.create(MessageCreateParamsbody, RequestOptionsoptions?): Message | Stream<RawMessageStreamEvent>`  **post** `/v1/messages`  Send a structured list of input messag...",
+      "content_preview": "## Create a Message  `client.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): Message | Stream<RawMessageStreamEvent>`  **post** `/v1/messages`  Send a structured list of input mess...",
       "keywords": [
         "tool",
         "model",
@@ -43030,18 +43366,18 @@
         "control",
         "breakpoint",
         "true",
-        "tokens",
-        "search",
         "used",
+        "search",
         "blocks",
-        "input",
+        "tokens",
         "only",
-        "response",
-        "system",
-        "invocation",
-        "returned"
+        "returned",
+        "input",
+        "number",
+        "prompt",
+        "response"
       ],
-      "word_count": 8265,
+      "word_count": 8892,
       "file_path": "docs/docs__en__api__typescript__messages__create.md"
     },
     "/docs/en/api/typescript/models": {
@@ -43136,6 +43472,7 @@
         "claude",
         "opus",
         "adaptive",
+        "sonnet",
         "mythos",
         "blocks",
         "tokens",
@@ -43143,17 +43480,16 @@
         "models",
         "when",
         "extended",
-        "sonnet",
-        "fable",
         "default",
+        "fable",
         "output",
         "only",
+        "manual",
         "field",
         "note",
-        "preview",
-        "see"
+        "preview"
       ],
-      "word_count": 4566,
+      "word_count": 4679,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -43181,7 +43517,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7127,
+      "word_count": 7164,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -43265,7 +43601,7 @@
         "opus",
         "europe"
       ],
-      "word_count": 1818,
+      "word_count": 1833,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -43293,7 +43629,7 @@
         "portal",
         "name"
       ],
-      "word_count": 3151,
+      "word_count": 3165,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -43304,13 +43640,13 @@
         "bedrock",
         "yes",
         "aws",
-        "anthropic",
         "sonnet",
+        "anthropic",
         "opus",
         "tab",
         "model",
-        "api",
         "amazon",
+        "api",
         "note",
         "codegroup",
         "endpoints",
@@ -43321,7 +43657,7 @@
         "available",
         "title"
       ],
-      "word_count": 3052,
+      "word_count": 3071,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -43333,8 +43669,8 @@
         "agent",
         "opus",
         "endpoints",
-        "tab",
         "sonnet",
+        "tab",
         "google",
         "cloud",
         "model",
@@ -43349,7 +43685,7 @@
         "data",
         "regional"
       ],
-      "word_count": 2544,
+      "word_count": 2554,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -43377,7 +43713,7 @@
         "authentication",
         "request"
       ],
-      "word_count": 6462,
+      "word_count": 6469,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -43386,9 +43722,9 @@
       "keywords": [
         "compaction",
         "when",
+        "claude",
         "codegroup",
         "context",
-        "claude",
         "prompt",
         "summary",
         "api",
@@ -43405,7 +43741,7 @@
         "request",
         "cache"
       ],
-      "word_count": 9764,
+      "word_count": 9769,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -43446,50 +43782,50 @@
         "window",
         "tool",
         "extended",
-        "models",
         "model",
+        "models",
         "tokens",
-        "output",
         "token",
+        "output",
         "input",
         "blocks",
         "api",
         "previous",
         "turn",
+        "sonnet",
         "request",
         "count",
-        "block",
-        "conversation"
+        "block"
       ],
-      "word_count": 1970,
+      "word_count": 2011,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
       "title": "Effort",
       "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization",
       "keywords": [
-        "claude",
         "effort",
+        "claude",
         "thinking",
         "opus",
-        "when",
         "token",
-        "levels",
-        "tool",
+        "sonnet",
         "tasks",
+        "when",
+        "levels",
         "default",
-        "parameter",
-        "mythos",
+        "tool",
+        "agentic",
+        "coding",
+        "recommended",
         "adaptive",
         "lower",
-        "calls",
+        "cost",
         "extended",
-        "agentic",
-        "set",
-        "fable",
-        "recommended"
+        "where",
+        "parameter"
       ],
-      "word_count": 2524,
+      "word_count": 2703,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -43541,11 +43877,11 @@
         "reasoning",
         "models",
         "streaming",
-        "mythos",
         "supported",
+        "mythos",
         "adaptive"
       ],
-      "word_count": 14215,
+      "word_count": 14338,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -43807,8 +44143,8 @@
         "cache",
         "caching",
         "prompt",
-        "tokens",
         "mtok",
+        "tokens",
         "cached",
         "block",
         "breakpoint",
@@ -43825,7 +44161,7 @@
         "input",
         "note"
       ],
-      "word_count": 16173,
+      "word_count": 16234,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -43881,7 +44217,7 @@
         "web",
         "custom"
       ],
-      "word_count": 5085,
+      "word_count": 5090,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -43965,15 +44301,15 @@
         "java",
         "tab"
       ],
-      "word_count": 9977,
+      "word_count": 9986,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
       "title": "Task budgets",
       "content_preview": "# Task budgets  Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.  ---  <Note>   This feature is eligible for [Zero Data Retention (...",
       "keywords": [
-        "budget",
         "claude",
+        "budget",
         "task",
         "tool",
         "tokens",
@@ -43993,35 +44329,35 @@
         "token",
         "side"
       ],
-      "word_count": 2650,
+      "word_count": 2658,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
       "title": "Token counting",
       "content_preview": "# Token counting  Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.  ---  ...",
       "keywords": [
+        "claude",
         "token",
         "tokens",
         "count",
-        "claude",
         "note",
         "counting",
         "limits",
         "codegroup",
-        "message",
         "counts",
+        "message",
         "rate",
-        "card",
         "prompts",
+        "card",
+        "model",
         "messages",
         "before",
-        "model",
         "usage",
-        "caching",
-        "api",
-        "same"
+        "same",
+        "models",
+        "opus"
       ],
-      "word_count": 3794,
+      "word_count": 3854,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -44077,7 +44413,7 @@
         "when",
         "standard"
       ],
-      "word_count": 3616,
+      "word_count": 3619,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -44105,7 +44441,7 @@
         "agents",
         "note"
       ],
-      "word_count": 2961,
+      "word_count": 2964,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/get-started": {
@@ -44896,28 +45232,28 @@
       "title": "Use WIF with Microsoft Entra ID",
       "content_preview": "# Use WIF with Microsoft Entra ID  Federate Azure managed identities and Entra Workload Identity with the Claude API so your Azure workloads can call Claude without static API keys.  ---  Azure worklo...",
       "keywords": [
-        "entra",
         "token",
         "identity",
+        "entra",
+        "managed",
         "workload",
         "issuer",
-        "managed",
-        "service",
-        "anthropic",
-        "azure",
-        "aks",
-        "tenant",
-        "federation",
+        "audience",
         "rule",
         "tokens",
-        "issued",
-        "kubernetes",
-        "account",
-        "value",
-        "microsoft",
-        "cluster"
+        "tenant",
+        "service",
+        "step",
+        "anthropic",
+        "federation",
+        "app",
+        "client",
+        "registration",
+        "exchange",
+        "claim",
+        "value"
       ],
-      "word_count": 3223,
+      "word_count": 6092,
       "file_path": "docs/docs__en__manage-claude__wif-providers__azure.md"
     },
     "/docs/en/manage-claude/wif-providers/gcp": {
@@ -45085,7 +45421,7 @@
         "step",
         "request"
       ],
-      "word_count": 3496,
+      "word_count": 3497,
       "file_path": "docs/docs__en__manage-claude__wif-reference.md"
     },
     "/docs/en/manage-claude/workload-identity-federation": {
@@ -45141,7 +45477,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1982,
+      "word_count": 1977,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -45869,7 +46205,7 @@
         "instructions",
         "when"
       ],
-      "word_count": 7257,
+      "word_count": 7260,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {

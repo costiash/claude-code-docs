@@ -342,7 +342,7 @@ client = Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_managed_agents_deployment_run = client.beta.deployments.run(
-    deployment_id="deployment_id",
+    deployment_id="depl_011CZkZcDH3vPqd7xnEfwTai",
 )
 print(beta_managed_agents_deployment_run.id)
 ```

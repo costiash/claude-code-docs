@@ -102,7 +102,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount",
+          "amount": "50000",
           "scope": {
             "type": "user",
             "user_id": "user_id"
@@ -115,9 +115,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",

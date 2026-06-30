@@ -74,7 +74,7 @@ The [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components)
 Tunnels-specific causes:
 
 * The chart's default audience is `api.anthropic.com` (no scheme). If your rule's audience is `https://api.anthropic.com`, set `api.wif.audience` to match.
-* A `403` from the Tunnels API after a successful exchange means the rule's scope doesn't include `org:manage_tunnels`, or the rule's service account isn't a member of the tunnel's workspace. Set the scope and add the service account to the workspace.
+* A `403` from the Tunnels API after a successful exchange means the rule's scope doesn't include `workspace:manage_tunnels`, or the rule's service account isn't a member of the tunnel's workspace. Set the scope and add the service account to the workspace.
 
 On Helm, the setup component runs as a pre-install hook Job. On failure, the Job is left behind for inspection (`kubectl logs job/mcp-tunnel-setup -n mcp-tunnel`). Helm doesn't manage hook resources, so delete it before retrying:
 

@@ -14,11 +14,11 @@ This guide deploys the [tunnel stack](/docs/en/agents-and-tools/mcp-tunnels/conc
 
 You need:
 
-* **A tunnel created in the Console.** Follow [Create a tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`).
+* **A tunnel.** With programmatic access, the [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
 
 * **A way for the host to authenticate to the Tunnels API.**
 
-  * **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the [setup component](/docs/en/agents-and-tools/mcp-tunnels/concepts#components) can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
+  * **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel (or create the federation rule directly under **Settings > Workload identity** if you're letting the setup component create the tunnel) so the setup component can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
   * **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](/docs/en/agents-and-tools/mcp-tunnels/console#get-the-connection-details), generate a CA and server certificate yourself, and [register the CA in the Console](/docs/en/agents-and-tools/mcp-tunnels/console#add-a-ca-certificate).
 
 * **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
@@ -80,7 +80,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cat > docker-compose.yaml <<'EOF'
         services:
           setup:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
             entrypoint: ["/setup"]
             command:
               - init
@@ -124,7 +124,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro
@@ -160,15 +160,15 @@ This guide provides one reference approach using Docker Compose. You are respons
       </Step>
 
       <Step title="Provision the tunnel">
-        Set the identifiers from the [Console create-tunnel flow](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel):
+        Set the identifiers. Leave `TUNNEL_ID` unset to have the setup component create a tunnel; set it to attach to an existing tunnel from the [Console](/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel):
 
         ```bash
-        export TUNNEL_ID=tnl_...
+        # export TUNNEL_ID=tnl_...   # set to attach to an existing tunnel
         export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
         export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
         ```
 
-        If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise.
+        If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise. An auto-created tunnel is created in that workspace.
 
         Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](/docs/en/manage-claude/workload-identity-federation#identity-providers) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
 
@@ -178,7 +178,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         docker compose run --rm setup
         ```
 
-        `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
+        `setup init` is idempotent over `data/`: re-running it reuses the tunnel ID and CA already stored there and never creates a second tunnel. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
 
         See [Setup component authentication failures](/docs/en/agents-and-tools/mcp-tunnels/troubleshooting#setup-component-authentication-failures) if it errors.
 
@@ -339,7 +339,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro
@@ -405,7 +405,7 @@ With programmatic access, increment `--token-version` in the `setup` service com
 # --token-version=2). The setup binary refuses to rotate when the value
 # hasn't changed.
 
-export TUNNEL_ID=tnl_...
+# export TUNNEL_ID=tnl_...   # set only if you set it during install
 export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
 export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
 # export ANTHROPIC_WORKSPACE_ID=wrkspc_...   # if your rule is workspace-scoped

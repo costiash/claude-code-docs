@@ -3277,19 +3277,15 @@ Create an external key config owned by the caller's organization.
 
   Human-friendly display name.
 
-- `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+- `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
 
-  - `Aws object { kms_arn, role_arn, type, region }`
+  - `Aws object { kms_arn, type, region, role_arn }`
 
     - `kms_arn: string`
 
       Full ARN of the AWS KMS key.
-
-    - `role_arn: string`
-
-      IAM role ARN that Anthropic assumes to access the KMS key.
 
     - `type: "aws"`
 
@@ -3298,6 +3294,10 @@ Create an external key config owned by the caller's organization.
     - `region: optional string`
 
       AWS region. Derived from kms_arn if omitted.
+
+    - `role_arn: optional string`
+
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
   - `Gcp object { key_name, type }`
 
@@ -3353,19 +3353,15 @@ Create an external key config owned by the caller's organization.
 
   Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-- `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+- `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
 
-  - `Aws object { kms_arn, role_arn, type, region }`
+  - `Aws object { kms_arn, type, region, role_arn }`
 
     - `kms_arn: string`
 
       Full ARN of the AWS KMS key.
-
-    - `role_arn: string`
-
-      IAM role ARN that Anthropic assumes to access the KMS key.
 
     - `type: "aws"`
 
@@ -3374,6 +3370,10 @@ Create an external key config owned by the caller's organization.
     - `region: optional string`
 
       AWS region. Derived from kms_arn if omitted.
+
+    - `role_arn: optional string`
+
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
   - `Gcp object { key_name, type }`
 
@@ -3424,7 +3424,6 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
           "display_name": "x",
           "provider_config": {
             "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-            "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
             "type": "aws"
           }
         }'
@@ -3440,9 +3439,9 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
   "geo": "us",
   "provider_config": {
     "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
     "type": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
   "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -3486,19 +3485,15 @@ Results are ordered by creation time (newest first). Use the
 
     Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
     KMS provider identity and auth coordinates.
 
-    - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, type, region, role_arn }`
 
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key.
-
-      - `role_arn: string`
-
-        IAM role ARN that Anthropic assumes to access the KMS key.
 
       - `type: "aws"`
 
@@ -3507,6 +3502,10 @@ Results are ordered by creation time (newest first). Use the
       - `region: optional string`
 
         AWS region. Derived from kms_arn if omitted.
+
+      - `role_arn: optional string`
+
+        IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
     - `Gcp object { key_name, type }`
 
@@ -3570,9 +3569,9 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
       "geo": "us",
       "provider_config": {
         "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-        "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
         "type": "aws",
-        "region": "us-east-1"
+        "region": "us-east-1",
+        "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
       },
       "type": "external_key",
       "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -3610,19 +3609,15 @@ Retrieve a single external key config in the caller's organization by ID.
 
   Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-- `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+- `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
 
-  - `Aws object { kms_arn, role_arn, type, region }`
+  - `Aws object { kms_arn, type, region, role_arn }`
 
     - `kms_arn: string`
 
       Full ARN of the AWS KMS key.
-
-    - `role_arn: string`
-
-      IAM role ARN that Anthropic assumes to access the KMS key.
 
     - `type: "aws"`
 
@@ -3631,6 +3626,10 @@ Retrieve a single external key config in the caller's organization by ID.
     - `region: optional string`
 
       AWS region. Derived from kms_arn if omitted.
+
+    - `role_arn: optional string`
+
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
   - `Gcp object { key_name, type }`
 
@@ -3688,9 +3687,9 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
   "geo": "us",
   "provider_config": {
     "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
     "type": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
   "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -3725,19 +3724,15 @@ encrypted data requires the original key identity to decrypt.
 
   - `"us"`
 
-- `provider_config: optional object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+- `provider_config: optional object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
 
-  - `Aws object { kms_arn, role_arn, type, region }`
+  - `Aws object { kms_arn, type, region, role_arn }`
 
     - `kms_arn: string`
 
       Full ARN of the AWS KMS key.
-
-    - `role_arn: string`
-
-      IAM role ARN that Anthropic assumes to access the KMS key.
 
     - `type: "aws"`
 
@@ -3746,6 +3741,10 @@ encrypted data requires the original key identity to decrypt.
     - `region: optional string`
 
       AWS region. Derived from kms_arn if omitted.
+
+    - `role_arn: optional string`
+
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
   - `Gcp object { key_name, type }`
 
@@ -3795,19 +3794,15 @@ encrypted data requires the original key identity to decrypt.
 
   Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-- `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+- `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
 
-  - `Aws object { kms_arn, role_arn, type, region }`
+  - `Aws object { kms_arn, type, region, role_arn }`
 
     - `kms_arn: string`
 
       Full ARN of the AWS KMS key.
-
-    - `role_arn: string`
-
-      IAM role ARN that Anthropic assumes to access the KMS key.
 
     - `type: "aws"`
 
@@ -3816,6 +3811,10 @@ encrypted data requires the original key identity to decrypt.
     - `region: optional string`
 
       AWS region. Derived from kms_arn if omitted.
+
+    - `role_arn: optional string`
+
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
   - `Gcp object { key_name, type }`
 
@@ -3875,9 +3874,9 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
   "geo": "us",
   "provider_config": {
     "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek",
     "type": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
   "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -4006,19 +4005,15 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
     Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
     KMS provider identity and auth coordinates.
 
-    - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, type, region, role_arn }`
 
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key.
-
-      - `role_arn: string`
-
-        IAM role ARN that Anthropic assumes to access the KMS key.
 
       - `type: "aws"`
 
@@ -4027,6 +4022,10 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
       - `region: optional string`
 
         AWS region. Derived from kms_arn if omitted.
+
+      - `role_arn: optional string`
+
+        IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
     - `Gcp object { key_name, type }`
 
@@ -4090,19 +4089,15 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
     Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
     KMS provider identity and auth coordinates.
 
-    - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, type, region, role_arn }`
 
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key.
-
-      - `role_arn: string`
-
-        IAM role ARN that Anthropic assumes to access the KMS key.
 
       - `type: "aws"`
 
@@ -4111,6 +4106,10 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
       - `region: optional string`
 
         AWS region. Derived from kms_arn if omitted.
+
+      - `role_arn: optional string`
+
+        IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
     - `Gcp object { key_name, type }`
 
@@ -4174,19 +4173,15 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
     Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
     KMS provider identity and auth coordinates.
 
-    - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, type, region, role_arn }`
 
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key.
-
-      - `role_arn: string`
-
-        IAM role ARN that Anthropic assumes to access the KMS key.
 
       - `type: "aws"`
 
@@ -4195,6 +4190,10 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
       - `region: optional string`
 
         AWS region. Derived from kms_arn if omitted.
+
+      - `role_arn: optional string`
+
+        IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
     - `Gcp object { key_name, type }`
 
@@ -4258,19 +4257,15 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
     Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
     KMS provider identity and auth coordinates.
 
-    - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, type, region, role_arn }`
 
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key.
-
-      - `role_arn: string`
-
-        IAM role ARN that Anthropic assumes to access the KMS key.
 
       - `type: "aws"`
 
@@ -4279,6 +4274,10 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
       - `region: optional string`
 
         AWS region. Derived from kms_arn if omitted.
+
+      - `role_arn: optional string`
+
+        IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
     - `Gcp object { key_name, type }`
 
@@ -5461,7 +5460,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `assigned_seat_count: number`
 
-      Number of seats currently assigned to members
+      Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
     - `cowork_daily_active_user_count: number`
 
@@ -5481,7 +5480,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `daily_adoption_rate: number`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -5493,11 +5492,11 @@ Requires an API key with the `read:analytics` scope.
 
     - `monthly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `pending_invite_count: number`
 
-      Number of pending invitations to join the organization
+      Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
     - `starting_at: string`
 
@@ -5509,7 +5508,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `weekly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
 ### Example
 
@@ -5555,7 +5554,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `assigned_seat_count: number`
 
-      Number of seats currently assigned to members
+      Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
     - `cowork_daily_active_user_count: number`
 
@@ -5575,7 +5574,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `daily_adoption_rate: number`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -5587,11 +5586,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `monthly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `pending_invite_count: number`
 
-      Number of pending invitations to join the organization
+      Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
     - `starting_at: string`
 
@@ -5603,7 +5602,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     - `weekly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
 ### Analytics User
 
@@ -5932,9 +5931,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/usage_report \
 Get per-user token usage across a date range.
 
 Returns one row per user, ranked by the chosen token metric. Use this to
-see which users consume the most tokens. Available to organizations on
-a Claude Enterprise plan. Requires an API key with the `read:analytics`
-scope.
+see which users consume the most tokens. Only usage attributable to a
+seat user is included; for organization-wide totals including direct
+API-key and automation traffic, use the bucketed
+`/v1/organizations/analytics/usage_report` endpoint. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -6611,8 +6613,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
 Get per-user cost in USD across a date range.
 
 Returns one row per user, ranked by spend. Use this to see which users
-account for the most cost. Available to organizations on a Claude
-Enterprise plan. Requires an API key with the `read:analytics` scope.
+account for the most cost. Only cost attributable to a seat user is
+included; for organization-wide totals including direct API-key and
+automation traffic, use the bucketed
+`/v1/organizations/analytics/cost_report` endpoint. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -7099,19 +7105,47 @@ an API key with the `read:analytics` scope.
 
   Response for GET /v1/organizations/analytics/users.
 
-  - `data: array of object { chat_metrics, claude_code_metrics, cowork_metrics, 4 more }`
+  - `data: array of object { bioscience_metrics, chat_metrics, claude_code_metrics, 5 more }`
 
-    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_conversation_count, 8 more }`
+    - `bioscience_metrics: object { delegation_count, distinct_session_count, message_count, 2 more }`
+
+      Claude Bioscience activity metrics for a single user on a given day.
+
+      - `delegation_count: number`
+
+        Number of delegations (handoffs to a specialized agent) in Claude Bioscience sessions
+
+      - `distinct_session_count: number`
+
+        Number of distinct Claude Bioscience sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `message_count: number`
+
+        Number of messages sent in Claude Bioscience sessions
+
+      - `remote_compute_job_count: number`
+
+        Number of remote compute jobs launched from Claude Bioscience sessions
+
+      - `skills_used_count: number`
+
+        Total number of skill invocations in Claude Bioscience sessions
+
+    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_connectors_used_count, 9 more }`
 
       Claude.ai activity metrics for a single user on a given day.
 
       - `connectors_used_count: number`
 
-        Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+        Number of MCP connector invocations.
 
       - `distinct_artifacts_created_count: number`
 
         Number of distinct artifacts created
+
+      - `distinct_connectors_used_count: number`
+
+        Distinct claude.ai connectors this user used. Excludes calls whose connector could not be identified and all calls from organizations with zero data retention. Null on aggregated rows where a distinct count cannot be computed.
 
       - `distinct_conversation_count: number`
 
@@ -7343,9 +7377,17 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 {
   "data": [
     {
+      "bioscience_metrics": {
+        "delegation_count": 0,
+        "distinct_session_count": 0,
+        "message_count": 0,
+        "remote_compute_job_count": 0,
+        "skills_used_count": 0
+      },
       "chat_metrics": {
         "connectors_used_count": 0,
         "distinct_artifacts_created_count": 0,
+        "distinct_connectors_used_count": 0,
         "distinct_conversation_count": 0,
         "distinct_files_uploaded_count": 0,
         "distinct_projects_created_count": 0,
@@ -7454,19 +7496,47 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 
   Response for GET /v1/organizations/analytics/users.
 
-  - `data: array of object { chat_metrics, claude_code_metrics, cowork_metrics, 4 more }`
+  - `data: array of object { bioscience_metrics, chat_metrics, claude_code_metrics, 5 more }`
 
-    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_conversation_count, 8 more }`
+    - `bioscience_metrics: object { delegation_count, distinct_session_count, message_count, 2 more }`
+
+      Claude Bioscience activity metrics for a single user on a given day.
+
+      - `delegation_count: number`
+
+        Number of delegations (handoffs to a specialized agent) in Claude Bioscience sessions
+
+      - `distinct_session_count: number`
+
+        Number of distinct Claude Bioscience sessions. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `message_count: number`
+
+        Number of messages sent in Claude Bioscience sessions
+
+      - `remote_compute_job_count: number`
+
+        Number of remote compute jobs launched from Claude Bioscience sessions
+
+      - `skills_used_count: number`
+
+        Total number of skill invocations in Claude Bioscience sessions
+
+    - `chat_metrics: object { connectors_used_count, distinct_artifacts_created_count, distinct_connectors_used_count, 9 more }`
 
       Claude.ai activity metrics for a single user on a given day.
 
       - `connectors_used_count: number`
 
-        Number of MCP connectors used. Null on aggregated rows where a distinct count cannot be computed.
+        Number of MCP connector invocations.
 
       - `distinct_artifacts_created_count: number`
 
         Number of distinct artifacts created
+
+      - `distinct_connectors_used_count: number`
+
+        Distinct claude.ai connectors this user used. Excludes calls whose connector could not be identified and all calls from organizations with zero data retention. Null on aggregated rows where a distinct count cannot be computed.
 
       - `distinct_conversation_count: number`
 
@@ -8136,11 +8206,7 @@ Requires an API key with the `read:analytics` scope.
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_conversation_count, distinct_user_count, message_count, 4 more }`
-
-    - `distinct_conversation_count: number`
-
-      Number of distinct conversations in the project on the requested day
+  - `data: array of object { distinct_user_count, message_count, project_id, 4 more }`
 
     - `distinct_user_count: number`
 
@@ -8173,6 +8239,10 @@ Requires an API key with the `read:analytics` scope.
       - `email_address: string`
 
         Email address of the user
+
+    - `distinct_conversation_count: optional number`
+
+      Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
 
   - `next_page: string`
 
@@ -8192,7 +8262,6 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 {
   "data": [
     {
-      "distinct_conversation_count": 0,
       "distinct_user_count": 0,
       "message_count": 0,
       "project_id": "project_id",
@@ -8201,7 +8270,8 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       "created_by": {
         "id": "id",
         "email_address": "email_address"
-      }
+      },
+      "distinct_conversation_count": 0
     }
   ],
   "next_page": "next_page"
@@ -8216,11 +8286,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_conversation_count, distinct_user_count, message_count, 4 more }`
-
-    - `distinct_conversation_count: number`
-
-      Number of distinct conversations in the project on the requested day
+  - `data: array of object { distinct_user_count, message_count, project_id, 4 more }`
 
     - `distinct_user_count: number`
 
@@ -8253,6 +8319,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       - `email_address: string`
 
         Email address of the user
+
+    - `distinct_conversation_count: optional number`
+
+      Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
 
   - `next_page: string`
 
@@ -8364,7 +8434,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount",
+          "amount": "50000",
           "scope": {
             "type": "user",
             "user_id": "user_id"
@@ -8377,9 +8447,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",
@@ -8481,9 +8551,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",
@@ -8500,8 +8570,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 Delete a per-user spend limit override.
 
-The member falls back to any inherited cap at that period. Seat-tier,
-group, and organization-level rows cannot be deleted via this endpoint.
+The member falls back to any inherited spend limit at that period.
+Seat-tier, group, and organization-level rows cannot be deleted via
+this endpoint.
 
 ### Path Parameters
 
@@ -8541,9 +8612,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 List each member's effective spend limit and period-to-date spend.
 
-Returns one row per (member, period) the member resolves a cap for, with
-the `source` scope the cap was inherited from. Paginates by member, so a
-member's periods never split across pages.
+Returns one row per (member, period) the member resolves a spend limit
+for, with the `source` scope the spend limit was inherited from.
+Paginates by member, so a member's periods never split across pages.
 
 ### Query Parameters
 
@@ -8664,8 +8735,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
         "type": "user_actor",
         "user_id": "user_id"
       },
-      "amount": "amount",
-      "currency": "currency",
+      "amount": "50000",
+      "currency": "USD",
       "period": "monthly",
       "period_to_date_spend": "period_to_date_spend",
       "scope": {
@@ -9092,8 +9163,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
           "type": "user_actor",
           "user_id": "user_id"
         },
-        "amount": "amount",
-        "currency": "currency",
+        "amount": "50000",
+        "currency": "USD",
         "period": "monthly",
         "period_to_date_spend": "period_to_date_spend",
         "scope": {
@@ -9335,8 +9406,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -9375,7 +9446,7 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `amount: string`
 
-  New per-user cap as a non-negative integer decimal string (minor units).
+  New per-user spend limit as a non-negative integer decimal string (minor units).
 
 - `period: optional "monthly" or "daily" or "weekly"`
 
@@ -9625,7 +9696,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount"
+          "amount": "50000"
         }'
 ```
 
@@ -9653,9 +9724,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
   },
   "spend_limit": {
     "id": "id",
-    "amount": "amount",
+    "amount": "50000",
     "created_at": "2019-12-27T18:11:19.117Z",
-    "currency": "currency",
+    "currency": "USD",
     "period": "monthly",
     "scope": {
       "type": "user",
@@ -9672,8 +9743,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -9686,7 +9757,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -9918,8 +9989,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -14399,6 +14470,8 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **get** `/v1/organizations/tunnels/{tunnel_id}`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Retrieve a single tunnel in the caller's organization by ID.
 
 ### Path Parameters
@@ -14476,6 +14549,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
 ## List Tunnels
 
 **get** `/v1/organizations/tunnels`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 List the organization's tunnels.
 
@@ -14585,6 +14660,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels \
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Return the tunnel's current connection token.
 
 The value is fetched live on each call; Anthropic does not store it.
@@ -14645,6 +14722,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token 
 ## Rotate Tunnel Token
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Invalidate the tunnel's current token for new connections and return a fresh value.
 
@@ -14711,6 +14790,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token 
 ## Archive Tunnel
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/archive`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Archive a tunnel. Archival is irreversible.
 
@@ -14952,6 +15033,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Register a public CA certificate for the tunnel.
 
 Anthropic verifies the gateway's server certificate against this CA
@@ -15044,6 +15127,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
 
 **get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+
 Retrieve a single certificate registered on a tunnel by ID.
 
 ### Path Parameters
@@ -15123,6 +15208,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 ## List Tunnel Certificates
 
 **get** `/v1/organizations/tunnels/{tunnel_id}/certificates`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 List the certificates registered on a tunnel.
 
@@ -15228,6 +15315,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
 ## Archive Tunnel Certificate
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Archive a certificate, removing it from the set Anthropic trusts for this tunnel.
 

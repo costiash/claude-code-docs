@@ -279,7 +279,7 @@ Run Deployment Now
 ```cli
 ant beta:deployments run \
   --api-key my-anthropic-api-key \
-  --deployment-id deployment_id
+  --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
 #### Response

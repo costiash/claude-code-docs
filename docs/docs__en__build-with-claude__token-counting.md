@@ -28,7 +28,11 @@ The [token counting](/docs/en/api/messages-count-tokens) endpoint accepts the sa
 
 ### Supported models
 
-All [active models](/docs/en/about-claude/models/overview) support token counting.
+All [active models](/docs/en/about-claude/models/overview) support token counting, including Claude Sonnet 5.
+
+<Note>
+  Claude Opus 4.7 and later Opus models, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Sonnet 5 use a newer tokenizer. The same input text produces approximately 30% more tokens than on earlier models. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
+</Note>
 
 ### Count tokens in basic messages
 

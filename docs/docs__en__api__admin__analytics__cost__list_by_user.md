@@ -5,8 +5,12 @@
 Get per-user cost in USD across a date range.
 
 Returns one row per user, ranked by spend. Use this to see which users
-account for the most cost. Available to organizations on a Claude
-Enterprise plan. Requires an API key with the `read:analytics` scope.
+account for the most cost. Only cost attributable to a seat user is
+included; for organization-wide totals including direct API-key and
+automation traffic, use the bucketed
+`/v1/organizations/analytics/cost_report` endpoint. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 

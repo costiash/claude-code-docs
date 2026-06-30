@@ -343,7 +343,9 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const betaManagedAgentsDeploymentRun = await client.beta.deployments.run('deployment_id');
+const betaManagedAgentsDeploymentRun = await client.beta.deployments.run(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+);
 
 console.log(betaManagedAgentsDeploymentRun.id);
 ```

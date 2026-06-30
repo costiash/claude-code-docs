@@ -12,7 +12,7 @@ This guide walks you through setting up and making API calls to Claude in Amazon
 
 ## Access
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](#regions).
+Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](#regions).
 
 ## Prerequisites
 
@@ -316,6 +316,7 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 | Claude Fable 5        | anthropic.claude-fable-5        | Open                                                                   |
 | Claude Opus 4.8       | anthropic.claude-opus-4-8       | Open                                                                   |
 | Claude Opus 4.7       | anthropic.claude-opus-4-7       | Open                                                                   |
+| Claude Sonnet 5       | `anthropic.claude-sonnet-5`     | Open                                                                   |
 | Claude Haiku 4.5      | anthropic.claude-haiku-4-5      | Open                                                                   |
 | Claude Mythos Preview | anthropic.claude-mythos-preview | Invitation only ([Project Glasswing](https://anthropic.com/glasswing)) |
 
@@ -352,7 +353,7 @@ Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedro
 * **Global:** dynamic routing across all available regions for maximum availability. No pricing premium.
 * **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10% pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
 
-The global endpoint is available for Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Haiku 4.5. Claude Mythos Preview is regional only and is available in `us-east-1`.
+The global endpoint is available for Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, and Claude Haiku 4.5. Claude Mythos Preview is regional only and is available in `us-east-1`.
 
 | AWS region       | Location                  | Endpoint types             |
 | ---------------- | ------------------------- | -------------------------- |

@@ -1,6 +1,6 @@
 ## Create a Message Batch
 
-`$client->messages->batches->create(list<Request> requests): MessageBatch`
+`$client->messages->batches->create(list<Request> requests, ?string userProfileID): MessageBatch`
 
 **post** `/v1/messages/batches`
 
@@ -8,13 +8,17 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Parameters
 
 - `requests: list<Request>`
 
   List of requests for prompt completion. Each is an individual request to create a Message.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 ### Returns
 
@@ -97,7 +101,7 @@ $messageBatch = $client->messages->batches->create(
         ],
         'serviceTier' => 'auto',
         'stopSequences' => ['string'],
-        'stream' => true,
+        'stream' => false,
         'system' => [
           [
             'text' => 'Today\'s date is 2024-06-01.',
@@ -141,6 +145,7 @@ $messageBatch = $client->messages->batches->create(
       ],
     ],
   ],
+  userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($messageBatch);

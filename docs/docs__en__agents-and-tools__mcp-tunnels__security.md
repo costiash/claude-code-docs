@@ -48,7 +48,7 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
   </Step>
 
   <Step title="Archive the tunnel">
-    Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#archive-a-tunnel) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](/docs/en/api/admin/mcp_tunnels/archive).
+    Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#archive-a-tunnel) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](/docs/en/api/beta/tunnels/archive).
   </Step>
 
   <Step title="Contact Anthropic">
