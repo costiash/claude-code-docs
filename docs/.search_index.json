@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-30T05:05:17Z",
+  "generated_at": "2026-06-30T08:01:23Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -48,15 +48,15 @@
         "set",
         "profile",
         "settings",
+        "version",
         "inference",
         "models",
-        "version",
         "see",
         "variables",
         "default",
         "file"
       ],
-      "word_count": 3362,
+      "word_count": 3435,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -135,12 +135,12 @@
         "setup",
         "web",
         "repository",
-        "network",
         "script",
+        "network",
         "fix",
         "repo"
       ],
-      "word_count": 6481,
+      "word_count": 6530,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -469,14 +469,14 @@
         "session",
         "runs",
         "command",
+        "output",
         "file",
         "event",
-        "output",
         "prompt",
         "user",
         "control"
       ],
-      "word_count": 22046,
+      "word_count": 22412,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -488,23 +488,23 @@
         "line",
         "code",
         "mode",
+        "session",
         "input",
         "prompt",
-        "history",
         "press",
-        "session",
+        "history",
         "commands",
         "terminal",
+        "background",
+        "when",
         "conversation",
         "search",
-        "background",
         "text",
-        "when",
         "cursor",
         "previous",
         "word"
       ],
-      "word_count": 3740,
+      "word_count": 3865,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -600,23 +600,23 @@
         "mcp",
         "servers",
         "code",
+        "when",
         "step",
         "tools",
-        "when",
         "tool",
         "plugin",
         "project",
         "environment",
-        "title",
-        "add",
         "set",
         "only",
-        "local",
-        "oauth",
+        "title",
+        "add",
         "authentication",
-        "variable"
+        "oauth",
+        "local",
+        "scope"
       ],
-      "word_count": 7265,
+      "word_count": 7726,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -697,10 +697,10 @@
         "version",
         "level",
         "context",
-        "fallback",
-        "sonnet"
+        "environment",
+        "fallback"
       ],
-      "word_count": 6936,
+      "word_count": 6962,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -715,20 +715,20 @@
         "claude",
         "request",
         "code",
-        "plugin",
         "session",
+        "plugin",
         "name",
         "only",
-        "metrics",
         "api",
+        "metrics",
         "standard",
-        "user",
-        "such",
         "set",
-        "mcp",
-        "counter"
+        "such",
+        "user",
+        "counter",
+        "mcp"
       ],
-      "word_count": 10298,
+      "word_count": 10556,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -819,28 +819,28 @@
       "title": "Create and distribute a plugin marketplace",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Create and dist...",
       "keywords": [
-        "marketplace",
         "plugin",
+        "marketplace",
         "plugins",
-        "git",
         "code",
         "claude",
+        "git",
         "string",
         "see",
-        "marketplaces",
         "directory",
         "add",
         "when",
+        "marketplaces",
         "url",
-        "paths",
-        "version",
         "github",
+        "paths",
+        "entry",
+        "version",
         "repository",
-        "source",
         "sources",
-        "users"
+        "source"
       ],
-      "word_count": 6662,
+      "word_count": 7339,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -857,18 +857,18 @@
         "default",
         "field",
         "mcp",
+        "marketplace",
         "see",
         "skills",
-        "marketplace",
         "version",
         "command",
         "skill",
+        "name",
         "path",
         "servers",
-        "root",
-        "manifest"
+        "root"
       ],
-      "word_count": 8286,
+      "word_count": 8308,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -992,23 +992,23 @@
         "managed",
         "source",
         "json",
-        "plugins",
         "code",
+        "plugins",
         "theme",
         "null",
         "acme",
         "when",
         "set",
-        "project",
         "see",
+        "project",
+        "only",
         "corp",
         "tools",
+        "mcp",
         "user",
-        "only",
-        "github",
-        "mcp"
+        "github"
       ],
-      "word_count": 13111,
+      "word_count": 13503,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1058,13 +1058,13 @@
         "create",
         "bundled",
         "agent",
+        "context",
         "settings",
         "file",
         "see",
-        "add",
-        "context"
+        "add"
       ],
-      "word_count": 7151,
+      "word_count": 7298,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1082,17 +1082,17 @@
         "session",
         "window",
         "current",
+        "only",
         "output",
         "json",
         "name",
         "directory",
-        "only",
         "codegroup",
         "api",
         "command",
         "may"
       ],
-      "word_count": 6231,
+      "word_count": 6276,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1112,15 +1112,15 @@
         "prompt",
         "context",
         "only",
-        "tools",
         "same",
-        "fork",
+        "tools",
         "model",
+        "fork",
+        "plugin",
         "field",
-        "specific",
-        "background"
+        "specific"
       ],
-      "word_count": 8799,
+      "word_count": 8970,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
