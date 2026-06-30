@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-29T22:09:01Z",
+  "generated_at": "2026-06-30T01:30:36Z",
   "indexed_files": 1714,
   "index": {
     "/changelog": {
@@ -16,8 +16,8 @@
         "claude",
         "mode",
         "improved",
-        "tool",
         "sessions",
+        "tool",
         "after",
         "being",
         "mcp",
@@ -28,7 +28,7 @@
         "model",
         "command"
       ],
-      "word_count": 59515,
+      "word_count": 60144,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1316,7 +1316,7 @@
         "capabilities",
         "when"
       ],
-      "word_count": 2452,
+      "word_count": 2474,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__overview.md"
     },
     "/docs/en/agents-and-tools/agent-skills/quickstart": {
@@ -1365,14 +1365,14 @@
         "deprecated",
         "oauth",
         "default",
+        "connector",
         "when",
         "must",
-        "connector",
         "token",
         "sdk",
         "messages"
       ],
-      "word_count": 3034,
+      "word_count": 3046,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1764,7 +1764,7 @@
         "response",
         "web"
       ],
-      "word_count": 5340,
+      "word_count": 5346,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -2044,7 +2044,7 @@
         "note",
         "request"
       ],
-      "word_count": 6210,
+      "word_count": 6234,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2304,8 +2304,8 @@
       "content_preview": "# Web fetch tool  Fetch and read content from specific URLs to augment Claude's context with live web content.  ---  The web fetch tool allows Claude to retrieve full content from specified web pages ...",
       "keywords": [
         "fetch",
-        "tool",
         "web",
+        "tool",
         "claude",
         "content",
         "api",
@@ -2324,7 +2324,7 @@
         "results",
         "specific"
       ],
-      "word_count": 3560,
+      "word_count": 3571,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2352,7 +2352,7 @@
         "token",
         "available"
       ],
-      "word_count": 2532,
+      "word_count": 2543,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -43293,7 +43293,7 @@
         "portal",
         "name"
       ],
-      "word_count": 3145,
+      "word_count": 3151,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -43448,9 +43448,9 @@
         "extended",
         "models",
         "model",
-        "token",
         "tokens",
         "output",
+        "token",
         "input",
         "blocks",
         "api",
@@ -43458,10 +43458,10 @@
         "turn",
         "request",
         "count",
-        "opus",
-        "block"
+        "block",
+        "conversation"
       ],
-      "word_count": 1979,
+      "word_count": 1970,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -43578,30 +43578,30 @@
     },
     "/docs/en/build-with-claude/fast-mode": {
       "title": "Fast mode (research preview)",
-      "content_preview": "# Fast mode (research preview)  Get up to 2.5x higher output tokens per second from Claude Opus models.  ---  Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8, Claude...",
+      "content_preview": "# Fast mode (research preview)  Get up to 2.5x higher output tokens per second from supported Claude Opus models.  ---  Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8 and Claude Opus 4.7 at premium pricing. Set `speed: \"fast\"` with the `fast-mode-2026-02-01` beta",
       "keywords": [
         "fast",
         "mode",
         "claude",
         "opus",
-        "pricing",
-        "tokens",
-        "standard",
         "speed",
-        "rate",
-        "output",
-        "per",
+        "standard",
+        "pricing",
         "note",
-        "when",
-        "api",
-        "model",
-        "card",
+        "rate",
+        "tokens",
         "available",
         "requests",
-        "limit",
-        "supported"
+        "output",
+        "when",
+        "model",
+        "per",
+        "api",
+        "card",
+        "supported",
+        "error"
       ],
-      "word_count": 2498,
+      "word_count": 2636,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -43629,7 +43629,7 @@
         "types",
         "created"
       ],
-      "word_count": 2663,
+      "word_count": 2675,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -43965,7 +43965,7 @@
         "java",
         "tab"
       ],
-      "word_count": 9971,
+      "word_count": 9977,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -44497,7 +44497,7 @@
         "azure",
         "admin"
       ],
-      "word_count": 1568,
+      "word_count": 1569,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -44749,7 +44749,7 @@
         "settings",
         "platform"
       ],
-      "word_count": 1199,
+      "word_count": 1252,
       "file_path": "docs/docs__en__manage-claude__data-residency.md"
     },
     "/docs/en/manage-claude/rate-limits-api": {
@@ -45151,8 +45151,8 @@
         "agent",
         "version",
         "tools",
-        "claude",
         "agents",
+        "claude",
         "reference",
         "codegroup",
         "new",
@@ -45162,14 +45162,14 @@
         "configuration",
         "managed",
         "fields",
-        "opus",
         "cli",
         "create",
         "reusable",
         "mcp",
-        "skills"
+        "skills",
+        "session"
       ],
-      "word_count": 1742,
+      "word_count": 1736,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45414,14 +45414,14 @@
         "memories",
         "full",
         "api",
+        "read",
         "content",
         "list",
         "response",
-        "read",
-        "versions",
-        "see"
+        "when",
+        "writes"
       ],
-      "word_count": 4092,
+      "word_count": 4169,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {

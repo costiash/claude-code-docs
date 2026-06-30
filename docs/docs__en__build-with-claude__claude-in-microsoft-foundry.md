@@ -15,7 +15,7 @@ Claude models in Microsoft Foundry are available in two hosting options. You cho
 |                      | Hosted on Azure                                            | Hosted on Anthropic                                                                                             |
 | -------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Where inference runs | Anthropic-operated service running on Azure infrastructure | Anthropic-operated service running on Anthropic infrastructure                                                  |
-| Model availability   | The latest models in the Opus, Sonnet, and Haiku families  | All Claude models available on Microsoft Foundry                                                                |
+| Model availability   | The latest models in the Opus and Haiku families           | All Claude models available on Microsoft Foundry                                                                |
 | Deployment types     | Global Standard, US Data Zone Standard                     | Global Standard                                                                                                 |
 | Recommended for      | Most workloads                                             | [Access to features or models not yet hosted on Azure](#additional-features-not-supported-when-hosted-on-azure) |
 
@@ -109,7 +109,7 @@ After creating your resource, deploy a Claude model to make it available for API
 
 2. Search for and select a Claude model (for example, `claude-opus-4-8`). Each model appears once in the catalog regardless of how many hosting options it supports.
 
-3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure.
+3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure for models available in both hosting options.
 
 4. On your first Claude deployment, review the Azure Marketplace terms, select an industry, and select **Agree and Proceed** to accept the terms and subscribe to the Azure Marketplace offer.
 

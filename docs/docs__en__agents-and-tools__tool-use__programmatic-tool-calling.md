@@ -35,7 +35,7 @@ Programmatic tool calling requires `code_execution_20260120` or later, which is 
 | Claude Opus 4.5 (claude-opus-4-5-20251101)     |
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) |
 
-For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Google Cloud.
+For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, programmatic tool calling requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ## Quick start
 
@@ -1545,7 +1545,7 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 * Enabled with a tool definition, with no infrastructure to run
 * Environment and instructions optimized for Claude
 
-Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, programmatic tool calling requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure).
 
 ## Data retention
 

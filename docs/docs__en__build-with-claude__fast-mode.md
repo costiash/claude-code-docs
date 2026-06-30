@@ -1,10 +1,10 @@
 # Fast mode (research preview)
 
-Get up to 2.5x higher output tokens per second from Claude Opus models.
+Get up to 2.5x higher output tokens per second from supported Claude Opus models.
 
 ---
 
-Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
+Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8 and Claude Opus 4.7 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
 
 <Note>
   Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
@@ -20,19 +20,18 @@ Fast mode is supported on the following models:
 
 * Claude Opus 4.8 (claude-opus-4-8)
 * Claude Opus 4.7 (claude-opus-4-7)
-* Claude Opus 4.6 (claude-opus-4-6)
 
 <Note>
   Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](/docs/en/managed-agents/overview), only. It is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 </Note>
 
 <Warning>
-  Fast mode for Claude Opus 4.7 is deprecated as of June 25, 2026, and will be removed on July 24, 2026. After removal, requests to `claude-opus-4-7` with `speed: "fast"` will return an error. Claude Opus 4.7 remains available at standard speed.
-
-  Fast mode for Claude Opus 4.6 is deprecated and will be removed on June 29, 2026. After removal, requests to `claude-opus-4-6` with `speed: "fast"` will fall back to standard speed at standard pricing rather than return an error.
-
-  Migrate to fast mode for Claude Opus 4.8 to keep the speedup.
+  Fast mode for Claude Opus 4.7 is deprecated as of June 25, 2026, and will be removed on July 24, 2026. After removal, requests to `claude-opus-4-7` with `speed: "fast"` will return an error; unlike Claude Opus 4.6 (see the following note), Claude Opus 4.7 does not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, migrate to Claude Opus 4.8.
 </Warning>
+
+<Note>
+  As of June 29, 2026, fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](/docs/en/about-claude/pricing) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](#checking-which-speed-was-used). To continue using fast mode, migrate to [Claude Opus 4.8](/docs/en/about-claude/models/migration-guide).
+</Note>
 
 ## How fast mode works
 
@@ -198,10 +197,10 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 Fast mode is priced at a per-model multiplier on standard rates across the full context window, including requests over 200k input tokens. The following table shows fast mode pricing for each supported model:
 
-| Model                             | Input      | Output      |
-| --------------------------------- | ---------- | ----------- |
-| Claude Opus 4.8                   | $10 / MTok | $50 / MTok  |
-| Claude Opus 4.7 / Claude Opus 4.6 | $30 / MTok | $150 / MTok |
+| Model           | Input      | Output      |
+| --------------- | ---------- | ----------- |
+| Claude Opus 4.8 | $10 / MTok | $50 / MTok  |
+| Claude Opus 4.7 | $30 / MTok | $150 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -229,7 +228,7 @@ For tier-specific rate limits, see the [rate limits page](/docs/en/api/rate-limi
 
 ## Checking which speed was used
 
-The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Fast mode doesn't silently fall back to standard speed on rate limits or capacity (you'll get a `429` or `529` instead), so when you request `speed: "fast"` on a supported model, `usage.speed` is `"fast"`.
+The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. On supported models, fast mode doesn't silently fall back to standard speed on rate limits or capacity (you'll get a `429` or `529` instead), so when you request `speed: "fast"` on Claude Opus 4.8 or Claude Opus 4.7, `usage.speed` is `"fast"`. On Claude Opus 4.6, where fast mode is [not available](#supported-models), requests with `speed: "fast"` run at standard speed and return `usage.speed: "standard"`. Check this field to confirm which speed served a request.
 
 <CodeGroup>
   ```bash cURL
@@ -386,6 +385,10 @@ To track fast mode usage and costs across your organization, see the [Usage and 
 When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. The Anthropic SDKs automatically retry these requests up to 2 times by default (configurable with `max_retries`), waiting for the server-specified delay before each retry. Because fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
 
 ### Falling back to standard speed
+
+<Note>
+  This section covers an opt-in client-side fallback when fast mode is rate limited. It is separate from the behavior on [Claude Opus 4.6](#supported-models), where fast mode is not available and requests run at standard speed automatically.
+</Note>
 
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
 
@@ -725,7 +728,7 @@ Because setting `max_retries` to `0` also disables retries for other transient e
 ## Considerations
 
 * **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-* **Supported models:** Fast mode is supported on Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
+* **Supported models:** Fast mode is supported on Claude Opus 4.8 and Claude Opus 4.7 (fast mode deprecated; removal on July 24, 2026, with the model itself unaffected). On Claude Opus 4.6, requests with `speed: "fast"` do not return an error: they run at standard speed and are billed at standard rates. On any other model, sending `speed: "fast"` returns an error.
 * **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 * **Batch API:** Fast mode is not available with the [Batch API](/docs/en/build-with-claude/batch-processing).
 * **Priority Tier:** Fast mode is not available with a [Priority Tier](/docs/en/api/service-tiers) commitment.
