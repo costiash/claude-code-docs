@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-01T18:43:37.256058Z",
-    "total_paths": 2036,
+    "generated_at": "2026-07-01T21:34:21.279313Z",
+    "total_paths": 2040,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-01T18:43:37.256068Z"
+    "last_regenerated": "2026-07-01T21:34:21.279322Z"
   },
   "categories": {
     "core_documentation": [
@@ -267,6 +267,8 @@
       "/docs/en/agent-sdk/user-input",
       "/docs/en/api/admin",
       "/docs/en/api/admin/analytics",
+      "/docs/en/api/admin/analytics/artifacts",
+      "/docs/en/api/admin/analytics/artifacts/list",
       "/docs/en/api/admin/analytics/chat_projects",
       "/docs/en/api/admin/analytics/chat_projects/list",
       "/docs/en/api/admin/analytics/connectors",
@@ -274,6 +276,8 @@
       "/docs/en/api/admin/analytics/cost",
       "/docs/en/api/admin/analytics/cost/list",
       "/docs/en/api/admin/analytics/cost/list_by_user",
+      "/docs/en/api/admin/analytics/plugins",
+      "/docs/en/api/admin/analytics/plugins/list",
       "/docs/en/api/admin/analytics/retrieve_summaries",
       "/docs/en/api/admin/analytics/skills",
       "/docs/en/api/admin/analytics/skills/list",
