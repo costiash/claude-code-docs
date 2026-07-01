@@ -2,6 +2,284 @@
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `class BetaWebhookAgentArchivedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.archived"constant`
+
+    - `AGENT_ARCHIVED("agent.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Created Event Data
+
+- `class BetaWebhookAgentCreatedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.created"constant`
+
+    - `AGENT_CREATED("agent.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `class BetaWebhookAgentDeletedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.deleted"constant`
+
+    - `AGENT_DELETED("agent.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Updated Event Data
+
+- `class BetaWebhookAgentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.updated"constant`
+
+    - `AGENT_UPDATED("agent.updated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `class BetaWebhookDeploymentArchivedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.archived"constant`
+
+    - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Created Event Data
+
+- `class BetaWebhookDeploymentCreatedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.created"constant`
+
+    - `DEPLOYMENT_CREATED("deployment.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `class BetaWebhookDeploymentDeletedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.deleted"constant`
+
+    - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `class BetaWebhookDeploymentPausedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.paused"constant`
+
+    - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `class BetaWebhookDeploymentRunFailedEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.failed"constant`
+
+    - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `class BetaWebhookDeploymentRunStartedEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.started"constant`
+
+    - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `class BetaWebhookDeploymentRunSucceededEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.succeeded"constant`
+
+    - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `class BetaWebhookDeploymentUnpausedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.unpaused"constant`
+
+    - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `class BetaWebhookDeploymentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.updated"constant`
+
+    - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Archived Event Data
+
+- `class BetaWebhookEnvironmentArchivedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.archived"constant`
+
+    - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Created Event Data
+
+- `class BetaWebhookEnvironmentCreatedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.created"constant`
+
+    - `ENVIRONMENT_CREATED("environment.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `class BetaWebhookEnvironmentDeletedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `BetaWebhookEnvironmentDeletedEventType type`
+
+    - `ENVIRONMENT_DELETED("environment.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Deleted Event Type
+
+- `enum BetaWebhookEnvironmentDeletedEventType:`
+
+  - `ENVIRONMENT_DELETED("environment.deleted")`
+
+### Beta Webhook Environment Updated Event Data
+
+- `class BetaWebhookEnvironmentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.updated"constant`
+
+    - `ENVIRONMENT_UPDATED("environment.updated")`
+
+  - `String workspaceId`
+
 ### Beta Webhook Event
 
 - `class BetaWebhookEvent:`
@@ -366,6 +644,286 @@
 
       - `String workspaceId`
 
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.created"constant`
+
+        - `AGENT_CREATED("agent.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.archived"constant`
+
+        - `AGENT_ARCHIVED("agent.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.deleted"constant`
+
+        - `AGENT_DELETED("agent.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.paused"constant`
+
+        - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.failed"constant`
+
+        - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.created"constant`
+
+        - `DEPLOYMENT_CREATED("deployment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.updated"constant`
+
+        - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.unpaused"constant`
+
+        - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.updated"constant`
+
+        - `AGENT_UPDATED("agent.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.archived"constant`
+
+        - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.started"constant`
+
+        - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.deleted"constant`
+
+        - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.succeeded"constant`
+
+        - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentCreatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.created"constant`
+
+        - `ENVIRONMENT_CREATED("environment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.updated"constant`
+
+        - `ENVIRONMENT_UPDATED("environment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentArchivedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.archived"constant`
+
+        - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentDeletedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `BetaWebhookEnvironmentDeletedEventType type`
+
+        - `ENVIRONMENT_DELETED("environment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.created"constant`
+
+        - `MEMORY_STORE_CREATED("memory_store.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.archived"constant`
+
+        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.deleted"constant`
+
+        - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+      - `String workspaceId`
+
   - `JsonValue; type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -725,6 +1283,334 @@
       - `SESSION_UPDATED("session.updated")`
 
     - `String workspaceId`
+
+  - `class BetaWebhookAgentCreatedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.created"constant`
+
+      - `AGENT_CREATED("agent.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentArchivedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.archived"constant`
+
+      - `AGENT_ARCHIVED("agent.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentDeletedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.deleted"constant`
+
+      - `AGENT_DELETED("agent.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentPausedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.paused"constant`
+
+      - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunFailedEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.failed"constant`
+
+      - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentCreatedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.created"constant`
+
+      - `DEPLOYMENT_CREATED("deployment.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.updated"constant`
+
+      - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentUnpausedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.unpaused"constant`
+
+      - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.updated"constant`
+
+      - `AGENT_UPDATED("agent.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentArchivedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.archived"constant`
+
+      - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunStartedEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.started"constant`
+
+      - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentDeletedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.deleted"constant`
+
+      - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.succeeded"constant`
+
+      - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentCreatedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.created"constant`
+
+      - `ENVIRONMENT_CREATED("environment.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.updated"constant`
+
+      - `ENVIRONMENT_UPDATED("environment.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentArchivedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.archived"constant`
+
+      - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentDeletedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `BetaWebhookEnvironmentDeletedEventType type`
+
+      - `ENVIRONMENT_DELETED("environment.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.created"constant`
+
+      - `MEMORY_STORE_CREATED("memory_store.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.archived"constant`
+
+      - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.deleted"constant`
+
+      - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+    - `String workspaceId`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `class BetaWebhookMemoryStoreArchivedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.archived"constant`
+
+    - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `class BetaWebhookMemoryStoreCreatedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.created"constant`
+
+    - `MEMORY_STORE_CREATED("memory_store.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `class BetaWebhookMemoryStoreDeletedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.deleted"constant`
+
+    - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+  - `String workspaceId`
 
 ### Beta Webhook Session Archived Event Data
 
@@ -1483,6 +2369,286 @@
       - `JsonValue; type "session.updated"constant`
 
         - `SESSION_UPDATED("session.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.created"constant`
+
+        - `AGENT_CREATED("agent.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.archived"constant`
+
+        - `AGENT_ARCHIVED("agent.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.deleted"constant`
+
+        - `AGENT_DELETED("agent.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.paused"constant`
+
+        - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.failed"constant`
+
+        - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.created"constant`
+
+        - `DEPLOYMENT_CREATED("deployment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.updated"constant`
+
+        - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.unpaused"constant`
+
+        - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.updated"constant`
+
+        - `AGENT_UPDATED("agent.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.archived"constant`
+
+        - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.started"constant`
+
+        - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.deleted"constant`
+
+        - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.succeeded"constant`
+
+        - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentCreatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.created"constant`
+
+        - `ENVIRONMENT_CREATED("environment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.updated"constant`
+
+        - `ENVIRONMENT_UPDATED("environment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentArchivedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.archived"constant`
+
+        - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentDeletedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `BetaWebhookEnvironmentDeletedEventType type`
+
+        - `ENVIRONMENT_DELETED("environment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.created"constant`
+
+        - `MEMORY_STORE_CREATED("memory_store.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.archived"constant`
+
+        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.deleted"constant`
+
+        - `MEMORY_STORE_DELETED("memory_store.deleted")`
 
       - `String workspaceId`
 

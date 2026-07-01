@@ -1,10 +1,10 @@
 # Scheduled deployments
 
-Run an agent on a recurring cron schedule and inspect its run history.
+Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.
 
 ---
 
-A **scheduled deployment** allows an [agent](/docs/en/managed-agents/agent-setup) to kick off [sessions](/docs/en/managed-agents/sessions) autonomously, enabling task completion over a predictable cadence.
+A **scheduled deployment** allows an [agent](/docs/en/managed-agents/agent-setup) to start [sessions](/docs/en/managed-agents/sessions) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
 
 <Note>
   All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -244,6 +244,8 @@ The upcoming run timestamps are based on the exact schedule configured. However,
 
 A maximum of **1,000 scheduled deployments** is supported per organization. Contact Anthropic support if you need more.
 
+See the [Create Deployment reference](/docs/en/api/beta/deployments/create) for full parameters and response schema.
+
 ### Cron and timezone semantics
 
 * **Expression:** Standard POSIX cron (`minute hour day-of-month month day-of-week`). You can generate and validate these cron expressions in the [Claude Console](https://platform.claude.com/workspaces/default/deployments).
@@ -435,7 +437,7 @@ You can additionally filter on deployment runs with errors:
   ```
 </CodeGroup>
 
-A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`).
+A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs reference](/docs/en/api/beta/deployment_runs/list) for all filter parameters and the response schema.
 
 ```json
 {
@@ -453,7 +455,7 @@ A failed run includes an `error` with a `type` describing why session creation w
 }
 ```
 
-To retrieve a single run by ID, call `GET /v1/deployment_runs/{deployment_run_id}`. A [`deployment_run` webhook event](/docs/en/managed-agents/webhooks#supported-event-types) carries the run ID as its `data.id`.
+To retrieve a single run by ID, call [`GET /v1/deployment_runs/{deployment_run_id}`](/docs/en/api/beta/deployment_runs/retrieve). A [`deployment_run` webhook event](/docs/en/managed-agents/webhooks#supported-event-types) carries the run ID as its `data.id`.
 
 ## Managing deployment lifecycle
 
@@ -602,7 +604,7 @@ If a deployment's agent has been archived or deleted, the deployment is automati
 
 ## Trigger a manual run
 
-To run a deployment outside its schedule, call the `run` endpoint. This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
+To run a deployment outside its schedule, call the [`run` endpoint](/docs/en/api/beta/deployments/run). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl

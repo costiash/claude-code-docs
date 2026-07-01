@@ -150,6 +150,18 @@ Create Credential
 
       - `"environment_variable"`
 
+    - `injection_location: Optional[BetaManagedAgentsInjectionLocationParams]`
+
+      Where in the outbound request the secret value may be substituted.
+
+      - `body: Optional[bool]`
+
+        Substitute when the placeholder appears in the request body.
+
+      - `header: Optional[bool]`
+
+        Substitute when the placeholder appears in a request header value.
+
 - `display_name: Optional[str]`
 
   Human-readable name for the credential. Up to 255 characters.
@@ -319,6 +331,18 @@ Create Credential
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: bool`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: bool`
+
+          Whether the placeholder is substituted in request header values.
 
       - `networking: Networking`
 

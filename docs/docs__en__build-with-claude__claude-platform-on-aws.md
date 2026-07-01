@@ -277,14 +277,14 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Claude P
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java-aws:2.40.0")
+    implementation("com.anthropic:anthropic-java-aws:2.47.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.40.0</version>
+      <version>2.47.0</version>
     </dependency>
     ```
   </Tab>

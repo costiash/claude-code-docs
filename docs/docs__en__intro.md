@@ -7,11 +7,11 @@ Claude is a highly performant, trustworthy, and intelligent AI platform built by
 <Tip>
   The latest generation of Claude models:
 
-  **Claude Fable 5** - Anthropic's most capable widely released model for the most demanding reasoning and long-horizon agentic work. Read the [Claude Fable 5 announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5).
+  **Claude Fable 5** - Next-generation intelligence for long-running agents. Read the [Claude Fable 5 and Claude Mythos 5 announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5).
 
   **Claude Mythos 5** - Shares Claude Fable 5's capabilities without the safety classifiers. Available in limited release through [Project Glasswing](https://anthropic.com/glasswing).
 
-  **Claude Opus 4.8** - Anthropic's most capable Opus-tier model for complex reasoning and agentic coding. Read the [Claude Opus 4.8 announcement](https://www.anthropic.com/news/claude-opus-4-8).
+  **Claude Opus 4.8** - For complex agentic coding and enterprise work. Read the [Claude Opus 4.8 announcement](https://www.anthropic.com/news/claude-opus-4-8).
 
   **Claude Sonnet 5** - Frontier intelligence at scale, built for coding, agents, and enterprise workflows. Read the [Claude Sonnet 5 announcement](https://www.anthropic.com/news/claude-sonnet-5).
 

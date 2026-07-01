@@ -45,14 +45,14 @@ First, install Anthropic's [client SDK](/docs/en/cli-sdks-libraries/overview) fo
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-vertex:2.40.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.47.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.40.0</version>
+          <version>2.47.0</version>
       </dependency>
       ```
 

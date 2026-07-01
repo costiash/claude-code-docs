@@ -2,6 +2,250 @@
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `BetaWebhookAgentArchivedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Created Event Data
+
+- `BetaWebhookAgentCreatedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `BetaWebhookAgentDeletedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.deleted" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Agent Updated Event Data
+
+- `BetaWebhookAgentUpdatedEventData`
+
+  - `string id`
+
+    ID of the agent that triggered the event.
+
+  - `string organizationID`
+
+  - `"agent.updated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `BetaWebhookDeploymentArchivedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Created Event Data
+
+- `BetaWebhookDeploymentCreatedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `BetaWebhookDeploymentDeletedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.deleted" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `BetaWebhookDeploymentPausedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.paused" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `BetaWebhookDeploymentRunFailedEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.failed" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `BetaWebhookDeploymentRunStartedEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.started" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `BetaWebhookDeploymentRunSucceededEventData`
+
+  - `string id`
+
+    ID of the deployment run that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment_run.succeeded" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `BetaWebhookDeploymentUnpausedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.unpaused" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `BetaWebhookDeploymentUpdatedEventData`
+
+  - `string id`
+
+    ID of the deployment that triggered the event.
+
+  - `string organizationID`
+
+  - `"deployment.updated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Archived Event Data
+
+- `BetaWebhookEnvironmentArchivedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Created Event Data
+
+- `BetaWebhookEnvironmentCreatedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `BetaWebhookEnvironmentDeletedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `BetaWebhookEnvironmentDeletedEventType type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Deleted Event Type
+
+- `BetaWebhookEnvironmentDeletedEventType`
+
+  - `"environment.deleted"`
+
+### Beta Webhook Environment Updated Event Data
+
+- `BetaWebhookEnvironmentUpdatedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.updated" type`
+
+  - `string workspaceID`
+
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
@@ -327,6 +571,288 @@
     - `"session.updated" type`
 
     - `string workspaceID`
+
+  - `BetaWebhookAgentCreatedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentArchivedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentDeletedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.deleted" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentPausedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.paused" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunFailedEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.failed" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentCreatedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentUpdatedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentUnpausedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.unpaused" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookAgentUpdatedEventData`
+
+    - `string id`
+
+      ID of the agent that triggered the event.
+
+    - `string organizationID`
+
+    - `"agent.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentArchivedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunStartedEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.started" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentDeletedEventData`
+
+    - `string id`
+
+      ID of the deployment that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment.deleted" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookDeploymentRunSucceededEventData`
+
+    - `string id`
+
+      ID of the deployment run that triggered the event.
+
+    - `string organizationID`
+
+    - `"deployment_run.succeeded" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentCreatedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentUpdatedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentArchivedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentDeletedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `BetaWebhookEnvironmentDeletedEventType type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreCreatedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreArchivedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreDeletedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.deleted" type`
+
+    - `string workspaceID`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `BetaWebhookMemoryStoreArchivedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `BetaWebhookMemoryStoreCreatedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `BetaWebhookMemoryStoreDeletedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.deleted" type`
+
+  - `string workspaceID`
 
 ### Beta Webhook Session Archived Event Data
 

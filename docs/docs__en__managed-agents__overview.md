@@ -76,6 +76,7 @@ Claude Managed Agents is best for workloads that need:
 * **Self-hosted execution:** Sandboxes on infrastructure you control for compliance or data-residency requirements
 * **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 * **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
+* **Scheduled execution:** Recurring agent runs on a cron schedule through [scheduled deployments](/docs/en/managed-agents/scheduled-deployments)
 
 ## Supported tools
 
