@@ -435,7 +435,7 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
     --header "anthropic-version: 2023-06-01" \
     --header "anthropic-beta: cache-diagnosis-2026-04-07" \
     --header "content-type: application/json" \
-    --data @- <<EOF | sed -n 's/^data: //p' | jq -s '.[] | select(.type == "message_start") | .message.diagnostics'
+    --data @- <<EOF | jq -R 'select(startswith("data: ")) | ltrimstr("data: ") | fromjson | select(.type == "message_start") | .message.diagnostics'
   {
     "model": "claude-opus-4-8",
     "max_tokens": 1024,

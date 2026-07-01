@@ -452,31 +452,20 @@ To poll a Message Batch, you'll need its `id`, which is provided in the response
   ```bash cURL
   #!/bin/sh
   # ...
-  until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
-            --header "x-api-key: $ANTHROPIC_API_KEY" \
-            --header "anthropic-version: 2023-06-01" \
-            | grep -o '"processing_status":[[:space:]]*"[^"]*"' \
-            | cut -d'"' -f4) == "ended" ]]; do
-      echo "Batch $MESSAGE_BATCH_ID is still processing..."
-  # ...
-      sleep 60
-  done
-
-  echo "Batch $MESSAGE_BATCH_ID has finished processing"
+  # Check the status; repeat until processing_status is "ended"
+  curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    | jq -r '.processing_status'
   ```
 
   ```bash CLI
   #!/bin/bash
   # ...
-  until [[ $(ant messages:batches retrieve \
-            --message-batch-id "$MESSAGE_BATCH_ID" \
-            --transform processing_status --raw-output) == "ended" ]]; do
-      echo "Batch $MESSAGE_BATCH_ID is still processing..."
-  # ...
-      sleep 60
-  done
-
-  echo "Batch $MESSAGE_BATCH_ID has finished processing"
+  # Check the status; repeat until processing_status is "ended"
+  ant messages:batches retrieve \
+    --message-batch-id "$MESSAGE_BATCH_ID" \
+    --transform processing_status --raw-output
   ```
 
   ```python Python
@@ -615,38 +604,12 @@ You can list all Message Batches in your Workspace using the [list endpoint](/do
 <CodeGroup>
   ```bash cURL
   #!/bin/sh
-
-  if ! command -v jq &> /dev/null; then
-      echo "Error: This script requires jq. Please install it first."
-      exit 1
-  fi
-
-  BASE_URL="https://api.anthropic.com/v1/messages/batches"
-
-  has_more=true
-  after_id=""
-
-  while [ "$has_more" = true ]; do
-      # Construct URL with after_id if it exists
-      if [ -n "$after_id" ]; then
-          url="${BASE_URL}?limit=20&after_id=${after_id}"
-      else
-          url="$BASE_URL?limit=20"
-      fi
-
-      response=$(curl -s "$url" \
-                --header "x-api-key: $ANTHROPIC_API_KEY" \
-                --header "anthropic-version: 2023-06-01")
-
-      # Extract values using jq
-      has_more=$(echo "$response" | jq -r '.has_more')
-      after_id=$(echo "$response" | jq -r '.last_id')
-
-      # Process and print each entry in the data array
-      echo "$response" | jq -c '.data[]' | while read -r entry; do
-          echo "$entry" | jq '.'
-      done
-  done
+  # Fetches one page. While the response's has_more is true, pass its
+  # last_id as after_id to fetch the next page. (The SDKs and the CLI
+  # perform automatic pagination.)
+  curl -s "https://api.anthropic.com/v1/messages/batches?limit=20" \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
@@ -757,65 +720,28 @@ Results of the batch are available for download at the `results_url` property on
 <CodeGroup>
   ```bash cURL
   #!/bin/sh
-  curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d" \
+  # Fetch the batch's results_url, then stream the .jsonl results it
+  # points to. For per-result handling (retries, validation errors),
+  # use the SDK examples in the other tabs.
+  RESULTS_URL=$(curl -s "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d" \
     --header "anthropic-version: 2023-06-01" \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
-    | grep -o '"results_url":[[:space:]]*"[^"]*"' \
-    | cut -d'"' -f4 \
-    | while read -r url; do
-      curl -s "$url" \
-        --header "anthropic-version: 2023-06-01" \
-        --header "x-api-key: $ANTHROPIC_API_KEY" \
-        | sed 's/}{/}\n{/g' \
-        | while IFS= read -r line
-      do
-        result_type=$(echo "$line" | sed -n 's/.*"result":[[:space:]]*{[[:space:]]*"type":[[:space:]]*"\([^"]*\)".*/\1/p')
-        custom_id=$(echo "$line" | sed -n 's/.*"custom_id":[[:space:]]*"\([^"]*\)".*/\1/p')
-        error_type=$(echo "$line" | sed -n 's/.*"error":[[:space:]]*{[[:space:]]*"type":[[:space:]]*"\([^"]*\)".*/\1/p')
+    | jq -r '.results_url')
 
-        case "$result_type" in
-          "succeeded")
-            echo "Success! $custom_id"
-            ;;
-          "errored")
-            if [ "$error_type" = "invalid_request_error" ]; then
-              # Request body must be fixed before re-sending request
-              echo "Validation error: $custom_id"
-            else
-              # Request can be retried directly
-              echo "Server error: $custom_id"
-            fi
-            ;;
-          "expired")
-            echo "Expired: $line"
-            ;;
-        esac
-      done
-    done
-
+  curl -s "$RESULTS_URL" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    | jq -r '"\(.result.type): \(.custom_id)"'
   ```
 
   ```bash CLI
+  # Prints one line per result, e.g. `{"custom_id":"test-1","type":"succeeded",…}`.
+  # For per-result handling (retries, validation errors), use the SDK
+  # examples in the other tabs.
   ant messages:batches results \
     --message-batch-id msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d \
     --transform '{custom_id,"type":result.type,"error":result.error.error.type}' \
-    --format jsonl \
-    | while IFS= read -r line; do
-      custom_id=${line#*'"custom_id":"'}; custom_id=${custom_id%%'"'*}
-      case "$line" in
-        *'"type":"succeeded"'*)
-          printf 'Success! %s\n' "$custom_id" ;;
-        *'"type":"errored"'*)
-          case "$line" in
-            *'"error":"invalid_request_error"'*)
-              printf 'Validation error %s\n' "$custom_id" ;;
-            *)
-              printf 'Server error %s\n' "$custom_id" ;;
-          esac ;;
-        *'"type":"expired"'*)
-          printf 'Request expired %s\n' "$custom_id" ;;
-      esac
-    done
+    --format jsonl
   ```
 
   ```python Python

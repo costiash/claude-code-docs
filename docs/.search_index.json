@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-06-30T22:14:35Z",
+  "generated_at": "2026-07-01T01:36:49Z",
   "indexed_files": 1726,
   "index": {
     "/changelog": {
@@ -470,13 +470,13 @@
         "runs",
         "command",
         "output",
+        "prompt",
         "file",
         "event",
-        "prompt",
         "user",
         "control"
       ],
-      "word_count": 22412,
+      "word_count": 22573,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -43517,7 +43517,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7164,
+      "word_count": 6986,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -43545,7 +43545,7 @@
         "previous",
         "header"
       ],
-      "word_count": 4374,
+      "word_count": 4375,
       "file_path": "docs/docs__en__build-with-claude__cache-diagnostics.md"
     },
     "/docs/en/build-with-claude/citations": {
