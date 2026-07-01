@@ -9921,8 +9921,8 @@
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
       "original_md_url": "https://platform.claude.com/docs/en/skills.md",
-      "hash": "7aaca90961b7e45b0402599a017ee9afcbbf1c1851d1d26cead3f05b2883970e",
-      "last_updated": "2026-06-30T07:59:11.058515"
+      "hash": "100e947d5b77ee7b0510488c9f4d908e351d7c464a0db24958a02ff533b9ff25",
+      "last_updated": "2026-07-01T05:10:24.509881"
     },
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
@@ -9975,8 +9975,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-01T01:36:46.141890",
-    "fetch_duration_seconds": 2316.626508,
+    "last_fetch_completed": "2026-07-01T05:12:31.402584",
+    "fetch_duration_seconds": 2273.680923,
     "total_pages_discovered": 2036,
     "pages_fetched_successfully": 1662,
     "pages_failed": 375,
@@ -10362,7 +10362,7 @@
     "total_files": 1662,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-01T01:36:46.141910",
+  "last_updated": "2026-07-01T05:12:31.402603",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

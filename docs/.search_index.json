@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-01T01:36:49Z",
+  "generated_at": "2026-07-01T05:12:34Z",
   "indexed_files": 1726,
   "index": {
     "/changelog": {
@@ -1064,7 +1064,7 @@
         "see",
         "add"
       ],
-      "word_count": 7298,
+      "word_count": 7361,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
