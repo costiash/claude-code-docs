@@ -21,11 +21,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   New per-user spend limit as a non-negative integer decimal string (minor units).
 
-- `period: optional "monthly" or "daily" or "weekly"`
-
-  - `"monthly"`
+- `period: optional "daily" or "monthly" or "weekly"`
 
   - `"daily"`
+
+  - `"monthly"`
 
   - `"weekly"`
 
@@ -55,11 +55,11 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `created_at: string`
 
-- `period: "monthly" or "daily" or "weekly"`
-
-  - `"monthly"`
+- `period: "daily" or "monthly" or "weekly"`
 
   - `"daily"`
+
+  - `"monthly"`
 
   - `"weekly"`
 
@@ -109,11 +109,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -189,11 +189,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -249,13 +249,13 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `spend_limit_id: string`
 
-- `status: "pending" or "approved" or "denied"`
-
-  - `"pending"`
+- `status: "approved" or "denied" or "pending"`
 
   - `"approved"`
 
   - `"denied"`
+
+  - `"pending"`
 
 - `type: "spend_limit_increase_request"`
 
@@ -269,7 +269,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "50000"
+          "amount": "50000",
+          "period": "monthly"
         }'
 ```
 

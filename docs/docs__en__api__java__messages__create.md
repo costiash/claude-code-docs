@@ -2787,8 +2787,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
 
-      - `MILITARY_WEAPONS("military_weapons")`
-
     - `Optional<String> explanation`
 
       Human-readable explanation of the refusal.

@@ -176,6 +176,18 @@ Archive Credential
 
       Environment variable credential details. The secret value is never returned.
 
+      - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `required Boolean Body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `required Boolean Header`
+
+          Whether the placeholder is substituted in request header values.
+
       - `required Networking Networking`
 
         Outbound hosts the secret value is substituted on.

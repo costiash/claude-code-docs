@@ -3025,7 +3025,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -3036,8 +3036,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `explanation: Optional[str]`
 
@@ -9951,7 +9949,7 @@ print(message_tokens_count.input_tokens)
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -9962,8 +9960,6 @@ print(message_tokens_count.input_tokens)
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `explanation: Optional[str]`
 
@@ -13276,7 +13272,7 @@ print(message_tokens_count.input_tokens)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -13287,8 +13283,6 @@ print(message_tokens_count.input_tokens)
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 
@@ -14172,7 +14166,7 @@ print(message_tokens_count.input_tokens)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -14183,8 +14177,6 @@ print(message_tokens_count.input_tokens)
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 
@@ -15129,7 +15121,7 @@ print(message_tokens_count.input_tokens)
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -15140,8 +15132,6 @@ print(message_tokens_count.input_tokens)
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `explanation: Optional[str]`
 
@@ -15483,7 +15473,7 @@ print(message_tokens_count.input_tokens)
 
   Structured information about a refusal.
 
-  - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+  - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
     The policy category that triggered a refusal.
 
@@ -15494,8 +15484,6 @@ print(message_tokens_count.input_tokens)
     - `"frontier_llm"`
 
     - `"reasoning_extraction"`
-
-    - `"military_weapons"`
 
   - `explanation: Optional[str]`
 
@@ -24661,7 +24649,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -24672,8 +24660,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `explanation: Optional[str]`
 
@@ -25953,7 +25939,7 @@ for batch in client.messages.batches.results(
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -25964,8 +25950,6 @@ for batch in client.messages.batches.results(
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `explanation: Optional[str]`
 
@@ -27038,7 +27022,7 @@ for batch in client.messages.batches.results(
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -27049,8 +27033,6 @@ for batch in client.messages.batches.results(
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `explanation: Optional[str]`
 
@@ -28085,7 +28067,7 @@ for batch in client.messages.batches.results(
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -28096,8 +28078,6 @@ for batch in client.messages.batches.results(
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 

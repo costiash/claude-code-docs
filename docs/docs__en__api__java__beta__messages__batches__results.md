@@ -1031,8 +1031,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `REASONING_EXTRACTION("reasoning_extraction")`
 
-                - `MILITARY_WEAPONS("military_weapons")`
-
               - `JsonValue; type "refusal"constant`
 
                 - `REFUSAL("refusal")`
@@ -1173,8 +1171,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `Optional<String> explanation`
 

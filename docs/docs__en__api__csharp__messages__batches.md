@@ -3501,8 +3501,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"reasoning_extraction"ReasoningExtraction`
 
-            - `"military_weapons"MilitaryWeapons`
-
           - `required string? Explanation`
 
             Human-readable explanation of the refusal.
@@ -4614,8 +4612,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `"reasoning_extraction"ReasoningExtraction`
 
-            - `"military_weapons"MilitaryWeapons`
-
           - `required string? Explanation`
 
             Human-readable explanation of the refusal.
@@ -5554,8 +5550,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `"reasoning_extraction"ReasoningExtraction`
 
-          - `"military_weapons"MilitaryWeapons`
-
         - `required string? Explanation`
 
           Human-readable explanation of the refusal.
@@ -6455,8 +6449,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
         - `"frontier_llm"FrontierLlm`
 
         - `"reasoning_extraction"ReasoningExtraction`
-
-        - `"military_weapons"MilitaryWeapons`
 
       - `required string? Explanation`
 

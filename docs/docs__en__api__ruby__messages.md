@@ -2989,7 +2989,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio | :frontier_llm | 2 more`
+    - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
       The policy category that triggered a refusal.
 
@@ -3000,8 +3000,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `:frontier_llm`
 
       - `:reasoning_extraction`
-
-      - `:military_weapons`
 
     - `explanation: String`
 
@@ -9873,7 +9871,7 @@ puts(message_tokens_count)
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio | :frontier_llm | 2 more`
+    - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
       The policy category that triggered a refusal.
 
@@ -9884,8 +9882,6 @@ puts(message_tokens_count)
       - `:frontier_llm`
 
       - `:reasoning_extraction`
-
-      - `:military_weapons`
 
     - `explanation: String`
 
@@ -13181,7 +13177,7 @@ puts(message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -13192,8 +13188,6 @@ puts(message_tokens_count)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 
@@ -14060,7 +14054,7 @@ puts(message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -14071,8 +14065,6 @@ puts(message_tokens_count)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 
@@ -15000,7 +14992,7 @@ puts(message_tokens_count)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio | :frontier_llm | 2 more`
+        - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
           The policy category that triggered a refusal.
 
@@ -15011,8 +15003,6 @@ puts(message_tokens_count)
           - `:frontier_llm`
 
           - `:reasoning_extraction`
-
-          - `:military_weapons`
 
         - `explanation: String`
 
@@ -15354,7 +15344,7 @@ puts(message_tokens_count)
 
   Structured information about a refusal.
 
-  - `category: :cyber | :bio | :frontier_llm | 2 more`
+  - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
     The policy category that triggered a refusal.
 
@@ -15365,8 +15355,6 @@ puts(message_tokens_count)
     - `:frontier_llm`
 
     - `:reasoning_extraction`
-
-    - `:military_weapons`
 
   - `explanation: String`
 
@@ -24481,7 +24469,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -24492,8 +24480,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -25753,7 +25739,7 @@ puts(message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -25764,8 +25750,6 @@ puts(message_batch_individual_response)
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -26821,7 +26805,7 @@ puts(message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio | :frontier_llm | 2 more`
+        - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
           The policy category that triggered a refusal.
 
@@ -26832,8 +26816,6 @@ puts(message_batch_individual_response)
           - `:frontier_llm`
 
           - `:reasoning_extraction`
-
-          - `:military_weapons`
 
         - `explanation: String`
 
@@ -27851,7 +27833,7 @@ puts(message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -27862,8 +27844,6 @@ puts(message_batch_individual_response)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 

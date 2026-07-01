@@ -98,6 +98,18 @@ Update Credential
 
         - `"environment_variable"EnvironmentVariable`
 
+      - `BetaManagedAgentsInjectionLocationUpdateParams InjectionLocation`
+
+        Updated injection location.
+
+        - `Boolean Body`
+
+          Substitute when the placeholder appears in the request body.
+
+        - `Boolean Header`
+
+          Substitute when the placeholder appears in a request header value.
+
       - `BetaManagedAgentsCredentialNetworkingParams? Networking`
 
         Updated networking scope. Full replacement.
@@ -291,6 +303,18 @@ Update Credential
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `required Boolean Body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `required Boolean Header`
+
+          Whether the placeholder is substituted in request header values.
 
       - `required Networking Networking`
 

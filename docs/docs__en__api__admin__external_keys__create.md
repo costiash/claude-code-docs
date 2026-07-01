@@ -6,10 +6,6 @@ Create an external key config owned by the caller's organization.
 
 ### Body Parameters
 
-- `display_name: string`
-
-  Human-friendly display name.
-
 - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
   KMS provider identity and auth coordinates.
@@ -64,6 +60,10 @@ Create an external key config owned by the caller's organization.
 
       Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
+- `display_name: optional string`
+
+  Human-friendly display name.
+
 - `geo: optional "us"`
 
   Data residency geo. Only `us` is supported.
@@ -80,7 +80,7 @@ Create an external key config owned by the caller's organization.
 
 - `display_name: string`
 
-  Human-friendly display name.
+  Human-friendly display name. Null if none was set.
 
 - `geo: string`
 
@@ -154,7 +154,6 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "display_name": "x",
           "provider_config": {
             "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
             "type": "aws"

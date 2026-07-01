@@ -5320,7 +5320,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -5331,8 +5331,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `type: Literal["refusal"]`
 
@@ -5463,7 +5461,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -5474,8 +5472,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `explanation: Optional[str]`
 
@@ -12071,7 +12067,7 @@ print(beta_message_tokens_count.context_management)
 
       What caused the `from` model to hand over at this hop.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -12082,8 +12078,6 @@ print(beta_message_tokens_count.context_management)
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `type: Literal["refusal"]`
 
@@ -14072,7 +14066,7 @@ print(beta_message_tokens_count.context_management)
 
     What caused the `from` model to hand over at this hop.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -14083,8 +14077,6 @@ print(beta_message_tokens_count.context_management)
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `type: Literal["refusal"]`
 
@@ -14775,7 +14767,7 @@ print(beta_message_tokens_count.context_management)
 
   The `from` model declined for policy reasons.
 
-  - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+  - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
     The policy category that triggered a refusal.
 
@@ -14786,8 +14778,6 @@ print(beta_message_tokens_count.context_management)
     - `"frontier_llm"`
 
     - `"reasoning_extraction"`
-
-    - `"military_weapons"`
 
   - `type: Literal["refusal"]`
 
@@ -16674,7 +16664,7 @@ print(beta_message_tokens_count.context_management)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -16685,8 +16675,6 @@ print(beta_message_tokens_count.context_management)
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `type: Literal["refusal"]`
 
@@ -16817,7 +16805,7 @@ print(beta_message_tokens_count.context_management)
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -16828,8 +16816,6 @@ print(beta_message_tokens_count.context_management)
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `explanation: Optional[str]`
 
@@ -20257,7 +20243,7 @@ print(beta_message_tokens_count.context_management)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -20268,8 +20254,6 @@ print(beta_message_tokens_count.context_management)
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `type: Literal["refusal"]`
 
@@ -20377,7 +20361,7 @@ print(beta_message_tokens_count.context_management)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -20388,8 +20372,6 @@ print(beta_message_tokens_count.context_management)
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 
@@ -21734,7 +21716,7 @@ print(beta_message_tokens_count.context_management)
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -21745,8 +21727,6 @@ print(beta_message_tokens_count.context_management)
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `type: Literal["refusal"]`
 
@@ -21877,7 +21857,7 @@ print(beta_message_tokens_count.context_management)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -21888,8 +21868,6 @@ print(beta_message_tokens_count.context_management)
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 
@@ -23206,7 +23184,7 @@ print(beta_message_tokens_count.context_management)
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
               The policy category that triggered a refusal.
 
@@ -23217,8 +23195,6 @@ print(beta_message_tokens_count.context_management)
               - `"frontier_llm"`
 
               - `"reasoning_extraction"`
-
-              - `"military_weapons"`
 
             - `type: Literal["refusal"]`
 
@@ -23349,7 +23325,7 @@ print(beta_message_tokens_count.context_management)
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -23360,8 +23336,6 @@ print(beta_message_tokens_count.context_management)
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `explanation: Optional[str]`
 
@@ -23975,7 +23949,7 @@ print(beta_message_tokens_count.context_management)
 
   Structured information about a refusal.
 
-  - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+  - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
     The policy category that triggered a refusal.
 
@@ -23986,8 +23960,6 @@ print(beta_message_tokens_count.context_management)
     - `"frontier_llm"`
 
     - `"reasoning_extraction"`
-
-    - `"military_weapons"`
 
   - `explanation: Optional[str]`
 
@@ -36074,7 +36046,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
                 The policy category that triggered a refusal.
 
@@ -36085,8 +36057,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 - `"frontier_llm"`
 
                 - `"reasoning_extraction"`
-
-                - `"military_weapons"`
 
               - `type: Literal["refusal"]`
 
@@ -36217,7 +36187,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -36228,8 +36198,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `explanation: Optional[str]`
 
@@ -37881,7 +37849,7 @@ for batch in client.beta.messages.batches.results(
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
                 The policy category that triggered a refusal.
 
@@ -37892,8 +37860,6 @@ for batch in client.beta.messages.batches.results(
                 - `"frontier_llm"`
 
                 - `"reasoning_extraction"`
-
-                - `"military_weapons"`
 
               - `type: Literal["refusal"]`
 
@@ -38024,7 +37990,7 @@ for batch in client.beta.messages.batches.results(
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -38035,8 +38001,6 @@ for batch in client.beta.messages.batches.results(
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `explanation: Optional[str]`
 
@@ -39481,7 +39445,7 @@ for batch in client.beta.messages.batches.results(
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
               The policy category that triggered a refusal.
 
@@ -39492,8 +39456,6 @@ for batch in client.beta.messages.batches.results(
               - `"frontier_llm"`
 
               - `"reasoning_extraction"`
-
-              - `"military_weapons"`
 
             - `type: Literal["refusal"]`
 
@@ -39624,7 +39586,7 @@ for batch in client.beta.messages.batches.results(
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -39635,8 +39597,6 @@ for batch in client.beta.messages.batches.results(
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `explanation: Optional[str]`
 
@@ -41043,7 +41003,7 @@ for batch in client.beta.messages.batches.results(
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
             The policy category that triggered a refusal.
 
@@ -41054,8 +41014,6 @@ for batch in client.beta.messages.batches.results(
             - `"frontier_llm"`
 
             - `"reasoning_extraction"`
-
-            - `"military_weapons"`
 
           - `type: Literal["refusal"]`
 
@@ -41186,7 +41144,7 @@ for batch in client.beta.messages.batches.results(
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
         The policy category that triggered a refusal.
 
@@ -41197,8 +41155,6 @@ for batch in client.beta.messages.batches.results(
         - `"frontier_llm"`
 
         - `"reasoning_extraction"`
-
-        - `"military_weapons"`
 
       - `explanation: Optional[str]`
 

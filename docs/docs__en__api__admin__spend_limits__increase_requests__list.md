@@ -19,15 +19,15 @@ Requests whose requester is no longer a member are excluded.
 
   Opaque cursor from a previous response's `next_page`.
 
-- `status: optional array of "pending" or "approved" or "denied"`
+- `status: optional array of "approved" or "denied" or "pending"`
 
   Filter by status. Omit to return all.
-
-  - `"pending"`
 
   - `"approved"`
 
   - `"denied"`
+
+  - `"pending"`
 
 ### Returns
 
@@ -55,11 +55,11 @@ Requests whose requester is no longer a member are excluded.
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -125,11 +125,11 @@ Requests whose requester is no longer a member are excluded.
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -185,13 +185,13 @@ Requests whose requester is no longer a member are excluded.
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -253,7 +253,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
         },
         "spend_limit_id": "spend_limit_id"
       },
-      "status": "pending",
+      "status": "approved",
       "type": "spend_limit_increase_request"
     }
   ],

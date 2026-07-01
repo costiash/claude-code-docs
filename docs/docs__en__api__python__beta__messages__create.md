@@ -4012,7 +4012,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
           The policy category that triggered a refusal.
 
@@ -4023,8 +4023,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           - `"frontier_llm"`
 
           - `"reasoning_extraction"`
-
-          - `"military_weapons"`
 
         - `type: Literal["refusal"]`
 
@@ -4155,7 +4153,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
 
       The policy category that triggered a refusal.
 
@@ -4166,8 +4164,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `"frontier_llm"`
 
       - `"reasoning_extraction"`
-
-      - `"military_weapons"`
 
     - `explanation: Optional[str]`
 

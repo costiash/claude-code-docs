@@ -166,7 +166,10 @@ Make your first API call to Claude and build a simple web search assistant.
                 }
             ],
         )
-        print(message.content)
+
+        for block in message.content:
+            if block.type == "text":
+                print(block.text)
         ```
       </Step>
 
@@ -176,7 +179,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
+        Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
         ```
       </Step>
     </Steps>
@@ -219,7 +226,12 @@ Make your first API call to Claude and build a simple web search assistant.
             }
           ]
         });
-        console.log(message.content);
+
+        for (const block of message.content) {
+          if (block.type === "text") {
+            console.log(block.text);
+          }
+        }
         ```
       </Step>
 
@@ -229,16 +241,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        [
-          {
-            type: 'text',
-            text: 'Here are some effective search strategies to find the latest developments in renewable energy:\n' +
-              '\n' +
-              '## General Search Terms\n' +
-              '- "Renewable energy news 2025"\n' +
-              '- ...'
-          }
-        ]
+        Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
         ```
       </Step>
     </Steps>
@@ -289,7 +296,10 @@ Make your first API call to Claude and build a simple web search assistant.
 
         foreach (var block in message.Content)
         {
-            Console.WriteLine(block);
+            if (block.TryPickText(out var textBlock))
+            {
+                Console.WriteLine(textBlock.Text);
+            }
         }
         ```
       </Step>
@@ -300,10 +310,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        {
-          "type": "text",
-          "text": "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."
-        }
+        Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
         ```
       </Step>
     </Steps>
@@ -357,7 +368,11 @@ Make your first API call to Claude and build a simple web search assistant.
         		log.Fatal(err)
         	}
 
-        	fmt.Println(message.JSON.Content.Raw())
+        	for _, block := range message.Content {
+        		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+        			fmt.Println(textBlock.Text)
+        		}
+        	}
         }
         ```
       </Step>
@@ -368,7 +383,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        [{"type":"text","text":"Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ..."}]
+        Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
         ```
       </Step>
     </Steps>
@@ -469,7 +488,9 @@ Make your first API call to Claude and build a simple web search assistant.
                 .build();
 
             Message message = client.messages().create(params);
-            IO.println(message.content());
+            for (var block : message.content()) {
+                block.text().ifPresent(textBlock -> IO.println(textBlock.text()));
+            }
         }
         ```
       </Step>
@@ -490,11 +511,11 @@ Make your first API call to Claude and build a simple web search assistant.
         </Tabs>
 
         ```text Output wrap
-        [ContentBlock{text=TextBlock{citations=, text=Here are some effective search strategies to find the latest developments in renewable energy:
+        Here are some effective search strategies to find the latest developments in renewable energy:
 
         ## General Search Terms
         - "Renewable energy news 2025"
-        - ..., type=text, additionalProperties={}}}]
+        - ...
         ```
       </Step>
     </Steps>
@@ -526,6 +547,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         use Anthropic\Client;
         use Anthropic\Messages\Model;
+        use Anthropic\Messages\TextBlock;
 
         $client = new Client();
 
@@ -540,7 +562,11 @@ Make your first API call to Claude and build a simple web search assistant.
             ],
         );
 
-        print_r($message->content);
+        foreach ($message->content as $block) {
+            if ($block instanceof TextBlock) {
+                echo $block->text . PHP_EOL;
+            }
+        }
         ```
       </Step>
 
@@ -550,20 +576,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        Array
-        (
-            [0] => Anthropic\Messages\TextBlock Object
-                (
-                    [type] => text
-                    [citations] =>
-                    [text] => Here are some effective search strategies to find the latest developments in renewable energy:
+        Here are some effective search strategies to find the latest developments in renewable energy:
 
         ## General Search Terms
         - "Renewable energy news 2025"
         - ...
-                )
-
-        )
         ```
       </Step>
     </Steps>
@@ -606,7 +623,9 @@ Make your first API call to Claude and build a simple web search assistant.
           ]
         )
 
-        pp message.content
+        message.content.each do |block|
+          puts block.text if block.type == :text
+        end
         ```
       </Step>
 
@@ -616,7 +635,11 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         ```text Output wrap
-        [#<Anthropic::Models::TextBlock:0xc8 {text: "Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- \"Renewable energy news 2025\"\n- ...", type: :text}>]
+        Here are some effective search strategies to find the latest developments in renewable energy:
+
+        ## General Search Terms
+        - "Renewable energy news 2025"
+        - ...
         ```
       </Step>
     </Steps>

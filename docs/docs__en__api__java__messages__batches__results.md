@@ -813,8 +813,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 
-            - `MILITARY_WEAPONS("military_weapons")`
-
           - `Optional<String> explanation`
 
             Human-readable explanation of the refusal.

@@ -178,6 +178,18 @@ Get Credential
 
       Environment variable credential details. The secret value is never returned.
 
+      - `InjectionLocation BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `Body bool`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `Header bool`
+
+          Whether the placeholder is substituted in request header values.
+
       - `Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion`
 
         Outbound hosts the secret value is substituted on.

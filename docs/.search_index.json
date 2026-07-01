@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-01T19:21:58Z",
-  "indexed_files": 1725,
+  "generated_at": "2026-07-01T22:14:25Z",
+  "indexed_files": 1730,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -28,7 +28,7 @@
         "model",
         "command"
       ],
-      "word_count": 60181,
+      "word_count": 60798,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1008,7 +1008,7 @@
         "user",
         "github"
       ],
-      "word_count": 13525,
+      "word_count": 13527,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1225,14 +1225,14 @@
         "click",
         "editor",
         "icon",
+        "install",
         "terminal",
         "file",
-        "install",
         "prompt",
         "when",
         "sessions"
       ],
-      "word_count": 5344,
+      "word_count": 5382,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -2359,168 +2359,224 @@
       "title": "Admin",
       "content_preview": "# Admin  # Organizations  ## Get Current Organization  **get** `/v1/organizations/me`  Retrieve information about the organization associated with the authenticated API key.  ### Returns  - `Organization object { id, name, type }`    - `id: string`      ID of the Organization.    - `name: string`",
       "keywords": [
-        "workspace",
         "when",
-        "key",
-        "account",
+        "workspace",
         "number",
-        "service",
         "user",
-        "response",
-        "tagged",
-        "rule",
+        "day",
         "null",
-        "parameters",
+        "key",
+        "group",
         "claude",
-        "issuer",
-        "api",
-        "returns",
-        "tunnel",
+        "response",
+        "account",
+        "tagged",
+        "date",
+        "only",
+        "service",
         "organization",
+        "per",
         "distinct",
-        "header"
+        "rule",
+        "api"
       ],
-      "word_count": 47847,
+      "word_count": 59864,
       "file_path": "docs/docs__en__api__admin.md"
     },
     "/docs/en/api/admin/analytics": {
       "title": "Analytics",
       "content_preview": "# Analytics  ## Get Activity Summaries  **get** `/v1/organizations/analytics/summaries`  Get organization-wide activity summaries for a date range.  Returns one entry per day in [starting_date, ending...",
       "keywords": [
+        "day",
         "number",
-        "distinct",
+        "group",
+        "date",
         "null",
         "claude",
-        "day",
-        "rows",
-        "office",
-        "user",
-        "activity",
-        "count",
-        "single",
-        "metrics",
-        "given",
-        "cannot",
-        "product",
-        "where",
-        "code",
+        "distinct",
         "when",
-        "agent",
-        "aggregated"
+        "user",
+        "per",
+        "rows",
+        "product",
+        "activity",
+        "range",
+        "office",
+        "rbac",
+        "count",
+        "skill",
+        "usage",
+        "only"
       ],
-      "word_count": 10475,
+      "word_count": 22449,
       "file_path": "docs/docs__en__api__admin__analytics.md"
+    },
+    "/docs/en/api/admin/analytics/artifacts": {
+      "title": "Artifacts",
+      "content_preview": "# Artifacts  ## Get Artifact Activity  **get** `/v1/organizations/analytics/artifacts`  Get artifact-creation activity for a given day, broken out by MIME type.  Returns the full (artifact_type, is_sh...",
+      "keywords": [
+        "group",
+        "rbac",
+        "artifacts",
+        "artifact",
+        "grouped",
+        "cube",
+        "only",
+        "day",
+        "type",
+        "user",
+        "product",
+        "when",
+        "full",
+        "null",
+        "ungrouped",
+        "get",
+        "queries",
+        "returned",
+        "number",
+        "bucket"
+      ],
+      "word_count": 933,
+      "file_path": "docs/docs__en__api__admin__analytics__artifacts.md"
+    },
+    "/docs/en/api/admin/analytics/artifacts/list": {
+      "title": "Untitled",
+      "content_preview": "## Get Artifact Activity  **get** `/v1/organizations/analytics/artifacts`  Get artifact-creation activity for a given day, broken out by MIME type.  Returns the full (artifact_type, is_shared) cube for the organization; `next_page` is null except for grouped queries, which paginate. Requires an API",
+      "keywords": [
+        "group",
+        "rbac",
+        "artifact",
+        "cube",
+        "day",
+        "grouped",
+        "type",
+        "only",
+        "user",
+        "artifacts",
+        "get",
+        "full",
+        "ungrouped",
+        "when",
+        "product",
+        "activity",
+        "null",
+        "queries",
+        "returned",
+        "page"
+      ],
+      "word_count": 630,
+      "file_path": "docs/docs__en__api__admin__analytics__artifacts__list.md"
     },
     "/docs/en/api/admin/analytics/chat_projects": {
       "title": "Chat Projects",
       "content_preview": "# Chat Projects  ## Get Chat Project Usage  **get** `/v1/organizations/analytics/apps/chat/projects`  Get per-project activity for a given day, with cursor-based pagination.  Returns activity metrics ...",
       "keywords": [
+        "group",
         "project",
-        "user",
         "day",
-        "number",
-        "get",
-        "distinct",
+        "date",
+        "rbac",
+        "user",
+        "when",
+        "per",
+        "only",
         "identifier",
-        "null",
+        "product",
         "chat",
-        "cursor",
-        "page",
-        "response",
-        "requested",
+        "available",
         "tagged",
-        "projects",
-        "activity",
-        "organizations",
-        "claude",
-        "results",
-        "opaque"
+        "distinct",
+        "null",
+        "over",
+        "grouped",
+        "name",
+        "claude"
       ],
-      "word_count": 458,
+      "word_count": 1252,
       "file_path": "docs/docs__en__api__admin__analytics__chat_projects.md"
     },
     "/docs/en/api/admin/analytics/chat_projects/list": {
       "title": "Untitled",
       "content_preview": "## Get Chat Project Usage  **get** `/v1/organizations/analytics/apps/chat/projects`  Get per-project activity for a given day, with cursor-based pagination.  Returns activity metrics for each project ...",
       "keywords": [
-        "project",
-        "get",
+        "group",
+        "date",
         "day",
-        "number",
-        "user",
-        "activity",
-        "cursor",
-        "page",
-        "response",
-        "distinct",
-        "identifier",
-        "null",
-        "chat",
+        "project",
+        "rbac",
         "per",
-        "returns",
-        "organizations",
-        "claude",
-        "results",
-        "opaque",
-        "next"
+        "available",
+        "when",
+        "user",
+        "over",
+        "range",
+        "only",
+        "get",
+        "utc",
+        "page",
+        "tagged",
+        "endpoint",
+        "grouped",
+        "sort",
+        "field"
       ],
-      "word_count": 303,
+      "word_count": 925,
       "file_path": "docs/docs__en__api__admin__analytics__chat_projects__list.md"
     },
     "/docs/en/api/admin/analytics/connectors": {
       "title": "Connectors",
       "content_preview": "# Connectors  ## Get Connector Usage  **get** `/v1/organizations/analytics/connectors`  Get per-connector usage for a given day, with cursor-based pagination.  Returns connector usage metrics for the organization, sorted by connector name. Connector names are normalized from their various sources \u2014",
       "keywords": [
-        "connector",
-        "office",
         "day",
-        "distinct",
-        "given",
-        "metrics",
-        "activity",
-        "single",
-        "agent",
-        "number",
-        "used",
-        "null",
-        "product",
-        "which",
-        "aggregated",
-        "rows",
-        "where",
+        "connector",
+        "date",
         "count",
-        "cannot",
-        "computed"
+        "office",
+        "distinct",
+        "only",
+        "group",
+        "call",
+        "range",
+        "metrics",
+        "null",
+        "activity",
+        "product",
+        "read",
+        "per",
+        "given",
+        "claude",
+        "rbac",
+        "number"
       ],
-      "word_count": 836,
+      "word_count": 2216,
       "file_path": "docs/docs__en__api__admin__analytics__connectors.md"
     },
     "/docs/en/api/admin/analytics/connectors/list": {
       "title": "Untitled",
       "content_preview": "## Get Connector Usage  **get** `/v1/organizations/analytics/connectors`  Get per-connector usage for a given day, with cursor-based pagination.  Returns connector usage metrics for the organization, ...",
       "keywords": [
-        "connector",
         "day",
+        "date",
+        "connector",
+        "group",
+        "count",
         "office",
-        "given",
-        "metrics",
+        "range",
         "distinct",
-        "activity",
-        "single",
-        "number",
-        "agent",
-        "get",
-        "used",
+        "only",
+        "per",
+        "metrics",
+        "call",
+        "rbac",
         "null",
+        "when",
+        "activity",
         "product",
-        "usage",
-        "claude",
-        "which",
-        "aggregated",
-        "rows",
-        "where"
+        "read",
+        "given",
+        "claude"
       ],
-      "word_count": 513,
+      "word_count": 1431,
       "file_path": "docs/docs__en__api__admin__analytics__connectors__list.md"
     },
     "/docs/en/api/admin/analytics/cost": {
@@ -2528,84 +2584,140 @@
       "content_preview": "# Cost  ## Get Cost Over Time  **get** `/v1/organizations/analytics/cost_report`  Get cost in USD over time across a date range.  Returns cost bucketed by minute, hour, or day, optionally broken down ...",
       "keywords": [
         "when",
+        "usage",
         "null",
+        "rows",
+        "group",
         "per",
         "cost",
         "claude",
-        "rows",
-        "usage",
-        "values",
+        "row",
         "user",
+        "values",
+        "filter",
+        "same",
+        "total",
+        "groups",
         "product",
         "out",
+        "one",
         "response",
-        "code",
-        "surface",
-        "break",
-        "row",
-        "range",
-        "type",
-        "days",
-        "defaults"
+        "code"
       ],
-      "word_count": 2484,
+      "word_count": 3074,
       "file_path": "docs/docs__en__api__admin__analytics__cost.md"
     },
     "/docs/en/api/admin/analytics/cost/list": {
       "title": "Untitled",
       "content_preview": "## Get Cost Over Time  **get** `/v1/organizations/analytics/cost_report`  Get cost in USD over time across a date range.  Returns cost bucketed by minute, hour, or day, optionally broken down by produ...",
       "keywords": [
+        "group",
+        "usage",
         "per",
-        "claude",
         "values",
+        "claude",
+        "when",
         "cost",
+        "bucket",
+        "filter",
         "break",
         "out",
+        "null",
         "time",
         "product",
         "defaults",
-        "null",
+        "groups",
+        "row",
+        "rows",
         "range",
-        "days",
-        "bucket",
-        "filter",
-        "when",
-        "include",
-        "response",
-        "usage",
-        "get",
-        "inference"
+        "days"
       ],
-      "word_count": 740,
+      "word_count": 945,
       "file_path": "docs/docs__en__api__admin__analytics__cost__list.md"
     },
     "/docs/en/api/admin/analytics/cost/list_by_user": {
       "title": "Untitled",
       "content_preview": "## Get Per-User Cost  **get** `/v1/organizations/analytics/user_cost_report`  Get per-user cost in USD across a date range.  Returns one row per user, ranked by spend. Use this to see which users acco...",
       "keywords": [
-        "per",
         "when",
         "rows",
-        "cost",
+        "per",
         "user",
         "row",
+        "usage",
+        "cost",
         "null",
         "one",
+        "group",
         "claude",
         "values",
         "range",
         "returns",
+        "filter",
         "out",
+        "each",
         "actor",
-        "usage",
-        "break",
-        "defaults",
-        "deleted",
-        "code",
-        "account"
+        "same",
+        "break"
       ],
-      "word_count": 1046,
+      "word_count": 1211,
       "file_path": "docs/docs__en__api__admin__analytics__cost__list_by_user.md"
+    },
+    "/docs/en/api/admin/analytics/plugins": {
+      "title": "Plugins",
+      "content_preview": "# Plugins  ## Get Plugin Usage  **get** `/v1/organizations/analytics/plugins`  Get per-plugin install + invocation usage for a given day, with pagination.  Returns plugin usage metrics for the organiz...",
+      "keywords": [
+        "plugin",
+        "day",
+        "group",
+        "date",
+        "rbac",
+        "distinct",
+        "per",
+        "only",
+        "when",
+        "claude",
+        "over",
+        "count",
+        "cowork",
+        "code",
+        "number",
+        "null",
+        "plugins",
+        "name",
+        "rows",
+        "range"
+      ],
+      "word_count": 1488,
+      "file_path": "docs/docs__en__api__admin__analytics__plugins.md"
+    },
+    "/docs/en/api/admin/analytics/plugins/list": {
+      "title": "Untitled",
+      "content_preview": "## Get Plugin Usage  **get** `/v1/organizations/analytics/plugins`  Get per-plugin install + invocation usage for a given day, with pagination.  Returns plugin usage metrics for the organization acros...",
+      "keywords": [
+        "day",
+        "plugin",
+        "date",
+        "group",
+        "rbac",
+        "per",
+        "when",
+        "distinct",
+        "range",
+        "available",
+        "over",
+        "only",
+        "claude",
+        "count",
+        "usage",
+        "metrics",
+        "cowork",
+        "code",
+        "name",
+        "rows"
+      ],
+      "word_count": 1070,
+      "file_path": "docs/docs__en__api__admin__analytics__plugins__list.md"
     },
     "/docs/en/api/admin/analytics/retrieve_summaries": {
       "title": "Untitled",
@@ -2613,26 +2725,26 @@
       "keywords": [
         "day",
         "activity",
-        "date",
-        "number",
-        "when",
         "response",
-        "assigned",
-        "group",
+        "number",
         "users",
+        "per",
+        "organization",
+        "omitted",
+        "claude",
         "rolling",
         "window",
-        "data",
-        "finalized",
-        "null",
-        "scoped",
+        "while",
+        "product",
+        "breakdown",
+        "enabled",
+        "group",
         "rbac",
-        "get",
-        "range",
-        "days",
-        "most"
+        "date",
+        "available",
+        "when"
       ],
-      "word_count": 485,
+      "word_count": 1162,
       "file_path": "docs/docs__en__api__admin__analytics__retrieve_summaries.md"
     },
     "/docs/en/api/admin/analytics/skills": {
@@ -2640,27 +2752,27 @@
       "content_preview": "# Skills  ## Get Skill Usage  **get** `/v1/organizations/analytics/skills`  Get per-skill usage for a given day, with cursor-based pagination.  Returns skill usage metrics for the organization, sorted...",
       "keywords": [
         "skill",
+        "when",
+        "date",
         "office",
         "day",
-        "distinct",
-        "given",
-        "metrics",
-        "activity",
-        "single",
-        "agent",
-        "number",
-        "used",
         "null",
+        "only",
+        "spend",
+        "user",
+        "group",
+        "agent",
         "product",
-        "which",
-        "aggregated",
-        "rows",
-        "where",
+        "claude",
+        "distinct",
         "count",
-        "cannot",
-        "computed"
+        "used",
+        "range",
+        "usage",
+        "context",
+        "activation"
       ],
-      "word_count": 816,
+      "word_count": 3900,
       "file_path": "docs/docs__en__api__admin__analytics__skills.md"
     },
     "/docs/en/api/admin/analytics/skills/list": {
@@ -2668,83 +2780,83 @@
       "content_preview": "## Get Skill Usage  **get** `/v1/organizations/analytics/skills`  Get per-skill usage for a given day, with cursor-based pagination.  Returns skill usage metrics for the organization, sorted by skill ...",
       "keywords": [
         "skill",
+        "date",
         "day",
+        "when",
         "office",
-        "given",
-        "metrics",
-        "distinct",
-        "activity",
-        "single",
-        "number",
-        "agent",
-        "get",
-        "used",
+        "group",
         "null",
-        "product",
+        "only",
+        "spend",
+        "user",
+        "available",
+        "range",
+        "agent",
         "usage",
         "claude",
-        "which",
-        "aggregated",
-        "rows",
-        "where"
+        "distinct",
+        "count",
+        "product",
+        "used",
+        "metrics"
       ],
-      "word_count": 493,
+      "word_count": 2267,
       "file_path": "docs/docs__en__api__admin__analytics__skills__list.md"
     },
     "/docs/en/api/admin/analytics/usage": {
       "title": "Usage",
       "content_preview": "# Usage  ## Get Token Usage Over Time  **get** `/v1/organizations/analytics/usage_report`  Get token usage over time across a date range.  Returns token usage bucketed by minute, hour, or day, optiona...",
       "keywords": [
-        "number",
         "usage",
-        "tokens",
-        "claude",
+        "number",
+        "group",
         "rows",
+        "tokens",
+        "when",
+        "claude",
+        "user",
+        "null",
         "per",
         "values",
+        "row",
         "input",
-        "when",
-        "null",
-        "user",
+        "filter",
+        "same",
+        "value",
+        "total",
+        "groups",
         "product",
-        "out",
-        "cache",
-        "surface",
-        "requests",
-        "break",
-        "token",
-        "range",
-        "days"
+        "out"
       ],
-      "word_count": 2456,
+      "word_count": 3046,
       "file_path": "docs/docs__en__api__admin__analytics__usage.md"
     },
     "/docs/en/api/admin/analytics/usage/list": {
       "title": "Untitled",
       "content_preview": "## Get Token Usage Over Time  **get** `/v1/organizations/analytics/usage_report`  Get token usage over time across a date range.  Returns token usage bucketed by minute, hour, or day, optionally broken down by product, model, context window, inference region, or speed. Available to organizations on",
       "keywords": [
-        "number",
         "usage",
+        "group",
+        "values",
+        "number",
         "claude",
         "per",
-        "values",
+        "bucket",
+        "filter",
         "break",
         "out",
         "time",
         "product",
         "defaults",
+        "groups",
+        "row",
+        "rows",
         "tokens",
         "range",
         "days",
-        "bucket",
-        "filter",
-        "include",
-        "input",
-        "get",
-        "token",
-        "inference"
+        "specific"
       ],
-      "word_count": 733,
+      "word_count": 938,
       "file_path": "docs/docs__en__api__admin__analytics__usage__list.md"
     },
     "/docs/en/api/admin/analytics/usage/list_by_user": {
@@ -2752,27 +2864,27 @@
       "content_preview": "## Get Per-User Token Usage  **get** `/v1/organizations/analytics/user_usage_report`  Get per-user token usage across a date range.  Returns one row per user, ranked by the chosen token metric. Use th...",
       "keywords": [
         "rows",
-        "per",
-        "when",
-        "user",
         "usage",
+        "when",
+        "per",
+        "user",
+        "row",
         "number",
+        "group",
+        "one",
         "tokens",
         "claude",
         "actor",
         "values",
         "range",
-        "one",
-        "row",
+        "filter",
         "out",
+        "null",
         "token",
         "may",
-        "break",
-        "defaults",
-        "deleted",
-        "null"
+        "same"
       ],
-      "word_count": 1020,
+      "word_count": 1185,
       "file_path": "docs/docs__en__api__admin__analytics__usage__list_by_user.md"
     },
     "/docs/en/api/admin/analytics/users": {
@@ -2781,26 +2893,26 @@
       "keywords": [
         "number",
         "distinct",
-        "claude",
-        "user",
-        "null",
-        "sessions",
-        "aggregated",
-        "rows",
-        "where",
-        "count",
-        "cannot",
-        "computed",
-        "single",
-        "code",
-        "activity",
+        "date",
         "day",
-        "given",
+        "null",
+        "user",
+        "range",
+        "mode",
+        "claude",
+        "count",
+        "sessions",
         "metrics",
-        "office",
-        "agent"
+        "rows",
+        "error",
+        "aggregated",
+        "cowork",
+        "where",
+        "approximate",
+        "hll",
+        "typical"
       ],
-      "word_count": 2290,
+      "word_count": 4112,
       "file_path": "docs/docs__en__api__admin__analytics__users.md"
     },
     "/docs/en/api/admin/analytics/users/list": {
@@ -2809,26 +2921,26 @@
       "keywords": [
         "number",
         "distinct",
-        "claude",
-        "user",
-        "null",
-        "sessions",
-        "aggregated",
-        "rows",
-        "where",
-        "count",
-        "cannot",
-        "computed",
-        "activity",
-        "single",
+        "date",
         "day",
-        "code",
-        "given",
+        "null",
+        "user",
+        "range",
+        "mode",
+        "claude",
+        "count",
+        "sessions",
         "metrics",
-        "office",
-        "agent"
+        "error",
+        "group",
+        "rows",
+        "aggregated",
+        "where",
+        "approximate",
+        "hll",
+        "typical"
       ],
-      "word_count": 1306,
+      "word_count": 2450,
       "file_path": "docs/docs__en__api__admin__analytics__users__list.md"
     },
     "/docs/en/api/admin/api_keys": {
@@ -3001,13 +3113,13 @@
     },
     "/docs/en/api/admin/external_keys": {
       "title": "External Keys",
-      "content_preview": "# External Keys  ## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `display_name: string`   ...",
+      "content_preview": "# External Keys  ## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id,",
       "keywords": [
         "key",
         "kms",
         "external",
-        "name",
         "arn",
+        "name",
         "tenant",
         "config",
         "anthropic",
@@ -3024,17 +3136,17 @@
         "only",
         "customer"
       ],
-      "word_count": 3082,
+      "word_count": 3121,
       "file_path": "docs/docs__en__api__admin__external_keys.md"
     },
     "/docs/en/api/admin/external_keys/create": {
       "title": "Untitled",
-      "content_preview": "## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `display_name: string`    Human-friendly display name.  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name,",
+      "content_preview": "## Create External Key  **post** `/v1/organizations/external_keys`  Create an external key config owned by the caller's organization.  ### Body Parameters  - `provider_config: object { kms_arn, type, region, role_arn }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`",
       "keywords": [
         "key",
         "kms",
-        "name",
         "arn",
+        "name",
         "tenant",
         "full",
         "aws",
@@ -3047,12 +3159,12 @@
         "only",
         "create",
         "config",
-        "human",
-        "friendly",
-        "display",
-        "provider"
+        "provider",
+        "identity",
+        "auth",
+        "coordinates"
       ],
-      "word_count": 495,
+      "word_count": 499,
       "file_path": "docs/docs__en__api__admin__external_keys__create.md"
     },
     "/docs/en/api/admin/external_keys/delete": {
@@ -3096,15 +3208,15 @@
         "list",
         "fetch",
         "opaque",
+        "null",
         "full",
         "aws",
         "role",
         "anthropic",
         "vault",
-        "azure",
-        "app"
+        "azure"
       ],
-      "word_count": 362,
+      "word_count": 367,
       "file_path": "docs/docs__en__api__admin__external_keys__list.md"
     },
     "/docs/en/api/admin/external_keys/retrieve": {
@@ -3132,7 +3244,7 @@
         "organization",
         "path"
       ],
-      "word_count": 293,
+      "word_count": 298,
       "file_path": "docs/docs__en__api__admin__external_keys__retrieve.md"
     },
     "/docs/en/api/admin/external_keys/update": {
@@ -3160,7 +3272,7 @@
         "only",
         "decrypt"
       ],
-      "word_count": 528,
+      "word_count": 533,
       "file_path": "docs/docs__en__api__admin__external_keys__update.md"
     },
     "/docs/en/api/admin/external_keys/validate": {
@@ -3641,7 +3753,7 @@
     },
     "/docs/en/api/admin/invites": {
       "title": "Invites",
-      "content_preview": "# Invites  ## Create Invite  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or \"claude_c...",
+      "content_preview": "# Invites  ## Create Invite  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"billing\" or \"claude_code_user\" or \"developer\" ...",
       "keywords": [
         "invite",
         "user",
@@ -3669,7 +3781,7 @@
     },
     "/docs/en/api/admin/invites/create": {
       "title": "Untitled",
-      "content_preview": "## Create Invite  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_user\"`    Role for the invited User. Cannot be \"admin\".    - `\"user\"`    - `\"developer\"`    - `\"billing\"`",
+      "content_preview": "## Create Invite  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"billing\" or \"claude_code_user\" or \"developer\" or \"user\"` ...",
       "keywords": [
         "invite",
         "user",
@@ -4494,7 +4606,7 @@
         "request",
         "get"
       ],
-      "word_count": 4799,
+      "word_count": 4803,
       "file_path": "docs/docs__en__api__admin__spend_limits.md"
     },
     "/docs/en/api/admin/spend_limits/create": {
@@ -4522,7 +4634,7 @@
         "seat",
         "tier"
       ],
-      "word_count": 273,
+      "word_count": 275,
       "file_path": "docs/docs__en__api__admin__spend_limits__create.md"
     },
     "/docs/en/api/admin/spend_limits/delete": {
@@ -4578,7 +4690,7 @@
         "get",
         "member"
       ],
-      "word_count": 3533,
+      "word_count": 3535,
       "file_path": "docs/docs__en__api__admin__spend_limits__increase_requests.md"
     },
     "/docs/en/api/admin/spend_limits/increase_requests/approve": {
@@ -4606,7 +4718,7 @@
         "approve",
         "requester"
       ],
-      "word_count": 775,
+      "word_count": 777,
       "file_path": "docs/docs__en__api__admin__spend_limits__increase_requests__approve.md"
     },
     "/docs/en/api/admin/spend_limits/increase_requests/deny": {
@@ -4929,7 +5041,7 @@
     },
     "/docs/en/api/admin/users/update": {
       "title": "Untitled",
-      "content_preview": "## Update User  **post** `/v1/organizations/users/{user_id}`  Update User  ### Path Parameters  - `user_id: string`    ID of the User.  ### Body Parameters  - `role: \"user\" or \"developer\" or \"billing\"...",
+      "content_preview": "## Update User  **post** `/v1/organizations/users/{user_id}`  Update User  ### Path Parameters  - `user_id: string`    ID of the User.  ### Body Parameters  - `role: \"billing\" or \"claude_code_user\" or...",
       "keywords": [
         "user",
         "update",
@@ -5069,7 +5181,7 @@
     },
     "/docs/en/api/admin/workspaces/members": {
       "title": "Members",
-      "content_preview": "# Members  ## Create Workspace Member  **post** `/v1/organizations/workspaces/{workspace_id}/members`  Create Workspace Member  ### Path Parameters  - `workspace_id: string`    ID of the Workspace.  #...",
+      "content_preview": "# Members  ## Create Workspace Member  **post** `/v1/organizations/workspaces/{workspace_id}/members`  Create Workspace Member  ### Path Parameters  - `workspace_id: string`    ID of the Workspace.  ### Body Parameters  - `user_id: string`    ID of the User.  - `workspace_role: \"workspace_admin\" or",
       "keywords": [
         "workspace",
         "member",
@@ -5507,24 +5619,24 @@
         "model",
         "content",
         "when",
+        "event",
         "block",
+        "agent",
         "session",
         "text",
-        "event",
-        "agent",
         "tokens",
-        "cache",
         "beta",
-        "timestamp",
+        "cache",
         "user",
+        "agents",
+        "timestamp",
         "rfc",
+        "request",
         "error",
-        "format",
         "server",
-        "input",
-        "agents"
+        "format"
       ],
-      "word_count": 282637,
+      "word_count": 290925,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -5532,15 +5644,16 @@
       "content_preview": "# Agents  ## Create Agent  **post** `/v1/agents`  Create Agent  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta version(s) you want ...",
       "keywords": [
         "tool",
-        "agent",
         "model",
         "agents",
+        "agent",
         "user",
         "calls",
         "confirmation",
         "execution",
         "intelligence",
         "coding",
+        "performance",
         "configuration",
         "resolved",
         "policy",
@@ -5549,10 +5662,9 @@
         "managed",
         "automatically",
         "approved",
-        "require",
-        "permission"
+        "require"
       ],
-      "word_count": 13140,
+      "word_count": 13244,
       "file_path": "docs/docs__en__api__beta__agents.md"
     },
     "/docs/en/api/beta/agents/archive": {
@@ -5563,15 +5675,15 @@
         "model",
         "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -5580,7 +5692,7 @@
         "require",
         "before"
       ],
-      "word_count": 969,
+      "word_count": 977,
       "file_path": "docs/docs__en__api__beta__agents__archive.md"
     },
     "/docs/en/api/beta/agents/create": {
@@ -5591,24 +5703,24 @@
         "agent",
         "model",
         "user",
+        "agents",
         "calls",
         "intelligence",
         "execution",
         "confirmation",
-        "agents",
-        "configuration",
         "coding",
+        "configuration",
+        "performance",
         "mcp",
         "tools",
         "server",
         "version",
         "frontier",
-        "performance",
         "must",
         "permission",
         "policy"
       ],
-      "word_count": 2182,
+      "word_count": 2198,
       "file_path": "docs/docs__en__api__beta__agents__create.md"
     },
     "/docs/en/api/beta/agents/list": {
@@ -5627,16 +5739,16 @@
         "coding",
         "resolved",
         "before",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved",
         "without"
       ],
-      "word_count": 1040,
+      "word_count": 1048,
       "file_path": "docs/docs__en__api__beta__agents__list.md"
     },
     "/docs/en/api/beta/agents/retrieve": {
@@ -5644,27 +5756,27 @@
       "content_preview": "## Get Agent  **get** `/v1/agents/{agent_id}`  Get Agent  ### Path Parameters  - `agent_id: string`  ### Query Parameters  - `version: optional number`    Agent version. Omit for the most recent version. Must be at least 1 if specified.  ### Header Parameters  - `\"anthropic-beta\": optional array of",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "version",
+        "performance",
         "parameters",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved",
         "without"
       ],
-      "word_count": 988,
+      "word_count": 996,
       "file_path": "docs/docs__en__api__beta__agents__retrieve.md"
     },
     "/docs/en/api/beta/agents/update": {
@@ -5675,24 +5787,24 @@
         "agent",
         "model",
         "user",
+        "agents",
         "calls",
         "intelligence",
         "execution",
         "confirmation",
-        "agents",
-        "configuration",
         "coding",
+        "configuration",
         "version",
         "server",
         "mcp",
+        "performance",
         "tools",
         "omit",
         "must",
         "preserve",
-        "frontier",
-        "performance"
+        "frontier"
       ],
-      "word_count": 2279,
+      "word_count": 2295,
       "file_path": "docs/docs__en__api__beta__agents__update.md"
     },
     "/docs/en/api/beta/agents/versions": {
@@ -5700,8 +5812,8 @@
       "content_preview": "# Versions  ## List Agent Versions  **get** `/v1/agents/{agent_id}/versions`  List Agent Versions  ### Path Parameters  - `agent_id: string`  ### Query Parameters  - `limit: optional number`    Maximu...",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
         "intelligence",
         "execution",
@@ -5710,17 +5822,17 @@
         "coding",
         "agents",
         "resolved",
+        "performance",
         "versions",
         "parameters",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 1007,
+      "word_count": 1015,
       "file_path": "docs/docs__en__api__beta__agents__versions.md"
     },
     "/docs/en/api/beta/agents/versions/list": {
@@ -5728,8 +5840,8 @@
       "content_preview": "## List Agent Versions  **get** `/v1/agents/{agent_id}/versions`  List Agent Versions  ### Path Parameters  - `agent_id: string`  ### Query Parameters  - `limit: optional number`    Maximum results pe...",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
         "intelligence",
         "execution",
@@ -5738,17 +5850,17 @@
         "coding",
         "agents",
         "resolved",
+        "performance",
         "parameters",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved",
         "without"
       ],
-      "word_count": 1005,
+      "word_count": 1013,
       "file_path": "docs/docs__en__api__beta__agents__versions__list.md"
     },
     "/docs/en/api/beta/deployment_runs": {
@@ -6094,8 +6206,8 @@
         "work",
         "environment",
         "type",
-        "packages",
         "when",
+        "packages",
         "install",
         "rfc",
         "timestamp",
@@ -6103,16 +6215,16 @@
         "network",
         "self",
         "hosted",
+        "item",
         "access",
         "package",
-        "item",
         "parameters",
         "identifier",
         "policy",
         "beta",
         "value"
       ],
-      "word_count": 9034,
+      "word_count": 9270,
       "file_path": "docs/docs__en__api__beta__environments.md"
     },
     "/docs/en/api/beta/environments/archive": {
@@ -6291,10 +6403,11 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "identifier",
+        "worker",
         "items",
         "type",
         "sandbox",
@@ -6303,11 +6416,10 @@
         "heartbeat",
         "sessions",
         "response",
-        "worker",
         "header",
         "execution"
       ],
-      "word_count": 4006,
+      "word_count": 4242,
       "file_path": "docs/docs__en__api__beta__environments__work.md"
     },
     "/docs/en/api/beta/environments/work/ack": {
@@ -6319,23 +6431,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "parameters",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 428,
+      "word_count": 458,
       "file_path": "docs/docs__en__api__beta__environments__work__ack.md"
     },
     "/docs/en/api/beta/environments/work/heartbeat": {
@@ -6375,23 +6487,23 @@
         "rfc",
         "timestamp",
         "items",
-        "list",
         "environment",
+        "item",
+        "list",
         "parameters",
         "cursor",
         "response",
         "identifier",
-        "item",
+        "worker",
         "provided",
         "self",
         "hosted",
         "sandbox",
         "opaque",
         "pagination",
-        "header",
-        "session"
+        "header"
       ],
-      "word_count": 431,
+      "word_count": 461,
       "file_path": "docs/docs__en__api__beta__environments__work__list.md"
     },
     "/docs/en/api/beta/environments/work/poll": {
@@ -6400,26 +6512,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
+        "worker",
         "self",
         "hosted",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
         "parameters",
-        "item",
         "poll",
         "provided",
         "milliseconds",
         "returns",
         "header"
       ],
-      "word_count": 484,
+      "word_count": 514,
       "file_path": "docs/docs__en__api__beta__environments__work__poll.md"
     },
     "/docs/en/api/beta/environments/work/retrieve": {
@@ -6428,26 +6540,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "get",
-        "worker",
         "provided",
         "parameters",
         "header",
         "created",
+        "execute",
         "session",
-        "type",
-        "execution"
+        "type"
       ],
-      "word_count": 416,
+      "word_count": 446,
       "file_path": "docs/docs__en__api__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/beta/environments/work/stats": {
@@ -6486,24 +6598,24 @@
         "when",
         "rfc",
         "timestamp",
-        "stop",
         "environment",
+        "item",
+        "stop",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "parameters",
         "identifier",
-        "worker",
         "provided",
         "graceful",
         "shutdown",
         "header",
         "created",
-        "session"
+        "execute"
       ],
-      "word_count": 438,
+      "word_count": 468,
       "file_path": "docs/docs__en__api__beta__environments__work__stop.md"
     },
     "/docs/en/api/beta/environments/work/update": {
@@ -6512,26 +6624,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
         "metadata",
+        "worker",
         "sessions",
         "sandbox",
         "parameters",
         "identifier",
         "update",
-        "worker",
         "provided",
         "header",
         "key",
-        "created",
-        "session"
+        "null",
+        "created"
       ],
-      "word_count": 458,
+      "word_count": 488,
       "file_path": "docs/docs__en__api__beta__environments__work__update.md"
     },
     "/docs/en/api/beta/files": {
@@ -7193,7 +7305,7 @@
         "search",
         "intelligence"
       ],
-      "word_count": 117897,
+      "word_count": 118063,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -7221,7 +7333,7 @@
         "server",
         "create"
       ],
-      "word_count": 31686,
+      "word_count": 31702,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -7277,7 +7389,7 @@
         "name",
         "schema"
       ],
-      "word_count": 10448,
+      "word_count": 10456,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -7361,7 +7473,7 @@
         "when",
         "message"
       ],
-      "word_count": 4799,
+      "word_count": 4801,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -7417,7 +7529,7 @@
         "name",
         "via"
       ],
-      "word_count": 9122,
+      "word_count": 9130,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -7445,7 +7557,7 @@
         "response",
         "server"
       ],
-      "word_count": 14422,
+      "word_count": 14432,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -7544,20 +7656,20 @@
         "error",
         "text",
         "thread",
+        "model",
         "timestamp",
         "rfc",
         "format",
+        "user",
         "result",
         "identifier",
-        "user",
-        "image",
-        "model",
         "execution",
+        "image",
+        "when",
         "document",
-        "unique",
-        "when"
+        "unique"
       ],
-      "word_count": 82553,
+      "word_count": 87105,
       "file_path": "docs/docs__en__api__beta__sessions.md"
     },
     "/docs/en/api/beta/sessions/archive": {
@@ -7578,42 +7690,42 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1867,
+      "word_count": 1875,
       "file_path": "docs/docs__en__api__beta__sessions__archive.md"
     },
     "/docs/en/api/beta/sessions/create": {
       "title": "Untitled",
       "content_preview": "## Create Session  **post** `/v1/sessions`  Create Session  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta version(s) you want to u...",
       "keywords": [
-        "session",
         "tool",
         "agent",
-        "store",
-        "memory",
         "model",
+        "session",
         "user",
-        "resolved",
+        "calls",
         "intelligence",
         "execution",
-        "calls",
         "confirmation",
-        "timestamp",
-        "rfc",
-        "format",
-        "time",
+        "configuration",
+        "coding",
+        "store",
+        "agents",
+        "memory",
         "version",
-        "container",
-        "into",
-        "agents"
+        "mcp",
+        "name",
+        "performance",
+        "skill",
+        "tools"
       ],
-      "word_count": 2294,
+      "word_count": 3349,
       "file_path": "docs/docs__en__api__beta__sessions__create.md"
     },
     "/docs/en/api/beta/sessions/delete": {
@@ -7647,14 +7759,14 @@
       "keywords": [
         "event",
         "content",
-        "text",
         "error",
+        "text",
         "session",
         "image",
         "tool",
+        "agent",
         "result",
         "document",
-        "agent",
         "thread",
         "identifier",
         "url",
@@ -7666,7 +7778,7 @@
         "data",
         "client"
       ],
-      "word_count": 39997,
+      "word_count": 40896,
       "file_path": "docs/docs__en__api__beta__sessions__events.md"
     },
     "/docs/en/api/beta/sessions/events/list": {
@@ -7689,12 +7801,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 6174,
+      "word_count": 6182,
       "file_path": "docs/docs__en__api__beta__sessions__events__list.md"
     },
     "/docs/en/api/beta/sessions/events/send": {
@@ -7727,30 +7839,30 @@
     },
     "/docs/en/api/beta/sessions/events/stream": {
       "title": "Untitled",
-      "content_preview": "## Stream Events  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ### Path Parameters  - `session_id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of Anthropic...",
+      "content_preview": "## Stream Events  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ### Path Parameters  - `session_id: string`  ### Query Parameters  - `event_deltas: optional array of BetaManagedAge...",
       "keywords": [
         "event",
         "error",
-        "session",
-        "tool",
         "content",
         "agent",
+        "session",
+        "tool",
         "identifier",
         "thread",
+        "when",
         "unique",
         "timestamp",
         "rfc",
         "format",
-        "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 6011,
+      "word_count": 6509,
       "file_path": "docs/docs__en__api__beta__sessions__events__stream.md"
     },
     "/docs/en/api/beta/sessions/list": {
@@ -7761,9 +7873,9 @@
         "agent",
         "sessions",
         "store",
+        "model",
         "time",
         "session",
-        "model",
         "user",
         "created",
         "memory",
@@ -7775,10 +7887,10 @@
         "timestamp",
         "rfc",
         "format",
-        "before",
-        "when"
+        "when",
+        "before"
       ],
-      "word_count": 2068,
+      "word_count": 2102,
       "file_path": "docs/docs__en__api__beta__sessions__list.md"
     },
     "/docs/en/api/beta/sessions/resources": {
@@ -7963,14 +8075,14 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1864,
+      "word_count": 1872,
       "file_path": "docs/docs__en__api__beta__sessions__retrieve.md"
     },
     "/docs/en/api/beta/sessions/threads": {
@@ -7983,13 +8095,13 @@
         "session",
         "agent",
         "error",
-        "identifier",
         "content",
+        "identifier",
+        "model",
         "timestamp",
         "rfc",
         "format",
         "unique",
-        "model",
         "execution",
         "user",
         "when",
@@ -7998,7 +8110,7 @@
         "client",
         "confirmation"
       ],
-      "word_count": 22519,
+      "word_count": 23329,
       "file_path": "docs/docs__en__api__beta__sessions__threads.md"
     },
     "/docs/en/api/beta/sessions/threads/archive": {
@@ -8013,20 +8125,20 @@
         "intelligence",
         "calls",
         "confirmation",
+        "coding",
         "session",
         "time",
-        "coding",
+        "agents",
         "resolved",
         "agent",
-        "agents",
+        "performance",
         "cache",
         "tokens",
         "frontier",
         "running",
-        "performance",
         "permission"
       ],
-      "word_count": 1150,
+      "word_count": 1158,
       "file_path": "docs/docs__en__api__beta__sessions__threads__archive.md"
     },
     "/docs/en/api/beta/sessions/threads/events": {
@@ -8049,12 +8161,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 12076,
+      "word_count": 12469,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events.md"
     },
     "/docs/en/api/beta/sessions/threads/events/list": {
@@ -8077,12 +8189,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 6055,
+      "word_count": 6063,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events__list.md"
     },
     "/docs/en/api/beta/sessions/threads/events/stream": {
@@ -8091,10 +8203,10 @@
       "keywords": [
         "event",
         "error",
-        "session",
-        "tool",
         "content",
         "agent",
+        "session",
+        "tool",
         "thread",
         "identifier",
         "unique",
@@ -8102,15 +8214,15 @@
         "rfc",
         "format",
         "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 6019,
+      "word_count": 6404,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events__stream.md"
     },
     "/docs/en/api/beta/sessions/threads/list": {
@@ -8125,20 +8237,20 @@
         "execution",
         "calls",
         "confirmation",
+        "coding",
         "session",
         "time",
-        "coding",
+        "agents",
         "threads",
         "resolved",
         "agent",
-        "agents",
+        "performance",
         "cache",
         "tokens",
         "parameters",
-        "frontier",
-        "running"
+        "frontier"
       ],
-      "word_count": 1178,
+      "word_count": 1186,
       "file_path": "docs/docs__en__api__beta__sessions__threads__list.md"
     },
     "/docs/en/api/beta/sessions/threads/retrieve": {
@@ -8153,20 +8265,20 @@
         "intelligence",
         "calls",
         "confirmation",
+        "coding",
         "session",
         "time",
-        "coding",
+        "agents",
         "resolved",
         "agent",
-        "agents",
+        "performance",
         "cache",
         "tokens",
         "frontier",
         "running",
-        "performance",
         "permission"
       ],
-      "word_count": 1147,
+      "word_count": 1155,
       "file_path": "docs/docs__en__api__beta__sessions__threads__retrieve.md"
     },
     "/docs/en/api/beta/sessions/update": {
@@ -8180,8 +8292,8 @@
         "calls",
         "execution",
         "confirmation",
-        "configuration",
         "model",
+        "configuration",
         "store",
         "mcp",
         "server",
@@ -8194,7 +8306,7 @@
         "approved",
         "without"
       ],
-      "word_count": 2570,
+      "word_count": 2578,
       "file_path": "docs/docs__en__api__beta__sessions__update.md"
     },
     "/docs/en/api/beta/skills": {
@@ -9015,26 +9127,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "endpoint",
         "client",
         "authentication",
+        "substituted",
         "refresh",
+        "request",
+        "value",
         "parameters",
         "vault",
         "mcp",
+        "beta",
         "timestamp",
         "rfc",
         "format",
-        "beta",
-        "environment",
-        "value",
-        "response",
-        "agents",
-        "substituted"
+        "header",
+        "environment"
       ],
-      "word_count": 8973,
+      "word_count": 9540,
       "file_path": "docs/docs__en__api__beta__vaults.md"
     },
     "/docs/en/api/beta/vaults/archive": {
@@ -9099,26 +9211,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "endpoint",
         "client",
         "authentication",
+        "substituted",
         "refresh",
+        "request",
+        "value",
         "mcp",
         "parameters",
         "environment",
         "beta",
-        "substituted",
-        "value",
-        "response",
+        "body",
         "updated",
-        "server",
-        "http",
-        "credentials",
-        "managed"
+        "response",
+        "managed",
+        "agents"
       ],
-      "word_count": 7422,
+      "word_count": 7989,
       "file_path": "docs/docs__en__api__beta__vaults__credentials.md"
     },
     "/docs/en/api/beta/vaults/credentials/archive": {
@@ -9127,26 +9239,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
+        "header",
         "returned",
         "url",
-        "refresh",
-        "environment",
-        "value",
-        "archive"
+        "refresh"
       ],
-      "word_count": 585,
+      "word_count": 623,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__archive.md"
     },
     "/docs/en/api/beta/vaults/credentials/create": {
@@ -9155,26 +9267,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "client",
         "authentication",
         "endpoint",
+        "value",
+        "substituted",
+        "request",
         "refresh",
         "parameters",
         "mcp",
-        "value",
         "environment",
         "url",
         "server",
-        "substituted",
+        "body",
         "details",
         "creating",
-        "timestamp",
-        "rfc",
-        "format"
+        "timestamp"
       ],
-      "word_count": 1044,
+      "word_count": 1125,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/beta/vaults/credentials/delete": {
@@ -9209,25 +9321,25 @@
         "credential",
         "token",
         "credentials",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "list",
         "parameters",
-        "url",
-        "refresh",
-        "environment"
+        "whether"
       ],
-      "word_count": 632,
+      "word_count": 670,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__list.md"
     },
     "/docs/en/api/beta/vaults/credentials/mcp_oauth_validate": {
@@ -9264,26 +9376,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "get",
+        "header",
         "returned",
-        "url",
-        "refresh",
-        "environment",
-        "value"
+        "url"
       ],
-      "word_count": 582,
+      "word_count": 620,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__retrieve.md"
     },
     "/docs/en/api/beta/vaults/credentials/update": {
@@ -9293,25 +9405,25 @@
         "credential",
         "token",
         "updated",
-        "oauth",
         "secret",
+        "oauth",
         "parameters",
         "authentication",
+        "request",
         "endpoint",
+        "substituted",
         "client",
+        "value",
         "refresh",
         "environment",
+        "body",
         "details",
         "mcp",
         "timestamp",
         "rfc",
-        "format",
-        "value",
-        "substituted",
-        "updating",
-        "server"
+        "format"
       ],
-      "word_count": 973,
+      "word_count": 1046,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/beta/vaults/delete": {
@@ -9425,30 +9537,30 @@
     },
     "/docs/en/api/beta/webhooks": {
       "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: string...",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Agent Archived Event Data  - `BetaWebhookAgentArchivedEventData object { id, organization_id, type, workspace_id }`    - `id: string`      ID of the agent...",
       "keywords": [
         "event",
-        "session",
         "triggered",
+        "session",
         "vault",
-        "credential",
         "webhook",
         "beta",
+        "deployment",
         "data",
+        "credential",
+        "environment",
+        "agent",
+        "run",
         "owns",
         "thread",
+        "memory",
+        "store",
         "refers",
         "created",
-        "status",
-        "archived",
         "deleted",
-        "idled",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
+        "archived"
       ],
-      "word_count": 3506,
+      "word_count": 6169,
       "file_path": "docs/docs__en__api__beta__webhooks.md"
     },
     "/docs/en/api/cli/beta": {
@@ -9458,25 +9570,25 @@
         "model",
         "tool",
         "content",
+        "event",
         "session",
         "tokens",
         "intelligence",
-        "block",
         "when",
-        "event",
-        "text",
-        "agent",
+        "block",
         "agents",
+        "agent",
+        "text",
         "cache",
-        "input",
-        "beta",
         "coding",
+        "beta",
+        "input",
         "error",
         "rfc",
         "timestamp",
-        "number"
+        "user"
       ],
-      "word_count": 253092,
+      "word_count": 260453,
       "file_path": "docs/docs__en__api__cli__beta.md"
     },
     "/docs/en/api/cli/beta/agents": {
@@ -9487,24 +9599,24 @@
         "agents",
         "agent",
         "user",
+        "model",
         "calls",
         "confirmation",
         "execution",
-        "model",
         "intelligence",
         "coding",
         "resolved",
         "managed",
+        "performance",
         "policy",
         "without",
         "before",
         "automatically",
         "approved",
         "require",
-        "permission",
-        "configuration"
+        "permission"
       ],
-      "word_count": 10583,
+      "word_count": 10663,
       "file_path": "docs/docs__en__api__cli__beta__agents.md"
     },
     "/docs/en/api/cli/beta/agents/archive": {
@@ -9512,18 +9624,18 @@
       "content_preview": "## Archive Agent  `$ ant beta:agents archive`  **post** `/v1/agents/{agent_id}/archive`  Archive Agent  ### Parameters  - `--agent-id: string`    Path parameter agent_id  - `--beta: optional array of ...",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -9532,7 +9644,7 @@
         "require",
         "before"
       ],
-      "word_count": 900,
+      "word_count": 908,
       "file_path": "docs/docs__en__api__cli__beta__agents__archive.md"
     },
     "/docs/en/api/cli/beta/agents/create": {
@@ -9545,22 +9657,22 @@
         "param",
         "body",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "maximum",
+        "performance",
         "configuration",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically"
       ],
-      "word_count": 1091,
+      "word_count": 1099,
       "file_path": "docs/docs__en__api__cli__beta__agents__create.md"
     },
     "/docs/en/api/cli/beta/agents/list": {
@@ -9575,20 +9687,20 @@
         "execution",
         "calls",
         "confirmation",
+        "coding",
         "param",
         "agent",
-        "coding",
         "resolved",
         "query",
         "before",
+        "performance",
         "list",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy"
       ],
-      "word_count": 991,
+      "word_count": 999,
       "file_path": "docs/docs__en__api__cli__beta__agents__list.md"
     },
     "/docs/en/api/cli/beta/agents/retrieve": {
@@ -9599,16 +9711,16 @@
         "agent",
         "model",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "version",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -9616,7 +9728,7 @@
         "without",
         "require"
       ],
-      "word_count": 925,
+      "word_count": 933,
       "file_path": "docs/docs__en__api__cli__beta__agents__retrieve.md"
     },
     "/docs/en/api/cli/beta/agents/update": {
@@ -9631,20 +9743,20 @@
         "user",
         "omit",
         "preserve",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
-        "empty",
         "coding",
+        "empty",
         "resolved",
         "version",
         "send",
         "null",
         "clear"
       ],
-      "word_count": 1210,
+      "word_count": 1218,
       "file_path": "docs/docs__en__api__cli__beta__agents__update.md"
     },
     "/docs/en/api/cli/beta/agents/versions": {
@@ -9663,16 +9775,16 @@
         "agents",
         "resolved",
         "versions",
+        "performance",
         "param",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 958,
+      "word_count": 966,
       "file_path": "docs/docs__en__api__cli__beta__agents__versions.md"
     },
     "/docs/en/api/cli/beta/agents/versions/list": {
@@ -9690,17 +9802,17 @@
         "coding",
         "agents",
         "resolved",
+        "performance",
         "versions",
         "param",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 956,
+      "word_count": 964,
       "file_path": "docs/docs__en__api__cli__beta__agents__versions__list.md"
     },
     "/docs/en/api/cli/beta/deployment_runs": {
@@ -10045,8 +10157,8 @@
       "keywords": [
         "work",
         "environment",
-        "type",
         "when",
+        "type",
         "rfc",
         "timestamp",
         "packages",
@@ -10055,8 +10167,8 @@
         "hosted",
         "configuration",
         "network",
-        "param",
         "item",
+        "param",
         "access",
         "identifier",
         "response",
@@ -10064,7 +10176,7 @@
         "package",
         "provided"
       ],
-      "word_count": 7427,
+      "word_count": 7663,
       "file_path": "docs/docs__en__api__cli__beta__environments.md"
     },
     "/docs/en/api/cli/beta/environments/archive": {
@@ -10242,11 +10354,12 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "param",
         "identifier",
+        "worker",
         "items",
         "type",
         "sandbox",
@@ -10254,11 +10367,10 @@
         "heartbeat",
         "sessions",
         "response",
-        "worker",
         "header",
         "execution"
       ],
-      "word_count": 3454,
+      "word_count": 3690,
       "file_path": "docs/docs__en__api__cli__beta__environments__work.md"
     },
     "/docs/en/api/cli/beta/environments/work/ack": {
@@ -10270,23 +10382,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "path",
         "header",
         "created",
-        "session"
+        "execute"
       ],
-      "word_count": 362,
+      "word_count": 392,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__ack.md"
     },
     "/docs/en/api/cli/beta/environments/work/heartbeat": {
@@ -10326,23 +10438,23 @@
         "rfc",
         "timestamp",
         "items",
-        "param",
-        "list",
         "environment",
+        "param",
+        "item",
+        "list",
         "cursor",
         "response",
         "identifier",
-        "item",
+        "worker",
         "provided",
         "self",
         "hosted",
         "sandbox",
         "query",
         "opaque",
-        "pagination",
-        "header"
+        "pagination"
       ],
-      "word_count": 364,
+      "word_count": 394,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__list.md"
     },
     "/docs/en/api/cli/beta/environments/work/poll": {
@@ -10351,26 +10463,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
         "param",
+        "worker",
         "self",
         "hosted",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
         "header",
-        "item",
         "poll",
         "provided",
         "query",
         "milliseconds"
       ],
-      "word_count": 419,
+      "word_count": 449,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__poll.md"
     },
     "/docs/en/api/cli/beta/environments/work/retrieve": {
@@ -10379,26 +10491,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
         "get",
-        "worker",
         "provided",
         "path",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 353,
+      "word_count": 383,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/cli/beta/environments/work/stats": {
@@ -10437,16 +10549,16 @@
         "when",
         "rfc",
         "timestamp",
-        "stop",
         "environment",
+        "item",
+        "stop",
         "self",
         "hosted",
-        "item",
         "param",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
-        "worker",
         "provided",
         "graceful",
         "shutdown",
@@ -10454,7 +10566,7 @@
         "header",
         "created"
       ],
-      "word_count": 367,
+      "word_count": 397,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__stop.md"
     },
     "/docs/en/api/cli/beta/environments/work/update": {
@@ -10463,26 +10575,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
         "metadata",
         "param",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "update",
-        "worker",
         "provided",
         "path",
         "key",
-        "header",
-        "created"
+        "null",
+        "header"
       ],
-      "word_count": 385,
+      "word_count": 415,
       "file_path": "docs/docs__en__api__cli__beta__environments__work__update.md"
     },
     "/docs/en/api/cli/beta/files": {
@@ -11129,21 +11241,21 @@
         "intelligence",
         "cache",
         "number",
+        "coding",
         "input",
         "content",
-        "coding",
         "used",
+        "agents",
         "when",
         "request",
         "create",
+        "performance",
         "frontier",
-        "agents",
         "output",
         "control",
-        "prompt",
-        "text"
+        "prompt"
       ],
-      "word_count": 103450,
+      "word_count": 103911,
       "file_path": "docs/docs__en__api__cli__beta__messages.md"
     },
     "/docs/en/api/cli/beta/messages/batches": {
@@ -11155,23 +11267,23 @@
         "number",
         "intelligence",
         "message",
+        "coding",
         "batch",
         "input",
-        "coding",
         "used",
         "request",
+        "agents",
         "tool",
         "cache",
+        "performance",
         "frontier",
-        "agents",
         "block",
         "which",
         "requests",
         "response",
-        "processing",
-        "entry"
+        "processing"
       ],
-      "word_count": 24306,
+      "word_count": 24442,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches.md"
     },
     "/docs/en/api/cli/beta/messages/batches/cancel": {
@@ -11294,24 +11406,24 @@
         "tokens",
         "intelligence",
         "number",
-        "input",
         "coding",
+        "input",
         "request",
         "used",
+        "agents",
         "tool",
         "cache",
+        "performance",
         "frontier",
-        "agents",
         "block",
         "response",
         "output",
         "entry",
-        "performance",
         "token",
         "content",
         "long"
       ],
-      "word_count": 5423,
+      "word_count": 5457,
       "file_path": "docs/docs__en__api__cli__beta__messages__batches__results.md"
     },
     "/docs/en/api/cli/beta/messages/batches/retrieve": {
@@ -11380,22 +11492,22 @@
         "input",
         "number",
         "tool",
+        "coding",
         "request",
         "used",
-        "coding",
         "body",
         "cache",
         "response",
+        "agents",
         "content",
         "block",
         "param",
         "output",
+        "performance",
         "frontier",
-        "agents",
-        "token",
-        "when"
+        "token"
       ],
-      "word_count": 6885,
+      "word_count": 6919,
       "file_path": "docs/docs__en__api__cli__beta__messages__create.md"
     },
     "/docs/en/api/cli/beta/models": {
@@ -11484,7 +11596,7 @@
     },
     "/docs/en/api/cli/beta/sessions": {
       "title": "Sessions",
-      "content_preview": "# Sessions  ## Create Session  `$ ant beta:sessions create`  **post** `/v1/sessions`  Create Session  ### Parameters  - `--agent: string or BetaManagedAgentsAgentParams`    Body param: Agent identifie...",
+      "content_preview": "# Sessions  ## Create Session  `$ ant beta:sessions create`  **post** `/v1/sessions`  Create Session  ### Parameters  - `--agent: string or BetaManagedAgentsAgentParams or BetaManagedAgentsAgentWithOv...",
       "keywords": [
         "event",
         "tool",
@@ -11497,17 +11609,17 @@
         "timestamp",
         "rfc",
         "format",
+        "model",
         "identifier",
         "result",
         "user",
-        "model",
-        "image",
         "execution",
+        "image",
+        "when",
         "unique",
-        "document",
-        "when"
+        "document"
       ],
-      "word_count": 80715,
+      "word_count": 84264,
       "file_path": "docs/docs__en__api__cli__beta__sessions.md"
     },
     "/docs/en/api/cli/beta/sessions/archive": {
@@ -11529,18 +11641,18 @@
         "timestamp",
         "rfc",
         "format",
-        "memory",
         "agents",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1880,
+      "word_count": 1888,
       "file_path": "docs/docs__en__api__cli__beta__sessions__archive.md"
     },
     "/docs/en/api/cli/beta/sessions/create": {
       "title": "Untitled",
-      "content_preview": "## Create Session  `$ ant beta:sessions create`  **post** `/v1/sessions`  Create Session  ### Parameters  - `--agent: string or BetaManagedAgentsAgentParams`    Body param: Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both",
+      "content_preview": "## Create Session  `$ ant beta:sessions create`  **post** `/v1/sessions`  Create Session  ### Parameters  - `--agent: string or BetaManagedAgentsAgentParams or BetaManagedAgentsAgentWithOverridesParam...",
       "keywords": [
         "session",
         "tool",
@@ -11558,12 +11670,12 @@
         "rfc",
         "format",
         "param",
+        "agents",
+        "coding",
         "memory",
-        "create",
-        "body",
-        "agents"
+        "create"
       ],
-      "word_count": 2004,
+      "word_count": 2014,
       "file_path": "docs/docs__en__api__cli__beta__sessions__create.md"
     },
     "/docs/en/api/cli/beta/sessions/delete": {
@@ -11603,8 +11715,8 @@
         "text",
         "image",
         "tool",
-        "result",
         "agent",
+        "result",
         "document",
         "thread",
         "identifier",
@@ -11615,9 +11727,9 @@
         "format",
         "client",
         "base",
-        "data"
+        "when"
       ],
-      "word_count": 39361,
+      "word_count": 40299,
       "file_path": "docs/docs__en__api__cli__beta__sessions__events.md"
     },
     "/docs/en/api/cli/beta/sessions/events/list": {
@@ -11640,12 +11752,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "events"
       ],
-      "word_count": 6292,
+      "word_count": 6300,
       "file_path": "docs/docs__en__api__cli__beta__sessions__events__list.md"
     },
     "/docs/en/api/cli/beta/sessions/events/send": {
@@ -11678,30 +11790,30 @@
     },
     "/docs/en/api/cli/beta/sessions/events/stream": {
       "title": "Untitled",
-      "content_preview": "## Stream Events  `$ ant beta:sessions:events stream`  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ### Parameters  - `--session-id: string`    Path parameter session_id  - `--bet...",
+      "content_preview": "## Stream Events  `$ ant beta:sessions:events stream`  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ### Parameters  - `--session-id: string`    Path param: Path parameter session_...",
       "keywords": [
         "event",
+        "content",
         "error",
+        "agent",
         "session",
         "tool",
-        "content",
-        "agent",
         "identifier",
         "thread",
+        "when",
         "unique",
         "timestamp",
         "rfc",
         "format",
-        "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "request",
+        "execution"
       ],
-      "word_count": 6101,
+      "word_count": 6618,
       "file_path": "docs/docs__en__api__cli__beta__sessions__events__stream.md"
     },
     "/docs/en/api/cli/beta/sessions/list": {
@@ -11715,8 +11827,8 @@
         "agent",
         "time",
         "store",
-        "session",
         "model",
+        "session",
         "user",
         "created",
         "memory",
@@ -11729,7 +11841,7 @@
         "rfc",
         "format"
       ],
-      "word_count": 2105,
+      "word_count": 2140,
       "file_path": "docs/docs__en__api__cli__beta__sessions__list.md"
     },
     "/docs/en/api/cli/beta/sessions/resources": {
@@ -11917,13 +12029,13 @@
         "timestamp",
         "rfc",
         "format",
-        "memory",
         "agents",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1880,
+      "word_count": 1888,
       "file_path": "docs/docs__en__api__cli__beta__sessions__retrieve.md"
     },
     "/docs/en/api/cli/beta/sessions/threads": {
@@ -11934,24 +12046,24 @@
         "tool",
         "thread",
         "session",
-        "error",
         "agent",
-        "identifier",
+        "error",
         "content",
+        "identifier",
+        "model",
         "timestamp",
         "rfc",
         "format",
         "unique",
         "execution",
-        "model",
         "user",
         "when",
-        "result",
         "text",
+        "result",
         "client",
         "confirmation"
       ],
-      "word_count": 22846,
+      "word_count": 23696,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/archive": {
@@ -11960,26 +12072,26 @@
       "keywords": [
         "thread",
         "tool",
-        "execution",
         "model",
+        "execution",
         "user",
         "intelligence",
         "calls",
         "confirmation",
         "session",
-        "time",
         "coding",
-        "resolved",
+        "time",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "path",
         "agent",
         "frontier",
-        "running",
-        "performance"
+        "running"
       ],
-      "word_count": 1117,
+      "word_count": 1125,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__archive.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/events": {
@@ -11987,27 +12099,27 @@
       "content_preview": "# Events  ## List Session Thread Events  `$ ant beta:sessions:threads:events list`  **get** `/v1/sessions/{session_id}/threads/{thread_id}/events`  List Session Thread Events  ### Parameters  - `--ses...",
       "keywords": [
         "event",
-        "session",
         "error",
-        "tool",
-        "thread",
+        "session",
         "content",
+        "tool",
         "agent",
+        "thread",
         "identifier",
         "unique",
         "timestamp",
         "rfc",
         "format",
         "when",
-        "result",
         "text",
+        "result",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
-        "url"
+        "request"
       ],
-      "word_count": 12300,
+      "word_count": 12713,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__events.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/events/list": {
@@ -12030,12 +12142,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 6177,
+      "word_count": 6185,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__events__list.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/events/stream": {
@@ -12043,27 +12155,27 @@
       "content_preview": "## Stream Session Thread Events  `$ ant beta:sessions:threads:events stream`  **get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`  Stream Session Thread Events  ### Parameters  - `--session...",
       "keywords": [
         "event",
-        "session",
+        "content",
         "error",
+        "session",
+        "agent",
         "tool",
         "thread",
-        "content",
-        "agent",
         "identifier",
         "unique",
         "timestamp",
         "rfc",
         "format",
         "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "request"
       ],
-      "word_count": 6121,
+      "word_count": 6526,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__events__stream.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/list": {
@@ -12079,19 +12191,19 @@
         "calls",
         "confirmation",
         "session",
+        "coding",
         "threads",
         "time",
-        "coding",
-        "resolved",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "param",
         "agent",
-        "frontier",
-        "running"
+        "frontier"
       ],
-      "word_count": 1155,
+      "word_count": 1163,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__list.md"
     },
     "/docs/en/api/cli/beta/sessions/threads/retrieve": {
@@ -12100,26 +12212,26 @@
       "keywords": [
         "thread",
         "tool",
-        "execution",
         "model",
+        "execution",
         "user",
         "intelligence",
         "calls",
         "confirmation",
         "session",
-        "time",
         "coding",
-        "resolved",
+        "time",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "path",
         "agent",
         "frontier",
-        "running",
-        "performance"
+        "running"
       ],
-      "word_count": 1117,
+      "word_count": 1125,
       "file_path": "docs/docs__en__api__cli__beta__sessions__threads__retrieve.md"
     },
     "/docs/en/api/cli/beta/sessions/update": {
@@ -12128,8 +12240,8 @@
       "keywords": [
         "session",
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
         "store",
         "resolved",
@@ -12141,13 +12253,13 @@
         "timestamp",
         "rfc",
         "format",
-        "memory",
-        "param",
         "agents",
         "coding",
+        "memory",
+        "param",
         "configuration"
       ],
-      "word_count": 1993,
+      "word_count": 2001,
       "file_path": "docs/docs__en__api__cli__beta__sessions__update.md"
     },
     "/docs/en/api/cli/beta/skills": {
@@ -12632,26 +12744,26 @@
       "keywords": [
         "credential",
         "token",
+        "secret",
         "oauth",
         "endpoint",
-        "secret",
         "client",
         "vault",
         "authentication",
+        "substituted",
+        "value",
+        "request",
         "refresh",
-        "response",
         "beta",
+        "response",
         "timestamp",
         "rfc",
         "format",
         "mcp",
-        "param",
-        "value",
-        "agents",
-        "environment",
-        "credentials"
+        "body",
+        "param"
       ],
-      "word_count": 7598,
+      "word_count": 8123,
       "file_path": "docs/docs__en__api__cli__beta__vaults.md"
     },
     "/docs/en/api/cli/beta/vaults/archive": {
@@ -12716,26 +12828,26 @@
       "keywords": [
         "credential",
         "token",
+        "secret",
         "oauth",
         "endpoint",
-        "secret",
         "client",
         "authentication",
-        "refresh",
-        "mcp",
-        "response",
-        "beta",
-        "environment",
         "substituted",
-        "param",
+        "request",
+        "refresh",
         "value",
-        "server",
-        "http",
+        "mcp",
+        "beta",
+        "response",
+        "body",
+        "environment",
         "managed",
         "agents",
-        "credentials"
+        "param",
+        "header"
       ],
-      "word_count": 6474,
+      "word_count": 6999,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials.md"
     },
     "/docs/en/api/cli/beta/vaults/credentials/archive": {
@@ -12744,11 +12856,13 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "path",
         "timestamp",
         "rfc",
@@ -12756,14 +12870,12 @@
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "param",
         "vault",
-        "returned",
-        "url",
-        "refresh"
+        "header"
       ],
-      "word_count": 532,
+      "word_count": 574,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials__archive.md"
     },
     "/docs/en/api/cli/beta/vaults/credentials/create": {
@@ -12772,26 +12884,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
         "authentication",
+        "secret",
         "param",
+        "body",
         "details",
+        "value",
         "oauth",
         "client",
         "endpoint",
-        "secret",
-        "body",
-        "value",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "mcp",
         "server",
-        "substituted",
         "vault",
-        "name",
-        "returned"
+        "name"
       ],
-      "word_count": 586,
+      "word_count": 628,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/cli/beta/vaults/credentials/delete": {
@@ -12829,12 +12941,14 @@
         "credential",
         "token",
         "credentials",
+        "substituted",
+        "secret",
         "param",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "list",
         "timestamp",
         "rfc",
@@ -12842,12 +12956,10 @@
         "details",
         "mcp",
         "server",
-        "substituted",
-        "query",
-        "response",
-        "url"
+        "value",
+        "query"
       ],
-      "word_count": 591,
+      "word_count": 633,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials__list.md"
     },
     "/docs/en/api/cli/beta/vaults/credentials/mcp_oauth_validate": {
@@ -12884,11 +12996,13 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "path",
         "timestamp",
         "rfc",
@@ -12896,14 +13010,12 @@
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "get",
         "param",
-        "vault",
-        "returned",
-        "url"
+        "vault"
       ],
-      "word_count": 532,
+      "word_count": 574,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials__retrieve.md"
     },
     "/docs/en/api/cli/beta/vaults/credentials/update": {
@@ -12912,26 +13024,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
         "param",
         "authentication",
+        "secret",
+        "body",
         "details",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "path",
-        "body",
         "timestamp",
         "rfc",
         "format",
         "mcp",
         "server",
-        "substituted",
-        "vault",
-        "name",
-        "returned"
+        "value",
+        "vault"
       ],
-      "word_count": 589,
+      "word_count": 631,
       "file_path": "docs/docs__en__api__cli__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/cli/beta/vaults/delete": {
@@ -13046,30 +13158,30 @@
     },
     "/docs/en/api/cli/beta/webhooks": {
       "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `beta_webhook_event: object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: str...",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Agent Archived Event Data  - `beta_webhook_agent_archived_event_data: object { id, organization_id, type, workspace_id }`    - `id: string`      ID of the...",
       "keywords": [
         "event",
-        "session",
         "triggered",
+        "session",
         "vault",
-        "credential",
         "webhook",
         "beta",
+        "deployment",
         "data",
+        "credential",
+        "environment",
+        "agent",
+        "run",
         "owns",
         "thread",
+        "memory",
+        "store",
         "refers",
         "created",
-        "status",
-        "archived",
         "deleted",
-        "idled",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
+        "archived"
       ],
-      "word_count": 3331,
+      "word_count": 5841,
       "file_path": "docs/docs__en__api__cli__beta__webhooks.md"
     },
     "/docs/en/api/cli/completions": {
@@ -13080,24 +13192,24 @@
         "intelligence",
         "coding",
         "stop",
-        "frontier",
         "agents",
+        "performance",
+        "frontier",
         "param",
         "maximum",
         "body",
-        "performance",
         "text",
         "may",
         "prompt",
         "long",
         "completions",
         "models",
+        "high",
         "running",
         "completion",
-        "see",
-        "additional"
+        "see"
       ],
-      "word_count": 972,
+      "word_count": 988,
       "file_path": "docs/docs__en__api__cli__completions.md"
     },
     "/docs/en/api/cli/completions/create": {
@@ -13113,19 +13225,19 @@
         "text",
         "maximum",
         "prompt",
+        "agents",
         "models",
         "may",
+        "performance",
         "frontier",
-        "agents",
         "completions",
         "see",
         "our",
         "only",
         "additional",
-        "details",
-        "options"
+        "details"
       ],
-      "word_count": 704,
+      "word_count": 712,
       "file_path": "docs/docs__en__api__cli__completions__create.md"
     },
     "/docs/en/api/cli/messages": {
@@ -13153,7 +13265,7 @@
         "create",
         "time"
       ],
-      "word_count": 65105,
+      "word_count": 65138,
       "file_path": "docs/docs__en__api__cli__messages.md"
     },
     "/docs/en/api/cli/messages/batches": {
@@ -13181,7 +13293,7 @@
         "input",
         "intelligence"
       ],
-      "word_count": 13645,
+      "word_count": 13665,
       "file_path": "docs/docs__en__api__cli__messages__batches.md"
     },
     "/docs/en/api/cli/messages/batches/cancel": {
@@ -13319,9 +13431,9 @@
         "text",
         "cited",
         "always",
-        "batch"
+        "coding"
       ],
-      "word_count": 2771,
+      "word_count": 2776,
       "file_path": "docs/docs__en__api__cli__messages__batches__results.md"
     },
     "/docs/en/api/cli/messages/batches/retrieve": {
@@ -13405,7 +13517,7 @@
         "message",
         "single"
       ],
-      "word_count": 3797,
+      "word_count": 3802,
       "file_path": "docs/docs__en__api__cli__messages__create.md"
     },
     "/docs/en/api/cli/models": {
@@ -13499,25 +13611,25 @@
         "model",
         "intelligence",
         "coding",
-        "frontier",
         "agents",
-        "stop",
         "performance",
+        "frontier",
+        "stop",
         "maximum",
         "prompt",
         "long",
         "models",
         "see",
         "details",
+        "high",
         "running",
         "may",
         "additional",
         "options",
         "text",
-        "complete",
-        "tasks"
+        "complete"
       ],
-      "word_count": 1289,
+      "word_count": 1313,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -13527,12 +13639,12 @@
         "model",
         "intelligence",
         "coding",
-        "frontier",
         "agents",
+        "performance",
+        "frontier",
         "stop",
         "maximum",
         "prompt",
-        "performance",
         "models",
         "see",
         "details",
@@ -13541,11 +13653,11 @@
         "may",
         "additional",
         "options",
+        "high",
         "running",
-        "complete",
-        "tasks"
+        "complete"
       ],
-      "word_count": 1003,
+      "word_count": 1019,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/compliance": {
@@ -15004,25 +15116,25 @@
         "tool",
         "model",
         "content",
-        "block",
         "when",
+        "event",
+        "block",
         "session",
         "text",
-        "event",
         "agent",
         "tokens",
-        "cache",
         "beta",
+        "cache",
+        "agents",
         "user",
-        "timestamp",
+        "request",
         "error",
+        "timestamp",
         "rfc",
         "server",
-        "input",
-        "agents",
-        "request"
+        "input"
       ],
-      "word_count": 250427,
+      "word_count": 258321,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/agents": {
@@ -15039,6 +15151,7 @@
         "execution",
         "intelligence",
         "coding",
+        "performance",
         "configuration",
         "resolved",
         "policy",
@@ -15047,10 +15160,9 @@
         "automatically",
         "approved",
         "require",
-        "frontier",
-        "performance"
+        "frontier"
       ],
-      "word_count": 11678,
+      "word_count": 11790,
       "file_path": "docs/docs__en__api__csharp__beta__agents.md"
     },
     "/docs/en/api/csharp/beta/agents/archive": {
@@ -15058,18 +15170,18 @@
       "content_preview": "## Archive Agent  `BetaManagedAgentsAgent Beta.Agents.Archive(AgentArchiveParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/agents/{agent_id}/archive`  Archive Agent  ###...",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -15078,7 +15190,7 @@
         "require",
         "before"
       ],
-      "word_count": 892,
+      "word_count": 900,
       "file_path": "docs/docs__en__api__csharp__beta__agents__archive.md"
     },
     "/docs/en/api/csharp/beta/agents/create": {
@@ -15090,23 +15202,23 @@
         "intelligence",
         "agent",
         "coding",
-        "user",
         "agents",
+        "user",
         "calls",
         "execution",
         "confirmation",
-        "frontier",
         "performance",
+        "frontier",
         "configuration",
         "param",
         "mcp",
         "tools",
         "body",
+        "high",
         "maximum",
-        "premium",
-        "server"
+        "premium"
       ],
-      "word_count": 1886,
+      "word_count": 1910,
       "file_path": "docs/docs__en__api__csharp__beta__agents__create.md"
     },
     "/docs/en/api/csharp/beta/agents/list": {
@@ -15121,20 +15233,20 @@
         "execution",
         "calls",
         "confirmation",
+        "coding",
         "param",
         "agent",
-        "coding",
         "resolved",
         "query",
         "before",
+        "performance",
         "list",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy"
       ],
-      "word_count": 984,
+      "word_count": 992,
       "file_path": "docs/docs__en__api__csharp__beta__agents__list.md"
     },
     "/docs/en/api/csharp/beta/agents/retrieve": {
@@ -15145,16 +15257,16 @@
         "agent",
         "model",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "version",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -15162,7 +15274,7 @@
         "without",
         "require"
       ],
-      "word_count": 916,
+      "word_count": 924,
       "file_path": "docs/docs__en__api__csharp__beta__agents__retrieve.md"
     },
     "/docs/en/api/csharp/beta/agents/update": {
@@ -15174,23 +15286,23 @@
         "intelligence",
         "agent",
         "coding",
-        "user",
         "agents",
+        "user",
         "calls",
         "execution",
         "confirmation",
+        "performance",
         "param",
         "frontier",
-        "performance",
         "configuration",
         "body",
         "mcp",
         "tools",
         "server",
-        "omit",
-        "preserve"
+        "high",
+        "omit"
       ],
-      "word_count": 2004,
+      "word_count": 2028,
       "file_path": "docs/docs__en__api__csharp__beta__agents__update.md"
     },
     "/docs/en/api/csharp/beta/agents/versions": {
@@ -15209,16 +15321,16 @@
         "agents",
         "resolved",
         "versions",
+        "performance",
         "param",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 957,
+      "word_count": 965,
       "file_path": "docs/docs__en__api__csharp__beta__agents__versions.md"
     },
     "/docs/en/api/csharp/beta/agents/versions/list": {
@@ -15236,17 +15348,17 @@
         "coding",
         "agents",
         "resolved",
+        "performance",
         "versions",
         "param",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 955,
+      "word_count": 963,
       "file_path": "docs/docs__en__api__csharp__beta__agents__versions__list.md"
     },
     "/docs/en/api/csharp/beta/deployment_runs": {
@@ -15592,8 +15704,8 @@
         "work",
         "environment",
         "type",
-        "packages",
         "when",
+        "packages",
         "install",
         "rfc",
         "timestamp",
@@ -15601,16 +15713,16 @@
         "network",
         "self",
         "hosted",
+        "item",
         "param",
         "access",
         "package",
-        "item",
         "identifier",
         "policy",
         "response",
         "value"
       ],
-      "word_count": 8474,
+      "word_count": 8718,
       "file_path": "docs/docs__en__api__csharp__beta__environments.md"
     },
     "/docs/en/api/csharp/beta/environments/archive": {
@@ -15788,11 +15900,12 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "param",
         "identifier",
+        "worker",
         "items",
         "type",
         "sandbox",
@@ -15800,11 +15913,10 @@
         "heartbeat",
         "sessions",
         "response",
-        "worker",
         "header",
         "execution"
       ],
-      "word_count": 3933,
+      "word_count": 4177,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work.md"
     },
     "/docs/en/api/csharp/beta/environments/work/ack": {
@@ -15816,23 +15928,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "path",
         "header",
         "created",
-        "session"
+        "execute"
       ],
-      "word_count": 424,
+      "word_count": 455,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__ack.md"
     },
     "/docs/en/api/csharp/beta/environments/work/heartbeat": {
@@ -15872,23 +15984,23 @@
         "rfc",
         "timestamp",
         "items",
-        "param",
-        "list",
         "environment",
+        "param",
+        "item",
+        "list",
         "cursor",
         "response",
         "identifier",
-        "item",
+        "worker",
         "provided",
         "self",
         "hosted",
         "sandbox",
         "query",
         "opaque",
-        "pagination",
-        "header"
+        "pagination"
       ],
-      "word_count": 434,
+      "word_count": 465,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__list.md"
     },
     "/docs/en/api/csharp/beta/environments/work/poll": {
@@ -15897,26 +16009,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
         "param",
+        "worker",
         "self",
         "hosted",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
         "header",
-        "item",
         "poll",
         "provided",
         "query",
         "milliseconds"
       ],
-      "word_count": 477,
+      "word_count": 508,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__poll.md"
     },
     "/docs/en/api/csharp/beta/environments/work/retrieve": {
@@ -15925,26 +16037,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
         "get",
-        "worker",
         "provided",
         "path",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 415,
+      "word_count": 446,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/csharp/beta/environments/work/stats": {
@@ -15983,16 +16095,16 @@
         "when",
         "rfc",
         "timestamp",
-        "stop",
         "environment",
+        "item",
+        "stop",
         "self",
         "hosted",
-        "item",
         "param",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
-        "worker",
         "provided",
         "graceful",
         "shutdown",
@@ -16000,7 +16112,7 @@
         "header",
         "created"
       ],
-      "word_count": 428,
+      "word_count": 459,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__stop.md"
     },
     "/docs/en/api/csharp/beta/environments/work/update": {
@@ -16009,26 +16121,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
         "metadata",
         "param",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "update",
-        "worker",
         "provided",
         "path",
         "key",
-        "header",
-        "created"
+        "null",
+        "header"
       ],
-      "word_count": 456,
+      "word_count": 487,
       "file_path": "docs/docs__en__api__csharp__beta__environments__work__update.md"
     },
     "/docs/en/api/csharp/beta/files": {
@@ -16668,8 +16780,8 @@
       "content_preview": "# Messages  ## Create a Message  `BetaMessage Beta.Messages.Create(MessageCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages`  Send a structured list of inp...",
       "keywords": [
         "tool",
-        "block",
         "model",
+        "block",
         "content",
         "tokens",
         "cache",
@@ -16688,7 +16800,7 @@
         "search",
         "response"
       ],
-      "word_count": 102809,
+      "word_count": 102989,
       "file_path": "docs/docs__en__api__csharp__beta__messages.md"
     },
     "/docs/en/api/csharp/beta/messages/batches": {
@@ -16716,7 +16828,7 @@
         "server",
         "create"
       ],
-      "word_count": 29004,
+      "word_count": 29028,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/cancel": {
@@ -16772,7 +16884,7 @@
         "name",
         "schema"
       ],
-      "word_count": 9434,
+      "word_count": 9442,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__create.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/delete": {
@@ -16856,7 +16968,7 @@
         "when",
         "message"
       ],
-      "word_count": 4382,
+      "word_count": 4386,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__results.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/retrieve": {
@@ -16912,7 +17024,7 @@
         "returned",
         "via"
       ],
-      "word_count": 7102,
+      "word_count": 7110,
       "file_path": "docs/docs__en__api__csharp__beta__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/beta/messages/create": {
@@ -16940,7 +17052,7 @@
         "response",
         "search"
       ],
-      "word_count": 12137,
+      "word_count": 12149,
       "file_path": "docs/docs__en__api__csharp__beta__messages__create.md"
     },
     "/docs/en/api/csharp/beta/models": {
@@ -17034,11 +17146,12 @@
         "event",
         "tool",
         "session",
-        "content",
         "agent",
+        "content",
         "error",
-        "thread",
         "text",
+        "thread",
+        "model",
         "timestamp",
         "rfc",
         "format",
@@ -17047,12 +17160,11 @@
         "user",
         "image",
         "execution",
+        "when",
         "document",
-        "model",
-        "unique",
-        "when"
+        "unique"
       ],
-      "word_count": 74541,
+      "word_count": 78998,
       "file_path": "docs/docs__en__api__csharp__beta__sessions.md"
     },
     "/docs/en/api/csharp/beta/sessions/archive": {
@@ -17061,8 +17173,8 @@
       "keywords": [
         "tool",
         "session",
-        "user",
         "model",
+        "user",
         "store",
         "agent",
         "resolved",
@@ -17073,42 +17185,42 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1737,
+      "word_count": 1745,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__archive.md"
     },
     "/docs/en/api/csharp/beta/sessions/create": {
       "title": "Untitled",
       "content_preview": "## Create Session  `BetaManagedAgentsSession Beta.Sessions.Create(SessionCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/sessions`  Create Session  ### Parameters  - `SessionCreateParams parameters`    - `required Agent agent`      Body param: Agent identifier.",
       "keywords": [
-        "session",
         "tool",
-        "agent",
-        "store",
-        "memory",
-        "user",
         "model",
-        "resolved",
+        "agent",
         "intelligence",
-        "execution",
+        "session",
+        "coding",
+        "user",
+        "agents",
         "calls",
+        "execution",
         "confirmation",
-        "timestamp",
-        "rfc",
-        "format",
-        "param",
-        "time",
-        "body",
+        "performance",
+        "configuration",
+        "store",
+        "frontier",
+        "memory",
         "version",
-        "container"
+        "mcp",
+        "name",
+        "skill"
       ],
-      "word_count": 2125,
+      "word_count": 3152,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__create.md"
     },
     "/docs/en/api/csharp/beta/sessions/delete": {
@@ -17143,14 +17255,14 @@
       "keywords": [
         "event",
         "content",
-        "text",
         "error",
+        "text",
         "session",
         "image",
         "tool",
         "result",
-        "document",
         "agent",
+        "document",
         "thread",
         "identifier",
         "url",
@@ -17162,7 +17274,7 @@
         "data",
         "client"
       ],
-      "word_count": 36436,
+      "word_count": 37321,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__events.md"
     },
     "/docs/en/api/csharp/beta/sessions/events/list": {
@@ -17190,7 +17302,7 @@
         "model",
         "events"
       ],
-      "word_count": 5640,
+      "word_count": 5648,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__events__list.md"
     },
     "/docs/en/api/csharp/beta/sessions/events/send": {
@@ -17227,26 +17339,26 @@
       "keywords": [
         "event",
         "error",
-        "session",
-        "tool",
         "content",
         "agent",
+        "session",
+        "tool",
         "identifier",
         "thread",
+        "when",
         "unique",
         "timestamp",
         "rfc",
         "format",
-        "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 5462,
+      "word_count": 5953,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__events__stream.md"
     },
     "/docs/en/api/csharp/beta/sessions/list": {
@@ -17261,9 +17373,9 @@
         "store",
         "time",
         "session",
+        "model",
         "user",
         "created",
-        "model",
         "memory",
         "resolved",
         "intelligence",
@@ -17274,7 +17386,7 @@
         "rfc",
         "format"
       ],
-      "word_count": 1955,
+      "word_count": 1988,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__list.md"
     },
     "/docs/en/api/csharp/beta/sessions/resources": {
@@ -17449,8 +17561,8 @@
       "keywords": [
         "tool",
         "session",
-        "user",
         "model",
+        "user",
         "store",
         "agent",
         "resolved",
@@ -17461,14 +17573,14 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 1737,
+      "word_count": 1745,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__retrieve.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads": {
@@ -17479,24 +17591,24 @@
         "tool",
         "thread",
         "session",
-        "error",
         "agent",
-        "identifier",
+        "error",
         "content",
+        "identifier",
         "timestamp",
         "rfc",
         "format",
+        "model",
         "unique",
         "execution",
         "user",
-        "model",
         "when",
         "result",
         "text",
         "client",
         "confirmation"
       ],
-      "word_count": 20614,
+      "word_count": 21410,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/archive": {
@@ -17505,26 +17617,26 @@
       "keywords": [
         "thread",
         "tool",
-        "execution",
         "model",
+        "execution",
         "user",
         "intelligence",
         "calls",
         "confirmation",
         "session",
-        "time",
         "coding",
-        "resolved",
+        "time",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "path",
         "agent",
         "frontier",
-        "running",
-        "performance"
+        "running"
       ],
-      "word_count": 1079,
+      "word_count": 1087,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__archive.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/events": {
@@ -17532,12 +17644,12 @@
       "content_preview": "# Events  ## List Session Thread Events  `EventListPageResponse Beta.Sessions.Threads.Events.List(EventListParamsparameters, CancellationTokencancellationToken = default)`  **get** `/v1/sessions/{session_id}/threads/{thread_id}/events`  List Session Thread Events  ### Parameters  - `EventListParams",
       "keywords": [
         "event",
-        "session",
         "error",
+        "session",
         "tool",
-        "thread",
         "content",
         "agent",
+        "thread",
         "identifier",
         "unique",
         "timestamp",
@@ -17547,12 +17659,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 11017,
+      "word_count": 11403,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__events.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/events/list": {
@@ -17580,7 +17692,7 @@
         "model",
         "url"
       ],
-      "word_count": 5532,
+      "word_count": 5540,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__events__list.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/events/stream": {
@@ -17588,27 +17700,27 @@
       "content_preview": "## Stream Session Thread Events  `BetaManagedAgentsStreamSessionThreadEvents Beta.Sessions.Threads.Events.StreamStreaming(EventStreamParamsparameters, CancellationTokencancellationToken = default)`  *...",
       "keywords": [
         "event",
-        "session",
         "error",
+        "content",
+        "session",
+        "agent",
         "tool",
         "thread",
-        "content",
-        "agent",
         "identifier",
         "unique",
         "timestamp",
         "rfc",
         "format",
         "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 5483,
+      "word_count": 5861,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__events__stream.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/list": {
@@ -17624,19 +17736,19 @@
         "calls",
         "confirmation",
         "session",
+        "coding",
         "threads",
         "time",
-        "coding",
-        "resolved",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "param",
         "agent",
-        "frontier",
-        "running"
+        "frontier"
       ],
-      "word_count": 1121,
+      "word_count": 1129,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__list.md"
     },
     "/docs/en/api/csharp/beta/sessions/threads/retrieve": {
@@ -17645,26 +17757,26 @@
       "keywords": [
         "thread",
         "tool",
-        "execution",
         "model",
+        "execution",
         "user",
         "intelligence",
         "calls",
         "confirmation",
         "session",
-        "time",
         "coding",
-        "resolved",
+        "time",
         "agents",
+        "resolved",
+        "performance",
         "cache",
         "tokens",
         "path",
         "agent",
         "frontier",
-        "running",
-        "performance"
+        "running"
       ],
-      "word_count": 1079,
+      "word_count": 1087,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__threads__retrieve.md"
     },
     "/docs/en/api/csharp/beta/sessions/update": {
@@ -17673,9 +17785,9 @@
       "keywords": [
         "session",
         "tool",
+        "model",
         "user",
         "agent",
-        "model",
         "store",
         "resolved",
         "intelligence",
@@ -17685,14 +17797,14 @@
         "timestamp",
         "rfc",
         "format",
+        "agents",
         "time",
+        "coding",
         "memory",
         "param",
-        "agents",
-        "coding",
         "configuration"
       ],
-      "word_count": 1841,
+      "word_count": 1849,
       "file_path": "docs/docs__en__api__csharp__beta__sessions__update.md"
     },
     "/docs/en/api/csharp/beta/skills": {
@@ -18177,26 +18289,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "endpoint",
         "client",
         "authentication",
         "vault",
+        "substituted",
         "refresh",
+        "request",
+        "value",
         "mcp",
+        "beta",
         "timestamp",
         "rfc",
         "format",
-        "beta",
-        "environment",
-        "param",
+        "body",
         "response",
-        "value",
-        "parameters",
-        "agents"
+        "environment"
       ],
-      "word_count": 8535,
+      "word_count": 9086,
       "file_path": "docs/docs__en__api__csharp__beta__vaults.md"
     },
     "/docs/en/api/csharp/beta/vaults/archive": {
@@ -18261,26 +18373,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "endpoint",
         "client",
         "authentication",
+        "substituted",
         "refresh",
+        "request",
+        "value",
         "mcp",
         "environment",
-        "substituted",
+        "body",
         "beta",
-        "parameters",
-        "value",
-        "response",
         "updated",
-        "server",
-        "credentials",
-        "param",
-        "http"
+        "response",
+        "parameters",
+        "managed",
+        "agents"
       ],
-      "word_count": 7025,
+      "word_count": 7576,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials.md"
     },
     "/docs/en/api/csharp/beta/vaults/credentials/archive": {
@@ -18289,11 +18401,13 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "path",
         "timestamp",
         "rfc",
@@ -18301,14 +18415,12 @@
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "param",
         "vault",
-        "returned",
-        "url",
-        "refresh"
+        "header"
       ],
-      "word_count": 560,
+      "word_count": 600,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials__archive.md"
     },
     "/docs/en/api/csharp/beta/vaults/credentials/create": {
@@ -18317,26 +18429,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "client",
         "authentication",
         "endpoint",
-        "refresh",
-        "mcp",
         "value",
+        "substituted",
+        "request",
+        "refresh",
+        "body",
+        "mcp",
         "environment",
         "url",
         "server",
-        "substituted",
         "parameters",
         "param",
-        "body",
         "details",
-        "creating",
-        "timestamp"
+        "creating"
       ],
-      "word_count": 978,
+      "word_count": 1057,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/csharp/beta/vaults/credentials/delete": {
@@ -18374,12 +18486,14 @@
         "credential",
         "token",
         "credentials",
+        "substituted",
+        "secret",
         "param",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "list",
         "timestamp",
         "rfc",
@@ -18387,12 +18501,10 @@
         "details",
         "mcp",
         "server",
-        "substituted",
-        "query",
-        "response",
-        "url"
+        "value",
+        "query"
       ],
-      "word_count": 622,
+      "word_count": 662,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials__list.md"
     },
     "/docs/en/api/csharp/beta/vaults/credentials/mcp_oauth_validate": {
@@ -18429,11 +18541,13 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "path",
         "timestamp",
         "rfc",
@@ -18441,14 +18555,12 @@
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "get",
         "param",
-        "vault",
-        "returned",
-        "url"
+        "vault"
       ],
-      "word_count": 560,
+      "word_count": 600,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials__retrieve.md"
     },
     "/docs/en/api/csharp/beta/vaults/credentials/update": {
@@ -18458,25 +18570,25 @@
         "credential",
         "token",
         "updated",
-        "oauth",
         "secret",
+        "oauth",
         "authentication",
         "parameters",
+        "request",
         "endpoint",
+        "substituted",
+        "body",
         "client",
+        "value",
         "param",
         "refresh",
         "environment",
-        "body",
         "details",
         "mcp",
         "timestamp",
-        "rfc",
-        "format",
-        "value",
-        "substituted"
+        "rfc"
       ],
-      "word_count": 895,
+      "word_count": 966,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/csharp/beta/vaults/delete": {
@@ -18591,30 +18703,30 @@
     },
     "/docs/en/api/csharp/beta/webhooks": {
       "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `required string ID`      Unique event identifier for idempotency.    - `required DateTimeOffset CreatedAt`      R...",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Agent Archived Event Data  - `class BetaWebhookAgentArchivedEventData:`    - `required string ID`      ID of the agent that triggered the event.    - `required string OrganizationID`    - `JsonElement Type \"agent.archived\"constant`    - `required string",
       "keywords": [
         "event",
-        "session",
         "triggered",
+        "session",
         "vault",
-        "credential",
         "webhook",
         "beta",
+        "deployment",
         "data",
+        "credential",
+        "environment",
+        "agent",
+        "run",
         "owns",
         "thread",
+        "memory",
+        "store",
         "refers",
         "created",
-        "status",
-        "archived",
         "deleted",
-        "idled",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
+        "archived"
       ],
-      "word_count": 3131,
+      "word_count": 5481,
       "file_path": "docs/docs__en__api__csharp__beta__webhooks.md"
     },
     "/docs/en/api/csharp/messages": {
@@ -18642,7 +18754,7 @@
         "input",
         "message"
       ],
-      "word_count": 68935,
+      "word_count": 68987,
       "file_path": "docs/docs__en__api__csharp__messages.md"
     },
     "/docs/en/api/csharp/messages/batches": {
@@ -18670,7 +18782,7 @@
         "only",
         "create"
       ],
-      "word_count": 19033,
+      "word_count": 19025,
       "file_path": "docs/docs__en__api__csharp__messages__batches.md"
     },
     "/docs/en/api/csharp/messages/batches/cancel": {
@@ -18726,7 +18838,7 @@
         "returned",
         "included"
       ],
-      "word_count": 6958,
+      "word_count": 6966,
       "file_path": "docs/docs__en__api__csharp__messages__batches__create.md"
     },
     "/docs/en/api/csharp/messages/batches/delete": {
@@ -18808,9 +18920,9 @@
         "text",
         "cited",
         "always",
-        "batch"
+        "coding"
       ],
-      "word_count": 2520,
+      "word_count": 2526,
       "file_path": "docs/docs__en__api__csharp__messages__batches__results.md"
     },
     "/docs/en/api/csharp/messages/batches/retrieve": {
@@ -18894,7 +19006,7 @@
         "number",
         "included"
       ],
-      "word_count": 7940,
+      "word_count": 7946,
       "file_path": "docs/docs__en__api__csharp__messages__create.md"
     },
     "/docs/en/api/csharp/models": {
@@ -18993,8 +19105,8 @@
         "int",
         "tool",
         "execution",
-        "code",
         "model",
+        "code",
         "claude",
         "error",
         "result",
@@ -19004,9 +19116,9 @@
         "content",
         "allowedcaller",
         "block",
-        "url"
+        "betamanagedagentsmodel"
       ],
-      "word_count": 291338,
+      "word_count": 299705,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/agents": {
@@ -19015,14 +19127,15 @@
       "keywords": [
         "tool",
         "model",
-        "agent",
         "agents",
+        "agent",
         "user",
         "calls",
         "confirmation",
         "execution",
         "intelligence",
         "coding",
+        "performance",
         "configuration",
         "managed",
         "resolved",
@@ -19031,10 +19144,9 @@
         "before",
         "automatically",
         "approved",
-        "require",
-        "permission"
+        "require"
       ],
-      "word_count": 13994,
+      "word_count": 14150,
       "file_path": "docs/docs__en__api__go__beta__agents.md"
     },
     "/docs/en/api/go/beta/agents/archive": {
@@ -19045,15 +19157,15 @@
         "model",
         "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -19062,7 +19174,7 @@
         "require",
         "before"
       ],
-      "word_count": 1141,
+      "word_count": 1153,
       "file_path": "docs/docs__en__api__go__beta__agents__archive.md"
     },
     "/docs/en/api/go/beta/agents/create": {
@@ -19081,16 +19193,16 @@
         "agents",
         "configuration",
         "param",
+        "performance",
         "mcp",
         "tools",
         "body",
         "frontier",
-        "performance",
         "server",
         "permission",
         "policy"
       ],
-      "word_count": 2156,
+      "word_count": 2180,
       "file_path": "docs/docs__en__api__go__beta__agents__create.md"
     },
     "/docs/en/api/go/beta/agents/list": {
@@ -19106,19 +19218,19 @@
         "calls",
         "confirmation",
         "agent",
-        "param",
         "coding",
+        "param",
         "resolved",
         "query",
         "before",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically"
       ],
-      "word_count": 1209,
+      "word_count": 1221,
       "file_path": "docs/docs__en__api__go__beta__agents__list.md"
     },
     "/docs/en/api/go/beta/agents/retrieve": {
@@ -19126,19 +19238,19 @@
       "content_preview": "## Get Agent  `client.Beta.Agents.Get(ctx, agentID, params) (*BetaManagedAgentsAgent, error)`  **get** `/v1/agents/{agent_id}`  Get Agent  ### Parameters  - `agentID string`  - `params BetaAgentGetPar...",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "version",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -19146,7 +19258,7 @@
         "without",
         "require"
       ],
-      "word_count": 1163,
+      "word_count": 1175,
       "file_path": "docs/docs__en__api__go__beta__agents__retrieve.md"
     },
     "/docs/en/api/go/beta/agents/update": {
@@ -19167,14 +19279,14 @@
         "configuration",
         "body",
         "mcp",
+        "performance",
         "tools",
         "server",
         "omit",
         "preserve",
-        "frontier",
-        "performance"
+        "frontier"
       ],
-      "word_count": 2268,
+      "word_count": 2292,
       "file_path": "docs/docs__en__api__go__beta__agents__update.md"
     },
     "/docs/en/api/go/beta/agents/versions": {
@@ -19185,16 +19297,16 @@
         "model",
         "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
@@ -19202,7 +19314,7 @@
         "without",
         "require"
       ],
-      "word_count": 1175,
+      "word_count": 1187,
       "file_path": "docs/docs__en__api__go__beta__agents__versions.md"
     },
     "/docs/en/api/go/beta/agents/versions/list": {
@@ -19213,16 +19325,16 @@
         "model",
         "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
@@ -19230,7 +19342,7 @@
         "without",
         "require"
       ],
-      "word_count": 1173,
+      "word_count": 1185,
       "file_path": "docs/docs__en__api__go__beta__agents__versions__list.md"
     },
     "/docs/en/api/go/beta/deployment_runs": {
@@ -19576,8 +19688,8 @@
         "work",
         "environment",
         "type",
-        "packages",
         "when",
+        "packages",
         "install",
         "rfc",
         "timestamp",
@@ -19585,8 +19697,8 @@
         "network",
         "self",
         "hosted",
-        "access",
         "item",
+        "access",
         "package",
         "param",
         "identifier",
@@ -19594,7 +19706,7 @@
         "beta",
         "value"
       ],
-      "word_count": 10784,
+      "word_count": 11020,
       "file_path": "docs/docs__en__api__go__beta__environments.md"
     },
     "/docs/en/api/go/beta/environments/archive": {
@@ -19772,10 +19884,11 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "identifier",
+        "worker",
         "sandbox",
         "type",
         "sessions",
@@ -19783,12 +19896,11 @@
         "items",
         "session",
         "heartbeat",
-        "worker",
         "header",
         "execution",
         "response"
       ],
-      "word_count": 5196,
+      "word_count": 5432,
       "file_path": "docs/docs__en__api__go__beta__environments__work.md"
     },
     "/docs/en/api/go/beta/environments/work/ack": {
@@ -19800,23 +19912,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "param",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 577,
+      "word_count": 607,
       "file_path": "docs/docs__en__api__go__beta__environments__work__ack.md"
     },
     "/docs/en/api/go/beta/environments/work/heartbeat": {
@@ -19853,26 +19965,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
         "items",
         "self",
         "hosted",
+        "item",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
-        "item",
         "list",
-        "worker",
         "provided",
         "query",
         "response",
         "header",
         "created"
       ],
-      "word_count": 590,
+      "word_count": 620,
       "file_path": "docs/docs__en__api__go__beta__environments__work__list.md"
     },
     "/docs/en/api/go/beta/environments/work/poll": {
@@ -19881,26 +19993,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
+        "worker",
         "self",
         "hosted",
         "param",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
         "header",
-        "item",
         "poll",
         "provided",
         "query",
         "milliseconds"
       ],
-      "word_count": 632,
+      "word_count": 662,
       "file_path": "docs/docs__en__api__go__beta__environments__work__poll.md"
     },
     "/docs/en/api/go/beta/environments/work/retrieve": {
@@ -19909,26 +20021,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "get",
-        "worker",
         "provided",
         "param",
         "header",
         "created",
+        "execute",
         "session",
-        "type",
-        "execution"
+        "type"
       ],
-      "word_count": 568,
+      "word_count": 598,
       "file_path": "docs/docs__en__api__go__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/go/beta/environments/work/stats": {
@@ -19965,26 +20077,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
-        "stop",
         "environment",
+        "stop",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "param",
         "identifier",
-        "worker",
         "provided",
         "header",
         "created",
+        "execute",
         "session",
-        "type",
-        "execution"
+        "type"
       ],
-      "word_count": 582,
+      "word_count": 612,
       "file_path": "docs/docs__en__api__go__beta__environments__work__stop.md"
     },
     "/docs/en/api/go/beta/environments/work/update": {
@@ -20000,19 +20112,19 @@
         "self",
         "hosted",
         "update",
+        "worker",
         "sessions",
         "sandbox",
         "metadata",
         "param",
         "identifier",
-        "worker",
         "provided",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 586,
+      "word_count": 616,
       "file_path": "docs/docs__en__api__go__beta__environments__work__update.md"
     },
     "/docs/en/api/go/beta/files": {
@@ -20673,7 +20785,7 @@
         "index",
         "web"
       ],
-      "word_count": 121485,
+      "word_count": 121701,
       "file_path": "docs/docs__en__api__go__beta__messages.md"
     },
     "/docs/en/api/go/beta/messages/batches": {
@@ -20701,7 +20813,7 @@
         "server",
         "create"
       ],
-      "word_count": 33448,
+      "word_count": 33460,
       "file_path": "docs/docs__en__api__go__beta__messages__batches.md"
     },
     "/docs/en/api/go/beta/messages/batches/cancel": {
@@ -20757,7 +20869,7 @@
         "name",
         "schema"
       ],
-      "word_count": 10598,
+      "word_count": 10610,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__create.md"
     },
     "/docs/en/api/go/beta/messages/batches/delete": {
@@ -20897,7 +21009,7 @@
         "returned",
         "via"
       ],
-      "word_count": 8516,
+      "word_count": 8528,
       "file_path": "docs/docs__en__api__go__beta__messages__count_tokens.md"
     },
     "/docs/en/api/go/beta/messages/create": {
@@ -20925,7 +21037,7 @@
         "betawebsearchtool",
         "anthropicbeta"
       ],
-      "word_count": 14223,
+      "word_count": 14235,
       "file_path": "docs/docs__en__api__go__beta__messages__create.md"
     },
     "/docs/en/api/go/beta/models": {
@@ -21024,20 +21136,20 @@
         "error",
         "text",
         "thread",
+        "model",
         "timestamp",
         "rfc",
         "format",
         "result",
         "identifier",
         "user",
-        "image",
-        "model",
         "execution",
+        "image",
         "document",
-        "unique",
-        "when"
+        "when",
+        "unique"
       ],
-      "word_count": 81740,
+      "word_count": 86381,
       "file_path": "docs/docs__en__api__go__beta__sessions.md"
     },
     "/docs/en/api/go/beta/sessions/archive": {
@@ -21058,42 +21170,42 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 2002,
+      "word_count": 2014,
       "file_path": "docs/docs__en__api__go__beta__sessions__archive.md"
     },
     "/docs/en/api/go/beta/sessions/create": {
       "title": "Untitled",
       "content_preview": "## Create Session  `client.Beta.Sessions.New(ctx, params) (*BetaManagedAgentsSession, error)`  **post** `/v1/sessions`  Create Session  ### Parameters  - `params BetaSessionNewParams`    - `Agent para...",
       "keywords": [
-        "session",
         "tool",
         "agent",
-        "store",
-        "memory",
         "model",
+        "session",
         "user",
-        "resolved",
+        "calls",
         "intelligence",
         "execution",
-        "calls",
         "confirmation",
-        "timestamp",
-        "rfc",
-        "format",
-        "param",
-        "time",
-        "body",
+        "configuration",
+        "coding",
+        "store",
+        "agents",
+        "memory",
         "version",
-        "container"
+        "mcp",
+        "name",
+        "performance",
+        "skill",
+        "tools"
       ],
-      "word_count": 2417,
+      "word_count": 3466,
       "file_path": "docs/docs__en__api__go__beta__sessions__create.md"
     },
     "/docs/en/api/go/beta/sessions/delete": {
@@ -21126,14 +21238,14 @@
       "keywords": [
         "event",
         "content",
-        "text",
         "error",
+        "text",
         "session",
         "image",
         "tool",
+        "agent",
         "result",
         "document",
-        "agent",
         "thread",
         "identifier",
         "url",
@@ -21145,7 +21257,7 @@
         "data",
         "client"
       ],
-      "word_count": 38879,
+      "word_count": 39812,
       "file_path": "docs/docs__en__api__go__beta__sessions__events.md"
     },
     "/docs/en/api/go/beta/sessions/events/list": {
@@ -21168,12 +21280,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 6042,
+      "word_count": 6054,
       "file_path": "docs/docs__en__api__go__beta__sessions__events__list.md"
     },
     "/docs/en/api/go/beta/sessions/events/send": {
@@ -21206,30 +21318,30 @@
     },
     "/docs/en/api/go/beta/sessions/events/stream": {
       "title": "Untitled",
-      "content_preview": "## Stream Events  `client.Beta.Sessions.Events.Stream(ctx, sessionID, query) (*BetaManagedAgentsStreamSessionEventsUnion, error)`  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ###...",
+      "content_preview": "## Stream Events  `client.Beta.Sessions.Events.Stream(ctx, sessionID, params) (*BetaManagedAgentsStreamSessionEventsUnion, error)`  **get** `/v1/sessions/{session_id}/events/stream`  Stream Events  ##...",
       "keywords": [
         "event",
         "error",
-        "session",
-        "tool",
         "content",
         "agent",
+        "session",
+        "tool",
         "identifier",
         "thread",
+        "when",
         "unique",
         "timestamp",
         "rfc",
         "format",
-        "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 5882,
+      "word_count": 6396,
       "file_path": "docs/docs__en__api__go__beta__sessions__events__stream.md"
     },
     "/docs/en/api/go/beta/sessions/list": {
@@ -21444,14 +21556,14 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
-        "custom",
-        "before"
+        "memory",
+        "performance",
+        "custom"
       ],
-      "word_count": 2002,
+      "word_count": 2014,
       "file_path": "docs/docs__en__api__go__beta__sessions__retrieve.md"
     },
     "/docs/en/api/go/beta/sessions/threads": {
@@ -21464,13 +21576,13 @@
         "session",
         "agent",
         "error",
-        "identifier",
         "content",
+        "identifier",
+        "model",
         "timestamp",
         "rfc",
         "format",
         "unique",
-        "model",
         "execution",
         "user",
         "when",
@@ -21479,7 +21591,7 @@
         "client",
         "confirmation"
       ],
-      "word_count": 22593,
+      "word_count": 23443,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads.md"
     },
     "/docs/en/api/go/beta/sessions/threads/archive": {
@@ -21495,19 +21607,19 @@
         "calls",
         "confirmation",
         "session",
-        "time",
         "coding",
+        "time",
+        "agents",
         "resolved",
         "agent",
-        "agents",
+        "performance",
         "cache",
         "tokens",
         "frontier",
         "running",
-        "performance",
         "permission"
       ],
-      "word_count": 1335,
+      "word_count": 1347,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads__archive.md"
     },
     "/docs/en/api/go/beta/sessions/threads/events": {
@@ -21515,8 +21627,8 @@
       "content_preview": "# Events  ## List Session Thread Events  `client.Beta.Sessions.Threads.Events.List(ctx, threadID, params) (*PageCursor[BetaManagedAgentsSessionEventUnion], error)`  **get** `/v1/sessions/{session_id}/...",
       "keywords": [
         "event",
-        "session",
         "error",
+        "session",
         "tool",
         "content",
         "agent",
@@ -21530,12 +21642,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 11821,
+      "word_count": 12228,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads__events.md"
     },
     "/docs/en/api/go/beta/sessions/threads/events/list": {
@@ -21558,12 +21670,12 @@
         "result",
         "text",
         "client",
+        "model",
         "execution",
         "user",
-        "model",
         "url"
       ],
-      "word_count": 5920,
+      "word_count": 5932,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads__events__list.md"
     },
     "/docs/en/api/go/beta/sessions/threads/events/stream": {
@@ -21571,11 +21683,11 @@
       "content_preview": "## Stream Session Thread Events  `client.Beta.Sessions.Threads.Events.Stream(ctx, threadID, params) (*BetaManagedAgentsStreamSessionThreadEventsUnion, error)`  **get** `/v1/sessions/{session_id}/threa...",
       "keywords": [
         "event",
-        "session",
         "error",
-        "tool",
         "content",
+        "session",
         "agent",
+        "tool",
         "thread",
         "identifier",
         "unique",
@@ -21583,15 +21695,15 @@
         "rfc",
         "format",
         "when",
-        "result",
         "text",
+        "result",
         "client",
-        "execution",
-        "user",
         "model",
-        "server"
+        "stream",
+        "execution",
+        "user"
       ],
-      "word_count": 5899,
+      "word_count": 6294,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads__events__stream.md"
     },
     "/docs/en/api/go/beta/sessions/threads/list": {
@@ -21606,20 +21718,20 @@
         "intelligence",
         "calls",
         "confirmation",
+        "coding",
         "session",
         "time",
-        "coding",
+        "agents",
         "threads",
         "resolved",
         "agent",
-        "agents",
+        "performance",
         "cache",
         "tokens",
         "frontier",
-        "running",
-        "performance"
+        "running"
       ],
-      "word_count": 1358,
+      "word_count": 1370,
       "file_path": "docs/docs__en__api__go__beta__sessions__threads__list.md"
     },
     "/docs/en/api/go/beta/sessions/threads/retrieve": {
@@ -21656,8 +21768,8 @@
       "keywords": [
         "session",
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
         "store",
         "resolved",
@@ -21668,14 +21780,14 @@
         "timestamp",
         "rfc",
         "format",
-        "time",
-        "memory",
         "agents",
+        "time",
         "coding",
+        "memory",
         "param",
         "configuration"
       ],
-      "word_count": 2104,
+      "word_count": 2116,
       "file_path": "docs/docs__en__api__go__beta__sessions__update.md"
     },
     "/docs/en/api/go/beta/skills": {
@@ -22244,26 +22356,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "endpoint",
         "client",
         "authentication",
+        "substituted",
         "refresh",
+        "request",
+        "value",
         "mcp",
         "environment",
-        "substituted",
+        "body",
         "beta",
-        "parameters",
-        "value",
-        "response",
         "updated",
-        "server",
-        "http",
+        "parameters",
+        "response",
         "managed",
         "agents"
       ],
-      "word_count": 8284,
+      "word_count": 8815,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials.md"
     },
     "/docs/en/api/go/beta/vaults/credentials/archive": {
@@ -22272,26 +22384,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "vault",
+        "header",
         "returned",
-        "url",
-        "refresh",
-        "environment",
-        "value"
+        "url"
       ],
-      "word_count": 712,
+      "word_count": 749,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials__archive.md"
     },
     "/docs/en/api/go/beta/vaults/credentials/create": {
@@ -22300,26 +22412,26 @@
       "keywords": [
         "credential",
         "token",
-        "oauth",
         "secret",
+        "oauth",
         "client",
         "authentication",
         "endpoint",
-        "refresh",
-        "mcp",
         "value",
+        "substituted",
+        "request",
+        "refresh",
+        "body",
+        "mcp",
         "environment",
         "url",
         "server",
-        "substituted",
         "parameters",
-        "body",
         "details",
         "creating",
-        "timestamp",
-        "rfc"
+        "timestamp"
       ],
-      "word_count": 1146,
+      "word_count": 1222,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/go/beta/vaults/credentials/delete": {
@@ -22356,12 +22468,14 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
         "credentials",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "param",
         "timestamp",
         "rfc",
@@ -22369,13 +22483,11 @@
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "query",
-        "returned",
-        "url",
-        "refresh"
+        "whether"
       ],
-      "word_count": 753,
+      "word_count": 790,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials__list.md"
     },
     "/docs/en/api/go/beta/vaults/credentials/mcp_oauth_validate": {
@@ -22412,26 +22524,26 @@
       "keywords": [
         "credential",
         "token",
+        "substituted",
+        "secret",
         "authentication",
         "oauth",
         "client",
         "endpoint",
-        "secret",
+        "request",
         "timestamp",
         "rfc",
         "format",
         "details",
         "mcp",
         "server",
-        "substituted",
+        "value",
         "get",
         "vault",
-        "returned",
-        "url",
-        "refresh",
-        "environment"
+        "header",
+        "returned"
       ],
-      "word_count": 712,
+      "word_count": 749,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials__retrieve.md"
     },
     "/docs/en/api/go/beta/vaults/credentials/update": {
@@ -22441,25 +22553,25 @@
         "credential",
         "token",
         "updated",
-        "oauth",
         "secret",
+        "oauth",
         "authentication",
         "parameters",
+        "request",
         "endpoint",
+        "substituted",
+        "body",
         "client",
+        "value",
         "refresh",
         "environment",
         "param",
-        "body",
         "details",
         "mcp",
         "timestamp",
-        "rfc",
-        "format",
-        "value",
-        "substituted"
+        "rfc"
       ],
-      "word_count": 1074,
+      "word_count": 1142,
       "file_path": "docs/docs__en__api__go__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/go/beta/vaults/delete": {
@@ -22572,30 +22684,30 @@
     },
     "/docs/en/api/go/beta/webhooks": {
       "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `type BetaWebhookEvent struct{\u2026}`    - `ID string`      Unique event identifier for idempotency.    - `CreatedAt Time`      RFC 3339 timestamp wh...",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Agent Archived Event Data  - `type BetaWebhookAgentArchivedEventData struct{\u2026}`    - `ID string`      ID of the agent that triggered the event.    - `OrganizationID string`    - `Type AgentArchived`      - `const AgentArchivedAgentArchived AgentArchived",
       "keywords": [
         "event",
-        "session",
         "triggered",
+        "session",
         "vault",
-        "credential",
         "webhook",
         "beta",
+        "deployment",
         "data",
+        "credential",
+        "environment",
+        "agent",
+        "run",
         "owns",
         "thread",
+        "memory",
+        "store",
         "refers",
         "created",
-        "status",
-        "archived",
         "deleted",
-        "idled",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
+        "archived"
       ],
-      "word_count": 3377,
+      "word_count": 5964,
       "file_path": "docs/docs__en__api__go__beta__webhooks.md"
     },
     "/docs/en/api/go/completions": {
@@ -22611,10 +22723,10 @@
         "completion",
         "stop",
         "param",
-        "tokens",
-        "prompt",
         "modelclaudesonnet",
         "sonnet",
+        "tokens",
+        "prompt",
         "text",
         "body",
         "sequences",
@@ -22623,7 +22735,7 @@
         "models",
         "our"
       ],
-      "word_count": 1293,
+      "word_count": 1317,
       "file_path": "docs/docs__en__api__go__completions.md"
     },
     "/docs/en/api/go/completions/create": {
@@ -22648,10 +22760,10 @@
         "tokens",
         "sequences",
         "field",
-        "completions",
-        "see"
+        "modelclaudesonnet",
+        "sonnet"
       ],
-      "word_count": 954,
+      "word_count": 966,
       "file_path": "docs/docs__en__api__go__completions__create.md"
     },
     "/docs/en/api/go/messages": {
@@ -22679,7 +22791,7 @@
         "index",
         "web"
       ],
-      "word_count": 81876,
+      "word_count": 81936,
       "file_path": "docs/docs__en__api__go__messages.md"
     },
     "/docs/en/api/go/messages/batches": {
@@ -22707,7 +22819,7 @@
         "only",
         "create"
       ],
-      "word_count": 22008,
+      "word_count": 22044,
       "file_path": "docs/docs__en__api__go__messages__batches.md"
     },
     "/docs/en/api/go/messages/batches/cancel": {
@@ -22763,7 +22875,7 @@
         "returned",
         "included"
       ],
-      "word_count": 7871,
+      "word_count": 7883,
       "file_path": "docs/docs__en__api__go__messages__batches__create.md"
     },
     "/docs/en/api/go/messages/batches/delete": {
@@ -22845,9 +22957,9 @@
         "text",
         "cited",
         "always",
-        "batch"
+        "coding"
       ],
-      "word_count": 3055,
+      "word_count": 3061,
       "file_path": "docs/docs__en__api__go__messages__batches__results.md"
     },
     "/docs/en/api/go/messages/batches/retrieve": {
@@ -22931,7 +23043,7 @@
         "codeexecution",
         "tooltexteditor"
       ],
-      "word_count": 9380,
+      "word_count": 9374,
       "file_path": "docs/docs__en__api__go__messages__create.md"
     },
     "/docs/en/api/go/models": {
@@ -23025,25 +23137,25 @@
         "tool",
         "model",
         "content",
-        "block",
+        "event",
         "when",
+        "block",
         "session",
         "text",
-        "event",
         "agent",
         "tokens",
-        "cache",
         "beta",
+        "cache",
         "user",
-        "timestamp",
+        "agents",
+        "request",
         "error",
+        "timestamp",
         "rfc",
         "server",
-        "input",
-        "agents",
-        "format"
+        "input"
       ],
-      "word_count": 243424,
+      "word_count": 250833,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/agents": {
@@ -23052,14 +23164,15 @@
       "keywords": [
         "tool",
         "agents",
-        "user",
         "model",
+        "user",
         "agent",
         "calls",
         "confirmation",
         "execution",
         "intelligence",
         "coding",
+        "performance",
         "configuration",
         "managed",
         "resolved",
@@ -23068,10 +23181,9 @@
         "before",
         "automatically",
         "approved",
-        "require",
-        "permission"
+        "require"
       ],
-      "word_count": 11030,
+      "word_count": 11134,
       "file_path": "docs/docs__en__api__java__beta__agents.md"
     },
     "/docs/en/api/java/beta/agents/archive": {
@@ -23082,15 +23194,15 @@
         "model",
         "user",
         "agent",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -23099,7 +23211,7 @@
         "require",
         "before"
       ],
-      "word_count": 856,
+      "word_count": 864,
       "file_path": "docs/docs__en__api__java__beta__agents__archive.md"
     },
     "/docs/en/api/java/beta/agents/create": {
@@ -23117,17 +23229,17 @@
         "coding",
         "agents",
         "configuration",
+        "performance",
         "mcp",
         "tools",
         "frontier",
-        "performance",
         "server",
         "permission",
         "policy",
         "automatically",
         "approved"
       ],
-      "word_count": 1717,
+      "word_count": 1733,
       "file_path": "docs/docs__en__api__java__beta__agents__create.md"
     },
     "/docs/en/api/java/beta/agents/list": {
@@ -23142,20 +23254,20 @@
         "execution",
         "calls",
         "confirmation",
-        "agent",
         "coding",
+        "agent",
         "resolved",
         "before",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
         "approved",
         "without"
       ],
-      "word_count": 916,
+      "word_count": 924,
       "file_path": "docs/docs__en__api__java__beta__agents__list.md"
     },
     "/docs/en/api/java/beta/agents/retrieve": {
@@ -23163,19 +23275,19 @@
       "content_preview": "## Get Agent  `BetaManagedAgentsAgent beta().agents().retrieve(AgentRetrieveParamsparams = AgentRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **get** `/v1/agents/{agent_id}`  Get Agent  ### Parameters  - `AgentRetrieveParams params`    - `Optional<String> agentId`",
       "keywords": [
         "tool",
-        "agent",
         "model",
+        "agent",
         "user",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
         "version",
-        "frontier",
         "performance",
+        "frontier",
         "permission",
         "policy",
         "automatically",
@@ -23183,7 +23295,7 @@
         "without",
         "require"
       ],
-      "word_count": 874,
+      "word_count": 882,
       "file_path": "docs/docs__en__api__java__beta__agents__retrieve.md"
     },
     "/docs/en/api/java/beta/agents/update": {
@@ -23202,16 +23314,16 @@
         "agents",
         "configuration",
         "mcp",
+        "performance",
         "tools",
         "server",
         "omit",
         "preserve",
         "frontier",
-        "performance",
         "permission",
         "policy"
       ],
-      "word_count": 1826,
+      "word_count": 1842,
       "file_path": "docs/docs__en__api__java__beta__agents__update.md"
     },
     "/docs/en/api/java/beta/agents/versions": {
@@ -23222,16 +23334,16 @@
         "model",
         "user",
         "agent",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
@@ -23239,7 +23351,7 @@
         "without",
         "require"
       ],
-      "word_count": 884,
+      "word_count": 892,
       "file_path": "docs/docs__en__api__java__beta__agents__versions.md"
     },
     "/docs/en/api/java/beta/agents/versions/list": {
@@ -23250,16 +23362,16 @@
         "model",
         "user",
         "agent",
+        "agents",
         "intelligence",
         "execution",
         "calls",
         "confirmation",
-        "agents",
         "coding",
         "resolved",
+        "performance",
         "maximum",
         "frontier",
-        "performance",
         "permission",
         "policy",
         "automatically",
@@ -23267,7 +23379,7 @@
         "without",
         "require"
       ],
-      "word_count": 882,
+      "word_count": 890,
       "file_path": "docs/docs__en__api__java__beta__agents__versions__list.md"
     },
     "/docs/en/api/java/beta/deployment_runs": {
@@ -23613,8 +23725,8 @@
         "work",
         "environment",
         "type",
-        "packages",
         "when",
+        "packages",
         "install",
         "rfc",
         "timestamp",
@@ -23622,8 +23734,8 @@
         "network",
         "self",
         "hosted",
-        "access",
         "item",
+        "access",
         "package",
         "identifier",
         "policy",
@@ -23631,7 +23743,7 @@
         "value",
         "response"
       ],
-      "word_count": 8474,
+      "word_count": 8710,
       "file_path": "docs/docs__en__api__java__beta__environments.md"
     },
     "/docs/en/api/java/beta/environments/archive": {
@@ -23809,23 +23921,23 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "identifier",
+        "worker",
         "sandbox",
         "type",
         "sessions",
         "items",
         "session",
         "heartbeat",
-        "worker",
         "execution",
         "response",
         "provided",
         "beta"
       ],
-      "word_count": 3942,
+      "word_count": 4178,
       "file_path": "docs/docs__en__api__java__beta__environments__work.md"
     },
     "/docs/en/api/java/beta/environments/work/ack": {
@@ -23837,23 +23949,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "created",
+        "execute",
         "session",
         "type",
-        "execution",
-        "post"
+        "execution"
       ],
-      "word_count": 430,
+      "word_count": 460,
       "file_path": "docs/docs__en__api__java__beta__environments__work__ack.md"
     },
     "/docs/en/api/java/beta/environments/work/heartbeat": {
@@ -23890,26 +24002,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
         "items",
         "self",
         "hosted",
+        "item",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
-        "item",
         "list",
-        "worker",
         "provided",
         "response",
         "created",
+        "execute",
         "session",
-        "type",
-        "execution"
+        "type"
       ],
-      "word_count": 438,
+      "word_count": 468,
       "file_path": "docs/docs__en__api__java__beta__environments__work__list.md"
     },
     "/docs/en/api/java/beta/environments/work/poll": {
@@ -23918,26 +24030,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
+        "worker",
         "self",
         "hosted",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
-        "item",
         "poll",
         "provided",
         "milliseconds",
         "returns",
-        "created",
-        "session"
+        "polling",
+        "used"
       ],
-      "word_count": 480,
+      "word_count": 510,
       "file_path": "docs/docs__en__api__java__beta__environments__work__poll.md"
     },
     "/docs/en/api/java/beta/environments/work/retrieve": {
@@ -23946,26 +24058,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "get",
-        "worker",
         "provided",
         "created",
+        "execute",
         "session",
         "type",
         "execution",
-        "note",
-        "these"
+        "note"
       ],
-      "word_count": 421,
+      "word_count": 451,
       "file_path": "docs/docs__en__api__java__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/java/beta/environments/work/stats": {
@@ -24002,26 +24114,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
-        "stop",
         "environment",
+        "stop",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
-        "worker",
         "provided",
         "created",
+        "execute",
         "session",
         "type",
         "execution",
-        "post",
-        "note"
+        "post"
       ],
-      "word_count": 433,
+      "word_count": 463,
       "file_path": "docs/docs__en__api__java__beta__environments__work__stop.md"
     },
     "/docs/en/api/java/beta/environments/work/update": {
@@ -24037,19 +24149,19 @@
         "self",
         "hosted",
         "update",
+        "worker",
         "sessions",
         "sandbox",
         "metadata",
         "identifier",
-        "worker",
         "provided",
         "created",
+        "execute",
         "session",
         "type",
-        "execution",
-        "post"
+        "execution"
       ],
-      "word_count": 439,
+      "word_count": 469,
       "file_path": "docs/docs__en__api__java__beta__environments__work__update.md"
     },
     "/docs/en/api/java/beta/files": {
@@ -24263,6 +24375,34 @@
       ],
       "word_count": 355,
       "file_path": "docs/docs__en__api__java__beta__memory_stores__archive.md"
+    },
+    "/docs/en/api/java/beta/memory_stores/create": {
+      "title": "Untitled",
+      "content_preview": "## Create a memory store  `BetaManagedAgentsMemoryStore beta().memoryStores().create(MemoryStoreCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/memory_stores`...",
+      "keywords": [
+        "store",
+        "characters",
+        "agent",
+        "name",
+        "when",
+        "memory",
+        "mount",
+        "path",
+        "timestamp",
+        "rfc",
+        "format",
+        "create",
+        "human",
+        "readable",
+        "slug",
+        "under",
+        "derived",
+        "unique",
+        "workspace",
+        "free"
+      ],
+      "word_count": 465,
+      "file_path": "docs/docs__en__api__java__beta__memory_stores__create.md"
     },
     "/docs/en/api/java/beta/memory_stores/delete": {
       "title": "Untitled",
@@ -24597,7 +24737,7 @@
         "identifies",
         "time"
       ],
-      "word_count": 698,
+      "word_count": 702,
       "file_path": "docs/docs__en__api__java__beta__memory_stores__memory_versions__retrieve.md"
     },
     "/docs/en/api/java/beta/memory_stores/retrieve": {
@@ -24681,7 +24821,7 @@
         "search",
         "response"
       ],
-      "word_count": 102386,
+      "word_count": 102342,
       "file_path": "docs/docs__en__api__java__beta__messages.md"
     },
     "/docs/en/api/java/beta/messages/batches": {
@@ -24709,7 +24849,7 @@
         "server",
         "create"
       ],
-      "word_count": 28498,
+      "word_count": 28482,
       "file_path": "docs/docs__en__api__java__beta__messages__batches.md"
     },
     "/docs/en/api/java/beta/messages/batches/cancel": {
@@ -24849,7 +24989,7 @@
         "when",
         "message"
       ],
-      "word_count": 4357,
+      "word_count": 4353,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__results.md"
     },
     "/docs/en/api/java/beta/messages/batches/retrieve": {
@@ -24933,7 +25073,7 @@
         "response",
         "search"
       ],
-      "word_count": 12126,
+      "word_count": 12122,
       "file_path": "docs/docs__en__api__java__beta__messages__create.md"
     },
     "/docs/en/api/java/beta/models": {
@@ -26680,7 +26820,7 @@
         "input",
         "message"
       ],
-      "word_count": 68863,
+      "word_count": 68843,
       "file_path": "docs/docs__en__api__java__messages.md"
     },
     "/docs/en/api/java/messages/batches": {
@@ -26708,7 +26848,7 @@
         "only",
         "create"
       ],
-      "word_count": 18744,
+      "word_count": 18736,
       "file_path": "docs/docs__en__api__java__messages__batches.md"
     },
     "/docs/en/api/java/messages/batches/cancel": {
@@ -26848,7 +26988,7 @@
         "always",
         "coding"
       ],
-      "word_count": 2517,
+      "word_count": 2515,
       "file_path": "docs/docs__en__api__java__messages__batches__results.md"
     },
     "/docs/en/api/java/messages/batches/retrieve": {
@@ -26932,7 +27072,7 @@
         "number",
         "included"
       ],
-      "word_count": 7941,
+      "word_count": 7939,
       "file_path": "docs/docs__en__api__java__messages__create.md"
     },
     "/docs/en/api/java/models": {
@@ -27044,7 +27184,7 @@
         "input",
         "prompt"
       ],
-      "word_count": 79986,
+      "word_count": 79956,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -27072,7 +27212,7 @@
         "only",
         "create"
       ],
-      "word_count": 20904,
+      "word_count": 20892,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -27212,7 +27352,7 @@
         "always",
         "coding"
       ],
-      "word_count": 2796,
+      "word_count": 2793,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -27296,7 +27436,7 @@
         "number",
         "system"
       ],
-      "word_count": 9777,
+      "word_count": 9774,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -31364,7 +31504,7 @@
         "request",
         "error"
       ],
-      "word_count": 269925,
+      "word_count": 269859,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/agents": {
@@ -33031,7 +33171,7 @@
         "output",
         "text"
       ],
-      "word_count": 111261,
+      "word_count": 111195,
       "file_path": "docs/docs__en__api__python__beta__messages.md"
     },
     "/docs/en/api/python/beta/messages/batches": {
@@ -33059,7 +33199,7 @@
         "results",
         "server"
       ],
-      "word_count": 29796,
+      "word_count": 29772,
       "file_path": "docs/docs__en__api__python__beta__messages__batches.md"
     },
     "/docs/en/api/python/beta/messages/batches/cancel": {
@@ -33199,7 +33339,7 @@
         "coding",
         "text"
       ],
-      "word_count": 4599,
+      "word_count": 4593,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__results.md"
     },
     "/docs/en/api/python/beta/messages/batches/retrieve": {
@@ -33283,7 +33423,7 @@
         "response",
         "server"
       ],
-      "word_count": 13235,
+      "word_count": 13229,
       "file_path": "docs/docs__en__api__python__beta__messages__create.md"
     },
     "/docs/en/api/python/beta/models": {
@@ -35030,7 +35170,7 @@
         "invocation",
         "input"
       ],
-      "word_count": 72910,
+      "word_count": 72880,
       "file_path": "docs/docs__en__api__python__messages.md"
     },
     "/docs/en/api/python/messages/batches": {
@@ -35058,7 +35198,7 @@
         "invocation",
         "agents"
       ],
-      "word_count": 19874,
+      "word_count": 19862,
       "file_path": "docs/docs__en__api__python__messages__batches.md"
     },
     "/docs/en/api/python/messages/batches/cancel": {
@@ -35198,7 +35338,7 @@
         "used",
         "directly"
       ],
-      "word_count": 2729,
+      "word_count": 2726,
       "file_path": "docs/docs__en__api__python__messages__batches__results.md"
     },
     "/docs/en/api/python/messages/batches/retrieve": {
@@ -35282,7 +35422,7 @@
         "returned",
         "input"
       ],
-      "word_count": 9022,
+      "word_count": 9019,
       "file_path": "docs/docs__en__api__python__messages__create.md"
     },
     "/docs/en/api/python/models": {
@@ -35394,7 +35534,7 @@
         "server",
         "input"
       ],
-      "word_count": 259533,
+      "word_count": 259467,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/agents": {
@@ -37061,7 +37201,7 @@
         "search",
         "intelligence"
       ],
-      "word_count": 106409,
+      "word_count": 106343,
       "file_path": "docs/docs__en__api__ruby__beta__messages.md"
     },
     "/docs/en/api/ruby/beta/messages/batches": {
@@ -37089,7 +37229,7 @@
         "server",
         "create"
       ],
-      "word_count": 28922,
+      "word_count": 28898,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/cancel": {
@@ -37229,7 +37369,7 @@
         "when",
         "message"
       ],
-      "word_count": 4400,
+      "word_count": 4394,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__results.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/retrieve": {
@@ -37313,7 +37453,7 @@
         "response",
         "server"
       ],
-      "word_count": 12968,
+      "word_count": 12962,
       "file_path": "docs/docs__en__api__ruby__beta__messages__create.md"
     },
     "/docs/en/api/ruby/beta/models": {
@@ -39060,7 +39200,7 @@
         "input",
         "prompt"
       ],
-      "word_count": 70872,
+      "word_count": 70842,
       "file_path": "docs/docs__en__api__ruby__messages.md"
     },
     "/docs/en/api/ruby/messages/batches": {
@@ -39088,7 +39228,7 @@
         "only",
         "create"
       ],
-      "word_count": 18850,
+      "word_count": 18838,
       "file_path": "docs/docs__en__api__ruby__messages__batches.md"
     },
     "/docs/en/api/ruby/messages/batches/cancel": {
@@ -39228,7 +39368,7 @@
         "always",
         "coding"
       ],
-      "word_count": 2508,
+      "word_count": 2505,
       "file_path": "docs/docs__en__api__ruby__messages__batches__results.md"
     },
     "/docs/en/api/ruby/messages/batches/retrieve": {
@@ -39312,7 +39452,7 @@
         "number",
         "system"
       ],
-      "word_count": 8685,
+      "word_count": 8682,
       "file_path": "docs/docs__en__api__ruby__messages__create.md"
     },
     "/docs/en/api/ruby/models": {
@@ -39424,7 +39564,7 @@
         "server",
         "input"
       ],
-      "word_count": 262323,
+      "word_count": 262257,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/agents": {
@@ -41091,7 +41231,7 @@
         "search",
         "response"
       ],
-      "word_count": 107540,
+      "word_count": 107474,
       "file_path": "docs/docs__en__api__typescript__beta__messages.md"
     },
     "/docs/en/api/typescript/beta/messages/batches": {
@@ -41119,7 +41259,7 @@
         "server",
         "create"
       ],
-      "word_count": 29289,
+      "word_count": 29265,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/cancel": {
@@ -41259,7 +41399,7 @@
         "when",
         "message"
       ],
-      "word_count": 4433,
+      "word_count": 4427,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__results.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/retrieve": {
@@ -41343,7 +41483,7 @@
         "only",
         "server"
       ],
-      "word_count": 13275,
+      "word_count": 13269,
       "file_path": "docs/docs__en__api__typescript__beta__messages__create.md"
     },
     "/docs/en/api/typescript/beta/models": {
@@ -43097,7 +43237,7 @@
         "input",
         "message"
       ],
-      "word_count": 71951,
+      "word_count": 71921,
       "file_path": "docs/docs__en__api__typescript__messages.md"
     },
     "/docs/en/api/typescript/messages/batches": {
@@ -43125,7 +43265,7 @@
         "only",
         "create"
       ],
-      "word_count": 19093,
+      "word_count": 19081,
       "file_path": "docs/docs__en__api__typescript__messages__batches.md"
     },
     "/docs/en/api/typescript/messages/batches/cancel": {
@@ -43265,7 +43405,7 @@
         "always",
         "coding"
       ],
-      "word_count": 2524,
+      "word_count": 2521,
       "file_path": "docs/docs__en__api__typescript__messages__batches__results.md"
     },
     "/docs/en/api/typescript/messages/batches/retrieve": {
@@ -43349,7 +43489,7 @@
         "prompt",
         "response"
       ],
-      "word_count": 8908,
+      "word_count": 8905,
       "file_path": "docs/docs__en__api__typescript__messages__create.md"
     },
     "/docs/en/api/typescript/models": {
@@ -44441,7 +44581,7 @@
         "card",
         "cli"
       ],
-      "word_count": 1693,
+      "word_count": 1740,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {

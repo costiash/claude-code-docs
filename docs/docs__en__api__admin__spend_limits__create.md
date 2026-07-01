@@ -20,11 +20,11 @@ group, and organization-level defaults are configured in claude.ai.
 
   - `user_id: string`
 
-- `period: optional "monthly" or "daily" or "weekly"`
-
-  - `"monthly"`
+- `period: optional "daily" or "monthly" or "weekly"`
 
   - `"daily"`
+
+  - `"monthly"`
 
   - `"weekly"`
 
@@ -40,11 +40,11 @@ group, and organization-level defaults are configured in claude.ai.
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -106,7 +106,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
           "scope": {
             "type": "user",
             "user_id": "user_id"
-          }
+          },
+          "period": "monthly"
         }'
 ```
 

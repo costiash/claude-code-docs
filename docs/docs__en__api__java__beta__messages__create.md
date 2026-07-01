@@ -3784,8 +3784,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
 
-          - `MILITARY_WEAPONS("military_weapons")`
-
         - `JsonValue; type "refusal"constant`
 
           - `REFUSAL("refusal")`
@@ -3926,8 +3924,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       - `FRONTIER_LLM("frontier_llm")`
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
-
-      - `MILITARY_WEAPONS("military_weapons")`
 
     - `Optional<String> explanation`
 

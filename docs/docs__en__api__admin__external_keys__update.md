@@ -90,7 +90,7 @@ encrypted data requires the original key identity to decrypt.
 
 - `display_name: string`
 
-  Human-friendly display name.
+  Human-friendly display name. Null if none was set.
 
 - `geo: string`
 

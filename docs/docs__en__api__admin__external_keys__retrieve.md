@@ -20,7 +20,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
 - `display_name: string`
 
-  Human-friendly display name.
+  Human-friendly display name. Null if none was set.
 
 - `geo: string`
 

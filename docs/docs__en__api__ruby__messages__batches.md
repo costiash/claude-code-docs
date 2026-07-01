@@ -3670,7 +3670,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -3681,8 +3681,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -4942,7 +4940,7 @@ puts(message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -4953,8 +4951,6 @@ puts(message_batch_individual_response)
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -6010,7 +6006,7 @@ puts(message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio | :frontier_llm | 2 more`
+        - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
           The policy category that triggered a refusal.
 
@@ -6021,8 +6017,6 @@ puts(message_batch_individual_response)
           - `:frontier_llm`
 
           - `:reasoning_extraction`
-
-          - `:military_weapons`
 
         - `explanation: String`
 
@@ -7040,7 +7034,7 @@ puts(message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -7051,8 +7045,6 @@ puts(message_batch_individual_response)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 

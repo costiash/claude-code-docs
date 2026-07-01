@@ -4979,7 +4979,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: :cyber | :bio | :frontier_llm | 2 more`
+              - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
                 The policy category that triggered a refusal.
 
@@ -4990,8 +4990,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 - `:frontier_llm`
 
                 - `:reasoning_extraction`
-
-                - `:military_weapons`
 
               - `type: :refusal`
 
@@ -5122,7 +5120,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -5133,8 +5131,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -6766,7 +6762,7 @@ puts(beta_message_batch_individual_response)
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: :cyber | :bio | :frontier_llm | 2 more`
+              - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
                 The policy category that triggered a refusal.
 
@@ -6777,8 +6773,6 @@ puts(beta_message_batch_individual_response)
                 - `:frontier_llm`
 
                 - `:reasoning_extraction`
-
-                - `:military_weapons`
 
               - `type: :refusal`
 
@@ -6909,7 +6903,7 @@ puts(beta_message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -6920,8 +6914,6 @@ puts(beta_message_batch_individual_response)
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -8349,7 +8341,7 @@ puts(beta_message_batch_individual_response)
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: :cyber | :bio | :frontier_llm | 2 more`
+            - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
               The policy category that triggered a refusal.
 
@@ -8360,8 +8352,6 @@ puts(beta_message_batch_individual_response)
               - `:frontier_llm`
 
               - `:reasoning_extraction`
-
-              - `:military_weapons`
 
             - `type: :refusal`
 
@@ -8492,7 +8482,7 @@ puts(beta_message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio | :frontier_llm | 2 more`
+        - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
           The policy category that triggered a refusal.
 
@@ -8503,8 +8493,6 @@ puts(beta_message_batch_individual_response)
           - `:frontier_llm`
 
           - `:reasoning_extraction`
-
-          - `:military_weapons`
 
         - `explanation: String`
 
@@ -9894,7 +9882,7 @@ puts(beta_message_batch_individual_response)
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -9905,8 +9893,6 @@ puts(beta_message_batch_individual_response)
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `type: :refusal`
 
@@ -10037,7 +10023,7 @@ puts(beta_message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -10048,8 +10034,6 @@ puts(beta_message_batch_individual_response)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 

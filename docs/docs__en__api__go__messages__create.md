@@ -2791,8 +2791,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-      - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
-
     - `Explanation string`
 
       Human-readable explanation of the refusal.
