@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-02T01:32:41Z",
+  "generated_at": "2026-07-02T05:04:42Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -683,16 +683,16 @@
         "when",
         "claude",
         "default",
-        "opus",
         "settings",
+        "opus",
         "set",
         "code",
         "session",
         "sonnet",
         "models",
         "fable",
-        "picker",
         "managed",
+        "picker",
         "effort",
         "setting",
         "context",
@@ -700,7 +700,7 @@
         "sessions",
         "level"
       ],
-      "word_count": 7141,
+      "word_count": 7206,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
