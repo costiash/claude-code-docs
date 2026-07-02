@@ -8,75 +8,72 @@ Let Claude dynamically determine when and how much to use extended thinking with
   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
-Adaptive thinking is the recommended way to use [extended thinking](/docs/en/build-with-claude/extended-thinking) with Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. On Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing), thinking is always enabled and cannot be disabled; adaptive thinking is the only thinking mode. On [Claude Mythos Preview](https://anthropic.com/glasswing), adaptive thinking is the default mode and auto-applies whenever `thinking` is unset. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request. On Claude Opus 4.8 and Claude Opus 4.7, adaptive thinking is the **only** supported thinking mode; manual `thinking: {type: "enabled", budget_tokens: N}` is no longer accepted. On Claude Sonnet 5, adaptive thinking is on by default; pass `thinking: {type: "disabled"}` to turn it off, and manual `{type: "enabled", budget_tokens: N}` is rejected with a 400 error.
+Adaptive thinking is the recommended way to use [extended thinking](/docs/en/build-with-claude/extended-thinking) with Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6, and the only thinking mode on Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing). Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request. Per-model defaults and restrictions are listed under [Supported models](#supported-models).
 
 <Tip>
-  Adaptive thinking can drive better performance than extended thinking with a fixed `budget_tokens` for many workloads, especially bimodal tasks and long-horizon agentic workflows. No beta header is required.
+  Adaptive thinking can drive better performance than extended thinking with a fixed `budget_tokens` for many workloads, especially workloads that mix trivial and complex requests, and long-horizon agentic workflows. No beta header is required.
 
-  If your workload requires predictable latency or precise control over thinking costs, extended thinking with `budget_tokens` is still functional on Claude Opus 4.6 and Claude Sonnet 4.6 but is deprecated and no longer recommended. See the warning below.
+  If your workload requires predictable latency or precise control over thinking costs, extended thinking with `budget_tokens` is still functional on Claude Opus 4.6 and Claude Sonnet 4.6 but is deprecated and no longer recommended. See the deprecation warning in [Supported models](#supported-models).
 </Tip>
 
 ## Supported models
 
 Adaptive thinking is supported on the following models:
 
-* Claude Fable 5 (`claude-fable-5`) and Claude Mythos 5 (`claude-mythos-5`), adaptive thinking is always on; `thinking: {type: "disabled"}` is not supported
-* Claude Mythos Preview (claude-mythos-preview), adaptive thinking is the default; `thinking: {type: "disabled"}` is not supported
+* Claude Fable 5 (claude-fable-5) and Claude Mythos 5 (claude-mythos-5), adaptive thinking is always on; `thinking: {type: "disabled"}` is not supported. Neither model is available under [zero data retention](/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+* Claude Mythos Preview (claude-mythos-preview), adaptive thinking is the default; `thinking: {type: "disabled"}` is not supported, and manual `{type: "enabled", budget_tokens: N}` is still accepted.
 * Claude Opus 4.8 (claude-opus-4-8), adaptive thinking is the only supported thinking mode. Thinking is off unless you explicitly set `thinking: {type: "adaptive"}` in your request; manual `thinking: {type: "enabled"}` is rejected with a 400 error.
 * Claude Opus 4.7 (claude-opus-4-7), adaptive thinking is the only supported thinking mode. Thinking is off unless you explicitly set `thinking: {type: "adaptive"}` in your request; manual `thinking: {type: "enabled"}` is rejected with a 400 error.
-* Claude Opus 4.6 (claude-opus-4-6)
-* Claude Sonnet 5 (`claude-sonnet-5`), adaptive thinking is on by default; manual `{type: "enabled"}` is rejected with a 400 error.
-* Claude Sonnet 4.6 (claude-sonnet-4-6)
+* Claude Opus 4.6 (claude-opus-4-6), adaptive thinking is off unless you explicitly set `thinking: {type: "adaptive"}`; manual `{type: "enabled", budget_tokens: N}` is still accepted but deprecated.
+* Claude Sonnet 5 (claude-sonnet-5), adaptive thinking is on by default; pass `thinking: {type: "disabled"}` to turn it off. Manual `{type: "enabled"}` is rejected with a 400 error.
+* Claude Sonnet 4.6 (claude-sonnet-4-6), adaptive thinking is off unless you explicitly set `thinking: {type: "adaptive"}`; manual `{type: "enabled", budget_tokens: N}` is still accepted but deprecated.
 
 <Warning>
-  `thinking.type: "enabled"` and `budget_tokens` are [**deprecated**](/docs/en/build-with-claude/overview#feature-availability) on Opus 4.6 and Sonnet 4.6 and will be removed in a future model release. Use `thinking.type: "adaptive"` with the `effort` parameter instead. Existing `budget_tokens` configurations are still functional but no longer recommended; plan to migrate.
+  `thinking.type: "enabled"` and `budget_tokens` are [**deprecated**](/docs/en/build-with-claude/overview#feature-availability) on Opus 4.6 and Sonnet 4.6 and will be removed in a future model release. Use `thinking.type: "adaptive"` with the [effort](/docs/en/build-with-claude/effort) parameter instead. Existing `budget_tokens` configurations are still functional but no longer recommended; plan to migrate.
 
-  Older models (Sonnet 4.5, Opus 4.5, etc.) do not support adaptive thinking and require `thinking.type: "enabled"` with `budget_tokens`.
+  Older models, such as Claude Sonnet 4.5 and Claude Opus 4.5, do not support adaptive thinking and require `thinking.type: "enabled"` with `budget_tokens`.
 </Warning>
 
 ## How adaptive thinking works
 
-In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default effort level (`high`), Claude almost always thinks. At lower effort levels, Claude may skip thinking for simpler problems.
+In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default [effort](/docs/en/build-with-claude/effort) level (`high`), Claude almost always thinks. At lower effort levels, Claude may skip thinking for simpler problems.
 
 Adaptive thinking also automatically enables [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). This means Claude can think between tool calls, making it especially effective for agentic workflows.
 
 ## How to use adaptive thinking
 
-Set `thinking.type` to `"adaptive"` in your API request:
+Set `thinking.type` to `"adaptive"` in your API request. The examples also set `thinking.display` to `"summarized"` to make the thinking text visible: on the newest models `display` defaults to `"omitted"`, which returns thinking blocks with an empty `thinking` field. See [Controlling thinking display](#controlling-thinking-display) for details.
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 16000,
       "thinking": {
-          "type": "adaptive"
+        "type": "adaptive",
+        "display": "summarized"
       },
       "messages": [
-          {
-              "role": "user",
-              "content": "Explain why the sum of two even numbers is always even."
-          }
+        {
+          "role": "user",
+          "content": "Explain why the sum of two even numbers is always even."
+        }
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-4-8 \
     --max-tokens 16000 \
-    --thinking '{type: adaptive}' \
-    --message '{role: user, content: Explain why the sum of two even numbers is always even.}' \
-    --transform content --format jsonl |
-    jq -r '
-      if   .type == "thinking" then "\nThinking: \(.thinking)"
-      elif .type == "text"     then "\nResponse: \(.text)"
-      else empty end'
+    --thinking '{type: adaptive, display: summarized}' \
+    --message '{role: user, content: "Explain why the sum of two even numbers is always even."}' \
+    --transform content \
+    --format yaml
   ```
 
   ```python Python
@@ -85,7 +82,7 @@ Set `thinking.type` to `"adaptive"` in your API request:
   response = client.messages.create(
       model="claude-opus-4-8",
       max_tokens=16000,
-      thinking={"type": "adaptive"},
+      thinking={"type": "adaptive", "display": "summarized"},
       messages=[
           {
               "role": "user",
@@ -108,7 +105,8 @@ Set `thinking.type` to `"adaptive"` in your API request:
     model: "claude-opus-4-8",
     max_tokens: 16000,
     thinking: {
-      type: "adaptive"
+      type: "adaptive",
+      display: "summarized"
     },
     messages: [
       {
@@ -128,43 +126,32 @@ Set `thinking.type` to `"adaptive"` in your API request:
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 16000,
-              Thinking = new ThinkingConfigAdaptive(),
-              Messages = [
-                  new() {
-                      Role = Role.User,
-                      Content = "Explain why the sum of two even numbers is always even."
-                  }
-              ]
-          };
-
-          var message = await client.Messages.Create(parameters);
-
-          foreach (var block in message.Content)
-          {
-              if (block.TryPickThinking(out ThinkingBlock? thinking))
-              {
-                  Console.WriteLine($"\nThinking: {thinking.Thinking}");
-              }
-              else if (block.TryPickText(out TextBlock? text))
-              {
-                  Console.WriteLine($"\nResponse: {text.Text}");
-              }
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 16000,
+      Thinking = new ThinkingConfigAdaptive { Display = Display.Summarized },
+      Messages = [
+          new() {
+              Role = Role.User,
+              Content = "Explain why the sum of two even numbers is always even."
           }
+      ]
+  };
+
+  var message = await client.Messages.Create(parameters);
+
+  foreach (var block in message.Content)
+  {
+      if (block.TryPickThinking(out ThinkingBlock? thinking))
+      {
+          Console.WriteLine($"\nThinking: {thinking.Thinking}");
+      }
+      else if (block.TryPickText(out TextBlock? text))
+      {
+          Console.WriteLine($"\nResponse: {text.Text}");
       }
   }
   ```
@@ -176,7 +163,9 @@ Set `thinking.type` to `"adaptive"` in your API request:
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Thinking: anthropic.ThinkingConfigParamUnion{
-  		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+  		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{
+  			Display: anthropic.ThinkingConfigAdaptiveDisplaySummarized,
+  		},
   	},
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Explain why the sum of two even numbers is always even.")),
@@ -198,26 +187,30 @@ Set `thinking.type` to `"adaptive"` in your API request:
 
   ```java Java
   import com.anthropic.models.messages.ThinkingConfigAdaptive;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(16000L)
-              .thinking(ThinkingConfigAdaptive.builder().build())
-              .addUserMessage("Explain why the sum of two even numbers is always even.")
-              .build();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Message response = client.messages().create(params);
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(16000L)
+          .thinking(ThinkingConfigAdaptive.builder()
+              .display(ThinkingConfigAdaptive.Display.SUMMARIZED)
+              .build())
+          .addUserMessage("Explain why the sum of two even numbers is always even.")
+          .build();
 
-          response.content().forEach(block -> {
-              block.thinking().ifPresent(thinkingBlock ->
-                  System.out.println("\nThinking: " + thinkingBlock.thinking())
-              );
-              block.text().ifPresent(textBlock ->
-                  System.out.println("\nResponse: " + textBlock.text())
-              );
-          });
+      Message response = client.messages().create(params);
+
+      response.content().forEach(block -> {
+          block.thinking().ifPresent(thinkingBlock ->
+              IO.println("\nThinking: " + thinkingBlock.thinking())
+          );
+          block.text().ifPresent(textBlock ->
+              IO.println("\nResponse: " + textBlock.text())
+          );
+      });
+  }
   ```
 
   ```php PHP
@@ -232,7 +225,7 @@ Set `thinking.type` to `"adaptive"` in your API request:
           ]
       ],
       model: 'claude-opus-4-8',
-      thinking: ['type' => 'adaptive'],
+      thinking: ['type' => 'adaptive', 'display' => 'summarized'],
   );
 
   foreach ($message->content as $block) {
@@ -251,7 +244,8 @@ Set `thinking.type` to `"adaptive"` in your API request:
     model: "claude-opus-4-8",
     max_tokens: 16000,
     thinking: {
-      type: "adaptive"
+      type: "adaptive",
+      display: "summarized"
     },
     messages: [
       {
@@ -272,56 +266,53 @@ Set `thinking.type` to `"adaptive"` in your API request:
   ```
 </CodeGroup>
 
+Thinking tokens count toward `max_tokens`, so set it high enough to leave room for both thinking and the response text. See [Cost control](#cost-control).
+
 ## Adaptive thinking with the effort parameter
 
 You can combine adaptive thinking with the [effort parameter](/docs/en/build-with-claude/effort) to guide how much thinking Claude does. The effort level acts as soft guidance for Claude's thinking allocation:
 
-| Effort level     | Thinking behavior                                                                                                                                                                                                           |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `max`            | Claude always thinks with no constraints on thinking depth. Available on Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. |
-| `xhigh`          | Claude always thinks deeply with extended exploration. Available on Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7.                                                                 |
-| `high` (default) | Claude almost always thinks. Provides deep reasoning on complex tasks.                                                                                                                                                      |
-| `medium`         | Claude uses moderate thinking. May skip thinking for very simple queries.                                                                                                                                                   |
-| `low`            | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most.                                                                                                                                        |
+| Effort level     | Thinking behavior                                                                                                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `max`            | Claude always thinks with no constraints on thinking depth. Available on all models that support adaptive thinking.                                         |
+| `xhigh`          | Claude always thinks deeply with extended exploration. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5. |
+| `high` (default) | Claude almost always thinks. Provides deep reasoning on complex tasks.                                                                                      |
+| `medium`         | Claude uses moderate thinking. May skip thinking for simple queries.                                                                                        |
+| `low`            | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most.                                                                        |
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 16000,
       "thinking": {
-          "type": "adaptive"
+        "type": "adaptive"
       },
       "output_config": {
-          "effort": "medium"
+        "effort": "medium"
       },
       "messages": [
-          {
-              "role": "user",
-              "content": "What is the capital of France?"
-          }
+        {
+          "role": "user",
+          "content": "What is the capital of France?"
+        }
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
-    --transform 'content.0.text' --raw-output <<'YAML'
-  model: claude-opus-4-8
-  max_tokens: 16000
-  thinking:
-    type: adaptive
-  output_config:
-    effort: medium
-  messages:
-    - role: user
-      content: What is the capital of France?
-  YAML
+    --model claude-opus-4-8 \
+    --max-tokens 16000 \
+    --thinking '{type: adaptive}' \
+    --output-config '{effort: medium}' \
+    --message '{role: user, content: "What is the capital of France?"}' \
+    --transform 'content.#(type=="text").text' \
+    --raw-output
   ```
 
   ```python Python
@@ -335,7 +326,9 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
       messages=[{"role": "user", "content": "What is the capital of France?"}],
   )
 
-  print(response.content[0].text)
+  for block in response.content:
+      if block.type == "text":
+          print(block.text)
   ```
 
   ```typescript TypeScript
@@ -366,28 +359,24 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 16000,
+      Thinking = new ThinkingConfigAdaptive(),
+      OutputConfig = new OutputConfig { Effort = Effort.Medium },
+      Messages = [new() { Role = Role.User, Content = "What is the capital of France?" }]
+  };
+
+  var message = await client.Messages.Create(parameters);
+
+  foreach (var block in message.Content)
+  {
+      if (block.TryPickText(out TextBlock? text))
       {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 16000,
-              Thinking = new ThinkingConfigAdaptive(),
-              OutputConfig = new OutputConfig { Effort = Effort.Medium },
-              Messages = [new() { Role = Role.User, Content = "What is the capital of France?" }]
-          };
-
-          var message = await client.Messages.Create(parameters);
-          Console.WriteLine(message);
+          Console.WriteLine(text.Text);
       }
   }
   ```
@@ -411,29 +400,37 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
   if err != nil {
   	log.Fatal(err)
   }
-  fmt.Println(response.Content[0].Text)
+
+  for _, block := range response.Content {
+  	switch v := block.AsAny().(type) {
+  	case anthropic.TextBlock:
+  		fmt.Println(v.Text)
+  	}
+  }
   ```
 
   ```java Java
   import com.anthropic.models.messages.OutputConfig;
   import com.anthropic.models.messages.ThinkingConfigAdaptive;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(16000L)
-              .thinking(ThinkingConfigAdaptive.builder().build())
-              .outputConfig(OutputConfig.builder()
-                  .effort(OutputConfig.Effort.MEDIUM)
-                  .build())
-              .addUserMessage("What is the capital of France?")
-              .build();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Message response = client.messages().create(params);
-          response.content().stream()
-              .flatMap(block -> block.text().stream())
-              .forEach(textBlock -> System.out.println(textBlock.text()));
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(16000L)
+          .thinking(ThinkingConfigAdaptive.builder().build())
+          .outputConfig(OutputConfig.builder()
+              .effort(OutputConfig.Effort.MEDIUM)
+              .build())
+          .addUserMessage("What is the capital of France?")
+          .build();
+
+      Message response = client.messages().create(params);
+      response.content().stream()
+          .flatMap(block -> block.text().stream())
+          .forEach(textBlock -> IO.println(textBlock.text()));
+  }
   ```
 
   ```php PHP
@@ -449,7 +446,11 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
       outputConfig: ['effort' => 'medium'],
   );
 
-  echo $message->content[0]->text;
+  foreach ($message->content as $block) {
+      if ($block->type === 'text') {
+          echo $block->text;
+      }
+  }
   ```
 
   ```ruby Ruby
@@ -469,21 +470,47 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
     ]
   )
 
-  puts message.content.first.text
+  message.content.each do |block|
+    puts block.text if block.type == :text
+  end
   ```
 </CodeGroup>
 
 ## Streaming with adaptive thinking
 
-Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/streaming). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
+Adaptive thinking works with [streaming](/docs/en/build-with-claude/streaming). Thinking blocks are streamed through `thinking_delta` events, the same as in manual thinking mode. As in the earlier examples, `thinking.display: "summarized"` makes the streamed thinking text visible:
 
 <CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 16000,
+      "stream": true,
+      "thinking": {
+        "type": "adaptive",
+        "display": "summarized"
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the greatest common divisor of 1071 and 462?"
+        }
+      ]
+    }'
+  ```
+
   ```bash CLI
-  ant messages create --stream --format jsonl \
+  ant messages create \
     --model claude-opus-4-8 \
     --max-tokens 16000 \
-    --thinking '{type: adaptive}' \
-    --message '{role: user, content: What is the greatest common divisor of 1071 and 462?}'
+    --thinking '{type: adaptive, display: summarized}' \
+    --message '{role: user, content: "What is the greatest common divisor of 1071 and 462?"}' \
+    --stream \
+    --format jsonl
   ```
 
   ```python Python
@@ -492,7 +519,7 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
   with client.messages.stream(
       model="claude-opus-4-8",
       max_tokens=16000,
-      thinking={"type": "adaptive"},
+      thinking={"type": "adaptive", "display": "summarized"},
       messages=[
           {
               "role": "user",
@@ -513,10 +540,10 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const stream = await client.messages.stream({
+  const stream = client.messages.stream({
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    thinking: { type: "adaptive" },
+    thinking: { type: "adaptive", display: "summarized" },
     messages: [{ role: "user", content: "What is the greatest common divisor of 1071 and 462?" }]
   });
 
@@ -534,28 +561,31 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 16000,
+      Thinking = new ThinkingConfigAdaptive { Display = Display.Summarized },
+      Messages = [new() { Role = Role.User, Content = "What is the greatest common divisor of 1071 and 462?" }]
+  };
+
+  await foreach (var rawEvent in client.Messages.CreateStreaming(parameters))
+  {
+      if (rawEvent.TryPickContentBlockStart(out var start))
       {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
+          Console.WriteLine($"\nStarting {start.ContentBlock.Type} block...");
+      }
+      else if (rawEvent.TryPickContentBlockDelta(out var delta))
+      {
+          if (delta.Delta.TryPickThinking(out var thinkingDelta))
           {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 16000,
-              Thinking = new ThinkingConfigAdaptive(),
-              Messages = [new() { Role = Role.User, Content = "What is the greatest common divisor of 1071 and 462?" }]
-          };
-
-          await foreach (var msg in client.Messages.CreateStreaming(parameters))
+              Console.Write(thinkingDelta.Thinking);
+          }
+          else if (delta.Delta.TryPickText(out var textDelta))
           {
-              Console.Write(msg);
+              Console.Write(textDelta.Text);
           }
       }
   }
@@ -568,7 +598,9 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Thinking: anthropic.ThinkingConfigParamUnion{
-  		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+  		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{
+  			Display: anthropic.ThinkingConfigAdaptiveDisplaySummarized,
+  		},
   	},
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("What is the greatest common divisor of 1071 and 462?")),
@@ -596,37 +628,41 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
 
   ```java Java
   import com.anthropic.models.messages.ThinkingConfigAdaptive;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(16000L)
-              .thinking(ThinkingConfigAdaptive.builder().build())
-              .addUserMessage("What is the greatest common divisor of 1071 and 462?")
-              .build();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          try (var streamResponse = client.messages().createStreaming(params)) {
-              streamResponse.stream().forEach(event -> {
-                  if (event.contentBlockStart().isPresent()) {
-                      var startEvent = event.contentBlockStart().get();
-                      var block = startEvent.contentBlock();
-                      if (block.isThinking()) {
-                          System.out.println("\nStarting thinking block...");
-                      } else if (block.isText()) {
-                          System.out.println("\nStarting text block...");
-                      }
-                  } else if (event.contentBlockDelta().isPresent()) {
-                      var deltaEvent = event.contentBlockDelta().get();
-                      deltaEvent.delta().thinking().ifPresent(td ->
-                          System.out.print(td.thinking())
-                      );
-                      deltaEvent.delta().text().ifPresent(td ->
-                          System.out.print(td.text())
-                      );
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(16000L)
+          .thinking(ThinkingConfigAdaptive.builder()
+              .display(ThinkingConfigAdaptive.Display.SUMMARIZED)
+              .build())
+          .addUserMessage("What is the greatest common divisor of 1071 and 462?")
+          .build();
+
+      try (var streamResponse = client.messages().createStreaming(params)) {
+          streamResponse.stream().forEach(event -> {
+              if (event.contentBlockStart().isPresent()) {
+                  var startEvent = event.contentBlockStart().get();
+                  var block = startEvent.contentBlock();
+                  if (block.isThinking()) {
+                      IO.println("\nStarting thinking block...");
+                  } else if (block.isText()) {
+                      IO.println("\nStarting text block...");
                   }
-              });
-          }
+              } else if (event.contentBlockDelta().isPresent()) {
+                  var deltaEvent = event.contentBlockDelta().get();
+                  deltaEvent.delta().thinking().ifPresent(td ->
+                      IO.print(td.thinking())
+                  );
+                  deltaEvent.delta().text().ifPresent(td ->
+                      IO.print(td.text())
+                  );
+              }
+          });
+      }
+  }
   ```
 
   ```php PHP
@@ -638,7 +674,7 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
           ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
       ],
       model: 'claude-opus-4-8',
-      thinking: ['type' => 'adaptive'],
+      thinking: ['type' => 'adaptive', 'display' => 'summarized'],
   );
 
   foreach ($stream as $event) {
@@ -660,7 +696,7 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
   stream = client.messages.stream(
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    thinking: { type: "adaptive" },
+    thinking: { type: "adaptive", display: "summarized" },
     messages: [
       { role: "user", content: "What is the greatest common divisor of 1071 and 462?" }
     ]
@@ -679,14 +715,14 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
 
 ## Adaptive vs manual vs disabled thinking
 
-| Mode         | Config                                                 | Availability                                                                                                                                                                                                  | When to use                                                                          |
-| ------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Adaptive** | `thinking: {type: "adaptive"}`                         | Claude Fable 5 (always on), Claude Mythos 5 (always on), Claude Mythos Preview (default), Claude Opus 4.8 (only mode), Opus 4.7 (only mode), Opus 4.6, Sonnet 5, Sonnet 4.6                                   | Claude determines when and how much to use extended thinking. Use `effort` to guide. |
-| **Manual**   | `thinking: {type: "enabled", budget_tokens: N}`        | All models except Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 (rejected with a 400 error). Deprecated on Opus 4.6 and Sonnet 4.6 (consider adaptive mode instead). | When you need precise control over thinking token spend.                             |
-| **Disabled** | Omit `thinking` parameter or pass `{type: "disabled"}` | All models except Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview. On Claude Sonnet 5, pass `{type: "disabled"}` explicitly (omitting `thinking` defaults to adaptive).                            | When you don't need extended thinking and want the lowest latency.                   |
+| Mode         | Config                                          | Availability                                                                                                                                                                                                          | When to use                                                                          |
+| ------------ | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Adaptive** | `thinking: {type: "adaptive"}`                  | Claude Fable 5 (always on), Claude Mythos 5 (always on), Claude Mythos Preview (default), Claude Opus 4.8 (only mode), Claude Opus 4.7 (only mode), Claude Opus 4.6, Claude Sonnet 5 (default), and Claude Sonnet 4.6 | Claude determines when and how much to use extended thinking. Use `effort` to guide. |
+| **Manual**   | `thinking: {type: "enabled", budget_tokens: N}` | All models except Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 (rejected with a 400 error). Deprecated on Opus 4.6 and Sonnet 4.6 (consider adaptive mode instead).         | When you need precise control over thinking token spend.                             |
+| **Disabled** | `thinking: {type: "disabled"}`                  | All models except Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview. On Claude Sonnet 5, pass `{type: "disabled"}` explicitly (omitting `thinking` defaults to adaptive).                                    | When you don't need extended thinking and want the lowest latency.                   |
 
 <Note>
-  Adaptive thinking is available on Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, Claude Opus 4.7, Opus 4.6, Sonnet 5, and Sonnet 4.6. On Claude Fable 5 and Claude Mythos 5, adaptive thinking is always on: it applies whenever `thinking` is unset and cannot be disabled. On Mythos Preview, adaptive thinking is the default and applies automatically whenever `thinking` is unset. On Claude Opus 4.8, adaptive thinking is the only supported mode; thinking is off unless you explicitly set `thinking: {type: "adaptive"}`, and manual `type: "enabled"` with `budget_tokens` is rejected with a 400 error. On Claude Opus 4.7, adaptive thinking is the only supported mode and `type: "enabled"` with `budget_tokens` is rejected. On Claude Sonnet 5, adaptive thinking is on by default; manual `type: "enabled"` is rejected with a 400 error, and `{type: "disabled"}` turns thinking off. Older models only support `type: "enabled"` with `budget_tokens`. On Opus 4.6 and Sonnet 4.6, `type: "enabled"` with `budget_tokens` is still functional but deprecated.
+  Per-model defaults and restrictions are listed under [Supported models](#supported-models). Models older than those listed accept only `type: "enabled"` with `budget_tokens`, when they support extended thinking at all.
 
   **Interleaved thinking availability by mode:**
 
@@ -700,6 +736,8 @@ Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/s
 ### Validation changes
 
 When using adaptive thinking, previous assistant turns don't need to start with thinking blocks. This is more flexible than manual mode, where the API enforces that thinking-enabled turns begin with a thinking block.
+
+Separately, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5 reject non-default `temperature`, `top_p`, and `top_k` values with a 400 error. This applies to every request on these models, regardless of whether thinking is active.
 
 ### Prompt caching
 
@@ -782,7 +820,7 @@ Here are some important considerations for omitted thinking:
   The default for `thinking.display` depends on the model:
 
   * **Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing):** the default is `"omitted"`. Thinking blocks still appear in the response stream, but their `thinking` field is empty unless you explicitly opt in. This is a silent change from Claude Opus 4.6, where the default was `"summarized"`.
-  * **Claude Opus 4.6:** the default is `"summarized"`. The readable summary appears without opting in.
+  * **Claude Opus 4.6 and Claude Sonnet 4.6:** the default is `"summarized"`. The readable summary appears without opting in.
 
   To receive summarized thinking text on models where the default is `"omitted"`, set `thinking.display` to `"summarized"` explicitly:
 
@@ -888,18 +926,22 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
 
 The extended thinking page covers several topics in more detail with mode-specific code examples:
 
-* **[Tool use with thinking](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-tool-use)**: The same rules apply for adaptive thinking: preserve thinking blocks between tool calls and be aware of `tool_choice` limitations when thinking is active.
-* **[Prompt caching](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-prompt-caching)**: With adaptive thinking, consecutive requests using the same thinking mode preserve cache breakpoints. Switching between `adaptive` and `enabled`/`disabled` modes breaks cache breakpoints for messages (system prompts and tool definitions remain cached).
-* **[Context windows](/docs/en/build-with-claude/extended-thinking#max-tokens-and-context-window-size-with-extended-thinking)**: How thinking tokens interact with `max_tokens` and context window limits.
+* **[Tool use with thinking](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-tool-use):** The same rules apply for adaptive thinking: preserve thinking blocks between tool calls and be aware of `tool_choice` limitations when thinking is active.
+* **[Extended thinking with prompt caching](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-prompt-caching):** Code examples for caching with thinking blocks. The adaptive-specific cache behavior is covered in [Prompt caching](#prompt-caching) earlier on this page.
+* **[Context windows](/docs/en/build-with-claude/extended-thinking#max-tokens-and-context-window-size-with-extended-thinking):** How thinking tokens interact with `max_tokens` and context window limits.
 
 ## Next steps
 
-<CardGroup>
-  <Card title="Extended thinking" icon="settings" href="/docs/en/build-with-claude/extended-thinking">
-    Learn more about extended thinking, including manual mode, tool use, and prompt caching.
+<CardGroup cols={3}>
+  <Card title="Effort" icon="gauge" href="/docs/en/build-with-claude/effort">
+    Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
   </Card>
 
-  <Card title="Effort parameter" icon="gauge" href="/docs/en/build-with-claude/effort">
-    Control how thoroughly Claude responds with the effort parameter.
+  <Card title="Extended thinking" icon="settings" href="/docs/en/build-with-claude/extended-thinking">
+    Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.
+  </Card>
+
+  <Card title="Prompting Claude Sonnet 5" icon="terminal" href="/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5">
+    Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
   </Card>
 </CardGroup>
