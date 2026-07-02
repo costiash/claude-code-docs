@@ -258,7 +258,7 @@ Once uploaded, reference the file using its `file_id`:
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = Messages::Model.ClaudeOpus4_6,
+          Model = Messages::Model.ClaudeOpus4_8,
           MaxTokens = 1024,
           Betas = [AnthropicBeta.FilesApi2025_04_14],
           Messages =
@@ -284,7 +284,7 @@ Once uploaded, reference the file using its `file_id`:
   ```go Go
   msg, err := client.Beta.Messages.New(context.Background(),
   	anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_6,
+  		Model:     anthropic.ModelClaudeOpus4_8,
   		MaxTokens: 1024,
   		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
   		Messages: []anthropic.BetaMessageParam{

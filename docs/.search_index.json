@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-02T16:27:22Z",
+  "generated_at": "2026-07-02T19:13:58Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -491,20 +491,20 @@
         "session",
         "input",
         "prompt",
+        "commands",
         "press",
         "history",
-        "commands",
-        "terminal",
         "background",
+        "terminal",
         "when",
         "conversation",
         "search",
         "text",
         "cursor",
-        "previous",
-        "word"
+        "running",
+        "previous"
       ],
-      "word_count": 3865,
+      "word_count": 3904,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -879,13 +879,13 @@
         "plugins",
         "claude",
         "skills",
-        "skill",
         "directory",
+        "skill",
         "code",
         "create",
+        "step",
         "see",
         "hooks",
-        "step",
         "when",
         "root",
         "add",
@@ -896,7 +896,7 @@
         "lsp",
         "file"
       ],
-      "word_count": 2973,
+      "word_count": 3039,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1512,7 +1512,7 @@
         "provider",
         "see"
       ],
-      "word_count": 1451,
+      "word_count": 1450,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -1769,30 +1769,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
       "title": "Computer use tool",
-      "content_preview": "# Computer use tool  ---  Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interac...",
+      "content_preview": "# Computer use tool  Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.  ---  Claude can interact with computer environments through the computer ...",
       "keywords": [
-        "tab",
         "claude",
-        "title",
         "computer",
         "tool",
         "actions",
-        "tabs",
-        "info",
-        "api",
-        "see",
+        "title",
+        "when",
         "click",
         "prompt",
         "accordion",
+        "tools",
         "screenshot",
         "opus",
-        "tools",
+        "environment",
+        "codegroup",
         "step",
-        "when",
-        "request",
-        "application"
+        "example",
+        "api",
+        "such",
+        "model",
+        "screenshots"
       ],
-      "word_count": 9008,
+      "word_count": 9012,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -2024,13 +2024,13 @@
       "content_preview": "# Programmatic tool calling  Let Claude call your tools from code in the code execution container, cutting model round trips and token use in multi-tool workflows.  ---  Programmatic tool calling allo...",
       "keywords": [
         "tool",
-        "claude",
         "code",
+        "claude",
         "programmatic",
         "execution",
         "calling",
-        "calls",
         "tools",
+        "calls",
         "result",
         "container",
         "call",
@@ -2039,12 +2039,12 @@
         "response",
         "model",
         "data",
-        "each",
         "only",
-        "note",
-        "request"
+        "request",
+        "each",
+        "note"
       ],
-      "word_count": 6240,
+      "word_count": 6382,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2329,30 +2329,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
       "title": "Web search tool",
-      "content_preview": "# Web search tool  ---  The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response i...",
+      "content_preview": "# Web search tool  Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.  ---  The web search tool gives Claude direct access to real-time web ...",
       "keywords": [
         "search",
         "web",
-        "claude",
         "tool",
+        "claude",
         "api",
-        "response",
-        "results",
         "filtering",
-        "note",
-        "tools",
-        "when",
-        "searches",
-        "content",
-        "dynamic",
         "request",
         "error",
-        "citations",
+        "results",
         "code",
-        "token",
-        "available"
+        "tools",
+        "content",
+        "dynamic",
+        "response",
+        "when",
+        "note",
+        "searches",
+        "server",
+        "turn",
+        "execution"
       ],
-      "word_count": 2546,
+      "word_count": 2990,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -43741,7 +43741,7 @@
         "portal",
         "name"
       ],
-      "word_count": 3165,
+      "word_count": 3166,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -44209,15 +44209,15 @@
         "feature",
         "model",
         "tool",
-        "availability",
         "tools",
         "context",
+        "availability",
         "features",
         "web",
         "when",
         "claudeapibeta"
       ],
-      "word_count": 1896,
+      "word_count": 1874,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -44469,7 +44469,7 @@
         "models",
         "opus"
       ],
-      "word_count": 3854,
+      "word_count": 3884,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {

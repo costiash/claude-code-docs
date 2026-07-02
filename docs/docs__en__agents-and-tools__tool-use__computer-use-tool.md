@@ -1,8 +1,10 @@
 # Computer use tool
 
+Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.
+
 ---
 
-Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
+Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
 <Note>
   Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
@@ -43,7 +45,7 @@ Computer use is a beta feature with unique risks distinct from standard API feat
   4. Asking a human to confirm decisions that might result in meaningful real-world consequences and any tasks requiring affirmative consent, such as accepting cookies, completing financial transactions, or agreeing to terms of service.
 </Warning>
 
-In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
+In some circumstances, Claude will follow commands found in content even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
 Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/).
 
@@ -169,7 +171,6 @@ Here's how to get started with computer use:
   ```
 
   ```csharp C#
-  using Anthropic;
   using Anthropic.Models.Beta.Messages;
   using Messages = Anthropic.Models.Messages;
 
@@ -224,7 +225,7 @@ Here's how to get started with computer use:
   		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Save a picture of a cat to my desktop.")),
   	},
   	Betas: []anthropic.AnthropicBeta{
-  		"computer-use-2025-11-24", // typed constant pending in the Go SDK
+  		"computer-use-2025-11-24", // no SDK exposes a named constant for this beta yet
   	},
   })
   if err != nil {
@@ -239,12 +240,13 @@ Here's how to get started with computer use:
   import com.anthropic.models.beta.messages.BetaToolComputerUse20251124;
   import com.anthropic.models.beta.messages.BetaToolTextEditor20250728;
   import com.anthropic.models.beta.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
 
   void main() {
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model("claude-opus-4-8")
+          .model(Model.CLAUDE_OPUS_4_8)
           .maxTokens(1024L)
           .addTool(BetaToolComputerUse20251124.builder()
               .displayWidthPx(1024L)
@@ -400,285 +402,269 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 * An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and runs the computer use tools
 * A web interface to interact with the container, agent loop, and tools.
 
-### Understanding the agentic loop
+### Understand the agent loop
 
-The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. Here's a simplified example:
+The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. The loop uses the client you created in the [Quick start](#quick-start), a tool list shaped like the Quick start's `tools` array, and the tool-call processing helper defined in [Process Claude's tool calls](#implement-the-computer-use-tool). Here's a simplified example:
 
-<Tabs>
-  <Tab title="cURL">
-    <Info>
-      The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
-    </Info>
-  </Tab>
+<CodeGroup>
+  ```bash cURL
+  # The agent loop is a stateful, multi-turn pattern that doesn't translate to a
+  # one-off shell command. See the SDK tabs for the implementation.
+  ```
 
-  <Tab title="CLI">
-    <Info>
-      The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
-    </Info>
-  </Tab>
+  ```bash CLI
+  # The agent loop is a stateful, multi-turn pattern that doesn't translate to a
+  # one-off shell command. See the SDK tabs for the implementation.
+  ```
 
-  <Tab title="Python">
-    ```python
-    def sampling_loop(model, messages, max_iterations=10):
-        """
-        Run the computer-use agent loop until Claude stops requesting tools
-        or the iteration limit is reached.
-        """
-        for _ in range(max_iterations):
-            response = client.beta.messages.create(
-                model=model,
-                max_tokens=4096,
-                messages=messages,
-                tools=TOOLS,
-                betas=["computer-use-2025-11-24"],
-            )
+  ```python Python
+  def sampling_loop(model, messages, max_iterations=10):
+      """
+      Run the computer-use agent loop until Claude stops requesting tools
+      or the iteration limit is reached.
+      """
+      for _ in range(max_iterations):
+          response = client.beta.messages.create(
+              model=model,
+              max_tokens=4096,
+              messages=messages,
+              tools=TOOLS,
+              betas=["computer-use-2025-11-24"],
+          )
 
-            # Add Claude's response to the conversation history
-            messages.append({"role": "assistant", "content": response.content})
+          # Add Claude's response to the conversation history
+          messages.append({"role": "assistant", "content": response.content})
 
-            # Run any tools Claude requested and collect results
-            tool_results = process_tool_calls(response)
-            if not tool_results:
-                return messages  # No more tool use; task complete
+          # Run any tools Claude requested and collect results
+          tool_results = process_tool_calls(response)
+          if not tool_results:
+              return messages  # No more tool use; task complete
 
-            # Send tool results back to Claude for the next iteration
-            messages.append({"role": "user", "content": tool_results})
+          # Send tool results back to Claude for the next iteration
+          messages.append({"role": "user", "content": tool_results})
 
-        return messages
-    ```
-  </Tab>
+      return messages
+  ```
 
-  <Tab title="TypeScript">
-    ```typescript
-    async function samplingLoop(
-      model: string,
-      messages: Anthropic.Beta.BetaMessageParam[],
-      maxIterations = 10,
-    ): Promise<Anthropic.Beta.BetaMessageParam[]> {
+  ```typescript TypeScript
+  async function samplingLoop(
+    model: string,
+    messages: Anthropic.Beta.BetaMessageParam[],
+    maxIterations = 10,
+  ): Promise<Anthropic.Beta.BetaMessageParam[]> {
+    // Run the computer-use agent loop until Claude stops requesting tools
+    // or the iteration limit is reached.
+    for (let i = 0; i < maxIterations; i++) {
+      const response = await client.beta.messages.create({
+        model,
+        max_tokens: 4096,
+        messages,
+        tools,
+        betas: ["computer-use-2025-11-24"],
+      });
+
+      // Add Claude's response to the conversation history
+      messages.push({ role: "assistant", content: response.content });
+
+      // Run any tools Claude requested and collect results
+      const toolResults = processToolCalls(response);
+      if (toolResults.length === 0) {
+        return messages; // No more tool use; task complete
+      }
+
+      // Send tool results back to Claude for the next iteration
+      messages.push({ role: "user", content: toolResults });
+    }
+
+    return messages;
+  }
+  ```
+
+  ```csharp C#
+  async Task<List<BetaMessageParam>> SamplingLoop(
+      Model model,
+      List<BetaMessageParam> messages,
+      int maxIterations = 10
+  )
+  {
       // Run the computer-use agent loop until Claude stops requesting tools
       // or the iteration limit is reached.
-      for (let i = 0; i < maxIterations; i++) {
-        const response = await client.beta.messages.create({
-          model,
-          max_tokens: 4096,
-          messages,
-          tools,
-          betas: ["computer-use-2025-11-24"],
-        });
+      for (var i = 0; i < maxIterations; i++)
+      {
+          var response = await client.Beta.Messages.Create(
+              new MessageCreateParams
+              {
+                  Model = model,
+                  MaxTokens = 4096,
+                  Messages = messages,
+                  Tools = tools,
+                  Betas = ["computer-use-2025-11-24"],
+              }
+          );
 
-        // Add Claude's response to the conversation history
-        messages.push({ role: "assistant", content: response.content });
+          // Add Claude's response to the conversation history
+          messages.Add(
+              new()
+              {
+                  Role = Role.Assistant,
+                  Content = response
+                      .Content.Select(block => new BetaContentBlockParam(block.Json))
+                      .ToList(),
+              }
+          );
 
-        // Run any tools Claude requested and collect results
-        const toolResults = processToolCalls(response);
-        if (toolResults.length === 0) {
-          return messages; // No more tool use; task complete
-        }
+          // Run any tools Claude requested and collect results
+          var toolResults = ProcessToolCalls(response);
+          if (toolResults.Count == 0)
+          {
+              return messages; // No more tool use; task complete
+          }
 
-        // Send tool results back to Claude for the next iteration
-        messages.push({ role: "user", content: toolResults });
+          // Send tool results back to Claude for the next iteration
+          messages.Add(new() { Role = Role.User, Content = toolResults });
       }
 
       return messages;
-    }
-    ```
-  </Tab>
+  }
+  ```
 
-  <Tab title="C#">
-    ```csharp
-    async Task<List<BetaMessageParam>> SamplingLoop(
-        Model model,
-        List<BetaMessageParam> messages,
-        int maxIterations = 10
-    )
-    {
-        // Run the computer-use agent loop until Claude stops requesting tools
-        // or the iteration limit is reached.
-        for (var i = 0; i < maxIterations; i++)
-        {
-            var response = await client.Beta.Messages.Create(
-                new MessageCreateParams
-                {
-                    Model = model,
-                    MaxTokens = 4096,
-                    Messages = messages,
-                    Tools = tools,
-                    Betas = ["computer-use-2025-11-24"],
-                }
-            );
+  ```go Go
+  // samplingLoop runs the computer-use agent loop until Claude stops
+  // requesting tools or the iteration limit is reached.
+  func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
+  	for range maxIterations {
+  		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+  			Model:     model,
+  			MaxTokens: 4096,
+  			Messages:  messages,
+  			Tools:     tools,
+  			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
+  		})
+  		if err != nil {
+  			return nil, err
+  		}
 
-            // Add Claude's response to the conversation history
-            messages.Add(
-                new()
-                {
-                    Role = Role.Assistant,
-                    Content = response
-                        .Content.Select(block => new BetaContentBlockParam(block.Json))
-                        .ToList(),
-                }
-            );
+  		// Add Claude's response to the conversation history
+  		messages = append(messages, response.ToParam())
 
-            // Run any tools Claude requested and collect results
-            var toolResults = ProcessToolCalls(response);
-            if (toolResults.Count == 0)
-            {
-                return messages; // No more tool use; task complete
-            }
+  		// Run any tools Claude requested and collect results
+  		toolResults := processToolCalls(response)
+  		if len(toolResults) == 0 {
+  			return messages, nil // No more tool use; task complete
+  		}
 
-            // Send tool results back to Claude for the next iteration
-            messages.Add(new() { Role = Role.User, Content = toolResults });
-        }
+  		// Send tool results back to Claude for the next iteration
+  		messages = append(messages, anthropic.BetaMessageParam{
+  			Role:    anthropic.BetaMessageParamRoleUser,
+  			Content: toolResults,
+  		})
+  	}
+  	return messages, nil
+  }
 
-        return messages;
-    }
-    ```
-  </Tab>
+  ```
 
-  <Tab title="Go">
-    ```go
-    // samplingLoop runs the computer-use agent loop until Claude stops
-    // requesting tools or the iteration limit is reached.
-    func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
-    	for range maxIterations {
-    		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-    			Model:     model,
-    			MaxTokens: 4096,
-    			Messages:  messages,
-    			Tools:     tools,
-    			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
-    		})
-    		if err != nil {
-    			return nil, err
-    		}
+  ```java Java
+  /**
+   * Run the computer-use agent loop until Claude stops requesting tools
+   * or the iteration limit is reached.
+   */
+  List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
+      for (int i = 0; i < maxIterations; i++) {
+          BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+                  .model(model)
+                  .maxTokens(4096)
+                  .messages(messages)
+                  .addTool(COMPUTER_TOOL)
+                  .addBeta("computer-use-2025-11-24")
+                  .build());
 
-    		// Add Claude's response to the conversation history
-    		messages = append(messages, response.ToParam())
+          // Add Claude's response to the conversation history
+          messages.add(BetaMessageParam.builder()
+                  .role(BetaMessageParam.Role.ASSISTANT)
+                  .contentOfBetaContentBlockParams(
+                          response.content().stream().map(BetaContentBlock::toParam).toList())
+                  .build());
 
-    		// Run any tools Claude requested and collect results
-    		toolResults := processToolCalls(response)
-    		if len(toolResults) == 0 {
-    			return messages, nil // No more tool use; task complete
-    		}
+          // Run any tools Claude requested and collect results
+          List<BetaContentBlockParam> toolResults = processToolCalls(response);
+          if (toolResults.isEmpty()) {
+              return messages; // No more tool use; task complete
+          }
 
-    		// Send tool results back to Claude for the next iteration
-    		messages = append(messages, anthropic.BetaMessageParam{
-    			Role:    anthropic.BetaMessageParamRoleUser,
-    			Content: toolResults,
-    		})
-    	}
-    	return messages, nil
-    }
+          // Send tool results back to Claude for the next iteration
+          messages.add(BetaMessageParam.builder()
+                  .role(BetaMessageParam.Role.USER)
+                  .contentOfBetaContentBlockParams(toolResults)
+                  .build());
+      }
+      return messages;
+  }
+  ```
 
-    ```
-  </Tab>
+  ```php PHP
+  /**
+   * Run the computer-use agent loop until Claude stops requesting tools
+   * or the iteration limit is reached.
+   */
+  function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
+  {
+      global $client, $tools;
 
-  <Tab title="Java">
-    ```java
-    /**
-     * Run the computer-use agent loop until Claude stops requesting tools
-     * or the iteration limit is reached.
-     */
-    List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
-        for (int i = 0; i < maxIterations; i++) {
-            BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
-                    .model(model)
-                    .maxTokens(4096)
-                    .messages(messages)
-                    .addTool(COMPUTER_TOOL)
-                    .addBeta("computer-use-2025-11-24")
-                    .build());
+      for ($i = 0; $i < $maxIterations; $i++) {
+          $response = $client->beta->messages->create(
+              model: $model,
+              maxTokens: 4096,
+              messages: $messages,
+              tools: $tools,
+              betas: ['computer-use-2025-11-24'],
+          );
 
-            // Add Claude's response to the conversation history
-            messages.add(BetaMessageParam.builder()
-                    .role(BetaMessageParam.Role.ASSISTANT)
-                    .contentOfBetaContentBlockParams(
-                            response.content().stream().map(BetaContentBlock::toParam).toList())
-                    .build());
+          // Add Claude's response to the conversation history
+          $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
 
-            // Run any tools Claude requested and collect results
-            List<BetaContentBlockParam> toolResults = processToolCalls(response);
-            if (toolResults.isEmpty()) {
-                return messages; // No more tool use; task complete
-            }
+          // Run any tools Claude requested and collect results
+          $toolResults = processToolCalls($response);
+          if ($toolResults === []) {
+              return $messages; // No more tool use; task complete
+          }
 
-            // Send tool results back to Claude for the next iteration
-            messages.add(BetaMessageParam.builder()
-                    .role(BetaMessageParam.Role.USER)
-                    .contentOfBetaContentBlockParams(toolResults)
-                    .build());
-        }
-        return messages;
-    }
-    ```
-  </Tab>
+          // Send tool results back to Claude for the next iteration
+          $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
+      }
 
-  <Tab title="PHP">
-    ```php
-    /**
-     * Run the computer-use agent loop until Claude stops requesting tools
-     * or the iteration limit is reached.
-     */
-    function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
-    {
-        global $client, $tools;
+      return $messages;
+  }
+  ```
 
-        for ($i = 0; $i < $maxIterations; $i++) {
-            $response = $client->beta->messages->create(
-                model: $model,
-                maxTokens: 4096,
-                messages: $messages,
-                tools: $tools,
-                betas: ['computer-use-2025-11-24'],
-            );
+  ```ruby Ruby
+  # Run the computer-use agent loop until Claude stops requesting tools
+  # or the iteration limit is reached.
+  def sampling_loop(model, messages, max_iterations: 10)
+    max_iterations.times do
+      response = CLIENT.beta.messages.create(
+        model: model,
+        max_tokens: 4096,
+        messages: messages,
+        tools: TOOLS,
+        betas: ["computer-use-2025-11-24"]
+      )
 
-            // Add Claude's response to the conversation history
-            $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
+      # Add Claude's response to the conversation history
+      messages << {role: "assistant", content: response.content}
 
-            // Run any tools Claude requested and collect results
-            $toolResults = processToolCalls($response);
-            if ($toolResults === []) {
-                return $messages; // No more tool use; task complete
-            }
+      # Run any tools Claude requested and collect results
+      tool_results = process_tool_calls(response)
+      return messages if tool_results.empty? # No more tool use; task complete
 
-            // Send tool results back to Claude for the next iteration
-            $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
-        }
-
-        return $messages;
-    }
-    ```
-  </Tab>
-
-  <Tab title="Ruby">
-    ```ruby
-    # Run the computer-use agent loop until Claude stops requesting tools
-    # or the iteration limit is reached.
-    def sampling_loop(model, messages, max_iterations: 10)
-      max_iterations.times do
-        response = CLIENT.beta.messages.create(
-          model: model,
-          max_tokens: 4096,
-          messages: messages,
-          tools: TOOLS,
-          betas: ["computer-use-2025-11-24"]
-        )
-
-        # Add Claude's response to the conversation history
-        messages << {role: "assistant", content: response.content}
-
-        # Run any tools Claude requested and collect results
-        tool_results = process_tool_calls(response)
-        return messages if tool_results.empty? # No more tool use; task complete
-
-        # Send tool results back to Claude for the next iteration
-        messages << {role: "user", content: tool_results}
-      end
-
-      messages
+      # Send tool results back to Claude for the next iteration
+      messages << {role: "user", content: tool_results}
     end
-    ```
-  </Tab>
-</Tabs>
+
+    messages
+  end
+  ```
+</CodeGroup>
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
@@ -710,7 +696,7 @@ When one of the Anthropic-schema tools is requested through the Claude API, a co
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
-As with regular tool use, the user-provided `system_prompt` field is still respected and used in the construction of the combined system prompt.
+As with regular tool use, the user-provided `system` parameter is still respected and used in the construction of the combined system prompt.
 
 ### Available actions
 
@@ -724,7 +710,7 @@ The computer use tool supports these actions:
 * **key:** Press key or key combination (for example, "ctrl+s")
 * **mouse\_move:** Move cursor to coordinates
 
-**Enhanced actions (`computer_20250124`)** Available on all models that support computer use:
+**Enhanced actions (`computer_20250124` and later)** Available in `computer_20250124` and `computer_20251124`:
 
 * **scroll:** Scroll in any direction with amount control
 * **left\_click\_drag:** Click and drag between coordinates
@@ -886,666 +872,618 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   <Step title="Implement action handlers">
     Create functions to handle each action type that Claude might request:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # This is application-side helper code with no API request. See the SDK tabs
+      # for the pattern.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # This is application-side helper code with no API request. See the SDK tabs
+      # for the pattern.
+      ```
 
-      <Tab title="Python">
-        ```python
-        def capture_screenshot():
-            return "<screenshot data>"
+      ```python Python
+      def capture_screenshot():
+          return "<screenshot data>"
 
 
-        def click_at(x, y):
-            return f"clicked at ({x}, {y})"
+      def click_at(x, y):
+          return f"clicked at ({x}, {y})"
 
 
-        def type_text(text):
-            return f"typed: {text}"
+      def type_text(text):
+          return f"typed: {text}"
 
 
-        def handle_computer_action(action_type, params):
-            if action_type == "screenshot":
-                return capture_screenshot()
-            elif action_type == "left_click":
-                x, y = params["coordinate"]
-                return click_at(x, y)
-            elif action_type == "type":
-                return type_text(params["text"])
-            # Handle other actions as needed
-            return f"unhandled action: {action_type}"
-        ```
-      </Tab>
-
-      <Tab title="TypeScript">
-        ```typescript
-        function captureScreenshot(): string {
-          return "<screenshot data>";
-        }
-
-        function clickAt(x: number, y: number): string {
-          return `clicked at (${x}, ${y})`;
-        }
-
-        function typeText(text: string): string {
-          return `typed: ${text}`;
-        }
-
-        function handleComputerAction(
-          actionType: string,
-          params: Record<string, unknown>,
-        ): string {
-          if (actionType === "screenshot") {
-            return captureScreenshot();
-          } else if (actionType === "left_click") {
-            const [x, y] = params.coordinate as [number, number];
-            return clickAt(x, y);
-          } else if (actionType === "type") {
-            return typeText(params.text as string);
-          }
-          // Handle other actions as needed
-          return `unhandled action: ${actionType}`;
-        }
-        ```
-      </Tab>
-
-      <Tab title="C#">
-        ```csharp
-        string CaptureScreenshot() => "<screenshot data>";
-
-        string ClickAt(int x, int y) => $"clicked at ({x}, {y})";
-
-        string TypeText(string text) => $"typed: {text}";
-
-        string HandleComputerAction(string actionType, IReadOnlyDictionary<string, JsonElement> input) =>
-            actionType switch
-            {
-                "screenshot" => CaptureScreenshot(),
-                "left_click" => ClickAt(
-                    input["coordinate"][0].GetInt32(),
-                    input["coordinate"][1].GetInt32()
-                ),
-                "type" => TypeText(input["text"].GetString()!),
-                // Handle other actions as needed
-                _ => $"unhandled action: {actionType}",
-            };
-        ```
-      </Tab>
-
-      <Tab title="Go">
-        ```go
-        func captureScreenshot() string {
-        	return "<screenshot data>"
-        }
-
-        func clickAt(x, y int) string {
-        	return fmt.Sprintf("clicked at (%d, %d)", x, y)
-        }
-
-        func typeText(text string) string {
-        	return fmt.Sprintf("typed: %s", text)
-        }
-
-        func handleComputerAction(actionType string, params map[string]any) string {
-        	switch actionType {
-        	case "screenshot":
-        		return captureScreenshot()
-        	case "left_click":
-        		coord := params["coordinate"].([]any)
-        		return clickAt(int(coord[0].(float64)), int(coord[1].(float64)))
-        	case "type":
-        		return typeText(params["text"].(string))
-        	// Handle other actions as needed
-        	default:
-        		return fmt.Sprintf("unhandled action: %s", actionType)
-        	}
-        }
-
-        ```
-      </Tab>
-
-      <Tab title="Java">
-        ```java
-        String captureScreenshot() {
-            return "<screenshot data>";
-        }
-
-        String clickAt(long x, long y) {
-            return "clicked at (" + x + ", " + y + ")";
-        }
-
-        String typeText(String text) {
-            return "typed: " + text;
-        }
-
-        String handleComputerAction(String actionType, Map<String, JsonValue> params) {
-            return switch (actionType) {
-                case "screenshot" -> captureScreenshot();
-                case "left_click" -> {
-                    List<JsonValue> coordinate = (List<JsonValue>) params.get("coordinate").asArray().get();
-                    long x = ((Number) coordinate.get(0).asNumber().get()).longValue();
-                    long y = ((Number) coordinate.get(1).asNumber().get()).longValue();
-                    yield clickAt(x, y);
-                }
-                case "type" -> typeText(params.get("text").asStringOrThrow());
-                // Handle other actions as needed
-                default -> "unhandled action: " + actionType;
-            };
-        }
-        ```
-      </Tab>
-
-      <Tab title="PHP">
-        ```php
-        function captureScreenshot(): string
-        {
-            return '<screenshot data>';
-        }
-
-        function clickAt(int $x, int $y): string
-        {
-            return "clicked at ({$x}, {$y})";
-        }
-
-        function typeText(string $text): string
-        {
-            return "typed: {$text}";
-        }
-
-        function handleComputerAction(string $actionType, array $params): string
-        {
-            return match ($actionType) {
-                'screenshot' => captureScreenshot(),
-                'left_click' => clickAt(...$params['coordinate']),
-                'type' => typeText($params['text']),
-                // Handle other actions as needed
-                default => "unhandled action: {$actionType}",
-            };
-        }
-        ```
-      </Tab>
-
-      <Tab title="Ruby">
-        ```ruby
-        def capture_screenshot
-          "<screenshot data>"
-        end
-
-        def click_at(x, y)
-          "clicked at (#{x}, #{y})"
-        end
-
-        def type_text(text)
-          "typed: #{text}"
-        end
-
-        def handle_computer_action(action_type, params)
-          case action_type
-          when "screenshot"
-            capture_screenshot
-          when "left_click"
-            x, y = params[:coordinate]
-            click_at(x, y)
-          when "type"
-            type_text(params[:text])
+      def handle_computer_action(action_type, params):
+          if action_type == "screenshot":
+              return capture_screenshot()
+          elif action_type == "left_click":
+              x, y = params["coordinate"]
+              return click_at(x, y)
+          elif action_type == "type":
+              return type_text(params["text"])
           # Handle other actions as needed
-          else
-            "unhandled action: #{action_type}"
-          end
+          return f"unhandled action: {action_type}"
+      ```
+
+      ```typescript TypeScript
+      function captureScreenshot(): string {
+        return "<screenshot data>";
+      }
+
+      function clickAt(x: number, y: number): string {
+        return `clicked at (${x}, ${y})`;
+      }
+
+      function typeText(text: string): string {
+        return `typed: ${text}`;
+      }
+
+      function handleComputerAction(
+        actionType: string,
+        params: Record<string, unknown>,
+      ): string {
+        if (actionType === "screenshot") {
+          return captureScreenshot();
+        } else if (actionType === "left_click") {
+          const [x, y] = params.coordinate as [number, number];
+          return clickAt(x, y);
+        } else if (actionType === "type") {
+          return typeText(params.text as string);
+        }
+        // Handle other actions as needed
+        return `unhandled action: ${actionType}`;
+      }
+      ```
+
+      ```csharp C#
+      string CaptureScreenshot() => "<screenshot data>";
+
+      string ClickAt(int x, int y) => $"clicked at ({x}, {y})";
+
+      string TypeText(string text) => $"typed: {text}";
+
+      string HandleComputerAction(string actionType, IReadOnlyDictionary<string, JsonElement> input) =>
+          actionType switch
+          {
+              "screenshot" => CaptureScreenshot(),
+              "left_click" => ClickAt(
+                  input["coordinate"][0].GetInt32(),
+                  input["coordinate"][1].GetInt32()
+              ),
+              "type" => TypeText(input["text"].GetString()!),
+              // Handle other actions as needed
+              _ => $"unhandled action: {actionType}",
+          };
+      ```
+
+      ```go Go
+      func captureScreenshot() string {
+      	return "<screenshot data>"
+      }
+
+      func clickAt(x, y int) string {
+      	return fmt.Sprintf("clicked at (%d, %d)", x, y)
+      }
+
+      func typeText(text string) string {
+      	return fmt.Sprintf("typed: %s", text)
+      }
+
+      func handleComputerAction(actionType string, params map[string]any) string {
+      	switch actionType {
+      	case "screenshot":
+      		return captureScreenshot()
+      	case "left_click":
+      		coord := params["coordinate"].([]any)
+      		return clickAt(int(coord[0].(float64)), int(coord[1].(float64)))
+      	case "type":
+      		return typeText(params["text"].(string))
+      	// Handle other actions as needed
+      	default:
+      		return fmt.Sprintf("unhandled action: %s", actionType)
+      	}
+      }
+
+      ```
+
+      ```java Java
+      String captureScreenshot() {
+          return "<screenshot data>";
+      }
+
+      String clickAt(long x, long y) {
+          return "clicked at (" + x + ", " + y + ")";
+      }
+
+      String typeText(String text) {
+          return "typed: " + text;
+      }
+
+      String handleComputerAction(String actionType, Map<String, JsonValue> params) {
+          return switch (actionType) {
+              case "screenshot" -> captureScreenshot();
+              case "left_click" -> {
+                  List<JsonValue> coordinate = (List<JsonValue>) params.get("coordinate").asArray().get();
+                  long x = ((Number) coordinate.get(0).asNumber().get()).longValue();
+                  long y = ((Number) coordinate.get(1).asNumber().get()).longValue();
+                  yield clickAt(x, y);
+              }
+              case "type" -> typeText(params.get("text").asStringOrThrow());
+              // Handle other actions as needed
+              default -> "unhandled action: " + actionType;
+          };
+      }
+      ```
+
+      ```php PHP
+      function captureScreenshot(): string
+      {
+          return '<screenshot data>';
+      }
+
+      function clickAt(int $x, int $y): string
+      {
+          return "clicked at ({$x}, {$y})";
+      }
+
+      function typeText(string $text): string
+      {
+          return "typed: {$text}";
+      }
+
+      function handleComputerAction(string $actionType, array $params): string
+      {
+          return match ($actionType) {
+              'screenshot' => captureScreenshot(),
+              'left_click' => clickAt(...$params['coordinate']),
+              'type' => typeText($params['text']),
+              // Handle other actions as needed
+              default => "unhandled action: {$actionType}",
+          };
+      }
+      ```
+
+      ```ruby Ruby
+      def capture_screenshot
+        "<screenshot data>"
+      end
+
+      def click_at(x, y)
+        "clicked at (#{x}, #{y})"
+      end
+
+      def type_text(text)
+        "typed: #{text}"
+      end
+
+      def handle_computer_action(action_type, params)
+        case action_type
+        when "screenshot"
+          capture_screenshot
+        when "left_click"
+          x, y = params[:coordinate]
+          click_at(x, y)
+        when "type"
+          type_text(params[:text])
+        # Handle other actions as needed
+        else
+          "unhandled action: #{action_type}"
         end
-        ```
-      </Tab>
-    </Tabs>
+      end
+      ```
+    </CodeGroup>
   </Step>
 
   <Step title="Process Claude's tool calls">
     Extract and run tool calls from Claude's responses:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # This is application-side helper code with no API request. See the SDK tabs
+      # for the pattern.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # This is application-side helper code with no API request. See the SDK tabs
+      # for the pattern.
+      ```
 
-      <Tab title="Python">
-        ```python
-        def process_tool_calls(response):
-            tool_results = []
-            for block in response.content:
-                if block.type == "tool_use":
-                    action = block.input["action"]
-                    result = handle_computer_action(action, block.input)
-                    tool_results.append(
-                        {
-                            "type": "tool_result",
-                            "tool_use_id": block.id,
-                            "content": result,
-                        }
-                    )
-            return tool_results
-        ```
-      </Tab>
-
-      <Tab title="TypeScript">
-        ```typescript
-        function processToolCalls(
-          response: Anthropic.Beta.BetaMessage,
-        ): Anthropic.Beta.BetaToolResultBlockParam[] {
-          const toolResults: Anthropic.Beta.BetaToolResultBlockParam[] = [];
-          for (const block of response.content) {
-            if (block.type === "tool_use") {
-              const input = block.input as Record<string, unknown>;
-              const action = input.action as string;
-              const result = handleComputerAction(action, input);
-              toolResults.push({
-                type: "tool_result",
-                tool_use_id: block.id,
-                content: result,
-              });
-            }
-          }
-          return toolResults;
-        }
-        ```
-      </Tab>
-
-      <Tab title="C#">
-        ```csharp
-        List<BetaContentBlockParam> ProcessToolCalls(BetaMessage response)
-        {
-            List<BetaContentBlockParam> toolResults = [];
-            foreach (var block in response.Content)
-            {
-                if (block.TryPickToolUse(out var toolUse))
-                {
-                    var action = toolUse.Input["action"].GetString()!;
-                    var result = HandleComputerAction(action, toolUse.Input);
-                    toolResults.Add(new BetaToolResultBlockParam(toolUse.ID) { Content = result });
-                }
-            }
-            return toolResults;
-        }
-        ```
-      </Tab>
-
-      <Tab title="Go">
-        ```go
-        func processToolCalls(response *anthropic.BetaMessage) []anthropic.BetaContentBlockParamUnion {
-        	var toolResults []anthropic.BetaContentBlockParamUnion
-        	for _, block := range response.Content {
-        		switch variant := block.AsAny().(type) {
-        		case anthropic.BetaToolUseBlock:
-        			input := variant.Input.(map[string]any)
-        			action := input["action"].(string)
-        			result := handleComputerAction(action, input)
-        			toolResults = append(toolResults, anthropic.NewBetaToolResultBlock(variant.ID, result, false))
-        		}
-        	}
-        	return toolResults
-        }
-
-        ```
-      </Tab>
-
-      <Tab title="Java">
-        ```java
-        List<BetaContentBlockParam> processToolCalls(BetaMessage response) {
-            List<BetaContentBlockParam> toolResults = new ArrayList<>();
-            for (BetaContentBlock block : response.content()) {
-                if (block.isToolUse()) {
-                    BetaToolUseBlock toolUse = block.asToolUse();
-                    Map<String, JsonValue> input =
-                            (Map<String, JsonValue>) toolUse._input().asObject().get();
-                    String action = input.get("action").asStringOrThrow();
-                    String result = handleComputerAction(action, input);
-                    toolResults.add(BetaContentBlockParam.ofToolResult(
-                            BetaToolResultBlockParam.builder()
-                                    .toolUseId(toolUse.id())
-                                    .content(result)
-                                    .build()));
-                }
-            }
-            return toolResults;
-        }
-        ```
-      </Tab>
-
-      <Tab title="PHP">
-        ```php
-        function processToolCalls(BetaMessage $response): array
-        {
-            $toolResults = [];
-            foreach ($response->content as $block) {
-                if ($block instanceof BetaToolUseBlock) {
-                    $action = $block->input['action'];
-                    $result = handleComputerAction($action, $block->input);
-                    $toolResults[] = BetaToolResultBlockParam::with(
-                        toolUseID: $block->id,
-                        content: $result,
-                    );
-                }
-            }
-            return $toolResults;
-        }
-        ```
-      </Tab>
-
-      <Tab title="Ruby">
-        ```ruby
-        def process_tool_calls(response)
+      ```python Python
+      def process_tool_calls(response):
           tool_results = []
-          response.content.each do |block|
-            next unless block.type == :tool_use
+          for block in response.content:
+              if block.type == "tool_use":
+                  action = block.input["action"]
+                  result = handle_computer_action(action, block.input)
+                  tool_results.append(
+                      {
+                          "type": "tool_result",
+                          "tool_use_id": block.id,
+                          "content": result,
+                      }
+                  )
+          return tool_results
+      ```
 
-            action = block.input[:action]
-            result = handle_computer_action(action, block.input)
-            tool_results << {
+      ```typescript TypeScript
+      function processToolCalls(
+        response: Anthropic.Beta.BetaMessage,
+      ): Anthropic.Beta.BetaToolResultBlockParam[] {
+        const toolResults: Anthropic.Beta.BetaToolResultBlockParam[] = [];
+        for (const block of response.content) {
+          if (block.type === "tool_use") {
+            const input = block.input as Record<string, unknown>;
+            const action = input.action as string;
+            const result = handleComputerAction(action, input);
+            toolResults.push({
               type: "tool_result",
               tool_use_id: block.id,
-              content: result
-            }
-          end
-          tool_results
+              content: result,
+            });
+          }
+        }
+        return toolResults;
+      }
+      ```
+
+      ```csharp C#
+      List<BetaContentBlockParam> ProcessToolCalls(BetaMessage response)
+      {
+          List<BetaContentBlockParam> toolResults = [];
+          foreach (var block in response.Content)
+          {
+              if (block.TryPickToolUse(out var toolUse))
+              {
+                  var action = toolUse.Input["action"].GetString()!;
+                  var result = HandleComputerAction(action, toolUse.Input);
+                  toolResults.Add(new BetaToolResultBlockParam(toolUse.ID) { Content = result });
+              }
+          }
+          return toolResults;
+      }
+      ```
+
+      ```go Go
+      func processToolCalls(response *anthropic.BetaMessage) []anthropic.BetaContentBlockParamUnion {
+      	var toolResults []anthropic.BetaContentBlockParamUnion
+      	for _, block := range response.Content {
+      		switch variant := block.AsAny().(type) {
+      		case anthropic.BetaToolUseBlock:
+      			input := variant.Input.(map[string]any)
+      			action := input["action"].(string)
+      			result := handleComputerAction(action, input)
+      			toolResults = append(toolResults, anthropic.NewBetaToolResultBlock(variant.ID, result, false))
+      		}
+      	}
+      	return toolResults
+      }
+
+      ```
+
+      ```java Java
+      List<BetaContentBlockParam> processToolCalls(BetaMessage response) {
+          List<BetaContentBlockParam> toolResults = new ArrayList<>();
+          for (BetaContentBlock block : response.content()) {
+              if (block.isToolUse()) {
+                  BetaToolUseBlock toolUse = block.asToolUse();
+                  Map<String, JsonValue> input =
+                          (Map<String, JsonValue>) toolUse._input().asObject().get();
+                  String action = input.get("action").asStringOrThrow();
+                  String result = handleComputerAction(action, input);
+                  toolResults.add(BetaContentBlockParam.ofToolResult(
+                          BetaToolResultBlockParam.builder()
+                                  .toolUseId(toolUse.id())
+                                  .content(result)
+                                  .build()));
+              }
+          }
+          return toolResults;
+      }
+      ```
+
+      ```php PHP
+      function processToolCalls(BetaMessage $response): array
+      {
+          $toolResults = [];
+          foreach ($response->content as $block) {
+              if ($block instanceof BetaToolUseBlock) {
+                  $action = $block->input['action'];
+                  $result = handleComputerAction($action, $block->input);
+                  $toolResults[] = BetaToolResultBlockParam::with(
+                      toolUseID: $block->id,
+                      content: $result,
+                  );
+              }
+          }
+          return $toolResults;
+      }
+      ```
+
+      ```ruby Ruby
+      def process_tool_calls(response)
+        tool_results = []
+        response.content.each do |block|
+          next unless block.type == :tool_use
+
+          action = block.input[:action]
+          result = handle_computer_action(action, block.input)
+          tool_results << {
+            type: "tool_result",
+            tool_use_id: block.id,
+            content: result
+          }
         end
-        ```
-      </Tab>
-    </Tabs>
+        tool_results
+      end
+      ```
+    </CodeGroup>
   </Step>
 
   <Step title="Implement the agent loop">
     Create a loop that continues until Claude completes the task:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # The agent loop is a stateful, multi-turn pattern that doesn't translate to a
+      # one-off shell command. See the SDK tabs for the implementation.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # The agent loop is a stateful, multi-turn pattern that doesn't translate to a
+      # one-off shell command. See the SDK tabs for the implementation.
+      ```
 
-      <Tab title="Python">
-        ```python
-        def sampling_loop(model, messages, max_iterations=10):
-            """
-            Run the computer-use agent loop until Claude stops requesting tools
-            or the iteration limit is reached.
-            """
-            for _ in range(max_iterations):
-                response = client.beta.messages.create(
-                    model=model,
-                    max_tokens=4096,
-                    messages=messages,
-                    tools=TOOLS,
-                    betas=["computer-use-2025-11-24"],
-                )
+      ```python Python
+      def sampling_loop(model, messages, max_iterations=10):
+          """
+          Run the computer-use agent loop until Claude stops requesting tools
+          or the iteration limit is reached.
+          """
+          for _ in range(max_iterations):
+              response = client.beta.messages.create(
+                  model=model,
+                  max_tokens=4096,
+                  messages=messages,
+                  tools=TOOLS,
+                  betas=["computer-use-2025-11-24"],
+              )
 
-                # Add Claude's response to the conversation history
-                messages.append({"role": "assistant", "content": response.content})
+              # Add Claude's response to the conversation history
+              messages.append({"role": "assistant", "content": response.content})
 
-                # Run any tools Claude requested and collect results
-                tool_results = process_tool_calls(response)
-                if not tool_results:
-                    return messages  # No more tool use; task complete
+              # Run any tools Claude requested and collect results
+              tool_results = process_tool_calls(response)
+              if not tool_results:
+                  return messages  # No more tool use; task complete
 
-                # Send tool results back to Claude for the next iteration
-                messages.append({"role": "user", "content": tool_results})
+              # Send tool results back to Claude for the next iteration
+              messages.append({"role": "user", "content": tool_results})
 
-            return messages
-        ```
-      </Tab>
+          return messages
+      ```
 
-      <Tab title="TypeScript">
-        ```typescript
-        async function samplingLoop(
-          model: string,
-          messages: Anthropic.Beta.BetaMessageParam[],
-          maxIterations = 10,
-        ): Promise<Anthropic.Beta.BetaMessageParam[]> {
+      ```typescript TypeScript
+      async function samplingLoop(
+        model: string,
+        messages: Anthropic.Beta.BetaMessageParam[],
+        maxIterations = 10,
+      ): Promise<Anthropic.Beta.BetaMessageParam[]> {
+        // Run the computer-use agent loop until Claude stops requesting tools
+        // or the iteration limit is reached.
+        for (let i = 0; i < maxIterations; i++) {
+          const response = await client.beta.messages.create({
+            model,
+            max_tokens: 4096,
+            messages,
+            tools,
+            betas: ["computer-use-2025-11-24"],
+          });
+
+          // Add Claude's response to the conversation history
+          messages.push({ role: "assistant", content: response.content });
+
+          // Run any tools Claude requested and collect results
+          const toolResults = processToolCalls(response);
+          if (toolResults.length === 0) {
+            return messages; // No more tool use; task complete
+          }
+
+          // Send tool results back to Claude for the next iteration
+          messages.push({ role: "user", content: toolResults });
+        }
+
+        return messages;
+      }
+      ```
+
+      ```csharp C#
+      async Task<List<BetaMessageParam>> SamplingLoop(
+          Model model,
+          List<BetaMessageParam> messages,
+          int maxIterations = 10
+      )
+      {
           // Run the computer-use agent loop until Claude stops requesting tools
           // or the iteration limit is reached.
-          for (let i = 0; i < maxIterations; i++) {
-            const response = await client.beta.messages.create({
-              model,
-              max_tokens: 4096,
-              messages,
-              tools,
-              betas: ["computer-use-2025-11-24"],
-            });
+          for (var i = 0; i < maxIterations; i++)
+          {
+              var response = await client.Beta.Messages.Create(
+                  new MessageCreateParams
+                  {
+                      Model = model,
+                      MaxTokens = 4096,
+                      Messages = messages,
+                      Tools = tools,
+                      Betas = ["computer-use-2025-11-24"],
+                  }
+              );
 
-            // Add Claude's response to the conversation history
-            messages.push({ role: "assistant", content: response.content });
+              // Add Claude's response to the conversation history
+              messages.Add(
+                  new()
+                  {
+                      Role = Role.Assistant,
+                      Content = response
+                          .Content.Select(block => new BetaContentBlockParam(block.Json))
+                          .ToList(),
+                  }
+              );
 
-            // Run any tools Claude requested and collect results
-            const toolResults = processToolCalls(response);
-            if (toolResults.length === 0) {
-              return messages; // No more tool use; task complete
-            }
+              // Run any tools Claude requested and collect results
+              var toolResults = ProcessToolCalls(response);
+              if (toolResults.Count == 0)
+              {
+                  return messages; // No more tool use; task complete
+              }
 
-            // Send tool results back to Claude for the next iteration
-            messages.push({ role: "user", content: toolResults });
+              // Send tool results back to Claude for the next iteration
+              messages.Add(new() { Role = Role.User, Content = toolResults });
           }
 
           return messages;
-        }
-        ```
-      </Tab>
+      }
+      ```
 
-      <Tab title="C#">
-        ```csharp
-        async Task<List<BetaMessageParam>> SamplingLoop(
-            Model model,
-            List<BetaMessageParam> messages,
-            int maxIterations = 10
-        )
-        {
-            // Run the computer-use agent loop until Claude stops requesting tools
-            // or the iteration limit is reached.
-            for (var i = 0; i < maxIterations; i++)
-            {
-                var response = await client.Beta.Messages.Create(
-                    new MessageCreateParams
-                    {
-                        Model = model,
-                        MaxTokens = 4096,
-                        Messages = messages,
-                        Tools = tools,
-                        Betas = ["computer-use-2025-11-24"],
-                    }
-                );
+      ```go Go
+      // samplingLoop runs the computer-use agent loop until Claude stops
+      // requesting tools or the iteration limit is reached.
+      func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
+      	for range maxIterations {
+      		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+      			Model:     model,
+      			MaxTokens: 4096,
+      			Messages:  messages,
+      			Tools:     tools,
+      			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
+      		})
+      		if err != nil {
+      			return nil, err
+      		}
 
-                // Add Claude's response to the conversation history
-                messages.Add(
-                    new()
-                    {
-                        Role = Role.Assistant,
-                        Content = response
-                            .Content.Select(block => new BetaContentBlockParam(block.Json))
-                            .ToList(),
-                    }
-                );
+      		// Add Claude's response to the conversation history
+      		messages = append(messages, response.ToParam())
 
-                // Run any tools Claude requested and collect results
-                var toolResults = ProcessToolCalls(response);
-                if (toolResults.Count == 0)
-                {
-                    return messages; // No more tool use; task complete
-                }
+      		// Run any tools Claude requested and collect results
+      		toolResults := processToolCalls(response)
+      		if len(toolResults) == 0 {
+      			return messages, nil // No more tool use; task complete
+      		}
 
-                // Send tool results back to Claude for the next iteration
-                messages.Add(new() { Role = Role.User, Content = toolResults });
-            }
+      		// Send tool results back to Claude for the next iteration
+      		messages = append(messages, anthropic.BetaMessageParam{
+      			Role:    anthropic.BetaMessageParamRoleUser,
+      			Content: toolResults,
+      		})
+      	}
+      	return messages, nil
+      }
 
-            return messages;
-        }
-        ```
-      </Tab>
+      ```
 
-      <Tab title="Go">
-        ```go
-        // samplingLoop runs the computer-use agent loop until Claude stops
-        // requesting tools or the iteration limit is reached.
-        func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
-        	for range maxIterations {
-        		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-        			Model:     model,
-        			MaxTokens: 4096,
-        			Messages:  messages,
-        			Tools:     tools,
-        			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
-        		})
-        		if err != nil {
-        			return nil, err
-        		}
+      ```java Java
+      /**
+       * Run the computer-use agent loop until Claude stops requesting tools
+       * or the iteration limit is reached.
+       */
+      List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
+          for (int i = 0; i < maxIterations; i++) {
+              BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+                      .model(model)
+                      .maxTokens(4096)
+                      .messages(messages)
+                      .addTool(COMPUTER_TOOL)
+                      .addBeta("computer-use-2025-11-24")
+                      .build());
 
-        		// Add Claude's response to the conversation history
-        		messages = append(messages, response.ToParam())
+              // Add Claude's response to the conversation history
+              messages.add(BetaMessageParam.builder()
+                      .role(BetaMessageParam.Role.ASSISTANT)
+                      .contentOfBetaContentBlockParams(
+                              response.content().stream().map(BetaContentBlock::toParam).toList())
+                      .build());
 
-        		// Run any tools Claude requested and collect results
-        		toolResults := processToolCalls(response)
-        		if len(toolResults) == 0 {
-        			return messages, nil // No more tool use; task complete
-        		}
+              // Run any tools Claude requested and collect results
+              List<BetaContentBlockParam> toolResults = processToolCalls(response);
+              if (toolResults.isEmpty()) {
+                  return messages; // No more tool use; task complete
+              }
 
-        		// Send tool results back to Claude for the next iteration
-        		messages = append(messages, anthropic.BetaMessageParam{
-        			Role:    anthropic.BetaMessageParamRoleUser,
-        			Content: toolResults,
-        		})
-        	}
-        	return messages, nil
-        }
+              // Send tool results back to Claude for the next iteration
+              messages.add(BetaMessageParam.builder()
+                      .role(BetaMessageParam.Role.USER)
+                      .contentOfBetaContentBlockParams(toolResults)
+                      .build());
+          }
+          return messages;
+      }
+      ```
 
-        ```
-      </Tab>
+      ```php PHP
+      /**
+       * Run the computer-use agent loop until Claude stops requesting tools
+       * or the iteration limit is reached.
+       */
+      function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
+      {
+          global $client, $tools;
 
-      <Tab title="Java">
-        ```java
-        /**
-         * Run the computer-use agent loop until Claude stops requesting tools
-         * or the iteration limit is reached.
-         */
-        List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
-            for (int i = 0; i < maxIterations; i++) {
-                BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
-                        .model(model)
-                        .maxTokens(4096)
-                        .messages(messages)
-                        .addTool(COMPUTER_TOOL)
-                        .addBeta("computer-use-2025-11-24")
-                        .build());
+          for ($i = 0; $i < $maxIterations; $i++) {
+              $response = $client->beta->messages->create(
+                  model: $model,
+                  maxTokens: 4096,
+                  messages: $messages,
+                  tools: $tools,
+                  betas: ['computer-use-2025-11-24'],
+              );
 
-                // Add Claude's response to the conversation history
-                messages.add(BetaMessageParam.builder()
-                        .role(BetaMessageParam.Role.ASSISTANT)
-                        .contentOfBetaContentBlockParams(
-                                response.content().stream().map(BetaContentBlock::toParam).toList())
-                        .build());
+              // Add Claude's response to the conversation history
+              $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
 
-                // Run any tools Claude requested and collect results
-                List<BetaContentBlockParam> toolResults = processToolCalls(response);
-                if (toolResults.isEmpty()) {
-                    return messages; // No more tool use; task complete
-                }
+              // Run any tools Claude requested and collect results
+              $toolResults = processToolCalls($response);
+              if ($toolResults === []) {
+                  return $messages; // No more tool use; task complete
+              }
 
-                // Send tool results back to Claude for the next iteration
-                messages.add(BetaMessageParam.builder()
-                        .role(BetaMessageParam.Role.USER)
-                        .contentOfBetaContentBlockParams(toolResults)
-                        .build());
-            }
-            return messages;
-        }
-        ```
-      </Tab>
+              // Send tool results back to Claude for the next iteration
+              $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
+          }
 
-      <Tab title="PHP">
-        ```php
-        /**
-         * Run the computer-use agent loop until Claude stops requesting tools
-         * or the iteration limit is reached.
-         */
-        function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
-        {
-            global $client, $tools;
+          return $messages;
+      }
+      ```
 
-            for ($i = 0; $i < $maxIterations; $i++) {
-                $response = $client->beta->messages->create(
-                    model: $model,
-                    maxTokens: 4096,
-                    messages: $messages,
-                    tools: $tools,
-                    betas: ['computer-use-2025-11-24'],
-                );
+      ```ruby Ruby
+      # Run the computer-use agent loop until Claude stops requesting tools
+      # or the iteration limit is reached.
+      def sampling_loop(model, messages, max_iterations: 10)
+        max_iterations.times do
+          response = CLIENT.beta.messages.create(
+            model: model,
+            max_tokens: 4096,
+            messages: messages,
+            tools: TOOLS,
+            betas: ["computer-use-2025-11-24"]
+          )
 
-                // Add Claude's response to the conversation history
-                $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
+          # Add Claude's response to the conversation history
+          messages << {role: "assistant", content: response.content}
 
-                // Run any tools Claude requested and collect results
-                $toolResults = processToolCalls($response);
-                if ($toolResults === []) {
-                    return $messages; // No more tool use; task complete
-                }
+          # Run any tools Claude requested and collect results
+          tool_results = process_tool_calls(response)
+          return messages if tool_results.empty? # No more tool use; task complete
 
-                // Send tool results back to Claude for the next iteration
-                $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
-            }
-
-            return $messages;
-        }
-        ```
-      </Tab>
-
-      <Tab title="Ruby">
-        ```ruby
-        # Run the computer-use agent loop until Claude stops requesting tools
-        # or the iteration limit is reached.
-        def sampling_loop(model, messages, max_iterations: 10)
-          max_iterations.times do
-            response = CLIENT.beta.messages.create(
-              model: model,
-              max_tokens: 4096,
-              messages: messages,
-              tools: TOOLS,
-              betas: ["computer-use-2025-11-24"]
-            )
-
-            # Add Claude's response to the conversation history
-            messages << {role: "assistant", content: response.content}
-
-            # Run any tools Claude requested and collect results
-            tool_results = process_tool_calls(response)
-            return messages if tool_results.empty? # No more tool use; task complete
-
-            # Send tool results back to Claude for the next iteration
-            messages << {role: "user", content: tool_results}
-          end
-
-          messages
+          # Send tool results back to Claude for the next iteration
+          messages << {role: "user", content: tool_results}
         end
-        ```
-      </Tab>
-    </Tabs>
+
+        messages
+      end
+      ```
+    </CodeGroup>
   </Step>
 </Steps>
 
@@ -1611,7 +1549,7 @@ When implementing the computer use tool, various errors might occur. Here's how 
 
 #### Size screenshots to fit image limits
 
-Screenshots sent to the computer tool must already fit within Claude's image size limits (see [image size limits](/docs/en/build-with-claude/vision#evaluate-image-size)). The API does not resize oversized images; a screenshot that exceeds the limit is rejected with an HTTP 400 validation error.
+Screenshots sent to the computer tool should fit within Claude's image size limits (see [image size limits](/docs/en/build-with-claude/vision#evaluate-image-size)). The API downscales oversized images before Claude sees them, and Claude returns coordinates for the image it sees, so relying on the server-side downscale leaves you without the scale factor you need to map those coordinates back to your screen. Only images over the API's separate [request limits](/docs/en/build-with-claude/vision#request-limits) (for example, more than 8,000 px on a side) are rejected with a validation error rather than downscaled.
 
 <Note>
   Limits vary by model. Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
@@ -1619,214 +1557,197 @@ Screenshots sent to the computer tool must already fit within Claude's image siz
 
 If your screen is larger than the limit, resize the screenshot before sending it, set `display_width_px`/`display_height_px` to the resized dimensions, and scale Claude's returned coordinates back to the original screen space:
 
-<Tabs>
-  <Tab title="cURL">
-    <Info>
-      Coordinate scaling and screenshot resizing happen in your application code, not in the API request. See the SDK tabs for the helper pattern.
-    </Info>
-  </Tab>
+<CodeGroup>
+  ```bash cURL
+  # Coordinate scaling and screenshot resizing happen in your application code, not
+  # in the API request. See the SDK tabs for the helper pattern.
+  ```
 
-  <Tab title="CLI">
-    <Info>
-      Coordinate scaling and screenshot resizing happen in your application code, not in the API request. See the SDK tabs for the helper pattern.
-    </Info>
-  </Tab>
+  ```bash CLI
+  # Coordinate scaling and screenshot resizing happen in your application code, not
+  # in the API request. See the SDK tabs for the helper pattern.
+  ```
 
-  <Tab title="Python">
-    ```python
-    import math
+  ```python Python
+  import math
 
 
-    def get_scale_factor(width, height):
-        """Calculate scale factor to meet API constraints."""
-        long_edge = max(width, height)
-        total_pixels = width * height
+  def get_scale_factor(width, height):
+      """Calculate scale factor to meet API constraints."""
+      long_edge = max(width, height)
+      total_pixels = width * height
 
-        long_edge_scale = 1568 / long_edge
-        total_pixels_scale = math.sqrt(1_150_000 / total_pixels)
+      long_edge_scale = 1568 / long_edge
+      total_pixels_scale = math.sqrt(1_150_000 / total_pixels)
 
-        return min(1.0, long_edge_scale, total_pixels_scale)
-
-
-    # When capturing screenshot
-    scale = get_scale_factor(screen_width, screen_height)
-    scaled_width = int(screen_width * scale)
-    scaled_height = int(screen_height * scale)
-
-    # Resize image to scaled dimensions before sending to Claude
-    screenshot = capture_and_resize(scaled_width, scaled_height)
+      return min(1.0, long_edge_scale, total_pixels_scale)
 
 
-    # When handling Claude's coordinates, scale them back up
-    def execute_click(x, y):
-        screen_x = x / scale
-        screen_y = y / scale
-        perform_click(screen_x, screen_y)
+  # When capturing screenshot
+  scale = get_scale_factor(screen_width, screen_height)
+  scaled_width = int(screen_width * scale)
+  scaled_height = int(screen_height * scale)
 
-    ```
-  </Tab>
+  # Resize image to scaled dimensions before sending to Claude
+  screenshot = capture_and_resize(scaled_width, scaled_height)
 
-  <Tab title="TypeScript">
-    ```typescript
-    const MAX_LONG_EDGE = 1568;
-    const MAX_PIXELS = 1_150_000;
 
-    function getScaleFactor(width: number, height: number): number {
-      const longEdge = Math.max(width, height);
-      const totalPixels = width * height;
+  # When handling Claude's coordinates, scale them back up
+  def execute_click(x, y):
+      screen_x = x / scale
+      screen_y = y / scale
+      perform_click(screen_x, screen_y)
+  ```
 
-      const longEdgeScale = MAX_LONG_EDGE / longEdge;
-      const totalPixelsScale = Math.sqrt(MAX_PIXELS / totalPixels);
+  ```typescript TypeScript
+  const MAX_LONG_EDGE = 1568;
+  const MAX_PIXELS = 1_150_000;
 
-      return Math.min(1.0, longEdgeScale, totalPixelsScale);
-    }
+  function getScaleFactor(width: number, height: number): number {
+    const longEdge = Math.max(width, height);
+    const totalPixels = width * height;
 
-    // When capturing screenshot
-    const scale = getScaleFactor(screenWidth, screenHeight);
-    const scaledWidth = Math.floor(screenWidth * scale);
-    const scaledHeight = Math.floor(screenHeight * scale);
+    const longEdgeScale = MAX_LONG_EDGE / longEdge;
+    const totalPixelsScale = Math.sqrt(MAX_PIXELS / totalPixels);
 
-    // Resize image to scaled dimensions before sending to Claude
-    const screenshot = captureAndResize(scaledWidth, scaledHeight);
+    return Math.min(1.0, longEdgeScale, totalPixelsScale);
+  }
 
-    // When handling Claude's coordinates, scale them back up
-    function executeClick(x: number, y: number): void {
-      const screenX = x / scale;
-      const screenY = y / scale;
-      performClick(screenX, screenY);
-    }
-    ```
-  </Tab>
+  // When capturing screenshot
+  const scale = getScaleFactor(screenWidth, screenHeight);
+  const scaledWidth = Math.floor(screenWidth * scale);
+  const scaledHeight = Math.floor(screenHeight * scale);
 
-  <Tab title="C#">
-    ```csharp
-    double GetScaleFactor(int width, int height)
-    {
-        // Calculate scale factor to meet API constraints.
-        int longEdge = Math.Max(width, height);
-        int totalPixels = width * height;
+  // Resize image to scaled dimensions before sending to Claude
+  const screenshot = captureAndResize(scaledWidth, scaledHeight);
 
-        double longEdgeScale = 1568.0 / longEdge;
-        double totalPixelsScale = Math.Sqrt(1_150_000.0 / totalPixels);
+  // When handling Claude's coordinates, scale them back up
+  function executeClick(x: number, y: number): void {
+    const screenX = x / scale;
+    const screenY = y / scale;
+    performClick(screenX, screenY);
+  }
+  ```
 
-        return Math.Min(1.0, Math.Min(longEdgeScale, totalPixelsScale));
-    }
+  ```csharp C#
+  double GetScaleFactor(int width, int height)
+  {
+      // Calculate scale factor to meet API constraints.
+      int longEdge = Math.Max(width, height);
+      int totalPixels = width * height;
 
-    // When capturing screenshot
-    double scale = GetScaleFactor(screenWidth, screenHeight);
-    int scaledWidth = (int)(screenWidth * scale);
-    int scaledHeight = (int)(screenHeight * scale);
+      double longEdgeScale = 1568.0 / longEdge;
+      double totalPixelsScale = Math.Sqrt(1_150_000.0 / totalPixels);
 
-    // Resize image to scaled dimensions before sending to Claude
-    var screenshot = CaptureAndResize(scaledWidth, scaledHeight);
+      return Math.Min(1.0, Math.Min(longEdgeScale, totalPixelsScale));
+  }
 
-    // When handling Claude's coordinates, scale them back up
-    void ExecuteClick(int x, int y)
-    {
-        double screenX = x / scale;
-        double screenY = y / scale;
-        PerformClick(screenX, screenY);
-    }
-    ```
-  </Tab>
+  // When capturing screenshot
+  double scale = GetScaleFactor(screenWidth, screenHeight);
+  int scaledWidth = (int)(screenWidth * scale);
+  int scaledHeight = (int)(screenHeight * scale);
 
-  <Tab title="Go">
-    ```go
-    func getScaleFactor(width, height int) float64 {
-    	longest := float64(max(width, height))
-    	area := float64(width * height)
-    	return min(1.0, 1568/longest, math.Sqrt(1_150_000/area))
-    }
+  // Resize image to scaled dimensions before sending to Claude
+  var screenshot = CaptureAndResize(scaledWidth, scaledHeight);
 
-    // ...
-    	// When capturing screenshot
-    	scale := getScaleFactor(screenWidth, screenHeight)
-    	scaledWidth := int(float64(screenWidth) * scale)
-    	scaledHeight := int(float64(screenHeight) * scale)
+  // When handling Claude's coordinates, scale them back up
+  void ExecuteClick(int x, int y)
+  {
+      double screenX = x / scale;
+      double screenY = y / scale;
+      PerformClick(screenX, screenY);
+  }
+  ```
 
-    	// Resize image to scaled dimensions before sending to Claude
-    	screenshot := captureAndResize(scaledWidth, scaledHeight)
+  ```go Go
+  func getScaleFactor(width, height int) float64 {
+  	longest := float64(max(width, height))
+  	area := float64(width * height)
+  	return min(1.0, 1568/longest, math.Sqrt(1_150_000/area))
+  }
 
-    	// When handling Claude's coordinates, scale them back up
-    	executeClick := func(x, y int) {
-    		performClick(float64(x)/scale, float64(y)/scale)
-    	}
-    ```
-  </Tab>
+  // ...
+  	// When capturing screenshot
+  	scale := getScaleFactor(screenWidth, screenHeight)
+  	scaledWidth := int(float64(screenWidth) * scale)
+  	scaledHeight := int(float64(screenHeight) * scale)
 
-  <Tab title="Java">
-    ```java
-    static double getScaleFactor(int width, int height) {
-        return Math.min(
-            1.0,
-            Math.min(
-                1568.0 / Math.max(width, height),
-                Math.sqrt(1_150_000.0 / (width * height))
-            )
-        );
-    }
+  	// Resize image to scaled dimensions before sending to Claude
+  	screenshot := captureAndResize(scaledWidth, scaledHeight)
 
-    void main() {
-    // ...
-        // When capturing screenshot
-        double scale = getScaleFactor(screenWidth, screenHeight);
-        int scaledWidth = (int)(screenWidth * scale);
-        int scaledHeight = (int)(screenHeight * scale);
+  	// When handling Claude's coordinates, scale them back up
+  	executeClick := func(x, y int) {
+  		performClick(float64(x)/scale, float64(y)/scale)
+  	}
+  ```
 
-        // Resize image to scaled dimensions before sending to Claude
-        var screenshot = captureAndResize(scaledWidth, scaledHeight);
+  ```java Java
+  static double getScaleFactor(int width, int height) {
+      return Math.min(
+          1.0,
+          Math.min(
+              1568.0 / Math.max(width, height),
+              Math.sqrt(1_150_000.0 / (width * height))
+          )
+      );
+  }
 
-        // When handling Claude's coordinates, scale them back up
-        BiConsumer<Integer, Integer> executeClick =
-            (x, y) -> performClick(x / scale, y / scale);
-    // ...
-    }
-    ```
-  </Tab>
+  void main() {
+  // ...
+      // When capturing screenshot
+      double scale = getScaleFactor(screenWidth, screenHeight);
+      int scaledWidth = (int)(screenWidth * scale);
+      int scaledHeight = (int)(screenHeight * scale);
 
-  <Tab title="PHP">
-    ```php
-    function getScaleFactor(int $width, int $height): float
-    {
-        return min(
-            1.0,
-            1568 / max($width, $height),
-            sqrt(1_150_000 / ($width * $height)),
-        );
-    }
-    // ...
-    // When capturing screenshot
-    $scale = getScaleFactor($screenWidth, $screenHeight);
-    $scaledWidth = (int)($screenWidth * $scale);
-    $scaledHeight = (int)($screenHeight * $scale);
+      // Resize image to scaled dimensions before sending to Claude
+      var screenshot = captureAndResize(scaledWidth, scaledHeight);
 
-    // Resize image to scaled dimensions before sending to Claude
-    $screenshot = captureAndResize($scaledWidth, $scaledHeight);
+      // When handling Claude's coordinates, scale them back up
+      BiConsumer<Integer, Integer> executeClick =
+          (x, y) -> performClick(x / scale, y / scale);
+  // ...
+  }
+  ```
 
-    // When handling Claude's coordinates, scale them back up
-    $executeClick = fn(int $x, int $y) => performClick($x / $scale, $y / $scale);
-    ```
-  </Tab>
+  ```php PHP
+  function getScaleFactor(int $width, int $height): float
+  {
+      return min(
+          1.0,
+          1568 / max($width, $height),
+          sqrt(1_150_000 / ($width * $height)),
+      );
+  }
+  // ...
+  // When capturing screenshot
+  $scale = getScaleFactor($screenWidth, $screenHeight);
+  $scaledWidth = (int)($screenWidth * $scale);
+  $scaledHeight = (int)($screenHeight * $scale);
 
-  <Tab title="Ruby">
-    ```ruby
-    def get_scale_factor(width, height)
-      [1.0, 1568.0 / [width, height].max, Math.sqrt(1_150_000.0 / (width * height))].min
-    end
-    # ...
-    # When capturing screenshot
-    scale = get_scale_factor(screen_width, screen_height)
-    scaled_width = (screen_width * scale).to_i
-    scaled_height = (screen_height * scale).to_i
+  // Resize image to scaled dimensions before sending to Claude
+  $screenshot = captureAndResize($scaledWidth, $scaledHeight);
 
-    # Resize image to scaled dimensions before sending to Claude
-    screenshot = capture_and_resize(scaled_width, scaled_height)
+  // When handling Claude's coordinates, scale them back up
+  $executeClick = fn(int $x, int $y) => performClick($x / $scale, $y / $scale);
+  ```
 
-    # When handling Claude's coordinates, scale them back up
-    execute_click = ->(x, y) { perform_click(x / scale, y / scale) }
-    ```
-  </Tab>
-</Tabs>
+  ```ruby Ruby
+  def get_scale_factor(width, height)
+    [1.0, 1568.0 / [width, height].max, Math.sqrt(1_150_000.0 / (width * height))].min
+  end
+  # ...
+  # When capturing screenshot
+  scale = get_scale_factor(screen_width, screen_height)
+  scaled_width = (screen_width * scale).to_i
+  scaled_height = (screen_height * scale).to_i
+
+  # Resize image to scaled dimensions before sending to Claude
+  screenshot = capture_and_resize(scaled_width, scaled_height)
+
+  # When handling Claude's coordinates, scale them back up
+  execute_click = ->(x, y) { perform_click(x / scale, y / scale) }
+  ```
+</CodeGroup>
 
 <Note>
   **macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
@@ -1865,6 +1786,30 @@ If clicks miss their targets, the cause is usually one of the following:
     * Consider compressing large screenshots to improve performance
     * Include relevant metadata such as timestamp or display state
     * If using higher resolutions, ensure coordinates are accurately scaled
+
+    A screenshot goes back as an image content block inside the `tool_result` content array (see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls)):
+
+    ```json
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+          "content": [
+            {
+              "type": "image",
+              "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": "iVBORw0KGgo..."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    ```
   </Accordion>
 
   <Accordion title="Manage screenshot history for prompt caching">
@@ -1877,336 +1822,286 @@ If clicks miss their targets, the cause is usually one of the following:
   <Accordion title="Add action delays">
     Some applications need time to respond to actions:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="Python">
-        ```python
-        def click_and_wait(x, y, wait_time=0.5):
-            click_at(x, y)
-            time.sleep(wait_time)  # Allow UI to update
-        ```
-      </Tab>
-
-      <Tab title="TypeScript">
-        ```typescript
-        async function clickAndWait(x: number, y: number, waitMs = 500): Promise<void> {
-          clickAt(x, y);
-          await setTimeout(waitMs); // Allow UI to update
-        }
-        ```
-      </Tab>
-
-      <Tab title="C#">
-        ```csharp
-        static void ClickAndWait(int x, int y, double waitSeconds = 0.5)
-        {
-            ClickAt(x, y);
-            Thread.Sleep(TimeSpan.FromSeconds(waitSeconds));  // Allow UI to update
-        }
-        ```
-      </Tab>
-
-      <Tab title="Go">
-        ```go
-        func clickAndWaitFor(x, y int, wait time.Duration) {
-        	clickAt(x, y)
-        	time.Sleep(wait) // Allow UI to update
-        }
-
-        func clickAndWait(x, y int) {
-        	clickAndWaitFor(x, y, 500*time.Millisecond)
-        }
-        ```
-      </Tab>
-
-      <Tab title="Java">
-        ```java
-        void clickAndWait(int x, int y) throws InterruptedException {
-            clickAndWait(x, y, 500);
-        }
-
-        void clickAndWait(int x, int y, long waitTimeMillis) throws InterruptedException {
-            clickAt(x, y);
-            Thread.sleep(waitTimeMillis);  // Allow UI to update
-        }
-        ```
-      </Tab>
-
-      <Tab title="PHP">
-        ```php
-        function clickAndWait(int $x, int $y, float $waitSeconds = 0.5): void
-        {
-            clickAt($x, $y);
-            usleep((int) ($waitSeconds * 1_000_000));  // Allow UI to update
-        }
-        ```
-      </Tab>
-
-      <Tab title="Ruby">
-        ```ruby
-        def click_and_wait(x, y, wait_time: 0.5)
+      ```python Python
+      def click_and_wait(x, y, wait_time=0.5):
           click_at(x, y)
-          sleep(wait_time) # Allow UI to update
-        end
-        ```
-      </Tab>
-    </Tabs>
+          time.sleep(wait_time)  # Allow UI to update
+      ```
+
+      ```typescript TypeScript
+      async function clickAndWait(x: number, y: number, waitMs = 500): Promise<void> {
+        clickAt(x, y);
+        await setTimeout(waitMs); // Allow UI to update
+      }
+      ```
+
+      ```csharp C#
+      static void ClickAndWait(int x, int y, double waitSeconds = 0.5)
+      {
+          ClickAt(x, y);
+          Thread.Sleep(TimeSpan.FromSeconds(waitSeconds));  // Allow UI to update
+      }
+      ```
+
+      ```go Go
+      func clickAndWaitFor(x, y int, wait time.Duration) {
+      	clickAt(x, y)
+      	time.Sleep(wait) // Allow UI to update
+      }
+
+      func clickAndWait(x, y int) {
+      	clickAndWaitFor(x, y, 500*time.Millisecond)
+      }
+      ```
+
+      ```java Java
+      void clickAndWait(int x, int y) throws InterruptedException {
+          clickAndWait(x, y, 500);
+      }
+
+      void clickAndWait(int x, int y, long waitTimeMillis) throws InterruptedException {
+          clickAt(x, y);
+          Thread.sleep(waitTimeMillis);  // Allow UI to update
+      }
+      ```
+
+      ```php PHP
+      function clickAndWait(int $x, int $y, float $waitSeconds = 0.5): void
+      {
+          clickAt($x, $y);
+          usleep((int) ($waitSeconds * 1_000_000));  // Allow UI to update
+      }
+      ```
+
+      ```ruby Ruby
+      def click_and_wait(x, y, wait_time: 0.5)
+        click_at(x, y)
+        sleep(wait_time) # Allow UI to update
+      end
+      ```
+    </CodeGroup>
   </Accordion>
 
   <Accordion title="Validate actions before running them">
     Check that requested actions are safe and valid:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="Python">
-        ```python
+      ```python Python
+      def validate_action(action_type, params):
+          if action_type == "left_click":
+              x, y = params.get("coordinate", (0, 0))
+              if not (0 <= x < display_width and 0 <= y < display_height):
+                  return False, "Coordinates out of bounds"
+          return True, None
+      ```
 
+      ```typescript TypeScript
+      interface ActionParams {
+        coordinate?: [number, number];
+      }
 
-        def validate_action(action_type, params):
-            if action_type == "left_click":
-                x, y = params.get("coordinate", (0, 0))
-                if not (0 <= x < display_width and 0 <= y < display_height):
-                    return False, "Coordinates out of bounds"
-            return True, None
-        ```
-      </Tab>
-
-      <Tab title="TypeScript">
-        ```typescript
-        interface ActionParams {
-          coordinate?: [number, number];
+      function validateAction(actionType: string, params: ActionParams): [boolean, string | null] {
+        if (actionType === "left_click") {
+          const [x, y] = params.coordinate ?? [0, 0];
+          if (!(x >= 0 && x < displayWidth && y >= 0 && y < displayHeight)) {
+            return [false, "Coordinates out of bounds"];
+          }
         }
+        return [true, null];
+      }
+      ```
 
-        function validateAction(actionType: string, params: ActionParams): [boolean, string | null] {
-          if (actionType === "left_click") {
-            const [x, y] = params.coordinate ?? [0, 0];
-            if (!(x >= 0 && x < displayWidth && y >= 0 && y < displayHeight)) {
-              return [false, "Coordinates out of bounds"];
-            }
+      ```csharp C#
+      const int DisplayWidth = 1024;
+      const int DisplayHeight = 768;
+      // ...
+      static (bool IsValid, string? Error) ValidateAction(string actionType, IReadOnlyDictionary<string, JsonElement> parameters)
+      {
+          if (actionType == "left_click")
+          {
+              int x = parameters["coordinate"][0].GetInt32();
+              int y = parameters["coordinate"][1].GetInt32();
+              if (x is < 0 or >= DisplayWidth || y is < 0 or >= DisplayHeight)
+              {
+                  return (false, "Coordinates out of bounds");
+              }
+          }
+          return (true, null);
+      }
+      ```
+
+      ```go Go
+      const (
+      	displayWidth  = 1024
+      	displayHeight = 768
+      )
+
+      func validateAction(actionType string, params map[string]any) (bool, string) {
+      	if actionType == "left_click" {
+      		coord, ok := params["coordinate"].([]any)
+      		if !ok || len(coord) != 2 {
+      			return false, "Invalid coordinate"
+      		}
+      		x, y := int(coord[0].(float64)), int(coord[1].(float64))
+      		if !(0 <= x && x < displayWidth && 0 <= y && y < displayHeight) {
+      			return false, "Coordinates out of bounds"
+      		}
+      	}
+      	return true, ""
+      }
+      ```
+
+      ```java Java
+      static final int DISPLAY_WIDTH = 1024;
+      static final int DISPLAY_HEIGHT = 768;
+
+      record Validation(boolean valid, String error) {}
+
+      Validation validateAction(String actionType, Map<String, JsonValue> params) {
+          if (actionType.equals("left_click")) {
+              List<JsonValue> coord = (List<JsonValue>) params.get("coordinate").asArray().get();
+              long x = ((Number) coord.get(0).asNumber().get()).longValue();
+              long y = ((Number) coord.get(1).asNumber().get()).longValue();
+              if (!(0 <= x && x < DISPLAY_WIDTH && 0 <= y && y < DISPLAY_HEIGHT)) {
+                  return new Validation(false, "Coordinates out of bounds");
+              }
+          }
+          return new Validation(true, null);
+      }
+      ```
+
+      ```php PHP
+      const DISPLAY_WIDTH = 1024;
+      const DISPLAY_HEIGHT = 768;
+
+      /** @return array{bool, ?string} */
+      function validateAction(string $actionType, array $params): array
+      {
+          if ($actionType === 'left_click') {
+              [$x, $y] = $params['coordinate'] ?? [0, 0];
+              if (!(0 <= $x && $x < DISPLAY_WIDTH && 0 <= $y && $y < DISPLAY_HEIGHT)) {
+                  return [false, 'Coordinates out of bounds'];
+              }
           }
           return [true, null];
-        }
-        ```
-      </Tab>
+      }
+      ```
 
-      <Tab title="C#">
-        ```csharp
-        const int DisplayWidth = 1024;
-        const int DisplayHeight = 768;
-        // ...
-        static (bool IsValid, string? Error) ValidateAction(string actionType, IReadOnlyDictionary<string, JsonElement> parameters)
-        {
-            if (actionType == "left_click")
-            {
-                int x = parameters["coordinate"][0].GetInt32();
-                int y = parameters["coordinate"][1].GetInt32();
-                if (x is < 0 or >= DisplayWidth || y is < 0 or >= DisplayHeight)
-                {
-                    return (false, "Coordinates out of bounds");
-                }
-            }
-            return (true, null);
-        }
-        ```
-      </Tab>
+      ```ruby Ruby
+      DISPLAY_WIDTH = 1024
+      DISPLAY_HEIGHT = 768
 
-      <Tab title="Go">
-        ```go
-        const (
-        	displayWidth  = 1024
-        	displayHeight = 768
-        )
-
-        func validateAction(actionType string, params map[string]any) (bool, string) {
-        	if actionType == "left_click" {
-        		coord, ok := params["coordinate"].([]any)
-        		if !ok || len(coord) != 2 {
-        			return false, "Invalid coordinate"
-        		}
-        		x, y := int(coord[0].(float64)), int(coord[1].(float64))
-        		if !(0 <= x && x < displayWidth && 0 <= y && y < displayHeight) {
-        			return false, "Coordinates out of bounds"
-        		}
-        	}
-        	return true, ""
-        }
-        ```
-      </Tab>
-
-      <Tab title="Java">
-        ```java
-        static final int DISPLAY_WIDTH = 1024;
-        static final int DISPLAY_HEIGHT = 768;
-
-        record Validation(boolean valid, String error) {}
-
-        Validation validateAction(String actionType, Map<String, JsonValue> params) {
-            if (actionType.equals("left_click")) {
-                List<JsonValue> coord = (List<JsonValue>) params.get("coordinate").asArray().get();
-                long x = ((Number) coord.get(0).asNumber().get()).longValue();
-                long y = ((Number) coord.get(1).asNumber().get()).longValue();
-                if (!(0 <= x && x < DISPLAY_WIDTH && 0 <= y && y < DISPLAY_HEIGHT)) {
-                    return new Validation(false, "Coordinates out of bounds");
-                }
-            }
-            return new Validation(true, null);
-        }
-        ```
-      </Tab>
-
-      <Tab title="PHP">
-        ```php
-        const DISPLAY_WIDTH = 1024;
-        const DISPLAY_HEIGHT = 768;
-
-        /** @return array{bool, ?string} */
-        function validateAction(string $actionType, array $params): array
-        {
-            if ($actionType === 'left_click') {
-                [$x, $y] = $params['coordinate'] ?? [0, 0];
-                if (!(0 <= $x && $x < DISPLAY_WIDTH && 0 <= $y && $y < DISPLAY_HEIGHT)) {
-                    return [false, 'Coordinates out of bounds'];
-                }
-            }
-            return [true, null];
-        }
-        ```
-      </Tab>
-
-      <Tab title="Ruby">
-        ```ruby
-        DISPLAY_WIDTH = 1024
-        DISPLAY_HEIGHT = 768
-
-        def validate_action(action_type, params)
-          if action_type == "left_click"
-            x, y = params.fetch(:coordinate, [0, 0])
-            unless (0...DISPLAY_WIDTH).cover?(x) && (0...DISPLAY_HEIGHT).cover?(y)
-              return [false, "Coordinates out of bounds"]
-            end
+      def validate_action(action_type, params)
+        if action_type == "left_click"
+          x, y = params.fetch(:coordinate, [0, 0])
+          unless (0...DISPLAY_WIDTH).cover?(x) && (0...DISPLAY_HEIGHT).cover?(y)
+            return [false, "Coordinates out of bounds"]
           end
-          [true, nil]
         end
-        ```
-      </Tab>
-    </Tabs>
+        [true, nil]
+      end
+      ```
+    </CodeGroup>
   </Accordion>
 
   <Accordion title="Log actions for debugging">
     Keep a log of all actions for troubleshooting:
 
-    <Tabs>
-      <Tab title="cURL">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+    <CodeGroup>
+      ```bash cURL
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="CLI">
-        <Info>
-          This is application-side helper code with no API request. See the SDK tabs for the pattern.
-        </Info>
-      </Tab>
+      ```bash CLI
+      # This is application-side helper code with no API request. See the SDK tabs for
+      # the pattern.
+      ```
 
-      <Tab title="Python">
-        ```python
-        import logging
+      ```python Python
+      import logging
 
 
-        def log_action(action_type, params, result):
-            logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")
-        ```
-      </Tab>
+      def log_action(action_type, params, result):
+          logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")
+      ```
 
-      <Tab title="TypeScript">
-        ```typescript
-        function logAction(actionType: string, params: unknown, result: unknown): void {
-          console.error(
-            `Action: ${actionType}, Params: ${JSON.stringify(params)}, Result: ${JSON.stringify(
-              result
-            )}`
-          );
-        }
-        ```
-      </Tab>
+      ```typescript TypeScript
+      function logAction(actionType: string, params: unknown, result: unknown): void {
+        console.error(
+          `Action: ${actionType}, Params: ${JSON.stringify(params)}, Result: ${JSON.stringify(
+            result
+          )}`
+        );
+      }
+      ```
 
-      <Tab title="C#">
-        ```csharp
-        static void LogAction(string actionType, object? parameters, object? result)
-        {
-            Console.Error.WriteLine($"Action: {actionType}, Params: {parameters}, Result: {result}");
-        }
-        ```
-      </Tab>
+      ```csharp C#
+      static void LogAction(string actionType, object? parameters, object? result)
+      {
+          Console.Error.WriteLine($"Action: {actionType}, Params: {parameters}, Result: {result}");
+      }
+      ```
 
-      <Tab title="Go">
-        ```go
-        func logAction(actionType string, params map[string]any, result any) {
-        	log.Printf("Action: %s, Params: %v, Result: %v", actionType, params, result)
-        }
-        ```
-      </Tab>
+      ```go Go
+      func logAction(actionType string, params map[string]any, result any) {
+      	log.Printf("Action: %s, Params: %v, Result: %v", actionType, params, result)
+      }
+      ```
 
-      <Tab title="Java">
-        ```java
-        import static java.lang.System.Logger.Level.INFO;
+      ```java Java
+      import static java.lang.System.Logger.Level.INFO;
 
-        static final System.Logger LOGGER = System.getLogger("computer-use");
+      static final System.Logger LOGGER = System.getLogger("computer-use");
 
-        void logAction(String actionType, Object params, Object result) {
-            LOGGER.log(INFO, "Action: {0}, Params: {1}, Result: {2}", actionType, params, result);
-        }
-        ```
-      </Tab>
+      void logAction(String actionType, Object params, Object result) {
+          LOGGER.log(INFO, "Action: {0}, Params: {1}, Result: {2}", actionType, params, result);
+      }
+      ```
 
-      <Tab title="PHP">
-        ```php
-        function logAction(string $actionType, array $params, mixed $result): void
-        {
-            error_log(sprintf(
-                'Action: %s, Params: %s, Result: %s',
-                $actionType,
-                json_encode($params),
-                json_encode($result),
-            ));
-        }
-        ```
-      </Tab>
+      ```php PHP
+      function logAction(string $actionType, array $params, mixed $result): void
+      {
+          error_log(sprintf(
+              'Action: %s, Params: %s, Result: %s',
+              $actionType,
+              json_encode($params),
+              json_encode($result),
+          ));
+      }
+      ```
 
-      <Tab title="Ruby">
-        ```ruby
-        require "logger"
+      ```ruby Ruby
+      require "logger"
 
-        LOGGER = Logger.new($stderr)
+      LOGGER = Logger.new($stderr)
 
-        def log_action(action_type, params, result)
-          LOGGER.info("Action: #{action_type}, Params: #{params}, Result: #{result}")
-        end
-        ```
-      </Tab>
-    </Tabs>
+      def log_action(action_type, params, result)
+        LOGGER.info("Action: #{action_type}, Params: #{params}, Result: #{result}")
+      end
+      ```
+    </CodeGroup>
   </Accordion>
 </AccordionGroup>
 
@@ -2214,22 +2109,33 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ## Understand computer use limitations
 
-The computer use functionality is in beta. While Claude's capabilities are state of the art, developers should be aware of its limitations:
+Computer use is in beta. Keep the following limitations in mind:
 
 1. **Latency:** The current computer use latency for human-AI interactions might be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
+
 2. **Computer vision accuracy and reliability:** Claude might make mistakes or hallucinate when outputting specific coordinates while generating actions. Extended thinking can help you understand the model's reasoning and identify potential issues.
+
 3. **Tool selection accuracy and reliability:** Claude might make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability might be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
+
 4. **Scrolling reliability:** The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn't take effect, keyboard alternatives such as Page Down can help.
+
 5. **Spreadsheet interaction:** Use the fine-grained mouse control actions (`left_mouse_down`, `left_mouse_up`) and modifier-key combinations to select individual cells. Complex spreadsheet operations might still require multiple attempts.
+
 6. **Account creation and content generation on social and communications platforms:** While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability might be updated in the future.
-7. **Vulnerabilities:** Vulnerabilities such as jailbreaking or prompt injection might persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Consider the following: a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges b. Avoiding giving computer use access to sensitive accounts or data without strict oversight c. Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
+
+7. **Vulnerabilities:** Vulnerabilities such as jailbreaking or prompt injection might persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Consider the following:
+
+   * Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
+   * Avoiding giving computer use access to sensitive accounts or data without strict oversight
+   * Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
+
 8. **Inappropriate or illegal actions:** Under Anthropic's Terms of Service, you must not employ computer use to violate any laws or the Acceptable Use Policy.
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
 ## Data retention
 
-Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
+Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call. Retention for those API requests is governed by [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
@@ -2257,19 +2163,19 @@ Computer use follows the standard [tool use pricing](/docs/en/agents-and-tools/t
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Text editor tool" icon="file" href="/docs/en/agents-and-tools/tool-use/text-editor-tool">
-    Continue to the next tool: view, create, and edit files with Claude
+  <Card title="Troubleshooting tool use" icon="wrench" href="/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use">
+    Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
   </Card>
 
   <Card title="Reference implementation" icon="github-logo" href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo">
     Get started with the complete Docker-based implementation
   </Card>
 
-  <Card title="Tool documentation" icon="tool" href="/docs/en/agents-and-tools/tool-use/overview">
-    Learn more about tool use and creating custom tools
+  <Card title="Tool use with Claude" icon="tool" href="/docs/en/agents-and-tools/tool-use/overview">
+    Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
   </Card>
 
-  <Card title="Best practices in detail" icon="book-open" href="https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude">
+  <Card title="Best practices in detail" icon="book" href="https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude">
     Benchmarked recommendations for resolution, thinking effort, and context management
   </Card>
 </CardGroup>
