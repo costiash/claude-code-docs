@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-02T22:07:26Z",
+  "generated_at": "2026-07-03T01:26:47Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -23,12 +23,12 @@
         "mcp",
         "code",
         "background",
-        "prompt",
         "agent",
+        "prompt",
         "model",
         "command"
       ],
-      "word_count": 60798,
+      "word_count": 61343,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -224,7 +224,7 @@
         "workspace",
         "agent"
       ],
-      "word_count": 2116,
+      "word_count": 2151,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
