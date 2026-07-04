@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-04T01:20:56Z",
+  "generated_at": "2026-07-04T04:56:08Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -38,6 +38,7 @@
         "model",
         "claude",
         "bedrock",
+        "amazon",
         "code",
         "aws",
         "mantle",
@@ -53,10 +54,9 @@
         "inference",
         "see",
         "api",
-        "variables",
-        "default"
+        "variables"
       ],
-      "word_count": 3499,
+      "word_count": 3541,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -140,7 +140,7 @@
         "when",
         "fix"
       ],
-      "word_count": 6598,
+      "word_count": 6601,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -168,7 +168,7 @@
         "background",
         "print"
       ],
-      "word_count": 3756,
+      "word_count": 3760,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -217,14 +217,14 @@
         "session",
         "limits",
         "teams",
+        "agent",
         "user",
         "tasks",
         "work",
         "thinking",
-        "workspace",
-        "agent"
+        "workspace"
       ],
-      "word_count": 2151,
+      "word_count": 2156,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -241,18 +241,18 @@
         "disable",
         "off",
         "users",
+        "cloud",
         "settings",
         "must",
+        "google",
+        "platform",
         "retention",
         "when",
         "opt",
         "see",
-        "using",
-        "feedback",
-        "survey",
-        "sessions"
+        "using"
       ],
-      "word_count": 2007,
+      "word_count": 2034,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -280,7 +280,7 @@
         "permissions",
         "before"
       ],
-      "word_count": 8789,
+      "word_count": 8812,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -308,7 +308,7 @@
         "across",
         "project"
       ],
-      "word_count": 2077,
+      "word_count": 2079,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
@@ -321,22 +321,22 @@
         "code",
         "actions",
         "repository",
+        "cloud",
         "api",
+        "google",
         "workflow",
+        "amazon",
         "bedrock",
         "permissions",
         "create",
-        "vertex",
+        "agent",
         "key",
         "setup",
         "action",
-        "required",
-        "google",
-        "security",
-        "tip",
-        "configuration"
+        "platform",
+        "required"
       ],
-      "word_count": 3343,
+      "word_count": 3375,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -345,35 +345,38 @@
       "keywords": [
         "claude",
         "gitlab",
+        "cloud",
+        "amazon",
         "bedrock",
         "code",
         "job",
-        "vertex",
+        "google",
+        "agent",
+        "platform",
         "api",
         "variables",
         "project",
-        "amazon",
-        "google",
         "provider",
         "oidc",
         "note",
         "add",
         "setup",
         "runs",
-        "example",
-        "iam",
-        "role"
+        "example"
       ],
-      "word_count": 2374,
+      "word_count": 2418,
       "file_path": "docs/claude-code__gitlab-ci-cd.md"
     },
     "/claude-code/google-vertex-ai": {
-      "title": "Claude Code on Google Vertex AI",
+      "title": "Claude Code on Google Cloud's Agent Platform",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "claude",
+        "google",
+        "cloud",
         "model",
-        "vertex",
+        "platform",
+        "agent",
         "code",
         "models",
         "project",
@@ -381,18 +384,15 @@
         "region",
         "default",
         "credentials",
-        "google",
         "gcp",
-        "cloud",
         "environment",
         "variables",
         "when",
         "through",
         "configuration",
-        "div",
-        "wizard"
+        "div"
       ],
-      "word_count": 2037,
+      "word_count": 2123,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -402,9 +402,9 @@
         "claude",
         "mode",
         "code",
+        "agent",
         "example",
         "session",
-        "agent",
         "sdk",
         "event",
         "without",
@@ -420,7 +420,7 @@
         "message",
         "response"
       ],
-      "word_count": 2107,
+      "word_count": 2112,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -560,7 +560,7 @@
         "terms",
         "free"
       ],
-      "word_count": 444,
+      "word_count": 446,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
@@ -588,7 +588,7 @@
         "connect",
         "reference"
       ],
-      "word_count": 795,
+      "word_count": 799,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -616,7 +616,7 @@
         "available",
         "local"
       ],
-      "word_count": 8237,
+      "word_count": 8253,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -651,9 +651,9 @@
       "title": "Claude Code on Microsoft Foundry",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
+        "microsoft",
         "foundry",
         "claude",
-        "microsoft",
         "code",
         "model",
         "azure",
@@ -672,7 +672,7 @@
         "const",
         "note"
       ],
-      "word_count": 1006,
+      "word_count": 1015,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -700,7 +700,7 @@
         "setting",
         "sessions"
       ],
-      "word_count": 8605,
+      "word_count": 8661,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -728,7 +728,7 @@
         "counter",
         "mcp"
       ],
-      "word_count": 10564,
+      "word_count": 10574,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -756,7 +756,7 @@
         "security",
         "github"
       ],
-      "word_count": 823,
+      "word_count": 824,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -924,7 +924,7 @@
         "info",
         "start"
       ],
-      "word_count": 1609,
+      "word_count": 1610,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1008,7 +1008,7 @@
         "mcp",
         "file"
       ],
-      "word_count": 13984,
+      "word_count": 14004,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1036,7 +1036,7 @@
         "native",
         "release"
       ],
-      "word_count": 3310,
+      "word_count": 3286,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1160,7 +1160,9 @@
         "through",
         "aws",
         "enterprise",
+        "cloud",
         "tab",
+        "platform",
         "gateway",
         "proxy",
         "environment",
@@ -1170,13 +1172,11 @@
         "variables",
         "div",
         "teams",
+        "microsoft",
         "default",
-        "corporate",
-        "traffic",
-        "learn",
-        "organization"
+        "corporate"
       ],
-      "word_count": 1602,
+      "word_count": 1623,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -1204,7 +1204,7 @@
         "installation",
         "mcp"
       ],
-      "word_count": 989,
+      "word_count": 997,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -1232,7 +1232,7 @@
         "when",
         "sessions"
       ],
-      "word_count": 5416,
+      "word_count": 5419,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
