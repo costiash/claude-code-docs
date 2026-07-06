@@ -19,7 +19,7 @@ Key characteristics:
 
 ### Claude Code workspace
 
-When a member of your organization first signs in to [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) with their Claude Console account, Anthropic automatically creates a **Claude Code** workspace in the organization and adds that member to it. Every subsequent member who signs in to Claude Code is added the same way.
+When a member of your organization first signs in to [Claude Code](https://code.claude.com/docs/en/overview) with their Claude Console account, Anthropic automatically creates a **Claude Code** workspace in the organization and adds that member to it. Every subsequent member who signs in to Claude Code is added the same way.
 
 The Claude Code workspace keeps Claude Code traffic separate from your other API workloads:
 

@@ -532,4 +532,4 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 | Claude Sonnet 4.6 | Not supported                               |
 | Claude Haiku 4.5  | Not supported                               |
 
-Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces. Use task budgets directly via the Messages API on a [supported model](#feature-support).
+Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/overview) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](#feature-support).

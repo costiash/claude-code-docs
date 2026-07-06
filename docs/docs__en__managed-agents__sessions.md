@@ -210,6 +210,8 @@ Overrides apply only to the session you create. They do not modify the agent res
 
 In the response, the `agent` object reflects the configuration the session runs with after the overrides are applied. Its `id` and `version` still identify the agent and version the overrides are applied to. This lets you trace a session back to its base agent.
 
+The following example starts a session that overrides the model and clears the system prompt:
+
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
   override_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -247,6 +249,132 @@ In the response, the `agent` object reflects the configuration the session runs 
     system: null
   environment_id: $ENVIRONMENT_ID
   YAML
+  ```
+
+  ```python Python
+  override_session = client.beta.sessions.create(
+      agent={
+          "type": "agent_with_overrides",
+          "id": agent.id,
+          "model": {"id": "claude-sonnet-5"},
+          "system": None,  # clear the agent's system prompt for this session
+      },
+      environment_id=environment.id,
+  )
+  # The response's agent is the resolved snapshot with the overrides applied.
+  print(f"Model: {override_session.agent.model.id}")
+  print(f"System: {override_session.agent.system}")
+  ```
+
+  ```typescript TypeScript
+  const overrideSession = await client.beta.sessions.create({
+    agent: {
+      type: "agent_with_overrides",
+      id: agent.id,
+      model: { id: "claude-sonnet-5" },
+      system: null // clear the agent's system prompt for this session
+    },
+    environment_id: environment.id
+  });
+  // The response's agent is the resolved snapshot with the overrides applied.
+  console.log(`Model: ${overrideSession.agent.model.id}`);
+  console.log(`System: ${overrideSession.agent.system}`);
+  ```
+
+  ```csharp C#
+  var overrideSession = await client.Beta.Sessions.Create(new()
+  {
+      Agent = new BetaManagedAgentsAgentWithOverridesParams
+      {
+          Type = BetaManagedAgentsAgentWithOverridesParamsType.AgentWithOverrides,
+          ID = agent.ID,
+          Model = new BetaManagedAgentsModelConfigParams
+          {
+              ID = BetaManagedAgentsModel.ClaudeSonnet5,
+          },
+          System = null, // clear the agent's system prompt for this session
+      },
+      EnvironmentID = environment.ID,
+  });
+  // The response's agent is the resolved snapshot with the overrides applied.
+  Console.WriteLine($"Model: {overrideSession.Agent.Model.ID.Raw()}");
+  Console.WriteLine($"System: {overrideSession.Agent.System ?? "null"}");
+  ```
+
+  ```go Go
+  overrideSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+  	Agent: anthropic.BetaSessionNewParamsAgentUnion{
+  		OfBetaManagedAgentsAgentWithOverridess: &anthropic.BetaManagedAgentsAgentWithOverridesParams{
+  			Type: anthropic.BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides,
+  			ID:   agent.ID,
+  			Model: anthropic.BetaManagedAgentsModelConfigParams{
+  				ID: anthropic.BetaManagedAgentsModelClaudeSonnet5,
+  			},
+  			// Clear the agent's system prompt for this session.
+  			System: param.Null[string](),
+  		},
+  	},
+  	EnvironmentID: environment.ID,
+  })
+  if err != nil {
+  	panic(err)
+  }
+  // The response's agent is the resolved snapshot with the overrides applied.
+  fmt.Printf("Model: %s\n", overrideSession.Agent.Model.ID)
+  fmt.Printf("System: %q\n", overrideSession.Agent.System)
+  ```
+
+  ```java Java
+  var overrideSession = client.beta().sessions().create(SessionCreateParams.builder()
+      .agent(BetaManagedAgentsAgentWithOverridesParams.builder()
+          .type(BetaManagedAgentsAgentWithOverridesParams.Type.AGENT_WITH_OVERRIDES)
+          .id(agent.id())
+          .model(BetaManagedAgentsModelConfigParams.builder()
+              .id(BetaManagedAgentsModel.CLAUDE_SONNET_5)
+              .build())
+          .system((String) null) // clear the agent's system prompt for this session
+          .build())
+      .environmentId(environment.id())
+      .build());
+  // The response's agent is the resolved snapshot with the overrides applied.
+  IO.println("Model: " + overrideSession.agent().model().id());
+  IO.println("System: " + overrideSession.agent().system().orElse("null"));
+  ```
+
+  ```php PHP
+  $overrides = BetaManagedAgentsAgentWithOverridesParams::with(
+      id: $agent->id,
+      type: 'agent_with_overrides',
+      model: ['id' => 'claude-sonnet-5'],
+  );
+  // Clear the system prompt for this session. Array access is load-bearing here:
+  // create() strips nulls from raw arrays and ::with() treats null args as omitted.
+  $overrides['system'] = null;
+
+  $overrideSession = $client->beta->sessions->create(
+      agent: $overrides,
+      environmentID: $environment->id,
+  );
+  // The response's agent is the resolved snapshot with the overrides applied.
+  echo "Model: {$overrideSession->agent->model->id}\n";
+  echo 'System: ' . ($overrideSession->agent->system ?? 'null') . "\n";
+  ```
+
+  ```ruby Ruby
+  # The system prompt override is `system_` (trailing underscore) because plain
+  # `system` is Ruby's Kernel#system. Setting it to nil clears the prompt.
+  override_session = client.beta.sessions.create(
+    agent: Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams.new(
+      type: :agent_with_overrides,
+      id: agent.id,
+      model: {id: "claude-sonnet-5"},
+      system_: nil
+    ),
+    environment_id: environment.id
+  )
+  # The response's agent is the resolved snapshot with the overrides applied.
+  puts "Model: #{override_session.agent.model.id}"
+  puts "System: #{override_session.agent.system_.inspect}"
   ```
 </CodeGroup>
 
@@ -484,6 +612,20 @@ Creating a session provisions the environment's sandbox but does not start any w
 
 See [Session event stream](/docs/en/managed-agents/events-and-streaming) for how to stream the agent's responses and handle tool confirmations.
 
-See [Session statuses](/docs/en/managed-agents/session-operations#session-statuses) for the statuses a session moves through, and [Session operations](/docs/en/managed-agents/session-operations) for retrieving, listing, updating, archiving, and deleting sessions.
+See [Session statuses](/docs/en/managed-agents/session-operations#session-statuses) for the statuses a session moves through.
 
-To create sessions automatically on a recurring schedule, see [Scheduled deployments](/docs/en/managed-agents/scheduled-deployments).
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Session operations" icon="settings" href="/docs/en/managed-agents/session-operations">
+    Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
+  </Card>
+
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+    Send events, stream responses, and interrupt or redirect your session mid-execution.
+  </Card>
+
+  <Card title="Scheduled deployments" icon="arrows-clockwise" href="/docs/en/managed-agents/scheduled-deployments">
+    Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.
+  </Card>
+</CardGroup>
