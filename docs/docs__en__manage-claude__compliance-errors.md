@@ -5,7 +5,7 @@ Every Compliance API error message with cause and fix, organized by HTTP status 
 ---
 
 <Note>
-  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
@@ -92,7 +92,7 @@ The API key provided is invalid or has been revoked.
 
 **Cause:** The key in `x-api-key` does not exist, has been deleted, or has been disabled. A missing or empty `x-api-key` header returns the same body, so check both your secret store and the key's revocation status.
 
-**Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+**Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 
 ## 403 Forbidden
 
@@ -109,7 +109,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 **Cause:** A key without `read:compliance_activities` was used to call `GET /v1/compliance/activities`. There are two common paths to this error:
 
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_activities` scope.
-* A Claude Console Admin API key (`sk-ant-admin01-...`) was created before the Compliance API was enabled for the organization. Keys created before enablement do not carry the scope; see [After enablement: Claude Console organizations](/docs/en/manage-claude/compliance-api-access#after-enablement-claude-console-organizations).
+* A Claude Console Admin API key (`sk-ant-admin01-...`) was created before the Compliance API was enabled for the organization. Keys created before enablement do not carry the scope; see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api).
 
 **Fix:** Compliance Access Key scopes are immutable after creation. Create a new key that includes `read:compliance_activities`, or use a Claude Console Admin API key. See [Which key do you need?](/docs/en/manage-claude/compliance-api-access#which-key-do-you-need) for the conditions under which an Admin API key carries this scope.
 
@@ -126,7 +126,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_org_data` scope.
 * A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot read organization metadata.
 
-**Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
+**Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
 
 ### Retired scope: organization settings
 
@@ -138,7 +138,7 @@ Missing required scopes. Got: ['read:compliance_org_settings'] Needed: ['read:co
 
 **Cause:** The `read:compliance_org_settings` scope was retired on June 30, 2026. `GET /v1/compliance/organizations/{organization_id}/settings` now requires `read:compliance_org_data`, the same scope as the other organization endpoints, and the retired scope no longer authorizes anything. A Compliance Access Key that carries only `read:compliance_org_settings` returns this error on every call to the settings endpoint, even though the key worked before the retirement. The retired scope can no longer be selected or granted when creating a key.
 
-**Fix:** Compliance Access Key scopes are immutable after creation. [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_org_data` selected, update your integration to use it, then delete the old key. A key that already carries `read:compliance_org_data` is unaffected by the retirement.
+**Fix:** Compliance Access Key scopes are immutable after creation. [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) with `read:compliance_org_data` selected, update your integration to use it, then delete the old key. A key that already carries `read:compliance_org_data` is unaffected by the retirement.
 
 ### Insufficient scope: user data
 
@@ -153,7 +153,7 @@ Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:comp
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_user_data` scope.
 * A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot be granted `read:compliance_user_data`, so they cannot call the chat, file, project, project attachment, user, or group-member endpoints.
 
-**Fix:** Use a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) created in claude.ai with `read:compliance_user_data` selected. If the request really should be Activity Feed only, point the Admin API key at `GET /v1/compliance/activities` instead.
+**Fix:** Use a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) created in claude.ai with `read:compliance_user_data` selected. If the request really should be Activity Feed only, point the Admin API key at `GET /v1/compliance/activities` instead.
 
 ### Insufficient scope: delete
 
@@ -165,7 +165,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['delete:com
 
 **Cause:** A Compliance Access Key without `delete:compliance_user_data` was used to call a `DELETE` endpoint on chats, files, or projects.
 
-**Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `delete:compliance_user_data` selected. The delete scope is separate from `read:compliance_user_data` so that read-only audit keys cannot delete content.
+**Fix:** [Create a new Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) with `delete:compliance_user_data` selected. The delete scope is separate from `read:compliance_user_data` so that read-only audit keys cannot delete content.
 
 ## 404 Not Found
 
@@ -259,7 +259,7 @@ The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has c
 
 **Cause:** `DELETE /v1/compliance/apps/projects/{project_id}` was called on a project that still has chats attached.
 
-**Fix:** List the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the chat list endpoint requires at least one `user_ids[]` value; enumerate IDs through [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}`, and then retry the project delete.
+**Fix:** List the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the `project_ids[]` filter requires at least one `user_ids[]` value; enumerate IDs through [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}`, and then retry the project delete.
 
 ## 429 Too Many Requests
 

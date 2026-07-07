@@ -5,7 +5,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 ---
 
 <Note>
-  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 ## Access and scopes
@@ -16,7 +16,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 
     To call the Compliance API, you create one of two key types instead:
 
-    * **For full Compliance API access ([Activity Feed](/docs/en/manage-claude/compliance-activity-feed) plus chats, files, projects, users, organization metadata, and organization settings),** the primary owner of the parent organization creates a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) in claude.ai.
+    * **For full Compliance API access ([Activity Feed](/docs/en/manage-claude/compliance-activity-feed) plus chats, files, projects, users, organization metadata, and organization settings),** the primary owner of the parent organization (or an organization owner, for a key restricted to their own organization only) creates a [Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) in claude.ai.
     * **For Activity Feed access only,** an organization admin in your Claude Console organization creates an [Admin API key](/docs/en/manage-claude/compliance-api-access#create-an-admin-api-key) in Claude Console. The Compliance API must already be enabled for the organization, and the admin must create the Admin API key after enablement for it to carry the `read:compliance_activities` scope.
   </Accordion>
 
@@ -36,7 +36,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
     }
     ```
 
-    To access content endpoints, the primary owner of your parent organization must [create a Compliance Access Key](/docs/en/manage-claude/compliance-api-access#create-a-compliance-access-key) with `read:compliance_user_data` (and `delete:compliance_user_data` for deletes), or `read:compliance_org_data` for organization, role, group, and effective-settings endpoints. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full per-endpoint catalog.
+    To access content endpoints, the primary owner of your parent organization (or an organization owner, for their own organization only) must [create a Compliance Access Key](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) with `read:compliance_user_data` (and `delete:compliance_user_data` for deletes), or `read:compliance_org_data` for organization, role, group, and effective-settings endpoints. See [Handle Compliance API errors](/docs/en/manage-claude/compliance-errors#403-forbidden) for the full per-endpoint catalog.
   </Accordion>
 </AccordionGroup>
 
@@ -70,7 +70,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
   </Accordion>
 
   <Accordion title="Can one customer have multiple organizations under one parent?">
-    Yes. A Claude Enterprise parent organization can have many linked organizations, including a mix of claude.ai organizations and Claude Console organizations (for example, separate production and staging Claude Console organizations). Identity, SSO, and SCIM are shared across the parent; billing, members, projects, and API keys remain separate for each organization. Compliance API enablement happens at the parent organization level and cascades to all linked organizations, and a Compliance Access Key with `read:compliance_org_data` can enumerate every organization beneath the parent through `GET /v1/compliance/organizations`.
+    Yes. A Claude Enterprise parent organization can have many linked organizations, including a mix of claude.ai organizations and Claude Console organizations (for example, separate production and staging Claude Console organizations). Identity, SSO, and SCIM are shared across the parent; billing, members, projects, and API keys remain separate for each organization. Compliance API enablement happens at the parent organization level and cascades to all linked organizations, and a Compliance Access Key that covers the parent organization and carries `read:compliance_org_data` can enumerate every organization beneath the parent through `GET /v1/compliance/organizations`.
   </Accordion>
 
   <Accordion title="Are activities returned in order, and how do I detect when I have caught up to real time?">
@@ -80,10 +80,10 @@ Answers to common questions about Compliance API access, scopes, retention, and 
   <Accordion title="How do I get a sandbox to test the Compliance API?">
     Set up a Claude Enterprise sandbox organization linked to a Claude Console organization under the same parent. This lets the sandbox exercise both the Activity Feed (through an Admin API key) and the chat, file, and project endpoints (through a Compliance Access Key).
 
-    1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization. On an existing Claude Enterprise organization, the primary owner can [enable the Compliance API directly in claude.ai](/docs/en/manage-claude/compliance-api-access#request-compliance-api-access).
+    1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization. On an existing Claude Enterprise organization, the primary owner can [enable the Compliance API directly in claude.ai](/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api).
     2. **Create the Claude Console organization.** Create a Claude Console organization yourself at `platform.claude.com` using the same email address.
     3. **Link the two organizations.** Sign in as the primary owner of the Claude Enterprise organization, go to [claude.ai > Organization settings > Identity and access](https://claude.ai/admin-settings/identity), and use **Merge Organizations** to link the two under a shared parent.
 
-    Once linked, follow [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access) to create keys and start querying. Test organizations use the same enablement process as production organizations.
+    Once linked, follow [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access) to create keys and start querying. Test organizations use the same enablement process as production organizations.
   </Accordion>
 </AccordionGroup>

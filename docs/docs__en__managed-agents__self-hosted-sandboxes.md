@@ -51,9 +51,9 @@ The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-o
 You need:
 
 * **An existing agent.** If you don't have one, complete the [Quickstart](/docs/en/managed-agents/quickstart) first and note its agent ID.
-* **A Linux host** with `/bin/bash` at that exact path. The TypeScript SDK additionally requires `unzip`, `tar`, and Node.js 22 or later; the Python SDK uses the standard library for archive extraction and has no additional binary requirements. These dependencies are resolved at fixed paths and do not respect `PATH` overrides.
+* **A Linux host** with `/bin/bash` at that exact path. The worker's bash tool invokes it directly, without consulting `PATH`. The TypeScript SDK additionally requires `unzip` and `tar` on the `PATH` and Node.js 22 or later; the Python and Go SDKs use their standard libraries for archive extraction and have no additional binary requirements.
 * **The `ant` CLI or an Anthropic SDK** (Python, TypeScript, or Go) on the worker host.
-* **Two credentials:** an environment key (generated in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host.
+* **Two credentials:** an environment key (generated in the Console in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host. Key generation is Console-only.
 
 <Note>
   On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](/docs/en/build-with-claude/claude-platform-on-aws#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](/docs/en/api/claude-platform-on-aws-iam-actions#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
@@ -183,7 +183,7 @@ You need:
 </Steps>
 
 <Note>
-  Skills can include executables that the agent may run directly. The CLI and SDK workers automatically mark downloaded skill files as executable in the sandbox. If you implement skills download manually, you are responsible for setting executable permissions.
+  Skills can include executables that the agent may run directly. The CLI and SDK workers preserve the executable permissions recorded in the skill bundle when they extract it. If you implement skills download manually, you are responsible for setting executable permissions.
 </Note>
 
 ## Run a worker
@@ -196,22 +196,36 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
       <Step title="Install the ant CLI">
         Run this on the worker host.
 
-        ```bash
-        VERSION=1.15.0
-        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-        case $(uname -m) in
-          x86_64) ARCH=amd64 ;;
-          aarch64) ARCH=arm64 ;;
-        esac
-        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
-          | sudo tar -xz -C /usr/local/bin ant
-        ```
+        <Tabs>
+          <Tab title="curl (Linux/WSL)">
+            For Linux environments, download the release binary directly.
+
+            ```bash
+            VERSION=1.15.0
+            OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+            case $(uname -m) in
+              x86_64) ARCH=amd64 ;;
+              aarch64) ARCH=arm64 ;;
+            esac
+            curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+              | sudo tar -xz -C /usr/local/bin ant
+            ```
+
+            You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+          </Tab>
+
+          <Tab title="Homebrew (macOS)">
+            ```bash
+            brew install anthropics/tap/ant
+            ```
+          </Tab>
+        </Tabs>
       </Step>
 
       <Step title="Run the worker">
         **In-process**
 
-        `ant beta:worker poll` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back.
+        `ant beta:worker poll` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back. It reads `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` from the environment.
 
         ```bash
         ant beta:worker poll \
@@ -240,7 +254,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
 
         ```bash
         #!/bin/bash
-        # spawn.sh: called once per session
+        # spawn.sh: called once per claimed work item
         mkdir -p "/host/outputs/$ANTHROPIC_SESSION_ID"
         exec docker run --rm \
           -e ANTHROPIC_SESSION_ID -e ANTHROPIC_ENVIRONMENT_KEY \
@@ -369,7 +383,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
       </Step>
 
       <Step title="Export the webhook signing key">
-        In addition to the environment ID and key from [Before you begin](#before-you-begin), export the webhook signing key on your handler host so the handler can verify incoming payloads:
+        In addition to the environment ID and key from [Before you begin](#before-you-begin), export the webhook signing key on your handler host so the handler can verify incoming payloads. Signature verification in the Python handler needs the webhooks extra: `pip install "anthropic[webhooks]"`.
 
         ```bash
         export ANTHROPIC_WEBHOOK_SIGNING_KEY="whsec_..."
@@ -571,15 +585,15 @@ The SDK provides three helpers at different levels of control. `EnvironmentWorke
 
 * **`EnvironmentWorker`:** the out-of-the-box worker. Handles polling, setup, and execution end to end.
 
-  * `.run()`: runs indefinitely, picking up sessions as they arrive. Exits cleanly on SIGTERM.
-  * `.handle_item()`: picks up one pending session, handles it, and exits.
+  * `.run()`: runs indefinitely, picking up sessions as they arrive.
+  * `.handle_item()`: handles a single claimed work item and exits. Pass the work, session, and environment identifiers explicitly, or let it read the `ANTHROPIC_*` variables that `ant beta:worker poll --on-work` sets for the process it spawns.
 
 * **`work.poller()`:** polls the work queue on your behalf and gives you each claimed session. Use this when you want to decide what happens for each session, for example launching a sandbox rather than running tools in-process.
 
   * `drain`: whether to stop polling once the queue is empty rather than waiting for new work.
   * `block_ms`: how long to wait for work to arrive before returning, in milliseconds. Must be between 1 and 999 (per-poll wait; the helper re-polls automatically). Pass `null` (`None` in Python, `param.Null[int64]()` in Go) for a non-blocking check; omitting the parameter uses the default 999 ms long-poll.
-  * `reclaim_older_than_ms`: re-claim work items leased to a worker that has stopped responding.
-  * `auto_stop`: whether to post a stop signal on the work item after the iterator exits. The Go poller has no opt-out and always posts the stop signal, so block in the loop body until the session completes rather than detaching.
+  * `reclaim_older_than_ms`: re-claim work items that were claimed but never acknowledged within this many milliseconds.
+  * `auto_stop`: whether to post a stop signal for each work item once your loop body finishes with it. The Go poller has no opt-out and always posts the stop signal, so block in the loop body until the session completes rather than detaching.
 
 * **`client.beta.sessions.events.tool_runner()`:** runs tool calls for a single session, given the session ID and a tool list. Use when you've already claimed the work and only need the execution layer.
 
@@ -657,8 +671,8 @@ Use the work poller directly when you want to launch your own per-session proces
   ```
 
   ```csharp C#
-  // Work polling is not currently available in the C# SDK.
-  // From the shell, use `ant beta:worker poll --on-work` instead.
+  // A work-polling helper is not currently available in the C# SDK.
+  // To claim work directly, see the Environments Work endpoints.
   ```
 
   ```go Go
@@ -707,22 +721,22 @@ Use the work poller directly when you want to launch your own per-session proces
   ```
 
   ```java Java
-  // Work polling is not currently available in the Java SDK.
-  // From the shell, use `ant beta:worker poll --on-work` instead.
+  // A work-polling helper is not currently available in the Java SDK.
+  // To claim work directly, see the Environments Work endpoints.
   ```
 
   ```php PHP
-  // Work polling is not currently available in the PHP SDK.
-  // From the shell, use `ant beta:worker poll --on-work` instead.
+  // A work-polling helper is not currently available in the PHP SDK.
+  // To claim work directly, see the Environments Work endpoints.
   ```
 
   ```ruby Ruby
-  # Work polling is not currently available in the Ruby SDK.
-  # From the shell, use `ant beta:worker poll --on-work` instead.
+  # A work-polling helper is not currently available in the Ruby SDK.
+  # To claim work directly, see the Environments Work endpoints.
   ```
 </CodeGroup>
 
-**`AgentToolContext`** is the execution context for tool calls. It defines the working directory and path policy, and optionally downloads the session's skills when used as a context manager. **`beta_agent_toolset_20260401(env)`** takes an `AgentToolContext` and returns the standard tool implementations (`bash`, `read`, `write`, `edit`, `glob`, `grep`).
+**`AgentToolContext`** is the execution context for tool calls. It defines the working directory and path policy, and can download the session's skills. **`beta_agent_toolset_20260401(env)`** takes an `AgentToolContext` and returns the standard tool implementations (`bash`, `read`, `write`, `edit`, `glob`, `grep`).
 
 **With `EnvironmentWorker`:** both are managed automatically. Pass a `tools` factory to customize the tool list:
 
@@ -785,7 +799,7 @@ EnvironmentWorker(client, ..., tools=lambda env: [beta_bash_tool(env), my_custom
 
 ### Verify the worker is connected
 
-From a separate shell, using your Claude API key (not the environment key), confirm `workers_polling` is at least 1:
+From a separate shell, with `ANTHROPIC_API_KEY` set to your Claude API key (not the environment key), confirm `workers_polling` is at least 1:
 
 ```bash
 ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
@@ -795,9 +809,9 @@ If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `A
 
 ## Start a session
 
-Once your worker is running, create a session that targets the environment. The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
+Once your worker is running, create a session that targets the environment. Set `AGENT_ID` to the agent ID you noted in [Before you begin](#before-you-begin). The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
 
-Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. Your spawn script or `--on-work` handler reads that metadata from the claimed work item (through the [Environments Work endpoints](/docs/en/api/beta/environments/work)) and stages the files into the working directory before tool execution begins.
+Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. Your spawn script or `--on-work` handler reads that metadata from the claimed work item (the CLI poller pipes the work item's JSON to the script's stdin, and SDK handlers can read it through the [Environments Work endpoints](/docs/en/api/beta/environments/work)) and stages the files into the working directory before tool execution begins.
 
 <CodeGroup>
   ```bash cURL
@@ -907,7 +921,7 @@ These calls run from your monitoring or operations tooling, authenticated with y
 
 * `depth` is the number of items waiting to be claimed. Scale your worker fleet or alert on backlog based on this value.
 * `pending` is the number of items a worker has claimed and is currently processing.
-* `oldest_queued_at` is the timestamp of the oldest item in the queue, or `null` if the queue is empty.
+* `oldest_queued_at` is the timestamp of the oldest item still queued or being processed, or `null` when there is none.
 * `workers_polling` is the number of workers that have polled in the last 30 seconds. Use this for liveness alerting.
 
 <CodeGroup>
@@ -1035,9 +1049,9 @@ These calls run from your monitoring or operations tooling, authenticated with y
 
 ### Stop a session gracefully
 
-Use `work.stop` to ask the worker handling a specific session to shut it down cleanly. The worker finishes any in-flight tool call, posts a final status, and releases the session. Pass `force: true` in the request body to interrupt immediately instead of waiting for the current tool call to complete.
+Use `work.stop` to ask the worker handling a specific session to shut it down cleanly. The worker finishes any in-flight tool call, posts a final status, and releases the session. Pass `force: true` in the request body (with the CLI, pass `--force`) to interrupt immediately instead of waiting for the current tool call to complete.
 
-Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the following examples.
+Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the following examples. To find a work item's ID, list the environment's work items through the [Environments Work endpoints](/docs/en/api/beta/environments/work).
 
 <CodeGroup>
   ```bash cURL
@@ -1179,15 +1193,15 @@ Because these calls run from your operations tooling rather than the worker host
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Managed Agent sessions" icon="settings" href="/docs/en/managed-agents/sessions">
+  <Card title="Security model" icon="lock" href="/docs/en/managed-agents/self-hosted-sandboxes-security">
+    Shared responsibility model for self-hosted sandbox environments.
+  </Card>
+
+  <Card title="Start a session" icon="settings" href="/docs/en/managed-agents/sessions">
     Create a session to run your agent and begin executing tasks.
   </Card>
 
-  <Card title="MCP tunnels overview" icon="bolt" href="/docs/en/agents-and-tools/mcp-tunnels/overview">
-    Reach MCP servers inside your private network from any execution environment.
-  </Card>
-
-  <Card title="Security model" icon="lock" href="/docs/en/managed-agents/self-hosted-sandboxes-security">
-    Understand the shared responsibility model for self-hosted sandbox environments.
+  <Card title="MCP tunnels" icon="bolt" href="/docs/en/agents-and-tools/mcp-tunnels/overview">
+    Securely connect Claude to MCP servers running in your private network without opening inbound ports or exposing services to the public internet.
   </Card>
 </CardGroup>

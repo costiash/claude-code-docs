@@ -2663,7 +2663,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 <Accordion title="Supported features">
   * All basic types: object, array, string, integer, number, boolean, null
-  * `enum` (strings, numbers, bools, or nulls only - no complex types)
+  * `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](#invalid-outputs) for a capitalization caveat)
   * `const`
   * `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)
   * `$ref`, `$def`, and `definitions` (external `$ref` not supported)
@@ -2767,6 +2767,19 @@ If the response is cut off due to reaching the `max_tokens` limit:
 * The response has `stop_reason: "max_tokens"`
 * The output may be incomplete and not match your schema
 * Retry with a higher `max_tokens` value to get the complete structured output
+
+**Enum value casing**
+
+Structured outputs don't guarantee the capitalization of string `enum` and `const` values: Claude may return a value that differs from your schema only in capitalization, typically in the first letter of a word following a space. For example, given this schema:
+
+```json
+{
+  "type": "string",
+  "enum": ["Conversation Topic 1", "Conversation Topic 2", "Conversation topic 3"]
+}
+```
+
+The output may contain `"Conversation Topic 3"` (capital "T") even though that exact value isn't in the enum. The response completes normally, with no error and no special `stop_reason`. This applies to both JSON outputs and strict tool use. Compare enum values case-insensitively, and avoid enum values that differ only in capitalization.
 
 ### Schema complexity limits
 

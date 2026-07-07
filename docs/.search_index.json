@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-07T19:26:04Z",
+  "generated_at": "2026-07-07T22:10:03Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -15,20 +15,20 @@
         "instead",
         "claude",
         "mode",
-        "improved",
         "sessions",
+        "improved",
         "tool",
         "after",
         "being",
-        "mcp",
         "background",
+        "mcp",
         "code",
         "agent",
         "prompt",
-        "model",
-        "command"
+        "command",
+        "model"
       ],
-      "word_count": 62093,
+      "word_count": 62763,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -43718,30 +43718,30 @@
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
       "title": "Claude in Microsoft Foundry",
-      "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide walks you through the process of setting up and making AP...",
+      "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide shows you how to set up and make API calls to Claude in M...",
       "keywords": [
         "claude",
         "foundry",
         "azure",
-        "tab",
-        "api",
         "model",
+        "api",
         "deployment",
         "microsoft",
         "anthropic",
-        "title",
-        "note",
         "resource",
-        "hosted",
+        "tab",
         "models",
+        "hosted",
         "opus",
-        "access",
-        "through",
-        "authentication",
+        "title",
+        "card",
+        "pricing",
+        "name",
         "portal",
-        "name"
+        "access",
+        "through"
       ],
-      "word_count": 3166,
+      "word_count": 3890,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -43816,16 +43816,16 @@
         "bedrock",
         "account",
         "through",
-        "available",
         "data",
+        "available",
         "sigv",
         "note",
-        "access",
+        "model",
         "yes",
-        "authentication",
-        "request"
+        "access",
+        "authentication"
       ],
-      "word_count": 6469,
+      "word_count": 6557,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -44405,15 +44405,15 @@
         "tool",
         "output",
         "type",
+        "strict",
         "when",
         "class",
-        "strict",
         "api",
         "tools",
         "java",
         "tab"
       ],
-      "word_count": 9986,
+      "word_count": 10105,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -44673,27 +44673,27 @@
       "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  Every API in the **Admin** section of this guide (the [Admin API](/docs/en/manage-cl...",
       "keywords": [
         "api",
+        "organization",
         "claude",
         "key",
-        "organization",
         "create",
         "admin",
         "step",
         "scopes",
+        "compliance",
         "title",
         "enterprise",
-        "compliance",
         "limits",
         "spend",
-        "keys",
         "analytics",
+        "keys",
         "card",
         "console",
         "settings",
-        "apis",
-        "manage"
+        "owner",
+        "apis"
       ],
-      "word_count": 743,
+      "word_count": 797,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
@@ -44716,12 +44716,12 @@
         "only",
         "role",
         "invites",
-        "access",
         "create",
         "workspace",
-        "usage"
+        "usage",
+        "roles"
       ],
-      "word_count": 1308,
+      "word_count": 1307,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
     "/docs/en/manage-claude/analytics-api": {
@@ -44741,15 +44741,15 @@
         "admin",
         "user",
         "step",
-        "access",
         "activity",
         "title",
+        "access",
         "adoption",
         "per",
         "available",
         "card"
       ],
-      "word_count": 1339,
+      "word_count": 1338,
       "file_path": "docs/docs__en__manage-claude__analytics-api.md"
     },
     "/docs/en/manage-claude/api-and-data-retention": {
@@ -44777,7 +44777,7 @@
         "phi",
         "feature"
       ],
-      "word_count": 3170,
+      "word_count": 3164,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -44950,7 +44950,7 @@
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
       "title": "Query the Activity Feed",
-      "content_preview": "# Query the Activity Feed  Retrieve, filter, and paginate your organization's Compliance API Activity Feed.  ---  <Note>   To enable the Compliance API, see [Get access to the Compliance API](/docs/en...",
+      "content_preview": "# Query the Activity Feed  Retrieve, filter, and paginate your organization's Compliance API Activity Feed.  ---  <Note>   To enable the Compliance API, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access). </Note>  <Check>   **Required scope:** `read:compliance_activities`",
       "keywords": [
         "api",
         "compliance",
@@ -44965,43 +44965,43 @@
         "key",
         "feed",
         "note",
-        "access",
         "codegroup",
         "through",
         "claude",
         "query",
         "admin",
-        "keys"
+        "keys",
+        "each"
       ],
-      "word_count": 1209,
+      "word_count": 1207,
       "file_path": "docs/docs__en__manage-claude__compliance-activity-feed.md"
     },
     "/docs/en/manage-claude/compliance-api-access": {
-      "title": "Get access to the Compliance API",
-      "content_preview": "# Get access to the Compliance API  Request Compliance API access for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.  ---  <Note>   Claude Enterprise organizations have self-service access to the full API. Claude Console",
+      "title": "Set up the Compliance API",
+      "content_preview": "# Set up the Compliance API  Enable the Compliance API for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.  ---  <Note>   ...",
       "keywords": [
         "key",
         "api",
+        "organization",
         "claude",
         "compliance",
-        "organization",
         "keys",
-        "access",
         "admin",
+        "access",
         "create",
-        "console",
+        "step",
         "activity",
         "settings",
+        "console",
         "feed",
-        "scopes",
-        "organizations",
         "parent",
-        "step",
+        "scopes",
+        "only",
         "delete",
         "read",
-        "primary"
+        "title"
       ],
-      "word_count": 1452,
+      "word_count": 1472,
       "file_path": "docs/docs__en__manage-claude__compliance-api-access.md"
     },
     "/docs/en/manage-claude/compliance-api": {
@@ -45011,12 +45011,12 @@
         "compliance",
         "api",
         "claude",
-        "card",
         "key",
-        "access",
+        "card",
         "organization",
         "activity",
         "feed",
+        "access",
         "manage",
         "href",
         "docs",
@@ -45029,7 +45029,7 @@
         "see",
         "scope"
       ],
-      "word_count": 736,
+      "word_count": 741,
       "file_path": "docs/docs__en__manage-claude__compliance-api.md"
     },
     "/docs/en/manage-claude/compliance-content-data": {
@@ -45038,31 +45038,31 @@
       "keywords": [
         "project",
         "chat",
-        "content",
         "chats",
+        "content",
         "file",
         "list",
         "delete",
-        "endpoint",
         "files",
+        "endpoint",
         "compliance",
         "api",
         "each",
         "one",
         "messages",
         "claude",
-        "get",
         "metadata",
+        "codegroup",
         "endpoints",
-        "artifact",
-        "page"
+        "page",
+        "only"
       ],
-      "word_count": 1956,
+      "word_count": 2173,
       "file_path": "docs/docs__en__manage-claude__compliance-content-data.md"
     },
     "/docs/en/manage-claude/compliance-errors": {
       "title": "Handle Compliance API errors",
-      "content_preview": "# Handle Compliance API errors  Every Compliance API error message with cause and fix, organized by HTTP status code.  ---  <Note>   To enable the Compliance API, see [Get access to the Compliance API...",
+      "content_preview": "# Handle Compliance API errors  Every Compliance API error message with cause and fix, organized by HTTP status code.  ---  <Note>   To enable the Compliance API, see [Set up the Compliance API](/docs...",
       "keywords": [
         "key",
         "compliance",
@@ -45071,49 +45071,49 @@
         "organization",
         "scope",
         "cause",
-        "access",
         "type",
-        "endpoint",
         "project",
+        "access",
+        "endpoint",
         "error",
         "deleted",
-        "claude",
         "retry",
         "activity",
+        "claude",
         "admin",
         "header",
         "request",
         "keys"
       ],
-      "word_count": 2637,
+      "word_count": 2634,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
       "title": "Compliance API FAQ",
-      "content_preview": "# Compliance API FAQ  Answers to common questions about Compliance API access, scopes, retention, and integration.  ---  <Note>   To enable the Compliance API, see [Get access to the Compliance API](/...",
+      "content_preview": "# Compliance API FAQ  Answers to common questions about Compliance API access, scopes, retention, and integration.  ---  <Note>   To enable the Compliance API, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access). </Note>  ## Access and scopes  <AccordionGroup>   <Accordion",
       "keywords": [
         "api",
+        "organization",
         "claude",
         "compliance",
-        "organization",
         "accordion",
         "key",
         "access",
+        "parent",
         "console",
         "organizations",
         "activity",
-        "parent",
         "title",
         "feed",
         "admin",
         "content",
         "through",
         "does",
+        "only",
         "retention",
-        "enterprise",
-        "accordiongroup"
+        "enterprise"
       ],
-      "word_count": 1101,
+      "word_count": 1127,
       "file_path": "docs/docs__en__manage-claude__compliance-faq.md"
     },
     "/docs/en/manage-claude/compliance-integration-patterns": {
@@ -45141,7 +45141,7 @@
         "each",
         "organization"
       ],
-      "word_count": 1407,
+      "word_count": 1406,
       "file_path": "docs/docs__en__manage-claude__compliance-integration-patterns.md"
     },
     "/docs/en/manage-claude/compliance-org-data": {
@@ -45152,14 +45152,13 @@
         "list",
         "compliance",
         "endpoint",
-        "activity",
         "key",
+        "activity",
+        "returns",
         "feed",
         "api",
-        "access",
         "group",
         "one",
-        "returns",
         "organizations",
         "settings",
         "role",
@@ -45167,9 +45166,10 @@
         "users",
         "groups",
         "parent",
-        "see"
+        "see",
+        "access"
       ],
-      "word_count": 1940,
+      "word_count": 1937,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -46103,25 +46103,25 @@
         "worker",
         "session",
         "environment",
-        "tool",
         "work",
+        "tool",
         "key",
         "self",
         "agent",
         "step",
+        "title",
         "codegroup",
-        "sandbox",
-        "queue",
         "hosted",
         "run",
-        "managed",
+        "sandbox",
         "anthropic",
         "host",
         "sdk",
-        "title",
-        "claude"
+        "managed",
+        "claude",
+        "queue"
       ],
-      "word_count": 4439,
+      "word_count": 4595,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
@@ -48119,8 +48119,8 @@
         "refusals",
         "refusal",
         "fallback",
-        "claude",
         "when",
+        "claude",
         "streaming",
         "model",
         "retry",
@@ -48128,16 +48128,16 @@
         "refused",
         "api",
         "card",
-        "handle",
         "responses",
+        "note",
         "handling",
         "build",
+        "handle",
         "stop",
         "another",
-        "context",
-        "request"
+        "context"
       ],
-      "word_count": 1385,
+      "word_count": 1479,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

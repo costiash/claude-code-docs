@@ -23,13 +23,22 @@ When streaming classifiers detect content that violates Anthropic's policies, th
       "text": "Hello.."
     }
   ],
-  "stop_reason": "refusal"
+  "stop_reason": "refusal",
+  "stop_details": {
+    "type": "refusal",
+    "category": "cyber",
+    "explanation": "This request was declined because it could enable cyber harm."
+  }
 }
 ```
 
-<Warning>
-  No additional refusal message is included. You must handle the response and provide appropriate user-facing messaging.
-</Warning>
+In the event stream, `stop_details` arrives on the `message_delta` event alongside `stop_reason`.
+
+<Note>
+  A `refusal` response from streaming classifiers may include a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the full response shape and the available categories.
+
+  `stop_details` (and its `category` / `explanation`) can be `null`, for example when the refusal maps to no named category, or on earlier models. Branch on `stop_reason` rather than assuming `stop_details` is populated, and provide your own user-facing messaging when it is `null`.
+</Note>
 
 ## Reset context after refusal
 

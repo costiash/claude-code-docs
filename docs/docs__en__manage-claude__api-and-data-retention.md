@@ -52,7 +52,7 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 
 Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. On the Claude API, requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
 
-The 30-day data retention requirement applies on every platform where these models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
+The 30-day data retention requirement applies wherever Covered Models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
 
 Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
 
@@ -201,7 +201,7 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 
 ### Data retention for policy violations and where required by law
 
-Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where required by law or to combat Usage Policy violations and malicious uses of Anthropic's platform. As a result, if a chat or session is flagged for such a violation, Anthropic may retain inputs and outputs for up to 2 years.
+Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where required by law or where it has been flagged by Anthropic's automated trust and safety systems. As a result, if a chat or session is flagged, Anthropic may retain inputs and outputs for up to 2 years.
 
 ## Frequently asked questions
 

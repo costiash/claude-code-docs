@@ -5,18 +5,18 @@ Access chat content, file attachments, and projects for claude.ai organizations 
 ---
 
 <Note>
-  The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations, which have self-service access to the Compliance API. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  The endpoints on this page retrieve and delete claude.ai content and are available only to Claude Enterprise organizations, which have self-service access to the Compliance API. See [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>
   **Required scope:** `read:compliance_user_data` on the Compliance Access Key. The delete endpoints also require `delete:compliance_user_data`.
 
-  **Prerequisite:** To list chats, at least one user ID from [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users). The other endpoints on this page take resource IDs directly.
+  **Prerequisite:** None for listing chats organization-wide. To filter the chat list to specific users, you need user IDs from [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users). The other endpoints on this page take resource IDs directly.
 </Check>
 
 The endpoints on this page expose claude.ai chat content, file uploads, projects, and project attachments to compliance reviewers. They support eDiscovery (electronic discovery) exports, data loss prevention (DLP) enforcement, and account-deletion responses. Content is retained for as long as your organization's retention policy allows. Chats that a user has soft-deleted in claude.ai remain visible through the Compliance API with `deleted_at` populated; chats that have been hard-deleted (through the Compliance API itself, or after the organization's retention window expires) are not retrievable.
 
-Both scopes are granted only on Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai; see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access) to provision one. The `read:compliance_user_data` scope covers retrieval; `delete:compliance_user_data` is required only for the delete endpoints. The chat, file, project, and attachment endpoints are not available to Admin API keys (`sk-ant-admin01-...`); calls authenticated with an Admin API key return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
+Both scopes are granted only on Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai; see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access) to provision one. The `read:compliance_user_data` scope covers retrieval; `delete:compliance_user_data` is required only for the delete endpoints. The chat, file, project, and attachment endpoints are not available to Admin API keys (`sk-ant-admin01-...`); calls authenticated with an Admin API key return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
 
 Endpoints on this page paginate two ways; see [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results) for the full reference. Each section notes which scheme applies.
 
@@ -24,16 +24,15 @@ Endpoints on this page paginate two ways; see [Paginate results](/docs/en/manage
 
 Use [List chats](/docs/en/api/compliance/apps/chats/list) to page through chat metadata, then [Get chat messages](/docs/en/api/compliance/apps/chats/messages/list) to fetch the full message content of one chat.
 
-The chat list endpoint requires at least one `user_ids[]` value (and accepts up to 10 in one request), so enumerate user IDs first with [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users), then list chats for each user or for each batch of users. The following request lists chats owned by a specific user since a given date.
+The chat list endpoint defaults to organization-wide scope: leave off `user_ids[]` to include every chat under your parent organization. Add `order_by=updated_at` to sort by last update time. This combination is the recommended way to export chats and keep an export current, because one paginated loop picks up both new and modified chats for every user without enumerating users first. The following request lists chats updated since a given date.
 
 <CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS -G \
     "https://api.anthropic.com/v1/compliance/apps/chats" \
     --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
-    --data-urlencode "organization_ids[]=91012d09-e48b-438e-a489-1bebfd8fa6f9" \
-    --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
+    --data-urlencode "order_by=updated_at" \
+    --data-urlencode "updated_at.gte=2025-06-01T00:00:00Z" \
     --data-urlencode "limit=100"
   ```
 </CodeGroup>
@@ -58,16 +57,31 @@ The chat list endpoint requires at least one `user_ids[]` value (and accepts up 
     }
   ],
   "has_more": true,
-  "first_id": "claude_chat_01H5CWunD7RpVJ5bHa8RCkja",
-  "last_id": "claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
+  "first_id": "eyJrIjogInVwZGF0ZWRfYXQiLCAidCI6ICIyMDI2LTA0LTEwVDA5OjEwOjExKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLS4uLiJ9",
+  "last_id": "eyJrIjogInVwZGF0ZWRfYXQiLCAidCI6ICIyMDI2LTA0LTEwVDA5OjEwOjExKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLS4uLiJ9"
 }
 ```
 
-Listing chats returns metadata only. See [List chats](/docs/en/api/compliance/apps/chats/list) for the full filter list; in addition to the required `user_ids[]`, the `updated_at.*` bounds are useful for incremental review of chats that have changed since a previous export.
+Results sort ascending by the `order_by` field, oldest first, with ties broken by `id`. Pagination uses the standard `first_id`/`last_id`/`has_more` cursor fields described in [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results). To walk forward toward newer chats, pass the response's `last_id` back as `after_id` on the next request.
 
-Chat results are sorted by `created_at` ascending (oldest first), with ties broken by `id`. Pagination uses the same `first_id`/`last_id`/`has_more` cursor fields as [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results); pass `last_id` as `after_id` to walk forward toward newer chats, or `first_id` as `before_id` to walk back toward older ones.
+That forward walk is also how you keep an export current across runs: persist the final page's `last_id` and resume from it as `after_id` on the next run. Because the list is ordered by `updated_at`, a chat that changes after your saved cursor reappears ahead of it, so each incremental run returns both brand-new chats and older chats that have since been modified. Process results idempotently, keyed by chat `id`, to handle those reappearances.
 
-To pull the actual chat content, attached files, and inline artifacts (structured documents Claude generates inside a chat), follow up with the messages endpoint for each chat ID:
+A few constraints apply to these organization-wide queries. Cursors are opaque and bound to the sort key, so an `after_id` issued under one `order_by` value is rejected with a 400 error under the other. Time-filter bounds must match the sort key too: pair `updated_at.*` bounds with `order_by=updated_at`, and `created_at.*` bounds with the default `order_by=created_at`. Backward pagination with `before_id` is not supported, and the `project_ids[]` filter is not available. See [List chats](/docs/en/api/compliance/apps/chats/list) for the full filter reference.
+
+To scope the list to specific users instead (for example, a legal hold on named custodians), pass 1–10 `user_ids[]` values. Obtain the IDs from [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users). User-filtered queries always sort by `created_at` (passing `order_by=updated_at` returns a 400 error) and support both `after_id` and `before_id`. Filtering by `project_ids[]` is only available in this user-filtered form.
+
+<CodeGroup>
+  ```bash cURL
+  curl --fail-with-body -sS -G \
+    "https://api.anthropic.com/v1/compliance/apps/chats" \
+    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+    --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
+    --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
+    --data-urlencode "limit=100"
+  ```
+</CodeGroup>
+
+The list response carries chat metadata only. To pull the actual chat content, attached files, and inline artifacts (structured documents Claude generates inside a chat), follow up with the messages endpoint for each chat ID:
 
 <CodeGroup>
   ```bash cURL
@@ -295,7 +309,7 @@ A project cannot be deleted while any chats remain attached to it. The API retur
 }
 ```
 
-To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the chat list endpoint requires at least one `user_ids[]` value; enumerate IDs through [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}` (or move it out of the project from claude.ai), and then retry the project delete.
+To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the `project_ids[]` filter requires at least one `user_ids[]` value; enumerate IDs through [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}` (or move it out of the project from claude.ai), and then retry the project delete.
 
 ## Next steps
 

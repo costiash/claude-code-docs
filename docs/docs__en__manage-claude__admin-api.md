@@ -243,7 +243,7 @@ Read the rate limits configured for your organization and its workspaces with th
 
 ## Compliance API
 
-Retrieve audit and activity data for your organization with the [Compliance API](/docs/en/manage-claude/compliance-api). Admin API keys can read the Activity Feed only; for full access, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+Retrieve audit and activity data for your organization with the [Compliance API](/docs/en/manage-claude/compliance-api). Admin API keys can read the Activity Feed only; for full access, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 
 ## Best practices
 
