@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-07T13:33:10Z",
+  "generated_at": "2026-07-07T16:32:31Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -448,7 +448,7 @@
         "script",
         "exit"
       ],
-      "word_count": 6634,
+      "word_count": 6648,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "user",
         "control"
       ],
-      "word_count": 23050,
+      "word_count": 23238,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -616,7 +616,7 @@
         "oauth",
         "available"
       ],
-      "word_count": 8319,
+      "word_count": 8386,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -855,20 +855,20 @@
         "plugins",
         "server",
         "default",
-        "field",
         "mcp",
+        "field",
         "marketplace",
         "see",
         "skills",
         "version",
         "command",
-        "skill",
         "name",
-        "path",
+        "skill",
         "servers",
+        "path",
         "root"
       ],
-      "word_count": 8320,
+      "word_count": 8371,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1036,7 +1036,7 @@
         "native",
         "release"
       ],
-      "word_count": 3345,
+      "word_count": 3325,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {

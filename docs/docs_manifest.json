@@ -9447,14 +9447,14 @@
     "claude-code__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks",
       "original_md_url": "https://platform.claude.com/docs/en/hooks.md",
-      "hash": "867a217b7315b73d5a62f5f272804d35a82dc9c79a4631344ad24e8567f18418",
-      "last_updated": "2026-07-07T01:19:29.565771"
+      "hash": "c03f3f1af00bf517cbc8daff98d9f8d5e7916f7cb69229d210d396aac8d3309a",
+      "last_updated": "2026-07-07T16:27:34.092892"
     },
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
       "original_md_url": "https://platform.claude.com/docs/en/hooks-guide.md",
-      "hash": "a41151e102a17253ed6ad05d1573b4e6e973a8fae297c06b0e2c4a69849bbd86",
-      "last_updated": "2026-07-03T04:52:55.704742"
+      "hash": "e1ac93b138a51c7f750decc994249876e0c3254e764ed537f00520c690e18a7c",
+      "last_updated": "2026-07-07T16:27:34.727455"
     },
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
@@ -9843,8 +9843,8 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "7d463c33ae9c467bf31f528a5c6a6f57bd99ae017618a9dc3389e1196c752292",
-      "last_updated": "2026-07-07T01:20:46.009540"
+      "hash": "81d503d1a522ce36504fa65fddf2e0606cbafe082da28dcc5dfb147a20d63e6c",
+      "last_updated": "2026-07-07T16:28:54.694677"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
@@ -9903,8 +9903,8 @@
     "claude-code__plugins-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins-reference",
       "original_md_url": "https://platform.claude.com/docs/en/plugins-reference.md",
-      "hash": "931b787ea4627bbaa9bd6a5ff9792683e25b2085087ca8047822dc8d80df96f3",
-      "last_updated": "2026-07-03T04:55:01.123264"
+      "hash": "601640ac3e31acd6f3e100bdc71418e73a1cd1c8d9de467090e87d4ca302049b",
+      "last_updated": "2026-07-07T16:29:35.483905"
     },
     "docs__en__prompt-library.md": {
       "original_url": "https://platform.claude.com/docs/en/prompt-library",
@@ -9939,8 +9939,8 @@
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
       "original_md_url": "https://platform.claude.com/docs/en/setup.md",
-      "hash": "5eae7c9c4d8d878db74629125cf749a0430eec439da1ccce9c305ef4c1cbdc1b",
-      "last_updated": "2026-07-06T19:17:20.552535"
+      "hash": "8e47b38638ff49eec0a99d949d14961a6224f47b8eb1946dab93a8d1c29848c0",
+      "last_updated": "2026-07-07T16:30:17.506380"
     },
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
@@ -9999,8 +9999,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-07T13:33:06.829759",
-    "fetch_duration_seconds": 2401.337479,
+    "last_fetch_completed": "2026-07-07T16:32:28.363976",
+    "fetch_duration_seconds": 2310.037521,
     "total_pages_discovered": 2040,
     "pages_fetched_successfully": 1666,
     "pages_failed": 375,
@@ -10386,7 +10386,7 @@
     "total_files": 1666,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-07T13:33:06.829779",
+  "last_updated": "2026-07-07T16:32:28.363997",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
