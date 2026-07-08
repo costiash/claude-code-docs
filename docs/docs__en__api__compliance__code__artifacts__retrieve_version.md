@@ -1,6 +1,6 @@
 ## Download Code Artifact Version Content
 
-**get** `/v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}`
+**get** `/v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}`
 
 Streams the content of one version of a Claude Code Artifact as the
 response body.
@@ -25,12 +25,6 @@ only for identity-stored content; validate against it when present.
 
   Opaque version identifier from the Artifact's `versions` list
 
-### Query Parameters
-
-- `organization_uuid: optional string`
-
-  The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
-
 ### Header Parameters
 
 - `"x-api-key": optional string`
@@ -38,6 +32,6 @@ only for identity-stored content; validate against it when present.
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```

@@ -194,6 +194,30 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   fmt.Println(response)
   ```
 
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaAdvisorTool20260301;
+  import com.anthropic.models.beta.messages.BetaMessage;
+  import com.anthropic.models.beta.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(4096L)
+          .addTool(BetaAdvisorTool20260301.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .build())
+          .addUserMessage("Build a concurrent worker pool in Go with graceful shutdown.")
+          .addBeta("advisor-tool-2026-03-01")
+          .build();
+
+      BetaMessage response = client.beta().messages().create(params);
+      IO.println(response);
+  }
+  ```
+
   ```php PHP
   $client = new Client();
 
@@ -486,6 +510,59 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
       Messages = messages,
       Betas = ["advisor-tool-2026-03-01"]
   });
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaAdvisorTool20260301;
+  import com.anthropic.models.beta.messages.BetaContentBlock;
+  import com.anthropic.models.beta.messages.BetaMessage;
+  import com.anthropic.models.beta.messages.BetaMessageParam;
+  import com.anthropic.models.beta.messages.BetaToolUnion;
+  import com.anthropic.models.beta.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      List<BetaToolUnion> tools = List.of(
+          BetaToolUnion.ofAdvisorTool20260301(
+              BetaAdvisorTool20260301.builder().model(Model.CLAUDE_OPUS_4_8).build()));
+
+      List<BetaMessageParam> messages = new ArrayList<>();
+      messages.add(BetaMessageParam.builder()
+          .role(BetaMessageParam.Role.USER)
+          .content("Build a concurrent worker pool in Go with graceful shutdown.")
+          .build());
+
+      BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(4096L)
+          .tools(tools)
+          .messages(messages)
+          .addBeta("advisor-tool-2026-03-01")
+          .build());
+
+      // Append the full response content, including any advisor_tool_result blocks
+      messages.add(BetaMessageParam.builder()
+          .role(BetaMessageParam.Role.ASSISTANT)
+          .contentOfBetaContentBlockParams(
+              response.content().stream().map(BetaContentBlock::toParam).toList())
+          .build());
+
+      // Continue the conversation
+      messages.add(BetaMessageParam.builder()
+          .role(BetaMessageParam.Role.USER)
+          .content("Now add a max-in-flight limit of 10.")
+          .build());
+
+      BetaMessage followUp = client.beta().messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_SONNET_4_6)
+          .maxTokens(4096L)
+          .tools(tools)
+          .messages(messages)
+          .addBeta("advisor-tool-2026-03-01")
+          .build());
+  }
   ```
 
   ```php PHP
@@ -788,6 +865,100 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
       if (turn == NudgeTurn - 1 && !advisorCalled)
       {
           messages.Add(new BetaMessageParam { Role = Role.User, Content = NudgeText });
+      }
+  }
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaAdvisorTool20260301;
+  import com.anthropic.models.beta.messages.BetaContentBlock;
+  import com.anthropic.models.beta.messages.BetaContentBlockParam;
+  import com.anthropic.models.beta.messages.BetaMessage;
+  import com.anthropic.models.beta.messages.BetaMessageParam;
+  import com.anthropic.models.beta.messages.BetaServerToolUseBlock;
+  import com.anthropic.models.beta.messages.BetaStopReason;
+  import com.anthropic.models.beta.messages.BetaToolResultBlockParam;
+  import com.anthropic.models.beta.messages.BetaToolUnion;
+  import com.anthropic.models.beta.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
+
+  static final int NUDGE_TURN = 2; // inject before this assistant turn if no advisor call yet
+  static final String NUDGE_TEXT =
+      "You have not consulted the advisor yet. If the task has a non-obvious "
+          + "design decision or a failure mode you haven't ruled out, call advisor "
+          + "now before committing to an approach.";
+  static final int MAX_TURNS = 10; // agent loop cap
+
+  // Replace with your tool dispatch. Returns one tool_result block per tool_use block.
+  List<BetaContentBlockParam> runYourTools(List<BetaContentBlock> content) {
+      List<BetaContentBlockParam> results = new ArrayList<>();
+      for (BetaContentBlock block : content) {
+          if (block.isToolUse()) {
+              results.add(BetaContentBlockParam.ofToolResult(
+                  BetaToolResultBlockParam.builder()
+                      .toolUseId(block.asToolUse().id())
+                      .content("Replace with your tool output.")
+                      .build()));
+          }
+      }
+      return results;
+  }
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      List<BetaToolUnion> tools = List.of(
+          BetaToolUnion.ofAdvisorTool20260301(
+              BetaAdvisorTool20260301.builder().model(Model.CLAUDE_OPUS_4_8).build())
+          // ... your other tools
+      );
+      String task = "Build a concurrent worker pool in Go with graceful shutdown.";
+      List<BetaMessageParam> messages = new ArrayList<>();
+      messages.add(BetaMessageParam.builder()
+          .role(BetaMessageParam.Role.USER)
+          .content(task)
+          .build());
+      boolean advisorCalled = false;
+
+      for (int turn = 1; turn <= MAX_TURNS; turn++) {
+          BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+              .model(Model.CLAUDE_HAIKU_4_5)
+              .maxTokens(4096L)
+              .tools(tools)
+              .messages(messages)
+              .addBeta("advisor-tool-2026-03-01")
+              .build());
+          messages.add(BetaMessageParam.builder()
+              .role(BetaMessageParam.Role.ASSISTANT)
+              .contentOfBetaContentBlockParams(
+                  response.content().stream().map(BetaContentBlock::toParam).toList())
+              .build());
+          advisorCalled = advisorCalled
+              || response.content().stream().anyMatch(block ->
+                  block.isServerToolUse()
+                      && block.asServerToolUse().name().equals(BetaServerToolUseBlock.Name.ADVISOR));
+          BetaStopReason stopReason = response.stopReason().orElse(null);
+          if (BetaStopReason.END_TURN.equals(stopReason)) {
+              break;
+          }
+          if (BetaStopReason.PAUSE_TURN.equals(stopReason)) {
+              continue; // server tool pending; re-send to let the API complete it
+          }
+
+          List<BetaContentBlockParam> results = runYourTools(response.content()); // list of tool_result blocks
+          if (!results.isEmpty()) {
+              messages.add(BetaMessageParam.builder()
+                  .role(BetaMessageParam.Role.USER)
+                  .contentOfBetaContentBlockParams(results)
+                  .build());
+          }
+          // Skip this if your system prompt already tells the model to call sparingly.
+          if (turn == NUDGE_TURN - 1 && !advisorCalled) {
+              messages.add(BetaMessageParam.builder()
+                  .role(BetaMessageParam.Role.USER)
+                  .content(NUDGE_TEXT)
+                  .build());
+          }
       }
   }
   ```

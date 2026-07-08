@@ -16,7 +16,7 @@ Search finds sources; code execution analyzes and synthesizes. Claude searches f
 {
   "tools": [
     { "type": "web_search_20260209", "name": "web_search" },
-    { "type": "code_execution_20250825", "name": "code_execution" }
+    { "type": "code_execution_20260521", "name": "code_execution" }
   ]
 }
 ```

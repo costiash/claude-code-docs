@@ -1,6 +1,6 @@
 ## Delete Code Artifact
 
-**delete** `/v1/compliance/code/artifacts/{artifact_id}`
+**delete** `/v1/compliance/apps/code/artifacts/{artifact_id}`
 
 Permanently deletes a Code Artifact and all its versions. This is a
 destructive operation that cannot be undone. A 200 response means the
@@ -16,12 +16,6 @@ Artifact.
 - `artifact_id: string`
 
   The Artifact ID (tagged ID, e.g., cart_abc123)
-
-### Query Parameters
-
-- `organization_uuid: optional string`
-
-  The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
 
 ### Header Parameters
 
@@ -42,7 +36,7 @@ Artifact.
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```

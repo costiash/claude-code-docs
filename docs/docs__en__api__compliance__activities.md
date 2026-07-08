@@ -12,7 +12,7 @@ compliance activities that can be filtered by various criteria.
 
 ### Query Parameters
 
-- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 339 more`
+- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 381 more`
 
   Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
@@ -68,6 +68,74 @@ compliance activities that can be filtered by various criteria.
 
     The organization's billing email recipients were updated.
 
+  - `"ccr_agent_created"`
+
+    A Claude Code agent was created.
+
+  - `"ccr_agent_deleted"`
+
+    A Claude Code agent was deleted.
+
+  - `"ccr_agent_proxy_credential_created"`
+
+    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+
+  - `"ccr_agent_proxy_credential_deleted"`
+
+    A Claude Code agent proxy credential was deleted. Its secret material was removed and can no longer be sent to any host.
+
+  - `"ccr_agent_proxy_credential_rotated"`
+
+    A Claude Code agent proxy credential's secret material was replaced. The replacement keeps the same name, profile, and allowed hosts under a new credential identifier, and everything that referenced the old credential now uses the replacement.
+
+  - `"ccr_agent_proxy_credential_updated"`
+
+    A Claude Code agent proxy credential's settings were updated. Only the display name and the allowed host patterns can be updated; the secret material can only be replaced through a rotation.
+
+  - `"ccr_agent_proxy_network_events_listed"`
+
+    A Claude Code network activity export was accessed for the given hour.
+
+  - `"ccr_agent_proxy_profile_bound"`
+
+    A Claude Code agent proxy profile was bound to a scope, applying its policy to Claude Code sessions in that scope.
+
+  - `"ccr_agent_proxy_profile_created"`
+
+    A Claude Code agent proxy profile was created. Agent proxy profiles are named, reusable bundles of access policy that administrators bind to parts of the organization.
+
+  - `"ccr_agent_proxy_profile_deleted"`
+
+    A Claude Code agent proxy profile was deleted, removing its policy from everything it was bound to.
+
+  - `"ccr_agent_proxy_profile_unbound"`
+
+    A Claude Code agent proxy profile was unbound from a scope, removing its policy from Claude Code sessions in that scope.
+
+  - `"ccr_agent_proxy_profile_updated"`
+
+    A Claude Code agent proxy profile's configuration was updated.
+
+  - `"ccr_agent_slack_access_scope_created"`
+
+    A Claude Code agent was granted access to read or write in an additional Slack channel beyond the one it is assigned to.
+
+  - `"ccr_agent_slack_access_scope_deleted"`
+
+    A Claude Code agent's access to an additional Slack channel was revoked.
+
+  - `"ccr_agent_slack_binding_created"`
+
+    A Claude Code agent was assigned to a Slack channel or workspace as its dedicated agent.
+
+  - `"ccr_agent_slack_binding_deleted"`
+
+    A Claude Code agent's assignment to a Slack channel or workspace was removed.
+
+  - `"ccr_agent_updated"`
+
+    A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
+
   - `"claude_artifact_access_failed"`
 
     An attempt to access an artifact failed.
@@ -247,6 +315,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_file_deleted"`
 
     A file was deleted.
+
+  - `"claude_file_exported"`
+
+    A file was exported from Claude to an external storage destination.
 
   - `"claude_file_uploaded"`
 
@@ -548,9 +620,17 @@ compliance activities that can be filtered by various criteria.
 
     One or more members were added to a group.
 
+  - `"group_member_addition_failed"`
+
+    A request to add members to a group failed. Some of the requested members may have been added before the failure.
+
   - `"group_member_list_viewed"`
 
     Admin viewed the members of an RBAC group.
+
+  - `"group_member_removal_failed"`
+
+    A request to remove members from a group failed. Some of the requested members may have been removed before the failure.
 
   - `"group_member_removed"`
 
@@ -676,9 +756,19 @@ compliance activities that can be filtered by various criteria.
 
     Organization Claude Code Desktop was enabled.
 
+  - `"org_claude_code_zero_data_retention_disabled"`
+
+    A primary owner disabled zero data retention for Claude Code, so Claude
+    Code content is retained according to the organization's data retention
+    settings.
+
   - `"org_compliance_api_settings_updated"`
 
     Organization compliance API settings were updated.
+
+  - `"org_connector_domain_guard_updated"`
+
+    Enterprise admin changed whether connectors are restricted to verified domains.
 
   - `"org_cowork_act_without_asking_mode_disabled"`
 
@@ -706,11 +796,11 @@ compliance activities that can be filtered by various criteria.
 
   - `"org_cowork_mcp_always_allow_disabled"`
 
-    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each connector tool use requires approval.
+    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each use of a connector tool that can make changes requires approval. Read-only connector tools are not affected by this setting.
 
   - `"org_cowork_mcp_always_allow_enabled"`
 
-    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool once and allow its later uses automatically.
+    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool that can make changes once and allow its later uses automatically. Read-only connector tools are not affected by this setting.
 
   - `"org_cowork_otlp_settings_updated"`
 
@@ -792,6 +882,22 @@ compliance activities that can be filtered by various criteria.
 
     Organization domain was verified.
 
+  - `"org_external_key_created"`
+
+    A CMEK external key config was created.
+
+  - `"org_external_key_deleted"`
+
+    A CMEK external key config was deleted.
+
+  - `"org_external_key_updated"`
+
+    A CMEK external key config was updated.
+
+  - `"org_external_key_validated"`
+
+    A CMEK external key config was validated against the customer's KMS.
+
   - `"org_hipaa_self_serve_enabled"`
 
     A primary owner click-accepted the BAA and enabled HIPAA protections
@@ -868,6 +974,10 @@ compliance activities that can be filtered by various criteria.
   - `"org_members_exported"`
 
     Organization members list was exported as CSV.
+
+  - `"org_model_default_updated"`
+
+    An organization or role default model setting was changed by an administrator.
 
   - `"org_parent_join_proposal_created"`
 
@@ -957,6 +1067,10 @@ compliance activities that can be filtered by various criteria.
 
     User removed themselves from organization.
 
+  - `"org_user_trusted_devices_revoked"`
+
+    An organization admin revoked a member's trusted devices and signed the member out of all active sessions.
+
   - `"org_user_viewed"`
 
     An organization user was viewed.
@@ -993,6 +1107,14 @@ compliance activities that can be filtered by various criteria.
 
     The organization's default payment method was updated.
 
+  - `"pending_share_created"`
+
+    A pending share of a project or skill was created for an email address that is not yet an organization member.
+
+  - `"pending_share_revoked"`
+
+    A pending share of a project or skill was revoked before the invitee joined the organization.
+
   - `"phone_code_sent"`
 
     User requested a phone verification code.
@@ -1009,9 +1131,17 @@ compliance activities that can be filtered by various criteria.
 
     An API key was updated.
 
+  - `"platform_billing_upgraded_to_prepaid"`
+
+    The organization's API billing was upgraded to the prepaid plan.
+
   - `"platform_cost_report_viewed"`
 
     The cost report was viewed.
+
+  - `"platform_federated_authentication"`
+
+    A federated workload identity attempted to exchange an OIDC token for Anthropic API credentials.
 
   - `"platform_federation_issuer_archived"`
 
@@ -1048,6 +1178,18 @@ compliance activities that can be filtered by various criteria.
   - `"platform_file_uploaded"`
 
     Activity logged when a file is uploaded via POST /v1/files.
+
+  - `"platform_plugin_directory_submission_created"`
+
+    A plugin directory submission was created on the API platform. A plugin directory submission is a request to list a plugin in the public plugin directory.
+
+  - `"platform_plugin_directory_submission_deleted"`
+
+    A plugin directory submission was deleted on the API platform.
+
+  - `"platform_plugin_directory_submission_updated"`
+
+    A plugin directory submission was updated on the API platform.
 
   - `"platform_service_account_archived"`
 
@@ -1304,6 +1446,18 @@ compliance activities that can be filtered by various criteria.
 
     SSO second factor magic link was used.
 
+  - `"step_up_authentication_failed"`
+
+    An additional identity check failed.
+
+  - `"step_up_authentication_succeeded"`
+
+    The user completed an additional identity check to confirm a sensitive action.
+
+  - `"step_up_credential_enrolled"`
+
+    A user enrolled a passkey for confirming sensitive actions on their account.
+
   - `"subscription_cancellation_scheduled"`
 
     Subscription cancellation was scheduled at end of billing period.
@@ -1327,6 +1481,18 @@ compliance activities that can be filtered by various criteria.
   - `"subscription_upgraded"`
 
     Subscription plan was upgraded (e.g. Team to Enterprise).
+
+  - `"trusted_device_credential_rotated"`
+
+    The identity-verification credential of a trusted device was rotated to a new key.
+
+  - `"trusted_device_enrolled"`
+
+    A device was enrolled as a trusted device for the user's account. Trusted devices can be used to confirm the user's identity for sensitive actions.
+
+  - `"trusted_device_revoked"`
+
+    A trusted device was removed from the user's account.
 
   - `"tunnel_archived"`
 
@@ -1387,6 +1553,10 @@ compliance activities that can be filtered by various criteria.
 
     A per-member Claude Code spend limit amount was updated.
 
+  - `"workspace_spend_limit_alert_emails_updated"`
+
+    Spend limit alert email recipients were updated for a workspace.
+
   - `"workspace_spend_limit_created"`
 
     A workspace-level API spend limit was created.
@@ -1425,7 +1595,7 @@ compliance activities that can be filtered by various criteria.
 
     Filter activities created at or before this time (RFC 3339 format)
 
-- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 339 more`
+- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "admin_api_key_created" or 381 more`
 
   Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
@@ -1481,6 +1651,74 @@ compliance activities that can be filtered by various criteria.
 
     The organization's billing email recipients were updated.
 
+  - `"ccr_agent_created"`
+
+    A Claude Code agent was created.
+
+  - `"ccr_agent_deleted"`
+
+    A Claude Code agent was deleted.
+
+  - `"ccr_agent_proxy_credential_created"`
+
+    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+
+  - `"ccr_agent_proxy_credential_deleted"`
+
+    A Claude Code agent proxy credential was deleted. Its secret material was removed and can no longer be sent to any host.
+
+  - `"ccr_agent_proxy_credential_rotated"`
+
+    A Claude Code agent proxy credential's secret material was replaced. The replacement keeps the same name, profile, and allowed hosts under a new credential identifier, and everything that referenced the old credential now uses the replacement.
+
+  - `"ccr_agent_proxy_credential_updated"`
+
+    A Claude Code agent proxy credential's settings were updated. Only the display name and the allowed host patterns can be updated; the secret material can only be replaced through a rotation.
+
+  - `"ccr_agent_proxy_network_events_listed"`
+
+    A Claude Code network activity export was accessed for the given hour.
+
+  - `"ccr_agent_proxy_profile_bound"`
+
+    A Claude Code agent proxy profile was bound to a scope, applying its policy to Claude Code sessions in that scope.
+
+  - `"ccr_agent_proxy_profile_created"`
+
+    A Claude Code agent proxy profile was created. Agent proxy profiles are named, reusable bundles of access policy that administrators bind to parts of the organization.
+
+  - `"ccr_agent_proxy_profile_deleted"`
+
+    A Claude Code agent proxy profile was deleted, removing its policy from everything it was bound to.
+
+  - `"ccr_agent_proxy_profile_unbound"`
+
+    A Claude Code agent proxy profile was unbound from a scope, removing its policy from Claude Code sessions in that scope.
+
+  - `"ccr_agent_proxy_profile_updated"`
+
+    A Claude Code agent proxy profile's configuration was updated.
+
+  - `"ccr_agent_slack_access_scope_created"`
+
+    A Claude Code agent was granted access to read or write in an additional Slack channel beyond the one it is assigned to.
+
+  - `"ccr_agent_slack_access_scope_deleted"`
+
+    A Claude Code agent's access to an additional Slack channel was revoked.
+
+  - `"ccr_agent_slack_binding_created"`
+
+    A Claude Code agent was assigned to a Slack channel or workspace as its dedicated agent.
+
+  - `"ccr_agent_slack_binding_deleted"`
+
+    A Claude Code agent's assignment to a Slack channel or workspace was removed.
+
+  - `"ccr_agent_updated"`
+
+    A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
+
   - `"claude_artifact_access_failed"`
 
     An attempt to access an artifact failed.
@@ -1660,6 +1898,10 @@ compliance activities that can be filtered by various criteria.
   - `"claude_file_deleted"`
 
     A file was deleted.
+
+  - `"claude_file_exported"`
+
+    A file was exported from Claude to an external storage destination.
 
   - `"claude_file_uploaded"`
 
@@ -1961,9 +2203,17 @@ compliance activities that can be filtered by various criteria.
 
     One or more members were added to a group.
 
+  - `"group_member_addition_failed"`
+
+    A request to add members to a group failed. Some of the requested members may have been added before the failure.
+
   - `"group_member_list_viewed"`
 
     Admin viewed the members of an RBAC group.
+
+  - `"group_member_removal_failed"`
+
+    A request to remove members from a group failed. Some of the requested members may have been removed before the failure.
 
   - `"group_member_removed"`
 
@@ -2089,9 +2339,19 @@ compliance activities that can be filtered by various criteria.
 
     Organization Claude Code Desktop was enabled.
 
+  - `"org_claude_code_zero_data_retention_disabled"`
+
+    A primary owner disabled zero data retention for Claude Code, so Claude
+    Code content is retained according to the organization's data retention
+    settings.
+
   - `"org_compliance_api_settings_updated"`
 
     Organization compliance API settings were updated.
+
+  - `"org_connector_domain_guard_updated"`
+
+    Enterprise admin changed whether connectors are restricted to verified domains.
 
   - `"org_cowork_act_without_asking_mode_disabled"`
 
@@ -2119,11 +2379,11 @@ compliance activities that can be filtered by various criteria.
 
   - `"org_cowork_mcp_always_allow_disabled"`
 
-    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each connector tool use requires approval.
+    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each use of a connector tool that can make changes requires approval. Read-only connector tools are not affected by this setting.
 
   - `"org_cowork_mcp_always_allow_enabled"`
 
-    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool once and allow its later uses automatically.
+    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool that can make changes once and allow its later uses automatically. Read-only connector tools are not affected by this setting.
 
   - `"org_cowork_otlp_settings_updated"`
 
@@ -2205,6 +2465,22 @@ compliance activities that can be filtered by various criteria.
 
     Organization domain was verified.
 
+  - `"org_external_key_created"`
+
+    A CMEK external key config was created.
+
+  - `"org_external_key_deleted"`
+
+    A CMEK external key config was deleted.
+
+  - `"org_external_key_updated"`
+
+    A CMEK external key config was updated.
+
+  - `"org_external_key_validated"`
+
+    A CMEK external key config was validated against the customer's KMS.
+
   - `"org_hipaa_self_serve_enabled"`
 
     A primary owner click-accepted the BAA and enabled HIPAA protections
@@ -2281,6 +2557,10 @@ compliance activities that can be filtered by various criteria.
   - `"org_members_exported"`
 
     Organization members list was exported as CSV.
+
+  - `"org_model_default_updated"`
+
+    An organization or role default model setting was changed by an administrator.
 
   - `"org_parent_join_proposal_created"`
 
@@ -2370,6 +2650,10 @@ compliance activities that can be filtered by various criteria.
 
     User removed themselves from organization.
 
+  - `"org_user_trusted_devices_revoked"`
+
+    An organization admin revoked a member's trusted devices and signed the member out of all active sessions.
+
   - `"org_user_viewed"`
 
     An organization user was viewed.
@@ -2406,6 +2690,14 @@ compliance activities that can be filtered by various criteria.
 
     The organization's default payment method was updated.
 
+  - `"pending_share_created"`
+
+    A pending share of a project or skill was created for an email address that is not yet an organization member.
+
+  - `"pending_share_revoked"`
+
+    A pending share of a project or skill was revoked before the invitee joined the organization.
+
   - `"phone_code_sent"`
 
     User requested a phone verification code.
@@ -2422,9 +2714,17 @@ compliance activities that can be filtered by various criteria.
 
     An API key was updated.
 
+  - `"platform_billing_upgraded_to_prepaid"`
+
+    The organization's API billing was upgraded to the prepaid plan.
+
   - `"platform_cost_report_viewed"`
 
     The cost report was viewed.
+
+  - `"platform_federated_authentication"`
+
+    A federated workload identity attempted to exchange an OIDC token for Anthropic API credentials.
 
   - `"platform_federation_issuer_archived"`
 
@@ -2461,6 +2761,18 @@ compliance activities that can be filtered by various criteria.
   - `"platform_file_uploaded"`
 
     Activity logged when a file is uploaded via POST /v1/files.
+
+  - `"platform_plugin_directory_submission_created"`
+
+    A plugin directory submission was created on the API platform. A plugin directory submission is a request to list a plugin in the public plugin directory.
+
+  - `"platform_plugin_directory_submission_deleted"`
+
+    A plugin directory submission was deleted on the API platform.
+
+  - `"platform_plugin_directory_submission_updated"`
+
+    A plugin directory submission was updated on the API platform.
 
   - `"platform_service_account_archived"`
 
@@ -2717,6 +3029,18 @@ compliance activities that can be filtered by various criteria.
 
     SSO second factor magic link was used.
 
+  - `"step_up_authentication_failed"`
+
+    An additional identity check failed.
+
+  - `"step_up_authentication_succeeded"`
+
+    The user completed an additional identity check to confirm a sensitive action.
+
+  - `"step_up_credential_enrolled"`
+
+    A user enrolled a passkey for confirming sensitive actions on their account.
+
   - `"subscription_cancellation_scheduled"`
 
     Subscription cancellation was scheduled at end of billing period.
@@ -2740,6 +3064,18 @@ compliance activities that can be filtered by various criteria.
   - `"subscription_upgraded"`
 
     Subscription plan was upgraded (e.g. Team to Enterprise).
+
+  - `"trusted_device_credential_rotated"`
+
+    The identity-verification credential of a trusted device was rotated to a new key.
+
+  - `"trusted_device_enrolled"`
+
+    A device was enrolled as a trusted device for the user's account. Trusted devices can be used to confirm the user's identity for sensitive actions.
+
+  - `"trusted_device_revoked"`
+
+    A trusted device was removed from the user's account.
 
   - `"tunnel_archived"`
 
@@ -2800,6 +3136,10 @@ compliance activities that can be filtered by various criteria.
 
     A per-member Claude Code spend limit amount was updated.
 
+  - `"workspace_spend_limit_alert_emails_updated"`
+
+    Spend limit alert email recipients were updated for a workspace.
+
   - `"workspace_spend_limit_created"`
 
     A workspace-level API spend limit was created.
@@ -2834,7 +3174,7 @@ compliance activities that can be filtered by various criteria.
 
 ### Returns
 
-- `data: optional array of object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 339 more`
+- `data: optional array of object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 381 more`
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -2842,12 +3182,10 @@ compliance activities that can be filtered by various criteria.
 
     An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -2894,6 +3232,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -2988,12 +3339,10 @@ compliance activities that can be filtered by various criteria.
 
     User-initiated self-service account deletion.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -3040,6 +3389,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -3264,12 +3626,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin approved or dismissed pending member requests to enable an MCP connector.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -3316,6 +3676,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -3410,12 +3783,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin request created by an org member (seat upgrade, limit increase, join org, end-user invite).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -3462,6 +3833,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -3670,12 +4054,10 @@ compliance activities that can be filtered by various criteria.
 
     An attempt to access an artifact failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -3722,6 +4104,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -3856,12 +4251,10 @@ compliance activities that can be filtered by various criteria.
 
     A published artifact was unpublished/deleted by its creator.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -3908,6 +4301,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -3994,12 +4400,10 @@ compliance activities that can be filtered by various criteria.
 
     An artifact was published and made publicly accessible.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4046,6 +4450,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -4152,12 +4569,10 @@ compliance activities that can be filtered by various criteria.
 
     An artifact's sharing settings were updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4204,6 +4619,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -4330,12 +4758,10 @@ compliance activities that can be filtered by various criteria.
 
     An artifact was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4382,6 +4808,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -4602,6 +5041,2823 @@ compliance activities that can be filtered by various criteria.
 
       - `"billing_emails_updated"`
 
+  - `CcrAgentCreated object { actor, agent_id, default_source_urls_truncated, 11 more }`
+
+    A Claude Code agent was created.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was created, e.g. "cagt_01HX...".
+
+    - `default_source_urls_truncated: boolean`
+
+      Whether default_source_urls was capped and omits some of the granted repositories.
+
+    - `display_name: string`
+
+      The agent's display name at creation time.
+
+    - `omitted_source_url_count: number`
+
+      Number of default repository entries that could not be safely rendered as a credential-free URL and were omitted from default_source_urls. A non-zero value with an empty list means repositories were granted but could not be displayed — not that all repositories were removed.
+
+    - `slug: string`
+
+      The agent's URL-safe identifier, unique within the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_source_urls: optional array of string`
+
+      The repository URLs the agent works on by default, reduced to scheme, host, and path — credentials and query parameters are never included. Empty with a zero omitted_source_url_count means the agent was created without any default repositories; empty with a non-zero count means repositories were granted but could not be safely rendered. At most 100 entries are included; default_source_urls_truncated indicates when more were granted.
+
+    - `guest_policy: optional string`
+
+      Whether the agent responds in Slack channels that include guest users: "allow" or "restrict". Omitted when the agent inherits the default policy.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_alias: optional string`
+
+      The Slack trigger word that routes mentions to this agent. An empty value means the agent responds to bare "@Claude" mentions. Omitted when the agent is not addressable from Slack.
+
+    - `type: optional "ccr_agent_created"`
+
+      - `"ccr_agent_created"`
+
+  - `CcrAgentDeleted object { actor, agent_id, cascaded_agent_ids_truncated, 7 more }`
+
+    A Claude Code agent was deleted.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was deleted, e.g. "cagt_01HX...".
+
+    - `cascaded_agent_ids_truncated: boolean`
+
+      True when more agents were deleted in this cascade than are individually recorded. On a cascade parent event (cascaded_from_agent_id unset), cascaded_agent_ids is capped at 100. On a cascade child event (cascaded_from_agent_id set, emitted when the parent deletion failed after committing child deletions), one event is emitted per deleted child up to 100, and this field indicates additional children were deleted in the same cascade.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `cascaded_agent_ids: optional array of string`
+
+      Agents assigned to individual Slack channels that were also deleted because agent_id was the agent assigned to their entire Slack workspace. Empty when no such agents were deleted, and always empty on a cascade child event (cascaded_from_agent_id set) — the child's siblings are recorded as their own events, not listed here. Capped at 100 entries; cascaded_agent_ids_truncated is set when the actual count exceeded the cap.
+
+    - `cascaded_from_agent_id: optional string`
+
+      When set, the Slack workspace's dedicated agent whose deletion attempt caused this agent to be deleted. The parent's own deletion may have failed after the cascade committed — check for a separate event with agent_id = cascaded_from_agent_id to confirm. Unset on a direct deletion.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_deleted"`
+
+      - `"ccr_agent_deleted"`
+
+  - `CcrAgentProxyCredentialCreated object { actor, credential_id, credential_type, 9 more }`
+
+    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was created, e.g. "apc_01HX...".
+
+    - `credential_type: string`
+
+      The kind of credential, e.g. "bearer", "basic", "github_app", "mtls".
+
+    - `display_name: string`
+
+      The credential's display name.
+
+    - `host_constraint_truncated: boolean`
+
+      Whether host_constraint was capped and omits some of the configured host name patterns.
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `host_constraint: optional array of string`
+
+      The host name patterns the credential may be sent to, e.g. "api.example.com" or "*.example.com". At most 100 entries are included; host_constraint_truncated indicates when the configured set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_created"`
+
+      - `"ccr_agent_proxy_credential_created"`
+
+  - `CcrAgentProxyCredentialDeleted object { actor, credential_id, profile_id, 5 more }`
+
+    A Claude Code agent proxy credential was deleted. Its secret material was removed and can no longer be sent to any host.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was deleted, e.g. "apc_01HX...".
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belonged to, e.g. "capp_01HX...". Carried so the deletion can be correlated with the profile's other audit events after the credential row no longer exists.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_deleted"`
+
+      - `"ccr_agent_proxy_credential_deleted"`
+
+  - `CcrAgentProxyCredentialRotated object { actor, credential_id, credential_type, 10 more }`
+
+    A Claude Code agent proxy credential's secret material was replaced. The replacement keeps the same name, profile, and allowed hosts under a new credential identifier, and everything that referenced the old credential now uses the replacement.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The replacement credential, e.g. "apc_01HX...".
+
+    - `credential_type: string`
+
+      The kind of credential, e.g. "bearer", "basic", "github_app", "mtls".
+
+    - `destinations_repointed: number`
+
+      The number of agent proxy destinations that referenced the old credential and now reference the replacement.
+
+    - `display_name: string`
+
+      The credential's display name.
+
+    - `previous_credential_id: string`
+
+      The credential that was replaced, e.g. "apc_01HX...".
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `rules_repointed: number`
+
+      The number of agent proxy rules that referenced the old credential and now reference the replacement.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_rotated"`
+
+      - `"ccr_agent_proxy_credential_rotated"`
+
+  - `CcrAgentProxyCredentialUpdated object { actor, credential_id, display_name, 9 more }`
+
+    A Claude Code agent proxy credential's settings were updated. Only the display name and the allowed host patterns can be updated; the secret material can only be replaced through a rotation.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was updated, e.g. "apc_01HX...".
+
+    - `display_name: string`
+
+      The credential's display name after the update.
+
+    - `host_constraint_truncated: boolean`
+
+      Whether host_constraint was capped and omits some of the configured host name patterns.
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `host_constraint: optional array of string`
+
+      The host name patterns the credential may be sent to after the update, e.g. "api.example.com" or "*.example.com". Populated only when the update changed them. At most 100 entries are included; host_constraint_truncated indicates when the configured set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_updated"`
+
+      - `"ccr_agent_proxy_credential_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the settings included in the update: "display_name", "host_constraint".
+
+  - `CcrAgentProxyNetworkEventsListed object { actor, failed, id, 5 more }`
+
+    A Claude Code network activity export was accessed for the given hour.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `failed: boolean`
+
+      True when the export request did not complete successfully.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `hour: optional string`
+
+      The UTC hour that was exported.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_network_events_listed"`
+
+      - `"ccr_agent_proxy_network_events_listed"`
+
+  - `CcrAgentProxyProfileBound object { actor, profile_id, scope_id, 6 more }`
+
+    A Claude Code agent proxy profile was bound to a scope, applying its policy to Claude Code sessions in that scope.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was bound, e.g. "capp_01HX...".
+
+    - `scope_id: string`
+
+      The identifier of the scope the profile was bound to.
+
+    - `scope_kind: string`
+
+      The kind of scope the profile was bound to: "organization", "environment", "account", or "agent".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_bound"`
+
+      - `"ccr_agent_proxy_profile_bound"`
+
+  - `CcrAgentProxyProfileCreated object { actor, display_name, profile_id, 7 more }`
+
+    A Claude Code agent proxy profile was created. Agent proxy profiles are named, reusable bundles of access policy that administrators bind to parts of the organization.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `display_name: string`
+
+      The profile's display name at creation time.
+
+    - `profile_id: string`
+
+      The profile that was created, e.g. "capp_01HX...".
+
+    - `slug: string`
+
+      The profile's URL-safe identifier, unique within the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `github_access: optional array of object { access_mode, github_installation_id, repo_count, 4 more }`
+
+      The GitHub repository access the profile grants, one entry per GitHub App installation. Empty when the profile grants no GitHub access.
+
+      - `access_mode: string`
+
+        How repository access is granted: "none" (no access), "list" (exactly the repositories in repos), or "all" — a legacy value for policies created before per-repository grants were required; it can no longer be assigned.
+
+      - `github_installation_id: number`
+
+        The GitHub App installation the access applies to.
+
+      - `repo_count: number`
+
+        The total number of repositories granted, including any omitted from repos.
+
+      - `repos_truncated: boolean`
+
+        Whether repos was capped and omits some of the granted repositories.
+
+      - `ghe_configuration_id: optional number`
+
+        The GitHub host configuration this installation belongs to. Distinguishes installations with the same numeric installation ID across github.com and GitHub Enterprise Server hosts. Absent for github.com installations.
+
+      - `repo_ids: optional array of number`
+
+        The numeric GitHub repository IDs the profile grants access to, in the same order as repos (and subject to the same 100-entry cap). These IDs are the authoritative identity of the granted repositories — access is enforced against them, not against the display names in repos.
+
+      - `repos: optional array of string`
+
+        Repository names (owner/name) the profile grants access to, populated when access_mode is "list". Names are display-only labels resolved when the event was recorded and may lag a repository rename; the entries in repo_ids are the authoritative identity of the granted repositories. A repository whose name is unavailable is listed as its numeric GitHub repository ID instead. At most 100 entries are included; repos_truncated indicates when the granted set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_created"`
+
+      - `"ccr_agent_proxy_profile_created"`
+
+  - `CcrAgentProxyProfileDeleted object { actor, deleted_credential_count, deleted_credentials_unknown, 6 more }`
+
+    A Claude Code agent proxy profile was deleted, removing its policy from everything it was bound to.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_credential_count: number`
+
+      Number of credentials deleted together with the profile — deleting a profile also deletes the credentials attached to it. Each deleted credential additionally emits its own ccr_agent_proxy_credential_deleted activity, at most 100 per profile deletion. Best-effort: when deleted_credentials_unknown is true the count could not be determined and 0 here does not mean the profile had no credentials.
+
+    - `deleted_credentials_unknown: boolean`
+
+      Whether the number of credentials deleted with the profile could not be determined. When true, deleted_credential_count is 0 and no per-credential deletion activities were emitted, even though the deletion may have destroyed credentials.
+
+    - `profile_id: string`
+
+      The profile that was deleted, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_deleted"`
+
+      - `"ccr_agent_proxy_profile_deleted"`
+
+  - `CcrAgentProxyProfileUnbound object { actor, profile_id, scope_id, 6 more }`
+
+    A Claude Code agent proxy profile was unbound from a scope, removing its policy from Claude Code sessions in that scope.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was unbound, e.g. "capp_01HX...".
+
+    - `scope_id: string`
+
+      The identifier of the scope the profile was unbound from.
+
+    - `scope_kind: string`
+
+      The kind of scope the profile was unbound from: "organization", "environment", "account", or "agent".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_unbound"`
+
+      - `"ccr_agent_proxy_profile_unbound"`
+
+  - `CcrAgentProxyProfileUpdated object { actor, profile_id, id, 6 more }`
+
+    A Claude Code agent proxy profile's configuration was updated.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was updated, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `github_access_changes: optional array of object { access_mode, github_installation_id, repo_count, 7 more }`
+
+      How the profile's GitHub repository access changed, one entry per GitHub App installation whose access changed. Empty when the update did not change GitHub access.
+
+      - `access_mode: string`
+
+        How repository access is granted after the change: "none" (no access), "list" (access is restricted to an explicit repository list — repos_added/repos_removed carry this change's delta and repo_count the post-change total), or "all" — a legacy value for policies created before per-repository grants were required; it can no longer be assigned.
+
+      - `github_installation_id: number`
+
+        The GitHub App installation the change applies to.
+
+      - `repo_count: number`
+
+        The total number of repositories granted after the change.
+
+      - `repos_truncated: boolean`
+
+        Whether repos_added or repos_removed was capped and omits some of the changed repositories.
+
+      - `ghe_configuration_id: optional number`
+
+        The GitHub host configuration this installation belongs to. Distinguishes installations with the same numeric installation ID across github.com and GitHub Enterprise Server hosts. Absent for github.com installations.
+
+      - `previous_access_mode: optional string`
+
+        How repository access was granted before the change. Present only when the access mode changed.
+
+      - `repo_ids_added: optional array of number`
+
+        The numeric GitHub repository IDs added to the granted set, in the same order as repos_added (and subject to the same 100-entry cap). These IDs are the authoritative identity of the added repositories — access is enforced against them, not against the display names in repos_added.
+
+      - `repo_ids_removed: optional array of number`
+
+        The numeric GitHub repository IDs removed from the granted set, in the same order as repos_removed (and subject to the same 100-entry cap). These IDs are the authoritative identity of the removed repositories.
+
+      - `repos_added: optional array of string`
+
+        Repository names (owner/name) added to the granted set. Names are display-only labels resolved when the event was recorded and may lag a repository rename; the entries in repo_ids_added are the authoritative identity of the added repositories. A repository whose name is unavailable is listed as its numeric GitHub repository ID instead. At most 100 entries are included; repos_truncated indicates when more were added. Empty when the change involves "all" access, which grants every repository regardless of any explicit list.
+
+      - `repos_removed: optional array of string`
+
+        Repository names (owner/name) removed from the granted set. Same rendering, cap, and "all" handling as repos_added; repo_ids_removed carries the authoritative identity of the removed repositories.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_updated"`
+
+      - `"ccr_agent_proxy_profile_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the configuration fields included in the update, e.g. "display_name", "github_installation_permissions".
+
+  - `CcrAgentSlackAccessScopeCreated object { actor, agent_id, can_write, 7 more }`
+
+    A Claude Code agent was granted access to read or write in an additional Slack channel beyond the one it is assigned to.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was granted access, e.g. "cagt_01HX...".
+
+    - `can_write: boolean`
+
+      Whether the grant includes permission to post messages in the channel, in addition to reading it.
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was granted access to, e.g. "C01ABC...". Empty when the grant covers the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_access_scope_created"`
+
+      - `"ccr_agent_slack_access_scope_created"`
+
+  - `CcrAgentSlackAccessScopeDeleted object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent's access to an additional Slack channel was revoked.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent whose access was revoked, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent's access was revoked from, e.g. "C01ABC...". Empty when the revoked grant covered the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_access_scope_deleted"`
+
+      - `"ccr_agent_slack_access_scope_deleted"`
+
+  - `CcrAgentSlackBindingCreated object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent was assigned to a Slack channel or workspace as its dedicated agent.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent the binding was created for, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was assigned to, e.g. "C01ABC...". Empty when the agent was assigned to the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace the agent was assigned to, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_binding_created"`
+
+      - `"ccr_agent_slack_binding_created"`
+
+  - `CcrAgentSlackBindingDeleted object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent's assignment to a Slack channel or workspace was removed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent the binding was removed from, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was unassigned from, e.g. "C01ABC...". Empty when the assignment covered the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace the agent was unassigned from, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_binding_deleted"`
+
+      - `"ccr_agent_slack_binding_deleted"`
+
+  - `CcrAgentUpdated object { actor, agent_id, default_source_urls_truncated, 10 more }`
+
+    A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was updated, e.g. "cagt_01HX...".
+
+    - `default_source_urls_truncated: boolean`
+
+      Whether default_source_urls was capped and omits some of the granted repositories.
+
+    - `omitted_source_url_count: number`
+
+      Number of default repository entries that could not be safely rendered as a credential-free URL and were omitted from default_source_urls. A non-zero value with an empty list means repositories were granted but could not be displayed — not that all repositories were removed.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_source_urls: optional array of string`
+
+      The agent's default repository URLs after the update, reduced to scheme, host, and path — credentials and query parameters are never included. Populated only when the update changed them — "default_source_urls" appears in updated_fields. Empty while listed in updated_fields AND omitted_source_url_count is 0 means all default repositories were removed. At most 100 entries are included; default_source_urls_truncated indicates when more were granted.
+
+    - `guest_policy: optional string`
+
+      The agent's guest-user response policy after the update: "allow", "restrict", or "default" when the update removed the agent-specific policy so the agent inherits the surrounding default. Present only when the update changed it.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_alias: optional string`
+
+      The agent's Slack trigger word after the update. Present only when the update changed it. An empty value means the agent responds to bare "@Claude" mentions.
+
+    - `type: optional "ccr_agent_updated"`
+
+      - `"ccr_agent_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the configuration fields included in the update, e.g. "display_name", "system_prompt_addendum", "guest_policy". Includes "is_virtual" when this update was the first administrator action on an auto-provisioned agent — a durable state change even when no other field was supplied.
+
   - `ClaudeChatSettingsUpdated object { actor, claude_chat_id, id, 5 more }`
 
     User updated the settings for a conversation.
@@ -4650,12 +7906,10 @@ compliance activities that can be filtered by various criteria.
 
     User created/shared a chat snapshot.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4702,6 +7956,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -4788,12 +8055,10 @@ compliance activities that can be filtered by various criteria.
 
     User deleted/unshared a chat snapshot.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4840,6 +8105,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -4926,12 +8204,10 @@ compliance activities that can be filtered by various criteria.
 
     User viewed a chat snapshot (authenticated or public/unauthenticated).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -4978,6 +8254,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5064,12 +8353,10 @@ compliance activities that can be filtered by various criteria.
 
     A user was denied access to a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5116,6 +8403,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5202,12 +8502,10 @@ compliance activities that can be filtered by various criteria.
 
     User created a chat.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5254,6 +8552,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5344,12 +8655,10 @@ compliance activities that can be filtered by various criteria.
 
     A user deleted a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5396,6 +8705,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5486,12 +8808,10 @@ compliance activities that can be filtered by various criteria.
 
     A request to delete a Claude.ai chat conversation failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5538,6 +8858,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5624,12 +8957,10 @@ compliance activities that can be filtered by various criteria.
 
     User updated the chat metadata (e.g name, model).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5676,6 +9007,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5766,12 +9110,10 @@ compliance activities that can be filtered by various criteria.
 
     A user viewed a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5818,6 +9160,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -5908,12 +9263,10 @@ compliance activities that can be filtered by various criteria.
 
     Claude Code Review configuration was enabled/disabled for an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -5960,6 +9313,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6082,12 +9448,10 @@ compliance activities that can be filtered by various criteria.
 
     A repository was added to org-level Claude Code Review configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6134,6 +9498,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6232,12 +9609,10 @@ compliance activities that can be filtered by various criteria.
 
     A repository was removed from org-level Claude Code Review configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6284,6 +9659,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6378,12 +9766,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code Review repository configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6430,6 +9816,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6532,12 +9931,10 @@ compliance activities that can be filtered by various criteria.
 
     Claude Code Security Center scanning was enabled/disabled for an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6584,6 +9981,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6674,12 +10084,10 @@ compliance activities that can be filtered by various criteria.
 
     In-flight Claude Code Security scans were cancelled for a project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6726,6 +10134,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6814,12 +10235,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code Security scan was started.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -6866,6 +10285,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -6966,12 +10398,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7018,6 +10448,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7114,12 +10557,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7166,6 +10607,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7266,12 +10720,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7318,6 +10770,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7404,12 +10869,10 @@ compliance activities that can be filtered by various criteria.
 
     A recurring scan schedule was deleted for a Claude Code Security project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7456,6 +10919,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7542,12 +11018,10 @@ compliance activities that can be filtered by various criteria.
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7594,6 +11068,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7682,12 +11169,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7734,6 +11219,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7838,12 +11336,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -7890,6 +11386,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -7980,12 +11489,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code Security outbound webhook was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8032,6 +11539,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8124,12 +11644,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code Security outbound webhook was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8176,6 +11694,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8266,12 +11797,10 @@ compliance activities that can be filtered by various criteria.
 
     The HMAC signing secret for a Claude Code Security webhook was rotated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8318,6 +11847,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8408,12 +11950,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Code Security outbound webhook was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8460,6 +12000,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8546,7 +12099,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_code_security_webhook_updated"`
 
-  - `ClaudeCodeTeamMemoryACLUpdated object { action, actor, group_id, 6 more }`
+  - `ClaudeCodeTeamMemoryACLUpdated object { action, actor, group_id, 7 more }`
 
     An RBAC group was added to or removed from the Claude Code team-memory ACL.
 
@@ -8560,12 +12113,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8612,6 +12163,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8694,6 +12258,10 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_access_level: optional string`
+
+      Access level the group had before this change; absent when the group was not previously in the access list. For removals this is the access level that was removed.
+
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
@@ -8702,12 +12270,10 @@ compliance activities that can be filtered by various criteria.
 
     Claude Code team memory shared with the organization was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8754,6 +12320,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -8884,12 +12463,10 @@ compliance activities that can be filtered by various criteria.
 
       - `"updated"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -8936,6 +12513,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9038,12 +12628,10 @@ compliance activities that can be filtered by various criteria.
 
     A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9090,6 +12678,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9200,12 +12801,10 @@ compliance activities that can be filtered by various criteria.
 
     A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9252,6 +12851,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9366,12 +12978,10 @@ compliance activities that can be filtered by various criteria.
 
     A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9418,6 +13028,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9528,12 +13151,10 @@ compliance activities that can be filtered by various criteria.
 
     A user's synced Claude Code settings were updated or deleted on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9580,6 +13201,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9690,12 +13324,10 @@ compliance activities that can be filtered by various criteria.
 
     A user was denied access to a file in Claude.ai.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9742,6 +13374,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9836,16 +13481,14 @@ compliance activities that can be filtered by various criteria.
 
       - `"claude_file_access_failed"`
 
-  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+  - `ClaudeFileExported object { actor, export_destination, filename, 7 more }`
 
-    A user viewed a file in Claude.ai.
+    A file was exported from Claude to an external storage destination.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -9892,6 +13535,184 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `export_destination: "google_drive" or "unspecified"`
+
+      The external destination the file was exported to.
+
+      - `"google_drive"`
+
+      - `"unspecified"`
+
+    - `filename: string`
+
+      Name of the exported file.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_chat_id: optional string`
+
+      The chat conversation the file was exported from, if the export originated in a chat, e.g. "claude_chat_01HX...".
+
+    - `claude_file_id: optional string`
+
+      The exported file, e.g. "claude_file_01HX...", if the file has a stored file record; files that exist only inside a session have no file ID.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_exported"`
+
+      - `"claude_file_exported"`
+
+  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+
+    A user viewed a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -9990,12 +13811,10 @@ compliance activities that can be filtered by various criteria.
 
     A sync source was connected to a Claude project's knowledge base.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10042,6 +13861,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10140,12 +13972,10 @@ compliance activities that can be filtered by various criteria.
 
     A sync source was disconnected from a Claude project's knowledge base.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10192,6 +14022,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10286,12 +14129,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude project sync source's configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10338,6 +14179,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10440,12 +14294,10 @@ compliance activities that can be filtered by various criteria.
 
     An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10492,6 +14344,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10590,12 +14455,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin set or cleared the per-op permission ceiling for a plugin CLI.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10642,6 +14505,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10748,12 +14624,10 @@ compliance activities that can be filtered by various criteria.
 
     Command was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10800,6 +14674,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -10886,12 +14773,10 @@ compliance activities that can be filtered by various criteria.
 
     Command was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -10938,6 +14823,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11024,12 +14922,10 @@ compliance activities that can be filtered by various criteria.
 
     Command was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11076,6 +14972,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11220,12 +15129,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Design project was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11272,6 +15179,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11370,12 +15290,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Design project was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11422,6 +15340,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11508,12 +15439,10 @@ compliance activities that can be filtered by various criteria.
 
     A Claude Design project's metadata was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11560,6 +15489,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11654,12 +15596,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was added to an org's allowlist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11706,6 +15646,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11792,12 +15745,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was added to the global blocklist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11844,6 +15795,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -11930,12 +15894,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was deleted, either globally by an admin or org-scoped by an org owner.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -11982,6 +15944,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12072,12 +16047,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was removed from an org's allowlist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12124,6 +16097,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12210,12 +16196,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was removed from the global blocklist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12262,6 +16246,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12348,12 +16345,10 @@ compliance activities that can be filtered by various criteria.
 
     A desktop extension was uploaded, either globally by an admin or org-scoped by an org owner.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12400,6 +16395,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12490,12 +16498,10 @@ compliance activities that can be filtered by various criteria.
 
     A new version of an existing org-owned desktop extension was uploaded.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12542,6 +16548,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12632,12 +16651,10 @@ compliance activities that can be filtered by various criteria.
 
     Domain capture claim initiated over personal accounts on verified domains.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12684,6 +16701,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -12766,12 +16796,10 @@ compliance activities that can be filtered by various criteria.
 
     Non-admin member submitted an invite request for a new org member.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -12818,6 +16846,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -13402,12 +17443,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin created a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -13454,6 +17493,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -13540,12 +17592,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin deleted a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -13592,6 +17642,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -13678,12 +17741,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin updated a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -13730,6 +17791,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -13816,12 +17890,10 @@ compliance activities that can be filtered by various criteria.
 
     User connected to a GHE instance.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -13868,6 +17940,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -13954,12 +18039,10 @@ compliance activities that can be filtered by various criteria.
 
     User disconnected from a GHE instance.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14006,6 +18089,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -14092,12 +18188,10 @@ compliance activities that can be filtered by various criteria.
 
     Webhook signature validation failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14144,6 +18238,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -14488,12 +18595,10 @@ compliance activities that can be filtered by various criteria.
 
     A group was created (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14540,6 +18645,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -14630,12 +18748,10 @@ compliance activities that can be filtered by various criteria.
 
     A group was deleted (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14682,6 +18798,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -14768,12 +18897,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin viewed the list of RBAC groups.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14820,6 +18947,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -14902,12 +19042,10 @@ compliance activities that can be filtered by various criteria.
 
     One or more members were added to a group.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -14954,6 +19092,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15040,16 +19191,14 @@ compliance activities that can be filtered by various criteria.
 
       - `"group_member_added"`
 
-  - `GroupMemberListViewed object { actor, group_id, id, 4 more }`
+  - `GroupMemberAdditionFailed object { actor, group_id, id, 5 more }`
 
-    Admin viewed the members of an RBAC group.
+    A request to add members to a group failed. Some of the requested members may have been added before the failure.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15096,6 +19245,172 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `group_id: string`
+
+      Tagged ID of the group
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `member_ids: optional array of string`
+
+      Tagged IDs of the members the request attempted to add
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "group_member_addition_failed"`
+
+      - `"group_member_addition_failed"`
+
+  - `GroupMemberListViewed object { actor, group_id, id, 4 more }`
+
+    Admin viewed the members of an RBAC group.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15178,16 +19493,14 @@ compliance activities that can be filtered by various criteria.
 
       - `"group_member_list_viewed"`
 
-  - `GroupMemberRemoved object { actor, group_id, id, 5 more }`
+  - `GroupMemberRemovalFailed object { actor, group_id, id, 5 more }`
 
-    One or more members were removed from a group.
+    A request to remove members from a group failed. Some of the requested members may have been removed before the failure.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15234,6 +19547,172 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `group_id: string`
+
+      Tagged ID of the group
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `member_ids: optional array of string`
+
+      Tagged IDs of the members the request attempted to remove
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "group_member_removal_failed"`
+
+      - `"group_member_removal_failed"`
+
+  - `GroupMemberRemoved object { actor, group_id, id, 5 more }`
+
+    One or more members were removed from a group.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15324,12 +19803,10 @@ compliance activities that can be filtered by various criteria.
 
     A group was updated (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15376,6 +19853,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15462,12 +19952,10 @@ compliance activities that can be filtered by various criteria.
 
     A group was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15514,6 +20002,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15760,12 +20261,10 @@ compliance activities that can be filtered by various criteria.
 
     LTI launch was initiated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15812,6 +20311,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -15894,12 +20406,10 @@ compliance activities that can be filtered by various criteria.
 
     LTI launch completed successfully.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -15946,6 +20456,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16028,12 +20551,10 @@ compliance activities that can be filtered by various criteria.
 
     Anthropic staff created an LTI platform integration on behalf of an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16080,6 +20601,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16170,12 +20704,10 @@ compliance activities that can be filtered by various criteria.
 
     Anthropic staff updated an LTI platform integration on behalf of an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16222,6 +20754,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16472,12 +21017,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin created an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16524,6 +21067,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16610,12 +21166,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin deleted an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16662,6 +21216,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16748,12 +21315,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin updated an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16800,6 +21365,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -16886,12 +21464,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin removed the GitHub push webhook for a marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -16938,6 +21514,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17024,12 +21613,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin provisioned a GitHub push webhook for a marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17076,6 +21663,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17166,12 +21766,10 @@ compliance activities that can be filtered by various criteria.
 
     An MCP server was added to the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17218,6 +21816,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17308,12 +21919,10 @@ compliance activities that can be filtered by various criteria.
 
     An MCP server was removed from the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17360,6 +21969,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17450,12 +22072,10 @@ compliance activities that can be filtered by various criteria.
 
     An MCP server's configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17502,6 +22122,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17592,12 +22225,10 @@ compliance activities that can be filtered by various criteria.
 
     The permission restriction for an MCP tool was set or cleared.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17644,6 +22275,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17846,12 +22490,10 @@ compliance activities that can be filtered by various criteria.
 
     A capability grant was added to a workspace or role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -17898,6 +22540,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -17998,12 +22653,10 @@ compliance activities that can be filtered by various criteria.
 
     A capability grant was removed from a workspace or role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -18050,6 +22703,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -18370,6 +23036,46 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_claude_code_desktop_enabled"`
 
+  - `OrgClaudeCodeZeroDataRetentionDisabled object { actor, id, created_at, 3 more }`
+
+    A primary owner disabled zero data retention for Claude Code, so Claude
+    Code content is retained according to the organization's data retention
+    settings.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_claude_code_zero_data_retention_disabled"`
+
+      - `"org_claude_code_zero_data_retention_disabled"`
+
   - `OrgComplianceAPISettingsUpdated object { actor, id, compliance_api_enabled, 5 more }`
 
     Organization compliance API settings were updated.
@@ -18445,6 +23151,153 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "org_compliance_api_settings_updated"`
 
       - `"org_compliance_api_settings_updated"`
+
+  - `OrgConnectorDomainGuardUpdated object { actor, enforced, id, 4 more }`
+
+    Enterprise admin changed whether connectors are restricted to verified domains.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `enforced: boolean`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_connector_domain_guard_updated"`
+
+      - `"org_connector_domain_guard_updated"`
 
   - `OrgCoworkActWithoutAskingModeDisabled object { actor, id, created_at, 3 more }`
 
@@ -18522,7 +23375,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_cowork_act_without_asking_mode_enabled"`
 
-  - `OrgCoworkAgentDisabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentDisabled object { actor, id, created_at, 5 more }`
 
     Organization Cowork Agent was disabled.
 
@@ -18548,6 +23401,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -18556,11 +23413,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_agent_disabled"`
 
       - `"org_cowork_agent_disabled"`
 
-  - `OrgCoworkAgentEnabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentEnabled object { actor, id, created_at, 5 more }`
 
     Organization Cowork Agent was enabled.
 
@@ -18586,6 +23447,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -18594,11 +23459,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_agent_enabled"`
 
       - `"org_cowork_agent_enabled"`
 
-  - `OrgCoworkDisabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkDisabled object { actor, id, created_at, 5 more }`
 
     Organization cowork was disabled.
 
@@ -18624,6 +23493,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -18632,11 +23505,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_disabled"`
 
       - `"org_cowork_disabled"`
 
-  - `OrgCoworkEnabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkEnabled object { actor, id, created_at, 5 more }`
 
     Organization cowork was enabled.
 
@@ -18662,6 +23539,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -18670,13 +23551,17 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_enabled"`
 
       - `"org_cowork_enabled"`
 
   - `OrgCoworkMcpAlwaysAllowDisabled object { actor, id, created_at, 3 more }`
 
-    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each connector tool use requires approval.
+    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each use of a connector tool that can make changes requires approval. Read-only connector tools are not affected by this setting.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -18714,7 +23599,7 @@ compliance activities that can be filtered by various criteria.
 
   - `OrgCoworkMcpAlwaysAllowEnabled object { actor, id, created_at, 3 more }`
 
-    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool once and allow its later uses automatically.
+    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool that can make changes once and allow its later uses automatically. Read-only connector tools are not affected by this setting.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -19492,12 +24377,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin disabled organization discoverability.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -19544,6 +24427,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -19626,12 +24522,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin enabled organization discoverability.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -19678,6 +24572,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -19760,12 +24667,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin updated organization discoverability settings.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -19812,6 +24717,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -20037,6 +24955,310 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "org_domain_verified"`
 
       - `"org_domain_verified"`
+
+  - `OrgExternalKeyCreated object { actor, external_key_id, provider, 5 more }`
+
+    A CMEK external key config was created.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the created external key config
+
+    - `provider: "aws" or "azure" or "gcp"`
+
+      KMS provider backing the key
+
+      - `"aws"`
+
+      - `"azure"`
+
+      - `"gcp"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_created"`
+
+      - `"org_external_key_created"`
+
+  - `OrgExternalKeyDeleted object { actor, external_key_id, id, 4 more }`
+
+    A CMEK external key config was deleted.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the deleted external key config
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_deleted"`
+
+      - `"org_external_key_deleted"`
+
+  - `OrgExternalKeyUpdated object { actor, external_key_id, updates, 5 more }`
+
+    A CMEK external key config was updated.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the updated external key config
+
+    - `updates: array of object { current_value, previous_value, type }`
+
+      - `current_value: string`
+
+      - `previous_value: string`
+
+      - `type: "display_name" or "geo" or "provider_config"`
+
+        - `"display_name"`
+
+        - `"geo"`
+
+        - `"provider_config"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_updated"`
+
+      - `"org_external_key_updated"`
+
+  - `OrgExternalKeyValidated object { actor, external_key_id, validation_result, 5 more }`
+
+    A CMEK external key config was validated against the customer's KMS.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the validated external key config
+
+    - `validation_result: "failure" or "success"`
+
+      Outcome of the encrypt/decrypt roundtrip
+
+      - `"failure"`
+
+      - `"success"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_validated"`
+
+      - `"org_external_key_validated"`
 
   - `OrgHipaaSelfServeEnabled object { actor, baa_content_hash, baa_version_label, 6 more }`
 
@@ -20345,12 +25567,10 @@ compliance activities that can be filtered by various criteria.
 
     An organization invite was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -20397,6 +25617,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -20483,12 +25716,10 @@ compliance activities that can be filtered by various criteria.
 
     Organization invites were listed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -20535,6 +25766,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -20617,12 +25861,10 @@ compliance activities that can be filtered by various criteria.
 
     Approve or reject decision on a parent-org join proposal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -20669,6 +25911,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -20753,12 +26008,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin approved a join request.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -20805,6 +26058,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -20887,12 +26153,10 @@ compliance activities that can be filtered by various criteria.
 
     User requested to join an organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -20939,6 +26203,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21021,12 +26298,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin dismissed a join request.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -21073,6 +26348,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21155,12 +26443,10 @@ compliance activities that can be filtered by various criteria.
 
     Join request was instantly approved.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -21207,6 +26493,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21289,12 +26588,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin bulk-dismissed join requests.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -21341,6 +26638,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21473,12 +26783,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin disabled member invites for the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -21525,6 +26833,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21607,12 +26928,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin enabled member invites for the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -21659,6 +26978,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -21784,6 +27116,199 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "org_members_exported"`
 
       - `"org_members_exported"`
+
+  - `OrgModelDefaultUpdated object { action, actor, override_user_selection, 9 more }`
+
+    An organization or role default model setting was changed by an administrator.
+
+    - `action: "cleared" or "set" or "unspecified"`
+
+      Whether the default model was set or cleared
+
+      - `"cleared"`
+
+      - `"set"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `override_user_selection: boolean`
+
+      Whether the default is enforced as a fixed default, resetting members' own model selections at the start of each new conversation
+
+    - `principal_id: string`
+
+      Tagged ID of the organization or role the default applies to
+
+    - `principal_type: "org" or "rbac_role" or "unspecified"`
+
+      Whether the default applies to the whole organization or to a single role
+
+      - `"org"`
+
+      - `"rbac_role"`
+
+      - `"unspecified"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_model: optional string`
+
+      The model set as the default, when the action is set
+
+    - `model_access: optional array of object { api_name, enabled, max_effort_level }`
+
+      The per-model access overrides set for this principal; absent when no overrides are configured
+
+      - `api_name: string`
+
+        The model the decision applies to
+
+      - `enabled: boolean`
+
+        Whether members with this principal may select the model
+
+      - `max_effort_level: optional string`
+
+        The highest effort level members may select for this model, when capped
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_model_default_updated"`
+
+      - `"org_model_default_updated"`
 
   - `OrgParentJoinProposalCreated object { actor, id, created_at, 3 more }`
 
@@ -22593,7 +28118,7 @@ compliance activities that can be filtered by various criteria.
 
     User was removed from organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -22640,6 +28165,18 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
     - `id: optional string`
 
@@ -22709,7 +28246,7 @@ compliance activities that can be filtered by various criteria.
 
     Organization user invite was deleted.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -22756,6 +28293,18 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
     - `id: optional string`
 
@@ -22901,11 +28450,11 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_user_invite_rejected"`
 
-  - `OrgUserInviteSent object { actor, id, created_at, 6 more }`
+  - `OrgUserInviteSent object { actor, id, created_at, 7 more }`
 
     Organization user invite was sent.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -22941,6 +28490,18 @@ compliance activities that can be filtered by various criteria.
 
           - `"admin_api_key_actor"`
 
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
       - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
 
         - `ip_address: string`
@@ -22962,6 +28523,10 @@ compliance activities that can be filtered by various criteria.
       When this activity occurred.
 
     - `invited_email: optional string`
+
+    - `invited_rbac_group_ids: optional array of string`
+
+      RBAC group IDs the invited user will be added to on joining
 
     - `invited_role: optional string`
 
@@ -23021,16 +28586,14 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_user_left"`
 
-  - `OrgUserViewed object { actor, user_id, id, 4 more }`
+  - `OrgUserTrustedDevicesRevoked object { actor, completed, devices_revoked_count, 7 more }`
 
-    An organization user was viewed.
+    An organization admin revoked a member's trusted devices and signed the member out of all active sessions.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -23077,6 +28640,180 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `completed: boolean`
+
+      Whether the operation completed fully. False records an attempt that revoked the counted credentials but failed before finishing.
+
+    - `devices_revoked_count: number`
+
+      Number of trusted devices revoked
+
+    - `sessions_revoked_count: number`
+
+      Number of active sessions the member was signed out of
+
+    - `user_id: string`
+
+      Tagged ID of the member whose trusted devices were revoked
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_user_trusted_devices_revoked"`
+
+      - `"org_user_trusted_devices_revoked"`
+
+  - `OrgUserViewed object { actor, user_id, id, 4 more }`
+
+    An organization user was viewed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -23163,12 +28900,10 @@ compliance activities that can be filtered by various criteria.
 
     Organization users were listed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -23215,6 +28950,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -23293,7 +29041,7 @@ compliance activities that can be filtered by various criteria.
 
       - `"org_users_listed"`
 
-  - `OrgWorkAcrossAppsDisabled object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsDisabled object { actor, id, created_at, 5 more }`
 
     Organization Work Across Apps was disabled.
 
@@ -23319,6 +29067,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -23327,11 +29079,15 @@ compliance activities that can be filtered by various criteria.
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_work_across_apps_disabled"`
 
       - `"org_work_across_apps_disabled"`
 
-  - `OrgWorkAcrossAppsEnabled object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsEnabled object { actor, id, created_at, 5 more }`
 
     Organization Work Across Apps was enabled.
 
@@ -23357,6 +29113,10 @@ compliance activities that can be filtered by various criteria.
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -23364,6 +29124,10 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
 
     - `type: optional "org_work_across_apps_enabled"`
 
@@ -23419,12 +29183,10 @@ compliance activities that can be filtered by various criteria.
 
     Organization's custom icon deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -23471,6 +29233,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -23553,12 +29328,10 @@ compliance activities that can be filtered by various criteria.
 
     Organization's custom icon uploaded or replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -23605,6 +29378,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -23711,7 +29497,7 @@ compliance activities that can be filtered by various criteria.
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 58 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 61 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
@@ -24009,6 +29795,54 @@ compliance activities that can be filtered by various criteria.
 
           - `"members_bulk_seat_tier_assignment"`
 
+      - `ClaudeCodeWebEnabled object { current_value, previous_value, type }`
+
+        The Claude Code on the web setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_web_enabled"`
+
+          - `"claude_code_web_enabled"`
+
+      - `ClaudeCodeDesktopBypassPermissionsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Desktop bypass-permissions mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_desktop_bypass_permissions_enabled"`
+
+          - `"claude_code_desktop_bypass_permissions_enabled"`
+
+      - `ClaudeCodeDesktopAutoPermissionsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Desktop auto-permissions mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_desktop_auto_permissions_enabled"`
+
+          - `"claude_code_desktop_auto_permissions_enabled"`
+
       - `WorkbenchCompletionFeedbackEnabled object { current_value, previous_value, type }`
 
         The Workbench completion feedback setting was changed for the organization.
@@ -24075,7 +29909,7 @@ compliance activities that can be filtered by various criteria.
 
       - `ClaudeAiccrSharingEnabled object { current_value, previous_value, type }`
 
-        The Claude.ai CCR sharing setting was changed for the organization.
+        The Claude.ai remote Claude Code session sharing setting was changed for the organization.
 
         - `current_value: boolean`
 
@@ -24966,6 +30800,324 @@ compliance activities that can be filtered by various criteria.
 
       - `"payment_method_updated"`
 
+  - `PendingShareCreated object { actor, invitee_email, resource_id, 7 more }`
+
+    A pending share of a project or skill was created for an email address that is not yet an organization member.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `invitee_email: string`
+
+      Email address the share was created for.
+
+    - `resource_id: string`
+
+      Tagged ID of the resource being shared.
+
+    - `resource_type: string`
+
+      The type of resource being shared.
+
+    - `role: string`
+
+      The role that will be granted when the invitee joins the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "pending_share_created"`
+
+      - `"pending_share_created"`
+
+  - `PendingShareRevoked object { actor, invitee_email, resource_id, 6 more }`
+
+    A pending share of a project or skill was revoked before the invitee joined the organization.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `invitee_email: string`
+
+      Email address the share had been created for.
+
+    - `resource_id: string`
+
+      Tagged ID of the resource that was shared.
+
+    - `resource_type: string`
+
+      The type of resource that was shared.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "pending_share_revoked"`
+
+      - `"pending_share_revoked"`
+
   - `PhoneCodeSent object { actor, id, created_at, 3 more }`
 
     User requested a phone verification code.
@@ -25206,6 +31358,155 @@ compliance activities that can be filtered by various criteria.
 
       - `"platform_api_key_updated"`
 
+  - `PlatformBillingUpgradedToPrepaid object { actor, previous_billing_type, id, 4 more }`
+
+    The organization's API billing was upgraded to the prepaid plan.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `previous_billing_type: string`
+
+      The organization's billing type before this upgrade, for example "api_evaluation".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_billing_upgraded_to_prepaid"`
+
+      - `"platform_billing_upgraded_to_prepaid"`
+
   - `PlatformCostReportViewed object { actor, id, created_at, 3 more }`
 
     The cost report was viewed.
@@ -25269,6 +31570,211 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "platform_cost_report_viewed"`
 
       - `"platform_cost_report_viewed"`
+
+  - `PlatformFederatedAuthentication object { actor, id, created_at, 7 more }`
+
+    A federated workload identity attempted to exchange an OIDC token for Anthropic API credentials.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `event_data: optional object { federation_rule_id, issuer_id, oidc_token, requested_service_account_id }`
+
+      A nested object within a compliance activity payload.
+
+      - `federation_rule_id: optional string`
+
+        The federation rule that matched the request, e.g. "fdrl_01HXZ4J2N8K5P7R9T3V6W1Y4M0".
+
+      - `issuer_id: optional string`
+
+        The registered identity issuer for the request, e.g. "fdis_01HXZ4H5M3K8P1R7T9V2W6Y4N0".
+
+      - `oidc_token: optional object { claims, jti }`
+
+        A nested object within a compliance activity payload.
+
+        - `claims: optional map[unknown]`
+
+          The verified claims from the presented OIDC token.
+
+        - `jti: optional string`
+
+          The presented token's unique identifier (its `jti` claim).
+
+      - `requested_service_account_id: optional string`
+
+        The service account the caller requested to authenticate as, e.g. "svac_01HXZ4...".
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `request_id: optional string`
+
+      The Anthropic API request identifier for correlation, e.g. "req_01HXZ4K7M9P2QR5T8V6W3Y1N0B".
+
+    - `resources: optional array of object { id, type }`
+
+      The resources involved in the exchange.
+
+      - `id: string`
+
+        The identifier of the resource involved in the exchange.
+
+      - `type: string`
+
+        The kind of resource involved in the exchange.
+
+    - `status: optional object { outcome, detail, reason }`
+
+      A nested object within a compliance activity payload.
+
+      - `outcome: string`
+
+        Whether the token exchange succeeded or was denied.
+
+      - `detail: optional string`
+
+        A human-readable explanation when the exchange did not succeed.
+
+      - `reason: optional string`
+
+        A short reason code when the exchange did not succeed.
+
+    - `type: optional "platform_federated_authentication"`
+
+      - `"platform_federated_authentication"`
 
   - `PlatformFederationIssuerArchived object { actor, federation_issuer_id, id, 4 more }`
 
@@ -25754,12 +32260,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when file content is downloaded via GET /v1/files/{file_id}/content.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -25806,6 +32310,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -25892,12 +32409,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when a file is deleted via DELETE /v1/files/{file_id}.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -25944,6 +32459,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -26030,12 +32558,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when a file is uploaded via POST /v1/files.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -26082,6 +32608,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -26167,6 +32706,461 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "platform_file_uploaded"`
 
       - `"platform_file_uploaded"`
+
+  - `PlatformPluginDirectorySubmissionCreated object { actor, plugin_name, submission_id, 5 more }`
+
+    A plugin directory submission was created on the API platform. A plugin directory submission is a request to list a plugin in the public plugin directory.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `plugin_name: string`
+
+      The name of the plugin being submitted.
+
+    - `submission_id: string`
+
+      The submission that was created, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_created"`
+
+      - `"platform_plugin_directory_submission_created"`
+
+  - `PlatformPluginDirectorySubmissionDeleted object { actor, submission_id, id, 4 more }`
+
+    A plugin directory submission was deleted on the API platform.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `submission_id: string`
+
+      The submission that was deleted, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_deleted"`
+
+      - `"platform_plugin_directory_submission_deleted"`
+
+  - `PlatformPluginDirectorySubmissionUpdated object { actor, status, submission_id, 5 more }`
+
+    A plugin directory submission was updated on the API platform.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `status: string`
+
+      The submission's status after the update.
+
+    - `submission_id: string`
+
+      The submission that was updated, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_updated"`
+
+      - `"platform_plugin_directory_submission_updated"`
 
   - `PlatformServiceAccountArchived object { actor, service_account_id, id, 4 more }`
 
@@ -26708,12 +33702,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when a skill version is created via POST /v1/skills/{skill_id}/versions.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -26760,6 +33752,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -26850,12 +33855,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when a skill version is deleted via DELETE /v1/skills/{skill_id}/versions/{version}.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -26902,6 +33905,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -27996,12 +35012,10 @@ compliance activities that can be filtered by various criteria.
 
     Plugin was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -28048,6 +35062,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -28134,12 +35161,10 @@ compliance activities that can be filtered by various criteria.
 
     Plugin was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -28186,6 +35211,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -28272,12 +35310,10 @@ compliance activities that can be filtered by various criteria.
 
     An org admin changed the installation preference for a plugin.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -28324,6 +35360,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -28430,12 +35479,10 @@ compliance activities that can be filtered by various criteria.
 
     Plugin was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -28482,6 +35529,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -28568,12 +35628,10 @@ compliance activities that can be filtered by various criteria.
 
     Plugin was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -28620,6 +35678,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -29876,12 +36947,10 @@ compliance activities that can be filtered by various criteria.
 
     SAML IdP configuration updated for a public sector organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -29928,6 +36997,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30016,12 +37098,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin assigned an RBAC custom role to a principal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30068,6 +37148,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30162,12 +37255,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin created an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30214,6 +37305,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30304,12 +37408,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin deleted an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30356,6 +37458,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30449,12 +37564,10 @@ compliance activities that can be filtered by various criteria.
 
       Action permitted on the resource
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30501,6 +37614,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30603,12 +37729,10 @@ compliance activities that can be filtered by various criteria.
 
       Action that was permitted on the resource
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30655,6 +37779,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30749,12 +37886,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin unassigned an RBAC custom role from a principal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30801,6 +37936,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -30895,12 +38043,10 @@ compliance activities that can be filtered by various criteria.
 
     Admin updated an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -30947,6 +38093,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -31323,12 +38482,10 @@ compliance activities that can be filtered by various criteria.
 
     A SCIM user was provisioned.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -31375,6 +38532,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -31459,12 +38629,10 @@ compliance activities that can be filtered by various criteria.
 
     A SCIM user was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -31511,6 +38679,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -31595,12 +38776,10 @@ compliance activities that can be filtered by various criteria.
 
     A SCIM user was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -31647,6 +38826,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -31915,12 +39107,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when an org service is explicitly created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -31967,6 +39157,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32053,12 +39256,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when an org service is deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32105,6 +39306,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32191,12 +39405,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when a new org service key is created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32243,6 +39455,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32345,12 +39570,10 @@ compliance activities that can be filtered by various criteria.
 
     Activity logged when an org service key is revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32397,6 +39620,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32525,12 +39761,10 @@ compliance activities that can be filtered by various criteria.
 
     Session share was accessed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32577,6 +39811,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32661,12 +39908,10 @@ compliance activities that can be filtered by various criteria.
 
     Session share was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32713,6 +39958,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32797,12 +40055,10 @@ compliance activities that can be filtered by various criteria.
 
     Session share was revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32849,6 +40105,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -32933,12 +40202,10 @@ compliance activities that can be filtered by various criteria.
 
     Skill was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -32985,6 +40252,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -33071,12 +40351,10 @@ compliance activities that can be filtered by various criteria.
 
     Skill was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -33123,6 +40401,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -33209,12 +40500,10 @@ compliance activities that can be filtered by various criteria.
 
     User disabled a skill for their account.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -33261,6 +40550,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -33347,12 +40649,10 @@ compliance activities that can be filtered by various criteria.
 
     User enabled a skill for their account.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -33399,6 +40699,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -33485,12 +40798,10 @@ compliance activities that can be filtered by various criteria.
 
     Skill was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -33537,6 +40848,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -33676,6 +41000,483 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "social_login_succeeded"`
 
       - `"social_login_succeeded"`
+
+  - `StepUpAuthenticationFailed object { actor, method, reason, 6 more }`
+
+    An additional identity check failed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `method: "device_key" or "unspecified" or "webauthn"`
+
+      The verification method the user attempted.
+
+      - `"device_key"`
+
+      - `"unspecified"`
+
+      - `"webauthn"`
+
+    - `reason: "challenge_rejected" or "unspecified" or "verification_failed"`
+
+      Why the attempt failed.
+
+      - `"challenge_rejected"`
+
+      - `"unspecified"`
+
+      - `"verification_failed"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the trusted device the attempt referenced, e.g. "tdev_...". Present only for the device key method.
+
+    - `type: optional "step_up_authentication_failed"`
+
+      - `"step_up_authentication_failed"`
+
+  - `StepUpAuthenticationSucceeded object { actor, method, id, 5 more }`
+
+    The user completed an additional identity check to confirm a sensitive action.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `method: "device_key" or "unspecified" or "webauthn"`
+
+      The verification method the user completed.
+
+      - `"device_key"`
+
+      - `"unspecified"`
+
+      - `"webauthn"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the trusted device used, e.g. "tdev_...". Present only for the device key method.
+
+    - `type: optional "step_up_authentication_succeeded"`
+
+      - `"step_up_authentication_succeeded"`
+
+  - `StepUpCredentialEnrolled object { actor, credential_id, id, 4 more }`
+
+    A user enrolled a passkey for confirming sensitive actions on their account.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      Identifier of the enrolled credential, e.g. "sucr_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "step_up_credential_enrolled"`
+
+      - `"step_up_credential_enrolled"`
 
   - `SubscriptionCancellationScheduled object { actor, id, created_at, 3 more }`
 
@@ -33939,16 +41740,14 @@ compliance activities that can be filtered by various criteria.
 
       - `"subscription_upgraded"`
 
-  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+  - `TrustedDeviceCredentialRotated object { actor, trusted_device_id, id, 4 more }`
 
-    An MCP tunnel was archived.
+    The identity-verification credential of a trusted device was rotated to a new key.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -33995,6 +41794,510 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `trusted_device_id: string`
+
+      Identifier of the device whose credential was rotated, e.g. "tdev_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "trusted_device_credential_rotated"`
+
+      - `"trusted_device_credential_rotated"`
+
+  - `TrustedDeviceEnrolled object { actor, enrollment_method, platform, 6 more }`
+
+    A device was enrolled as a trusted device for the user's account. Trusted devices can be used to confirm the user's identity for sensitive actions.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `enrollment_method: "oauth" or "session" or "unspecified"`
+
+      How the user confirmed their identity when enrolling the device.
+
+      - `"oauth"`
+
+      - `"session"`
+
+      - `"unspecified"`
+
+    - `platform: "android" or "claude_in_slack" or "desktop_app" or 4 more`
+
+      The kind of client the enrollment request came from.
+
+      - `"android"`
+
+      - `"claude_in_slack"`
+
+      - `"desktop_app"`
+
+      - `"ios"`
+
+      - `"unspecified"`
+
+      - `"web_claude_ai"`
+
+      - `"web_console"`
+
+    - `trusted_device_id: string`
+
+      Identifier of the device that was enrolled, e.g. "tdev_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "trusted_device_enrolled"`
+
+      - `"trusted_device_enrolled"`
+
+  - `TrustedDeviceRevoked object { actor, reason, id, 6 more }`
+
+    A trusted device was removed from the user's account.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `reason: "org_member_removed" or "superseded" or "unspecified" or "user_revoked"`
+
+      Why the device trust was removed.
+
+      - `"org_member_removed"`
+
+      - `"superseded"`
+
+      - `"unspecified"`
+
+      - `"user_revoked"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `revoked_count: optional number`
+
+      Number of devices removed. Set when a security action removed all of the user's trusted devices at once; absent when a single device was removed (see trusted_device_id).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the device that was removed, e.g. "tdev_...". Set when a single device was removed; absent when several devices were removed at once (see revoked_count).
+
+    - `type: optional "trusted_device_revoked"`
+
+      - `"trusted_device_revoked"`
+
+  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was archived.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34079,12 +42382,10 @@ compliance activities that can be filtered by various criteria.
 
     An inner-TLS CA certificate was added to a tunnel.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34131,6 +42432,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34219,12 +42533,10 @@ compliance activities that can be filtered by various criteria.
 
     An inner-TLS CA certificate was revoked from a tunnel.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34271,6 +42583,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34359,12 +42684,10 @@ compliance activities that can be filtered by various criteria.
 
     An MCP tunnel was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34411,6 +42734,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34495,12 +42831,10 @@ compliance activities that can be filtered by various criteria.
 
     An OAuth bearer token for the tunnel management API was minted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34547,6 +42881,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34633,12 +42980,10 @@ compliance activities that can be filtered by various criteria.
 
     The Cloudflare connector secret for a tunnel was revealed to the caller.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34685,6 +43030,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34771,12 +43129,10 @@ compliance activities that can be filtered by various criteria.
 
     An OAuth bearer token for the tunnel management API was revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34823,6 +43179,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -34910,12 +43279,10 @@ compliance activities that can be filtered by various criteria.
     `tunnel_token_id` is the id of the *newly-issued* token. The previous
     token is invalidated by the rotation and its id is not recorded here.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -34962,6 +43329,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -35050,12 +43430,10 @@ compliance activities that can be filtered by various criteria.
 
     User granted a consent for a specific entity (e.g. consumer health consent for an MCP server).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -35102,6 +43480,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -35190,12 +43581,10 @@ compliance activities that can be filtered by various criteria.
 
     User revoked a previously granted consent for a specific entity.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -35242,6 +43631,19 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -35332,7 +43734,7 @@ compliance activities that can be filtered by various criteria.
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }  or object { email_address, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -35359,6 +43761,18 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "admin_api_key_actor"`
 
           - `"admin_api_key_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
       - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
 
@@ -35434,7 +43848,7 @@ compliance activities that can be filtered by various criteria.
 
         - `"user_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 18 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 19 more`
 
       - `FullName object { current_value, previous_value, type }`
 
@@ -35674,6 +44088,14 @@ compliance activities that can be filtered by various criteria.
 
           - `"conversation_preferences"`
 
+      - `CoworkGlobalInstructions object { type }`
+
+        The Cowork global instructions were updated. Values omitted.
+
+        - `type: optional "cowork_global_instructions"`
+
+          - `"cowork_global_instructions"`
+
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -35847,6 +44269,52 @@ compliance activities that can be filtered by various criteria.
     - `type: optional "workspace_member_spend_limit_updated"`
 
       - `"workspace_member_spend_limit_updated"`
+
+    - `workspace_id: optional string`
+
+      Tagged ID of the workspace.
+
+  - `WorkspaceSpendLimitAlertEmailsUpdated object { actor, id, alert_emails, 5 more }`
+
+    Spend limit alert email recipients were updated for a workspace.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `alert_emails: optional array of string`
+
+      Updated list of alert email addresses.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "workspace_spend_limit_alert_emails_updated"`
+
+      - `"workspace_spend_limit_alert_emails_updated"`
 
     - `workspace_id: optional string`
 
@@ -35992,7 +44460,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
 ### Activity List Response
 
-- `ActivityListResponse = object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 339 more`
+- `ActivityListResponse = object { actor, decision, id, 5 more }  or object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or 381 more`
 
   An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
@@ -36000,12 +44468,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An external anti-abuse service reported a consequential decision about a sign-in or sign-up attempt.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -36052,6 +44518,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -36146,12 +44625,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User-initiated self-service account deletion.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -36198,6 +44675,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -36422,12 +44912,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin approved or dismissed pending member requests to enable an MCP connector.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -36474,6 +44962,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -36568,12 +45069,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin request created by an org member (seat upgrade, limit increase, join org, end-user invite).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -36620,6 +45119,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -36828,12 +45340,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An attempt to access an artifact failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -36880,6 +45390,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37014,12 +45537,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A published artifact was unpublished/deleted by its creator.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37066,6 +45587,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37152,12 +45686,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An artifact was published and made publicly accessible.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37204,6 +45736,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37310,12 +45855,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An artifact's sharing settings were updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37362,6 +45905,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37488,12 +46044,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An artifact was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37540,6 +46094,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37760,6 +46327,2823 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"billing_emails_updated"`
 
+  - `CcrAgentCreated object { actor, agent_id, default_source_urls_truncated, 11 more }`
+
+    A Claude Code agent was created.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was created, e.g. "cagt_01HX...".
+
+    - `default_source_urls_truncated: boolean`
+
+      Whether default_source_urls was capped and omits some of the granted repositories.
+
+    - `display_name: string`
+
+      The agent's display name at creation time.
+
+    - `omitted_source_url_count: number`
+
+      Number of default repository entries that could not be safely rendered as a credential-free URL and were omitted from default_source_urls. A non-zero value with an empty list means repositories were granted but could not be displayed — not that all repositories were removed.
+
+    - `slug: string`
+
+      The agent's URL-safe identifier, unique within the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_source_urls: optional array of string`
+
+      The repository URLs the agent works on by default, reduced to scheme, host, and path — credentials and query parameters are never included. Empty with a zero omitted_source_url_count means the agent was created without any default repositories; empty with a non-zero count means repositories were granted but could not be safely rendered. At most 100 entries are included; default_source_urls_truncated indicates when more were granted.
+
+    - `guest_policy: optional string`
+
+      Whether the agent responds in Slack channels that include guest users: "allow" or "restrict". Omitted when the agent inherits the default policy.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_alias: optional string`
+
+      The Slack trigger word that routes mentions to this agent. An empty value means the agent responds to bare "@Claude" mentions. Omitted when the agent is not addressable from Slack.
+
+    - `type: optional "ccr_agent_created"`
+
+      - `"ccr_agent_created"`
+
+  - `CcrAgentDeleted object { actor, agent_id, cascaded_agent_ids_truncated, 7 more }`
+
+    A Claude Code agent was deleted.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was deleted, e.g. "cagt_01HX...".
+
+    - `cascaded_agent_ids_truncated: boolean`
+
+      True when more agents were deleted in this cascade than are individually recorded. On a cascade parent event (cascaded_from_agent_id unset), cascaded_agent_ids is capped at 100. On a cascade child event (cascaded_from_agent_id set, emitted when the parent deletion failed after committing child deletions), one event is emitted per deleted child up to 100, and this field indicates additional children were deleted in the same cascade.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `cascaded_agent_ids: optional array of string`
+
+      Agents assigned to individual Slack channels that were also deleted because agent_id was the agent assigned to their entire Slack workspace. Empty when no such agents were deleted, and always empty on a cascade child event (cascaded_from_agent_id set) — the child's siblings are recorded as their own events, not listed here. Capped at 100 entries; cascaded_agent_ids_truncated is set when the actual count exceeded the cap.
+
+    - `cascaded_from_agent_id: optional string`
+
+      When set, the Slack workspace's dedicated agent whose deletion attempt caused this agent to be deleted. The parent's own deletion may have failed after the cascade committed — check for a separate event with agent_id = cascaded_from_agent_id to confirm. Unset on a direct deletion.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_deleted"`
+
+      - `"ccr_agent_deleted"`
+
+  - `CcrAgentProxyCredentialCreated object { actor, credential_id, credential_type, 9 more }`
+
+    A Claude Code agent proxy credential was created. Credentials hold the secrets the agent proxy injects into requests Claude Code sessions send to approved external services; each credential belongs to an agent proxy profile. Audit events carry only credential names and settings, never the secret material itself.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was created, e.g. "apc_01HX...".
+
+    - `credential_type: string`
+
+      The kind of credential, e.g. "bearer", "basic", "github_app", "mtls".
+
+    - `display_name: string`
+
+      The credential's display name.
+
+    - `host_constraint_truncated: boolean`
+
+      Whether host_constraint was capped and omits some of the configured host name patterns.
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `host_constraint: optional array of string`
+
+      The host name patterns the credential may be sent to, e.g. "api.example.com" or "*.example.com". At most 100 entries are included; host_constraint_truncated indicates when the configured set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_created"`
+
+      - `"ccr_agent_proxy_credential_created"`
+
+  - `CcrAgentProxyCredentialDeleted object { actor, credential_id, profile_id, 5 more }`
+
+    A Claude Code agent proxy credential was deleted. Its secret material was removed and can no longer be sent to any host.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was deleted, e.g. "apc_01HX...".
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belonged to, e.g. "capp_01HX...". Carried so the deletion can be correlated with the profile's other audit events after the credential row no longer exists.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_deleted"`
+
+      - `"ccr_agent_proxy_credential_deleted"`
+
+  - `CcrAgentProxyCredentialRotated object { actor, credential_id, credential_type, 10 more }`
+
+    A Claude Code agent proxy credential's secret material was replaced. The replacement keeps the same name, profile, and allowed hosts under a new credential identifier, and everything that referenced the old credential now uses the replacement.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The replacement credential, e.g. "apc_01HX...".
+
+    - `credential_type: string`
+
+      The kind of credential, e.g. "bearer", "basic", "github_app", "mtls".
+
+    - `destinations_repointed: number`
+
+      The number of agent proxy destinations that referenced the old credential and now reference the replacement.
+
+    - `display_name: string`
+
+      The credential's display name.
+
+    - `previous_credential_id: string`
+
+      The credential that was replaced, e.g. "apc_01HX...".
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `rules_repointed: number`
+
+      The number of agent proxy rules that referenced the old credential and now reference the replacement.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_rotated"`
+
+      - `"ccr_agent_proxy_credential_rotated"`
+
+  - `CcrAgentProxyCredentialUpdated object { actor, credential_id, display_name, 9 more }`
+
+    A Claude Code agent proxy credential's settings were updated. Only the display name and the allowed host patterns can be updated; the secret material can only be replaced through a rotation.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      The credential that was updated, e.g. "apc_01HX...".
+
+    - `display_name: string`
+
+      The credential's display name after the update.
+
+    - `host_constraint_truncated: boolean`
+
+      Whether host_constraint was capped and omits some of the configured host name patterns.
+
+    - `profile_id: string`
+
+      The agent proxy profile the credential belongs to, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `host_constraint: optional array of string`
+
+      The host name patterns the credential may be sent to after the update, e.g. "api.example.com" or "*.example.com". Populated only when the update changed them. At most 100 entries are included; host_constraint_truncated indicates when the configured set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_credential_updated"`
+
+      - `"ccr_agent_proxy_credential_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the settings included in the update: "display_name", "host_constraint".
+
+  - `CcrAgentProxyNetworkEventsListed object { actor, failed, id, 5 more }`
+
+    A Claude Code network activity export was accessed for the given hour.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `failed: boolean`
+
+      True when the export request did not complete successfully.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `hour: optional string`
+
+      The UTC hour that was exported.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_network_events_listed"`
+
+      - `"ccr_agent_proxy_network_events_listed"`
+
+  - `CcrAgentProxyProfileBound object { actor, profile_id, scope_id, 6 more }`
+
+    A Claude Code agent proxy profile was bound to a scope, applying its policy to Claude Code sessions in that scope.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was bound, e.g. "capp_01HX...".
+
+    - `scope_id: string`
+
+      The identifier of the scope the profile was bound to.
+
+    - `scope_kind: string`
+
+      The kind of scope the profile was bound to: "organization", "environment", "account", or "agent".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_bound"`
+
+      - `"ccr_agent_proxy_profile_bound"`
+
+  - `CcrAgentProxyProfileCreated object { actor, display_name, profile_id, 7 more }`
+
+    A Claude Code agent proxy profile was created. Agent proxy profiles are named, reusable bundles of access policy that administrators bind to parts of the organization.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `display_name: string`
+
+      The profile's display name at creation time.
+
+    - `profile_id: string`
+
+      The profile that was created, e.g. "capp_01HX...".
+
+    - `slug: string`
+
+      The profile's URL-safe identifier, unique within the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `github_access: optional array of object { access_mode, github_installation_id, repo_count, 4 more }`
+
+      The GitHub repository access the profile grants, one entry per GitHub App installation. Empty when the profile grants no GitHub access.
+
+      - `access_mode: string`
+
+        How repository access is granted: "none" (no access), "list" (exactly the repositories in repos), or "all" — a legacy value for policies created before per-repository grants were required; it can no longer be assigned.
+
+      - `github_installation_id: number`
+
+        The GitHub App installation the access applies to.
+
+      - `repo_count: number`
+
+        The total number of repositories granted, including any omitted from repos.
+
+      - `repos_truncated: boolean`
+
+        Whether repos was capped and omits some of the granted repositories.
+
+      - `ghe_configuration_id: optional number`
+
+        The GitHub host configuration this installation belongs to. Distinguishes installations with the same numeric installation ID across github.com and GitHub Enterprise Server hosts. Absent for github.com installations.
+
+      - `repo_ids: optional array of number`
+
+        The numeric GitHub repository IDs the profile grants access to, in the same order as repos (and subject to the same 100-entry cap). These IDs are the authoritative identity of the granted repositories — access is enforced against them, not against the display names in repos.
+
+      - `repos: optional array of string`
+
+        Repository names (owner/name) the profile grants access to, populated when access_mode is "list". Names are display-only labels resolved when the event was recorded and may lag a repository rename; the entries in repo_ids are the authoritative identity of the granted repositories. A repository whose name is unavailable is listed as its numeric GitHub repository ID instead. At most 100 entries are included; repos_truncated indicates when the granted set is larger.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_created"`
+
+      - `"ccr_agent_proxy_profile_created"`
+
+  - `CcrAgentProxyProfileDeleted object { actor, deleted_credential_count, deleted_credentials_unknown, 6 more }`
+
+    A Claude Code agent proxy profile was deleted, removing its policy from everything it was bound to.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `deleted_credential_count: number`
+
+      Number of credentials deleted together with the profile — deleting a profile also deletes the credentials attached to it. Each deleted credential additionally emits its own ccr_agent_proxy_credential_deleted activity, at most 100 per profile deletion. Best-effort: when deleted_credentials_unknown is true the count could not be determined and 0 here does not mean the profile had no credentials.
+
+    - `deleted_credentials_unknown: boolean`
+
+      Whether the number of credentials deleted with the profile could not be determined. When true, deleted_credential_count is 0 and no per-credential deletion activities were emitted, even though the deletion may have destroyed credentials.
+
+    - `profile_id: string`
+
+      The profile that was deleted, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_deleted"`
+
+      - `"ccr_agent_proxy_profile_deleted"`
+
+  - `CcrAgentProxyProfileUnbound object { actor, profile_id, scope_id, 6 more }`
+
+    A Claude Code agent proxy profile was unbound from a scope, removing its policy from Claude Code sessions in that scope.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was unbound, e.g. "capp_01HX...".
+
+    - `scope_id: string`
+
+      The identifier of the scope the profile was unbound from.
+
+    - `scope_kind: string`
+
+      The kind of scope the profile was unbound from: "organization", "environment", "account", or "agent".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_unbound"`
+
+      - `"ccr_agent_proxy_profile_unbound"`
+
+  - `CcrAgentProxyProfileUpdated object { actor, profile_id, id, 6 more }`
+
+    A Claude Code agent proxy profile's configuration was updated.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `profile_id: string`
+
+      The profile that was updated, e.g. "capp_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `github_access_changes: optional array of object { access_mode, github_installation_id, repo_count, 7 more }`
+
+      How the profile's GitHub repository access changed, one entry per GitHub App installation whose access changed. Empty when the update did not change GitHub access.
+
+      - `access_mode: string`
+
+        How repository access is granted after the change: "none" (no access), "list" (access is restricted to an explicit repository list — repos_added/repos_removed carry this change's delta and repo_count the post-change total), or "all" — a legacy value for policies created before per-repository grants were required; it can no longer be assigned.
+
+      - `github_installation_id: number`
+
+        The GitHub App installation the change applies to.
+
+      - `repo_count: number`
+
+        The total number of repositories granted after the change.
+
+      - `repos_truncated: boolean`
+
+        Whether repos_added or repos_removed was capped and omits some of the changed repositories.
+
+      - `ghe_configuration_id: optional number`
+
+        The GitHub host configuration this installation belongs to. Distinguishes installations with the same numeric installation ID across github.com and GitHub Enterprise Server hosts. Absent for github.com installations.
+
+      - `previous_access_mode: optional string`
+
+        How repository access was granted before the change. Present only when the access mode changed.
+
+      - `repo_ids_added: optional array of number`
+
+        The numeric GitHub repository IDs added to the granted set, in the same order as repos_added (and subject to the same 100-entry cap). These IDs are the authoritative identity of the added repositories — access is enforced against them, not against the display names in repos_added.
+
+      - `repo_ids_removed: optional array of number`
+
+        The numeric GitHub repository IDs removed from the granted set, in the same order as repos_removed (and subject to the same 100-entry cap). These IDs are the authoritative identity of the removed repositories.
+
+      - `repos_added: optional array of string`
+
+        Repository names (owner/name) added to the granted set. Names are display-only labels resolved when the event was recorded and may lag a repository rename; the entries in repo_ids_added are the authoritative identity of the added repositories. A repository whose name is unavailable is listed as its numeric GitHub repository ID instead. At most 100 entries are included; repos_truncated indicates when more were added. Empty when the change involves "all" access, which grants every repository regardless of any explicit list.
+
+      - `repos_removed: optional array of string`
+
+        Repository names (owner/name) removed from the granted set. Same rendering, cap, and "all" handling as repos_added; repo_ids_removed carries the authoritative identity of the removed repositories.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_proxy_profile_updated"`
+
+      - `"ccr_agent_proxy_profile_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the configuration fields included in the update, e.g. "display_name", "github_installation_permissions".
+
+  - `CcrAgentSlackAccessScopeCreated object { actor, agent_id, can_write, 7 more }`
+
+    A Claude Code agent was granted access to read or write in an additional Slack channel beyond the one it is assigned to.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was granted access, e.g. "cagt_01HX...".
+
+    - `can_write: boolean`
+
+      Whether the grant includes permission to post messages in the channel, in addition to reading it.
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was granted access to, e.g. "C01ABC...". Empty when the grant covers the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_access_scope_created"`
+
+      - `"ccr_agent_slack_access_scope_created"`
+
+  - `CcrAgentSlackAccessScopeDeleted object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent's access to an additional Slack channel was revoked.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent whose access was revoked, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent's access was revoked from, e.g. "C01ABC...". Empty when the revoked grant covered the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace containing the channel, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_access_scope_deleted"`
+
+      - `"ccr_agent_slack_access_scope_deleted"`
+
+  - `CcrAgentSlackBindingCreated object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent was assigned to a Slack channel or workspace as its dedicated agent.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent the binding was created for, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was assigned to, e.g. "C01ABC...". Empty when the agent was assigned to the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace the agent was assigned to, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_binding_created"`
+
+      - `"ccr_agent_slack_binding_created"`
+
+  - `CcrAgentSlackBindingDeleted object { actor, agent_id, slack_channel_id, 6 more }`
+
+    A Claude Code agent's assignment to a Slack channel or workspace was removed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent the binding was removed from, e.g. "cagt_01HX...".
+
+    - `slack_channel_id: string`
+
+      The Slack channel the agent was unassigned from, e.g. "C01ABC...". Empty when the assignment covered the entire workspace.
+
+    - `slack_team_id: string`
+
+      The Slack workspace the agent was unassigned from, e.g. "T01ABC...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "ccr_agent_slack_binding_deleted"`
+
+      - `"ccr_agent_slack_binding_deleted"`
+
+  - `CcrAgentUpdated object { actor, agent_id, default_source_urls_truncated, 10 more }`
+
+    A Claude Code agent's configuration was updated. Also emitted with updated_fields ["is_virtual"] alone when an auto-provisioned agent is promoted to a configured one, whether by an update request targeting it or by binding an agent proxy profile to it.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `agent_id: string`
+
+      The agent that was updated, e.g. "cagt_01HX...".
+
+    - `default_source_urls_truncated: boolean`
+
+      Whether default_source_urls was capped and omits some of the granted repositories.
+
+    - `omitted_source_url_count: number`
+
+      Number of default repository entries that could not be safely rendered as a credential-free URL and were omitted from default_source_urls. A non-zero value with an empty list means repositories were granted but could not be displayed — not that all repositories were removed.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_source_urls: optional array of string`
+
+      The agent's default repository URLs after the update, reduced to scheme, host, and path — credentials and query parameters are never included. Populated only when the update changed them — "default_source_urls" appears in updated_fields. Empty while listed in updated_fields AND omitted_source_url_count is 0 means all default repositories were removed. At most 100 entries are included; default_source_urls_truncated indicates when more were granted.
+
+    - `guest_policy: optional string`
+
+      The agent's guest-user response policy after the update: "allow", "restrict", or "default" when the update removed the agent-specific policy so the agent inherits the surrounding default. Present only when the update changed it.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `slack_alias: optional string`
+
+      The agent's Slack trigger word after the update. Present only when the update changed it. An empty value means the agent responds to bare "@Claude" mentions.
+
+    - `type: optional "ccr_agent_updated"`
+
+      - `"ccr_agent_updated"`
+
+    - `updated_fields: optional array of string`
+
+      Names of the configuration fields included in the update, e.g. "display_name", "system_prompt_addendum", "guest_policy". Includes "is_virtual" when this update was the first administrator action on an auto-provisioned agent — a durable state change even when no other field was supplied.
+
   - `ClaudeChatSettingsUpdated object { actor, claude_chat_id, id, 5 more }`
 
     User updated the settings for a conversation.
@@ -37808,12 +49192,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User created/shared a chat snapshot.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37860,6 +49242,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -37946,12 +49341,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User deleted/unshared a chat snapshot.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -37998,6 +49391,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38084,12 +49490,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User viewed a chat snapshot (authenticated or public/unauthenticated).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38136,6 +49540,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38222,12 +49639,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user was denied access to a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38274,6 +49689,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38360,12 +49788,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User created a chat.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38412,6 +49838,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38502,12 +49941,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user deleted a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38554,6 +49991,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38644,12 +50094,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A request to delete a Claude.ai chat conversation failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38696,6 +50144,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38782,12 +50243,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User updated the chat metadata (e.g name, model).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38834,6 +50293,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -38924,12 +50396,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user viewed a Claude.ai chat conversation.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -38976,6 +50446,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39066,12 +50549,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Claude Code Review configuration was enabled/disabled for an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39118,6 +50599,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39240,12 +50734,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A repository was added to org-level Claude Code Review configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39292,6 +50784,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39390,12 +50895,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A repository was removed from org-level Claude Code Review configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39442,6 +50945,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39536,12 +51052,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code Review repository configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39588,6 +51102,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39690,12 +51217,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Claude Code Security Center scanning was enabled/disabled for an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39742,6 +51267,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39832,12 +51370,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     In-flight Claude Code Security scans were cancelled for a project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -39884,6 +51420,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -39972,12 +51521,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code Security scan was started.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40024,6 +51571,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40124,12 +51684,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40176,6 +51734,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40272,12 +51843,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40324,6 +51893,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40424,12 +52006,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40476,6 +52056,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40562,12 +52155,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A recurring scan schedule was deleted for a Claude Code Security project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40614,6 +52205,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40700,12 +52304,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40752,6 +52354,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40840,12 +52455,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code remediation session was created for a Claude Code Security vulnerability finding.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -40892,6 +52505,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -40996,12 +52622,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41048,6 +52672,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41138,12 +52775,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code Security outbound webhook was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41190,6 +52825,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41282,12 +52930,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code Security outbound webhook was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41334,6 +52980,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41424,12 +53083,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     The HMAC signing secret for a Claude Code Security webhook was rotated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41476,6 +53133,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41566,12 +53236,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Code Security outbound webhook was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41618,6 +53286,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41704,7 +53385,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_code_security_webhook_updated"`
 
-  - `ClaudeCodeTeamMemoryACLUpdated object { action, actor, group_id, 6 more }`
+  - `ClaudeCodeTeamMemoryACLUpdated object { action, actor, group_id, 7 more }`
 
     An RBAC group was added to or removed from the Claude Code team-memory ACL.
 
@@ -41718,12 +53399,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"unspecified"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41770,6 +53449,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -41852,6 +53544,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_access_level: optional string`
+
+      Access level the group had before this change; absent when the group was not previously in the access list. For removals this is the access level that was removed.
+
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
@@ -41860,12 +53556,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Claude Code team memory shared with the organization was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -41912,6 +53606,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42042,12 +53749,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"updated"`
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42094,6 +53799,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42196,12 +53914,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's Claude Code plugin marketplace selections were updated on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42248,6 +53964,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42358,12 +54087,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's synced private Claude Code memory was updated or deleted on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42410,6 +54137,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42524,12 +54264,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's Claude Code plugin selections — which plugins are installed and enabled — were updated on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42576,6 +54314,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42686,12 +54437,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's synced Claude Code settings were updated or deleted on Anthropic servers.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42738,6 +54487,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42848,12 +54610,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user was denied access to a file in Claude.ai.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -42900,6 +54660,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -42994,16 +54767,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"claude_file_access_failed"`
 
-  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+  - `ClaudeFileExported object { actor, export_destination, filename, 7 more }`
 
-    A user viewed a file in Claude.ai.
+    A file was exported from Claude to an external storage destination.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43050,6 +54821,184 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `export_destination: "google_drive" or "unspecified"`
+
+      The external destination the file was exported to.
+
+      - `"google_drive"`
+
+      - `"unspecified"`
+
+    - `filename: string`
+
+      Name of the exported file.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_chat_id: optional string`
+
+      The chat conversation the file was exported from, if the export originated in a chat, e.g. "claude_chat_01HX...".
+
+    - `claude_file_id: optional string`
+
+      The exported file, e.g. "claude_file_01HX...", if the file has a stored file record; files that exist only inside a session have no file ID.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_exported"`
+
+      - `"claude_file_exported"`
+
+  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+
+    A user viewed a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43148,12 +55097,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A sync source was connected to a Claude project's knowledge base.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43200,6 +55147,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43298,12 +55258,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A sync source was disconnected from a Claude project's knowledge base.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43350,6 +55308,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43444,12 +55415,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude project sync source's configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43496,6 +55465,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43598,12 +55580,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An organization member's seat tier was changed. A null `previous_seat_tier` means the member previously had no seat assigned; a null `current_seat_tier` means the seat was removed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43650,6 +55630,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43748,12 +55741,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin set or cleared the per-op permission ceiling for a plugin CLI.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43800,6 +55791,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -43906,12 +55910,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Command was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -43958,6 +55960,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44044,12 +56059,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Command was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44096,6 +56109,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44182,12 +56208,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Command was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44234,6 +56258,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44378,12 +56415,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Design project was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44430,6 +56465,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44528,12 +56576,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Design project was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44580,6 +56626,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44666,12 +56725,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A Claude Design project's metadata was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44718,6 +56775,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44812,12 +56882,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was added to an org's allowlist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -44864,6 +56932,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -44950,12 +57031,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was added to the global blocklist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45002,6 +57081,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45088,12 +57180,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was deleted, either globally by an admin or org-scoped by an org owner.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45140,6 +57230,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45230,12 +57333,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was removed from an org's allowlist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45282,6 +57383,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45368,12 +57482,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was removed from the global blocklist.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45420,6 +57532,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45506,12 +57631,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A desktop extension was uploaded, either globally by an admin or org-scoped by an org owner.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45558,6 +57681,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45648,12 +57784,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A new version of an existing org-owned desktop extension was uploaded.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45700,6 +57834,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45790,12 +57937,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Domain capture claim initiated over personal accounts on verified domains.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45842,6 +57987,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -45924,12 +58082,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Non-admin member submitted an invite request for a new org member.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -45976,6 +58132,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -46560,12 +58729,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin created a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -46612,6 +58779,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -46698,12 +58878,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin deleted a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -46750,6 +58928,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -46836,12 +59027,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin updated a GHE configuration.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -46888,6 +59077,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -46974,12 +59176,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User connected to a GHE instance.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47026,6 +59226,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -47112,12 +59325,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User disconnected from a GHE instance.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47164,6 +59375,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -47250,12 +59474,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Webhook signature validation failed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47302,6 +59524,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -47646,12 +59881,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A group was created (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47698,6 +59931,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -47788,12 +60034,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A group was deleted (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47840,6 +60084,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -47926,12 +60183,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin viewed the list of RBAC groups.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -47978,6 +60233,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48060,12 +60328,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     One or more members were added to a group.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48112,6 +60378,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48198,16 +60477,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"group_member_added"`
 
-  - `GroupMemberListViewed object { actor, group_id, id, 4 more }`
+  - `GroupMemberAdditionFailed object { actor, group_id, id, 5 more }`
 
-    Admin viewed the members of an RBAC group.
+    A request to add members to a group failed. Some of the requested members may have been added before the failure.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48254,6 +60531,172 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `group_id: string`
+
+      Tagged ID of the group
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `member_ids: optional array of string`
+
+      Tagged IDs of the members the request attempted to add
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "group_member_addition_failed"`
+
+      - `"group_member_addition_failed"`
+
+  - `GroupMemberListViewed object { actor, group_id, id, 4 more }`
+
+    Admin viewed the members of an RBAC group.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48336,16 +60779,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"group_member_list_viewed"`
 
-  - `GroupMemberRemoved object { actor, group_id, id, 5 more }`
+  - `GroupMemberRemovalFailed object { actor, group_id, id, 5 more }`
 
-    One or more members were removed from a group.
+    A request to remove members from a group failed. Some of the requested members may have been removed before the failure.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48392,6 +60833,172 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `group_id: string`
+
+      Tagged ID of the group
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `member_ids: optional array of string`
+
+      Tagged IDs of the members the request attempted to remove
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "group_member_removal_failed"`
+
+      - `"group_member_removal_failed"`
+
+  - `GroupMemberRemoved object { actor, group_id, id, 5 more }`
+
+    One or more members were removed from a group.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48482,12 +61089,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A group was updated (RBAC admin or SCIM provisioning).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48534,6 +61139,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48620,12 +61238,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A group was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48672,6 +61288,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -48918,12 +61547,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     LTI launch was initiated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -48970,6 +61597,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49052,12 +61692,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     LTI launch completed successfully.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49104,6 +61742,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49186,12 +61837,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Anthropic staff created an LTI platform integration on behalf of an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49238,6 +61887,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49328,12 +61990,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Anthropic staff updated an LTI platform integration on behalf of an org.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49380,6 +62040,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49630,12 +62303,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin created an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49682,6 +62353,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49768,12 +62452,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin deleted an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49820,6 +62502,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -49906,12 +62601,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin updated an organization marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -49958,6 +62651,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50044,12 +62750,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin removed the GitHub push webhook for a marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50096,6 +62800,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50182,12 +62899,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin provisioned a GitHub push webhook for a marketplace.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50234,6 +62949,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50324,12 +63052,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An MCP server was added to the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50376,6 +63102,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50466,12 +63205,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An MCP server was removed from the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50518,6 +63255,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50608,12 +63358,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An MCP server's configuration was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50660,6 +63408,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -50750,12 +63511,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     The permission restriction for an MCP tool was set or cleared.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -50802,6 +63561,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -51004,12 +63776,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A capability grant was added to a workspace or role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -51056,6 +63826,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -51156,12 +63939,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A capability grant was removed from a workspace or role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -51208,6 +63989,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -51528,6 +64322,46 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_claude_code_desktop_enabled"`
 
+  - `OrgClaudeCodeZeroDataRetentionDisabled object { actor, id, created_at, 3 more }`
+
+    A primary owner disabled zero data retention for Claude Code, so Claude
+    Code content is retained according to the organization's data retention
+    settings.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_claude_code_zero_data_retention_disabled"`
+
+      - `"org_claude_code_zero_data_retention_disabled"`
+
   - `OrgComplianceAPISettingsUpdated object { actor, id, compliance_api_enabled, 5 more }`
 
     Organization compliance API settings were updated.
@@ -51603,6 +64437,153 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "org_compliance_api_settings_updated"`
 
       - `"org_compliance_api_settings_updated"`
+
+  - `OrgConnectorDomainGuardUpdated object { actor, enforced, id, 4 more }`
+
+    Enterprise admin changed whether connectors are restricted to verified domains.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `enforced: boolean`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_connector_domain_guard_updated"`
+
+      - `"org_connector_domain_guard_updated"`
 
   - `OrgCoworkActWithoutAskingModeDisabled object { actor, id, created_at, 3 more }`
 
@@ -51680,7 +64661,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_cowork_act_without_asking_mode_enabled"`
 
-  - `OrgCoworkAgentDisabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentDisabled object { actor, id, created_at, 5 more }`
 
     Organization Cowork Agent was disabled.
 
@@ -51706,6 +64687,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -51714,11 +64699,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_agent_disabled"`
 
       - `"org_cowork_agent_disabled"`
 
-  - `OrgCoworkAgentEnabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentEnabled object { actor, id, created_at, 5 more }`
 
     Organization Cowork Agent was enabled.
 
@@ -51744,6 +64733,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -51752,11 +64745,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_agent_enabled"`
 
       - `"org_cowork_agent_enabled"`
 
-  - `OrgCoworkDisabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkDisabled object { actor, id, created_at, 5 more }`
 
     Organization cowork was disabled.
 
@@ -51782,6 +64779,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -51790,11 +64791,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_disabled"`
 
       - `"org_cowork_disabled"`
 
-  - `OrgCoworkEnabled object { actor, id, created_at, 3 more }`
+  - `OrgCoworkEnabled object { actor, id, created_at, 5 more }`
 
     Organization cowork was enabled.
 
@@ -51820,6 +64825,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -51828,13 +64837,17 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_cowork_enabled"`
 
       - `"org_cowork_enabled"`
 
   - `OrgCoworkMcpAlwaysAllowDisabled object { actor, id, created_at, 3 more }`
 
-    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each connector tool use requires approval.
+    The "Always allow" option for connector tools in Cowork was disabled for the organization, so each use of a connector tool that can make changes requires approval. Read-only connector tools are not affected by this setting.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -51872,7 +64885,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
   - `OrgCoworkMcpAlwaysAllowEnabled object { actor, id, created_at, 3 more }`
 
-    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool once and allow its later uses automatically.
+    The "Always allow" option for connector tools in Cowork was enabled for the organization, letting members approve a connector tool that can make changes once and allow its later uses automatically. Read-only connector tools are not affected by this setting.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -52650,12 +65663,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin disabled organization discoverability.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -52702,6 +65713,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -52784,12 +65808,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin enabled organization discoverability.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -52836,6 +65858,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -52918,12 +65953,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin updated organization discoverability settings.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -52970,6 +66003,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -53195,6 +66241,310 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "org_domain_verified"`
 
       - `"org_domain_verified"`
+
+  - `OrgExternalKeyCreated object { actor, external_key_id, provider, 5 more }`
+
+    A CMEK external key config was created.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the created external key config
+
+    - `provider: "aws" or "azure" or "gcp"`
+
+      KMS provider backing the key
+
+      - `"aws"`
+
+      - `"azure"`
+
+      - `"gcp"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_created"`
+
+      - `"org_external_key_created"`
+
+  - `OrgExternalKeyDeleted object { actor, external_key_id, id, 4 more }`
+
+    A CMEK external key config was deleted.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the deleted external key config
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_deleted"`
+
+      - `"org_external_key_deleted"`
+
+  - `OrgExternalKeyUpdated object { actor, external_key_id, updates, 5 more }`
+
+    A CMEK external key config was updated.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the updated external key config
+
+    - `updates: array of object { current_value, previous_value, type }`
+
+      - `current_value: string`
+
+      - `previous_value: string`
+
+      - `type: "display_name" or "geo" or "provider_config"`
+
+        - `"display_name"`
+
+        - `"geo"`
+
+        - `"provider_config"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_updated"`
+
+      - `"org_external_key_updated"`
+
+  - `OrgExternalKeyValidated object { actor, external_key_id, validation_result, 5 more }`
+
+    A CMEK external key config was validated against the customer's KMS.
+
+    - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+    - `external_key_id: string`
+
+      Tagged ID of the validated external key config
+
+    - `validation_result: "failure" or "success"`
+
+      Outcome of the encrypt/decrypt roundtrip
+
+      - `"failure"`
+
+      - `"success"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_external_key_validated"`
+
+      - `"org_external_key_validated"`
 
   - `OrgHipaaSelfServeEnabled object { actor, baa_content_hash, baa_version_label, 6 more }`
 
@@ -53503,12 +66853,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An organization invite was viewed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -53555,6 +66903,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -53641,12 +67002,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Organization invites were listed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -53693,6 +67052,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -53775,12 +67147,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Approve or reject decision on a parent-org join proposal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -53827,6 +67197,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -53911,12 +67294,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin approved a join request.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -53963,6 +67344,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54045,12 +67439,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User requested to join an organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54097,6 +67489,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54179,12 +67584,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin dismissed a join request.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54231,6 +67634,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54313,12 +67729,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Join request was instantly approved.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54365,6 +67779,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54447,12 +67874,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin bulk-dismissed join requests.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54499,6 +67924,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54631,12 +68069,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin disabled member invites for the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54683,6 +68119,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54765,12 +68214,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin enabled member invites for the organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -54817,6 +68264,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -54942,6 +68402,199 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "org_members_exported"`
 
       - `"org_members_exported"`
+
+  - `OrgModelDefaultUpdated object { action, actor, override_user_selection, 9 more }`
+
+    An organization or role default model setting was changed by an administrator.
+
+    - `action: "cleared" or "set" or "unspecified"`
+
+      Whether the default model was set or cleared
+
+      - `"cleared"`
+
+      - `"set"`
+
+      - `"unspecified"`
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `override_user_selection: boolean`
+
+      Whether the default is enforced as a fixed default, resetting members' own model selections at the start of each new conversation
+
+    - `principal_id: string`
+
+      Tagged ID of the organization or role the default applies to
+
+    - `principal_type: "org" or "rbac_role" or "unspecified"`
+
+      Whether the default applies to the whole organization or to a single role
+
+      - `"org"`
+
+      - `"rbac_role"`
+
+      - `"unspecified"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `default_model: optional string`
+
+      The model set as the default, when the action is set
+
+    - `model_access: optional array of object { api_name, enabled, max_effort_level }`
+
+      The per-model access overrides set for this principal; absent when no overrides are configured
+
+      - `api_name: string`
+
+        The model the decision applies to
+
+      - `enabled: boolean`
+
+        Whether members with this principal may select the model
+
+      - `max_effort_level: optional string`
+
+        The highest effort level members may select for this model, when capped
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_model_default_updated"`
+
+      - `"org_model_default_updated"`
 
   - `OrgParentJoinProposalCreated object { actor, id, created_at, 3 more }`
 
@@ -55751,7 +69404,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User was removed from organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -55798,6 +69451,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
     - `id: optional string`
 
@@ -55867,7 +69532,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Organization user invite was deleted.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -55914,6 +69579,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "service_account_actor"`
 
           - `"service_account_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
     - `id: optional string`
 
@@ -56059,11 +69736,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_user_invite_rejected"`
 
-  - `OrgUserInviteSent object { actor, id, created_at, 6 more }`
+  - `OrgUserInviteSent object { actor, id, created_at, 7 more }`
 
     Organization user invite was sent.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -56099,6 +69776,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"admin_api_key_actor"`
 
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
       - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
 
         - `ip_address: string`
@@ -56120,6 +69809,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
       When this activity occurred.
 
     - `invited_email: optional string`
+
+    - `invited_rbac_group_ids: optional array of string`
+
+      RBAC group IDs the invited user will be added to on joining
 
     - `invited_role: optional string`
 
@@ -56179,16 +69872,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_user_left"`
 
-  - `OrgUserViewed object { actor, user_id, id, 4 more }`
+  - `OrgUserTrustedDevicesRevoked object { actor, completed, devices_revoked_count, 7 more }`
 
-    An organization user was viewed.
+    An organization admin revoked a member's trusted devices and signed the member out of all active sessions.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -56235,6 +69926,180 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `completed: boolean`
+
+      Whether the operation completed fully. False records an attempt that revoked the counted credentials but failed before finishing.
+
+    - `devices_revoked_count: number`
+
+      Number of trusted devices revoked
+
+    - `sessions_revoked_count: number`
+
+      Number of active sessions the member was signed out of
+
+    - `user_id: string`
+
+      Tagged ID of the member whose trusted devices were revoked
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "org_user_trusted_devices_revoked"`
+
+      - `"org_user_trusted_devices_revoked"`
+
+  - `OrgUserViewed object { actor, user_id, id, 4 more }`
+
+    An organization user was viewed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -56321,12 +70186,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Organization users were listed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -56373,6 +70236,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -56451,7 +70327,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"org_users_listed"`
 
-  - `OrgWorkAcrossAppsDisabled object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsDisabled object { actor, id, created_at, 5 more }`
 
     Organization Work Across Apps was disabled.
 
@@ -56477,6 +70353,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -56485,11 +70365,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
+
     - `type: optional "org_work_across_apps_disabled"`
 
       - `"org_work_across_apps_disabled"`
 
-  - `OrgWorkAcrossAppsEnabled object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsEnabled object { actor, id, created_at, 5 more }`
 
     Organization Work Across Apps was enabled.
 
@@ -56515,6 +70399,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       When this activity occurred.
 
+    - `current_value: optional boolean`
+
+      Setting value immediately after this change
+
     - `organization_id: optional string`
 
       Organization ID this activity is associated with
@@ -56522,6 +70410,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `organization_uuid: optional string`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_value: optional boolean`
+
+      Setting value immediately before this change
 
     - `type: optional "org_work_across_apps_enabled"`
 
@@ -56577,12 +70469,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Organization's custom icon deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -56629,6 +70519,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -56711,12 +70614,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Organization's custom icon uploaded or replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -56763,6 +70664,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -56869,7 +70783,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 58 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 61 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
@@ -57167,6 +71081,54 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"members_bulk_seat_tier_assignment"`
 
+      - `ClaudeCodeWebEnabled object { current_value, previous_value, type }`
+
+        The Claude Code on the web setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_web_enabled"`
+
+          - `"claude_code_web_enabled"`
+
+      - `ClaudeCodeDesktopBypassPermissionsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Desktop bypass-permissions mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_desktop_bypass_permissions_enabled"`
+
+          - `"claude_code_desktop_bypass_permissions_enabled"`
+
+      - `ClaudeCodeDesktopAutoPermissionsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Desktop auto-permissions mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_desktop_auto_permissions_enabled"`
+
+          - `"claude_code_desktop_auto_permissions_enabled"`
+
       - `WorkbenchCompletionFeedbackEnabled object { current_value, previous_value, type }`
 
         The Workbench completion feedback setting was changed for the organization.
@@ -57233,7 +71195,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAiccrSharingEnabled object { current_value, previous_value, type }`
 
-        The Claude.ai CCR sharing setting was changed for the organization.
+        The Claude.ai remote Claude Code session sharing setting was changed for the organization.
 
         - `current_value: boolean`
 
@@ -58124,6 +72086,324 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"payment_method_updated"`
 
+  - `PendingShareCreated object { actor, invitee_email, resource_id, 7 more }`
+
+    A pending share of a project or skill was created for an email address that is not yet an organization member.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `invitee_email: string`
+
+      Email address the share was created for.
+
+    - `resource_id: string`
+
+      Tagged ID of the resource being shared.
+
+    - `resource_type: string`
+
+      The type of resource being shared.
+
+    - `role: string`
+
+      The role that will be granted when the invitee joins the organization.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "pending_share_created"`
+
+      - `"pending_share_created"`
+
+  - `PendingShareRevoked object { actor, invitee_email, resource_id, 6 more }`
+
+    A pending share of a project or skill was revoked before the invitee joined the organization.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `invitee_email: string`
+
+      Email address the share had been created for.
+
+    - `resource_id: string`
+
+      Tagged ID of the resource that was shared.
+
+    - `resource_type: string`
+
+      The type of resource that was shared.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "pending_share_revoked"`
+
+      - `"pending_share_revoked"`
+
   - `PhoneCodeSent object { actor, id, created_at, 3 more }`
 
     User requested a phone verification code.
@@ -58364,6 +72644,155 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"platform_api_key_updated"`
 
+  - `PlatformBillingUpgradedToPrepaid object { actor, previous_billing_type, id, 4 more }`
+
+    The organization's API billing was upgraded to the prepaid plan.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `previous_billing_type: string`
+
+      The organization's billing type before this upgrade, for example "api_evaluation".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_billing_upgraded_to_prepaid"`
+
+      - `"platform_billing_upgraded_to_prepaid"`
+
   - `PlatformCostReportViewed object { actor, id, created_at, 3 more }`
 
     The cost report was viewed.
@@ -58427,6 +72856,211 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "platform_cost_report_viewed"`
 
       - `"platform_cost_report_viewed"`
+
+  - `PlatformFederatedAuthentication object { actor, id, created_at, 7 more }`
+
+    A federated workload identity attempted to exchange an OIDC token for Anthropic API credentials.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `event_data: optional object { federation_rule_id, issuer_id, oidc_token, requested_service_account_id }`
+
+      A nested object within a compliance activity payload.
+
+      - `federation_rule_id: optional string`
+
+        The federation rule that matched the request, e.g. "fdrl_01HXZ4J2N8K5P7R9T3V6W1Y4M0".
+
+      - `issuer_id: optional string`
+
+        The registered identity issuer for the request, e.g. "fdis_01HXZ4H5M3K8P1R7T9V2W6Y4N0".
+
+      - `oidc_token: optional object { claims, jti }`
+
+        A nested object within a compliance activity payload.
+
+        - `claims: optional map[unknown]`
+
+          The verified claims from the presented OIDC token.
+
+        - `jti: optional string`
+
+          The presented token's unique identifier (its `jti` claim).
+
+      - `requested_service_account_id: optional string`
+
+        The service account the caller requested to authenticate as, e.g. "svac_01HXZ4...".
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `request_id: optional string`
+
+      The Anthropic API request identifier for correlation, e.g. "req_01HXZ4K7M9P2QR5T8V6W3Y1N0B".
+
+    - `resources: optional array of object { id, type }`
+
+      The resources involved in the exchange.
+
+      - `id: string`
+
+        The identifier of the resource involved in the exchange.
+
+      - `type: string`
+
+        The kind of resource involved in the exchange.
+
+    - `status: optional object { outcome, detail, reason }`
+
+      A nested object within a compliance activity payload.
+
+      - `outcome: string`
+
+        Whether the token exchange succeeded or was denied.
+
+      - `detail: optional string`
+
+        A human-readable explanation when the exchange did not succeed.
+
+      - `reason: optional string`
+
+        A short reason code when the exchange did not succeed.
+
+    - `type: optional "platform_federated_authentication"`
+
+      - `"platform_federated_authentication"`
 
   - `PlatformFederationIssuerArchived object { actor, federation_issuer_id, id, 4 more }`
 
@@ -58912,12 +73546,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when file content is downloaded via GET /v1/files/{file_id}/content.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -58964,6 +73596,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -59050,12 +73695,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when a file is deleted via DELETE /v1/files/{file_id}.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -59102,6 +73745,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -59188,12 +73844,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when a file is uploaded via POST /v1/files.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -59240,6 +73894,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -59325,6 +73992,461 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "platform_file_uploaded"`
 
       - `"platform_file_uploaded"`
+
+  - `PlatformPluginDirectorySubmissionCreated object { actor, plugin_name, submission_id, 5 more }`
+
+    A plugin directory submission was created on the API platform. A plugin directory submission is a request to list a plugin in the public plugin directory.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `plugin_name: string`
+
+      The name of the plugin being submitted.
+
+    - `submission_id: string`
+
+      The submission that was created, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_created"`
+
+      - `"platform_plugin_directory_submission_created"`
+
+  - `PlatformPluginDirectorySubmissionDeleted object { actor, submission_id, id, 4 more }`
+
+    A plugin directory submission was deleted on the API platform.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `submission_id: string`
+
+      The submission that was deleted, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_deleted"`
+
+      - `"platform_plugin_directory_submission_deleted"`
+
+  - `PlatformPluginDirectorySubmissionUpdated object { actor, status, submission_id, 5 more }`
+
+    A plugin directory submission was updated on the API platform.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `status: string`
+
+      The submission's status after the update.
+
+    - `submission_id: string`
+
+      The submission that was updated, e.g. "psub_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "platform_plugin_directory_submission_updated"`
+
+      - `"platform_plugin_directory_submission_updated"`
 
   - `PlatformServiceAccountArchived object { actor, service_account_id, id, 4 more }`
 
@@ -59866,12 +74988,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when a skill version is created via POST /v1/skills/{skill_id}/versions.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -59918,6 +75038,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -60008,12 +75141,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when a skill version is deleted via DELETE /v1/skills/{skill_id}/versions/{version}.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -60060,6 +75191,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -61154,12 +76298,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Plugin was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -61206,6 +76348,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -61292,12 +76447,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Plugin was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -61344,6 +76497,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -61430,12 +76596,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An org admin changed the installation preference for a plugin.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -61482,6 +76646,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -61588,12 +76765,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Plugin was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -61640,6 +76815,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -61726,12 +76914,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Plugin was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -61778,6 +76964,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63034,12 +78233,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     SAML IdP configuration updated for a public sector organization.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63086,6 +78283,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63174,12 +78384,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin assigned an RBAC custom role to a principal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63226,6 +78434,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63320,12 +78541,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin created an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63372,6 +78591,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63462,12 +78694,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin deleted an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63514,6 +78744,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63607,12 +78850,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Action permitted on the resource
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63659,6 +78900,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63761,12 +79015,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Action that was permitted on the resource
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63813,6 +79065,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -63907,12 +79172,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin unassigned an RBAC custom role from a principal.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -63959,6 +79222,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -64053,12 +79329,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Admin updated an RBAC custom role.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -64105,6 +79379,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -64481,12 +79768,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A SCIM user was provisioned.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -64533,6 +79818,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -64617,12 +79915,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A SCIM user was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -64669,6 +79965,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -64753,12 +80062,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A SCIM user was updated.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -64805,6 +80112,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65073,12 +80393,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when an org service is explicitly created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65125,6 +80443,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65211,12 +80542,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when an org service is deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65263,6 +80592,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65349,12 +80691,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when a new org service key is created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65401,6 +80741,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65503,12 +80856,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Activity logged when an org service key is revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65555,6 +80906,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65683,12 +81047,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Session share was accessed.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65735,6 +81097,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65819,12 +81194,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Session share was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -65871,6 +81244,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -65955,12 +81341,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Session share was revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66007,6 +81391,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66091,12 +81488,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Skill was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66143,6 +81538,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66229,12 +81637,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Skill was deleted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66281,6 +81687,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66367,12 +81786,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User disabled a skill for their account.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66419,6 +81836,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66505,12 +81935,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User enabled a skill for their account.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66557,6 +81985,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66643,12 +82084,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     Skill was replaced.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -66695,6 +82134,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -66834,6 +82286,483 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "social_login_succeeded"`
 
       - `"social_login_succeeded"`
+
+  - `StepUpAuthenticationFailed object { actor, method, reason, 6 more }`
+
+    An additional identity check failed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `method: "device_key" or "unspecified" or "webauthn"`
+
+      The verification method the user attempted.
+
+      - `"device_key"`
+
+      - `"unspecified"`
+
+      - `"webauthn"`
+
+    - `reason: "challenge_rejected" or "unspecified" or "verification_failed"`
+
+      Why the attempt failed.
+
+      - `"challenge_rejected"`
+
+      - `"unspecified"`
+
+      - `"verification_failed"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the trusted device the attempt referenced, e.g. "tdev_...". Present only for the device key method.
+
+    - `type: optional "step_up_authentication_failed"`
+
+      - `"step_up_authentication_failed"`
+
+  - `StepUpAuthenticationSucceeded object { actor, method, id, 5 more }`
+
+    The user completed an additional identity check to confirm a sensitive action.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `method: "device_key" or "unspecified" or "webauthn"`
+
+      The verification method the user completed.
+
+      - `"device_key"`
+
+      - `"unspecified"`
+
+      - `"webauthn"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the trusted device used, e.g. "tdev_...". Present only for the device key method.
+
+    - `type: optional "step_up_authentication_succeeded"`
+
+      - `"step_up_authentication_succeeded"`
+
+  - `StepUpCredentialEnrolled object { actor, credential_id, id, 4 more }`
+
+    A user enrolled a passkey for confirming sensitive actions on their account.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `credential_id: string`
+
+      Identifier of the enrolled credential, e.g. "sucr_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "step_up_credential_enrolled"`
+
+      - `"step_up_credential_enrolled"`
 
   - `SubscriptionCancellationScheduled object { actor, id, created_at, 3 more }`
 
@@ -67097,16 +83026,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `"subscription_upgraded"`
 
-  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+  - `TrustedDeviceCredentialRotated object { actor, trusted_device_id, id, 4 more }`
 
-    An MCP tunnel was archived.
+    The identity-verification credential of a trusted device was rotated to a new key.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67153,6 +83080,510 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `trusted_device_id: string`
+
+      Identifier of the device whose credential was rotated, e.g. "tdev_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "trusted_device_credential_rotated"`
+
+      - `"trusted_device_credential_rotated"`
+
+  - `TrustedDeviceEnrolled object { actor, enrollment_method, platform, 6 more }`
+
+    A device was enrolled as a trusted device for the user's account. Trusted devices can be used to confirm the user's identity for sensitive actions.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `enrollment_method: "oauth" or "session" or "unspecified"`
+
+      How the user confirmed their identity when enrolling the device.
+
+      - `"oauth"`
+
+      - `"session"`
+
+      - `"unspecified"`
+
+    - `platform: "android" or "claude_in_slack" or "desktop_app" or 4 more`
+
+      The kind of client the enrollment request came from.
+
+      - `"android"`
+
+      - `"claude_in_slack"`
+
+      - `"desktop_app"`
+
+      - `"ios"`
+
+      - `"unspecified"`
+
+      - `"web_claude_ai"`
+
+      - `"web_console"`
+
+    - `trusted_device_id: string`
+
+      Identifier of the device that was enrolled, e.g. "tdev_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "trusted_device_enrolled"`
+
+      - `"trusted_device_enrolled"`
+
+  - `TrustedDeviceRevoked object { actor, reason, id, 6 more }`
+
+    A trusted device was removed from the user's account.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `reason: "org_member_removed" or "superseded" or "unspecified" or "user_revoked"`
+
+      Why the device trust was removed.
+
+      - `"org_member_removed"`
+
+      - `"superseded"`
+
+      - `"unspecified"`
+
+      - `"user_revoked"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `revoked_count: optional number`
+
+      Number of devices removed. Set when a security action removed all of the user's trusted devices at once; absent when a single device was removed (see trusted_device_id).
+
+    - `trusted_device_id: optional string`
+
+      Identifier of the device that was removed, e.g. "tdev_...". Set when a single device was removed; absent when several devices were removed at once (see revoked_count).
+
+    - `type: optional "trusted_device_revoked"`
+
+      - `"trusted_device_revoked"`
+
+  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was archived.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
+
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67237,12 +83668,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An inner-TLS CA certificate was added to a tunnel.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67289,6 +83718,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67377,12 +83819,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An inner-TLS CA certificate was revoked from a tunnel.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67429,6 +83869,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67517,12 +83970,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An MCP tunnel was created.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67569,6 +84020,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67653,12 +84117,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An OAuth bearer token for the tunnel management API was minted.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67705,6 +84167,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67791,12 +84266,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     The Cloudflare connector secret for a tunnel was revealed to the caller.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67843,6 +84316,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -67929,12 +84415,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     An OAuth bearer token for the tunnel management API was revoked.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -67981,6 +84465,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -68068,12 +84565,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     `tunnel_token_id` is the id of the *newly-issued* token. The previous
     token is invalidated by the rotation and its id is not recorded here.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -68120,6 +84615,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -68208,12 +84716,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User granted a consent for a specific entity (e.g. consumer health consent for an MCP server).
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -68260,6 +84766,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -68348,12 +84867,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     User revoked a previously granted consent for a specific entity.
 
-    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 6 more`
 
-      A federated external workload authenticated via a verified OIDC token.
-
-      Carries the verified issuer, subject, and audience claims from the
-      presented JWT.
+      Automated background processing performed by Anthropic systems, acting
+      without a user or customer credential.
 
       - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
@@ -68400,6 +84917,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "anthropic_actor"`
 
           - `"anthropic_actor"`
+
+      - `SystemActor object { service, type }`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `service: optional string`
+
+          Name of the automated process that performed the action, when known.
+
+        - `type: optional "system_actor"`
+
+          - `"system_actor"`
 
       - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
@@ -68490,7 +85020,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { ip_address, service_account_id, user_agent, type }  or object { email_address, type }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }  or object { api_key_id, ip_address, user_agent, type }  or 2 more`
 
       - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
@@ -68517,6 +85047,18 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "admin_api_key_actor"`
 
           - `"admin_api_key_actor"`
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
 
       - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
 
@@ -68592,7 +85134,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `"user_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 18 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 19 more`
 
       - `FullName object { current_value, previous_value, type }`
 
@@ -68832,6 +85374,14 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"conversation_preferences"`
 
+      - `CoworkGlobalInstructions object { type }`
+
+        The Cowork global instructions were updated. Values omitted.
+
+        - `type: optional "cowork_global_instructions"`
+
+          - `"cowork_global_instructions"`
+
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -69005,6 +85555,52 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "workspace_member_spend_limit_updated"`
 
       - `"workspace_member_spend_limit_updated"`
+
+    - `workspace_id: optional string`
+
+      Tagged ID of the workspace.
+
+  - `WorkspaceSpendLimitAlertEmailsUpdated object { actor, id, alert_emails, 5 more }`
+
+    Spend limit alert email recipients were updated for a workspace.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `alert_emails: optional array of string`
+
+      Updated list of alert email addresses.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "workspace_spend_limit_alert_emails_updated"`
+
+      - `"workspace_spend_limit_alert_emails_updated"`
 
     - `workspace_id: optional string`
 
