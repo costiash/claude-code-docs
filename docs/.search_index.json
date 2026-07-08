@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-08T13:16:17Z",
+  "generated_at": "2026-07-08T16:26:34Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -161,14 +161,14 @@
         "default",
         "mcp",
         "available",
+        "requires",
         "model",
         "flag",
         "file",
-        "requires",
         "background",
         "print"
       ],
-      "word_count": 3760,
+      "word_count": 3783,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -606,9 +606,9 @@
         "step",
         "plugin",
         "project",
-        "environment",
         "set",
         "only",
+        "environment",
         "title",
         "add",
         "authentication",
@@ -616,7 +616,7 @@
         "oauth",
         "available"
       ],
-      "word_count": 8386,
+      "word_count": 8526,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -652,27 +652,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "microsoft",
-        "foundry",
         "claude",
+        "foundry",
         "code",
         "model",
         "azure",
         "set",
         "div",
+        "resource",
         "environment",
         "classname",
         "create",
-        "resource",
-        "variables",
-        "haiku",
         "authentication",
         "default",
+        "variables",
+        "haiku",
+        "when",
         "documentation",
         "configuration",
-        "const",
-        "note"
+        "const"
       ],
-      "word_count": 1015,
+      "word_count": 1100,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -684,8 +684,8 @@
         "when",
         "claude",
         "code",
-        "set",
         "settings",
+        "set",
         "opus",
         "session",
         "organization",
@@ -694,13 +694,13 @@
         "managed",
         "version",
         "sonnet",
-        "fable",
         "effort",
+        "fable",
+        "environment",
         "level",
-        "setting",
-        "sessions"
+        "setting"
       ],
-      "word_count": 8661,
+      "word_count": 8753,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -857,8 +857,8 @@
         "default",
         "mcp",
         "field",
-        "marketplace",
         "see",
+        "marketplace",
         "skills",
         "version",
         "command",
@@ -868,7 +868,7 @@
         "path",
         "root"
       ],
-      "word_count": 8371,
+      "word_count": 8382,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -880,14 +880,14 @@
         "claude",
         "skills",
         "directory",
-        "skill",
         "code",
+        "skill",
         "create",
         "step",
         "see",
         "hooks",
-        "when",
         "root",
+        "when",
         "add",
         "marketplace",
         "agents",
@@ -896,7 +896,7 @@
         "name",
         "lsp"
       ],
-      "word_count": 3050,
+      "word_count": 3078,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1001,14 +1001,14 @@
         "set",
         "project",
         "see",
+        "file",
         "only",
         "tools",
         "corp",
         "user",
-        "mcp",
-        "file"
+        "mcp"
       ],
-      "word_count": 14073,
+      "word_count": 14231,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "see",
         "add"
       ],
-      "word_count": 7599,
+      "word_count": 7665,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1115,12 +1115,12 @@
         "model",
         "same",
         "fork",
+        "version",
         "name",
         "task",
-        "background",
-        "version"
+        "background"
       ],
-      "word_count": 9768,
+      "word_count": 9824,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1217,9 +1217,9 @@
         "extension",
         "tab",
         "see",
-        "cli",
         "session",
         "new",
+        "cli",
         "conversation",
         "panel",
         "click",
@@ -1227,12 +1227,12 @@
         "icon",
         "install",
         "terminal",
+        "settings",
         "file",
         "prompt",
-        "when",
-        "sessions"
+        "when"
       ],
-      "word_count": 5419,
+      "word_count": 5452,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
