@@ -9315,8 +9315,8 @@
     "docs__en__build-with-claude__skills-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide.md",
-      "hash": "b614f613d8567fe3358f9409eb78db4005a889ad5296371908cd24f6d5979121",
-      "last_updated": "2026-06-30T22:06:05.530064"
+      "hash": "390378758cc31226af8a7690d8f64a55db2077f1097875bc7996b03e1d33ff19",
+      "last_updated": "2026-07-08T19:02:06.512754"
     },
     "docs__en__build-with-claude__streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/streaming",
@@ -9729,8 +9729,8 @@
     "docs__en__managed-agents__files.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/files",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/files.md",
-      "hash": "45a3fad0486f7e5d9af0d70c8ce9f71b0966d4845a0f11a663b5a7a70b88d3f4",
-      "last_updated": "2026-06-27T07:42:42.190214"
+      "hash": "1fa03beb722fcb419857dd7075ce0040a84f6fb56ff43244f057c2cb15f19861",
+      "last_updated": "2026-07-08T19:06:25.710656"
     },
     "docs__en__managed-agents__github.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/github",
@@ -9999,8 +9999,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-08T16:26:30.476931",
-    "fetch_duration_seconds": 2348.055037,
+    "last_fetch_completed": "2026-07-08T19:10:14.207712",
+    "fetch_duration_seconds": 2255.216612,
     "total_pages_discovered": 2040,
     "pages_fetched_successfully": 1666,
     "pages_failed": 375,
@@ -10386,7 +10386,7 @@
     "total_files": 1666,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-08T16:26:30.476952",
+  "last_updated": "2026-07-08T19:10:14.207737",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
