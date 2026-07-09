@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-09T16:40:59Z",
+  "generated_at": "2026-07-09T19:21:19Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -135,12 +135,12 @@
         "setup",
         "repository",
         "web",
+        "when",
         "script",
         "network",
-        "when",
         "fix"
       ],
-      "word_count": 6601,
+      "word_count": 6685,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -150,25 +150,25 @@
         "session",
         "claude",
         "mode",
-        "prompt",
         "code",
+        "prompt",
         "settings",
-        "see",
         "version",
+        "see",
         "only",
-        "sessions",
         "interactive",
+        "sessions",
+        "requires",
         "default",
         "mcp",
-        "available",
-        "requires",
-        "model",
-        "flag",
         "file",
-        "background",
-        "print"
+        "available",
+        "print",
+        "model",
+        "min",
+        "flag"
       ],
-      "word_count": 3783,
+      "word_count": 3954,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -261,13 +261,13 @@
       "keywords": [
         "claude",
         "code",
-        "mode",
         "desktop",
         "file",
         "session",
-        "auto",
         "changes",
         "preview",
+        "mode",
+        "auto",
         "diff",
         "files",
         "settings",
@@ -277,10 +277,10 @@
         "review",
         "app",
         "windows",
-        "permissions",
-        "before"
+        "before",
+        "permission"
       ],
-      "word_count": 8812,
+      "word_count": 8841,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -400,27 +400,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Run Claude Code programmatically  > Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or",
       "keywords": [
         "claude",
-        "mode",
         "code",
         "agent",
+        "mode",
         "example",
         "session",
         "sdk",
         "event",
-        "without",
         "run",
+        "without",
         "cli",
         "prompt",
         "string",
+        "before",
         "tools",
         "output",
         "bare",
+        "json",
         "file",
-        "before",
-        "message",
-        "response"
+        "any"
       ],
-      "word_count": 2112,
+      "word_count": 2283,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -468,15 +468,15 @@
         "only",
         "session",
         "runs",
-        "command",
         "output",
+        "command",
         "prompt",
         "file",
         "event",
         "user",
         "control"
       ],
-      "word_count": 23238,
+      "word_count": 23337,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -606,17 +606,17 @@
         "step",
         "plugin",
         "project",
-        "set",
         "only",
+        "set",
         "environment",
         "title",
         "add",
+        "name",
         "authentication",
         "configuration",
-        "oauth",
-        "available"
+        "oauth"
       ],
-      "word_count": 8526,
+      "word_count": 8777,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -684,23 +684,23 @@
         "when",
         "claude",
         "code",
-        "settings",
         "set",
-        "opus",
+        "settings",
         "session",
+        "opus",
+        "version",
         "organization",
         "models",
         "picker",
         "managed",
-        "version",
-        "sonnet",
         "effort",
+        "sonnet",
         "fable",
-        "environment",
-        "level",
-        "setting"
+        "platform",
+        "only",
+        "allowlist"
       ],
-      "word_count": 8753,
+      "word_count": 9231,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -825,22 +825,22 @@
         "code",
         "claude",
         "git",
+        "add",
         "string",
         "see",
         "directory",
-        "add",
         "when",
         "marketplaces",
         "url",
+        "source",
         "github",
         "paths",
         "entry",
         "version",
         "repository",
-        "sources",
-        "source"
+        "sources"
       ],
-      "word_count": 7339,
+      "word_count": 7449,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -850,25 +850,25 @@
         "plugin",
         "when",
         "claude",
-        "directory",
-        "code",
-        "plugins",
         "server",
+        "code",
+        "directory",
+        "plugins",
         "default",
         "mcp",
         "field",
         "see",
         "marketplace",
         "skills",
+        "servers",
         "version",
         "command",
         "name",
         "skill",
-        "servers",
         "path",
-        "root"
+        "lsp"
       ],
-      "word_count": 8382,
+      "word_count": 8621,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -952,7 +952,7 @@
         "managed",
         "proxy"
       ],
-      "word_count": 4861,
+      "word_count": 4858,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "user",
         "mcp"
       ],
-      "word_count": 14231,
+      "word_count": 14248,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1050,21 +1050,21 @@
         "when",
         "commands",
         "run",
-        "description",
         "code",
+        "description",
+        "bundled",
         "agent",
         "subagent",
+        "settings",
         "plugin",
         "available",
         "create",
-        "bundled",
-        "context",
-        "settings",
         "file",
-        "see",
-        "add"
+        "one",
+        "built",
+        "see"
       ],
-      "word_count": 7665,
+      "word_count": 7739,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1089,10 +1089,10 @@
         "directory",
         "codegroup",
         "api",
-        "command",
-        "may"
+        "model",
+        "command"
       ],
-      "word_count": 6276,
+      "word_count": 6338,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1115,12 +1115,12 @@
         "model",
         "same",
         "fork",
-        "version",
-        "name",
         "task",
+        "name",
+        "version",
         "background"
       ],
-      "word_count": 9824,
+      "word_count": 9957,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1187,24 +1187,24 @@
         "claude",
         "file",
         "search",
-        "tab",
         "run",
+        "tab",
         "memory",
         "issues",
         "usage",
         "performance",
         "files",
-        "settings",
-        "context",
+        "check",
         "instead",
         "when",
         "terminal",
         "title",
         "high",
-        "installation",
-        "error"
+        "error",
+        "reference",
+        "settings"
       ],
-      "word_count": 1017,
+      "word_count": 1029,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5452,
+      "word_count": 5451,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
