@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-09T19:21:19Z",
+  "generated_at": "2026-07-09T22:10:43Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -261,26 +261,26 @@
       "keywords": [
         "claude",
         "code",
+        "browser",
         "desktop",
-        "file",
-        "session",
-        "changes",
-        "preview",
         "mode",
         "auto",
-        "diff",
-        "files",
-        "settings",
-        "see",
+        "file",
+        "session",
+        "pane",
         "open",
-        "sessions",
-        "review",
+        "changes",
         "app",
+        "permission",
+        "files",
+        "diff",
         "windows",
-        "before",
-        "permission"
+        "see",
+        "external",
+        "settings",
+        "review"
       ],
-      "word_count": 8841,
+      "word_count": 9355,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -997,18 +997,18 @@
         "theme",
         "null",
         "acme",
-        "when",
         "set",
+        "when",
         "project",
         "see",
-        "file",
         "only",
         "tools",
+        "file",
         "corp",
         "user",
         "mcp"
       ],
-      "word_count": 14248,
+      "word_count": 14294,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
