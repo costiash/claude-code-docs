@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-10T16:25:47Z",
+  "generated_at": "2026-07-10T19:12:45Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -44645,27 +44645,27 @@
       "content_preview": "# Access Transparency  Receive an audit record of human access to your organization's data by Anthropic personnel through the Compliance API.  ---  Learn how Access Transparency creates a record of hu...",
       "keywords": [
         "access",
-        "transparency",
         "content",
+        "transparency",
         "anthropic",
         "api",
         "claude",
+        "events",
+        "preservation",
+        "event",
         "covered",
         "feed",
         "activity",
         "accordion",
-        "events",
-        "event",
         "human",
+        "see",
         "organization",
         "compliance",
-        "title",
-        "see",
         "does",
-        "key",
-        "data"
+        "safety",
+        "automated"
       ],
-      "word_count": 1997,
+      "word_count": 2225,
       "file_path": "docs/docs__en__manage-claude__access-transparency.md"
     },
     "/docs/en/manage-claude/admin-api-keys": {
