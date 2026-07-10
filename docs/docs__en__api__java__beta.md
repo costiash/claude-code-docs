@@ -62,6 +62,8 @@
 
   - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+  - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Beta API Error
 
 - `class BetaApiError:`
@@ -402,6 +404,8 @@ The Models API response can be used to determine which models are available for 
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -720,6 +724,8 @@ The Models API response can be used to determine information about a specific mo
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -1386,6 +1392,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> userProfileId`
 
@@ -5789,6 +5797,8 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> userProfileId`
 
@@ -29863,6 +29873,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Optional<String> userProfileId`
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -33063,6 +33075,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -33285,6 +33299,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -33506,6 +33522,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -33720,6 +33738,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -33845,6 +33865,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -40258,6 +40280,8 @@ Create Agent
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Model model`
 
     Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
@@ -40548,7 +40572,7 @@ Create Agent
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -41056,6 +41080,8 @@ List Agents
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -41528,6 +41554,8 @@ Get Agent
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -41991,6 +42019,8 @@ Update Agent
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `long version`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
@@ -42285,7 +42315,7 @@ Update Agent
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -42773,6 +42803,8 @@ Archive Agent
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -44027,7 +44059,7 @@ public final class Main {
 
   - `String description`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
   - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -44969,6 +45001,8 @@ List Agent Versions
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -45437,6 +45471,8 @@ Create a new environment with the specified configuration.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `String name`
 
     Human-readable name for the environment
@@ -45858,6 +45894,8 @@ List environments with pagination support.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -46149,6 +46187,8 @@ Retrieve a specific environment by ID.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -46434,6 +46474,8 @@ Update an existing environment's configuration.
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<Config> config`
 
@@ -46843,6 +46885,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -46962,6 +47006,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -47748,6 +47794,8 @@ Retrieve detailed information about a specific work item.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -47795,10 +47843,6 @@ Retrieve detailed information about a specific work item.
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -47873,7 +47917,6 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -47966,6 +48009,8 @@ Long poll for work items in the queue.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Optional<String> anthropicWorkerId`
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -48017,10 +48062,6 @@ Long poll for work items in the queue.
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -48092,7 +48133,6 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48179,6 +48219,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -48226,10 +48268,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -48304,7 +48342,6 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48398,6 +48435,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -48552,6 +48591,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `BetaSelfHostedWorkStopRequest betaSelfHostedWorkStopRequest`
 
     Request to stop a work item.
@@ -48603,10 +48644,6 @@ Stop a work item, initiating graceful or forced shutdown.
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -48683,7 +48720,6 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48776,6 +48812,8 @@ List work items in an environment.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -48823,10 +48861,6 @@ List work items in an environment.
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -48899,7 +48933,6 @@ public final class Main {
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -48989,6 +49022,8 @@ Update work item metadata with merge semantics.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `BetaSelfHostedWorkUpdateRequest betaSelfHostedWorkUpdateRequest`
 
     Request to update work item metadata.
@@ -49040,10 +49075,6 @@ Update work item metadata with merge semantics.
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -49125,7 +49156,6 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -49207,6 +49237,8 @@ Get statistics about the work queue for an environment.
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -49320,10 +49352,6 @@ public final class Main {
   - `Metadata metadata`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `Optional<String> secret`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `Optional<String> startedAt`
 
@@ -49442,10 +49470,6 @@ public final class Main {
     - `Metadata metadata`
 
       User-provided metadata key-value pairs associated with this work item
-
-    - `Optional<String> secret`
-
-      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
     - `Optional<String> startedAt`
 
@@ -49625,6 +49649,8 @@ Create Session
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Agent agent`
 
@@ -49934,7 +49960,7 @@ Create Session
 
           - `String description`
 
-            Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+            Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
           - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -50931,6 +50957,8 @@ List Sessions
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -51738,6 +51766,8 @@ Get Session
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -52538,6 +52568,8 @@ Update Session
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<BetaManagedAgentsSessionAgentUpdate> agent`
 
@@ -53356,6 +53388,8 @@ Delete Session
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -53471,6 +53505,8 @@ Archive Session
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -54531,7 +54567,7 @@ public final class Main {
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -55917,7 +55953,7 @@ public final class Main {
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -57018,6 +57054,8 @@ List Events
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -58932,6 +58970,8 @@ Send Events
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.
@@ -59866,6 +59906,8 @@ Stream Events
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -69935,6 +69977,8 @@ Add Session Resource
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
     Mount a file uploaded via the Files API into the session.
@@ -70084,6 +70128,8 @@ List Session Resources
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -70316,6 +70362,8 @@ Get Session Resource
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -70537,6 +70585,8 @@ Update Session Resource
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `String authorizationToken`
 
@@ -70764,6 +70814,8 @@ Delete Session Resource
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -71116,6 +71168,8 @@ List Session Threads
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -71642,6 +71696,8 @@ Get Session Thread
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread:`
@@ -72165,6 +72221,8 @@ Archive Session Thread
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -74958,6 +75016,8 @@ List Session Thread Events
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union`
@@ -76865,6 +76925,8 @@ Stream Session Thread Events
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -78828,6 +78890,8 @@ Create Deployment
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Agent agent`
 
     Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
@@ -79909,6 +79973,8 @@ List Deployments
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
@@ -80601,6 +80667,8 @@ Get Deployment
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
@@ -81287,6 +81355,8 @@ Update Deployment
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<Agent> agent`
 
@@ -82331,6 +82401,8 @@ Archive Deployment
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
@@ -83018,6 +83090,8 @@ Run Deployment Now
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeploymentRun:`
@@ -83395,6 +83469,8 @@ Pause Deployment
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -84082,6 +84158,8 @@ Unpause Deployment
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -86814,6 +86892,8 @@ List Deployment Runs
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeploymentRun:`
@@ -87196,6 +87276,8 @@ Get Deployment Run
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -88119,6 +88201,8 @@ Create Vault
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `String displayName`
 
     Human-readable name for the vault. 1-255 characters.
@@ -88285,6 +88369,8 @@ List Vaults
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -88435,6 +88521,8 @@ Get Vault
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -88579,6 +88667,8 @@ Update Vault
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> displayName`
 
@@ -88733,6 +88823,8 @@ Delete Vault
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -88850,6 +88942,8 @@ Archive Vault
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -89047,6 +89141,8 @@ Create Credential
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Auth auth`
 
@@ -89511,6 +89607,8 @@ List Credentials
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -89800,6 +89898,8 @@ Get Credential
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -90087,6 +90187,8 @@ Update Credential
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<Auth> auth`
 
@@ -90504,6 +90606,8 @@ Delete Credential
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -90627,6 +90731,8 @@ Archive Credential
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -90915,6 +91021,8 @@ Validate Credential
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -92270,6 +92378,8 @@ Create a memory store
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `String name`
 
     Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
@@ -92453,6 +92563,8 @@ List memory stores
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -92608,6 +92720,8 @@ Retrieve a memory store
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -92757,6 +92871,8 @@ Update a memory store
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> description`
 
@@ -92920,6 +93036,8 @@ Delete a memory store
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -93037,6 +93155,8 @@ Archive a memory store
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -93248,6 +93368,8 @@ Create a memory
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `Optional<String> content`
 
     UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
@@ -93361,35 +93483,23 @@ List memories
 
   - `Optional<Long> depth`
 
-    Query parameter for depth
+    `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
   - `Optional<Long> limit`
 
-    Query parameter for limit
-
-  - `Optional<Order> order`
-
-    Query parameter for order
-
-    - `ASC("asc")`
-
-    - `DESC("desc")`
-
-  - `Optional<String> orderBy`
-
-    Query parameter for order_by
+    Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
   - `Optional<String> page`
 
-    Query parameter for page
+    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
   - `Optional<String> pathPrefix`
 
-    Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+    Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -93450,6 +93560,8 @@ List memories
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -93636,6 +93748,8 @@ Retrieve a memory
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -93803,6 +93917,8 @@ Update a memory
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> content`
 
@@ -93983,6 +94099,8 @@ Delete a memory
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -94458,6 +94576,8 @@ List memory versions
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -94690,6 +94810,8 @@ Retrieve a memory version
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -94916,6 +95038,8 @@ Redact a memory version
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -95340,6 +95464,8 @@ Upload File
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
   - `String file`
 
     The file to upload
@@ -95529,6 +95655,8 @@ List Files
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -95703,6 +95831,8 @@ Download File
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Example
 
 ```java
@@ -95799,6 +95929,8 @@ Get File Metadata
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -95967,6 +96099,8 @@ Delete File
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class DeletedFile:`
@@ -96101,7 +96235,7 @@ public final class Main {
 
 ## Create Skill
 
-`SkillCreateResponse beta().skills().create(SkillCreateParamsparams = SkillCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`SkillCreateResponse beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
 **post** `/v1/skills`
 
@@ -96171,17 +96305,19 @@ Create Skill
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `List<String> files`
+
+    Files to upload for the skill.
+
+    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
   - `Optional<String> displayTitle`
 
     Display title for the skill.
 
     This is a human-readable label that is not included in the prompt sent to the model.
-
-  - `Optional<List<String>> files`
-
-    Files to upload for the skill.
-
-    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 ### Returns
 
@@ -96237,6 +96373,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.SkillCreateParams;
 import com.anthropic.models.beta.skills.SkillCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -96244,7 +96381,10 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        SkillCreateResponse skill = client.beta().skills().create();
+        SkillCreateParams params = SkillCreateParams.builder()
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        SkillCreateResponse skill = client.beta().skills().create(params);
     }
 }
 ```
@@ -96355,6 +96495,8 @@ List Skills
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -96520,6 +96662,8 @@ Get Skill
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -96678,6 +96822,8 @@ Delete Skill
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -96728,7 +96874,7 @@ public final class Main {
 
 ## Create Skill Version
 
-`VersionCreateResponse beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`VersionCreateResponse beta().skills().versions().create(VersionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
 **post** `/v1/skills/{skill_id}/versions`
 
@@ -96804,7 +96950,9 @@ Create Skill Version
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-  - `Optional<List<String>> files`
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+  - `List<String> files`
 
     Files to upload for the skill.
 
@@ -96867,6 +97015,7 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.skills.versions.VersionCreateParams;
 import com.anthropic.models.beta.skills.versions.VersionCreateResponse;
+import java.io.ByteArrayInputStream;
 
 public final class Main {
     private Main() {}
@@ -96874,7 +97023,11 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        VersionCreateResponse version = client.beta().skills().versions().create("skill_id");
+        VersionCreateParams params = VersionCreateParams.builder()
+            .skillId("skill_id")
+            .addFile(new ByteArrayInputStream("Example data".getBytes()))
+            .build();
+        VersionCreateResponse version = client.beta().skills().versions().create(params);
     }
 }
 ```
@@ -96981,6 +97134,8 @@ List Skill Versions
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -97156,6 +97311,8 @@ Download a skill version's content as a zip archive.
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Example
 
 ```java
@@ -97264,6 +97421,8 @@ Get Skill Version
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -97437,6 +97596,8 @@ Delete Skill Version
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -97560,6 +97721,8 @@ Create User Profile
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> externalId`
 
@@ -97770,6 +97933,8 @@ List User Profiles
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -97948,6 +98113,8 @@ Get User Profile
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -98120,6 +98287,8 @@ Update User Profile
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
   - `Optional<String> externalId`
 
@@ -98315,6 +98484,8 @@ Create Enrollment URL
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
 ### Returns
 
@@ -98670,76 +98841,6 @@ public final class Main {
   - `JsonValue; type "deployment.updated"constant`
 
     - `DEPLOYMENT_UPDATED("deployment.updated")`
-
-  - `String workspaceId`
-
-### Beta Webhook Environment Archived Event Data
-
-- `class BetaWebhookEnvironmentArchivedEventData:`
-
-  - `String id`
-
-    ID of the environment that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "environment.archived"constant`
-
-    - `ENVIRONMENT_ARCHIVED("environment.archived")`
-
-  - `String workspaceId`
-
-### Beta Webhook Environment Created Event Data
-
-- `class BetaWebhookEnvironmentCreatedEventData:`
-
-  - `String id`
-
-    ID of the environment that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "environment.created"constant`
-
-    - `ENVIRONMENT_CREATED("environment.created")`
-
-  - `String workspaceId`
-
-### Beta Webhook Environment Deleted Event Data
-
-- `class BetaWebhookEnvironmentDeletedEventData:`
-
-  - `String id`
-
-    ID of the environment that triggered the event.
-
-  - `String organizationId`
-
-  - `BetaWebhookEnvironmentDeletedEventType type`
-
-    - `ENVIRONMENT_DELETED("environment.deleted")`
-
-  - `String workspaceId`
-
-### Beta Webhook Environment Deleted Event Type
-
-- `enum BetaWebhookEnvironmentDeletedEventType:`
-
-  - `ENVIRONMENT_DELETED("environment.deleted")`
-
-### Beta Webhook Environment Updated Event Data
-
-- `class BetaWebhookEnvironmentUpdatedEventData:`
-
-  - `String id`
-
-    ID of the environment that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "environment.updated"constant`
-
-    - `ENVIRONMENT_UPDATED("environment.updated")`
 
   - `String workspaceId`
 
@@ -99289,104 +99390,6 @@ public final class Main {
 
       - `String workspaceId`
 
-    - `class BetaWebhookEnvironmentCreatedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.created"constant`
-
-        - `ENVIRONMENT_CREATED("environment.created")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentUpdatedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.updated"constant`
-
-        - `ENVIRONMENT_UPDATED("environment.updated")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentArchivedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.archived"constant`
-
-        - `ENVIRONMENT_ARCHIVED("environment.archived")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentDeletedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `BetaWebhookEnvironmentDeletedEventType type`
-
-        - `ENVIRONMENT_DELETED("environment.deleted")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreCreatedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.created"constant`
-
-        - `MEMORY_STORE_CREATED("memory_store.created")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreArchivedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.archived"constant`
-
-        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreDeletedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.deleted"constant`
-
-        - `MEMORY_STORE_DELETED("memory_store.deleted")`
-
-      - `String workspaceId`
-
   - `JsonValue; type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -99928,152 +99931,6 @@ public final class Main {
       - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
 
     - `String workspaceId`
-
-  - `class BetaWebhookEnvironmentCreatedEventData:`
-
-    - `String id`
-
-      ID of the environment that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "environment.created"constant`
-
-      - `ENVIRONMENT_CREATED("environment.created")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookEnvironmentUpdatedEventData:`
-
-    - `String id`
-
-      ID of the environment that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "environment.updated"constant`
-
-      - `ENVIRONMENT_UPDATED("environment.updated")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookEnvironmentArchivedEventData:`
-
-    - `String id`
-
-      ID of the environment that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "environment.archived"constant`
-
-      - `ENVIRONMENT_ARCHIVED("environment.archived")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookEnvironmentDeletedEventData:`
-
-    - `String id`
-
-      ID of the environment that triggered the event.
-
-    - `String organizationId`
-
-    - `BetaWebhookEnvironmentDeletedEventType type`
-
-      - `ENVIRONMENT_DELETED("environment.deleted")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookMemoryStoreCreatedEventData:`
-
-    - `String id`
-
-      ID of the memory store that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "memory_store.created"constant`
-
-      - `MEMORY_STORE_CREATED("memory_store.created")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookMemoryStoreArchivedEventData:`
-
-    - `String id`
-
-      ID of the memory store that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "memory_store.archived"constant`
-
-      - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
-
-    - `String workspaceId`
-
-  - `class BetaWebhookMemoryStoreDeletedEventData:`
-
-    - `String id`
-
-      ID of the memory store that triggered the event.
-
-    - `String organizationId`
-
-    - `JsonValue; type "memory_store.deleted"constant`
-
-      - `MEMORY_STORE_DELETED("memory_store.deleted")`
-
-    - `String workspaceId`
-
-### Beta Webhook Memory Store Archived Event Data
-
-- `class BetaWebhookMemoryStoreArchivedEventData:`
-
-  - `String id`
-
-    ID of the memory store that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "memory_store.archived"constant`
-
-    - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
-
-  - `String workspaceId`
-
-### Beta Webhook Memory Store Created Event Data
-
-- `class BetaWebhookMemoryStoreCreatedEventData:`
-
-  - `String id`
-
-    ID of the memory store that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "memory_store.created"constant`
-
-    - `MEMORY_STORE_CREATED("memory_store.created")`
-
-  - `String workspaceId`
-
-### Beta Webhook Memory Store Deleted Event Data
-
-- `class BetaWebhookMemoryStoreDeletedEventData:`
-
-  - `String id`
-
-    ID of the memory store that triggered the event.
-
-  - `String organizationId`
-
-  - `JsonValue; type "memory_store.deleted"constant`
-
-    - `MEMORY_STORE_DELETED("memory_store.deleted")`
-
-  - `String workspaceId`
 
 ### Beta Webhook Session Archived Event Data
 
@@ -101014,104 +100871,6 @@ public final class Main {
       - `JsonValue; type "deployment_run.succeeded"constant`
 
         - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentCreatedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.created"constant`
-
-        - `ENVIRONMENT_CREATED("environment.created")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentUpdatedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.updated"constant`
-
-        - `ENVIRONMENT_UPDATED("environment.updated")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentArchivedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "environment.archived"constant`
-
-        - `ENVIRONMENT_ARCHIVED("environment.archived")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookEnvironmentDeletedEventData:`
-
-      - `String id`
-
-        ID of the environment that triggered the event.
-
-      - `String organizationId`
-
-      - `BetaWebhookEnvironmentDeletedEventType type`
-
-        - `ENVIRONMENT_DELETED("environment.deleted")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreCreatedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.created"constant`
-
-        - `MEMORY_STORE_CREATED("memory_store.created")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreArchivedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.archived"constant`
-
-        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
-
-      - `String workspaceId`
-
-    - `class BetaWebhookMemoryStoreDeletedEventData:`
-
-      - `String id`
-
-        ID of the memory store that triggered the event.
-
-      - `String organizationId`
-
-      - `JsonValue; type "memory_store.deleted"constant`
-
-        - `MEMORY_STORE_DELETED("memory_store.deleted")`
 
       - `String workspaceId`
 

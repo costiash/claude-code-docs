@@ -14,7 +14,7 @@ Create Skill Version
 
   The format and length of IDs may change over time.
 
-- `files: Optional[Sequence[FileTypes]]`
+- `files: Sequence[FileTypes]`
 
   Files to upload for the skill.
 
@@ -26,7 +26,7 @@ Create Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -83,6 +83,8 @@ Create Skill Version
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -143,6 +145,7 @@ client = Anthropic(
 )
 version = client.beta.skills.versions.create(
     skill_id="skill_id",
+    files=[b"Example data"],
 )
 print(version.id)
 ```

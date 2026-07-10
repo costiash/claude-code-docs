@@ -29,7 +29,7 @@ The simplest setup: name a fallback model on the request, and the API handles th
       "max_tokens": 1024,
       "fallbacks": [{"model": "claude-opus-4-8"}],
       "messages": [{"role": "user", "content": "Hello, Claude"}]
-    }'
+    }' | jq -r '.model'
   ```
 
   ```bash CLI
@@ -38,37 +38,40 @@ The simplest setup: name a fallback model on the request, and the API handles th
     --max-tokens 1024 \
     --message '{"role":"user","content":"Hello, Claude"}' \
     --fallback '[{"model":"claude-opus-4-8"}]' \
-    --beta server-side-fallback-2026-06-01
+    --beta server-side-fallback-2026-06-01 \
+    --transform model --raw-output
   ```
 
   ```python Python
   client = Anthropic()
 
-  client.beta.messages.create(
+  response = client.beta.messages.create(
       model="claude-fable-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
       fallbacks=[{"model": "claude-opus-4-8"}],
       betas=["server-side-fallback-2026-06-01"],
   )
+  print(response.model)
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
 
-  await client.beta.messages.create({
+  const response = await client.beta.messages.create({
     model: "claude-fable-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
     fallbacks: [{ model: "claude-opus-4-8" }],
     betas: ["server-side-fallback-2026-06-01"]
   });
+  console.log(response.model);
   ```
 
   ```csharp C#
   AnthropicClient client = new();
 
-  await client.Beta.Messages.Create(
+  BetaMessage response = await client.Beta.Messages.Create(
       new()
       {
           Model = Messages::Model.ClaudeFable5,
@@ -78,12 +81,14 @@ The simplest setup: name a fallback model on the request, and the API handles th
           Betas = [AnthropicBeta.ServerSideFallback2026_06_01],
       }
   );
+
+  Console.WriteLine(response.Model.Raw());
   ```
 
   ```go Go
   client := anthropic.NewClient()
 
-  client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
+  response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
   	Model:     anthropic.ModelClaudeFable5,
   	MaxTokens: 1024,
   	Messages: []anthropic.BetaMessageParam{
@@ -92,42 +97,53 @@ The simplest setup: name a fallback model on the request, and the API handles th
   	Fallbacks: []anthropic.BetaFallbackParam{{Model: anthropic.ModelClaudeOpus4_8}},
   	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaServerSideFallback2026_06_01},
   })
+  if err != nil {
+  	panic(err)
+  }
+
+  fmt.Println(response.Model)
   ```
 
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  client.beta().messages().create(MessageCreateParams.builder()
+  BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
       .model(Model.CLAUDE_FABLE_5)
       .maxTokens(1024L)
       .addUserMessage("Hello, Claude")
       .addFallback(BetaFallbackParam.builder().model(Model.CLAUDE_OPUS_4_8).build())
       .addBeta(AnthropicBeta.SERVER_SIDE_FALLBACK_2026_06_01)
       .build());
+
+  IO.println(response.model().asString());
   ```
 
   ```php PHP
   $client = new Client();
 
-  $client->beta->messages->create(
+  $response = $client->beta->messages->create(
+      model: 'claude-fable-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-fable-5',
       fallbacks: [['model' => 'claude-opus-4-8']],
       betas: ['server-side-fallback-2026-06-01'],
   );
+
+  echo $response->model, PHP_EOL;
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  client.beta.messages.create(
+  response = client.beta.messages.create(
     model: "claude-fable-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}],
     fallbacks: [{model: "claude-opus-4-8"}],
     betas: ["server-side-fallback-2026-06-01"]
   )
+
+  puts response.model
   ```
 </CodeGroup>
 
@@ -181,11 +197,11 @@ A refusal can arrive before any output, or mid-stream after partial output. In e
 
 There are three ways to retry a refused request on another model. The right one depends on where you are running and how much control you need.
 
-| Your situation                                                 | Use                                                                             | Why                                                         |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Claude API or Claude Platform on AWS, simplest setup           | [Server-side fallback](#server-side-fallback)                                   | One request, one response. The API handles the retry.       |
-| Any platform, with the TypeScript, Python, Go, Java, or C# SDK | [The SDK middleware](#client-side-fallback)                                     | Configure once on the client. Retries happen automatically. |
-| Ruby, PHP, raw HTTP, or custom retry logic                     | Manual retry with [fallback credit](/docs/en/build-with-claude/fallback-credit) | Full control. Fallback credit keeps the cost down.          |
+| Your situation                                       | Use                                                                             | Why                                                         |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Claude API or Claude Platform on AWS, simplest setup | [Server-side fallback](#server-side-fallback)                                   | One request, one response. The API handles the retry.       |
+| Any platform, using an Anthropic SDK                 | [The SDK middleware](#client-side-fallback)                                     | Configure once on the client. Retries happen automatically. |
+| Raw HTTP or custom retry logic                       | Manual retry with [fallback credit](/docs/en/build-with-claude/fallback-credit) | Full control. Fallback credit keeps the cost down.          |
 
 Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](/docs/en/build-with-claude/fallback-credit) page when you build the retry yourself.
 
@@ -213,7 +229,17 @@ Name the fallback models in the `fallbacks` parameter and send the `server-side-
       "max_tokens": 1024,
       "fallbacks": [{"model": "claude-opus-4-8"}],
       "messages": [{"role": "user", "content": "Hello, Claude"}]
-    }' | jq -c '{stop_reason, model}'
+    }' |
+    jq -c '{
+      stop_reason,
+      model,
+      # A fallback_message entry in usage.iterations means a fallback model ran;
+      # pair it with stop_reason to confirm the fallback served the response.
+      served_by_fallback: (
+        any(.usage.iterations[]?; .type == "fallback_message")
+        and .stop_reason != "refusal"
+      )
+    }'
   ```
 
   ```bash CLI
@@ -224,7 +250,16 @@ Name the fallback models in the `fallbacks` parameter and send the `server-side-
     --fallback '[{"model":"claude-opus-4-8"}]' \
     --beta server-side-fallback-2026-06-01 \
     --format json |
-    jq -c '{stop_reason, model}'
+    jq -c '{
+      stop_reason,
+      model,
+      # A fallback_message entry in usage.iterations means a fallback model ran;
+      # pair it with stop_reason to confirm the fallback served the response.
+      served_by_fallback: (
+        any(.usage.iterations[]?; .type == "fallback_message")
+        and .stop_reason != "refusal"
+      )
+    }'
   ```
 
   ```python Python
@@ -304,7 +339,7 @@ Name the fallback models in the `fallbacks` parameter and send the `server-side-
   // A fallback_message entry in usage.iterations means a fallback model ran;
   // pair it with stop_reason to confirm the fallback served the response.
   bool fallbackRan = (response.Usage.Iterations ?? []).Any(iteration =>
-      iteration.TryPickFallbackMessageIterationUsage(out _)
+      iteration.TryPickBetaFallbackMessageIterationUsage(out _)
   );
   bool servedByFallback =
       fallbackRan && response.StopReason?.Value() != BetaStopReason.Refusal;
@@ -378,11 +413,11 @@ Name the fallback models in the `fallbacks` parameter and send the `server-side-
 
   // A fallback_message usage entry means a fallback model produced the
   // response; a refusal stop reason means no model served it.
-  List<BetaUsage.BetaIterationsUsageItems> iterations =
+  List<BetaUsage.Iteration> iterations =
       response.usage().iterations().orElse(List.of());
   boolean servedByFallback =
-      iterations.stream().anyMatch(BetaUsage.BetaIterationsUsageItems::isFallbackMessage)
-          && !response.stopReason().map(BetaStopReason.REFUSAL::equals).orElse(false);
+      iterations.stream().anyMatch(BetaUsage.Iteration::isFallbackMessage)
+          && response.stopReason().filter(BetaStopReason.REFUSAL::equals).isEmpty();
 
   IO.println("""
       {"stop_reason":"%s","model":"%s","served_by_fallback":%b}\
@@ -575,11 +610,7 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
 ## Client-side fallback with the SDK middleware
 
-The TypeScript, Python, Go, Java, and C# SDKs include a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-06-01` beta header on every request it handles, so retries are repriced without per-request setup.
-
-<Note>
-  The refusal-fallback middleware helper is not yet available in the Ruby and PHP SDKs. On those SDKs, implement the detect-and-retry pattern directly.
-</Note>
+Every Anthropic SDK includes a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-06-01` beta header on every request it handles, so retries are repriced without per-request setup.
 
 ### Setting it up
 
@@ -617,9 +648,8 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
           messages=[{"role": "user", "content": "Hello, Claude"}],
       ) as stream,
   ):
-      for event in stream:
-          if event.type == "text":
-              print(event.text, end="", flush=True)
+      for text in stream.text_stream:
+          print(text, end="", flush=True)
       final_message = stream.get_final_message()
   print(f"\nserved by: {final_message.model}")
 
@@ -634,8 +664,10 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   ```
 
   ```typescript TypeScript
-  // On a refusal, the middleware retries the request down the fallback chain.
-  // It sends the fallback-credit beta header on every request it handles.
+  import { BetaFallbackState, betaRefusalFallbackMiddleware } from "@anthropic-ai/sdk";
+
+  // On a refusal, the middleware retries on the listed fallback model and
+  // automatically sends the fallback-credit beta header on every request it handles.
   const client = new Anthropic({
     middleware: [betaRefusalFallbackMiddleware([{ model: "claude-opus-4-8" }])]
   });
@@ -644,26 +676,27 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   // pinned to the model that accepted.
   const fallbackState = new BetaFallbackState();
 
-  // Streaming: on a refusal the middleware splices the fallback model's
-  // events onto the still-open stream.
-  const stream = client.beta.messages.stream(
-    {
-      model: "claude-fable-5",
-      max_tokens: 1024,
-      messages: [{ role: "user", content: "Hello, Claude" }]
-    },
-    { fallbackState }
-  );
-  stream.on("text", (text) => process.stdout.write(text));
+  // Streaming: on a refusal the middleware retries on the fallback model and
+  // splices its events onto the open stream.
+  const stream = client.beta.messages
+    .stream(
+      {
+        max_tokens: 1024,
+        model: "claude-fable-5",
+        messages: [{ role: "user", content: "Hello, Claude" }]
+      },
+      { fallbackState }
+    )
+    .on("text", (text) => process.stdout.write(text));
 
   const finalMessage = await stream.finalMessage();
   console.log("\nserved by:", finalMessage.model);
 
-  // Non-streaming: reusing the state keeps the conversation pinned to the model that accepted.
+  // Non-streaming: reusing the state keeps the conversation pinned.
   const message = await client.beta.messages.create(
     {
-      model: "claude-fable-5",
       max_tokens: 1024,
+      model: "claude-fable-5",
       messages: [{ role: "user", content: "Hello, Claude" }]
     },
     { fallbackState }
@@ -747,6 +780,7 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   // Streaming: on a refusal the middleware retries in place, splicing the
   // fallback model's events onto the open stream as one continuous message.
   stream := client.Beta.Messages.NewStreaming(ctx, params, conversation)
+  defer stream.Close()
   var streamed anthropic.BetaMessage
   for stream.Next() {
   	event := stream.Current()
@@ -814,15 +848,77 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   ```
 
   ```php PHP
-  // The refusal-fallback middleware is not currently available in the PHP SDK.
-  // See the server-side fallback section for the equivalent single-request
-  // approach, or the fallback credit page for the underlying retry pattern.
+  // Configure the fallback chain once. On a refusal, the middleware retries the
+  // request down the chain and sends the fallback-credit beta header for you.
+  $client = new Client(
+      requestOptions: [
+          'middleware' => [new RefusalFallbackMiddleware([['model' => 'claude-opus-4-8']])],
+      ],
+  );
+
+  // Share one state across the conversation so follow-up requests stay pinned
+  // to the model that accepted.
+  $state = new BetaFallbackState();
+
+  // Streaming: on a refusal the middleware splices the fallback model's events
+  // onto the still-open stream. The accumulator's model is the serving model.
+  $stream = $client->beta->messages->createStream(
+      model: 'claude-fable-5',
+      maxTokens: 1024,
+      messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+      requestOptions: ['fallbackState' => $state],
+  );
+  $accumulator = MessageAccumulator::forBetaMessages();
+  foreach ($stream as $event) {
+      $accumulator->accumulate($event);
+      if ($event instanceof BetaRawContentBlockDeltaEvent
+          && $event->delta instanceof BetaTextDelta) {
+          echo $event->delta->text;
+      }
+  }
+  echo "\nserved by: {$accumulator->message()->model}\n";
+
+  // Non-streaming: same middleware. Reusing the state keeps the conversation
+  // pinned to the model that accepted.
+  $message = $client->beta->messages->create(
+      model: 'claude-fable-5',
+      maxTokens: 1024,
+      messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+      requestOptions: ['fallbackState' => $state],
+  );
+  echo "served by: {$message->model}\n";
   ```
 
   ```ruby Ruby
-  # The refusal-fallback middleware is not currently available in the Ruby SDK.
-  # See the server-side fallback section for the equivalent single-request
-  # approach, or the fallback credit page for the underlying retry pattern.
+  # On a refusal, the middleware retries the request down the fallback chain.
+  # It sends the fallback-credit beta header on every request it handles.
+  client = Anthropic::Client.new(
+    middleware: [Anthropic::BetaRefusalFallbackMiddleware.new([{model: "claude-opus-4-8"}])]
+  )
+
+  # Share one state across the conversation so follow-up requests stay
+  # pinned to the model that accepted.
+  state = Anthropic::BetaFallbackState.new
+
+  # Streaming: on a refusal the middleware splices the fallback model's
+  # events onto the still-open stream.
+  stream = client.beta.messages.stream(
+    model: "claude-fable-5",
+    max_tokens: 1024,
+    messages: [{role: "user", content: "Hello, Claude"}],
+    request_options: {fallback_state: state}
+  )
+  stream.text.each { print it }
+  puts "\nserved by: #{stream.accumulated_message.model}"
+
+  # Non-streaming: reusing the state keeps the conversation pinned to the model that accepted.
+  message = client.beta.messages.create(
+    model: "claude-fable-5",
+    max_tokens: 1024,
+    messages: [{role: "user", content: "Hello, Claude"}],
+    request_options: {fallback_state: state}
+  )
+  puts "served by: #{message.model}"
   ```
 </CodeGroup>
 
@@ -839,7 +935,7 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
 </Note>
 
 <Accordion title="Writing the retry yourself">
-  On Ruby, PHP, or raw HTTP, implement the pattern the middleware wraps:
+  Over raw HTTP or with custom retry logic, implement the pattern the middleware wraps:
 
   <Steps>
     <Step title="Detect the refusal">

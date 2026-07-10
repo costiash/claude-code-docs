@@ -8,9 +8,20 @@ The advisor tool lets a faster, lower-cost **executor model** consult a higher-i
 
 This pattern fits long-horizon agentic workloads (coding agents, computer use, multi-step research pipelines) where most turns are mechanical but having an excellent plan is crucial. You get close to advisor-solo quality while the bulk of token generation happens at executor-model rates.
 
-<Note>
-  The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01` in your requests.
-</Note>
+```mermaid
+sequenceDiagram
+  participant U as Your application
+  participant E as Executor model
+  participant A as Advisor model
+
+  U->>E: Request with advisor tool
+  note over E: Executor begins the task
+  E->>A: server_tool_use (server-side)
+  note over A: Reads the full transcript,<br/>returns strategic guidance
+  A-->>E: advisor_tool_result
+  note over E: Executor continues,<br/>informed by the advice
+  E-->>U: Response
+```
 
 <Note>
   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
@@ -20,35 +31,18 @@ This pattern fits long-horizon agentic workloads (coding agents, computer use, m
 
 The advisor fits these configurations:
 
-* **You currently use Sonnet on complex tasks:** Add Opus as the advisor for a quality lift at similar or lower total cost.
-* **You currently use Haiku and want a step up in intelligence:** Add Opus as the advisor. Expect higher cost than Haiku alone, but lower than switching the executor to a larger model.
+* **You currently use Sonnet on complex tasks:** Add a higher-tier advisor. Opus keeps total cost similar or lower; Claude Fable 5 maximizes the quality lift.
+* **You currently use Haiku and want a step up in intelligence:** Add an Opus or Fable advisor. Expect higher cost than Haiku alone, but lower than switching the executor to a larger model.
 
 Results are task-dependent. Evaluate on your own workload.
 
 The advisor is a weaker fit for single-turn Q\&A (nothing to plan), pure pass-through model pickers where your users already choose their own cost and quality tradeoff, or workloads where every turn genuinely requires the advisor model's full capability.
 
-## Model compatibility
-
-The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be Claude Sonnet 4.6 or a more capable model, and it must be at least as capable as the executor. Models of equal capability (for example, Claude Opus 4.7 and Claude Opus 4.8) can advise each other.
-
-| Executor models                              | Advisor models                                                                                                                                                                                                |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Haiku 4.5 (claude-haiku-4-5-20251001) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 4.6 (claude-sonnet-4-6)        | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 5 (claude-sonnet-5)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Opus 4.6 (claude-opus-4-6)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6)                                       |
-| Claude Opus 4.7 (claude-opus-4-7)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Opus 4.8 (claude-opus-4-8)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Fable 5 (claude-fable-5)              | Claude Fable 5 (claude-fable-5)                                                                                                                                                                               |
-| Claude Mythos 5 (claude-mythos-5)            | Claude Mythos 5 (claude-mythos-5)                                                                                                                                                                             |
-
-If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
-
-## Platform availability
-
-The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
-
 ## Quick start
+
+<Note>
+  The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01` in your requests.
+</Note>
 
 <CodeGroup>
   ```bash cURL
@@ -58,13 +52,13 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
       --header "anthropic-beta: advisor-tool-2026-03-01" \
       --header "content-type: application/json" \
       --data '{
-          "model": "claude-sonnet-4-6",
+          "model": "claude-sonnet-5",
           "max_tokens": 4096,
           "tools": [
               {
                   "type": "advisor_20260301",
                   "name": "advisor",
-                  "model": "claude-opus-4-8"
+                  "model": "claude-fable-5"
               }
           ],
           "messages": [{
@@ -76,12 +70,12 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
   ```bash CLI
   ant beta:messages create --beta advisor-tool-2026-03-01 <<'YAML'
-  model: claude-sonnet-4-6
+  model: claude-sonnet-5
   max_tokens: 4096
   tools:
     - type: advisor_20260301
       name: advisor
-      model: claude-opus-4-8
+      model: claude-fable-5
   messages:
     - role: user
       content: Build a concurrent worker pool in Go with graceful shutdown.
@@ -92,14 +86,14 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   client = anthropic.Anthropic()
 
   response = client.beta.messages.create(
-      model="claude-sonnet-4-6",
+      model="claude-sonnet-5",
       max_tokens=4096,
       betas=["advisor-tool-2026-03-01"],
       tools=[
           {
               "type": "advisor_20260301",
               "name": "advisor",
-              "model": "claude-opus-4-8",
+              "model": "claude-fable-5",
           }
       ],
       messages=[
@@ -117,14 +111,14 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   const client = new Anthropic();
 
   const response = await client.beta.messages.create({
-    model: "claude-sonnet-4-6",
+    model: "claude-sonnet-5",
     max_tokens: 4096,
     betas: ["advisor-tool-2026-03-01"],
     tools: [
       {
         type: "advisor_20260301",
         name: "advisor",
-        model: "claude-opus-4-8"
+        model: "claude-fable-5"
       }
     ],
     messages: [
@@ -146,13 +140,13 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
   var parameters = new MessageCreateParams
   {
-      Model = Messages::Model.ClaudeSonnet4_6,
+      Model = Messages::Model.ClaudeSonnet5,
       MaxTokens = 4096,
       Tools = new BetaToolUnion[]
       {
           new BetaAdvisorTool20260301
           {
-              Model = Messages::Model.ClaudeOpus4_8
+              Model = Messages::Model.ClaudeFable5
           }
       },
       Messages =
@@ -174,11 +168,11 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   client := anthropic.NewClient()
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	Model:     anthropic.ModelClaudeSonnet5,
   	MaxTokens: 4096,
   	Tools: []anthropic.BetaToolUnionParam{
   		{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
-  			Model: anthropic.ModelClaudeOpus4_8,
+  			Model: anthropic.ModelClaudeFable5,
   		}},
   	},
   	Messages: []anthropic.BetaMessageParam{
@@ -229,12 +223,12 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
               'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
           ],
       ],
-      model: 'claude-sonnet-4-6',
+      model: 'claude-sonnet-5',
       tools: [
           [
               'type' => 'advisor_20260301',
               'name' => 'advisor',
-              'model' => 'claude-opus-4-8',
+              'model' => 'claude-fable-5',
           ],
       ],
       betas: ['advisor-tool-2026-03-01'],
@@ -247,13 +241,13 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   client = Anthropic::Client.new
 
   response = client.beta.messages.create(
-    model: "claude-sonnet-4-6",
+    model: "claude-sonnet-5",
     max_tokens: 4096,
     tools: [
       {
         type: "advisor_20260301",
         name: "advisor",
-        model: "claude-opus-4-8"
+        model: "claude-fable-5"
       }
     ],
     messages: [
@@ -268,6 +262,8 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   puts response
   ```
 </CodeGroup>
+
+The response `content` includes an `advisor_tool_result` block carrying the advisor's guidance. With Claude Fable 5 or Claude Mythos 5 as the advisor, the block's `content` field is an `advisor_redacted_result` variant (encrypted; the executor reads it server-side, but your client does not). To see the advice text directly in your response, use `claude-opus-4-8` as the advisor model instead, which returns the plaintext `advisor_result` variant. See [Result variants](#result-variants) for both shapes and [Model compatibility](#model-compatibility) for the full list of valid pairs.
 
 ## How it works
 
@@ -288,7 +284,7 @@ The advisor itself runs without tools and without context management. Its thinki
 | ------------ | -------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `type`       | string         | *required*                 | Must be `"advisor_20260301"`.                                                                                                                                                                                                                                                                                                                                                  |
 | `name`       | string         | *required*                 | Must be `"advisor"`.                                                                                                                                                                                                                                                                                                                                                           |
-| `model`      | string         | *required*                 | The advisor model ID, such as claude-opus-4-8. Billed at this model's rates for the sub-inference.                                                                                                                                                                                                                                                                             |
+| `model`      | string         | *required*                 | The advisor model ID, such as claude-fable-5. Billed at this model's rates for the sub-inference.                                                                                                                                                                                                                                                                              |
 | `max_uses`   | integer        | unlimited                  | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap. See [Cost control](#cost-control) for conversation-level limits. |
 | `max_tokens` | integer        | advisor model's output cap | Caps the advisor's total output (thinking plus text) per call. Minimum 1024. See [Capping advisor output](#capping-advisor-output).                                                                                                                                                                                                                                            |
 | `caching`    | object \| null | `null` (off)               | Enables [prompt caching](/docs/en/build-with-claude/prompt-caching) for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching).                                                                                                                                                                                |
@@ -301,7 +297,7 @@ The advisor tool also accepts the generic properties available on any tool defin
 
 ### Successful advisor call
 
-When the advisor is invoked, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content:
+When the advisor is invoked, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](#quick-start) uses Claude Fable 5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](#result-variants).
 
 ```json
 {
@@ -382,7 +378,7 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 ## Multi-turn conversations
 
-Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns:
+Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns. This example uses `claude-opus-4-8` as the advisor so the plaintext advice is visible in `response.content`; the mechanics are identical for any advisor model.
 
 <CodeGroup>
   ```python Python
@@ -404,8 +400,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   ]
 
   response = client.beta.messages.create(
-      model="claude-sonnet-4-6",
-      max_tokens=4096,
+      model="claude-sonnet-5",
+      max_tokens=1024,
       betas=["advisor-tool-2026-03-01"],
       tools=tools,
       messages=messages,
@@ -418,8 +414,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   messages.append({"role": "user", "content": "Now add a max-in-flight limit of 10."})
 
   response = client.beta.messages.create(
-      model="claude-sonnet-4-6",
-      max_tokens=4096,
+      model="claude-sonnet-5",
+      max_tokens=1024,
       betas=["advisor-tool-2026-03-01"],
       tools=tools,
       messages=messages,
@@ -445,8 +441,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   ];
 
   const response = await client.beta.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 4096,
+    model: "claude-sonnet-5",
+    max_tokens: 1024,
     betas: ["advisor-tool-2026-03-01"],
     tools,
     messages
@@ -459,8 +455,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   messages.push({ role: "user", content: "Now add a max-in-flight limit of 10." });
 
   const followUp = await client.beta.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 4096,
+    model: "claude-sonnet-5",
+    max_tokens: 1024,
     betas: ["advisor-tool-2026-03-01"],
     tools,
     messages
@@ -485,8 +481,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
 
   var response = await client.Beta.Messages.Create(new MessageCreateParams
   {
-      Model = Messages::Model.ClaudeSonnet4_6,
-      MaxTokens = 4096,
+      Model = Messages::Model.ClaudeSonnet5,
+      MaxTokens = 1024,
       Tools = tools,
       Messages = messages,
       Betas = ["advisor-tool-2026-03-01"]
@@ -504,8 +500,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
 
   var followUp = await client.Beta.Messages.Create(new MessageCreateParams
   {
-      Model = Messages::Model.ClaudeSonnet4_6,
-      MaxTokens = 4096,
+      Model = Messages::Model.ClaudeSonnet5,
+      MaxTokens = 1024,
       Tools = tools,
       Messages = messages,
       Betas = ["advisor-tool-2026-03-01"]
@@ -584,9 +580,9 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   ];
 
   $response = $client->beta->messages->create(
-      maxTokens: 4096,
+      maxTokens: 1024,
       messages: $messages,
-      model: 'claude-sonnet-4-6',
+      model: 'claude-sonnet-5',
       tools: $tools,
       betas: ['advisor-tool-2026-03-01'],
   );
@@ -598,9 +594,9 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   $messages[] = ['role' => 'user', 'content' => 'Now add a max-in-flight limit of 10.'];
 
   $response = $client->beta->messages->create(
-      maxTokens: 4096,
+      maxTokens: 1024,
       messages: $messages,
-      model: 'claude-sonnet-4-6',
+      model: 'claude-sonnet-5',
       tools: $tools,
       betas: ['advisor-tool-2026-03-01'],
   );
@@ -625,8 +621,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   ]
 
   response = client.beta.messages.create(
-    model: "claude-sonnet-4-6",
-    max_tokens: 4096,
+    model: "claude-sonnet-5",
+    max_tokens: 1024,
     tools: tools,
     messages: messages,
     betas: ["advisor-tool-2026-03-01"]
@@ -639,8 +635,8 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   messages << { role: "user", content: "Now add a max-in-flight limit of 10." }
 
   response = client.beta.messages.create(
-    model: "claude-sonnet-4-6",
-    max_tokens: 4096,
+    model: "claude-sonnet-5",
+    max_tokens: 1024,
     tools: tools,
     messages: messages,
     betas: ["advisor-tool-2026-03-01"]
@@ -691,7 +687,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
 
   tools = [
-      {"type": "advisor_20260301", "name": "advisor", "model": "claude-opus-4-8"},
+      {"type": "advisor_20260301", "name": "advisor", "model": "claude-fable-5"},
       # ... your other tools
   ]
   task = "Build a concurrent worker pool in Go with graceful shutdown."
@@ -747,7 +743,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   }
 
   const tools: Anthropic.Beta.Messages.BetaToolUnion[] = [
-    { type: "advisor_20260301", name: "advisor", model: "claude-opus-4-8" }
+    { type: "advisor_20260301", name: "advisor", model: "claude-fable-5" }
     // ... your other tools
   ];
   const task = "Build a concurrent worker pool in Go with graceful shutdown.";
@@ -819,7 +815,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   var tools = new BetaToolUnion[]
   {
-      new BetaAdvisorTool20260301 { Model = Messages::Model.ClaudeOpus4_8 }
+      new BetaAdvisorTool20260301 { Model = Messages::Model.ClaudeFable5 }
       // ... your other tools
   };
   var task = "Build a concurrent worker pool in Go with graceful shutdown.";
@@ -989,7 +985,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   }
 
   $tools = [
-      ['type' => 'advisor_20260301', 'name' => 'advisor', 'model' => 'claude-opus-4-8'],
+      ['type' => 'advisor_20260301', 'name' => 'advisor', 'model' => 'claude-fable-5'],
       // ... your other tools
   ];
   $task = 'Build a concurrent worker pool in Go with graceful shutdown.';
@@ -1047,7 +1043,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   end
 
   tools = [
-    { type: "advisor_20260301", name: "advisor", model: "claude-opus-4-8" }
+    { type: "advisor_20260301", name: "advisor", model: "claude-fable-5" }
     # ... your other tools
   ]
   task = "Build a concurrent worker pool in Go with graceful shutdown."
@@ -1116,7 +1112,7 @@ Advisor calls run as a separate sub-inference billed at the advisor model's rate
       },
       {
         "type": "advisor_message",
-        "model": "claude-opus-4-8",
+        "model": "claude-fable-5",
         "input_tokens": 823,
         "cache_read_input_tokens": 0,
         "cache_creation_input_tokens": 0,
@@ -1161,7 +1157,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-8",
+        "model": "claude-fable-5",
         "caching": {"type": "ephemeral", "ttl": "5m"},
     }
 ]
@@ -1191,7 +1187,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-8",
+        "model": "claude-fable-5",
     },
     {
         "name": "run_bash",
@@ -1367,6 +1363,27 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 
 * For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools` **and** strip all `advisor_tool_result` blocks from your message history to avoid a `400 invalid_request_error` (see the note in [Multi-turn conversations](#multi-turn-conversations)).
 * Enable `caching` only for conversations where you expect three or more advisor calls.
+
+## Model compatibility
+
+The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be Claude Sonnet 4.6 or a more capable model, and it must be at least as capable as the executor. Models of equal capability (for example, Claude Opus 4.7 and Claude Opus 4.8) can advise each other.
+
+| Executor models                       | Advisor models                                                                                                                                                                                                |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Haiku 4.5 (claude-haiku-4-5)   | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 5 (claude-sonnet-5)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Opus 4.6 (claude-opus-4-6)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6)                                       |
+| Claude Opus 4.7 (claude-opus-4-7)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Opus 4.8 (claude-opus-4-8)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Fable 5 (claude-fable-5)       | Claude Fable 5 (claude-fable-5)                                                                                                                                                                               |
+| Claude Mythos 5 (claude-mythos-5)     | Claude Mythos 5 (claude-mythos-5)                                                                                                                                                                             |
+
+If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
+
+### Platform availability
+
+The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 
 ## Next steps
 

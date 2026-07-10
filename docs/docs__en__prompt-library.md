@@ -1061,7 +1061,7 @@ You can also refer to the [full skill definition](https://github.com/anthropics/
 
 ## Migration considerations
 
-When migrating to Claude 4.6 models from earlier generations:
+When migrating to current Claude models from earlier generations:
 
 1. **Be specific about desired behavior:** Consider describing exactly what you'd like to see in the output.
 
@@ -1077,9 +1077,9 @@ When migrating to Claude 4.6 models from earlier generations:
 
 For detailed migration steps, see the [Migration guide](/docs/en/about-claude/models/migration-guide).
 
-### Migrating from Claude Sonnet 4.5 to Claude Sonnet 4.6
+### Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier
 
-See [Migrating from Sonnet 4.5](/docs/en/about-claude/models/migration-guide#migrating-from-sonnet-45) in the migration guide, which covers the effort default change and both extended-thinking migration paths.
+See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](/docs/en/about-claude/models/migration-guide#migrating-from-sonnet-45) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
 
 ## Next steps
 
