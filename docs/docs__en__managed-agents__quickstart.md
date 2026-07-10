@@ -126,7 +126,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 ## Create your first session
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 <Steps>

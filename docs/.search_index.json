@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-09T22:10:43Z",
+  "generated_at": "2026-07-10T01:21:11Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -14,21 +14,21 @@
         "session",
         "instead",
         "claude",
-        "mode",
         "sessions",
+        "mode",
         "improved",
-        "tool",
         "after",
+        "tool",
         "being",
         "background",
         "mcp",
         "code",
         "agent",
         "prompt",
-        "command",
-        "model"
+        "model",
+        "command"
       ],
-      "word_count": 63279,
+      "word_count": 63784,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "settings",
         "review"
       ],
-      "word_count": 9355,
+      "word_count": 9351,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -1349,7 +1349,7 @@
     },
     "/docs/en/agents-and-tools/mcp-connector": {
       "title": "MCP connector",
-      "content_preview": "# MCP connector  ---  Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.  <Note>   **Current version:** This feature requires the beta header: `\"anthropic-beta\": \"mcp-client-2025-11-20\"`",
+      "content_preview": "# MCP connector  Connect to remote MCP servers directly from the Messages API without an MCP client, and allowlist, denylist, or configure individual tools.  ---  Claude's Model Context Protocol (MCP)...",
       "keywords": [
         "mcp",
         "tool",
@@ -1357,8 +1357,8 @@
         "server",
         "configuration",
         "api",
-        "claude",
         "servers",
+        "claude",
         "mcptoolset",
         "array",
         "note",
@@ -1368,11 +1368,11 @@
         "connector",
         "when",
         "must",
-        "token",
-        "sdk",
-        "messages"
+        "messages",
+        "client",
+        "token"
       ],
-      "word_count": 3046,
+      "word_count": 3067,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1629,30 +1629,30 @@
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
       "title": "Remote MCP servers",
-      "content_preview": "# Remote MCP servers  ---  Several companies have deployed remote MCP servers that developers can connect to via the Anthropic MCP connector API. These servers expand the capabilities available to dev...",
+      "content_preview": "# Remote MCP servers  Connect Claude to third-party remote MCP servers through the MCP connector API. Browse example servers and review the steps to connect.  ---  Several companies have deployed remo...",
       "keywords": [
         "mcp",
         "remote",
         "servers",
         "note",
-        "server",
         "connect",
-        "api",
-        "tools",
+        "server",
         "claude",
+        "api",
+        "connector",
+        "review",
+        "tools",
         "more",
+        "third",
+        "party",
+        "through",
         "developers",
         "anthropic",
-        "connector",
         "these",
         "users",
-        "services",
-        "should",
-        "review",
-        "each",
-        "connecting"
+        "services"
       ],
-      "word_count": 198,
+      "word_count": 219,
       "file_path": "docs/docs__en__agents-and-tools__remote-mcp-servers.md"
     },
     "/docs/en/agents-and-tools/tool-use/advisor-tool": {
@@ -2105,30 +2105,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
       "title": "Text editor tool",
-      "content_preview": "# Text editor tool  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent t...",
+      "content_preview": "# Text editor tool  Give Claude the Anthropic-defined text editor tool to view, create, and edit files, and handle its view, str_replace, create, and insert commands.  ---  <Note>   This feature is el...",
       "keywords": [
         "text",
         "claude",
         "tool",
         "editor",
         "file",
-        "command",
         "files",
+        "command",
         "step",
         "title",
         "code",
+        "view",
+        "create",
         "contents",
         "line",
         "example",
-        "view",
+        "insert",
         "fix",
         "codegroup",
         "new",
-        "accordion",
-        "create",
-        "uses"
+        "accordion"
       ],
-      "word_count": 8433,
+      "word_count": 8455,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2206,13 +2206,13 @@
         "python",
         "each",
         "tools",
-        "state",
         "tabs",
+        "state",
         "typescript",
         "php",
         "inside"
       ],
-      "word_count": 6520,
+      "word_count": 6521,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-runner.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -43606,7 +43606,7 @@
     },
     "/docs/en/build-with-claude/batch-processing": {
       "title": "Batch processing",
-      "content_preview": "# Batch processing  ---  Batch processing is a powerful approach for handling large volumes of requests efficiently. Instead of processing requests one at a time with immediate responses, batch proces...",
+      "content_preview": "# Batch processing  Process large volumes of Messages requests asynchronously with the Message Batches API, cutting costs by 50% and increasing throughput.  ---  Batch processing is a powerful approac...",
       "keywords": [
         "batch",
         "api",
@@ -43620,8 +43620,8 @@
         "claude",
         "messages",
         "accordion",
-        "codegroup",
         "large",
+        "codegroup",
         "each",
         "data",
         "result",
@@ -43629,7 +43629,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 6986,
+      "word_count": 7005,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -43754,22 +43754,22 @@
         "aws",
         "sonnet",
         "anthropic",
+        "model",
         "opus",
         "tab",
-        "model",
+        "models",
         "amazon",
         "api",
         "note",
         "codegroup",
         "endpoints",
-        "models",
         "see",
-        "regional",
         "pricing",
         "available",
-        "title"
+        "regional",
+        "through"
       ],
-      "word_count": 3071,
+      "word_count": 3198,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -43825,7 +43825,7 @@
         "access",
         "authentication"
       ],
-      "word_count": 6557,
+      "word_count": 6561,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -44250,7 +44250,7 @@
     },
     "/docs/en/build-with-claude/prompt-caching": {
       "title": "Prompt caching",
-      "content_preview": "# Prompt caching  ---  Prompt caching optimizes your API usage by allowing resuming from specific prefixes in your prompts. This significantly reduces processing time and costs for repetitive tasks or...",
+      "content_preview": "# Prompt caching  Cache prompt prefixes with `cache_control` to cut costs and latency, using automatic caching or explicit breakpoints with 5-minute or 1-hour TTLs.  ---  Prompt caching optimizes your...",
       "keywords": [
         "cache",
         "caching",
@@ -44271,9 +44271,9 @@
         "tool",
         "requests",
         "input",
-        "note"
+        "breakpoints"
       ],
-      "word_count": 16233,
+      "word_count": 16254,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -44693,12 +44693,12 @@
         "owner",
         "apis"
       ],
-      "word_count": 797,
+      "word_count": 800,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
       "title": "Admin API",
-      "content_preview": "# Admin API  ---  <Tip>   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Tip>  The [Admin API](/docs/en/api/admin) allows you to programmatically manage your organization's",
+      "content_preview": "# Admin API  Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key or an `org:admin` OAuth token.  ---  <Tip>   **The Admin API is ...",
       "keywords": [
         "api",
         "admin",
@@ -44706,22 +44706,22 @@
         "keys",
         "manage",
         "members",
+        "key",
         "see",
         "workspaces",
         "claude",
-        "key",
         "accordion",
+        "invites",
         "federation",
         "codegroup",
         "only",
         "role",
-        "invites",
+        "oauth",
+        "token",
         "create",
-        "workspace",
-        "usage",
-        "roles"
+        "workspace"
       ],
-      "word_count": 1307,
+      "word_count": 1349,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
     "/docs/en/manage-claude/analytics-api": {
@@ -44754,58 +44754,58 @@
     },
     "/docs/en/manage-claude/api-and-data-retention": {
       "title": "API and data retention",
-      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  <Note>   Informa...",
+      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  This page covers...",
       "keywords": [
         "eligible",
         "claude",
-        "api",
         "zdr",
         "data",
+        "api",
         "hipaa",
         "yes",
-        "features",
         "retention",
-        "accordion",
+        "features",
         "anthropic",
-        "tool",
+        "accordion",
+        "see",
         "organization",
+        "feature",
+        "tool",
         "status",
         "readiness",
-        "see",
         "code",
         "title",
-        "phi",
-        "feature"
+        "under"
       ],
-      "word_count": 3164,
+      "word_count": 3486,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
       "title": "Authentication",
       "content_preview": "# Authentication  Authenticate to the Claude API with API keys or Workload Identity Federation.  ---  The Claude API supports two ways to authenticate requests:  | Method                                                        | Credential",
       "keywords": [
-        "identity",
-        "federation",
-        "api",
-        "workload",
-        "claude",
         "keys",
+        "api",
+        "identity",
+        "key",
+        "federation",
+        "claude",
+        "expiration",
+        "workload",
         "card",
         "cloud",
+        "console",
+        "create",
+        "credential",
         "lived",
         "token",
         "provider",
-        "key",
-        "environment",
-        "idp",
-        "manage",
-        "title",
-        "icon",
-        "href",
-        "docs",
-        "authenticate"
+        "secrets",
+        "set",
+        "leaked",
+        "days"
       ],
-      "word_count": 722,
+      "word_count": 1003,
       "file_path": "docs/docs__en__manage-claude__authentication.md"
     },
     "/docs/en/manage-claude/claude-code-analytics-api": {
@@ -44926,26 +44926,26 @@
       "keywords": [
         "key",
         "claude",
-        "data",
         "cmek",
+        "data",
         "anthropic",
         "kms",
-        "workspace",
         "encryption",
         "aws",
         "cloud",
+        "workspace",
         "platform",
         "keys",
-        "organization",
         "under",
-        "retention",
         "api",
         "service",
         "disabled",
         "managed",
-        "azure"
+        "azure",
+        "admin",
+        "organization"
       ],
-      "word_count": 1664,
+      "word_count": 1618,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -45612,12 +45612,12 @@
         "managed",
         "fields",
         "cli",
+        "see",
         "create",
         "reusable",
-        "mcp",
-        "skills"
+        "mcp"
       ],
-      "word_count": 1761,
+      "word_count": 1772,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -45635,6 +45635,7 @@
         "utilities",
         "available",
         "sandboxes",
+        "beta",
         "database",
         "connecting",
         "external",
@@ -45642,38 +45643,37 @@
         "managed",
         "infrastructure",
         "programming",
-        "languages",
-        "these"
+        "languages"
       ],
-      "word_count": 395,
+      "word_count": 406,
       "file_path": "docs/docs__en__managed-agents__cloud-sandboxes-reference.md"
     },
     "/docs/en/managed-agents/define-outcomes": {
       "title": "Define outcomes",
-      "content_preview": "# Define outcomes  Tell the agent what 'done' looks like, and let it iterate until it gets there.  ---  The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and",
+      "content_preview": "# Define outcomes  Tell the agent what 'done' looks like, and let it iterate until it gets there.  ---  An outcome tells the session what the end result should look like and how to measure its quality. The agent works toward that target, self-evaluating and iterating until the outcome is met.  When",
       "keywords": [
         "outcome",
         "session",
         "rubric",
         "agent",
+        "files",
         "grader",
-        "codegroup",
         "event",
         "evaluation",
         "note",
+        "codegroup",
+        "send",
+        "events",
+        "beta",
+        "card",
         "what",
         "iteration",
-        "after",
-        "events",
         "emitted",
-        "define",
-        "work",
-        "criteria",
-        "next",
-        "api",
-        "files"
+        "until",
+        "automatically",
+        "criteria"
       ],
-      "word_count": 2518,
+      "word_count": 3267,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/dreams": {
@@ -45729,7 +45729,7 @@
         "pre",
         "installed"
       ],
-      "word_count": 1936,
+      "word_count": 1947,
       "file_path": "docs/docs__en__managed-agents__environments.md"
     },
     "/docs/en/managed-agents/events-and-streaming": {
@@ -45757,7 +45757,7 @@
         "text",
         "model"
       ],
-      "word_count": 8264,
+      "word_count": 8275,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -45775,6 +45775,7 @@
         "note",
         "adding",
         "mount",
+        "beta",
         "using",
         "uploaded",
         "these",
@@ -45782,10 +45783,9 @@
         "upload",
         "uploading",
         "mounting",
-        "beta",
         "header"
       ],
-      "word_count": 1807,
+      "word_count": 1818,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -45807,13 +45807,13 @@
         "agents",
         "connect",
         "mount",
+        "beta",
         "server",
         "token",
         "permissions",
-        "required",
-        "private"
+        "required"
       ],
-      "word_count": 2061,
+      "word_count": 2072,
       "file_path": "docs/docs__en__managed-agents__github.md"
     },
     "/docs/en/managed-agents/mcp-connector": {
@@ -45830,6 +45830,7 @@
         "managed",
         "each",
         "credentials",
+        "see",
         "array",
         "when",
         "must",
@@ -45838,10 +45839,9 @@
         "entry",
         "toolset",
         "tool",
-        "see",
         "creation"
       ],
-      "word_count": 1389,
+      "word_count": 1400,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -45852,24 +45852,24 @@
         "store",
         "codegroup",
         "stores",
-        "agent",
         "session",
+        "agent",
+        "list",
         "version",
+        "one",
         "defaultlanguage",
         "cli",
         "reference",
-        "one",
         "memories",
         "full",
         "api",
+        "beta",
+        "see",
         "read",
         "content",
-        "list",
-        "response",
-        "when",
-        "writes"
+        "response"
       ],
-      "word_count": 4169,
+      "word_count": 4300,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -45897,7 +45897,7 @@
         "list",
         "own"
       ],
-      "word_count": 4029,
+      "word_count": 4040,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -45909,6 +45909,7 @@
         "code",
         "agents",
         "api",
+        "beta",
         "system",
         "prompt",
         "mcp",
@@ -45921,11 +45922,10 @@
         "creating",
         "configuring",
         "note",
-        "beta",
         "header",
         "model"
       ],
-      "word_count": 411,
+      "word_count": 422,
       "file_path": "docs/docs__en__managed-agents__onboarding.md"
     },
     "/docs/en/managed-agents/overview": {
@@ -45974,14 +45974,14 @@
         "server",
         "default",
         "policies",
+        "see",
         "confirmation",
         "set",
         "cli",
         "execute",
-        "custom",
-        "see"
+        "custom"
       ],
-      "word_count": 2245,
+      "word_count": 2256,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
@@ -46009,7 +46009,7 @@
         "docs",
         "claude"
       ],
-      "word_count": 2417,
+      "word_count": 2428,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/reference": {
@@ -46024,8 +46024,8 @@
         "tab",
         "events",
         "agents",
-        "stream",
         "see",
+        "stream",
         "type",
         "only",
         "description",
@@ -46037,7 +46037,7 @@
         "branding",
         "deltas"
       ],
-      "word_count": 1148,
+      "word_count": 1159,
       "file_path": "docs/docs__en__managed-agents__reference.md"
     },
     "/docs/en/managed-agents/scheduled-deployments": {
@@ -46101,27 +46101,27 @@
       "content_preview": "# Self-hosted sandboxes  Run agent sessions in your own self-hosted sandbox environment.  ---  By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](/docs/en/ma...",
       "keywords": [
         "worker",
-        "session",
-        "environment",
-        "work",
         "tool",
-        "key",
-        "self",
+        "session",
+        "mcp",
+        "environment",
         "agent",
+        "tools",
+        "work",
         "step",
-        "title",
         "codegroup",
-        "hosted",
-        "run",
         "sandbox",
-        "anthropic",
-        "host",
+        "server",
+        "key",
+        "title",
         "sdk",
-        "managed",
-        "claude",
-        "queue"
+        "anthropic",
+        "when",
+        "custom",
+        "self",
+        "host"
       ],
-      "word_count": 4595,
+      "word_count": 7382,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
@@ -46137,19 +46137,19 @@
         "archive",
         "delete",
         "sessions",
+        "see",
         "parameter",
         "page",
         "agents",
-        "see",
         "start",
+        "beta",
         "including",
         "error",
         "new",
         "back",
-        "when",
-        "event"
+        "when"
       ],
-      "word_count": 2152,
+      "word_count": 2163,
       "file_path": "docs/docs__en__managed-agents__session-operations.md"
     },
     "/docs/en/managed-agents/sessions": {
@@ -46166,6 +46166,7 @@
         "field",
         "card",
         "managed",
+        "see",
         "defaultlanguage",
         "cli",
         "event",
@@ -46174,10 +46175,9 @@
         "configuration",
         "model",
         "tool",
-        "value",
-        "see"
+        "value"
       ],
-      "word_count": 2000,
+      "word_count": 2011,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -46190,9 +46190,9 @@
         "custom",
         "api",
         "card",
+        "see",
         "when",
         "workspace",
-        "see",
         "files",
         "attach",
         "create",
@@ -46205,7 +46205,7 @@
         "href",
         "docs"
       ],
-      "word_count": 1198,
+      "word_count": 1209,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {
@@ -46216,24 +46216,24 @@
         "tool",
         "agent",
         "claude",
-        "when",
         "custom",
+        "when",
         "agents",
         "session",
+        "mcp",
         "managed",
         "them",
-        "mcp",
         "file",
         "what",
         "card",
         "available",
         "set",
         "toolset",
+        "sandbox",
         "each",
-        "codegroup",
-        "only"
+        "codegroup"
       ],
-      "word_count": 1615,
+      "word_count": 1654,
       "file_path": "docs/docs__en__managed-agents__tools.md"
     },
     "/docs/en/managed-agents/vaults": {
@@ -46253,15 +46253,15 @@
         "mcp",
         "token",
         "variable",
+        "which",
         "key",
         "refresh",
-        "which",
         "note",
         "api",
         "substituted",
         "tab"
       ],
-      "word_count": 3751,
+      "word_count": 3762,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {

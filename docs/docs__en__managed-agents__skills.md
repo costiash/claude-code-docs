@@ -14,7 +14,7 @@ You can attach two types of skill. Both work the same way: your agent invokes th
 To learn how to author custom skills, see [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) and [Skill authoring best practices](/docs/en/agents-and-tools/agent-skills/best-practices). To upload a custom skill to your workspace, see [Create a custom skill](#create-a-custom-skill).
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 ## Create a custom skill

@@ -7,7 +7,7 @@ Send events, stream responses, and interrupt or redirect your session mid-execut
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 ## Event types

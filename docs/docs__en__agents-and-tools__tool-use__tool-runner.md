@@ -774,7 +774,7 @@ Within the loop, you can read each response message and modify the runner's stat
 
 4. When your loop body returns, the runner checks whether you modified its message history.
 
-   * **If you did not modify message history:** The runner appends the assistant message to its state. If the message contains tool calls, the runner runs them and appends the results. If there are no tool calls, the loop exits.
+   * **If you did not modify message history:** If the message contains tool calls, the runner appends the assistant message and the tool results, then continues. If there are no tool calls, the loop exits.
    * **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](#taking-over-message-history).
 
 ```mermaid
@@ -790,7 +790,7 @@ sequenceDiagram
     note over U: Your loop body runs
     U->>TR: Resume
     alt Message history unchanged
-      TR->>TR: Append assistant message,<br/>run tools, append results<br/>(exit if no tool calls)
+      TR->>TR: If tool calls, append assistant<br/>message + tool results and continue.<br/>If none, exit the loop
     else Message history changed
       TR->>TR: Use your state unchanged
     end
@@ -799,7 +799,7 @@ sequenceDiagram
 
 ### Taking over message history
 
-By default, the runner manages conversation state for you: after each turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
+By default, the runner manages conversation state for you: after each tool-call turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
 
 You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK. See the per-language tabs that follow.
 
@@ -1719,7 +1719,7 @@ Enable streaming to process each turn's response incrementally. Each iteration y
   </Card>
 
   <Card title="Parallel tool use" icon="grid" href="/docs/en/agents-and-tools/tool-use/parallel-tool-use">
-    Enable and format parallel tool calls, with message-history guidance and troubleshooting.
+    Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
   </Card>
 
   <Card title="Define tools" icon="hammer" href="/docs/en/agents-and-tools/tool-use/define-tools">

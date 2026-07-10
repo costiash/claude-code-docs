@@ -8,7 +8,7 @@ The Claude API supports two ways to authenticate requests:
 
 | Method                                                        | Credential                                                                      | Best for                                                                                                                                        |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [API key](#api-keys)                                          | Long-lived `sk-ant-api...` secret in the `x-api-key` header                     | Local development, prototyping, scripts, and single-tenant servers where you control secret storage                                             |
+| [API key](#api-keys)                                          | Static `sk-ant-api...` secret in the `x-api-key` header                         | Local development, prototyping, scripts, and single-tenant servers where you control secret storage                                             |
 | [Workload Identity Federation](#workload-identity-federation) | Short-lived bearer token exchanged from your identity provider's identity token | Production workloads on cloud platforms (AWS, Google Cloud, Azure), CI/CD pipelines, and Kubernetes, where you want to eliminate static secrets |
 
 Both methods grant the same access to Claude API endpoints. Choose API keys to get started quickly, and move to Workload Identity Federation when your workload already has a platform-issued identity you can federate.
@@ -17,7 +17,7 @@ Both methods grant the same access to Claude API endpoints. Choose API keys to g
 
 API keys are static secrets that you generate in the Claude Console and pass on every request.
 
-* **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
+* **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. You choose an [expiration](#key-expiration) as part of creation. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
 * **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](/docs/en/cli-sdks-libraries/overview) pick it up automatically.
 
 ```http
@@ -27,7 +27,7 @@ anthropic-version: 2023-06-01
 content-type: application/json
 ```
 
-API keys have no expiry. Store them in a secrets manager, rotate them periodically, and revoke any key you suspect has leaked.
+Store API keys in a secrets manager, rotate them periodically, and revoke any key you suspect has leaked. You can also set an [expiration](#key-expiration) when you create a key to limit how long a leaked credential stays usable.
 
 <CodeGroup>
   ```bash cURL
@@ -99,6 +99,18 @@ API keys have no expiry. Store them in a secrets manager, rotate them periodical
   export ANTHROPIC_API_KEY=sk-ant-api03-...
   ```
 </CodeGroup>
+
+### Key expiration
+
+When you create an API key from the [API keys page](https://platform.claude.com/settings/keys) in the Claude Console, you choose an expiration: a preset (3 hours, 1 day, 7 days, or 30 days), a custom duration, or **Never** for keys you store in a secrets manager and rotate yourself. If your organization has a maximum expiration policy, the Console limits presets and custom durations to the policy maximum, and **Never** is unavailable. Existing keys keep their current behavior; expiration is set at creation time and cannot be changed afterward. The same expiration choice applies when you [create an Admin API key](/docs/en/manage-claude/admin-api-keys) in the Claude Console.
+
+Anthropic emails the key's creator as the expiration approaches: 7 days before expiration for keys created with a lifetime of at least 14 days, and 1 day before for keys with a lifetime of at least 7 days. Keys with shorter lifetimes expire without a warning email.
+
+After a key expires, requests made with it return a `401 authentication_error`. Create a new key to restore access; expired keys cannot be reactivated.
+
+The Console API keys table shows each key's expiration, and the Admin API reports each key's `expires_at` timestamp on the [List API Keys](/docs/en/api/admin/api_keys/list) and [Get API Key](/docs/en/api/admin/api_keys/retrieve) endpoints, so you can audit and rotate keys before they expire. The field is `null` for keys without an expiration.
+
+Expiration limits the lifetime of a leaked credential, but it is not a substitute for secret hygiene. Regardless of expiration, store keys in a secrets manager and revoke any key you suspect has leaked.
 
 ## Workload Identity Federation
 

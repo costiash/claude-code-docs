@@ -1,5 +1,7 @@
 # Batch processing
 
+Process large volumes of Messages requests asynchronously with the Message Batches API, cutting costs by 50% and increasing throughput.
+
 ---
 
 Batch processing is a powerful approach for handling large volumes of requests efficiently. Instead of processing requests one at a time with immediate responses, batch processing allows you to submit multiple requests together for asynchronous processing. This pattern is particularly useful when:

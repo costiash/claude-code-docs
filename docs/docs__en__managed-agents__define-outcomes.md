@@ -4,14 +4,14 @@ Tell the agent what 'done' looks like, and let it iterate until it gets there.
 
 ---
 
-The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and iterating until the outcome is met.
+An outcome tells the session what the end result should look like and how to measure its quality. The agent works toward that target, self-evaluating and iterating until the outcome is met.
 
 When you define an outcome, the harness automatically provisions a *grader* to evaluate the artifact against a rubric. The grader uses a separate context window to avoid being influenced by the main agent's implementation choices.
 
 The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 ## Create a rubric
@@ -52,10 +52,10 @@ Example rubric:
 - Sensitivity analysis on WACC and terminal growth rate is included
 ```
 
-Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it through the Files API for reuse across sessions.
+Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](#create-a-session-with-an-outcome)), or upload it through the Files API for reuse across sessions.
 
 <Note>
-  Uploading through the Files API requires both the `managed-agents-2026-04-01` and `files-api-2025-04-14` beta headers.
+  Uploading through the Files API requires the `files-api-2025-04-14` beta header, which the SDKs send automatically. The curl example passes its headers explicitly.
 </Note>
 
 <CodeGroup>
@@ -76,11 +76,47 @@ Pass the rubric as inline text on `user.define_outcome` (see the next section), 
   ```
 
   ```python Python
+  import time
+  from pathlib import Path
+
+  from anthropic import Anthropic
+
+  client = Anthropic()
+
+  RUBRIC = """# DCF Model Rubric
+
+  ## Revenue Projections
+  - Uses historical revenue data from the last 5 fiscal years
+  - Projects revenue for at least 5 years forward
+
+  ## Output Quality
+  - All figures are in a single .xlsx file with clearly labeled sheets
+  """
+  Path("/tmp/rubric.md").write_text(RUBRIC)
+
   rubric = client.beta.files.upload(file=Path("/tmp/rubric.md"))
   print(f"Uploaded rubric: {rubric.id}")
   ```
 
   ```typescript TypeScript
+  import { writeFile, readFile } from "node:fs/promises";
+
+  import Anthropic from "@anthropic-ai/sdk";
+  import { toFile } from "@anthropic-ai/sdk";
+
+  const client = new Anthropic();
+
+  const RUBRIC = `# DCF Model Rubric
+
+  ## Revenue Projections
+  - Uses historical revenue data from the last 5 fiscal years
+  - Projects revenue for at least 5 years forward
+
+  ## Output Quality
+  - All figures are in a single .xlsx file with clearly labeled sheets
+  `;
+  await writeFile("/tmp/rubric.md", RUBRIC);
+
   const rubric = await client.beta.files.upload({
     file: await toFile(readFile("/tmp/rubric.md"), "/tmp/rubric.md"),
   });
@@ -88,6 +124,27 @@ Pass the rubric as inline text on `user.define_outcome` (see the next section), 
   ```
 
   ```csharp C#
+  using Anthropic;
+  using Anthropic.Models.Beta.Agents;
+  using Anthropic.Models.Beta.Environments;
+  using Anthropic.Models.Beta.Files;
+  using Anthropic.Models.Beta.Sessions;
+  using Anthropic.Models.Beta.Sessions.Events;
+
+  var client = new AnthropicClient();
+
+  const string Rubric = """
+      # DCF Model Rubric
+
+      ## Revenue Projections
+      - Uses historical revenue data from the last 5 fiscal years
+      - Projects revenue for at least 5 years forward
+
+      ## Output Quality
+      - All figures are in a single .xlsx file with clearly labeled sheets
+      """;
+  await File.WriteAllTextAsync("/tmp/rubric.md", Rubric);
+
   var rubric = await client.Beta.Files.Upload(new()
   {
       File = File.OpenRead("/tmp/rubric.md"),
@@ -96,36 +153,136 @@ Pass the rubric as inline text on `user.define_outcome` (see the next section), 
   ```
 
   ```go Go
-  f, err := os.Open("/tmp/rubric.md")
-  if err != nil {
-  	panic(err)
-  }
+  package main
 
-  uploaded, err := client.Beta.Files.Upload(ctx, anthropic.BetaFileUploadParams{
-  	File: anthropic.File(f, "/tmp/rubric.md", "text/markdown"),
-  })
-  if err != nil {
-  	panic(err)
-  }
-  fmt.Printf("Uploaded rubric: %s\n", uploaded.ID)
+  import (
+  	"context"
+  	"fmt"
+  	"io"
+  	"os"
+  	"time"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  const rubric = `# DCF Model Rubric
+
+  ## Revenue Projections
+  - Uses historical revenue data from the last 5 fiscal years
+  - Projects revenue for at least 5 years forward
+
+  ## Output Quality
+  - All figures are in a single .xlsx file with clearly labeled sheets
+  `
+
+  func main() {
+  	ctx := context.Background()
+  	client := anthropic.NewClient()
+
+  	if err := os.WriteFile("/tmp/rubric.md", []byte(rubric), 0o644); err != nil {
+  		panic(err)
+  	}
+
+  	f, err := os.Open("/tmp/rubric.md")
+  	if err != nil {
+  		panic(err)
+  	}
+
+  	uploaded, err := client.Beta.Files.Upload(ctx, anthropic.BetaFileUploadParams{
+  		File: anthropic.File(f, "rubric.md", "text/markdown"),
+  	})
+  	if err != nil {
+  		panic(err)
+  	}
+  	fmt.Printf("Uploaded rubric: %s\n", uploaded.ID)
   ```
 
   ```java Java
-  var rubric = client.beta().files().upload(
-      FileUploadParams.builder()
-          .file(Path.of("/tmp/rubric.md"))
-          .build());
-  IO.println("Uploaded rubric: " + rubric.id());
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.core.http.HttpResponse;
+  import com.anthropic.models.beta.AnthropicBeta;
+  import com.anthropic.models.beta.agents.AgentCreateParams;
+  import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Params;
+  import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
+  import com.anthropic.models.beta.environments.BetaCloudConfigParams;
+  import com.anthropic.models.beta.environments.EnvironmentCreateParams;
+  import com.anthropic.models.beta.files.FileListParams;
+  import com.anthropic.models.beta.files.FileUploadParams;
+  import com.anthropic.models.beta.sessions.SessionCreateParams;
+  import com.anthropic.models.beta.sessions.events.BetaManagedAgentsTextRubricParams;
+  import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserDefineOutcomeEventParams;
+  import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserInterruptEventParams;
+  import com.anthropic.models.beta.sessions.events.EventSendParams;
+
+  import java.io.InputStream;
+  import java.nio.file.Files;
+  import java.nio.file.Path;
+  import java.nio.file.StandardCopyOption;
+
+  void main() throws Exception {
+      var client = AnthropicOkHttpClient.fromEnv();
+
+      var RUBRIC = """
+          # DCF Model Rubric
+
+          ## Revenue Projections
+          - Uses historical revenue data from the last 5 fiscal years
+          - Projects revenue for at least 5 years forward
+
+          ## Output Quality
+          - All figures are in a single .xlsx file with clearly labeled sheets
+          """;
+      Files.writeString(Path.of("/tmp/rubric.md"), RUBRIC);
+
+      var rubric = client.beta().files().upload(
+          FileUploadParams.builder()
+              .file(Path.of("/tmp/rubric.md"))
+              .build());
+      IO.println("Uploaded rubric: " + rubric.id());
   ```
 
   ```php PHP
+  use Anthropic\Client;
+  use Anthropic\Core\FileParam;
+
+  $client = new Client();
+
+  $rubricText = <<<'MD'
+  # DCF Model Rubric
+
+  ## Revenue Projections
+  - Uses historical revenue data from the last 5 fiscal years
+  - Projects revenue for at least 5 years forward
+
+  ## Output Quality
+  - All figures are in a single .xlsx file with clearly labeled sheets
+  MD;
+  file_put_contents('/tmp/rubric.md', $rubricText);
+
   $rubric = $client->beta->files->upload(
-      file: fopen('/tmp/rubric.md', 'r'),
+      file: FileParam::fromResource(fopen('/tmp/rubric.md', 'r'), contentType: 'text/markdown'),
   );
   echo "Uploaded rubric: {$rubric->id}\n";
   ```
 
   ```ruby Ruby
+  require "anthropic"
+  require "pathname"
+
+  client = Anthropic::Client.new
+
+  RUBRIC = <<~MD
+    # DCF Model Rubric
+
+    ## Revenue Projections
+    - Uses historical revenue data from the last 5 fiscal years
+    - Projects revenue for at least 5 years forward
+
+    ## Output Quality
+    - All figures are in a single .xlsx file with clearly labeled sheets
+  MD
+  File.write("/tmp/rubric.md", RUBRIC)
+
   rubric = client.beta.files.upload(file: Pathname.new("/tmp/rubric.md"))
   puts "Uploaded rubric: #{rubric.id}"
   ```
@@ -133,7 +290,7 @@ Pass the rubric as inline text on `user.define_outcome` (see the next section), 
 
 ## Create a session with an outcome
 
-After creating a session, send a `user.define_outcome` event. The agent begins work immediately; no additional user message event is required.
+The following examples create a [session](/docs/en/managed-agents/sessions) for an existing [agent](/docs/en/managed-agents/agent-setup) and [environment](/docs/en/managed-agents/environments) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
 
 <CodeGroup>
   ```bash curl
@@ -254,10 +411,15 @@ After creating a session, send a `user.define_outcome` event. The agent begins w
       [
           new BetaManagedAgentsUserDefineOutcomeEventParams
           {
-              Type = "user.define_outcome",
+              Type = BetaManagedAgentsUserDefineOutcomeEventParamsType.UserDefineOutcome,
               Description = "Build a DCF model for Costco in .xlsx",
-              Rubric = new BetaManagedAgentsTextRubricParams { Type = "text", Content = Rubric },
-              // or: Rubric = new BetaManagedAgentsFileRubricParams { Type = "file", FileID = rubric.ID },
+              Rubric = new BetaManagedAgentsTextRubricParams
+              {
+                  Type = BetaManagedAgentsTextRubricParamsType.Text,
+                  Content = Rubric,
+              },
+              // or: Rubric = new BetaManagedAgentsFileRubricParams
+              //     { Type = BetaManagedAgentsFileRubricParamsType.File, FileID = rubric.ID },
               MaxIterations = 5, // optional; default 3, max 20
           },
       ],
@@ -281,11 +443,16 @@ After creating a session, send a `user.define_outcome` event. The agent begins w
   _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserDefineOutcome: &anthropic.BetaManagedAgentsUserDefineOutcomeEventParams{
+  			Type:        anthropic.BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome,
   			Description: "Build a DCF model for Costco in .xlsx",
   			Rubric: anthropic.BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion{
-  				OfText: &anthropic.BetaManagedAgentsTextRubricParams{Content: rubric},
+  				OfText: &anthropic.BetaManagedAgentsTextRubricParams{
+  					Type:    anthropic.BetaManagedAgentsTextRubricParamsTypeText,
+  					Content: rubric,
+  				},
   			},
-  			// or: OfFile: &anthropic.BetaManagedAgentsFileRubricParams{FileID: uploaded.ID},
+  			// or: OfFile: &anthropic.BetaManagedAgentsFileRubricParams{
+  			//     Type: anthropic.BetaManagedAgentsFileRubricParamsTypeFile, FileID: uploaded.ID},
   			MaxIterations: anthropic.Int(5), // optional; default 3, max 20
   		},
   	}},
@@ -309,9 +476,14 @@ After creating a session, send a `user.define_outcome` event. The agent begins w
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserDefineOutcomeEventParams.builder()
+              .type(BetaManagedAgentsUserDefineOutcomeEventParams.Type.USER_DEFINE_OUTCOME)
               .description("Build a DCF model for Costco in .xlsx")
-              .rubric(BetaManagedAgentsTextRubricParams.builder().content(RUBRIC).build())
-              // or: .rubric(BetaManagedAgentsFileRubricParams.builder().fileId(rubric.id()).build())
+              .rubric(BetaManagedAgentsTextRubricParams.builder()
+                  .type(BetaManagedAgentsTextRubricParams.Type.TEXT)
+                  .content(RUBRIC)
+                  .build())
+              // or: .rubric(BetaManagedAgentsFileRubricParams.builder()
+              //     .type(BetaManagedAgentsFileRubricParams.Type.FILE).fileId(rubric.id()).build())
               .maxIterations(5) // optional; default 3, max 20
               .build())
           .build());
@@ -372,12 +544,12 @@ Progress on an outcome-oriented session is surfaced on the events [stream](/docs
 * `span.outcome_evaluation_*` events are only emitted for outcome-oriented sessions and show the number of iteration loops and the grader's feedback process.
 * You can also send `user.message` [events](/docs/en/managed-agents/reference#event-types) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
 * A `user.interrupt` event pauses work on the current outcome and marks the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
-* After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be kicked off. The session retains history of the prior outcome.
+* After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
 ### Define outcome user event
 
 <Note>
-  Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal event of the previous outcome.
+  Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal `span.outcome_evaluation_end` event of the previous outcome.
 </Note>
 
 This is the event you send to initiate an outcome. It is echoed back on receipt, including a `processed_at` timestamp and `outcome_id`.
@@ -414,6 +586,7 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
   "type": "span.outcome_evaluation_ongoing",
   "id": "sevt_01ghi...",
   "outcome_id": "outc_01a...",
+  "iteration": 0,
   "processed_at": "2026-03-25T14:02:10Z"
 }
 ```
@@ -422,13 +595,13 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 Emitted after the grader finishes evaluating one iteration. The `result` field indicates what happens next.
 
-| Result                   | Next                                                                                                                                                            |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `satisfied`              | Session transitions to `idle`.                                                                                                                                  |
-| `needs_revision`         | Agent starts a new iteration cycle.                                                                                                                             |
-| `max_iterations_reached` | No further evaluation cycles. The agent may run one final revision before the session transitions to `idle`.                                                    |
-| `failed`                 | Session transitions to `idle`. Returned when the rubric fundamentally does not match the task, for example if the description and rubric contradict each other. |
-| `interrupted`            | Only emitted if `outcome_evaluation_start` already fired before the interrupt.                                                                                  |
+| Result                   | Next                                                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `satisfied`              | Session transitions to `idle`.                                                                                                                               |
+| `needs_revision`         | Agent starts a new iteration cycle.                                                                                                                          |
+| `max_iterations_reached` | One final acknowledgment turn follows before the session transitions to `idle`. No further evaluation runs.                                                  |
+| `failed`                 | Session transitions to `idle`. Returned when the rubric does not apply to the deliverables, for example if the description and rubric contradict each other. |
+| `interrupted`            | Only emitted if `outcome_evaluation_start` already fired before the interrupt.                                                                               |
 
 ```json
 {
@@ -449,9 +622,9 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 }
 ```
 
-## Checking on outcome status
+## Check outcome status
 
-You can either listen on the [event stream](/docs/en/managed-agents/events-and-streaming) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`:
+You can either listen on the [event stream](/docs/en/managed-agents/events-and-streaming) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
 <CodeGroup>
   ```bash curl
@@ -536,17 +709,22 @@ You can either listen on the [event stream](/docs/en/managed-agents/events-and-s
   ```
 </CodeGroup>
 
-## Retrieving deliverables
+## Retrieve deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](/docs/en/build-with-claude/files) scoped to the session:
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](/docs/en/build-with-claude/files) scoped to the session.
+
+<Note>
+  Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the files request. The SDK files methods send only the files beta automatically, so the examples pass it explicitly.
+</Note>
 
 <CodeGroup>
   ```bash curl
   # List files produced by this session
+  # scope_id filtering requires the managed-agents beta alongside the files beta
   files=$(curl -fsSL "https://api.anthropic.com/v1/files?scope_id=$session_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01")
+    -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14")
   jq -r '.data[] | "\(.id) \(.filename)"' <<<"$files"
 
   # Download a file
@@ -555,17 +733,20 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
     curl -fsSL "https://api.anthropic.com/v1/files/$file_id/content" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
+      -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
       -o /tmp/output.txt
   fi
   ```
 
   ```bash CLI
   # List files produced by this session
-  ant beta:files list --scope-id "$SESSION_ID"
+  # scope_id filtering requires the managed-agents beta on the files request
+  ant beta:files list --scope-id "$SESSION_ID" \
+    --beta managed-agents-2026-04-01
 
   # Download a file
   FILE_ID=$(ant beta:files list --scope-id "$SESSION_ID" \
+    --beta managed-agents-2026-04-01 \
     --transform 'data[0].id' --raw-output)
   if [[ -n $FILE_ID ]]; then
     ant beta:files download --file-id "$FILE_ID" --output /tmp/output.txt
@@ -574,9 +755,10 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```python Python
   # List files produced by this session
-  files = client.beta.files.list(scope_id=session.id)
-  for f in files:
-      print(f.id, f.filename)
+  # scope_id filtering requires the managed-agents beta on the files request
+  files = client.beta.files.list(scope_id=session.id, betas=["managed-agents-2026-04-01"])
+  for file in files:
+      print(file.id, file.filename)
 
   # Download a file
   if files.data:
@@ -586,9 +768,13 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```typescript TypeScript
   // List files produced by this session
-  const files = await client.beta.files.list({ scope_id: session.id });
-  for (const f of files.data) {
-    console.log(f.id, f.filename);
+  // scope_id filtering requires the managed-agents beta on the files request
+  const files = await client.beta.files.list({
+    scope_id: session.id,
+    betas: ["managed-agents-2026-04-01"],
+  });
+  for (const file of files.data) {
+    console.log(file.id, file.filename);
   }
 
   // Download a file
@@ -600,24 +786,32 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```csharp C#
   // List files produced by this session
-  var files = await client.Beta.Files.List(new() { ScopeID = session.ID });
-  foreach (var file in files.Data)
+  // (scope_id filtering requires the managed-agents beta on the files request)
+  var files = await client.Beta.Files.List(new()
+  {
+      ScopeID = session.ID,
+      Betas = ["managed-agents-2026-04-01"],
+  });
+  foreach (var file in files.Items)
   {
       Console.WriteLine($"{file.ID} {file.Filename}");
   }
 
   // Download a file
-  if (files.Data.Count > 0)
+  if (files.Items.Count > 0)
   {
-      var content = await client.Beta.Files.Download(files.Data[0].ID);
-      await File.WriteAllBytesAsync("/tmp/output.txt", content);
+      using var download = await client.Beta.Files.Download(files.Items[0].ID);
+      await using var output = File.Create("/tmp/output.txt");
+      await (await download.ReadAsStream()).CopyToAsync(output);
   }
   ```
 
   ```go Go
   // List files produced by this session
+  // (scope_id filtering requires the managed-agents beta on the files request)
   files, err := client.Beta.Files.List(ctx, anthropic.BetaFileListParams{
-  	// pass ScopeID: anthropic.String(session.ID) to filter
+  	ScopeID: anthropic.String(session.ID),
+  	Betas:   []anthropic.AnthropicBeta{anthropic.AnthropicBetaManagedAgents2026_04_01},
   })
   if err != nil {
   	panic(err)
@@ -633,11 +827,12 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
   		panic(err)
   	}
   	defer resp.Body.Close()
-  	fileContent, err := io.ReadAll(resp.Body)
+  	out, err := os.Create("/tmp/output.txt")
   	if err != nil {
   		panic(err)
   	}
-  	if err := os.WriteFile("/tmp/output.txt", fileContent, 0o644); err != nil {
+  	defer out.Close()
+  	if _, err := io.Copy(out, resp.Body); err != nil {
   		panic(err)
   	}
   }
@@ -645,8 +840,12 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```java Java
   // List files produced by this session
+  // (scope_id filtering requires the managed-agents beta on the files request)
   var files = client.beta().files().list(
-      FileListParams.builder()/* pass .scopeId(session.id()) to filter */.build());
+      FileListParams.builder()
+          .scopeId(session.id())
+          .addBeta(AnthropicBeta.MANAGED_AGENTS_2026_04_01)
+          .build());
   for (var file : files.data()) {
       IO.println(file.id() + " " + file.filename());
   }
@@ -663,7 +862,8 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```php PHP
   // List files produced by this session
-  $files = $client->beta->files->list(/* pass scopeID: $session->id to filter */);
+  // scope_id filtering requires the managed-agents beta on the files request
+  $files = $client->beta->files->list(scopeID: $session->id, betas: ['managed-agents-2026-04-01']);
   foreach ($files->data as $file) {
       echo "{$file->id} {$file->filename}\n";
   }
@@ -677,8 +877,9 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 
   ```ruby Ruby
   # List files produced by this session
-  files = client.beta.files.list(scope_id: session.id)
-  files.data.each { puts "#{it.id} #{it.filename}" }
+  # scope_id filtering requires the managed-agents beta on the files request
+  files = client.beta.files.list(scope_id: session.id, betas: ["managed-agents-2026-04-01"])
+  files.data.each { |file| puts "#{file.id} #{file.filename}" }
 
   # Download a file
   if (first = files.data.first)
@@ -687,3 +888,19 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
   end
   ```
 </CodeGroup>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Authenticate with vaults" icon="fingerprint" href="/docs/en/managed-agents/vaults">
+    Register per-user credentials when creating sessions.
+  </Card>
+
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+    Send events, stream responses, and interrupt or redirect your session mid-execution.
+  </Card>
+
+  <Card title="Adding files" icon="file" href="/docs/en/managed-agents/files">
+    Upload files and mount them in your sandbox for reading and processing.
+  </Card>
+</CardGroup>

@@ -1,5 +1,7 @@
 # Text editor tool
 
+Give Claude the Anthropic-defined text editor tool to view, create, and edit files, and handle its view, str_replace, create, and insert commands.
+
 ---
 
 <Note>

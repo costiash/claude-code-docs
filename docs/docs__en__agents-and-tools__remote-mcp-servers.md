@@ -1,5 +1,7 @@
 # Remote MCP servers
 
+Connect Claude to third-party remote MCP servers through the MCP connector API. Browse example servers and review the steps to connect.
+
 ---
 
 Several companies have deployed remote MCP servers that developers can connect to via the Anthropic MCP connector API. These servers expand the capabilities available to developers and end users by providing remote access to various services and tools through the MCP protocol.
