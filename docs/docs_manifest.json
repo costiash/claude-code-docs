@@ -243,8 +243,8 @@
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "c74e0e7c1af7763eaedb889201c500de12ec49d2f4f90ee93b394e42fe3da754",
-      "last_updated": "2026-07-04T04:17:57.659526"
+      "hash": "41817cbb1796483f79995af53b104378b0072647f3a17eccf0e9a7258ce07162",
+      "last_updated": "2026-07-11T04:04:45.102704"
     },
     "claude-code__analytics.md": {
       "original_url": "https://platform.claude.com/docs/en/analytics",
@@ -9399,8 +9399,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "e5fdd8007a0f7774555eadbc2952f6635aa4e9aa57b5355424f8870087c0d423",
-      "last_updated": "2026-07-10T01:14:56.544888"
+      "hash": "b4b1ddb0d5c73bf7db4af3b045828dae4189939f5aa82baa4cc64a9bf48e0d4c",
+      "last_updated": "2026-07-11T04:35:03.779213"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -9999,11 +9999,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-11T01:14:35.280658",
-    "fetch_duration_seconds": 2254.514932,
-    "total_pages_discovered": 2040,
+    "last_fetch_completed": "2026-07-11T04:41:12.071865",
+    "fetch_duration_seconds": 2242.717106,
+    "total_pages_discovered": 2042,
     "pages_fetched_successfully": 1666,
-    "pages_failed": 375,
+    "pages_failed": 377,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/advisor",
@@ -10377,6 +10377,8 @@
       "/docs/en/whats-new/2026-w24",
       "/docs/en/whats-new/2026-w25",
       "/docs/en/whats-new/2026-w26",
+      "/docs/en/whats-new/2026-w27",
+      "/docs/en/whats-new/2026-w28",
       "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
@@ -10386,7 +10388,7 @@
     "total_files": 1666,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-11T01:14:35.280673",
+  "last_updated": "2026-07-11T04:41:12.071889",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

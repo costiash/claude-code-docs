@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-11T01:14:38Z",
+  "generated_at": "2026-07-11T04:41:15Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -52,11 +52,11 @@
         "profile",
         "settings",
         "inference",
+        "variables",
         "see",
-        "api",
-        "variables"
+        "api"
       ],
-      "word_count": 3541,
+      "word_count": 3549,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -280,7 +280,7 @@
         "settings",
         "review"
       ],
-      "word_count": 9351,
+      "word_count": 9348,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
