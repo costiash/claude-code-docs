@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-11T04:41:15Z",
+  "generated_at": "2026-07-11T07:27:00Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -965,22 +965,22 @@
         "commands",
         "permission",
         "approval",
-        "permissions",
         "bash",
+        "only",
+        "permissions",
+        "when",
+        "prompt",
         "access",
         "trust",
-        "when",
         "network",
         "mcp",
         "before",
         "anthropic",
-        "only",
-        "prompt",
         "user",
-        "running",
-        "users"
+        "read",
+        "running"
       ],
-      "word_count": 1380,
+      "word_count": 1400,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -1225,14 +1225,14 @@
         "click",
         "editor",
         "icon",
+        "file",
         "install",
         "terminal",
         "settings",
-        "file",
         "prompt",
         "when"
       ],
-      "word_count": 5451,
+      "word_count": 5455,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
