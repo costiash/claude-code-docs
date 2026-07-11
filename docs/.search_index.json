@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-10T22:03:07Z",
+  "generated_at": "2026-07-11T01:14:38Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -25,10 +25,10 @@
         "code",
         "agent",
         "prompt",
-        "model",
-        "command"
+        "showing",
+        "model"
       ],
-      "word_count": 63784,
+      "word_count": 64290,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -385,14 +385,14 @@
         "default",
         "credentials",
         "gcp",
-        "environment",
         "variables",
+        "environment",
         "when",
         "through",
         "configuration",
         "div"
       ],
-      "word_count": 2123,
+      "word_count": 2131,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -692,15 +692,15 @@
         "organization",
         "models",
         "picker",
+        "sonnet",
         "managed",
         "effort",
-        "sonnet",
         "fable",
-        "platform",
         "only",
-        "allowlist"
+        "allowlist",
+        "level"
       ],
-      "word_count": 9231,
+      "word_count": 9241,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
