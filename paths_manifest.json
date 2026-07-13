@@ -1,12 +1,13 @@
 {
   "metadata": {
-    "generated_at": "2026-07-13T15:54:42.780901Z",
-    "total_paths": 2043,
+    "generated_at": "2026-07-13T18:36:03.006297Z",
+    "total_paths": 2044,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-13T15:54:42.780911Z"
+    "last_regenerated": "2026-07-13T18:36:03.006304Z"
   },
   "categories": {
     "core_documentation": [
+      "/docs/en/accessibility",
       "/docs/en/admin-setup",
       "/docs/en/advisor",
       "/docs/en/agent-teams",
