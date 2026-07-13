@@ -21,7 +21,7 @@ The Message Batches API is Anthropic's first implementation of this pattern.
 
 The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](/docs/en/api/messages/create) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
 
-You can [explore the API reference directly](/docs/en/api/creating-message-batches), in addition to this guide.
+You can [explore the API reference directly](/docs/en/api/messages/batches/create), in addition to this guide.
 
 ## How the Message Batches API works
 
@@ -111,7 +111,7 @@ A Message Batch is composed of a list of requests to create a Message. The shape
 * A unique `custom_id` for identifying the Messages request. Must be 1 to 64 characters and contain only alphanumeric characters, hyphens, and underscores (matching `^[a-zA-Z0-9_-]{1,64}$`).
 * A `params` object with the standard [Messages API](/docs/en/api/messages/create) parameters
 
-You can [create a batch](/docs/en/api/creating-message-batches) by passing this list into the `requests` parameter:
+You can [create a batch](/docs/en/api/messages/batches/create) by passing this list into the `requests` parameter:
 
 <CodeGroup>
   ```bash cURL
@@ -717,7 +717,7 @@ Once batch processing has ended, each Messages request in the batch has a result
 
 You will see an overview of your results with the batch's `request_counts`, which shows how many requests reached each of these four states.
 
-Results of the batch are available for download at the `results_url` property on the Message Batch, and if the organization permission allows, in the Console. Because of the potentially large size of the results, it's recommended to [stream results](/docs/en/api/retrieving-message-batch-results) back rather than download them all at once.
+Results of the batch are available for download at the `results_url` property on the Message Batch, and if the organization permission allows, in the Console. Because of the potentially large size of the results, it's recommended to [stream results](/docs/en/api/messages/batches/results) back rather than download them all at once.
 
 <CodeGroup>
   ```bash cURL
@@ -1855,7 +1855,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
   </Accordion>
 
   <Accordion title="How do I handle errors in my batch requests?">
-    When you retrieve the results, each request will have a `result` field indicating whether it `succeeded`, `errored`, was `canceled`, or `expired`. For `errored` results, additional error information will be provided. View the error response object in the [API reference](/docs/en/api/creating-message-batches).
+    When you retrieve the results, each request will have a `result` field indicating whether it `succeeded`, `errored`, was `canceled`, or `expired`. For `errored` results, additional error information will be provided. View the error response object in the [API reference](/docs/en/api/messages/batches/create).
   </Accordion>
 
   <Accordion title="How does the Message Batches API handle privacy and data separation?">

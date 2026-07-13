@@ -4,17 +4,17 @@ Learn how to use Agent Skills to create documents with the Claude API in under 1
 
 ---
 
-This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a simple request, and access the generated file.
+This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a request, and access the generated file.
 
 ## Prerequisites
 
-* [Claude API key](/settings/keys)
-* Python 3.7+ or curl installed
+* A [Claude API key](/settings/keys) or a logged-in [ant CLI](/docs/en/cli-sdks-libraries/cli/authentication)
+* A [client SDK](/docs/en/cli-sdks-libraries/overview) for your language, or `curl` and `jq`
 * Basic familiarity with making API requests
 
 ## Agent Skills overview
 
-Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
+Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks such as creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
 
 * **PowerPoint (pptx):** Create and edit presentations
 * **Excel (xlsx):** Create and analyze spreadsheets
@@ -22,12 +22,12 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 * **PDF (pdf):** Generate PDF documents
 
 <Note>
-  **Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
+  To create custom Skills, see the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
 </Note>
 
 ## Step 1: List available Skills
 
-First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
+First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. Each language tab is an excerpt from one continuous script, with any imports and client setup at the top:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -117,11 +117,11 @@ First, check what Skills are available. Use the Skills API to list all Anthropic
 
 You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
 
-This API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to know what Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.
+This API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to determine which Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.
 
 ## Step 2: Create a presentation
 
-Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
+Use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 <CodeGroup>
   ```bash cURL
@@ -356,8 +356,9 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   ```
 </CodeGroup>
 
-Let's break down what each part does:
+The request includes the following parts:
 
+* **`model`:** A [model that supports the code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility)
 * **`container.skills`:** Specifies which Skills Claude can use
 * **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
 * **`skill_id: "pptx"`:** The PowerPoint Skill identifier
@@ -366,26 +367,26 @@ Let's break down what each part does:
 * **Beta header:** `skills-2025-10-02`
 
 <Note>
-  The examples here use the `code_execution_20260521` tool version, which is generally available and requires no code execution beta header. Skills also work with older [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) versions (such as `code_execution_20250825`); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+  The examples on this page use the `code_execution_20260521` tool version, which is generally available and needs only the `skills-2025-10-02` beta header. The Step 3 code parses the result types that current tool versions return. Skills also work with older [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
 </Note>
 
-When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
+When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill's code to create your presentation.
 
 ## Step 3: Download the created file
 
-The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
+The presentation was created in the code execution container and saved as a file. The Step 2 `response` includes a file reference with a file ID. Extract the file ID and download the file with the Files API. The example saves it to your system temp directory:
 
 <CodeGroup>
   ```bash cURL
-  # Extract file ID from the code-execution tool result. The Skill might run
-  # its work through either the Python or bash code-execution tool, so check
-  # both result types.
+  # Extract the file ID. The code execution tool runs the Skill's code through
+  # its Bash sub-tool, and generated files appear as bash_code_execution_output
+  # items inside the bash_code_execution_tool_result block.
   file_id=$(jq -r '
     last(
       .content[]
-      | select(.type == "code_execution_tool_result" or .type == "bash_code_execution_tool_result")
+      | select(.type == "bash_code_execution_tool_result")
       | .content
-      | select(.type == "code_execution_result" or .type == "bash_code_execution_result")
+      | select(.type == "bash_code_execution_result")
       | .content[].file_id
     ) // empty
   ' <<<"$response")
@@ -403,17 +404,15 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```bash CLI
-  # Extract file ID from the code-execution tool result. The Skill might run
-  # its work through either the Python or bash code-execution tool, so check
-  # both result types.
+  # Extract the file ID. The code execution tool runs the Skill's code through
+  # its Bash sub-tool, and generated files appear as bash_code_execution_output
+  # items inside the bash_code_execution_tool_result block.
   file_id=$(jq -r '
     last(
       .content[]
-      | select(.type == "code_execution_tool_result"
-            or .type == "bash_code_execution_tool_result")
+      | select(.type == "bash_code_execution_tool_result")
       | .content
-      | select(.type == "code_execution_result"
-            or .type == "bash_code_execution_result")
+      | select(.type == "bash_code_execution_result")
       | .content[].file_id
     ) // empty
   ' <<<"$response")
@@ -427,16 +426,12 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```python Python
-  # Extract file ID from the code-execution tool result. The Skill might run
-  # its work through either the Python or bash code-execution tool, so check
-  # both result types.
+  # Extract the file ID. The code execution tool runs the Skill's code through
+  # its Bash sub-tool, and generated files appear as bash_code_execution_output
+  # items inside the bash_code_execution_tool_result block.
   file_id = None
   for block in response.content:
-      if block.type == "code_execution_tool_result":
-          if block.content.type == "code_execution_result":
-              for output in block.content.content:
-                  file_id = output.file_id
-      elif block.type == "bash_code_execution_tool_result":
+      if block.type == "bash_code_execution_tool_result":
           if block.content.type == "bash_code_execution_result":
               for output in block.content.content:
                   file_id = output.file_id
@@ -450,51 +445,38 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```typescript TypeScript
-  // Extract file ID from the code-execution tool result. The Skill might run
-  // its work through either the Python or bash code-execution tool, so check
-  // both result types.
+  // Extract the file ID. The code execution tool runs the Skill's code through
+  // its Bash sub-tool, and generated files appear as bash_code_execution_output
+  // items inside the bash_code_execution_tool_result block.
   let fileId: string | undefined;
   for (const block of response.content) {
-    if (block.type === "code_execution_tool_result") {
-      if (block.content.type === "code_execution_result") {
-        for (const output of block.content.content) {
-          fileId = output.file_id;
-        }
-      }
-    } else if (block.type === "bash_code_execution_tool_result") {
-      if (block.content.type === "bash_code_execution_result") {
-        for (const output of block.content.content) {
-          fileId = output.file_id;
-        }
+    if (
+      block.type === "bash_code_execution_tool_result" &&
+      block.content.type === "bash_code_execution_result"
+    ) {
+      for (const output of block.content.content) {
+        fileId = output.file_id;
       }
     }
   }
 
   if (fileId) {
-    // Download the file and stream it to disk
+    // Download the file and save it
     const outputPath = path.join(os.tmpdir(), "renewable_energy.pptx");
     const fileContent = await client.beta.files.download(fileId);
-    await fs.writeFile(outputPath, fileContent.body!);
+    await fs.writeFile(outputPath, Buffer.from(await fileContent.arrayBuffer()));
     console.log(`Presentation saved to ${outputPath}`);
   }
   ```
 
   ```csharp C#
-  // Extract the file ID from the code-execution tool result. The Skill might
-  // run its work through either the Python or bash code-execution tool, so
-  // check both result types.
+  // Extract the file ID. The code execution tool runs the Skill's code through
+  // its Bash sub-tool, and generated files appear as bash_code_execution_output
+  // items inside the bash_code_execution_tool_result block.
   string? fileId = null;
   foreach (var block in response.Content)
   {
-      if (block.TryPickCodeExecutionToolResult(out var codeResult)
-          && codeResult.Content.TryPickResultBlock(out var codeResultBlock))
-      {
-          foreach (var output in codeResultBlock.Content)
-          {
-              fileId = output.FileID;
-          }
-      }
-      else if (block.TryPickBashCodeExecutionToolResult(out var bashResult)
+      if (block.TryPickBashCodeExecutionToolResult(out var bashResult)
           && bashResult.Content.TryPickBetaBashCodeExecutionResultBlock(out var bashResultBlock))
       {
           foreach (var output in bashResultBlock.Content)
@@ -517,18 +499,12 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```go Go
-  // Extract file ID from the code-execution tool result. The Skill might run
-  // its work through either the Python or bash code-execution tool, so check
-  // both result types.
+  // Extract the file ID. The code execution tool runs the Skill's code through
+  // its Bash sub-tool, and generated files appear as bash_code_execution_output
+  // items inside the bash_code_execution_tool_result block.
   var fileID string
   for _, block := range response.Content {
   	switch result := block.AsAny().(type) {
-  	case anthropic.BetaCodeExecutionToolResultBlock:
-  		if result.Content.Type == "code_execution_result" {
-  			for _, output := range result.Content.Content {
-  				fileID = output.FileID
-  			}
-  		}
   	case anthropic.BetaBashCodeExecutionToolResultBlock:
   		if result.Content.Type == "bash_code_execution_result" {
   			for _, output := range result.Content.Content {
@@ -559,19 +535,12 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```java Java
-  // Extract file ID from the code-execution tool result. The Skill might run
-  // its work through either the Python or bash code-execution tool, so check
-  // both result types.
+  // Extract the file ID. The code execution tool runs the Skill's code through
+  // its Bash sub-tool, and generated files appear as bash_code_execution_output
+  // items inside the bash_code_execution_tool_result block.
   String fileId = null;
   for (BetaContentBlock block : response.content()) {
-      if (block.isCodeExecutionToolResult()) {
-          var content = block.asCodeExecutionToolResult().content();
-          if (content.isResultBlock()) {
-              for (var output : content.asResultBlock().content()) {
-                  fileId = output.fileId();
-              }
-          }
-      } else if (block.isBashCodeExecutionToolResult()) {
+      if (block.isBashCodeExecutionToolResult()) {
           var content = block.asBashCodeExecutionToolResult().content();
           if (content.isBetaBashCodeExecutionResultBlock()) {
               for (var output : content.asBetaBashCodeExecutionResultBlock().content()) {
@@ -592,23 +561,20 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```php PHP
-  // Extract file ID from the code-execution tool result. The Skill might run
-  // its work through either the Python or bash code-execution tool, so check
-  // both result types.
+  // Extract the file ID. The code execution tool runs the Skill's code through
+  // its Bash sub-tool, and generated files appear as bash_code_execution_output
+  // items inside the bash_code_execution_tool_result block.
   $fileId = null;
   foreach ($response->content as $block) {
-      if ($block instanceof BetaCodeExecutionToolResultBlock) {
-          if ($block->content instanceof BetaCodeExecutionResultBlock) {
-              foreach ($block->content->content as $output) {
-                  $fileId = $output->fileID;
-              }
-          }
-      } elseif ($block instanceof BetaBashCodeExecutionToolResultBlock) {
-          if ($block->content instanceof BetaBashCodeExecutionResultBlock) {
-              foreach ($block->content->content as $output) {
-                  $fileId = $output->fileID;
-              }
-          }
+      if ($block->type !== 'bash_code_execution_tool_result') {
+          continue;
+      }
+      $resultBlock = $block->content;
+      if ($resultBlock->type !== 'bash_code_execution_result') {
+          continue;
+      }
+      foreach ($resultBlock->content as $output) {
+          $fileId = $output->fileID;
       }
   }
 
@@ -622,20 +588,15 @@ The presentation was created in the code execution container and saved as a file
   ```
 
   ```ruby Ruby
-  # Extract file ID from the code-execution tool result. The Skill might run
-  # its work through either the Python or bash code-execution tool, so check
-  # both result types.
+  # Extract the file ID. The code execution tool runs the Skill's code through
+  # its Bash sub-tool, and generated files appear as bash_code_execution_output
+  # items inside the bash_code_execution_tool_result block.
   file_id = nil
   response.content.each do |block|
-    case block.type
-    when :code_execution_tool_result
-      if block.content[:type] == "code_execution_result"
-        block.content[:content].each { |output| file_id = output[:file_id] }
-      end
-    when :bash_code_execution_tool_result
-      if block.content[:type] == "bash_code_execution_result"
-        block.content[:content].each { |output| file_id = output[:file_id] }
-      end
+    next unless block.type == :bash_code_execution_tool_result
+
+    if block.content[:type].to_s == "bash_code_execution_result"
+      Array(block.content[:content]).each { |output| file_id = output[:file_id] }
     end
   end
 
@@ -655,7 +616,7 @@ The presentation was created in the code execution container and saved as a file
 
 ## Try more examples
 
-Now that you've created your first document with Skills, try these variations:
+Try these variations:
 
 ### Create a spreadsheet
 
@@ -830,7 +791,7 @@ Now that you've created your first document with Skills, try these variations:
       betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
-              ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
+              ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest'],
           ],
       ],
       messages: [
@@ -1035,7 +996,7 @@ Now that you've created your first document with Skills, try these variations:
       betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
-              ['type' => 'anthropic', 'skillID' => 'docx', 'version' => 'latest'],
+              ['type' => 'anthropic', 'skill_id' => 'docx', 'version' => 'latest'],
           ],
       ],
       messages: [
@@ -1240,7 +1201,7 @@ Now that you've created your first document with Skills, try these variations:
       betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
-              ['type' => 'anthropic', 'skillID' => 'pdf', 'version' => 'latest'],
+              ['type' => 'anthropic', 'skill_id' => 'pdf', 'version' => 'latest'],
           ],
       ],
       messages: [
@@ -1274,26 +1235,24 @@ Now that you've created your first document with Skills, try these variations:
 
 ## Next steps
 
-Now that you've used pre-built Agent Skills, you can:
-
 <CardGroup cols={2}>
-  <Card title="API Guide" icon="book" href="/docs/en/build-with-claude/skills-guide">
-    Use Skills with the Claude API
+  <Card title="Skill authoring best practices" icon="edit" href="/docs/en/agents-and-tools/agent-skills/best-practices">
+    Learn how to write effective Skills that Claude can discover and use successfully.
   </Card>
 
-  <Card title="Create Custom Skills" icon="code" href="/docs/en/api/skills/create-skill">
-    Upload your own Skills for specialized tasks
+  <Card title="Using Agent Skills with the API" icon="book" href="/docs/en/build-with-claude/skills-guide">
+    Learn how to use Agent Skills to extend Claude's capabilities through the API.
   </Card>
 
-  <Card title="Authoring Guide" icon="edit" href="/docs/en/agents-and-tools/agent-skills/best-practices">
-    Learn best practices for writing effective Skills
+  <Card title="Create custom Skills" icon="code" href="/docs/en/api/skills/create-skill">
+    Upload your own Skills for specialized tasks.
   </Card>
 
   <Card title="Use Skills in Claude Code" icon="terminal" href="https://code.claude.com/docs/en/skills">
-    Learn about Skills in Claude Code
+    Learn about Skills in Claude Code.
   </Card>
 
   <Card title="Agent Skills Cookbook" icon="book" href="https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction">
-    Explore example Skills and implementation patterns
+    Explore example Skills and implementation patterns.
   </Card>
 </CardGroup>
