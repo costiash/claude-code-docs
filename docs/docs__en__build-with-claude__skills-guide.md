@@ -961,7 +961,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 </CodeGroup>
 
 <Note>
-  For complete details on the Files API, see the [Files API documentation](/docs/en/api/files-content).
+  For complete details on the Files API, see the [Files API documentation](/docs/en/api/beta/files/download).
 </Note>
 
 ### Multi-turn conversations

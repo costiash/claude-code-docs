@@ -4,7 +4,7 @@ Create an Admin API key for your Claude Console or Claude Enterprise organizatio
 
 ---
 
-Every API in the **Admin** section of this guide (the [Admin API](/docs/en/manage-claude/admin-api), [Analytics APIs](/docs/en/manage-claude/analytics-api), [Compliance API](/docs/en/manage-claude/compliance-api), [Spend Limits API](/docs/en/manage-claude/spend-limits-api), [Usage and Cost API](/docs/en/manage-claude/usage-cost-api), and [Rate Limits API](/docs/en/manage-claude/rate-limits-api)) is authenticated with an Admin API key. You do not need a separate key for each API.
+An Admin API key authenticates every API in the **Admin** section of this guide (the [Admin API](/docs/en/manage-claude/admin-api), [Analytics APIs](/docs/en/manage-claude/analytics-api), [Compliance API](/docs/en/manage-claude/compliance-api), [Spend Limits API](/docs/en/manage-claude/spend-limits-api), [Usage and Cost API](/docs/en/manage-claude/usage-cost-api), and [Rate Limits API](/docs/en/manage-claude/rate-limits-api)), with one exception: the Admin API's service-account, federation-issuer, and federation-rule endpoints accept only an OAuth bearer token with the `org:admin` scope; see [Obtain an OAuth bearer token](/docs/en/manage-claude/admin-api#oauth-bearer-token). You do not need a separate key for each API.
 
 Where you create the key depends on which Claude product your organization uses.
 
@@ -29,7 +29,7 @@ A key created in one organization cannot be used to manage a different organizat
   </Step>
 
   <Step title="Create the key">
-    Click **Create key**, give it a name, choose an [expiration](/docs/en/manage-claude/authentication#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full Admin API access.
+    Click **Create key**, give it a name, choose an [expiration](/docs/en/manage-claude/authentication#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
   </Step>
 
   <Step title="Copy and store the secret">

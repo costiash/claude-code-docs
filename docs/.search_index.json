@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-13T16:32:46Z",
+  "generated_at": "2026-07-13T19:15:53Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -36,13 +36,13 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "model",
-        "claude",
         "bedrock",
+        "claude",
         "amazon",
         "code",
         "aws",
-        "mantle",
         "credentials",
+        "mantle",
         "when",
         "account",
         "region",
@@ -56,7 +56,7 @@
         "see",
         "api"
       ],
-      "word_count": 3549,
+      "word_count": 3527,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -65,54 +65,54 @@
       "keywords": [
         "code",
         "claude",
-        "lines",
         "metrics",
+        "lines",
         "github",
         "users",
-        "prs",
-        "usage",
         "analytics",
+        "usage",
+        "prs",
         "contribution",
         "data",
+        "user",
+        "api",
+        "per",
         "dashboard",
         "adoption",
-        "user",
-        "team",
         "daily",
-        "sessions",
-        "per",
         "pull",
-        "track"
+        "team",
+        "sessions"
       ],
-      "word_count": 1590,
+      "word_count": 1679,
       "file_path": "docs/claude-code__analytics.md"
     },
     "/claude-code/checkpointing": {
       "title": "Checkpointing",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
       "keywords": [
-        "code",
         "conversation",
+        "code",
         "claude",
-        "summarize",
         "session",
+        "summarize",
         "rewind",
         "changes",
         "message",
         "file",
         "checkpoints",
         "before",
+        "prompt",
         "keeping",
         "here",
         "summary",
         "selected",
-        "prompt",
         "after",
         "input",
         "menu",
         "history"
       ],
-      "word_count": 898,
+      "word_count": 902,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -156,19 +156,19 @@
         "version",
         "see",
         "only",
-        "interactive",
         "sessions",
-        "requires",
+        "interactive",
         "default",
         "mcp",
         "file",
         "available",
+        "requires",
+        "background",
         "print",
         "model",
-        "min",
         "flag"
       ],
-      "word_count": 3954,
+      "word_count": 3948,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -196,7 +196,7 @@
         "directory",
         "specific"
       ],
-      "word_count": 2319,
+      "word_count": 2322,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -204,27 +204,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Manage costs ef...",
       "keywords": [
         "claude",
-        "code",
         "usage",
         "per",
+        "code",
+        "spend",
+        "token",
+        "user",
         "context",
         "costs",
         "when",
-        "token",
+        "api",
+        "console",
+        "limit",
+        "see",
+        "enterprise",
+        "each",
+        "teams",
         "tokens",
         "team",
-        "users",
-        "session",
-        "limits",
-        "teams",
-        "agent",
-        "user",
-        "tasks",
-        "work",
-        "thinking",
-        "workspace"
+        "limits"
       ],
-      "word_count": 2156,
+      "word_count": 3011,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -371,9 +371,9 @@
       "title": "Claude Code on Google Cloud's Agent Platform",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
-        "claude",
         "google",
         "cloud",
+        "claude",
         "model",
         "platform",
         "agent",
@@ -392,7 +392,7 @@
         "configuration",
         "div"
       ],
-      "word_count": 2131,
+      "word_count": 2103,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -439,16 +439,16 @@
         "file",
         "json",
         "call",
-        "run",
         "permission",
         "only",
+        "run",
         "example",
         "session",
         "input",
         "script",
         "exit"
       ],
-      "word_count": 6648,
+      "word_count": 6625,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "user",
         "control"
       ],
-      "word_count": 23337,
+      "word_count": 23312,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -616,7 +616,7 @@
         "configuration",
         "oauth"
       ],
-      "word_count": 8777,
+      "word_count": 8770,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -644,7 +644,7 @@
         "into",
         "preferences"
       ],
-      "word_count": 3884,
+      "word_count": 3868,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -819,28 +819,28 @@
       "title": "Create and distribute a plugin marketplace",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Create and dist...",
       "keywords": [
-        "plugin",
         "marketplace",
+        "plugin",
         "plugins",
+        "git",
         "code",
         "claude",
-        "git",
+        "when",
         "add",
         "string",
-        "see",
-        "directory",
-        "when",
-        "marketplaces",
         "url",
+        "see",
+        "marketplaces",
+        "directory",
+        "repository",
         "source",
-        "github",
         "paths",
+        "github",
         "entry",
         "version",
-        "repository",
         "sources"
       ],
-      "word_count": 7449,
+      "word_count": 7873,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -894,9 +894,9 @@
         "test",
         "install",
         "name",
-        "lsp"
+        "one"
       ],
-      "word_count": 3078,
+      "word_count": 3101,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -945,14 +945,14 @@
         "bash",
         "when",
         "directory",
+        "mode",
         "wsl",
         "inside",
         "sandboxing",
-        "mode",
         "managed",
         "proxy"
       ],
-      "word_count": 4858,
+      "word_count": 4865,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "user",
         "mcp"
       ],
-      "word_count": 14294,
+      "word_count": 14275,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1112,15 +1112,15 @@
         "only",
         "prompt",
         "context",
-        "model",
         "same",
+        "model",
         "fork",
         "task",
-        "name",
         "version",
+        "name",
         "background"
       ],
-      "word_count": 9957,
+      "word_count": 10027,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1146,9 +1146,9 @@
         "token",
         "shift",
         "such",
-        "vim"
+        "fullscreen"
       ],
-      "word_count": 2639,
+      "word_count": 2643,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -43886,7 +43886,7 @@
     },
     "/docs/en/build-with-claude/context-windows": {
       "title": "Context windows",
-      "content_preview": "# Context windows  Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.  ---  <Note>   This feature is eligible...",
+      "content_preview": "# Context windows  Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.  ---  As conversations grow, you'll eve...",
       "keywords": [
         "context",
         "thinking",
@@ -43901,15 +43901,15 @@
         "output",
         "input",
         "blocks",
-        "api",
         "previous",
+        "api",
         "turn",
         "sonnet",
         "request",
         "count",
         "block"
       ],
-      "word_count": 2011,
+      "word_count": 1979,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -44418,7 +44418,7 @@
     },
     "/docs/en/build-with-claude/task-budgets": {
       "title": "Task budgets",
-      "content_preview": "# Task budgets  Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.  ---  <Note>   This feature is eligible for [Zero Data Retention (...",
+      "content_preview": "# Task budgets  Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.  ---  Task budgets let you tell Claude how many tokens it has for ...",
       "keywords": [
         "claude",
         "budget",
@@ -44429,19 +44429,19 @@
         "agentic",
         "loop",
         "turn",
+        "thinking",
         "countdown",
         "request",
         "model",
-        "thinking",
         "across",
         "full",
         "set",
         "than",
+        "side",
         "client",
-        "token",
-        "side"
+        "token"
       ],
-      "word_count": 2658,
+      "word_count": 2844,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -44670,7 +44670,7 @@
     },
     "/docs/en/manage-claude/admin-api-keys": {
       "title": "Create an Admin API key",
-      "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  Every API in the **Admin** section of this guide (the [Admin API](/docs/en/manage-cl...",
+      "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  An Admin API key authenticates every API in the **Admin** section of this guide (the...",
       "keywords": [
         "api",
         "organization",
@@ -44684,16 +44684,16 @@
         "title",
         "enterprise",
         "limits",
+        "keys",
         "spend",
         "analytics",
-        "keys",
         "card",
         "console",
         "settings",
         "owner",
         "apis"
       ],
-      "word_count": 800,
+      "word_count": 849,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
@@ -44708,20 +44708,20 @@
         "members",
         "key",
         "see",
+        "token",
         "workspaces",
         "claude",
+        "federation",
         "accordion",
         "invites",
-        "federation",
-        "codegroup",
-        "only",
-        "role",
         "oauth",
-        "token",
-        "create",
-        "workspace"
+        "only",
+        "codegroup",
+        "access",
+        "role",
+        "create"
       ],
-      "word_count": 1349,
+      "word_count": 1463,
       "file_path": "docs/docs__en__manage-claude__admin-api.md"
     },
     "/docs/en/manage-claude/analytics-api": {
@@ -44777,7 +44777,7 @@
         "title",
         "under"
       ],
-      "word_count": 3486,
+      "word_count": 3525,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -45174,7 +45174,7 @@
     },
     "/docs/en/manage-claude/data-residency": {
       "title": "Data residency",
-      "content_preview": "# Data residency  Manage where model inference runs and where data is stored with geographic controls.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claud...",
+      "content_preview": "# Data residency  Manage where model inference runs and where data is stored with geographic controls.  ---  Data residency controls let you manage where your data is processed and stored. Two indepen...",
       "keywords": [
         "workspace",
         "claude",
@@ -45193,8 +45193,8 @@
         "request",
         "console",
         "model",
-        "through",
         "settings",
+        "through",
         "platform"
       ],
       "word_count": 1252,
@@ -45309,7 +45309,7 @@
         "oauth",
         "workspace"
       ],
-      "word_count": 1595,
+      "word_count": 1597,
       "file_path": "docs/docs__en__manage-claude__wif-admin-api.md"
     },
     "/docs/en/manage-claude/wif-providers/aws": {
@@ -45488,24 +45488,24 @@
         "spire",
         "workload",
         "jwt",
+        "api",
         "discovery",
         "svid",
-        "api",
         "federation",
-        "issuer",
         "anthropic",
         "provider",
+        "issuer",
         "oidc",
-        "rule",
         "url",
-        "server",
         "token",
+        "rule",
         "helper",
-        "jwks",
-        "every",
-        "agent"
+        "claude",
+        "server",
+        "kubernetes",
+        "identity"
       ],
-      "word_count": 3090,
+      "word_count": 3216,
       "file_path": "docs/docs__en__manage-claude__wif-providers__spiffe.md"
     },
     "/docs/en/manage-claude/wif-reference": {
@@ -45701,7 +45701,7 @@
         "new",
         "tip"
       ],
-      "word_count": 2393,
+      "word_count": 2397,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -46098,22 +46098,22 @@
     },
     "/docs/en/managed-agents/self-hosted-sandboxes": {
       "title": "Self-hosted sandboxes",
-      "content_preview": "# Self-hosted sandboxes  Run agent sessions in your own self-hosted sandbox environment.  ---  By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](/docs/en/ma...",
+      "content_preview": "# Self-hosted sandboxes  Run Claude Managed Agents sessions in self-hosted sandboxes, keeping tool execution, files, and network egress in your own infrastructure.  ---  By default, Managed Agents exe...",
       "keywords": [
         "worker",
         "tool",
         "session",
         "mcp",
         "environment",
-        "agent",
         "tools",
+        "agent",
         "work",
         "step",
         "codegroup",
-        "sandbox",
         "server",
         "key",
         "title",
+        "sandbox",
         "sdk",
         "anthropic",
         "when",
@@ -46121,7 +46121,7 @@
         "self",
         "host"
       ],
-      "word_count": 7382,
+      "word_count": 7392,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {

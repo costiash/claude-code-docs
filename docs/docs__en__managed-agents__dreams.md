@@ -164,7 +164,7 @@ The dream produces another **output memory store**, separate from the input. The
   ```
 </CodeGroup>
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-8`, `claude-opus-4-7`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -658,10 +658,10 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 
 ## Limits
 
-| Limit                 | Value                                                     |
-| --------------------- | --------------------------------------------------------- |
-| Sessions per dream    | 100                                                       |
-| `instructions` length | 4,096 characters                                          |
-| Supported models      | `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-4-6` |
+| Limit                 | Value                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| Sessions per dream    | 100                                                                                            |
+| `instructions` length | 4,096 characters                                                                               |
+| Supported models      | `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, `claude-sonnet-4-6` |
 
 Default rate limits apply to dream creation while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
