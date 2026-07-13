@@ -9399,8 +9399,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "b4b1ddb0d5c73bf7db4af3b045828dae4189939f5aa82baa4cc64a9bf48e0d4c",
-      "last_updated": "2026-07-11T04:35:03.779213"
+      "hash": "064e63cffc1e3aec650f45509f7bf3c0571db50fd4a849f64ede8f1f173c5b75",
+      "last_updated": "2026-07-13T16:26:11.653681"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -9999,11 +9999,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-13T13:29:38.059227",
-    "fetch_duration_seconds": 2211.354797,
-    "total_pages_discovered": 2042,
+    "last_fetch_completed": "2026-07-13T16:32:42.516449",
+    "fetch_duration_seconds": 2280.38111,
+    "total_pages_discovered": 2043,
     "pages_fetched_successfully": 1666,
-    "pages_failed": 377,
+    "pages_failed": 378,
     "failed_pages": [
       "/docs/en/admin-setup",
       "/docs/en/advisor",
@@ -10323,6 +10323,7 @@
       "/docs/en/desktop-linux",
       "/docs/en/desktop-quickstart",
       "/docs/en/desktop-scheduled-tasks",
+      "/docs/en/desktop-wsl",
       "/docs/en/discover-plugins",
       "/docs/en/env-vars",
       "/docs/en/errors",
@@ -10388,7 +10389,7 @@
     "total_files": 1666,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-13T13:29:38.059248",
+  "last_updated": "2026-07-13T16:32:42.516474",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

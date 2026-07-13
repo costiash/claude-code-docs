@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-13T13:29:41Z",
+  "generated_at": "2026-07-13T16:32:46Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -271,16 +271,16 @@
         "open",
         "changes",
         "app",
+        "windows",
         "permission",
         "files",
         "diff",
-        "windows",
         "see",
         "external",
         "settings",
         "review"
       ],
-      "word_count": 9348,
+      "word_count": 9379,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
