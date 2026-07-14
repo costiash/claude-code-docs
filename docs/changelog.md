@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.209
+
+- Fixed /model and other dialogs being blocked in `claude agents` background sessions (reverts an overly broad guard)
+
 ## 2.1.208
 
 - Added screen reader mode: opt-in plain-text rendering for screen reader users. Run `claude --ax-screen-reader`, set CLAUDE_AX_SCREEN_READER=1, or add "axScreenReader": true to settings.
