@@ -134,11 +134,605 @@ Here's a minimal example using a server tool, the [Web search tool](/docs/en/age
   ```
 </CodeGroup>
 
-Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) and [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls) cover that round trip.
+Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](/docs/en/agents-and-tools/tool-use/define-tools) and [handling tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 ## How tool use works
 
 Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code executes the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](/docs/en/build-with-claude/handling-stop-reasons#tool-use)).
+
+Here's that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
+
+<CodeGroup>
+  ```bash cURL
+  # Claude replies with a tool_use block naming the tool and its arguments.
+  TOOLS='[
+    {
+      "name": "get_weather",
+      "description": "Get the current weather for a given location.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "location": {"type": "string", "description": "City and state, e.g. San Francisco, CA"}
+        },
+        "required": ["location"]
+      }
+    }
+  ]'
+  USER_MSG="What's the weather in San Francisco?"
+  RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d "$(jq -n --argjson tools "$TOOLS" --arg msg "$USER_MSG" '{
+      model: "claude-opus-4-8",
+      max_tokens: 1024,
+      tools: $tools,
+      # Ask for at most one tool call per turn.
+      tool_choice: {type: "auto", disable_parallel_tool_use: true},
+      messages: [{role: "user", content: $msg}]
+    }')")
+  TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
+  echo "Claude called $(echo "$TOOL_USE" | jq -r '.name') with $(echo "$TOOL_USE" | jq -c '.input')"
+
+  # Run the tool, then send the result back in a tool_result block.
+  WEATHER="15 degrees Celsius, partly cloudy"
+  FOLLOWUP=$(curl -s https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d "$(jq -n \
+      --argjson tools "$TOOLS" \
+      --arg msg "$USER_MSG" \
+      --argjson assistant "$(echo "$RESPONSE" | jq '.content')" \
+      --arg tool_use_id "$(echo "$TOOL_USE" | jq -r '.id')" \
+      --arg weather "$WEATHER" \
+      '{
+        model: "claude-opus-4-8",
+        max_tokens: 1024,
+        tools: $tools,
+        tool_choice: {type: "auto", disable_parallel_tool_use: true},
+        messages: [
+          {role: "user", content: $msg},
+          {role: "assistant", content: $assistant},
+          {role: "user", content: [
+            {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
+          ]}
+        ]
+      }')")
+
+  # Claude uses the result to answer the original question.
+  echo "$FOLLOWUP" | jq -r '.content[] | select(.type == "text") | .text'
+  ```
+
+  ```bash CLI
+  # ant reads the request body as YAML on stdin; jq carries the conversation
+  # state into the second request.
+  USER_MSG="What's the weather in San Francisco?"
+  MESSAGES=$(jq -n --arg msg "$USER_MSG" '[{role: "user", content: $msg}]')
+  call_api() {
+    {
+      cat <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1024
+  # Ask for at most one tool call per turn.
+  tool_choice: {type: auto, disable_parallel_tool_use: true}
+  tools:
+    - name: get_weather
+      description: Get the current weather for a given location.
+      input_schema:
+        type: object
+        properties:
+          location: {type: string, description: "City and state, e.g. San Francisco, CA"}
+        required: [location]
+  YAML
+      printf 'messages: %s\n' "$MESSAGES"
+    } | ant messages create --format json
+  }
+
+  # Claude replies with a tool_use block naming the tool and its arguments.
+  RESPONSE=$(call_api)
+  TOOL_USE=$(jq '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
+  echo "Claude called $(jq -r '.name' <<<"$TOOL_USE") with $(jq -c '.input' <<<"$TOOL_USE")"
+
+  # Run the tool, then send the result back in a tool_result block.
+  WEATHER="15 degrees Celsius, partly cloudy"
+  MESSAGES=$(jq \
+    --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
+    --arg tool_use_id "$(jq -r '.id' <<<"$TOOL_USE")" \
+    --arg weather "$WEATHER" \
+    '. + [
+      {role: "assistant", content: $assistant},
+      {role: "user", content: [
+        {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
+      ]}
+    ]' <<<"$MESSAGES")
+  FOLLOWUP=$(call_api)
+
+  # Claude uses the result to answer the original question.
+  jq -r '.content[] | select(.type == "text") | .text' <<<"$FOLLOWUP"
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+
+  tools = [
+      {
+          "name": "get_weather",
+          "description": "Get the current weather for a given location.",
+          "input_schema": {
+              "type": "object",
+              "properties": {
+                  "location": {
+                      "type": "string",
+                      "description": "City and state, e.g. San Francisco, CA",
+                  }
+              },
+              "required": ["location"],
+          },
+      }
+  ]
+  messages = [{"role": "user", "content": "What's the weather in San Francisco?"}]
+
+  # Claude replies with a tool_use block naming the tool and its arguments.
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      tools=tools,
+      # Ask for at most one tool call per turn.
+      tool_choice={"type": "auto", "disable_parallel_tool_use": True},
+      messages=messages,
+  )
+  tool_use = next(block for block in response.content if block.type == "tool_use")
+  print(f"Claude called {tool_use.name} with {json.dumps(tool_use.input)}")
+
+  # Run the tool, then send the result back in a tool_result block.
+  weather = "15 degrees Celsius, partly cloudy"  # your weather lookup goes here
+  messages += [
+      {"role": "assistant", "content": response.content},
+      {
+          "role": "user",
+          "content": [
+              {"type": "tool_result", "tool_use_id": tool_use.id, "content": weather}
+          ],
+      },
+  ]
+  followup = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      tools=tools,
+      tool_choice={"type": "auto", "disable_parallel_tool_use": True},
+      messages=messages,
+  )
+
+  # Claude uses the result to answer the original question.
+  final_text = next(block for block in followup.content if block.type == "text")
+  print(final_text.text)
+  ```
+
+  ```typescript TypeScript
+  const client = new Anthropic();
+
+  const tools: Anthropic.Tool[] = [
+    {
+      name: "get_weather",
+      description: "Get the current weather for a given location.",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: { type: "string", description: "City and state, e.g. San Francisco, CA" }
+        },
+        required: ["location"]
+      }
+    }
+  ];
+  const messages: Anthropic.MessageParam[] = [
+    { role: "user", content: "What's the weather in San Francisco?" }
+  ];
+
+  // Claude replies with a tool_use block naming the tool and its arguments.
+  const response = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools,
+    // Ask for at most one tool call per turn.
+    tool_choice: { type: "auto", disable_parallel_tool_use: true },
+    messages
+  });
+  const toolUse = response.content.find(
+    (block): block is Anthropic.ToolUseBlock => block.type === "tool_use"
+  )!;
+  console.log(`Claude called ${toolUse.name} with ${JSON.stringify(toolUse.input)}`);
+
+  // Run the tool, then send the result back in a tool_result block.
+  const weather = "15 degrees Celsius, partly cloudy"; // your weather lookup goes here
+  messages.push(
+    { role: "assistant", content: response.content },
+    {
+      role: "user",
+      content: [{ type: "tool_result", tool_use_id: toolUse.id, content: weather }]
+    }
+  );
+  const followup = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools,
+    tool_choice: { type: "auto", disable_parallel_tool_use: true },
+    messages
+  });
+
+  // Claude uses the result to answer the original question.
+  const finalText = followup.content.find(
+    (block): block is Anthropic.TextBlock => block.type === "text"
+  )!;
+  console.log(finalText.text);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  List<ToolUnion> tools =
+  [
+      new ToolUnion(new Tool()
+      {
+          Name = "get_weather",
+          Description = "Get the current weather for a given location.",
+          InputSchema = new InputSchema()
+          {
+              Properties = new Dictionary<string, JsonElement>
+              {
+                  ["location"] = JsonSerializer.SerializeToElement(new
+                  {
+                      type = "string",
+                      description = "City and state, e.g. San Francisco, CA",
+                  }),
+              },
+              Required = ["location"],
+          },
+      }),
+  ];
+
+  // Ask for at most one tool call per turn.
+  var toolChoice = new ToolChoice(new ToolChoiceAuto { DisableParallelToolUse = true });
+
+  const string userPrompt = "What's the weather in San Francisco?";
+
+  // Claude replies with a tool_use block naming the tool and its arguments.
+  var response = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Tools = tools,
+      ToolChoice = toolChoice,
+      Messages = [new() { Role = Role.User, Content = userPrompt }],
+  });
+  ToolUseBlock? toolUse = null;
+  foreach (var block in response.Content)
+  {
+      if (block.TryPickToolUse(out var picked))
+      {
+          toolUse = picked;
+          break;
+      }
+  }
+  Console.WriteLine($"Claude called {toolUse!.Name} with {JsonSerializer.Serialize(toolUse.Input)}");
+
+  // Run the tool, then send the result back in a tool_result block.
+  var weather = "15 degrees Celsius, partly cloudy";
+  List<ContentBlockParam> toolResults =
+  [
+      new ContentBlockParam(new ToolResultBlockParam()
+      {
+          ToolUseID = toolUse.ID,
+          Content = weather,
+      }),
+  ];
+  var followup = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Tools = tools,
+      ToolChoice = toolChoice,
+      Messages =
+      [
+          new() { Role = Role.User, Content = userPrompt },
+          new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+          new() { Role = Role.User, Content = new MessageParamContent(toolResults) },
+      ],
+  });
+
+  // Claude uses the result to answer the original question.
+  foreach (var block in followup.Content)
+  {
+      if (block.TryPickText(out var text))
+      {
+          Console.WriteLine(text.Text);
+      }
+  }
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+  ctx := context.Background()
+
+  tools := []anthropic.ToolUnionParam{
+  	{OfTool: &anthropic.ToolParam{
+  		Name:        "get_weather",
+  		Description: anthropic.String("Get the current weather for a given location."),
+  		InputSchema: anthropic.ToolInputSchemaParam{
+  			Properties: map[string]any{
+  				"location": map[string]any{
+  					"type":        "string",
+  					"description": "City and state, e.g. San Francisco, CA",
+  				},
+  			},
+  			Required: []string{"location"},
+  		},
+  	}},
+  }
+  // Ask for at most one tool call per turn.
+  toolChoice := anthropic.ToolChoiceUnionParam{
+  	OfAuto: &anthropic.ToolChoiceAutoParam{DisableParallelToolUse: anthropic.Bool(true)},
+  }
+  messages := []anthropic.MessageParam{
+  	anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in San Francisco?")),
+  }
+
+  // Claude replies with a tool_use block naming the tool and its arguments.
+  response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+  	Model:      anthropic.ModelClaudeOpus4_8,
+  	MaxTokens:  1024,
+  	Tools:      tools,
+  	ToolChoice: toolChoice,
+  	Messages:   messages,
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  var toolUse anthropic.ContentBlockUnion
+  for _, block := range response.Content {
+  	if block.Type == "tool_use" {
+  		toolUse = block
+  		break
+  	}
+  }
+  fmt.Printf("Claude called %s with %s\n", toolUse.Name, string(toolUse.Input))
+
+  // Run the tool, then send the result back in a tool_result block.
+  weather := "15 degrees Celsius, partly cloudy"
+  var assistantContent []anthropic.ContentBlockParamUnion
+  for _, block := range response.Content {
+  	assistantContent = append(assistantContent, block.ToParam())
+  }
+  messages = append(messages,
+  	anthropic.NewAssistantMessage(assistantContent...),
+  	anthropic.NewUserMessage(anthropic.NewToolResultBlock(toolUse.ID, weather, false)),
+  )
+  followup, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+  	Model:      anthropic.ModelClaudeOpus4_8,
+  	MaxTokens:  1024,
+  	Tools:      tools,
+  	ToolChoice: toolChoice,
+  	Messages:   messages,
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  // Claude uses the result to answer the original question.
+  for _, block := range followup.Content {
+  	if block.Type == "text" {
+  		fmt.Println(block.Text)
+  	}
+  }
+  ```
+
+  ```java Java
+  import com.anthropic.core.JsonValue;
+  import com.anthropic.models.messages.ContentBlockParam;
+  // ...
+  import com.anthropic.models.messages.Tool;
+  import com.anthropic.models.messages.Tool.InputSchema;
+  import com.anthropic.models.messages.ToolChoiceAuto;
+  import com.anthropic.models.messages.ToolResultBlockParam;
+  import com.anthropic.models.messages.ToolUseBlock;
+  // ...
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      Tool weatherTool = Tool.builder()
+          .name("get_weather")
+          .description("Get the current weather for a given location.")
+          .inputSchema(InputSchema.builder()
+              .properties(JsonValue.from(Map.of(
+                  "location", Map.of(
+                      "type", "string",
+                      "description", "City and state, e.g. San Francisco, CA"
+                  )
+              )))
+              .required(List.of("location"))
+              .build())
+          .build();
+
+      // Ask for at most one tool call per turn.
+      ToolChoiceAuto toolChoice = ToolChoiceAuto.builder()
+          .disableParallelToolUse(true)
+          .build();
+
+      String userPrompt = "What's the weather in San Francisco?";
+
+      // Claude replies with a tool_use block naming the tool and its arguments.
+      Message response = client.messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addTool(weatherTool)
+          .toolChoice(toolChoice)
+          .addUserMessage(userPrompt)
+          .build());
+      ToolUseBlock toolUse = response.content().stream()
+          .flatMap(block -> block.toolUse().stream())
+          .findFirst()
+          .orElseThrow();
+      IO.println("Claude called " + toolUse.name() + " with " + toolUse._input());
+
+      // Run the tool, then send the result back in a tool_result block.
+      String weather = "15 degrees Celsius, partly cloudy";
+      Message followup = client.messages().create(MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addTool(weatherTool)
+          .toolChoice(toolChoice)
+          .addUserMessage(userPrompt)
+          .addMessage(response)
+          .addUserMessageOfBlockParams(List.of(ContentBlockParam.ofToolResult(
+              ToolResultBlockParam.builder()
+                  .toolUseId(toolUse.id())
+                  .content(weather)
+                  .build())))
+          .build());
+
+      // Claude uses the result to answer the original question.
+      followup.content().stream()
+          .flatMap(block -> block.text().stream())
+          .forEach(textBlock -> IO.println(textBlock.text()));
+  }
+  ```
+
+  ```php PHP
+  use Anthropic\Messages\ToolChoiceAuto;
+
+  $client = new Client();
+
+  $tools = [
+      [
+          'name' => 'get_weather',
+          'description' => 'Get the current weather for a given location.',
+          'input_schema' => [
+              'type' => 'object',
+              'properties' => [
+                  'location' => [
+                      'type' => 'string',
+                      'description' => 'City and state, e.g. San Francisco, CA',
+                  ],
+              ],
+              'required' => ['location'],
+          ],
+      ],
+  ];
+  $userMessage = ['role' => 'user', 'content' => "What's the weather in San Francisco?"];
+
+  // Ask for at most one tool call per turn.
+  $toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
+
+  // Claude replies with a tool_use block naming the tool and its arguments.
+  $response = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      tools: $tools,
+      toolChoice: $toolChoice,
+      messages: [$userMessage],
+  );
+  $toolUse = null;
+  foreach ($response->content as $block) {
+      if ($block->type === 'tool_use') {
+          $toolUse = $block;
+          break;
+      }
+  }
+  printf("Claude called %s with %s\n", $toolUse->name, json_encode($toolUse->input));
+
+  // Run the tool, then send the result back in a tool_result block.
+  $weather = '15 degrees Celsius, partly cloudy';
+  $followup = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      tools: $tools,
+      toolChoice: $toolChoice,
+      messages: [
+          $userMessage,
+          ['role' => 'assistant', 'content' => $response->content],
+          [
+              'role' => 'user',
+              'content' => [
+                  [
+                      'type' => 'tool_result',
+                      'tool_use_id' => $toolUse->id,
+                      'content' => $weather,
+                  ],
+              ],
+          ],
+      ],
+  );
+
+  // Claude uses the result to answer the original question.
+  foreach ($followup->content as $block) {
+      if ($block->type === 'text') {
+          echo $block->text, "\n";
+      }
+  }
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  tools = [
+    {
+      name: "get_weather",
+      description: "Get the current weather for a given location.",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {type: "string", description: "City and state, e.g. San Francisco, CA"}
+        },
+        required: ["location"]
+      }
+    }
+  ]
+  messages = [{role: "user", content: "What's the weather in San Francisco?"}]
+
+  # Claude replies with a tool_use block naming the tool and its arguments.
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: tools,
+    # Ask for at most one tool call per turn.
+    tool_choice: {type: "auto", disable_parallel_tool_use: true},
+    messages: messages
+  )
+  tool_use = response.content.find { |block| block.type == :tool_use }
+  puts "Claude called #{tool_use.name} with #{JSON.generate(tool_use.input)}"
+
+  # Run the tool, then send the result back in a tool_result block.
+  weather = "15 degrees Celsius, partly cloudy"
+  messages += [
+    {role: "assistant", content: response.content},
+    {
+      role: "user",
+      content: [
+        {type: "tool_result", tool_use_id: tool_use.id, content: weather}
+      ]
+    }
+  ]
+  followup = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    tools: tools,
+    tool_choice: {type: "auto", disable_parallel_tool_use: true},
+    messages: messages
+  )
+
+  # Claude uses the result to answer the original question.
+  final_text = followup.content.find { |block| block.type == :text }
+  puts final_text.text
+  ```
+</CodeGroup>
+
+```text Output wrap
+Claude called get_weather with {"location": "San Francisco, CA"}
+The current weather in San Francisco is 15 degrees Celsius with partly cloudy skies.
+```
+
+[Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls) covers each step in detail, including result formatting and error signaling; [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use) covers responses that call several tools at once. To skip writing this round trip yourself, use [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner): the SDKs execute your tools and send the results back automatically.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](/docs/en/agents-and-tools/tool-use/how-tool-use-works).
 

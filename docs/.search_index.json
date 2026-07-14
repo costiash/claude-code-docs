@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-13T22:00:16Z",
+  "generated_at": "2026-07-14T01:12:47Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "improved",
         "after",
         "tool",
-        "being",
         "background",
+        "being",
         "mcp",
-        "code",
         "agent",
+        "code",
         "prompt",
         "showing",
         "model"
       ],
-      "word_count": 64290,
+      "word_count": 65322,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9595,
+      "word_count": 9729,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -458,8 +458,8 @@
         "hook",
         "hooks",
         "claude",
-        "when",
         "tool",
+        "when",
         "code",
         "field",
         "input",
@@ -474,9 +474,9 @@
         "file",
         "event",
         "user",
-        "control"
+        "before"
       ],
-      "word_count": 23388,
+      "word_count": 23446,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -517,22 +517,22 @@
         "plugin",
         "wsl",
         "jetbrains",
+        "file",
         "command",
         "terminal",
         "step",
         "settings",
-        "ides",
         "windows",
+        "cli",
+        "when",
+        "ides",
         "restart",
         "install",
-        "running",
-        "installed",
-        "run",
         "configuration",
         "remote",
-        "host"
+        "networking"
       ],
-      "word_count": 1185,
+      "word_count": 1711,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -651,28 +651,28 @@
       "title": "Claude Code on Microsoft Foundry",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
-        "microsoft",
         "claude",
+        "microsoft",
         "foundry",
         "code",
         "model",
-        "azure",
         "set",
-        "div",
+        "azure",
         "resource",
+        "div",
+        "variables",
         "environment",
         "classname",
         "create",
         "authentication",
         "default",
-        "variables",
+        "name",
+        "deployment",
         "haiku",
         "when",
-        "documentation",
-        "configuration",
-        "const"
+        "documentation"
       ],
-      "word_count": 1100,
+      "word_count": 1197,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -748,15 +748,15 @@
         "store",
         "native",
         "set",
-        "configuration",
-        "trust",
         "anthropic",
         "network",
+        "configuration",
+        "trust",
+        "access",
         "custom",
-        "security",
-        "through"
+        "security"
       ],
-      "word_count": 986,
+      "word_count": 990,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -1159,24 +1159,24 @@
         "code",
         "through",
         "aws",
+        "proxy",
         "enterprise",
         "cloud",
+        "gateway",
         "tab",
         "platform",
-        "gateway",
-        "proxy",
         "environment",
         "configuration",
         "more",
+        "corporate",
         "llm",
         "variables",
         "div",
         "teams",
-        "microsoft",
-        "default",
-        "corporate"
+        "bedrock",
+        "microsoft"
       ],
-      "word_count": 1623,
+      "word_count": 1678,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5455,
+      "word_count": 5507,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -1980,15 +1980,15 @@
         "when",
         "see",
         "call",
+        "calls",
         "anthropic",
         "server",
         "search",
+        "code",
         "model",
-        "calls",
-        "web",
-        "code"
+        "client"
       ],
-      "word_count": 1785,
+      "word_count": 3914,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -13671,21 +13671,21 @@
         "performed",
         "automated",
         "user",
+        "credential",
+        "identifier",
         "api",
         "null",
-        "identifier",
-        "credential",
         "compliance",
-        "example",
         "without",
-        "uuid",
+        "example",
         "anthropic",
-        "login",
+        "uuid",
         "verified",
-        "unique",
-        "events"
+        "login",
+        "events",
+        "unique"
       ],
-      "word_count": 255035,
+      "word_count": 271061,
       "file_path": "docs/docs__en__api__compliance.md"
     },
     "/docs/en/api/compliance/activities": {
@@ -13699,21 +13699,21 @@
         "performed",
         "automated",
         "user",
-        "api",
         "credential",
+        "api",
         "null",
         "identifier",
         "anthropic",
+        "without",
+        "verified",
         "compliance",
         "example",
         "login",
         "uuid",
-        "verified",
-        "without",
         "events",
-        "unique"
+        "customer"
       ],
-      "word_count": 241722,
+      "word_count": 257730,
       "file_path": "docs/docs__en__api__compliance__activities.md"
     },
     "/docs/en/api/compliance/activities/list": {
@@ -13724,24 +13724,24 @@
         "organization",
         "when",
         "occurred",
-        "user",
         "performed",
+        "user",
         "automated",
-        "api",
         "credential",
+        "api",
         "null",
         "identifier",
         "anthropic",
-        "compliance",
-        "verified",
         "without",
+        "verified",
+        "compliance",
         "login",
         "example",
         "uuid",
         "events",
-        "unique"
+        "customer"
       ],
-      "word_count": 125285,
+      "word_count": 133681,
       "file_path": "docs/docs__en__api__compliance__activities__list.md"
     },
     "/docs/en/api/compliance/apps": {
@@ -14546,7 +14546,7 @@
         "before",
         "parameters"
       ],
-      "word_count": 1363,
+      "word_count": 1381,
       "file_path": "docs/docs__en__api__compliance__code.md"
     },
     "/docs/en/api/compliance/code/artifacts": {
@@ -14574,7 +14574,7 @@
         "before",
         "parameters"
       ],
-      "word_count": 1361,
+      "word_count": 1379,
       "file_path": "docs/docs__en__api__compliance__code__artifacts.md"
     },
     "/docs/en/api/compliance/code/artifacts/delete": {
@@ -14630,7 +14630,7 @@
         "field",
         "next"
       ],
-      "word_count": 732,
+      "word_count": 741,
       "file_path": "docs/docs__en__api__compliance__code__artifacts__list.md"
     },
     "/docs/en/api/compliance/code/artifacts/retrieve_version": {
@@ -43809,23 +43809,23 @@
         "platform",
         "api",
         "console",
-        "anthropic",
         "see",
+        "anthropic",
         "workspace",
+        "account",
         "iam",
         "bedrock",
-        "account",
+        "organization",
         "through",
         "available",
         "data",
-        "sigv",
-        "note",
-        "model",
-        "yes",
-        "access",
-        "authentication"
+        "first",
+        "usage",
+        "managed",
+        "request",
+        "limits"
       ],
-      "word_count": 6853,
+      "word_count": 7518,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -44760,24 +44760,24 @@
         "claude",
         "zdr",
         "data",
-        "api",
         "hipaa",
+        "api",
         "yes",
         "retention",
+        "organization",
         "features",
         "anthropic",
-        "accordion",
         "see",
-        "organization",
+        "readiness",
+        "accordion",
         "feature",
         "tool",
         "status",
-        "readiness",
         "code",
         "title",
         "under"
       ],
-      "word_count": 3525,
+      "word_count": 3778,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {

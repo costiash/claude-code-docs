@@ -666,6 +666,49 @@ IT teams can manage the desktop app through MDM on macOS or group policy on Wind
 * **macOS**: configure via `com.anthropic.claudefordesktop` preference domain using tools like Jamf or Kandji
 * **Windows**: configure via registry at `SOFTWARE\Policies\Claude`
 
+### Network access requirements
+
+Desktop loads its application code and user content from Anthropic CDN hosts.
+
+```text theme={null}
+anthropic.com
+*.anthropic.com
+claude.ai
+*.claude.ai
+claude.com
+*.claude.com
+claude.app
+*.claude.app
+*.claudeusercontent.com
+*.claudemcpcontent.com
+```
+
+Traffic is HTTPS on port 443 unless you configure a custom port for [OTLP](/en/monitoring-usage), an LLM gateway, or an MCP server.
+
+For proxy servers, custom certificate authorities, mTLS, and the domains the standalone CLI needs, see [network configuration](/en/network-config).
+
+To reduce the number of firewall wildcards, allow these Anthropic hosts instead. Certain subdomains are dynamically generated and must remain wildcards.
+
+```text theme={null}
+anthropic.com
+api.anthropic.com
+a-api.anthropic.com
+a-cdn.anthropic.com
+s-cdn.anthropic.com
+assets-proxy.anthropic.com
+claude.ai
+a.claude.ai
+a-cdn.claude.ai
+assets.claude.ai
+downloads.claude.ai
+*.livepreview.claude.ai
+claude.com
+platform.claude.com
+*.livepreview.claude.app
+*.claudeusercontent.com
+*.claudemcpcontent.com
+```
+
 ### Authentication and SSO
 
 Enterprise organizations can require SSO for all users. See [authentication](/en/authentication) for plan-level details and [Setting up SSO](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso) for SAML and OIDC configuration.
@@ -681,7 +724,7 @@ Desktop can be distributed through enterprise deployment tools:
 * **macOS**: distribute via MDM such as Jamf or Kandji using the `.dmg` installer
 * **Windows**: deploy via MSIX package or `.exe` installer. See [Deploy Claude Desktop for Windows](https://support.claude.com/en/articles/12622703-deploy-claude-desktop-for-windows) for enterprise deployment options including silent installation
 
-For network configuration such as proxy settings, firewall allowlisting, and LLM gateways, see [network configuration](/en/network-config).
+For the domains to allowlist in your firewall, see [network access requirements](#network-access-requirements) above. For proxy settings, custom certificate authorities, and LLM gateways, see [network configuration](/en/network-config).
 
 For the full enterprise configuration reference, see the [enterprise configuration guide](https://support.claude.com/en/articles/12622667-enterprise-configuration).
 
@@ -786,7 +829,8 @@ If the app opens but shows a blank or unresponsive screen:
 
 1. Restart the app.
 2. Check for pending updates. On macOS and Windows the app auto-updates on launch; on Linux, update through apt as described in [Claude Desktop on Linux](/en/desktop-linux).
-3. On Windows, check Event Viewer for crash logs under **Windows Logs → Application**.
+3. On a managed network, confirm your firewall allows the CDN hosts in [network access requirements](#network-access-requirements).
+4. On Windows, check Event Viewer for crash logs under **Windows Logs → Application**.
 
 ### "Failed to load session"
 

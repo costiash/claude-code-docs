@@ -79,13 +79,15 @@ returned.
 
     Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read_mode widened.
 
-  - `read_mode: "org" or "owner" or "users"`
+  - `read_mode: "org" or "owner" or "public" or "users"`
 
-    Who can view this Artifact: only its owner, a named set of users, or every member of its organization
+    Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
 
     - `"org"`
 
     - `"owner"`
+
+    - `"public"`
 
     - `"users"`
 
@@ -284,13 +286,15 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
 
     Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read_mode widened.
 
-  - `read_mode: "org" or "owner" or "users"`
+  - `read_mode: "org" or "owner" or "public" or "users"`
 
-    Who can view this Artifact: only its owner, a named set of users, or every member of its organization
+    Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
 
     - `"org"`
 
     - `"owner"`
+
+    - `"public"`
 
     - `"users"`
 

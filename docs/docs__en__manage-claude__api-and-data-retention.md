@@ -46,7 +46,7 @@ Under a ZDR arrangement, Anthropic does not store customer prompts or responses 
 
 ## HIPAA readiness
 
-The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
+The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance. Eligible organizations can review and execute the BAA and enable HIPAA readiness directly from the Claude Console. HIPAA readiness applies a broader set of privacy and security safeguards than ZDR (encryption, access controls, and audit logging that protect PHI throughout its lifecycle) rather than requiring immediate deletion. If your organization handles PHI, HIPAA readiness is the arrangement to use; you do not also need ZDR. See the [feature eligibility table](#feature-eligibility) for which features each arrangement covers.
 
 <Note>
   This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
@@ -59,7 +59,7 @@ The Claude API supports HIPAA-ready integrations for organizations that handle p
 ### What HIPAA readiness does not cover
 
 * **Claude consumer products:** Claude Free, Pro, and Max plans.
-* **Console and Workbench:** Usage through the Claude Console interface.
+* **Console and Workbench:** Usage through the Claude Console interface (enabling HIPAA readiness from Console settings is supported; processing PHI through the Console is not covered).
 * **Partner-operated platforms:** Amazon Bedrock and Google Cloud's Agent Platform. Refer to those platforms' compliance documentation.
 * **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available on these platforms.
 * **Third-party integrations:** Data processed by external tools or services connected to your application.
@@ -91,19 +91,31 @@ The error message lists the non-eligible features detected in the request; remov
 
 ### Getting started with HIPAA readiness
 
+There are two ways to set up HIPAA-ready API access. Most organizations can enable it directly in the Claude Console with Anthropic's standard BAA; organizations that require a negotiated BAA should work with their account team.
+
+#### Enable in the Console (standard BAA)
+
 <Steps>
-  <Step title="Sign a Business Associate Agreement">
-    Contact the [Anthropic sales team](https://claude.com/contact-sales) to sign a BAA that covers API usage.
+  <Step title="Open your organization's privacy settings">
+    In [Claude Console > Settings > Privacy](https://platform.claude.com/settings/privacy), organization admins with the HIPAA management permission see a **HIPAA compliance** card. If your organization is eligible but you don't see the option to enable, ask an organization admin to complete these steps.
   </Step>
 
-  <Step title="Provision a HIPAA-enabled organization">
-    Anthropic provisions a dedicated organization with HIPAA readiness controls enabled. This organization automatically enforces feature restrictions, blocking API requests that use non-eligible features.
+  <Step title="Review and execute the BAA">
+    Download the Business Associate Agreement and the HIPAA Implementation Guide, then accept the agreement as an authorized legal representative of your organization. Each step becomes available after you download the prior document, and your enablement is bound to the exact BAA version you downloaded.
   </Step>
 
-  <Step title="Build with eligible features">
-    Use the [feature eligibility table](#feature-eligibility) to confirm which features are supported. Review the [PHI handling guidelines](#phi-handling-guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
+  <Step title="Enablement takes effect immediately">
+    HIPAA readiness controls are applied to your organization as soon as you accept. Once HIPAA readiness is enabled for your organization, the configuration is permanent and cannot be disabled by an administrator. The API automatically enforces feature restrictions, returning an error for requests that use non-eligible features. See [HIPAA error handling](#hipaa-error-handling).
   </Step>
 </Steps>
+
+#### Contact sales (custom BAA)
+
+If your organization requires a negotiated or custom BAA, or if self-serve enablement isn't available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales). Anthropic will execute the BAA and enable HIPAA readiness for your organization.
+
+#### Build with eligible features
+
+Whichever path you use, confirm which features are supported in the [feature eligibility table](#feature-eligibility) and review the [PHI handling guidelines](#phi-handling-guidelines) for features that restrict where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
 
 <Warning>
   HIPAA readiness is enforced at the organization level. If you need both HIPAA-ready and general-purpose API access, use separate organizations for each.
@@ -230,7 +242,7 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
   </Accordion>
 
   <Accordion title="How do I request HIPAA-ready API access?">
-    Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss HIPAA-ready API access and sign a Business Associate Agreement.
+    Eligible organizations can enable HIPAA readiness directly in [Claude Console > Settings > Privacy](https://platform.claude.com/settings/privacy) by reviewing and executing Anthropic's standard BAA; see [Getting started with HIPAA readiness](#getting-started-with-hipaa-readiness). If your organization requires a negotiated BAA, or self-serve enablement isn't available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales).
   </Accordion>
 
   <Accordion title="Does this apply to Amazon Bedrock or Google Cloud?">
