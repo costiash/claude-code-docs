@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-14T01:12:47Z",
+  "generated_at": "2026-07-14T04:40:20Z",
   "indexed_files": 1730,
   "index": {
     "/changelog": {
@@ -224,7 +224,7 @@
         "tokens",
         "limits"
       ],
-      "word_count": 3236,
+      "word_count": 3240,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9729,
+      "word_count": 9731,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -542,23 +542,23 @@
         "claude",
         "code",
         "anthropic",
+        "authentication",
         "usage",
         "baa",
         "api",
         "through",
-        "authentication",
         "compliance",
         "security",
-        "users",
         "pro",
         "max",
         "legal",
         "agreements",
-        "information",
         "subject",
         "commercial",
         "terms",
-        "free"
+        "users",
+        "free",
+        "using"
       ],
       "word_count": 446,
       "file_path": "docs/claude-code__legal-and-compliance.md"
