@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-14T19:04:49Z",
+  "generated_at": "2026-07-14T22:00:05Z",
   "indexed_files": 1746,
   "index": {
     "/changelog": {
@@ -36,27 +36,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "model",
-        "claude",
         "bedrock",
+        "claude",
         "amazon",
         "code",
         "aws",
         "credentials",
         "when",
         "mantle",
+        "region",
         "default",
         "account",
         "set",
-        "region",
-        "models",
         "profile",
         "version",
+        "models",
         "api",
         "settings",
         "inference",
-        "see"
+        "before"
       ],
-      "word_count": 3974,
+      "word_count": 4213,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -252,7 +252,7 @@
         "see",
         "using"
       ],
-      "word_count": 2034,
+      "word_count": 2057,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -970,17 +970,17 @@
         "permissions",
         "when",
         "prompt",
+        "anthropic",
         "access",
         "trust",
         "network",
         "mcp",
         "before",
-        "anthropic",
         "user",
-        "read",
-        "running"
+        "session",
+        "servers"
       ],
-      "word_count": 1400,
+      "word_count": 1413,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
