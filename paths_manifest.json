@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-14T15:32:12.774982Z",
-    "total_paths": 2044,
+    "generated_at": "2026-07-14T18:27:12.867847Z",
+    "total_paths": 2060,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-14T15:32:12.774990Z"
+    "last_regenerated": "2026-07-14T18:27:12.867860Z"
   },
   "categories": {
     "core_documentation": [
@@ -157,6 +157,7 @@
       "/docs/en/manage-claude/rate-limits-api",
       "/docs/en/manage-claude/spend-limits-api",
       "/docs/en/manage-claude/usage-cost-api",
+      "/docs/en/manage-claude/user-management",
       "/docs/en/manage-claude/wif-admin-api",
       "/docs/en/manage-claude/wif-providers/aws",
       "/docs/en/manage-claude/wif-providers/azure",
@@ -178,7 +179,7 @@
       "/docs/en/managed-agents/github",
       "/docs/en/managed-agents/mcp-connector",
       "/docs/en/managed-agents/memory",
-      "/docs/en/managed-agents/multi-agent",
+      "/docs/en/managed-agents/multiagent-orchestration",
       "/docs/en/managed-agents/onboarding",
       "/docs/en/managed-agents/overview",
       "/docs/en/managed-agents/permission-policies",
@@ -339,6 +340,21 @@
       "/docs/en/api/admin/organizations/me",
       "/docs/en/api/admin/rate_limits",
       "/docs/en/api/admin/rate_limits/list",
+      "/docs/en/api/admin/rbac_groups",
+      "/docs/en/api/admin/rbac_groups/create",
+      "/docs/en/api/admin/rbac_groups/delete",
+      "/docs/en/api/admin/rbac_groups/list",
+      "/docs/en/api/admin/rbac_groups/members",
+      "/docs/en/api/admin/rbac_groups/members/create",
+      "/docs/en/api/admin/rbac_groups/members/delete",
+      "/docs/en/api/admin/rbac_groups/members/list",
+      "/docs/en/api/admin/rbac_groups/retrieve",
+      "/docs/en/api/admin/rbac_groups/update",
+      "/docs/en/api/admin/rbac_roles",
+      "/docs/en/api/admin/rbac_roles/list",
+      "/docs/en/api/admin/rbac_roles/permissions",
+      "/docs/en/api/admin/rbac_roles/permissions/list",
+      "/docs/en/api/admin/rbac_roles/retrieve",
       "/docs/en/api/admin/service_accounts",
       "/docs/en/api/admin/service_accounts/archive",
       "/docs/en/api/admin/service_accounts/create",

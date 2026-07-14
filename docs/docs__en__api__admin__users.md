@@ -4,7 +4,7 @@
 
 **get** `/v1/organizations/users/{user_id}`
 
-Get User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 
@@ -32,7 +32,7 @@ Get User
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -43,6 +43,14 @@ Get User
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 
@@ -79,7 +87,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 **get** `/v1/organizations/users`
 
-List Users
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Query Parameters
 
@@ -121,7 +129,7 @@ List Users
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -132,6 +140,14 @@ List Users
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 
@@ -187,7 +203,7 @@ curl https://api.anthropic.com/v1/organizations/users \
 
 **post** `/v1/organizations/users/{user_id}`
 
-Update User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 
@@ -197,15 +213,19 @@ Update User
 
 ### Body Parameters
 
-- `role: "billing" or "claude_code_user" or "developer" or "user"`
+- `role: "billing" or "claude_code_user" or "developer" or 2 more`
 
-  New role for the User. Cannot be "admin".
+  New role for the User.
+
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
 
   - `"billing"`
 
   - `"claude_code_user"`
 
   - `"developer"`
+
+  - `"managed"`
 
   - `"user"`
 
@@ -229,7 +249,7 @@ Update User
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -240,6 +260,14 @@ Update User
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 
@@ -280,7 +308,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 **delete** `/v1/organizations/users/{user_id}`
 
-Remove User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 
@@ -342,7 +370,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -353,6 +381,14 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 

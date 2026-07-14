@@ -750,13 +750,13 @@ Adaptive thinking's triggering behavior is promptable. If Claude is thinking mor
 ```text wrap
 Extended thinking adds latency and should only be used when it
 will meaningfully improve answer quality, typically for problems
-that require multi-step reasoning. When in doubt, respond directly.
+that require multistep reasoning. When in doubt, respond directly.
 ```
 
 To encourage thinking instead, use a phrase like:
 
 ```text wrap
-This task involves multi-step reasoning. Think carefully before responding.
+This task involves multistep reasoning. Think carefully before responding.
 ```
 
 Steering effectiveness can be sensitive to exact wording. If one phrasing doesn't produce the behavior you want, try a more direct variant.

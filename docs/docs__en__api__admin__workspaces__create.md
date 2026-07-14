@@ -69,11 +69,11 @@ Create Workspace
   - `compartment_id: string`
 
     Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK), reference this value in your cloud
-    provider's key configuration — an AWS KMS key-policy condition or an Azure Key
-    Vault tag — so the key is scoped to this compartment. See the CMEK integration
-    guide for the required key configuration, including the value used during key
-    validation.
+    customer-managed encryption key (CMEK) on AWS, reference this value in your
+    KMS key-policy condition so the key is scoped to this compartment. On GCP and
+    Azure, Anthropic enforces the compartment binding automatically; you do not
+    need to reference this value in your key configuration. See the CMEK integration guide for the
+    required key configuration, including the value used during key validation.
 
   - `created_at: string`
 

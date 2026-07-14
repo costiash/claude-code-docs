@@ -1,6 +1,6 @@
 # Build an orchestration mode
 
-Build a session-level mode that grants standing consent for multi-agent fan-out, switched on and off with mid-conversation system messages.
+Build a session-level mode that grants standing consent for multiagent fan-out, switched on and off with mid-conversation system messages.
 
 ---
 
@@ -399,20 +399,20 @@ The reminders are short on purpose. They flip the mode and point at the tool des
 
 ## Grant standing consent in the tool description
 
-The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multi-phase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
+The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multiphase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
 
 <CodeGroup>
   ```python Python
   WORKFLOW_TOOL = {
       "name": "Workflow",
       "description": (
-          "Orchestrate a multi-agent workflow: split a large task into independent subtasks "
+          "Orchestrate a multiagent workflow: split a large task into independent subtasks "
           "and run them as parallel agents, then collect their results.\n\n"
           "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
           "system message confirms that orchestration mode is on.\n\n"
           "Quality patterns: adversarial verification (a second wave of agents checks the first "
           "wave's findings against the source), a completeness critic (one agent hunts for what "
-          "the others missed), and multi-phase sequencing (understand, design, implement, and "
+          "the others missed), and multiphase sequencing (understand, design, implement, and "
           "review as separate workflow calls, reading results between phases). A useful default "
           "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
           "Granularity: scope each subtask to a distinct concern, component, or question rather "
@@ -475,13 +475,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   const WORKFLOW_TOOL: Anthropic.Tool = {
     name: "Workflow",
     description:
-      "Orchestrate a multi-agent workflow: split a large task into independent subtasks " +
+      "Orchestrate a multiagent workflow: split a large task into independent subtasks " +
       "and run them as parallel agents, then collect their results.\n\n" +
       "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " +
       "system message confirms that orchestration mode is on.\n\n" +
       "Quality patterns: adversarial verification (a second wave of agents checks the first " +
       "wave's findings against the source), a completeness critic (one agent hunts for what " +
-      "the others missed), and multi-phase sequencing (understand, design, implement, and " +
+      "the others missed), and multiphase sequencing (understand, design, implement, and " +
       "review as separate workflow calls, reading results between phases). A useful default " +
       "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" +
       "Granularity: scope each subtask to a distinct concern, component, or question rather " +
@@ -543,13 +543,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   {
       Name = "Workflow",
       Description =
-          "Orchestrate a multi-agent workflow: split a large task into independent subtasks "
+          "Orchestrate a multiagent workflow: split a large task into independent subtasks "
           + "and run them as parallel agents, then collect their results.\n\n"
           + "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
           + "system message confirms that orchestration mode is on.\n\n"
           + "Quality patterns: adversarial verification (a second wave of agents checks the first "
           + "wave's findings against the source), a completeness critic (one agent hunts for what "
-          + "the others missed), and multi-phase sequencing (understand, design, implement, and "
+          + "the others missed), and multiphase sequencing (understand, design, implement, and "
           + "review as separate workflow calls, reading results between phases). A useful default "
           + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
           + "Granularity: scope each subtask to a distinct concern, component, or question rather "
@@ -622,13 +622,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   var workflowTool = anthropic.ToolUnionParam{
   	OfTool: &anthropic.ToolParam{
   		Name: "Workflow",
-  		Description: anthropic.String("Orchestrate a multi-agent workflow: split a large task into independent subtasks " +
+  		Description: anthropic.String("Orchestrate a multiagent workflow: split a large task into independent subtasks " +
   			"and run them as parallel agents, then collect their results.\n\n" +
   			"Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " +
   			"system message confirms that orchestration mode is on.\n\n" +
   			"Quality patterns: adversarial verification (a second wave of agents checks the first " +
   			"wave's findings against the source), a completeness critic (one agent hunts for what " +
-  			"the others missed), and multi-phase sequencing (understand, design, implement, and " +
+  			"the others missed), and multiphase sequencing (understand, design, implement, and " +
   			"review as separate workflow calls, reading results between phases). A useful default " +
   			"is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" +
   			"Granularity: scope each subtask to a distinct concern, component, or question rather " +
@@ -691,13 +691,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   ```java Java
   static final Tool WORKFLOW_TOOL = Tool.builder()
           .name("Workflow")
-          .description("Orchestrate a multi-agent workflow: split a large task into independent subtasks "
+          .description("Orchestrate a multiagent workflow: split a large task into independent subtasks "
                   + "and run them as parallel agents, then collect their results.\n\n"
                   + "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
                   + "system message confirms that orchestration mode is on.\n\n"
                   + "Quality patterns: adversarial verification (a second wave of agents checks the first "
                   + "wave's findings against the source), a completeness critic (one agent hunts for what "
-                  + "the others missed), and multi-phase sequencing (understand, design, implement, and "
+                  + "the others missed), and multiphase sequencing (understand, design, implement, and "
                   + "review as separate workflow calls, reading results between phases). A useful default "
                   + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
                   + "Granularity: scope each subtask to a distinct concern, component, or question rather "
@@ -752,13 +752,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   const WORKFLOW_TOOL = [
       'name' => 'Workflow',
       'description' =>
-          'Orchestrate a multi-agent workflow: split a large task into independent subtasks '
+          'Orchestrate a multiagent workflow: split a large task into independent subtasks '
           . "and run them as parallel agents, then collect their results.\n\n"
           . 'Opt-in: only use this tool when the user explicitly asks for a workflow, or when a '
           . "system message confirms that orchestration mode is on.\n\n"
           . 'Quality patterns: adversarial verification (a second wave of agents checks the first '
           . 'wave\'s findings against the source), a completeness critic (one agent hunts for what '
-          . 'the others missed), and multi-phase sequencing (understand, design, implement, and '
+          . 'the others missed), and multiphase sequencing (understand, design, implement, and '
           . 'review as separate workflow calls, reading results between phases). A useful default '
           . "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
           . 'Granularity: scope each subtask to a distinct concern, component, or question rather '
@@ -819,13 +819,13 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   WORKFLOW_TOOL = {
     name: "Workflow",
     description:
-      "Orchestrate a multi-agent workflow: split a large task into independent subtasks " \
+      "Orchestrate a multiagent workflow: split a large task into independent subtasks " \
       "and run them as parallel agents, then collect their results.\n\n" \
       "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " \
       "system message confirms that orchestration mode is on.\n\n" \
       "Quality patterns: adversarial verification (a second wave of agents checks the first " \
       "wave's findings against the source), a completeness critic (one agent hunts for what " \
-      "the others missed), and multi-phase sequencing (understand, design, implement, and " \
+      "the others missed), and multiphase sequencing (understand, design, implement, and " \
       "review as separate workflow calls, reading results between phases). A useful default " \
       "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" \
       "Granularity: scope each subtask to a distinct concern, component, or question rather " \
@@ -2879,7 +2879,7 @@ The agent appends the user's message first, then any system messages that are du
     "tools": [
       {
         "name": "Workflow",
-        "description": "Orchestrate a multi-agent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Granularity: scope each subtask to a distinct concern rather than per line or file section; a review of a small module rarely needs more than about ten. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
+        "description": "Orchestrate a multiagent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Granularity: scope each subtask to a distinct concern rather than per line or file section; a review of a small module rarely needs more than about ten. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
         "input_schema": {
           "type": "object",
           "properties": {
@@ -2923,7 +2923,7 @@ The agent appends the user's message first, then any system messages that are du
   tools:
     - name: Workflow
       description: >-
-        Orchestrate a multi-agent workflow: split a large task into independent
+        Orchestrate a multiagent workflow: split a large task into independent
         subtasks and run them as parallel agents, then collect their results.
         Opt-in: only use this tool when the user explicitly asks for a workflow,
         or when a system message confirms that orchestration mode is on.

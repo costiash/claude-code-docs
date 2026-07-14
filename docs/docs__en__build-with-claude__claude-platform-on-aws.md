@@ -541,7 +541,7 @@ See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for featur
 
 ### Claude Managed Agents
 
-[Claude Managed Agents](/docs/en/managed-agents/overview) is available on Claude Platform on AWS, including [agents](/docs/en/managed-agents/agent-setup), [environments](/docs/en/managed-agents/environments), [sessions](/docs/en/managed-agents/sessions), [credential vaults](/docs/en/managed-agents/vaults), [memory stores](/docs/en/managed-agents/memory), [webhooks](/docs/en/managed-agents/webhooks), [multiagent orchestration](/docs/en/managed-agents/multi-agent), and [self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes).
+[Claude Managed Agents](/docs/en/managed-agents/overview) is available on Claude Platform on AWS, including [agents](/docs/en/managed-agents/agent-setup), [environments](/docs/en/managed-agents/environments), [sessions](/docs/en/managed-agents/sessions), [credential vaults](/docs/en/managed-agents/vaults), [memory stores](/docs/en/managed-agents/memory), [webhooks](/docs/en/managed-agents/webhooks), [multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration), and [self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes).
 
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in one way:
 

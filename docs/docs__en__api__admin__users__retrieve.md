@@ -2,7 +2,7 @@
 
 **get** `/v1/organizations/users/{user_id}`
 
-Get User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 
@@ -30,7 +30,7 @@ Get User
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -41,6 +41,14 @@ Get User
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 

@@ -1,10 +1,10 @@
-# Multi-agent sessions
+# Multiagent orchestration
 
 Coordinate multiple agents within a single session.
 
 ---
 
-Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
+Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
 
 <Note>
   Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
@@ -20,7 +20,7 @@ Each agent uses its own configuration: model, system prompt, tools, MCP servers,
 
 ### What to delegate
 
-Multi-agent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
+Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
 
 Patterns that work well:
 
@@ -1038,7 +1038,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
 
 ### Primary thread events
 
-These events surface multi-agent activity on the primary thread at `/v1/sessions/:id/events/stream`.
+These events surface multiagent activity on the primary thread at `/v1/sessions/:id/events/stream`.
 
 | Type                               | Description                                                                                                            |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |

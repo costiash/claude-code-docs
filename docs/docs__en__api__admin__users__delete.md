@@ -2,7 +2,7 @@
 
 **delete** `/v1/organizations/users/{user_id}`
 
-Remove User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 

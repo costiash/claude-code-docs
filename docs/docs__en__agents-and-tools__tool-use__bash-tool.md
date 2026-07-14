@@ -259,9 +259,9 @@ To handle `restart: true`, kill the shell process, start a new one, and return a
 
 The original `bash_20241022` version is part of the computer use beta, and the October 2024 Claude Sonnet 3.5 release ([retired](/docs/en/about-claude/model-deprecations)) is the only model that accepts it. Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
-## Example: Multi-step automation
+## Example: Multistep automation
 
-Claude can chain commands across tool calls to complete a multi-step task:
+Claude can chain commands across tool calls to complete a multistep task:
 
 ```text
 User request:

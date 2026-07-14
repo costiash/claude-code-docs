@@ -16,7 +16,7 @@ Skills are reusable, filesystem-based resources that give Claude domain-specific
 
 * **Specialize Claude:** Tailor capabilities for domain-specific tasks
 * **Reduce repetition:** Create once, use automatically
-* **Compose capabilities:** Combine Skills for complex, multi-step tasks
+* **Compose capabilities:** Combine Skills for complex, multistep tasks
 
 <Note>
   For more on the architecture and real-world applications of Agent Skills, see the engineering blog post [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).

@@ -119,7 +119,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
     -H "content-type: application/json" \
     --data @- <<'JSON' | jq -r '.content[0].text'
   {
-    "model": "claude-sonnet-4-6",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }
@@ -142,7 +142,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message = client.messages.create(
-      model="claude-sonnet-4-6",
+      model="claude-opus-4-8",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -167,7 +167,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   });
 
   const message = await client.messages.create({
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
@@ -192,7 +192,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -223,7 +223,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_SONNET_4_6)
+          .model(Model.CLAUDE_OPUS_4_8)
           .maxTokens(1024)
           .addUserMessage("Hello, Claude")
           .build());
@@ -244,7 +244,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet4_6,
+      Model = Model.ClaudeOpus4_8,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
   });
@@ -277,7 +277,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   ));
 
   $message = $client->messages->create(
-      model: 'claude-sonnet-4-6',
+      model: 'claude-opus-4-8',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
   );
@@ -299,7 +299,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message = client.messages.create(
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}]
   )

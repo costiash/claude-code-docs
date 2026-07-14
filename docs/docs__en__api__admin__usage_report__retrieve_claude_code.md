@@ -31,7 +31,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       The user or API key that performed the Claude Code actions.
 
-      - `UserActor object { email_address, type }`
+      - `ClaudeCodeUserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -41,7 +41,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
           - `"user_actor"`
 
-      - `APIActor object { api_key_name, type }`
+      - `ClaudeCodeAPIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 

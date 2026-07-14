@@ -12,7 +12,7 @@ encrypted data requires the original key identity to decrypt.
 
 - `external_key_id: string`
 
-  ID of the External Key to update.
+  ID of the External Key.
 
 ### Body Parameters
 
@@ -60,6 +60,8 @@ encrypted data requires the original key identity to decrypt.
 
   - `Azure object { key_name, tenant_id, type, 2 more }`
 
+    Azure Key Vault provider configuration.
+
     - `key_name: string`
 
       Name of the key within the vault.
@@ -74,7 +76,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `vault_uri: string`
 
-      Key Vault URI.
+      Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
 
     - `client_id: optional string`
 
@@ -84,7 +86,7 @@ encrypted data requires the original key identity to decrypt.
 
 - `id: string`
 
-  Tagged ID of the external key config.
+  Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
 - `created_at: string`
 
@@ -144,7 +146,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `vault_uri: string`
 
-      Key Vault URI.
+      Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
 
     - `client_id: optional string`
 

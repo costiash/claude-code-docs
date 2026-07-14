@@ -22,7 +22,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                           |
 | `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                         |
 | `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                        |
-| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multi-agent sessions](/docs/en/managed-agents/multi-agent).                                                                                                                                                                        |
+| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration).                                                                                                                                                       |
 | `description` | A description of what the agent does.                                                                                                                                                                                                                                                                            |
 | `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                 |
 
@@ -310,7 +310,7 @@ Updating an agent generates a new version when the configuration changes. The `v
 
 * **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 
-* **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](/docs/en/managed-agents/multi-agent#configure-the-coordinator) so its roster references it.
+* **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](/docs/en/managed-agents/multiagent-orchestration#configure-the-coordinator) so its roster references it.
 
 ## Agent lifecycle
 

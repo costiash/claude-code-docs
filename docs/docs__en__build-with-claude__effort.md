@@ -84,7 +84,7 @@ The API default is `high`. To use `xhigh`, set `effort` explicitly; the value yo
 | `xhigh`  | The recommended starting point for coding and agentic work, and for exploratory tasks like repeated tool calling, detailed web search, and knowledge-base search. Expect meaningfully higher token usage than `high`.      |
 | `max`    | Reserve for genuinely frontier problems. On most workloads `max` adds significant cost for relatively small quality gains, and on some structured-output or less intelligence-sensitive tasks it can lead to overthinking. |
 
-Claude Opus 4.7 also respects effort levels more strictly than Claude Opus 4.6, especially at `low` and `medium`. At lower effort levels, the model scopes its work to what was asked rather than going above and beyond. If you observe shallow reasoning on complex problems with Claude Opus 4.7, raise effort rather than prompting around it. If you must keep effort low for latency, add targeted guidance like "This task involves multi-step reasoning. Think carefully before responding."
+Claude Opus 4.7 also respects effort levels more strictly than Claude Opus 4.6, especially at `low` and `medium`. At lower effort levels, the model scopes its work to what was asked rather than going above and beyond. If you observe shallow reasoning on complex problems with Claude Opus 4.7, raise effort rather than prompting around it. If you must keep effort low for latency, add targeted guidance like "This task involves multistep reasoning. Think carefully before responding."
 
 When running Claude Opus 4.7 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
@@ -288,7 +288,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 * Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost. For example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
 
 <Note>
-  **Claude Code's ultracode mode:** ultracode appears in Claude Code's effort menu, but it is not an additional API effort level. The values documented on this page are the complete set the API accepts. Ultracode pairs the `xhigh` effort level with standing permission for Claude Code to launch multi-agent workflows, granted through [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages). To build similar behavior with the API, see [Build an orchestration mode](/docs/en/build-with-claude/mid-conversation-effort-example).
+  **Claude Code's ultracode mode:** ultracode appears in Claude Code's effort menu, but it is not an additional API effort level. The values documented on this page are the complete set the API accepts. Ultracode pairs the `xhigh` effort level with standing permission for Claude Code to launch multiagent workflows, granted through [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages). To build similar behavior with the API, see [Build an orchestration mode](/docs/en/build-with-claude/mid-conversation-effort-example).
 </Note>
 
 ## Effort with tool use

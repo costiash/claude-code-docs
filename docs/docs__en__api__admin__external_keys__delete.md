@@ -10,7 +10,7 @@ The request is rejected if any workspace still references this config.
 
 - `external_key_id: string`
 
-  ID of the External Key to delete.
+  ID of the External Key.
 
 ### Returns
 

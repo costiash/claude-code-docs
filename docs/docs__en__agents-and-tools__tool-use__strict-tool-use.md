@@ -657,7 +657,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   </Accordion>
 
   <Accordion title="Agentic workflow with multiple validated tools">
-    Build reliable multi-step agents with guaranteed tool parameters:
+    Build reliable multistep agents with guaranteed tool parameters:
 
     <CodeGroup>
       ```bash CLI

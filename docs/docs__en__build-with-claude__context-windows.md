@@ -126,10 +126,10 @@ Image tokens are included in these budgets.
 Newer models don't receive these injected tags. On Claude Opus 4.7 and later, Claude Fable 5, and Claude Mythos 5, you can give the model an explicit budget with [task budgets](/docs/en/build-with-claude/task-budgets), which are in beta.
 
 <Tip>
-  For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multi-session pattern](/docs/en/agents-and-tools/tool-use/memory-tool#multi-session-software-development-pattern) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
+  For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multisession pattern](/docs/en/agents-and-tools/tool-use/memory-tool#multisession-software-development-pattern) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 </Tip>
 
-For prompting guidance on using context awareness, see [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#context-awareness-and-multi-window-workflows).
+For prompting guidance on using context awareness, see [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#context-awareness-and-multiwindow-workflows).
 
 ## Manage context with compaction
 

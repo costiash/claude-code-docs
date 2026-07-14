@@ -40,6 +40,8 @@ Create an external key config owned by the caller's organization.
 
   - `Azure object { key_name, tenant_id, type, 2 more }`
 
+    Azure Key Vault provider configuration.
+
     - `key_name: string`
 
       Name of the key within the vault.
@@ -54,7 +56,7 @@ Create an external key config owned by the caller's organization.
 
     - `vault_uri: string`
 
-      Key Vault URI.
+      Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
 
     - `client_id: optional string`
 
@@ -74,7 +76,7 @@ Create an external key config owned by the caller's organization.
 
 - `id: string`
 
-  Tagged ID of the external key config.
+  Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
 - `created_at: string`
 
@@ -134,7 +136,7 @@ Create an external key config owned by the caller's organization.
 
     - `vault_uri: string`
 
-      Key Vault URI.
+      Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
 
     - `client_id: optional string`
 

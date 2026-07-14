@@ -243,12 +243,12 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
 * **Put longform data at the top:** Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This improves performance across all models.
 
   <Note>
-    Queries at the end can improve response quality by up to 30% in tests, especially with complex, multi-document inputs.
+    Queries at the end can improve response quality by up to 30% in tests, especially with complex, multidocument inputs.
   </Note>
 
 * **Structure document content and metadata with XML tags:** When using multiple documents, wrap each document in `<document>` tags with `<document_content>` and `<source>` (and other metadata) subtags for clarity.
 
-  <Accordion title="Example multi-document structure">
+  <Accordion title="Example multidocument structure">
     ```xml
     <documents>
       <document index="1">
@@ -534,11 +534,11 @@ If you need a hard ceiling on thinking costs, extended thinking with a `budget_t
 
 ### Leverage thinking & interleaved thinking capabilities
 
-Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.
+Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multistep reasoning. You can guide its initial or interleaved thinking for better results.
 
 Claude Opus 4.6, Claude Opus 4.7, Claude Opus 4.8, and Claude Sonnet 4.6 use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. On Claude Fable 5 and Claude Mythos 5, thinking is always on and adaptive thinking is the only mode. Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
 
-Use adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. Older models use manual [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`; see the [supported models table](/docs/en/build-with-claude/extended-thinking#supported-models) for which mode each model accepts.
+Use adaptive thinking for workloads that require agentic behavior such as multistep tool use, complex coding tasks, and long-horizon agent loops. Older models use manual [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`; see the [supported models table](/docs/en/build-with-claude/extended-thinking#supported-models) for which mode each model accepts.
 
 You can guide Claude's thinking behavior:
 
@@ -552,7 +552,7 @@ The triggering behavior for adaptive thinking is promptable. If you find the mod
 
 ```text Sample prompt wrap
 Extended thinking adds latency and should only be used when it will meaningfully improve
-answer quality - typically for problems that require multi-step reasoning. When in
+answer quality - typically for problems that require multistep reasoning. When in
 doubt, respond directly.
 ```
 
@@ -786,7 +786,7 @@ If you are not using extended thinking, no changes are required. On Claude Opus 
 
 Claude's latest models handle long-horizon reasoning tasks with strong state tracking. Claude maintains orientation across extended sessions by focusing on incremental progress, making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
 
-#### Context awareness and multi-window workflows
+#### Context awareness and multiwindow workflows
 
 Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature [context awareness](/docs/en/build-with-claude/context-windows#context-awareness), enabling the model to track its remaining context window (that is, its "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work.
 
@@ -806,7 +806,7 @@ context remaining.
 
 The [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) pairs well with context awareness for managing context transitions.
 
-#### Multi-context window workflows
+#### Workflows across multiple context windows
 
 For tasks spanning multiple context windows:
 
@@ -928,7 +928,7 @@ work directly rather than delegating.
 
 ### Chain complex prompts
 
-With adaptive thinking and subagent orchestration, Claude handles most multi-step reasoning internally. Explicit prompt chaining (breaking a task into sequential API calls) is still useful when you need to inspect intermediate outputs or enforce a specific pipeline structure.
+With adaptive thinking and subagent orchestration, Claude handles most multistep reasoning internally. Explicit prompt chaining (breaking a task into sequential API calls) is still useful when you need to inspect intermediate outputs or enforce a specific pipeline structure.
 
 The most common chaining pattern is **self-correction:** generate a draft → have Claude review it against criteria → have Claude refine based on the review. Each step is a separate API call so you can log, evaluate, or branch at any point.
 

@@ -1437,7 +1437,7 @@ Containers expire 30 days after creation. After about five minutes of inactivity
 
 ## Using code execution with other execution tools
 
-When you provide code execution alongside client-provided tools that also run code (such as a [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) or custom REPL), Claude is operating in a multi-computer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.
+When you provide code execution alongside client-provided tools that also run code (such as a [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) or custom REPL), Claude is operating in a multicomputer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.
 
 To avoid this, add instructions to your system prompt that clarify the distinction:
 

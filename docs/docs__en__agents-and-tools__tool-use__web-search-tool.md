@@ -438,7 +438,7 @@ All web search tool versions accept `allowed_callers`, which controls whether Cl
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
-Simple factual queries typically use 1–3 searches; comparative or multi-entity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
+Simple factual queries typically use 1–3 searches; comparative or multientity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
 
 ### Domain filtering
 

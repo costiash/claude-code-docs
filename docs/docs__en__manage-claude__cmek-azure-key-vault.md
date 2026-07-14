@@ -26,12 +26,12 @@ This guide walks through configuring an Azure Key Vault key as a [customer-manag
 
 ## Anthropic app information
 
-In order to have Anthropic use your encryption key, you must configure an Anthropic multi-tenant application ID and display name. Those values are:
+In order to have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
 
-| Field                           | Value                                  |
-| ------------------------------- | -------------------------------------- |
-| Multi-tenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
-| App display name                | `anthropic-cmek-client-us`             |
+| Field                          | Value                                  |
+| ------------------------------ | -------------------------------------- |
+| Multitenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
+| App display name               | `anthropic-cmek-client-us`             |
 
 <Warning>
   Use only this published client ID and display name. Never trust an identifier provided over email, chat, or any onboarding channel.
@@ -40,7 +40,7 @@ In order to have Anthropic use your encryption key, you must configure an Anthro
 ## Encryption key setup
 
 <Steps>
-  <Step title="Consent to the Anthropic multi-tenant application">
+  <Step title="Consent to the Anthropic multitenant application">
     This creates a service principal in your Entra tenant for Anthropic's CMEK client application. The application requests no Microsoft Graph permissions; it exists solely as a federation target for Key Vault data-plane access.
 
     ```bash
