@@ -20,7 +20,7 @@ First, install Anthropic's [client SDK](/docs/en/cli-sdks-libraries/overview) fo
 <Tabs>
   <Tab title="Python">
     ```bash
-    pip install -U google-cloud-aiplatform "anthropic[vertex]"
+    pip install -U "anthropic[vertex]"
     ```
   </Tab>
 
@@ -45,39 +45,47 @@ First, install Anthropic's [client SDK](/docs/en/cli-sdks-libraries/overview) fo
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-vertex:2.47.1")
+      implementation("com.anthropic:anthropic-java:2.48.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.48.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
+          <artifactId>anthropic-java</artifactId>
+          <version>2.48.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.47.1</version>
+          <version>2.48.0</version>
       </dependency>
       ```
 
       ```java Java
       import com.anthropic.client.AnthropicClient;
       import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-      import com.anthropic.vertex.backends.VertexBackend;
-      import com.anthropic.models.messages.MessageCreateParams;
       import com.anthropic.models.messages.Message;
+      import com.anthropic.models.messages.MessageCreateParams;
       import com.anthropic.models.messages.Model;
-      // ...
-              AnthropicClient client = AnthropicOkHttpClient.builder()
-                  .backend(VertexBackend.fromEnv())
-                  .build();
+      import com.anthropic.vertex.backends.VertexBackend;
 
-              MessageCreateParams params = MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_4_8)
-                  .maxTokens(1024L)
-                  .addUserMessage("What is the capital of France?")
-                  .build();
+      void main() {
+          AnthropicClient client = AnthropicOkHttpClient.builder()
+              .backend(VertexBackend.fromEnv())
+              .build();
 
-              Message response = client.messages().create(params);
-              response.content().stream()
-                  .flatMap(block -> block.text().stream())
-                  .forEach(textBlock -> System.out.println(textBlock.text()));
+          MessageCreateParams params = MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(1024L)
+              .addUserMessage("What is the capital of France?")
+              .build();
+
+          Message response = client.messages().create(params);
+          response.content().stream()
+              .flatMap(block -> block.text().stream())
+              .forEach(textBlock -> IO.println(textBlock.text()));
+      }
       ```
     </CodeGroup>
   </Tab>
@@ -137,22 +145,16 @@ The following examples show how to generate text from Claude on Agent Platform:
 <CodeGroup>
   ```bash cURL
   MODEL_ID=claude-opus-4-8
-  LOCATION=global
   PROJECT_ID=MY_PROJECT_ID
 
-  curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:streamRawPredict -d \
-  '{
-    "anthropic_version": "vertex-2023-10-16",
-    "messages": [{
-      "role": "user",
-      "content": "Hey Claude!"
-    }],
-    "max_tokens": 100
-  }'
+  curl https://aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/global/publishers/anthropic/models/${MODEL_ID}:rawPredict \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "anthropic_version": "vertex-2023-10-16",
+      "messages": [{"role": "user", "content": "Hey Claude!"}],
+      "max_tokens": 100
+    }'
   ```
 
   ```bash CLI
@@ -192,35 +194,27 @@ The following examples show how to generate text from Claude on Agent Platform:
     region
   });
 
-  async function main() {
-    const result = await client.messages.create({
-      model: "claude-opus-4-8",
-      max_tokens: 100,
-      messages: [
-        {
-          role: "user",
-          content: "Hey Claude!"
-        }
-      ]
-    });
-    console.log(JSON.stringify(result, null, 2));
-  }
-
-  main();
+  const result = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 100,
+    messages: [
+      {
+        role: "user",
+        content: "Hey Claude!"
+      }
+    ]
+  });
+  console.log(JSON.stringify(result, null, 2));
   ```
 
   ```csharp C#
-  using Anthropic;
   using Anthropic.Models.Messages;
   using Anthropic.Vertex;
 
   var projectId = "MY_PROJECT_ID";
   var region = "global";
 
-  var client = new AnthropicClient
-  {
-      Backend = new VertexBackend(projectId, region)
-  };
+  var client = new AnthropicVertexClient(new AnthropicVertexCredentials(region, projectId));
 
   var parameters = new MessageCreateParams
   {
@@ -248,7 +242,7 @@ The following examples show how to generate text from Claude on Agent Platform:
   	)
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  		Model:     anthropic.ModelClaudeOpus4_8,
   		MaxTokens: 100,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
@@ -265,24 +259,27 @@ The following examples show how to generate text from Claude on Agent Platform:
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.Message;
   import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
   import com.anthropic.vertex.backends.VertexBackend;
-  // ...
+
+  void main() {
       // Uses default Google Cloud credentials
       AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.fromEnv())
-        .build();
+          .backend(VertexBackend.fromEnv())
+          .build();
 
       Message message = client
-        .messages()
-        .create(
-          MessageCreateParams.builder()
-            .model("claude-opus-4-8")
-            .maxTokens(100)
-            .addUserMessage("Hey Claude!")
-            .build()
-        );
+          .messages()
+          .create(
+              MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_8)
+                  .maxTokens(100)
+                  .addUserMessage("Hey Claude!")
+                  .build()
+          );
 
-      System.out.println(message);
+      IO.println(message);
+  }
   ```
 
   ```php PHP
@@ -415,6 +412,20 @@ Regional and multi-region endpoints include a 10% pricing premium over global en
 Set the `region` parameter to `"global"` when initializing the client:
 
 <CodeGroup>
+  ```bash cURL
+  MODEL_ID=claude-opus-4-8
+  PROJECT_ID=MY_PROJECT_ID
+
+  curl https://aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/global/publishers/anthropic/models/${MODEL_ID}:rawPredict \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "anthropic_version": "vertex-2023-10-16",
+      "messages": [{"role": "user", "content": "Hey Claude!"}],
+      "max_tokens": 100
+    }'
+  ```
+
   ```bash CLI
   # The ant CLI does not support Agent Platform.
   ```
@@ -461,20 +472,17 @@ Set the `region` parameter to `"global"` when initializing the client:
       }
     ]
   });
+  console.log(JSON.stringify(result, null, 2));
   ```
 
   ```csharp C#
-  using Anthropic;
   using Anthropic.Models.Messages;
   using Anthropic.Vertex;
 
   var projectId = "MY_PROJECT_ID";
   var region = "global";
 
-  var client = new AnthropicClient
-  {
-      Backend = new VertexBackend(projectId, region)
-  };
+  var client = new AnthropicVertexClient(new AnthropicVertexCredentials(region, projectId));
 
   var parameters = new MessageCreateParams
   {
@@ -490,6 +498,7 @@ Set the `region` parameter to `"global"` when initializing the client:
   ```go Go
   import (
   	"context"
+  	"fmt"
 
   	"github.com/anthropics/anthropic-sdk-go"
   	"github.com/anthropics/anthropic-sdk-go/vertex"
@@ -500,27 +509,33 @@ Set the `region` parameter to `"global"` when initializing the client:
   		vertex.WithGoogleAuth(context.Background(), "global", "MY_PROJECT_ID"),
   	)
 
-  	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_8,
   		MaxTokens: 100,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
   		},
   	})
-  	_ = message
+  	if err != nil {
+  		panic(err)
+  	}
+  	fmt.Printf("%+v\n", message)
   ```
 
   ```java Java
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
   import com.anthropic.vertex.backends.VertexBackend;
+  import com.google.auth.oauth2.GoogleCredentials;
 
-  void main() {
+  void main() throws Exception {
       // Uses default Google Cloud credentials
       AnthropicClient client = AnthropicOkHttpClient.builder()
           .backend(
               VertexBackend.builder()
+                  .googleCredentials(GoogleCredentials.getApplicationDefault())
                   .region("global")
                   .project("MY_PROJECT_ID")
                   .build()
@@ -531,7 +546,7 @@ Set the `region` parameter to `"global"` when initializing the client:
           .messages()
           .create(
               MessageCreateParams.builder()
-                  .model("claude-opus-4-8")
+                  .model(Model.CLAUDE_OPUS_4_8)
                   .maxTokens(100)
                   .addUserMessage("Hey Claude!")
                   .build()
@@ -585,6 +600,21 @@ Set the `region` parameter to `"global"` when initializing the client:
 Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
 <CodeGroup>
+  ```bash cURL
+  MODEL_ID=claude-opus-4-8
+  LOCATION=us # Multi-region identifier: "us" or "eu"
+  PROJECT_ID=MY_PROJECT_ID
+
+  curl https://aiplatform.${LOCATION}.rep.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:rawPredict \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "anthropic_version": "vertex-2023-10-16",
+      "messages": [{"role": "user", "content": "Hey Claude!"}],
+      "max_tokens": 100
+    }'
+  ```
+
   ```bash CLI
   # The ant CLI does not support Agent Platform.
   ```
@@ -631,20 +661,17 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
       }
     ]
   });
+  console.log(JSON.stringify(result, null, 2));
   ```
 
   ```csharp C#
-  using Anthropic;
   using Anthropic.Models.Messages;
   using Anthropic.Vertex;
 
   var projectId = "MY_PROJECT_ID";
   var region = "us"; // Multi-region identifier: "us" or "eu"
 
-  var client = new AnthropicClient
-  {
-      Backend = new VertexBackend(projectId, region)
-  };
+  var client = new AnthropicVertexClient(new AnthropicVertexCredentials(region, projectId));
 
   var parameters = new MessageCreateParams
   {
@@ -660,6 +687,7 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
   ```go Go
   import (
   	"context"
+  	"fmt"
 
   	"github.com/anthropics/anthropic-sdk-go"
   	"github.com/anthropics/anthropic-sdk-go/vertex"
@@ -670,27 +698,33 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
   		vertex.WithGoogleAuth(context.Background(), "us", "MY_PROJECT_ID"),
   	)
 
-  	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_8,
   		MaxTokens: 100,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
   		},
   	})
-  	_ = message
+  	if err != nil {
+  		panic(err)
+  	}
+  	fmt.Printf("%+v\n", message)
   ```
 
   ```java Java
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
   import com.anthropic.vertex.backends.VertexBackend;
+  import com.google.auth.oauth2.GoogleCredentials;
 
-  void main() {
+  void main() throws Exception {
       // Multi-region identifier: "us" or "eu"
       AnthropicClient client = AnthropicOkHttpClient.builder()
           .backend(
               VertexBackend.builder()
+                  .googleCredentials(GoogleCredentials.getApplicationDefault())
                   .region("us")
                   .project("MY_PROJECT_ID")
                   .build()
@@ -701,7 +735,7 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
           .messages()
           .create(
               MessageCreateParams.builder()
-                  .model("claude-opus-4-8")
+                  .model(Model.CLAUDE_OPUS_4_8)
                   .maxTokens(100)
                   .addUserMessage("Hey Claude!")
                   .build()
@@ -751,9 +785,25 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
 
 **Using regional endpoints:**
 
-Specify a specific region like `"us-east1"` or `"europe-west1"`:
+Specify a specific region such as `"us-east5"` or `"europe-west1"`:
 
 <CodeGroup>
+  ```bash cURL
+  # Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+  MODEL_ID=claude-sonnet-4-6
+  LOCATION=us-east5 # Specify a specific region
+  PROJECT_ID=MY_PROJECT_ID
+
+  curl https://${LOCATION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:rawPredict \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "anthropic_version": "vertex-2023-10-16",
+      "messages": [{"role": "user", "content": "Hey Claude!"}],
+      "max_tokens": 100
+    }'
+  ```
+
   ```bash CLI
   # The ant CLI does not support Agent Platform.
   ```
@@ -762,12 +812,13 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   from anthropic import AnthropicVertex
 
   project_id = "MY_PROJECT_ID"
-  region = "us-east1"  # Specify a specific region
+  region = "us-east5"  # Specify a specific region
 
   client = AnthropicVertex(project_id=project_id, region=region)
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      # Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+      model="claude-sonnet-4-6",
       max_tokens=100,
       messages=[
           {
@@ -783,7 +834,7 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
   const projectId = "MY_PROJECT_ID";
-  const region = "us-east1"; // Specify a specific region
+  const region = "us-east5"; // Specify a specific region
 
   const client = new AnthropicVertex({
     projectId,
@@ -791,7 +842,8 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   });
 
   const result = await client.messages.create({
-    model: "claude-opus-4-8",
+    // Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+    model: "claude-sonnet-4-6",
     max_tokens: 100,
     messages: [
       {
@@ -800,24 +852,22 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
       }
     ]
   });
+  console.log(JSON.stringify(result, null, 2));
   ```
 
   ```csharp C#
-  using Anthropic;
   using Anthropic.Models.Messages;
   using Anthropic.Vertex;
 
   var projectId = "MY_PROJECT_ID";
-  var region = "us-east1";
+  var region = "us-east5"; // Specify a specific region
 
-  AnthropicClient client = new()
-  {
-      Backend = new VertexBackend(projectId, region)
-  };
+  var client = new AnthropicVertexClient(new AnthropicVertexCredentials(region, projectId));
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      // Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+      Model = Model.ClaudeSonnet4_6,
       MaxTokens = 100,
       Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
   };
@@ -829,6 +879,7 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   ```go Go
   import (
   	"context"
+  	"fmt"
 
   	"github.com/anthropics/anthropic-sdk-go"
   	"github.com/anthropics/anthropic-sdk-go/vertex"
@@ -836,31 +887,38 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   // ...
   	// Specify a specific region
   	client := anthropic.NewClient(
-  		vertex.WithGoogleAuth(context.Background(), "us-east1", "MY_PROJECT_ID"),
+  		vertex.WithGoogleAuth(context.Background(), "us-east5", "MY_PROJECT_ID"),
   	)
 
-  	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  		// Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+  		Model:     anthropic.ModelClaudeSonnet4_6,
   		MaxTokens: 100,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
   		},
   	})
-  	_ = message
+  	if err != nil {
+  		panic(err)
+  	}
+  	fmt.Printf("%+v\n", message)
   ```
 
   ```java Java
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
   import com.anthropic.vertex.backends.VertexBackend;
+  import com.google.auth.oauth2.GoogleCredentials;
 
-  void main() {
+  void main() throws Exception {
       // Uses default Google Cloud credentials with specific region
       AnthropicClient client = AnthropicOkHttpClient.builder()
           .backend(
               VertexBackend.builder()
-                  .region("us-east1") // Specify a specific region
+                  .googleCredentials(GoogleCredentials.getApplicationDefault())
+                  .region("us-east5") // Specify a specific region
                   .project("MY_PROJECT_ID")
                   .build()
           )
@@ -870,7 +928,8 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
           .messages()
           .create(
               MessageCreateParams.builder()
-                  .model("claude-opus-4-8")
+                  // Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+                  .model(Model.CLAUDE_SONNET_4_6)
                   .maxTokens(100)
                   .addUserMessage("Hey Claude!")
                   .build()
@@ -886,7 +945,7 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   use Anthropic\Vertex;
 
   $client = Vertex\Client::fromEnvironment(
-      location: 'us-east1',
+      location: 'us-east5',
       projectId: 'MY_PROJECT_ID',
   );
 
@@ -895,7 +954,8 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
       messages: [
           ['role' => 'user', 'content' => 'Hey Claude!']
       ],
-      model: 'claude-opus-4-8',
+      // Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+      model: 'claude-sonnet-4-6',
   );
   echo $message->content[0]->text;
   ```
@@ -904,12 +964,13 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
   require "anthropic"
 
   client = Anthropic::VertexClient.new(
-    region: "us-east1", # Specify a specific region
+    region: "us-east5", # Specify a specific region
     project_id: "MY_PROJECT_ID"
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    # Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
+    model: "claude-sonnet-4-6",
     max_tokens: 100,
     messages: [{role: "user", content: "Hey Claude!"}]
   )
