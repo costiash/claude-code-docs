@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-15T19:11:08Z",
+  "generated_at": "2026-07-15T22:00:14Z",
   "indexed_files": 1746,
   "index": {
     "/changelog": {
@@ -135,12 +135,12 @@
         "accordion",
         "repository",
         "web",
-        "network",
         "script",
+        "network",
         "when",
         "fix"
       ],
-      "word_count": 6927,
+      "word_count": 7091,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9860,
+      "word_count": 9870,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -408,6 +408,7 @@
         "sdk",
         "event",
         "run",
+        "tools",
         "without",
         "before",
         "cli",
@@ -415,12 +416,11 @@
         "message",
         "response",
         "string",
-        "tools",
         "output",
         "bare",
         "json"
       ],
-      "word_count": 2368,
+      "word_count": 2389,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -428,27 +428,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate action...",
       "keywords": [
         "hook",
-        "hooks",
         "claude",
+        "hooks",
         "when",
         "tool",
         "code",
         "command",
         "event",
         "see",
-        "file",
         "json",
+        "file",
         "call",
+        "example",
         "permission",
         "only",
-        "run",
-        "example",
         "session",
+        "run",
+        "mcp",
         "input",
-        "script",
-        "exit"
+        "script"
       ],
-      "word_count": 6646,
+      "word_count": 6763,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -469,14 +469,14 @@
         "session",
         "runs",
         "output",
-        "command",
         "prompt",
+        "command",
         "file",
         "event",
         "user",
         "before"
       ],
-      "word_count": 23540,
+      "word_count": 23562,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -598,8 +598,8 @@
         "server",
         "claude",
         "mcp",
-        "servers",
         "code",
+        "servers",
         "tool",
         "when",
         "tools",
@@ -616,7 +616,7 @@
         "name",
         "oauth"
       ],
-      "word_count": 9290,
+      "word_count": 9461,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -942,17 +942,17 @@
         "access",
         "command",
         "mode",
-        "only",
-        "bash",
-        "when",
         "directory",
-        "wsl",
+        "only",
+        "when",
+        "bash",
+        "allow",
+        "rules",
         "inside",
-        "sandboxing",
-        "managed",
-        "proxy"
+        "tools",
+        "wsl"
       ],
-      "word_count": 4902,
+      "word_count": 5000,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "corp",
         "mcp"
       ],
-      "word_count": 14696,
+      "word_count": 14720,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1106,21 +1106,21 @@
         "agent",
         "main",
         "conversation",
-        "code",
         "tool",
+        "code",
         "session",
         "only",
         "prompt",
         "context",
         "same",
         "model",
+        "tools",
         "version",
         "fork",
         "task",
-        "name",
-        "background"
+        "name"
       ],
-      "word_count": 10255,
+      "word_count": 10286,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
