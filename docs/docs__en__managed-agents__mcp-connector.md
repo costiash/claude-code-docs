@@ -9,7 +9,7 @@ Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https:/
 MCP configuration is split across two steps:
 
 1. **Agent creation** declares which MCP servers the agent connects to, by name and URL.
-2. **Session creation** supplies auth for those servers by referencing a pre-registered [vault](/docs/en/managed-agents/vaults).
+2. **Session creation** supplies authentication for those servers by referencing a pre-registered [vault](/docs/en/managed-agents/vaults).
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 

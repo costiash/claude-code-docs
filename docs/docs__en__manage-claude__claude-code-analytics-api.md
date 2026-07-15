@@ -58,7 +58,7 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 
 ### Key concepts
 
-* **Daily aggregation**: Returns metrics for a single day specified by the `starting_at` parameter
+* **Daily aggregation:** Returns metrics for a single day specified by the `starting_at` parameter
 * **User-level data**: Each record represents one user's activity for the specified day
 * **Productivity metrics**: Track sessions, lines of code, commits, pull requests, and tool usage
 * **Token and cost data**: Monitor usage and estimated costs broken down by Claude model
@@ -110,7 +110,7 @@ Each response record contains the following metrics for a single user on a singl
 
 #### Dimensions
 
-* **date**: Date in RFC 3339 format (UTC timestamp)
+* **date:** Date in RFC 3339 format (UTC timestamp)
 * **actor**: The user or API key that performed the Claude Code actions (either `user_actor` with `email_address` or `api_actor` with `api_key_name`)
 * **organization\_id**: Organization UUID
 * **customer\_type**: Type of customer account (`api` for API customers, `subscription` for Pro/Team customers)
@@ -137,7 +137,7 @@ Breakdown of tool action acceptance and rejection rates by tool type:
 
 For each Claude model used:
 
-* **model**: Claude model identifier (e.g., `claude-opus-4-8`)
+* **model:** Claude model identifier (for example, `claude-opus-4-8`)
 * **tokens.input/output**: Input and output token counts for this model
 * **tokens.cache\_read/cache\_creation**: Cache-related token usage for this model
 * **estimated\_cost.amount**: Estimated cost in cents USD for this model
@@ -220,7 +220,7 @@ The cursor encodes the position of the last record and ensures stable pagination
 
 ## Common use cases
 
-* **Executive dashboards**: Create high-level reports showing Claude Code impact on development velocity
+* **Executive dashboards:** Create high-level reports showing Claude Code impact on development velocity
 * **AI tool comparison**: Export metrics to compare Claude Code with other AI coding tools like Copilot and Cursor
 * **Developer productivity analysis**: Track individual and team productivity metrics over time
 * **Cost tracking and allocation**: Monitor spending patterns and allocate costs by team or project
@@ -252,7 +252,7 @@ Historical Claude Code analytics data is retained and accessible through the API
 
 ### Which Claude Code deployments are supported?
 
-This API only tracks Claude Code usage on the Claude API. Usage through [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), or [Claude on Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai) is not included.
+This API only tracks Claude Code usage on the Claude API. Usage through [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude on Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) is not included.
 
 ### What does it cost to use this API?
 

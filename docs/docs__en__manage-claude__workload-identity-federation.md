@@ -29,7 +29,7 @@ An issuer has two pieces of configuration:
 * **Issuer URL:** The exact `iss` claim value that appears in the provider's JWTs, for example `https://token.actions.githubusercontent.com` or `https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLE`.
 * **JWKS source:** How Anthropic fetches the public keys to verify JWT signatures. Use `discovery` (the default) for any provider that serves `/.well-known/openid-configuration` at its issuer URL. Use `explicit_url` to point at a JWKS endpoint directly, or `inline` to upload the key set for issuers that are not reachable from the public internet (for example, a private Kubernetes cluster).
 
-Issuer and JWKS URLs must be `https`, on port 443, and use a public DNS host name that resolves to public IP addresses; IP literals are not accepted. These constraints apply only to URLs Anthropic fetches; in `explicit_url` and `inline` modes the `issuer_url` is compared as a string and may reference an internal hostname.
+Issuer and JWKS URLs must be `https`, on port 443, and use a public DNS hostname that resolves to public IP addresses; IP literals are not accepted. These constraints apply only to URLs Anthropic fetches; in `explicit_url` and `inline` modes the `issuer_url` is compared as a string and may reference an internal hostname.
 
 You typically register one issuer per environment: your production EKS cluster, your staging cluster, and GitHub Actions are three separate issuers.
 

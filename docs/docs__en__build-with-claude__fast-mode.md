@@ -197,10 +197,10 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 Fast mode is priced at a per-model multiplier on standard rates across the full context window, including requests over 200k input tokens. The following table shows fast mode pricing for each supported model:
 
-| Model           | Input      | Output      |
-| --------------- | ---------- | ----------- |
-| Claude Opus 4.8 | $10 / MTok | $50 / MTok  |
-| Claude Opus 4.7 | $30 / MTok | $150 / MTok |
+| Model           | Input          | Output          |
+| --------------- | -------------- | --------------- |
+| Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok  |
+| Claude Opus 4.7 | $30 USD / MTok | $150 USD / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -398,7 +398,7 @@ If you'd prefer to fall back to standard speed rather than wait for fast mode ca
 
 Because setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
 
-<CodeGroup>
+<CodeGroup exclude="shell:cURL">
   ```bash CLI
   # `ant` retries 429/5xx automatically and has no per-request max_retries
   # override, so on a fast-mode 429 the fallback runs after the built-in

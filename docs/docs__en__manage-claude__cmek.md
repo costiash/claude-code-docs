@@ -99,7 +99,7 @@ These features remain available, but their data is not encrypted under your key.
 
 * Claude Code Desktop, Claude Code on the web, and Claude in Slack. Anthropic recommends disabling any of these that are not appropriate for your use case in the admin console.
 * Beta and research preview features may not be covered by CMEK and can break in CMEK organizations, for example Claude Security and Claude Design.
-* On-demand data export under Settings > Privacy.
+* On-demand data export under **Settings** > **Privacy**.
 
 On both products, account data for users in your organization (such as names, email addresses, and profile pictures) is not encrypted under your key.
 

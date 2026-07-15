@@ -18,7 +18,7 @@ Some examples of when to use the text editor tool are:
 
 * **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
 * **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
-* **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your codebase.
+* **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your code base.
 * **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
 ## Use the text editor tool
@@ -159,6 +159,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
   ```java Java
   import com.anthropic.models.messages.ToolTextEditor20250728;
   // ...
+  void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     ToolTextEditor20250728 editorTool =
@@ -175,6 +176,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
     Message message = client.messages().create(params);
     IO.println(message);
+  }
   ```
 
   ```php PHP
@@ -503,6 +505,7 @@ First, your application provides Claude with the text editor tool and a prompt t
   ```java Java
   import com.anthropic.models.messages.ToolTextEditor20250728;
   // ...
+  void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     ToolTextEditor20250728 editorTool =
@@ -517,6 +520,7 @@ First, your application provides Claude with the text editor tool and a prompt t
 
     Message message = client.messages().create(params);
     IO.println(message);
+  }
   ```
 
   ```php PHP
@@ -883,50 +887,48 @@ Your application should then read the file and return its contents to Claude:
   ```
 
   ```java Java
-  import com.anthropic.models.messages.ToolTextEditor20250728;
-  // ...
-      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-      MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addTool(ToolTextEditor20250728.builder().build())
-        .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-        .addAssistantMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofText(
-              TextBlockParam.builder()
-                .text("I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.")
-                .build()
-            ),
-            ContentBlockParam.ofToolUse(
-              ToolUseBlockParam.builder()
-                .id("toolu_01AbCdEfGhIjKlMnOpQrStU")
-                .name("str_replace_based_edit_tool")
-                .input(
-                  ToolUseBlockParam.Input.builder()
-                    .putAdditionalProperty("command", JsonValue.from("view"))
-                    .putAdditionalProperty("path", JsonValue.from("primes.py"))
-                    .build()
-                )
+  MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_8)
+    .maxTokens(1024)
+    .addTool(ToolTextEditor20250728.builder().build())
+    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+    .addAssistantMessageOfBlockParams(
+      List.of(
+        ContentBlockParam.ofText(
+          TextBlockParam.builder()
+            .text("I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.")
+            .build()
+        ),
+        ContentBlockParam.ofToolUse(
+          ToolUseBlockParam.builder()
+            .id("toolu_01AbCdEfGhIjKlMnOpQrStU")
+            .name("str_replace_based_edit_tool")
+            .input(
+              ToolUseBlockParam.Input.builder()
+                .putAdditionalProperty("command", JsonValue.from("view"))
+                .putAdditionalProperty("path", JsonValue.from("primes.py"))
                 .build()
             )
-          )
+            .build()
         )
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofToolResult(
-              ToolResultBlockParam.builder()
-                .toolUseId("toolu_01AbCdEfGhIjKlMnOpQrStU")
-                .content("1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()")
-                .build()
-            )
-          )
+      )
+    )
+    .addUserMessageOfBlockParams(
+      List.of(
+        ContentBlockParam.ofToolResult(
+          ToolResultBlockParam.builder()
+            .toolUseId("toolu_01AbCdEfGhIjKlMnOpQrStU")
+            .content("1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()")
+            .build()
         )
-        .build();
+      )
+    )
+    .build();
 
-      Message message = client.messages().create(params);
-      System.out.println(message);
+  Message message = client.messages().create(params);
+  System.out.println(message);
   ```
 
   ```php PHP
@@ -1019,7 +1021,7 @@ Your application should then read the file and return its contents to Claude:
 <Tip>
   **Line numbers**
 
-  In the example above, the `view` tool result includes file contents with line numbers prepended to each line (e.g., "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
+  In the preceding example, the `view` tool result includes file contents with line numbers prepended to each line (for example, "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
 </Tip>
 
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
@@ -1319,60 +1321,58 @@ Your application should then make the edit and return the result:
   ```
 
   ```java Java
-  import com.anthropic.models.messages.ToolTextEditor20250728;
-  // ...
-      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-      MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addTool(ToolTextEditor20250728.builder().build())
-        // Previous messages would go here
-        .addAssistantMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofText(
-              TextBlockParam.builder()
-                .text(
-                  "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+  MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_8)
+    .maxTokens(1024)
+    .addTool(ToolTextEditor20250728.builder().build())
+    // Previous messages would go here
+    .addAssistantMessageOfBlockParams(
+      List.of(
+        ContentBlockParam.ofText(
+          TextBlockParam.builder()
+            .text(
+              "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+            )
+            .build()
+        ),
+        ContentBlockParam.ofToolUse(
+          ToolUseBlockParam.builder()
+            .id("toolu_01PqRsTuVwXyZAbCdEfGh")
+            .name("str_replace_based_edit_tool")
+            .input(
+              ToolUseBlockParam.Input.builder()
+                .putAdditionalProperty("command", JsonValue.from("str_replace"))
+                .putAdditionalProperty("path", JsonValue.from("primes.py"))
+                .putAdditionalProperty(
+                  "old_str",
+                  JsonValue.from("    for num in range(2, limit + 1)")
                 )
-                .build()
-            ),
-            ContentBlockParam.ofToolUse(
-              ToolUseBlockParam.builder()
-                .id("toolu_01PqRsTuVwXyZAbCdEfGh")
-                .name("str_replace_based_edit_tool")
-                .input(
-                  ToolUseBlockParam.Input.builder()
-                    .putAdditionalProperty("command", JsonValue.from("str_replace"))
-                    .putAdditionalProperty("path", JsonValue.from("primes.py"))
-                    .putAdditionalProperty(
-                      "old_str",
-                      JsonValue.from("    for num in range(2, limit + 1)")
-                    )
-                    .putAdditionalProperty(
-                      "new_str",
-                      JsonValue.from("    for num in range(2, limit + 1):")
-                    )
-                    .build()
+                .putAdditionalProperty(
+                  "new_str",
+                  JsonValue.from("    for num in range(2, limit + 1):")
                 )
                 .build()
             )
-          )
+            .build()
         )
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofToolResult(
-              ToolResultBlockParam.builder()
-                .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
-                .content("Successfully replaced text at exactly one location.")
-                .build()
-            )
-          )
+      )
+    )
+    .addUserMessageOfBlockParams(
+      List.of(
+        ContentBlockParam.ofToolResult(
+          ToolResultBlockParam.builder()
+            .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
+            .content("Successfully replaced text at exactly one location.")
+            .build()
         )
-        .build();
+      )
+    )
+    .build();
 
-      Message message = client.messages().create(params);
-      System.out.println(message);
+  Message message = client.messages().create(params);
+  System.out.println(message);
   ```
 
   ```php PHP
@@ -1497,7 +1497,7 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
   <Step title="Handle editor tool calls">
     Create a function that processes tool calls from Claude based on the command type:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       def handle_editor_tool(tool_call):
           input_params = tool_call.input
@@ -1652,7 +1652,7 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
   <Step title="Process Claude's responses">
     Extract and handle tool calls from Claude's responses:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       # Process tool use in Claude's response
       for content in response.content:
@@ -1856,23 +1856,23 @@ When using the text editor tool, various errors may occur. Here is guidance on h
   <Accordion title="Provide clear context">
     When asking Claude to fix or modify code, be specific about what files need to be examined or what issues need to be addressed. Clear context helps Claude identify the right files and make appropriate changes.
 
-    **Less helpful prompt**: "Can you fix my code?"
+    **Less helpful prompt:** "Can you fix my code?"
 
-    **Better prompt**: "There's a syntax error in my primes.py file that prevents it from running. Can you fix it?"
+    **Better prompt:** "There's a syntax error in my primes.py file that prevents it from running. Can you fix it?"
   </Accordion>
 
   <Accordion title="Be explicit about file paths">
     Specify file paths clearly when needed, especially if you're working with multiple files or files in different directories.
 
-    **Less helpful prompt**: "Review my helper file"
+    **Less helpful prompt:** "Review my helper file"
 
-    **Better prompt**: "Can you check my utils/helpers.py file for any performance issues?"
+    **Better prompt:** "Can you check my utils/helpers.py file for any performance issues?"
   </Accordion>
 
   <Accordion title="Create backups before editing">
     Implement a backup system in your application that creates copies of files before allowing Claude to edit them, especially for important or production code.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       def backup_file(file_path):
           """Create a backup of a file before editing."""
@@ -1951,7 +1951,7 @@ When using the text editor tool, various errors may occur. Here is guidance on h
   <Accordion title="Handle unique text replacement carefully">
     The `str_replace` command requires an exact match for the text to be replaced. Your application should ensure that there is exactly one match for the old text or provide appropriate error messages.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       def safe_replace(file_path, old_text, new_text):
           """Replace text only if there's exactly one match."""
@@ -2094,7 +2094,7 @@ When using the text editor tool, various errors may occur. Here is guidance on h
   <Accordion title="Verify changes">
     After Claude makes changes to a file, verify the changes by running tests or checking that the code still works as expected.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       def verify_changes(file_path):
           """Run tests or checks after making changes."""
@@ -2249,10 +2249,10 @@ The text editor tool can be used alongside other Claude tools. When combining to
 
 | Date             | Version                | Changes                                                                                                                                                                                                                                                               |
 | ---------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| July 28, 2025    | `text_editor_20250728` | Release of an updated text editor Tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`.                                                                                                   |
-| April 29, 2025   | `text_editor_20250429` | Release of the text editor Tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture.                                                       |
-| March 13, 2025   | `text_editor_20250124` | Introduction of standalone text editor Tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version.                                                                                                    |
-| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor Tool with Claude Sonnet 3.5 ([retired](/docs/en/about-claude/model-deprecations)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
+| July 28, 2025    | `text_editor_20250728` | Release of an updated text editor tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`.                                                                                                   |
+| April 29, 2025   | `text_editor_20250429` | Release of the text editor tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture.                                                       |
+| March 13, 2025   | `text_editor_20250124` | Introduction of standalone text editor tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version.                                                                                                    |
+| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 ([retired](/docs/en/about-claude/model-deprecations)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
 ## Next steps
 
@@ -2264,7 +2264,7 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 * **Implement file format conversion**: Let Claude help you convert files from one format to another
 * **Automate documentation**: Set up workflows for Claude to automatically document your code
 
-The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
+The text editor tool enables Claude to work directly with your code base, supporting workflows from debugging to automated documentation.
 
 <CardGroup cols={3}>
   <Card title="Tool use overview" icon="wrench" href="/docs/en/agents-and-tools/tool-use/overview">

@@ -337,8 +337,6 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   ```
 
   ```php PHP
-  <?php
-
   use Anthropic\Foundry;
 
   $client = Foundry\Client::withCredentials(
@@ -663,7 +661,7 @@ Requests that use these features against a deployment hosted on Azure return a `
 
 ## API responses
 
-API responses from Claude in Microsoft Foundry follow the standard [Claude API response format](/docs/en/api/messages/create). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (Claude API, Foundry, Claude Platform on AWS, Amazon Bedrock, and Google Cloud).
+API responses from Claude in Microsoft Foundry follow the standard [Claude API response format](/docs/en/api/messages/create). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (Claude API, Amazon Bedrock, Claude Platform on AWS, Foundry, and Google Cloud).
 
 For details on response headers specific to Foundry, see [Correlation request IDs](#correlation-request-ids).
 

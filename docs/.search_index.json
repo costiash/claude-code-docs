@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-15T16:12:33Z",
+  "generated_at": "2026-07-15T19:11:08Z",
   "indexed_files": 1746,
   "index": {
     "/changelog": {
@@ -46,17 +46,17 @@
         "mantle",
         "region",
         "default",
-        "account",
         "set",
+        "account",
         "profile",
-        "version",
         "models",
+        "version",
         "api",
         "settings",
         "inference",
         "before"
       ],
-      "word_count": 4213,
+      "word_count": 4248,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -147,8 +147,8 @@
       "title": "CLI reference",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
-        "claude",
         "session",
+        "claude",
         "code",
         "mode",
         "prompt",
@@ -156,8 +156,8 @@
         "version",
         "see",
         "only",
-        "mcp",
         "sessions",
+        "mcp",
         "interactive",
         "requires",
         "min",
@@ -168,7 +168,7 @@
         "background",
         "print"
       ],
-      "word_count": 4043,
+      "word_count": 4057,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -264,10 +264,11 @@
         "browser",
         "mode",
         "auto",
+        "file",
         "desktop",
         "settings",
-        "file",
         "session",
+        "external",
         "pane",
         "app",
         "open",
@@ -276,11 +277,10 @@
         "windows",
         "permission",
         "diff",
-        "external",
         "before",
         "sessions"
       ],
-      "word_count": 9731,
+      "word_count": 9860,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -385,14 +385,14 @@
         "sonnet",
         "region",
         "credentials",
-        "gcp",
         "when",
-        "environment",
+        "gcp",
         "variables",
-        "opus",
-        "through"
+        "pin",
+        "environment",
+        "opus"
       ],
-      "word_count": 2283,
+      "word_count": 2305,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -448,7 +448,7 @@
         "script",
         "exit"
       ],
-      "word_count": 6625,
+      "word_count": 6646,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "user",
         "before"
       ],
-      "word_count": 23508,
+      "word_count": 23540,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "normal",
         "running"
       ],
-      "word_count": 4174,
+      "word_count": 4198,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "name",
         "oauth"
       ],
-      "word_count": 9245,
+      "word_count": 9290,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -834,13 +834,13 @@
         "directory",
         "repository",
         "source",
-        "paths",
         "github",
+        "paths",
+        "sources",
         "entry",
-        "version",
-        "sources"
+        "version"
       ],
-      "word_count": 7889,
+      "word_count": 7941,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1008,7 +1008,7 @@
         "corp",
         "mcp"
       ],
-      "word_count": 14602,
+      "word_count": 14696,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1141,14 +1141,14 @@
         "key",
         "settings",
         "file",
-        "tmux",
         "such",
+        "tmux",
         "text",
+        "set",
         "token",
-        "shift",
-        "fullscreen"
+        "shift"
       ],
-      "word_count": 2659,
+      "word_count": 2687,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1162,21 +1162,21 @@
         "proxy",
         "enterprise",
         "cloud",
+        "platform",
         "gateway",
         "tab",
-        "platform",
         "environment",
         "configuration",
         "more",
+        "bedrock",
         "corporate",
         "llm",
         "variables",
         "div",
         "teams",
-        "bedrock",
-        "microsoft"
+        "amazon"
       ],
-      "word_count": 1678,
+      "word_count": 1704,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5507,
+      "word_count": 5527,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -1357,22 +1357,22 @@
         "server",
         "configuration",
         "api",
+        "tab",
         "servers",
         "claude",
         "mcptoolset",
         "array",
-        "note",
+        "helpers",
+        "sdk",
+        "client",
         "deprecated",
         "oauth",
         "default",
+        "codegroup",
         "connector",
-        "when",
-        "must",
-        "messages",
-        "client",
-        "token"
+        "when"
       ],
-      "word_count": 3067,
+      "word_count": 4609,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1508,11 +1508,11 @@
         "connector",
         "upstream",
         "tools",
+        "claude",
         "request",
-        "provider",
-        "see"
+        "provider"
       ],
-      "word_count": 1450,
+      "word_count": 1451,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -1647,12 +1647,12 @@
         "party",
         "through",
         "developers",
+        "using",
         "anthropic",
         "these",
-        "users",
-        "services"
+        "users"
       ],
-      "word_count": 219,
+      "word_count": 220,
       "file_path": "docs/docs__en__agents-and-tools__remote-mcp-servers.md"
     },
     "/docs/en/agents-and-tools/tool-use/advisor-tool": {
@@ -1680,7 +1680,7 @@
         "request",
         "cost"
       ],
-      "word_count": 8288,
+      "word_count": 8292,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1694,6 +1694,7 @@
         "bash",
         "codegroup",
         "run",
+        "shell",
         "accordion",
         "application",
         "see",
@@ -1703,12 +1704,11 @@
         "when",
         "process",
         "step",
-        "shell",
         "output",
         "tools",
         "request"
       ],
-      "word_count": 6951,
+      "word_count": 6958,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__bash-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent": {
@@ -1764,7 +1764,7 @@
         "run",
         "environment"
       ],
-      "word_count": 6142,
+      "word_count": 6141,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1898,13 +1898,13 @@
         "response",
         "code",
         "client",
+        "calls",
         "claude",
         "execution",
-        "calls",
         "what",
         "call"
       ],
-      "word_count": 1378,
+      "word_count": 1377,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__how-tool-use-works.md"
     },
     "/docs/en/agents-and-tools/tool-use/manage-tool-context": {
@@ -1960,7 +1960,7 @@
         "editing",
         "compaction"
       ],
-      "word_count": 4407,
+      "word_count": 4408,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2113,22 +2113,22 @@
         "editor",
         "file",
         "files",
+        "code",
         "command",
         "step",
         "title",
-        "code",
         "view",
+        "example",
         "create",
         "contents",
         "line",
-        "example",
         "insert",
         "fix",
         "codegroup",
         "new",
         "accordion"
       ],
-      "word_count": 8455,
+      "word_count": 8463,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2188,8 +2188,8 @@
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-reference.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-runner": {
-      "title": "Tool Runner (SDK)",
-      "content_preview": "# Tool Runner (SDK)  Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.  ---  The tool runner handles the agentic loop, error wrapping, and type safet...",
+      "title": "Tool runner (SDK)",
+      "content_preview": "# Tool runner (SDK)  Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.  ---  The tool runner handles the agentic loop, error wrapping, and type safet...",
       "keywords": [
         "tool",
         "tab",
@@ -2324,7 +2324,7 @@
         "results",
         "specific"
       ],
-      "word_count": 3606,
+      "word_count": 3608,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -44033,7 +44033,7 @@
         "note",
         "response"
       ],
-      "word_count": 4800,
+      "word_count": 4799,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -44061,7 +44061,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7005,
+      "word_count": 7007,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -44117,7 +44117,7 @@
         "indices",
         "tab"
       ],
-      "word_count": 6378,
+      "word_count": 6377,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
@@ -44173,7 +44173,7 @@
         "access",
         "through"
       ],
-      "word_count": 3890,
+      "word_count": 3889,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -44201,7 +44201,7 @@
         "regional",
         "through"
       ],
-      "word_count": 3201,
+      "word_count": 3195,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -44229,7 +44229,7 @@
         "data",
         "regional"
       ],
-      "word_count": 2835,
+      "word_count": 2840,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -44257,7 +44257,7 @@
         "request",
         "limits"
       ],
-      "word_count": 7527,
+      "word_count": 7532,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -44285,7 +44285,7 @@
         "request",
         "cache"
       ],
-      "word_count": 9769,
+      "word_count": 9770,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -44369,7 +44369,7 @@
         "where",
         "parameter"
       ],
-      "word_count": 2703,
+      "word_count": 2706,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -44397,7 +44397,7 @@
         "optimized",
         "similarity"
       ],
-      "word_count": 2457,
+      "word_count": 2453,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
@@ -44425,7 +44425,7 @@
         "mythos",
         "adaptive"
       ],
-      "word_count": 14346,
+      "word_count": 14344,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -44481,7 +44481,7 @@
         "supported",
         "error"
       ],
-      "word_count": 2636,
+      "word_count": 2641,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -44509,7 +44509,7 @@
         "claude",
         "skills"
       ],
-      "word_count": 2950,
+      "word_count": 2955,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -44537,7 +44537,7 @@
         "which",
         "results"
       ],
-      "word_count": 11505,
+      "word_count": 11514,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {
@@ -44677,7 +44677,7 @@
         "analysis",
         "charts"
       ],
-      "word_count": 5422,
+      "word_count": 5419,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -44705,7 +44705,7 @@
         "input",
         "breakpoints"
       ],
-      "word_count": 16257,
+      "word_count": 16254,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -44761,7 +44761,7 @@
         "web",
         "custom"
       ],
-      "word_count": 5090,
+      "word_count": 5091,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -44789,7 +44789,7 @@
         "reference",
         "request"
       ],
-      "word_count": 12299,
+      "word_count": 12300,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -44873,7 +44873,7 @@
         "client",
         "token"
       ],
-      "word_count": 2844,
+      "word_count": 2845,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -45018,7 +45018,7 @@
     },
     "/docs/en/glossary": {
       "title": "Glossary",
-      "content_preview": "# Glossary  These concepts are not unique to Anthropic\u2019s language models, but we present a brief summary of key terms below.  ---  ## Context window  The \"context window\" refers to the amount of text ...",
+      "content_preview": "# Glossary  These concepts are not unique to Anthropic\u2019s language models, but this page presents a brief summary of key terms.  ---  ## Context window  The \"context window\" refers to the amount of tex...",
       "keywords": [
         "model",
         "language",
@@ -45027,14 +45027,14 @@
         "context",
         "mcp",
         "models",
+        "claude",
         "when",
         "data",
         "fine",
-        "claude",
         "information",
         "tuning",
-        "time",
         "prompt",
+        "time",
         "tokens",
         "these",
         "anthropic",
@@ -45102,7 +45102,7 @@
     },
     "/docs/en/manage-claude/admin-api-keys": {
       "title": "Create an Admin API key",
-      "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  An Admin API key authenticates every API in the **Admin** section of this guide (the...",
+      "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  An Admin API key authenticates every API in the **Admin** section of this guide: the...",
       "keywords": [
         "api",
         "organization",
@@ -45125,7 +45125,7 @@
         "read",
         "card"
       ],
-      "word_count": 968,
+      "word_count": 970,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
@@ -45265,7 +45265,7 @@
         "users",
         "pagination"
       ],
-      "word_count": 1519,
+      "word_count": 1520,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/cmek-aws-kms": {
@@ -45293,7 +45293,7 @@
         "data",
         "iam"
       ],
-      "word_count": 1267,
+      "word_count": 1254,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
@@ -45321,7 +45321,7 @@
         "wrap",
         "unwrap"
       ],
-      "word_count": 1533,
+      "word_count": 1531,
       "file_path": "docs/docs__en__manage-claude__cmek-azure-key-vault.md"
     },
     "/docs/en/manage-claude/cmek-google-cloud-kms": {
@@ -45349,7 +45349,7 @@
         "data",
         "level"
       ],
-      "word_count": 1167,
+      "word_count": 1165,
       "file_path": "docs/docs__en__manage-claude__cmek-google-cloud-kms.md"
     },
     "/docs/en/manage-claude/cmek": {
@@ -45517,7 +45517,7 @@
         "request",
         "keys"
       ],
-      "word_count": 2634,
+      "word_count": 2635,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
@@ -45601,7 +45601,7 @@
         "see",
         "access"
       ],
-      "word_count": 1937,
+      "word_count": 1936,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -45713,7 +45713,7 @@
         "anthropic",
         "code"
       ],
-      "word_count": 1673,
+      "word_count": 1674,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/user-management": {
@@ -45965,7 +45965,7 @@
         "kubernetes",
         "identity"
       ],
-      "word_count": 3216,
+      "word_count": 3222,
       "file_path": "docs/docs__en__manage-claude__wif-providers__spiffe.md"
     },
     "/docs/en/manage-claude/wif-reference": {
@@ -45993,7 +45993,7 @@
         "step",
         "request"
       ],
-      "word_count": 3497,
+      "word_count": 3496,
       "file_path": "docs/docs__en__manage-claude__wif-reference.md"
     },
     "/docs/en/manage-claude/workload-identity-federation": {
@@ -46021,7 +46021,7 @@
         "tokens",
         "key"
       ],
-      "word_count": 2565,
+      "word_count": 2564,
       "file_path": "docs/docs__en__manage-claude__workload-identity-federation.md"
     },
     "/docs/en/manage-claude/workspaces": {
@@ -46153,15 +46153,15 @@
         "session",
         "archived",
         "api",
-        "run",
         "stores",
         "what",
+        "run",
         "archiving",
         "claude",
         "new",
         "tip"
       ],
-      "word_count": 2397,
+      "word_count": 2396,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -46296,10 +46296,10 @@
         "must",
         "credential",
         "card",
+        "authentication",
         "entry",
         "toolset",
-        "tool",
-        "creation"
+        "tool"
       ],
       "word_count": 1400,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
@@ -46329,7 +46329,7 @@
         "content",
         "response"
       ],
-      "word_count": 4300,
+      "word_count": 4299,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multiagent-orchestration": {
@@ -46413,7 +46413,7 @@
         "docs",
         "tool"
       ],
-      "word_count": 786,
+      "word_count": 785,
       "file_path": "docs/docs__en__managed-agents__overview.md"
     },
     "/docs/en/managed-agents/permission-policies": {
@@ -46777,7 +46777,7 @@
         "when",
         "title"
       ],
-      "word_count": 7377,
+      "word_count": 7378,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {
@@ -48597,7 +48597,7 @@
         "another",
         "context"
       ],
-      "word_count": 1479,
+      "word_count": 1477,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

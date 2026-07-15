@@ -201,7 +201,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
             For Linux environments, download the release binary directly.
 
             ```bash
-            VERSION=1.15.0
+            VERSION=1.17.0
             OS=$(uname -s | tr '[:upper:]' '[:lower:]')
             case $(uname -m) in
               x86_64) ARCH=amd64 ;;
@@ -240,7 +240,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
 
         ```text
         FROM your-base-image
-        ARG ANT_VERSION=1.15.0
+        ARG ANT_VERSION=1.17.0
         ARG TARGETARCH
         RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
             curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -278,7 +278,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
       <Step title="Run the worker">
         `EnvironmentWorker` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back. Authenticate with the environment key you generated in [Before you begin](#before-you-begin).
 
-        <CodeGroup>
+        <CodeGroup exclude="shell">
           ```python Python
           import asyncio
           import os
@@ -393,7 +393,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
       <Step title="Implement the webhook handler">
         `EnvironmentWorker` claims the work item, downloads skills, executes tool calls in the working directory, posts results back, and exits. Invoke it when `session.status_run_started` fires.
 
-        <CodeGroup>
+        <CodeGroup exclude="shell">
           ```python Python
           import os
           import anthropic
@@ -746,7 +746,7 @@ EnvironmentWorker(client, ..., tools=lambda env: [beta_bash_tool(env), my_custom
 
 **With `work.poller()` and `tool_runner()`:** pass a tool list as `tools` to `client.beta.sessions.events.tool_runner()`. To build that list, set up `AgentToolContext` yourself and call `beta_agent_toolset_20260401(env)`:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   from anthropic.lib.tools.agent_toolset import (
       AgentToolContext,
@@ -938,7 +938,7 @@ See [Self-hosted worker](/docs/en/managed-agents/reference#self-hosted-worker) i
   <Step title="Register the implementation with the worker">
     Pass the tool through the worker's `tools` factory (see [SDK helpers](#sdk-helpers)), alongside the built-in toolset:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import asyncio
       import os
@@ -1105,7 +1105,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
   <Step title="Declare the server's tools on the agent">
     List the MCP server's tools and declare each one as a `custom` tool; the MCP `name`, `description`, and `inputSchema` map one to one onto the custom tool's fields. If the server paginates its tool list, declare every page; the worker must list the same pages.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import asyncio
       from typing import Any, cast
@@ -1320,7 +1320,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
   <Step title="Serve the tools from the worker">
     Connect to the same MCP server at startup, convert its tools with the MCP helpers, and register them alongside the built-in toolset. Keep one MCP session open for the life of the worker.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import asyncio
       import os
@@ -1405,8 +1405,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
       ```
 
       ```csharp C#
-      // EnvironmentWorker and the client-side MCP helpers are not currently
-      // available in the C# SDK.
+      // EnvironmentWorker is not currently available in the C# SDK.
       ```
 
       ```go Go

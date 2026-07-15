@@ -158,11 +158,11 @@ For complete parameter details and response schemas, see the [Service accounts A
 
 The `issuer_url`, `jwks.discovery_base`, and `jwks.url` fields are validated:
 
-| Constraint | Detail                                                                                                                    |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Scheme     | Must be `https`.                                                                                                          |
-| Port       | Must be `443` (explicit or default).                                                                                      |
-| Host       | Must be a public DNS host name for your OIDC provider. Must resolve to public IP addresses; IP literals are not accepted. |
+| Constraint | Detail                                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Scheme     | Must be `https`.                                                                                                         |
+| Port       | Must be `443` (explicit or default).                                                                                     |
+| Host       | Must be a public DNS hostname for your OIDC provider. Must resolve to public IP addresses; IP literals are not accepted. |
 
 URL validation failures return `400 invalid_request_error` with the field name as a prefix on the error message (for example, `issuer_url: url must use https scheme`).
 

@@ -62,24 +62,23 @@ Here is an example of using extended thinking in the Messages API:
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 16000,
-    "thinking": {
-      "type": "enabled",
-      "budget_tokens": 10000
-    },
-    "messages": [
-      {
-        "role": "user",
-        "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-      }
-    ]
-  }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-sonnet-4-6",
+      "max_tokens": 16000,
+      "thinking": {
+        "type": "enabled",
+        "budget_tokens": 10000
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+        }
+      ]
+    }'
   ```
 
   ```bash CLI
@@ -617,11 +616,11 @@ Here are some important considerations for summarized thinking:
 
 You can stream extended thinking responses using [server-sent events (SSE)](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents).
 
-When streaming is enabled for extended thinking, you receive thinking content via `thinking_delta` events.
+When streaming is enabled for extended thinking, you receive thinking content through `thinking_delta` events.
 
 When `display: "omitted"` is set, no `thinking_delta` events are emitted. See [Controlling thinking display](#controlling-thinking-display).
 
-For more documentation on streaming via the Messages API, see [Streaming Messages](/docs/en/build-with-claude/streaming).
+For more documentation on streaming through the Messages API, see [Streaming Messages](/docs/en/build-with-claude/streaming).
 
 Here's how to handle streaming with thinking:
 
@@ -1924,7 +1923,7 @@ Earlier Claude 4 models here means Claude Sonnet 4.5, Claude Opus 4.1 (deprecate
 Here are some important considerations for interleaved thinking:
 
 * With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
-* Interleaved thinking is only supported for [tools used via the Messages API](/docs/en/agents-and-tools/tool-use/overview).
+* Interleaved thinking is only supported for [tools used through the Messages API](/docs/en/agents-and-tools/tool-use/overview).
 * The Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 5, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
 * On partner-operated platforms (for example, [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), Sonnet 4.5, or Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)), your request will fail.
 
@@ -3478,10 +3477,10 @@ Full thinking content is encrypted and returned in the `signature` field. This f
 
 Here are some important considerations on thinking encryption:
 
-* When [streaming responses](/docs/en/build-with-claude/extended-thinking#streaming-thinking), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
+* When [streaming responses](/docs/en/build-with-claude/extended-thinking#streaming-thinking), the signature is added through a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 * `signature` values are significantly longer in Claude 4 models than in previous models.
 * The `signature` field is an opaque field and should not be interpreted or parsed.
-* `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)). Values generated on one platform will be compatible with another.
+* `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)). Values generated on one platform are compatible with another.
 
 ## Redacted thinking blocks
 

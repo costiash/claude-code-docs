@@ -71,8 +71,8 @@ Need help deciding which text embedding model to use? Check out the [FAQ](https:
 
 To access Voyage embeddings:
 
-1. Sign up on Voyage AI's website
-2. Obtain an API key
+1. Sign up on Voyage AI's website.
+2. Obtain an API key.
 3. Set the API key as an environment variable for convenience:
 
 ```bash
@@ -105,7 +105,7 @@ print(result.embeddings[0])
 print(result.embeddings[1])
 ```
 
-`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
+`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the preceding code, the two embeddings will be printed on the screen:
 
 ```text
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
@@ -175,7 +175,7 @@ documents = [
 ]
 ```
 
-First, use Voyage to convert each document into an embedding vector
+First, use Voyage to convert each document into an embedding vector.
 
 ```python
 import voyageai
@@ -209,7 +209,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](/docs/en/build-with-claude/embeddings#voyage-python-library).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](#voyage-python-library).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
@@ -252,7 +252,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
   </Accordion>
 
   <Accordion title="Which similarity function should I use?">
-    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. An explanation about embedding similarity can be found in this [vector similarity guide](https://www.pinecone.io/learn/vector-similarity/).
+    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. For an explanation of embedding similarity, see this [vector similarity guide](https://www.pinecone.io/learn/vector-similarity/).
 
     Voyage AI embeddings are normalized to length 1, which means that:
 
@@ -281,7 +281,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     >
     >   * When `input_type="document"`, a query like "Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2p.m. PT / 5p.m. ET." will become "**Represent the document for retrieval:** Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2p.m. PT / 5p.m. ET."
 
-    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://huggingface.co/mteb) subtasks, please use the [voyage-large-2-instruct instructions](https://github.com/voyage-ai/voyage-large-2-instruct).
+    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://huggingface.co/mteb) subtasks, use the [voyage-large-2-instruct instructions](https://github.com/voyage-ai/voyage-large-2-instruct).
   </Accordion>
 
   <Accordion title="What quantization options are available?">
@@ -289,7 +289,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
     * `float`: Each returned embedding is a list of 32-bit (4-byte) single-precision floating-point numbers. This is the default and provides the highest precision / retrieval accuracy.
     * `int8` and `uint8`: Each returned embedding is a list of 8-bit (1-byte) integers ranging from -128 to 127 and 0 to 255, respectively.
-    * `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the FAQ below.
+    * `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the [FAQ](#faq).
 
     > **Binary quantization example**
     >

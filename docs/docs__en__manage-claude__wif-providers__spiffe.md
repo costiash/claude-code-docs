@@ -338,7 +338,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
   <Tab title="Callable through the SPIFFE Workload API">
     Workloads that link a SPIFFE Workload API client directly can skip spiffe-helper and pass the SDK a callable that fetches a fresh JWT-SVID from the agent socket. The SDK invokes the callable before each token exchange, so the workload always presents an unexpired SVID. Python ([py-spiffe](https://github.com/HewlettPackard/py-spiffe)) and Go ([go-spiffe](https://github.com/spiffe/go-spiffe)) have mature Workload API clients.
 
-    <CodeGroup>
+    <CodeGroup exclude="shell, typescript, java, csharp, php, ruby">
       ```python Python
       import os
       import anthropic

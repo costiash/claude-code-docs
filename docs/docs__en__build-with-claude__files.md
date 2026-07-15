@@ -912,12 +912,14 @@ Download files that were created by [skills](/docs/en/build-with-claude/skills-g
   	}
   	defer resp.Body.Close()
 
-  	fileContent, err := io.ReadAll(resp.Body)
+  	out, err := os.Create("downloaded_file.txt")
   	if err != nil {
   		return err
   	}
+  	defer out.Close()
 
-  	return os.WriteFile("downloaded_file.txt", fileContent, 0644)
+  	_, err = io.Copy(out, resp.Body)
+  	return err
   }
 
   ```

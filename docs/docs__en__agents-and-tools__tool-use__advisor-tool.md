@@ -47,25 +47,25 @@ The advisor is a weaker fit for single-turn Q\&A (nothing to plan), pure pass-th
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "anthropic-beta: advisor-tool-2026-03-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-sonnet-5",
-          "max_tokens": 4096,
-          "tools": [
-              {
-                  "type": "advisor_20260301",
-                  "name": "advisor",
-                  "model": "claude-fable-5"
-              }
-          ],
-          "messages": [{
-              "role": "user",
-              "content": "Build a concurrent worker pool in Go with graceful shutdown."
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: advisor-tool-2026-03-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-sonnet-5",
+      "max_tokens": 4096,
+      "tools": [
+        {
+          "type": "advisor_20260301",
+          "name": "advisor",
+          "model": "claude-fable-5"
+        }
+      ],
+      "messages": [{
+        "role": "user",
+        "content": "Build a concurrent worker pool in Go with graceful shutdown."
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -380,7 +380,7 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 Pass the full assistant content, including `advisor_tool_result` blocks, back to the API on subsequent turns. This example uses `claude-opus-4-8` as the advisor so the plaintext advice is visible in `response.content`; the mechanics are identical for any advisor model.
 
-<CodeGroup>
+<CodeGroup exclude="shell, go">
   ```python Python
   client = anthropic.Anthropic()
 
@@ -660,7 +660,7 @@ If a Haiku executor has not called the advisor in its first assistant turn, appe
 
 With the default `NUDGE_TURN` of 2, the reminder typically arrives after the model has oriented on the task but before it has committed to an approach.
 
-<CodeGroup>
+<CodeGroup exclude="shell, go">
   ```python Python
   client = anthropic.Anthropic()
 
@@ -704,7 +704,8 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
       )
       messages.append({"role": "assistant", "content": response.content})
       advisor_called = advisor_called or any(
-          b.type == "server_tool_use" and b.name == "advisor" for b in response.content
+          block.type == "server_tool_use" and block.name == "advisor"
+          for block in response.content
       )
       if response.stop_reason == "end_turn":
           break

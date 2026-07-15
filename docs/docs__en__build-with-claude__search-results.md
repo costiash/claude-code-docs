@@ -76,10 +76,10 @@ Search results use the following structure:
 
 ### Optional fields
 
-| Field           | Type   | Description                                            |
-| --------------- | ------ | ------------------------------------------------------ |
-| `citations`     | object | Citation configuration with `enabled` boolean field    |
-| `cache_control` | object | Cache control settings (e.g., `{"type": "ephemeral"}`) |
+| Field           | Type   | Description                                                   |
+| --------------- | ------ | ------------------------------------------------------------- |
+| `citations`     | object | Citation configuration with `enabled` boolean field           |
+| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`) |
 
 Each item in the `content` array must be a text block with:
 
@@ -92,7 +92,7 @@ The most powerful use case is returning search results from your custom tools. T
 
 ### Example: Knowledge base tool
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   from anthropic.types import (
       MessageParam,
@@ -753,53 +753,52 @@ You can also provide search results directly in user messages. This is useful fo
   ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [
-          {
-              "role": "user",
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "search_result",
+              "source": "https://docs.company.com/api-reference",
+              "title": "API Reference - Authentication",
               "content": [
-                  {
-                      "type": "search_result",
-                      "source": "https://docs.company.com/api-reference",
-                      "title": "API Reference - Authentication",
-                      "content": [
-                          {
-                              "type": "text",
-                              "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
-                          }
-                      ],
-                      "citations": {
-                          "enabled": true
-                      }
-                  },
-                  {
-                      "type": "search_result",
-                      "source": "https://docs.company.com/quickstart",
-                      "title": "Getting Started Guide",
-                      "content": [
-                          {
-                              "type": "text",
-                              "text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
-                          }
-                      ],
-                      "citations": {
-                          "enabled": true
-                      }
-                  },
-                  {
-                      "type": "text",
-                      "text": "Based on these search results, how do I authenticate API requests and what are the rate limits?"
-                  }
-              ]
-          }
+                {
+                  "type": "text",
+                  "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
+                }
+              ],
+              "citations": {
+                "enabled": true
+              }
+            },
+            {
+              "type": "search_result",
+              "source": "https://docs.company.com/quickstart",
+              "title": "Getting Started Guide",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
+                }
+              ],
+              "citations": {
+                "enabled": true
+              }
+            },
+            {
+              "type": "text",
+              "text": "Based on these search results, how do I authenticate API requests and what are the rate limits?"
+            }
+          ]
+        }
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -1438,9 +1437,9 @@ When `citations.enabled` is set to `true`, Claude includes citation references w
 
 ## Limitations
 
-* Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud
-* Only text content is supported within search results (no images or other media)
-* The `content` array must contain at least one text block
+* Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud.
+* Only text content is supported within search results (no images or other media).
+* The `content` array must contain at least one text block.
 
 ## Next steps
 

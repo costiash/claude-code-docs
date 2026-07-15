@@ -204,7 +204,7 @@ AWS publishes token-generator libraries for [JavaScript](https://github.com/aws/
 
 Pass the generated token to the SDK the same way you'd pass an AWS Console-generated API key:
 
-<CodeGroup>
+<CodeGroup exclude="shell, csharp, go, php, ruby">
   ```python Python
   from token_generator_for_aws_external_anthropic import TokenGenerator
   from anthropic import AnthropicAWS

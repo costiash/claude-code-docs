@@ -44,7 +44,7 @@ Web fetch is a [server tool](/docs/en/agents-and-tools/tool-use/server-tools): t
 
 When you add the web fetch tool to your API request:
 
-1. Claude decides when to fetch content based on the prompt and available URLs.
+1. Claude determines when to fetch content based on the prompt and available URLs.
 2. The API retrieves the full text content from the specified URL.
 3. For PDFs, the API returns the content as base64-encoded data and processes it like a directly attached PDF document.
 4. Claude analyzes the fetched content and provides a response with optional citations.
@@ -646,7 +646,7 @@ For security reasons, the web fetch tool can only fetch URLs that have previousl
 * URLs in client-side tool results
 * URLs from previous web search or web fetch results
 
-The tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (Code Execution, Bash, etc.).
+The tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (such as Code Execution and Bash).
 
 ## Combined search and fetch
 

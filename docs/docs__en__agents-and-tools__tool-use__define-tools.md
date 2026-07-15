@@ -11,7 +11,7 @@ Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
 <Tip>
-  If using Claude with tool use and extended thinking, refer to the [extended thinking guide](/docs/en/build-with-claude/extended-thinking) for more information.
+  If using Claude with tool use and extended thinking, refer to the [extended thinking](/docs/en/build-with-claude/extended-thinking) guide for more information.
 </Tip>
 
 ## Specifying client tools

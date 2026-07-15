@@ -62,10 +62,10 @@ Here's how to detect and handle streaming refusals in your application:
   ```bash cURL
   # Stream request and check for refusal
   response=$(curl -N https://api.anthropic.com/v1/messages \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --data '{
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -d '{
       "model": "claude-opus-4-8",
       "messages": [{"role": "user", "content": "Hello"}],
       "max_tokens": 1024,
@@ -319,11 +319,11 @@ Here's how to detect and handle streaming refusals in your application:
 
 The API currently handles refusals in three different ways:
 
-| Refusal Type                       | Response Format              | When It Occurs                                  |
+| Refusal type                       | Response format              | When it occurs                                  |
 | ---------------------------------- | ---------------------------- | ----------------------------------------------- |
 | Streaming classifier refusals      | **`stop_reason`: `refusal`** | During streaming when content violates policies |
 | API input and copyright validation | 400 error codes              | When input fails validation checks              |
-| Model-generated refusals           | Standard text responses      | When the model itself decides to refuse         |
+| Model-generated refusals           | Standard text responses      | When the model itself refuses                   |
 
 <Note>
   Future API versions will expand the **`stop_reason`: `refusal`** pattern to unify refusal handling across all types.

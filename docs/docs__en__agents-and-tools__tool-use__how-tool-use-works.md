@@ -8,7 +8,7 @@ This page explains the concepts behind tool use: where tools run, how the agenti
 
 ## The tool-use contract
 
-Tool use is a contract between your application and the model. You specify what operations are available and what shape their inputs and outputs take; Claude decides when and how to call them. The model never executes anything on its own. It emits a structured request, your code (or Anthropic's servers) runs the operation, and the result flows back into the conversation.
+Tool use is a contract between your application and the model. You specify what operations are available and what shape their inputs and outputs take; Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code (or Anthropic's servers) runs the operation, and the result flows back into the conversation.
 
 This contract makes the model behave less like a text generator and more like a function you call. Engineers with classical API experience can integrate tool use the same way they would any other typed interface: define the schema, handle the callback, return a result. The difference is that the caller on the other side is a language model choosing which function to invoke based on the conversation.
 
@@ -20,7 +20,7 @@ The primary axis along which tools differ is where the code executes. Every tool
 
 You write the schema, you execute the code, you return the results. This is the main event: the vast majority of tool-use traffic is [user-defined tools](/docs/en/agents-and-tools/tool-use/define-tools) calling into application-specific logic.
 
-When Claude decides to use one of your tools, the API response contains a `tool_use` block with the tool name and a JSON object of arguments. Your application extracts those arguments, runs the operation (a database query, an HTTP call, a file write, whatever the tool does), and sends the output back in a `tool_result` block on the next request. Claude never sees your implementation; it only sees the schema you provided and the result you returned.
+When Claude calls one of your tools, the API response contains a `tool_use` block with the tool name and a JSON object of arguments. Your application extracts those arguments, runs the operation (a database query, an HTTP call, a file write, whatever the tool does), and sends the output back in a `tool_result` block on the next request. Claude never sees your implementation; it only sees the schema you provided and the result you returned.
 
 ### Anthropic-schema tools (client-executed)
 
@@ -52,7 +52,7 @@ For the mechanics of building requests, handling parallel tool calls, and format
 
 ## The server-side loop
 
-Server-executed tools run their own loop inside Anthropic's infrastructure. A single request from your application might trigger several web searches or code executions before a response comes back. The model searches, reads results, decides to search again, and iterates until it has what it needs, all without your application participating.
+Server-executed tools run their own loop inside Anthropic's infrastructure. A single request from your application might trigger several web searches or code executions before a response comes back. The model searches, reads results, determines whether to search again, and iterates until it has what it needs, all without your application participating.
 
 This internal loop has an iteration limit. If the model is still iterating when it hits the cap, the response comes back with `stop_reason: "pause_turn"` instead of `"end_turn"`. A paused turn means the work isn't finished; re-send the conversation (including the paused response) to let the model continue where it left off. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools) for the continuation pattern.
 
@@ -91,7 +91,7 @@ Tool use doesn't fit when:
   </Card>
 
   <Card href="/docs/en/agents-and-tools/tool-use/define-tools" title="Define tools">
-    Schema specification, descriptions, and tool\_choice.
+    Schema specification, descriptions, and `tool_choice`.
   </Card>
 
   <Card href="/docs/en/agents-and-tools/tool-use/tool-reference" title="Tool reference">

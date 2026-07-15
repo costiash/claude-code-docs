@@ -91,11 +91,11 @@ Evaluation results signal when to act:
   </Step>
 
   <Step title="Deploy">
-    Upload via the Skills API for workspace-wide access. See [Using Skills with the API](/docs/en/build-with-claude/skills-guide) for upload and version management. Document the Skill in your internal registry with purpose, owner, and version.
+    Upload through the Skills API for workspace-wide access. See [Using Skills with the API](/docs/en/build-with-claude/skills-guide) for upload and version management. Document the Skill in your internal registry with purpose, owner, and version.
   </Step>
 
   <Step title="Monitor">
-    Track usage patterns and collect feedback from users. Re-run evaluations periodically to detect drift or regressions as workflows and models evolve. Usage analytics are not currently available via the Skills API. Implement application-level logging to track which Skills are included in requests.
+    Track usage patterns and collect feedback from users. Re-run evaluations periodically to detect drift or regressions as workflows and models evolve. Usage analytics are not currently available through the Skills API. Implement application-level logging to track which Skills are included in requests.
   </Step>
 
   <Step title="Iterate or deprecate">
@@ -150,11 +150,11 @@ Each role-based bundle should contain only the Skills relevant to that role's da
 
 ### Source control
 
-Store Skill directories in Git for history tracking, code review via pull requests, and rollback capability. Each Skill directory (containing SKILL.md and any bundled files) maps naturally to a Git-tracked folder.
+Store Skill directories in Git for history tracking, code review through pull requests, and rollback capability. Each Skill directory (containing SKILL.md and any bundled files) maps naturally to a Git-tracked folder.
 
 ### API-based distribution
 
-The Skills API provides workspace-scoped distribution. Skills uploaded via the API are available to all workspace members. See [Using Skills with the API](/docs/en/build-with-claude/skills-guide) for upload, versioning, and management endpoints.
+The Skills API provides workspace-scoped distribution. Skills uploaded through the API are available to all workspace members. See [Using Skills with the API](/docs/en/build-with-claude/skills-guide) for upload, versioning, and management endpoints.
 
 ### Versioning strategy
 

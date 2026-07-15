@@ -26,7 +26,7 @@ This guide walks through configuring an Azure Key Vault key as a [customer-manag
 
 ## Anthropic app information
 
-In order to have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
+To have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
 
 | Field                          | Value                                  |
 | ------------------------------ | -------------------------------------- |

@@ -87,10 +87,10 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
     The `EncryptionContext` condition is recommended but optional. Anthropic always includes your workspace's compartment ID in the encryption context, so ciphertext is cryptographically bound to that compartment regardless. Adding the condition provides defense-in-depth at the IAM layer. To start without it, omit the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and add it later with `kms:PutKeyPolicy`.
 
     <Note>
-      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](/docs/en/api/admin-api/workspaces/get-workspace) endpoint. Substitute that value for `<compartment-uuid>` in the key policy above. Anthropic also sends it as the encryption context when validating the key, so the condition value must match for validation to succeed.
+      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](/docs/en/api/admin-api/workspaces/get-workspace) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy. Anthropic also sends it as the encryption context when validating the key, so the condition value must match for validation to succeed.
     </Note>
 
-    You can also create the key from the AWS Console. Choose a symmetric key with the encrypt and decrypt key usage, a single-region key, and KMS key material origin. The Create-key wizard commits a key policy at its **Review** step: if you add Anthropic's account ID `915198916910` under key usage permissions there, the generated policy grants the whole Anthropic account broader actions (such as `kms:ReEncrypt*` and `kms:GenerateDataKey*`) with no `EncryptionContext` condition, and validation would still succeed against it. To avoid leaving an over-permissive key, finish the wizard with administrative permissions only, then open the key's **Key policy** tab and replace the JSON with the role-scoped policy shown above (the three statements scoped to the `anthropic-cmek-client-us` role, with the `EncryptionContext` condition).
+    You can also create the key from the AWS Console. Choose a symmetric key with the encrypt and decrypt key usage, a single-region key, and KMS key material origin. The Create-key wizard commits a key policy at its **Review** step: if you add Anthropic's account ID `915198916910` under key usage permissions there, the generated policy grants the whole Anthropic account broader actions (such as `kms:ReEncrypt*` and `kms:GenerateDataKey*`) with no `EncryptionContext` condition, and validation would still succeed against it. To avoid leaving an over-permissive key, finish the wizard with administrative permissions only, then open the key's **Key policy** tab and replace the JSON with the role-scoped policy shown earlier (the three statements scoped to the `anthropic-cmek-client-us` role, with the `EncryptionContext` condition).
 
     <Frame caption="Configure key: symmetric, encrypt and decrypt, single-region key.">
       ![AWS KMS Create key wizard on the Configure key step, with Symmetric key type, Encrypt and decrypt key usage, and Single-Region key selected.](/docs/images/cmek/aws-configure-key.png)
@@ -104,8 +104,8 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
       ![AWS KMS Define key administrative permissions step listing IAM roles that can administer the key.](/docs/images/cmek/aws-admin-permissions.png)
     </Frame>
 
-    <Frame caption="Do not add Anthropic's account ID here. This wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see above).">
-      ![AWS KMS Define key usage permissions step shown as an anti-pattern: adding Anthropic's account ID 915198916910 under Other AWS accounts here yields an over-permissive policy. Skip this step and leave it empty.](/docs/images/cmek/aws-usage-permissions.png)
+    <Frame caption="Do not add Anthropic's account ID here. This wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see the preceding key policy).">
+      ![AWS KMS Define key usage permissions step with Anthropic's account ID entered under Other AWS accounts.](/docs/images/cmek/aws-usage-permissions.png)
     </Frame>
   </Step>
 </Steps>

@@ -194,7 +194,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 </CodeGroup>
 
 <Accordion title="Empty responses with end_turn">
-  Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) with `stop_reason: "end_turn"`. This typically happens when Claude interprets that the assistant turn is complete, particularly after tool results.
+  Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude interprets that the assistant turn is complete, particularly after tool results.
 
   **Common causes:**
 
@@ -203,7 +203,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   **How to prevent empty responses:**
 
-  <CodeGroup>
+  <CodeGroup exclude="shell">
     ```python Python
     # INCORRECT: Adding text immediately after tool_result
     messages = [
@@ -525,7 +525,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   If you still get empty responses after fixing the message structure, add a continuation prompt in a new user message rather than retrying with the empty response:
 
-  <CodeGroup>
+  <CodeGroup exclude="shell">
     ```python Python
     def handle_empty_response(client, messages):
         response = client.messages.create(
@@ -878,9 +878,9 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 </CodeGroup>
 
 <Accordion title="Incomplete tool use blocks">
-  If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+  If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-  <CodeGroup>
+  <CodeGroup exclude="shell:cURL">
     ```bash CLI
     RESPONSE=$(ant messages create --max-tokens 1024 \
       --format jsonl < request.yaml)
@@ -2061,7 +2061,7 @@ Claude stopped because it reached the model's context window limit. This lets yo
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_response(response):
       if response.stop_reason == "tool_use":
@@ -2194,7 +2194,7 @@ Make it a habit to check the `stop_reason` in your response handling logic:
 
 When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_truncated_response(response):
       if response.stop_reason in ["max_tokens", "model_context_window_exceeded"]:
@@ -2312,7 +2312,7 @@ When a response is truncated because of token limits or the context window, appe
 
 When using [server tools](/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
       """
@@ -2955,7 +2955,7 @@ When using streaming, `stop_reason` is:
   **Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) automatically handles tool execution with much less code.
 </Tip>
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def complete_tool_workflow(client, user_query, tools):
       messages = [{"role": "user", "content": user_query}]
@@ -3164,7 +3164,7 @@ When using streaming, `stop_reason` is:
 
 ### Ensuring complete responses
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def get_complete_response(client, prompt, max_attempts=3):
       messages = [{"role": "user", "content": prompt}]
@@ -3396,7 +3396,7 @@ When using streaming, `stop_reason` is:
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def get_max_possible_tokens(client, prompt):
       """

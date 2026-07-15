@@ -1107,7 +1107,7 @@ When a model works on long tasks with many tool-use iterations, total token cons
 
 This example appears in the SDK languages only: its value is the budget-tracking logic around the request. The raw request combines the `trigger` from [Trigger configuration](#trigger-configuration) with `pause_after_compaction` from [Pausing after compaction](#pausing-after-compaction).
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   client = anthropic.Anthropic()
   messages = [{"role": "user", "content": "Hello, Claude"}]

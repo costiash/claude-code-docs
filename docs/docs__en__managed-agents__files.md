@@ -559,8 +559,8 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
       scope_id="sesn_abc123",
       betas=["managed-agents-2026-04-01"],
   )
-  for f in files:
-      print(f.id, f.filename)
+  for file in files:
+      print(file.id, file.filename)
 
   # Download a file
   content = client.beta.files.download(files.data[0].id)
@@ -573,8 +573,8 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
     scope_id: "sesn_abc123",
     betas: ["managed-agents-2026-04-01"]
   });
-  for (const f of files.data) {
-    console.log(f.id, f.filename);
+  for (const file of files.data) {
+    console.log(file.id, file.filename);
   }
 
   // Download a file

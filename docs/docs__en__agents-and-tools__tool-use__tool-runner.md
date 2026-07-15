@@ -1,4 +1,4 @@
-# Tool Runner (SDK)
+# Tool runner (SDK)
 
 Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 

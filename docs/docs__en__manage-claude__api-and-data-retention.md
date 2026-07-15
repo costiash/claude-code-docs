@@ -4,7 +4,7 @@ Learn about how Anthropic's APIs and associated features retain data, including 
 
 ---
 
-This page covers the Claude API (`api.anthropic.com`) and Claude Platform on AWS, where Anthropic is the data processor. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, the cloud provider is the data processor; refer to those platforms' data retention and compliance documentation for their equivalent controls.
+This page covers the Claude API (`api.anthropic.com`), Claude Platform on AWS, and [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), where Anthropic is the data processor. On Amazon Bedrock and Google Cloud's Agent Platform, the cloud provider is the data processor; refer to those platforms' data retention and compliance documentation for their equivalent controls.
 
 Anthropic offers two data handling arrangements for the Claude API: [zero data retention (ZDR)](#zero-data-retention-zdr-scope) and [HIPAA readiness](#hipaa-readiness). The [feature eligibility table](#feature-eligibility) lists which API features each arrangement covers. For Anthropic's standard retention policies outside these arrangements, see the [commercial data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data) and the [consumer data retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
@@ -135,7 +135,7 @@ Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://suppo
 }
 ```
 
-The 30-day data retention requirement applies wherever Covered Models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
+The 30-day data retention requirement applies wherever Covered Models are offered. On the Claude API (including Claude Platform on AWS), Anthropic handles retained data. On Amazon Bedrock and Google Cloud's Agent Platform, retained data stays within your cloud provider's environment; review each platform's documentation for enablement steps.
 
 ### Enable 30-day retention for a workspace
 

@@ -43,7 +43,7 @@ First, install Anthropic's [client SDK](/docs/en/cli-sdks-libraries/overview) fo
   </Tab>
 
   <Tab title="Java">
-    <CodeGroup>
+    <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
       implementation("com.anthropic:anthropic-java:2.48.0")
       implementation("com.anthropic:anthropic-java-vertex:2.48.0")
@@ -138,7 +138,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 
 ### Making requests
 
-Before running requests you may need to run `gcloud auth application-default login` to authenticate with Google Cloud.
+Before running requests you might need to run `gcloud auth application-default login` to authenticate with Google Cloud.
 
 The following examples show how to generate text from Claude on Agent Platform:
 
@@ -332,7 +332,7 @@ Data handling for this offering is governed by Google Cloud. For details, see [A
 
 Agent Platform provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
 
-Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
+Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
 <Note>
   Turning on this service does not give Google or Anthropic any access to your content.
@@ -365,7 +365,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 
 Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
-Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
+Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you might reach this limit before the token limit.
 
 ## Global, multi-region, and regional endpoints
 
