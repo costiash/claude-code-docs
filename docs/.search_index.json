@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-16T01:15:41Z",
+  "generated_at": "2026-07-16T04:41:07Z",
   "indexed_files": 1746,
   "index": {
     "/changelog": {
@@ -138,9 +138,9 @@
         "script",
         "network",
         "when",
-        "fix"
+        "settings"
       ],
-      "word_count": 7091,
+      "word_count": 7141,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -240,19 +240,19 @@
         "api",
         "disable",
         "off",
-        "users",
         "cloud",
         "settings",
         "must",
+        "retention",
+        "users",
+        "when",
         "google",
         "platform",
-        "retention",
-        "when",
+        "error",
         "opt",
-        "see",
-        "using"
+        "see"
       ],
-      "word_count": 2057,
+      "word_count": 2138,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9870,
+      "word_count": 9874,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -1064,7 +1064,7 @@
         "built",
         "see"
       ],
-      "word_count": 7739,
+      "word_count": 7740,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
