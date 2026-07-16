@@ -22,8 +22,8 @@ The input store is never modified, so you can review the output and discard it i
 
 A **dream** is an asynchronous job that takes:
 
-* a pre-existing **memory store**: the store Claude verifies, deduplicates, and reorganizes, and
-* 1 to 100 **sessions**: past transcripts Claude mines for patterns and insights to fold into the output.
+* a pre-existing **memory store:** the store Claude verifies, deduplicates, and reorganizes, and
+* 1 to 100 **sessions:** past transcripts Claude mines for patterns and insights to fold into the output.
 
 The dream produces another **output memory store**, separate from the input. The output store ID appears in the dream's `outputs[]` once it starts `running`.
 
@@ -289,24 +289,24 @@ Dreams run asynchronously and typically take minutes to tens of minutes dependin
 
 ### Lifecycle
 
-| `status`    | Meaning                                                                                                                |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `pending`   | Dream successfully created and queued.                                                                                 |
-| `running`   | The pipeline is processing. `usage` updates as work progresses.                                                        |
-| `completed` | Finished successfully. The `outputs[]` value is the new memory store.                                                  |
-| `failed`    | Dreaming run terminated with an error. The output memory store is left as-is with whatever was written before failure. |
-| `canceled`  | Dreaming run canceled. The output memory store is left as-is.                                                          |
+| `status`    | Meaning                                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `pending`   | Dream successfully created and queued.                                                                            |
+| `running`   | The pipeline is processing. `usage` updates as work progresses.                                                   |
+| `completed` | Finished successfully. The `outputs[]` value is the new memory store.                                             |
+| `failed`    | Dreaming run ended with an error. The output memory store is left as-is with whatever was written before failure. |
+| `canceled`  | Dreaming run canceled. The output memory store is left as-is.                                                     |
 
 ### Watch the pipeline run
 
-Once a dream is `running`, its `session_id` field points at the underlying [session](/docs/en/managed-agents/sessions) executing the pipeline. You can stream that session's [events](/docs/en/managed-agents/events-and-streaming) to observe what the dream is reading and writing in real time. The session is archived (not deleted) when the dream reaches a terminal state, so the transcript remains available afterward.
+Once a dream is `running`, its `session_id` field points at the underlying [session](/docs/en/managed-agents/sessions) running the pipeline. You can stream that session's [events](/docs/en/managed-agents/events-and-streaming) to observe what the dream is reading and writing in real time. The session is archived (not deleted) when the dream reaches a terminal state, so the transcript remains available afterward.
 
 ## Use the output
 
 When `status` reaches `completed`, the `memory_store` entry in `outputs[]` references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](/docs/en/managed-agents/memory#view-and-edit-memories) or in the Console, then either:
 
 * **Leverage it:** attach it to future sessions as a `memory_store` resource in place of (or alongside) the input memory store, or
-* **Discard it:** [delete](/docs/en/api/beta/memory_stores/delete) or [archive](/docs/en/api/beta/memory_stores/archive) it.
+* **Discard it:** [delete the memory store](/docs/en/api/beta/memory_stores/delete) or [archive the memory store](/docs/en/api/beta/memory_stores/archive).
 
 <CodeGroup>
   ```bash curl
@@ -568,7 +568,7 @@ Archive sets `archived_at` on a dream that has reached a terminal state (`comple
   ```
 </CodeGroup>
 
-Archiving a dream does not touch its output memory store; manage that separately through the [Memory Stores API](/docs/en/managed-agents/memory).
+Archiving a dream does not touch its output memory store; manage that separately through the [Memory Stores API](/docs/en/managed-agents/memory#view-and-edit-memories).
 
 ## List dreams
 

@@ -135,6 +135,9 @@ The simplest way to start is with automatic caching:
   ```java Java
   import com.anthropic.models.messages.CacheControlEphemeral;
   // ...
+  public class PromptCachingExample {
+
+    public static void main(String[] args) {
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
@@ -147,6 +150,8 @@ The simplest way to start is with automatic caching:
 
       Message message = client.messages().create(params);
       System.out.println(message.usage());
+    }
+  }
   ```
 
   ```php PHP
@@ -222,7 +227,7 @@ By default, the cache has a 5-minute lifetime. The cache is refreshed for no add
 
 ## Pricing
 
-Prompt caching introduces a new pricing structure. The table below shows the price per million tokens for each supported model:
+Prompt caching introduces a new pricing structure. The following table shows the price per million tokens for each supported model:
 
 | Model                                                                                                         | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | ------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | --------------- | ---------------------- | ------------- |
@@ -243,7 +248,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))    | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok    | $0.08 / MTok           | $4 / MTok     |
 
 <Note>
-  The table above reflects the following pricing multipliers for prompt caching:
+  The previous table reflects the following pricing multipliers for prompt caching:
 
   * 5-minute cache write tokens are 1.25 times the base input tokens price
   * 1-hour cache write tokens are 2 times the base input tokens price
@@ -398,6 +403,9 @@ Automatic caching is the simplest way to enable prompt caching. Instead of placi
   ```java Java
   import com.anthropic.models.messages.CacheControlEphemeral;
   // ...
+  public class AutomaticCachingExample {
+
+      public static void main(String[] args) {
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
@@ -412,6 +420,8 @@ Automatic caching is the simplest way to enable prompt caching. Instead of placi
 
           Message message = client.messages().create(params);
           System.out.println(message.usage());
+      }
+  }
   ```
 
   ```php PHP
@@ -505,7 +515,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 * If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
 
 <Note>
-  Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). Bedrock does not support automatic caching.
+  Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). Amazon Bedrock does not support automatic caching.
 </Note>
 
 ***
@@ -567,9 +577,9 @@ You can define up to 4 cache breakpoints if you want to:
 
 **Cache breakpoints themselves don't add any cost.** You are only charged for:
 
-* **Cache writes**: When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
-* **Cache reads**: When cached content is used (10% of base input token price)
-* **Regular input tokens**: For any uncached content
+* **Cache writes:** When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
+* **Cache reads:** When cached content is used (10% of base input token price)
+* **Regular input tokens:** For any uncached content
 
 Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints simply give you control over what sections can be cached independently.
 
@@ -590,7 +600,7 @@ On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-pl
 
 Model availability varies by platform, and so can the minimum for newly released models: on [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), the minimum cacheable prompt length for Claude Fable 5 and Claude Mythos 5 is 1,024 tokens.
 
-Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](/docs/en/build-with-claude/prompt-caching#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
+Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the [response usage fields](#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
 
 If your prompt falls just short of the minimum for your model and platform, expanding the cached content to reach the threshold is often worthwhile. Cache reads cost significantly less than uncached input tokens, so reaching the minimum can reduce costs for frequently reused prompts.
 
@@ -646,7 +656,7 @@ The following table shows which parts of the cache are invalidated by different 
 | **Non-tool results passed to extended thinking requests** | ✓           | ✓            | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](#caching-with-thinking-blocks). |
 
 <Note>
-  On Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages).
+  On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages).
 </Note>
 
 ### Tracking cache performance
@@ -679,7 +689,7 @@ Monitor cache performance using these API response fields, within `usage` in the
   * `cache_read_input_tokens`: 100,000
   * `cache_creation_input_tokens`: 0
   * `input_tokens`: 50
-  * **Total input tokens processed**: 100,050 tokens
+  * **Total input tokens processed:** 100,050 tokens
 
   This is important for understanding both costs and rate limits, as `input_tokens` will typically be much smaller than your total input when using caching effectively.
 </Note>
@@ -688,11 +698,11 @@ Monitor cache performance using these API response fields, within `usage` in the
 
 When using [extended thinking](/docs/en/build-with-claude/extended-thinking) with prompt caching, thinking blocks have special behavior:
 
-**Automatic caching alongside other content**: While thinking blocks cannot be explicitly marked with `cache_control`, they get cached as part of the request content when you make subsequent API calls with tool results. This commonly happens during tool use when you pass thinking blocks back to continue the conversation.
+**Automatic caching alongside other content:** While thinking blocks cannot be explicitly marked with `cache_control`, they get cached as part of the request content when you make subsequent API calls with tool results. This commonly happens during tool use when you pass thinking blocks back to continue the conversation.
 
-**Input token counting**: When thinking blocks are read from cache, they count as input tokens in your usage metrics. This is important for cost calculation and token budgeting.
+**Input token counting:** When thinking blocks are read from cache, they count as input tokens in your usage metrics. This is important for cost calculation and token budgeting.
 
-**Cache invalidation patterns**:
+**Cache invalidation patterns:**
 
 * Cache remains valid when only tool results are provided as user messages
 * On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default even when non-tool-result user content is added, so the cache remains valid
@@ -701,7 +711,7 @@ When using [extended thinking](/docs/en/build-with-claude/extended-thinking) wit
 
 For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
 
-**Example with tool use**:
+**Example with tool use:**
 
 ```text wrap
 Request 1: User: "What's the weather in Paris?"
@@ -802,7 +812,7 @@ To use the extended cache, include `ttl` in the `cache_control` definition like 
 }
 ```
 
-The response will include detailed cache information like the following:
+The response includes detailed cache information like the following:
 
 ```json Output
 {
@@ -826,13 +836,13 @@ If you see `ephemeral_5m_input_tokens` writes you didn't request while using ser
 
 ### When to use the 1-hour cache
 
-If you have prompts that are used at a regular cadence (that is, system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, since this will continue to be refreshed at no additional charge.
+If you have prompts that are used at a regular cadence (that is, system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, because this will continue to be refreshed at no additional charge.
 
 The 1-hour cache is best used in the following scenarios:
 
 * When you have prompts that are likely used less frequently than 5 minutes, but more frequently than every hour. For example, when an agentic side-agent will take longer than 5 minutes, or when storing a long chat conversation with a user and you generally expect that user may not respond in the next 5 minutes.
 * When latency is important and your follow up prompts may be sent beyond 5 minutes.
-* When you want to improve your rate limit utilization, since cache hits are not deducted against your rate limit.
+* When you want to improve your rate limit utilization, because cache hits are not deducted against your rate limit.
 
 <Note>
   The 5-minute and 1-hour cache behave the same with respect to latency. You will generally see improved time-to-first-token for long documents.
@@ -858,7 +868,7 @@ You'll be charged for:
 2. 1-hour cache write tokens for `(B - A)`.
 3. 5-minute cache write tokens for `(C - B)`.
 
-Here are 3 examples. This depicts the input tokens of 3 requests, each of which has different cache hits and cache misses. Each has a different calculated pricing, shown in the colored boxes, as a result. ![Mixing TTLs Diagram](/docs/images/prompt-cache-mixed-ttl.svg)
+Here are three examples. This depicts the input tokens of 3 requests, each of which has different cache hits and cache misses. Each has a different calculated pricing, shown in the colored boxes, as a result. ![Mixing TTLs Diagram](/docs/images/prompt-cache-mixed-ttl.svg)
 
 ***
 
@@ -1506,31 +1516,30 @@ The following code snippets showcase various prompt caching patterns. These exam
     <CodeGroup>
       ```bash cURL
       curl https://api.anthropic.com/v1/messages \
-           --header "x-api-key: $ANTHROPIC_API_KEY" \
-           --header "anthropic-version: 2023-06-01" \
-           --header "content-type: application/json" \
-           --data \
-      '{
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "content-type: application/json" \
+        -d '{
           "model": "claude-opus-4-8",
           "max_tokens": 1024,
           "system": [
-              {
-                  "type": "text",
-                  "text": "You are an AI assistant tasked with analyzing legal documents."
-              },
-              {
-                  "type": "text",
-                  "text": "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
-                  "cache_control": {"type": "ephemeral"}
-              }
+            {
+              "type": "text",
+              "text": "You are an AI assistant tasked with analyzing legal documents."
+            },
+            {
+              "type": "text",
+              "text": "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
+              "cache_control": {"type": "ephemeral"}
+            }
           ],
           "messages": [
-              {
-                  "role": "user",
-                  "content": "What are the key terms and conditions in this agreement?"
-              }
+            {
+              "role": "user",
+              "content": "What are the key terms and conditions in this agreement?"
+            }
           ]
-      }'
+        }'
       ```
 
       ```bash CLI
@@ -1670,6 +1679,9 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```java Java
       import com.anthropic.models.messages.CacheControlEphemeral;
       // ...
+      public class LegalDocumentAnalysisExample {
+
+        public static void main(String[] args) {
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
@@ -1693,6 +1705,8 @@ The following code snippets showcase various prompt caching patterns. These exam
 
           Message message = client.messages().create(params);
           System.out.println(message);
+        }
+      }
       ```
 
       ```php PHP
@@ -1807,50 +1821,49 @@ The following code snippets showcase various prompt caching patterns. These exam
     <CodeGroup>
       ```bash cURL
       curl https://api.anthropic.com/v1/messages \
-           --header "x-api-key: $ANTHROPIC_API_KEY" \
-           --header "anthropic-version: 2023-06-01" \
-           --header "content-type: application/json" \
-           --data \
-      '{
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "content-type: application/json" \
+        -d '{
           "model": "claude-opus-4-8",
           "max_tokens": 1024,
           "system": [
-              {
-                  "type": "text",
-                  "text": "...long system prompt",
-                  "cache_control": {"type": "ephemeral"}
-              }
+            {
+              "type": "text",
+              "text": "...long system prompt",
+              "cache_control": {"type": "ephemeral"}
+            }
           ],
           "messages": [
-              {
-                  "role": "user",
-                  "content": [
-                      {
-                          "type": "text",
-                          "text": "Hello, can you tell me more about the solar system?"
-                      }
-                  ]
-              },
-              {
-                  "role": "assistant",
-                  "content": "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?"
-              },
-              {
-                  "role": "user",
-                  "content": [
-                      {
-                          "type": "text",
-                          "text": "Good to know."
-                      },
-                      {
-                          "type": "text",
-                          "text": "Tell me more about Mars.",
-                          "cache_control": {"type": "ephemeral"}
-                      }
-                  ]
-              }
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Hello, can you tell me more about the solar system?"
+                }
+              ]
+            },
+            {
+              "role": "assistant",
+              "content": "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Good to know."
+                },
+                {
+                  "type": "text",
+                  "text": "Tell me more about Mars.",
+                  "cache_control": {"type": "ephemeral"}
+                }
+              ]
+            }
           ]
-      }'
+        }'
       ```
 
       ```bash CLI
@@ -1980,6 +1993,8 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```
 
       ```csharp C#
+      AnthropicClient client = new();
+
       var parameters = new MessageCreateParams
       {
           Model = Model.ClaudeOpus4_8,
@@ -2063,6 +2078,9 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```java Java
       import com.anthropic.models.messages.CacheControlEphemeral;
       // ...
+      public class ConversationWithCacheControlExample {
+
+        public static void main(String[] args) {
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           // Create ephemeral system prompt
@@ -2098,6 +2116,8 @@ The following code snippets showcase various prompt caching patterns. These exam
 
           Message message = client.messages().create(params);
           System.out.println(message);
+        }
+      }
       ```
 
       ```php PHP
@@ -2190,7 +2210,7 @@ The following code snippets showcase various prompt caching patterns. These exam
 
     This example demonstrates how to use prompt caching in a multi-turn conversation.
 
-    During each turn, the final block of the final message is marked with `cache_control` so the conversation can be incrementally cached. The system will automatically lookup and use the longest previously cached sequence of blocks for follow-up messages. That is, blocks that were previously marked with a `cache_control` block are later not marked with this, but they will still be considered a cache hit (and also a cache refresh!) if they are hit within 5 minutes.
+    During each turn, the final block of the final message is marked with `cache_control` so the conversation can be incrementally cached. The system automatically looks up and uses the longest previously cached sequence of blocks for follow-up messages. That is, blocks that were previously marked with a `cache_control` block are later not marked with this, but they will still be considered a cache hit (and also a cache refresh!) if they are hit within 5 minutes.
 
     In addition, note that the `cache_control` parameter is placed on the system message. This is to ensure that if this gets evicted from the cache (after not being used for more than 5 minutes), it will get added back to the cache on the next request.
 
@@ -2207,103 +2227,102 @@ The following code snippets showcase various prompt caching patterns. These exam
     <CodeGroup>
       ```bash cURL
       curl https://api.anthropic.com/v1/messages \
-           --header "x-api-key: $ANTHROPIC_API_KEY" \
-           --header "anthropic-version: 2023-06-01" \
-           --header "content-type: application/json" \
-           --data \
-      '{
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "content-type: application/json" \
+        -d '{
           "model": "claude-opus-4-8",
           "max_tokens": 1024,
           "tools": [
-              {
-                  "name": "search_documents",
-                  "description": "Search through the knowledge base",
-                  "input_schema": {
-                      "type": "object",
-                      "properties": {
-                          "query": {
-                              "type": "string",
-                              "description": "Search query"
-                          }
-                      },
-                      "required": ["query"]
+            {
+              "name": "search_documents",
+              "description": "Search through the knowledge base",
+              "input_schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Search query"
                   }
-              },
-              {
-                  "name": "get_document",
-                  "description": "Retrieve a specific document by ID",
-                  "input_schema": {
-                      "type": "object",
-                      "properties": {
-                          "doc_id": {
-                              "type": "string",
-                              "description": "Document ID"
-                          }
-                      },
-                      "required": ["doc_id"]
-                  },
-                  "cache_control": {"type": "ephemeral"}
+                },
+                "required": ["query"]
               }
+            },
+            {
+              "name": "get_document",
+              "description": "Retrieve a specific document by ID",
+              "input_schema": {
+                "type": "object",
+                "properties": {
+                  "doc_id": {
+                    "type": "string",
+                    "description": "Document ID"
+                  }
+                },
+                "required": ["doc_id"]
+              },
+              "cache_control": {"type": "ephemeral"}
+            }
           ],
           "system": [
-              {
-                  "type": "text",
-                  "text": "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
-                  "cache_control": {"type": "ephemeral"}
-              },
-              {
-                  "type": "text",
-                  "text": "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
-                  "cache_control": {"type": "ephemeral"}
-              }
+            {
+              "type": "text",
+              "text": "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+              "cache_control": {"type": "ephemeral"}
+            },
+            {
+              "type": "text",
+              "text": "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+              "cache_control": {"type": "ephemeral"}
+            }
           ],
           "messages": [
-              {
-                  "role": "user",
-                  "content": "Can you search for information about Mars rovers?"
-              },
-              {
-                  "role": "assistant",
-                  "content": [
-                      {
-                          "type": "tool_use",
-                          "id": "tool_1",
-                          "name": "search_documents",
-                          "input": {"query": "Mars rovers"}
-                      }
-                  ]
-              },
-              {
-                  "role": "user",
-                  "content": [
-                      {
-                          "type": "tool_result",
-                          "tool_use_id": "tool_1",
-                          "content": "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
-                      }
-                  ]
-              },
-              {
-                  "role": "assistant",
-                  "content": [
-                      {
-                          "type": "text",
-                          "text": "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
-                      }
-                  ]
-              },
-              {
-                  "role": "user",
-                  "content": [
-                      {
-                          "type": "text",
-                          "text": "Yes, please tell me about the Perseverance rover specifically.",
-                          "cache_control": {"type": "ephemeral"}
-                      }
-                  ]
-              }
+            {
+              "role": "user",
+              "content": "Can you search for information about Mars rovers?"
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "tool_use",
+                  "id": "tool_1",
+                  "name": "search_documents",
+                  "input": {"query": "Mars rovers"}
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "tool_result",
+                  "tool_use_id": "tool_1",
+                  "content": "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
+                }
+              ]
+            },
+            {
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
+                }
+              ]
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Yes, please tell me about the Perseverance rover specifically.",
+                  "cache_control": {"type": "ephemeral"}
+                }
+              ]
+            }
           ]
-      }'
+        }'
       ```
 
       ```bash CLI
@@ -2773,6 +2792,9 @@ The following code snippets showcase various prompt caching patterns. These exam
       ```java Java
       import com.anthropic.models.messages.CacheControlEphemeral;
       // ...
+      public class MultipleCacheBreakpointsExample {
+
+        public static void main(String[] args) {
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           // Search tool schema
@@ -2881,6 +2903,8 @@ The following code snippets showcase various prompt caching patterns. These exam
 
           Message message = client.messages().create(params);
           System.out.println(message);
+        }
+      }
       ```
 
       ```php PHP
@@ -3174,7 +3198,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
     * `cache_read_input_tokens`: 200,000
     * `cache_creation_input_tokens`: 0
     * `input_tokens`: 50
-    * **Total**: 200,050 tokens
+    * **Total:** 200,050 tokens
 
     This breakdown is critical for understanding both your costs and rate limit usage. See [Tracking cache performance](#tracking-cache-performance) for more details.
   </Accordion>

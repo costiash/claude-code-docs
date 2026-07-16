@@ -47,7 +47,7 @@ One Console-created rule is enough to put the rest of your federation configurat
   </Step>
 </Steps>
 
-For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](#permissions-and-constraints). If you already created issuers, service accounts, or rules with the Connect workload wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
+For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](#permissions-and-constraints). If you already created issuers, service accounts, or rules with the **Connect workload** wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
 
 ## Authentication
 
@@ -55,8 +55,8 @@ All endpoints live under `https://api.anthropic.com/v1/organizations/`. Every re
 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 Admin API keys are not accepted on these endpoints; the Admin API page's `x-api-key` examples do not apply here.
@@ -68,23 +68,23 @@ A [service account](/docs/en/manage-claude/workload-identity-federation#service-
 ```bash cURL
 # Create a service account
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  --header "content-type: application/json" \
-  --data '{
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
     "name": "inference-worker",
     "organization_role": "developer"
   }'
 
 # List service accounts
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts?limit=20" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 
 # Archive a service account
-curl --fail-with-body -sS --request POST "https://api.anthropic.com/v1/organizations/service_accounts/svac_.../archive" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/service_accounts/svac_.../archive" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 The create endpoint returns the new service account:
@@ -117,10 +117,10 @@ A [federation issuer](/docs/en/manage-claude/workload-identity-federation#federa
 ```bash cURL
 # Register an issuer (GitHub Actions, with JWKS discovery)
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_issuers" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  --header "content-type: application/json" \
-  --data '{
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
     "name": "github-actions",
     "issuer_url": "https://token.actions.githubusercontent.com",
     "jwks": {"type": "discovery"}
@@ -128,13 +128,13 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation
 
 # List issuers
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_issuers?limit=20" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 
 # Archive an issuer
-curl --fail-with-body -sS --request POST "https://api.anthropic.com/v1/organizations/federation_issuers/fdis_.../archive" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/federation_issuers/fdis_.../archive" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](#permissions-and-constraints).
@@ -148,10 +148,10 @@ A [federation rule](/docs/en/manage-claude/workload-identity-federation#federati
 ```bash cURL
 # Create a rule (GitHub Actions deploys from the main branch)
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_rules" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  --header "content-type: application/json" \
-  --data '{
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
     "name": "gha-deploy",
     "issuer_id": "fdis_...",
     "match": {
@@ -169,13 +169,13 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation
 
 # List rules, optionally filtered by issuer
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_rules?issuer_id=fdis_..." \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 
 # Archive a rule
-curl --fail-with-body -sS --request POST "https://api.anthropic.com/v1/organizations/federation_rules/fdrl_.../archive" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/federation_rules/fdrl_.../archive" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 The list endpoint returns a page of rules and the cursor for the next page:

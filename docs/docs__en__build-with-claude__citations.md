@@ -204,30 +204,30 @@ The following example shows how to enable citations on a plain text document wit
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   PlainTextSource source = PlainTextSource.builder()
-    .data("The grass is green. The sky is blue.")
-    .build();
+      .data("The grass is green. The sky is blue.")
+      .build();
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(source)
-    .title("My Document")
-    .context("This is a trustworthy document.")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .build();
+      .source(source)
+      .title("My Document")
+      .context("This is a trustworthy document.")
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .build();
 
   TextBlockParam textBlockParam = TextBlockParam.builder()
-    .text("What color is the grass and sky?")
-    .build();
+      .text("What color is the grass and sky?")
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(textBlockParam)
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(textBlockParam)
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);
@@ -368,7 +368,7 @@ Integrate citations with Claude in these steps:
 ### Token costs
 
 * Enabling citations incurs a slight increase in input tokens because of system prompt additions and document chunking.
-* However, the citations feature is very efficient with output tokens. Under the hood, the model is outputting citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
+* However, the citations feature is very efficient with output tokens. Internally, the model outputs citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
 * When passed back in subsequent conversation turns, `cited_text` is also not counted toward input tokens.
 
 ### Feature compatibility
@@ -589,29 +589,29 @@ The citation blocks generated in responses cannot be cached directly, but the so
 
   // Long document content (for example, technical documentation)
   String longDocument =
-    "This is a very long document with thousands of words..."
-      + " ... ".repeat(1000); // Minimum cacheable length
+      "This is a very long document with thousands of words..."
+          + " ... ".repeat(1000); // Minimum cacheable length
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(PlainTextSource.builder().data(longDocument).build())
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
-    .build();
+      .source(PlainTextSource.builder().data(longDocument).build())
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
+      .build();
 
   TextBlockParam textBlockParam = TextBlockParam.builder()
-    .text("What does this document say about API features?")
-    .build();
+      .text("What does this document say about API features?")
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(textBlockParam)
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(textBlockParam)
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);
@@ -1204,22 +1204,22 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       String pdfBase64 = Base64.getEncoder().encodeToString(pdfBytes);
 
       DocumentBlockParam documentParam = DocumentBlockParam.builder()
-        .source(Base64PdfSource.builder().data(pdfBase64).build())
-        .title("Document Title")
-        .context("Context about the document that will not be cited from")
-        .citations(CitationsConfigParam.builder().enabled(true).build())
-        .build();
+          .source(Base64PdfSource.builder().data(pdfBase64).build())
+          .title("Document Title")
+          .context("Context about the document that will not be cited from")
+          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+              List.of(
+                  ContentBlockParam.ofDocument(documentParam),
+                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+              )
           )
-        )
-        .build();
+          .build();
 
       Message message = client.messages().create(params);
       System.out.println(message);
@@ -1480,24 +1480,24 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       DocumentBlockParam documentParam = DocumentBlockParam.builder()
-        .source(UrlPdfSource.builder()
-          .url("https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf")
-          .build())
-        .title("Document Title")
-        .context("Context about the document that will not be cited from")
-        .citations(CitationsConfigParam.builder().enabled(true).build())
-        .build();
+          .source(UrlPdfSource.builder()
+              .url("https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf")
+              .build())
+          .title("Document Title")
+          .context("Context about the document that will not be cited from")
+          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+              List.of(
+                  ContentBlockParam.ofDocument(documentParam),
+                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+              )
           )
-        )
-        .build();
+          .build();
 
       Message message = client.messages().create(params);
       System.out.println(message);
@@ -2035,29 +2035,29 @@ Custom content documents give you control over citation granularity. No addition
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(ContentBlockSource.builder()
-      .contentOfBlockSource(
-        List.of(
-          ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
-          ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
-        )
-      )
-      .build())
-    .title("Document Title")
-    .context("Context about the document that will not be cited from")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .build();
+      .source(ContentBlockSource.builder()
+          .contentOfBlockSource(
+              List.of(
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
+              )
+          )
+          .build())
+      .title("Document Title")
+      .context("Context about the document that will not be cited from")
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);

@@ -26,7 +26,7 @@ The following call lists every organization under your parent. The response is a
   ```bash cURL
   curl --fail-with-body -sS \
     "https://api.anthropic.com/v1/compliance/organizations" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
   ```
 </CodeGroup>
 
@@ -57,7 +57,7 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 | `organization_uuid`  | Activity Feed, chat, and project records                                                                                                                                                           | Same value; join on these two fields directly                                                                                                             |
 | `organization_id`    | Activity Feed, chat, and project records                                                                                                                                                           | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead.                                              |
 | `organization_ids[]` | Filter on [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) and [Retrieve chats and messages](/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) | Accepts `uuid` or the `org_`-prefixed form                                                                                                                |
-| `organization_id`    | [Get effective organization settings](#get-effective-organization-settings) response                                                                                                               | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
+| `organization_id`    | [Effective organization settings](#get-effective-organization-settings) response                                                                                                                   | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
@@ -79,7 +79,7 @@ Results are sorted by organization join date ascending. Unlike the Activity Feed
 
   curl --fail-with-body -sS -G \
     "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
     --data-urlencode "limit=500"
   ```
 </CodeGroup>
@@ -108,7 +108,7 @@ A user only appears here while they are an active member of the organization. Re
 
 The [List Compliance Roles](/docs/en/api/compliance/organizations/roles/list) endpoint returns a paginated list of role records defined on one organization, and [Get Compliance Role](/docs/en/api/compliance/organizations/roles/retrieve) returns one role by ID.
 
-Both role endpoints require `read:compliance_org_data`. The list endpoint accepts the same `limit` and `page` parameters as [List organization users](#list-organization-users).
+Both role endpoints require `read:compliance_org_data`. The list endpoint accepts the same `limit` and `page` parameters as the [organization users endpoint](#list-organization-users).
 
 <CodeGroup>
   ```bash cURL
@@ -116,7 +116,7 @@ Both role endpoints require `read:compliance_org_data`. The list endpoint accept
 
   curl --fail-with-body -sS \
     "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
   ```
 </CodeGroup>
 
@@ -142,7 +142,7 @@ See the [List Compliance Roles](/docs/en/api/compliance/organizations/roles/list
 
 The [List Compliance Groups](/docs/en/api/compliance/groups/list) endpoint returns a paginated list of RBAC and SCIM-provisioned groups, and [Get Compliance Group](/docs/en/api/compliance/groups/retrieve) returns one group by ID. The [List Compliance Group Members](/docs/en/api/compliance/groups/members/list) endpoint returns the members of one group.
 
-The group list and retrieval endpoints require `read:compliance_org_data`. The members endpoint requires `read:compliance_user_data`. Create the key with both scopes to walk groups end to end. Both list endpoints accept the same `limit` and `page` parameters as [List organization users](#list-organization-users).
+The group list and retrieval endpoints require `read:compliance_org_data`. The members endpoint requires `read:compliance_user_data`. Create the key with both scopes to walk groups end to end. Both list endpoints accept the same `limit` and `page` parameters as the [organization users endpoint](#list-organization-users).
 
 See the [List Compliance Groups](/docs/en/api/compliance/groups/list) response schema for the full group record shape. The `roles` array lists role IDs assigned to the group, matching IDs from [List roles](#list-roles). `source_type` is the discriminator between groups created manually through claude.ai (`direct`) and groups synced from an external identity provider through SCIM (`scim`).
 
@@ -152,7 +152,7 @@ List groups, then for each group list its members:
   ```bash cURL
   curl --fail-with-body -sS -G \
     "https://api.anthropic.com/v1/compliance/groups" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
   ```
 </CodeGroup>
 
@@ -182,7 +182,7 @@ For each group ID, list its members:
 
   curl --fail-with-body -sS -G \
     "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
   ```
 </CodeGroup>
 
@@ -218,7 +218,7 @@ org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/settings" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
 ```
 
 The response is a list of typed setting rows, and which rows appear varies by organization: a setting the organization's administrators cannot change, because it is controlled by Anthropic policy or not available to the organization, is omitted from the list. Treat a missing row as "not controllable by this organization's administrators", not as "off". The following abridged example shows three of the rows a response can contain:
@@ -269,7 +269,7 @@ Each row carries `name`, `type`, and `value`; the `type` field (`boolean`, `inte
 
 The `api_keys` array lists every Compliance Access Key configured for your parent organization, so the same list is returned regardless of which linked organization you query. Each entry carries the key's `type` (`compliance_api_key`), `id`, `name`, `scopes`, `is_active` flag, `created_at` and `expires_at` timestamps, and `created_by_id` (the ID of the user who created the key; may be `null`). The key's secret value is never returned. Deactivated keys are included with `is_active: false` so you can review keys that previously had access, and keys that carry only the retired `read:compliance_org_settings` scope remain in the list for audit and cleanup visibility even though that scope no longer grants access.
 
-The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the identifier table in [List organizations](#list-organizations)).
+The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the [organization identifier table](#list-organizations)).
 
 Rows reflect the enforced state rather than the last-stored configuration: for example, `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled, `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range, and `code_execution_network_egress_enabled` is `false` whenever code execution is off.
 

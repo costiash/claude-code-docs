@@ -242,24 +242,24 @@ Provide the web search tool in your API request:
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 1024,
-          "messages": [
-              {
-                  "role": "user",
-                  "content": "What is the weather in NYC?"
-              }
-          ],
-          "tools": [{
-              "type": "web_search_20250305",
-              "name": "web_search",
-              "max_uses": 5
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the weather in NYC?"
+        }
+      ],
+      "tools": [{
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 5
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -432,19 +432,19 @@ The web search tool supports the following parameters:
 }
 ```
 
-All web search tool versions accept `allowed_callers`, which controls whether Claude calls web search directly or from [code execution](#dynamic-filtering). On `web_search_20260209` and later it defaults to `["code_execution_20260120"]` instead of `["direct"]`. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers) for how to configure it. `web_search_20260318` and later also accept [`response_inclusion`](#response-inclusion).
+All web search tool versions accept `allowed_callers`, which controls whether Claude calls web search directly or from code execution through [dynamic filtering](#dynamic-filtering). On `web_search_20260209` and later it defaults to `["code_execution_20260120"]` instead of `["direct"]`. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers) for how to configure it. `web_search_20260318` and later also accept [`response_inclusion`](#response-inclusion).
 
 ### Max uses
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
-Simple factual queries typically use 1–3 searches; comparative or multientity research can use 10 or more. For latency-sensitive lookups, `max_uses: 3` bounds cost while rarely truncating. For research agents, set `max_uses` to 15–20 or omit it entirely.
+Simple factual queries typically use 1–3 searches; comparative or multientity research can use 10 or more. For guidance on choosing a value, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools).
 
 ### Domain filtering
 
 Provide `allowed_domains` or `blocked_domains`, not both. If a request includes both, the API returns a 400 error. Entries are bare domains with an optional path, for example `example.com` or `example.com/blog`, without a scheme.
 
-For the full domain filtering rules, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#domain-filtering).
+For the full domain filtering rules, see [Domain filtering](/docs/en/agents-and-tools/tool-use/server-tools#domain-filtering) in the Server tools guide.
 
 ### Localization
 
@@ -562,7 +562,7 @@ Citations are always enabled for web search, and each `web_search_result_locatio
 
 * `url`: The URL of the cited source
 * `title`: The title of the cited source
-* `encrypted_index`: A reference that must be passed back for multi-turn conversations.
+* `encrypted_index`: A reference that must be passed back for multi-turn conversations
 * `cited_text`: Up to 150 characters of the cited content
 
 The web search citation fields `cited_text`, `title`, and `url` do not count toward input or output token usage.
@@ -603,7 +603,7 @@ The API can pause a long-running search turn and return `stop_reason: "pause_tur
 
 If Claude calls web search and one of your client tools in the same group of parallel tool calls, the API returns `stop_reason: "tool_use"` instead and does not run the search yet. To continue, return the client tool results, and the API runs the search in the next request. See [Mixing server tools and client tools in one turn](/docs/en/agents-and-tools/tool-use/server-tools#mixing-server-tools-and-client-tools-in-one-turn).
 
-For the server-side loop and `pause_turn` handling, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn).
+For the server-side loop and `pause_turn` handling, see [The server-side loop and pause\_turn](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn) in the Server tools guide.
 
 ## Prompt caching
 

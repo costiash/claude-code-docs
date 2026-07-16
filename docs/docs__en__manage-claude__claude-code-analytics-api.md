@@ -8,7 +8,7 @@ Programmatically access your organization's Claude Code usage analytics and prod
   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API bridges the gap between the basic [Analytics dashboard](/claude-code) and the complex OpenTelemetry integration.
+The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](/claude-code) without the complexity of the OpenTelemetry integration.
 
 This API enables you to better monitor, analyze, and optimize your Claude Code adoption:
 
@@ -38,8 +38,8 @@ Get your organization's Claude Code analytics for a specific day:
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 limit=20" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ADMIN_API_KEY"
 ```
 
 <Tip>
@@ -59,11 +59,11 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 ### Key concepts
 
 * **Daily aggregation:** Returns metrics for a single day specified by the `starting_at` parameter
-* **User-level data**: Each record represents one user's activity for the specified day
-* **Productivity metrics**: Track sessions, lines of code, commits, pull requests, and tool usage
-* **Token and cost data**: Monitor usage and estimated costs broken down by Claude model
-* **Cursor-based pagination**: Handle large datasets with stable pagination using opaque cursors
-* **Data freshness**: Metrics are available with up to 1-hour delay for consistency
+* **User-level data:** Each record represents one user's activity for the specified day
+* **Productivity metrics:** Track sessions, lines of code, commits, pull requests, and tool usage
+* **Token and cost data:** Monitor usage and estimated costs broken down by Claude model
+* **Cursor-based pagination:** Handle large datasets with stable pagination using opaque cursors
+* **Data freshness:** Metrics are available with up to 1-hour delay for consistency
 
 For complete parameter details and response schemas, see the [Claude Code Analytics API reference](/docs/en/api/admin/usage_report/retrieve_claude_code).
 
@@ -74,8 +74,8 @@ For complete parameter details and response schemas, see the [Claude Code Analyt
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ADMIN_API_KEY"
 ```
 
 #### Get analytics with pagination
@@ -85,15 +85,15 @@ starting_at=2025-09-08" \
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 limit=20" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ADMIN_API_KEY"
 
 # Subsequent request using cursor from response
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 page=page_MjAyNS0wNS0xNFQwMDowMDowMFo=" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ADMIN_API_KEY"
 ```
 
 ### Request parameters
@@ -111,18 +111,18 @@ Each response record contains the following metrics for a single user on a singl
 #### Dimensions
 
 * **date:** Date in RFC 3339 format (UTC timestamp)
-* **actor**: The user or API key that performed the Claude Code actions (either `user_actor` with `email_address` or `api_actor` with `api_key_name`)
-* **organization\_id**: Organization UUID
-* **customer\_type**: Type of customer account (`api` for API customers, `subscription` for Pro/Team customers)
-* **terminal\_type**: Type of terminal or environment where Claude Code was used (e.g., `vscode`, `iTerm.app`, `tmux`)
+* **actor:** The user or API key that performed the Claude Code actions (either `user_actor` with `email_address` or `api_actor` with `api_key_name`)
+* **organization\_id:** Organization UUID
+* **customer\_type:** Type of customer account (`api` for API customers, `subscription` for Pro/Team customers)
+* **terminal\_type:** Type of terminal or environment where Claude Code was used (for example, `vscode`, `iTerm.app`, `tmux`)
 
 #### Core metrics
 
-* **num\_sessions**: Number of distinct Claude Code sessions initiated by this actor
-* **lines\_of\_code.added**: Total number of lines of code added across all files by Claude Code
-* **lines\_of\_code.removed**: Total number of lines of code removed across all files by Claude Code
-* **commits\_by\_claude\_code**: Number of git commits created through Claude Code's commit functionality
-* **pull\_requests\_by\_claude\_code**: Number of pull requests created through Claude Code's PR functionality
+* **num\_sessions:** Number of distinct Claude Code sessions initiated by this actor
+* **lines\_of\_code.added:** Total number of lines of code added across all files by Claude Code
+* **lines\_of\_code.removed:** Total number of lines of code removed across all files by Claude Code
+* **commits\_by\_claude\_code:** Number of git commits created through Claude Code's commit functionality
+* **pull\_requests\_by\_claude\_code:** Number of pull requests created through Claude Code's PR functionality
 
 #### Tool action metrics
 
@@ -138,10 +138,10 @@ Breakdown of tool action acceptance and rejection rates by tool type:
 For each Claude model used:
 
 * **model:** Claude model identifier (for example, `claude-opus-4-8`)
-* **tokens.input/output**: Input and output token counts for this model
-* **tokens.cache\_read/cache\_creation**: Cache-related token usage for this model
-* **estimated\_cost.amount**: Estimated cost in cents USD for this model
-* **estimated\_cost.currency**: Currency code for the cost amount (currently always `USD`)
+* **tokens.input/output:** Input and output token counts for this model
+* **tokens.cache\_read/cache\_creation:** Cache-related token usage for this model
+* **estimated\_cost.amount:** Estimated cost in cents USD for this model
+* **estimated\_cost.currency:** Currency code for the cost amount (currently always `USD`)
 
 ### Response structure
 
@@ -212,20 +212,20 @@ The API returns data in the following format:
 
 The API supports cursor-based pagination for organizations with large numbers of users:
 
-1. Make your initial request with optional `limit` parameter
-2. If `has_more` is `true` in the response, use the `next_page` value in your next request
-3. Continue until `has_more` is `false`
+1. Make your initial request with optional `limit` parameter.
+2. If `has_more` is `true` in the response, use the `next_page` value in your next request.
+3. Continue until `has_more` is `false`.
 
 The cursor encodes the position of the last record and ensures stable pagination even as new data arrives. Each pagination session maintains a consistent data boundary to ensure you don't miss or duplicate records.
 
 ## Common use cases
 
 * **Executive dashboards:** Create high-level reports showing Claude Code impact on development velocity
-* **AI tool comparison**: Export metrics to compare Claude Code with other AI coding tools like Copilot and Cursor
-* **Developer productivity analysis**: Track individual and team productivity metrics over time
-* **Cost tracking and allocation**: Monitor spending patterns and allocate costs by team or project
-* **Adoption monitoring**: Identify which teams and users are getting the most value from Claude Code
-* **ROI justification**: Provide concrete metrics to justify and expand Claude Code adoption internally
+* **AI tool comparison:** Export metrics to compare Claude Code with other AI coding tools such as Copilot and Cursor
+* **Developer productivity analysis:** Track individual and team productivity metrics over time
+* **Cost tracking and allocation:** Monitor spending patterns and allocate costs by team or project
+* **Adoption monitoring:** Identify which teams and users are getting the most value from Claude Code
+* **ROI justification:** Provide concrete metrics to justify and expand Claude Code adoption internally
 
 ## Frequently asked questions
 

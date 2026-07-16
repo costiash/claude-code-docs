@@ -893,7 +893,7 @@ The following example enables web fetch together with a user-defined `run_comman
       ['type' => 'web_fetch_20250910', 'name' => 'web_fetch', 'max_uses' => 5],
       [
           'name' => 'run_command',
-          'description' => "Run a shell command on this computer and return its output.",
+          'description' => 'Run a shell command on this computer and return its output.',
           'input_schema' => [
               'type' => 'object',
               'properties' => [

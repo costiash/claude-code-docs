@@ -8,7 +8,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 ## Streaming with SDKs
 
-The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
+The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) offer multiple ways of streaming. The [PHP SDK](https://github.com/anthropics/anthropic-sdk-php) provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 <CodeGroup>
   ```bash CLI
@@ -46,27 +46,18 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
   ```
 
   ```csharp C#
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "Hello" }]
+  };
 
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = "Hello" }]
-          };
-
-          await foreach (var msg in client.Messages.CreateStreaming(parameters))
-          {
-              Console.Write(msg);
-          }
-      }
+  await foreach (var msg in client.Messages.CreateStreaming(parameters))
+  {
+      Console.Write(msg);
   }
   ```
 
@@ -100,7 +91,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model("claude-opus-4-8")
+      .model(Model.CLAUDE_OPUS_4_8)
       .maxTokens(1024L)
       .addUserMessage("Hello")
       .build();
@@ -147,7 +138,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 
 ## Get the final message without handling events
 
-If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
+If you don't need to process text as it arrives, the SDKs provide a way to use streaming internally while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
 <CodeGroup>
   ```bash CLI
@@ -193,33 +184,22 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main()
-      {
-          AnthropicClient client = new();
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 128000,
+      Messages = [new() { Role = Role.User, Content = "Write a detailed analysis..." }]
+  };
 
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 128000,
-              Messages = [new() { Role = Role.User, Content = "Write a detailed analysis..." }]
-          };
-
-          var fullText = "";
-          await foreach (var msg in client.Messages.CreateStreaming(parameters))
-          {
-              fullText += msg;
-          }
-
-          Console.WriteLine(fullText);
-      }
+  var fullText = "";
+  await foreach (var msg in client.Messages.CreateStreaming(parameters))
+  {
+      fullText += msg;
   }
+
+  Console.WriteLine(fullText);
   ```
 
   ```go Go
@@ -248,23 +228,21 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
   ```
 
   ```java Java
-  import com.anthropic.helpers.MessageAccumulator;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(128000L)
-              .addUserMessage("Write a detailed analysis...")
-              .build();
+  MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(128000L)
+      .addUserMessage("Write a detailed analysis...")
+      .build();
 
-          MessageAccumulator accumulator = MessageAccumulator.create();
-          try (var streamResponse = client.messages().createStreaming(params)) {
-              streamResponse.stream().forEach(accumulator::accumulate);
-          }
+  MessageAccumulator accumulator = MessageAccumulator.create();
+  try (var streamResponse = client.messages().createStreaming(params)) {
+      streamResponse.stream().forEach(accumulator::accumulate);
+  }
 
-          Message message = accumulator.message();
-          message.content().get(0).text().ifPresent(tb -> System.out.println(tb.text()));
+  Message message = accumulator.message();
+  message.content().get(0).text().ifPresent(tb -> System.out.println(tb.text()));
   ```
 
   ```php PHP
@@ -361,7 +339,7 @@ event: content_block_delta
 data: {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_delta","partial_json": "{\"location\": \"San Fra"}}}
 ```
 
-Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial json so that the format can automatically support finer granularity in future models.
+Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial JSON so that the format can automatically support finer granularity in future models.
 
 ### Thinking delta
 
@@ -410,16 +388,15 @@ There may be `ping` events dispersed throughout the response as well. See [Event
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --data \
-  '{
-    "model": "claude-opus-4-8",
-    "messages": [{"role": "user", "content": "Hello"}],
-    "max_tokens": 256,
-    "stream": true
-  }'
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "messages": [{"role": "user", "content": "Hello"}],
+      "max_tokens": 256,
+      "stream": true
+    }'
   ```
 
   ```bash CLI
@@ -458,29 +435,18 @@ There may be `ping` events dispersed throughout the response as well. See [Event
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 256,
+      Messages = [new() { Role = Role.User, Content = "Hello" }]
+  };
 
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 256,
-              Messages = [new() { Role = Role.User, Content = "Hello" }]
-          };
-
-          await foreach (var msg in client.Messages.CreateStreaming(parameters))
-          {
-              Console.Write(msg);
-          }
-      }
+  await foreach (var msg in client.Messages.CreateStreaming(parameters))
+  {
+      Console.Write(msg);
   }
   ```
 
@@ -727,48 +693,36 @@ This request asks Claude to use a tool to report the weather.
   ```
 
   ```csharp C#
-  using System;
-  using System.Text.Json;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Tools = [
+          new ToolUnion(new Tool()
           {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 1024,
-              Tools = [
-                  new ToolUnion(new Tool()
+              Name = "get_weather",
+              Description = "Get the current weather in a given location",
+              InputSchema = new InputSchema()
+              {
+                  Properties = new Dictionary<string, JsonElement>
                   {
-                      Name = "get_weather",
-                      Description = "Get the current weather in a given location",
-                      InputSchema = new InputSchema()
-                      {
-                          Properties = new Dictionary<string, JsonElement>
-                          {
-                              ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
-                          },
-                          Required = ["location"],
-                      },
-                  }),
-              ],
-              ToolChoice = new ToolChoiceAny(),
-              Messages = [
-                  new() { Role = Role.User, Content = "What is the weather like in San Francisco?" }
-              ]
-          };
+                      ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
+                  },
+                  Required = ["location"],
+              },
+          }),
+      ],
+      ToolChoice = new ToolChoiceAny(),
+      Messages = [
+          new() { Role = Role.User, Content = "What is the weather like in San Francisco?" }
+      ]
+  };
 
-          await foreach (var msg in client.Messages.CreateStreaming(parameters))
-          {
-              Console.Write(msg);
-          }
-      }
+  await foreach (var msg in client.Messages.CreateStreaming(parameters))
+  {
+      Console.Write(msg);
   }
   ```
 
@@ -1005,25 +959,24 @@ This request enables extended thinking with streaming. The `display: "summarized
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 20000,
       "stream": true,
       "thinking": {
-          "type": "adaptive",
-          "display": "summarized"
+        "type": "adaptive",
+        "display": "summarized"
       },
       "messages": [
-          {
-              "role": "user",
-              "content": "What is the greatest common divisor of 1071 and 462?"
-          }
+        {
+          "role": "user",
+          "content": "What is the greatest common divisor of 1071 and 462?"
+        }
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -1250,28 +1203,27 @@ This request asks Claude to search the web for current weather information.
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "stream": true,
       "tools": [
-          {
-              "type": "web_search_20250305",
-              "name": "web_search",
-              "max_uses": 5
-          }
+        {
+          "type": "web_search_20250305",
+          "name": "web_search",
+          "max_uses": 5
+        }
       ],
       "messages": [
-          {
-              "role": "user",
-              "content": "What is the weather like in New York City today?"
-          }
+        {
+          "role": "user",
+          "content": "What is the weather like in New York City today?"
+        }
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -1368,28 +1320,26 @@ This request asks Claude to search the web for current weather information.
   ```
 
   ```java Java
-  import com.anthropic.models.messages.WebSearchTool20250305;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addTool(WebSearchTool20250305.builder()
-                  .maxUses(5L)
-                  .build())
-              .addUserMessage("What is the weather like in New York City today?")
-              .build();
+  MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024L)
+      .addTool(WebSearchTool20250305.builder()
+          .maxUses(5L)
+          .build())
+      .addUserMessage("What is the weather like in New York City today?")
+      .build();
 
-          try (var streamResponse = client.messages().createStreaming(params)) {
-              streamResponse.stream().forEach(event -> {
-                  event.contentBlockDelta().ifPresent(deltaEvent ->
-                      deltaEvent.delta().text().ifPresent(td ->
-                          System.out.print(td.text())
-                      )
-                  );
-              });
-          }
+  try (var streamResponse = client.messages().createStreaming(params)) {
+      streamResponse.stream().forEach(event -> {
+          event.contentBlockDelta().ifPresent(deltaEvent ->
+              deltaEvent.delta().text().ifPresent(td ->
+                  System.out.print(td.text())
+              )
+          );
+      });
+  }
   ```
 
   ```php PHP
@@ -1526,24 +1476,24 @@ For Claude 4.5 models and earlier, you can recover a streaming request that was 
 
 The basic recovery strategy involves:
 
-1. **Capture the partial response:** Save all content that was successfully received before the error occurred
-2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message
-3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred.
+2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message.
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
 ### Claude 4.6 and later
 
 For Claude 4.6 and later models, the same capture-and-resume strategy applies, but step 2 changes: instead of placing the partial response in an assistant message, add a user message that instructs the model to continue from where it left off.
 
-1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred.
 2. **Construct a continuation request:** Create a new API request with a user message containing the partial response and an instruction to continue, for example:
    ```text Sample prompt wrap
    Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
    ```
-3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
 ### Error recovery best practices
 
-1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
+1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities.
 2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
 ## Next steps

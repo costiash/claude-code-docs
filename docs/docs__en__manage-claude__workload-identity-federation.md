@@ -97,7 +97,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   # 2. Exchange it for a short-lived Anthropic access token.
   RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
     -H "content-type: application/json" \
-    --data @- <<JSON
+    -d @- <<JSON
   {
     "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
     "assertion": "$JWT",
@@ -117,7 +117,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
     -H "authorization: Bearer $ACCESS_TOKEN" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    --data @- <<'JSON' | jq -r '.content[0].text'
+    -d @- <<'JSON' | jq -r '.content[0].text'
   {
     "model": "claude-opus-4-8",
     "max_tokens": 1024,
@@ -205,33 +205,48 @@ You can construct the client with explicit credentials or with no arguments. Wit
   ```
 
   ```java Java
-  AnthropicClient client = AnthropicOkHttpClient.builder()
-          .fromEnv()
-          .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
-                  .organizationId("00000000-0000-0000-0000-000000000000")
-                  .workspaceId("wrkspc_...")
-                  .authentication(AuthenticationConfig.builder()
-                          .type(AuthenticationType.OIDC_FEDERATION)
-                          .federationRuleId("fdrl_...")
-                          .serviceAccountId("svac_...")
-                          .identityToken(IdentityTokenConfig.builder()
-                                  .source("file")
-                                  .path("/var/run/secrets/anthropic.com/token")
-                                  .build())
-                          .build())
-                  .build()))
-          .build();
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.config.AuthenticationConfig;
+  import com.anthropic.config.AuthenticationType;
+  import com.anthropic.config.IdentityTokenConfig;
+  import com.anthropic.config.InMemoryProfileConfigProvider;
+  import com.anthropic.config.ProfileConfig;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
 
-  var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
-          .maxTokens(1024)
-          .addUserMessage("Hello, Claude")
-          .build());
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.builder()
+              .fromEnv()
+              .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
+                      .organizationId("00000000-0000-0000-0000-000000000000")
+                      .workspaceId("wrkspc_...")
+                      .authentication(AuthenticationConfig.builder()
+                              .type(AuthenticationType.OIDC_FEDERATION)
+                              .federationRuleId("fdrl_...")
+                              .serviceAccountId("svac_...")
+                              .identityToken(IdentityTokenConfig.builder()
+                                      .source("file")
+                                      .path("/var/run/secrets/anthropic.com/token")
+                                      .build())
+                              .build())
+                      .build()))
+              .build();
 
-  IO.println(message.content());
+      var message = client.messages().create(MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(1024)
+              .addUserMessage("Hello, Claude")
+              .build());
+
+      IO.println(message.content());
+  }
   ```
 
   ```csharp C#
+  using Anthropic.Models.Messages;
+  using Anthropic.Oidc;
+
   var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
   {
       FederationRuleId = "fdrl_...",
@@ -318,7 +333,7 @@ Every SDK resolves credentials in the same five-tier order: constructor argument
   `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the environment silently shadows federation. When migrating a workload from API keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) command reports which source won.
 </Warning>
 
-For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence](/docs/en/manage-claude/wif-reference#credential-precedence) in the WIF reference.
+For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence in the WIF reference](/docs/en/manage-claude/wif-reference#credential-precedence).
 
 ## Migrate from API keys
 
@@ -331,7 +346,7 @@ To switch an existing workload from a static API key to federation without downt
 
 ## Token lifetime and refresh
 
-The minted Anthropic token's lifetime is the lesser of (a) the rule's `token_lifetime_seconds` (default 3600 seconds) and (b) twice the remaining lifetime of the IdP JWT you presented. The result is never less than 60 seconds. The second bound prevents an Anthropic token from outliving the upstream identity it was derived from by more than a small margin.
+The minted Anthropic token's lifetime is the lesser of (a) the rule's `token_lifetime_seconds` (default 3,600 seconds) and (b) twice the remaining lifetime of the IdP JWT you presented. The result is never less than 60 seconds. The second bound prevents an Anthropic token from outliving the upstream identity it was derived from by more than a small margin.
 
 The SDKs cache the token and refresh it on a two-tier schedule modeled on `botocore`:
 

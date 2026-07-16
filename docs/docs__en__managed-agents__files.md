@@ -294,7 +294,6 @@ Mount multiple files by adding entries to the `resources` array:
   	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_def456", MountPath: anthropic.String("/workspace/config.json")}},
   	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_ghi789", MountPath: anthropic.String("/workspace/src/main.py")}},
   }
-  _ = resources
   ```
 
   ```java Java
@@ -611,11 +610,12 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
   	panic(err)
   }
   defer resp.Body.Close()
-  fileContent, err := io.ReadAll(resp.Body)
+  out, err := os.Create("output.txt")
   if err != nil {
   	panic(err)
   }
-  if err := os.WriteFile("output.txt", fileContent, 0644); err != nil {
+  defer out.Close()
+  if _, err := io.Copy(out, resp.Body); err != nil {
   	panic(err)
   }
   ```

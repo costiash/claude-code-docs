@@ -8,14 +8,14 @@ Control how many tokens Claude uses when responding with the effort parameter, t
   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
-The effort parameter lets you control how eager Claude is about spending tokens when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
+The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
 <Note>
   The effort parameter is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Opus 4.5.
 </Note>
 
 <Tip>
-  For Claude Opus 4.6 and Sonnet 4.6, effort replaces `budget_tokens` as the recommended way to control thinking depth. Combine effort with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`) for the best experience. While `budget_tokens` is still accepted on Opus 4.6 and Sonnet 4.6, it is deprecated and will be removed in a future model release. At `high` (default) and `max` effort, Claude will almost always think. At lower effort levels, it may skip thinking for simpler problems.
+  For Claude Opus 4.6 and Sonnet 4.6, effort replaces `budget_tokens` as the recommended way to control thinking depth. Combine effort with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`) for the best experience. While `budget_tokens` is still accepted on Opus 4.6 and Sonnet 4.6, it is deprecated and will be removed in a future model release. At `high` (default) and `max` effort, Claude almost always thinks. At lower effort levels, it may skip thinking for simpler problems.
 </Tip>
 
 ## How effort works
@@ -80,11 +80,11 @@ The API default is `high`. To use `xhigh`, set `effort` explicitly; the value yo
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `low`    | Efficient, but best for short, scoped tasks. Pair `low` with explicit checklists if your task has multiple sections.                                                                                                       |
 | `medium` | The drop-in for the average workflow where you want good results while reducing costs.                                                                                                                                     |
-| `high`   | Advanced use cases that still need a balance of intelligence and token consumption. This is often the sweet spot balancing quality and token efficiency.                                                                   |
+| `high`   | Advanced use cases that still need a balance of intelligence and token consumption. This is often the best balance of quality and token efficiency.                                                                        |
 | `xhigh`  | The recommended starting point for coding and agentic work, and for exploratory tasks such as repeated tool calling, detailed web search, and knowledge-base search. Expect meaningfully higher token usage than `high`.   |
 | `max`    | Reserve for genuinely frontier problems. On most workloads `max` adds significant cost for relatively small quality gains, and on some structured-output or less intelligence-sensitive tasks it can lead to overthinking. |
 
-Claude Opus 4.7 also respects effort levels more strictly than Claude Opus 4.6, especially at `low` and `medium`. At lower effort levels, the model scopes its work to what was asked rather than going above and beyond. If you observe shallow reasoning on complex problems with Claude Opus 4.7, raise effort rather than prompting around it. If you must keep effort low for latency, add targeted guidance like "This task involves multistep reasoning. Think carefully before responding."
+Claude Opus 4.7 also respects effort levels more strictly than Claude Opus 4.6, especially at `low` and `medium`. At lower effort levels, the model scopes its work to what was asked rather than doing more than requested. If you observe shallow reasoning on complex problems with Claude Opus 4.7, raise effort rather than prompting around it. If you must keep effort low for latency, add targeted guidance like "This task involves multistep reasoning. Think carefully before responding."
 
 When running Claude Opus 4.7 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
@@ -107,20 +107,20 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 4096,
-          "messages": [{
-              "role": "user",
-              "content": "Analyze the trade-offs between microservices and monolithic architectures"
-          }],
-          "output_config": {
-              "effort": "medium"
-          }
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [{
+        "role": "user",
+        "content": "Analyze the trade-offs between microservices and monolithic architectures"
+      }],
+      "output_config": {
+        "effort": "medium"
+      }
+    }'
   ```
 
   ```bash CLI
@@ -179,32 +179,21 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  class Program
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 4096,
+      Messages = [new() { Role = Role.User, Content = "Analyze the trade-offs between microservices and monolithic architectures" }],
+      OutputConfig = new OutputConfig
       {
-          AnthropicClient client = new();
-
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 4096,
-              Messages = [new() { Role = Role.User, Content = "Analyze the trade-offs between microservices and monolithic architectures" }],
-              OutputConfig = new OutputConfig
-              {
-                  Effort = Effort.Medium
-              }
-          };
-
-          var message = await client.Messages.Create(parameters);
-          Console.WriteLine(message);
+          Effort = Effort.Medium
       }
-  }
+  };
+
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
   ```
 
   ```go Go
@@ -227,23 +216,21 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   ```
 
   ```java Java
-  import com.anthropic.models.messages.OutputConfig;
-  // ...
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(4096L)
-              .addUserMessage("Analyze the trade-offs between microservices and monolithic architectures")
-              .outputConfig(OutputConfig.builder()
-                  .effort(OutputConfig.Effort.MEDIUM)
-                  .build())
-              .build();
+  MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(4096L)
+      .addUserMessage("Analyze the trade-offs between microservices and monolithic architectures")
+      .outputConfig(OutputConfig.builder()
+          .effort(OutputConfig.Effort.MEDIUM)
+          .build())
+      .build();
 
-          Message response = client.messages().create(params);
-          response.content().stream()
-              .flatMap(block -> block.text().stream())
-              .forEach(textBlock -> System.out.println(textBlock.text()));
+  Message response = client.messages().create(params);
+  response.content().stream()
+      .flatMap(block -> block.text().stream())
+      .forEach(textBlock -> System.out.println(textBlock.text()));
   ```
 
   ```php PHP

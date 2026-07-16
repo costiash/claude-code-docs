@@ -330,7 +330,7 @@ Data handling for this offering is governed by Google Cloud. For details, see [A
 
 ## Activity logging
 
-Agent Platform provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
+Agent Platform provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows you to log the prompts and completions associated with your usage.
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 

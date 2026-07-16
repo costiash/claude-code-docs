@@ -147,7 +147,7 @@ The simplest setup: name a fallback model on the request, and the API handles th
   ```
 </CodeGroup>
 
-The sections below cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
+The following sections cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 
 ## What a refusal looks like
 
@@ -210,7 +210,7 @@ Server-side fallback and the SDK middleware apply fallback credit for you. You o
 Server-side fallback retries a refused request inside a single API call. You name up to three fallback models, and when Claude Fable 5 declines, the API runs the next model in the chain on the same request. You get back one response that names the model that answered, so your user gets an answer in one round trip.
 
 <Note>
-  Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](/docs/en/build-with-claude/batch-processing) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use the [SDK middleware](#client-side-fallback) instead.
+  Server-side fallback is in beta on the Claude API and Claude Platform on AWS. The `fallbacks` parameter is rejected on the [Message Batches API](/docs/en/build-with-claude/batch-processing) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use [client-side fallback with the SDK middleware](#client-side-fallback) instead.
 </Note>
 
 ### Making the request
@@ -589,7 +589,7 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
   A few properties of the routing decision:
 
-  * It is retained for approximately one hour and is scoped to your organization.
+  * It is retained for approximately 1 hour and is scoped to your organization.
   * It is stored as a content hash of the conversation prefix plus the model that served it. The message content itself is not stored.
   * It is best-effort, so your code must handle the requested model being tried again at any time.
 
@@ -630,6 +630,8 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   ```
 
   ```python Python
+  from anthropic import Anthropic, BetaFallbackState, BetaRefusalFallbackMiddleware
+
   # On a refusal, the middleware retries on the listed fallback model and
   # automatically sends the fallback-credit beta header on every request it handles.
   client = Anthropic(
@@ -705,6 +707,11 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   ```
 
   ```csharp C#
+  using Anthropic;
+  using Anthropic.Helpers;
+  using Anthropic.Models.Beta.Messages;
+  using Messages = Anthropic.Models.Messages;
+
   // On a refusal, the handler retries on the listed fallback model and
   // automatically sends the fallback-credit beta header on every request it handles.
   AnthropicClient client = new()
@@ -754,100 +761,129 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
   ```
 
   ```go Go
-  ctx := context.Background()
-
-  // The middleware retries a refused request on each fallback model in
-  // turn, and opts requests into the fallback-credit beta automatically.
-  client := anthropic.NewClient(
-  	option.WithMiddleware(betafallback.BetaRefusalFallbackMiddleware(
-  		[]anthropic.BetaFallbackParam{{Model: anthropic.ModelClaudeOpus4_8}},
-  	)),
+  import (
+  // ...
+  	"github.com/anthropics/anthropic-sdk-go/lib/betafallback"
+  // ...
   )
 
-  // One state per conversation: requests sharing it stay pinned to the
-  // model that accepted, so a follow-up never re-asks a model that refused.
-  state := &betafallback.BetaFallbackState{}
-  conversation := betafallback.WithBetaFallbackState(state)
+  func main() {
+  	ctx := context.Background()
 
-  params := anthropic.BetaMessageNewParams{
-  	MaxTokens: 1024,
-  	Model:     anthropic.ModelClaudeFable5,
-  	Messages: []anthropic.BetaMessageParam{
-  		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude")),
-  	},
-  }
+  	// The middleware retries a refused request on each fallback model in
+  	// turn, and opts requests into the fallback-credit beta automatically.
+  	client := anthropic.NewClient(
+  		option.WithMiddleware(betafallback.BetaRefusalFallbackMiddleware(
+  			[]anthropic.BetaFallbackParam{{Model: anthropic.ModelClaudeOpus4_8}},
+  		)),
+  	)
 
-  // Streaming: on a refusal the middleware retries in place, splicing the
-  // fallback model's events onto the open stream as one continuous message.
-  stream := client.Beta.Messages.NewStreaming(ctx, params, conversation)
-  defer stream.Close()
-  var streamed anthropic.BetaMessage
-  for stream.Next() {
-  	event := stream.Current()
-  	if err := streamed.Accumulate(event); err != nil {
-  		panic(err)
+  	// One state per conversation: requests sharing it stay pinned to the
+  	// model that accepted, so a follow-up never re-asks a model that refused.
+  	state := &betafallback.BetaFallbackState{}
+  	conversation := betafallback.WithBetaFallbackState(state)
+
+  	params := anthropic.BetaMessageNewParams{
+  		MaxTokens: 1024,
+  		Model:     anthropic.ModelClaudeFable5,
+  		Messages: []anthropic.BetaMessageParam{
+  			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude")),
+  		},
   	}
-  	switch eventVariant := event.AsAny().(type) {
-  	case anthropic.BetaRawContentBlockDeltaEvent:
-  		if textDelta, ok := eventVariant.Delta.AsAny().(anthropic.BetaTextDelta); ok {
-  			fmt.Print(textDelta.Text)
+
+  	// Streaming: on a refusal the middleware retries in place, splicing the
+  	// fallback model's events onto the open stream as one continuous message.
+  	stream := client.Beta.Messages.NewStreaming(ctx, params, conversation)
+  	defer stream.Close()
+  	var streamed anthropic.BetaMessage
+  	for stream.Next() {
+  		event := stream.Current()
+  		if err := streamed.Accumulate(event); err != nil {
+  			panic(err)
+  		}
+  		switch eventVariant := event.AsAny().(type) {
+  		case anthropic.BetaRawContentBlockDeltaEvent:
+  			if textDelta, ok := eventVariant.Delta.AsAny().(anthropic.BetaTextDelta); ok {
+  				fmt.Print(textDelta.Text)
+  			}
   		}
   	}
-  }
-  if err := stream.Err(); err != nil {
-  	panic(err)
-  }
-  fmt.Println("\nserved by:", streamed.Model)
+  	if err := stream.Err(); err != nil {
+  		panic(err)
+  	}
+  	fmt.Println("\nserved by:", streamed.Model)
 
-  // Non-streaming: the shared state pins this follow-up to the model that
-  // served the streamed turn.
-  message, err := client.Beta.Messages.New(ctx, params, conversation)
-  if err != nil {
-  	panic(err)
+  	// Non-streaming: the shared state pins this follow-up to the model that
+  	// served the streamed turn.
+  	message, err := client.Beta.Messages.New(ctx, params, conversation)
+  	if err != nil {
+  		panic(err)
+  	}
+  	fmt.Println("served by:", message.Model)
   }
-  fmt.Println("served by:", message.Model)
   ```
 
   ```java Java
-  // The interceptor retries refused requests on the fallback model. It automatically
-  // adds the fallback-credit beta header to every request it handles.
-  AnthropicClient client = AnthropicOkHttpClient.builder()
-      .fromEnv()
-      .addInterceptor(BetaRefusalFallbackInterceptor.builder()
-          .addFallback(Model.CLAUDE_OPUS_4_8)
-          .build())
-      .build();
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.core.RequestOptions;
+  import com.anthropic.core.http.StreamResponse;
+  import com.anthropic.helpers.BetaFallbackState;
+  import com.anthropic.helpers.BetaMessageAccumulator;
+  import com.anthropic.helpers.BetaRefusalFallbackInterceptor;
+  import com.anthropic.models.beta.messages.BetaMessage;
+  import com.anthropic.models.beta.messages.BetaRawMessageStreamEvent;
+  import com.anthropic.models.beta.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Model;
 
-  // Share one state across requests so follow-ups stay pinned to the model that accepted.
-  BetaFallbackState state = BetaFallbackState.create();
+  void main() {
+      // The interceptor retries refused requests on the fallback model. It automatically
+      // adds the fallback-credit beta header to every request it handles.
+      AnthropicClient client = AnthropicOkHttpClient.builder()
+          .fromEnv()
+          .addInterceptor(BetaRefusalFallbackInterceptor.builder()
+              .addFallback(Model.CLAUDE_OPUS_4_8)
+              .build())
+          .build();
 
-  MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_FABLE_5)
-      .maxTokens(1024)
-      .addUserMessage("Hello, Claude")
-      .build();
+      // Share one state across requests so follow-ups stay pinned to the model that accepted.
+      BetaFallbackState state = BetaFallbackState.create();
 
-  // Streaming: on a refusal, the fallback model's events are spliced onto the open stream.
-  BetaMessageAccumulator accumulator = BetaMessageAccumulator.create();
-  try (StreamResponse<BetaRawMessageStreamEvent> streamResponse = client.beta()
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_FABLE_5)
+          .maxTokens(1024)
+          .addUserMessage("Hello, Claude")
+          .build();
+
+      // Streaming: on a refusal, the fallback model's events are spliced onto the open stream.
+      BetaMessageAccumulator accumulator = BetaMessageAccumulator.create();
+      try (StreamResponse<BetaRawMessageStreamEvent> streamResponse = client.beta()
+              .messages()
+              .createStreaming(params, RequestOptions.builder().fallbackState(state).build())) {
+          streamResponse.stream()
+              .peek(accumulator::accumulate)
+              .forEach(event -> event.contentBlockDelta()
+                  .flatMap(deltaEvent -> deltaEvent.delta().text())
+                  .ifPresent(textDelta -> IO.print(textDelta.text())));
+      }
+      IO.println("\nserved by: " + accumulator.message().model().asString());
+
+      // Non-streaming: reusing the same state keeps the conversation pinned.
+      BetaMessage message = client.beta()
           .messages()
-          .createStreaming(params, RequestOptions.builder().fallbackState(state).build())) {
-      streamResponse.stream()
-          .peek(accumulator::accumulate)
-          .forEach(event -> event.contentBlockDelta()
-              .flatMap(deltaEvent -> deltaEvent.delta().text())
-              .ifPresent(textDelta -> IO.print(textDelta.text())));
+          .create(params, RequestOptions.builder().fallbackState(state).build());
+      IO.println("served by: " + message.model().asString());
   }
-  IO.println("\nserved by: " + accumulator.message().model().asString());
-
-  // Non-streaming: reusing the same state keeps the conversation pinned.
-  BetaMessage message = client.beta()
-      .messages()
-      .create(params, RequestOptions.builder().fallbackState(state).build());
-  IO.println("served by: " + message.model().asString());
   ```
 
   ```php PHP
+  use Anthropic\Beta\Messages\BetaRawContentBlockDeltaEvent;
+  use Anthropic\Beta\Messages\BetaTextDelta;
+  use Anthropic\Client;
+  use Anthropic\Lib\Middleware\BetaFallbackState;
+  use Anthropic\Lib\Middleware\RefusalFallbackMiddleware;
+  use Anthropic\Lib\Streaming\MessageAccumulator;
+
   // Configure the fallback chain once. On a refusal, the middleware retries the
   // request down the chain and sends the fallback-credit beta header for you.
   $client = new Client(

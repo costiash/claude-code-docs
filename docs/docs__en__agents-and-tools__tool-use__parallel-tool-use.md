@@ -182,87 +182,83 @@ The following script sends a request that should trigger parallel tool calls, ve
     }
   ];
 
-  async function testParallelTools() {
-    // Make initial request
-    console.log("Requesting parallel tool calls...");
-    const response = await client.messages.create({
-      model: "claude-opus-4-8",
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "user",
-          content: "What's the weather in SF and NYC, and what time is it there?"
-        }
-      ],
-      tools: tools
-    });
-
-    // Check for parallel tool calls
-    const toolUses = response.content.filter((block) => block.type === "tool_use");
-    console.log(`\n✓ Claude made ${toolUses.length} tool calls`);
-
-    if (toolUses.length > 1) {
-      console.log("✓ Parallel tool calls detected!");
-      for (const tool of toolUses) {
-        if (tool.type === "tool_use") {
-          console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
-        }
+  // Make initial request
+  console.log("Requesting parallel tool calls...");
+  const response = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: "What's the weather in SF and NYC, and what time is it there?"
       }
-    } else {
-      console.log("✗ No parallel tool calls detected");
-    }
+    ],
+    tools: tools
+  });
 
-    // Simulate tool execution and format results correctly
-    const toolResults: Anthropic.ToolResultBlockParam[] = toolUses
-      .filter((block): block is Anthropic.ToolUseBlock => block.type === "tool_use")
-      .map((toolUse) => {
-        const input = toolUse.input as Record<string, string>;
-        let result: string;
-        if (toolUse.name === "get_weather") {
-          result = input.location?.includes("San Francisco")
-            ? "San Francisco: 68F, partly cloudy"
-            : "New York: 45F, clear skies";
-        } else {
-          result = input.timezone?.includes("Los_Angeles") ? "2:30 PM PST" : "5:30 PM EST";
-        }
+  // Check for parallel tool calls
+  const toolUses = response.content.filter((block) => block.type === "tool_use");
+  console.log(`\n✓ Claude made ${toolUses.length} tool calls`);
 
-        return {
-          type: "tool_result" as const,
-          tool_use_id: toolUse.id,
-          content: result
-        };
-      });
-
-    // Get final response with correct formatting
-    console.log("\nGetting final response...");
-    const finalResponse = await client.messages.create({
-      model: "claude-opus-4-8",
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "user",
-          content: "What's the weather in SF and NYC, and what time is it there?"
-        },
-        { role: "assistant", content: response.content },
-        { role: "user", content: toolResults }
-      ],
-      tools: tools
-    });
-
-    for (const block of finalResponse.content) {
-      if (block.type === "text") {
-        console.log(`\nClaude's response:\n${block.text}`);
+  if (toolUses.length > 1) {
+    console.log("✓ Parallel tool calls detected!");
+    for (const tool of toolUses) {
+      if (tool.type === "tool_use") {
+        console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
       }
     }
-
-    // Verify formatting
-    console.log("\n--- Verification ---");
-    console.log(`✓ Tool results sent in single user message: ${toolResults.length} results`);
-    console.log("✓ No text before tool results in content array");
-    console.log("✓ Conversation formatted correctly for future parallel tool use");
+  } else {
+    console.log("✗ No parallel tool calls detected");
   }
 
-  testParallelTools().catch(console.error);
+  // Simulate tool execution and format results correctly
+  const toolResults: Anthropic.ToolResultBlockParam[] = toolUses
+    .filter((block): block is Anthropic.ToolUseBlock => block.type === "tool_use")
+    .map((toolUse) => {
+      const input = toolUse.input as Record<string, string>;
+      let result: string;
+      if (toolUse.name === "get_weather") {
+        result = input.location?.includes("San Francisco")
+          ? "San Francisco: 68F, partly cloudy"
+          : "New York: 45F, clear skies";
+      } else {
+        result = input.timezone?.includes("Los_Angeles") ? "2:30 PM PST" : "5:30 PM EST";
+      }
+
+      return {
+        type: "tool_result" as const,
+        tool_use_id: toolUse.id,
+        content: result
+      };
+    });
+
+  // Get final response with correct formatting
+  console.log("\nGetting final response...");
+  const finalResponse = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: "What's the weather in SF and NYC, and what time is it there?"
+      },
+      { role: "assistant", content: response.content },
+      { role: "user", content: toolResults }
+    ],
+    tools: tools
+  });
+
+  for (const block of finalResponse.content) {
+    if (block.type === "text") {
+      console.log(`\nClaude's response:\n${block.text}`);
+    }
+  }
+
+  // Verify formatting
+  console.log("\n--- Verification ---");
+  console.log(`✓ Tool results sent in single user message: ${toolResults.length} results`);
+  console.log("✓ No text before tool results in content array");
+  console.log("✓ Conversation formatted correctly for future parallel tool use");
   ```
 
   ```csharp C#

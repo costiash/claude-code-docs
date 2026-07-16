@@ -11,7 +11,7 @@ claude "/claude-api help me configure a customer-managed encryption key with Azu
 This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](/docs/en/manage-claude/cmek) for your Anthropic organization.
 
 <Warning>
-  Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](/docs/en/manage-claude/cmek) before you begin.
+  Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](/docs/en/manage-claude/cmek) before you start.
 </Warning>
 
 ## Prerequisites
@@ -116,7 +116,7 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
     </Note>
 
     <Frame caption="Assign Key Vault Crypto User to the Anthropic service principal, scoped to the key.">
-      ![Azure Key Vault Access control (IAM) role assignments showing the anthropic-cmek-client-us service principal assigned the Key Vault Crypto User role.](/docs/images/cmek/azure-role-assignment.png)
+      ![Key Vault IAM role assignments showing anthropic-cmek-client-us assigned the Key Vault Crypto User role.](/docs/images/cmek/azure-role-assignment.png)
     </Frame>
   </Step>
 

@@ -611,7 +611,7 @@ The presentation was created in the code execution container and saved as a file
 </CodeGroup>
 
 <Note>
-  For complete details on working with generated files, see the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool#retrieve-generated-files) documentation.
+  For complete details on working with generated files, see [Retrieve generated files](/docs/en/agents-and-tools/tool-use/code-execution-tool#retrieve-generated-files) in the code execution tool documentation.
 </Note>
 
 ## Try more examples
@@ -760,27 +760,26 @@ Try these variations:
   ```
 
   ```java Java
-  void main() {
-      BetaMessage response = client.beta().messages().create(
-          MessageCreateParams.builder()
-              .model(CLAUDE_OPUS_4_8)
-              .maxTokens(16000)
-              .addBeta(AnthropicBeta.SKILLS_2025_10_02)
-              .container(
-                  BetaContainerParams.builder()
-                      .addSkill(
-                          BetaSkillParams.builder()
-                              .type(ANTHROPIC)
-                              .skillId("xlsx")
-                              .version("latest")
-                              .build()
-                      )
-                      .build()
-              )
-              .addUserMessage("Create a quarterly sales tracking spreadsheet with sample data")
-              .addTool(BetaCodeExecutionTool20260521.builder().build())
-              .build()
-      );
+  BetaMessage response = client.beta().messages().create(
+      MessageCreateParams.builder()
+          .model(CLAUDE_OPUS_4_8)
+          .maxTokens(16000)
+          .addBeta(AnthropicBeta.SKILLS_2025_10_02)
+          .container(
+              BetaContainerParams.builder()
+                  .addSkill(
+                      BetaSkillParams.builder()
+                          .type(ANTHROPIC)
+                          .skillId("xlsx")
+                          .version("latest")
+                          .build()
+                  )
+                  .build()
+          )
+          .addUserMessage("Create a quarterly sales tracking spreadsheet with sample data")
+          .addTool(BetaCodeExecutionTool20260521.builder().build())
+          .build()
+  );
 
   ```
 
@@ -965,27 +964,26 @@ Try these variations:
   ```
 
   ```java Java
-  void main() {
-      BetaMessage response = client.beta().messages().create(
-          MessageCreateParams.builder()
-              .model(CLAUDE_OPUS_4_8)
-              .maxTokens(16000)
-              .addBeta(AnthropicBeta.SKILLS_2025_10_02)
-              .container(
-                  BetaContainerParams.builder()
-                      .addSkill(
-                          BetaSkillParams.builder()
-                              .type(ANTHROPIC)
-                              .skillId("docx")
-                              .version("latest")
-                              .build()
-                      )
-                      .build()
-              )
-              .addUserMessage("Write a 2-page report on the benefits of renewable energy")
-              .addTool(BetaCodeExecutionTool20260521.builder().build())
-              .build()
-      );
+  BetaMessage response = client.beta().messages().create(
+      MessageCreateParams.builder()
+          .model(CLAUDE_OPUS_4_8)
+          .maxTokens(16000)
+          .addBeta(AnthropicBeta.SKILLS_2025_10_02)
+          .container(
+              BetaContainerParams.builder()
+                  .addSkill(
+                      BetaSkillParams.builder()
+                          .type(ANTHROPIC)
+                          .skillId("docx")
+                          .version("latest")
+                          .build()
+                  )
+                  .build()
+          )
+          .addUserMessage("Write a 2-page report on the benefits of renewable energy")
+          .addTool(BetaCodeExecutionTool20260521.builder().build())
+          .build()
+  );
 
   ```
 
@@ -1170,27 +1168,26 @@ Try these variations:
   ```
 
   ```java Java
-  void main() {
-      BetaMessage response = client.beta().messages().create(
-          MessageCreateParams.builder()
-              .model(CLAUDE_OPUS_4_8)
-              .maxTokens(16000)
-              .addBeta(AnthropicBeta.SKILLS_2025_10_02)
-              .container(
-                  BetaContainerParams.builder()
-                      .addSkill(
-                          BetaSkillParams.builder()
-                              .type(ANTHROPIC)
-                              .skillId("pdf")
-                              .version("latest")
-                              .build()
-                      )
-                      .build()
-              )
-              .addUserMessage("Generate a PDF invoice template")
-              .addTool(BetaCodeExecutionTool20260521.builder().build())
-              .build()
-      );
+  BetaMessage response = client.beta().messages().create(
+      MessageCreateParams.builder()
+          .model(CLAUDE_OPUS_4_8)
+          .maxTokens(16000)
+          .addBeta(AnthropicBeta.SKILLS_2025_10_02)
+          .container(
+              BetaContainerParams.builder()
+                  .addSkill(
+                      BetaSkillParams.builder()
+                          .type(ANTHROPIC)
+                          .skillId("pdf")
+                          .version("latest")
+                          .build()
+                  )
+                  .build()
+          )
+          .addUserMessage("Generate a PDF invoice template")
+          .addTool(BetaCodeExecutionTool20260521.builder().build())
+          .build()
+  );
 
   ```
 

@@ -4,6 +4,11 @@ Specify tool schemas, write effective descriptions, and control when Claude call
 
 ---
 
+## Prerequisites
+
+* Familiarity with the [tool use overview](/docs/en/agents-and-tools/tool-use/overview)
+* A Claude API key and a working SDK or cURL setup
+
 ## Choosing a model
 
 Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
@@ -76,15 +81,15 @@ To get the best performance out of Claude when using tools, follow these guideli
   * What the tool does
   * When it should be used (and when it shouldn't)
   * What each parameter means and how it affects the tool's behavior
-  * Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.
+  * Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3–4 sentences for each tool description, more if the tool is complex.
 
 * **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field to provide schema-validated examples. See [Providing tool use examples](#providing-tool-use-examples) for details.
 
 * **Consolidate related operations into fewer tools.** Rather than creating a separate tool for every action (`create_pr`, `review_pr`, `merge_pr`), group them into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.
 
-* **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (e.g., `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool).
+* **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (for example, `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool).
 
-* **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (e.g., slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
+* **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 
 <AccordionGroup>
   <Accordion title="Example of a good tool description">
@@ -213,8 +218,6 @@ Add an optional `input_examples` field to your tool definition with an array of 
   ```
 
   ```python Python
-  import anthropic
-
   client = anthropic.Anthropic()
 
   response = client.messages.create(
@@ -255,6 +258,8 @@ Add an optional `input_examples` field to your tool definition with an array of 
   ```
 
   ```typescript TypeScript
+  const client = new Anthropic();
+
   const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
@@ -448,10 +453,6 @@ Add an optional `input_examples` field to your tool definition with an array of 
   ```
 
   ```php PHP
-  <?php
-
-  use Anthropic\Client;
-
   $client = new Client();
 
   $message = $client->messages->create(
@@ -498,8 +499,6 @@ Add an optional `input_examples` field to your tool definition with an array of 
   ```
 
   ```ruby Ruby
-  require "anthropic"
-
   client = Anthropic::Client.new
 
   message = client.messages.create(
@@ -552,8 +551,8 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 ### Requirements and limitations
 
 * **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error
-* **Not supported for server-side tools** - Input examples work on user-defined and Anthropic-schema client tools, but not on server tools like web search or code execution
-* **Token cost** - Examples add to prompt tokens: \~20-50 tokens for simple examples, \~100-200 tokens for complex nested objects
+* **Not supported for server-side tools** - Input examples work on user-defined and Anthropic-schema client tools, but not on server tools such as web search or code execution
+* **Token cost** - Examples add to prompt tokens: \~20–50 tokens for simple examples, \~100–200 tokens for complex nested objects
 
 ## Controlling Claude's output
 
@@ -619,8 +618,6 @@ In some cases, you may want Claude to use a specific tool to answer the user's q
   ```
 
   ```python Python
-  import anthropic
-
   client = anthropic.Anthropic()
 
   tools = [
@@ -652,6 +649,8 @@ In some cases, you may want Claude to use a specific tool to answer the user's q
   ```
 
   ```typescript TypeScript
+  const client = new Anthropic();
+
   const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
@@ -779,10 +778,6 @@ In some cases, you may want Claude to use a specific tool to answer the user's q
   ```
 
   ```php PHP
-  <?php
-
-  use Anthropic\Client;
-
   $client = new Client();
 
   $message = $client->messages->create(
@@ -812,8 +807,6 @@ In some cases, you may want Claude to use a specific tool to answer the user's q
   ```
 
   ```ruby Ruby
-  require "anthropic"
-
   client = Anthropic::Client.new
 
   message = client.messages.create(
@@ -881,7 +874,7 @@ Testing has shown that this should not reduce performance. If you would like the
 
 ### Model responses with tools
 
-When using tools, Claude will often comment on what it's doing or respond naturally to the user before invoking tools.
+When using tools, Claude often comments on what it's doing or responds naturally to the user before calling tools.
 
 For example, given the prompt "What's the weather like in San Francisco right now, and what time is it there?", Claude might respond with:
 

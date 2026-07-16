@@ -852,40 +852,365 @@ See [Messages API examples](/docs/en/api/messages/create) for more example code 
 
 You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
-```python Python
-client = anthropic.Anthropic()
-message = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    messages=[
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [
         {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": "Image 1:"},
-                {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC",
-                    },
-                },
-                {"type": "text", "text": "Image 2:"},
-                {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC",
-                    },
-                },
-                {"type": "text", "text": "How are these images different?"},
-            ],
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Image 1:"
+            },
+            {
+              "type": "image",
+              "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+              }
+            },
+            {
+              "type": "text",
+              "text": "Image 2:"
+            },
+            {
+              "type": "image",
+              "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+              }
+            },
+            {
+              "type": "text",
+              "text": "How are these images different?"
+            }
+          ]
         }
-    ],
-)
-print(message)
-```
+      ]
+    }'
+  ```
+
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: text
+          text: "Image 1:"
+        - type: image
+          source:
+            type: base64
+            media_type: image/png
+            data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC
+        - type: text
+          text: "Image 2:"
+        - type: image
+          source:
+            type: base64
+            media_type: image/png
+            data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC
+        - type: text
+          text: How are these images different?
+  YAML
+  ```
+
+  ```python Python
+  image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  client = anthropic.Anthropic()
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {"type": "text", "text": "Image 1:"},
+                  {
+                      "type": "image",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "image/png",
+                          "data": image1_data,
+                      },
+                  },
+                  {"type": "text", "text": "Image 2:"},
+                  {
+                      "type": "image",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "image/png",
+                          "data": image2_data,
+                      },
+                  },
+                  {"type": "text", "text": "How are these images different?"},
+              ],
+          }
+      ],
+  )
+  print(message)
+  ```
+
+  ```typescript TypeScript
+  const anthropic = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY
+  });
+
+  const image1Data =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  const image2Data =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  const message = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: "Image 1:"
+          },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image1Data
+            }
+          },
+          {
+            type: "text",
+            text: "Image 2:"
+          },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image2Data
+            }
+          },
+          {
+            type: "text",
+            text: "How are these images different?"
+          }
+        ]
+      }
+    ]
+  });
+
+  console.log(message);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  string image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  string image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  var message = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Messages =
+      [
+          new()
+          {
+              Role = Role.User,
+              Content = new MessageParamContent(new List<ContentBlockParam>
+              {
+                  new ContentBlockParam(new TextBlockParam("Image 1:")),
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new Base64ImageSource()
+                      {
+                          Data = image1Data,
+                          MediaType = MediaType.ImagePng,
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("Image 2:")),
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new Base64ImageSource()
+                      {
+                          Data = image2Data,
+                          MediaType = MediaType.ImagePng,
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("How are these images different?")),
+              }),
+          }
+      ]
+  });
+
+  Console.WriteLine(message);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  image1Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(
+  			anthropic.NewTextBlock("Image 1:"),
+  			anthropic.NewImageBlockBase64("image/png", image1Data),
+  			anthropic.NewTextBlock("Image 2:"),
+  			anthropic.NewImageBlockBase64("image/png", image2Data),
+  			anthropic.NewTextBlock("How are these images different?"),
+  		),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  fmt.Println(message)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  String image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  String image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  List<ContentBlockParam> contentBlockParams = List.of(
+      ContentBlockParam.ofText(TextBlockParam.builder().text("Image 1:").build()),
+      ContentBlockParam.ofImage(
+          ImageBlockParam.builder()
+              .source(
+                  Base64ImageSource.builder()
+                      .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                      .data(image1Data)
+                      .build()
+              )
+              .build()
+      ),
+      ContentBlockParam.ofText(TextBlockParam.builder().text("Image 2:").build()),
+      ContentBlockParam.ofImage(
+          ImageBlockParam.builder()
+              .source(
+                  Base64ImageSource.builder()
+                      .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                      .data(image2Data)
+                      .build()
+              )
+              .build()
+      ),
+      ContentBlockParam.ofText(
+          TextBlockParam.builder().text("How are these images different?").build()
+      )
+  );
+
+  Message message = client
+      .messages()
+      .create(
+          MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(1024)
+              .addUserMessageOfBlockParams(contentBlockParams)
+              .build()
+      );
+
+  IO.println(message);
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $image1Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC';
+  $image2Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC';
+
+  $message = $client->messages->create(
+      maxTokens: 1024,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => [
+                  ['type' => 'text', 'text' => 'Image 1:'],
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'base64',
+                          'media_type' => 'image/png',
+                          'data' => $image1Data,
+                      ],
+                  ],
+                  ['type' => 'text', 'text' => 'Image 2:'],
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'base64',
+                          'media_type' => 'image/png',
+                          'data' => $image2Data,
+                      ],
+                  ],
+                  ['type' => 'text', 'text' => 'How are these images different?'],
+              ],
+          ],
+      ],
+      model: 'claude-opus-4-8',
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "text", text: "Image 1:" },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image1_data
+            }
+          },
+          { type: "text", text: "Image 2:" },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image2_data
+            }
+          },
+          { type: "text", text: "How are these images different?" }
+        ]
+      }
+    ]
+  )
+
+  puts message
+  ```
+</CodeGroup>
 
 In a multi-turn conversation, add new images in later `user` turns the same way. Claude has access to every image from earlier turns, so follow-up questions such as "Are these similar to the first two?" work without including the earlier images again in the new turn's content.
 

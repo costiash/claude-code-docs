@@ -13,7 +13,7 @@ The mode is not an API parameter. It is built entirely from documented pieces:
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
 <Note>
-  This example uses mid-conversation system messages, which are currently available on Claude Opus 4.8 only. The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
+  This example uses mid-conversation system messages; for the models and platforms that support them, see [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages). The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
 </Note>
 
 ## Set up the loop

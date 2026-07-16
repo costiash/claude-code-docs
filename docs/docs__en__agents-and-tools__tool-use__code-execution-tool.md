@@ -22,19 +22,19 @@ Code execution also powers dynamic filtering in the [web search](/docs/en/agents
 
 The code execution tool is available on the following models:
 
-| Model                                                                                               | Tool versions                                                                   |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Claude Fable 5 (claude-fable-5)                                                                     | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Mythos 5 (claude-mythos-5)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 5 (claude-sonnet-5)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.8 (claude-opus-4-8)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.7 (claude-opus-4-7)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.6 (claude-opus-4-6)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 4.6 (claude-sonnet-4-6)                                                               | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.5 (claude-opus-4-5-20251101)                                                          | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)                                                      | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Haiku 4.5 (claude-haiku-4-5-20251001)                                                        | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.1 (claude-opus-4-1-20250805) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825`                                                       |
+| Model                                                                                                                       | Tool versions                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Claude Fable 5 (claude-fable-5)                                                                                             | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Mythos 5 (claude-mythos-5)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 5 (claude-sonnet-5)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.8 (claude-opus-4-8)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.7 (claude-opus-4-7)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.6 (claude-opus-4-6)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 4.6 (claude-sonnet-4-6)                                                                                       | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.5 (claude-opus-4-5-20251101)                                                                                  | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)                                                                              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Haiku 4.5 (claude-haiku-4-5-20251001)                                                                                | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.1 (claude-opus-4-1-20250805) (deprecated, see [Model deprecations](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825`                                                       |
 
 Each tool version builds on the previous one:
 
@@ -70,7 +70,7 @@ Code execution is not currently available on Amazon Bedrock or Google Cloud.
 
 ## Quick start
 
-Here's a simple example that asks Claude to perform a calculation:
+Here's an example that asks Claude to perform a calculation:
 
 <CodeGroup>
   ```bash cURL
@@ -239,8 +239,8 @@ When you add the code execution tool to your API request:
 
 2. The tool automatically provides Claude with the following capabilities:
 
-   * **Bash commands**: Execute shell commands for system operations
-   * **File operations**: Create, view, and edit files directly, including writing code
+   * **Bash commands:** Run shell commands for system operations
+   * **File operations:** Create, view, and edit files directly, including writing code
 
 3. Claude can use any combination of these capabilities in a single request
 
@@ -881,7 +881,7 @@ When Claude creates files during code execution, each created file's ID appears 
   client = Anthropic::Client.new
 
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: Anthropic::Model::CLAUDE_OPUS_4_8,
     betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
@@ -942,7 +942,7 @@ The code execution tool requires no additional parameters:
 
 Both fields are fixed: `type` selects the tool version, and `name` must be `code_execution`.
 
-When this tool is provided, Claude automatically gains access to two sub-tools:
+When you provide this tool, Claude automatically gains access to two sub-tools:
 
 * `bash_code_execution`: Run shell commands
 * `text_editor_code_execution`: View, create, and edit files, including writing code
@@ -1111,35 +1111,35 @@ The code execution tool runs in a secure, containerized environment designed spe
 
 ### Runtime environment
 
-* **Python version**: 3.11
-* **Operating system**: Linux-based container
-* **Architecture**: x86\_64 (AMD64)
+* **Python version:** 3.11
+* **Operating system:** Linux-based container
+* **Architecture:** x86\_64 (AMD64)
 
 ### Resource limits
 
-* **Memory**: 5GiB RAM
-* **Disk space**: 5GiB workspace storage
-* **CPU**: 1 CPU
-* **Execution time**: A tool invocation that runs past the maximum execution time returns an `execution_time_exceeded` [error](#errors). With [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), each REPL cell also has a 90-second wall-clock limit
+* **Memory:** 5 GiB RAM
+* **Disk space:** 5 GiB workspace storage
+* **CPU:** 1 CPU
+* **Execution time:** A tool invocation that runs past the maximum execution time returns an `execution_time_exceeded` [error](#errors). With [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), each REPL cell also has a 90-second wall-clock limit
 
 ### Networking and security
 
-* **Internet access**: Completely disabled for security
-* **External connections**: No outbound network requests permitted
-* **Sandbox isolation**: Full isolation from host system and other containers
-* **File access**: Limited to workspace directory only
-* **Workspace scoping**: Like [Files](/docs/en/build-with-claude/files), containers are scoped to the workspace of the API key
-* **Expiration**: Containers expire 30 days after creation
+* **Internet access:** Completely disabled for security
+* **External connections:** No outbound network requests permitted
+* **Sandbox isolation:** Full isolation from host system and other containers
+* **File access:** Limited to workspace directory only
+* **Workspace scoping:** Like the [Files API](/docs/en/build-with-claude/files), containers are scoped to the workspace of the API key
+* **Expiration:** Containers expire 30 days after creation
 
 ### Pre-installed libraries
 
 The sandboxed Python environment includes these commonly used libraries:
 
-* **Data science**: pandas, numpy, scipy, scikit-learn, statsmodels
-* **Visualization**: matplotlib, seaborn
-* **File processing**: pyarrow, openpyxl, xlsxwriter, xlrd, pillow, python-pptx, python-docx, pypdf, pdfplumber, pypdfium2, pdf2image, pdfkit, tabula-py, reportlab\[pycairo], Img2pdf
-* **Math and computing**: sympy, mpmath
-* **Utilities**: tqdm, python-dateutil, pytz, joblib
+* **Data science:** pandas, numpy, scipy, scikit-learn, statsmodels
+* **Visualization:** matplotlib, seaborn
+* **File processing:** pyarrow, openpyxl, xlsxwriter, xlrd, pillow, python-pptx, python-docx, pypdf, pdfplumber, pypdfium2, pdf2image, pdfkit, tabula-py, reportlab\[pycairo], Img2pdf
+* **Math and computing:** sympy, mpmath
+* **Utilities:** tqdm, python-dateutil, pytz, joblib
 
 The container also includes command-line tools such as unzip, unrar, 7zip, bc, rg (ripgrep), fd, and sqlite.
 
@@ -1149,7 +1149,7 @@ The container has no internet access, so Claude can't download or install additi
 
 You can reuse an existing container across multiple API requests by providing the container ID from a previous response. This allows you to maintain created files between requests. With `code_execution_20260120` or later and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the Python interpreter state persists as well.
 
-Containers expire 30 days after creation. After about five minutes of inactivity a container is checkpointed, and sending a request with its ID inside the 30-day window restores it. The `expires_at` timestamp in the response's `container` object is a shorter rolling value and doesn't report the 30-day limit. A container that has expired can't be reused. Send the request again without the `container` parameter to get a new container.
+Containers expire 30 days after creation. After about 5 minutes of inactivity a container is checkpointed, and sending a request with its ID inside the 30-day window restores it. The `expires_at` timestamp in the response's `container` object is a shorter rolling value and doesn't report the 30-day limit. A container that has expired can't be reused. Send the request again without the `container` parameter to get a new container.
 
 ### Example
 
@@ -1484,8 +1484,8 @@ When used without these tools, code execution is billed by execution time, track
 
 * Execution time has a minimum of 5 minutes
 * Each organization receives **1,550 free hours** of usage per month
-* Additional usage beyond 1,550 hours is billed at **$0.05 per hour, per container**
-* If files are included in the request, execution time is billed even if the tool is not invoked, because files are preloaded onto the container
+* Additional usage beyond 1,550 hours is billed at **$0.05 USD per hour, per container**
+* If files are included in the request, execution time is billed even if the tool is not called, because files are preloaded onto the container
 
 Code execution usage is tracked in the response:
 
@@ -1532,8 +1532,8 @@ To upgrade, update the tool type in your API requests:
 
 **Review response handling** (if parsing responses programmatically):
 
-* The previous blocks for Python execution responses will no longer be sent
-* Instead, new response types for Bash and file operations will be sent (see [Response format](#response-format))
+* The API no longer sends the previous blocks for Python execution responses
+* Instead, the API sends new response types for Bash and file operations (see [Response format](#response-format))
 
 ## Data retention
 

@@ -14,8 +14,8 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 
 ## Install and configure the AWS CLI
 
-1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`
-2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
+1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`.
+2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the modal window.
 3. Verify that your credentials are working:
 
 ```bash AWS CLI
@@ -72,7 +72,9 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Bedrock.
       import com.anthropic.models.messages.MessageCreateParams;
       import com.anthropic.models.messages.Message;
       import com.anthropic.models.messages.Model;
-      // ...
+
+      public class BasicMessage {
+          public static void main(String[] args) {
               AnthropicClient client = AnthropicOkHttpClient.builder()
                   .backend(BedrockBackend.fromEnv())
                   .build();
@@ -87,6 +89,8 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Bedrock.
               response.content().stream()
                   .flatMap(block -> block.text().stream())
                   .forEach(textBlock -> System.out.println(textBlock.text()));
+          }
+      }
       ```
     </CodeGroup>
   </Tab>
@@ -134,7 +138,7 @@ AWS offers newer Claude models through [cross-region inference](https://docs.aws
 Invocation of model ID anthropic.claude-sonnet-4-5-20250929-v1:0 with on-demand throughput isn't supported. Retry your request with the ID or ARN of an inference profile that contains this model.
 ```
 
-To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section.
+To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global versus regional endpoints](#global-vs-regional-endpoints) section.
 
 | Model                        | Base Bedrock model ID                     | `global` | `us` | `eu` | `jp` | `apac` |
 | ---------------------------- | ----------------------------------------- | -------- | ---- | ---- | ---- | ------ |
@@ -190,24 +194,18 @@ The following examples show how to print a list of all the Claude models availab
   using Amazon.Bedrock;
   using Amazon.Bedrock.Model;
 
-  public class ListAnthropicModels
+  var client = new AmazonBedrockClient(RegionEndpoint.USWest2);
+
+  var request = new ListFoundationModelsRequest
   {
-      public static async Task Main(string[] args)
-      {
-          var client = new AmazonBedrockClient(RegionEndpoint.USWest2);
+      ByProvider = "anthropic"
+  };
 
-          var request = new ListFoundationModelsRequest
-          {
-              ByProvider = "anthropic"
-          };
+  var response = await client.ListFoundationModelsAsync(request);
 
-          var response = await client.ListFoundationModelsAsync(request);
-
-          foreach (var summary in response.ModelSummaries)
-          {
-              Console.WriteLine(summary.ModelId);
-          }
-      }
+  foreach (var summary in response.ModelSummaries)
+  {
+      Console.WriteLine(summary.ModelId);
   }
   ```
 
@@ -247,7 +245,9 @@ The following examples show how to print a list of all the Claude models availab
   import software.amazon.awssdk.services.bedrock.model.ListFoundationModelsRequest;
   import software.amazon.awssdk.services.bedrock.model.ListFoundationModelsResponse;
   import software.amazon.awssdk.services.bedrock.model.FoundationModelSummary;
-  // ...
+
+  public class ListAnthropicModels {
+      public static void main(String[] args) {
           BedrockClient client = BedrockClient.builder()
               .region(Region.US_WEST_2)
               .build();
@@ -263,6 +263,8 @@ The following examples show how to print a list of all the Claude models availab
           }
 
           client.close();
+      }
+  }
   ```
 
   ```php PHP
@@ -417,7 +419,10 @@ The following examples show how to generate text from Claude on Bedrock:
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.Message;
   import com.anthropic.models.messages.MessageCreateParams;
-  // ...
+
+  public class BedrockExample {
+
+    public static void main(String[] args) {
       // Uses default AWS credential provider chain
       AnthropicClient client = AnthropicOkHttpClient.builder()
         .backend(BedrockBackend.fromEnv())
@@ -434,6 +439,8 @@ The following examples show how to generate text from Claude on Bedrock:
         );
 
       System.out.println(message.content());
+    }
+  }
   ```
 
   ```php PHP
@@ -653,7 +660,7 @@ To provide a token programmatically:
 
 ## Activity logging
 
-Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows customers to log the prompts and completions associated with your usage.
+Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows you to log the prompts and completions associated with your usage.
 
 Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
@@ -699,7 +706,7 @@ Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude So
 
 Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
-## Global vs regional endpoints
+## Global versus regional endpoints
 
 Starting with **Claude Sonnet 4.5 and all future models**, Bedrock offers two endpoint types:
 
@@ -804,7 +811,6 @@ The model IDs for Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 already include th
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
   		},
   	})
-  	_ = message
   ```
 
   ```java Java
@@ -935,7 +941,6 @@ To use regional endpoints, replace the `global.` prefix with a regional prefix s
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
   		},
   	})
-  	_ = message
   ```
 
   ```java Java
@@ -997,7 +1002,7 @@ To use regional endpoints, replace the `global.` prefix with a regional prefix s
 
 ## Additional resources
 
-* **Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)
+* **Bedrock pricing:** [Amazon Bedrock pricing page](https://aws.amazon.com/bedrock/pricing/)
 * **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)
 * **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)
 * **Anthropic pricing details:** [Cloud platform pricing](/docs/en/about-claude/pricing#cloud-platform-pricing)

@@ -27,7 +27,7 @@ For Zero Data Retention eligibility and the `allowed_callers` workaround, see [S
 <Warning>
   Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
-  To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.
+  To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that you should carefully consider when using this tool.
 
   If data exfiltration is a concern, consider:
 
@@ -82,23 +82,23 @@ To enable dynamic filtering, use `web_fetch_20260209` or any later version. The 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 4096,
-          "messages": [
-              {
-                  "role": "user",
-                  "content": "Fetch the content at https://example.com/research-paper and extract the key findings."
-              }
-          ],
-          "tools": [{
-              "type": "web_fetch_20260318",
-              "name": "web_fetch"
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Fetch the content at https://example.com/research-paper and extract the key findings."
+        }
+      ],
+      "tools": [{
+        "type": "web_fetch_20260318",
+        "name": "web_fetch"
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -246,24 +246,24 @@ Provide the web fetch tool in your API request:
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 1024,
-          "messages": [
-              {
-                  "role": "user",
-                  "content": "Please analyze the content at https://example.com/article"
-              }
-          ],
-          "tools": [{
-              "type": "web_fetch_20250910",
-              "name": "web_fetch",
-              "max_uses": 5
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Please analyze the content at https://example.com/article"
+        }
+      ],
+      "tools": [{
+        "type": "web_fetch_20250910",
+        "name": "web_fetch",
+        "max_uses": 5
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -499,7 +499,7 @@ The `response_inclusion` parameter controls how fetch result blocks appear in th
 Unlike web search where citations are always enabled, citations are optional for web fetch and disabled by default. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
 <Note>
-  When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
+  When displaying API outputs directly to end users, include citations to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
 </Note>
 
 ## Response
@@ -655,32 +655,32 @@ When both the web search and web fetch tools are enabled, and the user names a s
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 4096,
-          "messages": [
-              {
-                  "role": "user",
-                  "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
-              }
-          ],
-          "tools": [
-              {
-                  "type": "web_search_20250305",
-                  "name": "web_search",
-                  "max_uses": 3
-              },
-              {
-                  "type": "web_fetch_20250910",
-                  "name": "web_fetch",
-                  "max_uses": 5,
-                  "citations": {"enabled": true}
-              }
-          ]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+        }
+      ],
+      "tools": [
+        {
+          "type": "web_search_20250305",
+          "name": "web_search",
+          "max_uses": 3
+        },
+        {
+          "type": "web_fetch_20250910",
+          "name": "web_fetch",
+          "max_uses": 5,
+          "citations": {"enabled": true}
+        }
+      ]
+    }'
   ```
 
   ```bash CLI

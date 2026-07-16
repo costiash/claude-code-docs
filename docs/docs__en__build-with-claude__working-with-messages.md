@@ -28,17 +28,16 @@ This guide covers common patterns for working with the Messages API, including b
   ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [
-          {"role": "user", "content": "Hello, Claude"}
+        {"role": "user", "content": "Hello, Claude"}
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -69,9 +68,6 @@ This guide covers common patterns for working with the Messages API, including b
   ```
 
   ```csharp C#
-  using Anthropic;
-  using Anthropic.Models.Messages;
-
   AnthropicClient client = new();
 
   var parameters = new MessageCreateParams
@@ -169,20 +165,19 @@ The Messages API is stateless, which means that you always send the full convers
   ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [
-          {"role": "user", "content": "Hello, Claude"},
-          {"role": "assistant", "content": "Hello!"},
-          {"role": "user", "content": "Can you describe LLMs to me?"}
+        {"role": "user", "content": "Hello, Claude"},
+        {"role": "assistant", "content": "Hello!"},
+        {"role": "user", "content": "Can you describe LLMs to me?"}
 
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -223,9 +218,6 @@ The Messages API is stateless, which means that you always send the full convers
   ```
 
   ```csharp C#
-  using Anthropic;
-  using Anthropic.Models.Messages;
-
   AnthropicClient client = new();
 
   var parameters = new MessageCreateParams
@@ -332,15 +324,15 @@ The Messages API is stateless, which means that you always send the full convers
 
 ### System role in messages
 
-On Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](/docs/en/build-with-claude/mid-conversation-system-messages#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
+On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](/docs/en/build-with-claude/mid-conversation-system-messages#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
 See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages) for the complete guide, including how to combine it with [prompt caching](/docs/en/build-with-claude/prompt-caching).
 
-## Putting words in Claude's mouth
+## Prefilling Claude's response
 
-You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
   Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) on models that support it, or system prompt instructions, instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
@@ -350,18 +342,17 @@ You can pre-fill part of Claude's response in the last position of the input mes
   ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-sonnet-4-5",
       "max_tokens": 1,
       "messages": [
-          {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
-          {"role": "assistant", "content": "The answer is ("}
+        {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
+        {"role": "assistant", "content": "The answer is ("}
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -409,9 +400,6 @@ You can pre-fill part of Claude's response in the last position of the input mes
   ```
 
   ```csharp C#
-  using Anthropic;
-  using Anthropic.Models.Messages;
-
   AnthropicClient client = new();
 
   var parameters = new MessageCreateParams
@@ -514,7 +502,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
 
 ## Vision
 
-Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](/docs/en/build-with-claude/files). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](/docs/en/build-with-claude/vision) for more details.
+Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](/docs/en/build-with-claude/files). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](/docs/en/build-with-claude/vision) for more details.
 
 <CodeGroup>
   ```bash cURL
@@ -526,44 +514,42 @@ Claude can read both text and images in requests. Images can be supplied using t
   IMAGE_BASE64=$(curl "$IMAGE_URL" | base64 | tr -d '\n')
 
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [
-          {"role": "user", "content": [
-              {"type": "image", "source": {
-                  "type": "base64",
-                  "media_type": "'$IMAGE_MEDIA_TYPE'",
-                  "data": "'$IMAGE_BASE64'"
-              }},
-              {"type": "text", "text": "What is in the above image?"}
-          ]}
+        {"role": "user", "content": [
+          {"type": "image", "source": {
+            "type": "base64",
+            "media_type": "'$IMAGE_MEDIA_TYPE'",
+            "data": "'$IMAGE_BASE64'"
+          }},
+          {"type": "text", "text": "What is in the above image?"}
+        ]}
       ]
-  }'
+    }'
 
   # Option 2: URL-referenced image
   curl https://api.anthropic.com/v1/messages \
-       --header "x-api-key: $ANTHROPIC_API_KEY" \
-       --header "anthropic-version: 2023-06-01" \
-       --header "content-type: application/json" \
-       --data \
-  '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [
-          {"role": "user", "content": [
-              {"type": "image", "source": {
-                  "type": "url",
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-              }},
-              {"type": "text", "text": "What is in the above image?"}
-          ]}
+        {"role": "user", "content": [
+          {"type": "image", "source": {
+            "type": "url",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+          }},
+          {"type": "text", "text": "What is in the above image?"}
+        ]}
       ]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -789,6 +775,8 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   ```go Go
+  client := anthropic.NewClient()
+
   // Option 1: Base64-encoded image
   imageURL := "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
 
@@ -904,7 +892,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   $client = new Client();
 
   // Option 1: Base64-encoded image
-  $image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  $image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg';
   $image_media_type = "image/jpeg";
   $image_data = base64_encode(file_get_contents($image_url));
 

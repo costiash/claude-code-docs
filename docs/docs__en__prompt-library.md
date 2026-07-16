@@ -243,7 +243,7 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
 * **Put longform data at the top:** Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This improves performance across all models.
 
   <Note>
-    Queries at the end can improve response quality by up to 30% in tests, especially with complex, multidocument inputs.
+    Queries at the end can improve response quality by up to 30 percent in tests, especially with complex, multidocument inputs.
   </Note>
 
 * **Structure document content and metadata with XML tags:** When using multiple documents, wrap each document in `<document>` tags with `<document_content>` and `<source>` (and other metadata) subtags for clarity.
@@ -269,7 +269,7 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
     ```
   </Accordion>
 
-* **Ground responses in quotes:** For long document tasks, ask Claude to quote relevant parts of the documents first before carrying out its task. This helps Claude cut through the noise of the rest of the document's contents.
+* **Ground responses in quotes:** For long document tasks, ask Claude to quote relevant parts of the documents first before carrying out its task. This helps Claude focus on the relevant content and ignore the rest of the document.
 
   <Accordion title="Example quote extraction">
     ```xml
@@ -489,7 +489,7 @@ Claude's latest models run independent tool calls in parallel. These models will
 
 * Run multiple speculative searches during research
 * Read several files at once to build context faster
-* Execute bash commands in parallel (which can even bottleneck system performance)
+* Run bash commands in parallel (which can even bottleneck system performance)
 
 This behavior is steerable. While the model has a high success rate in parallel tool calling without prompting, you can boost this to \~100% or adjust the aggression level:
 
@@ -765,7 +765,7 @@ If you are migrating from [extended thinking](/docs/en/build-with-claude/extende
   ```
 </CodeGroup>
 
-If you are not using extended thinking, no changes are required. On Claude Opus 4.6 through Claude Opus 4.8 and Claude Sonnet 4.6, thinking is off when you omit the `thinking` parameter. On Claude Fable 5 and Claude Mythos 5, thinking is always on, whether or not you set the `thinking` parameter.
+If you are not using extended thinking, no changes are required. On Claude Opus 4.6 through Claude Opus 4.8 and Claude Sonnet 4.6, thinking is off when you omit the `thinking` parameter. On Claude Fable 5 and Claude Mythos 5, thinking is always on, regardless of whether you set the `thinking` parameter.
 
 * **Prefer general instructions over prescriptive steps.** A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe.
 * **Multishot examples work with thinking.** Use `<thinking>` tags inside your few-shot examples to show Claude the reasoning pattern. It will generalize that style to its own extended thinking blocks.
@@ -812,11 +812,11 @@ For tasks spanning multiple context windows:
 
 1. **Use a different prompt for the very first context window:** Use the first context window to set up a framework (write tests, create setup scripts), then use future context windows to iterate on a todo-list.
 
-2. **Have the model write tests in a structured format:** Ask Claude to create tests before starting work and keep track of them in a structured format (e.g., `tests.json`). This leads to better long-term ability to iterate. Remind Claude of the importance of tests: "It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality."
+2. **Have the model write tests in a structured format:** Ask Claude to create tests before starting work and keep track of them in a structured format (for example, `tests.json`). This leads to better long-term ability to iterate. Remind Claude of the importance of tests: "It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality."
 
-3. **Set up quality of life tools:** Encourage Claude to create setup scripts (e.g., `init.sh`) to gracefully start servers, run test suites, and linters. This prevents repeated work when continuing from a fresh context window.
+3. **Set up quality of life tools:** Encourage Claude to create setup scripts (for example, `init.sh`) to gracefully start servers, run test suites, and linters. This prevents repeated work when continuing from a fresh context window.
 
-4. **Starting fresh vs compacting:** When a context window is cleared, consider starting with a brand new context window rather than using compaction. Claude's latest models are extremely effective at discovering state from the local filesystem. In some cases, you may want to take advantage of this over compaction. Be prescriptive about how it should start:
+4. **Starting fresh versus compacting:** When a context window is cleared, consider starting with a brand new context window rather than using compaction. Claude's latest models are extremely effective at discovering state from the local filesystem. In some cases, you may want to take advantage of this over compaction. Be prescriptive about how it should start:
 
    * "Call pwd; you can only read and write files in this directory."
    * "Review progress.txt, tests.json, and the git logs."
@@ -835,10 +835,10 @@ systematically until you have completed this task.
 
 #### State management best practices
 
-* **Use structured formats for state data:** When tracking structured information (like test results or task status), use JSON or other structured formats to help Claude understand schema requirements
-* **Use unstructured text for progress notes:** Freeform progress notes work well for tracking general progress and context
+* **Use structured formats for state data:** When tracking structured information (like test results or task status), use JSON or other structured formats to help Claude understand schema requirements.
+* **Use unstructured text for progress notes:** Freeform progress notes work well for tracking general progress and context.
 * **Use git for state tracking:** Git provides a log of what's been done and checkpoints that can be restored. Claude's latest models perform especially well in using git to track state across multiple sessions.
-* **Emphasize incremental progress:** Explicitly ask Claude to keep track of its progress and focus on incremental work
+* **Emphasize incremental progress:** Explicitly ask Claude to keep track of its progress and focus on incremental work.
 
 <Accordion title="Example: State tracking">
   ```json
@@ -891,9 +891,9 @@ in-progress work.
 
 Claude's latest models can find and synthesize information from multiple sources effectively. For optimal research results:
 
-1. **Provide clear success criteria:** Define what constitutes a successful answer to your research question
+1. **Provide clear success criteria:** Define what constitutes a successful answer to your research question.
 
-2. **Encourage source verification:** Ask Claude to verify information across multiple sources
+2. **Encourage source verification:** Ask Claude to verify information across multiple sources.
 
 3. **For complex research tasks, use a structured approach:**
 
@@ -913,8 +913,8 @@ Claude's latest models orchestrate subagents natively. These models can recogniz
 
 To take advantage of this behavior:
 
-1. **Ensure well-defined subagent tools:** Have subagent tools available and described in tool definitions
-2. **Let Claude orchestrate naturally:** Claude will delegate appropriately without explicit instruction
+1. **Ensure well-defined subagent tools:** Have subagent tools available and described in tool definitions.
+2. **Let Claude orchestrate naturally:** Claude will delegate appropriately without explicit instruction.
 3. **Watch for overuse:** Claude Opus 4.6 has a strong predilection for subagents and may spawn them in situations where a simpler, direct approach would suffice. For example, the model may spawn subagents for code exploration when a direct grep call is faster and sufficient.
 
 If you're seeing excessive subagent use, add explicit guidance about when subagents are and aren't warranted:
@@ -969,7 +969,7 @@ operations. Don't design for hypothetical future requirements. The right amount 
 complexity is the minimum needed for the current task.
 ```
 
-### Avoid focusing on passing tests and hard-coding
+### Avoid focusing on passing tests and hardcoding
 
 Claude can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and get solutions that generalize:
 
@@ -1009,7 +1009,7 @@ hallucination-free answers.
 
 Claude Opus 4.5 and Claude Opus 4.6 have improved vision capabilities compared to previous Claude models. They perform better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the models can more reliably interpret screenshots and UI elements. You can also use these models to analyze videos by breaking them up into frames.
 
-One technique that has proven effective to further boost performance is to give Claude a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). Testing has shown consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. Anthropic has created a [cookbook for the crop tool](https://platform.claude.com/cookbook/multimodal-crop-tool).
+One technique that has proven effective to further boost performance is to give Claude a crop tool or [agent skill](/docs/en/agents-and-tools/agent-skills/overview). Testing has shown consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. Anthropic has created a [recipe for the crop tool](https://platform.claude.com/cookbook/multimodal-crop-tool).
 
 ### Frontend design
 

@@ -190,7 +190,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         ```
 
         <Note>
-          Workload Identity Federation tokens are short-lived (one hour by default) and expire automatically; there is nothing to revoke after setup completes.
+          Workload Identity Federation tokens are short-lived (1 hour by default) and expire automatically; there is nothing to revoke after setup completes.
         </Note>
       </Step>
 

@@ -14,7 +14,7 @@ When selecting an embeddings provider, there are several factors you can conside
 
 ## How to get embeddings with Anthropic
 
-Anthropic does not offer its own embedding model. One embeddings provider that has a wide variety of options and capabilities encompassing all of the above considerations is Voyage AI.
+Anthropic does not offer its own embedding model. One embeddings provider that has a wide variety of options and capabilities encompassing all of the preceding considerations is Voyage AI.
 
 Voyage AI makes state-of-the-art embedding models and offers customized models for specific industry domains such as finance and healthcare, or bespoke fine-tuned models for individual customers.
 
@@ -26,46 +26,46 @@ Voyage recommends using the following text embedding models:
 
 **Voyage 4 (latest generation)**
 
-| Model            | Context length | Embedding dimension            | Description                                                                                                                                                                     |
-| ---------------- | -------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `voyage-4-large` | 32,000         | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                       |
-| `voyage-4`       | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
-| `voyage-4-lite`  | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                                                    |
-| `voyage-4-nano`  | 32,000         | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                  |
+| Model            | Context length | Embedding dimension            | Description                                                                                                                                                                                  |
+| ---------------- | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `voyage-4-large` | 32,000         | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See the [Voyage 4 blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                       |
+| `voyage-4`       | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See the [Voyage 4 blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-lite`  | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See the [Voyage 4 blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                                                    |
+| `voyage-4-nano`  | 32,000         | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See the [Voyage 4 blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details.                                  |
 
 **Previous generation**
 
-| Model              | Context length | Embedding dimension            | Description                                                                                                                                                                                                                                           |
-| ------------------ | -------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `voyage-3-large`   | 32,000         | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2025/01/07/voyage-3-large/) for details.                                                                                                       |
-| `voyage-3.5`       | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details.                                                                                                      |
-| `voyage-3.5-lite`  | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details.                                                                                                                                        |
-| `voyage-code-3`    | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for **code** retrieval. See [blog post](https://blog.voyageai.com/2024/12/04/voyage-code-3/) for details.                                                                                                                                   |
-| `voyage-finance-2` | 32,000         | 1024                           | Optimized for **finance** retrieval and RAG. See [blog post](https://blog.voyageai.com/2024/06/03/domain-specific-embeddings-finance-edition-voyage-finance-2/) for details.                                                                          |
-| `voyage-law-2`     | 16,000         | 1024                           | Optimized for **legal** and **long-context** retrieval and RAG. Also improved performance across all domains. See [blog post](https://blog.voyageai.com/2024/04/15/domain-specific-embeddings-and-retrieval-legal-edition-voyage-law-2/) for details. |
+| Model              | Context length | Embedding dimension            | Description                                                                                                                                                                                                                                                            |
+| ------------------ | -------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `voyage-3-large`   | 32,000         | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See the [voyage-3-large blog post](https://blog.voyageai.com/2025/01/07/voyage-3-large/) for details.                                                                                                     |
+| `voyage-3.5`       | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. See the [voyage-3.5 blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details.                                                                                                        |
+| `voyage-3.5-lite`  | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See the [voyage-3.5 blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details.                                                                                                                                          |
+| `voyage-code-3`    | 32,000         | 1024 (default), 256, 512, 2048 | Optimized for **code** retrieval. See the [voyage-code-3 blog post](https://blog.voyageai.com/2024/12/04/voyage-code-3/) for details.                                                                                                                                  |
+| `voyage-finance-2` | 32,000         | 1024                           | Optimized for **finance** retrieval and RAG. See the [voyage-finance-2 blog post](https://blog.voyageai.com/2024/06/03/domain-specific-embeddings-finance-edition-voyage-finance-2/) for details.                                                                      |
+| `voyage-law-2`     | 16,000         | 1024                           | Optimized for **legal** and **long-context** retrieval and RAG. Also improved performance across all domains. See the [voyage-law-2 blog post](https://blog.voyageai.com/2024/04/15/domain-specific-embeddings-and-retrieval-legal-edition-voyage-law-2/) for details. |
 
-Additionally, the following multimodal embedding models are recommended:
+Additionally, Voyage recommends the following multimodal embedding models:
 
-| Model                   | Context length | Embedding dimension            | Description                                                                                                                                                                                                                                                    |
-| ----------------------- | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `voyage-multimodal-3.5` | 32,000         | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-multimodal-3-5/) for details. |
-| `voyage-multimodal-3`   | 32,000         | 1024                           | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details.           |
+| Model                   | Context length | Embedding dimension            | Description                                                                                                                                                                                                                                                                              |
+| ----------------------- | -------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `voyage-multimodal-3.5` | 32,000         | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See the [voyage-multimodal-3.5 blog post](https://blog.voyageai.com/2026/01/15/voyage-multimodal-3-5/) for details. |
+| `voyage-multimodal-3`   | 32,000         | 1024                           | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See the [voyage-multimodal-3 blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details.             |
 
 The following contextualized chunk embedding models produce chunk-level vectors that capture full document context without manual metadata augmentation. Call these models with `contextualized_embed()` instead of `embed()`:
 
-| Model              | Context length | Embedding dimension            | Description                                                                                                                                                                            |
-| ------------------ | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `voyage-context-4` | 120,000        | 1024 (default), 256, 512, 2048 | Contextualized chunk embeddings optimized for general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2026/06/29/voyage-context-4/) for details. |
-| `voyage-context-3` | 120,000        | 1024 (default), 256, 512, 2048 | Contextualized chunk embeddings optimized for general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2025/07/23/voyage-context-3/) for details. |
+| Model              | Context length | Embedding dimension            | Description                                                                                                                                                                                                 |
+| ------------------ | -------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `voyage-context-4` | 120,000        | 1024 (default), 256, 512, 2048 | Contextualized chunk embeddings optimized for general-purpose and multilingual retrieval quality. See the [voyage-context-4 blog post](https://blog.voyageai.com/2026/06/29/voyage-context-4/) for details. |
+| `voyage-context-3` | 120,000        | 1024 (default), 256, 512, 2048 | Contextualized chunk embeddings optimized for general-purpose and multilingual retrieval quality. See the [voyage-context-3 blog post](https://blog.voyageai.com/2025/07/23/voyage-context-3/) for details. |
 
 Voyage AI also offers rerankers, which take a query and a list of documents and return them ranked by relevance to the query. Call these models with `rerank()`:
 
-| Model             | Context length | Description                                                                                                                         |
-| ----------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `rerank-2.5`      | 32,000         | Highest accuracy. Recommended for most applications. See [blog post](https://blog.voyageai.com/2025/08/11/rerank-2-5/) for details. |
-| `rerank-2.5-lite` | 32,000         | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2025/08/11/rerank-2-5/) for details.                      |
+| Model             | Context length | Description                                                                                                                                        |
+| ----------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rerank-2.5`      | 32,000         | Highest accuracy. Recommended for most applications. See the [rerank-2.5 blog post](https://blog.voyageai.com/2025/08/11/rerank-2-5/) for details. |
+| `rerank-2.5-lite` | 32,000         | Optimized for latency and cost. See the [rerank-2.5 blog post](https://blog.voyageai.com/2025/08/11/rerank-2-5/) for details.                      |
 
-Need help deciding which text embedding model to use? Check out the [FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use\&ref=anthropic).
+Need help deciding which text embedding model to use? Check out the [Voyage AI FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use\&ref=anthropic).
 
 ## Getting started with Voyage AI
 
@@ -79,11 +79,11 @@ To access Voyage embeddings:
 export VOYAGE_API_KEY="<your secret key>"
 ```
 
-You can obtain the embeddings by either using the official [`voyageai` Python package](https://github.com/voyage-ai/voyageai-python) or HTTP requests, as described below.
+You can obtain the embeddings by either using the official [`voyageai` Python package](https://github.com/voyage-ai/voyageai-python) or HTTP requests, as described in the following sections.
 
 ### Voyage Python library
 
-The `voyageai` package can be installed using the following command:
+Install the `voyageai` package using the following command:
 
 ```bash
 pip install -U voyageai
@@ -105,7 +105,7 @@ print(result.embeddings[0])
 print(result.embeddings[1])
 ```
 
-`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the preceding code, the two embeddings will be printed on the screen:
+`result.embeddings` is a list of two embedding vectors, each containing 1024 floating-point numbers. After running the preceding code, the two embeddings are printed on the screen:
 
 ```text
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
@@ -211,13 +211,13 @@ print(documents[retrieved_id])
 
 Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](#voyage-python-library).
 
-The output would be the 5th document, which is indeed the most relevant to the query:
+The output is the fifth document, which is indeed the most relevant to the query:
 
 ```text wrap
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
-If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
+If you are looking for a detailed set of recipes on how to do RAG with embeddings, including vector databases, check out the [RAG recipe](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
 ## FAQ
 
@@ -230,7 +230,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     * Loss functions
     * Optimizer selection
 
-    Learn more about Voyage's technical approach on their [blog](https://blog.voyageai.com/).
+    Learn more about Voyage's technical approach on the [Voyage AI blog](https://blog.voyageai.com/).
   </Accordion>
 
   <Accordion title="What embedding models are available and which should I use?">
@@ -257,7 +257,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     Voyage AI embeddings are normalized to length 1, which means that:
 
     * Cosine similarity is equivalent to dot-product similarity, while the latter can be computed more quickly.
-    * Cosine similarity and Euclidean distance will result in the identical rankings.
+    * Cosine similarity and Euclidean distance result in identical rankings.
   </Accordion>
 
   <Accordion title="What is the relationship between characters, words, and tokens?">
@@ -285,11 +285,11 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
   </Accordion>
 
   <Accordion title="What quantization options are available?">
-    Quantization in embeddings converts high-precision values, like 32-bit single-precision floating-point numbers, to lower-precision formats such as 8-bit integers or 1-bit binary values, reducing storage, memory, and costs by 4x and 32x, respectively. Supported Voyage models enable quantization by specifying the output data type with the `output_dtype` parameter:
+    Quantization in embeddings converts high-precision values, such as 32-bit single-precision floating-point numbers, to lower-precision formats such as 8-bit integers or 1-bit binary values, reducing storage, memory, and costs by 4x and 32x, respectively. Supported Voyage models enable quantization by specifying the output data type with the `output_dtype` parameter:
 
     * `float`: Each returned embedding is a list of 32-bit (4-byte) single-precision floating-point numbers. This is the default and provides the highest precision / retrieval accuracy.
     * `int8` and `uint8`: Each returned embedding is a list of 8-bit (1-byte) integers ranging from -128 to 127 and 0 to 255, respectively.
-    * `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the [FAQ](#faq).
+    * `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the [embeddings FAQ](#faq).
 
     > **Binary quantization example**
     >

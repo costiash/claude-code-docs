@@ -19,7 +19,7 @@ Some examples of when to use the text editor tool are:
 * **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
 * **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
 * **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your code base.
-* **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
+* **Test creation:** Have Claude create unit tests for your code based on its analysis of the implementation.
 
 ## Use the text editor tool
 
@@ -222,7 +222,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
   ```
 </CodeGroup>
 
-The text editor tool can be used in the following way:
+Use the text editor tool in the following way:
 
 <Steps>
   <Step title="Provide Claude with the text editor tool and a user prompt">
@@ -1568,7 +1568,7 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
       func handleEditorTool(input map[string]any) string {
       	command, _ := input["command"].(string)
       	filePath, _ := input["path"].(string)
-      	_ = filePath
+      // ...
 
       	switch command {
       	case "view":
@@ -1712,7 +1712,7 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
       		result := handleEditorTool(input)
 
       		toolResult := anthropic.NewToolResultBlock(block.ID, result, false)
-      		_ = toolResult
+      // ...
       	}
       }
       ```
@@ -2240,19 +2240,19 @@ For more detailed information about tool pricing, see [Tool use pricing](/docs/e
 
 ## Integrate the text editor tool with other tools
 
-The text editor tool can be used alongside other Claude tools. When combining tools, ensure you:
+You can use the text editor tool alongside other Claude tools. When combining tools, ensure you:
 
 * Match the tool version with the model you're using
 * Account for the additional token usage for all tools included in your request
 
 ## Change log
 
-| Date             | Version                | Changes                                                                                                                                                                                                                                                               |
-| ---------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| July 28, 2025    | `text_editor_20250728` | Release of an updated text editor tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`.                                                                                                   |
-| April 29, 2025   | `text_editor_20250429` | Release of the text editor tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture.                                                       |
-| March 13, 2025   | `text_editor_20250124` | Introduction of standalone text editor tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version.                                                                                                    |
-| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 ([retired](/docs/en/about-claude/model-deprecations)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
+| Date             | Version                | Changes                                                                                                                                                                                                                                                                                       |
+| ---------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| July 28, 2025    | `text_editor_20250728` | Release of an updated text editor tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`.                                                                                                                           |
+| April 29, 2025   | `text_editor_20250429` | Release of the text editor tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str\_replace-based architecture.                                                                               |
+| March 13, 2025   | `text_editor_20250124` | Introduction of standalone text editor tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version.                                                                                                                            |
+| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor tool with Claude Sonnet 3.5 (retired; see [Model deprecations](/docs/en/about-claude/model-deprecations)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
 ## Next steps
 

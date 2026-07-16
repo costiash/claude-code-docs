@@ -71,9 +71,9 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   </Tab>
 
   <Tab title="System events">
-    | Type             | Description                                                                        |
-    | ---------------- | ---------------------------------------------------------------------------------- |
-    | `system.message` | Update the agent's system prompt between turns. Only supported on Claude Opus 4.8. |
+    | Type             | Description                                                                                                                                           |
+    | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `system.message` | Update the agent's system prompt between turns. Supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. |
   </Tab>
 
   <Tab title="Event deltas">

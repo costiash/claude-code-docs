@@ -11,7 +11,7 @@ This guide is for enterprise admins and architects who need to govern Agent Skil
 Deploying Skills in an enterprise requires answering two distinct questions:
 
 1. **Are Skills safe in general?** See the [security considerations](/docs/en/agents-and-tools/agent-skills/overview#security-considerations) section in the overview for platform-level security details.
-2. **How do I vet a specific Skill?** Use the risk assessment and review checklist below.
+2. **How do I vet a specific Skill?** Use the following risk assessment and review checklist.
 
 ### Risk tier assessment
 
@@ -24,7 +24,7 @@ Evaluate each Skill against these risk indicators before approving deployment:
 | MCP server references    | Instructions referencing MCP tools (`ServerName:tool_name`)                                          | High: extends access beyond the Skill itself            |
 | Network access patterns  | URLs, API endpoints, `fetch`, `curl`, or `requests` calls                                            | High: potential data exfiltration vector                |
 | Hardcoded credentials    | API keys, tokens, or passwords in Skill files or scripts                                             | High: secrets exposed in Git history and context window |
-| File system access scope | Paths outside the Skill directory, broad glob patterns, path traversal (`../`)                       | Medium: may access unintended data                      |
+| Filesystem access scope  | Paths outside the Skill directory, broad glob patterns, path traversal (`../`)                       | Medium: may access unintended data                      |
 | Tool invocations         | Instructions directing Claude to use bash, file operations, or other tools                           | Medium: review what operations are performed            |
 
 ### Review checklist
@@ -62,7 +62,7 @@ Establish approval gates for these dimensions before deploying any Skill:
 
 ### Evaluation requirements
 
-Require Skill authors to submit evaluation suites with 3-5 representative queries per Skill, covering cases where the Skill should trigger, should not trigger, and ambiguous edge cases. Require testing across the models your organization uses (Haiku, Sonnet, Opus), since Skill effectiveness varies by model.
+Require Skill authors to submit evaluation suites with 3–5 representative queries per Skill, covering cases where the Skill should trigger, should not trigger, and ambiguous edge cases. Require testing across the models your organization uses (Haiku, Sonnet, Opus), because Skill effectiveness varies by model.
 
 For detailed guidance on building evaluations, see [evaluation and iteration](/docs/en/agents-and-tools/agent-skills/best-practices#evaluation-and-iteration) in best practices. For general evaluation methodology, see [develop test cases](/docs/en/test-and-evaluate/develop-tests).
 
@@ -83,7 +83,7 @@ Evaluation results signal when to act:
   </Step>
 
   <Step title="Create and review">
-    Ensure the Skill author follows [best practices](/docs/en/agents-and-tools/agent-skills/best-practices). Require a security review using the [review checklist](#review-checklist) above. Require an evaluation suite before approval. Establish separation of duties: Skill authors should not be their own reviewers.
+    Ensure the Skill author follows [best practices](/docs/en/agents-and-tools/agent-skills/best-practices). Require a security review using the [review checklist](#review-checklist). Require an evaluation suite before approval. Establish separation of duties: Skill authors should not be their own reviewers.
   </Step>
 
   <Step title="Test">
@@ -95,7 +95,7 @@ Evaluation results signal when to act:
   </Step>
 
   <Step title="Monitor">
-    Track usage patterns and collect feedback from users. Re-run evaluations periodically to detect drift or regressions as workflows and models evolve. Usage analytics are not currently available through the Skills API. Implement application-level logging to track which Skills are included in requests.
+    Track usage patterns and collect feedback from users. Rerun evaluations periodically to detect drift or regressions as workflows and models evolve. Usage analytics are not currently available through the Skills API. Implement application-level logging to track which Skills are included in requests.
   </Step>
 
   <Step title="Iterate or deprecate">
@@ -109,7 +109,7 @@ Evaluation results signal when to act:
 
 As a general guideline, limit the number of Skills loaded simultaneously to maintain reliable recall accuracy. Each Skill's metadata (name and description) competes for attention in the system prompt. With too many Skills active, Claude may fail to select the right Skill or miss relevant ones entirely. Use your evaluation suite to measure recall accuracy as you add Skills, and stop adding when performance degrades.
 
-Note that API requests support a maximum of 8 Skills per request (see [Using Skills with the API](/docs/en/build-with-claude/skills-guide)). If a role requires more Skills than a single request supports, consider consolidating narrow Skills into broader ones or routing requests to different Skill sets based on task type.
+Note that API requests support a maximum of 8 Skills for each request (see [Using Skills with the API](/docs/en/build-with-claude/skills-guide)). If a role requires more Skills than a single request supports, consider consolidating narrow Skills into broader ones or routing requests to different Skill sets based on task type.
 
 ### Start specific, consolidate later
 
@@ -119,7 +119,7 @@ Encourage teams to start with narrow, workflow-specific Skills rather than broad
   Use evaluations to decide when to consolidate. Merge narrow Skills into a broader one only when the consolidated Skill's evaluations confirm equivalent performance to the individual Skills it replaces.
 </Tip>
 
-**Example progression**:
+**Example progression:**
 
 * Start: `formatting-sales-reports`, `querying-pipeline-data`, `updating-crm-records`
 * Consolidate: `sales-operations` (when evals confirm equivalent performance)
@@ -130,19 +130,19 @@ Use consistent naming conventions across your organization. The [naming conventi
 
 Maintain an internal registry for each Skill with:
 
-* **Purpose**: What workflow the Skill supports
-* **Owner**: Team or individual responsible for maintenance
-* **Version**: Current deployed version
-* **Dependencies**: MCP servers, packages, or external services required
-* **Evaluation status**: Last evaluation date and results
+* **Purpose:** What workflow the Skill supports
+* **Owner:** Team or individual responsible for maintenance
+* **Version:** Current deployed version
+* **Dependencies:** MCP servers, packages, or external services required
+* **Evaluation status:** Last evaluation date and results
 
 ### Role-based bundles
 
 Group Skills by organizational role to keep each user's active Skill set focused:
 
-* **Sales team**: CRM operations, pipeline reporting, proposal generation
-* **Engineering**: Code review, deployment workflows, incident response
-* **Finance**: Report generation, data validation, audit preparation
+* **Sales team:** CRM operations, pipeline reporting, proposal generation
+* **Engineering:** Code review, deployment workflows, incident response
+* **Finance:** Report generation, data validation, audit preparation
 
 Each role-based bundle should contain only the Skills relevant to that role's daily workflows.
 
@@ -158,10 +158,10 @@ The Skills API provides workspace-scoped distribution. Skills uploaded through t
 
 ### Versioning strategy
 
-* **Production**: Pin Skills to specific versions. Run the full evaluation suite before promoting a new version. Treat every update as a new deployment requiring full security review.
-* **Development and testing**: Use latest versions to validate changes before production promotion.
-* **Rollback plan**: Maintain the previous version as a fallback. If a new version fails evaluations in production, revert to the last known-good version immediately.
-* **Integrity verification**: Compute checksums of reviewed Skills and verify them at deployment time. Use signed commits in your Skill repository to ensure provenance.
+* **Production:** Pin Skills to specific versions. Run the full evaluation suite before promoting a new version. Treat every update as a new deployment requiring full security review.
+* **Development and testing:** Use latest versions to validate changes before production promotion.
+* **Rollback plan:** Maintain the previous version as a fallback. If a new version fails evaluations in production, revert to the last known-good version immediately.
+* **Integrity verification:** Compute checksums of reviewed Skills and verify them at deployment time. Use signed commits in your Skill repository to ensure provenance.
 
 ### Cross-surface considerations
 

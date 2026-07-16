@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-16T16:12:37Z",
-  "indexed_files": 1746,
+  "generated_at": "2026-07-16T19:08:34Z",
+  "indexed_files": 1747,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -1092,7 +1092,7 @@
         "model",
         "command"
       ],
-      "word_count": 6358,
+      "word_count": 6350,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1260,7 +1260,7 @@
         "specific",
         "tasks"
       ],
-      "word_count": 5709,
+      "word_count": 5712,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__best-practices.md"
     },
     "/docs/en/agents-and-tools/agent-skills/enterprise": {
@@ -1282,13 +1282,13 @@
         "title",
         "version",
         "across",
+        "each",
         "access",
         "require",
         "evaluations",
-        "security",
-        "each"
+        "security"
       ],
-      "word_count": 1669,
+      "word_count": 1668,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__enterprise.md"
     },
     "/docs/en/agents-and-tools/agent-skills/overview": {
@@ -1344,7 +1344,7 @@
         "icon",
         "href"
       ],
-      "word_count": 3705,
+      "word_count": 3700,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -1454,7 +1454,7 @@
         "federation",
         "identity",
         "docker",
-        "one"
+        "see"
       ],
       "word_count": 2222,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__deploy-compose.md"
@@ -1512,7 +1512,7 @@
         "request",
         "provider"
       ],
-      "word_count": 1451,
+      "word_count": 1452,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -1652,7 +1652,7 @@
         "these",
         "users"
       ],
-      "word_count": 220,
+      "word_count": 218,
       "file_path": "docs/docs__en__agents-and-tools__remote-mcp-servers.md"
     },
     "/docs/en/agents-and-tools/tool-use/advisor-tool": {
@@ -1670,10 +1670,10 @@
         "when",
         "block",
         "tools",
+        "calls",
         "output",
         "fable",
         "prompt",
-        "calls",
         "sonnet",
         "tasks",
         "mythos",
@@ -1726,17 +1726,17 @@
         "one",
         "error",
         "single",
+        "each",
         "code",
         "result",
         "what",
         "card",
-        "sdk",
-        "schema",
         "note",
         "user",
-        "message"
+        "message",
+        "back"
       ],
-      "word_count": 16578,
+      "word_count": 16557,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md"
     },
     "/docs/en/agents-and-tools/tool-use/code-execution-tool": {
@@ -1747,8 +1747,8 @@
         "execution",
         "claude",
         "tool",
-        "files",
         "api",
+        "files",
         "container",
         "file",
         "tools",
@@ -1757,14 +1757,14 @@
         "response",
         "when",
         "runs",
+        "run",
         "bash",
         "data",
         "each",
         "requests",
-        "run",
         "environment"
       ],
-      "word_count": 6141,
+      "word_count": 6148,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1797,16 +1797,16 @@
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
       "title": "Define tools",
-      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Choosing a model  Use the latest Claude Opus (4.8) model for complex tools and am...",
+      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Prerequisites  * Familiarity with the [tool use overview](/docs/en/agents-and-too...",
       "keywords": [
         "tool",
         "tools",
         "claude",
         "when",
         "what",
+        "example",
         "examples",
         "note",
-        "example",
         "using",
         "schema",
         "parameter",
@@ -1818,9 +1818,9 @@
         "any",
         "tip",
         "more",
-        "must"
+        "each"
       ],
-      "word_count": 3559,
+      "word_count": 3579,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -1900,11 +1900,11 @@
         "client",
         "calls",
         "claude",
+        "call",
         "execution",
-        "what",
-        "call"
+        "what"
       ],
-      "word_count": 1377,
+      "word_count": 1383,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__how-tool-use-works.md"
     },
     "/docs/en/agents-and-tools/tool-use/manage-tool-context": {
@@ -2016,7 +2016,7 @@
         "formatting",
         "runner"
       ],
-      "word_count": 5586,
+      "word_count": 5580,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2128,7 +2128,7 @@
         "new",
         "accordion"
       ],
-      "word_count": 8463,
+      "word_count": 8462,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2296,7 +2296,7 @@
         "block",
         "most"
       ],
-      "word_count": 928,
+      "word_count": 925,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__troubleshooting-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -2324,7 +2324,7 @@
         "results",
         "specific"
       ],
-      "word_count": 3608,
+      "word_count": 3606,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2337,22 +2337,22 @@
         "claude",
         "api",
         "filtering",
+        "tools",
         "request",
         "error",
         "results",
         "code",
-        "tools",
         "content",
-        "response",
         "dynamic",
+        "response",
         "note",
         "when",
-        "searches",
         "server",
+        "searches",
         "turn",
-        "execution"
+        "see"
       ],
-      "word_count": 3022,
+      "word_count": 3026,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -44033,7 +44033,7 @@
         "note",
         "response"
       ],
-      "word_count": 4799,
+      "word_count": 4796,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -44061,7 +44061,7 @@
         "may",
         "workspace"
       ],
-      "word_count": 7007,
+      "word_count": 7001,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -44117,7 +44117,7 @@
         "indices",
         "tab"
       ],
-      "word_count": 6377,
+      "word_count": 6374,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
@@ -44168,12 +44168,12 @@
         "title",
         "card",
         "pricing",
-        "name",
         "portal",
+        "name",
         "access",
         "through"
       ],
-      "word_count": 3889,
+      "word_count": 3891,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -44201,7 +44201,7 @@
         "regional",
         "through"
       ],
-      "word_count": 3195,
+      "word_count": 3209,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -44369,15 +44369,15 @@
         "where",
         "parameter"
       ],
-      "word_count": 2706,
+      "word_count": 2680,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
       "title": "Embeddings",
       "content_preview": "# Embeddings  Text embeddings are numerical representations of text that enable measuring semantic similarity. This guide introduces embeddings, their applications, and how to use embedding models for tasks like search, recommendations, and anomaly detection.  ---  ## Before implementing embeddings",
       "keywords": [
-        "embedding",
         "voyage",
+        "embedding",
         "embeddings",
         "see",
         "models",
@@ -44393,11 +44393,11 @@
         "text",
         "bit",
         "binary",
+        "context",
         "quality",
-        "optimized",
-        "similarity"
+        "optimized"
       ],
-      "word_count": 2453,
+      "word_count": 2491,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
@@ -44425,7 +44425,7 @@
         "mythos",
         "adaptive"
       ],
-      "word_count": 14344,
+      "word_count": 14338,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -44481,7 +44481,7 @@
         "supported",
         "error"
       ],
-      "word_count": 2641,
+      "word_count": 2658,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -44537,7 +44537,7 @@
         "which",
         "results"
       ],
-      "word_count": 11514,
+      "word_count": 11518,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/mid-conversation-effort-example": {
@@ -44550,22 +44550,22 @@
         "run",
         "example",
         "out",
+        "system",
         "bash",
         "fan",
-        "system",
         "when",
         "model",
         "card",
         "orchestration",
+        "mid",
+        "conversation",
+        "messages",
         "effort",
         "subagent",
         "runs",
-        "level",
-        "mid",
-        "conversation",
-        "messages"
+        "level"
       ],
-      "word_count": 17988,
+      "word_count": 17991,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-effort-example.md"
     },
     "/docs/en/build-with-claude/mid-conversation-system-messages": {
@@ -44575,25 +44575,25 @@
         "system",
         "message",
         "conversation",
-        "cache",
-        "level",
         "claude",
+        "level",
+        "cache",
         "caching",
         "mid",
-        "turn",
         "field",
-        "user",
-        "instructions",
+        "turn",
+        "top",
         "prompt",
+        "user",
         "tool",
         "messages",
-        "top",
+        "instructions",
         "prefix",
         "after",
         "new",
         "request"
       ],
-      "word_count": 3068,
+      "word_count": 3081,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-system-messages.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -44665,9 +44665,9 @@
         "page",
         "visual",
         "when",
-        "processing",
         "support",
         "note",
+        "processing",
         "citations",
         "codegroup",
         "files",
@@ -44677,7 +44677,7 @@
         "analysis",
         "charts"
       ],
-      "word_count": 5419,
+      "word_count": 5422,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -44693,8 +44693,8 @@
         "block",
         "breakpoint",
         "request",
-        "content",
         "claude",
+        "content",
         "blocks",
         "system",
         "accordion",
@@ -44705,7 +44705,7 @@
         "input",
         "breakpoints"
       ],
-      "word_count": 16254,
+      "word_count": 16337,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -44723,17 +44723,17 @@
         "middleware",
         "response",
         "output",
-        "server",
         "side",
+        "server",
         "requests",
         "any",
-        "one",
         "attempt",
         "credit",
         "api",
-        "note"
+        "note",
+        "one"
       ],
-      "word_count": 5054,
+      "word_count": 5123,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -44761,7 +44761,7 @@
         "web",
         "custom"
       ],
-      "word_count": 5091,
+      "word_count": 5098,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -44774,10 +44774,10 @@
         "api",
         "files",
         "custom",
+        "claude",
         "code",
         "execution",
         "agent",
-        "claude",
         "note",
         "container",
         "data",
@@ -44789,7 +44789,7 @@
         "reference",
         "request"
       ],
-      "word_count": 12300,
+      "word_count": 12302,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -44810,14 +44810,14 @@
         "block",
         "claude",
         "card",
-        "sdks",
         "extended",
         "message",
+        "sdks",
+        "sdk",
         "delta",
-        "partial",
-        "json"
+        "partial"
       ],
-      "word_count": 4722,
+      "word_count": 4637,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -44873,7 +44873,7 @@
         "client",
         "token"
       ],
-      "word_count": 2845,
+      "word_count": 2837,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -44901,7 +44901,7 @@
         "models",
         "opus"
       ],
-      "word_count": 3884,
+      "word_count": 3849,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -44955,9 +44955,9 @@
         "cost",
         "high",
         "when",
-        "standard"
+        "codegroup"
       ],
-      "word_count": 3619,
+      "word_count": 4241,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -44973,9 +44973,9 @@
         "opus",
         "guide",
         "see",
+        "response",
         "system",
         "build",
-        "response",
         "conversation",
         "title",
         "icon",
@@ -44985,7 +44985,7 @@
         "agents",
         "note"
       ],
-      "word_count": 2964,
+      "word_count": 2954,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/get-started": {
@@ -45013,7 +45013,7 @@
         "card",
         "cli"
       ],
-      "word_count": 1740,
+      "word_count": 1748,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
@@ -45041,7 +45041,7 @@
         "window",
         "large"
       ],
-      "word_count": 1375,
+      "word_count": 1376,
       "file_path": "docs/docs__en__glossary.md"
     },
     "/docs/en/intro": {
@@ -45105,17 +45105,17 @@
       "content_preview": "# Create an Admin API key  Create an Admin API key for your Claude Console or Claude Enterprise organization.  ---  An Admin API key authenticates every API in the **Admin** section of this guide: the...",
       "keywords": [
         "api",
-        "organization",
         "claude",
+        "organization",
         "key",
         "admin",
         "create",
         "step",
         "compliance",
         "scopes",
+        "enterprise",
         "limits",
         "title",
-        "enterprise",
         "spend",
         "keys",
         "analytics",
@@ -45125,7 +45125,7 @@
         "read",
         "card"
       ],
-      "word_count": 970,
+      "word_count": 977,
       "file_path": "docs/docs__en__manage-claude__admin-api-keys.md"
     },
     "/docs/en/manage-claude/admin-api": {
@@ -45198,8 +45198,8 @@
         "retention",
         "organization",
         "features",
-        "anthropic",
         "see",
+        "anthropic",
         "readiness",
         "accordion",
         "feature",
@@ -45209,7 +45209,7 @@
         "title",
         "under"
       ],
-      "word_count": 3778,
+      "word_count": 3785,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -45265,7 +45265,7 @@
         "users",
         "pagination"
       ],
-      "word_count": 1520,
+      "word_count": 1524,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/cmek-aws-kms": {
@@ -45293,7 +45293,7 @@
         "data",
         "iam"
       ],
-      "word_count": 1254,
+      "word_count": 1255,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
@@ -45304,24 +45304,24 @@
         "vault",
         "anthropic",
         "step",
-        "service",
         "cmek",
+        "service",
         "azure",
-        "principal",
         "tenant",
+        "principal",
         "data",
         "role",
         "application",
         "title",
-        "access",
         "operations",
         "frame",
         "organization",
+        "access",
         "rsa",
         "wrap",
         "unwrap"
       ],
-      "word_count": 1531,
+      "word_count": 1525,
       "file_path": "docs/docs__en__manage-claude__cmek-azure-key-vault.md"
     },
     "/docs/en/manage-claude/cmek-google-cloud-kms": {
@@ -45334,8 +45334,8 @@
         "step",
         "kms",
         "service",
-        "google",
         "account",
+        "google",
         "organization",
         "create",
         "title",
@@ -45349,7 +45349,7 @@
         "data",
         "level"
       ],
-      "word_count": 1165,
+      "word_count": 1161,
       "file_path": "docs/docs__en__manage-claude__cmek-google-cloud-kms.md"
     },
     "/docs/en/manage-claude/cmek": {
@@ -45591,17 +45591,17 @@
         "api",
         "group",
         "one",
-        "organizations",
         "settings",
         "role",
         "same",
+        "organizations",
         "users",
         "groups",
         "parent",
         "see",
         "access"
       ],
-      "word_count": 1936,
+      "word_count": 1935,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -45705,15 +45705,15 @@
         "track",
         "endpoint",
         "analytics",
+        "anthropic",
         "which",
         "workspace",
         "buckets",
         "console",
         "token",
-        "anthropic",
         "code"
       ],
-      "word_count": 1674,
+      "word_count": 1672,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/user-management": {
@@ -45993,7 +45993,7 @@
         "step",
         "request"
       ],
-      "word_count": 3496,
+      "word_count": 3497,
       "file_path": "docs/docs__en__manage-claude__wif-reference.md"
     },
     "/docs/en/manage-claude/workload-identity-federation": {
@@ -46021,7 +46021,7 @@
         "tokens",
         "key"
       ],
-      "word_count": 2564,
+      "word_count": 2590,
       "file_path": "docs/docs__en__manage-claude__workload-identity-federation.md"
     },
     "/docs/en/manage-claude/workspaces": {
@@ -46049,7 +46049,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1977,
+      "word_count": 1978,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -46161,7 +46161,7 @@
         "new",
         "tip"
       ],
-      "word_count": 2396,
+      "word_count": 2401,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -46217,7 +46217,7 @@
         "text",
         "model"
       ],
-      "word_count": 8275,
+      "word_count": 8280,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -46245,7 +46245,7 @@
         "mounting",
         "header"
       ],
-      "word_count": 1818,
+      "word_count": 1817,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -46287,10 +46287,10 @@
         "servers",
         "session",
         "agents",
+        "see",
         "managed",
         "each",
         "credentials",
-        "see",
         "array",
         "when",
         "must",
@@ -46301,7 +46301,7 @@
         "toolset",
         "tool"
       ],
-      "word_count": 1400,
+      "word_count": 1404,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -46331,6 +46331,34 @@
       ],
       "word_count": 4299,
       "file_path": "docs/docs__en__managed-agents__memory.md"
+    },
+    "/docs/en/managed-agents/migration": {
+      "title": "Migration",
+      "content_preview": "# Migration  Move an existing agent built on the Messages API or the Claude Agent SDK to Claude Managed Agents.  ---  Claude Managed Agents replaces your hand-written agent loop with managed infrastru...",
+      "keywords": [
+        "agent",
+        "managed",
+        "agents",
+        "sdk",
+        "session",
+        "claude",
+        "loop",
+        "events",
+        "api",
+        "tools",
+        "built",
+        "messages",
+        "tool",
+        "before",
+        "run",
+        "see",
+        "code",
+        "side",
+        "codegroup",
+        "model"
+      ],
+      "word_count": 2669,
+      "file_path": "docs/docs__en__managed-agents__migration.md"
     },
     "/docs/en/managed-agents/multiagent-orchestration": {
       "title": "Multiagent orchestration",
@@ -46410,8 +46438,8 @@
         "tools",
         "beta",
         "built",
-        "docs",
-        "tool"
+        "runs",
+        "docs"
       ],
       "word_count": 785,
       "file_path": "docs/docs__en__managed-agents__overview.md"
@@ -46487,17 +46515,17 @@
         "see",
         "stream",
         "type",
-        "only",
         "description",
         "tool",
         "multiagent",
         "managed",
+        "only",
         "title",
         "worker",
         "branding",
         "deltas"
       ],
-      "word_count": 1159,
+      "word_count": 1165,
       "file_path": "docs/docs__en__managed-agents__reference.md"
     },
     "/docs/en/managed-agents/scheduled-deployments": {
@@ -46642,7 +46670,7 @@
     },
     "/docs/en/managed-agents/skills": {
       "title": "Skills",
-      "content_preview": "# Skills  Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.  ---  Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Unlike",
+      "content_preview": "# Skills  Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.  ---  Skills are reusable, filesystem-based resources that give your agent domain-specific expertise:...",
       "keywords": [
         "skills",
         "agent",
@@ -46651,21 +46679,21 @@
         "api",
         "card",
         "see",
-        "when",
         "workspace",
         "files",
         "attach",
+        "when",
         "create",
         "title",
+        "learn",
         "pre",
         "built",
         "upload",
         "codegroup",
         "icon",
-        "href",
-        "docs"
+        "href"
       ],
-      "word_count": 1209,
+      "word_count": 1222,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {
@@ -46777,7 +46805,7 @@
         "when",
         "title"
       ],
-      "word_count": 7378,
+      "word_count": 7383,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {
@@ -48573,8 +48601,8 @@
       "file_path": "docs/docs__en__resources__prompt-library__website-wizard.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals": {
-      "title": "Streaming refusals",
-      "content_preview": "# Streaming refusals  Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.  ---  Starting with Claude 4 models, streaming responses from Claud...",
+      "title": "Handle streaming refusals",
+      "content_preview": "# Handle streaming refusals  Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle",
       "keywords": [
         "refusals",
         "refusal",
@@ -48588,16 +48616,16 @@
         "refused",
         "api",
         "card",
+        "handle",
         "responses",
         "note",
         "handling",
         "build",
-        "handle",
         "stop",
         "another",
         "context"
       ],
-      "word_count": 1477,
+      "word_count": 1453,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

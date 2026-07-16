@@ -55,7 +55,7 @@ Three independent layers protect every request:
 | Layer                                                                       | Protects against                                                         |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Outer mTLS between Anthropic and the transport provider, with IP validation | Unauthorized clients reaching the tunnel                                 |
-| Inner TLS from Anthropic's backend to your proxy                            | Payload inspection by the transport provider or any network intermediary |
+| Inner TLS from Anthropic's back end to your proxy                           | Payload inspection by the transport provider or any network intermediary |
 | OAuth on each MCP server                                                    | Unauthorized use of MCP tools by authenticated tunnel traffic            |
 
 The tunnel transport runs on Cloudflare's network. Because the proxy terminates inner TLS using a certificate that only you hold, Cloudflare cannot read request or response payloads. Anthropic does not connect to a tunnel until a CA certificate is registered, so payloads are always encrypted when they cross Cloudflare's network. Cloudflare does receive connection metadata; see [What the transport provider can observe](#what-the-transport-provider-can-observe).

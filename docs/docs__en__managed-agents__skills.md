@@ -4,7 +4,7 @@ Attach reusable, filesystem-based expertise to your agent for domain-specific wo
 
 ---
 
-Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Unlike prompts (conversation-level instructions for one-off tasks), skills load on demand, only impacting the context window when needed.
+Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) overview.
 
 You can attach two types of skill. Both work the same way: your agent invokes them automatically when they are relevant to the task.
 
