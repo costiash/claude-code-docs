@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-16T15:33:31.497720Z",
-    "total_paths": 2061,
+    "generated_at": "2026-07-16T18:27:39.940313Z",
+    "total_paths": 2062,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-16T15:33:31.497728Z"
+    "last_regenerated": "2026-07-16T18:27:39.940322Z"
   },
   "categories": {
     "core_documentation": [
@@ -180,6 +180,7 @@
       "/docs/en/managed-agents/github",
       "/docs/en/managed-agents/mcp-connector",
       "/docs/en/managed-agents/memory",
+      "/docs/en/managed-agents/migration",
       "/docs/en/managed-agents/multiagent-orchestration",
       "/docs/en/managed-agents/onboarding",
       "/docs/en/managed-agents/overview",
