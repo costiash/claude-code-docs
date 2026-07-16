@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-16T12:36:58.400455Z",
-    "total_paths": 2060,
+    "generated_at": "2026-07-16T15:33:31.497720Z",
+    "total_paths": 2061,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-16T12:36:58.400464Z"
+    "last_regenerated": "2026-07-16T15:33:31.497728Z"
   },
   "categories": {
     "core_documentation": [
@@ -109,6 +109,7 @@
       "/docs/en/communications-kit",
       "/docs/en/computer-use",
       "/docs/en/context-window",
+      "/docs/en/corporate-launcher",
       "/docs/en/debug-your-config",
       "/docs/en/deep-links",
       "/docs/en/desktop-linux",
