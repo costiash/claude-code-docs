@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-17T16:07:20Z",
+  "generated_at": "2026-07-17T19:02:27Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -240,8 +240,8 @@
         "api",
         "disable",
         "off",
-        "cloud",
         "settings",
+        "cloud",
         "must",
         "retention",
         "users",
@@ -252,7 +252,7 @@
         "opt",
         "see"
       ],
-      "word_count": 2173,
+      "word_count": 2187,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -738,25 +738,25 @@
         "claude",
         "code",
         "settings",
-        "environment",
-        "authentication",
-        "set",
         "proxy",
-        "certificate",
+        "environment",
+        "set",
+        "network",
+        "authentication",
         "variables",
+        "certificate",
+        "when",
         "supervisor",
         "enterprise",
-        "network",
         "configuration",
+        "through",
         "note",
         "shell",
-        "when",
+        "gateway",
         "background",
-        "every",
-        "launcher",
-        "through"
+        "every"
       ],
-      "word_count": 1337,
+      "word_count": 1448,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
