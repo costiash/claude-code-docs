@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-17T13:08:12Z",
+  "generated_at": "2026-07-17T16:07:20Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -642,9 +642,9 @@
         "when",
         "them",
         "into",
-        "preferences"
+        "mdmemory"
       ],
-      "word_count": 4194,
+      "word_count": 4231,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -767,8 +767,8 @@
         "claude",
         "style",
         "styles",
-        "code",
         "prompt",
+        "code",
         "system",
         "instructions",
         "software",
@@ -784,7 +784,7 @@
         "name",
         "keep"
       ],
-      "word_count": 1142,
+      "word_count": 1177,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -1115,12 +1115,12 @@
         "model",
         "same",
         "version",
+        "fork",
         "tools",
         "directory",
-        "fork",
         "task"
       ],
-      "word_count": 10683,
+      "word_count": 10779,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
