@@ -1259,16 +1259,18 @@ Each model has a maximum native image resolution, expressed as a long-edge limit
 
 High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
 
-The following table shows the visual-token cost for several image sizes on each tier:
+The following table shows the downsized resolution and visual-token cost for several image sizes on each tier:
 
-| Image size                     | Standard-tier tokens                                                                                                                                         | High-resolution-tier tokens                                                                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200x200 px (0.04 megapixels)   | 64                                                                                                                                                           | 64                                                                                                                                                       |
-| 1000x1000 px (1 megapixel)     | 1296                                                                                                                                                         | 1296                                                                                                                                                     |
-| 1092x1092 px (1.19 megapixels) | 1521                                                                                                                                                         | 1521                                                                                                                                                     |
-| 1920x1080 px (2.07 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | 2691                                                                                                                                                     |
-| 2000x1500 px (3 megapixels)    | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1564</Tooltip> | 3888                                                                                                                                                     |
-| 3840x2160 px (8.29 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | <Tooltip tooltipContent="Exceeds the high-resolution tier's limit; the image is downscaled before processing, which caps the token cost.">4784</Tooltip> |
+| Image size                     | Standard tier: downsized to | Standard tier: tokens | High-resolution tier: downsized to | High-resolution tier: tokens |
+| ------------------------------ | --------------------------- | --------------------- | ---------------------------------- | ---------------------------- |
+| 200x200 px (0.04 megapixels)   | Not resized                 | 64                    | Not resized                        | 64                           |
+| 1000x1000 px (1 megapixel)     | Not resized                 | 1296                  | Not resized                        | 1296                         |
+| 1092x1092 px (1.19 megapixels) | Not resized                 | 1521                  | Not resized                        | 1521                         |
+| 1920x1080 px (2.07 megapixels) | 1456x819 px                 | 1560                  | Not resized                        | 2691                         |
+| 2000x1500 px (3 megapixels)    | 1269x952 px                 | 1564                  | Not resized                        | 3888                         |
+| 3840x2160 px (8.29 megapixels) | 1456x819 px                 | 1560                  | 2576x1449 px                       | 4784                         |
+
+When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](/docs/en/build-with-claude/vision-coordinates#how-claude-resizes-and-pads-images).
 
 To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 per million input tokens (standard tier), the 1000×1000 image costs about $1.30 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
 

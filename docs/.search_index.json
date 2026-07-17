@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-17T19:02:27Z",
+  "generated_at": "2026-07-17T21:59:59Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9895,
+      "word_count": 9989,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -438,9 +438,9 @@
         "see",
         "json",
         "file",
+        "permission",
         "call",
         "example",
-        "permission",
         "only",
         "session",
         "run",
@@ -448,7 +448,7 @@
         "input",
         "script"
       ],
-      "word_count": 6763,
+      "word_count": 6769,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -616,7 +616,7 @@
         "port",
         "client"
       ],
-      "word_count": 9577,
+      "word_count": 9596,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -797,22 +797,22 @@
         "accordion",
         "title",
         "run",
-        "desktop",
         "terminal",
+        "desktop",
         "app",
         "tasks",
         "get",
         "work",
+        "web",
         "install",
         "windows",
         "icon",
-        "web",
         "files",
         "tools",
         "cli",
         "see"
       ],
-      "word_count": 1821,
+      "word_count": 1828,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1051,11 +1051,11 @@
         "commands",
         "run",
         "code",
+        "settings",
         "description",
         "bundled",
         "agent",
         "subagent",
-        "settings",
         "plugin",
         "available",
         "create",
@@ -1064,7 +1064,7 @@
         "one",
         "built"
       ],
-      "word_count": 7937,
+      "word_count": 8140,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -44943,21 +44943,21 @@
         "request",
         "per",
         "accordion",
-        "token",
         "resolution",
-        "before",
-        "limit",
         "see",
+        "token",
         "text",
         "example",
-        "tier",
         "title",
-        "cost",
-        "high",
+        "tier",
+        "before",
         "when",
-        "codegroup"
+        "limit",
+        "high",
+        "resized",
+        "limits"
       ],
-      "word_count": 4241,
+      "word_count": 4271,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -46679,21 +46679,21 @@
         "api",
         "card",
         "see",
+        "attach",
         "workspace",
         "files",
-        "attach",
         "when",
         "create",
         "title",
+        "each",
+        "session",
         "learn",
         "pre",
         "built",
         "upload",
-        "codegroup",
-        "icon",
-        "href"
+        "note"
       ],
-      "word_count": 1222,
+      "word_count": 1248,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {

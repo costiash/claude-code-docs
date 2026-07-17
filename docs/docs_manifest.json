@@ -9435,8 +9435,8 @@
     "docs__en__build-with-claude__vision.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/vision",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/vision.md",
-      "hash": "ab5912f81d3780ad80a06867535f6b8e5a63a0f688bcd3e443001febc6749d60",
-      "last_updated": "2026-07-16T18:57:16.288010"
+      "hash": "a80339588225e18937275bac10ecb2f12950b0cdf0a8b067e549398fae606a31",
+      "last_updated": "2026-07-17T21:51:09.387661"
     },
     "docs__en__build-with-claude__vision-coordinates.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/vision-coordinates",
@@ -9489,8 +9489,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "02c2355192dcb1117b7401c0ba7713bf49de782f376baf7fda0c0f1e2367c04a",
-      "last_updated": "2026-07-17T01:09:41.547507"
+      "hash": "0e31739e67b12cf1bd2c53025ef1bdb716b4cc18af2953c6a39e7e295b48650f",
+      "last_updated": "2026-07-17T21:53:27.612324"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -9543,8 +9543,8 @@
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
       "original_md_url": "https://platform.claude.com/docs/en/hooks-guide.md",
-      "hash": "4a33961e63b1bbb231db082034dc31dd6b65d01f3ed8e831a62c23c4b1b0d99c",
-      "last_updated": "2026-07-17T01:10:55.330726"
+      "hash": "3f1d423249dc01b17a03b41f1c115a7c1b67f33471a1955068d990a0b42e1b9c",
+      "last_updated": "2026-07-17T21:54:46.508987"
     },
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
@@ -9921,8 +9921,8 @@
     "docs__en__managed-agents__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/skills",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/skills.md",
-      "hash": "910b5141e6b83062d3fbc511250700458fc96f42b0ba6b3c4618776fd0d466f5",
-      "last_updated": "2026-07-16T19:02:05.551635"
+      "hash": "0a8f281eb8e96632e28c021c1837f1c190e83cf4379b2da6c5ca8beb5314e781",
+      "last_updated": "2026-07-17T21:55:55.130788"
     },
     "docs__en__managed-agents__tools.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/tools",
@@ -9945,8 +9945,8 @@
     "claude-code__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/mcp.md",
-      "hash": "ca37e1f18e7d589cdb1c07b2078cf2e00d6ca7eb7976c191ee150caae4cc5b6d",
-      "last_updated": "2026-07-16T21:58:29.851041"
+      "hash": "2cf4b94417b7479477b11ba9c2c307ff6af482d5b67707b1d7be481af0610400",
+      "last_updated": "2026-07-17T21:56:02.657908"
     },
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
@@ -9987,8 +9987,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "d34b05b607fde87bd9a7f0236b512f6fcf154f1fa53bab6975f06bdf7b97edca",
-      "last_updated": "2026-07-14T19:01:21.083674"
+      "hash": "51aedf11b4f193f443be1b0acda22e512738c93cb8955feb8003b21226b20399",
+      "last_updated": "2026-07-17T21:56:19.439256"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -10047,8 +10047,8 @@
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
       "original_md_url": "https://platform.claude.com/docs/en/skills.md",
-      "hash": "8849d9fa7a0c1bc3cbbbcc71a8e9faf0f3b6ca3e4ebd550a196b18cb8c366a6c",
-      "last_updated": "2026-07-17T01:13:35.680400"
+      "hash": "209e5766f78ff65935b0a12364069f493c595388be72095f58ac13ed6f922527",
+      "last_updated": "2026-07-17T21:57:37.514430"
     },
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
@@ -10101,11 +10101,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-17T19:02:23.739008",
-    "fetch_duration_seconds": 2255.122808,
-    "total_pages_discovered": 2062,
+    "last_fetch_completed": "2026-07-17T21:59:55.503278",
+    "fetch_duration_seconds": 2531.750801,
+    "total_pages_discovered": 2064,
     "pages_fetched_successfully": 1683,
-    "pages_failed": 380,
+    "pages_failed": 382,
     "failed_pages": [
       "/docs/en/accessibility",
       "/docs/en/admin-setup",
@@ -10446,6 +10446,7 @@
       "/docs/en/llm-gateway-rollout",
       "/docs/en/managed-mcp",
       "/docs/en/mcp-quickstart",
+      "/docs/en/mobile",
       "/docs/en/permission-modes",
       "/docs/en/permissions",
       "/docs/en/platforms",
@@ -10484,6 +10485,7 @@
       "/docs/en/whats-new/2026-w26",
       "/docs/en/whats-new/2026-w27",
       "/docs/en/whats-new/2026-w28",
+      "/docs/en/whats-new/2026-w29",
       "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
@@ -10493,7 +10495,7 @@
     "total_files": 1683,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-17T19:02:23.739034",
+  "last_updated": "2026-07-17T21:59:55.503299",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
