@@ -5,7 +5,7 @@ Fetch and read content from specific URLs to augment Claude's context with live 
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.

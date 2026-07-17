@@ -11,7 +11,7 @@ Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4
 </Note>
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Supported models

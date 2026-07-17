@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-17T07:29:43Z",
+  "generated_at": "2026-07-17T10:15:33Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -1308,15 +1308,15 @@
         "available",
         "access",
         "note",
+        "see",
         "custom",
         "capabilities",
         "packages",
-        "see",
         "pre",
         "network",
         "instructions"
       ],
-      "word_count": 2529,
+      "word_count": 2524,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__overview.md"
     },
     "/docs/en/agents-and-tools/agent-skills/quickstart": {
@@ -1372,7 +1372,7 @@
         "connector",
         "when"
       ],
-      "word_count": 4609,
+      "word_count": 4604,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/concepts": {
@@ -1680,12 +1680,12 @@
         "request",
         "cost"
       ],
-      "word_count": 8292,
+      "word_count": 8277,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
       "title": "Bash tool",
-      "content_preview": "# Bash tool  Let Claude request shell commands that your application runs in a persistent bash session and returns as tool results.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZD...",
+      "content_preview": "# Bash tool  Let Claude request shell commands that your application runs in a persistent bash session and returns as tool results.  ---  <Note>   For how zero data retention (ZDR) applies to this fea...",
       "keywords": [
         "tool",
         "command",
@@ -1701,14 +1701,14 @@
         "title",
         "commands",
         "one",
-        "when",
         "process",
         "step",
+        "when",
         "output",
         "tools",
         "request"
       ],
-      "word_count": 6958,
+      "word_count": 6943,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__bash-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent": {
@@ -1764,7 +1764,7 @@
         "requests",
         "environment"
       ],
-      "word_count": 6148,
+      "word_count": 6143,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1776,11 +1776,11 @@
         "tool",
         "actions",
         "title",
-        "when",
         "click",
         "prompt",
         "accordion",
         "tools",
+        "when",
         "screenshot",
         "opus",
         "environment",
@@ -1792,7 +1792,7 @@
         "model",
         "screenshots"
       ],
-      "word_count": 9012,
+      "word_count": 8997,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1825,7 +1825,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
       "title": "Fine-grained tool streaming",
-      "content_preview": "# Fine-grained tool streaming  Stream tool inputs without server-side JSON buffering for latency-sensitive applications.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/e...",
+      "content_preview": "# Fine-grained tool streaming  Stream tool inputs without server-side JSON buffering for latency-sensitive applications.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [...",
       "keywords": [
         "tool",
         "streaming",
@@ -1834,10 +1834,10 @@
         "claude",
         "fine",
         "grained",
-        "when",
         "fragments",
         "card",
         "parameter",
+        "when",
         "string",
         "without",
         "api",
@@ -1848,7 +1848,7 @@
         "result",
         "server"
       ],
-      "word_count": 3439,
+      "word_count": 3424,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md"
     },
     "/docs/en/agents-and-tools/tool-use/handle-tool-calls": {
@@ -1952,15 +1952,15 @@
         "session",
         "return",
         "application",
-        "card",
         "see",
+        "card",
         "side",
         "returns",
         "handler",
         "editing",
         "compaction"
       ],
-      "word_count": 4408,
+      "word_count": 4393,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2042,9 +2042,9 @@
         "only",
         "request",
         "each",
-        "note"
+        "see"
       ],
-      "word_count": 6382,
+      "word_count": 6377,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/server-tools": {
@@ -2105,7 +2105,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
       "title": "Text editor tool",
-      "content_preview": "# Text editor tool  Give Claude the Anthropic-defined text editor tool to view, create, and edit files, and handle its view, str_replace, create, and insert commands.  ---  <Note>   This feature is el...",
+      "content_preview": "# Text editor tool  Give Claude the Anthropic-defined text editor tool to view, create, and edit files, and handle its view, str_replace, create, and insert commands.  ---  <Note>   For how zero data ...",
       "keywords": [
         "text",
         "claude",
@@ -2128,7 +2128,7 @@
         "new",
         "accordion"
       ],
-      "word_count": 8462,
+      "word_count": 8447,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2226,21 +2226,21 @@
         "api",
         "deferred",
         "definition",
-        "when",
         "descriptions",
         "note",
+        "when",
         "definitions",
         "every",
         "blocks",
         "card",
         "names",
-        "response",
         "opus",
         "loading",
         "argument",
-        "request"
+        "request",
+        "see"
       ],
-      "word_count": 3488,
+      "word_count": 3473,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -2301,7 +2301,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
       "title": "Web fetch tool",
-      "content_preview": "# Web fetch tool  Fetch and read content from specific URLs to augment Claude's context with live web content.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-wi...",
+      "content_preview": "# Web fetch tool  Fetch and read content from specific URLs to augment Claude's context with live web content.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API and da...",
       "keywords": [
         "fetch",
         "web",
@@ -2312,24 +2312,24 @@
         "api",
         "when",
         "tools",
-        "response",
         "filtering",
         "code",
+        "response",
         "url",
         "data",
-        "urls",
         "see",
+        "urls",
         "search",
         "only",
         "results",
         "specific"
       ],
-      "word_count": 3606,
+      "word_count": 3591,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
       "title": "Web search tool",
-      "content_preview": "# Web search tool  Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement,",
+      "content_preview": "# Web search tool  Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.  ---  <Note>   For how zero data retention (ZDR) applies to this featu...",
       "keywords": [
         "search",
         "web",
@@ -2344,15 +2344,15 @@
         "code",
         "content",
         "dynamic",
-        "response",
         "note",
-        "when",
+        "response",
         "server",
+        "when",
+        "see",
         "searches",
-        "turn",
-        "see"
+        "turn"
       ],
-      "word_count": 3026,
+      "word_count": 3011,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -44010,7 +44010,7 @@
     },
     "/docs/en/build-with-claude/adaptive-thinking": {
       "title": "Adaptive thinking",
-      "content_preview": "# Adaptive thinking  Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/d...",
+      "content_preview": "# Adaptive thinking  Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, ...",
       "keywords": [
         "thinking",
         "claude",
@@ -44026,14 +44026,14 @@
         "mode",
         "default",
         "output",
+        "see",
         "fable",
         "model",
         "field",
-        "see",
         "note",
-        "response"
+        "effort"
       ],
-      "word_count": 4796,
+      "word_count": 4781,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -44061,12 +44061,12 @@
         "may",
         "workspace"
       ],
-      "word_count": 7001,
+      "word_count": 6996,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
       "title": "Cache diagnostics",
-      "content_preview": "# Cache diagnostics  Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.  ---  <Note>   This feature qualifies for [Zero...",
+      "content_preview": "# Cache diagnostics  Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.  ---  <Note>   For how zero data retention (ZDR...",
       "keywords": [
         "request",
         "cache",
@@ -44075,21 +44075,21 @@
         "prompt",
         "diagnostics",
         "turn",
+        "api",
         "only",
         "beta",
         "comparison",
         "title",
         "where",
         "when",
-        "api",
         "first",
         "see",
         "note",
-        "retention",
         "previous",
-        "header"
+        "header",
+        "divergence"
       ],
-      "word_count": 4375,
+      "word_count": 4365,
       "file_path": "docs/docs__en__build-with-claude__cache-diagnostics.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -44117,7 +44117,7 @@
         "indices",
         "tab"
       ],
-      "word_count": 6374,
+      "word_count": 6359,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
@@ -44183,15 +44183,15 @@
         "claude",
         "bedrock",
         "yes",
-        "aws",
         "sonnet",
+        "aws",
         "anthropic",
         "opus",
         "model",
         "tab",
         "models",
-        "amazon",
         "api",
+        "amazon",
         "note",
         "codegroup",
         "endpoints",
@@ -44201,7 +44201,7 @@
         "regional",
         "through"
       ],
-      "word_count": 3209,
+      "word_count": 3199,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -44244,53 +44244,53 @@
         "see",
         "anthropic",
         "workspace",
+        "organization",
         "account",
         "iam",
-        "bedrock",
-        "organization",
         "through",
+        "bedrock",
         "available",
-        "data",
-        "first",
+        "limits",
         "usage",
         "managed",
-        "request",
-        "limits"
+        "data",
+        "first",
+        "page"
       ],
-      "word_count": 7532,
+      "word_count": 7752,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
       "title": "Compaction",
-      "content_preview": "# Compaction  Server-side context compaction for managing long conversations that approach context window limits.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
+      "content_preview": "# Compaction  Server-side context compaction for managing long conversations that approach context window limits.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API and...",
       "keywords": [
         "compaction",
-        "when",
         "claude",
         "codegroup",
+        "when",
         "context",
         "prompt",
         "summary",
         "api",
         "block",
         "long",
-        "response",
         "conversation",
         "content",
+        "response",
         "trigger",
-        "after",
         "summarization",
         "messages",
         "blocks",
         "request",
-        "cache"
+        "cache",
+        "iteration"
       ],
-      "word_count": 9770,
+      "word_count": 9755,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
       "title": "Context editing",
-      "content_preview": "# Context editing  Automatically manage conversation context as it grows with context editing.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-an...",
+      "content_preview": "# Context editing  Automatically manage conversation context as it grows with context editing.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API and data retention](/d...",
       "keywords": [
         "tab",
         "compaction",
@@ -44302,8 +44302,8 @@
         "title",
         "server",
         "runner",
-        "when",
         "claude",
+        "when",
         "instead",
         "client",
         "thinking",
@@ -44313,7 +44313,7 @@
         "support",
         "parameter"
       ],
-      "word_count": 9056,
+      "word_count": 9041,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -44346,7 +44346,7 @@
     },
     "/docs/en/build-with-claude/effort": {
       "title": "Effort",
-      "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization",
+      "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note>   For how zero data retention (ZDR...",
       "keywords": [
         "effort",
         "claude",
@@ -44355,8 +44355,8 @@
         "token",
         "sonnet",
         "tasks",
-        "when",
         "levels",
+        "when",
         "default",
         "tool",
         "agentic",
@@ -44369,7 +44369,7 @@
         "where",
         "parameter"
       ],
-      "word_count": 2680,
+      "word_count": 2665,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -44402,7 +44402,7 @@
     },
     "/docs/en/build-with-claude/extended-thinking": {
       "title": "Extended thinking",
-      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/bui...",
+      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention). </Note>  Extended thinking gives",
       "keywords": [
         "thinking",
         "claude",
@@ -44414,9 +44414,9 @@
         "turn",
         "opus",
         "note",
-        "response",
-        "model",
         "see",
+        "model",
+        "response",
         "tokens",
         "reasoning",
         "models",
@@ -44425,7 +44425,7 @@
         "mythos",
         "adaptive"
       ],
-      "word_count": 14338,
+      "word_count": 14323,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -44473,15 +44473,15 @@
         "available",
         "requests",
         "output",
-        "when",
         "model",
         "per",
         "api",
+        "when",
         "card",
         "supported",
         "error"
       ],
-      "word_count": 2658,
+      "word_count": 2643,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -44509,7 +44509,7 @@
         "claude",
         "skills"
       ],
-      "word_count": 2955,
+      "word_count": 2950,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -44570,7 +44570,7 @@
     },
     "/docs/en/build-with-claude/mid-conversation-system-messages": {
       "title": "Mid-conversation system messages",
-      "content_preview": "# Mid-conversation system messages  Add or update system instructions partway through a conversation without invalidating the cached prefix that came before them.  ---  <Note>   This feature is eligib...",
+      "content_preview": "# Mid-conversation system messages  Add or update system instructions partway through a conversation without invalidating the cached prefix that came before them.  ---  <Note>   For how zero data rete...",
       "keywords": [
         "system",
         "message",
@@ -44589,11 +44589,11 @@
         "messages",
         "instructions",
         "prefix",
-        "after",
         "new",
-        "request"
+        "request",
+        "card"
       ],
-      "word_count": 3081,
+      "word_count": 3066,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-system-messages.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -44654,7 +44654,7 @@
     },
     "/docs/en/build-with-claude/pdf-support": {
       "title": "PDF support",
-      "content_preview": "# PDF support  Process PDFs with Claude: extract text, analyze charts, and understand visual content from your documents.  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/...",
+      "content_preview": "# PDF support  Process PDFs with Claude: extract text, analyze charts, and understand visual content from your documents.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see ...",
       "keywords": [
         "pdf",
         "api",
@@ -44664,9 +44664,9 @@
         "document",
         "page",
         "visual",
-        "when",
         "support",
         "note",
+        "when",
         "processing",
         "citations",
         "codegroup",
@@ -44677,7 +44677,7 @@
         "analysis",
         "charts"
       ],
-      "word_count": 5422,
+      "word_count": 5407,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -44705,7 +44705,7 @@
         "input",
         "breakpoints"
       ],
-      "word_count": 16337,
+      "word_count": 16322,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/refusals-and-fallback": {
@@ -44738,7 +44738,7 @@
     },
     "/docs/en/build-with-claude/search-results": {
       "title": "Search results",
-      "content_preview": "# Search results  Enable natural citations for RAG applications by providing search results with source attribution  ---  <Note>   This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/bui...",
+      "content_preview": "# Search results  Enable natural citations for RAG applications by providing search results with source attribution  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API a...",
       "keywords": [
         "search",
         "results",
@@ -44752,16 +44752,16 @@
         "text",
         "block",
         "source",
-        "when",
         "string",
         "array",
         "card",
         "rag",
         "applications",
         "web",
-        "custom"
+        "custom",
+        "opus"
       ],
-      "word_count": 5098,
+      "word_count": 5083,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -44770,8 +44770,8 @@
       "keywords": [
         "skills",
         "skill",
-        "codegroup",
         "api",
+        "codegroup",
         "files",
         "custom",
         "claude",
@@ -44783,13 +44783,13 @@
         "data",
         "card",
         "create",
+        "see",
         "anthropic",
         "when",
         "must",
-        "reference",
-        "request"
+        "reference"
       ],
-      "word_count": 12302,
+      "word_count": 12297,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -44845,7 +44845,7 @@
         "java",
         "tab"
       ],
-      "word_count": 10105,
+      "word_count": 10095,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -44901,7 +44901,7 @@
         "models",
         "opus"
       ],
-      "word_count": 3849,
+      "word_count": 3834,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -44970,12 +44970,12 @@
         "card",
         "codegroup",
         "docs",
+        "see",
         "opus",
         "guide",
-        "see",
-        "response",
         "system",
         "build",
+        "response",
         "conversation",
         "title",
         "icon",
@@ -44985,7 +44985,7 @@
         "agents",
         "note"
       ],
-      "word_count": 2954,
+      "word_count": 2939,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/get-started": {
@@ -45626,10 +45626,10 @@
         "console",
         "model",
         "settings",
-        "through",
+        "see",
         "platform"
       ],
-      "word_count": 1252,
+      "word_count": 1237,
       "file_path": "docs/docs__en__manage-claude__data-residency.md"
     },
     "/docs/en/manage-claude/rate-limits-api": {
