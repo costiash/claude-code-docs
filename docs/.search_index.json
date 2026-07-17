@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-16T22:02:24Z",
+  "generated_at": "2026-07-17T01:15:50Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -13,8 +13,8 @@
         "added",
         "session",
         "instead",
-        "claude",
         "sessions",
+        "claude",
         "mode",
         "improved",
         "after",
@@ -26,9 +26,9 @@
         "code",
         "prompt",
         "model",
-        "showing"
+        "command"
       ],
-      "word_count": 66691,
+      "word_count": 67715,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -56,7 +56,7 @@
         "before",
         "settings"
       ],
-      "word_count": 4365,
+      "word_count": 4402,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -91,28 +91,28 @@
       "title": "Checkpointing",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
       "keywords": [
-        "code",
         "conversation",
+        "code",
+        "summarize",
         "session",
         "claude",
-        "summarize",
-        "rewind",
         "file",
+        "rewind",
         "changes",
         "checkpoints",
         "message",
         "before",
         "files",
-        "prompt",
-        "keeping",
-        "here",
-        "summary",
+        "restore",
         "selected",
-        "version",
+        "prompt",
         "after",
-        "input"
+        "menu",
+        "point",
+        "keeping",
+        "here"
       ],
-      "word_count": 966,
+      "word_count": 1053,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -168,7 +168,7 @@
         "background",
         "print"
       ],
-      "word_count": 4142,
+      "word_count": 4147,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -191,12 +191,12 @@
         "context",
         "see",
         "when",
+        "sessions",
         "plan",
         "project",
-        "suppose",
-        "need"
+        "suppose"
       ],
-      "word_count": 2411,
+      "word_count": 2421,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -213,9 +213,9 @@
         "user",
         "context",
         "costs",
-        "limit",
         "api",
         "session",
+        "limit",
         "console",
         "before",
         "enterprise",
@@ -224,7 +224,7 @@
         "limits",
         "plan"
       ],
-      "word_count": 3554,
+      "word_count": 3654,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -252,7 +252,7 @@
         "opt",
         "see"
       ],
-      "word_count": 2138,
+      "word_count": 2173,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -263,10 +263,10 @@
         "code",
         "browser",
         "mode",
+        "settings",
         "auto",
         "file",
         "desktop",
-        "settings",
         "session",
         "external",
         "pane",
@@ -280,7 +280,7 @@
         "before",
         "sessions"
       ],
-      "word_count": 9878,
+      "word_count": 9895,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -388,11 +388,11 @@
         "credentials",
         "gcp",
         "variables",
-        "opus",
-        "version",
-        "pin"
+        "configuration",
+        "environment",
+        "opus"
       ],
-      "word_count": 2415,
+      "word_count": 2529,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -476,7 +476,7 @@
         "user",
         "before"
       ],
-      "word_count": 23772,
+      "word_count": 23787,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -486,25 +486,25 @@
         "claude",
         "mode",
         "code",
-        "line",
-        "command",
         "input",
         "prompt",
-        "session",
+        "line",
+        "command",
         "press",
+        "session",
         "history",
         "commands",
+        "text",
         "background",
         "when",
-        "text",
-        "character",
-        "cursor",
         "search",
+        "cursor",
+        "character",
         "terminal",
         "conversation",
-        "normal"
+        "previous"
       ],
-      "word_count": 4323,
+      "word_count": 4488,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -520,19 +520,19 @@
         "file",
         "command",
         "terminal",
-        "step",
         "settings",
+        "step",
+        "when",
         "windows",
         "cli",
-        "when",
         "ides",
         "restart",
+        "run",
         "install",
         "configuration",
-        "remote",
-        "networking"
+        "only"
       ],
-      "word_count": 1711,
+      "word_count": 1747,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -664,15 +664,15 @@
         "environment",
         "classname",
         "create",
+        "deployment",
+        "when",
         "authentication",
         "default",
         "name",
-        "deployment",
         "haiku",
-        "when",
-        "documentation"
+        "option"
       ],
-      "word_count": 1197,
+      "word_count": 1219,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -681,26 +681,26 @@
       "keywords": [
         "model",
         "default",
-        "when",
         "claude",
+        "when",
         "code",
+        "session",
         "opus",
         "set",
-        "session",
         "settings",
         "version",
         "organization",
         "sonnet",
-        "effort",
         "picker",
         "models",
+        "effort",
         "managed",
         "platform",
         "fable",
         "level",
-        "allowlist"
+        "anthropic"
       ],
-      "word_count": 9728,
+      "word_count": 9874,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -851,9 +851,9 @@
         "when",
         "claude",
         "code",
-        "server",
-        "directory",
         "plugins",
+        "directory",
+        "server",
         "default",
         "mcp",
         "field",
@@ -864,11 +864,11 @@
         "version",
         "skills",
         "name",
+        "path",
         "file",
-        "skill",
-        "path"
+        "skill"
       ],
-      "word_count": 8871,
+      "word_count": 9077,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -924,7 +924,7 @@
         "windows",
         "git"
       ],
-      "word_count": 1755,
+      "word_count": 1695,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -939,20 +939,20 @@
         "permission",
         "sandboxed",
         "run",
-        "access",
         "command",
-        "mode",
         "when",
-        "directory",
+        "access",
         "only",
-        "bash",
         "rules",
+        "mode",
         "allow",
+        "directory",
+        "bash",
         "inside",
         "tools",
         "wsl"
       ],
-      "word_count": 5048,
+      "word_count": 5156,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -997,18 +997,18 @@
         "file",
         "theme",
         "null",
+        "when",
         "project",
         "set",
         "acme",
-        "when",
-        "see",
         "only",
+        "see",
         "tools",
         "user",
         "corp",
         "example"
       ],
-      "word_count": 15185,
+      "word_count": 15257,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1036,7 +1036,7 @@
         "update",
         "settings"
       ],
-      "word_count": 3706,
+      "word_count": 3636,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1064,7 +1064,7 @@
         "one",
         "built"
       ],
-      "word_count": 7874,
+      "word_count": 7937,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5527,
+      "word_count": 5549,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
