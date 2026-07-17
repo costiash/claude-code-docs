@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-17T18:24:49.518955Z",
-    "total_paths": 2062,
+    "generated_at": "2026-07-17T21:17:44.676308Z",
+    "total_paths": 2064,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-17T18:24:49.518966Z"
+    "last_regenerated": "2026-07-17T21:17:44.676315Z"
   },
   "categories": {
     "core_documentation": [
@@ -198,6 +198,7 @@
       "/docs/en/managed-agents/webhooks",
       "/docs/en/managed-mcp",
       "/docs/en/mcp-quickstart",
+      "/docs/en/mobile",
       "/docs/en/permission-modes",
       "/docs/en/permissions",
       "/docs/en/platforms",
@@ -237,6 +238,7 @@
       "/docs/en/whats-new/2026-w26",
       "/docs/en/whats-new/2026-w27",
       "/docs/en/whats-new/2026-w28",
+      "/docs/en/whats-new/2026-w29",
       "/docs/en/workflows",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
