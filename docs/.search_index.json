@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-18T13:01:58Z",
+  "generated_at": "2026-07-18T16:02:40Z",
   "indexed_files": 1747,
   "index": {
     "/changelog": {
@@ -616,7 +616,7 @@
         "port",
         "client"
       ],
-      "word_count": 9861,
+      "word_count": 9913,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -802,17 +802,17 @@
         "app",
         "tasks",
         "get",
+        "windows",
         "work",
         "web",
         "install",
-        "windows",
         "icon",
         "files",
         "tools",
         "cli",
         "see"
       ],
-      "word_count": 1828,
+      "word_count": 1889,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1204,7 +1204,7 @@
         "high",
         "problems"
       ],
-      "word_count": 1247,
+      "word_count": 1255,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5549,
+      "word_count": 5605,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
