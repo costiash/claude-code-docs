@@ -93,6 +93,101 @@ The `inference_geo` parameter controls where model inference runs for a specific
   // Check where inference actually ran
   console.log(`Inference geo: ${response.usage.inference_geo}`);
   ```
+
+  ```csharp C#
+  var client = new AnthropicClient();
+
+  var response = await client.Messages.Create(
+      new MessageCreateParams
+      {
+          Model = Model.ClaudeOpus4_8,
+          MaxTokens = 1024,
+          InferenceGeo = "us",
+          Messages =
+          [
+              new() { Role = Role.User, Content = "Summarize the key points of this document." },
+          ],
+      }
+  );
+
+  if (response.Content[0].TryPickText(out var textBlock))
+  {
+      Console.WriteLine(textBlock.Text);
+  }
+
+  // Check where inference actually ran
+  Console.WriteLine($"Inference geo: {response.Usage.InferenceGeo}");
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  	Model:        anthropic.ModelClaudeOpus4_8,
+  	MaxTokens:    1024,
+  	InferenceGeo: anthropic.String("us"),
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Summarize the key points of this document.")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  fmt.Println(message.Content[0].Text)
+  // Check where inference actually ran
+  fmt.Printf("Inference geo: %s\n", message.Usage.InferenceGeo)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  Message response = client.messages().create(
+          MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_8)
+                  .maxTokens(1024L)
+                  .inferenceGeo("us")
+                  .addUserMessage("Summarize the key points of this document.")
+                  .build());
+
+  IO.println(response.content().get(0).text().get().text());
+  // Check where inference actually ran
+  IO.println("Inference geo: " + response.usage().inferenceGeo().get());
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $response = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      inferenceGeo: 'us',
+      messages: [
+          ['role' => 'user', 'content' => 'Summarize the key points of this document.'],
+      ],
+  );
+
+  echo $response->content[0]->text, PHP_EOL;
+  // Check where inference actually ran
+  echo "Inference geo: {$response->usage->inferenceGeo}\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    inference_geo: "us",
+    messages: [
+      {role: "user", content: "Summarize the key points of this document."}
+    ]
+  )
+
+  puts response.content.first.text
+  # Check where inference actually ran
+  puts "Inference geo: #{response.usage.inference_geo}"
+  ```
 </CodeGroup>
 
 ### Response

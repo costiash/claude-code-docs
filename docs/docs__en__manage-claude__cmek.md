@@ -35,7 +35,7 @@ Anthropic calls your key management service from its standard public IP range. I
 
 ## Availability and regions
 
-CMEK is currently available in US regions only, and all encryption operations are processed in US regions. Multi-region keys and EU key residency are not yet supported.
+CMEK is currently available in US regions only, and all encryption operations are processed in US regions.
 
 On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the Claude Console; the `external_keys` API endpoints are not currently available on Claude Platform on AWS. The key must be in the same AWS region as the workspace it is attached to.
 
