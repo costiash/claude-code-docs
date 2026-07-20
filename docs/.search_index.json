@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-20T19:23:01Z",
+  "generated_at": "2026-07-20T22:10:00Z",
   "indexed_files": 1804,
   "index": {
     "/changelog": {
@@ -467,16 +467,16 @@
         "fields",
         "only",
         "session",
-        "runs",
         "prompt",
         "command",
+        "runs",
         "output",
         "file",
         "event",
         "user",
         "before"
       ],
-      "word_count": 23810,
+      "word_count": 23909,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -728,7 +728,7 @@
         "counter",
         "mcp"
       ],
-      "word_count": 10957,
+      "word_count": 11006,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
