@@ -1,6 +1,6 @@
 # CLI scripting and automation
 
-Version-control API resources as YAML, chain ant CLI commands in scripts, and operate on resources from Claude Code.
+Version-control API resources as YAML, chain ant CLI commands in scripts, operate on resources from Claude Code, and authenticate curl calls with CLI credentials.
 
 ---
 
@@ -179,3 +179,27 @@ Agent not found.
 * "Pull the events for session `session_01...` and tell me where the agent got stuck."
 
 Claude Code shells out to `ant`, parses the structured output, and reasons over the results (no custom integration code required).
+
+## Authenticate curl requests with CLI credentials
+
+Scripts that call the API with `curl` or another HTTP client can use the credentials stored by [`ant auth login`](/docs/en/cli-sdks-libraries/cli/quickstart#authentication) instead of a static API key. The OAuth access token goes in the `Authorization` header as a bearer token; the `x-api-key` header is only for static API keys.
+
+`ant auth print-credentials --access-token` prints the active profile's access token, refreshing it first if it is expired or near expiry:
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "Authorization: Bearer $(ant auth print-credentials --access-token)" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 256,
+    "messages": [{"role": "user", "content": "hi"}]
+  }'
+```
+
+<Note>
+  Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](/docs/en/manage-claude/wif-reference#credential-precedence)) and can silently route them to a different organization or workspace.
+</Note>
+
+Run [`ant auth status`](/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.

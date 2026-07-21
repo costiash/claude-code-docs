@@ -21,16 +21,16 @@ The use of CMEK is optional. Eligible organizations can **opt in** to use custom
 
 ## How it works
 
-Only admins can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
+Only Organization Admins (on Claude Platform) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
-CMEK admin configuration events appear in the [Compliance API Activity Feed](/docs/en/manage-claude/compliance-activity-feed). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
+CMEK configuration events appear in the [Compliance API Activity Feed](/docs/en/manage-claude/compliance-activity-feed). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
 
 Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](/docs/en/api/ip-addresses).
 
 ## Prerequisites
 
-* Cloud Admin access in the account, project, or subscription that will host the encryption key.
-* An admin role in your Anthropic organization: an Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
+* Permissions to create encryption keys and manage key access in the account, project, or subscription that will host the encryption key.
+* An Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
 * Data retention configuration: CMEK is allowed with [Zero data retention (ZDR)](/docs/en/manage-claude/api-and-data-retention) for both Claude Platform and Claude Enterprise.
 
 ## Availability and regions
@@ -64,6 +64,7 @@ What CMEK covers depends on which product you use.
 * Claude Code on the CLI, including message content.
 * Cowork in Claude Desktop.
 * Office agents.
+* Claude in Chrome.
 
 On both products, backups and snapshots inherit the key.
 
@@ -83,7 +84,7 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 * Search across large numbers of files is slower.
 * The Analytics API and in-product analytics are degraded. Some usage views and reports may be incomplete.
 * Audit log exports are disabled.
-* Signed URLs for temporary file exchanges are disabled. These back claude.ai admin data exports and Claude Code Remote file flows such as screenshot updates.
+* Signed URLs for temporary file exchanges are disabled. These back organization data exports in claude.ai and Claude Code Remote file flows such as screenshot updates.
 * Personal preferences are disabled for users who belong to a CMEK-protected organization, across all organizations under the same parent. Users who do not belong to a CMEK-protected organization can still use them across all organizations.
 
 ### Not encrypted

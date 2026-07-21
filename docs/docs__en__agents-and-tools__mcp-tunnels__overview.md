@@ -139,28 +139,243 @@ Pass the upstream MCP server's URL in the `mcp_servers` array, the same way as a
 
 The URL's host is `<subdomain>.<your-tunnel-domain>`. The path depends on your upstream MCP server, not the tunnel: FastMCP's `streamable-http` transport serves at `/mcp`, and other servers may use `/` or a custom path (check the server's documentation). The proxy forwards the path untouched.
 
-```bash
-curl https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "X-API-Key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: mcp-client-2025-11-20" \
-  -d '{
-    "model": "claude-opus-4-8",
-    "max_tokens": 1000,
-    "messages": [{"role": "user", "content": "Use the hello tool to greet tunnel."}],
-    "mcp_servers": [
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: mcp-client-2025-11-20" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1000,
+      "messages": [{"role": "user", "content": "Use the hello tool to greet tunnel."}],
+      "mcp_servers": [
+        {
+          "type": "url",
+          "url": "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+          "name": "echo"
+        }
+      ],
+      "tools": [{"type": "mcp_toolset", "mcp_server_name": "echo"}]
+    }'
+  ```
+
+  ```bash CLI
+  ant beta:messages create --beta mcp-client-2025-11-20 <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1000
+  messages:
+    - role: user
+      content: Use the hello tool to greet tunnel.
+  mcp_servers:
+    - type: url
+      url: https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp
+      name: echo
+  tools:
+    - type: mcp_toolset
+      mcp_server_name: echo
+  YAML
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+
+  response = client.beta.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1000,
+      messages=[{"role": "user", "content": "Use the hello tool to greet tunnel."}],
+      mcp_servers=[
+          {
+              "type": "url",
+              "url": "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+              "name": "echo",
+          }
+      ],
+      tools=[{"type": "mcp_toolset", "mcp_server_name": "echo"}],
+      betas=["mcp-client-2025-11-20"],
+  )
+
+  print(response)
+  ```
+
+  ```typescript TypeScript
+  const anthropic = new Anthropic();
+
+  const response = await anthropic.beta.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1000,
+    messages: [
       {
-        "type": "url",
-        "url": "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
-        "name": "echo"
+        role: "user",
+        content: "Use the hello tool to greet tunnel."
       }
     ],
-    "tools": [{"type": "mcp_toolset", "mcp_server_name": "echo"}]
-  }'
-```
+    mcp_servers: [
+      {
+        type: "url",
+        url: "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+        name: "echo"
+      }
+    ],
+    tools: [
+      {
+        type: "mcp_toolset",
+        mcp_server_name: "echo"
+      }
+    ],
+    betas: ["mcp-client-2025-11-20"]
+  });
 
-For SDK examples in every language, see [MCP connector](/docs/en/agents-and-tools/mcp-connector); the only tunnel-specific value is the `url`.
+  console.log(response);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  var parameters = new MessageCreateParams
+  {
+      Model = Messages::Model.ClaudeOpus4_8,
+      MaxTokens = 1000,
+      Messages = new List<BetaMessageParam>
+      {
+          new() { Role = Role.User, Content = "Use the hello tool to greet tunnel." }
+      },
+      McpServers = new List<BetaRequestMcpServerUrlDefinition>
+      {
+          new()
+          {
+              Url = "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+              Name = "echo"
+          }
+      },
+      Tools = new List<BetaToolUnion>
+      {
+          new BetaMcpToolset("echo")
+      },
+      Betas = ["mcp-client-2025-11-20"]
+  };
+
+  var message = await client.Beta.Messages.Create(parameters);
+  Console.WriteLine(message);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1000,
+  	Messages: []anthropic.BetaMessageParam{
+  		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Use the hello tool to greet tunnel.")),
+  	},
+  	MCPServers: []anthropic.BetaRequestMCPServerURLDefinitionParam{
+  		{
+  			URL:  "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+  			Name: "echo",
+  		},
+  	},
+  	Tools: []anthropic.BetaToolUnionParam{
+  		{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
+  			MCPServerName: "echo",
+  		}},
+  	},
+  	Betas: []anthropic.AnthropicBeta{
+  		anthropic.AnthropicBetaMCPClient2025_11_20,
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.messages.BetaMcpToolset;
+  // ...
+  import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
+  // ...
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1000L)
+          .addUserMessage("Use the hello tool to greet tunnel.")
+          .addMcpServer(BetaRequestMcpServerUrlDefinition.builder()
+              .url("https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp")
+              .name("echo")
+              .build())
+          .addTool(BetaMcpToolset.builder()
+              .mcpServerName("echo")
+              .build())
+          .addBeta("mcp-client-2025-11-20")
+          .build();
+
+      BetaMessage response = client.beta().messages().create(params);
+      IO.println(response);
+  }
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $message = $client->beta->messages->create(
+      maxTokens: 1000,
+      messages: [
+          ['role' => 'user', 'content' => 'Use the hello tool to greet tunnel.']
+      ],
+      model: 'claude-opus-4-8',
+      mcpServers: [
+          [
+              'type' => 'url',
+              'url' => 'https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp',
+              'name' => 'echo',
+          ],
+      ],
+      tools: [
+          [
+              'type' => 'mcp_toolset',
+              'mcpServerName' => 'echo',
+          ],
+      ],
+      betas: ['mcp-client-2025-11-20'],
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.beta.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1000,
+    messages: [
+      { role: "user", content: "Use the hello tool to greet tunnel." }
+    ],
+    mcp_servers: [
+      {
+        type: "url",
+        url: "https://echo.YOUR_TUNNEL_DOMAIN_HERE/mcp",
+        name: "echo"
+      }
+    ],
+    tools: [
+      {
+        type: "mcp_toolset",
+        mcp_server_name: "echo"
+      }
+    ],
+    betas: ["mcp-client-2025-11-20"]
+  )
+
+  puts response
+  ```
+</CodeGroup>
+
+For authenticating to the upstream MCP server (`authorization_token`) and other `mcp_servers` options, see [MCP connector](/docs/en/agents-and-tools/mcp-connector).
 
 ## Next steps
 

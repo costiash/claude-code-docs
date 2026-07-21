@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-21T16:19:46Z",
-  "indexed_files": 1804,
+  "generated_at": "2026-07-21T18:48:16Z",
+  "indexed_files": 1805,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -28,7 +28,7 @@
         "commands",
         "model"
       ],
-      "word_count": 69427,
+      "word_count": 69442,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -91,28 +91,28 @@
       "title": "Checkpointing",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
       "keywords": [
-        "conversation",
         "code",
+        "conversation",
         "session",
-        "summarize",
         "claude",
+        "summarize",
         "file",
+        "files",
         "rewind",
         "changes",
+        "restore",
+        "before",
         "checkpoints",
         "message",
-        "before",
-        "files",
-        "restore",
+        "menu",
+        "into",
         "selected",
         "prompt",
         "after",
-        "menu",
-        "point",
-        "keeping",
-        "here"
+        "note",
+        "point"
       ],
-      "word_count": 1054,
+      "word_count": 1210,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -160,15 +160,15 @@
         "requires",
         "flag",
         "mcp",
+        "file",
         "sessions",
         "min",
         "interactive",
         "default",
-        "file",
         "tool",
         "available"
       ],
-      "word_count": 4241,
+      "word_count": 4260,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -406,21 +406,21 @@
         "agent",
         "mode",
         "sdk",
+        "before",
         "event",
         "docs",
         "run",
         "cli",
-        "before",
         "tools",
         "prompt",
-        "without",
-        "message",
         "output",
         "response",
+        "without",
+        "message",
         "text",
         "field"
       ],
-      "word_count": 2563,
+      "word_count": 2619,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -448,7 +448,7 @@
         "mcp",
         "prompt"
       ],
-      "word_count": 6806,
+      "word_count": 6881,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24272,
+      "word_count": 24369,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -493,18 +493,18 @@
         "press",
         "session",
         "history",
-        "commands",
         "text",
+        "commands",
         "background",
         "when",
         "search",
         "cursor",
         "character",
         "terminal",
-        "conversation",
-        "previous"
+        "previous",
+        "conversation"
       ],
-      "word_count": 4528,
+      "word_count": 4589,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -512,27 +512,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # JetBrains IDEs  > Use Claude Code with JetBrains IDEs including IntelliJ, PyCharm, WebStorm, and more  Claude Code",
       "keywords": [
         "claude",
-        "code",
         "ide",
+        "code",
         "plugin",
         "wsl",
         "jetbrains",
-        "file",
         "command",
+        "file",
         "terminal",
         "settings",
-        "step",
         "when",
+        "step",
         "windows",
         "cli",
-        "ides",
         "restart",
+        "ides",
         "run",
         "install",
-        "configuration",
-        "only"
+        "running",
+        "configuration"
       ],
-      "word_count": 1747,
+      "word_count": 1806,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -626,9 +626,9 @@
         "claude",
         "files",
         "instructions",
+        "memory",
         "rules",
         "project",
-        "memory",
         "code",
         "context",
         "mdclaude",
@@ -644,7 +644,7 @@
         "into",
         "mdmemory"
       ],
-      "word_count": 4391,
+      "word_count": 4531,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -708,27 +708,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "when",
-        "event",
-        "tool",
-        "attributes",
-        "events",
         "claude",
+        "tool",
+        "event",
+        "attributes",
         "code",
+        "events",
         "request",
-        "name",
         "session",
+        "name",
+        "only",
         "plugin",
         "api",
-        "only",
         "metrics",
         "set",
         "user",
-        "standard",
         "such",
-        "counter",
-        "mcp"
+        "default",
+        "standard",
+        "version"
       ],
-      "word_count": 11006,
+      "word_count": 12318,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -826,21 +826,21 @@
         "code",
         "claude",
         "when",
-        "add",
         "see",
+        "add",
+        "directory",
         "string",
         "url",
         "marketplaces",
-        "directory",
         "repository",
-        "source",
         "github",
+        "source",
         "paths",
         "sources",
         "entry",
-        "version"
+        "path"
       ],
-      "word_count": 7941,
+      "word_count": 8029,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1941,8 +1941,8 @@
       "keywords": [
         "mcp",
         "tunnel",
-        "tunnels",
         "server",
+        "tunnels",
         "card",
         "api",
         "network",
@@ -1952,15 +1952,15 @@
         "servers",
         "certificate",
         "agents",
+        "upstream",
         "transport",
         "connector",
-        "upstream",
         "tools",
         "claude",
         "request",
         "provider"
       ],
-      "word_count": 1452,
+      "word_count": 1874,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -36561,8 +36561,8 @@
       "title": "Rate limits",
       "content_preview": "# Rate limits  To mitigate misuse and manage capacity on the API, limits are in place on how much an organization can use the Claude API.  ---  <Note>   **[Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws):** The rate limits on this page apply to Claude Platform on AWS, but",
       "keywords": [
-        "rate",
         "limits",
+        "rate",
         "limit",
         "tokens",
         "per",
@@ -36575,14 +36575,14 @@
         "api",
         "spend",
         "organization",
+        "usage",
         "output",
         "note",
         "number",
-        "usage",
         "request",
         "tab"
       ],
-      "word_count": 2991,
+      "word_count": 3045,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -45639,25 +45639,25 @@
         "search",
         "results",
         "content",
-        "claude",
-        "citations",
         "result",
-        "citation",
         "blocks",
+        "claude",
         "tool",
+        "citations",
         "text",
         "block",
+        "citation",
+        "messages",
+        "card",
         "source",
         "string",
         "array",
-        "card",
-        "rag",
-        "applications",
-        "web",
-        "custom",
-        "opus"
+        "same",
+        "title",
+        "when",
+        "must"
       ],
-      "word_count": 5083,
+      "word_count": 7780,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -45970,30 +45970,30 @@
     },
     "/docs/en/cli-sdks-libraries/cli/scripting": {
       "title": "CLI scripting and automation",
-      "content_preview": "# CLI scripting and automation  Version-control API resources as YAML, chain ant CLI commands in scripts, and operate on resources from Claude Code.  ---  This page covers task-oriented workflows buil...",
+      "content_preview": "# CLI scripting and automation  Version-control API resources as YAML, chain ant CLI commands in scripts, operate on resources from Claude Code, and authenticate curl calls with CLI credentials.  --- ...",
       "keywords": [
-        "step",
         "cli",
+        "step",
         "api",
         "session",
         "title",
         "agent",
         "command",
+        "environment",
         "resources",
         "claude",
         "code",
+        "note",
         "tip",
-        "environment",
         "create",
         "into",
         "version",
         "output",
-        "note",
+        "keep",
         "list",
-        "flags",
-        "repository"
+        "commands"
       ],
-      "word_count": 772,
+      "word_count": 949,
       "file_path": "docs/docs__en__cli-sdks-libraries__cli__scripting.md"
     },
     "/docs/en/cli-sdks-libraries/cli/using": {
@@ -46332,6 +46332,34 @@
       "word_count": 3608,
       "file_path": "docs/docs__en__cli-sdks-libraries__sdks__typescript.md"
     },
+    "/docs/en/get-api-key": {
+      "title": "Get your Claude API key",
+      "content_preview": "# Get your Claude API key  Find, create, and manage your API keys for the Claude API in the Claude Console.  ---  API keys for the Claude API (also called Anthropic API keys) live in the Claude Consol...",
+      "keywords": [
+        "api",
+        "key",
+        "keys",
+        "create",
+        "claude",
+        "step",
+        "console",
+        "admin",
+        "title",
+        "one",
+        "settings",
+        "organization",
+        "get",
+        "also",
+        "view",
+        "new",
+        "steps",
+        "sign",
+        "give",
+        "workspace"
+      ],
+      "word_count": 359,
+      "file_path": "docs/docs__en__get-api-key.md"
+    },
     "/docs/en/get-started": {
       "title": "Get started with Claude",
       "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  * An Anthropic [Console account](/) * An [API key](/settings/keys)  ## Ca...",
@@ -46623,21 +46651,21 @@
         "aws",
         "policy",
         "account",
+        "workspace",
+        "compartment",
         "encryption",
+        "claude",
+        "condition",
         "cmek",
         "organization",
-        "workspace",
-        "frame",
-        "permissions",
         "create",
-        "encrypt",
-        "decrypt",
-        "condition",
-        "claude",
+        "add",
+        "frame",
         "data",
-        "iam"
+        "under",
+        "permissions"
       ],
-      "word_count": 1255,
+      "word_count": 1431,
       "file_path": "docs/docs__en__manage-claude__cmek-aws-kms.md"
     },
     "/docs/en/manage-claude/cmek-azure-key-vault": {
@@ -46708,20 +46736,20 @@
         "kms",
         "encryption",
         "aws",
-        "cloud",
-        "workspace",
         "platform",
-        "under",
+        "workspace",
+        "cloud",
         "keys",
+        "under",
+        "organization",
         "api",
         "service",
         "disabled",
         "managed",
         "azure",
-        "admin",
-        "organization"
+        "enterprise"
       ],
-      "word_count": 1608,
+      "word_count": 1624,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -47953,7 +47981,7 @@
         "self",
         "host"
       ],
-      "word_count": 7392,
+      "word_count": 7530,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {

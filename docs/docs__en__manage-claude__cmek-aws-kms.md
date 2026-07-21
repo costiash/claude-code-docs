@@ -67,7 +67,10 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
             \"Resource\": \"*\",
             \"Condition\": {
               \"StringEquals\": {
-                \"kms:EncryptionContext:anthropic:compartment_uuid\": \"<compartment-uuid>\"
+                \"kms:EncryptionContext:anthropic:compartment_uuid\": [
+                  \"00000000-0000-0000-0000-000000000000\",
+                  \"<compartment-uuid>\"
+                ]
               }
             }
           },
@@ -87,7 +90,7 @@ arn:aws:iam::915198916910:role/anthropic-cmek-client-us
     The `EncryptionContext` condition is recommended but optional. Anthropic always includes your workspace's compartment ID in the encryption context, so ciphertext is cryptographically bound to that compartment regardless. Adding the condition provides defense-in-depth at the IAM layer. To start without it, omit the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and add it later with `kms:PutKeyPolicy`.
 
     <Note>
-      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](/docs/en/api/admin-api/workspaces/get-workspace) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy. Anthropic also sends it as the encryption context when validating the key, so the condition value must match for validation to succeed.
+      **Finding your compartment ID:** Where to find your compartment ID differs between Claude Platform and Claude Enterprise. See the **Claude Platform** and **Claude Enterprise** tabs under **Register the key with Anthropic**.
     </Note>
 
     You can also create the key from the AWS Console. Choose a symmetric key with the encrypt and decrypt key usage, a single-region key, and KMS key material origin. The Create-key wizard commits a key policy at its **Review** step: If you add Anthropic's account ID `915198916910` under key usage permissions there, the generated policy grants the whole Anthropic account broader actions (such as `kms:ReEncrypt*` and `kms:GenerateDataKey*`) with no `EncryptionContext` condition, and validation would still succeed against it. To avoid leaving an over-permissive key, finish the wizard with administrative permissions only, then open the key's **Key policy** tab and replace the JSON with the role-scoped policy shown earlier (the three statements scoped to the `anthropic-cmek-client-us` role, with the `EncryptionContext` condition).
@@ -116,6 +119,16 @@ How you register the key depends on which product you use.
 
 <Tabs>
   <Tab title="Claude Platform">
+    <Note>
+      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security > Encryption keys** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](/docs/en/api/admin-api/workspaces/get-workspace) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
+
+      Key validation always sends the all-zeros compartment UUID (`00000000-0000-0000-0000-000000000000`) as the encryption context, because validation runs before the key is attached to any workspace. Live traffic sends the compartment ID of each attached workspace.
+
+      Any `EncryptionContext` condition must allow the all-zeros value plus the compartment ID of every workspace the key is attached to. Validation also runs again whenever key setup is re-run, so keep the all-zeros entry in place permanently.
+
+      To attach the key to an additional workspace, add that workspace's compartment ID to the condition with `kms:PutKeyPolicy` before attaching.
+    </Note>
+
     <Steps>
       <Step title="Register the key with Anthropic">
         Create an external key configuration through the Admin API.
@@ -170,7 +183,7 @@ How you register the key depends on which product you use.
 
         If validation fails, common causes are:
 
-        * **Encryption context mismatch:** If you kept the `EncryptionContext` condition in the key policy, confirm you replaced `<compartment-uuid>` with your workspace's actual compartment ID (see the Create the KMS key step under Encryption key setup). A wrong or unsubstituted value makes KMS return an opaque `AccessDeniedException`. To rule it out, temporarily remove the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and re-validate.
+        * **Encryption context mismatch:** Validation fails while data traffic works (or the reverse) with an opaque `AccessDeniedException` when a `kms:EncryptionContext:anthropic:compartment_uuid` condition allows only one of the two values Anthropic sends. Validation sends the all-zeros UUID (`00000000-0000-0000-0000-000000000000`); live traffic sends the attached workspace's compartment ID. Confirm the condition lists both. To rule the condition out entirely, temporarily remove the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and re-validate.
         * **Resource control policies (RCPs):** If your AWS organization has an RCP that denies KMS operations when `aws:PrincipalOrgID` does not match your org, it blocks Anthropic's cross-account role. The RCP needs a carve-out for this key or for Anthropic's role ARN. Service control policies do not apply here, because they do not evaluate for external principals calling through resource-based policies.
         * **Access granted through IAM instead of the key policy:** Cross-account KMS access must be granted in the key policy itself, not through an IAM policy in your account. Check with `aws kms get-key-policy --key-id <id> --policy-name default`.
         * **Region mismatch:** Confirm the key's region is one Anthropic operates in for the geo tier you configured.
@@ -191,7 +204,9 @@ How you register the key depends on which product you use.
   </Tab>
 
   <Tab title="Claude Enterprise">
-    In [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls), open **Encryption keys**, then click **Add key**. Choose **AWS**, paste the Key ARN from the previous step, and click **Continue**. Anthropic validates the key with an encrypt and decrypt round-trip. Once it shows as verified, your organization is CMEK-protected from that point forward.
+    In [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls), open **Encryption keys**, then click **Add key**. Choose **AWS** and click **Continue**, then paste the Key ARN from the previous step and click **Add**. Anthropic validates the key with an encrypt and decrypt round-trip. Once it shows as verified, your organization is CMEK-protected from that point forward.
+
+    The key details step of this flow displays your organization's **Compartment ID** with a copy button. Substitute that value for `<compartment-uuid>` in the key policy (see the Create the KMS key step under Encryption key setup); you can open the flow to copy the ID before you create the key. After setup, the ID remains visible on the key under **Encryption keys**.
 
     On Claude Enterprise, CMEK applies to the whole organization, so there is no separate workspace attach step, and an organization can have only one key.
   </Tab>

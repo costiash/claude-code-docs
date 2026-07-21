@@ -242,6 +242,7 @@
 - Added `vimInsertModeRemaps` setting: map two-key insert-mode sequences like `jj` to Escape in vim mode
 - Added `CLAUDE_CODE_PROCESS_WRAPPER`: agent view and the background service now honor a corporate launcher by running every Claude Code self-spawn through a required wrapper executable
 - Added mouse-click support for multi-select menus and "Other" input rows in fullscreen mode
+- Changed the Fable 5 usage-credits consent prompt to start with the decline option focused
 - Fixed fast mode staying off after switching back to a model that supports it — it now restores automatically when enabled in settings
 - Fixed replies typed to a background agent being lost when delivery fails — the text is now saved and delivered when the session restarts
 - Fixed background-session attach failing permanently ("Couldn't start the background daemon") after an update replaced the binary a running `claude agents` process was launched from
