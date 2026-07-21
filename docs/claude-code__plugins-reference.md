@@ -135,8 +135,8 @@ Plugin hooks respond to the same lifecycle events as [user-defined hooks](/en/ho
 | `ConfigChange`        | When a configuration file changes during a session                                                                                                     |
 | `CwdChanged`          | When the working directory changes, for example when Claude executes a `cd` command. Useful for reactive environment management with tools like direnv |
 | `FileChanged`         | When a watched file changes on disk. The `matcher` field specifies which filenames to watch                                                            |
-| `WorktreeCreate`      | When a worktree is being created via `--worktree` or `isolation: "worktree"`. Replaces default git behavior                                            |
-| `WorktreeRemove`      | When a worktree is being removed, either at session exit or when a subagent finishes                                                                   |
+| `WorktreeCreate`      | When a worktree is being created via `--worktree`, `isolation: "worktree"`, or for a background session. Replaces default git behavior                 |
+| `WorktreeRemove`      | When a worktree is being removed at session exit, when a subagent finishes, or when you delete a background session                                    |
 | `PreCompact`          | Before context compaction                                                                                                                              |
 | `PostCompact`         | After context compaction completes                                                                                                                     |
 | `Elicitation`         | When an MCP server requests user input during a tool call                                                                                              |
