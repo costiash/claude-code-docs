@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-21T13:17:58Z",
+  "generated_at": "2026-07-21T16:19:46Z",
   "indexed_files": 1804,
   "index": {
     "/changelog": {
@@ -936,23 +936,23 @@
         "commands",
         "claude",
         "code",
-        "permission",
         "sandboxed",
-        "run",
-        "command",
-        "mode",
+        "filesystem",
+        "isolation",
+        "permission",
         "when",
         "only",
+        "run",
         "access",
-        "allow",
+        "command",
+        "mode",
         "rules",
+        "allow",
         "directory",
-        "bash",
-        "inside",
-        "tools",
-        "wsl"
+        "managed",
+        "network"
       ],
-      "word_count": 5239,
+      "word_count": 5796,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {

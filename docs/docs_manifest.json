@@ -10323,8 +10323,8 @@
     "claude-code__sandboxing.md": {
       "original_url": "https://platform.claude.com/docs/en/sandboxing",
       "original_md_url": "https://platform.claude.com/docs/en/sandboxing.md",
-      "hash": "51f127a3c5a38011fa8eb8e4a2c57c657743581ff78097a426160bf7e08ef932",
-      "last_updated": "2026-07-21T04:45:03.187052"
+      "hash": "4a3944a633848184a0b52dec44ea96c615b07806d605e79f3f7cd648fce7de94",
+      "last_updated": "2026-07-21T16:16:06.649566"
     },
     "claude-code__security.md": {
       "original_url": "https://platform.claude.com/docs/en/security",
@@ -10443,8 +10443,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-21T13:17:54.548667",
-    "fetch_duration_seconds": 2550.535353,
+    "last_fetch_completed": "2026-07-21T16:19:43.045859",
+    "fetch_duration_seconds": 2680.349353,
     "total_pages_discovered": 2123,
     "pages_fetched_successfully": 1740,
     "pages_failed": 384,
@@ -10839,7 +10839,7 @@
     "total_files": 1740,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-21T13:17:54.548691",
+  "last_updated": "2026-07-21T16:19:43.045881",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
