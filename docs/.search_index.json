@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-21T18:48:16Z",
+  "generated_at": "2026-07-21T21:44:39Z",
   "indexed_files": 1805,
   "index": {
     "/changelog": {
@@ -21,14 +21,14 @@
         "after",
         "background",
         "being",
-        "agent",
         "mcp",
+        "agent",
         "code",
         "prompt",
         "commands",
         "model"
       ],
-      "word_count": 69442,
+      "word_count": 69895,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -268,9 +268,9 @@
         "auto",
         "desktop",
         "session",
-        "external",
         "pane",
         "app",
+        "external",
         "open",
         "changes",
         "files",
@@ -280,7 +280,7 @@
         "diff",
         "review"
       ],
-      "word_count": 10010,
+      "word_count": 10403,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -681,8 +681,8 @@
       "keywords": [
         "model",
         "default",
-        "when",
         "claude",
+        "when",
         "code",
         "session",
         "opus",
@@ -700,7 +700,7 @@
         "level",
         "anthropic"
       ],
-      "word_count": 9891,
+      "word_count": 9960,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
