@@ -2706,12 +2706,6 @@
       "hash": "a820f26545380c8066b1dd15178d3b021ba05cb3798c33ac4597f6599ccf5091",
       "last_updated": "2026-07-17T10:07:27.036532"
     },
-    "claude-code__checkpointing.md": {
-      "original_url": "https://platform.claude.com/docs/en/checkpointing",
-      "original_md_url": "https://platform.claude.com/docs/en/checkpointing.md",
-      "hash": "9a60bae794a5c309bc292a0e248f66fe1d14a05bd53d8140ebb85ce59bc96837",
-      "last_updated": "2026-07-21T18:38:44.229837"
-    },
     "claude-code__claude-code-on-the-web.md": {
       "original_url": "https://platform.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://platform.claude.com/docs/en/claude-code-on-the-web.md",
@@ -3513,11 +3507,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-07-22T10:05:25.923712",
-    "fetch_duration_seconds": 881.155146,
+    "last_fetch_completed": "2026-07-22T12:52:19.325411",
+    "fetch_duration_seconds": 956.241113,
     "total_pages_discovered": 712,
-    "pages_fetched_successfully": 585,
-    "pages_failed": 128,
+    "pages_fetched_successfully": 584,
+    "pages_failed": 129,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/accessibility",
@@ -3564,6 +3558,7 @@
       "/docs/en/changelog",
       "/docs/en/channels",
       "/docs/en/channels-reference",
+      "/docs/en/checkpointing",
       "/docs/en/chrome",
       "/docs/en/claude-apps-gateway",
       "/docs/en/claude-apps-gateway-config",
@@ -3650,10 +3645,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 585,
+    "total_files": 584,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-07-22T10:05:25.923737",
+  "last_updated": "2026-07-22T12:52:19.325432",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
