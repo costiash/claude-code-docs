@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-22T15:33:28.586346Z",
-    "total_paths": 712,
+    "generated_at": "2026-07-22T18:28:43.388567Z",
+    "total_paths": 717,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-22T15:33:28.586356Z"
+    "last_regenerated": "2026-07-22T18:28:43.388574Z"
   },
   "categories": {
     "core_documentation": [
@@ -104,7 +104,6 @@
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5",
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8",
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5",
-      "/docs/en/build-with-claude/prompt-engineering/prompting-tools",
       "/docs/en/build-with-claude/refusals-and-fallback",
       "/docs/en/build-with-claude/search-results",
       "/docs/en/build-with-claude/skills-guide",
@@ -127,6 +126,7 @@
       "/docs/en/claude-apps-gateway-spend-limits",
       "/docs/en/claude-directory",
       "/docs/en/claude-platform-on-aws",
+      "/docs/en/claude-security",
       "/docs/en/claude_api_primer",
       "/docs/en/cli-sdks-libraries/cli/authentication",
       "/docs/en/cli-sdks-libraries/cli/quickstart",
@@ -256,7 +256,6 @@
       "/docs/en/sessions",
       "/docs/en/slack",
       "/docs/en/test-and-evaluate/develop-tests",
-      "/docs/en/test-and-evaluate/eval-tool",
       "/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
       "/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency",
       "/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
@@ -477,6 +476,12 @@
       "/docs/en/api/beta/deployments/run",
       "/docs/en/api/beta/deployments/unpause",
       "/docs/en/api/beta/deployments/update",
+      "/docs/en/api/beta/dreams",
+      "/docs/en/api/beta/dreams/archive",
+      "/docs/en/api/beta/dreams/cancel",
+      "/docs/en/api/beta/dreams/create",
+      "/docs/en/api/beta/dreams/list",
+      "/docs/en/api/beta/dreams/retrieve",
       "/docs/en/api/beta/environments",
       "/docs/en/api/beta/environments/archive",
       "/docs/en/api/beta/environments/create",
