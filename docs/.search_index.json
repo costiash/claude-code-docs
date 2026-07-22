@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-22T12:52:23Z",
-  "indexed_files": 1804,
+  "generated_at": "2026-07-22T15:48:52Z",
+  "indexed_files": 1805,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -86,6 +86,34 @@
       ],
       "word_count": 1679,
       "file_path": "docs/claude-code__analytics.md"
+    },
+    "/claude-code/checkpointing": {
+      "title": "Checkpointing",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
+      "keywords": [
+        "code",
+        "conversation",
+        "session",
+        "claude",
+        "summarize",
+        "file",
+        "files",
+        "rewind",
+        "changes",
+        "restore",
+        "before",
+        "checkpoints",
+        "message",
+        "menu",
+        "into",
+        "selected",
+        "prompt",
+        "after",
+        "note",
+        "point"
+      ],
+      "word_count": 1210,
+      "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
       "title": "Use Claude Code on the web",
