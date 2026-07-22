@@ -12,30 +12,30 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
 <Tabs>
   <Tab title="Session events">
-    | Event                              | Trigger                                                                                                                                                      |
-    | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                                   |
-    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                                          |
-    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                                        |
-    | `session.status_terminated`        | The session hit a terminal error.                                                                                                                            |
-    | `session.thread_created`           | New [multiagent thread](/docs/en/managed-agents/multiagent-orchestration) opened, meaning an additional agent called by the coordinator is kicking off work. |
-    | `session.thread_idled`             | An agent in a [multiagent interaction](/docs/en/managed-agents/multiagent-orchestration) is waiting for input.                                               |
-    | `session.thread_terminated`        | A [multiagent thread](/docs/en/managed-agents/multiagent-orchestration) was archived.                                                                        |
-    | `session.outcome_evaluation_ended` | [Outcome evaluation](/docs/en/managed-agents/define-outcomes) for a single iteration completed.                                                              |
-    | `session.updated`                  | Session properties changed (for example, its name or configuration was updated).                                                                             |
-    | `session.deleted`                  | Session permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                           |
+    | Event                              | Trigger                                                                                                                                                                                                                                                                   |
+    | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                                                                                                                                                |
+    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                                                                                                                                                       |
+    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                                                                                                                                                     |
+    | `session.status_terminated`        | The session terminated, either because of an error or completion.                                                                                                                                                                                                         |
+    | `session.thread_created`           | New [multiagent thread](/docs/en/managed-agents/multiagent-orchestration) opened, meaning an additional agent called by the coordinator is kicking off work.                                                                                                              |
+    | `session.thread_idled`             | An agent in a [multiagent interaction](/docs/en/managed-agents/multiagent-orchestration) is waiting for input.                                                                                                                                                            |
+    | `session.thread_terminated`        | A [multiagent thread](/docs/en/managed-agents/multiagent-orchestration) terminated, either because the child agent completed its work or because the thread was archived. Fires for child threads only; the primary thread's end surfaces as `session.status_terminated`. |
+    | `session.outcome_evaluation_ended` | [Outcome evaluation](/docs/en/managed-agents/define-outcomes) for a single iteration completed.                                                                                                                                                                           |
+    | `session.updated`                  | Session properties changed (for example, its name or configuration was updated).                                                                                                                                                                                          |
+    | `session.deleted`                  | Session permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                                                                                                                                        |
   </Tab>
 
   <Tab title="Vault events">
-    | Event                             | Trigger                                                                                                              |
-    | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-    | `vault.created`                   | Vault created.                                                                                                       |
-    | `vault.archived`                  | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential.                  |
-    | `vault.deleted`                   | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential.                    |
-    | `vault_credential.created`        | Credential created.                                                                                                  |
-    | `vault_credential.archived`       | Credential archived, either directly or as a result of vault archival.                                               |
-    | `vault_credential.deleted`        | Credential deleted, either directly or as a result of vault deletion.                                                |
-    | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+    | Event                             | Trigger                                                                                                                                                                 |
+    | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `vault.created`                   | Vault created.                                                                                                                                                          |
+    | `vault.archived`                  | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential.                                                                     |
+    | `vault.deleted`                   | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential. There is no object left to fetch, so treat the event itself as final. |
+    | `vault_credential.created`        | Credential created.                                                                                                                                                     |
+    | `vault_credential.archived`       | Credential archived, either directly or as a result of vault archival.                                                                                                  |
+    | `vault_credential.deleted`        | Credential deleted, either directly or as a result of vault deletion. There is no object left to fetch, so treat the event itself as final.                             |
+    | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server).                                                    |
   </Tab>
 
   <Tab title="Agent events">
@@ -56,7 +56,7 @@ Webhook events return the event `type` and `id`, not the full object. When you r
     | `deployment.updated`  | Deployment properties changed (for example, its schedule was updated).                                                                                                                                                                                                                                                                  |
     | `deployment.paused`   | Deployment paused, either by request or automatically when a scheduled run fails with an unrecoverable error, such as an archived subagent or an archived environment. Recoverable failures, including rate limits, don't pause the deployment. See [Failure behavior](/docs/en/managed-agents/scheduled-deployments#failure-behavior). |
     | `deployment.unpaused` | Deployment unpaused, resuming its schedule.                                                                                                                                                                                                                                                                                             |
-    | `deployment.archived` | Deployment archived, either directly or as a result of agent archival or deletion.                                                                                                                                                                                                                                                      |
+    | `deployment.archived` | Deployment archived, either directly or as a result of its agent being archived or deleted.                                                                                                                                                                                                                                             |
     | `deployment.deleted`  | Deployment permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                                                                                                                                                                                                   |
   </Tab>
 
@@ -67,6 +67,27 @@ Webhook events return the event `type` and `id`, not the full object. When you r
     | `deployment_run.succeeded` | A scheduled run created its session. The event carries the same `data.id` (the run ID) as the run's `deployment_run.started` event. To follow the session's work, subscribe to its session events (the Session events tab), or fetch the [deployment run](/docs/en/managed-agents/scheduled-deployments#deployment-runs) for its `session_id`. |
     | `deployment_run.failed`    | A scheduled run did not create a session. The event carries the same `data.id` as the run's `deployment_run.started` event. Fetch the [deployment run](/docs/en/managed-agents/scheduled-deployments#deployment-runs) for the error details.                                                                                                   |
   </Tab>
+
+  <Tab title="Environment events">
+    | Event                  | Trigger                                                                                                                                         |
+    | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `environment.created`  | Environment created.                                                                                                                            |
+    | `environment.updated`  | Environment updated with at least one changed field. A no-op update emits nothing.                                                              |
+    | `environment.archived` | Environment archived. Re-archiving an already-archived environment emits nothing.                                                               |
+    | `environment.deleted`  | Environment deleted, including delete of an already-archived environment. There is no object left to fetch, so treat the event itself as final. |
+
+    An environment's [work items](/docs/en/managed-agents/self-hosted-sandboxes) emit no webhook events.
+  </Tab>
+
+  <Tab title="Memory store events">
+    | Event                   | Trigger                                                                                                                                                                                                                                                                                             |
+    | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `memory_store.created`  | Memory store created, either by you or by an Anthropic-operated process that clones one of your existing stores.                                                                                                                                                                                    |
+    | `memory_store.archived` | Memory store archived. Re-archiving an already-archived store emits nothing.                                                                                                                                                                                                                        |
+    | `memory_store.deleted`  | Memory store deleted, including delete of an already-archived store. Deleting a store cascades to its memories and memory versions without emitting per-memory events; the single `memory_store.deleted` event is the signal. There is no object left to fetch, so treat the event itself as final. |
+
+    Individual [memories](/docs/en/managed-agents/memory) and memory versions emit no webhook events.
+  </Tab>
 </Tabs>
 
 ## Register an endpoint
@@ -76,12 +97,12 @@ Visit **Manage > Webhooks** in [Console](https://platform.claude.com/settings/wo
 A webhook endpoint consists of:
 
 * **URL:** Must be HTTPS on port 443 with a publicly resolvable hostname.
-* **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to, plus test events (see [Delivery behavior](#delivery-behavior)).
+* **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to.
 * **Signing secret:** A 32-byte `whsec_`-prefixed secret generated at creation. It's shown only once, so store it securely to verify webhook deliveries.
 
 ## Verify the signature
 
-Every delivery carries an `X-Webhook-Signature` header. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than five minutes old.
+Every delivery carries the `webhook-id`, `webhook-timestamp`, and `webhook-signature` headers. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than five minutes old.
 
 Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at endpoint creation.
 
@@ -310,14 +331,14 @@ Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at end
 
 ## Handle an event
 
-Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Anything else (including `3xx`) counts as a failure and triggers a retry.
+Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Any other response counts against the endpoint: a `3xx` disables it immediately (redirects are never followed), while other failures are retried; see [Delivery behavior](#delivery-behavior) for the retry and auto-disable rules.
 
-Every event payload has the same structure, including the event type, identifier, and timestamp of when the object was created.
+Every event payload has the same structure, including the event type, identifier, and the timestamp of when the event occurred.
 
 ```json
 {
   "type": "event",
-  "id": "event_01ABC...",
+  "id": "whe_9d5c1f7e...",
   "created_at": "2026-03-18T14:05:22Z",
   "data": {
     "type": "session.status_idled",
@@ -393,7 +414,20 @@ The top-level `event.id` is unique per event, not per delivery. If you receive t
 
 ## Delivery behavior
 
-* **Ordering is not guaranteed.** `session.status_idled` may arrive before `session.outcome_evaluation_ended` even if the outcome was produced first. Use the `created_at` timestamp to sort if ordering matters.
-* **Retries:** Anthropic retries at least once. The retry delivers the same `event.id`.
-* **Redirects are not followed.** A `3xx` is treated as a failure. If your endpoint moves, update the URL in Console.
-* **Auto-disable:** An endpoint is automatically set to `disabled` with a machine-readable `disabled_reason` after roughly 20 consecutive failed deliveries, or immediately if the hostname resolves to a private IP or the endpoint returns a redirect. Re-enable manually in Console after resolving the issue.
+* **Duplicates:** An endpoint can receive the same event more than once, and every attempt delivers the same top-level `event.id` (the same value as the `webhook-id` header). Deduplicate on it.
+
+* **Subscription scope:** An event is delivered only to endpoints subscribed to its type at the moment it's emitted. An event emitted while no endpoint is subscribed to its type is never delivered, and subscribing later doesn't backfill it, so subscribe to an event type before you need it.
+
+* **Ordering is not guaranteed.** Events aren't delivered in the order they occurred: `session.status_idled` may arrive before `session.outcome_evaluation_ended` even if the outcome was produced first, and a `.deleted` event can arrive before the `.archived` event for the same resource. Drive your state from the resource you fetch, not from the order events arrive in.
+
+* **Retries:** For each endpoint and event, Anthropic makes up to three delivery attempts (a response that triggers auto-disable, described later in this section, is never retried) with jittered exponential backoff between 5 and 120 seconds. Every attempt delivers the same `event.id`. After the last attempt fails, the event is dropped: it isn't queued for later delivery and there's no signal that it was lost. Webhooks aren't a durable log, so if you need to observe every transition, reconcile by listing or fetching the resource through the API.
+
+* **Timestamps:** The `webhook-timestamp` header is stamped when a delivery attempt is signed and is regenerated on every retry, so retries aren't rejected by the SDK's freshness check. It's the clock for the delivery attempt, not for the event: use the event payload's `created_at` for when the event occurred.
+
+* **Auto-disable:** An endpoint is automatically set to `disabled` with a machine-readable `disabled_reason` in three cases:
+
+  * The endpoint returns a `3xx` response. Redirects are never followed; this disables the endpoint immediately, on the first attempt, with the reason `auto-disabled: endpoint URL returned a redirect (3xx)`. If your endpoint moves, update the URL in Console and re-enable the endpoint.
+  * The endpoint's URL resolves to a non-public IP address when Anthropic connects. This disables the endpoint immediately, with the reason `auto-disabled: endpoint URL resolved to an invalid address`.
+  * Deliveries to the endpoint fail continuously for a sustained period, with the reason `auto-disabled after sustained delivery failures`. The trigger is how long the endpoint has been failing without interruption, not a delivery count. A single `2xx` resets the window, so one flaky event can't disable the endpoint.
+
+  All three are reversible: re-enable the endpoint in Console after you resolve the issue. Events emitted while the endpoint was disabled aren't replayed.

@@ -18,7 +18,7 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   <Tab title="User events">
     | Type                      | Description                                                                                                                                                                                                               |
     | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `user.message`            | A user message with text content.                                                                                                                                                                                         |
+    | `user.message`            | A user message with text, image, or document content.                                                                                                                                                                     |
     | `user.interrupt`          | Stop the agent mid-execution.                                                                                                                                                                                             |
     | `user.custom_tool_result` | Response to a custom tool call from the agent.                                                                                                                                                                            |
     | `user.tool_confirmation`  | Approve or deny an agent or MCP tool call when a permission policy requires confirmation.                                                                                                                                 |
@@ -27,57 +27,57 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   </Tab>
 
   <Tab title="Agent events">
-    | Type                             | Description                                                                                                                     |
-    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-    | `agent.message`                  | Agent response containing text content blocks.                                                                                  |
-    | `agent.thinking`                 | Agent thinking content, emitted separately from messages.                                                                       |
-    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                                        |
-    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                                     |
-    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                               |
-    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                |
-    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                         |
-    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                   |
-    | `agent.thread_message_received`  | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, an agent delivered its result to the coordinator.  |
-    | `agent.thread_message_sent`      | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, the coordinator sent a follow-up to another agent. |
+    | Type                             | Description                                                                                                                                                                                                                                         |
+    | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `agent.message`                  | Agent response containing text content blocks.                                                                                                                                                                                                      |
+    | `agent.thinking`                 | Signals the agent is making forward progress through extended thinking. This is a progress signal only and does not carry the thinking content.                                                                                                     |
+    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                                                                                                                                                            |
+    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                                                                                                                                                         |
+    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                                                                                                                                                   |
+    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                                                                                                                                    |
+    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                                                                                                                                             |
+    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                                                                                                                                       |
+    | `agent.thread_message_received`  | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, a message from another thread arrived on the thread whose stream carries this event; on the primary thread, an agent sent a report or question to the coordinator.     |
+    | `agent.thread_message_sent`      | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, the thread whose stream carries this event sent a message to another thread; on the primary thread, the coordinator sent a task or follow-up message to another agent. |
   </Tab>
 
   <Tab title="Session events">
-    | Type                                | Description                                                                                                                              |
-    | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-    | `session.status_running`            | Agent is actively processing.                                                                                                            |
-    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.                     |
-    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                                    |
-    | `session.status_terminated`         | Session ended because of an unrecoverable error.                                                                                         |
-    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                 |
-    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                |
-    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                              |
-    | `session.thread_created`            | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread was created.                                                     |
-    | `session.thread_status_running`     | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread started activity.                                                |
-    | `session.thread_status_idle`        | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread finished its turn and is awaiting input. Includes `stop_reason`. |
-    | `session.thread_status_rescheduled` | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread hit a transient error and is retrying automatically.             |
-    | `session.thread_status_terminated`  | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread was archived or reached a terminal error.                        |
+    | Type                                | Description                                                                                                                                                                                                                          |
+    | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | `session.status_running`            | Agent is actively processing.                                                                                                                                                                                                        |
+    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.                                                                                                                 |
+    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                                                                                                                                |
+    | `session.status_terminated`         | Session ended, either because of an unrecoverable error or on completion.                                                                                                                                                            |
+    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                                                                                                             |
+    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                                                                                                            |
+    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                                                                                                                          |
+    | `session.thread_created`            | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread was created.                                                                                                                                                 |
+    | `session.thread_status_running`     | A session thread began executing. Every session emits this for its primary thread; in [multiagent](/docs/en/managed-agents/multiagent-orchestration) sessions, child-thread transitions are also cross-posted to the primary stream. |
+    | `session.thread_status_idle`        | A session thread finished its turn and is awaiting input. Includes `stop_reason`.                                                                                                                                                    |
+    | `session.thread_status_rescheduled` | A session thread hit a transient error and is retrying automatically.                                                                                                                                                                |
+    | `session.thread_status_terminated`  | A session thread was archived or reached a terminal error.                                                                                                                                                                           |
   </Tab>
 
   <Tab title="Span events">
     Span events are observability markers that wrap activity for timing and usage tracking.
 
-    | Type                              | Description                                                                                |
-    | --------------------------------- | ------------------------------------------------------------------------------------------ |
-    | `span.model_request_start`        | A model inference call has started.                                                        |
-    | `span.model_request_end`          | A model inference call has completed. Includes `model_usage` with token counts.            |
-    | `span.outcome_evaluation_start`   | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has started.                 |
-    | `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](/docs/en/managed-agents/define-outcomes) evaluation. |
-    | `span.outcome_evaluation_end`     | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has completed.               |
+    | Type                              | Description                                                                                                                                                                                                                   |
+    | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `span.model_request_start`        | A model inference call has started.                                                                                                                                                                                           |
+    | `span.model_request_end`          | A model inference call has completed. Includes `model_usage` with token counts.                                                                                                                                               |
+    | `span.outcome_evaluation_start`   | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has started.                                                                                                                                                    |
+    | `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](/docs/en/managed-agents/define-outcomes) evaluation.                                                                                                                                    |
+    | `span.outcome_evaluation_end`     | An [outcome](/docs/en/managed-agents/define-outcomes) evaluation cycle has completed. A `needs_revision` result means another cycle follows; `satisfied`, `max_iterations_reached`, `failed`, and `interrupted` are terminal. |
   </Tab>
 
   <Tab title="System events">
-    | Type             | Description                                                                                                                                           |
-    | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `system.message` | Update the agent's system prompt between turns. Supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. |
+    | Type             | Description                                                                                                                                                                                                                                                                                             |
+    | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `system.message` | Append privileged system-level context that applies to the accompanying turn and all subsequent turns. Supported on Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and Claude Mythos 5; on an unsupported primary model the event is rejected with `model_does_not_support_mid_conversation_system`. |
   </Tab>
 
   <Tab title="Event deltas">
-    Event deltas are stream-only preview events. They are emitted on session event stream connections that opt in with the `event_deltas[]` parameter, and they are never persisted to the session's event history. See [Event deltas](/docs/en/managed-agents/events-and-streaming#event-deltas) for opting in, accumulating, and reconciling them.
+    Event deltas are stream-only preview events. They are emitted on stream connections (session-level or per-thread) that opt in with the `event_deltas[]` parameter, and they are never persisted to the session's event history. See [Event deltas](/docs/en/managed-agents/events-and-streaming#event-deltas) for opting in, accumulating, and reconciling them.
 
     | Type          | Description                                                                                                              |
     | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -90,19 +90,19 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
 
 These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes) for setting up the environment, running a worker, and the SDK helper options.
 
-| Flag                   | Description                                                                                                                                                          |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--environment-id`     | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                        |
-| `--environment-key`    | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                         |
-| `--workdir`            | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`. |
-| `--on-work`            | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables.                                    |
-| `--unrestricted-paths` | Allow tool calls to access paths outside `--workdir`.                                                                                                                |
-| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](/docs/en/api/handling-stop-reasons) before shutting down. Defaults to `60s`.           |
-| `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                      |
+| Flag                   | Description                                                                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--environment-id`     | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                          |
+| `--environment-key`    | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                           |
+| `--workdir`            | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`.   |
+| `--on-work`            | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables.                                      |
+| `--unrestricted-paths` | Allow the file tools to read and write paths outside `--workdir`. The workdir check is a guardrail for the file tools only, not a sandbox; it does not constrain bash. |
+| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](/docs/en/api/handling-stop-reasons) before shutting down. Defaults to `60s`.             |
+| `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                        |
 
 ## Supported MCP server types
 
-Claude Managed Agents connects to [remote MCP servers](/docs/en/agents-and-tools/remote-mcp-servers) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview). The server must support the MCP protocol's streamable HTTP transport. See [MCP connector](/docs/en/managed-agents/mcp-connector) for declaring servers on an agent.
+Claude Managed Agents connects to [remote MCP servers](/docs/en/agents-and-tools/remote-mcp-servers) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](/docs/en/managed-agents/mcp-connector) for declaring servers on an agent.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).
 

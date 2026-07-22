@@ -50,7 +50,7 @@ import FoundationModels
 import ClaudeForFoundationModels
 
 let model = ClaudeLanguageModel(
-  name: .sonnet4_6,
+  name: .sonnet5,
   auth: .apiKey(ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"] ?? "")
 )
 
@@ -108,7 +108,7 @@ Set the credential with the `auth:` parameter.
 Pass an API key directly while developing:
 
 ```swift
-ClaudeLanguageModel(name: .sonnet4_6, auth: .apiKey("YOUR_API_KEY"))
+ClaudeLanguageModel(name: .sonnet5, auth: .apiKey("YOUR_API_KEY"))
 ```
 
 <Warning>
@@ -121,7 +121,7 @@ For production, route requests through your own back end with `.proxied`. The re
 
 ```swift
 ClaudeLanguageModel(
-  name: .sonnet4_6,
+  name: .sonnet5,
   auth: .proxied(headers: ["X-App-Token": "..."]),
   baseURL: URL(string: "https://api.yourapp.com/claude")!
 )
@@ -173,7 +173,7 @@ let session = LanguageModelSession(model: model, tools: [FindRestaurantsTool()])
 
 ```swift
 let model = ClaudeLanguageModel(
-  name: .sonnet4_6,
+  name: .sonnet5,
   auth: auth,
   serverTools: [
     .webSearch(maxUses: 5),

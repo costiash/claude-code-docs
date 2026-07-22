@@ -55,7 +55,7 @@ Example rubric:
 Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](#create-a-session-with-an-outcome)), or upload it through the Files API for reuse across sessions.
 
 <Note>
-  Uploading through the Files API requires the `files-api-2025-04-14` beta header, which the SDKs send automatically. The curl example passes its headers explicitly.
+  Uploading through the Files API requires a beta header that grants Files API access. Your Managed Agents beta header grants this on its own, so you don't need to send `files-api-2025-04-14` alongside it. The curl example passes its headers explicitly.
 </Note>
 
 <CodeGroup>
@@ -63,7 +63,7 @@ Pass the rubric as inline text on `user.define_outcome` (see [Create a session w
   rubric=$(curl -fsSL https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
     -F file=@/tmp/rubric.md)
   rubric_id=$(jq -r '.id' <<<"$rubric")
   printf 'Uploaded rubric: %s\n' "$rubric_id"
@@ -536,6 +536,10 @@ The following examples create a [session](/docs/en/managed-agents/sessions) for 
   ```
 </CodeGroup>
 
+<Note>
+  You can also define the outcome in the create request itself: pass a single `user.define_outcome` event in [`initial_events`](/docs/en/managed-agents/sessions#seed-the-session-with-initial-events) to create the session and start work toward the outcome in one call.
+</Note>
+
 ## Outcome events
 
 Progress on an outcome-oriented session is surfaced on the events [stream](/docs/en/managed-agents/events-and-streaming).
@@ -593,15 +597,15 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 ### Outcome evaluation end
 
-Emitted after the grader finishes evaluating one iteration. The `result` field indicates what happens next.
+Emitted when an outcome evaluation cycle ends: after the grader finishes evaluating one iteration, or when the session is interrupted while an outcome is active. The `result` field indicates what happens next.
 
-| Result                   | Next                                                                                                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `satisfied`              | Session transitions to `idle`.                                                                                                                               |
-| `needs_revision`         | Agent starts a new iteration cycle.                                                                                                                          |
-| `max_iterations_reached` | One final acknowledgment turn follows before the session transitions to `idle`. No further evaluation runs.                                                  |
-| `failed`                 | Session transitions to `idle`. Returned when the rubric does not apply to the deliverables, for example if the description and rubric contradict each other. |
-| `interrupted`            | Only emitted if `outcome_evaluation_start` already fired before the interrupt.                                                                               |
+| Result                   | Next                                                                                                                                                                                                                      |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `satisfied`              | Session transitions to `idle`.                                                                                                                                                                                            |
+| `needs_revision`         | Agent starts a new iteration cycle.                                                                                                                                                                                       |
+| `max_iterations_reached` | One final acknowledgment turn follows before the session transitions to `idle`. No further evaluation runs.                                                                                                               |
+| `failed`                 | Session transitions to `idle`. Returned when the rubric does not apply to the deliverables, for example if the description and rubric contradict each other.                                                              |
+| `interrupted`            | Emitted when the session is interrupted while an outcome is active, even if evaluation hadn't started yet. If no `outcome_evaluation_start` fired before the interrupt, `outcome_evaluation_start_id` is an empty string. |
 
 ```json
 {
@@ -624,7 +628,7 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 
 ## Check outcome status
 
-You can either listen on the [event stream](/docs/en/managed-agents/events-and-streaming) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
+You can either listen on the [event stream](/docs/en/managed-agents/events-and-streaming) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
 <CodeGroup>
   ```bash curl
@@ -720,11 +724,11 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
 <CodeGroup>
   ```bash curl
   # List files produced by this session
-  # scope_id filtering requires the managed-agents beta alongside the files beta
+  # scope_id filtering requires the managed-agents beta
   files=$(curl -fsSL "https://api.anthropic.com/v1/files?scope_id=$session_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14")
+    -H "anthropic-beta: managed-agents-2026-04-01")
   jq -r '.data[] | "\(.id) \(.filename)"' <<<"$files"
 
   # Download a file
@@ -733,7 +737,7 @@ The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Onc
     curl -fsSL "https://api.anthropic.com/v1/files/$file_id/content" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
+      -H "anthropic-beta: managed-agents-2026-04-01" \
       -o /tmp/output.txt
   fi
   ```

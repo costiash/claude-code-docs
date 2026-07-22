@@ -13,7 +13,7 @@ This guide describes how to send images to Claude, the limits and costs that app
 Use Claude's vision capabilities through:
 
 * [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-* The [Anthropic Workbench](/workbench/). A button to add images appears at the top right of every User message block.
+* The [Workbench](/playground) in the Claude Console. Add images directly to any User message block.
 * API request. See the following examples.
 
 On the API, provide images to Claude as `image` content blocks using one of three source types:

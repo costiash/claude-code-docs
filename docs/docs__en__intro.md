@@ -68,7 +68,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="/">
-    Prototype and test prompts in your browser with the Workbench and prompt generator.
+    Prototype and test prompts in your browser with the Workbench.
   </Card>
 
   <Card title="API Reference" icon="code" href="/docs/en/api/overview">

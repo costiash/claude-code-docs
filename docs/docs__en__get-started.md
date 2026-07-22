@@ -6,7 +6,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
 ## Prerequisites
 
-* An Anthropic [Console account](/)
+* A [Claude Console account](https://platform.claude.com)
 * An [API key](/settings/keys)
 
 ## Call the API

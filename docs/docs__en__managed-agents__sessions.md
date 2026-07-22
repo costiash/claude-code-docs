@@ -4,7 +4,7 @@ Create a session to run your agent and begin executing tasks.
 
 ---
 
-A session is an agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session) to provision its sandbox, then [send a user event](#starting-the-session) to start work.
+A session is an agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session), then [send a user event](#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](#seed-the-session-with-initial-events).
 
 <Note>
   Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
@@ -141,7 +141,7 @@ To pin a session to a specific agent version, pass an object. This lets you cont
   {
       Agent = new BetaManagedAgentsAgentParams
       {
-          Type = Anthropic.Models.Beta.Sessions.Type.Agent,
+          Type = BetaManagedAgentsAgentParamsType.Agent,
           ID = agent.ID,
           Version = 1,
       },
@@ -191,6 +191,273 @@ To pin a session to a specific agent version, pass an object. This lets you cont
   ```
 </CodeGroup>
 
+### Seed the session with initial events
+
+You can create a session and start its work in one call. `initial_events` is an optional array of initial [events](/docs/en/managed-agents/reference#event-types) to send to the session at creation, processed in order. It supports `user.message` and [`user.define_outcome`](/docs/en/managed-agents/define-outcomes) events, and accepts a maximum of 50 events. A non-empty list starts the agent loop in the same call: the session is created directly in the `running` status, with no further request.
+
+The following example creates a session with a single `user.message` in `initial_events`:
+
+<CodeGroup defaultLanguage="CLI">
+  ```bash cURL
+  seeded_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<EOF
+  {
+    "agent": "$AGENT_ID",
+    "environment_id": "$ENVIRONMENT_ID",
+    "initial_events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "List the files in the working directory."}]
+      }
+    ]
+  }
+  EOF
+  )
+  SEEDED_SESSION_ID=$(jq -r '.id' <<< "$seeded_session")
+
+  # initial_events aren't echoed on the create response; list the session's
+  # events to see the seeded message.
+  seeded_events=$(curl -fsSL \
+    "https://api.anthropic.com/v1/sessions/$SEEDED_SESSION_ID/events" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01")
+  echo "Seeded event: $(jq -r \
+    '.data[] | select(.type == "user.message") | .content[0].text' <<< "$seeded_events")"
+  ```
+
+  ```bash CLI
+  SEEDED_SESSION_ID=$(ant beta:sessions create \
+    --transform id --raw-output <<YAML
+  agent: $AGENT_ID
+  environment_id: $ENVIRONMENT_ID
+  initial_events:
+    - type: user.message
+      content:
+        - type: text
+          text: List the files in the working directory.
+  YAML
+  )
+
+  # initial_events aren't echoed on the create response; list the session's
+  # events to see the seeded message.
+  echo "Seeded event: $(ant beta:sessions:events list \
+    --session-id "$SEEDED_SESSION_ID" \
+    --format raw \
+    --transform 'data.#(type=="user.message").content.0.text' --raw-output)"
+  ```
+
+  ```python Python
+  seeded_session = client.beta.sessions.create(
+      agent=agent.id,
+      environment_id=environment.id,
+      initial_events=[
+          {
+              "type": "user.message",
+              "content": [
+                  {"type": "text", "text": "List the files in the working directory."}
+              ],
+          },
+      ],
+  )
+  # initial_events are not echoed on the create response; read them back
+  # from the session's event list.
+  for event in client.beta.sessions.events.list(seeded_session.id):
+      if event.type == "user.message":
+          for block in event.content:
+              if block.type == "text":
+                  print(f"Seeded event: {block.text}")
+  ```
+
+  ```typescript TypeScript
+  const seededSession = await client.beta.sessions.create({
+    agent: agent.id,
+    environment_id: environment.id,
+    initial_events: [
+      {
+        type: "user.message",
+        content: [{ type: "text", text: "List the files in the working directory." }]
+      }
+    ]
+  });
+
+  // initial_events are not echoed on the create response; list the session's
+  // events to read the seeded message back.
+  for await (const event of client.beta.sessions.events.list(seededSession.id)) {
+    if (event.type === "user.message") {
+      for (const block of event.content) {
+        if (block.type === "text") {
+          console.log(`Seeded event: ${block.text}`);
+        }
+      }
+    }
+  }
+  ```
+
+  ```csharp C#
+  var seededSession = await client.Beta.Sessions.Create(new()
+  {
+      Agent = agent.ID,
+      EnvironmentID = environment.ID,
+      InitialEvents =
+      [
+          new BetaManagedAgentsUserMessageEventParams
+          {
+              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
+              Content =
+              [
+                  new BetaManagedAgentsTextBlock
+                  {
+                      Type = BetaManagedAgentsTextBlockType.Text,
+                      Text = "List the files in the working directory.",
+                  },
+              ],
+          },
+      ],
+  });
+  // initial_events are not echoed on the create response; read them back
+  // from the session's event list.
+  var seededEvents = await client.Beta.Sessions.Events.List(seededSession.ID);
+  await foreach (var sessionEvent in seededEvents.Paginate())
+  {
+      if (sessionEvent.TryPickUserMessage(out var userMessage))
+      {
+          foreach (var contentBlock in userMessage.Content)
+          {
+              if (contentBlock.TryPickBetaManagedAgentsTextBlock(out var textBlock))
+              {
+                  Console.WriteLine($"Seeded event: {textBlock.Text}");
+              }
+          }
+      }
+  }
+  ```
+
+  ```go Go
+  seededSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+  	Agent: anthropic.BetaSessionNewParamsAgentUnion{
+  		OfString: anthropic.String(agent.ID),
+  	},
+  	EnvironmentID: environment.ID,
+  	InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{{
+  		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
+  			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
+  			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
+  				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+  					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+  					Text: "List the files in the working directory.",
+  				},
+  			}},
+  		},
+  	}},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  // initial_events are not echoed on the create response, so list the
+  // session's events to read the seeded user.message back.
+  seededEvents, err := client.Beta.Sessions.Events.List(ctx, seededSession.ID, anthropic.BetaSessionEventListParams{})
+  if err != nil {
+  	panic(err)
+  }
+  for _, event := range seededEvents.Data {
+  	if event.Type != "user.message" {
+  		continue
+  	}
+  	for _, contentBlock := range event.AsUserMessage().Content {
+  		if contentBlock.Type == "text" {
+  			fmt.Printf("Seeded event: %s\n", contentBlock.AsText().Text)
+  		}
+  	}
+  }
+  ```
+
+  ```java Java
+  var seededSession = client.beta().sessions().create(SessionCreateParams.builder()
+      .agent(agent.id())
+      .environmentId(environment.id())
+      .addInitialEvent(BetaManagedAgentsUserMessageEventParams.builder()
+          .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
+          .addTextContent("List the files in the working directory.")
+          .build())
+      .build());
+  // initial_events are not echoed on the create response; list the
+  // session's events to read the seeded user.message back.
+  for (var event : client.beta().sessions().events().list(seededSession.id()).autoPager()) {
+      if (event.isUserMessage()) {
+          for (var contentBlock : event.asUserMessage().content()) {
+              if (contentBlock.isText()) {
+                  IO.println("Seeded event: " + contentBlock.asText().text());
+              }
+          }
+      }
+  }
+  ```
+
+  ```php PHP
+  $seededSession = $client->beta->sessions->create(
+      agent: $agent->id,
+      environmentID: $environment->id,
+      initialEvents: [
+          [
+              'type' => 'user.message',
+              'content' => [['type' => 'text', 'text' => 'List the files in the working directory.']],
+          ],
+      ],
+  );
+
+  // initial_events are not echoed on the create response; read them back
+  // from the session's event list.
+  $seededEvents = $client->beta->sessions->events->list($seededSession->id);
+  foreach ($seededEvents->getItems() as $event) {
+      if ($event->type === 'user.message') {
+          echo "Seeded event: {$event->content[0]->text}\n";
+      }
+  }
+  ```
+
+  ```ruby Ruby
+  seeded_session = client.beta.sessions.create(
+    agent: agent.id,
+    environment_id: environment.id,
+    initial_events: [
+      {
+        type: :"user.message",
+        content: [{type: :text, text: "List the files in the working directory."}]
+      }
+    ]
+  )
+
+  # initial_events are not echoed on the create response; read them back from
+  # the session's event list.
+  client.beta.sessions.events.list(seeded_session.id).auto_paging_each do |event|
+    next unless event.type == :"user.message"
+    event.content.each do |block|
+      puts "Seeded event: #{block.text}" if block.type == :text
+    end
+  end
+  ```
+</CodeGroup>
+
+No other event type is accepted. Events that respond to an agent turn (`user.tool_confirmation`, `user.tool_result`, and `user.custom_tool_result`) aren't accepted because no agent turn exists yet, and `user.interrupt` isn't accepted because there is no turn to stop. Unlike `initial_events` on a scheduled deployment, a session's `initial_events` don't accept `system.message`.
+
+Each event in `initial_events` is validated and persisted before the create response returns, in list order, with a server-assigned ID, exactly as if you had posted it to the [send events](/docs/en/managed-agents/events-and-streaming) endpoint immediately after creation. Per-event content rules are also the same as on that endpoint. An empty list is equivalent to omitting the field. Validation is all-or-nothing: if any event fails validation, the whole request is rejected and no session is created.
+
+The create request is rejected in the following cases:
+
+| Condition                                                                                                                      | Status |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| More than one `user.define_outcome` event                                                                                      | 400    |
+| A `user.define_outcome` event without a `rubric`                                                                               | 400    |
+| More than 100 file-sourced [`document` content blocks](/docs/en/build-with-claude/files#document-blocks) across the whole list | 400    |
+| A request body over 32 MB                                                                                                      | 413    |
+
+A `user.define_outcome` event in `initial_events` is accepted under the same conditions as sending one to an existing session; see [Define outcomes](/docs/en/managed-agents/define-outcomes).
+
 ### Override agent configuration for a session
 
 You can pass `agent` in three forms: an agent ID string, a pinned-version object (`type: "agent"`), or an overrides object. The overrides form changes parts of the agent's configuration for a single session. Use it to try a different model or grant an extra tool in one session without versioning the agent. For the overrides form, set `type` to `agent_with_overrides` and pass the agent's `id` and optionally a `version` (omit `version` to use the agent's latest version). Then include any of `model`, `system`, `tools`, `mcp_servers`, or `skills` with the values the session should use.
@@ -199,12 +466,14 @@ Each overridable field follows the same three rules:
 
 * **Omit the field:** The session inherits the value from the agent version it references.
 
-* **Set the field to `null`, or to an empty array for list fields:** The session runs with that field cleared. This rule applies in full to `system`, `mcp_servers`, and `skills`. There are two exceptions:
+* **Set the field to `null`, or to an empty array for list fields:** The session runs with that field cleared. This rule applies in full to `system` and `skills`. There are three exceptions:
 
   * `model` is never clearable. A session always needs a model, so `model: null` returns a 400 `agent_model_required` error.
   * Clearing `tools` returns a 400 error when the session's effective `skills` is non-empty, because skills require the `read` tool. Otherwise, `tools: null` and `tools: []` clear the field.
+  * Clearing `mcp_servers` returns a 400 error when the session's effective `tools` still contains an `mcp_toolset` that references one of the agent's servers. Override `tools` in the same request to remove those `mcp_toolset` entries, then clear `mcp_servers`.
 
-* **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have.
+* **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have. There is one exception:
+  * An `effort` level inside a per-session `model` override isn't applied. Set `effort` on the [agent](/docs/en/managed-agents/agent-setup#agent-configuration-fields) instead.
 
 Overrides apply only to the session you create. They do not modify the agent resource or create a new agent version, so other sessions that reference the same agent are unaffected.
 
@@ -478,7 +747,7 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 
 ## Starting the session
 
-Creating a session provisions the environment's sandbox but does not start any work. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/reference#event-types). The session acts as a state machine that tracks progress while events drive the actual execution.
+Creating a session without `initial_events` registers the session but does not start any work; the environment's sandbox is provisioned when the session first needs it. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/reference#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL

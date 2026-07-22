@@ -86,7 +86,7 @@ Most unsupported fields are silently ignored rather than producing errors. These
 
 ### Output quality considerations
 
-If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider using the [prompt improver in the Claude Console](/dashboard) as a good starting point.
+If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider reworking it for Claude using the [prompting best practices guide](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 
 ### System / developer message hoisting
 

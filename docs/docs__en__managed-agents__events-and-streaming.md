@@ -14,12 +14,12 @@ Communication with Claude Managed Agents is event-based. You send user events to
 
 Events flow in two directions.
 
-* **User events** and **system events** are what you send to the agent: `user.*` events kick off a session and steer it as it progresses; `system.message` updates the agent's system prompt between turns.
+* **User events** and **system events** are what you send to the agent: `user.*` events kick off a session and steer it as it progresses; `system.message` appends system-level context that applies to the accompanying turn and all subsequent turns.
 * **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress. Stream connections that opt in also receive [event deltas](#event-deltas).
 
 Session, span, agent, user, and system event type strings follow a `{domain}.{action}` naming convention. The stream-only delta preview events (`event_start`, `event_delta`) are the exception. See [Event types](/docs/en/managed-agents/reference#event-types) in the reference for the full catalog.
 
-Every persisted event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
+Every persisted event includes a `processed_at` timestamp set when the event finishes processing. On events you send, `processed_at` is null while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` already populated.
 
 ## Integrating events
 
@@ -362,7 +362,7 @@ Every persisted event includes a `processed_at` timestamp indicating when the ev
       ```
     </CodeGroup>
 
-    The agent acknowledges the interruption and switches to the new task.
+    The agent acknowledges the interruption and switches to the new task. The interrupted turn ends with a `session.status_idle` event whose `stop_reason` is `end_turn`, the same value as a turn that finishes on its own; there is no stop reason specific to interruption.
   </Tab>
 
   <Tab title="Streaming events">
@@ -1044,14 +1044,7 @@ Every persisted event includes a `processed_at` timestamp indicating when the ev
       ```
 
       ```php PHP
-      $events = $client->beta->sessions->events->list(
-          $session->id,
-          types: ['agent.tool_use', 'agent.tool_result'],
-      );
-      foreach ($events->data as $event) {
-          $processedAt = ($event->processedAt ?? null)?->format(DATE_RFC3339) ?? 'null';
-          echo "[{$event->type}] {$processedAt}\n";
-      }
+      // Filtering events by type is not currently available in the PHP SDK.
       ```
 
       ```ruby Ruby
@@ -1071,7 +1064,7 @@ By default, the agent's response text reaches the stream as buffered `agent.mess
 
 ### Opt in to previews
 
-Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to `GET /v1/sessions/{session_id}/events/stream`, repeating it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error. Only the session-level event stream supports the parameter. [Session thread](/docs/en/managed-agents/multiagent-orchestration) event streams reject it.
+Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to the stream you're reading, repeating it once for each event type you want previewed. Because `[]` is a shell glob pattern, quote the URL whenever you build the request in a shell; the examples percent-encode the brackets as `%5B%5D`, which also works. Both stream endpoints accept the parameter: the session-level stream at `GET /v1/sessions/{session_id}/events/stream`, and each [session thread](/docs/en/managed-agents/multiagent-orchestration)'s own stream at `GET /v1/sessions/{session_id}/threads/{thread_id}/stream`. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error, as does a request with more than 100 values. A subagent's previews appear on [that subagent's own thread stream](#preview-session-thread-events).
 
 When a previewed event begins, the stream emits an `event_start` carrying the upcoming event's type and `id`:
 
@@ -1102,7 +1095,7 @@ For `agent.message`, the start is followed by `event_delta` events carrying incr
 }
 ```
 
-When an `agent.thinking` event is previewed, only the `event_start` is emitted. No `event_delta` events follow, and the content arrives in the buffered `agent.thinking` event as usual.
+When an `agent.thinking` event is previewed, only the `event_start` is emitted. No `event_delta` events follow, and the buffered `agent.thinking` event that concludes the preview carries no thinking content; it is a progress signal, not a content carrier.
 
 Unlike persisted events, `event_start` and `event_delta` have no `id` or `processed_at` of their own. The only identifier they carry is the `id` of the event they preview.
 
@@ -1112,14 +1105,28 @@ Unlike persisted events, `event_start` and `event_delta` have no `id` or `proces
 
 ### Accumulate and reconcile
 
-The Python, TypeScript, and Go SDKs include an accumulator helper that keys the preview by the event's `id` and handles the `index` bookkeeping for you. The manual pattern works in every language: in the other SDKs, apply it to the generated event types.
+Every SDK that supports event deltas includes an accumulator helper that keys the preview by the event's `id` and handles the `index` bookkeeping for you (event deltas are not currently available in the PHP SDK; see the PHP tabs that follow). The manual pattern also works in every language when you need custom bookkeeping: apply it to the generated event types.
 
-In the manual pattern, treat the preview as a scratch buffer and the buffered event as the record. Key the buffer by `(event_id, index)`. Reconcile per model request: a turn opens with a single `session.status_running` event, then on a turn that completes normally each model request produces, in order, `span.model_request_start`, `event_start`, the `event_delta` events, the buffered `agent.message`, and finally [`span.model_request_end`](/docs/en/managed-agents/reference#event-types) (in the Span events tab). Process each event as it arrives:
+In the manual pattern, treat the preview as a scratch buffer and the buffered event as the record. Key the buffer by `(event_id, index)`. Reconcile per model request: a turn opens with a single `session.status_running` event, then on a turn that completes normally each model request produces, in order, `span.model_request_start`, `event_start`, the `event_delta` events, the buffered `agent.message`, and finally [`span.model_request_end`](/docs/en/managed-agents/reference#event-types) (in the Span events tab). On the wire, this is the previewed portion of that sequence, interleaved with the connection's other buffered events:
+
+```text wrap
+event_start     {"event": {"type": "agent.message", "id": "sevt_01abc..."}}
+event_delta     {"event_id": "sevt_01abc...", "delta": {"type": "content_delta", "index": 0, "content": {"type": "text", "text": "..."}}}
+...
+agent.message   {"id": "sevt_01abc...", "content": [...]}
+```
+
+The `event_delta` line repeats once per text fragment. Process each event as it arrives:
 
 1. On `event_start`, note the announced `id`. The identifiers always line up: `event_start.event.id`, every `event_delta.event_id`, and the buffered `agent.message`'s `id` are the same value.
 2. On each `event_delta`, append `delta.content.text` to the entry at `(event_id, delta.index)` and render the running text. The first delta for an `index` creates that entry.
 3. When the buffered `agent.message` arrives, match it by `id`, discard the accumulated preview, and render the message's content instead.
 4. On `span.model_request_end`, close any preview that has not been reconciled by its buffered event. No more deltas are coming for it. If the turn errors or is interrupted, the buffered event may never arrive; `span.model_request_end` still does.
+
+Guarantees the pattern relies on:
+
+* Concatenating a preview's deltas in arrival order, keyed by `(event_id, index)`, gives a prefix of `content[index].text` in the buffered event (a prefix, not necessarily the whole text, because deltas may be shed under load).
+* A connection emits at most one `event_start` per `event_id`, and the buffered event is the last thing that connection delivers for that `id`.
 
 <CodeGroup>
   ```bash curl
@@ -1328,8 +1335,13 @@ In the manual pattern, treat the preview as a scratch buffer and the buffered ev
   {
       if (streamEvent.TryPickStartEvent(out var start))
       {
-          // A preview opened for the event with this id
-          Console.WriteLine($"event_start             {start.Event.Type} {start.Event.ID}");
+          // A preview opened for the event with this id. This stream only opts in
+          // to agent.message deltas; TryPick* returns false instead of throwing,
+          // so other preview types (including ones added later) are skipped.
+          if (start.Event.TryPickAgentMessage(out var preview))
+          {
+              Console.WriteLine($"event_start             {preview.Type.Raw()} {preview.ID}");
+          }
       }
       else if (streamEvent.TryPickDeltaEvent(out var delta))
       {
@@ -1476,57 +1488,7 @@ In the manual pattern, treat the preview as a scratch buffer and the buffered ev
   ```
 
   ```php PHP
-  // Opt in to event deltas: agent.message previews stream as incremental fragments.
-  $stream = $client->beta->sessions->events->streamStream(
-      $session->id,
-      eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
-  );
-
-  $client->beta->sessions->events->send(
-      $session->id,
-      events: [
-          [
-              'type' => 'user.message',
-              'content' => [['type' => 'text', 'text' => 'Give a one-sentence project tagline.']],
-          ],
-      ],
-  );
-
-  // Accumulate preview fragments by (event id, index). The buffered agent.message
-  // with the same id is authoritative and replaces whatever the deltas built up.
-  $buffers = [];
-
-  foreach ($stream as $event) {
-      if ($event->type === 'event_start') {
-          printf("event_start             %s %s\n", $event->event->type, $event->event->id);
-      } elseif ($event->type === 'event_delta') {
-          // index is optional on the wire; a single-element preview omits it.
-          $index = $event->delta->index ?? 0;
-          $fragment = $event->delta->content->text;
-          $buffers[$event->eventID][$index] ??= '';
-          $buffers[$event->eventID][$index] .= $fragment;
-          printf("event_delta             preview: %s\n", json_encode($buffers[$event->eventID][$index]));
-      } elseif ($event->type === 'agent.message') {
-          // Replace: drop the accumulated preview and render the complete event.
-          unset($buffers[$event->id]);
-          $text = '';
-          foreach ($event->content as $block) {
-              if ($block->type === 'text') {
-                  $text .= $block->text;
-              }
-          }
-          printf("agent.message           %s %s\n", $event->id, json_encode($text));
-      } elseif ($event->type === 'span.model_request_end') {
-          // No more deltas are coming. Close any preview that was never reconciled.
-          foreach (array_keys($buffers) as $eventID) {
-              printf("span.model_request_end  closing preview for %s\n", $eventID);
-          }
-          $buffers = [];
-      } elseif ($event->type === 'session.status_idle') {
-          break;
-      }
-  }
-  $stream->close();
+  // Event deltas are not currently available in the PHP SDK.
   ```
 
   ```ruby Ruby
@@ -1577,15 +1539,330 @@ In the manual pattern, treat the preview as a scratch buffer and the buffered ev
   ```
 </CodeGroup>
 
+### Preview session thread events
+
+In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, every session thread has its own event stream at `GET /v1/sessions/{session_id}/threads/{thread_id}/stream`, and it takes the same `event_deltas[]` parameter with the same values. Previews are thread-scoped by design: a connection previews only the thread it's reading. A child thread's previews are delivered on that child's own stream and are never cross-posted to the session-level stream, whose previews stay scoped to the primary thread. To watch a subagent's text as the model generates it, open that subagent's thread stream.
+
+The thread stream's path is easy to get wrong: it is `/threads/{thread_id}/stream`, not `/events/stream` (which exists only at the session level), and there is no `/threads/{thread_id}/events/stream` endpoint.
+
+The preview events themselves don't change. `event_start` and `event_delta` have the same shape on a thread stream as on the session-level stream, and the [accumulate and reconcile](#accumulate-and-reconcile) pattern applies as written. The one adjustment is bookkeeping: run one accumulator instance per stream connection.
+
+<CodeGroup defaultLanguage="curl">
+  ```bash curl
+  # List the session's threads and pick a child: child threads carry a non-null
+  # parent_thread_id, and the primary thread's parent_thread_id is null.
+  THREAD_ID=$(
+    curl --fail-with-body -sS \
+      "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads?beta=true" \
+      -H "x-api-key: $ANTHROPIC_API_KEY" \
+      -H "anthropic-version: 2023-06-01" \
+      -H "anthropic-beta: managed-agents-2026-04-01" |
+      jq -er 'first(.data[] | select(.parent_thread_id != null)).id'
+  )
+
+  # The child thread's stream takes the same event_deltas[] parameter as the
+  # session stream. Percent-encode the brackets (%5B%5D) and quote the URL.
+  exec {stream}< <(
+    curl --fail-with-body -sS -N \
+      "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true&event_deltas%5B%5D=agent.message" \
+      -H "x-api-key: $ANTHROPIC_API_KEY" \
+      -H "anthropic-version: 2023-06-01" \
+      -H "anthropic-beta: managed-agents-2026-04-01" \
+      -H "accept: text/event-stream"
+  )
+
+  while IFS= read -r -u "$stream" event_line; do
+    [[ $event_line == data:* ]] || continue
+    event_json=${event_line#data: }
+    case $(jq -r '.type' <<<"$event_json") in
+      event_delta)
+        jq -j '.delta.content.text' <<<"$event_json"
+        ;;
+      agent.message)
+        # The buffered event is the authoritative record; render its content.
+        printf '\n'
+        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
+        printf '\n'
+        ;;
+      session.thread_status_idle)
+        break
+        ;;
+    esac
+  done
+  exec {stream}<&-
+  ```
+
+  ```bash CLI
+  # List the session's threads and pick a child: child threads carry a non-null
+  # parent_thread_id, and the primary thread's parent_thread_id is null
+  # (--transform's #(parent_thread_id!=~null) query matches non-null values).
+  THREAD_ID=$(ant beta:sessions:threads list \
+    --session-id "$SESSION_ID" \
+    --format raw --transform 'data.#(parent_thread_id!=~null).id' --raw-output)
+
+  # The child thread's stream takes the same event_deltas parameter as the
+  # session stream, one --event-delta flag per event type to preview. @tostr
+  # re-encodes each text field as a JSON string, so every value stays on one
+  # YAML line and jq's fromjson recovers the original text.
+  transform='{type,frag:delta.content.text|@tostr,text:content.#(type=="text").text|@tostr}'
+  exec {stream}< <(ant beta:sessions:threads:events stream \
+    --session-id "$SESSION_ID" \
+    --thread-id "$THREAD_ID" \
+    --event-delta agent.message \
+    --transform "$transform" \
+    --format yaml)
+
+  type=
+  while IFS= read -r -u "$stream" line; do
+    case "$line" in
+      type:\ session.thread_status_idle) break ;;
+      type:\ *) type=${line#type: } ;;
+      frag:*)
+        [[ $type == event_delta ]] || continue
+        jq -j fromjson <<<"${line#frag: }" ;;
+      text:*)
+        [[ $type == agent.message ]] || continue
+        # The buffered event is the authoritative record; render its content.
+        printf '\n'
+        jq -r fromjson <<<"${line#text: }" ;;
+    esac
+  done
+  exec {stream}<&-
+  ```
+
+  ```python Python
+  # List the session's threads and pick a child: child threads carry a non-null
+  # parent_thread_id, and the primary thread's parent_thread_id is null.
+  child_thread = next(
+      thread
+      for thread in client.beta.sessions.threads.list(session.id)
+      if thread.parent_thread_id is not None
+  )
+
+  # The child thread's stream takes the same event_deltas parameter as the
+  # session stream.
+  with client.beta.sessions.threads.events.stream(
+      child_thread.id,
+      session_id=session.id,
+      event_deltas=["agent.message"],
+  ) as stream:
+      for event in stream:
+          match event.type:
+              case "event_delta":
+                  print(event.delta.content.text, end="")
+              case "agent.message":
+                  # The buffered event is the authoritative record; render its content
+                  print()
+                  for block in event.content:
+                      if block.type == "text":
+                          print(block.text, end="")
+                  print()
+              case "session.thread_status_idle":
+                  break
+  ```
+
+  ```typescript TypeScript
+  // List the session's threads and pick a child: child threads carry a non-null
+  // parent_thread_id, and the primary thread's parent_thread_id is null.
+  let childThreadId: string | undefined;
+  for await (const thread of client.beta.sessions.threads.list(session.id)) {
+    if (thread.parent_thread_id !== null) {
+      childThreadId = thread.id;
+      break;
+    }
+  }
+  if (!childThreadId) throw new Error("No child thread found");
+
+  // The child thread's stream takes the same event_deltas parameter as the
+  // session stream.
+  const stream = await client.beta.sessions.threads.events.stream(childThreadId, {
+    session_id: session.id,
+    event_deltas: ["agent.message"],
+  });
+
+  for await (const event of stream) {
+    if (event.type === "event_delta") {
+      process.stdout.write(event.delta.content.text);
+    } else if (event.type === "agent.message") {
+      // The buffered event is the authoritative record; render its content.
+      process.stdout.write("\n");
+      const text = event.content.map((block) => block.text).join("");
+      console.log(text);
+    } else if (event.type === "session.thread_status_idle") {
+      break;
+    }
+  }
+  stream.controller.abort();
+  ```
+
+  ```csharp C#
+  // List the session's threads and pick a child: child threads carry a non-null
+  // parent_thread_id, and the primary thread's parent_thread_id is null.
+  var threads = await client.Beta.Sessions.Threads.List(session.ID);
+  var childThread = threads.Items.First(thread => thread.ParentThreadID is not null);
+
+  // The child thread's stream takes the same event_deltas parameter as the
+  // session stream.
+  using var stream = await client.Beta.Sessions.Threads.Events.WithRawResponse.StreamStreaming(
+      childThread.ID,
+      new() { SessionID = session.ID, EventDeltas = [BetaManagedAgentsDeltaType.AgentMessage] }
+  );
+
+  await foreach (var streamEvent in stream.Enumerate())
+  {
+      if (streamEvent.TryPickDeltaEvent(out var delta))
+      {
+          Console.Write(delta.Delta.Content.Text);
+      }
+      else if (streamEvent.TryPickAgentMessageEvent(out var message))
+      {
+          // The buffered event is the authoritative record; render its content.
+          Console.WriteLine();
+          Console.WriteLine(string.Concat(message.Content.Select(block => block.Text)));
+      }
+      else if (streamEvent.TryPickSessionThreadStatusIdleEvent(out _))
+      {
+          break;
+      }
+  }
+  ```
+
+  ```go Go
+  	// List the session's threads and pick a child: child threads carry a non-null
+  	// parent_thread_id, and the primary thread's parent_thread_id is null.
+  	var childThreadID string
+  	threads := client.Beta.Sessions.Threads.ListAutoPaging(ctx, session.ID, anthropic.BetaSessionThreadListParams{})
+  	for threads.Next() {
+  		if thread := threads.Current(); thread.ParentThreadID != "" {
+  			childThreadID = thread.ID
+  			break
+  		}
+  	}
+  	if err := threads.Err(); err != nil {
+  		panic(err)
+  	}
+
+  	// The child thread's stream takes the same event_deltas parameter as the
+  	// session stream; run one read loop per stream connection.
+  	stream := client.Beta.Sessions.Threads.Events.StreamEvents(ctx, childThreadID, anthropic.BetaSessionThreadEventStreamParams{
+  		SessionID: session.ID,
+  		EventDeltas: []anthropic.BetaManagedAgentsDeltaType{
+  			anthropic.BetaManagedAgentsDeltaTypeAgentMessage,
+  		},
+  	})
+
+  threadDeltas:
+  	for stream.Next() {
+  		switch event := stream.Current().AsAny().(type) {
+  		case anthropic.BetaManagedAgentsDeltaEvent:
+  			fmt.Print(event.Delta.Content.Text)
+  		case anthropic.BetaManagedAgentsAgentMessageEvent:
+  			// The buffered event is the authoritative record; render its content.
+  			fmt.Println()
+  			// concrete-typed list: BetaManagedAgentsTextBlock
+  			for _, block := range event.Content {
+  				fmt.Print(block.Text)
+  			}
+  			fmt.Println()
+  		case anthropic.BetaManagedAgentsSessionThreadStatusIdleEvent:
+  			break threadDeltas
+  		}
+  	}
+  	if err := stream.Err(); err != nil {
+  		panic(err)
+  	}
+  	stream.Close()
+  ```
+
+  ```java Java
+  // List the session's threads and pick a child: child threads carry a non-null
+  // parent_thread_id, and the primary thread's parent_thread_id is null.
+  var childThread = client.beta().sessions().threads().list(session.id()).autoPager().stream()
+      .filter(thread -> thread.parentThreadId().isPresent())
+      .findFirst()
+      .orElseThrow();
+
+  // The child thread's stream takes the same event_deltas parameter as the session
+  // stream. Its params class shares the session-level one's simple name, so qualify it.
+  try (var stream = client.beta().sessions().threads().events().streamStreaming(
+          childThread.id(),
+          com.anthropic.models.beta.sessions.threads.events.EventStreamParams.builder()
+              .sessionId(session.id())
+              .addEventDelta(BetaManagedAgentsDeltaType.AGENT_MESSAGE)
+              .build()
+  )) {
+      Iterable<BetaManagedAgentsStreamSessionThreadEvents> events = stream.stream()::iterator;
+      for (var event : events) {
+          if (event.isEventDelta()) {
+              IO.print(event.asEventDelta().delta().content().text());
+          } else if (event.isAgentMessage()) {
+              // The buffered event is the authoritative record; render its content.
+              IO.println();
+              event.asAgentMessage().content().forEach(block -> IO.print(block.text()));
+              IO.println();
+          } else if (event.isSessionThreadStatusIdle()) {
+              break;
+          }
+      }
+  }
+  ```
+
+  ```php PHP
+  // Previewing session thread events is not currently available in the PHP SDK.
+  ```
+
+  ```ruby Ruby
+  # List the session's threads and pick a child: child threads carry a non-null
+  # parent_thread_id, and the primary thread's parent_thread_id is null.
+  child_thread = client.beta.sessions.threads.list(session.id).to_enum.find { it.parent_thread_id }
+
+  # The child thread's stream takes the same event_deltas parameter as the
+  # session stream.
+  stream = client.beta.sessions.threads.events.stream_events(
+    child_thread.id,
+    session_id: session.id,
+    event_deltas: [Anthropic::Beta::BetaManagedAgentsDeltaType::AGENT_MESSAGE]
+  )
+
+  stream.each do |event|
+    case event.type
+    in :event_delta
+      print event.delta.content.text
+    in :"agent.message"
+      # The buffered event is the authoritative record; render its content.
+      puts
+      event.content.each { print it.text }
+      puts
+    in :"session.thread_status_idle"
+      break
+    else
+      # ignore other event types
+    end
+  end
+  ```
+</CodeGroup>
+
+The read loop exits on [`session.thread_status_idle`](/docs/en/managed-agents/reference#event-types), the event emitted when the session thread's turn finishes and the thread goes idle.
+
 ### Limitations
 
 Previews are tuned for responsiveness. Build against these constraints:
 
 * **Best effort:** Under load, the server may shed deltas for an event. When it does, you receive a contiguous prefix of the text and then no further deltas for that event. The buffered `agent.message` still arrives complete. Never treat an accumulated preview as final.
-* **No replay on reconnect:** Deltas are delivered only to the connection that opted in, while it is open. If the stream drops, follow the [reconnect procedure](#integrating-events) in the Streaming events tab: reopen the stream and list the event history. The history includes any buffered events emitted while you were disconnected, including the `agent.message` your preview was waiting for. There is no way to re-request missed deltas.
-* **Primary thread, text only:** Previews cover assistant text on the session's primary thread. Tool use, tool results, MCP results, and activity on other [session threads](/docs/en/managed-agents/multiagent-orchestration) are never previewed.
+* **No replay on reconnect:** Deltas are delivered only to the connection that opted in, while it is open. This applies to the session-level stream and to each session thread stream alike, and a connection opened after a model request started receives no deltas for that in-flight event. If the stream drops, follow the [reconnect procedure](#integrating-events) in the Streaming events tab: reopen the stream and list the event history. The history includes any buffered events emitted while you were disconnected, including the `agent.message` your preview was waiting for. There is no way to re-request missed deltas.
+* **One thread, text only:** Previews cover assistant text on the thread the connection is reading. Tool use, tool results, MCP results, and activity on any other [session thread](/docs/en/managed-agents/multiagent-orchestration) are never previewed on that connection.
 * **Start-only `agent.thinking`:** An `agent.thinking` preview emits only the `event_start` as a signal that a thinking block has started; no `event_delta` events follow it.
-* **Never persisted:** `event_start` and `event_delta` exist only on the live stream. They do not appear in the session's event history (`GET /v1/sessions/{session_id}/events`).
+* **Never persisted:** `event_start` and `event_delta` exist only on the live stream. They do not appear in the session's event history (`GET /v1/sessions/{session_id}/events`) or in any session thread's event history.
+
+### Troubleshoot previews
+
+If the stream doesn't behave as you expect:
+
+| You see                                                             | What it means                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A stream with buffered events but no `event_start` or `event_delta` | The connection you're reading didn't opt in (`event_deltas[]` applies per connection, not per session), or the turn never touched the thread you're streaming. Previews are thread-scoped, so list the session's threads (`GET /v1/sessions/{session_id}/threads`) to find which one ran. |
+| A 404 on the stream URL                                             | The path or an ID is wrong, or the request carries no managed-agents beta header at all. The thread endpoints are beta-gated, so without the header they don't exist.                                                                                                                     |
+| A 400 naming `event_deltas`                                         | Only `agent.message` and `agent.thinking` are accepted.                                                                                                                                                                                                                                   |
 
 ## Additional scenarios
 
@@ -2100,7 +2377,7 @@ When a [permission policy](/docs/en/managed-agents/permission-policies) requires
 Sessions persist between interactions. Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its sandbox is checkpointed, preserving the full sandbox state, including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
 
 <Note>
-  While session history is persisted until deleted, checkpoints are only preserved for 30 days after the session's last activity. If your workflow requires the full sandbox state (files, installed tools, and so on) to persist beyond 30 days, send periodic `user.message` events to reset the inactivity timer before the checkpoint expires.
+  While session history is persisted until deleted, sandbox state is only preserved for 30 days after the sandbox is created. Activity does not extend this window: after 30 days the sandbox state (files, installed tools, and so on) is unrecoverable, and a resumed session starts from a fresh sandbox. If your workflow depends on sandbox contents, have the agent write important artifacts to [outputs](/docs/en/managed-agents/define-outcomes#retrieving-deliverables) before the window ends.
 </Note>
 
 To resume a session, send a `user.message` event to it as usual:
@@ -2270,10 +2547,10 @@ To resume a session, send a `user.message` event to it as usual:
 ### Sending system messages
 
 <Note>
-  `system.message` is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. If any model configured on the agent does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error.
+  `system.message` is currently supported by Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and Claude Mythos 5. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error; subagent models are not checked, because `system.message` lands on the primary thread only.
 </Note>
 
-Send a `system.message` event to update the agent's system prompt between turns. Unlike the `system` field on the agent definition (which is fixed at session creation), `system.message` lets you change the system prompt as the session progresses. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
+Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl
@@ -2419,7 +2696,7 @@ Send a `system.message` event to update the agent's system prompt between turns.
   ```
 </CodeGroup>
 
-`system.message` cannot be sent while the session is idle with `stop_reason: requires_action`. `content` accepts 1–1000 text items.
+While the session is idle with `stop_reason: requires_action`, a `system.message` is accepted only when it trails a tool result event in the same request; sent on its own or with a `user.message`, it is rejected until the pending tool events are resolved. `content` accepts 1–1000 text items.
 
 ### Tracking usage
 
@@ -2432,19 +2709,22 @@ The session object includes a `usage` field with cumulative token statistics. Fe
   "usage": {
     "input_tokens": 5000,
     "output_tokens": 3200,
-    "cache_creation_input_tokens": 2000,
-    "cache_read_input_tokens": 20000
+    "cache_read_input_tokens": 20000,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 2000,
+      "ephemeral_1h_input_tokens": 0
+    }
   }
 }
 ```
 
-`input_tokens` reports uncached input tokens and `output_tokens` reports total output tokens across all model calls in the session. The `cache_creation_input_tokens` and `cache_read_input_tokens` fields reflect prompt caching activity. Cache entries use a 5-minute TTL, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
+`input_tokens` reports uncached input tokens and `output_tokens` reports total output tokens across all model calls in the session. The `cache_read_input_tokens` field reports tokens read from the prompt cache, and the `cache_creation` object breaks down cache-creation tokens by cache lifetime (`ephemeral_5m_input_tokens` and `ephemeral_1h_input_tokens`). Cache entries use a 5-minute TTL by default, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
 
 ## Console observability
 
 The Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
 
-* **Session list:** All sessions with their status, creation time, and model
+* **Session list:** All sessions with their status, creation time, and agent
 * **Tracing view:** A chronological view of events (content, timestamps, token usage) within a session. Tracing views are only accessible to Developers and Admins.
 * **Tool execution:** Details of each tool call and its result
 
@@ -2454,3 +2734,4 @@ The Console provides a visual timeline view of your agent sessions. Navigate to 
 * **Review tool results:** Tool execution failures often explain unexpected agent behavior
 * **Track token usage:** Monitor token consumption to optimize prompts and reduce costs
 * **Use system prompts:** Add logging instructions to the system prompt to make the agent explain its reasoning
+* **Troubleshoot previews:** If a stream that opts in to event deltas doesn't behave as you expect, see [Troubleshoot previews](#troubleshoot-previews)

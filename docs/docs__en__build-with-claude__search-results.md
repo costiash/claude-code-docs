@@ -187,7 +187,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   ```
 
   ```typescript TypeScript
-  const anthropic = new Anthropic();
+  const client = new Anthropic();
 
   // Define a knowledge base search tool
   const knowledgeBaseTool: Anthropic.Tool = {
@@ -243,7 +243,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   ];
 
   // Create a message with the tool
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
     tools: [knowledgeBaseTool],
@@ -274,7 +274,7 @@ Returning search results from your custom tools enables dynamic RAG applications
     });
 
     // Send the tool result back
-    const finalResponse = await anthropic.messages.create({
+    const finalResponse = await client.messages.create({
       model: "claude-opus-4-8",
       max_tokens: 1024,
       messages
@@ -480,121 +480,119 @@ Returning search results from your custom tools enables dynamic RAG applications
   import com.anthropic.models.messages.ToolChoice;
   import com.anthropic.models.messages.ToolChoiceTool;
   import com.anthropic.models.messages.ToolResultBlockParam;
-  import com.anthropic.models.messages.ToolUseBlockParam;
   import com.anthropic.core.JsonValue;
   // ...
 
-  public class SearchKnowledgeBaseExample {
-      public static void main(String[] args) {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Tool knowledgeBaseTool = Tool.builder()
+      Tool knowledgeBaseTool = Tool.builder()
+          .name("search_knowledge_base")
+          .description("Search the company knowledge base for information")
+          .inputSchema(Tool.InputSchema.builder()
+              .properties(JsonValue.from(Map.of(
+                  "query", Map.of(
+                      "type", "string",
+                      "description", "The search query"
+                  )
+              )))
+              .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+              .build())
+          .build();
+
+      // Build up the conversation in a list, starting with the user's question
+      List<MessageParam> messages = new ArrayList<>();
+      messages.add(MessageParam.builder()
+          .role(MessageParam.Role.USER)
+          .content("How do I configure the timeout settings?")
+          .build());
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addTool(knowledgeBaseTool)
+          .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
               .name("search_knowledge_base")
-              .description("Search the company knowledge base for information")
-              .inputSchema(Tool.InputSchema.builder()
-                  .properties(JsonValue.from(Map.of(
-                      "query", Map.of(
-                          "type", "string",
-                          "description", "The search query"
+              .build()))
+          .messages(messages)
+          .build();
+
+      Message response = client.messages().create(params);
+
+      // The tool_use block is not always first: find it in the content list
+      response.content().stream()
+          .flatMap(contentBlock -> contentBlock.toolUse().stream())
+          .findFirst()
+          .ifPresent(toolUse -> {
+              Map<String, JsonValue> input =
+                  (Map<String, JsonValue>) toolUse._input().asObject().get();
+              List<ToolResultBlockParam.Content.Block> toolResult = searchKnowledgeBase(
+                  input.get("query").asStringOrThrow()
+              );
+
+              // Append Claude's entire turn to the running conversation, then the tool result.
+              // Rebuilding only the tool_use block would drop any other content blocks Claude
+              // returned (e.g. leading text when the tool call is not forced) — append the
+              // full turn, as the other language tabs do.
+              messages.add(MessageParam.builder()
+                  .role(MessageParam.Role.ASSISTANT)
+                  .contentOfBlockParams(
+                      response.content().stream()
+                          .map(block -> block.toParam())
+                          .toList()
+                  )
+                  .build());
+              messages.add(MessageParam.builder()
+                  .role(MessageParam.Role.USER)
+                  .contentOfBlockParams(List.of(
+                      ContentBlockParam.ofToolResult(
+                          ToolResultBlockParam.builder()
+                              .toolUseId(toolUse.id())
+                              .contentOfBlocks(toolResult)
+                              .build()
                       )
-                  )))
-                  .putAdditionalProperty("required", JsonValue.from(List.of("query")))
-                  .build())
-              .build();
+                  ))
+                  .build());
 
-          // Build up the conversation in a list, starting with the user's question
-          List<MessageParam> messages = new ArrayList<>();
-          messages.add(MessageParam.builder()
-              .role(MessageParam.Role.USER)
-              .content("How do I configure the timeout settings?")
-              .build());
+              // Send the tool result back
+              MessageCreateParams finalParams = MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_8)
+                  .maxTokens(1024L)
+                  .messages(messages)
+                  .build();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addTool(knowledgeBaseTool)
-              .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
-                  .name("search_knowledge_base")
-                  .build()))
-              .messages(messages)
-              .build();
+              Message finalResponse = client.messages().create(finalParams);
+              System.out.println(finalResponse);
+          });
+  }
 
-          Message response = client.messages().create(params);
-
-          // The tool_use block is not always first: find it in the content list
-          response.content().stream()
-              .flatMap(contentBlock -> contentBlock.toolUse().stream())
-              .findFirst()
-              .ifPresent(toolUse -> {
-                  Map<String, JsonValue> input =
-                      (Map<String, JsonValue>) toolUse._input().asObject().get();
-                  List<ToolResultBlockParam.Content.Block> toolResult = searchKnowledgeBase(
-                      input.get("query").asStringOrThrow()
-                  );
-
-                  // Append Claude's turn, then the tool result, to the running conversation
-                  messages.add(MessageParam.builder()
-                      .role(MessageParam.Role.ASSISTANT)
-                      .contentOfBlockParams(List.of(
-                          ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
-                              .id(toolUse.id())
-                              .name(toolUse.name())
-                              .input(toolUse._input())
-                              .build())
-                      ))
-                      .build());
-                  messages.add(MessageParam.builder()
-                      .role(MessageParam.Role.USER)
-                      .contentOfBlockParams(List.of(
-                          ContentBlockParam.ofToolResult(
-                              ToolResultBlockParam.builder()
-                                  .toolUseId(toolUse.id())
-                                  .contentOfBlocks(toolResult)
-                                  .build()
-                          )
-                      ))
-                      .build());
-
-                  // Send the tool result back
-                  MessageCreateParams finalParams = MessageCreateParams.builder()
-                      .model(Model.CLAUDE_OPUS_4_8)
-                      .maxTokens(1024L)
-                      .messages(messages)
-                      .build();
-
-                  Message finalResponse = client.messages().create(finalParams);
-                  System.out.println(finalResponse);
-              });
-      }
-
-      private static List<ToolResultBlockParam.Content.Block> searchKnowledgeBase(String query) {
-          return List.of(
-              ToolResultBlockParam.Content.Block.ofSearchResult(
-                  SearchResultBlockParam.builder()
-                      .source("https://docs.company.com/product-guide")
-                      .title("Product Configuration Guide")
-                      .content(List.of(
-                          TextBlockParam.builder()
-                              .text("To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.")
-                              .build()
-                      ))
-                      .citations(CitationsConfigParam.builder().enabled(true).build())
-                      .build()
-              ),
-              ToolResultBlockParam.Content.Block.ofSearchResult(
-                  SearchResultBlockParam.builder()
-                      .source("https://docs.company.com/troubleshooting")
-                      .title("Troubleshooting Guide")
-                      .content(List.of(
-                          TextBlockParam.builder()
-                              .text("If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.")
-                              .build()
-                      ))
-                      .citations(CitationsConfigParam.builder().enabled(true).build())
-                      .build()
-              )
-          );
-      }
+  static List<ToolResultBlockParam.Content.Block> searchKnowledgeBase(String query) {
+      return List.of(
+          ToolResultBlockParam.Content.Block.ofSearchResult(
+              SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/product-guide")
+                  .title("Product Configuration Guide")
+                  .content(List.of(
+                      TextBlockParam.builder()
+                          .text("To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.")
+                          .build()
+                  ))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()
+          ),
+          ToolResultBlockParam.Content.Block.ofSearchResult(
+              SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/troubleshooting")
+                  .title("Troubleshooting Guide")
+                  .content(List.of(
+                      TextBlockParam.builder()
+                          .text("If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.")
+                          .build()
+                  ))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()
+          )
+      );
   }
   ```
 
@@ -929,10 +927,10 @@ You can also provide search results directly in user messages. This is useful fo
   ```
 
   ```typescript TypeScript
-  const anthropic = new Anthropic();
+  const client = new Anthropic();
 
   // Provide search results directly in the user message
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
@@ -1055,49 +1053,47 @@ You can also provide search results directly in user messages. This is useful fo
   import com.anthropic.models.messages.TextBlockParam;
   // ...
 
-  public class SearchResultExample {
-      public static void main(String[] args) {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addUserMessageOfBlockParams(List.of(
-                  ContentBlockParam.ofSearchResult(
-                      SearchResultBlockParam.builder()
-                          .source("https://docs.company.com/api-reference")
-                          .title("API Reference - Authentication")
-                          .content(List.of(
-                              TextBlockParam.builder()
-                                  .text("All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.")
-                                  .build()
-                          ))
-                          .citations(CitationsConfigParam.builder().enabled(true).build())
-                          .build()
-                  ),
-                  ContentBlockParam.ofSearchResult(
-                      SearchResultBlockParam.builder()
-                          .source("https://docs.company.com/quickstart")
-                          .title("Getting Started Guide")
-                          .content(List.of(
-                              TextBlockParam.builder()
-                                  .text("To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.")
-                                  .build()
-                          ))
-                          .citations(CitationsConfigParam.builder().enabled(true).build())
-                          .build()
-                  ),
-                  ContentBlockParam.ofText(
-                      TextBlockParam.builder()
-                          .text("Based on these search results, how do I authenticate API requests and what are the rate limits?")
-                          .build()
-                  )
-              ))
-              .build();
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofSearchResult(
+                  SearchResultBlockParam.builder()
+                      .source("https://docs.company.com/api-reference")
+                      .title("API Reference - Authentication")
+                      .content(List.of(
+                          TextBlockParam.builder()
+                              .text("All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.")
+                              .build()
+                      ))
+                      .citations(CitationsConfigParam.builder().enabled(true).build())
+                      .build()
+              ),
+              ContentBlockParam.ofSearchResult(
+                  SearchResultBlockParam.builder()
+                      .source("https://docs.company.com/quickstart")
+                      .title("Getting Started Guide")
+                      .content(List.of(
+                          TextBlockParam.builder()
+                              .text("To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.")
+                              .build()
+                      ))
+                      .citations(CitationsConfigParam.builder().enabled(true).build())
+                      .build()
+              ),
+              ContentBlockParam.ofText(
+                  TextBlockParam.builder()
+                      .text("Based on these search results, how do I authenticate API requests and what are the rate limits?")
+                      .build()
+              )
+          ))
+          .build();
 
-          Message response = client.messages().create(params);
-          System.out.println(response);
-      }
+      Message response = client.messages().create(params);
+      System.out.println(response);
   }
   ```
 
@@ -1542,7 +1538,7 @@ The following example replays a complete conversation. The first user message ca
   ```
 
   ```typescript TypeScript
-  const anthropic = new Anthropic();
+  const client = new Anthropic();
 
   const knowledgeBaseTool: Anthropic.Tool = {
     name: "search_knowledge_base",
@@ -1558,7 +1554,7 @@ The following example replays a complete conversation. The first user message ca
 
   // Replay a conversation that provides search results both ways: the first
   // user message carries a pre-fetched result, the tool result returns another
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 1024,
     tools: [knowledgeBaseTool],
@@ -1788,70 +1784,68 @@ The following example replays a complete conversation. The first user message ca
   import com.anthropic.models.messages.ToolUseBlockParam;
   // ...
 
-  public class CombinedSearchResultsExample {
-      public static void main(String[] args) {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Tool knowledgeBaseTool = Tool.builder()
-              .name("search_knowledge_base")
-              .description("Search the company knowledge base for information")
-              .inputSchema(Tool.InputSchema.builder()
-                  .properties(JsonValue.from(Map.of(
-                      "query", Map.of("type", "string", "description", "The search query")
-                  )))
-                  .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+      Tool knowledgeBaseTool = Tool.builder()
+          .name("search_knowledge_base")
+          .description("Search the company knowledge base for information")
+          .inputSchema(Tool.InputSchema.builder()
+              .properties(JsonValue.from(Map.of(
+                  "query", Map.of("type", "string", "description", "The search query")
+              )))
+              .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+              .build())
+          .build();
+
+      // Replay a conversation that provides search results both ways: the first
+      // user message carries a pre-fetched result, the tool result returns another
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024L)
+          .addTool(knowledgeBaseTool)
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofSearchResult(SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/overview")
+                  .title("Product Overview")
+                  .content(List.of(TextBlockParam.builder()
+                      .text("Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.")
+                      .build()))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()),
+              ContentBlockParam.ofText(TextBlockParam.builder()
+                  .text("What does Acme Dashboard do, and what plans is it available on?")
                   .build())
-              .build();
+          ))
+          .addAssistantMessageOfBlockParams(List.of(
+              ContentBlockParam.ofText(TextBlockParam.builder()
+                  .text("Let me check the pricing information.")
+                  .build()),
+              ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
+                  .id("toolu_01A09q90qw90lq917835lq9")
+                  .name("search_knowledge_base")
+                  .input(JsonValue.from(Map.of("query", "Acme Dashboard pricing plans")))
+                  .build())
+          ))
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
+                  .toolUseId("toolu_01A09q90qw90lq917835lq9")
+                  .contentOfBlocks(List.of(
+                      ToolResultBlockParam.Content.Block.ofSearchResult(SearchResultBlockParam.builder()
+                          .source("https://docs.company.com/pricing")
+                          .title("Pricing Plans")
+                          .content(List.of(TextBlockParam.builder()
+                              .text("Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.")
+                              .build()))
+                          .citations(CitationsConfigParam.builder().enabled(true).build())
+                          .build())
+                  ))
+                  .build())
+          ))
+          .build();
 
-          // Replay a conversation that provides search results both ways: the first
-          // user message carries a pre-fetched result, the tool result returns another
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addTool(knowledgeBaseTool)
-              .addUserMessageOfBlockParams(List.of(
-                  ContentBlockParam.ofSearchResult(SearchResultBlockParam.builder()
-                      .source("https://docs.company.com/overview")
-                      .title("Product Overview")
-                      .content(List.of(TextBlockParam.builder()
-                          .text("Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.")
-                          .build()))
-                      .citations(CitationsConfigParam.builder().enabled(true).build())
-                      .build()),
-                  ContentBlockParam.ofText(TextBlockParam.builder()
-                      .text("What does Acme Dashboard do, and what plans is it available on?")
-                      .build())
-              ))
-              .addAssistantMessageOfBlockParams(List.of(
-                  ContentBlockParam.ofText(TextBlockParam.builder()
-                      .text("Let me check the pricing information.")
-                      .build()),
-                  ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
-                      .id("toolu_01A09q90qw90lq917835lq9")
-                      .name("search_knowledge_base")
-                      .input(JsonValue.from(Map.of("query", "Acme Dashboard pricing plans")))
-                      .build())
-              ))
-              .addUserMessageOfBlockParams(List.of(
-                  ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
-                      .toolUseId("toolu_01A09q90qw90lq917835lq9")
-                      .contentOfBlocks(List.of(
-                          ToolResultBlockParam.Content.Block.ofSearchResult(SearchResultBlockParam.builder()
-                              .source("https://docs.company.com/pricing")
-                              .title("Pricing Plans")
-                              .content(List.of(TextBlockParam.builder()
-                                  .text("Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.")
-                                  .build()))
-                              .citations(CitationsConfigParam.builder().enabled(true).build())
-                              .build())
-                      ))
-                      .build())
-              ))
-              .build();
-
-          Message response = client.messages().create(params);
-          System.out.println(response);
-      }
+      Message response = client.messages().create(params);
+      System.out.println(response);
   }
   ```
 

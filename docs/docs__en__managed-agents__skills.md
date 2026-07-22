@@ -21,7 +21,7 @@ To learn how to author custom skills, see [Agent Skills](/docs/en/agents-and-too
 
 A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
 
-When you call the Skills API directly with cURL or the CLI, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The SDKs send it automatically.
+When you call the Skills API directly with cURL, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The CLI and SDKs send it automatically.
 
 These examples omit the optional `display_title` field, so the skill's title is derived from `SKILL.md`. An explicitly passed `display_title` must be unique among the custom skills in your workspace.
 
@@ -36,8 +36,7 @@ These examples omit the optional `display_title` field, so the skill's title is 
 
   ```bash CLI
   ant beta:skills create \
-    --file example_skill.zip \
-    --beta skills-2025-10-02
+    --file example_skill.zip
   ```
 
   ```python Python
@@ -205,7 +204,7 @@ Each entry in the `skills` array uses the following fields:
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`     | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills.                                                                                                                        |
 | `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation (see [Create a custom skill](#create-a-custom-skill)). |
-| `version`  | Custom skills only. Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted.                                                                                               |
+| `version`  | Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. Applies to both Anthropic and custom skills.                                                                      |
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL

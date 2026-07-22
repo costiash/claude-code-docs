@@ -21,7 +21,7 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-* An Anthropic [Console account](https://platform.claude.com)
+* A [Claude Console account](https://platform.claude.com)
 * An [API key](/settings/keys)
 
 ## Install the CLI

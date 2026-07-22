@@ -15,7 +15,7 @@ Agents write to their [memory stores](/docs/en/managed-agents/memory) as they wo
 The input store is never modified, so you can review the output and discard it if you don't like the result.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. Dreams additionally require the `dreaming-2026-04-21` beta header. The SDK sets these automatically.
+  Dream endpoints are gated by the `dreaming-2026-04-21` beta header; the `managed-agents-2026-04-01` header on its own doesn't grant access to dreams. The dream-endpoint examples on this page send both headers; session and memory-store calls need only `managed-agents-2026-04-01`. The SDK sets these automatically.
 </Note>
 
 ## How it works
@@ -25,7 +25,7 @@ A **dream** is an asynchronous job that takes:
 * a pre-existing **memory store:** the store Claude verifies, deduplicates, and reorganizes, and
 * 1 to 100 **sessions:** past transcripts Claude mines for patterns and insights to fold into the output.
 
-The dream produces another **output memory store**, separate from the input. The output store ID appears in the dream's `outputs[]` once it starts `running`.
+The dream produces another **output memory store**, separate from the input. The output store ID appears in the dream's `outputs[]` shortly after the dream starts `running`, once the workflow has cloned the input store; a `running` dream can briefly report an empty `outputs[]`.
 
 ## Create a dream
 
@@ -187,8 +187,8 @@ The response is the full `dream` resource with `status: "pending"`:
   "usage": {
     "input_tokens": 0,
     "output_tokens": 0,
-    "cache_creation_input_tokens": 0,
-    "cache_read_input_tokens": 0
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
   },
   "error": null
 }
@@ -206,7 +206,7 @@ Use `instructions` for high-level synthesis guidance such as focus areas ("focus
 
 ## Track progress
 
-Dreams run asynchronously and typically take minutes to tens of minutes depending on input size. Poll the dream by ID to check status:
+Dreams run asynchronously and typically take minutes to a few hours, driven by the number of input transcripts. Poll the dream by ID to check status:
 
 <CodeGroup>
   ```bash curl
@@ -465,7 +465,7 @@ When `status` reaches `completed`, the `memory_store` entry in `outputs[]` refer
 The dream itself never deletes or modifies its inputs. On `failed` or `canceled` the output store persists with partial contents so you can inspect what was produced before stopping; clean it up through the Memory Stores API if you don't need it.
 
 <Warning>
-  While a dream is `pending` or `running`, archiving or deleting its output store is rejected with a 400. Archiving or deleting an *input* store or session mid-run will cause the dream to fail with `input_memory_store_unavailable` or `input_session_unavailable`.
+  While a dream is `pending` or `running`, the 400 guard applies to archiving the dream itself, not its stores. Archiving or deleting an *input* memory store mid-run (or deleting an input session) will cause the dream to fail with `input_memory_store_unavailable` or `input_session_unavailable`.
 </Warning>
 
 ## Cancel a dream
@@ -650,7 +650,7 @@ A non-exhaustive list of possible dreaming errors follows.
 | `memory_store_org_limit_exceeded` | Your organization hit its memory-store cap while the pipeline was provisioning working storage. |
 | `input_memory_store_too_large`    | The input memory store exceeds the pipeline's size limit.                                       |
 | `input_memory_store_unavailable`  | The input memory store was archived or deleted after the dream was created.                     |
-| `input_session_unavailable`       | An input session was archived or deleted after the dream was created.                           |
+| `input_session_unavailable`       | An input session was deleted after the dream was created.                                       |
 
 ## Billing
 

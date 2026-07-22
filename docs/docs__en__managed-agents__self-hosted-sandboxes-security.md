@@ -17,7 +17,7 @@ Anthropic secures the control plane across all environments: session and work qu
 
 ## What Anthropic cannot do for you
 
-* **Instantly invalidate a leaked key.** Anthropic can detect anomalous usage patterns, but cannot instantly invalidate a key. Treat `ANTHROPIC_ENVIRONMENT_KEY` like a database password: rotate it immediately if compromised.
+* **Know that your key leaked.** Anthropic can detect anomalous usage patterns, but cannot know your key was compromised. If you suspect `ANTHROPIC_ENVIRONMENT_KEY` leaked, revoke it and generate a replacement immediately. Revocation is validated on every request, so it takes effect on the worker's next call.
 * **Verify your worker build.** Anthropic does not inspect your sandbox image or runtime. A supply-chain compromise in your image is not detectable from the control plane.
 * **Isolate tools inside your sandbox.** Anthropic's security boundary stops at the sandbox. How you isolate individual tool executions from each other inside that boundary is entirely your responsibility.
 * **Enforce data retention in your environment.** Once session content reaches your worker, it is outside Anthropic's data lifecycle controls.

@@ -17,7 +17,7 @@ For the launch context and examples of what teams run on schedules, see [schedul
 When creating a deployment, you pass the [session configurations](/docs/en/managed-agents/sessions) required for execution, in addition to a `schedule`.
 
 * Deployments require [agent configuration](/docs/en/managed-agents/agent-setup) and [environment configuration](/docs/en/managed-agents/environments), and optionally accept [files](/docs/en/managed-agents/files), [GitHub](/docs/en/managed-agents/github), [memory stores](/docs/en/managed-agents/memory), and [vaults](/docs/en/managed-agents/vaults).
-* Deployments also require an initial `user.message` event that starts the session's work.
+* Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work.
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
 <CodeGroup defaultLanguage="CLI">
@@ -242,7 +242,7 @@ The response includes a deployment object with a populated `schedule.upcoming_ru
 }
 ```
 
-The upcoming run timestamps are based on the exact schedule configured. However, to distribute load, deployments may apply jitter of up to 10 seconds.
+The upcoming run timestamps reflect the exact schedule configured. However, to distribute load, actual execution applies jitter of up to 15% of the interval between runs, with a minimum of 5 seconds and a maximum of 9 minutes.
 
 A maximum of **1,000 scheduled deployments** is supported per organization. Contact Anthropic support if you need more.
 
@@ -602,7 +602,7 @@ Each lifecycle change emits a [webhook event](/docs/en/managed-agents/webhooks#s
 
 Session creation rate-limit responses are recorded immediately as a `session_rate_limited_error` run without retry; the schedule attempts again at the next scheduled occurrence. Rate limits on underlying API calls within a session are handled by the session itself.
 
-If a deployment's agent has been archived or deleted, the deployment is automatically archived in the same operation; no deployment run is recorded. If a subagent referenced by the agent has been archived, the next trigger records a failed run with `error.type: "agent_archived_error"` and the deployment is automatically paused so you can update the agent and resume. Other unrecoverable session-creation errors, such as an archived environment or vault, behave the same way: the trigger records a failed run and the deployment is automatically paused. The deployment's `paused_reason.error.type` mirrors the failed run's `error.type`.
+If a deployment's agent has been archived, the deployment is automatically archived in the same operation. If the agent has been deleted, the next scheduled trigger detects the missing agent and automatically archives the deployment. In both cases no deployment run is recorded. If a subagent referenced by the agent has been archived, the next trigger records a failed run with `error.type: "agent_archived_error"` and the deployment is automatically paused so you can update the agent and resume. Other unrecoverable session-creation errors, such as an archived environment or vault, behave the same way: the trigger records a failed run and the deployment is automatically paused. The deployment's `paused_reason.error.type` mirrors the failed run's `error.type`.
 
 ## Trigger a manual run
 

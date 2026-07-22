@@ -230,7 +230,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
 
 The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](/docs/en/managed-agents/agent-setup#update-an-agent) so its roster references that version.
 
-The coordinator can only delegate to one level of agents; depth > 1 is ignored. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
+The coordinator can only delegate to one level of agents; referencing an agent that has its own `multiagent.agents` roster fails the create or update request with a validation error. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
 
 ## Create the session
 
@@ -678,12 +678,12 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 In this example, only the researcher declares the GitHub MCP server, so the coordinator does not have access. The session's `vault_ids` supply the GitHub credential to the researcher's thread.
 
 <Tip>
-  If an agent's MCP calls fail to authenticate after you declare the server, confirm the credential's `mcp_server_url` matches the agent's `mcp_servers[].url` exactly, including scheme and trailing slash.
+  If an agent's MCP calls fail to authenticate after you declare the server, confirm the credential's `mcp_server_url` refers to the same server as the agent's `mcp_servers[].url`. Both URLs are normalized before matching (scheme and host lowercased, default ports and trailing slashes stripped), so differences in host casing, a default port, or a trailing slash don't prevent a match; a different path, subdomain, or non-default port does.
 </Tip>
 
 ## Threads
 
-The **session-level event stream** (`/v1/sessions/:id/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from subagents, but you do see the start and end of their work, and blocking events such as tool permission requests.
+The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from subagents, but you do see the start and end of their work, and blocking events such as tool permission requests.
 
 **Session threads** are where you drill into a specific agent's activity.
 
@@ -762,7 +762,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
   </Tab>
 
   <Tab title="Interrupt a session thread">
-    Send `user.interrupt` with `session_thread_id` to stop a specific thread. Omitting `session_thread_id` targets the primary thread.
+    Send `user.interrupt` with `session_thread_id` to stop a specific thread. Omitting `session_thread_id` interrupts every non-archived thread in the session, including the primary.
 
     <CodeGroup>
       ```bash curl
@@ -848,7 +848,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
       ```
     </CodeGroup>
 
-    Against a child thread blocked on `requires_action`, the interrupt marks each pending tool call denied and re-emits `session.thread_status_idle` with `stop_reason: end_turn` directly; the model is not sampled. Against a thread already at `idle`, the interrupt is a no-op.
+    Against a child thread blocked on `requires_action`, the interrupt closes each pending tool call with an error tool result ("Tool execution was interrupted before completion. Please retry.") and re-emits `session.thread_status_idle` with `stop_reason: end_turn` directly; the model is not sampled. Against a thread already at `idle`, the interrupt is a no-op.
   </Tab>
 
   <Tab title="Archive a session thread">
@@ -915,7 +915,7 @@ The session `status` is an aggregation of all agent activity; if at least one th
       ```
     </CodeGroup>
 
-    Archive only succeeds if the thread is `idle`. If the thread is running or blocked on `requires_action`, interrupt it first:
+    Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle and can be archived directly; only a running thread must be interrupted first:
 
     <CodeGroup>
       ```bash curl
@@ -1040,20 +1040,22 @@ The session `status` is an aggregation of all agent activity; if at least one th
 
 ### Primary thread events
 
-These events surface multiagent activity on the primary thread at `/v1/sessions/:id/events/stream`.
+These events surface multiagent activity on the primary thread at `/v1/sessions/{session_id}/events/stream`. Message-direction events are named relative to the thread whose stream they appear on: `agent.thread_message_received` means a message arrived on this thread from another thread, and `agent.thread_message_sent` means this thread sent one. The task the coordinator delegates, for example, arrives on the child's own stream as an `agent.thread_message_received` event.
 
-| Type                               | Description                                                                                                            |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `session.thread_created`           | A thread was created. Includes `session_thread_id` and `agent_name`.                                                   |
-| `session.thread_status_running`    | A thread started activity.                                                                                             |
-| `session.thread_status_idle`       | The agent associated with the thread is awaiting input. Includes a `stop_reason` indicating why the agent stopped.     |
-| `session.thread_status_terminated` | A thread was archived or encountered a terminal error.                                                                 |
-| `agent.thread_message_received`    | An agent delivered its result to the coordinator. Includes `from_session_thread_id`, `from_agent_name`, and `content`. |
-| `agent.thread_message_sent`        | The coordinator sent a follow-up to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`.    |
+| Type                               | Description                                                                                                                                                |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `session.thread_created`           | A thread was created. Includes `session_thread_id` and `agent_name`.                                                                                       |
+| `session.thread_status_running`    | A thread started activity.                                                                                                                                 |
+| `session.thread_status_idle`       | The agent associated with the thread is awaiting input. Includes a `stop_reason` indicating why the agent stopped.                                         |
+| `session.thread_status_terminated` | A thread was archived or encountered a terminal error.                                                                                                     |
+| `agent.thread_message_received`    | On the primary thread, an agent sent a report or question to the coordinator. Includes `from_session_thread_id`, `from_agent_name`, and `content`.         |
+| `agent.thread_message_sent`        | On the primary thread, the coordinator sent a task or follow-up message to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`. |
 
 ### Session thread events
 
 Critical events are proxied to the primary thread. However, you might still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
+
+Each session thread has its own event stream at `/v1/sessions/{session_id}/threads/{thread_id}/stream`, and it accepts the same `event_deltas[]` parameter as the session-level stream, so you can preview a subagent's text as the model generates it. A connection previews only the thread it's reading: a child thread's previews never appear on the session-level stream, so to watch a subagent live, open its own thread stream. See [Preview session thread events](/docs/en/managed-agents/events-and-streaming#preview-session-thread-events) for opting in, accumulating, and reconciling previews.
 
 <Tabs>
   <Tab title="Stream session thread events">

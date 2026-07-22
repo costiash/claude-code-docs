@@ -27,7 +27,7 @@ The agent toolset includes the following tools. All are enabled by default when 
 | Web fetch  | `web_fetch`  | Fetch content from a URL                       |
 | Web search | `web_search` | Search the web for information                 |
 
-When a tool output exceeds 100,000 tokens, it is automatically written to a file in the [sandbox](/docs/en/managed-agents/environments). The model receives a truncated preview with the file path and can read the full content from there.
+When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](/docs/en/managed-agents/environments). The model receives a truncated preview with the file path and can read the full content from there.
 
 ## Configuring the toolset
 

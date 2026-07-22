@@ -12,12 +12,14 @@ A customer-managed encryption key (CMEK) lets you provision an encryption key in
 
 The use of CMEK is optional. Eligible organizations can **opt in** to use customer-managed encryption keys instead of the default encryption that Anthropic provides. To activate CMEK, contact your Anthropic account team.
 
-<Accordion title="Enabling CMEK is permanent and can cause irreversible data loss" className="!border-warning-200 bg-warning-900 text-warning-000 [&_button:hover]:bg-warning-200/10">
+<Warning>
+  **Enabling CMEK is permanent and can cause irreversible data loss**
+
   Enabling CMEK is permanent. Anthropic keeps no copy of your key, so misconfiguration or key loss can permanently destroy your CMEK-protected data. If you are uncertain about any step, contact your Anthropic representative before applying changes.
 
   * **Permanent data loss:** If your encryption key is deleted, scheduled for deletion, or has its key material destroyed, Anthropic cannot recover your data.
   * **Identifier verification is mandatory:** Granting key access to an incorrect or spoofed principal can expose your data to an unauthorized party. Always verify the Anthropic identifier against the published production identities in each configuration guide. Never trust an identifier provided over email, chat, or any onboarding channel.
-</Accordion>
+</Warning>
 
 ## How it works
 

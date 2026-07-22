@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-22T15:48:52Z",
-  "indexed_files": 1805,
+  "generated_at": "2026-07-22T18:45:18Z",
+  "indexed_files": 1809,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -1555,20 +1555,20 @@
         "cost",
         "risk",
         "categories",
+        "codegroup",
+        "unsafe",
         "message",
         "title",
         "flagged",
         "function",
-        "unsafe",
         "system",
         "may",
-        "list",
         "mtok",
         "example",
         "should",
         "examples"
       ],
-      "word_count": 3230,
+      "word_count": 12732,
       "file_path": "docs/docs__en__about-claude__use-case-guides__content-moderation.md"
     },
     "/docs/en/about-claude/use-case-guides/customer-support-chat": {
@@ -1586,17 +1586,17 @@
         "responses",
         "insurance",
         "response",
-        "interaction",
         "chatbot",
         "user",
-        "questions",
+        "interaction",
         "api",
+        "questions",
         "time",
         "context",
         "when",
         "quote"
       ],
-      "word_count": 4414,
+      "word_count": 5926,
       "file_path": "docs/docs__en__about-claude__use-case-guides__customer-support-chat.md"
     },
     "/docs/en/about-claude/use-case-guides/legal-summarization": {
@@ -2548,7 +2548,7 @@
         "validated",
         "accordion"
       ],
-      "word_count": 3217,
+      "word_count": 3426,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -6521,30 +6521,30 @@
     },
     "/docs/en/api/beta": {
       "title": "Beta",
-      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = string or \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 26 more`    - `string`    - `\"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 26 more`",
+      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = string or \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 27 more`    - `string`    - `\"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 27 more`",
       "keywords": [
         "tool",
         "model",
         "content",
         "when",
-        "block",
         "event",
-        "agent",
+        "block",
         "session",
+        "agent",
         "text",
         "tokens",
-        "cache",
-        "beta",
-        "user",
-        "agents",
-        "timestamp",
-        "rfc",
         "request",
-        "error",
-        "server",
-        "format"
+        "beta",
+        "cache",
+        "timestamp",
+        "agents",
+        "user",
+        "rfc",
+        "input",
+        "format",
+        "error"
       ],
-      "word_count": 290067,
+      "word_count": 303067,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -6561,18 +6561,18 @@
         "execution",
         "intelligence",
         "coding",
+        "effort",
+        "high",
         "performance",
         "configuration",
+        "managed",
         "resolved",
+        "depth",
         "policy",
         "without",
-        "before",
-        "managed",
-        "automatically",
-        "approved",
-        "require"
+        "before"
       ],
-      "word_count": 13256,
+      "word_count": 15050,
       "file_path": "docs/docs__en__api__beta__agents.md"
     },
     "/docs/en/api/beta/agents/archive": {
@@ -6590,17 +6590,17 @@
         "confirmation",
         "coding",
         "resolved",
+        "high",
         "performance",
+        "effort",
+        "models",
         "frontier",
+        "reasoning",
+        "depth",
         "permission",
-        "policy",
-        "automatically",
-        "approved",
-        "without",
-        "require",
-        "before"
+        "policy"
       ],
-      "word_count": 979,
+      "word_count": 1102,
       "file_path": "docs/docs__en__api__beta__agents__archive.md"
     },
     "/docs/en/api/beta/agents/create": {
@@ -6618,17 +6618,17 @@
         "confirmation",
         "coding",
         "configuration",
+        "models",
+        "high",
         "performance",
+        "depth",
+        "effort",
         "mcp",
         "tools",
-        "server",
-        "version",
-        "frontier",
-        "must",
-        "permission",
-        "policy"
+        "maximum",
+        "reasoning"
       ],
-      "word_count": 2200,
+      "word_count": 2513,
       "file_path": "docs/docs__en__api__beta__agents__create.md"
     },
     "/docs/en/api/beta/agents/list": {
@@ -6647,16 +6647,16 @@
         "coding",
         "resolved",
         "before",
-        "performance",
         "maximum",
+        "high",
+        "performance",
+        "effort",
+        "models",
         "frontier",
-        "permission",
-        "policy",
-        "automatically",
-        "approved",
-        "without"
+        "reasoning",
+        "depth"
       ],
-      "word_count": 1050,
+      "word_count": 1173,
       "file_path": "docs/docs__en__api__beta__agents__list.md"
     },
     "/docs/en/api/beta/agents/retrieve": {
@@ -6675,16 +6675,16 @@
         "coding",
         "resolved",
         "version",
+        "high",
         "performance",
+        "effort",
         "parameters",
+        "models",
         "frontier",
-        "permission",
-        "policy",
-        "automatically",
-        "approved",
-        "without"
+        "reasoning",
+        "depth"
       ],
-      "word_count": 998,
+      "word_count": 1121,
       "file_path": "docs/docs__en__api__beta__agents__retrieve.md"
     },
     "/docs/en/api/beta/agents/update": {
@@ -6703,16 +6703,16 @@
         "coding",
         "configuration",
         "version",
-        "server",
-        "mcp",
-        "performance",
-        "tools",
         "omit",
+        "mcp",
         "must",
-        "preserve",
-        "frontier"
+        "server",
+        "models",
+        "high",
+        "performance",
+        "depth"
       ],
-      "word_count": 2297,
+      "word_count": 2628,
       "file_path": "docs/docs__en__api__beta__agents__update.md"
     },
     "/docs/en/api/beta/agents/versions": {
@@ -6730,17 +6730,17 @@
         "coding",
         "agents",
         "resolved",
+        "maximum",
+        "high",
         "performance",
+        "effort",
         "versions",
         "parameters",
-        "maximum",
+        "models",
         "frontier",
-        "permission",
-        "policy",
-        "automatically",
-        "approved"
+        "reasoning"
       ],
-      "word_count": 1017,
+      "word_count": 1140,
       "file_path": "docs/docs__en__api__beta__agents__versions.md"
     },
     "/docs/en/api/beta/agents/versions/list": {
@@ -6758,17 +6758,17 @@
         "coding",
         "agents",
         "resolved",
-        "performance",
-        "parameters",
         "maximum",
+        "high",
+        "performance",
+        "effort",
+        "parameters",
+        "models",
         "frontier",
-        "permission",
-        "policy",
-        "automatically",
-        "approved",
-        "without"
+        "reasoning",
+        "depth"
       ],
-      "word_count": 1015,
+      "word_count": 1138,
       "file_path": "docs/docs__en__api__beta__agents__versions__list.md"
     },
     "/docs/en/api/beta/deployment_runs": {
@@ -6796,7 +6796,7 @@
         "vault",
         "creation"
       ],
-      "word_count": 3198,
+      "word_count": 3202,
       "file_path": "docs/docs__en__api__beta__deployment_runs.md"
     },
     "/docs/en/api/beta/deployment_runs/list": {
@@ -6824,7 +6824,7 @@
         "agent",
         "environment"
       ],
-      "word_count": 961,
+      "word_count": 963,
       "file_path": "docs/docs__en__api__beta__deployment_runs__list.md"
     },
     "/docs/en/api/beta/deployment_runs/retrieve": {
@@ -6852,7 +6852,7 @@
         "version",
         "success"
       ],
-      "word_count": 815,
+      "word_count": 817,
       "file_path": "docs/docs__en__api__beta__deployment_runs__retrieve.md"
     },
     "/docs/en/api/beta/deployments": {
@@ -6880,7 +6880,7 @@
         "exists",
         "memory"
       ],
-      "word_count": 21297,
+      "word_count": 21313,
       "file_path": "docs/docs__en__api__beta__deployments.md"
     },
     "/docs/en/api/beta/deployments/archive": {
@@ -6908,7 +6908,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1736,
+      "word_count": 1738,
       "file_path": "docs/docs__en__api__beta__deployments__archive.md"
     },
     "/docs/en/api/beta/deployments/create": {
@@ -6936,7 +6936,7 @@
         "store",
         "encoded"
       ],
-      "word_count": 2918,
+      "word_count": 2920,
       "file_path": "docs/docs__en__api__beta__deployments__create.md"
     },
     "/docs/en/api/beta/deployments/list": {
@@ -6964,7 +6964,7 @@
         "rubric",
         "longer"
       ],
-      "word_count": 1815,
+      "word_count": 1817,
       "file_path": "docs/docs__en__api__beta__deployments__list.md"
     },
     "/docs/en/api/beta/deployments/pause": {
@@ -6992,7 +6992,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1736,
+      "word_count": 1738,
       "file_path": "docs/docs__en__api__beta__deployments__pause.md"
     },
     "/docs/en/api/beta/deployments/retrieve": {
@@ -7020,7 +7020,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1733,
+      "word_count": 1735,
       "file_path": "docs/docs__en__api__beta__deployments__retrieve.md"
     },
     "/docs/en/api/beta/deployments/run": {
@@ -7048,7 +7048,7 @@
         "version",
         "success"
       ],
-      "word_count": 818,
+      "word_count": 820,
       "file_path": "docs/docs__en__api__beta__deployments__run.md"
     },
     "/docs/en/api/beta/deployments/unpause": {
@@ -7076,7 +7076,7 @@
         "longer",
         "exists"
       ],
-      "word_count": 1736,
+      "word_count": 1738,
       "file_path": "docs/docs__en__api__beta__deployments__unpause.md"
     },
     "/docs/en/api/beta/deployments/update": {
@@ -7104,8 +7104,176 @@
         "store",
         "preserve"
       ],
-      "word_count": 2939,
+      "word_count": 2941,
       "file_path": "docs/docs__en__api__beta__deployments__update.md"
+    },
+    "/docs/en/api/beta/dreams": {
+      "title": "Dreams",
+      "content_preview": "# Dreams  ## Create a Dream  **post** `/v1/dreams`  Create a Dream  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta version(s) you w...",
+      "keywords": [
+        "dream",
+        "store",
+        "every",
+        "pipeline",
+        "stage",
+        "input",
+        "memory",
+        "total",
+        "tokens",
+        "output",
+        "reads",
+        "model",
+        "across",
+        "timestamp",
+        "rfc",
+        "identifier",
+        "create",
+        "format",
+        "beta",
+        "token"
+      ],
+      "word_count": 3629,
+      "file_path": "docs/docs__en__api__beta__dreams.md"
+    },
+    "/docs/en/api/beta/dreams/archive": {
+      "title": "Untitled",
+      "content_preview": "## Archive a Dream  **post** `/v1/dreams/{dream_id}/archive`  Archive a Dream  ### Path Parameters  - `dream_id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`  ...",
+      "keywords": [
+        "dream",
+        "memory",
+        "store",
+        "every",
+        "pipeline",
+        "stage",
+        "total",
+        "tokens",
+        "reads",
+        "output",
+        "timestamp",
+        "rfc",
+        "format",
+        "input",
+        "across",
+        "archive",
+        "parameters",
+        "header",
+        "session",
+        "transcripts"
+      ],
+      "word_count": 526,
+      "file_path": "docs/docs__en__api__beta__dreams__archive.md"
+    },
+    "/docs/en/api/beta/dreams/cancel": {
+      "title": "Untitled",
+      "content_preview": "## Cancel a Dream  **post** `/v1/dreams/{dream_id}/cancel`  Cancel a Dream  ### Path Parameters  - `dream_id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    O...",
+      "keywords": [
+        "dream",
+        "memory",
+        "store",
+        "every",
+        "pipeline",
+        "stage",
+        "total",
+        "tokens",
+        "reads",
+        "output",
+        "timestamp",
+        "rfc",
+        "format",
+        "input",
+        "across",
+        "cancel",
+        "parameters",
+        "header",
+        "session",
+        "transcripts"
+      ],
+      "word_count": 526,
+      "file_path": "docs/docs__en__api__beta__dreams__cancel.md"
+    },
+    "/docs/en/api/beta/dreams/create": {
+      "title": "Untitled",
+      "content_preview": "## Create a Dream  **post** `/v1/dreams`  Create a Dream  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta version(s) you want to use...",
+      "keywords": [
+        "dream",
+        "store",
+        "every",
+        "pipeline",
+        "stage",
+        "create",
+        "input",
+        "memory",
+        "reads",
+        "model",
+        "identifier",
+        "output",
+        "total",
+        "tokens",
+        "session",
+        "transcripts",
+        "configuration",
+        "applied",
+        "token",
+        "timestamp"
+      ],
+      "word_count": 676,
+      "file_path": "docs/docs__en__api__beta__dreams__create.md"
+    },
+    "/docs/en/api/beta/dreams/list": {
+      "title": "Untitled",
+      "content_preview": "## List Dreams  **get** `/v1/dreams`  List Dreams  ### Query Parameters  - `\"created_at[gt]\": optional string`    Return dreams with `created_at` strictly after this timestamp (exclusive lower bound, ...",
+      "keywords": [
+        "dream",
+        "timestamp",
+        "rfc",
+        "dreams",
+        "query",
+        "bound",
+        "parameter",
+        "every",
+        "pipeline",
+        "stage",
+        "total",
+        "tokens",
+        "applies",
+        "status",
+        "format",
+        "input",
+        "across",
+        "list",
+        "parameters",
+        "return"
+      ],
+      "word_count": 574,
+      "file_path": "docs/docs__en__api__beta__dreams__list.md"
+    },
+    "/docs/en/api/beta/dreams/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Get a Dream  **get** `/v1/dreams/{dream_id}`  Get a Dream  ### Path Parameters  - `dream_id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header...",
+      "keywords": [
+        "dream",
+        "memory",
+        "store",
+        "every",
+        "pipeline",
+        "stage",
+        "total",
+        "tokens",
+        "get",
+        "reads",
+        "output",
+        "timestamp",
+        "rfc",
+        "format",
+        "input",
+        "across",
+        "parameters",
+        "header",
+        "session",
+        "transcripts"
+      ],
+      "word_count": 523,
+      "file_path": "docs/docs__en__api__beta__dreams__retrieve.md"
     },
     "/docs/en/api/beta/environments": {
       "title": "Environments",
@@ -7114,8 +7282,8 @@
         "work",
         "environment",
         "type",
-        "packages",
         "when",
+        "packages",
         "install",
         "rfc",
         "timestamp",
@@ -7123,16 +7291,16 @@
         "network",
         "self",
         "hosted",
+        "item",
         "access",
         "package",
-        "item",
         "parameters",
         "identifier",
         "policy",
         "beta",
         "value"
       ],
-      "word_count": 9062,
+      "word_count": 9326,
       "file_path": "docs/docs__en__api__beta__environments.md"
     },
     "/docs/en/api/beta/environments/archive": {
@@ -7160,7 +7328,7 @@
         "header",
         "cloud"
       ],
-      "word_count": 552,
+      "word_count": 554,
       "file_path": "docs/docs__en__api__beta__environments__archive.md"
     },
     "/docs/en/api/beta/environments/create": {
@@ -7188,7 +7356,7 @@
         "account",
         "self"
       ],
-      "word_count": 951,
+      "word_count": 953,
       "file_path": "docs/docs__en__api__beta__environments__create.md"
     },
     "/docs/en/api/beta/environments/delete": {
@@ -7215,7 +7383,7 @@
         "type",
         "example"
       ],
-      "word_count": 170,
+      "word_count": 172,
       "file_path": "docs/docs__en__api__beta__environments__delete.md"
     },
     "/docs/en/api/beta/environments/list": {
@@ -7243,7 +7411,7 @@
         "parameters",
         "previous"
       ],
-      "word_count": 602,
+      "word_count": 604,
       "file_path": "docs/docs__en__api__beta__environments__list.md"
     },
     "/docs/en/api/beta/environments/retrieve": {
@@ -7271,7 +7439,7 @@
         "environments",
         "archived"
       ],
-      "word_count": 541,
+      "word_count": 543,
       "file_path": "docs/docs__en__api__beta__environments__retrieve.md"
     },
     "/docs/en/api/beta/environments/update": {
@@ -7299,7 +7467,7 @@
         "those",
         "listed"
       ],
-      "word_count": 929,
+      "word_count": 931,
       "file_path": "docs/docs__en__api__beta__environments__update.md"
     },
     "/docs/en/api/beta/environments/work": {
@@ -7311,10 +7479,11 @@
         "rfc",
         "timestamp",
         "item",
+        "environment",
         "self",
         "hosted",
-        "environment",
         "identifier",
+        "worker",
         "items",
         "type",
         "sandbox",
@@ -7323,11 +7492,10 @@
         "heartbeat",
         "sessions",
         "response",
-        "worker",
         "header",
         "execution"
       ],
-      "word_count": 4022,
+      "word_count": 4274,
       "file_path": "docs/docs__en__api__beta__environments__work.md"
     },
     "/docs/en/api/beta/environments/work/ack": {
@@ -7339,23 +7507,23 @@
         "rfc",
         "timestamp",
         "environment",
+        "item",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "acknowledge",
-        "worker",
         "provided",
         "queued",
         "parameters",
         "header",
         "created",
-        "session",
-        "type"
+        "execute",
+        "session"
       ],
-      "word_count": 430,
+      "word_count": 462,
       "file_path": "docs/docs__en__api__beta__environments__work__ack.md"
     },
     "/docs/en/api/beta/environments/work/heartbeat": {
@@ -7383,7 +7551,7 @@
         "automatically",
         "pre"
       ],
-      "word_count": 331,
+      "word_count": 333,
       "file_path": "docs/docs__en__api__beta__environments__work__heartbeat.md"
     },
     "/docs/en/api/beta/environments/work/list": {
@@ -7395,23 +7563,23 @@
         "rfc",
         "timestamp",
         "items",
-        "list",
         "environment",
+        "item",
+        "list",
         "parameters",
         "cursor",
         "response",
         "identifier",
-        "item",
+        "worker",
         "provided",
         "self",
         "hosted",
         "sandbox",
         "opaque",
         "pagination",
-        "header",
-        "session"
+        "header"
       ],
-      "word_count": 433,
+      "word_count": 465,
       "file_path": "docs/docs__en__api__beta__environments__work__list.md"
     },
     "/docs/en/api/beta/environments/work/poll": {
@@ -7420,26 +7588,26 @@
       "keywords": [
         "work",
         "when",
+        "environment",
         "rfc",
         "timestamp",
-        "environment",
+        "worker",
         "self",
         "hosted",
         "identifier",
-        "worker",
+        "item",
         "sessions",
         "sandbox",
         "long",
         "items",
         "parameters",
-        "item",
         "poll",
         "provided",
         "milliseconds",
         "returns",
         "header"
       ],
-      "word_count": 486,
+      "word_count": 518,
       "file_path": "docs/docs__en__api__beta__environments__work__poll.md"
     },
     "/docs/en/api/beta/environments/work/retrieve": {
@@ -7448,26 +7616,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
+        "worker",
         "sessions",
         "sandbox",
         "identifier",
         "get",
-        "worker",
         "provided",
         "parameters",
         "header",
         "created",
+        "execute",
         "session",
-        "type",
-        "execution"
+        "type"
       ],
-      "word_count": 418,
+      "word_count": 450,
       "file_path": "docs/docs__en__api__beta__environments__work__retrieve.md"
     },
     "/docs/en/api/beta/environments/work/stats": {
@@ -7495,7 +7663,7 @@
         "version",
         "want"
       ],
-      "word_count": 258,
+      "word_count": 260,
       "file_path": "docs/docs__en__api__beta__environments__work__stats.md"
     },
     "/docs/en/api/beta/environments/work/stop": {
@@ -7506,24 +7674,24 @@
         "when",
         "rfc",
         "timestamp",
-        "stop",
         "environment",
+        "item",
+        "stop",
         "self",
         "hosted",
-        "item",
+        "worker",
         "sessions",
         "sandbox",
         "parameters",
         "identifier",
-        "worker",
         "provided",
         "graceful",
         "shutdown",
         "header",
         "created",
-        "session"
+        "execute"
       ],
-      "word_count": 440,
+      "word_count": 472,
       "file_path": "docs/docs__en__api__beta__environments__work__stop.md"
     },
     "/docs/en/api/beta/environments/work/update": {
@@ -7532,26 +7700,26 @@
       "keywords": [
         "work",
         "when",
+        "item",
         "rfc",
         "timestamp",
-        "item",
         "environment",
         "self",
         "hosted",
         "metadata",
+        "worker",
         "sessions",
         "sandbox",
         "parameters",
         "identifier",
         "update",
-        "worker",
         "provided",
         "header",
         "key",
-        "created",
-        "session"
+        "null",
+        "created"
       ],
-      "word_count": 460,
+      "word_count": 492,
       "file_path": "docs/docs__en__api__beta__environments__work__update.md"
     },
     "/docs/en/api/beta/files": {
@@ -7579,7 +7747,7 @@
         "scoping",
         "resource"
       ],
-      "word_count": 1490,
+      "word_count": 1500,
       "file_path": "docs/docs__en__api__beta__files.md"
     },
     "/docs/en/api/beta/files/delete": {
@@ -7605,7 +7773,7 @@
         "example",
         "response"
       ],
-      "word_count": 170,
+      "word_count": 172,
       "file_path": "docs/docs__en__api__beta__files__delete.md"
     },
     "/docs/en/api/beta/files/download": {
@@ -7625,7 +7793,7 @@
         "want",
         "example"
       ],
-      "word_count": 124,
+      "word_count": 126,
       "file_path": "docs/docs__en__api__beta__files__download.md"
     },
     "/docs/en/api/beta/files/list": {
@@ -7653,7 +7821,7 @@
         "whether",
         "get"
       ],
-      "word_count": 418,
+      "word_count": 420,
       "file_path": "docs/docs__en__api__beta__files__list.md"
     },
     "/docs/en/api/beta/files/retrieve_metadata": {
@@ -7681,7 +7849,7 @@
         "identifier",
         "format"
       ],
-      "word_count": 287,
+      "word_count": 289,
       "file_path": "docs/docs__en__api__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/beta/files/upload": {
@@ -7709,7 +7877,7 @@
         "format",
         "length"
       ],
-      "word_count": 282,
+      "word_count": 284,
       "file_path": "docs/docs__en__api__beta__files__upload.md"
     },
     "/docs/en/api/beta/memory_stores": {
@@ -7737,7 +7905,7 @@
         "bytes",
         "content"
       ],
-      "word_count": 9834,
+      "word_count": 9862,
       "file_path": "docs/docs__en__api__beta__memory_stores.md"
     },
     "/docs/en/api/beta/memory_stores/archive": {
@@ -7765,7 +7933,7 @@
         "beta",
         "version"
       ],
-      "word_count": 358,
+      "word_count": 360,
       "file_path": "docs/docs__en__api__beta__memory_stores__archive.md"
     },
     "/docs/en/api/beta/memory_stores/create": {
@@ -7793,7 +7961,7 @@
         "derived",
         "unique"
       ],
-      "word_count": 473,
+      "word_count": 475,
       "file_path": "docs/docs__en__api__beta__memory_stores__create.md"
     },
     "/docs/en/api/beta/memory_stores/delete": {
@@ -7821,7 +7989,7 @@
         "retrievable",
         "example"
       ],
-      "word_count": 181,
+      "word_count": 183,
       "file_path": "docs/docs__en__api__beta__memory_stores__delete.md"
     },
     "/docs/en/api/beta/memory_stores/list": {
@@ -7849,7 +8017,7 @@
         "sent",
         "wire"
       ],
-      "word_count": 479,
+      "word_count": 481,
       "file_path": "docs/docs__en__api__beta__memory_stores__list.md"
     },
     "/docs/en/api/beta/memory_stores/memories": {
@@ -7877,7 +8045,7 @@
         "precondition",
         "text"
       ],
-      "word_count": 4103,
+      "word_count": 4113,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories.md"
     },
     "/docs/en/api/beta/memory_stores/memories/create": {
@@ -7905,7 +8073,7 @@
         "update",
         "query"
       ],
-      "word_count": 540,
+      "word_count": 542,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories__create.md"
     },
     "/docs/en/api/beta/memory_stores/memories/delete": {
@@ -7933,7 +8101,7 @@
         "returned",
         "history"
       ],
-      "word_count": 198,
+      "word_count": 200,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories__delete.md"
     },
     "/docs/en/api/beta/memory_stores/memories/list": {
@@ -7961,7 +8129,7 @@
         "maximum",
         "pass"
       ],
-      "word_count": 776,
+      "word_count": 778,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories__list.md"
     },
     "/docs/en/api/beta/memory_stores/memories/retrieve": {
@@ -7989,7 +8157,7 @@
         "clients",
         "via"
       ],
-      "word_count": 457,
+      "word_count": 459,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories__retrieve.md"
     },
     "/docs/en/api/beta/memory_stores/memories/update": {
@@ -8017,7 +8185,7 @@
         "applies",
         "stored"
       ],
-      "word_count": 664,
+      "word_count": 666,
       "file_path": "docs/docs__en__api__beta__memory_stores__memories__update.md"
     },
     "/docs/en/api/beta/memory_stores/memory_versions": {
@@ -8045,7 +8213,7 @@
         "look",
         "provenance"
       ],
-      "word_count": 3160,
+      "word_count": 3166,
       "file_path": "docs/docs__en__api__beta__memory_stores__memory_versions.md"
     },
     "/docs/en/api/beta/memory_stores/memory_versions/list": {
@@ -8073,7 +8241,7 @@
         "set",
         "via"
       ],
-      "word_count": 783,
+      "word_count": 785,
       "file_path": "docs/docs__en__api__beta__memory_stores__memory_versions__list.md"
     },
     "/docs/en/api/beta/memory_stores/memory_versions/redact": {
@@ -8101,7 +8269,7 @@
         "identifies",
         "time"
       ],
-      "word_count": 709,
+      "word_count": 711,
       "file_path": "docs/docs__en__api__beta__memory_stores__memory_versions__redact.md"
     },
     "/docs/en/api/beta/memory_stores/memory_versions/retrieve": {
@@ -8129,7 +8297,7 @@
         "mutation",
         "identifies"
       ],
-      "word_count": 721,
+      "word_count": 723,
       "file_path": "docs/docs__en__api__beta__memory_stores__memory_versions__retrieve.md"
     },
     "/docs/en/api/beta/memory_stores/retrieve": {
@@ -8157,7 +8325,7 @@
         "beta",
         "version"
       ],
-      "word_count": 355,
+      "word_count": 357,
       "file_path": "docs/docs__en__api__beta__memory_stores__retrieve.md"
     },
     "/docs/en/api/beta/memory_stores/update": {
@@ -8185,7 +8353,7 @@
         "keys",
         "chars"
       ],
-      "word_count": 460,
+      "word_count": 462,
       "file_path": "docs/docs__en__api__beta__memory_stores__update.md"
     },
     "/docs/en/api/beta/messages": {
@@ -8200,20 +8368,20 @@
         "cache",
         "when",
         "number",
-        "input",
-        "used",
         "request",
+        "input",
         "create",
+        "used",
         "control",
         "breakpoint",
-        "prompt",
         "output",
         "text",
+        "prompt",
+        "response",
         "server",
-        "search",
-        "intelligence"
+        "search"
       ],
-      "word_count": 118079,
+      "word_count": 120886,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -8224,24 +8392,24 @@
         "model",
         "tokens",
         "number",
+        "request",
         "block",
         "message",
         "content",
-        "request",
         "batch",
         "when",
         "cache",
         "input",
         "used",
         "response",
-        "requests",
-        "output",
-        "results",
         "which",
-        "server",
-        "create"
+        "output",
+        "requests",
+        "results",
+        "create",
+        "token"
       ],
-      "word_count": 31714,
+      "word_count": 32744,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -8269,7 +8437,7 @@
         "once",
         "specified"
       ],
-      "word_count": 644,
+      "word_count": 646,
       "file_path": "docs/docs__en__api__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/beta/messages/batches/create": {
@@ -8282,8 +8450,8 @@
         "when",
         "model",
         "cache",
-        "control",
         "create",
+        "control",
         "breakpoint",
         "true",
         "prompt",
@@ -8292,12 +8460,12 @@
         "message",
         "search",
         "returned",
-        "request",
         "system",
+        "request",
         "name",
         "schema"
       ],
-      "word_count": 10458,
+      "word_count": 10498,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -8325,7 +8493,7 @@
         "more",
         "about"
       ],
-      "word_count": 208,
+      "word_count": 210,
       "file_path": "docs/docs__en__api__beta__messages__batches__delete.md"
     },
     "/docs/en/api/beta/messages/batches/list": {
@@ -8353,7 +8521,7 @@
         "only",
         "ends"
       ],
-      "word_count": 706,
+      "word_count": 708,
       "file_path": "docs/docs__en__api__beta__messages__batches__list.md"
     },
     "/docs/en/api/beta/messages/batches/results": {
@@ -8362,26 +8530,26 @@
       "keywords": [
         "model",
         "tokens",
-        "number",
         "request",
+        "number",
         "tool",
         "input",
         "block",
-        "used",
         "response",
+        "used",
         "output",
         "cache",
         "token",
+        "which",
         "content",
         "results",
-        "which",
+        "text",
         "were",
         "server",
-        "text",
         "when",
         "message"
       ],
-      "word_count": 4803,
+      "word_count": 5050,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -8409,7 +8577,7 @@
         "specified",
         "once"
       ],
-      "word_count": 604,
+      "word_count": 606,
       "file_path": "docs/docs__en__api__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/beta/messages/count_tokens": {
@@ -8423,8 +8591,8 @@
         "model",
         "cache",
         "control",
-        "breakpoint",
         "create",
+        "breakpoint",
         "true",
         "blocks",
         "prompt",
@@ -8437,7 +8605,7 @@
         "name",
         "via"
       ],
-      "word_count": 9132,
+      "word_count": 9147,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -8452,20 +8620,20 @@
         "cache",
         "tokens",
         "create",
+        "request",
         "number",
         "control",
-        "request",
         "breakpoint",
         "true",
         "used",
         "prompt",
         "input",
         "blocks",
-        "only",
         "response",
+        "only",
         "server"
       ],
-      "word_count": 14434,
+      "word_count": 14737,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -8493,7 +8661,7 @@
         "content",
         "blocks"
       ],
-      "word_count": 2350,
+      "word_count": 2354,
       "file_path": "docs/docs__en__api__beta__models.md"
     },
     "/docs/en/api/beta/models/list": {
@@ -8521,7 +8689,7 @@
         "returns",
         "results"
       ],
-      "word_count": 767,
+      "word_count": 769,
       "file_path": "docs/docs__en__api__beta__models__list.md"
     },
     "/docs/en/api/beta/models/retrieve": {
@@ -8549,7 +8717,7 @@
         "parameters",
         "identifier"
       ],
-      "word_count": 645,
+      "word_count": 647,
       "file_path": "docs/docs__en__api__beta__models__retrieve.md"
     },
     "/docs/en/api/beta/sessions": {
@@ -8563,21 +8731,21 @@
         "content",
         "error",
         "text",
-        "thread",
         "model",
+        "thread",
         "timestamp",
         "rfc",
         "format",
         "user",
         "result",
         "identifier",
-        "execution",
         "image",
-        "when",
+        "execution",
         "document",
+        "when",
         "unique"
       ],
-      "word_count": 87143,
+      "word_count": 90579,
       "file_path": "docs/docs__en__api__beta__sessions.md"
     },
     "/docs/en/api/beta/sessions/archive": {
@@ -8602,10 +8770,10 @@
         "time",
         "coding",
         "memory",
-        "performance",
-        "custom"
+        "high",
+        "performance"
       ],
-      "word_count": 1877,
+      "word_count": 2005,
       "file_path": "docs/docs__en__api__beta__sessions__archive.md"
     },
     "/docs/en/api/beta/sessions/create": {
@@ -8625,15 +8793,15 @@
         "coding",
         "store",
         "agents",
+        "image",
+        "text",
+        "document",
         "memory",
         "version",
         "mcp",
-        "name",
-        "performance",
-        "skill",
-        "tools"
+        "name"
       ],
-      "word_count": 3351,
+      "word_count": 4206,
       "file_path": "docs/docs__en__api__beta__sessions__create.md"
     },
     "/docs/en/api/beta/sessions/delete": {
@@ -8658,7 +8826,7 @@
         "example",
         "response"
       ],
-      "word_count": 158,
+      "word_count": 160,
       "file_path": "docs/docs__en__api__beta__sessions__delete.md"
     },
     "/docs/en/api/beta/sessions/events": {
@@ -8686,7 +8854,7 @@
         "data",
         "client"
       ],
-      "word_count": 40902,
+      "word_count": 41361,
       "file_path": "docs/docs__en__api__beta__sessions__events.md"
     },
     "/docs/en/api/beta/sessions/events/list": {
@@ -8714,7 +8882,7 @@
         "user",
         "url"
       ],
-      "word_count": 6184,
+      "word_count": 6300,
       "file_path": "docs/docs__en__api__beta__sessions__events__list.md"
     },
     "/docs/en/api/beta/sessions/events/send": {
@@ -8742,7 +8910,7 @@
         "session",
         "type"
       ],
-      "word_count": 2650,
+      "word_count": 2652,
       "file_path": "docs/docs__en__api__beta__sessions__events__send.md"
     },
     "/docs/en/api/beta/sessions/events/stream": {
@@ -8770,7 +8938,7 @@
         "execution",
         "user"
       ],
-      "word_count": 6511,
+      "word_count": 6627,
       "file_path": "docs/docs__en__api__beta__sessions__events__stream.md"
     },
     "/docs/en/api/beta/sessions/list": {
@@ -8781,9 +8949,9 @@
         "agent",
         "sessions",
         "store",
+        "session",
         "model",
         "time",
-        "session",
         "user",
         "created",
         "memory",
@@ -8798,7 +8966,7 @@
         "when",
         "before"
       ],
-      "word_count": 2104,
+      "word_count": 2232,
       "file_path": "docs/docs__en__api__beta__sessions__list.md"
     },
     "/docs/en/api/beta/sessions/resources": {
@@ -8826,7 +8994,7 @@
         "system",
         "prompt"
       ],
-      "word_count": 3085,
+      "word_count": 3095,
       "file_path": "docs/docs__en__api__beta__sessions__resources.md"
     },
     "/docs/en/api/beta/sessions/resources/add": {
@@ -8854,7 +9022,7 @@
         "file",
         "mount"
       ],
-      "word_count": 227,
+      "word_count": 229,
       "file_path": "docs/docs__en__api__beta__sessions__resources__add.md"
     },
     "/docs/en/api/beta/sessions/resources/delete": {
@@ -8878,7 +9046,7 @@
         "example",
         "response"
       ],
-      "word_count": 159,
+      "word_count": 161,
       "file_path": "docs/docs__en__api__beta__sessions__resources__delete.md"
     },
     "/docs/en/api/beta/sessions/resources/list": {
@@ -8906,7 +9074,7 @@
         "response",
         "next"
       ],
-      "word_count": 521,
+      "word_count": 523,
       "file_path": "docs/docs__en__api__beta__sessions__resources__list.md"
     },
     "/docs/en/api/beta/sessions/resources/retrieve": {
@@ -8934,7 +9102,7 @@
         "attach",
         "time"
       ],
-      "word_count": 442,
+      "word_count": 444,
       "file_path": "docs/docs__en__api__beta__sessions__resources__retrieve.md"
     },
     "/docs/en/api/beta/sessions/resources/update": {
@@ -8962,7 +9130,7 @@
         "description",
         "snapshotted"
       ],
-      "word_count": 471,
+      "word_count": 473,
       "file_path": "docs/docs__en__api__beta__sessions__resources__update.md"
     },
     "/docs/en/api/beta/sessions/retrieve": {
@@ -8987,10 +9155,10 @@
         "time",
         "coding",
         "memory",
-        "performance",
-        "custom"
+        "high",
+        "performance"
       ],
-      "word_count": 1874,
+      "word_count": 2002,
       "file_path": "docs/docs__en__api__beta__sessions__retrieve.md"
     },
     "/docs/en/api/beta/sessions/threads": {
@@ -9018,7 +9186,7 @@
         "client",
         "confirmation"
       ],
-      "word_count": 23339,
+      "word_count": 24283,
       "file_path": "docs/docs__en__api__beta__sessions__threads.md"
     },
     "/docs/en/api/beta/sessions/threads/archive": {
@@ -9033,20 +9201,20 @@
         "intelligence",
         "calls",
         "confirmation",
-        "coding",
         "session",
+        "coding",
         "time",
         "agents",
         "resolved",
         "agent",
+        "high",
         "performance",
+        "effort",
         "cache",
         "tokens",
-        "frontier",
-        "running",
-        "permission"
+        "models"
       ],
-      "word_count": 1160,
+      "word_count": 1283,
       "file_path": "docs/docs__en__api__beta__sessions__threads__archive.md"
     },
     "/docs/en/api/beta/sessions/threads/events": {
@@ -9056,8 +9224,8 @@
         "event",
         "error",
         "session",
-        "tool",
         "content",
+        "tool",
         "agent",
         "thread",
         "identifier",
@@ -9074,7 +9242,7 @@
         "user",
         "url"
       ],
-      "word_count": 12473,
+      "word_count": 12818,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events.md"
     },
     "/docs/en/api/beta/sessions/threads/events/list": {
@@ -9082,8 +9250,8 @@
       "content_preview": "## List Session Thread Events  **get** `/v1/sessions/{session_id}/threads/{thread_id}/events`  List Session Thread Events  ### Path Parameters  - `session_id: string`  - `thread_id: string`  ### Query...",
       "keywords": [
         "event",
-        "error",
         "session",
+        "error",
         "tool",
         "content",
         "agent",
@@ -9102,12 +9270,12 @@
         "user",
         "url"
       ],
-      "word_count": 6065,
+      "word_count": 6181,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events__list.md"
     },
     "/docs/en/api/beta/sessions/threads/events/stream": {
       "title": "Untitled",
-      "content_preview": "## Stream Session Thread Events  **get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`  Stream Session Thread Events  ### Path Parameters  - `session_id: string`  - `thread_id: string`  ### H...",
+      "content_preview": "## Stream Session Thread Events  **get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`  Stream Session Thread Events  ### Path Parameters  - `session_id: string`  - `thread_id: string`  ### Q...",
       "keywords": [
         "event",
         "error",
@@ -9117,11 +9285,11 @@
         "tool",
         "thread",
         "identifier",
+        "when",
         "unique",
         "timestamp",
         "rfc",
         "format",
-        "when",
         "text",
         "result",
         "client",
@@ -9130,7 +9298,7 @@
         "execution",
         "user"
       ],
-      "word_count": 6406,
+      "word_count": 6635,
       "file_path": "docs/docs__en__api__beta__sessions__threads__events__stream.md"
     },
     "/docs/en/api/beta/sessions/threads/list": {
@@ -9145,20 +9313,20 @@
         "execution",
         "calls",
         "confirmation",
-        "coding",
         "session",
+        "coding",
         "time",
         "agents",
         "threads",
         "resolved",
         "agent",
+        "high",
         "performance",
+        "effort",
         "cache",
-        "tokens",
-        "parameters",
-        "frontier"
+        "tokens"
       ],
-      "word_count": 1188,
+      "word_count": 1311,
       "file_path": "docs/docs__en__api__beta__sessions__threads__list.md"
     },
     "/docs/en/api/beta/sessions/threads/retrieve": {
@@ -9173,20 +9341,20 @@
         "intelligence",
         "calls",
         "confirmation",
-        "coding",
         "session",
+        "coding",
         "time",
         "agents",
         "resolved",
         "agent",
+        "high",
         "performance",
+        "effort",
         "cache",
         "tokens",
-        "frontier",
-        "running",
-        "permission"
+        "models"
       ],
-      "word_count": 1157,
+      "word_count": 1280,
       "file_path": "docs/docs__en__api__beta__sessions__threads__retrieve.md"
     },
     "/docs/en/api/beta/sessions/update": {
@@ -9214,7 +9382,7 @@
         "approved",
         "without"
       ],
-      "word_count": 2580,
+      "word_count": 2708,
       "file_path": "docs/docs__en__api__beta__sessions__update.md"
     },
     "/docs/en/api/beta/skills": {
@@ -9242,7 +9410,7 @@
         "extracted",
         "name"
       ],
-      "word_count": 3567,
+      "word_count": 3585,
       "file_path": "docs/docs__en__api__beta__skills.md"
     },
     "/docs/en/api/beta/skills/create": {
@@ -9270,7 +9438,7 @@
         "format",
         "length"
       ],
-      "word_count": 279,
+      "word_count": 281,
       "file_path": "docs/docs__en__api__beta__skills__create.md"
     },
     "/docs/en/api/beta/skills/delete": {
@@ -9298,7 +9466,7 @@
         "want",
         "returns"
       ],
-      "word_count": 180,
+      "word_count": 182,
       "file_path": "docs/docs__en__api__beta__skills__delete.md"
     },
     "/docs/en/api/beta/skills/list": {
@@ -9326,7 +9494,7 @@
         "response",
         "user"
       ],
-      "word_count": 434,
+      "word_count": 436,
       "file_path": "docs/docs__en__api__beta__skills__list.md"
     },
     "/docs/en/api/beta/skills/retrieve": {
@@ -9354,7 +9522,7 @@
         "path",
         "optional"
       ],
-      "word_count": 292,
+      "word_count": 294,
       "file_path": "docs/docs__en__api__beta__skills__retrieve.md"
     },
     "/docs/en/api/beta/skills/versions": {
@@ -9382,7 +9550,7 @@
         "time",
         "each"
       ],
-      "word_count": 1895,
+      "word_count": 1905,
       "file_path": "docs/docs__en__api__beta__skills__versions.md"
     },
     "/docs/en/api/beta/skills/versions/create": {
@@ -9410,7 +9578,7 @@
         "upload",
         "directory"
       ],
-      "word_count": 311,
+      "word_count": 313,
       "file_path": "docs/docs__en__api__beta__skills__versions__create.md"
     },
     "/docs/en/api/beta/skills/versions/delete": {
@@ -9438,7 +9606,7 @@
         "over",
         "time"
       ],
-      "word_count": 203,
+      "word_count": 205,
       "file_path": "docs/docs__en__api__beta__skills__versions__delete.md"
     },
     "/docs/en/api/beta/skills/versions/download": {
@@ -9466,7 +9634,7 @@
         "time",
         "each"
       ],
-      "word_count": 163,
+      "word_count": 165,
       "file_path": "docs/docs__en__api__beta__skills__versions__download.md"
     },
     "/docs/en/api/beta/skills/versions/list": {
@@ -9494,7 +9662,7 @@
         "response",
         "header"
       ],
-      "word_count": 398,
+      "word_count": 400,
       "file_path": "docs/docs__en__api__beta__skills__versions__list.md"
     },
     "/docs/en/api/beta/skills/versions/retrieve": {
@@ -9522,7 +9690,7 @@
         "unix",
         "epoch"
       ],
-      "word_count": 322,
+      "word_count": 324,
       "file_path": "docs/docs__en__api__beta__skills__versions__retrieve.md"
     },
     "/docs/en/api/beta/tunnels": {
@@ -9550,7 +9718,7 @@
         "mcp",
         "research"
       ],
-      "word_count": 3262,
+      "word_count": 3282,
       "file_path": "docs/docs__en__api__beta__tunnels.md"
     },
     "/docs/en/api/beta/tunnels/archive": {
@@ -9578,7 +9746,7 @@
         "requires",
         "may"
       ],
-      "word_count": 312,
+      "word_count": 314,
       "file_path": "docs/docs__en__api__beta__tunnels__archive.md"
     },
     "/docs/en/api/beta/tunnels/certificates": {
@@ -9606,7 +9774,7 @@
         "sha",
         "fingerprint"
       ],
-      "word_count": 1327,
+      "word_count": 1335,
       "file_path": "docs/docs__en__api__beta__tunnels__certificates.md"
     },
     "/docs/en/api/beta/tunnels/certificates/archive": {
@@ -9634,7 +9802,7 @@
         "period",
         "supersedes"
       ],
-      "word_count": 303,
+      "word_count": 305,
       "file_path": "docs/docs__en__api__beta__tunnels__certificates__archive.md"
     },
     "/docs/en/api/beta/tunnels/certificates/create": {
@@ -9662,7 +9830,7 @@
         "deprecation",
         "period"
       ],
-      "word_count": 323,
+      "word_count": 325,
       "file_path": "docs/docs__en__api__beta__tunnels__certificates__create.md"
     },
     "/docs/en/api/beta/tunnels/certificates/list": {
@@ -9690,7 +9858,7 @@
         "cursor",
         "response"
       ],
-      "word_count": 339,
+      "word_count": 341,
       "file_path": "docs/docs__en__api__beta__tunnels__certificates__list.md"
     },
     "/docs/en/api/beta/tunnels/certificates/retrieve": {
@@ -9718,7 +9886,7 @@
         "supersedes",
         "admin"
       ],
-      "word_count": 269,
+      "word_count": 271,
       "file_path": "docs/docs__en__api__beta__tunnels__certificates__retrieve.md"
     },
     "/docs/en/api/beta/tunnels/create": {
@@ -9746,7 +9914,7 @@
         "research",
         "preview"
       ],
-      "word_count": 314,
+      "word_count": 316,
       "file_path": "docs/docs__en__api__beta__tunnels__create.md"
     },
     "/docs/en/api/beta/tunnels/list": {
@@ -9774,7 +9942,7 @@
         "rfc",
         "format"
       ],
-      "word_count": 348,
+      "word_count": 350,
       "file_path": "docs/docs__en__api__beta__tunnels__list.md"
     },
     "/docs/en/api/beta/tunnels/retrieve": {
@@ -9802,7 +9970,7 @@
         "period",
         "supersedes"
       ],
-      "word_count": 273,
+      "word_count": 275,
       "file_path": "docs/docs__en__api__beta__tunnels__retrieve.md"
     },
     "/docs/en/api/beta/tunnels/reveal_token": {
@@ -9830,7 +9998,7 @@
         "deprecation",
         "period"
       ],
-      "word_count": 261,
+      "word_count": 263,
       "file_path": "docs/docs__en__api__beta__tunnels__reveal_token.md"
     },
     "/docs/en/api/beta/tunnels/rotate_token": {
@@ -9858,7 +10026,7 @@
         "requires",
         "may"
       ],
-      "word_count": 272,
+      "word_count": 274,
       "file_path": "docs/docs__en__api__beta__tunnels__rotate_token.md"
     },
     "/docs/en/api/beta/user_profiles": {
@@ -9886,7 +10054,7 @@
         "header",
         "chars"
       ],
-      "word_count": 2167,
+      "word_count": 2177,
       "file_path": "docs/docs__en__api__beta__user_profiles.md"
     },
     "/docs/en/api/beta/user_profiles/create": {
@@ -9914,7 +10082,7 @@
         "optional",
         "enforced"
       ],
-      "word_count": 480,
+      "word_count": 482,
       "file_path": "docs/docs__en__api__beta__user_profiles__create.md"
     },
     "/docs/en/api/beta/user_profiles/create_enrollment_url": {
@@ -9942,7 +10110,7 @@
         "always",
         "send"
       ],
-      "word_count": 179,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__beta__user_profiles__create_enrollment_url.md"
     },
     "/docs/en/api/beta/user_profiles/list": {
@@ -9970,7 +10138,7 @@
         "chars",
         "entity"
       ],
-      "word_count": 395,
+      "word_count": 397,
       "file_path": "docs/docs__en__api__beta__user_profiles__list.md"
     },
     "/docs/en/api/beta/user_profiles/retrieve": {
@@ -9998,7 +10166,7 @@
         "trust",
         "path"
       ],
-      "word_count": 345,
+      "word_count": 347,
       "file_path": "docs/docs__en__api__beta__user_profiles__retrieve.md"
     },
     "/docs/en/api/beta/user_profiles/update": {
@@ -10026,7 +10194,7 @@
         "header",
         "present"
       ],
-      "word_count": 492,
+      "word_count": 494,
       "file_path": "docs/docs__en__api__beta__user_profiles__update.md"
     },
     "/docs/en/api/beta/vaults": {
@@ -10054,7 +10222,7 @@
         "header",
         "environment"
       ],
-      "word_count": 9566,
+      "word_count": 9592,
       "file_path": "docs/docs__en__api__beta__vaults.md"
     },
     "/docs/en/api/beta/vaults/archive": {
@@ -10082,7 +10250,7 @@
         "during",
         "sessions"
       ],
-      "word_count": 228,
+      "word_count": 230,
       "file_path": "docs/docs__en__api__beta__vaults__archive.md"
     },
     "/docs/en/api/beta/vaults/create": {
@@ -10110,7 +10278,7 @@
         "beta",
         "version"
       ],
-      "word_count": 273,
+      "word_count": 275,
       "file_path": "docs/docs__en__api__beta__vaults__create.md"
     },
     "/docs/en/api/beta/vaults/credentials": {
@@ -10138,7 +10306,7 @@
         "managed",
         "agents"
       ],
-      "word_count": 8003,
+      "word_count": 8017,
       "file_path": "docs/docs__en__api__beta__vaults__credentials.md"
     },
     "/docs/en/api/beta/vaults/credentials/archive": {
@@ -10166,7 +10334,7 @@
         "url",
         "refresh"
       ],
-      "word_count": 625,
+      "word_count": 627,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__archive.md"
     },
     "/docs/en/api/beta/vaults/credentials/create": {
@@ -10194,7 +10362,7 @@
         "creating",
         "timestamp"
       ],
-      "word_count": 1127,
+      "word_count": 1129,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/beta/vaults/credentials/delete": {
@@ -10219,7 +10387,7 @@
         "example",
         "response"
       ],
-      "word_count": 164,
+      "word_count": 166,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__delete.md"
     },
     "/docs/en/api/beta/vaults/credentials/list": {
@@ -10247,7 +10415,7 @@
         "parameters",
         "whether"
       ],
-      "word_count": 672,
+      "word_count": 674,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__list.md"
     },
     "/docs/en/api/beta/vaults/credentials/mcp_oauth_validate": {
@@ -10275,7 +10443,7 @@
         "outcome",
         "exchange"
       ],
-      "word_count": 381,
+      "word_count": 383,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md"
     },
     "/docs/en/api/beta/vaults/credentials/retrieve": {
@@ -10303,7 +10471,7 @@
         "returned",
         "url"
       ],
-      "word_count": 622,
+      "word_count": 624,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__retrieve.md"
     },
     "/docs/en/api/beta/vaults/credentials/update": {
@@ -10331,7 +10499,7 @@
         "rfc",
         "format"
       ],
-      "word_count": 1048,
+      "word_count": 1050,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/beta/vaults/delete": {
@@ -10356,7 +10524,7 @@
         "example",
         "response"
       ],
-      "word_count": 161,
+      "word_count": 163,
       "file_path": "docs/docs__en__api__beta__vaults__delete.md"
     },
     "/docs/en/api/beta/vaults/list": {
@@ -10384,7 +10552,7 @@
         "archived",
         "number"
       ],
-      "word_count": 274,
+      "word_count": 276,
       "file_path": "docs/docs__en__api__beta__vaults__list.md"
     },
     "/docs/en/api/beta/vaults/retrieve": {
@@ -10412,7 +10580,7 @@
         "sessions",
         "unique"
       ],
-      "word_count": 225,
+      "word_count": 227,
       "file_path": "docs/docs__en__api__beta__vaults__retrieve.md"
     },
     "/docs/en/api/beta/vaults/update": {
@@ -10440,7 +10608,7 @@
         "want",
         "body"
       ],
-      "word_count": 281,
+      "word_count": 283,
       "file_path": "docs/docs__en__api__beta__vaults__update.md"
     },
     "/docs/en/api/beta/webhooks": {
@@ -10451,24 +10619,24 @@
         "triggered",
         "session",
         "vault",
-        "deployment",
         "webhook",
         "beta",
+        "deployment",
         "data",
         "credential",
         "agent",
+        "environment",
         "run",
         "owns",
         "thread",
+        "memory",
+        "store",
         "refers",
         "created",
         "archived",
-        "deleted",
-        "status",
-        "updated",
-        "idled"
+        "deleted"
       ],
-      "word_count": 5224,
+      "word_count": 6156,
       "file_path": "docs/docs__en__api__beta__webhooks.md"
     },
     "/docs/en/api/claude-code/routines-fire": {
@@ -14593,7 +14761,7 @@
         "text",
         "complete"
       ],
-      "word_count": 1315,
+      "word_count": 1317,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -14621,7 +14789,7 @@
         "running",
         "complete"
       ],
-      "word_count": 1021,
+      "word_count": 1023,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/compliance": {
@@ -28194,17 +28362,17 @@
         "breakpoint",
         "create",
         "search",
-        "number",
-        "results",
         "text",
+        "number",
+        "request",
+        "results",
         "cited",
         "used",
         "true",
         "invocation",
-        "input",
-        "prompt"
+        "input"
       ],
-      "word_count": 79956,
+      "word_count": 81114,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -28218,21 +28386,21 @@
         "block",
         "content",
         "number",
+        "request",
         "requests",
         "when",
         "tokens",
         "processing",
         "results",
-        "request",
+        "response",
         "used",
         "cache",
-        "response",
         "invocation",
+        "which",
         "input",
-        "only",
-        "create"
+        "only"
       ],
-      "word_count": 20892,
+      "word_count": 21348,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -28353,26 +28521,26 @@
       "keywords": [
         "model",
         "tool",
-        "tokens",
         "request",
+        "tokens",
         "block",
         "results",
-        "invocation",
         "response",
+        "invocation",
         "number",
         "output",
         "generated",
         "input",
+        "text",
         "intelligence",
         "message",
         "used",
         "directly",
-        "text",
         "cited",
         "always",
         "coding"
       ],
-      "word_count": 2793,
+      "word_count": 2907,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -28448,15 +28616,15 @@
         "used",
         "search",
         "blocks",
+        "request",
         "tokens",
         "only",
         "prompt",
         "returned",
         "input",
-        "number",
-        "system"
+        "number"
       ],
-      "word_count": 9774,
+      "word_count": 9906,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -28484,7 +28652,7 @@
         "api",
         "object"
       ],
-      "word_count": 2242,
+      "word_count": 2246,
       "file_path": "docs/docs__en__api__models.md"
     },
     "/docs/en/api/models/list": {
@@ -28512,7 +28680,7 @@
         "returns",
         "results"
       ],
-      "word_count": 732,
+      "word_count": 734,
       "file_path": "docs/docs__en__api__models__list.md"
     },
     "/docs/en/api/models/retrieve": {
@@ -28540,7 +28708,7 @@
         "identifier",
         "header"
       ],
-      "word_count": 610,
+      "word_count": 612,
       "file_path": "docs/docs__en__api__models__retrieve.md"
     },
     "/docs/en/api/overview": {
@@ -45466,7 +45634,7 @@
     },
     "/docs/en/build-with-claude/prompt-engineering/overview": {
       "title": "Prompt engineering overview",
-      "content_preview": "# Prompt engineering overview  Learn when prompt engineering is the right solution, and find Claude prompting techniques, Console prompting tools, and interactive tutorials.  ---  ## Before prompt engineering  This guide assumes that you have:  1. A clear definition of the success criteria for your",
+      "content_preview": "# Prompt engineering overview  Learn when prompt engineering is the right solution, and find Claude prompting techniques and interactive tutorials.  ---  ## Before prompt engineering  This guide assum...",
       "keywords": [
         "prompt",
         "engineering",
@@ -45485,11 +45653,11 @@
         "href",
         "practices",
         "techniques",
-        "console",
         "first",
-        "build"
+        "https",
+        "google"
       ],
-      "word_count": 306,
+      "word_count": 283,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__overview.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5": {
@@ -45576,34 +45744,6 @@
       "word_count": 2375,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__prompting-claude-sonnet-5.md"
     },
-    "/docs/en/build-with-claude/prompt-engineering/prompting-tools": {
-      "title": "Console prompting tools",
-      "content_preview": "# Console prompting tools  Draft, template, and refine prompts in the Claude Console with the prompt generator, prompt templates and variables, and the prompt improver.  ---  The Claude Console offers...",
-      "keywords": [
-        "prompt",
-        "claude",
-        "improver",
-        "template",
-        "templates",
-        "examples",
-        "prompts",
-        "variables",
-        "generator",
-        "example",
-        "console",
-        "note",
-        "outputs",
-        "prompting",
-        "content",
-        "test",
-        "reasoning",
-        "them",
-        "extended",
-        "thinking"
-      ],
-      "word_count": 1415,
-      "file_path": "docs/docs__en__build-with-claude__prompt-engineering__prompting-tools.md"
-    },
     "/docs/en/build-with-claude/refusals-and-fallback": {
       "title": "Refusals and fallback",
       "content_preview": "# Refusals and fallback  How Claude Fable 5 returns classifier refusals and how to retry refused requests on a fallback model.  ---  Claude Fable 5 includes safety classifiers that can decline a reque...",
@@ -45657,7 +45797,7 @@
         "when",
         "must"
       ],
-      "word_count": 7780,
+      "word_count": 7791,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -45853,7 +45993,7 @@
         "resized",
         "limits"
       ],
-      "word_count": 4271,
+      "word_count": 4267,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -46077,7 +46217,7 @@
         "messages",
         "message"
       ],
-      "word_count": 1672,
+      "word_count": 1669,
       "file_path": "docs/docs__en__cli-sdks-libraries__libraries__openai-sdk.md"
     },
     "/docs/en/cli-sdks-libraries/middleware": {
@@ -46362,7 +46502,7 @@
     },
     "/docs/en/get-started": {
       "title": "Get started with Claude",
-      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  * An Anthropic [Console account](/) * An [API key](/settings/keys)  ## Ca...",
+      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  * A [Claude Console account](https://platform.claude.com) * An [API key](...",
       "keywords": [
         "step",
         "title",
@@ -46373,9 +46513,9 @@
         "key",
         "code",
         "sdk",
+        "claude",
         "set",
         "project",
-        "claude",
         "environment",
         "export",
         "variable",
@@ -46441,7 +46581,7 @@
         "overview",
         "built"
       ],
-      "word_count": 501,
+      "word_count": 498,
       "file_path": "docs/docs__en__intro.md"
     },
     "/docs/en/manage-claude/access-transparency": {
@@ -46749,7 +46889,7 @@
         "azure",
         "enterprise"
       ],
-      "word_count": 1624,
+      "word_count": 1620,
       "file_path": "docs/docs__en__manage-claude__cmek.md"
     },
     "/docs/en/manage-claude/compliance-activity-feed": {
@@ -47429,27 +47569,27 @@
       "content_preview": "# Define your agent  Create a reusable, versioned agent configuration.  ---  An agent is a reusable, versioned configuration that defines persona and capabilities. It bundles the model, system prompt,...",
       "keywords": [
         "agent",
-        "version",
+        "update",
         "tools",
+        "codegroup",
+        "version",
         "agents",
+        "new",
         "claude",
         "reference",
-        "codegroup",
-        "new",
+        "fields",
         "card",
         "configuration",
-        "update",
+        "model",
         "session",
-        "sessions",
-        "managed",
-        "fields",
-        "cli",
         "see",
+        "level",
+        "when",
         "create",
-        "reusable",
-        "mcp"
+        "sessions",
+        "managed"
       ],
-      "word_count": 1772,
+      "word_count": 2087,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -47458,6 +47598,7 @@
       "keywords": [
         "sandbox",
         "databases",
+        "sandboxes",
         "note",
         "client",
         "tools",
@@ -47466,18 +47607,17 @@
         "installed",
         "utilities",
         "available",
-        "sandboxes",
         "beta",
         "database",
         "connecting",
         "external",
+        "default",
         "run",
         "managed",
         "infrastructure",
-        "programming",
-        "languages"
+        "programming"
       ],
-      "word_count": 406,
+      "word_count": 419,
       "file_path": "docs/docs__en__managed-agents__cloud-sandboxes-reference.md"
     },
     "/docs/en/managed-agents/define-outcomes": {
@@ -47487,53 +47627,53 @@
         "outcome",
         "session",
         "rubric",
-        "agent",
         "files",
-        "grader",
-        "event",
         "evaluation",
+        "agent",
         "note",
+        "event",
+        "grader",
         "codegroup",
-        "send",
         "events",
         "beta",
+        "send",
+        "when",
+        "managed",
+        "agents",
+        "create",
         "card",
         "what",
-        "iteration",
-        "emitted",
-        "until",
-        "automatically",
-        "criteria"
+        "iteration"
       ],
-      "word_count": 3267,
+      "word_count": 3351,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/dreams": {
       "title": "Dreams",
       "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip>   Dreaming is a research preview feature. [Request access](https://claude.com/form/claud...",
       "keywords": [
-        "store",
         "dream",
+        "store",
         "memory",
+        "input",
         "output",
         "codegroup",
         "pipeline",
-        "input",
         "dreams",
         "sessions",
         "dreaming",
         "session",
-        "archived",
-        "api",
         "stores",
+        "archived",
         "what",
+        "api",
         "run",
         "archiving",
         "claude",
         "new",
         "tip"
       ],
-      "word_count": 2401,
+      "word_count": 2445,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -47571,25 +47711,25 @@
         "event",
         "session",
         "events",
+        "stream",
         "codegroup",
         "agent",
-        "stream",
+        "thread",
         "only",
-        "tool",
-        "system",
+        "deltas",
         "preview",
         "buffered",
-        "send",
-        "note",
-        "deltas",
+        "previews",
+        "tool",
+        "system",
         "when",
-        "each",
-        "tab",
-        "history",
+        "connection",
         "text",
-        "model"
+        "each",
+        "send",
+        "turn"
       ],
-      "word_count": 8280,
+      "word_count": 9904,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -47597,27 +47737,27 @@
       "content_preview": "# Adding files  Upload files and mount them in your sandbox for reading and processing.  ---  You can provide files to your agent by uploading them through the Files API and mounting them in the sessi...",
       "keywords": [
         "files",
-        "codegroup",
         "session",
         "file",
+        "codegroup",
         "agent",
         "them",
         "sandbox",
         "api",
         "note",
+        "paths",
         "adding",
         "mount",
         "beta",
         "using",
         "uploaded",
         "these",
-        "paths",
         "upload",
         "uploading",
         "mounting",
         "header"
       ],
-      "word_count": 1817,
+      "word_count": 1856,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -47659,21 +47799,21 @@
         "servers",
         "session",
         "agents",
+        "authentication",
         "see",
+        "when",
+        "credential",
         "managed",
         "each",
         "credentials",
         "array",
-        "when",
         "must",
-        "credential",
         "card",
-        "authentication",
         "entry",
         "toolset",
         "tool"
       ],
-      "word_count": 1404,
+      "word_count": 1467,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -47742,22 +47882,22 @@
         "coordinator",
         "codegroup",
         "agents",
-        "tab",
+        "stream",
         "primary",
+        "events",
+        "tab",
+        "own",
         "threads",
         "mcp",
-        "events",
+        "tool",
         "servers",
         "activity",
-        "tool",
+        "roster",
         "multiagent",
         "multiple",
-        "work",
-        "when",
-        "copies",
-        "roster"
+        "work"
       ],
-      "word_count": 4058,
+      "word_count": 4273,
       "file_path": "docs/docs__en__managed-agents__multiagent-orchestration.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -47861,13 +48001,13 @@
         "session",
         "step",
         "codegroup",
+        "claude",
         "run",
         "events",
         "tool",
         "icon",
         "href",
-        "docs",
-        "claude"
+        "docs"
       ],
       "word_count": 2428,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
@@ -47878,26 +48018,26 @@
       "keywords": [
         "agent",
         "claude",
-        "event",
         "session",
+        "event",
+        "thread",
         "mcp",
         "tab",
+        "stream",
+        "only",
         "events",
         "agents",
         "see",
-        "stream",
         "type",
         "description",
-        "tool",
-        "multiagent",
         "managed",
-        "only",
         "title",
+        "tool",
         "worker",
         "branding",
         "deltas"
       ],
-      "word_count": 1165,
+      "word_count": 1322,
       "file_path": "docs/docs__en__managed-agents__reference.md"
     },
     "/docs/en/managed-agents/scheduled-deployments": {
@@ -47908,24 +48048,24 @@
         "run",
         "codegroup",
         "session",
-        "deployments",
         "scheduled",
+        "deployments",
         "schedule",
+        "agent",
         "defaultlanguage",
         "cli",
-        "api",
-        "agent",
-        "cron",
         "runs",
+        "api",
+        "cron",
         "archived",
+        "automatically",
         "event",
+        "next",
+        "trigger",
         "lifecycle",
-        "events",
-        "create",
-        "claude",
-        "see"
+        "events"
       ],
-      "word_count": 2067,
+      "word_count": 2106,
       "file_path": "docs/docs__en__managed-agents__scheduled-deployments.md"
     },
     "/docs/en/managed-agents/self-hosted-sandboxes-security": {
@@ -47936,13 +48076,13 @@
         "anthropic",
         "environment",
         "key",
+        "worker",
         "session",
         "image",
         "tool",
         "tools",
         "inside",
         "content",
-        "worker",
         "work",
         "queue",
         "what",
@@ -47953,7 +48093,7 @@
         "each",
         "boundary"
       ],
-      "word_count": 399,
+      "word_count": 416,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes-security.md"
     },
     "/docs/en/managed-agents/self-hosted-sandboxes": {
@@ -47963,25 +48103,25 @@
         "worker",
         "tool",
         "session",
+        "agent",
         "mcp",
         "environment",
         "tools",
-        "agent",
         "work",
         "step",
         "codegroup",
-        "server",
         "key",
-        "title",
         "sandbox",
-        "sdk",
+        "server",
+        "title",
+        "self",
         "anthropic",
         "when",
-        "custom",
-        "self",
-        "host"
+        "sdk",
+        "hosted",
+        "custom"
       ],
-      "word_count": 7530,
+      "word_count": 7633,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/session-operations": {
@@ -48009,7 +48149,7 @@
         "back",
         "when"
       ],
-      "word_count": 2163,
+      "word_count": 2167,
       "file_path": "docs/docs__en__managed-agents__session-operations.md"
     },
     "/docs/en/managed-agents/sessions": {
@@ -48018,26 +48158,26 @@
       "keywords": [
         "session",
         "agent",
+        "event",
+        "events",
         "codegroup",
+        "create",
         "version",
         "overrides",
-        "create",
+        "one",
         "agents",
-        "field",
-        "card",
-        "managed",
         "see",
+        "list",
+        "field",
+        "managed",
         "defaultlanguage",
         "cli",
-        "event",
-        "pass",
-        "object",
-        "configuration",
-        "model",
-        "tool",
-        "value"
+        "same",
+        "request",
+        "card",
+        "send"
       ],
-      "word_count": 2011,
+      "word_count": 3138,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -48062,8 +48202,8 @@
         "learn",
         "pre",
         "built",
-        "upload",
-        "note"
+        "anthropic",
+        "upload"
       ],
       "word_count": 1248,
       "file_path": "docs/docs__en__managed-agents__skills.md"
@@ -48093,7 +48233,7 @@
         "each",
         "codegroup"
       ],
-      "word_count": 1654,
+      "word_count": 1657,
       "file_path": "docs/docs__en__managed-agents__tools.md"
     },
     "/docs/en/managed-agents/vaults": {
@@ -48109,19 +48249,19 @@
         "codegroup",
         "environment",
         "when",
-        "agent",
-        "mcp",
         "token",
+        "agent",
+        "note",
+        "mcp",
         "variable",
         "which",
         "key",
         "refresh",
-        "note",
         "api",
         "substituted",
         "tab"
       ],
-      "word_count": 3762,
+      "word_count": 3824,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {
@@ -48130,26 +48270,26 @@
       "keywords": [
         "event",
         "events",
-        "session",
-        "agent",
-        "tab",
-        "deployment",
-        "run",
         "endpoint",
-        "fetch",
+        "tab",
         "archived",
+        "agent",
+        "fetch",
+        "session",
+        "deployment",
+        "delivery",
+        "run",
         "object",
         "trigger",
-        "vault",
-        "created",
-        "credential",
-        "scheduled",
-        "delivery",
-        "title",
-        "error",
-        "deleted"
+        "environment",
+        "same",
+        "every",
+        "deleted",
+        "there",
+        "store",
+        "when"
       ],
-      "word_count": 1720,
+      "word_count": 2311,
       "file_path": "docs/docs__en__managed-agents__webhooks.md"
     },
     "/docs/en/prompt-library": {
@@ -48186,8 +48326,8 @@
       "keywords": [
         "claude",
         "api",
-        "beta",
         "now",
+        "beta",
         "opus",
         "tool",
         "more",
@@ -48195,17 +48335,17 @@
         "sonnet",
         "launched",
         "header",
-        "available",
         "see",
+        "available",
         "models",
         "token",
         "thinking",
         "our",
         "learn",
-        "new",
-        "support"
+        "support",
+        "managed"
       ],
-      "word_count": 8356,
+      "word_count": 8578,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
@@ -50055,34 +50195,6 @@
       ],
       "word_count": 14531,
       "file_path": "docs/docs__en__test-and-evaluate__develop-tests.md"
-    },
-    "/docs/en/test-and-evaluate/eval-tool": {
-      "title": "Using the Evaluation Tool",
-      "content_preview": "# Using the Evaluation Tool  The [Claude Console](/dashboard) features an **Evaluation tool** that allows you to test your prompts under various scenarios.  ---  ## Accessing the Evaluate Feature  To ...",
-      "keywords": [
-        "prompt",
-        "test",
-        "evaluation",
-        "generate",
-        "step",
-        "claude",
-        "prompts",
-        "cases",
-        "tool",
-        "title",
-        "case",
-        "console",
-        "feature",
-        "screen",
-        "click",
-        "more",
-        "evaluate",
-        "tip",
-        "steps",
-        "button"
-      ],
-      "word_count": 827,
-      "file_path": "docs/docs__en__test-and-evaluate__eval-tool.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals": {
       "title": "Handle streaming refusals",

@@ -434,109 +434,635 @@ def get_quote(make, model, year, mileage, driver_age):
 
 It's hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](/docs/en/test-and-evaluate/develop-tests). Build a small application using the prompt, the Anthropic SDK, and Streamlit for a user interface.
 
-In a file called `chatbot.py`, start by setting up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
+In a file called `chatbot.py` (or the equivalent module in your language), set up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
 
-The class should have two main methods: `generate_message` and `process_user_input`.
+The class should have two main methods: one that calls the API to generate a message, and one that processes each incoming user input.
 
-```python
-from anthropic import Anthropic
-from config import IDENTITY, TOOLS, MODEL, get_quote
-from dotenv import load_dotenv
+<CodeGroup exclude="shell">
+  ```python Python
+  # In your chatbot.py, import these from the config.py you wrote above:
+  # from config import IDENTITY, TOOLS, MODEL, get_quote
+  from anthropic import Anthropic
+  from dotenv import load_dotenv
 
-load_dotenv()
+  load_dotenv()
 
 
-class ChatBot:
-    def __init__(self, session_state):
-        self.anthropic = Anthropic()
-        self.session_state = session_state
+  class ChatBot:
+      def __init__(self, session_state):
+          self.anthropic = Anthropic()
+          self.session_state = session_state
 
-    def generate_message(
-        self,
+      def generate_message(
+          self,
+          messages,
+          max_tokens,
+      ):
+          try:
+              response = self.anthropic.messages.create(
+                  model=MODEL,
+                  system=IDENTITY,
+                  max_tokens=max_tokens,
+                  messages=messages,
+                  tools=TOOLS,
+              )
+              return response
+          except Exception as e:
+              return {"error": str(e)}
+
+      def process_user_input(self, user_input):
+          self.session_state.messages.append({"role": "user", "content": user_input})
+
+          response_message = self.generate_message(
+              messages=self.session_state.messages,
+              max_tokens=2048,
+          )
+
+          if "error" in response_message:
+              return f"An error occurred: {response_message['error']}"
+
+          if response_message.content[-1].type == "tool_use":
+              tool_use = response_message.content[-1]
+              func_name = tool_use.name
+              func_params = tool_use.input
+              tool_use_id = tool_use.id
+
+              result = self.handle_tool_use(func_name, func_params)
+              self.session_state.messages.append(
+                  {"role": "assistant", "content": response_message.content}
+              )
+              self.session_state.messages.append(
+                  {
+                      "role": "user",
+                      "content": [
+                          {
+                              "type": "tool_result",
+                              "tool_use_id": tool_use_id,
+                              "content": f"{result}",
+                          }
+                      ],
+                  }
+              )
+
+              follow_up_response = self.generate_message(
+                  messages=self.session_state.messages,
+                  max_tokens=2048,
+              )
+
+              if "error" in follow_up_response:
+                  return f"An error occurred: {follow_up_response['error']}"
+
+              response_text = follow_up_response.content[0].text
+              self.session_state.messages.append(
+                  {"role": "assistant", "content": response_text}
+              )
+              return response_text
+
+          elif response_message.content[0].type == "text":
+              response_text = response_message.content[0].text
+              self.session_state.messages.append(
+                  {"role": "assistant", "content": response_text}
+              )
+              return response_text
+
+          else:
+              raise Exception("An error occurred: Unexpected response type")
+
+      def handle_tool_use(self, func_name, func_params):
+          if func_name == "get_quote":
+              premium = get_quote(**func_params)
+              return f"Quote generated: ${premium:.2f} per month"
+
+          raise Exception("An unexpected tool was used")
+  ```
+
+  ```typescript TypeScript
+  import Anthropic from "@anthropic-ai/sdk";
+
+  class ChatBot {
+    // IDENTITY, MODEL, TOOLS, and getQuote mirror the config.py values defined
+    // earlier in this guide (shown in Python).
+    readonly anthropic = new Anthropic();
+    readonly messages: Anthropic.MessageParam[] = [];
+
+    async generateMessage(
+      messages: Anthropic.MessageParam[],
+      maxTokens: number
+    ): Promise<Anthropic.Message> {
+      return this.anthropic.messages.create({
+        model: MODEL,
+        system: IDENTITY,
+        max_tokens: maxTokens,
         messages,
-        max_tokens,
-    ):
-        try:
-            response = self.anthropic.messages.create(
-                model=MODEL,
-                system=IDENTITY,
-                max_tokens=max_tokens,
-                messages=messages,
-                tools=TOOLS,
-            )
-            return response
-        except Exception as e:
-            return {"error": str(e)}
+        tools: TOOLS
+      });
+    }
 
-    def process_user_input(self, user_input):
-        self.session_state.messages.append({"role": "user", "content": user_input})
+    async processUserInput(userInput: string): Promise<string> {
+      this.messages.push({ role: "user", content: userInput });
 
-        response_message = self.generate_message(
-            messages=self.session_state.messages,
-            max_tokens=2048,
-        )
+      const responseMessage = await this.generateMessage(this.messages, 2048);
 
-        if "error" in response_message:
-            return f"An error occurred: {response_message['error']}"
+      const lastBlock = responseMessage.content.at(-1);
+      if (lastBlock?.type === "tool_use") {
+        const toolResult = this.handleToolUse(lastBlock.name, lastBlock.input);
 
-        if response_message.content[-1].type == "tool_use":
-            tool_use = response_message.content[-1]
-            func_name = tool_use.name
-            func_params = tool_use.input
-            tool_use_id = tool_use.id
+        this.messages.push({ role: "assistant", content: responseMessage.content });
+        this.messages.push({
+          role: "user",
+          content: [{ type: "tool_result", tool_use_id: lastBlock.id, content: toolResult }]
+        });
 
-            result = self.handle_tool_use(func_name, func_params)
-            self.session_state.messages.append(
-                {"role": "assistant", "content": response_message.content}
-            )
-            self.session_state.messages.append(
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "tool_result",
-                            "tool_use_id": tool_use_id,
-                            "content": f"{result}",
-                        }
-                    ],
-                }
-            )
+        const followUpResponse = await this.generateMessage(this.messages, 2048);
 
-            follow_up_response = self.generate_message(
-                messages=self.session_state.messages,
-                max_tokens=2048,
-            )
+        const followUpBlock = followUpResponse.content[0];
+        if (followUpBlock.type !== "text") {
+          throw new Error("An error occurred: Unexpected response type");
+        }
+        this.messages.push({ role: "assistant", content: followUpBlock.text });
+        return followUpBlock.text;
+      }
 
-            if "error" in follow_up_response:
-                return f"An error occurred: {follow_up_response['error']}"
+      const firstBlock = responseMessage.content[0];
+      if (firstBlock.type === "text") {
+        this.messages.push({ role: "assistant", content: firstBlock.text });
+        return firstBlock.text;
+      }
 
-            response_text = follow_up_response.content[0].text
-            self.session_state.messages.append(
-                {"role": "assistant", "content": response_text}
-            )
-            return response_text
+      throw new Error("An error occurred: Unexpected response type");
+    }
 
-        elif response_message.content[0].type == "text":
-            response_text = response_message.content[0].text
-            self.session_state.messages.append(
-                {"role": "assistant", "content": response_text}
-            )
-            return response_text
+    handleToolUse(toolName: string, toolInput: unknown): string {
+      if (toolName === "get_quote") {
+        // The SDK types tool_use.input as unknown; narrow it to the get_quote schema.
+        if (
+          toolInput === null ||
+          typeof toolInput !== "object" ||
+          !("make" in toolInput) || typeof toolInput.make !== "string" ||
+          !("model" in toolInput) || typeof toolInput.model !== "string" ||
+          !("year" in toolInput) || typeof toolInput.year !== "number" ||
+          !("mileage" in toolInput) || typeof toolInput.mileage !== "number" ||
+          !("driver_age" in toolInput) || typeof toolInput.driver_age !== "number"
+        ) {
+          throw new Error("An error occurred: Unexpected tool input");
+        }
+        const { make, model: vehicleModel, year, mileage, driver_age: driverAge } = toolInput;
 
-        else:
-            raise Exception("An error occurred: Unexpected response type")
+        const premium = getQuote(make, vehicleModel, year, mileage, driverAge);
+        return `Quote generated: $${premium.toFixed(2)} per month`;
+      }
 
-    def handle_tool_use(self, func_name, func_params):
-        if func_name == "get_quote":
-            premium = get_quote(**func_params)
-            return f"Quote generated: ${premium:.2f} per month"
+      throw new Error("An unexpected tool was used");
+    }
+  }
+  ```
 
-        raise Exception("An unexpected tool was used")
-```
+  ```csharp C#
+  using System.Text.Json;
+  using Anthropic;
+  using Anthropic.Models.Messages;
+
+  // Config.Model, Config.Identity, Config.Tools, and Config.GetQuote mirror
+  // the config.py values defined earlier in this guide (shown in Python).
+  public class ChatBot
+  {
+      private readonly AnthropicClient _anthropic = new();
+
+      public List<MessageParam> Messages { get; } = [];
+
+      public async Task<Message> GenerateMessage(List<MessageParam> messages, long maxTokens) =>
+          await _anthropic.Messages.Create(
+              new MessageCreateParams
+              {
+                  Model = Config.Model,
+                  System = Config.Identity,
+                  MaxTokens = maxTokens,
+                  Messages = messages,
+                  Tools = Config.Tools,
+              }
+          );
+
+      public async Task<string> ProcessUserInput(string userInput)
+      {
+          Messages.Add(new() { Role = Role.User, Content = userInput });
+
+          var responseMessage = await GenerateMessage(Messages, maxTokens: 2048);
+
+          if (responseMessage.Content[^1].TryPickToolUse(out var toolUse))
+          {
+              var toolResult = HandleToolUse(toolUse.Name, toolUse.Input);
+
+              Messages.Add(new()
+              {
+                  Role = Role.Assistant,
+                  Content = responseMessage.Content
+                      .Select(contentBlock => new ContentBlockParam(contentBlock.Json))
+                      .ToList(),
+              });
+              Messages.Add(new()
+              {
+                  Role = Role.User,
+                  Content = new List<ContentBlockParam>
+                  {
+                      new ToolResultBlockParam { ToolUseID = toolUse.ID, Content = toolResult },
+                  },
+              });
+
+              var followUpResponse = await GenerateMessage(Messages, maxTokens: 2048);
+
+              if (!followUpResponse.Content[0].TryPickText(out var followUpText))
+              {
+                  throw new InvalidOperationException("An error occurred: Unexpected response type");
+              }
+
+              Messages.Add(new() { Role = Role.Assistant, Content = followUpText.Text });
+              return followUpText.Text;
+          }
+
+          if (responseMessage.Content[0].TryPickText(out var textBlock))
+          {
+              Messages.Add(new() { Role = Role.Assistant, Content = textBlock.Text });
+              return textBlock.Text;
+          }
+
+          throw new InvalidOperationException("An error occurred: Unexpected response type");
+      }
+
+      public string HandleToolUse(string funcName, IReadOnlyDictionary<string, JsonElement> funcParams)
+      {
+          if (funcName == "get_quote")
+          {
+              var premium = Config.GetQuote(
+                  funcParams["make"].GetString()!,
+                  funcParams["model"].GetString()!,
+                  funcParams["year"].GetInt64(),
+                  funcParams["mileage"].GetInt64(),
+                  funcParams["driver_age"].GetInt64()
+              );
+              return $"Quote generated: ${premium:F2} per month";
+          }
+
+          throw new ArgumentException("An unexpected tool was used");
+      }
+  }
+  ```
+
+  ```go Go
+  import (
+  	"context"
+  	"encoding/json"
+  	"fmt"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  // ChatBot wraps the Anthropic client and the conversation history. The
+  // identity, model, tools, and getQuote values it uses mirror the config.py
+  // definitions earlier in this guide (shown in Python).
+  type ChatBot struct {
+  	client   anthropic.Client
+  	messages []anthropic.MessageParam
+  }
+
+  func NewChatBot() *ChatBot {
+  	return &ChatBot{client: anthropic.NewClient()}
+  }
+
+  func (bot *ChatBot) GenerateMessage(ctx context.Context, messages []anthropic.MessageParam, maxTokens int64) (*anthropic.Message, error) {
+  	return bot.client.Messages.New(ctx, anthropic.MessageNewParams{
+  		Model:     model,
+  		System:    []anthropic.TextBlockParam{{Text: identity}},
+  		MaxTokens: maxTokens,
+  		Messages:  messages,
+  		Tools:     tools,
+  	})
+  }
+
+  func (bot *ChatBot) ProcessUserInput(ctx context.Context, userInput string) (string, error) {
+  	bot.messages = append(bot.messages, anthropic.NewUserMessage(anthropic.NewTextBlock(userInput)))
+
+  	response, err := bot.GenerateMessage(ctx, bot.messages, 2048)
+  	if err != nil {
+  		return "", err
+  	}
+
+  	lastBlock := response.Content[len(response.Content)-1]
+  	if toolUse, ok := lastBlock.AsAny().(anthropic.ToolUseBlock); ok {
+  		result, err := bot.HandleToolUse(toolUse.Name, toolUse.Input)
+  		if err != nil {
+  			return "", err
+  		}
+
+  		bot.messages = append(bot.messages,
+  			response.ToParam(),
+  			anthropic.NewUserMessage(anthropic.NewToolResultBlock(toolUse.ID, result, false)),
+  		)
+
+  		followUp, err := bot.GenerateMessage(ctx, bot.messages, 2048)
+  		if err != nil {
+  			return "", err
+  		}
+
+  		textBlock, ok := followUp.Content[0].AsAny().(anthropic.TextBlock)
+  		if !ok {
+  			return "", fmt.Errorf("unexpected response type: %s", followUp.Content[0].Type)
+  		}
+  		bot.messages = append(bot.messages, anthropic.NewAssistantMessage(anthropic.NewTextBlock(textBlock.Text)))
+  		return textBlock.Text, nil
+  	}
+
+  	if textBlock, ok := response.Content[0].AsAny().(anthropic.TextBlock); ok {
+  		bot.messages = append(bot.messages, anthropic.NewAssistantMessage(anthropic.NewTextBlock(textBlock.Text)))
+  		return textBlock.Text, nil
+  	}
+
+  	return "", fmt.Errorf("unexpected response type: %s", response.Content[0].Type)
+  }
+
+  func (bot *ChatBot) HandleToolUse(toolName string, toolInput json.RawMessage) (string, error) {
+  	if toolName != "get_quote" {
+  		return "", fmt.Errorf("an unexpected tool was used: %s", toolName)
+  	}
+
+  	var input struct {
+  		Make      string `json:"make"`
+  		Model     string `json:"model"`
+  		Year      int    `json:"year"`
+  		Mileage   int    `json:"mileage"`
+  		DriverAge int    `json:"driver_age"`
+  	}
+  	if err := json.Unmarshal(toolInput, &input); err != nil {
+  		return "", err
+  	}
+  	premium := getQuote(input.Make, input.Model, input.Year, input.Mileage, input.DriverAge)
+  	return fmt.Sprintf("Quote generated: $%.2f per month", premium), nil
+  }
+
+  ```
+
+  ```java Java
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.core.JsonValue;
+  import com.anthropic.models.messages.ContentBlock;
+  import com.anthropic.models.messages.ContentBlockParam;
+  import com.anthropic.models.messages.Message;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.MessageParam;
+  import com.anthropic.models.messages.ToolResultBlockParam;
+  import com.anthropic.models.messages.ToolUseBlock;
+
+  // IDENTITY, MODEL, TOOLS, and getQuote mirror the config.py values defined
+  // earlier in this guide (shown in Python).
+  class ChatBot {
+      final AnthropicClient anthropic;
+      final List<MessageParam> messages;
+
+      ChatBot() {
+          // Reads the API key from the ANTHROPIC_API_KEY environment variable
+          this.anthropic = AnthropicOkHttpClient.fromEnv();
+          this.messages = new ArrayList<>();
+      }
+
+      Message generateMessage(List<MessageParam> messages, long maxTokens) {
+          return anthropic.messages().create(MessageCreateParams.builder()
+                  .model(MODEL)
+                  .system(IDENTITY)
+                  .maxTokens(maxTokens)
+                  .messages(messages)
+                  .tools(TOOLS)
+                  .build());
+      }
+
+      String processUserInput(String userInput) {
+          messages.add(MessageParam.builder()
+                  .role(MessageParam.Role.USER)
+                  .content(userInput)
+                  .build());
+
+          Message responseMessage = generateMessage(messages, 2048);
+
+          List<ContentBlock> content = responseMessage.content();
+          ContentBlock lastBlock = content.getLast();
+          if (lastBlock.isToolUse()) {
+              ToolUseBlock toolUse = lastBlock.asToolUse();
+              Map<String, JsonValue> toolInput =
+                      (Map<String, JsonValue>) toolUse._input().asObject().orElseThrow();
+              String result = handleToolUse(toolUse.name(), toolInput);
+
+              messages.add(MessageParam.builder()
+                      .role(MessageParam.Role.ASSISTANT)
+                      .contentOfBlockParams(content.stream().map(ContentBlock::toParam).toList())
+                      .build());
+              messages.add(MessageParam.builder()
+                      .role(MessageParam.Role.USER)
+                      .contentOfBlockParams(List.of(ContentBlockParam.ofToolResult(
+                              ToolResultBlockParam.builder()
+                                      .toolUseId(toolUse.id())
+                                      .content(result)
+                                      .build())))
+                      .build());
+
+              Message followUpResponse = generateMessage(messages, 2048);
+
+              ContentBlock followUpBlock = followUpResponse.content().getFirst();
+              if (!followUpBlock.isText()) {
+                  throw new IllegalStateException("An error occurred: Unexpected response type");
+              }
+              String responseText = followUpBlock.asText().text();
+              messages.add(MessageParam.builder()
+                      .role(MessageParam.Role.ASSISTANT)
+                      .content(responseText)
+                      .build());
+              return responseText;
+          } else if (content.getFirst().isText()) {
+              String responseText = content.getFirst().asText().text();
+              messages.add(MessageParam.builder()
+                      .role(MessageParam.Role.ASSISTANT)
+                      .content(responseText)
+                      .build());
+              return responseText;
+          } else {
+              throw new IllegalStateException("An error occurred: Unexpected response type");
+          }
+      }
+
+      String handleToolUse(String funcName, Map<String, JsonValue> funcParams) {
+          return switch (funcName) {
+              case "get_quote" -> {
+                  double premium = getQuote(
+                          funcParams.get("make").asStringOrThrow(),
+                          funcParams.get("model").asStringOrThrow(),
+                          ((Number) funcParams.get("year").asNumber().orElseThrow()).longValue(),
+                          ((Number) funcParams.get("mileage").asNumber().orElseThrow()).longValue(),
+                          ((Number) funcParams.get("driver_age").asNumber().orElseThrow()).longValue());
+                  yield "Quote generated: $%.2f per month".formatted(premium);
+              }
+              default -> throw new IllegalArgumentException("An unexpected tool was used");
+          };
+      }
+  }
+  ```
+
+  ```php PHP
+  use Anthropic\Client;
+  use Anthropic\Messages\Message;
+  use Anthropic\Messages\MessageParam;
+  use Anthropic\Messages\TextBlock;
+  use Anthropic\Messages\ToolResultBlockParam;
+  use Anthropic\Messages\ToolUseBlock;
+
+  class ChatBot
+  {
+      // MODEL, IDENTITY, TOOLS, and get_quote() mirror the config.py values
+      // defined earlier in this guide (shown in Python).
+
+      /** @var list<MessageParam> */
+      public private(set) array $messages = [];
+
+      public function __construct(
+          private readonly Client $anthropic = new Client(),
+      ) {}
+
+      /**
+       * @param list<MessageParam> $messages
+       */
+      public function generateMessage(array $messages, int $maxTokens): Message
+      {
+          return $this->anthropic->messages->create(
+              model: MODEL,
+              system: IDENTITY,
+              maxTokens: $maxTokens,
+              messages: $messages,
+              tools: TOOLS,
+          );
+      }
+
+      public function processUserInput(string $userInput): string
+      {
+          $this->messages[] = MessageParam::with(role: 'user', content: $userInput);
+
+          $responseMessage = $this->generateMessage($this->messages, maxTokens: 2048);
+
+          $content = $responseMessage->content;
+          $lastBlock = array_last($content);
+
+          if ($lastBlock instanceof ToolUseBlock) {
+              $toolResult = $this->handleToolUse($lastBlock->name, $lastBlock->input);
+
+              $this->messages[] = MessageParam::with(role: 'assistant', content: $content);
+              $this->messages[] = MessageParam::with(
+                  role: 'user',
+                  content: [
+                      ToolResultBlockParam::with(toolUseID: $lastBlock->id, content: $toolResult),
+                  ],
+              );
+
+              $followUpResponse = $this->generateMessage($this->messages, maxTokens: 2048);
+
+              $firstBlock = array_first($followUpResponse->content);
+              if (!$firstBlock instanceof TextBlock) {
+                  throw new RuntimeException('An error occurred: Unexpected response type');
+              }
+
+              $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
+
+              return $firstBlock->text;
+          }
+
+          $firstBlock = array_first($content);
+          if ($firstBlock instanceof TextBlock) {
+              $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
+
+              return $firstBlock->text;
+          }
+
+          throw new RuntimeException('An error occurred: Unexpected response type');
+      }
+
+      /**
+       * @param array<string, mixed> $funcParams
+       */
+      private function handleToolUse(string $funcName, array $funcParams): string
+      {
+          if ($funcName === 'get_quote') {
+              $premium = get_quote(...$funcParams);
+
+              return sprintf('Quote generated: $%.2f per month', $premium);
+          }
+
+          throw new RuntimeException('An unexpected tool was used');
+      }
+  }
+  ```
+
+  ```ruby Ruby
+  # IDENTITY, MODEL, TOOLS, and get_quote mirror the config.py values defined
+  # earlier in this guide (shown in Python).
+  require "anthropic"
+
+  class ChatBot
+    attr_reader :messages
+
+    def initialize
+      @anthropic = Anthropic::Client.new
+      @messages = []
+    end
+
+    def generate_message(messages, max_tokens)
+      @anthropic.messages.create(
+        model: MODEL,
+        system_: IDENTITY,
+        max_tokens:,
+        messages:,
+        tools: TOOLS
+      )
+    end
+
+    def process_user_input(user_input)
+      @messages << {role: "user", content: user_input}
+
+      response_message = generate_message(@messages, 2048)
+
+      case response_message.content
+      in [*, Anthropic::ToolUseBlock => tool_use]
+        result = handle_tool_use(tool_use.name, tool_use.input)
+        @messages << {role: "assistant", content: response_message.content}
+        @messages << {
+          role: "user",
+          content: [{type: "tool_result", tool_use_id: tool_use.id, content: result}]
+        }
+
+        follow_up_response = generate_message(@messages, 2048)
+
+        case follow_up_response.content
+        in [Anthropic::TextBlock => text_block, *]
+          @messages << {role: "assistant", content: text_block.text}
+          text_block.text
+        else
+          raise "An error occurred: Unexpected response type"
+        end
+      in [Anthropic::TextBlock => text_block, *]
+        @messages << {role: "assistant", content: text_block.text}
+        text_block.text
+      else
+        raise "An error occurred: Unexpected response type"
+      end
+    end
+
+    def handle_tool_use(tool_name, tool_input)
+      raise "An unexpected tool was used" unless tool_name == "get_quote"
+
+      premium = get_quote(**tool_input)
+      format("Quote generated: $%.2f per month", premium)
+    end
+  end
+  ```
+</CodeGroup>
 
 ### Build your user interface
 
-Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface.
+Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface. Streamlit is a Python framework, so this part of the walkthrough is shown in Python only; the ChatBot class above is the piece you can port to any language.
 
 Do this in a file called `app.py`
 
@@ -587,14 +1113,6 @@ streamlit run app.py
 ### Evaluate your prompts
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate the chatbot performance using a systematic process combining quantitative and qualitative methods. Creating a [strong empirical evaluation](/docs/en/test-and-evaluate/develop-tests#building-evals-and-test-cases) based on your defined success criteria will allow you to optimize your prompts.
-
-<Tip>
-  The 
-
-  [Claude Console](/dashboard)
-
-   now features an Evaluation tool that lets you test your prompts under various scenarios.
-</Tip>
 
 ### Improve performance
 
