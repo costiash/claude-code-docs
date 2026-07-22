@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-21T21:44:39Z",
+  "generated_at": "2026-07-22T00:52:30Z",
   "indexed_files": 1805,
   "index": {
     "/changelog": {
@@ -214,17 +214,17 @@
         "context",
         "costs",
         "api",
-        "session",
-        "limit",
-        "console",
         "enterprise",
-        "see",
-        "before",
+        "session",
         "team",
+        "see",
+        "console",
         "plan",
-        "each"
+        "each",
+        "limit",
+        "limits"
       ],
-      "word_count": 3713,
+      "word_count": 3440,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -616,7 +616,7 @@
         "port",
         "client"
       ],
-      "word_count": 9913,
+      "word_count": 10027,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1046,14 +1046,14 @@
         "skill",
         "claude",
         "skills",
-        "name",
         "when",
+        "name",
         "commands",
         "run",
+        "bundled",
         "description",
         "code",
         "settings",
-        "bundled",
         "agent",
         "subagent",
         "plugin",
@@ -1064,7 +1064,7 @@
         "theme",
         "null"
       ],
-      "word_count": 8275,
+      "word_count": 8426,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
