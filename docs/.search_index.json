@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-23T12:50:25Z",
+  "generated_at": "2026-07-23T15:55:40Z",
   "indexed_files": 1812,
   "index": {
     "/changelog": {
@@ -98,21 +98,21 @@
         "summarize",
         "file",
         "files",
+        "restore",
         "rewind",
         "changes",
-        "restore",
         "before",
+        "edits",
         "checkpoints",
         "message",
         "menu",
         "into",
         "selected",
         "prompt",
-        "after",
-        "note",
-        "point"
+        "version",
+        "after"
       ],
-      "word_count": 1210,
+      "word_count": 1333,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -991,15 +991,15 @@
         "claude",
         "managed",
         "source",
-        "code",
         "json",
+        "code",
         "plugins",
         "file",
         "theme",
         "null",
         "when",
-        "project",
         "set",
+        "project",
         "acme",
         "only",
         "see",
@@ -1008,7 +1008,7 @@
         "corp",
         "example"
       ],
-      "word_count": 15535,
+      "word_count": 15595,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1051,20 +1051,20 @@
         "commands",
         "run",
         "bundled",
-        "description",
-        "code",
-        "settings",
-        "agent",
         "subagent",
+        "code",
+        "agent",
+        "description",
+        "settings",
+        "set",
+        "runs",
         "plugin",
         "file",
         "available",
         "create",
-        "add",
-        "theme",
-        "null"
+        "add"
       ],
-      "word_count": 8426,
+      "word_count": 8743,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1120,7 +1120,7 @@
         "background",
         "task"
       ],
-      "word_count": 11690,
+      "word_count": 11694,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
