@@ -185,7 +185,7 @@ The `stop_details` object explains the decline:
 | `"cyber"`                | The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.                                                                                                    |
 | `"bio"`                  | The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.                                                                                                    |
 | `"frontier_llm"`         | The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category. |
-| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).                                |
+| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost).                       |
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
 
@@ -962,7 +962,7 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
 
 * Retries walk your fallback list in order. A fallback model that itself refuses passes the request to the next entry.
 * The original refusal response is returned only when every model in the list has declined. The middleware does not raise an error for it.
-* [Thinking blocks from Claude Fable 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) are handled for you: the middleware strips them from the retry and manages them in conversation history on later requests.
+* [Thinking blocks from Claude Fable 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) are handled for you: the middleware strips them from the retry and manages them in conversation history on later requests.
 * Responses served through the middleware include a `fallback` content block at each model boundary, the same as server-side fallback responses. The middleware manages those blocks for you on later requests.
 * The model that accepted is recorded in `BetaFallbackState`, so follow-up requests that share the state stay pinned to it rather than re-asking a model that refused.
 
@@ -981,7 +981,7 @@ Pass the middleware to the client constructor, and share one `BetaFallbackState`
     <Step title="Re-send on a fallback model">
       Send the same request with `model` set to a fallback model, such as Claude Opus 4.8. A request that Claude Fable 5's classifiers decline can normally be served by another model. How you handle the conversation history depends on whether you redeem a [fallback credit](/docs/en/build-with-claude/fallback-credit):
 
-      * **Not redeeming a credit:** you can first strip the [thinking blocks from Claude Fable 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) out of the conversation history. Other models ignore them, and stripping keeps cross-model requests minimal.
+      * **Not redeeming a credit:** you can first strip the [thinking blocks from Claude Fable 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5) out of the conversation history. Other models ignore them, and stripping keeps cross-model requests minimal.
       * **Redeeming a credit:** send the body unchanged, because redemption requires an exact match.
     </Step>
 

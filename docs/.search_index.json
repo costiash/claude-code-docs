@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-23T00:54:36Z",
-  "indexed_files": 1809,
+  "generated_at": "2026-07-23T04:19:08Z",
+  "indexed_files": 1812,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24369,
+      "word_count": 24411,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1105,22 +1105,22 @@
         "when",
         "agent",
         "main",
-        "conversation",
         "tool",
         "session",
+        "conversation",
         "code",
         "only",
         "prompt",
-        "context",
         "model",
+        "context",
         "same",
+        "tools",
         "version",
         "fork",
         "background",
-        "tools",
         "task"
       ],
-      "word_count": 11109,
+      "word_count": 11690,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1428,7 +1428,7 @@
         "available",
         "tooltipcontent"
       ],
-      "word_count": 1712,
+      "word_count": 1720,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-8": {
@@ -1443,12 +1443,12 @@
         "model",
         "api",
         "prompt",
-        "adaptive",
-        "mode",
         "tokens",
+        "adaptive",
         "see",
         "level",
         "changes",
+        "mode",
         "new",
         "agentic",
         "fast",
@@ -1456,7 +1456,7 @@
         "stop",
         "when"
       ],
-      "word_count": 1689,
+      "word_count": 1692,
       "file_path": "docs/docs__en__about-claude__models__whats-new-claude-4-8.md"
     },
     "/docs/en/about-claude/models/whats-new-sonnet-5": {
@@ -1475,9 +1475,9 @@
         "output",
         "text",
         "model",
-        "adaptive",
         "default",
         "error",
+        "adaptive",
         "context",
         "see",
         "per",
@@ -2240,7 +2240,7 @@
         "model",
         "screenshots"
       ],
-      "word_count": 8997,
+      "word_count": 8994,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -2268,7 +2268,7 @@
         "more",
         "each"
       ],
-      "word_count": 3579,
+      "word_count": 3571,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -2705,18 +2705,18 @@
         "invalidates",
         "prefix",
         "breakpoint",
+        "system",
         "card",
         "definitions",
-        "system",
+        "caches",
         "when",
         "web",
-        "caches",
         "set",
-        "interaction",
-        "what",
-        "place"
+        "model",
+        "changing",
+        "interaction"
       ],
-      "word_count": 722,
+      "word_count": 758,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-use-with-prompt-caching.md"
     },
     "/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use": {
@@ -2741,10 +2741,10 @@
         "parallel",
         "one",
         "user",
-        "block",
-        "most"
+        "thinking",
+        "block"
       ],
-      "word_count": 925,
+      "word_count": 950,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__troubleshooting-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -20229,28 +20229,28 @@
       "title": "Claude API errors",
       "content_preview": "# Claude API errors  Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.  ---  ## HTTP errors  The API fo...",
       "keywords": [
+        "claude",
         "api",
         "request",
-        "claude",
+        "thinking",
         "error",
         "aws",
         "errors",
         "response",
+        "see",
+        "returns",
         "limits",
         "messages",
-        "see",
         "streaming",
-        "returns",
+        "these",
         "sdks",
         "platform",
         "message",
-        "blocks",
-        "card",
-        "also",
-        "example",
-        "resource"
+        "mythos",
+        "models",
+        "also"
       ],
-      "word_count": 2155,
+      "word_count": 2409,
       "file_path": "docs/docs__en__api__errors.md"
     },
     "/docs/en/api/go/beta": {
@@ -44904,34 +44904,6 @@
       "word_count": 206,
       "file_path": "docs/docs__en__api__versioning.md"
     },
-    "/docs/en/build-with-claude/adaptive-thinking": {
-      "title": "Adaptive thinking",
-      "content_preview": "# Adaptive thinking  Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, ...",
-      "keywords": [
-        "thinking",
-        "claude",
-        "opus",
-        "adaptive",
-        "sonnet",
-        "blocks",
-        "models",
-        "tokens",
-        "mythos",
-        "when",
-        "extended",
-        "mode",
-        "default",
-        "output",
-        "see",
-        "fable",
-        "model",
-        "field",
-        "note",
-        "effort"
-      ],
-      "word_count": 4781,
-      "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
-    },
     "/docs/en/build-with-claude/batch-processing": {
       "title": "Batch processing",
       "content_preview": "# Batch processing  Process large volumes of Messages requests asynchronously with the Message Batches API, cutting costs by 50% and increasing throughput.  ---  Batch processing is a powerful approac...",
@@ -45041,7 +45013,7 @@
         "see",
         "europe"
       ],
-      "word_count": 1840,
+      "word_count": 1839,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -45076,28 +45048,28 @@
       "title": "Claude on Amazon Bedrock (Opus 4.6 and earlier)",
       "content_preview": "# Claude on Amazon Bedrock (Opus 4.6 and earlier)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note>   Thi...",
       "keywords": [
+        "tab",
         "claude",
         "bedrock",
+        "title",
+        "note",
         "yes",
-        "sonnet",
         "aws",
+        "sonnet",
+        "amazon",
         "anthropic",
         "opus",
         "model",
-        "tab",
-        "models",
         "api",
-        "amazon",
-        "note",
-        "codegroup",
-        "endpoints",
+        "models",
         "see",
+        "tabs",
+        "endpoints",
+        "cli",
         "pricing",
-        "available",
-        "regional",
-        "through"
+        "available"
       ],
-      "word_count": 3199,
+      "word_count": 3469,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -45125,7 +45097,7 @@
         "data",
         "regional"
       ],
-      "word_count": 2840,
+      "word_count": 2839,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -45217,27 +45189,27 @@
       "content_preview": "# Context windows  Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.  ---  As conversations grow, you'll eve...",
       "keywords": [
         "context",
-        "thinking",
         "claude",
+        "thinking",
         "window",
         "tool",
-        "extended",
         "model",
         "models",
         "tokens",
         "token",
         "output",
-        "input",
         "blocks",
+        "input",
         "previous",
         "api",
         "turn",
         "sonnet",
         "request",
+        "opus",
         "count",
         "block"
       ],
-      "word_count": 1979,
+      "word_count": 1978,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -45246,26 +45218,26 @@
       "keywords": [
         "effort",
         "claude",
-        "thinking",
         "opus",
-        "token",
-        "sonnet",
+        "thinking",
         "tasks",
-        "levels",
+        "token",
         "when",
-        "default",
+        "sonnet",
+        "levels",
         "tool",
+        "default",
+        "cost",
         "agentic",
         "coding",
-        "recommended",
-        "adaptive",
-        "lower",
-        "cost",
-        "extended",
-        "where",
-        "parameter"
+        "parameter",
+        "see",
+        "high",
+        "than",
+        "capability",
+        "calls"
       ],
-      "word_count": 2665,
+      "word_count": 2378,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -45298,30 +45270,30 @@
     },
     "/docs/en/build-with-claude/extended-thinking": {
       "title": "Extended thinking",
-      "content_preview": "# Extended thinking  Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.  ---  <Note>   For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention). </Note>  Extended thinking gives",
+      "content_preview": "# Extended thinking  Configure manual extended thinking with a fixed budget_tokens budget on Claude models that support it, and migrate to adaptive thinking.  ---  <Note>   For how zero data retention...",
       "keywords": [
         "thinking",
         "claude",
-        "blocks",
-        "extended",
-        "when",
-        "tool",
-        "api",
-        "turn",
+        "budget",
         "opus",
-        "note",
-        "see",
+        "mode",
+        "manual",
+        "adaptive",
         "model",
-        "response",
-        "tokens",
-        "reasoning",
+        "sonnet",
+        "extended",
+        "tool",
+        "turn",
         "models",
-        "streaming",
-        "supported",
-        "mythos",
-        "adaptive"
+        "request",
+        "see",
+        "only",
+        "where",
+        "api",
+        "interleaved",
+        "prompt"
       ],
-      "word_count": 14323,
+      "word_count": 2458,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fallback-credit": {
@@ -45525,9 +45497,9 @@
       "content_preview": "# Features overview  Explore Claude's advanced features and capabilities.  ---  Claude's API surface is organized into five areas:  * **Model capabilities:** Control how Claude reasons and formats res...",
       "keywords": [
         "zdr",
+        "claude",
         "eligible",
         "platformavailability",
-        "claude",
         "claudeapi",
         "claudeplatformaws",
         "azureai",
@@ -45545,7 +45517,7 @@
         "when",
         "claudeapibeta"
       ],
-      "word_count": 1875,
+      "word_count": 1883,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -45595,13 +45567,13 @@
         "system",
         "accordion",
         "user",
-        "when",
         "tool",
+        "when",
         "requests",
-        "input",
-        "breakpoints"
+        "message",
+        "input"
       ],
-      "word_count": 16322,
+      "word_count": 16457,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -45629,7 +45601,7 @@
         "when",
         "title"
       ],
-      "word_count": 7383,
+      "word_count": 7382,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/overview": {
@@ -45846,14 +45818,14 @@
         "block",
         "claude",
         "card",
-        "extended",
         "message",
         "sdks",
         "sdk",
         "delta",
-        "partial"
+        "partial",
+        "json"
       ],
-      "word_count": 4637,
+      "word_count": 4634,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -45881,7 +45853,7 @@
         "java",
         "tab"
       ],
-      "word_count": 10095,
+      "word_count": 10094,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -45912,6 +45884,118 @@
       "word_count": 2837,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
+    "/docs/en/build-with-claude/thinking-steering-and-cost": {
+      "title": "Steering thinking",
+      "content_preview": "# Steering thinking  Steer how often and how deeply Claude thinks with effort levels, system prompt guidance, and per-message steering, and understand thinking's cost and pricing.  ---  <Note>   For h...",
+      "keywords": [
+        "thinking",
+        "claude",
+        "effort",
+        "turn",
+        "prompt",
+        "tab",
+        "see",
+        "output",
+        "per",
+        "reasoning",
+        "level",
+        "title",
+        "tokens",
+        "guidance",
+        "steering",
+        "model",
+        "request",
+        "think",
+        "each",
+        "tool"
+      ],
+      "word_count": 3895,
+      "file_path": "docs/docs__en__build-with-claude__thinking-steering-and-cost.md"
+    },
+    "/docs/en/build-with-claude/thinking-tool-workflows": {
+      "title": "Thinking in tool and multi-turn workflows",
+      "content_preview": "# Thinking in tool and multi-turn workflows  Walk through a complete two-turn tool-use round trip that preserves thinking blocks correctly, and see how interleaved thinking changes the flow.  ---  <No...",
+      "keywords": [
+        "thinking",
+        "tool",
+        "claude",
+        "turn",
+        "interleaved",
+        "step",
+        "blocks",
+        "title",
+        "assistant",
+        "back",
+        "request",
+        "see",
+        "result",
+        "card",
+        "two",
+        "page",
+        "rules",
+        "adaptive",
+        "block",
+        "content"
+      ],
+      "word_count": 2978,
+      "file_path": "docs/docs__en__build-with-claude__thinking-tool-workflows.md"
+    },
+    "/docs/en/build-with-claude/thinking-troubleshooting": {
+      "title": "Troubleshooting thinking",
+      "content_preview": "# Troubleshooting thinking  Diagnose and fix the most common thinking failures: configuration 400 errors, empty or missing thinking blocks, max_tokens stops, and cache misses.  ---  <Note>   For how z...",
+      "keywords": [
+        "thinking",
+        "claude",
+        "extended",
+        "adaptive",
+        "only",
+        "see",
+        "model",
+        "error",
+        "models",
+        "blocks",
+        "opus",
+        "configuration",
+        "off",
+        "effort",
+        "message",
+        "instead",
+        "mythos",
+        "happens",
+        "sonnet",
+        "because"
+      ],
+      "word_count": 1384,
+      "file_path": "docs/docs__en__build-with-claude__thinking-troubleshooting.md"
+    },
+    "/docs/en/build-with-claude/thinking": {
+      "title": "Thinking",
+      "content_preview": "# Thinking  Understand how Claude's thinking works: turn it on, read thinking output, steer thinking depth with effort, and use thinking with tools, caching, and streaming.  ---  <Note>   For how zero...",
+      "keywords": [
+        "thinking",
+        "claude",
+        "blocks",
+        "tool",
+        "turn",
+        "see",
+        "when",
+        "model",
+        "models",
+        "block",
+        "api",
+        "response",
+        "text",
+        "field",
+        "opus",
+        "context",
+        "back",
+        "streaming",
+        "request",
+        "reasoning"
+      ],
+      "word_count": 6200,
+      "file_path": "docs/docs__en__build-with-claude__thinking.md"
+    },
     "/docs/en/build-with-claude/token-counting": {
       "title": "Token counting",
       "content_preview": "# Token counting  Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.  ---  ...",
@@ -45937,7 +46021,7 @@
         "models",
         "opus"
       ],
-      "word_count": 3834,
+      "word_count": 3830,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/vision-coordinates": {
@@ -46217,7 +46301,7 @@
         "messages",
         "message"
       ],
-      "word_count": 1669,
+      "word_count": 1670,
       "file_path": "docs/docs__en__cli-sdks-libraries__libraries__openai-sdk.md"
     },
     "/docs/en/cli-sdks-libraries/middleware": {
@@ -46721,7 +46805,7 @@
         "title",
         "under"
       ],
-      "word_count": 3785,
+      "word_count": 3784,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -46909,15 +46993,15 @@
         "key",
         "feed",
         "note",
-        "codegroup",
         "through",
         "claude",
         "query",
         "admin",
         "keys",
-        "each"
+        "each",
+        "reference"
       ],
-      "word_count": 1207,
+      "word_count": 1201,
       "file_path": "docs/docs__en__manage-claude__compliance-activity-feed.md"
     },
     "/docs/en/manage-claude/compliance-api-access": {
@@ -46973,7 +47057,7 @@
         "see",
         "scope"
       ],
-      "word_count": 741,
+      "word_count": 739,
       "file_path": "docs/docs__en__manage-claude__compliance-api.md"
     },
     "/docs/en/manage-claude/compliance-content-data": {
@@ -46996,12 +47080,12 @@
         "messages",
         "claude",
         "metadata",
-        "codegroup",
         "endpoints",
         "page",
-        "only"
+        "only",
+        "artifact"
       ],
-      "word_count": 2173,
+      "word_count": 2161,
       "file_path": "docs/docs__en__manage-claude__compliance-content-data.md"
     },
     "/docs/en/manage-claude/compliance-errors": {
@@ -47029,7 +47113,7 @@
         "request",
         "keys"
       ],
-      "word_count": 2635,
+      "word_count": 2628,
       "file_path": "docs/docs__en__manage-claude__compliance-errors.md"
     },
     "/docs/en/manage-claude/compliance-faq": {
@@ -47085,7 +47169,7 @@
         "each",
         "organization"
       ],
-      "word_count": 1406,
+      "word_count": 1402,
       "file_path": "docs/docs__en__manage-claude__compliance-integration-patterns.md"
     },
     "/docs/en/manage-claude/compliance-org-data": {
@@ -47113,7 +47197,7 @@
         "see",
         "access"
       ],
-      "word_count": 1935,
+      "word_count": 1925,
       "file_path": "docs/docs__en__manage-claude__compliance-org-data.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -48317,7 +48401,7 @@
         "when",
         "title"
       ],
-      "word_count": 7383,
+      "word_count": 7382,
       "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/release-notes/overview": {
@@ -48339,8 +48423,8 @@
         "available",
         "models",
         "token",
-        "thinking",
         "our",
+        "thinking",
         "learn",
         "support",
         "managed"

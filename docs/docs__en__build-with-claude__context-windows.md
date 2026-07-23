@@ -43,60 +43,60 @@ A single request can include up to 600 images or PDF pages (100 for models with 
 
 See the [model comparison](/docs/en/about-claude/models/overview#latest-models-comparison) table for a list of context window sizes by model.
 
-## The context window with extended thinking
+## The context window with thinking
 
-With [extended thinking](/docs/en/build-with-claude/extended-thinking), all input and output tokens, including thinking tokens, count toward the context window limit, with a few nuances in multi-turn situations.
+With [thinking](/docs/en/build-with-claude/thinking), all input and output tokens, including thinking tokens, count toward the context window limit, with a few nuances in multi-turn situations.
 
-The thinking budget tokens are a subset of your `max_tokens` parameter, are billed as output tokens, and count toward rate limits. With [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), Claude determines its thinking allocation dynamically, so thinking token usage varies from request to request.
+Thinking tokens are a subset of your `max_tokens` parameter, are billed as output tokens, and count toward rate limits. With [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), Claude determines its thinking allocation dynamically, so thinking token usage varies from request to request.
 
-Whether thinking blocks from previous assistant turns stay in the context window depends on the model. On Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview, the API keeps previous thinking blocks by default, and they count toward the context window like any other input tokens. On earlier Opus and Sonnet models and all Haiku models, the API automatically strips previous thinking blocks from the conversation history when you pass them back, which preserves token capacity for conversation content. For the per-model defaults, see [thinking block preservation by model](/docs/en/build-with-claude/extended-thinking#thinking-block-preservation-by-model). To override the default in either direction, use [thinking block clearing](/docs/en/build-with-claude/context-editing#thinking-block-clearing).
+Whether thinking blocks from previous assistant turns stay in the context window depends on the model. On Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview, the API keeps previous thinking blocks by default, and they count toward the context window like any other input tokens. On earlier Opus and Sonnet models and all Haiku models, the API automatically strips previous thinking blocks from the conversation history when you pass them back, which preserves token capacity for conversation content. For the per-model defaults, see [thinking block preservation by model](/docs/en/build-with-claude/thinking#thinking-block-preservation-by-model). To override the default in either direction, use [thinking block clearing](/docs/en/build-with-claude/context-editing#thinking-block-clearing).
 
-The following diagram shows how tokens are managed when extended thinking is enabled on a model that strips previous thinking blocks:
+The following diagram shows how tokens are managed when thinking is enabled on a model that strips previous thinking blocks:
 
-![Diagram of extended thinking on a model that strips previous thinking blocks: each turn's thinking block is generated in the output and not carried into later turns' input](/docs/images/context-window-thinking.svg)
+![Diagram of thinking on a model that strips previous thinking blocks: each turn's thinking block is generated in the output and not carried into later turns' input](/docs/images/context-window-thinking.svg)
 
-* **Stripping extended thinking:** On models that strip previous thinking blocks, extended thinking blocks (shown in dark gray) are generated during each turn's output phase but are not carried forward as input tokens for subsequent turns. You do not need to strip the thinking blocks yourself: if you pass them back, the Claude API strips them automatically.
-* **Billing:** Extended thinking tokens are billed as output tokens once, when they are generated. On models that keep previous thinking blocks, the kept blocks are then part of later requests' input and are billed as input tokens, like the rest of the conversation history.
+* **Stripping thinking blocks:** On models that strip previous thinking blocks, thinking blocks (shown in dark gray) are generated during each turn's output phase but are not carried forward as input tokens for subsequent turns. You do not need to strip the thinking blocks yourself: if you pass them back, the Claude API strips them automatically.
+* **Billing:** Thinking tokens are billed as output tokens once, when they are generated. On models that keep previous thinking blocks, the kept blocks are then part of later requests' input and are billed as input tokens, like the rest of the conversation history.
 
 <Note>
-  You can read more about the context window and extended thinking in the [Extended thinking](/docs/en/build-with-claude/extended-thinking) guide.
+  You can read more about the context window and thinking in the [Thinking](/docs/en/build-with-claude/thinking) guide.
 </Note>
 
-## The context window with extended thinking and tool use
+## The context window with thinking and tool use
 
-The following diagram illustrates how tokens are managed when you combine extended thinking with tool use on a model that strips previous thinking blocks:
+The following diagram illustrates how tokens are managed when you combine thinking with tool use on a model that strips previous thinking blocks:
 
-![Diagram of extended thinking with tool use: thinking is kept with its tool result, then dropped on the next user turn on models that strip previous thinking blocks](/docs/images/context-window-thinking-tools.svg)
+![Diagram of thinking with tool use: thinking is kept with its tool result, then dropped on the next user turn on models that strip previous thinking blocks](/docs/images/context-window-thinking-tools.svg)
 
 <Steps>
   <Step title="First turn architecture">
     * **Input components:** Tools configuration and user message
-    * **Output components:** Extended thinking + text response + tool use request
+    * **Output components:** Thinking + text response + tool use request
     * **Token calculation:** All input and output components count toward the context window, and all output components are billed as output tokens.
   </Step>
 
   <Step title="Tool result handling (turn 2)">
-    * **Input components:** Every block in the first turn and the `tool_result`. You must return the extended thinking block with the corresponding tool results. This is the only case where you have to return thinking blocks.
-    * **Output components:** After tool results have been passed back to Claude, Claude responds with only text (no additional extended thinking until the next `user` message, unless [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) is enabled).
+    * **Input components:** Every block in the first turn and the `tool_result`. You must return the thinking block with the corresponding tool results. This is the only case where you have to return thinking blocks.
+    * **Output components:** After tool results have been passed back to Claude, Claude responds with only text (no additional thinking until the next `user` message, unless [interleaved thinking](/docs/en/build-with-claude/thinking#interleaved-thinking) is enabled).
     * **Token calculation:** All input and output components count toward the context window, and all output components are billed as output tokens.
   </Step>
 
   <Step title="New user turn (turn 3)">
     * **Input components:** All inputs and the output from the previous turn are carried forward. The thinking block from the completed tool use cycle no longer has to stay in context: on models that strip previous thinking blocks, the API drops it automatically when you pass it back, and on models that keep previous thinking blocks, you can strip it yourself at this stage. This is also where you add the next `user` turn.
-    * **Output components:** Because there is a new `user` turn outside the tool use cycle, Claude generates a new extended thinking block and continues from there.
+    * **Output components:** Because there is a new `user` turn outside the tool use cycle, Claude generates a new thinking block and continues from there.
     * **Token calculation:** On models that strip previous thinking blocks, the previous thinking tokens no longer count toward the context window. All other previous blocks still count toward the context window, as does the thinking block in the current `assistant` turn.
   </Step>
 </Steps>
 
-* **Considerations for tool use with extended thinking:**
+* **Considerations for tool use with thinking:**
 
   * When you post tool results, you must include the entire unmodified thinking block that accompanies that tool request, including its signature.
   * The API uses cryptographic signatures to verify thinking block authenticity. If you modify a thinking block, the API returns an error.
 
 <Note>
-  Most current Claude models support [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking), which lets Claude think between tool calls, including after it receives tool results. It is automatic on models with adaptive thinking. Claude Opus 4.5, Claude Sonnet 4.5, and earlier Claude 4 models require the `interleaved-thinking-2025-05-14` beta header.
+  Most current Claude models support [interleaved thinking](/docs/en/build-with-claude/thinking#interleaved-thinking), which lets Claude think between tool calls, including after it receives tool results. It is automatic on models with adaptive thinking; Claude Opus 4.5, Claude Sonnet 4.5, and earlier Claude 4 models require the `interleaved-thinking-2025-05-14` beta header, and Claude Haiku 4.5 does not support it.
 
-  For more information about using tools with extended thinking, see [Extended thinking with tool use](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-tool-use).
+  For more information about using tools with thinking, see [Thinking with tool use](/docs/en/build-with-claude/thinking#thinking-with-tool-use).
 </Note>
 
 To reduce the context consumed by the tool definitions themselves, see [Manage tool context](/docs/en/agents-and-tools/tool-use/manage-tool-context), or defer tool definitions with the [tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool).
@@ -123,7 +123,7 @@ After each tool call, the API gives Claude an update on its remaining capacity:
 
 Image tokens are included in these budgets.
 
-Newer models don't receive these injected tags. On Claude Opus 4.7 and later, Claude Fable 5, and Claude Mythos 5, you can give the model an explicit budget with [task budgets](/docs/en/build-with-claude/task-budgets), which are in beta.
+Claude Opus 4.7 and later Opus models, Claude Fable 5, and Claude Mythos 5 don't receive these injected tags. On Claude Opus 4.7 and later, Claude Fable 5, and Claude Mythos 5, you can give the model an explicit budget with [task budgets](/docs/en/build-with-claude/task-budgets), which are in beta.
 
 <Tip>
   For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multisession pattern](/docs/en/agents-and-tools/tool-use/memory-tool#multisession-software-development-pattern) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
@@ -165,7 +165,7 @@ To stay within context window limits, use the [token counting API](/docs/en/buil
     See the model comparison table for a list of context window sizes and input/output token pricing by model.
   </Card>
 
-  <Card title="Extended thinking" icon="settings" href="/docs/en/build-with-claude/extended-thinking">
+  <Card title="Thinking" icon="settings" href="/docs/en/build-with-claude/thinking">
     Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.
   </Card>
 </CardGroup>

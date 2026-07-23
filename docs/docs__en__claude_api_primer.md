@@ -248,7 +248,7 @@ Extended thinking is supported in the following models:
 * Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
 
 <Note>
-  On Claude Opus 4.8 and Claude Opus 4.7, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`type: adaptive`) instead.
+  On Claude Opus 4.8 and Claude Opus 4.7, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`type: adaptive`) instead.
 </Note>
 
 ### How extended thinking works
@@ -531,7 +531,7 @@ Extended thinking with tool use in Claude 4 models supports interleaved thinking
 With interleaved thinking and ONLY with interleaved thinking (not regular extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.
 
 <Info>
-  For Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, interleaved thinking is automatically enabled when using [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`). No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
+  For Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, interleaved thinking is automatically enabled when using [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`thinking: {type: "adaptive"}`). No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
 </Info>
 
 ## Tool use

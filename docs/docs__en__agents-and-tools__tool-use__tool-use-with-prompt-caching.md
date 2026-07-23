@@ -54,14 +54,15 @@ This means adding tools dynamically through tool search does not break your cach
 
 The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a change at one level invalidates that level and everything after it:
 
-| Change                               | Invalidates                            |
-| ------------------------------------ | -------------------------------------- |
-| Modifying tool definitions           | Entire cache (tools, system, messages) |
-| Toggling web search or citations     | System and messages caches             |
-| Changing `tool_choice`               | Messages cache                         |
-| Changing `disable_parallel_tool_use` | Messages cache                         |
-| Toggling images present/absent       | Messages cache                         |
-| Changing thinking parameters         | Messages cache                         |
+| Change                               | Invalidates                                                                                                                                                                                   |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Modifying tool definitions           | Entire cache (tools, system, messages)                                                                                                                                                        |
+| Toggling web search or citations     | System and messages caches                                                                                                                                                                    |
+| Changing `tool_choice`               | Messages cache                                                                                                                                                                                |
+| Changing `disable_parallel_tool_use` | Messages cache                                                                                                                                                                                |
+| Toggling images present/absent       | Messages cache                                                                                                                                                                                |
+| Changing thinking parameters         | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](/docs/en/build-with-claude/thinking#thinking-and-prompt-caching)) |
+| Changing `output_config.effort`      | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it                                                                                              |
 
 <Note>
   If you need to vary `tool_choice` mid-conversation, consider placing cache breakpoints before the variation point.

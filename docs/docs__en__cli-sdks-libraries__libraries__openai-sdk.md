@@ -13,7 +13,7 @@ Anthropic provides a compatibility layer that enables you to use the OpenAI SDK 
 </Note>
 
 <Tip>
-  For the best experience and access to Claude API full feature set ([PDF processing](/docs/en/build-with-claude/pdf-support), [citations](/docs/en/build-with-claude/citations), [extended thinking](/docs/en/build-with-claude/extended-thinking), and [prompt caching](/docs/en/build-with-claude/prompt-caching)), use the native [Claude API](/docs/en/api/overview).
+  For the best experience and access to Claude API full feature set ([PDF processing](/docs/en/build-with-claude/pdf-support), [citations](/docs/en/build-with-claude/citations), [thinking](/docs/en/build-with-claude/thinking), and [prompt caching](/docs/en/build-with-claude/prompt-caching)), use the native [Claude API](/docs/en/api/overview).
 </Tip>
 
 ## Getting started with the OpenAI SDK
@@ -28,7 +28,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
    * Replace your API key with a [Claude API key](/settings/keys)
    * Update your model name to use a [Claude model](/docs/en/about-claude/models/overview)
 
-3. Review the documentation below for what features are supported
+3. Review the following sections for what features are supported
 
 ### Quick start example
 
@@ -78,11 +78,11 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 Here are the most substantial differences from using OpenAI:
 
 * The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](/docs/en/build-with-claude/structured-outputs).
-* Audio input is not supported; it will simply be ignored and stripped from input
+* Audio input is not supported; it will be ignored and stripped from input
 * Prompt caching is not supported, but it is supported in the [Anthropic SDKs](/docs/en/cli-sdks-libraries/overview)
 * System/developer messages are hoisted and concatenated to the beginning of the conversation, as Anthropic only supports a single initial system message.
 
-Most unsupported fields are silently ignored rather than producing errors. These are all documented below.
+Most unsupported fields are silently ignored rather than producing errors. These are all documented in the following sections.
 
 ### Output quality considerations
 

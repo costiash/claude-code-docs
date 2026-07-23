@@ -36,16 +36,14 @@ Both patterns share these constraints:
 
 Set `created_at.lt` at least 1 minute in the past so that every activity in the window is already queryable. Use `created_at.gte` for the lower bound and `created_at.lt` for the upper bound so that consecutive windows tile without gaps or overlap; reuse the previous window's `lt` value as the next window's `gte`.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/activities" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "created_at.gte=2026-04-20T07:00:00Z" \
-    --data-urlencode "created_at.lt=2026-04-20T08:00:00Z" \
-    --data-urlencode "limit=5000"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/activities" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "created_at.gte=2026-04-20T07:00:00Z" \
+  --data-urlencode "created_at.lt=2026-04-20T08:00:00Z" \
+  --data-urlencode "limit=5000"
+```
 
 When the response has `has_more: true`, the window contains more than one page of activities. Either page within the window by passing the response's `last_id` as `after_id` on the next request (stopping when `has_more` is `false`), or choose a smaller time window. See [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results) for the full contract.
 
@@ -57,17 +55,15 @@ Even with clean tiling, an activity that indexes after its window has closed nev
 
 ### Cursor-driven incremental reads
 
-<CodeGroup>
-  ```bash cURL
-  first_id="activity_01XyDMpzjS89pFZXqSFUBDr6"  # first_id from a previous response
+```bash cURL
+first_id="activity_01XyDMpzjS89pFZXqSFUBDr6"  # first_id from a previous response
 
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/activities" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "limit=5000" \
-    --data-urlencode "before_id=$first_id"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/activities" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "limit=5000" \
+  --data-urlencode "before_id=$first_id"
+```
 
 Page through until `has_more` is `false`, then persist `first_id` from the final response and pass it unchanged as `before_id` on the next run to retrieve activities newer than the saved cursor. To walk in the opposite direction for a backfill, persist `last_id` and pass it as `after_id` instead. For the full cursor-vs-page-token reference and retry semantics, see [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results).
 

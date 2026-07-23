@@ -26,16 +26,14 @@ Use [List chats](/docs/en/api/compliance/apps/chats/list) to page through chat m
 
 The chat list endpoint defaults to organization-wide scope: leave off `user_ids[]` to include every chat under your parent organization. Add `order_by=updated_at` to sort by last update time. This combination is the recommended way to export chats and keep an export current, because one paginated loop picks up both new and modified chats for every user without enumerating users first. The following request lists chats updated since a given date.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/apps/chats" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "order_by=updated_at" \
-    --data-urlencode "updated_at.gte=2025-06-01T00:00:00Z" \
-    --data-urlencode "limit=100"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/apps/chats" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "order_by=updated_at" \
+  --data-urlencode "updated_at.gte=2025-06-01T00:00:00Z" \
+  --data-urlencode "limit=100"
+```
 
 ```json Response
 {
@@ -70,28 +68,24 @@ A few constraints apply to these organization-wide queries. Cursors are opaque a
 
 To scope the list to specific users instead (for example, a legal hold on named custodians), pass 1–10 `user_ids[]` values. Obtain the IDs from [List organization users](/docs/en/manage-claude/compliance-org-data#list-organization-users). User-filtered queries always sort by `created_at` (passing `order_by=updated_at` returns a 400 error) and support both `after_id` and `before_id`. Filtering by `project_ids[]` is only available in this user-filtered form.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/apps/chats" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
-    --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
-    --data-urlencode "limit=100"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/apps/chats" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
+  --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
+  --data-urlencode "limit=100"
+```
 
 The list response carries chat metadata only. To pull the actual chat content, attached files, and inline artifacts (structured documents Claude generates inside a chat), follow up with the messages endpoint for each chat ID:
 
-<CodeGroup>
-  ```bash cURL
-  chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
+```bash cURL
+chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id/messages" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id/messages" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 The messages endpoint returns the chat's metadata plus a `chat_messages` array sorted by `created_at`. When `limit` is omitted, the full message set is returned in one response; pass `limit`, `after_id`, or `before_id` to page through very long chats. The endpoint also accepts `created_at.*` and `updated_at.*` range bounds (`gt`, `gte`, `lt`, `lte`) and an `order` parameter (`asc` or `desc`). See [Get chat messages](/docs/en/api/compliance/apps/chats/messages/list) for the full parameter list. For user messages, `created_at` is when the message was sent; for assistant messages, it is when Claude finished generating the message. Each message carries its text content and, when present, any uploaded files (typically on user messages), any tool-generated files, and any artifacts the assistant produced or updated (typically on assistant messages):
 
@@ -188,15 +182,13 @@ The file content endpoint streams the original upload as a chunked binary respon
 * `Content-MD5` carries the file's MD5 digest, base64-encoded as specified in RFC 1864.
 * `Transfer-Encoding: chunked` is always set.
 
-<CodeGroup>
-  ```bash cURL
-  file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
+```bash cURL
+file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
 
-  curl --fail-with-body -sS -OJ \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -OJ \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
+```
 
 The `-OJ` flags tell curl to save the response under the file name from `Content-Disposition`, which is the original file name the user uploaded.
 
@@ -221,15 +213,13 @@ Entries with `type` of `project_file` are binary uploads (PDFs, images, spreadsh
 
 A consumer that walks the attachment list must branch on `type` and call the matching content endpoint for each entry. The following request lists one page of attachments; paginate by passing `next_page` back as the `page` parameter until `has_more` is `false`.
 
-<CodeGroup>
-  ```bash cURL
-  project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
+```bash cURL
+project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
 
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/apps/projects/$project_id/attachments" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/apps/projects/$project_id/attachments" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {
@@ -271,21 +261,19 @@ All four endpoints require the `delete:compliance_user_data` scope, which is gra
 
 The following request deletes one chat. The same pattern applies to the other delete endpoints; only the URL changes.
 
-<CodeGroup>
-  ```bash cURL
-  # WARNING: This operation PERMANENTLY deletes the chat, all of its messages,
-  # and any attached files. Deletion is immediate and cannot be undone. It
-  # requires the `delete:compliance_user_data` scope, which is granted separately
-  # from `read:compliance_user_data` when the Compliance Access Key is created.
-  # Ensure you have explicit authorization before running this.
+```bash cURL
+# WARNING: This operation PERMANENTLY deletes the chat, all of its messages,
+# and any attached files. Deletion is immediate and cannot be undone. It
+# requires the `delete:compliance_user_data` scope, which is granted separately
+# from `read:compliance_user_data` when the Compliance Access Key is created.
+# Ensure you have explicit authorization before running this.
 
-  chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
+chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
-  curl --fail-with-body -sS -X DELETE \
-    "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -X DELETE \
+  "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {

@@ -102,7 +102,7 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Claude i
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-bedrock:2.48.0")
+        implementation("com.anthropic:anthropic-java-bedrock:2.50.0")
         ```
       </Tab>
 
@@ -111,7 +111,7 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Claude i
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>2.48.0</version>
+            <version>2.50.0</version>
         </dependency>
         ```
       </Tab>
@@ -332,7 +332,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 
 * [Messages API](/docs/en/api/messages/create) (`/anthropic/v1/messages`)
 * [Prompt caching](/docs/en/build-with-claude/prompt-caching)
-* [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+* [Thinking](/docs/en/build-with-claude/thinking)
 * [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
 * [Citations](/docs/en/build-with-claude/citations)
 * [Structured outputs](/docs/en/build-with-claude/structured-outputs)

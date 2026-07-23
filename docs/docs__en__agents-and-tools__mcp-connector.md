@@ -664,7 +664,7 @@ Install both the Anthropic SDK and the MCP SDK:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-mcp:2.48.0")
+        implementation("com.anthropic:anthropic-java-mcp:2.50.0")
         ```
       </Tab>
 
@@ -673,7 +673,7 @@ Install both the Anthropic SDK and the MCP SDK:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-mcp</artifactId>
-            <version>2.48.0</version>
+            <version>2.50.0</version>
         </dependency>
         ```
       </Tab>

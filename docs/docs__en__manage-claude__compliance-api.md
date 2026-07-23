@@ -12,13 +12,11 @@ The Compliance API gives Claude Enterprise customers programmatic access to thei
 
 The following call returns the most recent activity event in your organization. Any key with the `read:compliance_activities` scope can make it. To create a key and grant it that scope, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/activities?limit=1" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/activities?limit=1" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 A successful response returns a JSON object containing `data` (an array of `Activity` records), `has_more`, `first_id`, and `last_id`:
 

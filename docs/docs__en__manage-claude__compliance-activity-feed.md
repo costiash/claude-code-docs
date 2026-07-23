@@ -16,13 +16,11 @@ Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
 
 The Activity Feed records every authentication, chat, file, project, administrative, and platform action that occurs in your organization, in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/activities?limit=1" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/activities?limit=1" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {
@@ -56,16 +54,14 @@ Filter by organization, actor, activity type, or a `created_at` time window usin
 
 Repeatable parameters use array-bracket query syntax: pass `activity_types[]=...`, `actor_ids[]=...`, or `organization_ids[]=...` once for each value.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/activities" \
-    --data-urlencode "activity_types[]=claude_file_uploaded" \
-    --data-urlencode "activity_types[]=claude_chat_created" \
-    --data-urlencode "created_at.gte=2026-04-01T00:00:00Z" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/activities" \
+  --data-urlencode "activity_types[]=claude_file_uploaded" \
+  --data-urlencode "activity_types[]=claude_chat_created" \
+  --data-urlencode "created_at.gte=2026-04-01T00:00:00Z" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](/docs/en/api/compliance/activities/list) in the API reference for the full list of values that `activity_types[]` accepts.
 
@@ -97,21 +93,19 @@ The cursor parameter sets the page direction; the endpoint's sort order sets the
   **Cursors are safe to reuse on retry.** A cursor or page token from a successfully returned page remains valid; a request that fails (5xx, timeout, network error) does not advance your position. Retry the same request with the same cursor. Only move to the next cursor after you have stored the page it points past.
 </Note>
 
-<CodeGroup>
-  ```bash cURL
-  # Fetch the first page (newest activities first) and capture its trailing cursor.
-  last_id=$(curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/activities?limit=2" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" | jq -er '.last_id')
+```bash cURL
+# Fetch the first page (newest activities first) and capture its trailing cursor.
+last_id=$(curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/activities?limit=2" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" | jq -er '.last_id')
 
-  # Pass the cursor back unchanged to fetch the next (older) page.
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/activities" \
-    --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "limit=2" \
-    --data-urlencode "after_id=${last_id}"
-  ```
-</CodeGroup>
+# Pass the cursor back unchanged to fetch the next (older) page.
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/activities" \
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "limit=2" \
+  --data-urlencode "after_id=${last_id}"
+```
 
 A production **backfill** loop pages through older activities by driving iteration off `has_more` and `last_id`:
 
@@ -149,14 +143,14 @@ Every entry in `data` is an Activity with this top-level shape:
 
 The `actor` field is a discriminated union. The `type` discriminator tells you which other fields are present:
 
-| `actor.type`                 | When it appears                                                                                                                                                                        | Key fields                                                                                                                                          |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user_actor`                 | A signed-in claude.ai or Claude Console user took the action.                                                                                                                          | `email_address`, `user_id`, `ip_address`, `user_agent`                                                                                              |
-| `api_actor`                  | A request called the Claude API or the Compliance API with a customer-issued API key. Compliance API calls produce this actor type for both Compliance Access Keys and Admin API keys. | `api_key_id`, `ip_address`, `user_agent`                                                                                                            |
-| `admin_api_key_actor`        | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys.                                                                                         | `admin_api_key_id`                                                                                                                                  |
-| `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`.                                                                                                        | `unauthenticated_email_address`, `ip_address`, `user_agent`                                                                                         |
-| `anthropic_actor`            | Anthropic acted on the organization, for example through internal tooling.                                                                                                             | `email_address` (always `null`; present for shape consistency with `user_actor`, since Anthropic operators are not represented by individual email) |
-| `scim_directory_sync_actor`  | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync.                                                                     | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`)                                        |
+| `actor.type`                 | When it appears                                                                                                                                                                        | Key fields                                                                                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user_actor`                 | A signed-in claude.ai or Claude Console user took the action.                                                                                                                          | `email_address`, `user_id`, `ip_address`, `user_agent`                                                                                                |
+| `api_actor`                  | A request called the Claude API or the Compliance API with a customer-issued API key. Compliance API calls produce this actor type for both Compliance Access Keys and Admin API keys. | `api_key_id`, `ip_address`, `user_agent`                                                                                                              |
+| `admin_api_key_actor`        | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys.                                                                                         | `admin_api_key_id`                                                                                                                                    |
+| `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`.                                                                                                        | `unauthenticated_email_address`, `ip_address`, `user_agent`                                                                                           |
+| `anthropic_actor`            | Anthropic acted on the organization, for example through internal tooling.                                                                                                             | `email_address` (always `null`; present for shape consistency with `user_actor`, because Anthropic operators are not represented by individual email) |
+| `scim_directory_sync_actor`  | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync.                                                                     | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`)                                          |
 
 <Note>
   **Build forward-compatible handlers.** Pass through unrecognized `type` and `actor.type` values, and ignore fields your handler does not expect, so your integration keeps working when new activity types ship.

@@ -54,14 +54,14 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Bedrock.
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.48.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.50.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.48.0</version>
+          <version>2.50.0</version>
       </dependency>
       ```
 
@@ -303,201 +303,225 @@ The following examples show how to print a list of all the Claude models availab
 
 The following examples show how to generate text from Claude on Bedrock:
 
-<CodeGroup>
-  ```bash CLI
-  # The ant CLI does not support Amazon Bedrock.
-  ```
+<Tabs>
+  <Tab title="cURL">
+    <Note>
+      Calling the `InvokeModel` API with AWS credentials requires SigV4 request signing, which the SDKs in the other tabs handle automatically. For a Bedrock endpoint you can call with a self-contained cURL command, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock#making-your-first-request).
+    </Note>
+  </Tab>
 
-  ```python Python
-  from anthropic import AnthropicBedrock
+  <Tab title="CLI">
+    <Note>
+      The `ant` CLI does not support Amazon Bedrock. Use one of the SDK examples instead.
+    </Note>
+  </Tab>
 
-  client = AnthropicBedrock(
-      # Authenticate by either providing the keys below or use the default AWS credential providers, such as
-      # using ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and "AWS_ACCESS_KEY_ID" environment variables.
-      aws_access_key="<access key>",
-      aws_secret_key="<secret key>",
-      # Temporary credentials can be used with aws_session_token.
-      # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
-      aws_session_token="<session_token>",
-      # aws_region changes the aws region to which the request is made. By default, the SDK reads AWS_REGION,
-      # and if that's not present, defaults to us-east-1. Note that the SDK does not read ~/.aws/config for the region.
-      aws_region="us-west-2",
-  )
+  <Tab title="Python">
+    ```python
+    from anthropic import AnthropicBedrock
 
-  message = client.messages.create(
-      model="global.anthropic.claude-opus-4-6-v1",
-      max_tokens=256,
-      messages=[{"role": "user", "content": "Hello, world"}],
-  )
-  print(message.content)
-  ```
+    client = AnthropicBedrock(
+        # Authenticate by either providing the keys below or use the default AWS credential providers, such as
+        # using ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and "AWS_ACCESS_KEY_ID" environment variables.
+        aws_access_key="<access key>",
+        aws_secret_key="<secret key>",
+        # Temporary credentials can be used with aws_session_token.
+        # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
+        aws_session_token="<session_token>",
+        # aws_region changes the aws region to which the request is made. By default, the SDK reads AWS_REGION,
+        # and if that's not present, defaults to us-east-1. Note that the SDK does not read ~/.aws/config for the region.
+        aws_region="us-west-2",
+    )
 
-  ```typescript TypeScript
-  import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+    message = client.messages.create(
+        model="global.anthropic.claude-opus-4-6-v1",
+        max_tokens=256,
+        messages=[{"role": "user", "content": "Hello, world"}],
+    )
+    print(message.content)
+    ```
+  </Tab>
 
-  const client = new AnthropicBedrock({
-    // Authenticate by either providing the keys below or use
-    // the default AWS credential providers, such as
-    // ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and
-    // "AWS_ACCESS_KEY_ID" environment variables.
-    awsAccessKey: "<access key>",
-    awsSecretKey: "<secret key>",
+  <Tab title="TypeScript">
+    ```typescript
+    import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
-    // Temporary credentials can be used with awsSessionToken.
-    // Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
-    awsSessionToken: "<session_token>",
+    const client = new AnthropicBedrock({
+      // Authenticate by either providing the keys below or use
+      // the default AWS credential providers, such as
+      // ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and
+      // "AWS_ACCESS_KEY_ID" environment variables.
+      awsAccessKey: "<access key>",
+      awsSecretKey: "<secret key>",
 
-    // awsRegion changes the aws region to which the request
-    // is made. By default, the SDK reads AWS_REGION, and if
-    // that's not present, defaults to us-east-1. Note that
-    // the SDK does not read ~/.aws/config for the region.
-    awsRegion: "us-west-2"
-  });
+      // Temporary credentials can be used with awsSessionToken.
+      // Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
+      awsSessionToken: "<session_token>",
 
-  const message = await client.messages.create({
-    model: "global.anthropic.claude-opus-4-6-v1",
-    max_tokens: 256,
-    messages: [{ role: "user", content: "Hello, world" }]
-  });
-  console.log(message);
-  ```
+      // awsRegion changes the aws region to which the request
+      // is made. By default, the SDK reads AWS_REGION, and if
+      // that's not present, defaults to us-east-1. Note that
+      // the SDK does not read ~/.aws/config for the region.
+      awsRegion: "us-west-2"
+    });
 
-  ```csharp C#
-  using Anthropic.Bedrock;
-  using Anthropic.Models.Messages;
+    const message = await client.messages.create({
+      model: "global.anthropic.claude-opus-4-6-v1",
+      max_tokens: 256,
+      messages: [{ role: "user", content: "Hello, world" }]
+    });
+    console.log(message);
+    ```
+  </Tab>
 
-  AnthropicBedrockClient client = new(
-      await AnthropicBedrockCredentialsHelper.FromEnv()
-      ?? throw new InvalidOperationException("AWS credentials not configured.")
-  );
+  <Tab title="C#">
+    ```csharp
+    using Anthropic.Bedrock;
+    using Anthropic.Models.Messages;
 
-  var response = await client.Messages.Create(new MessageCreateParams
-  {
-      Model = "global.anthropic.claude-opus-4-6-v1",
-      MaxTokens = 256,
-      Messages = [new() { Role = Role.User, Content = "Hello, world" }],
-  });
+    AnthropicBedrockClient client = new(
+        await AnthropicBedrockCredentialsHelper.FromEnv()
+        ?? throw new InvalidOperationException("AWS credentials not configured.")
+    );
 
-  Console.WriteLine(
-      string.Join("", response.Content
-          .Where(c => c.Value is TextBlock)
-          .Select(c => (c.Value as TextBlock)!.Text)));
-  ```
+    var response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = "global.anthropic.claude-opus-4-6-v1",
+        MaxTokens = 256,
+        Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+    });
 
-  ```go Go
-  import (
-  	"context"
-  	"fmt"
+    Console.WriteLine(
+        string.Join("", response.Content
+            .Where(c => c.Value is TextBlock)
+            .Select(c => (c.Value as TextBlock)!.Text)));
+    ```
+  </Tab>
 
-  	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/bedrock"
-  )
-  // ...
-  	// Uses default AWS credential provider chain
-  	client := anthropic.NewClient(
-  		bedrock.WithLoadDefaultConfig(context.Background()),
-  	)
+  <Tab title="Go">
+    ```go
+    import (
+    	"context"
+    	"fmt"
 
-  	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "global.anthropic.claude-opus-4-6-v1",
-  		MaxTokens: 256,
-  		Messages: []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
-  		},
-  	})
-  	if err != nil {
-  		panic(err)
-  	}
-  	fmt.Printf("%+v\n", message.Content)
-  ```
+    	"github.com/anthropics/anthropic-sdk-go"
+    	"github.com/anthropics/anthropic-sdk-go/bedrock"
+    )
+    // ...
+    	// Uses default AWS credential provider chain
+    	client := anthropic.NewClient(
+    		bedrock.WithLoadDefaultConfig(context.Background()),
+    	)
 
-  ```java Java
-  import com.anthropic.bedrock.backends.BedrockBackend;
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-  import com.anthropic.models.messages.Message;
-  import com.anthropic.models.messages.MessageCreateParams;
+    	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+    		Model:     "global.anthropic.claude-opus-4-6-v1",
+    		MaxTokens: 256,
+    		Messages: []anthropic.MessageParam{
+    			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
+    		},
+    	})
+    	if err != nil {
+    		panic(err)
+    	}
+    	fmt.Printf("%+v\n", message.Content)
+    ```
+  </Tab>
 
-  public class BedrockExample {
+  <Tab title="Java">
+    ```java
+    import com.anthropic.bedrock.backends.BedrockBackend;
+    import com.anthropic.client.AnthropicClient;
+    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+    import com.anthropic.models.messages.Message;
+    import com.anthropic.models.messages.MessageCreateParams;
 
-    public static void main(String[] args) {
-      // Uses default AWS credential provider chain
-      AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(BedrockBackend.fromEnv())
-        .build();
+    public class BedrockExample {
 
-      Message message = client
-        .messages()
-        .create(
-          MessageCreateParams.builder()
-            .model("global.anthropic.claude-opus-4-6-v1")
-            .maxTokens(256)
-            .addUserMessage("Hello, world")
-            .build()
-        );
+      public static void main(String[] args) {
+        // Uses default AWS credential provider chain
+        AnthropicClient client = AnthropicOkHttpClient.builder()
+          .backend(BedrockBackend.fromEnv())
+          .build();
 
-      System.out.println(message.content());
-    }
-  }
-  ```
+        Message message = client
+          .messages()
+          .create(
+            MessageCreateParams.builder()
+              .model("global.anthropic.claude-opus-4-6-v1")
+              .maxTokens(256)
+              .addUserMessage("Hello, world")
+              .build()
+          );
 
-  ```php PHP
-  <?php
-
-  use Anthropic\Bedrock;
-
-  $client = Bedrock\Client::withCredentials(
-      accessKeyId: getenv("AWS_ACCESS_KEY_ID"),
-      secretAccessKey: getenv("AWS_SECRET_ACCESS_KEY"),
-      region: 'us-west-2',
-      securityToken: getenv("AWS_SESSION_TOKEN"),
-  );
-
-  $message = $client->messages->create(
-      maxTokens: 256,
-      messages: [
-          ['role' => 'user', 'content' => 'Hello, world']
-      ],
-      model: 'global.anthropic.claude-opus-4-6-v1',
-  );
-  echo $message->content[0]->text;
-  ```
-
-  ```ruby Ruby
-  require "anthropic"
-
-  client = Anthropic::BedrockClient.new
-
-  message = client.messages.create(
-    model: "global.anthropic.claude-opus-4-6-v1",
-    max_tokens: 256,
-    messages: [{role: "user", content: "Hello, world"}]
-  )
-
-  puts message.content.first.text
-  ```
-
-  ```python Boto3 (Python)
-  import boto3
-  import json
-
-  bedrock = boto3.client(service_name="bedrock-runtime")
-  body = json.dumps(
-      {
-          "max_tokens": 256,
-          "messages": [{"role": "user", "content": "Hello, world"}],
-          "anthropic_version": "bedrock-2023-05-31",
+        System.out.println(message.content());
       }
-  )
+    }
+    ```
+  </Tab>
 
-  response = bedrock.invoke_model(
-      body=body, modelId="global.anthropic.claude-opus-4-6-v1"
-  )
+  <Tab title="PHP">
+    ```php
+    <?php
 
-  response_body = json.loads(response.get("body").read())
-  print(response_body.get("content"))
-  ```
-</CodeGroup>
+    use Anthropic\Bedrock;
+
+    $client = Bedrock\Client::withCredentials(
+        accessKeyId: getenv("AWS_ACCESS_KEY_ID"),
+        secretAccessKey: getenv("AWS_SECRET_ACCESS_KEY"),
+        region: 'us-west-2',
+        securityToken: getenv("AWS_SESSION_TOKEN"),
+    );
+
+    $message = $client->messages->create(
+        maxTokens: 256,
+        messages: [
+            ['role' => 'user', 'content' => 'Hello, world']
+        ],
+        model: 'global.anthropic.claude-opus-4-6-v1',
+    );
+    echo $message->content[0]->text;
+    ```
+  </Tab>
+
+  <Tab title="Ruby">
+    ```ruby
+    require "anthropic"
+
+    client = Anthropic::BedrockClient.new
+
+    message = client.messages.create(
+      model: "global.anthropic.claude-opus-4-6-v1",
+      max_tokens: 256,
+      messages: [{role: "user", content: "Hello, world"}]
+    )
+
+    puts message.content.first.text
+    ```
+  </Tab>
+
+  <Tab title="Boto3 (Python)">
+    ```python
+    import boto3
+    import json
+
+    bedrock = boto3.client(service_name="bedrock-runtime")
+    body = json.dumps(
+        {
+            "max_tokens": 256,
+            "messages": [{"role": "user", "content": "Hello, world"}],
+            "anthropic_version": "bedrock-2023-05-31",
+        }
+    )
+
+    response = bedrock.invoke_model(
+        body=body, modelId="global.anthropic.claude-opus-4-6-v1"
+    )
+
+    response_body = json.loads(response.get("body").read())
+    print(response_body.get("content"))
+    ```
+  </Tab>
+</Tabs>
 
 See the [client SDKs](/docs/en/cli-sdks-libraries/overview) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
@@ -509,152 +533,178 @@ The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment varia
 
 To provide a token programmatically:
 
-<CodeGroup>
-  ```python Python
-  from anthropic import AnthropicBedrock
+<Tabs>
+  <Tab title="cURL">
+    <Note>
+      This section shows how to configure a bearer token in an SDK client. The SDKs also read the token from the `AWS_BEARER_TOKEN_BEDROCK` environment variable. For making direct HTTP requests with a bearer token, see the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+    </Note>
+  </Tab>
 
-  client = AnthropicBedrock(
-      api_key="your-bearer-token",
-      aws_region="us-west-2",
-  )
+  <Tab title="CLI">
+    <Note>
+      The `ant` CLI does not support Amazon Bedrock. Use one of the SDK examples instead.
+    </Note>
+  </Tab>
 
-  message = client.messages.create(
-      model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-      max_tokens=1024,
-      messages=[{"role": "user", "content": "Hello!"}],
-  )
-  print(message.content)
-  ```
+  <Tab title="Python">
+    ```python
+    from anthropic import AnthropicBedrock
 
-  ```typescript TypeScript
-  import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+    client = AnthropicBedrock(
+        api_key="your-bearer-token",
+        aws_region="us-west-2",
+    )
 
-  const client = new AnthropicBedrock({
-    apiKey: "your-bearer-token",
-    awsRegion: "us-west-2"
-  });
+    message = client.messages.create(
+        model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello!"}],
+    )
+    print(message.content)
+    ```
+  </Tab>
 
-  const message = await client.messages.create({
-    model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: "Hello!" }]
-  });
-  console.log(message);
-  ```
+  <Tab title="TypeScript">
+    ```typescript
+    import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
-  ```csharp C#
-  using Anthropic.Bedrock;
-  using Anthropic.Models.Messages;
+    const client = new AnthropicBedrock({
+      apiKey: "your-bearer-token",
+      awsRegion: "us-west-2"
+    });
 
-  var client = new AnthropicBedrockClient(
-      new AnthropicBedrockApiTokenCredentials
-      {
-          BearerToken = "your-bearer-token",
-          Region = "us-west-2",
-      }
-  );
+    const message = await client.messages.create({
+      model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: "Hello!" }]
+    });
+    console.log(message);
+    ```
+  </Tab>
 
-  var response = await client.Messages.Create(new MessageCreateParams
-  {
-      Model = "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-      MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello!" }],
-  });
-  ```
+  <Tab title="C#">
+    ```csharp
+    using Anthropic.Bedrock;
+    using Anthropic.Models.Messages;
 
-  ```go Go
-  import (
-  	"context"
-  	"fmt"
+    var client = new AnthropicBedrockClient(
+        new AnthropicBedrockApiTokenCredentials
+        {
+            BearerToken = "your-bearer-token",
+            Region = "us-west-2",
+        }
+    );
 
-  	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/bedrock"
-  	"github.com/aws/aws-sdk-go-v2/aws"
-  )
-  // ...
-  	cfg := aws.Config{
-  		Region:                  "us-west-2",
-  		BearerAuthTokenProvider: bedrock.NewStaticBearerTokenProvider("your-bearer-token"),
-  	}
-  	client := anthropic.NewClient(
-  		bedrock.WithConfig(cfg),
-  	)
+    var response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+        MaxTokens = 1024,
+        Messages = [new() { Role = Role.User, Content = "Hello!" }],
+    });
+    ```
+  </Tab>
 
-  	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-  		MaxTokens: 1024,
-  		Messages: []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
-  		},
-  	})
-  	if err != nil {
-  		panic(err)
-  	}
-  	fmt.Println(message.Content[0].Text)
-  ```
+  <Tab title="Go">
+    ```go
+    import (
+    	"context"
+    	"fmt"
 
-  ```java Java
-  import com.anthropic.bedrock.backends.BedrockBackend;
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-  import com.anthropic.models.messages.MessageCreateParams;
+    	"github.com/anthropics/anthropic-sdk-go"
+    	"github.com/anthropics/anthropic-sdk-go/bedrock"
+    	"github.com/aws/aws-sdk-go-v2/aws"
+    )
+    // ...
+    	cfg := aws.Config{
+    		Region:                  "us-west-2",
+    		BearerAuthTokenProvider: bedrock.NewStaticBearerTokenProvider("your-bearer-token"),
+    	}
+    	client := anthropic.NewClient(
+    		bedrock.WithConfig(cfg),
+    	)
 
-  // Option 1: Set AWS_BEARER_TOKEN_BEDROCK environment variable and use fromEnv()
-  AnthropicClient client = AnthropicOkHttpClient.builder()
-    .backend(BedrockBackend.fromEnv())
-    .build();
+    	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+    		Model:     "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    		MaxTokens: 1024,
+    		Messages: []anthropic.MessageParam{
+    			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
+    		},
+    	})
+    	if err != nil {
+    		panic(err)
+    	}
+    	fmt.Println(message.Content[0].Text)
+    ```
+  </Tab>
 
-  // Option 2: Provide the token programmatically
-  client = AnthropicOkHttpClient.builder()
-    .backend(BedrockBackend.builder()
-      .apiKey("your-bearer-token")
-      .build())
-    .build();
+  <Tab title="Java">
+    ```java
+    import com.anthropic.bedrock.backends.BedrockBackend;
+    import com.anthropic.client.AnthropicClient;
+    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+    import com.anthropic.models.messages.MessageCreateParams;
 
-  MessageCreateParams params = MessageCreateParams.builder()
-    .model("us.anthropic.claude-sonnet-4-5-20250929-v1:0")
-    .maxTokens(1024)
-    .addUserMessage("Hello!")
-    .build();
+    // Option 1: Set AWS_BEARER_TOKEN_BEDROCK environment variable and use fromEnv()
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+      .backend(BedrockBackend.fromEnv())
+      .build();
 
-  client.messages().create(params).content().stream()
-    .flatMap(block -> block.text().stream())
-    .forEach(textBlock -> System.out.println(textBlock.text()));
-  ```
+    // Option 2: Provide the token programmatically
+    client = AnthropicOkHttpClient.builder()
+      .backend(BedrockBackend.builder()
+        .apiKey("your-bearer-token")
+        .build())
+      .build();
 
-  ```php PHP
-  <?php
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model("us.anthropic.claude-sonnet-4-5-20250929-v1:0")
+      .maxTokens(1024)
+      .addUserMessage("Hello!")
+      .build();
 
-  use Anthropic\Bedrock;
+    client.messages().create(params).content().stream()
+      .flatMap(block -> block.text().stream())
+      .forEach(textBlock -> System.out.println(textBlock.text()));
+    ```
+  </Tab>
 
-  $client = Bedrock\Client::withApiKey('your-bearer-token', 'us-west-2');
+  <Tab title="PHP">
+    ```php
+    <?php
 
-  $message = $client->messages->create(
-      maxTokens: 1024,
-      messages: [
-          ['role' => 'user', 'content' => 'Hello!']
-      ],
-      model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
-  );
-  echo $message->content[0]->text;
-  ```
+    use Anthropic\Bedrock;
 
-  ```ruby Ruby
-  require "anthropic"
+    $client = Bedrock\Client::withApiKey('your-bearer-token', 'us-west-2');
 
-  client = Anthropic::BedrockClient.new(
-    api_key: "your-bearer-token",
-    aws_region: "us-west-2"
-  )
+    $message = $client->messages->create(
+        maxTokens: 1024,
+        messages: [
+            ['role' => 'user', 'content' => 'Hello!']
+        ],
+        model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+    );
+    echo $message->content[0]->text;
+    ```
+  </Tab>
 
-  message = client.messages.create(
-    model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    max_tokens: 1024,
-    messages: [{role: "user", content: "Hello!"}]
-  )
-  puts message.content.first.text
-  ```
-</CodeGroup>
+  <Tab title="Ruby">
+    ```ruby
+    require "anthropic"
+
+    client = Anthropic::BedrockClient.new(
+      api_key: "your-bearer-token",
+      aws_region: "us-west-2"
+    )
+
+    message = client.messages.create(
+      model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      max_tokens: 1024,
+      messages: [{role: "user", content: "Hello!"}]
+    )
+    puts message.content.first.text
+    ```
+  </Tab>
+</Tabs>
 
 ## Activity logging
 
@@ -674,7 +724,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 
 * [Messages API](/docs/en/api/messages/create)
 * [Prompt caching](/docs/en/build-with-claude/prompt-caching)
-* [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+* [Thinking](/docs/en/build-with-claude/thinking)
 * [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
 * [Citations](/docs/en/build-with-claude/citations)
 * [Structured outputs](/docs/en/build-with-claude/structured-outputs)
@@ -739,260 +789,304 @@ Regional endpoints include a 10% pricing premium over global endpoints.
 
 The model IDs for Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 already include the `global.` prefix:
 
-<CodeGroup>
-  ```bash CLI
-  # The ant CLI does not support Amazon Bedrock.
-  ```
+<Tabs>
+  <Tab title="cURL">
+    <Note>
+      Calling the `InvokeModel` API with AWS credentials requires SigV4 request signing, which the SDKs in the other tabs handle automatically. For a Bedrock endpoint you can call with a self-contained cURL command, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock#making-your-first-request).
+    </Note>
+  </Tab>
 
-  ```python Python
-  from anthropic import AnthropicBedrock
+  <Tab title="CLI">
+    <Note>
+      The `ant` CLI does not support Amazon Bedrock. Use one of the SDK examples instead.
+    </Note>
+  </Tab>
 
-  client = AnthropicBedrock(aws_region="us-west-2")
+  <Tab title="Python">
+    ```python
+    from anthropic import AnthropicBedrock
 
-  message = client.messages.create(
-      model="global.anthropic.claude-opus-4-6-v1",
-      max_tokens=256,
-      messages=[{"role": "user", "content": "Hello, world"}],
-  )
-  ```
+    client = AnthropicBedrock(aws_region="us-west-2")
 
-  ```typescript TypeScript
-  import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+    message = client.messages.create(
+        model="global.anthropic.claude-opus-4-6-v1",
+        max_tokens=256,
+        messages=[{"role": "user", "content": "Hello, world"}],
+    )
+    ```
+  </Tab>
 
-  const client = new AnthropicBedrock({
-    awsRegion: "us-west-2"
-  });
+  <Tab title="TypeScript">
+    ```typescript
+    import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
-  const message = await client.messages.create({
-    model: "global.anthropic.claude-opus-4-6-v1",
-    max_tokens: 256,
-    messages: [{ role: "user", content: "Hello, world" }]
-  });
-  ```
+    const client = new AnthropicBedrock({
+      awsRegion: "us-west-2"
+    });
 
-  ```csharp C#
-  using Anthropic.Bedrock;
-  using Anthropic.Models.Messages;
+    const message = await client.messages.create({
+      model: "global.anthropic.claude-opus-4-6-v1",
+      max_tokens: 256,
+      messages: [{ role: "user", content: "Hello, world" }]
+    });
+    ```
+  </Tab>
 
-  // C# Bedrock client uses model IDs with region prefix for global routing
-  AnthropicBedrockClient client = new(
-      await AnthropicBedrockCredentialsHelper.FromEnv()
-      ?? throw new InvalidOperationException("AWS credentials not configured.")
-  );
+  <Tab title="C#">
+    ```csharp
+    using Anthropic.Bedrock;
+    using Anthropic.Models.Messages;
 
-  var response = await client.Messages.Create(new MessageCreateParams
-  {
-      // Use "global." prefix for global cross-region inference
-      Model = "global.anthropic.claude-opus-4-6-v1",
-      MaxTokens = 256,
-      Messages = [new() { Role = Role.User, Content = "Hello, world" }],
-  });
-  ```
-
-  ```go Go
-  import (
-  	"context"
-
-  	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/bedrock"
-  )
-  // ...
-  	// Uses default AWS credential provider chain
-  	client := anthropic.NewClient(
-  		bedrock.WithLoadDefaultConfig(context.Background()),
-  	)
-
-  	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "global.anthropic.claude-opus-4-6-v1",
-  		MaxTokens: 256,
-  		Messages: []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
-  		},
-  	})
-  ```
-
-  ```java Java
-  import com.anthropic.bedrock.backends.BedrockBackend;
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-  import com.anthropic.models.messages.MessageCreateParams;
-
-  // Uses default AWS credential provider chain
-  AnthropicClient client = AnthropicOkHttpClient.builder()
-    .backend(BedrockBackend.fromEnv())
-    .build();
-
-  var message = client
-    .messages()
-    .create(
-      MessageCreateParams.builder()
-        .model("global.anthropic.claude-opus-4-6-v1")
-        .maxTokens(256)
-        .addUserMessage("Hello, world")
-        .build()
+    // C# Bedrock client uses model IDs with region prefix for global routing
+    AnthropicBedrockClient client = new(
+        await AnthropicBedrockCredentialsHelper.FromEnv()
+        ?? throw new InvalidOperationException("AWS credentials not configured.")
     );
-  ```
 
-  ```php PHP
-  <?php
+    var response = await client.Messages.Create(new MessageCreateParams
+    {
+        // Use "global." prefix for global cross-region inference
+        Model = "global.anthropic.claude-opus-4-6-v1",
+        MaxTokens = 256,
+        Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+    });
+    ```
+  </Tab>
 
-  use Anthropic\Bedrock;
+  <Tab title="Go">
+    ```go
+    import (
+    	"context"
 
-  $client = Bedrock\Client::fromEnvironment();
+    	"github.com/anthropics/anthropic-sdk-go"
+    	"github.com/anthropics/anthropic-sdk-go/bedrock"
+    )
+    // ...
+    	// Uses default AWS credential provider chain
+    	client := anthropic.NewClient(
+    		bedrock.WithLoadDefaultConfig(context.Background()),
+    	)
 
-  $message = $client->messages->create(
-      maxTokens: 256,
-      messages: [
-          ['role' => 'user', 'content' => 'Hello, world']
-      ],
-      model: 'global.anthropic.claude-opus-4-6-v1',
-  );
-  ```
+    	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+    		Model:     "global.anthropic.claude-opus-4-6-v1",
+    		MaxTokens: 256,
+    		Messages: []anthropic.MessageParam{
+    			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
+    		},
+    	})
+    ```
+  </Tab>
 
-  ```ruby Ruby
-  require "anthropic"
+  <Tab title="Java">
+    ```java
+    import com.anthropic.bedrock.backends.BedrockBackend;
+    import com.anthropic.client.AnthropicClient;
+    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+    import com.anthropic.models.messages.MessageCreateParams;
 
-  # Default credentials resolve region from AWS_REGION env var
-  client = Anthropic::BedrockClient.new
+    // Uses default AWS credential provider chain
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+      .backend(BedrockBackend.fromEnv())
+      .build();
 
-  message = client.messages.create(
-    # Use "global." prefix for global cross-region inference
-    model: "global.anthropic.claude-opus-4-6-v1",
-    max_tokens: 256,
-    messages: [{role: "user", content: "Hello, world"}]
-  )
-  ```
-</CodeGroup>
+    var message = client
+      .messages()
+      .create(
+        MessageCreateParams.builder()
+          .model("global.anthropic.claude-opus-4-6-v1")
+          .maxTokens(256)
+          .addUserMessage("Hello, world")
+          .build()
+      );
+    ```
+  </Tab>
+
+  <Tab title="PHP">
+    ```php
+    <?php
+
+    use Anthropic\Bedrock;
+
+    $client = Bedrock\Client::fromEnvironment();
+
+    $message = $client->messages->create(
+        maxTokens: 256,
+        messages: [
+            ['role' => 'user', 'content' => 'Hello, world']
+        ],
+        model: 'global.anthropic.claude-opus-4-6-v1',
+    );
+    ```
+  </Tab>
+
+  <Tab title="Ruby">
+    ```ruby
+    require "anthropic"
+
+    # Default credentials resolve region from AWS_REGION env var
+    client = Anthropic::BedrockClient.new
+
+    message = client.messages.create(
+      # Use "global." prefix for global cross-region inference
+      model: "global.anthropic.claude-opus-4-6-v1",
+      max_tokens: 256,
+      messages: [{role: "user", content: "Hello, world"}]
+    )
+    ```
+  </Tab>
+</Tabs>
 
 **Using regional endpoints (CRIS):**
 
 To use regional endpoints, replace the `global.` prefix with a regional prefix such as `us.`:
 
-<CodeGroup>
-  ```bash CLI
-  # The ant CLI does not support Amazon Bedrock.
-  ```
+<Tabs>
+  <Tab title="cURL">
+    <Note>
+      Calling the `InvokeModel` API with AWS credentials requires SigV4 request signing, which the SDKs in the other tabs handle automatically. For a Bedrock endpoint you can call with a self-contained cURL command, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock#making-your-first-request).
+    </Note>
+  </Tab>
 
-  ```python Python
-  from anthropic import AnthropicBedrock
+  <Tab title="CLI">
+    <Note>
+      The `ant` CLI does not support Amazon Bedrock. Use one of the SDK examples instead.
+    </Note>
+  </Tab>
 
-  client = AnthropicBedrock(aws_region="us-west-2")
+  <Tab title="Python">
+    ```python
+    from anthropic import AnthropicBedrock
 
-  # Using US regional endpoint (CRIS)
-  message = client.messages.create(
-      model="us.anthropic.claude-opus-4-6-v1",  # Regional prefix
-      max_tokens=256,
-      messages=[{"role": "user", "content": "Hello, world"}],
-  )
-  ```
+    client = AnthropicBedrock(aws_region="us-west-2")
 
-  ```typescript TypeScript
-  import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+    # Using US regional endpoint (CRIS)
+    message = client.messages.create(
+        model="us.anthropic.claude-opus-4-6-v1",  # Regional prefix
+        max_tokens=256,
+        messages=[{"role": "user", "content": "Hello, world"}],
+    )
+    ```
+  </Tab>
 
-  const client = new AnthropicBedrock({
-    awsRegion: "us-west-2"
-  });
+  <Tab title="TypeScript">
+    ```typescript
+    import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
-  // Using US regional endpoint (CRIS)
-  const message = await client.messages.create({
-    model: "us.anthropic.claude-opus-4-6-v1", // Regional prefix
-    max_tokens: 256,
-    messages: [{ role: "user", content: "Hello, world" }]
-  });
-  ```
+    const client = new AnthropicBedrock({
+      awsRegion: "us-west-2"
+    });
 
-  ```csharp C#
-  using Anthropic.Bedrock;
-  using Anthropic.Models.Messages;
+    // Using US regional endpoint (CRIS)
+    const message = await client.messages.create({
+      model: "us.anthropic.claude-opus-4-6-v1", // Regional prefix
+      max_tokens: 256,
+      messages: [{ role: "user", content: "Hello, world" }]
+    });
+    ```
+  </Tab>
 
-  AnthropicBedrockClient client = new(
-      new AnthropicBedrockPrivateKeyCredentials { Region = "us-west-2" }
-  );
+  <Tab title="C#">
+    ```csharp
+    using Anthropic.Bedrock;
+    using Anthropic.Models.Messages;
 
-  // Using US regional endpoint (CRIS)
-  var response = await client.Messages.Create(new MessageCreateParams
-  {
-      Model = "us.anthropic.claude-opus-4-6-v1", // Regional prefix
-      MaxTokens = 256,
-      Messages = [new() { Role = Role.User, Content = "Hello, world" }],
-  });
-  ```
-
-  ```go Go
-  import (
-  	"context"
-
-  	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/bedrock"
-  )
-  // ...
-  	// Uses default AWS credential provider chain
-  	client := anthropic.NewClient(
-  		bedrock.WithLoadDefaultConfig(context.Background()),
-  	)
-
-  	// Using US regional endpoint (CRIS)
-  	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "us.anthropic.claude-opus-4-6-v1", // Regional prefix
-  		MaxTokens: 256,
-  		Messages: []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
-  		},
-  	})
-  ```
-
-  ```java Java
-  import com.anthropic.bedrock.backends.BedrockBackend;
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-  import com.anthropic.models.messages.MessageCreateParams;
-
-  // Uses default AWS credential provider chain
-  AnthropicClient client = AnthropicOkHttpClient.builder()
-    .backend(BedrockBackend.fromEnv())
-    .build();
-
-  // Using US regional endpoint (CRIS)
-  var message = client
-    .messages()
-    .create(
-      MessageCreateParams.builder()
-        .model("us.anthropic.claude-opus-4-6-v1") // Regional prefix
-        .maxTokens(256)
-        .addUserMessage("Hello, world")
-        .build()
+    AnthropicBedrockClient client = new(
+        new AnthropicBedrockPrivateKeyCredentials { Region = "us-west-2" }
     );
-  ```
 
-  ```php PHP
-  <?php
+    // Using US regional endpoint (CRIS)
+    var response = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = "us.anthropic.claude-opus-4-6-v1", // Regional prefix
+        MaxTokens = 256,
+        Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+    });
+    ```
+  </Tab>
 
-  use Anthropic\Bedrock;
+  <Tab title="Go">
+    ```go
+    import (
+    	"context"
 
-  $client = Bedrock\Client::fromEnvironment();
+    	"github.com/anthropics/anthropic-sdk-go"
+    	"github.com/anthropics/anthropic-sdk-go/bedrock"
+    )
+    // ...
+    	// Uses default AWS credential provider chain
+    	client := anthropic.NewClient(
+    		bedrock.WithLoadDefaultConfig(context.Background()),
+    	)
 
-  $message = $client->messages->create(
-      maxTokens: 256,
-      messages: [
-          ['role' => 'user', 'content' => 'Hello, world']
-      ],
-      model: 'us.anthropic.claude-opus-4-6-v1',
-  );
-  ```
+    	// Using US regional endpoint (CRIS)
+    	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+    		Model:     "us.anthropic.claude-opus-4-6-v1", // Regional prefix
+    		MaxTokens: 256,
+    		Messages: []anthropic.MessageParam{
+    			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, world")),
+    		},
+    	})
+    ```
+  </Tab>
 
-  ```ruby Ruby
-  require "anthropic"
+  <Tab title="Java">
+    ```java
+    import com.anthropic.bedrock.backends.BedrockBackend;
+    import com.anthropic.client.AnthropicClient;
+    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+    import com.anthropic.models.messages.MessageCreateParams;
 
-  # Using US regional endpoint (CRIS)
-  client = Anthropic::BedrockClient.new(aws_region: "us-west-2")
+    // Uses default AWS credential provider chain
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+      .backend(BedrockBackend.fromEnv())
+      .build();
 
-  message = client.messages.create(
-    model: "us.anthropic.claude-opus-4-6-v1", # Regional prefix
-    max_tokens: 256,
-    messages: [{role: "user", content: "Hello, world"}]
-  )
-  ```
-</CodeGroup>
+    // Using US regional endpoint (CRIS)
+    var message = client
+      .messages()
+      .create(
+        MessageCreateParams.builder()
+          .model("us.anthropic.claude-opus-4-6-v1") // Regional prefix
+          .maxTokens(256)
+          .addUserMessage("Hello, world")
+          .build()
+      );
+    ```
+  </Tab>
+
+  <Tab title="PHP">
+    ```php
+    <?php
+
+    use Anthropic\Bedrock;
+
+    $client = Bedrock\Client::fromEnvironment();
+
+    $message = $client->messages->create(
+        maxTokens: 256,
+        messages: [
+            ['role' => 'user', 'content' => 'Hello, world']
+        ],
+        model: 'us.anthropic.claude-opus-4-6-v1',
+    );
+    ```
+  </Tab>
+
+  <Tab title="Ruby">
+    ```ruby
+    require "anthropic"
+
+    # Using US regional endpoint (CRIS)
+    client = Anthropic::BedrockClient.new(aws_region: "us-west-2")
+
+    message = client.messages.create(
+      model: "us.anthropic.claude-opus-4-6-v1", # Regional prefix
+      max_tokens: 256,
+      messages: [{role: "user", content: "Hello, world"}]
+    )
+    ```
+  </Tab>
+</Tabs>
 
 <Note>
   **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).

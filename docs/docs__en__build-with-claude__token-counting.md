@@ -776,7 +776,7 @@ All [active models](/docs/en/about-claude/models/overview) support token countin
 ### Count tokens in messages with extended thinking
 
 <Note>
-  See [how the context window is calculated with extended thinking](/docs/en/build-with-claude/extended-thinking#how-context-window-is-calculated-with-extended-thinking) for more details.
+  See [Thinking and the context window](/docs/en/build-with-claude/thinking#thinking-and-the-context-window) for more details.
 
   * Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
   * **Current** assistant turn thinking **does** count toward your input tokens

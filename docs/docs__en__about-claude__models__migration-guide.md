@@ -24,7 +24,7 @@ Guide for migrating to the latest Claude models from previous Claude versions
 
 The baseline settings for `claude-mythos-5`:
 
-* **Thinking:** [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) is always on. The model determines when and how much to think on each request, and no `thinking` configuration is required. Both `thinking: {type: "disabled"}` and manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) return a 400 error.
+* **Thinking:** [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) is always on. The model determines when and how much to think on each request, and no `thinking` configuration is required. Both `thinking: {type: "disabled"}` and manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) return a 400 error.
 * **Prefill:** Prefilling the assistant message returns a 400 error. Use system prompt instructions instead.
 * **Data retention:** Claude Mythos 5 requires 30-day data retention and is not available under zero data retention (ZDR) arrangements; it is designated a Covered Model. See [Model-specific data retention requirements](/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
 
@@ -45,7 +45,7 @@ model = "claude-mythos-5"  # After
 
 #### Features not available on Claude Mythos 5
 
-1. **Extended thinking and thinking token budgets:** Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported on `claude-mythos-5` and returns a 400 error. [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) is always on: the model determines when and how much to think on each request, and no `thinking` configuration is required. `thinking: {type: "disabled"}` returns an error. `budget_tokens` has no direct replacement: thinking is adaptive, and the [effort parameter](/docs/en/build-with-claude/effort) is a separate output-level control, not a thinking budget.
+1. **Extended thinking and thinking token budgets:** Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported on `claude-mythos-5` and returns a 400 error. [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) is always on: the model determines when and how much to think on each request, and no `thinking` configuration is required. `thinking: {type: "disabled"}` returns an error. `budget_tokens` has no direct replacement: thinking is adaptive, and the [effort parameter](/docs/en/build-with-claude/effort) is a separate output-level control, not a thinking budget.
 
    Before (Claude Mythos Preview):
 
@@ -296,7 +296,7 @@ model = "claude-mythos-5"  # After
 
 2. **Assistant prefill:** Prefilling the assistant message is not supported on `claude-mythos-5` and returns a 400 error, the same as on Claude Mythos Preview. Use system prompt instructions instead.
 
-3. **Thinking output:** On `claude-mythos-5`, the raw chain of thought is never returned, but thinking blocks still carry readable summarized text when `thinking.display` is set to `summarized`. Pass thinking blocks back unchanged when continuing a conversation on the same model. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
+3. **Thinking output:** On `claude-mythos-5`, the raw chain of thought is never returned, but thinking blocks still carry readable summarized text when `thinking.display` is set to `summarized`. Pass thinking blocks back unchanged when continuing a conversation on the same model. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
 
 #### Token counting and billing
 
@@ -310,7 +310,7 @@ model = "claude-mythos-5"  # After
 * Remove manual extended thinking configuration (`thinking: {type: "enabled", budget_tokens: N}`). Adaptive thinking is always on, and no `thinking` field is required.
 * Remove any `thinking: {type: "disabled"}` configuration. Disabling thinking returns an error on `claude-mythos-5`.
 * Remove `budget_tokens`. It has no direct replacement: thinking is adaptive, and the `effort` parameter is a separate output-level control, not a thinking budget.
-* Verify any code that parses the `thinking` field treats it as display text only and passes thinking blocks back unchanged when continuing on the same model. `thinking.display` defaults to `"omitted"` on `claude-mythos-5`, the same as on Claude Mythos Preview; set `display: "summarized"` to receive readable summaries. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
+* Verify any code that parses the `thinking` field treats it as display text only and passes thinking blocks back unchanged when continuing on the same model. `thinking.display` defaults to `"omitted"` on `claude-mythos-5`, the same as on Claude Mythos Preview; set `display: "summarized"` to receive readable summaries. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
 * If you replay conversation history on another model, strip `thinking` and `redacted_thinking` blocks from prior assistant turns first. Thinking blocks from `claude-mythos-5` are tied to the model that produced them, and models other than Claude Fable 5 and Claude Mythos 5 silently ignore them. Stripping keeps cross-model requests minimal and uniform.
 * Re-baseline token counts and costs on your own workloads. Token counts are roughly unchanged when migrating from `claude-mythos-preview`.
 
@@ -320,7 +320,7 @@ model = "claude-mythos-5"  # After
 
 Migration is mostly drop-in. Claude Fable 5 uses the same [Messages API](/docs/en/build-with-claude/working-with-messages) and the same [tool use](/docs/en/agents-and-tools/tool-use/overview) patterns as Claude Opus 4.8. It supports the same [1M token context window](/docs/en/build-with-claude/context-windows) by default and the same [128k max output tokens](/docs/en/about-claude/models/overview). Token counts are roughly unchanged because both models use the same tokenizer.
 
-The key changes to check are always-on [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), thinking output, safety classifier refusals, and pricing. [Before you migrate](#before-you-migrate) covers pricing and data retention; [What changed](#what-changed) covers the rest.
+The key changes to check are always-on [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), thinking output, safety classifier refusals, and pricing. [Before you migrate](#before-you-migrate) covers pricing and data retention; [What changed](#what-changed) covers the rest.
 
 ### Before you migrate
 
@@ -345,9 +345,9 @@ model = "claude-fable-5"  # After
 
 The items in this section describe the API and behavior differences worth checking after you swap the model ID.
 
-1. **Adaptive thinking is always on:** [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) is the only thinking mode on `claude-fable-5`. The model determines when and how much to think on each request, and no `thinking` configuration is required. `thinking: {type: "disabled"}` returns an error. Use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth.
+1. **Adaptive thinking is always on:** [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) is the only thinking mode on `claude-fable-5`. The model determines when and how much to think on each request, and no `thinking` configuration is required. `thinking: {type: "disabled"}` returns an error. Use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth.
 
-   The behavior change to check: on Claude Opus 4.8, requests without a `thinking` field run without thinking; on `claude-fable-5`, those same requests run with adaptive thinking. `max_tokens` remains a hard limit on total output, thinking plus response text, so revisit it for workloads that ran without thinking on Claude Opus 4.8. See [Cost control](/docs/en/build-with-claude/adaptive-thinking#cost-control).
+   The behavior change to check: on Claude Opus 4.8, requests without a `thinking` field run without thinking; on `claude-fable-5`, those same requests run with adaptive thinking. `max_tokens` remains a hard limit on total output, thinking plus response text, so revisit it for workloads that ran without thinking on Claude Opus 4.8. See [Cost control](/docs/en/build-with-claude/thinking-steering-and-cost#cost-control).
 
    Before (Claude Opus 4.8):
 
@@ -635,7 +635,7 @@ The items in this section describe the API and behavior differences worth checki
 
 3. **Assistant prefill (unchanged):** Prefilling the assistant message is not supported on `claude-fable-5` and returns a 400 error, the same as on Claude Opus 4.8. Use system prompt instructions instead.
 
-4. **Thinking output:** On `claude-fable-5`, the raw chain of thought is never returned, but thinking blocks still carry readable summarized text when `thinking.display` is set to `summarized`. Pass thinking blocks back unchanged when continuing a conversation on the same model. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
+4. **Thinking output:** On `claude-fable-5`, the raw chain of thought is never returned, but thinking blocks still carry readable summarized text when `thinking.display` is set to `summarized`. Pass thinking blocks back unchanged when continuing a conversation on the same model. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
 
 5. **Safety classifiers and the `refusal` stop reason:** `claude-fable-5` runs safety classifiers on requests and during response generation. When a classifier declines a request, the Messages API returns `stop_reason: "refusal"` as a successful HTTP 200 response, not an error. The `stop_details.category` field reports which classifier fired, with categories such as `"cyber"`, `"bio"`, and `"reasoning_extraction"`, or `null` when the refusal maps to no named category. See the [refusal category table](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the full set.
 
@@ -653,7 +653,7 @@ The items in this section describe the API and behavior differences worth checki
 * Update the model name from `claude-opus-4-8` to `claude-fable-5`.
 * Remove any `thinking: {type: "disabled"}` configuration. Disabling thinking returns an error on `claude-fable-5`, and requests without a `thinking` field run with adaptive thinking.
 * If you removed manual extended thinking and assistant prefills during earlier migrations, no action is needed: both remain unsupported on `claude-fable-5`.
-* Verify any code that parses the `thinking` field treats it as display text only and passes thinking blocks back unchanged when continuing on the same model. `thinking.display` defaults to `"omitted"` on `claude-fable-5`, the same as on Claude Opus 4.8; set `display: "summarized"` to receive readable summaries. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/adaptive-thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
+* Verify any code that parses the `thinking` field treats it as display text only and passes thinking blocks back unchanged when continuing on the same model. `thinking.display` defaults to `"omitted"` on `claude-fable-5`, the same as on Claude Opus 4.8; set `display: "summarized"` to receive readable summaries. See [Thinking output on Claude Fable 5 and Claude Mythos 5](/docs/en/build-with-claude/thinking#thinking-output-on-claude-fable-5-and-claude-mythos-5).
 * If you replay conversation history on another model, strip `thinking` and `redacted_thinking` blocks from prior assistant turns first. Thinking blocks from `claude-fable-5` are tied to the model that produced them, and models other than Claude Fable 5 and Claude Mythos 5 silently ignore them. Stripping keeps cross-model requests minimal and uniform. The exception is redeeming a [fallback credit](/docs/en/build-with-claude/fallback-credit), which requires the request body echoed under that feature's exact rules.
 * Handle `stop_reason: "refusal"` and read the `stop_details.category` field. To re-run refused requests on another model automatically, consider the opt-in `fallbacks` parameter (beta). See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback).
 * Re-evaluate your `effort` setting. Start at `high` for most tasks, including workloads that ran at `xhigh` on Claude Opus 4.8.
@@ -664,7 +664,7 @@ The items in this section describe the API and behavior differences worth checki
 Claude Opus 4.8 is built for complex agentic coding and enterprise work. These are the baseline settings for `claude-opus-4-8`. The following sub-sections cover the specific changes to make from each earlier Opus model.
 
 * **Pricing:** see [Claude pricing](/docs/en/about-claude/pricing).
-* **Thinking:** [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`) is the supported thinking mode and is off by default: requests with no `thinking` field run without thinking. Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) returns a 400 error.
+* **Thinking:** [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`thinking: {type: "adaptive"}`) is the supported thinking mode and is off by default: requests with no `thinking` field run without thinking. Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) returns a 400 error.
 * **Effort:** The [effort parameter](/docs/en/build-with-claude/effort) defaults to `high` across all surfaces. For coding and high-autonomy work, set `xhigh` explicitly.
 * **Sampling parameters:** `temperature`, `top_p`, and `top_k` set to a non-default value return a 400 error. Omit them and use prompting to guide the model's behavior.
 * **Prefill:** Prefilling the assistant message returns a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or `output_config.format` instead.
@@ -676,7 +676,7 @@ Claude Opus 4.8 also supports [prompt caching](/docs/en/build-with-claude/prompt
 
 Claude Opus 4.8 builds on Claude Opus 4.7.
 
-Claude Opus 4.8 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals. There are no breaking API changes for code already running on Claude Opus 4.7. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](/docs/en/build-with-claude/context-windows), [128k max output tokens](/docs/en/about-claude/models/overview), [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), [prompt caching](/docs/en/build-with-claude/prompt-caching), [batch processing](/docs/en/build-with-claude/batch-processing), the [Files API](/docs/en/build-with-claude/files), [PDF support](/docs/en/build-with-claude/pdf-support), [vision](/docs/en/build-with-claude/vision), and the full set of server-side and client-side [tools](/docs/en/agents-and-tools/tool-use/overview). It also adds [mid-conversation system messages](/docs/en/about-claude/models/whats-new-claude-4-8#mid-conversation-system-messages) and publicly documents [refusal stop details](/docs/en/about-claude/models/whats-new-claude-4-8#refusal-stop-details).
+Claude Opus 4.8 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals. There are no breaking API changes for code already running on Claude Opus 4.7. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](/docs/en/build-with-claude/context-windows), [128k max output tokens](/docs/en/about-claude/models/overview), [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), [prompt caching](/docs/en/build-with-claude/prompt-caching), [batch processing](/docs/en/build-with-claude/batch-processing), the [Files API](/docs/en/build-with-claude/files), [PDF support](/docs/en/build-with-claude/pdf-support), [vision](/docs/en/build-with-claude/vision), and the full set of server-side and client-side [tools](/docs/en/agents-and-tools/tool-use/overview). It also adds [mid-conversation system messages](/docs/en/about-claude/models/whats-new-claude-4-8#mid-conversation-system-messages) and publicly documents [refusal stop details](/docs/en/about-claude/models/whats-new-claude-4-8#refusal-stop-details).
 
 <Note>
   If your code is on Claude Opus 4.6 or earlier, use [Migrating to Claude Opus 4.8 from Claude Opus 4.6](#migrating-from-claude-opus-46) or [Migrating to Claude Opus 4.8 from Claude Opus 4.5 or earlier](#migrating-from-claude-opus-45) instead. Those sections include breaking changes (sampling parameters rejected, manual extended thinking rejected, new tokenizer) that the upgrade from Claude Opus 4.7 alone does not cover.
@@ -692,7 +692,7 @@ model = "claude-opus-4-8"  # After
 
 #### What changed
 
-These are not breaking changes. Code that runs on Claude Opus 4.7 continues to work unchanged on Claude Opus 4.8. The items below describe behavior differences worth checking after you swap the model ID.
+These are not breaking changes. Code that runs on Claude Opus 4.7 continues to work unchanged on Claude Opus 4.8. The following items describe behavior differences worth checking after you swap the model ID.
 
 1. **Sampling parameters (unchanged):** Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Opus 4.8, the same as on Claude Opus 4.7. The SDK request types still define these fields for compatibility with earlier models, so code that sets them type-checks, but the API rejects the request server-side. If you removed these parameters when migrating to Opus 4.7, no further changes are needed.
 
@@ -724,7 +724,7 @@ Claude Opus 4.8 should have strong out-of-the-box performance on existing Claude
 
 * [1M token context window](/docs/en/build-with-claude/context-windows) at standard API pricing with no long-context premium
 * [128k max output tokens](/docs/en/about-claude/models/overview)
-* [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking)
+* [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost)
 * [Prompt caching](/docs/en/build-with-claude/prompt-caching)
 * [Batch processing](/docs/en/build-with-claude/batch-processing)
 * [Files API](/docs/en/build-with-claude/files)
@@ -742,7 +742,7 @@ model = "claude-opus-4-8"  # After
 
 #### Breaking changes
 
-1. **Extended thinking removed:** `thinking: {type: "enabled", budget_tokens: N}` is no longer supported on Claude Opus 4.7 or later models and returns a 400 error. Switch to [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`) and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. Adaptive thinking is **off by default** on Claude Opus 4.7: requests with no `thinking` field run without thinking, matching Opus 4.6 behavior. Set `thinking: {type: "adaptive"}` explicitly to enable it.
+1. **Extended thinking removed:** `thinking: {type: "enabled", budget_tokens: N}` is no longer supported on Claude Opus 4.7 or later models and returns a 400 error. Switch to [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`thinking: {type: "adaptive"}`) and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. Adaptive thinking is **off by default** on Claude Opus 4.7: requests with no `thinking` field run without thinking, matching Opus 4.6 behavior. Set `thinking: {type: "adaptive"}` explicitly to enable it.
 
    Before (Claude Opus 4.6):
 
@@ -1076,7 +1076,7 @@ model = "claude-opus-4-8"  # After
      ```
    </CodeGroup>
 
-   The default is `"omitted"` on Claude Opus 4.7. If your product streams reasoning to users, the new default appears as a long pause before output begins; set `display: "summarized"` to restore visible progress during thinking. See [Extended thinking](/docs/en/build-with-claude/extended-thinking#controlling-thinking-display) for details.
+   The default is `"omitted"` on Claude Opus 4.7. If your product streams reasoning to users, the new default appears as a long pause before output begins; set `display: "summarized"` to restore visible progress during thinking. See [Controlling thinking display](/docs/en/build-with-claude/thinking#controlling-thinking-display) for details.
 
 4. **Updated token counting:** Claude Opus 4.7 uses a new tokenizer, contributing to its improved performance on a wide range of tasks. The new tokenizer may use roughly 1x to 1.35x as many tokens when processing text compared to previous models (up to \~35% more, varying by content).
 
@@ -1239,7 +1239,7 @@ These are not required but will improve your experience:
 * Re-test any client-side token-count estimations.
 * If your application sends images, re-budget for [high-resolution image support](/docs/en/build-with-claude/vision#high-resolution-image-support-on-claude-opus-4-7) (up to approximately 3x more image tokens per full-resolution image). Downsample before sending if you do not need the additional fidelity.
 * If you consume pointing or bounding-box coordinates from the model, remove any scale-factor conversion; coordinates are 1:1 with actual image pixels on Claude Opus 4.7.
-* Review prompts for the behavior changes above (response length, literalism, tone, progress updates, subagents, effort calibration, tool triggering, cyber safeguards, high-resolution image handling).
+* Review prompts for the behavior changes (response length, literalism, tone, progress updates, subagents, effort calibration, tool triggering, cyber safeguards, high-resolution image handling).
 * Re-baseline response length with existing length-control prompts removed, then tune explicitly.
 * If using `xhigh` or `max` effort, raise `max_tokens` to at least 64k as a starting point.
 * Consider adopting task budgets (beta) for agentic workflows.
@@ -1267,7 +1267,7 @@ model = "claude-opus-4-8"  # After
 
 These changes improve your experience on Claude Opus 4.7 and later models. Items marked **(required on Opus 4.7)** were optional recommendations when Opus 4.6 launched but are now mandatory; the rest remain recommended.
 
-1. **Migrate to adaptive thinking (required on Opus 4.7):** `thinking: {type: "enabled", budget_tokens: N}` returns a 400 error on Claude Opus 4.7. Switch to `thinking: {type: "adaptive"}` and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. See [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
+1. **Migrate to adaptive thinking (required on Opus 4.7):** `thinking: {type: "enabled", budget_tokens: N}` returns a 400 error on Claude Opus 4.7. Switch to `thinking: {type: "adaptive"}` and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. See [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost).
 
    <CodeGroup>
      ```bash cURL
@@ -1812,7 +1812,7 @@ model = "claude-opus-4-8"  # After
 
 Claude Sonnet 5 offers the best combination of speed and intelligence in the Claude model family. It builds on Claude Sonnet 4.6.
 
-Claude Sonnet 5 is a drop-in upgrade for Claude Sonnet 4.6. Introductory pricing of $2/$10 USD per million input/output tokens is in effect through August 31, 2026, after which the standard pricing of $3/$15 USD per million input/output tokens will take effect; see [Pricing](/docs/en/about-claude/pricing#claude-sonnet-5-introductory-pricing) for details. There are two breaking API changes for code already running on Claude Sonnet 4.6: manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) and sampling parameters (`temperature`, `top_p`, `top_k`) set to non-default values are no longer accepted and return a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with the [effort parameter](/docs/en/build-with-claude/effort) instead. Claude Sonnet 5 supports the same set of features as Claude Sonnet 4.6, including the [1M token context window](/docs/en/build-with-claude/context-windows), [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), [prompt caching](/docs/en/build-with-claude/prompt-caching), [batch processing](/docs/en/build-with-claude/batch-processing), the [Files API](/docs/en/build-with-claude/files), [PDF support](/docs/en/build-with-claude/pdf-support), [vision](/docs/en/build-with-claude/vision), and the full set of server-side and client-side [tools](/docs/en/agents-and-tools/tool-use/overview). [Priority Tier](/docs/en/api/service-tiers#supported-models) is not available on Claude Sonnet 5. Claude Sonnet 5 also uses a new tokenizer.
+Claude Sonnet 5 is a drop-in upgrade for Claude Sonnet 4.6. Introductory pricing of $2/$10 USD per million input/output tokens is in effect through August 31, 2026, after which the standard pricing of $3/$15 USD per million input/output tokens will take effect; see [Pricing](/docs/en/about-claude/pricing#claude-sonnet-5-introductory-pricing) for details. There are two breaking API changes for code already running on Claude Sonnet 4.6: manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) and sampling parameters (`temperature`, `top_p`, `top_k`) set to non-default values are no longer accepted and return a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) with the [effort parameter](/docs/en/build-with-claude/effort) instead. Claude Sonnet 5 supports the same set of features as Claude Sonnet 4.6, including the [1M token context window](/docs/en/build-with-claude/context-windows), [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), [prompt caching](/docs/en/build-with-claude/prompt-caching), [batch processing](/docs/en/build-with-claude/batch-processing), the [Files API](/docs/en/build-with-claude/files), [PDF support](/docs/en/build-with-claude/pdf-support), [vision](/docs/en/build-with-claude/vision), and the full set of server-side and client-side [tools](/docs/en/agents-and-tools/tool-use/overview). [Priority Tier](/docs/en/api/service-tiers#supported-models) is not available on Claude Sonnet 5. Claude Sonnet 5 also uses a new tokenizer.
 
 ### Migrating to Claude Sonnet 5 from Claude Sonnet 4.6
 
@@ -1838,12 +1838,12 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
 
 3. **Assistant message prefilling (unchanged):** Prefilling the assistant message returns a `400` error on Claude Sonnet 5, the same as on Claude Sonnet 4.6. If you removed prefill when migrating to Claude Sonnet 4.6, no further changes are needed. Use [structured outputs](/docs/en/build-with-claude/structured-outputs), system prompt instructions, or `output_config.format` instead.
 
-4. **Adaptive thinking on by default:** On Claude Sonnet 4.6, requests without a `thinking` field run without thinking; on Claude Sonnet 5, the same requests run with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking). To turn thinking off, pass `thinking: {type: "disabled"}`. Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported and returns a 400 error. Use the [effort parameter](/docs/en/build-with-claude/effort) (default `high`) to control thinking depth.
+4. **Adaptive thinking on by default:** On Claude Sonnet 4.6, requests without a `thinking` field run without thinking; on Claude Sonnet 5, the same requests run with [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost). To turn thinking off, pass `thinking: {type: "disabled"}`. Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported and returns a 400 error. Use the [effort parameter](/docs/en/build-with-claude/effort) (default `high`) to control thinking depth.
 
    <Tabs>
      <Tab title="Claude Sonnet 5">
        <Note>
-         Adaptive thinking is on by default for Claude Sonnet 5. The `thinking` field is shown explicitly here to set `display: "summarized"`; if you omit `thinking`, Claude Sonnet 5 omits thinking content from the response by default. For per-model defaults, see [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
+         Adaptive thinking is on by default for Claude Sonnet 5. The `thinking` field is shown explicitly here to set `display: "summarized"`; if you omit `thinking`, Claude Sonnet 5 omits thinking content from the response by default. For per-model defaults, see [Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost).
        </Note>
 
        <CodeGroup>
@@ -2437,7 +2437,7 @@ For a complete overview of capabilities, see the [models overview](/docs/en/abou
 <Note>
   Extended thinking impacts [prompt caching](/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks) efficiency.
 
-  Extended thinking is deprecated in Claude 4.6 models and removed in Claude Opus 4.7. If using newer models, use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) instead.
+  Extended thinking is deprecated in Claude 4.6 models and removed in Claude Opus 4.7. If using newer models, use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) instead.
 </Note>
 
 ### Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 or earlier
