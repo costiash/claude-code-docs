@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-24T15:31:35.953097Z",
-    "total_paths": 720,
+    "generated_at": "2026-07-24T18:33:54.822229Z",
+    "total_paths": 721,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-24T15:31:35.953104Z"
+    "last_regenerated": "2026-07-24T18:33:54.822236Z"
   },
   "categories": {
     "core_documentation": [
@@ -14,7 +14,7 @@
       "/docs/en/about-claude/models/migration-guide",
       "/docs/en/about-claude/models/model-ids-and-versions",
       "/docs/en/about-claude/models/overview",
-      "/docs/en/about-claude/models/whats-new-claude-4-8",
+      "/docs/en/about-claude/models/whats-new-opus-5",
       "/docs/en/about-claude/models/whats-new-sonnet-5",
       "/docs/en/about-claude/pricing",
       "/docs/en/about-claude/use-case-guides/classification",
@@ -102,6 +102,7 @@
       "/docs/en/build-with-claude/prompt-engineering/overview",
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5",
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8",
+      "/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5",
       "/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5",
       "/docs/en/build-with-claude/refusals-and-fallback",
       "/docs/en/build-with-claude/search-results",
