@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-23T21:39:43Z",
+  "generated_at": "2026-07-24T00:50:19Z",
   "indexed_files": 1812,
   "index": {
     "/changelog": {
@@ -152,23 +152,23 @@
         "code",
         "mode",
         "prompt",
-        "settings",
         "version",
+        "settings",
         "only",
         "docs",
         "see",
         "requires",
+        "min",
         "flag",
         "mcp",
         "file",
         "sessions",
-        "min",
         "interactive",
         "default",
-        "tool",
-        "available"
+        "background",
+        "tool"
       ],
-      "word_count": 4260,
+      "word_count": 4302,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -738,25 +738,25 @@
         "claude",
         "code",
         "settings",
+        "proxy",
+        "variables",
         "when",
         "docs",
-        "proxy",
         "environment",
+        "authentication",
+        "only",
         "set",
         "network",
-        "authentication",
-        "variables",
         "certificate",
-        "only",
+        "through",
+        "session",
+        "every",
         "supervisor",
         "anthropic",
         "enterprise",
-        "configuration",
-        "through",
-        "note",
-        "shell"
+        "configuration"
       ],
-      "word_count": 1689,
+      "word_count": 1852,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -861,14 +861,14 @@
         "see",
         "servers",
         "command",
-        "version",
         "skills",
+        "version",
         "name",
         "path",
         "file",
         "skill"
       ],
-      "word_count": 9124,
+      "word_count": 9162,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1197,14 +1197,14 @@
         "usage",
         "performance",
         "check",
+        "error",
+        "reference",
         "files",
         "when",
         "see",
-        "title",
-        "high",
-        "problems"
+        "title"
       ],
-      "word_count": 1255,
+      "word_count": 1274,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -45741,7 +45741,7 @@
         "note",
         "one"
       ],
-      "word_count": 5123,
+      "word_count": 5147,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -45853,7 +45853,7 @@
         "java",
         "tab"
       ],
-      "word_count": 10094,
+      "word_count": 10448,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -47317,14 +47317,14 @@
       "content_preview": "# User management  Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles.  ---  Th...",
       "keywords": [
         "api",
-        "group",
         "organization",
+        "group",
         "member",
         "role",
         "invite",
         "claude",
-        "roles",
         "members",
+        "roles",
         "scope",
         "groups",
         "custom",
@@ -47337,7 +47337,7 @@
         "requires",
         "complete"
       ],
-      "word_count": 3543,
+      "word_count": 3654,
       "file_path": "docs/docs__en__manage-claude__user-management.md"
     },
     "/docs/en/manage-claude/wif-admin-api": {
