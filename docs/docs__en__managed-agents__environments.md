@@ -287,6 +287,8 @@ The `packages` field pre-installs packages into the sandbox before the agent sta
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Environments;
+
   var environment = await client.Beta.Environments.Create(new()
   {
       Name = "data-analysis",
@@ -324,6 +326,9 @@ The `packages` field pre-installs packages into the sandbox before the agent sta
   ```
 
   ```java Java
+  import com.anthropic.models.beta.environments.*;
+  import java.util.List;
+
   var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
       .name("data-analysis")
       .config(BetaCloudConfigParams.builder()
@@ -453,6 +458,8 @@ The following example creates an environment with `limited` networking:
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Environments;
+
   var environment = await client.Beta.Environments.Create(new()
   {
       Name = "api-access",
@@ -490,6 +497,9 @@ The following example creates an environment with `limited` networking:
   ```
 
   ```java Java
+  import com.anthropic.models.beta.environments.*;
+  import java.util.List;
+
   var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
       .name("api-access")
       .config(BetaCloudConfigParams.builder()

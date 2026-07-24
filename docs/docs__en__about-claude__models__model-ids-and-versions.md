@@ -18,9 +18,9 @@ Starting with the Claude 4.6 generation, model IDs use a dateless format:
 claude-{name}-{major}[-{minor}]
 ```
 
-Major-version releases such as Claude Sonnet 5 omit the minor segment.
+Major-version releases such as Claude Sonnet 5 and Claude Opus 5 omit the minor segment.
 
-For example: `claude-sonnet-4-6`, `claude-sonnet-5`, `claude-opus-4-6`, `claude-opus-4-7`, and `claude-opus-4-8`
+For example: `claude-sonnet-4-6`, `claude-sonnet-5`, `claude-opus-4-6`, `claude-opus-4-7`, `claude-opus-4-8`, and `claude-opus-5`
 
 On Amazon Bedrock, the corresponding format is:
 
@@ -28,7 +28,7 @@ On Amazon Bedrock, the corresponding format is:
 anthropic.claude-{name}-{major}[-{minor}]
 ```
 
-For example: `anthropic.claude-sonnet-4-6`, `anthropic.claude-sonnet-5`, `anthropic.claude-opus-4-7`, `anthropic.claude-opus-4-8`
+For example: `anthropic.claude-sonnet-4-6`, `anthropic.claude-sonnet-5`, `anthropic.claude-opus-4-7`, `anthropic.claude-opus-4-8`, `anthropic.claude-opus-5`
 
 Claude Opus 4.6 is the last Bedrock model ID to include the `-v1` suffix (`anthropic.claude-opus-4-6-v1`). Anthropic dropped the suffix starting with Claude Sonnet 4.6.
 

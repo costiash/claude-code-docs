@@ -190,10 +190,10 @@ The samples fetch the managed identity token from the platform's token endpoint:
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from Azure"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -242,11 +242,11 @@ The samples fetch the managed identity token from the platform's token endpoint:
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from Azure"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -285,7 +285,7 @@ The samples fetch the managed identity token from the platform's token endpoint:
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from Azure" }]
   });
@@ -355,7 +355,7 @@ The samples fetch the managed identity token from the platform's token endpoint:
   	)
 
   	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_8,
+  		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from Azure")),
@@ -364,7 +364,12 @@ The samples fetch the managed identity token from the platform's token endpoint:
   	if err != nil {
   		panic(err)
   	}
-  	fmt.Println(message.Content[0].Text)
+  	for _, block := range message.Content {
+  		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  			fmt.Println(textBlock.Text)
+  			break
+  		}
+  	}
   }
   ```
 
@@ -403,7 +408,7 @@ The samples fetch the managed identity token from the platform's token endpoint:
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello from Azure")
           .build());
@@ -424,7 +429,7 @@ The samples fetch the managed identity token from the platform's token endpoint:
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from Azure" }],
   });
@@ -506,11 +511,12 @@ The samples fetch the managed identity token from the platform's token endpoint:
   $client = new Client(credentials: $credentials);
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from Azure']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -546,11 +552,11 @@ The samples fetch the managed identity token from the platform's token endpoint:
   client = Anthropic::Client.new(credentials: credentials)
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from Azure"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 
   ```bash CLI
@@ -569,7 +575,7 @@ The samples fetch the managed identity token from the platform's token endpoint:
   # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
   # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from Azure"}'
   ```
@@ -793,10 +799,10 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from Azure"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -836,11 +842,11 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from Azure"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -881,7 +887,7 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from Azure" }]
   });
@@ -950,7 +956,7 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   		}),
   	)
   	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_8,
+  		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from Azure")),
@@ -959,7 +965,12 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   	if err != nil {
   		panic(err)
   	}
-  	fmt.Println(message.Content[0].Text)
+  	for _, block := range message.Content {
+  		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  			fmt.Println(textBlock.Text)
+  			break
+  		}
+  	}
   }
   ```
 
@@ -997,7 +1008,7 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello from Azure")
           .build());
@@ -1018,7 +1029,7 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from Azure" }],
   });
@@ -1090,11 +1101,12 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   );
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from Azure']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -1127,11 +1139,11 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from Azure"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 
   ```bash CLI
@@ -1152,7 +1164,7 @@ Two different client IDs appear in the samples. `<APP_ID>` is the audience app r
   # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read
   # from the environment.
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from Azure"}'
   ```

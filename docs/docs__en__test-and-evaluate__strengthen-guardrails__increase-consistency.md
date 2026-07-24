@@ -28,15 +28,11 @@ Precisely define your desired output format using JSON, XML, or custom templates
 ## Prefill Claude's response
 
 <Note>
-  Prefilling is not supported on Claude Fable 5, 
-
-  [Claude Mythos 5](https://anthropic.com/glasswing)
-
-  , 
+  Prefilling is not supported on Claude 4.6 and later models and 
 
   [Claude Mythos Preview](https://anthropic.com/glasswing)
 
-  , Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Use 
+  . Use 
 
   [structured outputs](/docs/en/build-with-claude/structured-outputs)
 

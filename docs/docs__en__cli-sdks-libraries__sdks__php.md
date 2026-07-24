@@ -36,10 +36,11 @@ $client = new Client();
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5',
 );
 
-echo $message->content[0]->text;
+$textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+echo $textBlock->text;
 ```
 
 For authentication options including Workload Identity Federation, see [Authentication](/docs/en/manage-claude/authentication).
@@ -60,7 +61,7 @@ $client = new Client();
 $stream = $client->messages->createStream(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5',
 );
 
 foreach ($stream as $event) {
@@ -91,7 +92,7 @@ try {
   $message = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5',
   );
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
@@ -138,7 +139,7 @@ $client = new Client(requestOptions: RequestOptions::with(maxRetries: 0));
 $result = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5',
   requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
@@ -182,7 +183,7 @@ use Anthropic\RequestOptions;
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-8',
+  model: 'claude-opus-5',
   requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],

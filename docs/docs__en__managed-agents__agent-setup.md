@@ -14,23 +14,23 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 
 ## Agent configuration fields
 
-| Field         | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`        | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                                                                                                                               |
-| `model`       | Required. The Claude [model](/docs/en/about-claude/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-4-8"}`. All Claude 4.5-family and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](/docs/en/build-with-claude/effort#effort-levels). |
-| `system`      | A [system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](/docs/en/managed-agents/reference#event-types), which should describe the work to be done.                                                                                                             |
-| `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                                                                                                                                       |
-| `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                                                                                                                                     |
-| `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                                                                                                                                    |
-| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration).                                                                                                                                                                                                                                                                   |
-| `description` | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                                        |
-| `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                             |
+| Field         | Description                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                                                                                                                  |
+| `model`       | Required. The Claude [model](/docs/en/about-claude/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](/docs/en/build-with-claude/effort#effort-levels). |
+| `system`      | A [system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](/docs/en/managed-agents/reference#event-types), which should describe the work to be done.                                                                                                |
+| `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                                                                                                                          |
+| `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                                                                                                                        |
+| `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                                                                                                                       |
+| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration).                                                                                                                                                                                                                                                      |
+| `description` | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                           |
+| `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                |
 
 You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied; set it on the agent instead. See [Override agent configuration for a session](/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 5 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
 
 The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one up, the [quickstart](/docs/en/managed-agents/quickstart#install-the-cli) covers installation and client setup.
 
@@ -43,7 +43,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
     -H "content-type: application/json" \
     -d '{
       "name": "Coding Assistant",
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "system": "You are a helpful coding agent.",
       "tools": [{"type": "agent_toolset_20260401"}]
     }')
@@ -55,7 +55,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```bash CLI
   agent=$(ant beta:agents create \
     --name "Coding Assistant" \
-    --model '{id: claude-opus-4-8}' \
+    --model '{id: claude-opus-5}' \
     --system "You are a helpful coding agent." \
     --tool '{type: agent_toolset_20260401}' \
     --format json)
@@ -67,7 +67,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```python Python
   agent = client.beta.agents.create(
       name="Coding Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       system="You are a helpful coding agent.",
       tools=[
           {"type": "agent_toolset_20260401"},
@@ -78,7 +78,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system: "You are a helpful coding agent.",
     tools: [{ type: "agent_toolset_20260401" }],
   });
@@ -88,7 +88,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Coding Assistant",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       System = "You are a helpful coding agent.",
       Tools =
       [
@@ -104,7 +104,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	System: anthropic.String("You are a helpful coding agent."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -122,7 +122,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Coding Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .system("You are a helpful coding agent.")
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -136,7 +136,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       system: 'You are a helpful coding agent.',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
@@ -149,7 +149,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system_: "You are a helpful coding agent.",
     tools: [{type: "agent_toolset_20260401"}]
   )
@@ -157,11 +157,11 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
 </CodeGroup>
 
 <Tip>
-  To use Claude Opus 4.8 or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for the removal date and behavior.
+  To use Claude Opus 5, Claude Opus 4.8, or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for the removal date and behavior.
 </Tip>
 
 <Tip>
-  To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-4-8", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](/docs/en/build-with-claude/effort#effort-levels) for what each level does.
+  To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](/docs/en/build-with-claude/effort#effort-levels) for what each level does.
 </Tip>
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
@@ -172,7 +172,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-4-8",
+    "id": "claude-opus-5",
     "effort": { "type": "high" },
     "speed": "standard"
   },
@@ -258,7 +258,7 @@ Updating an agent generates a new version when the configuration changes. The `v
 
   ```go Go
   updatedAgent, err := client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
-  	Version: agent.Version,
+  	Version: anthropic.Int(agent.Version),
   	System:  anthropic.String("You are a helpful coding agent. Always write tests."),
   })
   if err != nil {

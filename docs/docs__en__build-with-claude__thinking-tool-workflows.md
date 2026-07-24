@@ -14,7 +14,7 @@ This page walks through a complete two-turn tool-use round trip with thinking en
 
 Each link leads to the full statement on the Thinking page:
 
-* [Limit tool choice to `auto` or `none`](/docs/en/build-with-claude/thinking#thinking-with-tool-use): `tool_choice` options that force tool use return an error while thinking is on.
+* [Limit tool choice to `auto` or `none` in manual mode](/docs/en/build-with-claude/thinking#thinking-with-tool-use): `tool_choice` options that force tool use return an error with manual extended thinking (`thinking: {type: "enabled"}`); adaptive thinking supports forced tool use.
 * [Keep one thinking configuration per assistant turn](/docs/en/build-with-claude/thinking#thinking-with-tool-use): a tool-use loop is one assistant turn, so change the configuration only between turns.
 * [Pass thinking blocks back complete and unmodified](/docs/en/build-with-claude/thinking#preserving-thinking-blocks): when you return a tool result, the thinking blocks from the assistant message must come back with it.
 * [Echo the assistant message exactly as received](/docs/en/build-with-claude/thinking#preserving-thinking-blocks): rebuilding the message or filtering out `redacted_thinking` blocks triggers a 400 error.

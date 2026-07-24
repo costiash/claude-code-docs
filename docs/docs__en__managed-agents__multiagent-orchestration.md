@@ -44,7 +44,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
     -d @- <<EOF
   {
     "name": "Engineering Lead",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     "tools": [
       {
@@ -66,7 +66,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```bash CLI
   ant beta:agents create <<YAML
   name: Engineering Lead
-  model: claude-opus-4-8
+  model: claude-opus-5
   system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
   tools:
     - type: agent_toolset_20260401
@@ -83,7 +83,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```python Python
   coordinator = client.beta.agents.create(
       name="Engineering Lead",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       system="You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
       tools=[
           {"type": "agent_toolset_20260401"},
@@ -101,7 +101,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```typescript TypeScript
   const coordinator = await client.beta.agents.create({
     name: "Engineering Lead",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system:
       "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools: [{ type: "agent_toolset_20260401" }],
@@ -119,7 +119,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   var coordinator = await client.Beta.Agents.Create(new()
   {
       Name = "Engineering Lead",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       System = "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
       Tools =
       [
@@ -139,7 +139,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```go Go
   coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name:   "Engineering Lead",
-  	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
+  	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5},
   	System: anthropic.String("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -163,7 +163,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   var coordinator = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Engineering Lead")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .system("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.")
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -188,7 +188,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```php PHP
   $coordinator = $client->beta->agents->create(
       name: 'Engineering Lead',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       system: 'You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.',
       tools: [
           ['type' => 'agent_toolset_20260401'],
@@ -206,7 +206,7 @@ When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent
   ```ruby Ruby
   coordinator = client.beta.agents.create(
     name: "Engineering Lead",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system: "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools: [
       {type: "agent_toolset_20260401"}
@@ -339,7 +339,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
   coordinator_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
   {
     "name": "coordinator",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "tools": [{"type": "agent_toolset_20260401"}],
     "multiagent": {
       "type": "coordinator",
@@ -376,7 +376,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   coordinator_id=$(ant beta:agents create --transform id --raw-output <<YAML
   name: coordinator
-  model: claude-opus-4-8
+  model: claude-opus-5
   tools:
     - type: agent_toolset_20260401
   multiagent:
@@ -407,7 +407,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   coordinator = client.beta.agents.create(
       name="coordinator",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       tools=[{"type": "agent_toolset_20260401"}],
       multiagent={
           "type": "coordinator",
@@ -435,7 +435,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   const coordinator = await client.beta.agents.create({
     name: "coordinator",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [{ type: "agent_toolset_20260401" }],
     multiagent: {
       type: "coordinator",
@@ -478,7 +478,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
   var coordinator = await client.Beta.Agents.Create(new()
   {
       Name = "coordinator",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -493,7 +493,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
           [
               new BetaManagedAgentsAgentParams
               {
-                  Type = Anthropic.Models.Beta.Sessions.Type.Agent,
+                  Type = BetaManagedAgentsAgentParamsType.Agent,
                   ID = researchAgent.ID,
               },
           ],
@@ -531,7 +531,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name:  "coordinator",
-  	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
+  	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
   			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
@@ -584,7 +584,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
   var coordinator = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("coordinator")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
               .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
               .build())
@@ -620,7 +620,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   $coordinator = $client->beta->agents->create(
       name: 'coordinator',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           ['type' => 'agent_toolset_20260401'],
       ],
@@ -654,7 +654,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 
   coordinator = client.beta.agents.create(
     name: "coordinator",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {type: "agent_toolset_20260401"}
     ],

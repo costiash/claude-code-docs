@@ -11,7 +11,7 @@ Control how many tokens Claude uses when responding with the effort parameter, t
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on the following models with no beta header required.
 
 <Note>
-  The effort parameter is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Opus 4.5.
+  The effort parameter is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Opus 4.5.
 </Note>
 
 <Tip>
@@ -39,13 +39,13 @@ This approach has two major advantages:
 
 ### Effort levels
 
-| Level    | Description                                                                                                                                                                                                                        | Typical use case                                                                           |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `max`    | Absolute maximum capability with no constraints on token spending. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. | Tasks requiring the deepest possible reasoning and most thorough analysis                  |
-| `xhigh`  | Extended capability for long-horizon work. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5.                                                                                    | Long-running agentic and coding tasks (over 30 minutes) with token budgets in the millions |
-| `high`   | High capability. Equivalent to not setting the parameter.                                                                                                                                                                          | Complex reasoning, difficult coding problems, agentic tasks                                |
-| `medium` | Balanced approach with moderate token savings.                                                                                                                                                                                     | Agentic tasks that require a balance of speed, cost, and performance                       |
-| `low`    | Most efficient. Significant token savings with some capability reduction.                                                                                                                                                          | Simpler tasks that need the best speed and lowest costs, such as subagents                 |
+| Level    | Description                                                                                                                                                                                                                                       | Typical use case                                                                           |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `max`    | Absolute maximum capability with no constraints on token spending. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. | Tasks requiring the deepest possible reasoning and most thorough analysis                  |
+| `xhigh`  | Extended capability for long-horizon work. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5.                                                                                    | Long-running agentic and coding tasks (over 30 minutes) with token budgets in the millions |
+| `high`   | High capability. Equivalent to not setting the parameter.                                                                                                                                                                                         | Complex reasoning, difficult coding problems, agentic tasks                                |
+| `medium` | Balanced approach with moderate token savings.                                                                                                                                                                                                    | Agentic tasks that require a balance of speed, cost, and performance                       |
+| `low`    | Most efficient. Significant token savings with some capability reduction.                                                                                                                                                                         | Simpler tasks that need the best speed and lowest costs, such as subagents                 |
 
 `xhigh` is a newer level; some models that support `max` don't support `xhigh`.
 
@@ -98,6 +98,18 @@ The API default is `high`. Set `effort` explicitly to use a different level; the
 
 When running Claude Opus 4.8 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
+### Recommended effort levels for Claude Opus 5
+
+Claude Opus 5 supports all five effort levels. **Start with `xhigh` for coding and agentic work**, and use `high` for most other intelligence-sensitive workloads. `low` and `medium` effort are stronger on Claude Opus 5 than on earlier Opus models: use them liberally as your primary control for token cost and response time wherever your evals show quality holds, and step up to `max` when a task justifies unconstrained token spending. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
+
+Effort controls thinking volume, not visible response length: on Claude Opus 5, changing effort does not reliably shorten responses, so [prompt for length](/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#response-length-and-verbosity) instead.
+
+The API default is `high`. Set `effort` explicitly to use a different level; the value you pass overrides the default.
+
+On Claude Opus 5, thinking cannot be disabled at `xhigh` or `max` effort: requests that set `thinking: {"type": "disabled"}` at those levels return a 400 error. See [Effort with thinking](#effort-with-thinking).
+
+When running Claude Opus 5 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
+
 ### Recommended effort levels for Claude Fable 5
 
 Effort is the primary control for trading off intelligence, latency, and cost on Claude Fable 5. **Start with `high`, the default, for most tasks**, use `xhigh` for the most capability-sensitive workloads, and step down to `medium` or `low` for routine work. Lower effort settings on Claude Fable 5 still perform well and often exceed `xhigh` performance on prior models. At `high` and `xhigh`, set a large `max_tokens`: it is a hard limit on total output, thinking plus response text. See [Cost control](/docs/en/build-with-claude/thinking-steering-and-cost#cost-control).
@@ -113,7 +125,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 4096,
       "messages": [{
         "role": "user",
@@ -127,9 +139,9 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 
   ```bash CLI
   ant messages create \
-    --transform 'content.0.text' \
+    --transform 'content.#(type=="text").text' \
     --raw-output <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 4096
   messages:
     - role: user
@@ -143,7 +155,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=4096,
       messages=[
           {
@@ -154,14 +166,16 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
       output_config={"effort": "medium"},
   )
 
-  print(response.content[0].text)
+  for block in response.content:
+      if block.type == "text":
+          print(block.text)
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 4096,
     messages: [
       {
@@ -185,7 +199,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 4096,
       Messages = [new() { Role = Role.User, Content = "Analyze the trade-offs between microservices and monolithic architectures" }],
       OutputConfig = new OutputConfig
@@ -202,7 +216,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 4096,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the trade-offs between microservices and monolithic architectures")),
@@ -214,14 +228,18 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   if err != nil {
   	log.Fatal(err)
   }
-  fmt.Println(response.Content[0].Text)
+  for _, block := range response.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  	}
+  }
   ```
 
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
+      .model(Model.CLAUDE_OPUS_5)
       .maxTokens(4096L)
       .addUserMessage("Analyze the trade-offs between microservices and monolithic architectures")
       .outputConfig(OutputConfig.builder()
@@ -243,18 +261,22 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
       messages: [
           ['role' => 'user', 'content' => 'Analyze the trade-offs between microservices and monolithic architectures']
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       outputConfig: ['effort' => 'medium'],
   );
 
-  echo $message->content[0]->text;
+  foreach ($message->content as $block) {
+      if ($block->type === 'text') {
+          echo $block->text, PHP_EOL;
+      }
+  }
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 4096,
     messages: [
       { role: "user", content: "Analyze the trade-offs between microservices and monolithic architectures" }
@@ -264,14 +286,16 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
     }
   )
 
-  puts message.content.first.text
+  message.content.each do |block|
+    puts block.text if block.type == :text
+  end
   ```
 </CodeGroup>
 
 ## When to adjust the effort parameter
 
-* Use **max effort** when you need the absolute highest capability with no constraints: the most thorough reasoning and deepest analysis. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6.
-* Use **xhigh effort** for advanced coding and complex agentic work requiring extended exploration, such as repeated tool calling and detailed search. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5.
+* Use **max effort** when you need the absolute highest capability with no constraints: the most thorough reasoning and deepest analysis. Available on Claude 4.6 and later models and Claude Mythos Preview.
+* Use **xhigh effort** for advanced coding and complex agentic work requiring extended exploration, such as repeated tool calling and detailed search. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5.
 * Use **high effort** (the default) for complex reasoning, nuanced analysis, difficult coding problems, or any task where quality matters more than speed or cost.
 * Use **medium effort** as a balanced option when you want solid performance without the full token expenditure of high effort.
 * Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost. For example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
@@ -305,6 +329,10 @@ At higher effort levels, Claude thinks on most requests and at greater length; a
 On Claude Opus 4.5, the only extended-thinking-only model that supports effort, it works alongside [`budget_tokens`](/docs/en/build-with-claude/extended-thinking): set the effort level for your task, then set the thinking token budget based on how much reasoning depth the task needs.
 
 For per-model thinking availability, see the [per-model configuration table](/docs/en/build-with-claude/thinking-troubleshooting#supported-models). Effort works with or without thinking; see [How effort works](#how-effort-works).
+
+## Changing effort mid-conversation
+
+`output_config.effort` is a request-level setting: each request carries its own value, so to run a later part of a conversation at a different effort level, set the new value on the next request. The effort level applies to the whole request. Because effort shapes the rendered prompt, changing it between requests does not preserve cached prefixes from earlier turns; if you rely on [prompt caching](/docs/en/build-with-claude/prompt-caching) across a long session, pick an effort level at the start and keep it constant.
 
 ## Best practices
 

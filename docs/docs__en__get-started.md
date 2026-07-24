@@ -31,7 +31,7 @@ Make your first API call to Claude and build a simple web search assistant.
           -H "x-api-key: $ANTHROPIC_API_KEY" \
           -H "anthropic-version: 2023-06-01" \
           -d '{
-            "model": "claude-opus-4-8",
+            "model": "claude-opus-5",
             "max_tokens": 1000,
             "messages": [
               {
@@ -46,7 +46,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         ```json Output
         {
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
           "type": "message",
           "role": "assistant",
@@ -102,7 +102,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         ```bash CLI
         ant messages create \
-          --model claude-opus-4-8 \
+          --model claude-opus-5 \
           --max-tokens 1000 \
           --message '{
             role: user,
@@ -114,7 +114,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         ```json Output
         {
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
           "type": "message",
           "role": "assistant",
@@ -161,7 +161,7 @@ Make your first API call to Claude and build a simple web search assistant.
         client = anthropic.Anthropic()
 
         message = client.messages.create(
-            model="claude-opus-4-8",
+            model="claude-opus-5",
             max_tokens=1000,
             messages=[
                 {
@@ -221,7 +221,7 @@ Make your first API call to Claude and build a simple web search assistant.
         const client = new Anthropic();
 
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1000,
           messages: [
             {
@@ -286,7 +286,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         var message = await client.Messages.Create(new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_8,
+            Model = Model.ClaudeOpus5,
             MaxTokens = 1000,
             Messages =
             [
@@ -362,7 +362,7 @@ Make your first API call to Claude and build a simple web search assistant.
         	client := anthropic.NewClient()
 
         	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-        		Model:     anthropic.ModelClaudeOpus4_8,
+        		Model:     anthropic.ModelClaudeOpus5,
         		MaxTokens: 1000,
         		Messages: []anthropic.MessageParam{
         			anthropic.NewUserMessage(anthropic.NewTextBlock("What should I search for to find the latest developments in renewable energy?")),
@@ -484,7 +484,7 @@ Make your first API call to Claude and build a simple web search assistant.
             var client = AnthropicOkHttpClient.fromEnv();
 
             var params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_8)
+                .model(Model.CLAUDE_OPUS_5)
                 .maxTokens(1000)
                 .addUserMessage(
                     "What should I search for to find the latest developments in renewable energy?"
@@ -556,7 +556,7 @@ Make your first API call to Claude and build a simple web search assistant.
         $client = new Client();
 
         $message = $client->messages->create(
-            model: Model::CLAUDE_OPUS_4_8,
+            model: Model::CLAUDE_OPUS_5,
             maxTokens: 1000,
             messages: [
                 [
@@ -617,7 +617,7 @@ Make your first API call to Claude and build a simple web search assistant.
         client = Anthropic::Client.new
 
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 1000,
           messages: [
             {

@@ -34,7 +34,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "What is the weather in San Francisco?"}
@@ -64,7 +64,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
   ```bash CLI
   ant messages create --transform content <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -91,7 +91,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
       tools=[
@@ -127,7 +127,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   });
 
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -170,7 +170,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }],
       Tools = [
@@ -201,7 +201,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather like in San Francisco?")),
@@ -258,7 +258,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
+      .model(Model.CLAUDE_OPUS_5)
       .maxTokens(1024L)
       .addUserMessage("What's the weather like in San Francisco?")
       .addTool(
@@ -283,7 +283,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       messages: [
           ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           [
               'name' => 'get_weather',
@@ -315,7 +315,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       { role: "user", content: "What's the weather like in San Francisco?" }
@@ -393,7 +393,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {"role": "user", "content": "Search for flights to Tokyo departing June 1, 2026"}
@@ -417,7 +417,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
       ```bash CLI
       ant messages create <<'YAML'
-      model: claude-opus-4-8
+      model: claude-opus-5
       max_tokens: 1024
       messages:
         - role: user
@@ -444,7 +444,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       ```python Python
       client = Anthropic()
       response = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=[
               {
@@ -495,7 +495,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       };
 
       const response = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [{ role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }],
         tools: [searchFlightsTool]
@@ -513,7 +513,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
       var parameters = new MessageCreateParams
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = "Search for flights to Tokyo departing June 1, 2026" }],
           Tools = [
@@ -544,7 +544,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       client := anthropic.NewClient()
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus4_8,
+      	Model:     anthropic.ModelClaudeOpus5,
       	MaxTokens: 1024,
       	Messages: []anthropic.MessageParam{
       		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for flights to Tokyo departing June 1, 2026")),
@@ -601,7 +601,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addUserMessage("Search for flights to Tokyo departing June 1, 2026")
           .addTool(
@@ -625,7 +625,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
           messages: [
               ['role' => 'user', 'content' => 'Search for flights to Tokyo departing June 1, 2026']
           ],
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           tools: [
               [
                   'name' => 'search_flights',
@@ -654,7 +654,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       client = Anthropic::Client.new
 
       message = client.messages.create(
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [
           { role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }
@@ -694,7 +694,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {"role": "user", "content": "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026"}
@@ -735,7 +735,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
       ```bash CLI
       ant messages create <<'YAML'
-      model: claude-opus-4-8
+      model: claude-opus-5
       max_tokens: 1024
       messages:
         - role: user
@@ -770,7 +770,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       ```python Python
       client = Anthropic()
       response = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=[
               {
@@ -850,7 +850,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       ];
 
       const response = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [
           {
@@ -874,7 +874,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
       var parameters = new MessageCreateParams
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
           Tools = [
@@ -922,7 +922,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       client := anthropic.NewClient()
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus4_8,
+      	Model:     anthropic.ModelClaudeOpus5,
       	MaxTokens: 1024,
       	Messages: []anthropic.MessageParam{
       		anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")),
@@ -998,7 +998,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addUserMessage("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")
           .addTool(
@@ -1029,7 +1029,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
           messages: [
               ['role' => 'user', 'content' => 'Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026']
           ],
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           tools: [
               [
                   'name' => 'search_flights',
@@ -1070,7 +1070,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
       client = Anthropic::Client.new
 
       message = client.messages.create(
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [
           { role: "user", content: "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }

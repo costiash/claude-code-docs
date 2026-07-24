@@ -20,7 +20,7 @@ If you decide to implement leak-resistant techniques, be sure to test your promp
 
 ## Strategies to reduce prompt leak
 
-* **Separate context from queries:** You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.)
+* **Separate context from queries:** You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing).)
 
 <Accordion title="Example: Safeguarding proprietary analytics">
   Notice that this system prompt is still predominantly a role prompt, which is the [most effective way to use system prompts](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).

@@ -4,12 +4,12 @@ Behavioral differences and prompting patterns for Claude Opus 4.8, covering verb
 
 ---
 
-This guide covers the prompting patterns specific to Claude Opus 4.8. For the model's capabilities and API changes, see [What's new in Claude Opus 4.8](/docs/en/about-claude/models/whats-new-claude-4-8). For techniques that apply across all current Claude models, see [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
+This guide covers the prompting patterns specific to Claude Opus 4.8. For the API changes involved in moving from Claude Opus 4.8 to the latest Opus model, see [Migrating to Claude Opus 5 from Claude Opus 4.8](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-4-8-to-claude-opus-5). For techniques that apply across all current Claude models, see [Prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 
 Claude Opus 4.8 has particular strengths in long-horizon agentic work, knowledge work, vision, and memory tasks. It performs well out of the box on existing Claude Opus 4.7 prompts. The following patterns cover the behaviors that most often require tuning.
 
 <Note>
-  For API parameter changes when migrating from Claude Opus 4.7 (sampling parameters, effort default, 1M context window default, mid-conversation system messages, and refusal stop details), see the [migration guide](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
+  For the API parameter changes since Claude Opus 4.7 (sampling parameters, effort default, 1M context window default, mid-conversation system messages, and refusal stop details), see [Migrating to Claude Opus 5 from Claude Opus 4.7](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47), which covers the same changes on the way to the latest Opus model; Claude Opus 4.8 shares these behaviors.
 </Note>
 
 ## Response length and verbosity

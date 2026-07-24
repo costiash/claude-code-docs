@@ -263,7 +263,7 @@ The advisor is a weaker fit for single-turn Q\&A (nothing to plan), pure pass-th
   ```
 </CodeGroup>
 
-The response `content` includes an `advisor_tool_result` block carrying the advisor's guidance. With Claude Fable 5 or Claude Mythos 5 as the advisor, the block's `content` field is an `advisor_redacted_result` variant (encrypted; the executor reads it server-side, but your client does not). To see the advice text directly in your response, use `claude-opus-4-8` as the advisor model instead, which returns the plaintext `advisor_result` variant. See [Result variants](#result-variants) for both shapes and [Model compatibility](#model-compatibility) for the full list of valid pairs.
+The response `content` includes an `advisor_tool_result` block carrying the advisor's guidance. With Claude Opus 5, Claude Fable 5, or Claude Mythos 5 as the advisor, the block's `content` field is an `advisor_redacted_result` variant (encrypted; the executor reads it server-side, but your client does not). To see the advice text directly in your response, use `claude-opus-4-8` as the advisor model instead, which returns the plaintext `advisor_result` variant. See [Result variants](#result-variants) for both shapes and [Model compatibility](#model-compatibility) for the full list of valid pairs.
 
 ## How it works
 
@@ -340,7 +340,7 @@ The `advisor_tool_result.content` field is a discriminated union. For successful
 | `advisor_result`          | `text`, `stop_reason`              | The advisor model returns plaintext (for example, Claude Opus 4.8). |
 | `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output.                         |
 
-Claude Fable 5 and Claude Mythos 5 advisors return `advisor_redacted_result`. The other advisor models in the [compatibility table](#model-compatibility) return `advisor_result`.
+Claude Opus 5, Claude Fable 5, and Claude Mythos 5 advisors return `advisor_redacted_result`. The other advisor models in the [compatibility table](#model-compatibility) return `advisor_result`.
 
 Both result variants carry a `stop_reason` field when you set [`max_tokens`](#capping-advisor-output) on the tool definition, and omit it when you do not. It holds the advisor sub-call's stop reason, typically `"end_turn"`, or `"max_tokens"` when the cap is hit. The values match the top-level Messages API [`stop_reason`](/docs/en/build-with-claude/handling-stop-reasons).
 
@@ -1080,7 +1080,7 @@ Append the nudge as its own user message after the tool results rather than as a
 
 The plain-text nudge is highly salient on Haiku and Sonnet executors: 74 percent (Sonnet) to 98 percent (Haiku) of nudged attempts in Anthropic's testing called the advisor immediately at turn 2. If that lands before your executor has read the problem or gathered context, the resulting advisor call is low-context and can displace a better-timed later call. Measure your executor's baseline first-call turn before adding the nudge. If the executor already calls the advisor reliably and its first call typically lands at turn N, set `NUDGE_TURN` greater than N. In Anthropic's testing, a turn-2 nudge on workloads where the baseline first call was turn 7 or later correlated with a 3 to 4 percentage-point task-performance drop. On a browse workload where the baseline call rate was 86 percent, the same nudge raised engagement with no task-performance cost.
 
-To force a consult on a specific request instead of nudging, set `tool_choice` to `{"type": "tool", "name": "advisor"}`, subject to the constraints in [Forcing tool use](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). Forcing tool use cannot be combined with extended thinking: The API returns a `400 invalid_request_error` if you enable both.
+To force a consult on a specific request instead of nudging, set `tool_choice` to `{"type": "tool", "name": "advisor"}`, subject to the constraints in [Forcing tool use](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). Forcing tool use cannot be combined with manual extended thinking (`thinking: {type: "enabled"}`): the API returns a `400 invalid_request_error` if you enable both. Adaptive thinking supports forced tool use.
 
 ## Streaming
 
@@ -1369,16 +1369,17 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be Claude Sonnet 4.6 or a more capable model, and it must be at least as capable as the executor. Models of equal capability (for example, Claude Opus 4.7 and Claude Opus 4.8) can advise each other.
 
-| Executor models                       | Advisor models                                                                                                                                                                                                |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Haiku 4.5 (claude-haiku-4-5)   | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 5 (claude-sonnet-5)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Opus 4.6 (claude-opus-4-6)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6)                                       |
-| Claude Opus 4.7 (claude-opus-4-7)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Opus 4.8 (claude-opus-4-8)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
-| Claude Fable 5 (claude-fable-5)       | Claude Fable 5 (claude-fable-5)                                                                                                                                                                               |
-| Claude Mythos 5 (claude-mythos-5)     | Claude Mythos 5 (claude-mythos-5)                                                                                                                                                                             |
+| Executor models                       | Advisor models                                                                                                                                                                                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Haiku 4.5 (claude-haiku-4-5)   | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 5 (claude-sonnet-5)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Opus 4.6 (claude-opus-4-6)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6)                                       |
+| Claude Opus 4.7 (claude-opus-4-7)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Opus 4.8 (claude-opus-4-8)     | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
+| Claude Opus 5 (claude-opus-5)         | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5)                                                                                                                                             |
+| Claude Fable 5 (claude-fable-5)       | Claude Fable 5 (claude-fable-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                               |
+| Claude Mythos 5 (claude-mythos-5)     | Claude Mythos 5 (claude-mythos-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                             |
 
 If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
 

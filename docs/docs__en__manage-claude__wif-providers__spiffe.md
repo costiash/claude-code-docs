@@ -194,10 +194,10 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
         -H "anthropic-version: 2023-06-01" \
         -H "content-type: application/json" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [{"role": "user", "content": "Hello, Claude"}]
-        }' | jq -r '.content[0].text'
+        }' | jq -r '.content[] | select(.type == "text") | .text'
       ```
 
       ```bash CLI
@@ -205,7 +205,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       # ANTHROPIC_IDENTITY_TOKEN_FILE, plus ANTHROPIC_FEDERATION_RULE_ID,
       # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID.
       ant messages create \
-        --model claude-opus-4-8 \
+        --model claude-opus-5 \
         --max-tokens 1024 \
         --message '{role: user, content: "Hello, Claude"}'
       ```
@@ -219,11 +219,11 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       client = anthropic.Anthropic()
 
       message = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=[{"role": "user", "content": "Hello, Claude"}],
       )
-      print(message.content[0].text)
+      print(next(block.text for block in message.content if block.type == "text"))
       ```
 
       ```typescript TypeScript
@@ -235,7 +235,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       const client = new Anthropic();
 
       const message = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [{ role: "user", content: "Hello, Claude" }]
       });
@@ -254,7 +254,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
 
       var message = await client.Messages.Create(new()
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
       });
@@ -274,7 +274,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       client := anthropic.NewClient()
 
       message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus4_8,
+      	Model:     anthropic.ModelClaudeOpus5,
       	MaxTokens: 1024,
       	Messages: []anthropic.MessageParam{
       		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -283,7 +283,12 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       if err != nil {
       	panic(err)
       }
-      fmt.Println(message.Content[0].Text)
+      for _, block := range message.Content {
+      	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+      		fmt.Println(textBlock.Text)
+      		break
+      	}
+      }
       ```
 
       ```java Java
@@ -293,7 +298,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       var message = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024)
               .addUserMessage("Hello, Claude")
               .build());
@@ -310,11 +315,12 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       $client = new Client();
 
       $message = $client->messages->create(
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           maxTokens: 1024,
           messages: [['role' => 'user', 'content' => 'Hello, Claude']],
       );
-      echo $message->content[0]->text, PHP_EOL;
+      $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+      echo $textBlock->text, PHP_EOL;
       ```
 
       ```ruby Ruby
@@ -326,11 +332,11 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       client = Anthropic::Client.new
 
       message = client.messages.create(
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [{role: "user", content: "Hello, Claude"}]
       )
-      puts message.content.first.text
+      puts message.content.find { it.type == :text }.text
       ```
     </CodeGroup>
   </Tab>
@@ -367,11 +373,11 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       )
 
       message = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=[{"role": "user", "content": "Hello, Claude"}],
       )
-      print(message.content[0].text)
+      print(next(block.text for block in message.content if block.type == "text"))
       ```
 
       ```go Go
@@ -413,7 +419,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       	)
 
       	message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 1024,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -422,7 +428,12 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
       	if err != nil {
       		panic(err)
       	}
-      	fmt.Println(message.Content[0].Text)
+      	for _, block := range message.Content {
+      		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+      			fmt.Println(textBlock.Text)
+      			break
+      		}
+      	}
       ```
     </CodeGroup>
 

@@ -36,7 +36,7 @@ Most Anthropic-provided tools carry a `_YYYYMMDD` suffix in the `type` string. A
 When a tool has multiple active versions, the relationship between them varies:
 
 * **Capability-keyed:** `web_search_20260209` and `web_fetch_20260209` add dynamic content filtering over their predecessors; `web_fetch_20260309` adds a cache-bypass option; `web_search_20260318` and `web_fetch_20260318` add response-inclusion control. `code_execution_20260120` adds [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox; `code_execution_20260521` discloses the per-cell time limit in the tool description. In each case, both the new and old versions are current; which one you use depends on whether you need the new capability.
-* **Model-keyed:** `text_editor_20250728` is for Claude 4 models and `text_editor_20250124` is for earlier models. The version you use depends on the model you target.
+* **Model-keyed:** `text_editor_20250728` is for Claude 4 and later models and `text_editor_20250124` is for earlier models. The version you use depends on the model you target.
 * **Variant, not version:** `tool_search_tool_regex_20251119` and `tool_search_tool_bm25_20251119` are two search algorithms released together. Neither supersedes the other.
 * **Legacy:** `code_execution_20250522` supports only Python. `code_execution_20250825` adds Bash and file operations.
 

@@ -9,7 +9,7 @@ By default, Managed Agents executes tools and code inside [Anthropic-managed clo
 Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. See the [security model](/docs/en/managed-agents/self-hosted-sandboxes-security) for the full data-flow boundary.
 
 <Note>
-  Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8. The model is configured on the [agent](/docs/en/managed-agents/agent-setup), not the environment.
+  Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8 and Claude Opus 5. The model is configured on the [agent](/docs/en/managed-agents/agent-setup), not the environment.
 </Note>
 
 ## How it differs from cloud environments
@@ -1182,7 +1182,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
               listed = await mcp_session.list_tools()
               agent = await client.beta.agents.create(
                   name="Internal tools agent",
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   tools=[
                       {"type": "agent_toolset_20260401"},
                       *[to_custom_tool(tool) for tool in listed.tools],
@@ -1211,7 +1211,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
 
       const agent = await client.beta.agents.create({
         name: "Internal tools agent",
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         tools: [
           { type: "agent_toolset_20260401" },
           // The MCP fields map one to one onto a custom tool declaration.
@@ -1330,7 +1330,7 @@ The SDKs' [Client-side MCP helpers](/docs/en/agents-and-tools/mcp-connector#clie
 
       	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
       		Name:  "Internal tools agent",
-      		Model: anthropic.BetaManagedAgentsModelConfigParams{ID: "claude-opus-4-8"},
+      		Model: anthropic.BetaManagedAgentsModelConfigParams{ID: "claude-opus-5"},
       		Tools: tools,
       	})
       	if err != nil {

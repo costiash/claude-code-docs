@@ -21,7 +21,7 @@ This guide covers common patterns for working with the Messages API, including b
 ## Basic request and response
 
 <Note>
-  The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including Claude Opus 4.8. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
+  The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
 </Note>
 
 <CodeGroup>
@@ -32,7 +32,7 @@ This guide covers common patterns for working with the Messages API, including b
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello, Claude"}
@@ -42,14 +42,14 @@ This guide covers common patterns for working with the Messages API, including b
 
   ```bash CLI
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}'
   ```
 
   ```python Python
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -60,7 +60,7 @@ This guide covers common patterns for working with the Messages API, including b
   const anthropic = new Anthropic();
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
@@ -72,7 +72,7 @@ This guide covers common patterns for working with the Messages API, including b
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
   };
@@ -84,7 +84,7 @@ This guide covers common patterns for working with the Messages API, including b
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -100,7 +100,7 @@ This guide covers common patterns for working with the Messages API, including b
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
+      .model(Model.CLAUDE_OPUS_5)
       .maxTokens(1024L)
       .addUserMessage("Hello, Claude")
       .build();
@@ -115,16 +115,16 @@ This guide covers common patterns for working with the Messages API, including b
   $message = $client->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
-  echo $message->content[0]->text;
+  echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       { role: "user", content: "Hello, Claude" }
@@ -145,7 +145,7 @@ This guide covers common patterns for working with the Messages API, including b
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -155,7 +155,7 @@ This guide covers common patterns for working with the Messages API, including b
 }
 ```
 
-On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the field reference and example handling code.
+Refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal, on every model. See [Handling stop reasons](/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the field reference and example handling code.
 
 ## Multiple conversational turns
 
@@ -169,7 +169,7 @@ The Messages API is stateless, which means that you always send the full convers
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello, Claude"},
@@ -182,7 +182,7 @@ The Messages API is stateless, which means that you always send the full convers
 
   ```bash CLI
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}' \
     --message '{role: assistant, content: "Hello!"}' \
@@ -191,7 +191,7 @@ The Messages API is stateless, which means that you always send the full convers
 
   ```python Python
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {"role": "user", "content": "Hello, Claude"},
@@ -206,7 +206,7 @@ The Messages API is stateless, which means that you always send the full convers
   const anthropic = new Anthropic();
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       { role: "user", content: "Hello, Claude" },
@@ -222,7 +222,7 @@ The Messages API is stateless, which means that you always send the full convers
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -240,7 +240,7 @@ The Messages API is stateless, which means that you always send the full convers
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -258,7 +258,7 @@ The Messages API is stateless, which means that you always send the full convers
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_8)
+      .model(Model.CLAUDE_OPUS_5)
       .maxTokens(1024L)
       .addUserMessage("Hello, Claude")
       .addAssistantMessage("Hello!")
@@ -279,17 +279,17 @@ The Messages API is stateless, which means that you always send the full convers
           ['role' => 'assistant', 'content' => 'Hello!'],
           ['role' => 'user', 'content' => 'Can you describe LLMs to me?'],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
-  echo $message->content[0]->text;
+  echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       { role: "user", content: "Hello, Claude" },
@@ -312,7 +312,7 @@ The Messages API is stateless, which means that you always send the full convers
       "text": "Sure, I'd be happy to provide..."
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -324,7 +324,7 @@ The Messages API is stateless, which means that you always send the full convers
 
 ### System role in messages
 
-On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](/docs/en/build-with-claude/mid-conversation-system-messages#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
+On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](/docs/en/build-with-claude/mid-conversation-system-messages#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
@@ -335,7 +335,7 @@ See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversati
 You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
-  Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) on models that support it, or system prompt instructions, instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
+  Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) on models that support it, or system prompt instructions, instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
 </Warning>
 
 <CodeGroup>
@@ -517,20 +517,22 @@ Claude can read both text and images in requests. You can supply images using th
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d '{
-      "model": "claude-opus-4-8",
-      "max_tokens": 1024,
-      "messages": [
-        {"role": "user", "content": [
-          {"type": "image", "source": {
-            "type": "base64",
-            "media_type": "'$IMAGE_MEDIA_TYPE'",
-            "data": "'$IMAGE_BASE64'"
-          }},
-          {"type": "text", "text": "What is in the above image?"}
-        ]}
-      ]
-    }'
+    -d @- <<EOF
+  {
+    "model": "claude-opus-5",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": [
+        {"type": "image", "source": {
+          "type": "base64",
+          "media_type": "$IMAGE_MEDIA_TYPE",
+          "data": "$IMAGE_BASE64"
+        }},
+        {"type": "text", "text": "What is in the above image?"}
+      ]}
+    ]
+  }
+  EOF
 
   # Option 2: URL-referenced image
   curl https://api.anthropic.com/v1/messages \
@@ -538,7 +540,7 @@ Claude can read both text and images in requests. You can supply images using th
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": [
@@ -559,7 +561,7 @@ Claude can read both text and images in requests. You can supply images using th
   curl -s "$IMAGE_URL" -o ./ant.jpg
 
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -575,7 +577,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   # Option 2: URL-referenced image
   ant messages create <<YAML
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -599,7 +601,7 @@ Claude can read both text and images in requests. You can supply images using th
   image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -622,7 +624,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   # Option 2: URL-referenced image
   message_from_url = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -654,7 +656,7 @@ Claude can read both text and images in requests. You can supply images using th
   const imageData = Buffer.from(imageArrayBuffer).toString("base64");
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -680,7 +682,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   // Option 2: URL-referenced image
   const messageFromUrl = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -721,7 +723,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -749,7 +751,7 @@ Claude can read both text and images in requests. You can supply images using th
   // Option 2: URL-referenced image
   var parametersFromUrl = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -799,7 +801,7 @@ Claude can read both text and images in requests. You can supply images using th
   imageData := base64.StdEncoding.EncodeToString(imageBytes)
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -815,7 +817,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   // Option 2: URL-referenced image
   messageFromURL, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -859,7 +861,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   Message message = client.messages().create(
       MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addUserMessageOfBlockParams(base64Content)
           .build());
@@ -881,7 +883,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   Message messageFromUrl = client.messages().create(
       MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addUserMessageOfBlockParams(urlContent)
           .build());
@@ -917,7 +919,7 @@ Claude can read both text and images in requests. You can supply images using th
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
   echo $message;
 
@@ -942,7 +944,7 @@ Claude can read both text and images in requests. You can supply images using th
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
   echo $message_from_url;
   ```
@@ -959,7 +961,7 @@ Claude can read both text and images in requests. You can supply images using th
   image_data = Base64.strict_encode64(Net::HTTP.get(URI(image_url)))
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -985,7 +987,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   # Option 2: URL-referenced image
   message_from_url = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1021,7 +1023,7 @@ Claude can read both text and images in requests. You can supply images using th
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

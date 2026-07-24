@@ -26,7 +26,7 @@ When triggered, the skill equips Claude with:
 * **Streaming patterns:** Implementation details for building chat UIs and handling incremental display
 * **Batch processing:** Offline batch processing at 50% cost
 * **Prompt caching:** Prefix-stability design, breakpoint placement, and silent-invalidator audit
-* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 4.8](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47))
+* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 5](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-4-8-to-claude-opus-5))
 * **Current model information:** Model IDs, context window sizes, and pricing
 * **Common pitfalls:** Detailed guidance on avoiding frequent mistakes when integrating with the API
 
@@ -102,33 +102,33 @@ Or install it as a [Claude Code plugin](https://code.claude.com/docs/en/plugins)
 The Claude API skill can perform Claude model migrations across a code base. Invoke it directly with `/claude-api migrate`:
 
 ```text wrap
-/claude-api migrate this project to claude-opus-4-8
+/claude-api migrate this project to claude-opus-5
 ```
 
 You can also pass a specific scope up front to skip the scope-confirmation question:
 
 ```text wrap
-/claude-api migrate everything under src/ to claude-opus-4-8
-/claude-api migrate apps/api.py and apps/worker.py to claude-opus-4-8
+/claude-api migrate everything under src/ to claude-opus-5
+/claude-api migrate apps/api.py and apps/worker.py to claude-opus-5
 ```
 
-When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-4-8`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
+When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-5`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
 
 The skill handles:
 
-* **Model ID swaps**, including typed SDK constants (`Model.CLAUDE_OPUS_4_7` → `Model.CLAUDE_OPUS_4_8`) across all supported languages, and classifies each file as a caller, a model definer, or an opaque string reference before editing
+* **Model ID swaps**, including typed SDK constants (`Model.CLAUDE_OPUS_4_8` → `Model.CLAUDE_OPUS_5`) across all supported languages, and classifies each file as a caller, a model definer, or an opaque string reference before editing
 * **Cloud platform detection**, preserving platform-specific model ID formats (for example, the `anthropic.` prefix on Amazon Bedrock) and skipping changes for features that are unavailable on partner-operated platforms
 * **Breaking parameter changes**, such as removing `temperature`, `top_p`, and `top_k` for Claude Opus 4.8 and Claude Opus 4.7, and converting `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}`
 * **Prefill replacement**, converting assistant-message prefill patterns to [structured outputs](/docs/en/build-with-claude/structured-outputs) where applicable
 * **Beta header cleanup**, removing headers that are GA on the target model (for example, `effort-2025-11-24`, `fine-grained-tool-streaming-2025-05-14`, `interleaved-thinking-2025-05-14`) and switching back from `client.beta.messages.create` to `client.messages.create`
-* **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, `xhigh` for coding and agentic use cases on Claude Opus 4.8 and Claude Opus 4.7)
+* **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, `xhigh` for coding and agentic use cases on Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7)
 * **Prompt-behavior tuning**, flagging length-control, tool-triggering, subagent, and instruction-following prompts that may behave differently on the target model
 * **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.8 and Claude Opus 4.7
 * **Refusal fallback configuration**, adding `stop_reason: "refusal"` handling before reading response content and setting up a [fallback retry path](/docs/en/build-with-claude/refusals-and-fallback) when the target is Claude Fable 5 (the server-side `fallbacks` parameter, the SDK refusal-fallback middleware, or a fallback-credit retry), and updating fallback code written against earlier preview shapes
 
 As it edits, the skill explains each change and its motivation inline. On completion, it produces a checklist of items that require manual verification (typically integration tests, length-control prompt tuning, and cost/rate-limit re-baselining).
 
-For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 4.8 from Claude Opus 4.7](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47).
+For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5 from Claude Opus 4.8](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-4-8-to-claude-opus-5).
 
 ## Setting up a Managed Agent
 
@@ -155,7 +155,7 @@ Build a streaming chat UI with the Claude API in TypeScript
 **Migrating an existing project:**
 
 ```text wrap
-/claude-api migrate this codebase to claude-opus-4-8 and re-tune effort
+/claude-api migrate this codebase to claude-opus-5 and re-tune effort
 ```
 
 **Onboarding a new Managed Agent:**

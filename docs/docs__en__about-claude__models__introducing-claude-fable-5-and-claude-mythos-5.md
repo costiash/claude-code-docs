@@ -38,7 +38,7 @@ When Claude Fable 5 declines a request, the Messages API returns `stop_reason: "
 
 A request that Claude Fable 5 refuses can usually be served by another Claude model. There are three ways to retry:
 
-* **Server-side:** Pass the `fallbacks` parameter to have the API retry for you (in beta on the Claude API and Claude Platform on AWS). See [Server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
+* **Server-side:** Pass the `fallbacks` parameter to have the API retry for you (in beta on the Claude API). See [Server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
 * **Client-side:** Use the [SDK middleware](/docs/en/cli-sdks-libraries/middleware) to retry from the client on any platform. See [Client-side fallback](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback).
 * **Manual:** Build the retry yourself, on any platform and in any language. See [Fallback credit](/docs/en/build-with-claude/fallback-credit).
 
@@ -63,13 +63,9 @@ Claude Fable 5 responds to the same prompting techniques as other Claude models,
 
 ## Messages API on Claude Fable 5 and Claude Mythos 5
 
-<Note>
-  The behaviors in this section are specific to Claude Fable 5 and Claude Mythos 5. The Messages API is unchanged for Opus, Sonnet, and Haiku models.
-</Note>
-
 ### Adaptive thinking is always on
 
-[Adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) is the only thinking mode on Claude Fable 5 and Claude Mythos 5. It applies whenever the `thinking` parameter is unset. `thinking: {"type": "disabled"}` is not supported. Use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth.
+Claude Fable 5 and Claude Mythos 5 always have thinking enabled; passing `thinking: {"type": "disabled"}` is not supported. To reduce or otherwise control thinking depth, use the [effort](/docs/en/build-with-claude/effort) parameter.
 
 ### Raw thinking content is never returned
 
@@ -111,7 +107,7 @@ Step-by-step instructions live in the migration guide:
     Specs and comparison for all current Claude models.
   </Card>
 
-  <Card title="Adaptive thinking" icon="brain" href="/docs/en/build-with-claude/thinking-steering-and-cost">
+  <Card title="Adaptive thinking" icon="brain" href="/docs/en/build-with-claude/thinking">
     The only thinking mode on Claude Fable 5 and Claude Mythos 5.
   </Card>
 

@@ -134,7 +134,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
       -H "anthropic-beta: skills-2025-10-02" \
       -d @- <<'EOF'
   {
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "max_tokens": 16000,
     "container": {
       "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -153,7 +153,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   # Create a message with the PowerPoint Skill
   response=$(ant beta:messages create --format json \
     --beta skills-2025-10-02 <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   container:
     skills:
@@ -175,7 +175,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```python Python
   # Create a message with the PowerPoint Skill
   response = client.beta.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       betas=["skills-2025-10-02"],
       container={
@@ -196,7 +196,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```typescript TypeScript
   // Create a message with the PowerPoint Skill
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -220,7 +220,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   // Create a message with the PowerPoint Skill
   var response = await client.Beta.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 16000,
       Betas = ["skills-2025-10-02"],
       Container = new BetaContainerParams
@@ -252,7 +252,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```go Go
   // Create a message with the PowerPoint Skill
   response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
   		anthropic.AnthropicBetaSkills2025_10_02,
@@ -288,7 +288,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   // Create a message with the PowerPoint Skill
   BetaMessage response = client.beta().messages().create(
       MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(16000)
           .addBeta(AnthropicBeta.SKILLS_2025_10_02)
           .container(
@@ -316,7 +316,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```php PHP
   // Create a message with the PowerPoint Skill
   $response = $client->beta->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 16000,
       betas: ['skills-2025-10-02'],
       container: [
@@ -337,7 +337,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```ruby Ruby
   # Create a message with the PowerPoint Skill
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16_000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -628,7 +628,7 @@ Try these variations:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: skills-2025-10-02" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -643,7 +643,7 @@ Try these variations:
   ```bash CLI
   ant beta:messages create --format json \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   container:
     skills:
@@ -661,7 +661,7 @@ Try these variations:
 
   ```python Python
   response = client.beta.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       betas=["skills-2025-10-02"],
       container={
@@ -679,7 +679,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -699,7 +699,7 @@ Try these variations:
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 16000,
           Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
@@ -729,7 +729,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
   		anthropic.AnthropicBetaSkills2025_10_02,
@@ -762,7 +762,7 @@ Try these variations:
   ```java Java
   BetaMessage response = client.beta().messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_4_8)
+          .model(CLAUDE_OPUS_5)
           .maxTokens(16000)
           .addBeta(AnthropicBeta.SKILLS_2025_10_02)
           .container(
@@ -785,7 +785,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->beta->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 16000,
       betas: ['skills-2025-10-02'],
       container: [
@@ -805,7 +805,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16_000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -832,7 +832,7 @@ Try these variations:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: skills-2025-10-02" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
@@ -847,7 +847,7 @@ Try these variations:
   ```bash CLI
   ant beta:messages create --format json \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   container:
     skills:
@@ -865,7 +865,7 @@ Try these variations:
 
   ```python Python
   response = client.beta.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       betas=["skills-2025-10-02"],
       container={
@@ -883,7 +883,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -903,7 +903,7 @@ Try these variations:
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 16000,
           Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
@@ -933,7 +933,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
   		anthropic.AnthropicBetaSkills2025_10_02,
@@ -966,7 +966,7 @@ Try these variations:
   ```java Java
   BetaMessage response = client.beta().messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_4_8)
+          .model(CLAUDE_OPUS_5)
           .maxTokens(16000)
           .addBeta(AnthropicBeta.SKILLS_2025_10_02)
           .container(
@@ -989,7 +989,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->beta->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 16000,
       betas: ['skills-2025-10-02'],
       container: [
@@ -1009,7 +1009,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16_000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -1036,7 +1036,7 @@ Try these variations:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: skills-2025-10-02" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
@@ -1051,7 +1051,7 @@ Try these variations:
   ```bash CLI
   ant beta:messages create --format json \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   container:
     skills:
@@ -1069,7 +1069,7 @@ Try these variations:
 
   ```python Python
   response = client.beta.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       betas=["skills-2025-10-02"],
       container={
@@ -1087,7 +1087,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16000,
     betas: ["skills-2025-10-02"],
     container: {
@@ -1107,7 +1107,7 @@ Try these variations:
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 16000,
           Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
@@ -1137,7 +1137,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
   		anthropic.AnthropicBetaSkills2025_10_02,
@@ -1170,7 +1170,7 @@ Try these variations:
   ```java Java
   BetaMessage response = client.beta().messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_4_8)
+          .model(CLAUDE_OPUS_5)
           .maxTokens(16000)
           .addBeta(AnthropicBeta.SKILLS_2025_10_02)
           .container(
@@ -1193,7 +1193,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->beta->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 16000,
       betas: ['skills-2025-10-02'],
       container: [
@@ -1213,7 +1213,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 16_000,
     betas: ["skills-2025-10-02"],
     container: {

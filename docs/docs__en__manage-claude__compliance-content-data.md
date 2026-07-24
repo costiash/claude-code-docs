@@ -45,7 +45,7 @@ curl --fail-with-body -sS -G \
       "updated_at": "2026-04-10T09:10:11Z",
       "deleted_at": null,
       "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
       "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
       "user": {
@@ -97,7 +97,7 @@ The messages endpoint returns the chat's metadata plus a `chat_messages` array s
   "updated_at": "2026-04-10T09:10:11Z",
   "deleted_at": null,
   "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
   "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
   "user": {

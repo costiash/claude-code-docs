@@ -15,7 +15,7 @@ Mid-conversation system messages close that gap. You append a `{"role": "system"
 <Note>
   Mid-conversation system messages are available on the Claude API, [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai).
 
-  This feature is available on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. No beta header is required. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead.
+  This feature is available on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5. No beta header is required. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead.
 </Note>
 
 ## When to use a mid-conversation system message
@@ -49,7 +49,7 @@ You can still set the top-level `system` field for instructions that should appl
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "cache_control": {"type": "ephemeral"},
       "system": "You are a code review assistant. Be concise.",
@@ -75,8 +75,8 @@ You can still set the top-level `system` field for instructions that should appl
   ```
 
   ```bash CLI
-  ant messages create --transform 'content.0.text' --raw-output <<'YAML'
-  model: claude-opus-4-8
+  ant messages create --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+  model: claude-opus-5
   max_tokens: 1024
   cache_control:
     type: ephemeral
@@ -99,7 +99,7 @@ You can still set the top-level `system` field for instructions that should appl
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       # Automatic prompt caching: each request caches the conversation so far,
       # and the next request reads the unchanged prefix from cache.
@@ -129,14 +129,16 @@ You can still set the top-level `system` field for instructions that should appl
       ],
   )
 
-  print(response.content[0].text)
+  for block in response.content:
+      if block.type == "text":
+          print(block.text)
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     // Automatic prompt caching: each request caches the conversation so far,
     // and the next request reads the unchanged prefix from cache.
@@ -178,7 +180,7 @@ You can still set the top-level `system` field for instructions that should appl
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       // Automatic prompt caching: each request caches the conversation so far,
       // and the next request reads the unchanged prefix from cache.
@@ -221,7 +223,7 @@ You can still set the top-level `system` field for instructions that should appl
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	// Automatic prompt caching: each request caches the conversation so far,
   	// and the next request reads the unchanged prefix from cache.
@@ -248,7 +250,11 @@ You can still set the top-level `system` field for instructions that should appl
   if err != nil {
   	log.Fatal(err)
   }
-  fmt.Println(response.Content[0].Text)
+  for _, block := range response.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  	}
+  }
   ```
 
   ```java Java
@@ -259,7 +265,7 @@ You can still set the top-level `system` field for instructions that should appl
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           // Automatic prompt caching: each request caches the conversation so far,
           // and the next request reads the unchanged prefix from cache.
@@ -287,7 +293,7 @@ You can still set the top-level `system` field for instructions that should appl
   ```php PHP
   use Anthropic\Messages\CacheControlEphemeral;
   // ...
-  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+  $client = new Client();
 
   $response = $client->messages->create(
       maxTokens: 1024,
@@ -301,21 +307,25 @@ You can still set the top-level `system` field for instructions that should appl
           // request is still read from cache.
           ['role' => 'system', 'content' => 'From now on, every suggestion must include explicit type annotations.']
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       // Automatic prompt caching: each request caches the conversation so far,
       // and the next request reads the unchanged prefix from cache.
       cacheControl: CacheControlEphemeral::with(),
       system: 'You are a code review assistant. Be concise.',
   );
 
-  echo $response->content[0]->text;
+  foreach ($response->content as $block) {
+      if ($block->type === 'text') {
+          echo $block->text, PHP_EOL;
+      }
+  }
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     # Automatic prompt caching: each request caches the conversation so far,
     # and the next request reads the unchanged prefix from cache.
@@ -333,7 +343,9 @@ You can still set the top-level `system` field for instructions that should appl
     ]
   )
 
-  puts response.content.first.text
+  response.content.each do |block|
+    puts block.text if block.type == :text
+  end
   ```
 </CodeGroup>
 
@@ -379,6 +391,12 @@ Mid-conversation system messages and [prompt caching](/docs/en/build-with-claude
 * **A mid-conversation system message is itself cacheable.** Once it is in the conversation, it becomes part of the stable history. On the next turn you can move your cache breakpoint past it (or rely on [automatic caching](/docs/en/build-with-claude/prompt-caching#automatic-caching) to do so) and the system message is read from cache like any other turn.
 
 Avoid editing or removing a mid-conversation system message that has already been sent. Like any other change to earlier messages, that invalidates the cache from that point forward. If the instruction needs to evolve, append a new system message rather than rewriting the old one. Consecutive system messages are accepted and treated as a single system section, which follows the same placement rule as a whole.
+
+## Mid-conversation tool changes
+
+The same cache math applies to the `tools` array, which sits even earlier in the hashed prefix than the top-level `system` field: editing it invalidates the cache for the entire conversation. Mid-conversation tool changes are the tools counterpart to mid-conversation system messages. You declare the full tool set in `tools` up front, then use `tool_addition` and `tool_removal` blocks to offer a tool to the model, or withdraw it, from a specific point in the conversation onward. The blocks reference a tool by name from the request's `tools` (individual MCP tools and whole MCP toolsets can also be referenced), so the `tools` array itself never changes and the cached prefix stays intact.
+
+Mid-conversation tool changes are in beta. To use them, include the beta header `mid-conversation-tool-changes-2026-07-01` in your requests. On Amazon Bedrock, tool changes are supported for Claude Opus 5 only.
 
 ## Limitations
 

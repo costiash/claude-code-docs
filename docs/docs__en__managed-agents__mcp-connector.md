@@ -33,7 +33,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
     -d @- <<'EOF'
   {
     "name": "GitHub Assistant",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "mcp_servers": [
       {
         "type": "url",
@@ -54,7 +54,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```bash CLI
   AGENT_ID=$(ant beta:agents create \
     --name "GitHub Assistant" \
-    --model claude-opus-4-8 \
+    --model '{id: claude-opus-5}' \
     --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
     --tool '{type: agent_toolset_20260401}' \
     --tool '{type: mcp_toolset, mcp_server_name: github}' \
@@ -64,7 +64,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```python Python
   agent = client.beta.agents.create(
       name="GitHub Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       mcp_servers=[
           {
               "type": "url",
@@ -82,7 +82,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "GitHub Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [
       {
         type: "url",
@@ -101,7 +101,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "GitHub Assistant",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       McpServers =
       [
           new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
@@ -121,7 +121,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "GitHub Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -151,7 +151,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("GitHub Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -177,7 +177,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'GitHub Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -200,7 +200,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "GitHub Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [
       {
         type: "url",

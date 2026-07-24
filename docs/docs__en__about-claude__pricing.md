@@ -16,6 +16,7 @@ The following table shows pricing for all Claude models:
 | ------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | --------------- | ---------------------- | ------------- |
 | Claude Fable 5                                                                                                | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
 | Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                                     | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
+| Claude Opus 5                                                                                                 | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
 | Claude Opus 4.8                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
 | Claude Opus 4.7                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
 | Claude Opus 4.6                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
@@ -39,7 +40,7 @@ The following table shows pricing for all Claude models:
 </Note>
 
 <Note>
-  Claude Opus 4.7 and later Opus models, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Sonnet 5 use a newer tokenizer that contributes to their improved performance on a wide range of tasks. This tokenizer produces approximately 30% more tokens for the same text. The exact increase depends on the content and workload shape. Claude Sonnet 4.6 and earlier models use the previous tokenizer.
+  Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer that contributes to their improved performance on a wide range of tasks. This tokenizer produces approximately 30% more tokens for the same text. The exact increase depends on the content and workload shape. Claude Sonnet 4.6 and earlier models use the previous tokenizer.
 </Note>
 
 For Claude Platform on AWS pricing, see [Claude Platform on AWS pricing](#claude-platform-on-aws-pricing).
@@ -92,7 +93,7 @@ Claude models are available on [Amazon Bedrock](/docs/en/build-with-claude/claud
 
 ### Inference geography
 
-For Claude Opus 4.6, Claude Sonnet 4.6, and later models, using `inference_geo: "us"` applies a 1.1x pricing multiplier. `inference_geo: "global"` (default) uses standard pricing. See [Data residency](/docs/en/manage-claude/data-residency) for details.
+For Claude 4.6 and later models, using `inference_geo: "us"` applies a 1.1x pricing multiplier. `inference_geo: "global"` (default) uses standard pricing. See [Data residency](/docs/en/manage-claude/data-residency) for details.
 
 ### Private offers
 
@@ -152,7 +153,7 @@ For implementation details, supported models, and code examples, see [Prompt cac
 
 ### Data residency pricing
 
-For Claude Opus 4.6, Claude Sonnet 4.6, and later models, specifying US-only inference through the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
+For Claude 4.6 and later models, specifying US-only inference through the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
 
 This applies to the Claude API (first-party) and Claude Platform on AWS. On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments that use the US Data Zone Standard deployment type (see [Inference geography](#foundry-inference-geography)). Partner-operated platforms (Bedrock and Google Cloud) have independent regional pricing. See [Bedrock](https://aws.amazon.com/bedrock/pricing/) and [Google Cloud](https://cloud.google.com/vertex-ai/generative-ai/pricing#claude-models) for details. Earlier models do not support the `inference_geo` parameter and always use standard pricing; requests that include the parameter on these models return a 400 error.
 
@@ -160,10 +161,11 @@ For more information, see [Data residency](/docs/en/manage-claude/data-residency
 
 ### Fast mode pricing
 
-[Fast mode](/docs/en/build-with-claude/fast-mode), in research preview, provides significantly faster output for Claude Opus 4.8 and Claude Opus 4.7 at premium pricing. Fast mode pricing applies across the full context window, including requests over 200k input tokens. Fast mode is not available on Claude Platform on AWS.
+[Fast mode](/docs/en/build-with-claude/fast-mode), in research preview, provides significantly faster output for Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7 at premium pricing. Fast mode pricing applies across the full context window, including requests over 200k input tokens. Fast mode is available on the Claude API (first-party) only; it is not available on Claude Platform on AWS or partner-operated cloud platforms.
 
 | Model           | Input      | Output      |
 | --------------- | ---------- | ----------- |
+| Claude Opus 5   | $10 / MTok | $50 / MTok  |
 | Claude Opus 4.8 | $10 / MTok | $50 / MTok  |
 | Claude Opus 4.7 | $30 / MTok | $150 / MTok |
 
@@ -186,6 +188,7 @@ The Batch API allows asynchronous processing of large volumes of requests with a
 | ------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
 | Claude Fable 5                                                                                                | $5 / MTok    | $25 / MTok    |
 | Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                                     | $5 / MTok    | $25 / MTok    |
+| Claude Opus 5                                                                                                 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.8                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.7                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6                                                                                               | $2.50 / MTok | $12.50 / MTok |
@@ -204,7 +207,7 @@ For more information about batch processing, see [Batch processing](/docs/en/bui
 
 ### Long context pricing
 
-Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 5, and Sonnet 4.6 include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
+Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing) include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
 ### Tool use pricing
 
@@ -226,6 +229,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 | Model                                                                                                      | Tool choice                    | Tool use system prompt token count |
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------- |
+| Claude Opus 5                                                                                              | `auto`, `none`***`any`, `tool` | 286 tokens***406 tokens            |
 | Claude Opus 4.8                                                                                            | `auto`, `none`***`any`, `tool` | 290 tokens***410 tokens            |
 | Claude Opus 4.7                                                                                            | `auto`, `none`***`any`, `tool` | 675 tokens***804 tokens            |
 | Claude Opus 4.6                                                                                            | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
@@ -251,10 +255,10 @@ For more information about tool use implementation and best practices, see [Tool
 
 The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](/docs/en/agents-and-tools/tool-use/overview#pricing) that applies whenever any tool is present.
 
-| Model                                           | Additional input tokens |
-| ----------------------------------------------- | ----------------------- |
-| Claude Opus 4.7 and Claude Opus 4.8             | 325 tokens              |
-| Claude Opus 4.6, Claude Sonnet 4.6, and earlier | 244 tokens              |
+| Model                                               | Additional input tokens |
+| --------------------------------------------------- | ----------------------- |
+| Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7 | 325 tokens              |
+| Claude Opus 4.6, Claude Sonnet 4.6, and earlier     | 244 tokens              |
 
 Additional tokens are consumed by:
 
@@ -403,7 +407,7 @@ Runtime is measured to the millisecond and accrues only while the session's stat
 
 ### Worked example
 
-A one-hour coding session using Claude Opus 4.8 that consumes 50,000 input tokens and 15,000 output tokens:
+A one-hour coding session using Claude Opus 5 that consumes 50,000 input tokens and 15,000 output tokens:
 
 | Line item       | Calculation              | Cost       |
 | --------------- | ------------------------ | ---------- |

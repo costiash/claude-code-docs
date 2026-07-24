@@ -156,10 +156,10 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from Cloud Run"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -188,11 +188,11 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from Cloud Run"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -222,7 +222,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from Cloud Run" }]
   });
@@ -258,7 +258,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   )
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from Cloud Run")),
@@ -267,7 +267,12 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   if err != nil {
   	panic(err)
   }
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
@@ -294,7 +299,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello from Cloud Run")
           .build());
@@ -315,7 +320,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from Cloud Run" }],
   });
@@ -355,7 +360,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
   # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from Cloud Run"}'
   ```
@@ -380,11 +385,12 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   $client = new Client(credentials: $credentials);
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from Cloud Run']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -403,11 +409,11 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   client = Anthropic::Client.new(credentials: credentials)
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from Cloud Run"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 

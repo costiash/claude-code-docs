@@ -9,7 +9,7 @@ Configure manual extended thinking with a fixed budget_tokens budget on Claude m
 </Note>
 
 <Warning>
-  Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on Claude Opus 4.6 and Claude Sonnet 4.6 (it still works there). Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and Claude Mythos 5 do not support it and reject requests that use it, returning a 400 error. On earlier models, including Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5, extended thinking is the only thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) instead.
+  Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on the Claude 4.6 models (requests using it still succeed). Claude 4.7 and later models do not support it and reject requests that use it, returning a 400 error. On Claude 4.5 and earlier models that support thinking, extended thinking is the only available thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](/docs/en/build-with-claude/thinking) instead.
 
   See [Migrating to adaptive thinking](#migrating-to-adaptive-thinking) to move to adaptive thinking. If your model supports only extended thinking, this page describes the supported configuration; no change is needed until you move to a newer model.
 </Warning>
@@ -294,7 +294,7 @@ On Claude Opus 4.5, Claude Sonnet 4.5, and earlier Claude 4 models (Claude Opus 
 
 The 4.6 generation splits in manual mode:
 
-* **Claude Sonnet 4.6**: the beta header with manual `type: "enabled"` is still functional but deprecated. Prefer [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), which interleaves automatically with no header.
+* **Claude Sonnet 4.6**: the beta header with manual `type: "enabled"` is still functional but deprecated. Prefer [adaptive thinking](/docs/en/build-with-claude/thinking), which interleaves automatically with no header.
 * **Claude Opus 4.6**: manual mode has no interleaved thinking at all. Only its adaptive mode interleaves, so switch to `thinking: {type: "adaptive"}` if you need reasoning between tool calls on this model.
 
 Claude Haiku 4.5 does not support interleaved thinking. On the Claude API, the beta header is accepted but ignored.
@@ -306,17 +306,13 @@ Two more considerations for interleaved thinking in manual mode:
 
 How platforms treat the beta header differs. The Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) accept `interleaved-thinking-2025-05-14` on any model and ignore it where unsupported. Acceptance is not the same as effect: on models that reject `type: "enabled"` (4.7 and later) or lack manual-mode interleaving (Claude Opus 4.6), the header has no manual-mode effect; adaptive thinking interleaves automatically there.
 
-Partner-operated platforms ([Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)) reject the request unless the model is one of the following:
-
-* Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5
-* Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Sonnet 4.5, Claude Opus 4.1 (deprecated)
-* Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)) and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))
+Partner-operated platforms ([Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai)) likewise accept the header on any model without returning an error, and ignore it on models that don't support interleaved thinking.
 
 ## Turn structure in manual mode
 
 The general turn-structure rules, including the single-turn tool-use loop, mid-turn conflict handling, and toggling thinking between turns, are on [Thinking with tool use](/docs/en/build-with-claude/thinking#thinking-with-tool-use).
 
-Manual mode adds one requirement: the final assistant turn of a thinking-enabled request must begin with a thinking block ([adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) drops that requirement). Changing the thinking configuration between turns also invalidates prompt caching; see the following section.
+Manual mode adds one requirement: the final assistant turn of a thinking-enabled request must begin with a thinking block ([adaptive thinking](/docs/en/build-with-claude/thinking) drops that requirement). Changing the thinking configuration between turns also invalidates prompt caching; see the following section.
 
 ## Prompt caching in manual mode
 
@@ -355,8 +351,8 @@ If your model supports only extended thinking (Claude Sonnet 4.5, Claude Opus 4.
 
 You need to migrate off `type: "enabled"` if:
 
-* You use Claude Opus 4.6 or Claude Sonnet 4.6, where `budget_tokens` is deprecated and will be removed in a future model release.
-* You are moving to Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, or Claude Mythos 5, where `type: "enabled"` returns a 400 error.
+* You use Claude Opus 4.6 or Claude Sonnet 4.6, where `budget_tokens` is deprecated.
+* You are moving to Claude Opus 4.7, Claude Opus 4.8, Claude Opus 5, Claude Sonnet 5, Claude Fable 5, or Claude Mythos 5, where `type: "enabled"` returns a 400 error.
 
 The mapping is small: remove `budget_tokens`, set `thinking: {type: "adaptive"}`, and control reasoning depth with `output_config: {effort: ...}` instead of a token budget.
 
@@ -392,7 +388,7 @@ Expect a behavioral difference, not just a syntax change. With a fixed budget, C
 
 Switching modes is a thinking-configuration change, so the first request after the switch invalidates cache breakpoints, as described in [Prompt caching in manual mode](#extended-thinking-with-prompt-caching).
 
-For full guidance, see [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), [effort](/docs/en/build-with-claude/effort), and the [model migration guide](/docs/en/about-claude/models/migration-guide).
+For full guidance, see [adaptive thinking](/docs/en/build-with-claude/thinking), [effort](/docs/en/build-with-claude/effort), and the [model migration guide](/docs/en/about-claude/models/migration-guide).
 
 ## Next steps
 

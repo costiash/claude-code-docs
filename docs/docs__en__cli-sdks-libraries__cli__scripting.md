@@ -20,7 +20,7 @@ You can use the CLI to version control API resources such as skills, agents, env
 
     ```yaml summarizer.agent.yaml
     name: Summarizer
-    model: claude-opus-4-8
+    model: claude-opus-5
     system: |
       You are a helpful assistant that writes concise summaries.
     tools:
@@ -38,7 +38,7 @@ You can use the CLI to version control API resources such as skills, agents, env
       "id": "agent_011CYm1BLqPXpQRk5khsSXrs",
       "version": 1,
       "name": "Summarizer",
-      "model": "claude-opus-4-8"
+      "model": "claude-opus-5"
       /* ... */
     }
     ```
@@ -192,7 +192,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "max_tokens": 256,
     "messages": [{"role": "user", "content": "hi"}]
   }'

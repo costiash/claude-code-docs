@@ -117,9 +117,9 @@ You can construct the client with explicit credentials or with no arguments. Wit
     -H "authorization: Bearer $ACCESS_TOKEN" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d @- <<'JSON' | jq -r '.content[0].text'
+    -d @- <<'JSON' | jq -r '.content[] | select(.type == "text") | .text'
   {
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }
@@ -142,11 +142,11 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -167,7 +167,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
@@ -192,7 +192,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -201,7 +201,12 @@ You can construct the client with explicit credentials or with no arguments. Wit
   if err != nil {
   	log.Fatal(err)
   }
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
@@ -234,7 +239,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
               .build();
 
       var message = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024)
               .addUserMessage("Hello, Claude")
               .build());
@@ -259,7 +264,7 @@ You can construct the client with explicit credentials or with no arguments. Wit
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
   });
@@ -292,12 +297,13 @@ You can construct the client with explicit credentials or with no arguments. Wit
   ));
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
   );
 
-  echo $message->content[0]->text . PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text . PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -314,12 +320,12 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}]
   )
 
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 

@@ -131,10 +131,10 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from AWS"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -166,11 +166,11 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from AWS"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -204,7 +204,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from AWS" }]
   });
@@ -245,7 +245,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from AWS")),
@@ -254,7 +254,12 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   if err != nil {
   	panic(err)
   }
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
@@ -277,7 +282,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello from AWS")
           .build());
@@ -298,7 +303,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from AWS" }],
   });
@@ -340,7 +345,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
   # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from AWS"}'
   ```
@@ -364,11 +369,12 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   ));
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from AWS']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -393,11 +399,11 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from AWS"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 
@@ -584,10 +590,10 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from EKS"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -609,11 +615,11 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from EKS"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -634,7 +640,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from EKS" }]
   });
@@ -666,7 +672,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   )
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from EKS")),
@@ -675,14 +681,19 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   if err != nil {
   	panic(err)
   }
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello from EKS")
           .build());
@@ -697,7 +708,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from EKS" }],
   });
@@ -714,7 +725,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
   # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from EKS"}'
   ```
@@ -727,11 +738,12 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from EKS']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -742,11 +754,11 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from EKS"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 

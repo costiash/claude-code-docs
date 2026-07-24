@@ -110,18 +110,18 @@ On both products, account data for users in your organization (such as names, em
 
 The following Claude Platform APIs and tools store data at rest under your key when CMEK is enabled:
 
-| APIs          | Tools and features                                               |
-| ------------- | ---------------------------------------------------------------- |
-| Messages      | Web search                                                       |
-| Models        | Web fetch                                                        |
-| Files         | Code execution                                                   |
-| Batch         | Bash tool                                                        |
-| Skills        | Text editor tool                                                 |
-| User profiles | MCP connector                                                    |
-|               | Structured outputs (Claude Sonnet 4.6 and Claude Haiku 4.5 only) |
-|               | Advisor tool                                                     |
-|               | Computer use                                                     |
-|               | Context management                                               |
+| APIs          | Tools and features                                                                                  |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| Messages      | Web search                                                                                          |
+| Models        | Web fetch                                                                                           |
+| Files         | Code execution                                                                                      |
+| Batch         | Bash tool                                                                                           |
+| Skills        | Text editor tool                                                                                    |
+| User profiles | MCP connector                                                                                       |
+|               | Structured outputs (not available for Claude Fable 5 or Claude Mythos models in CMEK organizations) |
+|               | Advisor tool                                                                                        |
+|               | Computer use                                                                                        |
+|               | Context management                                                                                  |
 
 ## Limited preservation outside your key
 

@@ -8,7 +8,7 @@ An orchestration mode is a session-level switch: when it is on, the model puts m
 
 The mode is not an API parameter. It is built entirely from documented pieces:
 
-1. **An effort level:** requests run at a documented [Effort](/docs/en/build-with-claude/effort) value such as `xhigh`. There is no hidden level above the ones on that page.
+1. **An effort level:** requests run at a documented [Effort](/docs/en/build-with-claude/effort) value such as `xhigh`. There is no hidden level above the ones on that page. This example sets effort at the top level of each request, which needs no beta header.
 2. **A mode reminder:** a [mid-conversation system message](/docs/en/build-with-claude/mid-conversation-system-messages) tells the model the mode is active, with a one-line refresher every several turns and an exit notice when the mode is turned off. The top-level `system` field never changes, so the cached prefix stays intact.
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
@@ -37,7 +37,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   client = anthropic.Anthropic()
 
-  MODEL = "claude-opus-4-8"
+  MODEL = "claude-opus-5"
   EFFORT = "xhigh"
 
   SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -67,7 +67,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   const client = new Anthropic();
 
-  const MODEL = "claude-opus-4-8";
+  const MODEL = "claude-opus-5";
   const EFFORT = "xhigh";
 
   const SYSTEM_PROMPT =
@@ -95,7 +95,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   AnthropicClient client = new();
 
-  const string model = "claude-opus-4-8";
+  const string model = "claude-opus-5";
   var effort = Effort.Xhigh;
 
   const string systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly.";
@@ -141,7 +141,7 @@ The example is a single file. The constants control the effort level, the fan-ou
   var client = anthropic.NewClient()
 
   const (
-  	modelID = "claude-opus-4-8"
+  	modelID = "claude-opus-5"
   	effort  = anthropic.OutputConfigEffortXhigh
 
   	systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -184,7 +184,6 @@ The example is a single file. The constants control the effort level, the fan-ou
   import com.anthropic.models.messages.OutputConfig;
   import com.anthropic.models.messages.StopReason;
   import com.anthropic.models.messages.TextBlock;
-  import com.anthropic.models.messages.ThinkingConfigAdaptive;
   import com.anthropic.models.messages.Tool;
   import com.anthropic.models.messages.ToolBash20250124;
   import com.anthropic.models.messages.ToolResultBlockParam;
@@ -223,7 +222,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  static final String MODEL = "claude-opus-4-8";
+  static final String MODEL = "claude-opus-5";
   static final boolean DOC_TEST_MODE =
           !Objects.requireNonNullElse(System.getenv("DOC_TEST_MODE"), "").isEmpty();
   static final OutputConfig.Effort EFFORT = OutputConfig.Effort.XHIGH;
@@ -252,7 +251,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   $client = new Client();
 
-  const MODEL = 'claude-opus-4-8';
+  const MODEL = 'claude-opus-5';
   define('DOC_TEST_MODE', (string) getenv('DOC_TEST_MODE') !== '');
   const EFFORT = 'xhigh';
 
@@ -279,7 +278,7 @@ The example is a single file. The constants control the effort level, the fan-ou
 
   CLIENT = Anthropic::Client.new
 
-  MODEL = "claude-opus-4-8"
+  MODEL = "claude-opus-5"
   EFFORT = :xhigh
 
   SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -1450,7 +1449,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
               model=model,
               max_tokens=64000,
               system=subagent_system,
-              thinking={"type": "adaptive"},
               output_config={"effort": EFFORT},
               tools=[BASH_TOOL, REPORT_TOOL],
               messages=messages,
@@ -1507,7 +1505,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
             model,
             max_tokens: 64000,
             system: subagentSystem,
-            thinking: { type: "adaptive" },
             output_config: { effort: EFFORT },
             tools: [BASH_TOOL, REPORT_TOOL],
             messages,
@@ -1581,7 +1578,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
               Model = model,
               MaxTokens = requestMaxTokens,
               System = subagentSystem,
-              Thinking = new ThinkingConfigAdaptive(),
               OutputConfig = new OutputConfig { Effort = effort },
               Tools = [bashTool, reportTool],
               Messages = messages,
@@ -1660,7 +1656,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
   				Model:        model,
   				MaxTokens:    64000,
   				System:       []anthropic.TextBlockParam{{Text: subagentSystem}},
-  				Thinking:     anthropic.ThinkingConfigParamUnion{OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{}},
   				OutputConfig: anthropic.OutputConfigParam{Effort: effort},
   				Tools:        []anthropic.ToolUnionParam{bashTool, reportTool},
   				Messages:     messages,
@@ -1742,7 +1737,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
                   .model(model)
                   .maxTokens(64000L)
                   .system(subagentSystem)
-                  .thinking(ThinkingConfigAdaptive.builder().build())
                   .outputConfig(OutputConfig.builder().effort(EFFORT).build())
                   .addTool(BASH_TOOL)
                   .addTool(REPORT_TOOL)
@@ -1861,7 +1855,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
               model: $model,
               maxTokens: 64000,
               system: $subagentSystem,
-              thinking: ['type' => 'adaptive'],
               outputConfig: ['effort' => EFFORT],
               tools: [BASH_TOOL, REPORT_TOOL],
               messages: $messages,
@@ -1930,7 +1923,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
         model: model,
         max_tokens: 64_000,
         system_: subagent_system,
-        thinking: {type: :adaptive},
         output_config: {effort: EFFORT},
         tools: [BASH_TOOL, REPORT_TOOL],
         messages: messages,
@@ -2871,10 +2863,9 @@ The agent appends the user's message first, then any system messages that are du
     -H "content-type: application/json" \
     -d @- <<'EOF'
   {
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "max_tokens": 64000,
     "system": "You are a helpful general-purpose agent. Answer the user's request directly.",
-    "thinking": {"type": "adaptive"},
     "output_config": {"effort": "xhigh"},
     "tools": [
       {
@@ -2915,10 +2906,9 @@ The agent appends the user's message first, then any system messages that are du
   # subagents is shown in the SDK tabs; the Workflow description is condensed here,
   # the SDK examples carry the full standing-consent text.
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 64000
   system: You are a helpful general-purpose agent. Answer the user's request directly.
-  thinking: {type: adaptive}
   output_config: {effort: xhigh}
   tools:
     - name: Workflow
@@ -3011,7 +3001,6 @@ The agent appends the user's message first, then any system messages that are du
                   model=self.model,
                   max_tokens=64000,
                   system=SYSTEM_PROMPT,  # static for the whole session
-                  thinking={"type": "adaptive"},
                   output_config={"effort": EFFORT},
                   tools=[WORKFLOW_TOOL, BASH_TOOL],
                   messages=self.messages,
@@ -3120,7 +3109,6 @@ The agent appends the user's message first, then any system messages that are du
               model: this.model,
               max_tokens: 64000,
               system: SYSTEM_PROMPT, // static for the whole session
-              thinking: { type: "adaptive" },
               output_config: { effort: EFFORT },
               tools: [WORKFLOW_TOOL, BASH_TOOL],
               messages: this.messages,
@@ -3254,7 +3242,6 @@ The agent appends the user's message first, then any system messages that are du
               Model = model,
               MaxTokens = requestMaxTokens,
               System = systemPrompt, // static for the whole session
-              Thinking = new ThinkingConfigAdaptive(),
               OutputConfig = new OutputConfig { Effort = effort },
               Tools = [workflowTool, bashTool],
               Messages = messages,
@@ -3391,7 +3378,6 @@ The agent appends the user's message first, then any system messages that are du
   				Model:        agent.model,
   				MaxTokens:    64000,
   				System:       []anthropic.TextBlockParam{{Text: systemPrompt}}, // static for the whole session
-  				Thinking:     anthropic.ThinkingConfigParamUnion{OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{}},
   				OutputConfig: anthropic.OutputConfigParam{Effort: effort},
   				Tools:        []anthropic.ToolUnionParam{workflowTool, bashTool},
   				Messages:     agent.messages,
@@ -3537,7 +3523,6 @@ The agent appends the user's message first, then any system messages that are du
                       .model(model)
                       .maxTokens(64000L)
                       .system(SYSTEM_PROMPT) // static for the whole session
-                      .thinking(ThinkingConfigAdaptive.builder().build())
                       .outputConfig(OutputConfig.builder().effort(EFFORT).build())
                       .addTool(WORKFLOW_TOOL)
                       .addTool(BASH_TOOL)
@@ -3642,7 +3627,6 @@ The agent appends the user's message first, then any system messages that are du
                   model: $this->model,
                   maxTokens: 64000,
                   system: SYSTEM_PROMPT, // static for the whole session
-                  thinking: ['type' => 'adaptive'],
                   outputConfig: ['effort' => EFFORT],
                   tools: [WORKFLOW_TOOL, BASH_TOOL],
                   messages: $this->messages,
@@ -3758,7 +3742,6 @@ The agent appends the user's message first, then any system messages that are du
           model: @model,
           max_tokens: 64_000,
           system_: SYSTEM_PROMPT, # static for the whole session
-          thinking: {type: :adaptive},
           output_config: {effort: EFFORT},
           tools: [WORKFLOW_TOOL, BASH_TOOL],
           messages: @messages,

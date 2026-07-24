@@ -18,7 +18,7 @@ The following diagram illustrates the standard context window behavior for API r
 
 ![Diagram of turns accumulating in the context window until the conversation approaches the token limit](/docs/images/context-window.svg)
 
-*1Chat interfaces such as [claude.ai](https://claude.ai/) can also manage the context window on a rolling "first in, first out" basis.*
+*1 Chat interfaces such as [claude.ai](https://claude.ai/) can also manage the context window on a rolling "first in, first out" basis.*
 
 * **Progressive token accumulation:** As the conversation advances through turns, each user message and assistant response accumulates within the context window, and previous turns are preserved completely.
 
@@ -33,9 +33,9 @@ Everything in the request counts toward the context window: the system prompt, e
 
 ## Context window sizes by model
 
-Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a 1M-token context window on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry. [Claude Mythos Preview](https://anthropic.com/glasswing) also has a 1M-token context window.
+Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a 1M-token context window on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry. [Claude Mythos Preview](https://anthropic.com/glasswing) also has a 1M-token context window.
 
-Claude Fable 5 and Claude Mythos 5 (claude-fable-5 and claude-mythos-5) have a 1M-token context window, and a single request to these models can generate up to 128k output tokens (`max_tokens`). Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
+Claude Fable 5 and Claude Mythos 5 (claude-fable-5 and claude-mythos-5) also have a 1M-token context window. A single request to any model with a 1M-token context window can generate up to 128k output tokens (`max_tokens`). Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
 
 For every model with a 1M-token context window, 1M is the default: you don't need a beta header, and long-context requests are billed at [standard pricing](/docs/en/about-claude/pricing#long-context-pricing).
 
@@ -47,7 +47,7 @@ See the [model comparison](/docs/en/about-claude/models/overview#latest-models-c
 
 With [thinking](/docs/en/build-with-claude/thinking), all input and output tokens, including thinking tokens, count toward the context window limit, with a few nuances in multi-turn situations.
 
-Thinking tokens are a subset of your `max_tokens` parameter, are billed as output tokens, and count toward rate limits. With [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost), Claude determines its thinking allocation dynamically, so thinking token usage varies from request to request.
+Thinking tokens are a subset of your `max_tokens` parameter, are billed as output tokens, and count toward rate limits. With [adaptive thinking](/docs/en/build-with-claude/thinking), Claude determines its thinking allocation dynamically, so thinking token usage varies from request to request.
 
 Whether thinking blocks from previous assistant turns stay in the context window depends on the model. On Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview, the API keeps previous thinking blocks by default, and they count toward the context window like any other input tokens. On earlier Opus and Sonnet models and all Haiku models, the API automatically strips previous thinking blocks from the conversation history when you pass them back, which preserves token capacity for conversation content. For the per-model defaults, see [thinking block preservation by model](/docs/en/build-with-claude/thinking#thinking-block-preservation-by-model). To override the default in either direction, use [thinking block clearing](/docs/en/build-with-claude/context-editing#thinking-block-clearing).
 
@@ -123,7 +123,7 @@ After each tool call, the API gives Claude an update on its remaining capacity:
 
 Image tokens are included in these budgets.
 
-Claude Opus 4.7 and later Opus models, Claude Fable 5, and Claude Mythos 5 don't receive these injected tags. On Claude Opus 4.7 and later, Claude Fable 5, and Claude Mythos 5, you can give the model an explicit budget with [task budgets](/docs/en/build-with-claude/task-budgets), which are in beta.
+Claude Opus 4.7 and later Opus models, Claude Fable 5, and Claude Mythos 5 don't receive these injected tags. On Claude Opus 4.7 and later Opus models, Claude Fable 5, and Claude Mythos 5, you can give the model an explicit budget with [task budgets](/docs/en/build-with-claude/task-budgets), which are in beta.
 
 <Tip>
   For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multisession pattern](/docs/en/agents-and-tools/tool-use/memory-tool#multisession-software-development-pattern) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
@@ -133,7 +133,7 @@ For prompting guidance on using context awareness, see [Prompting best practices
 
 ## Manage context with compaction
 
-If your conversations regularly approach context window limits, use [server-side compaction](/docs/en/build-with-claude/compaction). Compaction automatically summarizes earlier parts of the conversation on the server, so the conversation can continue past the context window limit. It is available in beta for Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6.
+If your conversations regularly approach context window limits, use [server-side compaction](/docs/en/build-with-claude/compaction). Compaction automatically summarizes earlier parts of the conversation on the server, so the conversation can continue past the context window limit. It is available in beta for Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 For more specialized needs, [context editing](/docs/en/build-with-claude/context-editing) offers additional strategies:
 

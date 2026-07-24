@@ -948,7 +948,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
     The model that will complete your prompt.
 
@@ -966,13 +966,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"`
 
@@ -980,7 +984,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `"claude-opus-4-6"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"`
 
@@ -996,11 +1000,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `"claude-opus-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"`
 
@@ -1012,11 +1016,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `"claude-opus-4-1"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `string`
 
@@ -2905,7 +2909,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
       The model that will complete your prompt.
 
@@ -2923,13 +2927,17 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         Most capable model for cybersecurity and biology research
 
+      - `"claude-opus-5"`
+
+        Powerful intelligence for long-running agents and coding
+
       - `"claude-opus-4-8"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"`
 
@@ -2937,7 +2945,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"claude-opus-4-6"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"`
 
@@ -2953,11 +2961,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"claude-opus-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-5"`
 
@@ -2969,11 +2977,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"claude-opus-4-1"`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-1-20250805"`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
     - `string`
 
@@ -3035,6 +3043,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -3049,6 +3058,8 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
     - `"pause_turn"`
 
     - `"refusal"`
+
+    - `"model_context_window_exceeded"`
 
   - `stop_sequence: string`
 
@@ -4194,7 +4205,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
     The model that will complete your prompt.
 
@@ -4212,13 +4223,17 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"`
 
@@ -4226,7 +4241,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `"claude-opus-4-6"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"`
 
@@ -4242,11 +4257,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `"claude-opus-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"`
 
@@ -4258,11 +4273,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `"claude-opus-4-1"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `string`
 
@@ -9858,7 +9873,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
       The model that will complete your prompt.
 
@@ -9876,13 +9891,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Most capable model for cybersecurity and biology research
 
+      - `"claude-opus-5"`
+
+        Powerful intelligence for long-running agents and coding
+
       - `"claude-opus-4-8"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"`
 
@@ -9890,7 +9909,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"claude-opus-4-6"`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"`
 
@@ -9906,11 +9925,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"claude-opus-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-5"`
 
@@ -9922,11 +9941,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"claude-opus-4-1"`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-1-20250805"`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
     - `string`
 
@@ -9988,6 +10007,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -10002,6 +10022,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"pause_turn"`
 
     - `"refusal"`
+
+    - `"model_context_window_exceeded"`
 
   - `stop_sequence: string`
 
@@ -12129,13 +12151,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Model
 
-- `Model = "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
+- `Model = "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more or string`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
     The model that will complete your prompt.
 
@@ -12153,13 +12175,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"`
 
@@ -12167,7 +12193,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"claude-opus-4-6"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"`
 
@@ -12183,11 +12209,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"claude-opus-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"`
 
@@ -12199,11 +12225,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"claude-opus-4-1"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `string`
 
@@ -13308,6 +13334,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"refusal"`
 
+      - `"model_context_window_exceeded"`
+
     - `stop_sequence: string`
 
   - `type: "message_delta"`
@@ -14065,7 +14093,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
         The model that will complete your prompt.
 
@@ -14083,13 +14111,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"`
 
@@ -14097,7 +14129,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"claude-opus-4-6"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"`
 
@@ -14113,11 +14145,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"claude-opus-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"`
 
@@ -14129,11 +14161,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"claude-opus-4-1"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `string`
 
@@ -14195,6 +14227,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -14209,6 +14242,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"pause_turn"`
 
       - `"refusal"`
+
+      - `"model_context_window_exceeded"`
 
     - `stop_sequence: string`
 
@@ -15015,7 +15050,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+        - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
           The model that will complete your prompt.
 
@@ -15033,13 +15068,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"`
 
@@ -15047,7 +15086,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"claude-opus-4-6"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"`
 
@@ -15063,11 +15102,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"claude-opus-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"`
 
@@ -15079,11 +15118,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"claude-opus-4-1"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `string`
 
@@ -15145,6 +15184,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -15159,6 +15199,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `"pause_turn"`
 
         - `"refusal"`
+
+        - `"model_context_window_exceeded"`
 
       - `stop_sequence: string`
 
@@ -15839,7 +15881,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Stop Reason
 
-- `StopReason = "end_turn" or "max_tokens" or "stop_sequence" or 3 more`
+- `StopReason = "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
   - `"end_turn"`
 
@@ -15852,6 +15894,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `"pause_turn"`
 
   - `"refusal"`
+
+  - `"model_context_window_exceeded"`
 
 ### Text Block
 
@@ -21894,7 +21938,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
         The model that will complete your prompt.
 
@@ -21912,13 +21956,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"`
 
@@ -21926,7 +21974,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `"claude-opus-4-6"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"`
 
@@ -21942,11 +21990,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `"claude-opus-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"`
 
@@ -21958,11 +22006,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `"claude-opus-4-1"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `string`
 
@@ -24511,7 +24559,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
             The model that will complete your prompt.
 
@@ -24529,13 +24577,17 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"`
 
@@ -24543,7 +24595,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"claude-opus-4-6"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -24559,11 +24611,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -24575,11 +24627,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"claude-opus-4-1"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
           - `string`
 
@@ -24641,6 +24693,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -24655,6 +24708,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           - `"pause_turn"`
 
           - `"refusal"`
+
+          - `"model_context_window_exceeded"`
 
         - `stop_sequence: string`
 
@@ -25789,7 +25844,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
             The model that will complete your prompt.
 
@@ -25807,13 +25862,17 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"`
 
@@ -25821,7 +25880,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"claude-opus-4-6"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -25837,11 +25896,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -25853,11 +25912,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"claude-opus-4-1"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
           - `string`
 
@@ -25919,6 +25978,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -25933,6 +25993,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           - `"pause_turn"`
 
           - `"refusal"`
+
+          - `"model_context_window_exceeded"`
 
         - `stop_sequence: string`
 
@@ -26867,7 +26929,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+        - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
           The model that will complete your prompt.
 
@@ -26885,13 +26947,17 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"`
 
@@ -26899,7 +26965,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"claude-opus-4-6"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"`
 
@@ -26915,11 +26981,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"claude-opus-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"`
 
@@ -26931,11 +26997,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"claude-opus-4-1"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `string`
 
@@ -26997,6 +27063,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -27011,6 +27078,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         - `"pause_turn"`
 
         - `"refusal"`
+
+        - `"model_context_window_exceeded"`
 
       - `stop_sequence: string`
 
@@ -27907,7 +27976,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
+      - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
 
         The model that will complete your prompt.
 
@@ -27925,13 +27994,17 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"`
 
@@ -27939,7 +28012,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `"claude-opus-4-6"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"`
 
@@ -27955,11 +28028,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `"claude-opus-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"`
 
@@ -27971,11 +28044,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `"claude-opus-4-1"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `string`
 
@@ -28037,6 +28110,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -28051,6 +28125,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
       - `"pause_turn"`
 
       - `"refusal"`
+
+      - `"model_context_window_exceeded"`
 
     - `stop_sequence: string`
 

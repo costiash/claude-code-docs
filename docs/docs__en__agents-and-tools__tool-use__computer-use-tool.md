@@ -9,7 +9,7 @@ Claude can interact with computer environments through the computer use tool, wh
 <Note>
   Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
 
-  * `"computer-use-2025-11-24"` for Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
+  * `"computer-use-2025-11-24"` for Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
   * `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)), and Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))
 
   Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
@@ -69,7 +69,7 @@ Here's how to get started with computer use:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: computer-use-2025-11-24" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "tools": [
         {
@@ -99,7 +99,7 @@ Here's how to get started with computer use:
 
   ```bash CLI
   ant beta:messages create --beta computer-use-2025-11-24 <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   tools:
     - type: computer_20251124
@@ -121,7 +121,7 @@ Here's how to get started with computer use:
   client = anthropic.Anthropic()
 
   response = client.beta.messages.create(
-      model="claude-opus-4-8",  # or another compatible model
+      model="claude-opus-5",  # or another compatible model
       max_tokens=1024,
       tools=[
           {
@@ -144,7 +144,7 @@ Here's how to get started with computer use:
   const client = new Anthropic();
 
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [
       {
@@ -178,7 +178,7 @@ Here's how to get started with computer use:
 
   var parameters = new MessageCreateParams
   {
-      Model = Messages::Model.ClaudeOpus4_8,
+      Model = Messages::Model.ClaudeOpus5,
       MaxTokens = 1024,
       Tools = new BetaToolUnion[]
       {
@@ -210,7 +210,7 @@ Here's how to get started with computer use:
   client := anthropic.NewClient()
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Tools: []anthropic.BetaToolUnionParam{
   		{OfComputerUseTool20251124: &anthropic.BetaToolComputerUse20251124Param{
@@ -246,7 +246,7 @@ Here's how to get started with computer use:
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addTool(BetaToolComputerUse20251124.builder()
               .displayWidthPx(1024L)
@@ -272,7 +272,7 @@ Here's how to get started with computer use:
       messages: [
           ['role' => 'user', 'content' => 'Save a picture of a cat to my desktop.'],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           [
               'type' => 'computer_20251124',
@@ -300,7 +300,7 @@ Here's how to get started with computer use:
   client = Anthropic::Client.new
 
   response = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [
       {
@@ -720,7 +720,7 @@ The computer use tool supports these actions:
 * **hold\_key:** Hold down a key for a specified duration (in seconds)
 * **wait:** Pause between actions
 
-**Enhanced actions (`computer_20251124`)** Available in Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
+**Enhanced actions (`computer_20251124`)** Available in Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 
 * All actions from `computer_20250124`
 * **zoom:** View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
@@ -763,7 +763,7 @@ The computer use tool supports these actions:
   }
   ```
 
-  Zoom to view region in detail (Claude Sonnet 5, Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Opus 4.5):
+  Zoom to view region in detail (Claude Opus 5, Sonnet 5, Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Opus 4.5):
 
   ```json
   {
@@ -1552,7 +1552,7 @@ When implementing the computer use tool, various errors might occur. Here's how 
 Screenshots sent to the computer tool should fit within Claude's image size limits (see [image size limits](/docs/en/build-with-claude/vision#evaluate-image-size)). The API downscales oversized images before Claude sees them, and Claude returns coordinates for the image it sees, so relying on the server-side downscale leaves you without the scale factor you need to map those coordinates back to your screen. Only images over the API's separate [request limits](/docs/en/build-with-claude/vision#request-limits) (for example, more than 8,000 px on a side) are rejected with a validation error rather than downscaled.
 
 <Note>
-  Limits vary by model. Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
+  Limits vary by model. Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
 </Note>
 
 If your screen is larger than the limit, resize the screenshot before sending it, set `display_width_px`/`display_height_px` to the resized dimensions, and scale Claude's returned coordinates back to the original screen space:

@@ -81,14 +81,14 @@ With the binary installed and authenticated, call the [Messages API](/docs/en/ap
 
 ```bash
 ant messages create \
-  --model claude-opus-4-8 \
+  --model claude-opus-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
 
 ```text Output wrap
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "id": "msg_01YMmR5XodC5nTqMxLZMKaq6",
   "type": "message",
   "role": "assistant",

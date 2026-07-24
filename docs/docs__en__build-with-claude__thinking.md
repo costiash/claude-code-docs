@@ -46,7 +46,7 @@ If Claude uses tools, thinking can also appear between tool calls; see [Thinking
 
 On current models, thinking is on by default or one parameter away. Which configuration each model accepts, and what it defaults to, is listed in the [per-model configuration table](/docs/en/build-with-claude/thinking-troubleshooting#supported-models) on the Troubleshooting page.
 
-On Claude Sonnet 5, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview, thinking is already on: no configuration needed. The first thing most developers need on these models is to see the thinking text, since `display` defaults to `"omitted"` there. Opt in with `thinking: {"type": "adaptive", "display": "summarized"}`, which is exactly the following request with the model string swapped.
+On Claude Opus 5, Claude Sonnet 5, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview, thinking is already on: no configuration needed. The first thing most developers need on these models is to see the thinking text, since `display` defaults to `"omitted"` there. Opt in with `thinking: {"type": "adaptive", "display": "summarized"}`, which is exactly the following request with the model string swapped.
 
 On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set `thinking: {type: "adaptive"}` in your request. The following examples do that, set `display: "summarized"` so the thinking text is visible, and use a roomy `max_tokens`:
 
@@ -303,6 +303,8 @@ response = client.messages.create(
 )
 ```
 
+Claude Opus 5 also has thinking on by default and accepts `thinking: {type: "disabled"}` at [effort](/docs/en/build-with-claude/effort) `high` or below. At `xhigh` or `max` effort, thinking cannot be turned off: requests that combine `thinking: {type: "disabled"}` with those effort levels return a 400 error. This restriction applies to Claude Opus 5 and later models and is enforced on each request. With thinking disabled, Claude Opus 5 can occasionally emit tool calls as plain text or include internal XML tags in its visible output; see [Running with thinking disabled](/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#running-with-thinking-disabled) for prompting mitigations.
+
 Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview reject `thinking: {type: "disabled"}`: thinking cannot be turned off on these models.
 
 If your model supports only extended thinking (see the [per-model configuration table](/docs/en/build-with-claude/thinking-troubleshooting#supported-models)), configure it with `type: "enabled"` and a `budget_tokens` value instead; the [Extended thinking](/docs/en/build-with-claude/extended-thinking) page covers that configuration. And if any thinking configuration comes back with a 400 error, [Troubleshooting thinking](/docs/en/build-with-claude/thinking-troubleshooting) matches each error message to its fix.
@@ -314,7 +316,7 @@ If your model supports only extended thinking (see the [per-model configuration 
 The `display` field on the thinking configuration controls how thinking content is returned in API responses. `display` works in both modes: set it alongside `type: "adaptive"` or `type: "enabled"`. It accepts two values:
 
 * `"summarized"`: thinking blocks contain [summarized thinking](#summarized-thinking) text, a readable summary of Claude's reasoning. This is the default on Claude Opus 4.6, Claude Sonnet 4.6, and earlier models.
-* `"omitted"`: thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
+* `"omitted"`: thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Set `display: "omitted"` when your application doesn't surface thinking content to users. The primary benefit is **faster time-to-first-text-token when streaming**: the server skips streaming thinking tokens entirely and delivers only the signature, so the final text response begins streaming sooner.
 
@@ -687,9 +689,9 @@ With the two controls separated this way, pick the one that matches your goal:
 
 ## Thinking with tool use
 
-Thinking works alongside [tool use](/docs/en/agents-and-tools/tool-use/overview), letting Claude reason through tool selection and process tool results. Two constraints apply in both thinking modes:
+Thinking works alongside [tool use](/docs/en/agents-and-tools/tool-use/overview), letting Claude reason through tool selection and process tool results. Two constraints apply:
 
-1. **Tool choice limitation**: tool use with thinking only supports `tool_choice: {"type": "auto"}` (the default) or `tool_choice: {"type": "none"}`. Using `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` results in an error because these options force tool use, which is incompatible with thinking.
+1. **Tool choice limitation (manual mode)**: tool use with manual extended thinking (`thinking: {type: "enabled"}`) only supports `tool_choice: {"type": "auto"}` (the default) or `tool_choice: {"type": "none"}`. Using `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` results in an error because these options force tool use, which is incompatible with manual extended thinking. Adaptive thinking, including on models where thinking is on by default, supports forced tool use.
 2. **Preserving thinking blocks**: when you return tool results, you must pass the thinking blocks from the assistant message back to the API, complete and unmodified. See [Preserving thinking blocks](#preserving-thinking-blocks).
 
 **A tool-use loop is one assistant turn.** From the model's perspective, an assistant turn doesn't complete until Claude finishes its full response, which may include multiple tool calls and results. This whole sequence is a single assistant turn:
@@ -753,7 +755,7 @@ Interleaved thinking lets Claude think between tool calls, reasoning about each 
   Consecutive tool calls do not require interleaved thinking. Claude can chain tool calls with or without interleaved thinking; interleaving changes where thinking blocks appear between tool calls, not whether tool calls can chain.
 </Note>
 
-With adaptive thinking, interleaved thinking is automatic on every model that supports adaptive thinking; no beta header is needed. On Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, and Claude Opus 4.7, reasoning between tool calls always appears in thinking blocks. Claude Haiku 4.5 does not support interleaved thinking. On models using manual extended thinking, interleaving requires a beta header and changes how the thinking budget is counted; [Interleaved thinking in manual mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) covers the per-model rules and platform-specific header behavior.
+With adaptive thinking, interleaved thinking is automatic on every model that supports adaptive thinking; no beta header is needed. On Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7, reasoning between tool calls always appears in thinking blocks. Claude Haiku 4.5 does not support interleaved thinking. On models using manual extended thinking, interleaving requires a beta header and changes how the thinking budget is counted; [Interleaved thinking in manual mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) covers the per-model rules and platform-specific header behavior.
 
 With interleaved thinking, the thinking allocation can span the entire assistant turn rather than a single response. Interleaved thinking is only supported for [tools used through the Messages API](/docs/en/agents-and-tools/tool-use/overview).
 
@@ -886,11 +888,11 @@ To get visibility into the model's reasoning, read the `thinking` blocks describ
 
 ## Limits and feature compatibility
 
-**Sampling parameters.** On Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5, non-default `temperature`, `top_p`, or `top_k` values return a 400 error on every request, regardless of whether thinking is used. On older models, the restriction applies only while thinking is on: `temperature` and `top_k` are incompatible with thinking, and `top_p` is allowed at values between 0.95 and 1.
+**Sampling parameters.** On Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5, non-default `temperature`, `top_p`, or `top_k` values return a 400 error on every request, regardless of whether thinking is used. On older models, the restriction applies only while thinking is on: `temperature` and `top_k` are incompatible with thinking, and `top_p` is allowed at values between 0.95 and 1.
 
-**Response prefill and forced tool use.** You can't pre-fill the assistant response while thinking is on. Forced tool use (`tool_choice: {"type": "any"}` or `{"type": "tool", ...}`) is incompatible with thinking; see [Thinking with tool use](#thinking-with-tool-use).
+**Response prefill and forced tool use.** You can't pre-fill the assistant response while thinking is on. Forced tool use (`tool_choice: {"type": "any"}` or `{"type": "tool", ...}`) is incompatible with manual extended thinking but works with adaptive thinking; see [Thinking with tool use](#thinking-with-tool-use).
 
-**Output limits.** Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens per request. Claude Haiku 4.5, Claude Sonnet 4.5, and Claude Opus 4.5 support up to 64k. On the [Message Batches API](/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](/docs/en/api/beta-headers) raises the limit to 300k for Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6. See the [models overview](/docs/en/about-claude/models/overview) for limits on legacy models.
+**Output limits.** Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 128k output tokens per request. Claude Haiku 4.5, Claude Sonnet 4.5, and Claude Opus 4.5 support up to 64k. On the [Message Batches API](/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](/docs/en/api/beta-headers) raises the limit to 300k for Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, Claude Opus 4.6, and Claude Sonnet 4.6. See the [models overview](/docs/en/about-claude/models/overview) for limits on legacy models.
 
 **Long requests.** The SDKs require streaming when `max_tokens` is greater than 21,333, to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without handling individual events; see [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events). Expect longer response times when thinking is active, since generating thinking blocks adds processing time. For workloads that push thinking above roughly 32k tokens per request, use [batch processing](/docs/en/build-with-claude/batch-processing) to avoid networking issues: such requests can run long enough to hit system timeouts and open connection limits.
 

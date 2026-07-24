@@ -38,7 +38,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
     -H "content-type: application/json" \
     -d '{
       "name": "Coding Assistant",
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "tools": [
         {
           "type": "agent_toolset_20260401",
@@ -53,7 +53,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Coding Assistant
-  model: claude-opus-4-8
+  model: claude-opus-5
   tools:
     - type: agent_toolset_20260401
       default_config:
@@ -65,7 +65,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```python Python
   agent = client.beta.agents.create(
       name="Coding Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       tools=[
           {
               "type": "agent_toolset_20260401",
@@ -80,7 +80,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {
         type: "agent_toolset_20260401",
@@ -93,10 +93,12 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Agents;
+
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Coding Assistant",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -115,7 +117,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -137,10 +139,12 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Coding Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
                   .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -160,9 +164,13 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```
 
   ```php PHP
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolsetDefaultConfigParams;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAlwaysAskPolicy;
+
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               type: 'agent_toolset_20260401',
@@ -177,7 +185,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {
         type: "agent_toolset_20260401",
@@ -209,7 +217,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
     -H "content-type: application/json" \
     -d '{
       "name": "Dev Assistant",
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "mcp_servers": [
         {"type": "url", "name": "github", "url": "https://mcp.example.com/github"}
       ],
@@ -229,7 +237,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Dev Assistant
-  model: claude-opus-4-8
+  model: claude-opus-5
   mcp_servers:
     - type: url
       name: github
@@ -247,7 +255,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```python Python
   agent = client.beta.agents.create(
       name="Dev Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       mcp_servers=[
           {"type": "url", "name": "github", "url": "https://mcp.example.com/github"},
       ],
@@ -267,7 +275,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Dev Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [{ type: "url", name: "github", url: "https://mcp.example.com/github" }],
     tools: [
       { type: "agent_toolset_20260401" },
@@ -283,10 +291,12 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Agents;
+
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Dev Assistant",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       McpServers =
       [
           new() { Type = "url", Name = "github", Url = "https://mcp.example.com/github" },
@@ -314,7 +324,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Dev Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -349,10 +359,12 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Dev Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -385,13 +397,15 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```
 
   ```php PHP
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAlwaysAllowPolicy;
   use Anthropic\Beta\Agents\BetaManagedAgentsMCPToolsetDefaultConfigParams;
   use Anthropic\Beta\Agents\BetaManagedAgentsMCPToolsetParams;
   use Anthropic\Beta\Agents\BetaManagedAgentsURLMCPServerParams;
 
   $agent = $client->beta->agents->create(
       name: 'Dev Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -417,7 +431,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Dev Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [
       {type: "url", name: "github", url: "https://mcp.example.com/github"}
     ],
@@ -460,7 +474,7 @@ Use the `configs` array to override the default for individual tools. The `name`
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Coding Assistant
-  model: claude-opus-4-8
+  model: claude-opus-5
   tools:
     - type: agent_toolset_20260401
       default_config:
@@ -508,6 +522,9 @@ Use the `configs` array to override the default for individual tools. The `name`
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Agents;
+  using Tool = Anthropic.Models.Beta.Agents.Tool;
+
   Tool[] tools =
   [
       new BetaManagedAgentsAgentToolset20260401Params
@@ -550,9 +567,13 @@ Use the `configs` array to override the default for individual tools. The `name`
   		}},
   	},
   }}
+  _ = tools
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+  import java.util.List;
+
   var tools = List.of(
       AgentCreateParams.Tool.ofAgentToolset20260401(
           BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -582,6 +603,10 @@ Use the `configs` array to override the default for individual tools. The `name`
   ```
 
   ```php PHP
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolConfigParams;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolsetDefaultConfigParams;
+  use Anthropic\Beta\Agents\BetaManagedAgentsAlwaysAllowPolicy;
   use Anthropic\Beta\Agents\BetaManagedAgentsAlwaysAskPolicy;
 
   $tools = [

@@ -1,17 +1,18 @@
 # API usage primer for Claude
 
-This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, extended thinking, and nothing else.
+This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
 
 ---
 
 # API usage primer for Claude
 
-> This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, extended thinking, and nothing else.
+> This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
 
 ## Models
 
 ```text wrap
-Smartest model: Claude Opus 4.8: claude-opus-4-8
+For complex agentic coding and enterprise work: Claude Opus 5: claude-opus-5
+Previous Opus model: Claude Opus 4.8: claude-opus-4-8
 Smart model: Claude Sonnet 5: claude-sonnet-5
 For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 ```
@@ -23,7 +24,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 <CodeGroup>
   ```bash CLI
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{"role": "user", "content": "Hello, Claude"}'
   ```
@@ -35,7 +36,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
   message = anthropic.Anthropic(
       api_key=os.environ.get("ANTHROPIC_API_KEY")
   ).messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -54,7 +55,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -71,7 +72,7 @@ The Messages API is stateless, which means that you always send the full convers
 <CodeGroup>
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -87,7 +88,7 @@ The Messages API is stateless, which means that you always send the full convers
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {"role": "user", "content": "Hello, Claude"},
@@ -102,6 +103,10 @@ The Messages API is stateless, which means that you always send the full convers
 ### Prefilling Claude's response
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+
+<Note>
+  Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The examples below use a model that supports prefill.
+</Note>
 
 <CodeGroup>
   ```bash CLI
@@ -147,7 +152,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   curl -sSo ant.jpg "$IMAGE_URL"
 
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -163,7 +168,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
   # Option 2: URL-referenced image
   ant messages create <<YAML
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -188,7 +193,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -207,11 +212,11 @@ Claude can read both text and images in requests. Both `base64` and `url` source
           }
       ],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
 
   # Option 2: URL-referenced image
   message_from_url = anthropic.Anthropic().messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -229,37 +234,41 @@ Claude can read both text and images in requests. Both `base64` and `url` source
           }
       ],
   )
-  print(message_from_url.content[0].text)
+  print(next(block.text for block in message_from_url.content if block.type == "text"))
   ```
 </CodeGroup>
 
-## Extended thinking
+## Thinking
 
-Extended thinking can sometimes help Claude with very hard tasks. On models before Claude Opus 4.7, temperature must be set to 1 when extended thinking is enabled.
+Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](/docs/en/build-with-claude/thinking) (`thinking: {"type": "adaptive"}`): Claude decides when and how much to think, and you steer thinking depth with the [`effort`](/docs/en/build-with-claude/effort) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
-Extended thinking is supported in the following models:
+Temperature must be set to 1 (or left unset) whenever thinking is enabled, on all models. On Claude 4.7 and later models and Claude Mythos Preview, `temperature` is deprecated and only its default value is accepted, even when thinking is off.
 
+Thinking is supported in the following models:
+
+* Claude Opus 5 (claude-opus-5, adaptive thinking only, on by default)
+* Claude Sonnet 5 (`claude-sonnet-5`, adaptive thinking only, on by default)
 * Claude Opus 4.8 (claude-opus-4-8, adaptive thinking only)
-* Claude Opus 4.7 (`claude-opus-4-7`)
-* Claude Opus 4.6 (`claude-opus-4-6`)
-* Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-* Claude Sonnet 4.6 (`claude-sonnet-4-6`)
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
+* Claude Opus 4.7 (`claude-opus-4-7`, adaptive thinking only)
+* Claude Opus 4.6 (`claude-opus-4-6`, adaptive or legacy manual thinking)
+* Claude Sonnet 4.6 (`claude-sonnet-4-6`, adaptive or legacy manual thinking)
+* Claude Opus 4.5 (`claude-opus-4-5-20251101`, legacy manual thinking only)
+* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
+* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
 
 <Note>
-  On Claude Opus 4.8 and Claude Opus 4.7, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`type: adaptive`) instead.
+  On Claude 4.7 and later models, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](/docs/en/build-with-claude/thinking) (`type: adaptive`) instead.
 </Note>
 
-### How extended thinking works
+### How thinking works
 
-When extended thinking is turned on, Claude creates `thinking` content blocks where it outputs its internal reasoning. The API response includes `thinking` content blocks, followed by `text` content blocks.
+When thinking is on, Claude creates `thinking` content blocks where it outputs its internal reasoning. The API response includes `thinking` content blocks, followed by `text` content blocks.
 
 <CodeGroup>
   ```bash CLI
   ant messages create \
     --transform content --format yaml <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -276,7 +285,7 @@ When extended thinking is turned on, Claude creates `thinking` content blocks wh
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       messages=[
@@ -296,11 +305,11 @@ When extended thinking is turned on, Claude creates `thinking` content blocks wh
   ```
 </CodeGroup>
 
-When using manual extended thinking (`type: enabled`), the `budget_tokens` parameter determines the maximum number of tokens Claude is allowed to use for its internal reasoning process. In Claude 4 and later models, this limit applies to full thinking tokens, and not to the summarized output. Larger budgets can improve response quality by enabling more thorough analysis for complex problems. Unless you are using [interleaved thinking](#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
+Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](/docs/en/build-with-claude/thinking) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
 
-## Extended thinking with tool use
+## Thinking with tool use
 
-Extended thinking can be used alongside tool use, allowing Claude to reason through tool selection and results processing.
+Thinking can be used alongside tool use, allowing Claude to reason through tool selection and results processing.
 
 Important limitations:
 
@@ -315,7 +324,7 @@ Important limitations:
   # blocks, signatures intact) as compact JSON.
   ASSISTANT_CONTENT=$(ant messages create \
     --transform content --format jsonl <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -342,7 +351,7 @@ Important limitations:
   # Second request: pass the captured blocks back unchanged as the assistant
   # message. The thinking block must accompany the tool_use block.
   ant messages create <<YAML
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -389,7 +398,7 @@ Important limitations:
 
   # First request - Claude responds with thinking and tool request
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       tools=[weather_tool],
@@ -406,7 +415,7 @@ Important limitations:
 
   # Second request - Include thinking block and tool result
   continuation = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       tools=[weather_tool],
@@ -435,7 +444,13 @@ Important limitations:
 
 ### Interleaved thinking
 
-Extended thinking with tool use in Claude 4 models supports interleaved thinking, which enables Claude to think between tool calls. To enable on Claude 4, 4.5, and Sonnet 4.6 models, add the beta header `interleaved-thinking-2025-05-14` to your API request.
+Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before deciding the next step.
+
+<Info>
+  On models with [adaptive thinking](/docs/en/build-with-claude/thinking) (`thinking: {type: "adaptive"}`), interleaved thinking is automatically enabled. No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
+</Info>
+
+On older models that use manual extended thinking (Claude 4, 4.5, and Sonnet 4.6 models), enable interleaved thinking by adding the beta header `interleaved-thinking-2025-05-14` to your API request:
 
 <CodeGroup>
   ```bash CLI
@@ -528,11 +543,7 @@ Extended thinking with tool use in Claude 4 models supports interleaved thinking
   ```
 </CodeGroup>
 
-With interleaved thinking and ONLY with interleaved thinking (not regular extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.
-
-<Info>
-  For Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, interleaved thinking is automatically enabled when using [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) (`thinking: {type: "adaptive"}`). No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
-</Info>
+With interleaved thinking and ONLY with interleaved thinking (not regular manual extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.
 
 ## Tool use
 
@@ -715,7 +726,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 <CodeGroup>
   ```bash CLI
   ant messages create --stream --format jsonl \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello"}' \
     | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
@@ -729,7 +740,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
   with client.messages.stream(
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello"}],
-      model="claude-opus-4-8",
+      model="claude-opus-5",
   ) as stream:
       for text in stream.text_stream:
           print(text, end="", flush=True)
@@ -769,7 +780,7 @@ For `tool_use` content blocks, deltas are *partial JSON strings*:
 
 #### Thinking delta
 
-When using extended thinking with streaming:
+When using thinking with streaming:
 
 ```json
 {
@@ -786,7 +797,7 @@ When using extended thinking with streaming:
 
 ```sse
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-8", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
+data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}}

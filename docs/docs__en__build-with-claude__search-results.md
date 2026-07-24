@@ -149,7 +149,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
   # Create a message with the tool
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       tools=[knowledge_base_tool],
       tool_choice={"type": "tool", "name": "search_knowledge_base"},
@@ -179,7 +179,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
       # Send the tool result back
       final_response = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=messages,
       )
@@ -244,7 +244,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
   // Create a message with the tool
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledgeBaseTool],
     tool_choice: { type: "tool", name: "search_knowledge_base" },
@@ -275,7 +275,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
     // Send the tool result back
     const finalResponse = await client.messages.create({
-      model: "claude-opus-4-8",
+      model: "claude-opus-5",
       max_tokens: 1024,
       messages
     });
@@ -333,7 +333,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   // Create a message with the tool
   var response = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Tools = tools,
       ToolChoice = new ToolChoiceTool { Name = "search_knowledge_base" },
@@ -362,7 +362,7 @@ Returning search results from your custom tools enables dynamic RAG applications
           // Send the tool result back
           var finalResponse = await client.Messages.Create(new()
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 1024,
               Messages = messages,
           });
@@ -397,7 +397,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   	}
 
   	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:      anthropic.ModelClaudeOpus4_8,
+  		Model:      anthropic.ModelClaudeOpus5,
   		MaxTokens:  1024,
   		Tools:      []anthropic.ToolUnionParam{knowledgeBaseTool},
   		ToolChoice: anthropic.ToolChoiceUnionParam{OfTool: &anthropic.ToolChoiceToolParam{Name: "search_knowledge_base"}},
@@ -436,7 +436,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
   		// Send the tool result back
   		finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  			Model:     anthropic.ModelClaudeOpus4_8,
+  			Model:     anthropic.ModelClaudeOpus5,
   			MaxTokens: 1024,
   			Messages:  messages,
   		})
@@ -508,7 +508,7 @@ Returning search results from your custom tools enables dynamic RAG applications
           .build());
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addTool(knowledgeBaseTool)
           .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
@@ -556,7 +556,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
               // Send the tool result back
               MessageCreateParams finalParams = MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_4_8)
+                  .model(Model.CLAUDE_OPUS_5)
                   .maxTokens(1024L)
                   .messages(messages)
                   .build();
@@ -651,7 +651,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   $response = $client->messages->create(
       maxTokens: 1024,
       messages: $messages,
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       toolChoice: ['type' => 'tool', 'name' => 'search_knowledge_base'],
       tools: [$knowledgeBaseTool],
   );
@@ -684,7 +684,7 @@ Returning search results from your custom tools enables dynamic RAG applications
       $finalResponse = $client->messages->create(
           maxTokens: 1024,
           messages: $messages,
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
       );
       echo $finalResponse;
   } else {
@@ -742,7 +742,7 @@ Returning search results from your custom tools enables dynamic RAG applications
   ]
 
   response = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledge_base_tool],
     tool_choice: { type: "tool", name: "search_knowledge_base" },
@@ -770,7 +770,7 @@ Returning search results from your custom tools enables dynamic RAG applications
 
     # Send the tool result back
     final_response = client.messages.create(
-      model: "claude-opus-4-8",
+      model: "claude-opus-5",
       max_tokens: 1024,
       messages: messages
     )
@@ -797,7 +797,7 @@ You can also provide search results directly in user messages. This is useful fo
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -843,7 +843,7 @@ You can also provide search results directly in user messages. This is useful fo
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -884,7 +884,7 @@ You can also provide search results directly in user messages. This is useful fo
 
   # Provide search results directly in the user message
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           MessageParam(
@@ -931,7 +931,7 @@ You can also provide search results directly in user messages. This is useful fo
 
   // Provide search results directly in the user message
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -979,7 +979,7 @@ You can also provide search results directly in user messages. This is useful fo
   // Provide search results directly in the user message
   var response = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -1015,7 +1015,7 @@ You can also provide search results directly in user messages. This is useful fo
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -1057,7 +1057,7 @@ You can also provide search results directly in user messages. This is useful fo
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addUserMessageOfBlockParams(List.of(
               ContentBlockParam.ofSearchResult(
@@ -1137,7 +1137,7 @@ You can also provide search results directly in user messages. This is useful fo
               ]
           ]
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
   echo json_encode($message, JSON_PRETTY_PRINT);
@@ -1147,7 +1147,7 @@ You can also provide search results directly in user messages. This is useful fo
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1310,7 +1310,7 @@ The following example replays a complete conversation. The first user message ca
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "tools": [
         {
@@ -1391,7 +1391,7 @@ The following example replays a complete conversation. The first user message ca
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   tools:
     - name: search_knowledge_base
@@ -1469,7 +1469,7 @@ The following example replays a complete conversation. The first user message ca
   # Replay a conversation that provides search results both ways: the first
   # user message carries a pre-fetched result, the tool result returns another
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       tools=[knowledge_base_tool],
       messages=[
@@ -1555,7 +1555,7 @@ The following example replays a complete conversation. The first user message ca
   // Replay a conversation that provides search results both ways: the first
   // user message carries a pre-fetched result, the tool result returns another
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledgeBaseTool],
     messages: [
@@ -1628,7 +1628,7 @@ The following example replays a complete conversation. The first user message ca
   // user message carries a pre-fetched result, the tool result returns another
   var response = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Tools =
       [
@@ -1726,7 +1726,7 @@ The following example replays a complete conversation. The first user message ca
   // Replay a conversation that provides search results both ways: the first
   // user message carries a pre-fetched result, the tool result returns another
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
   	Messages: []anthropic.MessageParam{
@@ -1801,7 +1801,7 @@ The following example replays a complete conversation. The first user message ca
       // Replay a conversation that provides search results both ways: the first
       // user message carries a pre-fetched result, the tool result returns another
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024L)
           .addTool(knowledgeBaseTool)
           .addUserMessageOfBlockParams(List.of(
@@ -1927,7 +1927,7 @@ The following example replays a complete conversation. The first user message ca
               ]
           ]
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1951,7 +1951,7 @@ The following example replays a complete conversation. The first user message ca
   # Replay a conversation that provides search results both ways: the first
   # user message carries a pre-fetched result, the tool result returns another
   response = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledge_base_tool],
     messages: [

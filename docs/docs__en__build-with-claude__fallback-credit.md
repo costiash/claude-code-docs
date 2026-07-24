@@ -560,9 +560,9 @@ The following example makes a request that may be refused and redeems the credit
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Credit tokens returned in [Message Batches](/docs/en/build-with-claude/batch-processing) results cannot be redeemed. Redemption applies only to direct Messages API requests.
+Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](/docs/en/build-with-claude/batch-processing) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
 
-The retry model must be one of the refused model's permitted fallback targets. At launch, Claude Fable 5's permitted target is Claude Opus 4.8 (`claude-opus-4-8`).
+The retry model must be one of the refused model's permitted fallback targets. Claude Fable 5's permitted targets are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
 
 <Accordion title="Looking up permitted fallback targets programmatically">
   On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](/docs/en/api/models/list) when the `server-side-fallback-2026-06-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
@@ -620,7 +620,7 @@ The sections below cover edge cases and the complete redemption rules. Most inte
   * **`fallback-credit-*`:** keep this header on both requests. The retry needs it to redeem the token.
 
   <Note>
-    On models that include the 1M token context window by default, such as Claude Fable 5 and Claude Opus 4.8, the `context-1m-2025-08-07` beta header has no effect. The most robust way to keep the two requests identical is to omit that header on both, rather than sending it on one request and not the other.
+    On models that include the 1M token context window by default, such as Claude Fable 5, Claude Opus 5, and Claude Opus 4.8, the `context-1m-2025-08-07` beta header has no effect. The most robust way to keep the two requests identical is to omit that header on both, rather than sending it on one request and not the other.
   </Note>
 </Accordion>
 

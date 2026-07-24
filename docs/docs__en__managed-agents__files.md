@@ -282,6 +282,8 @@ Mount multiple files by adding entries to the `resources` array:
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Sessions;
+
   var resources = new[]
   {
       new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_abc123", MountPath = "/data.csv" },
@@ -299,6 +301,9 @@ Mount multiple files by adding entries to the `resources` array:
   ```
 
   ```java Java
+  import com.anthropic.models.beta.sessions.*;
+  import java.util.List;
+
   var resources = List.of(
       BetaManagedAgentsFileResourceParams.builder()
           .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_abc123").mountPath("/data.csv").build(),
@@ -365,6 +370,9 @@ You can add or remove files from a session after creation using the session reso
     type: "file",
     file_id: file.id,
   });
+  if (resource.type !== "file") {
+    throw new Error(`Unexpected resource type: ${resource.type}`);
+  }
   console.log(resource.id); // "sesrsc_01ABC..."
   ```
 
@@ -455,7 +463,9 @@ List all resources on a session with `resources.list`. To remove a file, call `r
   ```typescript TypeScript
   const listed = await client.beta.sessions.resources.list(session.id);
   for (const entry of listed.data) {
-    console.log(entry.id, entry.type);
+    if (entry.type !== "memory_store") {
+      console.log(entry.id, entry.type);
+    }
   }
 
   await client.beta.sessions.resources.delete(resource.id, {

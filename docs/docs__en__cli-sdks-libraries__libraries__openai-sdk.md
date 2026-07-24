@@ -44,7 +44,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
   )
 
   response = client.chat.completions.create(
-      model="claude-opus-4-8",  # Claude model name
+      model="claude-opus-5",  # Claude model name
       messages=[
           {"role": "system", "content": "You are a helpful assistant."},
           {"role": "user", "content": "Who are you?"},
@@ -64,7 +64,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
   const response = await openai.chat.completions.create({
     messages: [{ role: "user", content: "Who are you?" }],
-    model: "claude-opus-4-8" // Claude model name
+    model: "claude-opus-5" // Claude model name
   });
 
   console.log(response.choices[0].message.content);
@@ -92,9 +92,9 @@ If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned
 
 Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API parameters, but one distinct difference is the handling of system / developer prompts. These two prompts can be put throughout a chat conversation via OpenAI. Since Anthropic only supports an initial system message, the API takes all system/developer messages and concatenates them together with a single newline (`\n`) in between them. This full string is then supplied as a single system message at the start of the messages.
 
-### Extended thinking support
+### Thinking support
 
-You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking) capabilities by adding the `thinking` parameter. While this improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full extended thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
+You can enable [thinking](/docs/en/build-with-claude/thinking) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. While thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
 <CodeGroup>
   ```python Python

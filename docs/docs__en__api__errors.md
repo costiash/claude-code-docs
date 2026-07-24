@@ -160,7 +160,12 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   }
 
   fmt.Println("Request ID:", response.Header.Get("request-id"))
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
@@ -280,7 +285,7 @@ If you don't need to process events incrementally, the SDKs can consume the stre
   ) as stream:
       message = stream.get_final_message()
 
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -335,13 +340,19 @@ If you don't need to process events incrementally, the SDKs can consume the stre
   	log.Fatal(err)
   }
 
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.helpers.MessageAccumulator;
+  import com.anthropic.models.messages.ContentBlock;
   import com.anthropic.models.messages.Message;
   import com.anthropic.models.messages.MessageCreateParams;
   import com.anthropic.models.messages.Model;
@@ -361,7 +372,11 @@ If you don't need to process events incrementally, the SDKs can consume the stre
       }
 
       Message message = accumulator.message();
-      message.content().get(0).text().ifPresent(textBlock -> IO.println(textBlock.text()));
+      message.content().stream()
+              .filter(ContentBlock::isText)
+              .findFirst()
+              .flatMap(ContentBlock::text)
+              .ifPresent(textBlock -> IO.println(textBlock.text()));
   }
   ```
 
@@ -381,7 +396,7 @@ If you don't need to process events incrementally, the SDKs can consume the stre
       $accumulator->accumulate($event);
   }
 
-  echo $accumulator->message()->content[0]->text;
+  echo array_find($accumulator->message()->content, static fn ($block): bool => $block->type === 'text')->text;
   ```
 
   ```ruby Ruby
@@ -393,7 +408,7 @@ If you don't need to process events incrementally, the SDKs can consume the stre
     messages: [{ role: "user", content: "Write a detailed analysis..." }]
   ).accumulated_message
 
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 
@@ -403,14 +418,14 @@ See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-mess
 
 ### Prefill not supported
 
-Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
+Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing) do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
 ```json
 {
   "type": "error",
   "error": {
     "type": "invalid_request_error",
-    "message": "Prefilling assistant messages is not supported for this model."
+    "message": "This model does not support assistant message prefill. The conversation must end with a user message."
   }
 }
 ```
@@ -429,17 +444,17 @@ With tool use, every `thinking` and `redacted_thinking` block from the assistant
 
 ### Extended thinking not supported
 
-Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and [Claude Mythos 5](https://anthropic.com/glasswing) have removed extended thinking. Sending `thinking: {"type": "enabled"}` to any of these models returns a 400 `invalid_request_error`:
+Claude 4.7 and later models have removed extended thinking. Sending `thinking: {"type": "enabled"}` to any of these models returns a 400 `invalid_request_error`:
 
 ```text wrap
 "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
 ```
 
-Use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) instead. [Migrating to adaptive thinking](/docs/en/build-with-claude/extended-thinking#migrating-to-adaptive-thinking) shows the parameter mapping, and [Troubleshooting thinking](/docs/en/build-with-claude/thinking-troubleshooting#error-thinking-type-enabled) covers the symptom-first fix.
+Use [adaptive thinking](/docs/en/build-with-claude/thinking) instead. [Migrating to adaptive thinking](/docs/en/build-with-claude/extended-thinking#migrating-to-adaptive-thinking) shows the parameter mapping, and [Troubleshooting thinking](/docs/en/build-with-claude/thinking-troubleshooting#error-thinking-type-enabled) covers the symptom-first fix.
 
 ### Adaptive thinking not supported
 
-Models that support only extended thinking (Claude Opus 4.5, Claude Haiku 4.5, Claude Sonnet 4.5, and earlier Claude 4 models) reject `thinking: {"type": "adaptive"}` with a 400 `invalid_request_error`:
+Models that support only extended thinking (Claude 4.5 and earlier models) reject `thinking: {"type": "adaptive"}` with a 400 `invalid_request_error`:
 
 ```text wrap
 adaptive thinking is not supported on this model

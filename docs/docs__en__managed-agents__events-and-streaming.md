@@ -2547,7 +2547,7 @@ To resume a session, send a `user.message` event to it as usual:
 ### Sending system messages
 
 <Note>
-  `system.message` is currently supported by Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and Claude Mythos 5. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error; subagent models are not checked, because `system.message` lands on the primary thread only.
+  `system.message` is currently supported by Claude Opus 4.8, Claude Fable 5, Claude Mythos 5, and Claude Opus 5. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error; subagent models are not checked, because `system.message` lands on the primary thread only.
 </Note>
 
 Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.

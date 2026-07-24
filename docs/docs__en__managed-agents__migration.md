@@ -32,7 +32,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   messages = [{"role": "user", "content": task}]
   while True:
       response = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           messages=messages,
           tools=tools,
@@ -61,7 +61,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   const messages: Anthropic.MessageParam[] = [{ role: "user", content: task }];
   while (true) {
     const response = await client.messages.create({
-      model: "claude-opus-4-8",
+      model: "claude-opus-5",
       max_tokens: 1024,
       messages,
       tools
@@ -94,7 +94,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   {
       var response = await client.Messages.Create(new()
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
           Messages = messages,
           Tools = tools,
@@ -129,7 +129,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   }
   for {
   	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_8,
+  		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 1024,
   		Messages:  messages,
   		Tools:     tools,
@@ -160,7 +160,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
       .build());
   while (true) {
       var response = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .messages(messages)
           .tools(tools)
@@ -189,7 +189,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   $messages = [['role' => 'user', 'content' => $task]];
   while (true) {
       $response = $client->messages->create(
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           maxTokens: 1024,
           messages: $messages,
           tools: $tools,
@@ -220,7 +220,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   messages = [{ role: "user", content: task }]
   loop do
     response = client.messages.create(
-      model: "claude-opus-4-8",
+      model: "claude-opus-5",
       max_tokens: 1024,
       messages: messages,
       tools: tools
@@ -256,7 +256,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
       -H "anthropic-beta: managed-agents-2026-04-01" \
       --json '{
         "name": "Task Runner",
-        "model": "claude-opus-4-8",
+        "model": "claude-opus-5",
         "tools": [{"type": "agent_toolset_20260401"}]
       }'
   )
@@ -303,7 +303,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   ```bash CLI
   { read -r _ agent_id; read -r _ agent_version; } < <(ant beta:agents create \
     --name "Task Runner" \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --tool '{type: agent_toolset_20260401}' \
     --transform '{id,version}' --format yaml)
 
@@ -330,7 +330,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   ```python Python
   agent = client.beta.agents.create(
       name="Task Runner",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       tools=[{"type": "agent_toolset_20260401"}],
   )
 
@@ -352,7 +352,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Task Runner",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [{ type: "agent_toolset_20260401" }]
   });
 
@@ -383,7 +383,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Task Runner",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -431,7 +431,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   		Name: "Task Runner",
   		Model: anthropic.BetaManagedAgentsModelConfigParams{
-  			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+  			ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
   		},
   		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -492,7 +492,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
       var agent = client.beta().agents().create(
           AgentCreateParams.builder()
               .name("Task Runner")
-              .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+              .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
               .addTool(
                   BetaManagedAgentsAgentToolset20260401Params.builder()
                       .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -535,7 +535,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Task Runner',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               type: 'agent_toolset_20260401',
@@ -574,7 +574,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Task Runner",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [{type: "agent_toolset_20260401"}]
   )
 
@@ -636,7 +636,7 @@ async def get_weather(args: dict) -> dict:
 
 
 options = ClaudeAgentOptions(
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     system_prompt="You are a concise weather assistant.",
     mcp_servers={
         "weather": create_sdk_mcp_server("weather", "1.0", tools=[get_weather])
@@ -658,7 +658,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="weather-agent",
-    model="claude-opus-4-8",
+    model="claude-opus-5",
     system="You are a concise weather assistant.",
     tools=[
         {
@@ -753,28 +753,28 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
-    --json "$(jq -n --argjson version "$AGENT_VERSION" '{version: $version, model: "claude-opus-4-8"}')"
+    --json "$(jq -n --argjson version "$AGENT_VERSION" '{version: $version, model: "claude-opus-5"}')"
   ```
 
   ```bash CLI
   ant beta:agents update \
     --agent-id "$AGENT_ID" \
     --version "$AGENT_VERSION" \
-    --model claude-opus-4-8
+    --model claude-opus-5
   ```
 
   ```python Python
   client.beta.agents.update(
       agent.id,
       version=agent.version,
-      model="claude-opus-4-8",
+      model="claude-opus-5",
   )
   ```
 
   ```typescript TypeScript
   await client.beta.agents.update(agent.id, {
     version: agent.version,
-    model: "claude-opus-4-8"
+    model: "claude-opus-5"
   });
   ```
 
@@ -782,7 +782,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
   await client.Beta.Agents.Update(agent.ID, new()
   {
       Version = agent.Version,
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
   });
   ```
 
@@ -790,7 +790,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
   _, err = client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
   	Version: agent.Version,
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
   	},
   })
   if err != nil {
@@ -803,7 +803,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
       agent.id(),
       AgentUpdateParams.builder()
           .version(agent.version())
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .build()
   );
   ```
@@ -812,7 +812,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
   $client->beta->agents->update(
       $agent->id,
       version: $agent->version,
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
   ```
 
@@ -820,7 +820,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
   client.beta.agents.update(
     agent.id,
     version: agent.version,
-    model: "claude-opus-4-8"
+    model: "claude-opus-5"
   )
   ```
 </CodeGroup>

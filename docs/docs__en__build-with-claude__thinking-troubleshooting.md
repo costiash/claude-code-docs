@@ -14,26 +14,28 @@ This page covers the most common failures when configuring thinking or round-tri
 
 Most thinking configuration errors are a mismatch between the `thinking.type` value in the request and what the model supports. On current models, thinking runs as `thinking: {type: "adaptive"}`, and on the newest it is on by default. Some earlier models instead use [extended thinking](/docs/en/build-with-claude/extended-thinking), a legacy manual mode configured as `thinking: {type: "enabled", budget_tokens: N}`.
 
-Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on Claude Opus 4.6 and Claude Sonnet 4.6 (it still works there). Claude Opus 4.7, Claude Opus 4.8, Claude Sonnet 5, Claude Fable 5, and Claude Mythos 5 do not support it and reject requests that use it, returning a 400 error. On earlier models, including Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5, extended thinking is the only thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](/docs/en/build-with-claude/thinking-steering-and-cost) instead.
+Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on the Claude 4.6 models (requests using it still succeed). Claude 4.7 and later models do not support it and reject requests that use it, returning a 400 error. On Claude 4.5 and earlier models that support thinking, extended thinking is the only available thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](/docs/en/build-with-claude/thinking) instead.
 
 The table lists what each model supports, what it defaults to, and which `thinking.type` values it rejects with a 400 error; any value not listed as rejected is accepted.
 
-| Model                        | Thinking types                   | Default   | Rejected with 400         |
-| ---------------------------- | -------------------------------- | --------- | ------------------------- |
-| Claude Fable 5               | Adaptive only                    | Always on | `"enabled"`, `"disabled"` |
-| Claude Mythos 5              | Adaptive only                    | Always on | `"enabled"`, `"disabled"` |
-| Claude Mythos Preview        | Adaptive, extended               | Always on | `"disabled"`              |
-| Claude Opus 4.8              | Adaptive only                    | Off       | `"enabled"`               |
-| Claude Opus 4.7              | Adaptive only                    | Off       | `"enabled"`               |
-| Claude Sonnet 5              | Adaptive only                    | On        | `"enabled"`               |
-| Claude Opus 4.6              | Adaptive, extended (deprecated)1 | Off       | None                      |
-| Claude Sonnet 4.6            | Adaptive, extended (deprecated)1 | Off       | None                      |
-| Claude Opus 4.5              | Extended only                    | Off       | `"adaptive"`              |
-| Claude Haiku 4.5             | Extended only                    | Off       | `"adaptive"`              |
-| Claude Sonnet 4.5            | Extended only                    | Off       | `"adaptive"`              |
-| Claude Opus 4.1 (deprecated) | Extended only                    | Off       | `"adaptive"`              |
+| Model                        | Thinking types                   | Default   | Rejected with 400          |
+| ---------------------------- | -------------------------------- | --------- | -------------------------- |
+| Claude Fable 5               | Adaptive only                    | Always on | `"enabled"`, `"disabled"`  |
+| Claude Mythos 5              | Adaptive only                    | Always on | `"enabled"`, `"disabled"`  |
+| Claude Mythos Preview        | Adaptive, extended               | Always on | `"disabled"`               |
+| Claude Opus 5                | Adaptive only                    | On        | `"enabled"`, `"disabled"`2 |
+| Claude Opus 4.8              | Adaptive only                    | Off       | `"enabled"`                |
+| Claude Opus 4.7              | Adaptive only                    | Off       | `"enabled"`                |
+| Claude Sonnet 5              | Adaptive only                    | On        | `"enabled"`                |
+| Claude Opus 4.6              | Adaptive, extended (deprecated)1 | Off       | None                       |
+| Claude Sonnet 4.6            | Adaptive, extended (deprecated)1 | Off       | None                       |
+| Claude Opus 4.5              | Extended only                    | Off       | `"adaptive"`               |
+| Claude Haiku 4.5             | Extended only                    | Off       | `"adaptive"`               |
+| Claude Sonnet 4.5            | Extended only                    | Off       | `"adaptive"`               |
+| Claude Opus 4.1 (deprecated) | Extended only                    | Off       | `"adaptive"`               |
 
-*1 `enabled` and `budget_tokens` still work on these models but are deprecated; use adaptive thinking instead.*
+*1 `enabled` and `budget_tokens` still work on these models but are deprecated; use adaptive thinking instead.*\
+*2 Claude Opus 5 accepts `"disabled"` at [effort](/docs/en/build-with-claude/effort) `high` or below; combining it with effort `xhigh` or `max` returns a 400 error. This restriction applies to Claude Opus 5 and later models and is enforced on each request.*
 
 Models marked `Always on` cannot turn thinking off. Models marked `On` default to thinking but accept `thinking: {type: "disabled"}`.
 
@@ -62,6 +64,8 @@ The request fails with a 400 error whose message reads:
 This happens on models where thinking is always on: Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview reject `"disabled"`. On Claude Fable 5 and Claude Mythos 5, the error text's suggestion of `"thinking.type.enabled"` does not apply either: those models reject it too.
 
 Omit the `thinking` parameter; these models think without any configuration. If your goal was to keep thinking text out of responses, use `display: "omitted"` instead of disabling thinking; see [Controlling thinking display](/docs/en/build-with-claude/thinking#controlling-thinking-display).
+
+A 400 error on `"disabled"` can also occur on Claude Opus 5, which accepts `thinking: {type: "disabled"}` only at [effort](/docs/en/build-with-claude/effort) `high` or below: combining it with effort `xhigh` or `max` is rejected. Lower the effort level, or leave thinking on.
 
 ## A 400 error says adaptive thinking is not supported
 
@@ -102,6 +106,14 @@ Some responses contain no `thinking` block at all, even though thinking is confi
 This is normal in adaptive mode: Claude skips thinking on requests it judges simple enough to answer directly.
 
 If you want thinking more often or more deeply, raise `effort` or steer with prompting; see [Steering how often Claude thinks](/docs/en/build-with-claude/thinking-steering-and-cost#tuning-thinking-behavior).
+
+## Tool calls or XML tags appear in the text output
+
+A response occasionally writes a tool call into its text instead of emitting a `tool_use` block, or includes `<thinking>` or other internal XML tags in its visible text. A leaked tool call never runs, and in agentic loops the leaked text stays in the conversation history, so later turns are affected as well.
+
+This happens on Claude Opus 5 when thinking is disabled, most commonly on tool-heavy workloads such as search. System-prompt rules instructing the model not to think or not to reason increase the tag leakage.
+
+Re-enable thinking (the default) and use lower `effort` levels to control token cost instead. If your integration must keep thinking disabled, apply the prompting mitigations in [Running with thinking disabled](/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#running-with-thinking-disabled).
 
 ## The response stops with `stop_reason: "max_tokens"`
 

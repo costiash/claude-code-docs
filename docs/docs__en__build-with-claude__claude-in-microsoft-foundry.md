@@ -4,7 +4,7 @@ Access Claude models through Microsoft Foundry with Azure-native endpoints and a
 
 ---
 
-This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use the latest Claude models, including Claude Opus 4.8 and Claude Sonnet 5, and features such as the [1M-token context window](/docs/en/build-with-claude/context-windows), while managing costs through your Azure subscription.
+This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use the latest Claude models, including Claude Opus 5, Claude Opus 4.8, and Claude Sonnet 5, and features such as the [1M-token context window](/docs/en/build-with-claude/context-windows), while managing costs through your Azure subscription.
 
 Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Claude in Microsoft Foundry pricing](/docs/en/about-claude/pricing#claude-in-microsoft-foundry-pricing) for details.
 
@@ -140,7 +140,7 @@ After creating your resource, deploy a Claude model to make it available for API
 
 1. Sign in to the Foundry portal. From the portal homepage, select **Discover** in the upper-right navigation, then **Models** in the left pane to open the model catalog.
 
-2. Search for and select a Claude model (for example, claude-opus-4-8). Each model appears once in the catalog regardless of how many hosting options it supports.
+2. Search for and select a Claude model (for example, claude-opus-5). Each model appears once in the catalog regardless of how many hosting options it supports.
 
 3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure for models available in both hosting options.
 
@@ -194,7 +194,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
     -H "api-key: YOUR_AZURE_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello!"}
@@ -208,7 +208,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
 
   ant messages create \
     --base-url https://example-resource.services.ai.azure.com/anthropic \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello!"}' \
     --transform content
@@ -224,7 +224,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   )
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello!"}],
   )
@@ -240,7 +240,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   });
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   });
@@ -260,7 +260,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
-      Model = "claude-opus-4-8",
+      Model = "claude-opus-5",
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello!" }],
   });
@@ -299,7 +299,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   	)
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  		Model:     "claude-opus-5",
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
@@ -325,7 +325,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model("claude-opus-4-8")
+          .model("claude-opus-5")
           .maxTokens(1024)
           .addUserMessage("Hello!")
           .build();
@@ -349,9 +349,9 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
       messages: [
           ['role' => 'user', 'content' => 'Hello!']
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
-  echo $message->content[0]->text;
+  echo array_find($message->content, fn ($block) => $block->type === 'text')->text;
   ```
 
   ```ruby Ruby
@@ -370,12 +370,12 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello!"}]
   )
 
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 
@@ -404,7 +404,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello!"}
@@ -437,7 +437,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
 
   # Make request
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello!"}],
   )
@@ -460,7 +460,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
 
   // Make request
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   });
@@ -481,7 +481,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
-      Model = "claude-opus-4-8",
+      Model = "claude-opus-5",
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello!" }],
   });
@@ -524,7 +524,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   	)
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-4-8",
+  		Model:     "claude-opus-5",
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
@@ -560,7 +560,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model("claude-opus-4-8")
+          .model("claude-opus-5")
           .maxTokens(1024)
           .addUserMessage("Hello!")
           .build();
@@ -589,9 +589,9 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
       messages: [
           ['role' => 'user', 'content' => 'Hello!']
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
-  echo $message->content[0]->text;
+  echo array_find($message->content, fn ($block) => $block->type === 'text')->text;
   ```
 
   ```ruby Ruby
@@ -613,12 +613,12 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   )
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello!"}]
   )
 
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 
@@ -632,7 +632,7 @@ Claude in Microsoft Foundry supports most Claude features. You can find all the 
 
 ### Context window
 
-Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
+Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
 
 ### Claude features not supported for Claude in Microsoft Foundry
 
@@ -672,6 +672,7 @@ The following Claude models are available through Foundry:
 | Model                                                | Default deployment name | Hosted on Azure | Hosted on Anthropic |
 | ---------------------------------------------------- | ----------------------- | --------------- | ------------------- |
 | Claude Fable 5                                       | claude-fable-5          |                 | ✓                   |
+| Claude Opus 5                                        | claude-opus-5           | ✓               | ✓                   |
 | Claude Opus 4.8                                      | claude-opus-4-8         | ✓               | ✓                   |
 | Claude Opus 4.7                                      | claude-opus-4-7         |                 | ✓                   |
 | Claude Opus 4.6                                      | claude-opus-4-6         |                 | ✓                   |
@@ -750,7 +751,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-* **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-4-8).
+* **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-5).
 * **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`
