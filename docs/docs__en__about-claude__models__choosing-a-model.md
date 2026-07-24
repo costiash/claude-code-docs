@@ -9,7 +9,7 @@ Selecting the optimal Claude model for your application involves balancing three
 When choosing a Claude model, consider first evaluating these factors:
 
 * **Capabilities:** What specific features or capabilities will you need the model to have to meet your needs?
-* **Speed:** How quickly does the model need to respond in your application? Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7 support [fast mode](/docs/en/build-with-claude/fast-mode) (research preview), which delivers up to 2.5x higher output speed at premium pricing. Fast mode on Claude Opus 4.7 is deprecated, with removal on July 24, 2026.
+* **Speed:** How quickly does the model need to respond in your application? Claude Opus 5 and Claude Opus 4.8 support [fast mode](/docs/en/build-with-claude/fast-mode) (research preview), which delivers up to 2.5x higher output speed at premium pricing.
 * **Cost:** What's your budget for both development and production usage?
 * **Effort:** Recent Opus and Sonnet models support an [effort parameter](/docs/en/build-with-claude/effort) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
 

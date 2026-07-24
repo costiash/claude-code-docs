@@ -17,6 +17,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 * Claude Opus 5 supports the full [effort](/docs/en/build-with-claude/effort) ladder (`low`, `medium`, `high`, `xhigh`, `max`), including the `max` level for capability-critical work.
 * Mid-conversation tool changes are now in beta on Claude Opus 5: add or remove tools between turns of a conversation while preserving the prompt cache. Include the `mid-conversation-tool-changes-2026-07-01` beta header in your requests.
 * The `fallbacks` parameter now supports a `"default"` mode, which applies Anthropic's recommended fallback models by refusal category. Server-side fallback is in beta, and the `"default"` mode requires the `server-side-fallback-2026-07-01` beta header. See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback).
+* We've removed [fast mode](/docs/en/build-with-claude/fast-mode) for Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` now return an error; unlike Claude Opus 4.6, they do not fall back to standard speed. Claude Opus 4.7 itself remains available at standard speed. To continue using fast mode, migrate to [Claude Opus 5](/docs/en/about-claude/models/migration-guide#migrating-from-claude-opus-47) or Claude Opus 4.8. Read more in [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models).
 
 ### July 22, 2026
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-24T18:49:23Z",
+  "generated_at": "2026-07-24T21:41:27Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -140,7 +140,7 @@
         "when",
         "terminal"
       ],
-      "word_count": 7400,
+      "word_count": 7385,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -224,7 +224,7 @@
         "tokens",
         "limits"
       ],
-      "word_count": 3696,
+      "word_count": 3709,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24411,
+      "word_count": 24422,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -868,7 +868,7 @@
         "file",
         "skill"
       ],
-      "word_count": 9162,
+      "word_count": 9198,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1064,7 +1064,7 @@
         "create",
         "add"
       ],
-      "word_count": 8743,
+      "word_count": 8744,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1316,7 +1316,7 @@
         "most",
         "performance"
       ],
-      "word_count": 892,
+      "word_count": 875,
       "file_path": "docs/docs__en__about-claude__models__choosing-a-model.md"
     },
     "/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5": {
@@ -1367,12 +1367,12 @@
         "earlier",
         "migrating",
         "remove",
-        "update",
         "error",
+        "update",
         "same",
         "than"
       ],
-      "word_count": 16608,
+      "word_count": 16682,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/model-ids-and-versions": {
@@ -1512,7 +1512,7 @@
         "note",
         "models"
       ],
-      "word_count": 4472,
+      "word_count": 4432,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/classification": {
@@ -36750,7 +36750,7 @@
         "opus",
         "request"
       ],
-      "word_count": 3093,
+      "word_count": 3099,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -45332,24 +45332,24 @@
         "mode",
         "claude",
         "opus",
-        "speed",
-        "standard",
-        "pricing",
         "note",
+        "speed",
+        "pricing",
+        "standard",
         "rate",
         "tokens",
         "available",
-        "requests",
         "output",
-        "model",
-        "per",
+        "requests",
+        "models",
         "api",
+        "error",
         "when",
         "card",
-        "supported",
-        "error"
+        "per",
+        "supported"
       ],
-      "word_count": 2734,
+      "word_count": 2648,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -45573,7 +45573,7 @@
         "message",
         "input"
       ],
-      "word_count": 16535,
+      "word_count": 16519,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -47685,7 +47685,6 @@
         "tools",
         "codegroup",
         "version",
-        "claude",
         "agents",
         "new",
         "reference",
@@ -47693,6 +47692,7 @@
         "card",
         "configuration",
         "model",
+        "claude",
         "session",
         "see",
         "level",
@@ -47701,7 +47701,7 @@
         "sessions",
         "managed"
       ],
-      "word_count": 2089,
+      "word_count": 2075,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-sandboxes-reference": {
@@ -48457,7 +48457,7 @@
         "new",
         "support"
       ],
-      "word_count": 8798,
+      "word_count": 8857,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

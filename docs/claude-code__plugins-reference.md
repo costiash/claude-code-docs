@@ -523,6 +523,7 @@ The same field can appear in a plugin's marketplace entry, where it takes preced
 | `skills`                | string\|array         | Custom skill directories containing `<name>/SKILL.md`. Adds to the default `skills/` scan. See [Path behavior rules](#path-behavior-rules) for the marketplace-root exception | `"./custom/skills/"`                                 |
 | `commands`              | string\|array         | Custom flat `.md` skill files or directories (replaces default `commands/`)                                                                                                   | `"./custom/cmd.md"` or `["./cmd1.md"]`               |
 | `agents`                | string\|array         | Custom agent files (replaces default `agents/`)                                                                                                                               | `"./custom/agents/reviewer.md"`                      |
+| `workflows`             | string\|array         | Custom [workflow](/docs/en/workflows) script files or directories (replaces default `workflows/`)                                                                                  | `"./custom/workflows/"`                              |
 | `hooks`                 | string\|array\|object | Hook config paths or inline config                                                                                                                                            | `"./my-extra-hooks.json"`                            |
 | `mcpServers`            | string\|array\|object | MCP config paths or inline config                                                                                                                                             | `"./my-extra-mcp-config.json"`                       |
 | `outputStyles`          | string\|array         | Custom output style files/directories (replaces default `output-styles/`)                                                                                                     | `"./styles/"`                                        |
@@ -621,7 +622,7 @@ The `server` field is required and must match a key in the plugin's `mcpServers`
 
 Whether a custom path replaces or extends the plugin's default directory depends on the field:
 
-* **Replaces the default**: `commands`, `agents`, `outputStyles`, `experimental.themes`, `experimental.monitors`. For example, when the manifest specifies `commands`, the default `commands/` directory is not scanned. To keep the default and add more, list it explicitly: `"commands": ["./commands/", "./extras/"]`
+* **Replaces the default**: `commands`, `agents`, `workflows`, `outputStyles`, `experimental.themes`, `experimental.monitors`. For example, when the manifest specifies `commands`, the default `commands/` directory is not scanned. To keep the default and add more, list it explicitly: `"commands": ["./commands/", "./extras/"]`
 * **Adds to the default**: `skills`. The default `skills/` directory is always scanned, and directories listed in `skills` are loaded alongside it. Exception: for a [marketplace entry whose `source` resolves to the marketplace root](/docs/en/plugin-marketplaces#advanced-plugin-entries), declaring specific subdirectories replaces the default `skills/` scan
 * **Own merge rules**: [hooks](#hooks), [MCP servers](#mcp-servers), and [LSP servers](#lsp-servers). See each section for how multiple sources combine
 
@@ -803,6 +804,8 @@ enterprise-plugin/
 │   ├── security-reviewer.md
 │   ├── performance-tester.md
 │   └── compliance-checker.md
+├── workflows/                # Workflow scripts
+│   └── release-audit.js
 ├── output-styles/            # Output style definitions
 │   └── terse.md
 ├── themes/                   # Color theme definitions
@@ -826,7 +829,7 @@ enterprise-plugin/
 ```
 
 <Warning>
-  The `.claude-plugin/` directory contains the `plugin.json` file. All other directories (commands/, agents/, skills/, output-styles/, themes/, monitors/, hooks/) must be at the plugin root, not inside `.claude-plugin/`.
+  The `.claude-plugin/` directory contains the `plugin.json` file. All other directories (commands/, agents/, skills/, workflows/, output-styles/, themes/, monitors/, hooks/) must be at the plugin root, not inside `.claude-plugin/`.
 </Warning>
 
 A `CLAUDE.md` file at the plugin root is not loaded as project context. Plugins contribute context through skills, agents, and hooks rather than CLAUDE.md. To ship instructions that load into Claude's context, put them in a [skill](#skills).
@@ -839,6 +842,7 @@ A `CLAUDE.md` file at the plugin root is not loaded as project context. Plugins 
 | **Skills**        | `skills/`                    | Skills with `<name>/SKILL.md` structure                                                                                                                                                    |
 | **Commands**      | `commands/`                  | Skills as flat Markdown files. Use `skills/` for new plugins                                                                                                                               |
 | **Agents**        | `agents/`                    | Subagent Markdown files                                                                                                                                                                    |
+| **Workflows**     | `workflows/`                 | [Workflow](/docs/en/workflows) script files                                                                                                                                                     |
 | **Output styles** | `output-styles/`             | Output style definitions                                                                                                                                                                   |
 | **Themes**        | `themes/`                    | Color theme definitions                                                                                                                                                                    |
 | **Hooks**         | `hooks/hooks.json`           | Hook configuration                                                                                                                                                                         |

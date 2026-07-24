@@ -157,7 +157,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
 </CodeGroup>
 
 <Tip>
-  To use Claude Opus 5, Claude Opus 4.8, or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for the removal date and behavior.
+  To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for supported models.
 </Tip>
 
 <Tip>

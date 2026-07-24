@@ -869,6 +869,8 @@ The following items are not breaking changes; they describe behavior differences
 
 7. **Lower prompt caching minimum:** The minimum cacheable prompt length on Claude Opus 5 is 512 tokens, lower than on Claude Opus 4.7. Prompts that were too short to cache on Claude Opus 4.7 can now create cache entries, with no code changes required. See [Prompt caching](/docs/en/build-with-claude/prompt-caching#cache-limitations) for per-model minimums.
 
+8. **Fast mode:** Claude Opus 5 supports [fast mode](/docs/en/build-with-claude/fast-mode) (research preview); fast mode is not available on Claude Opus 4.7, where requests with `speed: "fast"` return an error. The `speed: "fast"` parameter and `fast-mode-2026-02-01` beta header work unchanged on Claude Opus 5.
+
 #### Recommended changes
 
 These are not required but will improve your experience:
@@ -894,6 +896,7 @@ These are not required but will improve your experience:
 * Review prompts near the caching minimum: prompts of 512 tokens or more can now create cache entries.
 * If you use [web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool), plan an alternative: it is not available on Claude Opus 5.
 * If your organization has a [Priority Tier](/docs/en/api/service-tiers#supported-models) commitment, note that Priority Tier is not supported on Claude Opus 5.
+* If you used fast mode on Claude Opus 4.7, no request changes are needed beyond the model ID: `speed: "fast"` and the `fast-mode-2026-02-01` beta header work unchanged on Claude Opus 5.
 * For agentic workloads, consider [task budgets](/docs/en/build-with-claude/task-budgets) (beta) and mid-conversation tool changes (beta).
 * Re-tune length and verbosity prompts, and remove verification and self-check instructions carried over from prompts tuned for earlier models.
 * Re-baseline cost and latency at your chosen effort level.
