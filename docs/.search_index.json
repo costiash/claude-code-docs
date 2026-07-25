@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-25T18:36:16Z",
+  "generated_at": "2026-07-25T21:33:38Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -826,11 +826,11 @@
         "code",
         "claude",
         "when",
+        "string",
+        "url",
         "see",
         "add",
         "directory",
-        "string",
-        "url",
         "marketplaces",
         "repository",
         "github",
@@ -840,7 +840,7 @@
         "entry",
         "path"
       ],
-      "word_count": 8029,
+      "word_count": 8045,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
