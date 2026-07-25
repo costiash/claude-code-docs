@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-25T00:53:52Z",
+  "generated_at": "2026-07-25T04:18:10Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "model",
         "commands"
       ],
-      "word_count": 71224,
+      "word_count": 71119,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -942,17 +942,17 @@
         "permission",
         "when",
         "only",
-        "run",
-        "access",
-        "command",
         "mode",
-        "rules",
+        "access",
+        "run",
+        "command",
         "allow",
+        "rules",
+        "set",
         "directory",
-        "managed",
-        "network"
+        "managed"
       ],
-      "word_count": 5796,
+      "word_count": 5840,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
