@@ -585,9 +585,19 @@ Fields that run in a shell reject `${user_config.*}`: substituting a configured 
 
 Before v2.1.207, these fields substituted `${user_config.KEY}` values; update plugins that relied on this.
 
-Non-sensitive values are stored under the [`pluginConfigs`](/docs/en/settings#pluginconfigs) key in `settings.json` as `pluginConfigs[<plugin-id>].options`. {/* min-version: 2.1.207 */}Claude Code writes the key to user settings and reads it back from user settings, the `--settings` flag, and managed settings only; entries in a project's `.claude/settings.json` or `.claude/settings.local.json` are ignored. Before v2.1.207, Claude Code also read project and local settings.
+Non-sensitive values are stored under the [`pluginConfigs`](/docs/en/settings#pluginconfigs) key in your user `settings.json` as `pluginConfigs[<plugin-id>].options`.
 
 Sensitive values go to the macOS Keychain, or to `~/.claude/.credentials.json` on platforms where no supported keychain is available. Keychain storage is shared with OAuth tokens and has an approximately 2 KB total limit, so keep sensitive values small.
+
+Claude Code reads all `pluginConfigs` values from only three settings sources:
+
+* **User settings**: `~/.claude/settings.json`, the file the enable-time prompt writes to
+* **`--settings`**: the CLI flag or SDK inline settings
+* **Managed settings**: [organization-controlled policy](/docs/en/permissions#managed-settings)
+
+When more than one source sets the same key, managed settings take precedence, then `--settings`, then user settings. The [`--setting-sources`](/docs/en/cli-reference#cli-flags) flag narrows the list further.
+
+Entries in a project's `.claude/settings.json` or `.claude/settings.local.json` are ignored. Both files live in the workspace, so a cloned repository could supply values there, and those values would flow into plugin hook commands, MCP server configs, LSP commands, and monitor commands. Before v2.1.207, these entries were read. The restriction is specific to `pluginConfigs`: [`enabledPlugins`](/docs/en/settings#enabledplugins) still honors project and local settings.
 
 ### Channels
 

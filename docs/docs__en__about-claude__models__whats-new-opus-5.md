@@ -18,9 +18,37 @@ For complete pricing and specs, see the [models overview](/docs/en/about-claude/
 
 ## New features
 
-### Full effort ladder, including `max`
+### Mid-conversation tool changes (beta)
 
-Claude Opus 5 supports the full [effort](/docs/en/build-with-claude/effort) ladder, `low`, `medium`, `high`, `xhigh`, and `max`, with `max` as the explicit top tier for the deepest possible reasoning. No beta header is required. When running at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls.
+You can add or remove tools between turns of a conversation while preserving the prompt cache, instead of resending a fixed tool list for the life of a session. Mid-conversation tool changes are in beta: include the `mid-conversation-tool-changes-2026-07-01` beta header in your requests. See [Mid-conversation tool changes](/docs/en/build-with-claude/mid-conversation-system-messages#mid-conversation-tool-changes) for usage.
+
+### Default fallbacks mode
+
+The `fallbacks` parameter supports a new `"default"` mode, which applies Anthropic's recommended fallback models by refusal category instead of a model list you maintain yourself. The entire `fallbacks` parameter is in beta. Use the `server-side-fallback-2026-07-01` beta header, which supports both the `"default"` mode and explicit model lists (the earlier `server-side-fallback-2026-06-01` header accepts only explicit lists). See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback).
+
+### Lower prompt cache minimum
+
+The minimum cacheable prompt length on Claude Opus 5 is 512 tokens, down from 1,024 tokens on Claude Opus 4.8. Prompts that were too short to cache on Claude Opus 4.8 can now create cache entries with no code changes. See [Prompt caching](/docs/en/build-with-claude/prompt-caching#cache-limitations) for per-model minimums.
+
+### Fast mode
+
+[Fast mode](/docs/en/build-with-claude/fast-mode) (research preview) is available for Claude Opus 5 on the Claude API only; it is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. Fast mode for Claude Opus 5 is priced at $10 per million input tokens and $50 per million output tokens. See [Fast mode](/docs/en/build-with-claude/fast-mode) for access, supported models, and pricing.
+
+## Behavior changes
+
+### Thinking on by default
+
+On Claude Opus 4.8, requests run without thinking unless you set `thinking: {"type": "adaptive"}`. On Claude Opus 5, the same requests run with [thinking](/docs/en/build-with-claude/thinking) on: the model decides when and how much to think on each turn, and the [effort parameter](/docs/en/build-with-claude/effort) is the control for thinking depth. The wire value is unchanged; `thinking: {"type": "adaptive"}` remains valid and equivalent to the default.
+
+Because `max_tokens` is a hard limit on total output (thinking plus response text), revisit it for workloads that ran without thinking on Claude Opus 4.8.
+
+The API keeps the option to disable thinking, subject to the effort restriction below.
+
+### Effort matters more
+
+Claude Opus 5 converts additional [effort](/docs/en/build-with-claude/effort) into better results more reliably than any earlier Opus model, so the effort level you choose carries more weight. The full ladder is available: `low`, `medium`, `high`, `xhigh`, and `max`, with `max` as the top tier for the deepest possible reasoning. Start at the default, `high`, and adjust in either direction based on your evals: step down where quality holds to save tokens and latency, or step up for the most demanding work. When running at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls.
+
+This request turns effort all the way up to `max`:
 
 <CodeGroup>
   ```bash cURL
@@ -203,32 +231,6 @@ Claude Opus 5 supports the full [effort](/docs/en/build-with-claude/effort) ladd
 </CodeGroup>
 
 Thinking is [on by default](#thinking-on-by-default) on Claude Opus 5, so no `thinking` field is needed.
-
-### Mid-conversation tool changes (beta)
-
-You can add or remove tools between turns of a conversation while preserving the prompt cache, instead of resending a fixed tool list for the life of a session. Mid-conversation tool changes are in beta: include the `mid-conversation-tool-changes-2026-07-01` beta header in your requests. See [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages) for usage.
-
-### Default fallbacks mode
-
-The `fallbacks` parameter supports a new `"default"` mode, which applies Anthropic's recommended fallback models by refusal category instead of a model list you maintain yourself. Server-side fallback is in beta, and the `"default"` mode requires the `server-side-fallback-2026-07-01` beta header. See [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback).
-
-### Lower prompt cache minimum
-
-The minimum cacheable prompt length on Claude Opus 5 is 512 tokens, down from 1,024 tokens on Claude Opus 4.8. Prompts that were too short to cache on Claude Opus 4.8 can now create cache entries with no code changes. See [Prompt caching](/docs/en/build-with-claude/prompt-caching#cache-limitations) for per-model minimums.
-
-### Fast mode
-
-[Fast mode](/docs/en/build-with-claude/fast-mode) (research preview) is available for Claude Opus 5 on the Claude API only; it is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. Fast mode for Claude Opus 5 is priced at $10 per million input tokens and $50 per million output tokens. See [Fast mode](/docs/en/build-with-claude/fast-mode) for access, supported models, and pricing.
-
-## Behavior changes
-
-### Thinking on by default
-
-On Claude Opus 4.8, requests run without thinking unless you set `thinking: {"type": "adaptive"}`. On Claude Opus 5, the same requests run with [thinking](/docs/en/build-with-claude/thinking) on: the model decides when and how much to think on each turn, and the [effort parameter](/docs/en/build-with-claude/effort) is the control for thinking depth. The wire value is unchanged; `thinking: {"type": "adaptive"}` remains valid and equivalent to the default.
-
-Because `max_tokens` is a hard limit on total output (thinking plus response text), revisit it for workloads that ran without thinking on Claude Opus 4.8.
-
-The API keeps the option to disable thinking, subject to the effort restriction below.
 
 ### Disabling thinking requires effort `high` or below
 

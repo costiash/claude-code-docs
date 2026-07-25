@@ -341,6 +341,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
 
 <CodeGroup exclude="shell">
   ```python Python
+  # Tokens spent before compaction, tracked client-side
+  tokens_spent_so_far = 45000
+
   output_config = {
       "effort": "high",
       "task_budget": {
@@ -352,6 +355,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```typescript TypeScript
+  // Tokens spent before compaction, tracked client-side
+  const tokensSpentSoFar = 45000;
+
   const outputConfig = {
     effort: "high",
     task_budget: {
@@ -363,6 +369,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```csharp C#
+  // Tokens spent before compaction, tracked client-side
+  var tokensSpentSoFar = 45000;
+
   var outputConfig = new BetaOutputConfig
   {
       Effort = Effort.High,
@@ -375,6 +384,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```go Go
+  // Tokens spent before compaction, tracked client-side
+  tokensSpentSoFar := int64(45000)
+
   outputConfig := anthropic.BetaOutputConfigParam{
   	Effort: anthropic.BetaOutputConfigEffortHigh,
   	TaskBudget: anthropic.BetaTokenTaskBudgetParam{
@@ -385,6 +397,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```java Java
+  // Tokens spent before compaction, tracked client-side
+  long tokensSpentSoFar = 45000;
+
   BetaOutputConfig outputConfig = BetaOutputConfig.builder()
       .effort(BetaOutputConfig.Effort.HIGH)
       .taskBudget(BetaTokenTaskBudget.builder()
@@ -395,6 +410,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```php PHP
+  // Tokens spent before compaction, tracked client-side
+  $tokensSpentSoFar = 45000;
+
   $outputConfig = [
       'effort' => 'high',
       'taskBudget' => [
@@ -406,6 +424,9 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```ruby Ruby
+  # Tokens spent before compaction, tracked client-side
+  tokens_spent_so_far = 45_000
+
   output_config = {
     effort: :high,
     task_budget: {

@@ -38,7 +38,7 @@ When Claude Fable 5 declines a request, the Messages API returns `stop_reason: "
 
 A request that Claude Fable 5 refuses can usually be served by another Claude model. There are three ways to retry:
 
-* **Server-side:** Pass the `fallbacks` parameter to have the API retry for you (in beta on the Claude API). See [Server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
+* **Server-side:** Pass the `fallbacks` parameter to have the API retry for you, using its `"default"` mode for Anthropic's recommended models or naming your own (in beta on the Claude API). See [Server-side fallback](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback).
 * **Client-side:** Use the [SDK middleware](/docs/en/cli-sdks-libraries/middleware) to retry from the client on any platform. See [Client-side fallback](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback).
 * **Manual:** Build the retry yourself, on any platform and in any language. See [Fallback credit](/docs/en/build-with-claude/fallback-credit).
 

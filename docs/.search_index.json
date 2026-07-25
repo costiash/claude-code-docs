@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-24T21:41:27Z",
+  "generated_at": "2026-07-25T00:53:52Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24422,
+      "word_count": 24432,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -613,10 +613,10 @@
         "callback",
         "tools",
         "remote",
-        "port",
-        "client"
+        "mcpclaude",
+        "port"
       ],
-      "word_count": 10067,
+      "word_count": 10312,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -852,8 +852,8 @@
         "claude",
         "code",
         "plugins",
-        "directory",
         "server",
+        "directory",
         "default",
         "mcp",
         "field",
@@ -864,11 +864,11 @@
         "skills",
         "version",
         "name",
-        "path",
         "file",
-        "skill"
+        "path",
+        "files"
       ],
-      "word_count": 9198,
+      "word_count": 9276,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1300,23 +1300,23 @@
         "model",
         "models",
         "cost",
+        "start",
         "tasks",
         "card",
+        "coding",
+        "agentic",
         "effort",
         "intelligence",
         "best",
-        "coding",
-        "agentic",
-        "start",
+        "most",
         "applications",
         "tokens",
         "speed",
         "first",
         "output",
-        "most",
         "performance"
       ],
-      "word_count": 875,
+      "word_count": 915,
       "file_path": "docs/docs__en__about-claude__models__choosing-a-model.md"
     },
     "/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5": {
@@ -1344,7 +1344,7 @@
         "build",
         "prompting"
       ],
-      "word_count": 996,
+      "word_count": 1008,
       "file_path": "docs/docs__en__about-claude__models__introducing-claude-fable-5-and-claude-mythos-5.md"
     },
     "/docs/en/about-claude/models/migration-guide": {
@@ -1364,15 +1364,15 @@
         "token",
         "changes",
         "tokens",
-        "earlier",
         "migrating",
         "remove",
+        "earlier",
         "error",
         "update",
         "same",
-        "than"
+        "tool"
       ],
-      "word_count": 16682,
+      "word_count": 16635,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/model-ids-and-versions": {
@@ -1440,8 +1440,8 @@
         "thinking",
         "effort",
         "card",
-        "default",
         "model",
+        "default",
         "tokens",
         "see",
         "models",
@@ -1450,13 +1450,13 @@
         "changes",
         "tool",
         "when",
-        "prompting",
         "work",
+        "prompting",
+        "step",
         "pricing",
-        "per",
-        "fast"
+        "per"
       ],
-      "word_count": 1904,
+      "word_count": 1976,
       "file_path": "docs/docs__en__about-claude__models__whats-new-opus-5.md"
     },
     "/docs/en/about-claude/models/whats-new-sonnet-5": {
@@ -1698,9 +1698,9 @@
         "model",
         "code",
         "skills",
+        "opus",
         "anthropic",
         "tool",
-        "opus",
         "sdk",
         "language",
         "specific",
@@ -1708,7 +1708,7 @@
         "messages",
         "project"
       ],
-      "word_count": 1496,
+      "word_count": 1510,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__claude-api-skill.md"
     },
     "/docs/en/agents-and-tools/agent-skills/enterprise": {
@@ -45226,18 +45226,18 @@
         "tasks",
         "default",
         "tool",
-        "level",
         "cost",
         "agentic",
         "coding",
-        "set",
         "sonnet",
+        "set",
+        "level",
         "than",
-        "see",
         "parameter",
+        "see",
         "model"
       ],
-      "word_count": 2717,
+      "word_count": 2640,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -45317,11 +45317,11 @@
         "shape",
         "refusal",
         "server",
+        "same",
         "rejected",
-        "cache",
-        "must"
+        "cache"
       ],
-      "word_count": 3445,
+      "word_count": 3460,
       "file_path": "docs/docs__en__build-with-claude__fallback-credit.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -45437,31 +45437,31 @@
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-effort-example.md"
     },
     "/docs/en/build-with-claude/mid-conversation-system-messages": {
-      "title": "Mid-conversation system messages",
-      "content_preview": "# Mid-conversation system messages  Add or update system instructions partway through a conversation without invalidating the cached prefix that came before them.  ---  <Note>   For how zero data rete...",
+      "title": "Mid-conversation system messages and tool changes",
+      "content_preview": "# Mid-conversation system messages and tool changes  Change system instructions or tool availability partway through a conversation without invalidating the cached prefix that came before them.  ---  ...",
       "keywords": [
         "system",
-        "message",
         "conversation",
+        "message",
         "claude",
-        "cache",
-        "level",
         "tool",
         "mid",
+        "level",
+        "cache",
         "field",
         "caching",
-        "top",
-        "turn",
         "messages",
-        "prefix",
+        "top",
         "prompt",
+        "turn",
+        "prefix",
         "user",
         "instructions",
         "request",
-        "cached",
-        "new"
+        "changes",
+        "cached"
       ],
-      "word_count": 3257,
+      "word_count": 4657,
       "file_path": "docs/docs__en__build-with-claude__mid-conversation-system-messages.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -45517,7 +45517,7 @@
         "when",
         "claudeapibeta"
       ],
-      "word_count": 1872,
+      "word_count": 1884,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -45698,22 +45698,22 @@
         "model",
         "effort",
         "than",
-        "models",
         "work",
-        "prior",
         "agentic",
+        "disabled",
+        "models",
+        "tasks",
+        "prior",
         "prompt",
         "task",
-        "disabled",
-        "tasks",
+        "cost",
+        "tool",
         "prompting",
         "response",
-        "see",
-        "well",
-        "instruction",
-        "cost"
+        "when",
+        "see"
       ],
-      "word_count": 1605,
+      "word_count": 1649,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-5.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5": {
@@ -45751,25 +45751,25 @@
         "model",
         "fallback",
         "request",
-        "block",
-        "retry",
         "refusal",
+        "block",
         "when",
-        "response",
+        "retry",
         "claude",
+        "response",
         "middleware",
         "server",
         "output",
-        "side",
         "requests",
-        "attempt",
         "api",
+        "side",
+        "attempt",
+        "refused",
+        "category",
         "any",
-        "one",
-        "entry",
-        "refused"
+        "one"
       ],
-      "word_count": 5636,
+      "word_count": 5916,
       "file_path": "docs/docs__en__build-with-claude__refusals-and-fallback.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -45909,7 +45909,7 @@
         "client",
         "token"
       ],
-      "word_count": 2936,
+      "word_count": 3009,
       "file_path": "docs/docs__en__build-with-claude__task-budgets.md"
     },
     "/docs/en/build-with-claude/thinking-steering-and-cost": {
@@ -48457,7 +48457,7 @@
         "new",
         "support"
       ],
-      "word_count": 8857,
+      "word_count": 8873,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

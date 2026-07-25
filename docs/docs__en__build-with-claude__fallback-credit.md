@@ -14,7 +14,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
 <Steps>
   <Step title="Opt in with the beta header">
-    Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-06-01` header. The `server-side-fallback-2026-06-01` header also grants the same fields.
+    Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-07-01` header. The `server-side-fallback-2026-07-01` header also grants the same fields, and the earlier `fallback-credit-2026-06-01` header remains accepted and grants the same fields.
   </Step>
 
   <Step title="Read two fields from the refusal">
@@ -31,7 +31,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
   </Step>
 
   <Step title="Send the retry with the same header">
-    Send the retry with the same `fallback-credit-2026-06-01` beta header. The retry needs the header to redeem the token.
+    Send the retry with the same `fallback-credit-2026-07-01` beta header. The retry needs the header to redeem the token.
   </Step>
 </Steps>
 
@@ -52,7 +52,7 @@ The following example makes a request that may be refused and redeems the credit
   response=$(curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: fallback-credit-2026-06-01" \
+    -H "anthropic-beta: fallback-credit-2026-07-01" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-fable-5",
@@ -68,7 +68,7 @@ The following example makes a request that may be refused and redeems the credit
     response=$(curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: fallback-credit-2026-06-01" \
+      -H "anthropic-beta: fallback-credit-2026-07-01" \
       -H "content-type: application/json" \
       -d "$(jq -n --arg token "${token}" '{
         model: "claude-opus-4-8",
@@ -88,7 +88,7 @@ The following example makes a request that may be refused and redeems the credit
     --model claude-fable-5 \
     --max-tokens 1024 \
     --message '{"role":"user","content":"Hello, Claude"}' \
-    --beta fallback-credit-2026-06-01 \
+    --beta fallback-credit-2026-07-01 \
     --format json)
 
   # A refusal carries a one-time credit token in stop_details
@@ -101,7 +101,7 @@ The following example makes a request that may be refused and redeems the credit
       --max-tokens 1024 \
       --message '{"role":"user","content":"Hello, Claude"}' \
       --fallback-credit-token "${token}" \
-      --beta fallback-credit-2026-06-01 \
+      --beta fallback-credit-2026-07-01 \
       --format json)
   fi
 
@@ -120,7 +120,7 @@ The following example makes a request that may be refused and redeems the credit
 
   def send(model: str, body: dict[str, object]) -> BetaMessage:
       return client.beta.messages.create(
-          model=model, betas=["fallback-credit-2026-06-01"], **body
+          model=model, betas=["fallback-credit-2026-07-01"], **body
       )
 
 
@@ -171,7 +171,7 @@ The following example makes a request that may be refused and redeems the credit
     model: "claude-fable-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    betas: ["fallback-credit-2026-06-01"]
+    betas: ["fallback-credit-2026-07-01"]
   };
 
   let response = await client.beta.messages.create(request);
@@ -241,7 +241,7 @@ The following example makes a request that may be refused and redeems the credit
 
   ```csharp C#
   var client = new AnthropicClient();
-  const string beta = "fallback-credit-2026-06-01";
+  const string beta = "fallback-credit-2026-07-01";
 
   List<BetaMessageParam> requestMessages =
   [
@@ -326,7 +326,7 @@ The following example makes a request that may be refused and redeems the credit
 
   request := anthropic.BetaMessageNewParams{
   	MaxTokens: 1024,
-  	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFallbackCredit2026_06_01},
+  	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFallbackCredit2026_07_01},
   	Messages: []anthropic.BetaMessageParam{
   		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude")),
   	},
@@ -355,7 +355,9 @@ The following example makes a request that may be refused and redeems the credit
   	details := response.StopDetails
   	if token := details.FallbackCreditToken; token != "" {
   		exactBody := request
-  		exactBody.FallbackCreditToken = anthropic.String(token)
+  		exactBody.FallbackCreditToken = anthropic.BetaMessageNewParamsFallbackCreditTokenUnion{
+  			OfString: anthropic.String(token),
+  		}
   		attempt := exactBody
   		// Prefer the continuation shape unless the claim is false
   		if details.FallbackHasPrefillClaim || !details.JSON.FallbackHasPrefillClaim.Valid() {
@@ -399,7 +401,7 @@ The following example makes a request that may be refused and redeems the credit
       return MessageCreateParams.builder()
           .maxTokens(1024L)
           .addUserMessage("Hello, Claude")
-          .addBeta(AnthropicBeta.FALLBACK_CREDIT_2026_06_01);
+          .addBeta(AnthropicBeta.FALLBACK_CREDIT_2026_07_01);
   }
 
   BetaMessage send(Model model, MessageCreateParams.Builder body) {
@@ -452,7 +454,7 @@ The following example makes a request that may be refused and redeems the credit
 
   ```php PHP
   $client = new Client();
-  $beta = 'fallback-credit-2026-06-01';
+  $beta = 'fallback-credit-2026-07-01';
   $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
   $send = fn (string $model, array $messages, ?string $token = null) => $client->beta->messages->create(
@@ -515,7 +517,7 @@ The following example makes a request that may be refused and redeems the credit
   }
 
   send_message = ->(model, body) do
-    client.beta.messages.create(model:, betas: ["fallback-credit-2026-06-01"], **body)
+    client.beta.messages.create(model:, betas: ["fallback-credit-2026-07-01"], **body)
   end
 
   response = send_message.call("claude-fable-5", request)
@@ -565,7 +567,7 @@ Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on
 The retry model must be one of the refused model's permitted fallback targets. Claude Fable 5's permitted targets are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
 
 <Accordion title="Looking up permitted fallback targets programmatically">
-  On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](/docs/en/api/models/list) when the `server-side-fallback-2026-06-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
+  On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](/docs/en/api/models/list) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 </Accordion>
 
 ## Checking that the credit applied

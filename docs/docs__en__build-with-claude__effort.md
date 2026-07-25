@@ -100,7 +100,7 @@ When running Claude Opus 4.8 at `xhigh` or `max` effort, set a large `max_tokens
 
 ### Recommended effort levels for Claude Opus 5
 
-Claude Opus 5 supports all five effort levels. **Start with `xhigh` for coding and agentic work**, and use `high` for most other intelligence-sensitive workloads. `low` and `medium` effort are stronger on Claude Opus 5 than on earlier Opus models: use them liberally as your primary control for token cost and response time wherever your evals show quality holds, and step up to `max` when a task justifies unconstrained token spending. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
+Claude Opus 5 supports all five effort levels. **Start with `high`, the default**, and adjust based on your evals: step up to `xhigh` for demanding coding and agentic work, or to `max` when a task justifies unconstrained token spending, and use `low` and `medium` liberally as your primary control for token cost and response time wherever your evals show quality holds. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
 
 Effort controls thinking volume, not visible response length: on Claude Opus 5, changing effort does not reliably shorten responses, so [prompt for length](/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5#response-length-and-verbosity) instead.
 
@@ -250,7 +250,7 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   Message response = client.messages().create(params);
   response.content().stream()
       .flatMap(block -> block.text().stream())
-      .forEach(textBlock -> System.out.println(textBlock.text()));
+      .forEach(textBlock -> IO.println(textBlock.text()));
   ```
 
   ```php PHP
@@ -299,10 +299,6 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 * Use **high effort** (the default) for complex reasoning, nuanced analysis, difficult coding problems, or any task where quality matters more than speed or cost.
 * Use **medium effort** as a balanced option when you want solid performance without the full token expenditure of high effort.
 * Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost. For example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
-
-<Note>
-  **Claude Code's ultracode mode:** ultracode appears in Claude Code's effort menu, but it is not an additional API effort level. The values documented on this page are the complete set the API accepts. Ultracode pairs the `xhigh` effort level with standing permission for Claude Code to launch multiagent workflows, granted through [Mid-conversation system messages](/docs/en/build-with-claude/mid-conversation-system-messages). To build similar behavior with the API, see [Build an orchestration mode](/docs/en/build-with-claude/mid-conversation-effort-example).
-</Note>
 
 ## Effort with tool use
 
