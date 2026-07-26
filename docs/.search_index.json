@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-25T21:33:38Z",
+  "generated_at": "2026-07-26T00:56:16Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -501,10 +501,10 @@
         "cursor",
         "terminal",
         "character",
-        "previous",
-        "conversation"
+        "conversation",
+        "previous"
       ],
-      "word_count": 4833,
+      "word_count": 4873,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
