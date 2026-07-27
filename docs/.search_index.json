@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-27T16:07:40Z",
+  "generated_at": "2026-07-27T18:50:27Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -458,17 +458,17 @@
         "hook",
         "hooks",
         "claude",
-        "tool",
         "when",
+        "tool",
         "code",
         "field",
         "input",
         "json",
-        "fields",
         "only",
+        "fields",
         "session",
-        "command",
         "runs",
+        "command",
         "output",
         "prompt",
         "file",
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24432,
+      "word_count": 24573,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -942,17 +942,17 @@
         "permission",
         "when",
         "only",
-        "mode",
         "access",
+        "mode",
         "run",
         "command",
-        "allow",
         "rules",
         "set",
-        "directory",
-        "managed"
+        "allow",
+        "managed",
+        "directory"
       ],
-      "word_count": 5840,
+      "word_count": 5937,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "corp",
         "example"
       ],
-      "word_count": 15586,
+      "word_count": 15669,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1104,23 +1104,23 @@
         "subagents",
         "when",
         "agent",
-        "main",
         "tool",
+        "main",
         "conversation",
         "session",
         "code",
         "only",
         "prompt",
+        "same",
         "model",
         "version",
         "context",
-        "same",
         "tools",
         "fork",
         "background",
         "task"
       ],
-      "word_count": 11751,
+      "word_count": 11806,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
