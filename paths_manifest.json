@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-07-28T12:40:33.582916Z",
-    "total_paths": 721,
+    "generated_at": "2026-07-28T15:48:13.612751Z",
+    "total_paths": 722,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-07-28T12:40:33.582925Z"
+    "last_regenerated": "2026-07-28T15:48:13.612760Z"
   },
   "categories": {
     "core_documentation": [
@@ -147,6 +147,7 @@
       "/docs/en/cli-sdks-libraries/sdks/python",
       "/docs/en/cli-sdks-libraries/sdks/ruby",
       "/docs/en/cli-sdks-libraries/sdks/typescript",
+      "/docs/en/cloud-environments",
       "/docs/en/code-review",
       "/docs/en/commands",
       "/docs/en/communications-kit",
