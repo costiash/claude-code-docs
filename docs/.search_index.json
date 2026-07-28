@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-28T12:54:55Z",
+  "generated_at": "2026-07-28T16:02:54Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -122,25 +122,25 @@
         "session",
         "claude",
         "cloud",
-        "com",
-        "org",
         "sessions",
-        "environment",
         "github",
-        "access",
         "code",
-        "run",
-        "www",
-        "setup",
-        "accordion",
-        "repository",
         "web",
-        "script",
-        "network",
+        "repository",
+        "fix",
+        "account",
+        "terminal",
+        "run",
+        "auto",
+        "access",
+        "app",
         "when",
-        "terminal"
+        "see",
+        "review",
+        "environment",
+        "note"
       ],
-      "word_count": 7385,
+      "word_count": 3834,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -277,10 +277,10 @@
         "windows",
         "permission",
         "before",
-        "diff",
-        "review"
+        "sessions",
+        "diff"
       ],
-      "word_count": 10403,
+      "word_count": 10406,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -966,21 +966,21 @@
         "permission",
         "approval",
         "bash",
+        "access",
         "only",
         "permissions",
         "when",
         "prompt",
-        "anthropic",
-        "access",
-        "trust",
         "network",
+        "anthropic",
+        "trust",
         "mcp",
         "before",
         "user",
         "session",
         "servers"
       ],
-      "word_count": 1413,
+      "word_count": 1425,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -1008,7 +1008,7 @@
         "corp",
         "example"
       ],
-      "word_count": 15669,
+      "word_count": 15721,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
