@@ -1,14 +1,4 @@
-# Claude Code Documentation Mirror - Enhanced Edition
-
-> **⛔ CRITICAL: UPSTREAM ISOLATION ⛔**
->
-> **This repository is COMPLETELY INDEPENDENT. Do NOT:**
-> - Push to, pull from, or sync with the upstream repo (ericbuess/claude-code-docs)
-> - Create PRs to the upstream repo
-> - Add upstream as a remote
-> - Reference upstream in any git operations
->
-> **All git operations must target `origin` (costiash/claude-code-docs) ONLY.**
+# Claude Code Documentation Mirror
 
 This repository contains local copies of Claude documentation from multiple Anthropic sources:
 - **Platform docs**: https://platform.claude.com (API, guides, Agent SDK, etc.)
@@ -193,10 +183,3 @@ pytest tests/ -v
 # Run full CI test suite
 pytest tests/ -q
 ```
-
-## Upstream Compatibility
-
-This enhanced edition maintains compatibility with upstream (ericbuess/claude-code-docs):
-- Same installation location (~/.claude-code-docs)
-- Same `/docs` command interface
-- Plugin features are additive, not breaking

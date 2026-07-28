@@ -5,8 +5,6 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
 [![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
 
-> **Enhanced fork of [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs)** with native plugin support, auto-discovery Skill, and AI-powered semantic search.
-
 **Official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
 
 ## Why Use This?
