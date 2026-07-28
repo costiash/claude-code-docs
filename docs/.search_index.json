@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-28T16:02:54Z",
+  "generated_at": "2026-07-28T18:48:30Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -602,21 +602,21 @@
         "json",
         "tool",
         "servers",
-        "plugin",
         "name",
+        "plugin",
         "add",
         "directory",
         "local",
         "project",
         "settings",
+        "mcpclaude",
         "output",
         "callback",
         "tools",
         "remote",
-        "mcpclaude",
         "port"
       ],
-      "word_count": 10312,
+      "word_count": 10426,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -826,11 +826,11 @@
         "code",
         "claude",
         "when",
+        "directory",
         "string",
         "url",
         "see",
         "add",
-        "directory",
         "marketplaces",
         "repository",
         "github",
@@ -840,7 +840,7 @@
         "entry",
         "path"
       ],
-      "word_count": 8045,
+      "word_count": 8051,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -852,8 +852,8 @@
         "claude",
         "code",
         "plugins",
-        "server",
         "directory",
+        "server",
         "default",
         "mcp",
         "field",
@@ -868,7 +868,7 @@
         "path",
         "files"
       ],
-      "word_count": 9276,
+      "word_count": 9284,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -883,8 +883,8 @@
         "code",
         "skill",
         "create",
-        "step",
         "see",
+        "step",
         "hooks",
         "root",
         "when",
@@ -892,11 +892,11 @@
         "marketplace",
         "agents",
         "test",
+        "custom",
         "install",
-        "name",
-        "one"
+        "name"
       ],
-      "word_count": 3107,
+      "word_count": 3232,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {

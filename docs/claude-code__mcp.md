@@ -153,16 +153,20 @@ Once configured, you can manage your MCP servers with these commands:
 claude mcp list
 
 # Get details for a specific server
-claude mcp get github
+claude mcp get notion
 
 # Remove a server
-claude mcp remove github
+claude mcp remove notion
 
 # (within Claude Code) Check server status
 /mcp
 ```
 
+`claude mcp add` confirms a successful add by printing an `Added ...` line, which means the configuration was written. `claude mcp list` then shows a health status next to each server it lists, such as `✔ Connected`, `! Needs authentication`, or `✘ Failed to connect`. A failure status means Claude Code couldn't connect to that server, not that the list command failed.
+
 Project-scoped servers from `.mcp.json` that are awaiting your approval appear in `claude mcp list` and `claude mcp get <name>` as ``⏸ Pending approval (run `claude` to approve)``. Run `claude` interactively to review and approve them. `claude mcp get <name>` shows rejected servers as `✘ Rejected (see disabledMcpjsonServers in settings)`.
+
+WebSocket servers don't appear in `claude mcp list` output. Use `claude mcp get <name>` or the `/mcp` panel to check them.
 
 As of v2.1.196, `claude mcp list` and `claude mcp get` read `.mcp.json` approvals only from settings files that aren't checked into the repository until you trust the workspace by running `claude` in it and accepting the workspace trust dialog. A cloned repository can't approve its own servers: [`enableAllProjectMcpServers` or `enabledMcpjsonServers`](/docs/en/settings#available-settings) committed to the project's `.claude/settings.json` is ignored in an untrusted folder, and the server stays at `⏸ Pending approval` instead of being connected and health-checked.
 
@@ -393,7 +397,7 @@ Project-scoped servers enable team collaboration by storing configurations in a 
 
 ```bash theme={null}
 # Add a project-scoped server
-claude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp
+claude mcp add --transport http shared-server --scope project https://example.com/mcp
 ```
 
 The resulting `.mcp.json` file follows a standardized format:
@@ -402,9 +406,8 @@ The resulting `.mcp.json` file follows a standardized format:
 {
   "mcpServers": {
     "shared-server": {
-      "command": "/path/to/server",
-      "args": [],
-      "env": {}
+      "type": "http",
+      "url": "https://example.com/mcp"
     }
   }
 }
@@ -943,6 +946,8 @@ You can use Claude Code itself as an MCP server that other applications can conn
 # Start Claude as a stdio MCP server
 claude mcp serve
 ```
+
+The command prints nothing when it starts. A stdio MCP server communicates over stdin and stdout, so a silent, blocked terminal means the server is running and waiting for a client to connect.
 
 You can use this in Claude Desktop by adding this configuration to claude\_desktop\_config.json:
 
