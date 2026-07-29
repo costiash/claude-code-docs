@@ -9,7 +9,7 @@
 
 ## Why Use This?
 
-Claude knows a lot — but documentation changes fast. API parameters shift, new features land, SDK methods get renamed. This tool gives Claude a local mirror of every official doc page, so answers come from the source, not stale training data.
+Claude knows a lot — but documentation changes fast. API parameters shift, new features land, SDK methods get renamed. This tool gives Claude a live index of every official doc page and fetches the latest page from Anthropic's servers on demand, so answers come from the source, not stale training data. The repository itself stores only metadata — a page manifest and a lossy search index — never documentation prose.
 
 | Without claude-code-docs | With claude-code-docs |
 |---|---|
@@ -28,8 +28,8 @@ Two commands, no dependencies:
 ```
 
 That's it. On your next session Claude will automatically:
-1. Clone all documentation files to `~/.claude-code-docs/`
-2. Keep them updated every session via `git pull`
+1. Clone a tiny metadata repo to `~/.claude-code-docs/` (manifest + search index, no prose)
+2. Fetch documentation pages into a local cache in the background, and keep both current each session
 3. Make the `/docs` command available for manual lookups
 4. Activate the **auto-discovery Skill** — Claude reads docs automatically when you ask Claude-related questions
 
@@ -165,10 +165,10 @@ Documentation files across multiple categories, updated every 3 hours:
 
 ## How Updates Work
 
-1. **Automatic (Plugin)** — Docs update via `git pull` at the start of each Claude Code session
-2. **Automatic (CI/CD)** — GitHub Actions fetches from Anthropic sitemaps every 3 hours
-3. **On-Demand** — `/docs -t` checks for and pulls updates
-4. **Safe** — Sync safeguards prevent mass deletion (min 200 paths discovered, max 10% deletion per sync, min 250 files)
+1. **Automatic (Plugin)** — Each session the metadata syncs (`git reset --hard origin/main`) and a background fetch updates only changed pages in the local cache
+2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
+3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
+4. **Safe** — Manifest safeguards prevent catastrophic changes (min 200 pages discovered, max 10% removed per sync, min 250 pages)
 
 ## Troubleshooting
 
@@ -193,10 +193,10 @@ Documentation files across multiple categories, updated every 3 hours:
 
 ## Security
 
-- Input sanitization and path traversal protection
-- Sync safeguards prevent catastrophic documentation loss
-- All operations limited to documentation directory, HTTPS-only
-- Full test suite with security coverage
+- No documentation prose is committed — the repo holds only metadata (manifest + lossy index)
+- The client fetch layer enforces a **domain allowlist** (`code.claude.com`, `platform.claude.com`, `raw.githubusercontent.com`), HTTPS-only, with atomic writes and sha256 integrity checks
+- Manifest safeguards prevent catastrophic changes; input sanitization and path-traversal protection on filenames
+- Full test suite (including a mocked-curl harness for the client fetch layer)
 
 ## Contributing
 

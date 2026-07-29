@@ -20,3 +20,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+Documentation Content
+
+This repository contains no Anthropic documentation content. Documentation is
+fetched at runtime by the end user directly from Anthropic's servers. All
+documentation content remains (c) Anthropic PBC.
+
+The MIT license above applies to the tool code (fetch pipeline, plugin, scripts,
+tests) and to the metadata this project generates (the page manifest and the
+lossy search index). It does not grant any rights in Anthropic's documentation.

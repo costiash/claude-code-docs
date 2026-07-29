@@ -1,10 +1,17 @@
-# Claude Code Documentation Mirror
+# Claude Code Documentation Index
 
-This repository contains local copies of Claude documentation from multiple Anthropic sources:
+This repository indexes Claude documentation from two Anthropic sources but **commits no
+documentation prose** — only metadata. End users fetch the actual `.md` pages from
+Anthropic's servers at runtime into a local cache.
+
 - **Platform docs**: https://platform.claude.com (API, guides, Agent SDK, etc.)
 - **Claude Code docs**: https://code.claude.com/docs (CLI-specific documentation)
 
-The docs are periodically updated via GitHub Actions with safeguards to prevent mass deletion.
+The metadata (`paths_manifest.json` + `search_index.json`) is regenerated via GitHub
+Actions every 3 hours with safeguards against catastrophic manifest changes.
+
+> **Read `ARCHITECTURE.md` first** for the full v2 design (manifest schema, index schema,
+> fetch pipeline, safeguards, cache layout, and the no-committed-content invariant).
 
 ## Architecture: Plugin-Based Documentation System
 
@@ -55,43 +62,45 @@ Search intelligence, synthesis rules, and URL generation live in `plugin/skills/
 
 The `scripts/` directory contains Python modules that run in GitHub Actions — they are **not** user-facing and are **not** installed with the plugin:
 
-- `scripts/fetcher/` — Fetches docs from Anthropic sitemaps (every 3 hours)
-- `scripts/lookup/` — Path validation for CI checks (daily)
-- `scripts/build_search_index.py` — Generates `.search_index.json` consumed by the plugin's content search
-- `scripts/fetch_claude_docs.py` — Thin wrapper for fetcher package
-- `scripts/lookup_paths.py` — Thin wrapper for lookup package
+- `scripts/fetcher/` — Discovers pages (llms.txt ∪ sitemaps), fetches `.md` verbatim into the gitignored `.doc_fetch/` scratch, and writes the v2 `paths_manifest.json` (every 3 hours). Modules: `llms_txt`, `sitemap`, `discovery`, `paths`, `content`, `manifest`, `safeguards`, `config`, `cli`.
+- `scripts/build_search_index.py` — Generates the prose-free root `search_index.json` from the scratch dir + manifest
+- `scripts/fetch_claude_docs.py` — Thin wrapper for the fetcher package
 
-These require Python 3.9+ and are only executed in GitHub Actions workflows.
+These require Python 3.9+ and are only executed in GitHub Actions workflows. The legacy
+`scripts/lookup/` search package was removed — client search is now shell-only (see plugin).
 
 ## Repository Structure
 
 ```
 /
-├── docs/                   # Documentation files (.md format)
-│   ├── docs_manifest.json  # File tracking manifest
-│   └── .search_index.json  # Full-text search index (CI-generated)
+├── paths_manifest.json     # v2 manifest — single source of truth (committed)
+├── search_index.json       # v2 prose-free search index (committed)
+├── .doc_fetch/             # ephemeral CI fetch scratch (gitignored, never committed)
+├── docs/                   # legacy/scratch only — gitignored, not tracked
 ├── scripts/                # CI-only Python scripts
 │   ├── fetch_claude_docs.py        # Thin wrapper for fetcher
-│   ├── lookup_paths.py             # Thin wrapper for lookup
-│   ├── build_search_index.py       # Index builder
-│   ├── fetcher/                    # Documentation fetching package (8 modules)
-│   └── lookup/                     # Search and validation package (7 modules)
-├── plugin/                 # Claude Code Plugin (v1.1.0)
+│   ├── build_search_index.py       # v2 index builder (scratch + manifest -> index)
+│   └── fetcher/                    # Fetching package: llms_txt, sitemap, discovery,
+│                                   #   paths, content, manifest, safeguards, config, cli
+├── plugin/                 # Claude Code Plugin
 │   ├── .claude-plugin/plugin.json  # Plugin metadata
 │   ├── commands/docs.md            # /docs slash command (lean router)
+│   ├── scripts/                    # Client shell layer (bash+curl+jq, zero Python)
+│   │   ├── fetch-docs.sh           #   sync/get/status/prune -> cache
+│   │   └── manifest-diff.sh        #   git-history diff for what's-new/changelog
 │   ├── skills/
-│   │   ├── claude-docs/            # Search skill + examples + scripts
-│   │   ├── claude-docs-validate/   # Validation skill + examples + scripts
+│   │   ├── claude-docs/            # Search skill + scripts (content-search, fuzzy-search)
+│   │   ├── claude-docs-validate/   # Validation skill + validate-paths.sh
 │   │   ├── claude-docs-course/     # Interactive course generator + references
 │   │   └── claude-docs-changelog/  # Changelog report generator + examples
-│   └── hooks/                      # SessionStart hook (auto-update docs)
+│   └── hooks/                      # SessionStart hook (reset --hard + background sync)
 ├── .claude-plugin/marketplace.json # Marketplace registration
-├── paths_manifest.json     # Active paths manifest (auto-generated categories)
+├── ARCHITECTURE.md         # v2 design (read this first)
+├── IMPLEMENTATION_PLAN.md  # Redistribution rework checklist
 ├── pyproject.toml          # Python project configuration
 ├── CHANGELOG.md            # Version history
-├── tests/                  # Test suite (CI-only, covers Python scripts)
-├── reports/                # Coverage and test reports
-├── install.sh              # Migration wrapper (routes to plugin install)
+├── tests/                  # Test suite (CI-only)
+├── install.sh              # Metadata-clone + cache sync (non-plugin fallback)
 ├── uninstall.sh            # Points to plugin uninstall
 ├── index.html              # GitHub Pages landing page
 └── CLAUDE.md               # This file (AI context)
@@ -119,13 +128,14 @@ When working on this repository, read these files as needed (not auto-loaded to 
 - `.claude-plugin/marketplace.json` - Marketplace registration
 
 ### CI/CD Scripts (Python)
-- `scripts/fetch_claude_docs.py` - Documentation fetcher entry point
-- `scripts/lookup_paths.py` - Search & validation entry point
-- `scripts/fetcher/` - Documentation fetching package (8 modules)
-- `scripts/lookup/` - Search & validation package (7 modules)
-- `scripts/build_search_index.py` - Full-text search indexing
-- `paths_manifest.json` - Active paths manifest (auto-generated categories)
-- `tests/` - Test suite (covers CI scripts)
+- `scripts/fetch_claude_docs.py` - Documentation fetcher entry point (thin wrapper)
+- `scripts/fetcher/` - Fetching package: `llms_txt`, `sitemap`, `discovery`, `paths`, `content`, `manifest`, `safeguards`, `config`, `cli`
+- `scripts/build_search_index.py` - v2 prose-free index builder
+- `paths_manifest.json` - v2 manifest (single source of truth)
+- `search_index.json` - v2 prose-free search index
+- `plugin/scripts/fetch-docs.sh` - Client cache fetcher (sync/get/status/prune)
+- `plugin/scripts/manifest-diff.sh` - Manifest git-history diff (what's-new/changelog)
+- `tests/` - Test suite (covers CI scripts + shell scripts via mocked-curl harness)
 
 ### Automation
 - `.github/workflows/` - Auto-update workflows (runs every 3 hours)
@@ -138,22 +148,23 @@ The automated sync system includes multiple safeguards to prevent catastrophic d
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
-| `MIN_DISCOVERY_THRESHOLD` | 200 | Minimum paths that must be discovered from sitemaps |
-| `MAX_DELETION_PERCENT` | 10 | Maximum percentage of files that can be deleted in one sync |
-| `MIN_EXPECTED_FILES` | 250 | Minimum files that must remain after sync |
+| `MIN_DISCOVERY_THRESHOLD` | 200 | Minimum pages that must be discovered (llms.txt ∪ sitemaps) |
+| `MAX_DELETION_PERCENT` | 10 | Max % of manifest entries a single sync may remove |
+| `MIN_EXPECTED_FILES` | 250 | Minimum pages that must remain in the manifest |
 
-### How Safeguards Work
+### How Safeguards Work (`scripts/fetcher/safeguards.py`)
 
-1. **Discovery Validation**: Before fetching, validates that sitemap discovery found enough paths
-2. **Deletion Limiting**: `cleanup_old_files()` refuses to delete more than 10% of existing files
-3. **File Count Validation**: Refuses to proceed if result would have fewer than 250 files
-4. **Workflow Validation**: GitHub Actions validates sync success before committing
+1. **Discovery Validation**: `validate_discovery_threshold()` aborts if discovery found < 200 pages
+2. **Transition Guard**: `validate_manifest_transition(old, new)` aborts if > 10% of entries are removed or < 250 remain — first-run-safe (no v2 predecessor = clean start)
+3. **Carry-forward**: a page that fails to fetch is kept in the manifest (`fetch_status: stale`), never dropped on a transient error
+4. **Workflow Validation**: `update-docs.yml` repeats the ≥250 floor as a jq check before committing
 
-### Sitemap Sources
+### Discovery Sources
 
-Documentation is discovered from two sitemaps:
-- `https://platform.claude.com/sitemap.xml` - Platform documentation (API, guides, etc.)
-- `https://code.claude.com/docs/sitemap.xml` - Claude Code CLI documentation
+Pages are discovered from the **union** of two llms.txt files and two sitemaps (keyed by
+canonical URL; llms.txt supplies titles/coverage, sitemaps supply `lastmod`):
+- `https://code.claude.com/docs/llms.txt` + `https://code.claude.com/docs/sitemap.xml`
+- `https://platform.claude.com/llms.txt` + `https://platform.claude.com/sitemap.xml`
 
 ### Filename Conventions
 
@@ -171,15 +182,16 @@ uv sync --group dev
 
 ### Testing
 ```bash
-# Test plugin search scripts manually
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
-DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
+# Test plugin search scripts manually (they resolve the manifest/index from the repo root)
+./plugin/skills/claude-docs/scripts/content-search.sh hooks matcher
+./plugin/skills/claude-docs/scripts/fuzzy-search.sh agent sdk python
+./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-# Test CI Python scripts
-python3 scripts/lookup_paths.py --search "mcp"
-pytest tests/ -v
+# Regenerate metadata locally (fetches into gitignored .doc_fetch/, then builds the index)
+DOCS_FETCH_LIMIT=8 python3 scripts/fetch_claude_docs.py   # fast preview (writes .preview manifest to scratch)
+python3 scripts/fetch_claude_docs.py                      # full run (~10 min; writes real paths_manifest.json)
+python3 scripts/build_search_index.py                     # build search_index.json from scratch
 
-# Run full CI test suite
-pytest tests/ -q
+# Run the test suite
+pytest tests/ -q -m "not network"
 ```
