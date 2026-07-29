@@ -91,7 +91,8 @@ else
 
     if [ -d "$INSTALL_DIR" ]; then
         echo "Updating existing installation..."
-        cd "$INSTALL_DIR" && git pull --ff-only origin main || {
+        # reset --hard (not pull --ff-only) so a history rewrite is absorbed cleanly.
+        cd "$INSTALL_DIR" && git fetch --depth 1 origin main && git reset --hard origin/main || {
             echo "Update failed. Try: rm -rf $INSTALL_DIR && re-run this script"
             exit 1
         }
@@ -102,9 +103,19 @@ else
         }
     fi
 
-    DOC_COUNT=$(find "$INSTALL_DIR/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+    # v2: the clone holds only metadata; fetch the actual pages into the cache.
+    if [ -x "$INSTALL_DIR/plugin/scripts/fetch-docs.sh" ]; then
+        echo "Fetching documentation pages into the cache (this can take a minute)..."
+        "$INSTALL_DIR/plugin/scripts/fetch-docs.sh" sync || echo "Cache sync incomplete — pages fetch on demand."
+    fi
+
+    if command -v jq >/dev/null 2>&1; then
+        DOC_COUNT=$(jq '.pages | length' "$INSTALL_DIR/paths_manifest.json" 2>/dev/null || echo "?")
+    else
+        DOC_COUNT="?"
+    fi
     echo ""
-    echo "Documentation installed: $DOC_COUNT files at $INSTALL_DIR"
+    echo "Documentation installed: $DOC_COUNT pages indexed at $INSTALL_DIR (pages cached in $INSTALL_DIR/cache/)"
     echo ""
     echo "To use with Claude Code later, install the plugin:"
     echo "  /plugin marketplace add costiash/claude-code-docs"
