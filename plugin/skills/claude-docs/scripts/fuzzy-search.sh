@@ -1,83 +1,62 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
-# fuzzy-search.sh — Fuzzy filename matching for Claude documentation
+# fuzzy-search.sh — fuzzy filename/title matching over the v2 manifest.
 # Usage: fuzzy-search.sh <query>
-# Tokenizes query, matches against filenames in docs/, scores by match quality.
-# Output: ranked list of filenames (top 10), one per line.
+#
+# Reads filenames + titles from paths_manifest.json (not the cache), so it works
+# before any page is fetched. Output: ranked filenames (top 10), one per line.
 
-DOCS_DIR="${DOCS_DIR:-${HOME}/.claude-code-docs/docs}"
+set -uo pipefail
+trap '' PIPE
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+CLONE_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
+MANIFEST="${CLAUDE_DOCS_MANIFEST:-$CLONE_ROOT/paths_manifest.json}"
 
 if [ $# -eq 0 ]; then
     echo "Usage: fuzzy-search.sh <query>" >&2
     exit 1
 fi
 
-query=$(echo "$*" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' | xargs)
-
-if [ -z "$query" ]; then
-    echo "No valid query provided" >&2
-    exit 1
-fi
-
-if [ ! -d "$DOCS_DIR" ]; then
-    echo "Documentation directory not found: $DOCS_DIR" >&2
-    exit 1
-fi
+query=$(printf '%s' "$*" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' | xargs)
+[ -n "$query" ] || { echo "No valid query provided" >&2; exit 1; }
+[ -f "$MANIFEST" ] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
 
 read -ra tokens <<< "$query"
+query_hyphen=$(printf '%s' "$query" | tr ' ' '-')
+query_spaced=$(printf '%s' "$query" | tr '-' ' ')
 
 score_file=$(mktemp)
 trap 'rm -f "$score_file"' EXIT
 
-for filepath in "$DOCS_DIR"/*.md; do
-    [ -f "$filepath" ] || continue
-    fname=$(basename "$filepath" .md)
-    fname_lower=$(echo "$fname" | tr '[:upper:]' '[:lower:]' | tr '_' ' ' | tr '-' ' ')
+while IFS=$'\t' read -r fname title; do
+    [ -n "$fname" ] || continue
+    base="${fname%.md}"
+    fname_lower=$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr '_-' '  ')
+    title_lower=$(printf '%s' "$title" | tr '[:upper:]' '[:lower:]')
 
     score=0
+    echo "$fname_lower" | grep -q -- "$query" && score=$((score + 100))
+    [ "$query_hyphen" != "$query" ] && echo "$fname_lower" | grep -q -- "$query_hyphen" && score=$((score + 90))
+    [ "$query_spaced" != "$query" ] && echo "$fname_lower" | grep -q -- "$query_spaced" && score=$((score + 90))
+    [ -n "$title_lower" ] && printf '%s' "$title_lower" | grep -qF -- "$query" && score=$((score + 80))
 
-    # Exact full-query match in filename
-    if echo "$fname_lower" | grep -q "$query"; then
-        score=$((score + 100))
-    fi
-
-    # Also try hyphenated form (e.g., "tool use" → "tool-use")
-    query_hyphen=$(echo "$query" | tr ' ' '-')
-    if [ "$query_hyphen" != "$query" ] && echo "$fname_lower" | grep -q "$query_hyphen"; then
-        score=$((score + 90))
-    fi
-
-    # Also try space form of hyphenated query (e.g., "sub-agents" → "sub agents")
-    query_spaced=$(echo "$query" | tr '-' ' ')
-    if [ "$query_spaced" != "$query" ] && echo "$fname_lower" | grep -q "$query_spaced"; then
-        score=$((score + 90))
-    fi
-
-    matched_tokens=0
+    matched=0
     for token in "${tokens[@]}"; do
-        token_spaced=$(echo "$token" | tr '-' ' ')
-        if echo "$fname_lower" | grep -q "$token" || echo "$fname_lower" | grep -q "$token_spaced"; then
-            # Longer tokens are more specific, weight them higher
-            token_len=${#token}
-            if [ "$token_len" -ge 6 ]; then
-                score=$((score + 15))
-            else
-                score=$((score + 10))
-            fi
-            matched_tokens=$((matched_tokens + 1))
+        token_spaced=$(printf '%s' "$token" | tr '-' ' ')
+        if echo "$fname_lower" | grep -q -- "$token" \
+           || echo "$fname_lower" | grep -q -- "$token_spaced" \
+           || { [ -n "$title_lower" ] && printf '%s' "$title_lower" | grep -qF -- "$token"; }; then
+            if [ "${#token}" -ge 6 ]; then score=$((score + 15)); else score=$((score + 10)); fi
+            matched=$((matched + 1))
         fi
     done
-
-    if [ "$matched_tokens" -eq "${#tokens[@]}" ] && [ "${#tokens[@]}" -gt 1 ]; then
+    if [ "$matched" -eq "${#tokens[@]}" ] && [ "${#tokens[@]}" -gt 1 ]; then
         score=$((score + 50))
     fi
 
-    if [ "$score" -gt 0 ]; then
-        echo -e "${score}\t${fname}.md" >> "$score_file"
-    fi
-done
+    [ "$score" -gt 0 ] && printf '%s\t%s\n' "$score" "$fname" >> "$score_file"
+done < <(jq -r '.pages[] | [.filename, (.title // "")] | @tsv' "$MANIFEST")
 
 sort -t$'\t' -k1 -rn "$score_file" | head -10 | cut -f2
-
 exit 0

@@ -24,47 +24,39 @@ Generate a self-contained HTML report showing recent documentation changes. The 
 
 ### Phase 1: Discover Changes
 
-**Find what changed in the documentation directory:**
+**Find what changed, from the manifest's git history:**
 
 ```bash
-cd ~/.claude-code-docs && git log --since="<timeframe>" --name-status --pretty=format:"%H %ai %s" -- docs/
+~/.claude-code-docs/plugin/scripts/manifest-diff.sh --since <timeframe> --json
 ```
 
 **Default timeframe:** Last 7 days. The user can specify a different window:
-- `/docs --report` → last 7 days
-- `/docs --report 24h` → last 24 hours
-- `/docs --report 30d` → last 30 days
-- `/docs --report 2026-03-20` → since that date
+- `/docs --report` → `--since 7d`
+- `/docs --report 24h` → `--since 24h`
+- `/docs --report 30d` → `--since 30d`
+- `/docs --report 2026-03-20` → `--since 2026-03-20`
 
-**Parse the output:**
-- `A` = Added (new doc)
-- `M` = Modified (updated doc)
-- `D` = Deleted (removed doc)
+**Parse the JSON** — three arrays, each element a full page entry:
+- `added` = new pages
+- `changed` = content changed (keyed off `sha256` deltas, so it catches every real update)
+- `removed` = pages dropped from the manifest
 
-If there are no changes in the timeframe, tell the user and suggest a wider window.
+Each entry already carries `.category`, `.title`, `.url`, `.filename` — no filename-pattern
+categorization needed. Map `category` to a label via `manifest-reference.md`.
 
-**Categorize each file** using the same patterns from `manifest-reference.md`:
+If all three arrays are empty, tell the user and suggest a wider window.
 
-| File pattern | Category | Label |
-|---|---|---|
-| `claude-code__*.md` | cli | Claude Code CLI |
-| `docs__en__agent-sdk__*.md` | sdk | Agent SDK |
-| `docs__en__api__*.md` | api | Claude API |
-| `docs__en__agents-and-tools__*.md` | tools | Agents & Tools |
-| `docs__en__build-with-claude__*.md` | platform | Claude Platform |
-| `docs__en__about-claude__*.md` | about | About Claude |
-| `docs__en__resources__prompt-library__*.md` | prompts | Prompt Library |
-| `docs__en__test-and-evaluate__*.md` | testing | Testing & Evaluation |
-| `docs__en__release-notes__*.md` | releases | Release Notes |
-
-**Limit scope:** If there are more than 30 changed files, focus on the most recent 30 and note how many were omitted.
+**Limit scope:** If there are more than 30 changed pages total, focus on the most recent/notable 30 and note how many were omitted.
 
 ### Phase 2: Analyze Changes
 
-For each changed file (or the most significant ones if there are many):
+For each changed page (or the most significant ones if there are many):
 
-1. **Read the file** to understand the current content
-2. If the file was modified (not new), run `git diff` on it to see what specifically changed
+1. **Read the page** to understand its current content — it's cached at
+   `~/.claude-code-docs/cache/<filename>`; if missing, fetch it first with
+   `~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "<filename>"`.
+2. v2 commits no prose history, so there is no line-level `git diff` — describe the page's
+   **current** content and why it matters (it appeared in `added`/`changed` for this window).
 3. **Extract key points:** What's new? What was updated? What are the highlights?
 4. **Write a 1-2 sentence summary** of the change
 5. **Extract 3-6 bullet points** describing specific additions or updates
@@ -278,9 +270,9 @@ After generating the HTML:
 
 ## URL Generation
 
-Use the same URL rules as the `claude-docs` skill:
-- `claude-code__<page>.md` → `https://code.claude.com/docs/en/<page>`
-- `docs__en__<path>.md` → `https://platform.claude.com/en/docs/<path>` (replace `__` with `/`)
+Each `manifest-diff.sh` entry already includes the exact `.url` field — use it directly.
+(If you need a URL for a filename not in the diff output, look it up:
+`jq -r '.pages[] | select(.filename=="<filename>") | .url' ~/.claude-code-docs/paths_manifest.json`.)
 
 ## Topic Extraction for Course Buttons
 
