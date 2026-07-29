@@ -40,7 +40,7 @@ That's it. On your next session Claude will automatically:
 - **Interactive Courses** — Turn any Claude topic into a stunning, self-contained HTML course with animated diagrams, protocol conversations, quizzes, and code translations. Just say "create a course on hooks" or run `/docs --course <topic>`.
 - **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
 - **Content search** — Shell-based full-text search and fuzzy filename matching, no Python needed
-- **Zero dependencies** — No Python, no jq, no curl. Just Claude Code with plugin support.
+- **Nothing to install** — the client is pure `bash` + `curl` + `jq` (already on macOS/Linux), no Python runtime needed
 
 ## Legacy: Script Install (Migration)
 
@@ -177,7 +177,7 @@ Documentation files across multiple categories, updated every 3 hours:
 | `/docs` not found | Restart Claude Code; for script install check `ls ~/.claude/commands/docs.md` |
 | Docs seem outdated | `/docs -t` to force update, or `cd ~/.claude-code-docs && git pull` |
 | Plugin not working | Run `/plugin list` to verify installation |
-| "Installation cancelled" | Use `CLAUDE_DOCS_AUTO_INSTALL=yes` with the curl install |
+| Script install fails | Install the plugin instead: `/plugin install claude-docs@claude-code-docs` |
 
 ## Uninstalling
 
