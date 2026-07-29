@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-29T04:19:40Z",
+  "generated_at": "2026-07-29T07:13:12Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -240,19 +240,19 @@
         "api",
         "disable",
         "off",
-        "settings",
         "cloud",
+        "settings",
         "must",
+        "google",
         "retention",
+        "error",
         "users",
         "when",
-        "google",
         "platform",
-        "error",
-        "opt",
-        "see"
+        "feedback",
+        "opt"
       ],
-      "word_count": 2224,
+      "word_count": 2284,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -364,7 +364,7 @@
         "runs",
         "example"
       ],
-      "word_count": 2418,
+      "word_count": 2421,
       "file_path": "docs/claude-code__gitlab-ci-cd.md"
     },
     "/claude-code/google-vertex-ai": {
@@ -401,26 +401,26 @@
       "keywords": [
         "claude",
         "code",
-        "example",
         "session",
+        "example",
         "agent",
-        "mode",
         "sdk",
-        "before",
-        "event",
-        "docs",
+        "mode",
+        "when",
         "run",
         "cli",
+        "event",
+        "docs",
+        "before",
+        "field",
         "tools",
         "prompt",
         "output",
-        "response",
+        "mcp",
         "without",
-        "message",
-        "text",
-        "field"
+        "stream"
       ],
-      "word_count": 2619,
+      "word_count": 2922,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -458,8 +458,8 @@
         "hook",
         "hooks",
         "claude",
-        "when",
         "tool",
+        "when",
         "code",
         "field",
         "input",
@@ -467,8 +467,8 @@
         "only",
         "fields",
         "session",
-        "prompt",
         "runs",
+        "prompt",
         "command",
         "output",
         "file",
@@ -476,7 +476,7 @@
         "before",
         "user"
       ],
-      "word_count": 24745,
+      "word_count": 24911,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -502,9 +502,9 @@
         "terminal",
         "character",
         "conversation",
-        "previous"
+        "normal"
       ],
-      "word_count": 4873,
+      "word_count": 4901,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "remote",
         "http"
       ],
-      "word_count": 10839,
+      "word_count": 10857,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -826,21 +826,21 @@
         "code",
         "claude",
         "when",
+        "repository",
+        "see",
         "directory",
         "string",
         "url",
-        "see",
-        "add",
-        "marketplaces",
-        "repository",
         "source",
         "github",
-        "entry",
-        "paths",
+        "add",
+        "marketplaces",
         "sources",
-        "path"
+        "entry",
+        "path",
+        "paths"
       ],
-      "word_count": 8154,
+      "word_count": 8392,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -924,7 +924,7 @@
         "windows",
         "git"
       ],
-      "word_count": 1774,
+      "word_count": 1739,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1008,7 +1008,7 @@
         "corp",
         "example"
       ],
-      "word_count": 15891,
+      "word_count": 15954,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1048,23 +1048,23 @@
         "skills",
         "when",
         "name",
-        "commands",
         "run",
+        "commands",
         "bundled",
-        "subagent",
         "code",
+        "subagent",
         "agent",
         "description",
+        "file",
         "settings",
+        "runs",
         "add",
         "set",
-        "runs",
         "plugin",
-        "file",
         "available",
         "create"
       ],
-      "word_count": 8788,
+      "word_count": 8905,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1106,21 +1106,21 @@
         "agent",
         "tool",
         "main",
+        "code",
         "conversation",
         "session",
-        "code",
         "only",
         "prompt",
+        "version",
         "same",
         "model",
-        "version",
         "context",
         "tools",
         "fork",
-        "background",
-        "task"
+        "run",
+        "background"
       ],
-      "word_count": 11906,
+      "word_count": 12072,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1232,7 +1232,7 @@
         "prompt",
         "when"
       ],
-      "word_count": 5605,
+      "word_count": 5603,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {

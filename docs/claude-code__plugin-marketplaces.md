@@ -259,6 +259,16 @@ The git-based source types below are `github`, `url`, and `git-subdir`. When bot
 
 On most git hosts, including GitHub, GitLab, and Bitbucket, this means installation succeeds even if the branch or tag named by `ref` has since been deleted upstream, as long as the commit is still reachable from the repository. Some servers, such as AWS CodeCommit, don't support fetching commits by SHA. On those servers the `ref` must still exist and the pinned commit must be reachable from it.
 
+<Note>
+  If you distribute this marketplace through [Organization settings > Plugins](https://claude.ai/admin-settings/plugins) on a Team or Enterprise plan, different source rules apply:
+
+  * The marketplace repository must be private or internal. Organization sync reads it through the Claude GitHub App or your organization's GitHub Enterprise App.
+  * Plugin sources of type `github`, `url`, and `git-subdir` are supported. `npm` sources are not.
+  * A plugin source can be private in two cases: a github.com source that shares the marketplace repository's owner, or a source on your organization's GitHub Enterprise host with the GHE App installed on the repository. Organization sync fetches every other source without credentials, so github.com repositories under a different owner and repositories on other hosts, such as GitLab or Bitbucket, must be public.
+
+  To include private plugins, place the plugin folders inside the marketplace repository and reference them with a [relative path](#relative-paths). Organization sync packages each plugin during distribution, so users never need access to a separate source repository. See [Manage plugins for your organization](https://support.claude.com/en/articles/13837433) for the admin workflow.
+</Note>
+
 ### Relative paths
 
 For plugins in the same repository, use a path starting with `./`:
@@ -536,9 +546,15 @@ Any git hosting service works, such as GitLab, Bitbucket, and self-hosted server
 
 ### Private repositories
 
-Claude Code supports installing plugins from private repositories. For manual installation and updates, Claude Code uses your existing git credential helpers, so HTTPS access via `gh auth login`, macOS Keychain, or `git-credential-store` works the same as in your terminal. SSH access works as long as the host is already in your `known_hosts` file and the key is loaded in `ssh-agent`, since Claude Code suppresses interactive SSH prompts for the host fingerprint and key passphrase. GitHub `owner/repo` shorthand sources clone over SSH by default; set [`CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`](/docs/en/env-vars#variables) to clone them over HTTPS instead.
+Claude Code supports installing plugins from private repositories. If you distribute your marketplace through [Organization settings > Plugins](https://claude.ai/admin-settings/plugins) instead, your git credentials aren't involved: organization sync reads the marketplace repository through the Claude GitHub App or your organization's GitHub Enterprise App, and a plugin source it can't authenticate to must be public. The note under [Plugin sources](#plugin-sources) has the full rules.
 
-Background auto-updates work differently. By default, the background refresh disables git credential helpers for its `git pull`, so the pull can't authenticate to private repositories over HTTPS even when a helper is configured. SSH remotes aren't affected: a key loaded in `ssh-agent` authenticates background pulls the same way as manual operations. When the background pull fails, Claude Code falls back to re-cloning the marketplace from scratch. The re-clone does use your stored git credentials, but it can [time out on large repositories](#git-operations-time-out), so private-marketplace auto-updates may fail intermittently.
+#### Commands you run
+
+When you run `/plugin marketplace add`, `/plugin install`, `/plugin update`, or `/plugin marketplace update`, Claude Code uses your existing git credential helpers, so HTTPS access via `gh auth login`, macOS Keychain, or `git-credential-store` works the same as in your terminal. SSH access works as long as the host is already in your `known_hosts` file and the key is loaded in `ssh-agent`, since Claude Code suppresses interactive SSH prompts for the host fingerprint and key passphrase. GitHub `owner/repo` shorthand sources clone over SSH by default; set [`CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`](/docs/en/env-vars#variables) to clone them over HTTPS instead.
+
+#### Background auto-updates
+
+By default, the background refresh disables git credential helpers for its `git pull`, so the pull can't authenticate to private repositories over HTTPS even when a helper is configured. SSH remotes aren't affected: a key loaded in `ssh-agent` authenticates background pulls the same way as the commands you run. When the background pull fails, Claude Code falls back to re-cloning the marketplace from scratch. The re-clone does use your stored git credentials, but it can [time out on large repositories](#git-operations-time-out), so private-marketplace auto-updates may fail intermittently.
 
 Two settings make private marketplaces behave predictably:
 
