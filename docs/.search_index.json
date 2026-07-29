@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-29T15:53:13Z",
+  "generated_at": "2026-07-29T18:38:00Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -990,25 +990,25 @@
         "settings",
         "claude",
         "managed",
-        "source",
-        "json",
         "code",
+        "json",
+        "source",
         "file",
-        "plugins",
         "theme",
         "null",
         "when",
         "set",
+        "plugins",
         "project",
-        "acme",
         "only",
+        "acme",
         "see",
         "tools",
         "user",
-        "corp",
-        "example"
+        "example",
+        "mcp"
       ],
-      "word_count": 15961,
+      "word_count": 15958,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
