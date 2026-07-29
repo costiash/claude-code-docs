@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-07-29T15:10:55.686915Z",
+  "generated_at": "2026-07-29T15:39:16.625813Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9,10 +9,6 @@
       "category": "release_notes",
       "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "headings": [
-        {
-          "text": "Claude Code Changelog",
-          "level": 1
-        },
         {
           "text": "Changelog",
           "level": 1
@@ -1439,7 +1435,7 @@
         "agent": 391,
         "instead": 377,
         "command": 372,
-        "claude": 367,
+        "claude": 363,
         "mode": 353,
         "background": 340,
         "improv": 332,
@@ -1451,9 +1447,9 @@
         "mcp": 251,
         "fail": 242,
         "terminal": 235,
-        "code": 230,
         "plugin": 229,
         "model": 226,
+        "code": 226,
         "server": 223,
         "window": 212,
         "file": 183,
@@ -1476,13 +1472,13 @@
         "fil": 127,
         "token": 126,
         "silently": 126,
-        "via": 124,
         "text": 124,
+        "via": 123,
         "longer": 121,
         "output": 120,
         "message": 119
       },
-      "word_count": 71119
+      "word_count": 71087
     },
     {
       "filename": "claude-code__accessibility.md",
