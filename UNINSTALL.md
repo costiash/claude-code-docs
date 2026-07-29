@@ -1,4 +1,4 @@
-# Uninstalling Claude Code Documentation Mirror
+# Uninstalling Claude Code Docs
 
 ## Plugin Uninstall (Recommended)
 

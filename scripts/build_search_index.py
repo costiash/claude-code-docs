@@ -31,7 +31,7 @@ import os
 import re
 import sys
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List
 
@@ -139,7 +139,7 @@ def build_index(manifest: Dict, scratch_dir: Path) -> Dict:
     print(f"Indexed {len(pages)} pages ({with_content} with content) from {scratch_dir}")
     return {
         "schema_version": INDEX_SCHEMA_VERSION,
-        "generated_at": datetime.now().isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "pages": pages,
     }
 

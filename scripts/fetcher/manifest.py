@@ -24,7 +24,7 @@ dropped, so a transient network error never deletes a page from the manifest.
 """
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -69,7 +69,7 @@ def pages_by_url(manifest: Dict) -> Dict[str, Dict]:
 def build_manifest(pages: List[Dict], sources: List[str], generated_at: Optional[str] = None) -> Dict:
     """Assemble a v2 manifest dict from page entries (pages sorted by id)."""
     if generated_at is None:
-        generated_at = datetime.now().isoformat() + "Z"
+        generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     return {
         "schema_version": MANIFEST_SCHEMA_VERSION,
         "generated_at": generated_at,

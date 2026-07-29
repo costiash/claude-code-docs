@@ -16,7 +16,7 @@
 # Layout (resolved relative to this script's clone, overridable by env):
 #   manifest : $CLAUDE_DOCS_MANIFEST      (default <clone>/paths_manifest.json)
 #   cache    : $CLAUDE_DOCS_CACHE_DIR     (default <clone>/cache)
-#   sidecars : <cache>/.meta/<filename>.json  {sha256, fetched_at, stale_manifest}
+#   sidecars : <cache>/.meta/<filename>.json  {manifest_sha256, content_sha256, fetched_at, stale_manifest}
 #
 # Cache filenames match the manifest's flattened convention (claude-code__hooks.md),
 # so the search skills' globs work unchanged.
@@ -43,6 +43,17 @@ ALLOWED_HOSTS="code.claude.com platform.claude.com raw.githubusercontent.com"
 die() { echo "fetch-docs: $*" >&2; exit 1; }
 
 have_jq() { command -v jq >/dev/null 2>&1; }
+
+# Guard used by every subcommand: jq present, manifest exists AND parses to a JSON
+# object. A truncated/empty/whitespace/wrong-shape manifest must fail loudly here,
+# not read as "0 pages / up to date" downstream. NB: `jq -e .` is NOT enough — jq
+# 1.6 exits 0 on empty/whitespace input; a `type == "object"` test rejects those
+# (and a stray top-level array) while still accepting an empty {"pages":[]}.
+require_manifest() {
+    have_jq || die "jq is required"
+    [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
+    [ "$(jq -r 'type' "$MANIFEST" 2>/dev/null)" = "object" ] || die "manifest is not a valid JSON object: $MANIFEST"
+}
 
 url_host() { printf '%s' "$1" | sed -E 's#^https?://([^/]+).*#\1#'; }
 
@@ -136,8 +147,7 @@ lookup_page() {
 
 cmd_get() {
     [ -n "${1:-}" ] || die "usage: get <filename|id>"
-    have_jq || die "jq is required"
-    [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
+    require_manifest
     local key="$1" row md_url sha filename
     row=$(lookup_page "$key")
     [ -n "$row" ] || die "no manifest entry for '$key'"
@@ -151,8 +161,7 @@ cmd_get() {
 cmd_sync() {
     local background=0
     [ "${1:-}" = "--background" ] && background=1
-    have_jq || die "jq is required"
-    [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
+    require_manifest
 
     if [ "$background" = 1 ]; then
         nohup "$SELF" sync >/dev/null 2>&1 &
@@ -199,8 +208,7 @@ cmd_fetch_line() {
 }
 
 cmd_status() {
-    have_jq || die "jq is required"
-    [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
+    require_manifest
     local total syncable cached=0 pending=0 stale=0
     total=$(jq '.pages | length' "$MANIFEST")
     syncable=$(jq '[.pages[] | select(.sha256 != null)] | length' "$MANIFEST")
@@ -227,8 +235,7 @@ cmd_status() {
 }
 
 cmd_prune() {
-    have_jq || die "jq is required"
-    [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
+    require_manifest
     [ -d "$CACHE_DIR" ] || { echo "fetch-docs: no cache to prune"; return 0; }
     local keep; keep=$(mktemp)
     jq -r '.pages[].filename' "$MANIFEST" | sort > "$keep"

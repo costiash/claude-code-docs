@@ -1,477 +1,140 @@
 # Contributing Guidelines
 
-Thank you for contributing to the Enhanced Claude Code Documentation Mirror!
+Thank you for contributing to **claude-code-docs** — a Claude Code plugin that gives Claude local, searchable access to Anthropic's documentation.
 
-## Project Philosophy
+This repository is a **manifest + client-side fetch** system, not a documentation mirror: it commits only metadata (`paths_manifest.json` + `search_index.json`). End users fetch the actual `.md` pages from Anthropic's servers at runtime into a local cache. **Read [`ARCHITECTURE.md`](./ARCHITECTURE.md) first** — it covers the manifest/index schemas, the fetch pipeline, the safeguards, and the invariant below.
 
-This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) as a native Claude Code plugin:
+## The one rule that matters most
 
-**Core Principle: Plugin-First Architecture**
-- All user-facing features delivered via Claude Code plugin (skills, commands, hooks)
-- Shell scripts in skills provide search capabilities — zero Python dependency for users
-- Python modules in `scripts/` are CI-only (fetching docs, building search index, validation)
-- Single installation path: plugin marketplace
+**Never commit Anthropic documentation prose — not at the tip, not in history.**
 
-**Design Goals:**
-1. **Zero dependencies**: Plugin works with just Claude Code — no Python, jq, or curl required on user machines
-2. **Skill-based search**: Content search and fuzzy matching via shell scripts in plugin skills
-3. **CI integrity**: Python scripts continue powering GitHub Actions workflows unchanged
-4. **Testing**: CI test suite covers Python modules; plugin skills tested manually
+CI fetches pages only to hash them and build a lossy, prose-free index, into the gitignored `.doc_fetch/` scratch dir. The client caches fetched pages under the gitignored `cache/`. The two committed data files store titles, headings, and stemmed word *counts* only — never sentences, previews, positions, or n-grams. If you ever see documentation prose staged for commit, stop.
 
-## Repository URL Strategy
+## Project philosophy
 
-This project uses clear URL conventions:
+**Plugin-first, zero user dependencies.**
 
-### Functional URLs (This Fork)
-For **functional purposes**, use `costiash/claude-code-docs`:
-- Installation scripts
-- Issue tracking and bug reports
-- GitHub Actions / CI/CD
-- Pull requests
-- Status badges
+- All user-facing features ship via the Claude Code plugin (skills, commands, hooks).
+- The client layer is **bash + curl + jq** — no Python on user machines.
+- Python under `scripts/` is **CI-only** (discover pages, fetch + hash into scratch, build the manifest and index). It runs in GitHub Actions and is never installed with the plugin.
+- Single install path: the plugin marketplace. The plugin slug `claude-docs` must not change.
 
-**Examples:**
-```bash
-# Installation
-curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
+## Getting started
 
-# Issues
-https://github.com/costiash/claude-code-docs/issues
+**Prerequisites**
 
-# Actions
-https://github.com/costiash/claude-code-docs/actions
-```
+- Git, Bash
+- For the CI Python scripts: Python 3.9+ and [`uv`](https://github.com/astral-sh/uv)
 
-### Attribution URLs (Upstream)
-For **attribution and credit**, use `ericbuess/claude-code-docs`:
-- "Built on" acknowledgments
-- "Forked from" references
-- Upstream compatibility notes
-- Contribution guidance to original project
-
-**Examples:**
-```markdown
-Built on [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs)
-For upstream contributions, see [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs)
-```
-
-## Getting Started
-
-### Prerequisites
-
-**Required for all contributors:**
-- Git
-- Bash
-- Basic understanding of Claude Code
-
-**For Python features:**
-- Python 3.9+
-- pip package manager
-
-### Fork and Clone
+**Clone**
 
 ```bash
-# Fork on GitHub, then:
-git clone https://github.com/YOUR_USERNAME/claude-code-docs.git
+git clone https://github.com/costiash/claude-code-docs.git
 cd claude-code-docs
-
-# Add upstream remote
-git remote add upstream https://github.com/costiash/claude-code-docs.git
 ```
 
-## Development Workflows
+## Development workflows
 
-### For Plugin Skills
+### Plugin skills (bash — the user-facing layer)
 
-Working on search skills, commands, or hooks:
+The search scripts read the committed `search_index.json` / `paths_manifest.json` and the local `cache/`. Populate a throwaway cache to test against real pages:
 
 ```bash
-cd claude-code-docs
+# Fetch a few pages into an isolated cache (no Python required)
+CLAUDE_DOCS_CACHE_DIR=/tmp/ccd-cache ./plugin/scripts/fetch-docs.sh sync
 
-# Test search scripts manually
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
-DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
+# Search the prose-free index
+./plugin/skills/claude-docs/scripts/content-search.sh hooks matcher
+./plugin/skills/claude-docs/scripts/fuzzy-search.sh agent sdk python
 
-# Test the plugin in Claude Code
-# Install from local source:
-/plugin install claude-docs@/path/to/claude-code-docs/plugin
+# Validate that manifest URLs are reachable (quick sample)
+./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
+
+# Lint every shell script (must be clean at this severity)
+uv run shellcheck --severity=warning plugin/scripts/*.sh plugin/skills/*/scripts/*.sh plugin/hooks/*.sh
 ```
 
 **Files to work on:**
-- `plugin/commands/docs.md` — `/docs` command router
-- `plugin/skills/claude-docs/SKILL.md` — Search skill instructions
-- `plugin/skills/claude-docs/scripts/` — Search shell scripts
-- `plugin/skills/claude-docs-validate/` — Validation skill
-- `plugin/skills/claude-docs-course/` — Interactive course generator (Obsidian & Amber theme)
-- `plugin/skills/claude-docs-changelog/` — Changelog report generator
-- `plugin/hooks/` — SessionStart sync hook
 
-### For CI/CD Scripts (Python)
+- `plugin/commands/docs.md` — the `/docs` command router
+- `plugin/skills/claude-docs/` — search skill + `content-search.sh` / `fuzzy-search.sh`
+- `plugin/skills/claude-docs-validate/` — health / freshness checks
+- `plugin/skills/claude-docs-course/`, `plugin/skills/claude-docs-changelog/` — self-contained HTML generators
+- `plugin/scripts/fetch-docs.sh` — cache `sync` / `get` / `status` / `prune`
+- `plugin/scripts/manifest-diff.sh` — git-history manifest diff (what's-new / changelog)
+- `plugin/hooks/` — SessionStart auto-sync
 
-Working on documentation fetching, search indexing, or CI validation (these run in GitHub Actions, not on user machines):
+### CI/CD scripts (Python — runs in GitHub Actions only)
 
 ```bash
-# Setup Python virtual environment
-python3 -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+# Install dev dependencies
+uv sync --group dev
 
-# Install in development mode
-pip install -e ".[dev]"
+# Run the test suite (network tests excluded)
+uv run pytest tests/ -q -m "not network"
 
-# Run tests (REQUIRED before submitting PR)
-pytest tests/ -v  # All tests must pass
-
-# Test specific changes
-python scripts/lookup_paths.py "your test query"
-python scripts/fetch_claude_docs.py --help
+# Regenerate metadata locally: fetch into the gitignored .doc_fetch/ scratch, then build the index
+DOCS_FETCH_LIMIT=8 python3 scripts/fetch_claude_docs.py   # fast preview
+python3 scripts/build_search_index.py                     # build search_index.json from scratch
 ```
 
 **Files to work on:**
-- `scripts/fetch_claude_docs.py` - Documentation fetcher with auto-regeneration
-- `scripts/lookup_paths.py` - Search & validation
-- `scripts/build_search_index.py` - Full-text search indexing
-- `tests/` - Test suite (run `pytest --collect-only -q` to see current count)
 
-## Code Standards
+- `scripts/fetch_claude_docs.py` — fetcher entry point (thin wrapper)
+- `scripts/fetcher/` — discovery (`llms_txt`, `sitemap`, `discovery`), fetch + hash (`content`, `paths`), `manifest`, `safeguards`, `config`, `cli`
+- `scripts/build_search_index.py` — the prose-free index builder
+- `tests/` — the pytest suite (CI-only)
 
-### Shell Scripts
+## Code standards
 
-**Style Guide:**
-- Use `set -euo pipefail` at top
-- Sanitize ALL user inputs (alphanumeric + safe chars only)
-- Comment complex logic
-- UPPERCASE for environment variables
-- Test on both macOS and Linux
+### Shell scripts
 
-**Example:**
-```bash
-#!/bin/bash
-set -euo pipefail
+- `set -euo pipefail` (or `set -uo pipefail` where a `trap` handles broken pipes, as the client scripts do)
+- Sanitize all user input (alphanumeric + safe characters only)
+- UPPERCASE for environment variables; comment non-obvious logic
+- Must pass `shellcheck --severity=warning`
+- Portable across macOS and Linux
 
-# Claude Code Docs Helper
-# Handles documentation lookups with feature detection
+### Python (CI scripts)
 
-DOCS_DIR="${HOME}/.claude-code-docs/docs"
-TOPIC="${1:-}"
+- Python 3.9+, type hints on function signatures, Google-style docstrings
+- PEP 8, max line length 100
 
-# Sanitize input to prevent injection
-TOPIC="$(echo "$TOPIC" | tr -cd '[:alnum:]-_')"
+## Filename conventions
 
-if [[ -z "$TOPIC" ]]; then
-    echo "Usage: $0 <topic>"
-    exit 1
-fi
-
-# Implementation...
-```
-
-### Python Scripts
-
-**Style Guide:**
-- Python 3.9+ features encouraged
-- Type hints required on all function signatures
-- Docstrings required (Google style)
-- Follow PEP 8 (max line length: 100 chars)
-- Descriptive variable names (lowercase_with_underscores)
-- Format with `black` (optional but recommended)
-
-**Example:**
-```python
-#!/usr/bin/env python3
-"""
-Path search and validation tool.
-
-Provides fuzzy search and HTTP validation for Claude documentation paths.
-"""
-
-from typing import List, Optional
-import json
-
-
-def search_paths(query: str, limit: int = 20, category: Optional[str] = None) -> List[str]:
-    """
-    Search for documentation paths matching the query.
-
-    Uses fuzzy matching with Levenshtein distance for relevance ranking.
-
-    Args:
-        query: Search term (supports partial matches)
-        limit: Maximum results to return (default: 20)
-        category: Optional category filter (e.g., "core_documentation")
-
-    Returns:
-        List of matching paths, sorted by relevance score
-
-    Raises:
-        ValueError: If query is empty or limit is negative
-
-    Example:
-        >>> search_paths("prompt engineering", limit=5)
-        ['/en/docs/build-with-claude/prompt-engineering/overview', ...]
-    """
-    if not query:
-        raise ValueError("Query cannot be empty")
-    if limit < 0:
-        raise ValueError("Limit must be non-negative")
-
-    # Implementation...
-    return []
-```
-
-## File Naming Standards
-
-All documentation files follow a consistent naming convention:
-
-### Format
-
-```
-# Claude Code CLI docs (from code.claude.com)
-claude-code__<page>.md
-
-# Platform docs (from platform.claude.com)
-docs__en__<section>__<page>.md
-```
-
-### Examples
+Cache filenames follow the manifest's flattened convention. URLs are stored **verbatim** in the manifest — never reconstruct a URL from a filename.
 
 | Source URL | Filename |
 |------------|----------|
 | `code.claude.com/docs/en/hooks` | `claude-code__hooks.md` |
-| `platform.claude.com/en/docs/api/messages/create` | `docs__en__api__messages__create.md` |
-| `platform.claude.com/en/docs/agent-sdk/python` | `docs__en__agent-sdk__python.md` |
+| `platform.claude.com/docs/en/agent-sdk/python` | `docs__en__agent-sdk__python.md` |
 
-### Rules
+- `id` = filename without `.md`, with `__` → `/`.
+- Code pages use the full sub-path so nested pages don't collide with top-level ones.
 
-1. **Lowercase only**
-2. **Double underscores** for path separators
-3. **No special characters** except alphanumeric, hyphens, underscores
-4. **Keep `.md` extension**
-5. **Place in `docs/` directory**
-6. **`claude-code__` prefix** for CLI docs, **`docs__en__` prefix** for platform docs
+## Testing requirements
 
-## Testing Requirements
+- All new Python code needs unit tests; keep the suite green with `uv run pytest tests/ -q -m "not network"`.
+- Shell scripts are tested via a mocked-curl harness under `tests/unit/` (see `test_fetch_docs_sh.py`) — no live network in unit tests.
+- The stemming rule in `build_search_index.py` (Python) and `content-search.sh` (jq) must stay **identical**; `tests/unit/test_stem_parity.py` enforces it.
 
-### Manual Testing (Plugin Skills)
+## Pull requests
 
-Test search scripts on both macOS and Linux:
+Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, `test:`). Before opening a PR:
 
-```bash
-# Content search
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
+- [ ] `uv run pytest tests/ -q -m "not network"` is green
+- [ ] `shellcheck --severity=warning` is clean (if you touched shell)
+- [ ] No documentation prose is staged (the invariant above)
+- [ ] Relevant docs updated (`README.md`, `CLAUDE.md`, `ARCHITECTURE.md`)
 
-# Fuzzy search
-DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
+## Getting help
 
-# Validation (quick mode)
-DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
-
-# Or install the plugin locally and test via /docs command
-/plugin install claude-docs@/path/to/claude-code-docs/plugin
-```
-
-### Automated Testing (Python Features)
-
-**All new Python code must have unit tests.**
-
-**Running tests:**
-```bash
-# Run all tests
-pytest
-
-# Run specific test suites
-pytest tests/unit/
-pytest tests/integration/
-pytest tests/validation/
-
-# Check coverage
-pytest --cov=scripts --cov-report=html
-pytest --cov=scripts --cov-report=term
-
-# Run specific test file
-pytest tests/unit/test_lookup_functions.py -v
-
-# Verbose output
-pytest -v
-
-# Stop on first failure
-pytest -x
-```
-
-**Writing tests:**
-```python
-# tests/unit/test_search.py
-import pytest
-from scripts.lookup_paths import search_paths
-
-
-def test_search_paths_basic():
-    """Test basic path search functionality."""
-    results = search_paths("hooks")
-    assert len(results) > 0
-    assert any("hooks" in path.lower() for path in results)
-
-
-def test_search_paths_empty_query():
-    """Test that empty query raises ValueError."""
-    with pytest.raises(ValueError, match="Query cannot be empty"):
-        search_paths("")
-
-
-def test_search_paths_with_limit():
-    """Test limit parameter."""
-    results = search_paths("mcp", limit=5)
-    assert len(results) <= 5
-```
-
-**Current test status:**
-Run `pytest tests/ -v` — all tests must pass before submitting a PR.
-
-## Pull Request Guidelines
-
-### PR Title Format
-
-```
-[scope] Brief description
-
-Examples:
-[fix] Update outdated path counts in helper script
-[feat] Add full-text content search
-[docs] Clarify installation methods in README
-[test] Add tests for auto-regeneration feature
-```
-
-### PR Description Template
-
-```markdown
-## Summary
-[Brief description of changes]
-
-## Changes Made
-- Change 1
-- Change 2
-- Change 3
-
-## Testing
-- [ ] All tests pass (pytest)
-- [ ] Coverage maintained or improved
-- [ ] Manual testing completed
-- [ ] Works without Python (if touching shell scripts)
-- [ ] Works with Python 3.9+ (if touching Python code)
-
-## Documentation
-- [ ] Updated relevant docs (README, CLAUDE.md, etc.)
-- [ ] Added docstrings to new functions
-- [ ] Updated examples if needed
-
-## Related Issues
-Fixes #123
-```
-
-### Review Process
-
-1. **Automated Checks**: CI/CD runs tests automatically
-2. **Code Review**: Maintainer reviews code quality
-3. **Testing**: Functionality verified on macOS and Linux
-4. **Documentation**: Changes must be documented
-5. **Merge**: Approved PRs merged to main branch
-
-## Documentation Requirements
-
-| Feature Type | Documentation Required |
-|-------------|----------------------|
-| Plugin skills | Update SKILL.md, add/update examples |
-| Course/changelog design | Update `references/design-system.md` or `interactive-elements.md` |
-| Shell scripts | Update relevant SKILL.md |
-| Python CI scripts | Update docstrings |
-| Architecture changes | Update CLAUDE.md |
-| User-facing changes | Update README.md |
-
-## Release Process
-
-### Standard Releases
-
-**When to release:**
-- Bug fixes merged
-- Documentation updates
-- No breaking changes
-
-**Process:**
-```bash
-# Update version in install.sh
-# Update CHANGELOG.md
-
-# Tag release
-git tag v0.x.x
-git push origin v0.x.x
-```
-
-### Feature Releases
-
-**When to release:**
-- New Python features complete
-- All tests passing (`pytest tests/`)
-- Documentation updated
-
-**Process:**
-```bash
-# Ensure tests pass
-pytest
-
-# Update versions
-# Edit install.sh, README.md
-
-# Test both basic and Python features
-./install.sh
-pytest tests/ -v
-
-# Tag release
-git tag v0.x.x-feature
-git push origin v0.x.x-feature
-```
-
-## Getting Help
-
-**Questions:**
-- [GitHub Discussions](https://github.com/costiash/claude-code-docs/discussions)
-
-**Bug Reports:**
-- [GitHub Issues](https://github.com/costiash/claude-code-docs/issues)
-- Use bug report template
-- Include: OS, Python version, reproduction steps
-
-**Feature Requests:**
-- [GitHub Issues](https://github.com/costiash/claude-code-docs/issues)
-- Label: `[Feature Request]`
-- Explain: what, why, and which features (shell or Python)
+- Issues & discussions: <https://github.com/costiash/claude-code-docs>
 
 ## Code of Conduct
 
-**Expected Behavior:**
-- Be respectful and inclusive
-- Welcome newcomers
-- Accept constructive criticism gracefully
-- Focus on what's best for the project
-- Show empathy
-
-**Unacceptable Behavior:**
-- Harassment or discrimination
-- Trolling or derogatory remarks
-- Personal attacks
-- Publishing others' private information
-
-**Reporting:**
-Report to maintainers via GitHub Issues or email.
+Be respectful and inclusive, welcome newcomers, accept constructive criticism gracefully, and focus on what's best for the project. Harassment, trolling, personal attacks, and publishing others' private information are not tolerated. Report concerns to the maintainers via GitHub Issues.
 
 ## License
 
-By contributing, you agree to license your contributions under the MIT License. See [LICENSE](./LICENSE) for details.
-
-## Acknowledgments
-
-- [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) - Original implementation
-- [Anthropic](https://www.anthropic.com/) - Claude Code and documentation
-
----
-
-**Ready to contribute?** Fork the repository and start coding! We're excited to see your contributions.
+By contributing, you agree to license your contributions under the MIT License (see [LICENSE](./LICENSE)). The MIT license covers the tool code and the generated metadata only — it grants no rights in Anthropic's documentation, which remains © Anthropic PBC and is fetched at runtime by the end user.
