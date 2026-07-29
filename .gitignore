@@ -93,6 +93,9 @@ docs/
 .last_check
 claude-docs-helper.sh
 
+# Personal Claude working rules (not shared)
+CLAUDE.local.md
+
 # Upstream reference repository (local development only)
 upstream/
 
