@@ -31,6 +31,8 @@ PAGES = {
 STALE = ("docs__en__stale.md", "https://platform.claude.com/docs/en/stale.md", "# Stale\n\nlive content\n")
 # A page on a disallowed host (allowlist test only).
 EVIL = ("evil.md", "https://evil.example.com/docs/en/evil.md", "# Evil\n")
+# A page on an ALLOWED host but with an insecure http:// scheme (https-only guard test).
+INSECURE = ("insecure.md", "http://code.claude.com/docs/en/insecure.md", "# Insecure\n")
 
 FAKE_CURL = r'''#!/usr/bin/env python3
 import sys, os, json
@@ -87,6 +89,8 @@ def harness(tmp_path):
     content_map[surl] = sc
     # evil content available too (used only when a test adds the evil page to the manifest)
     content_map[EVIL[1]] = EVIL[2]
+    # insecure http page available too — the guard must block BEFORE curl is ever reached
+    content_map[INSECURE[1]] = INSECURE[2]
 
     manifest_path = clone / "paths_manifest.json"
     manifest_path.write_text(json.dumps({"schema_version": 2, "pages": pages}))
@@ -113,6 +117,12 @@ def run(env, *args):
 def add_evil(manifest_path):
     data = json.loads(manifest_path.read_text())
     data["pages"].append(_entry(EVIL[0], EVIL[1], EVIL[2], category="core_documentation"))
+    manifest_path.write_text(json.dumps(data))
+
+
+def add_insecure(manifest_path):
+    data = json.loads(manifest_path.read_text())
+    data["pages"].append(_entry(INSECURE[0], INSECURE[1], INSECURE[2], category="core_documentation"))
     manifest_path.write_text(json.dumps(data))
 
 
@@ -171,6 +181,14 @@ class TestGet:
         assert r.returncode != 0
         assert "disallowed host" in r.stderr
         assert not (cache / "evil.md").exists()
+
+    def test_get_non_https_refused(self, harness):
+        env, cache, manifest_path = harness
+        add_insecure(manifest_path)
+        r = run(env, "get", "insecure.md")
+        assert r.returncode != 0
+        assert "non-https" in r.stderr
+        assert not (cache / "insecure.md").exists()
 
 
 class TestRetry:

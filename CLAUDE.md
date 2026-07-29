@@ -20,7 +20,7 @@ This repository delivers documentation via a **Claude Code plugin**. The plugin 
 - **`/docs` command** — Routes queries to the appropriate skill
 - **`claude-docs/` skill** — Auto-discovery + search (content search, fuzzy matching, direct lookups)
 - **`claude-docs-validate/` skill** — Documentation health checks and freshness validation
-- **SessionStart hook** — Auto-updates docs via `git pull` on each session start
+- **SessionStart hook** — Auto-updates docs via `git reset --hard origin/main` on each session start
 
 ### Plugin Structure
 
@@ -37,10 +37,11 @@ plugin/
 │   │   ├── SKILL.md              # Health check instructions
 │   │   ├── examples/             # Worked examples
 │   │   └── scripts/              # validate-paths.sh
-│   └── claude-docs-course/       # Interactive course generator
-│       ├── SKILL.md              # Course generation workflow (Obsidian & Amber theme)
-│       ├── references/           # design-system.md, interactive-elements.md
-│       └── examples/             # Worked examples
+│   ├── claude-docs-course/       # Interactive course generator
+│   │   ├── SKILL.md              # Course generation workflow (Obsidian & Amber theme)
+│   │   ├── references/           # design-system.md, interactive-elements.md
+│   │   └── examples/             # Worked examples
+│   └── claude-docs-changelog/    # Changelog report generator (SKILL.md + examples/)
 └── hooks/                        # SessionStart auto-sync
 ```
 
@@ -170,7 +171,7 @@ canonical URL; llms.txt supplies titles/coverage, sitemaps supply `lastmod`):
 
 Files are named based on their source:
 - Claude Code CLI docs: `claude-code__<page>.md` (e.g., `claude-code__hooks.md`) → `https://code.claude.com/docs/en/<page>`
-- Platform docs: `docs__en__<section>__<page>.md` (e.g., `docs__en__agent-sdk__python.md`) → `https://platform.claude.com/en/docs/<section>/<page>`
+- Platform docs: `docs__en__<section>__<page>.md` (e.g., `docs__en__agent-sdk__python.md`) → `https://platform.claude.com/docs/en/<section>/<page>`
 
 ## Working on This Repository
 

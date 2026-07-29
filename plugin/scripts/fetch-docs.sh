@@ -96,6 +96,11 @@ needs_fetch() {
 # Core single-page fetch. Args: filename, md_url, expected_sha ("" or "null" to skip check).
 fetch_one() {
     local filename="$1" md_url="$2" expected="$3"
+    # https-only: reject any non-https scheme before touching the network (defense in depth beside the host allowlist)
+    case "$md_url" in
+        https://*) ;;
+        *) echo "fetch-docs: refusing non-https URL for $filename" >&2; return 1 ;;
+    esac
     local host; host=$(url_host "$md_url")
     if ! host_allowed "$host"; then
         echo "fetch-docs: refusing disallowed host '$host' for $filename" >&2
