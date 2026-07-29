@@ -77,6 +77,9 @@ extracted_paths.txt
 extracted_paths_clean.txt
 sample_paths.txt
 
+# Ephemeral fetch scratch dir (v2 pipeline fetches .md here to hash + index; never committed)
+.doc_fetch/
+
 # ============================================================================
 # Project Specific
 # ============================================================================

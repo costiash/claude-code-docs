@@ -8,7 +8,7 @@ This module handles:
 """
 
 import xml.etree.ElementTree as ET
-from typing import List, Tuple
+from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse
 
 import requests
@@ -51,6 +51,81 @@ def discover_from_all_sitemaps(session: requests.Session) -> List[str]:
     logger.info(f"Total unique paths discovered from {successful_sitemaps} sitemaps: {len(unique_paths)}")
 
     return unique_paths
+
+
+def discover_sitemap_entries(session: requests.Session) -> List[Dict[str, Optional[str]]]:
+    """
+    Discover English documentation pages from all sitemaps as full URLs + lastmod.
+
+    Unlike :func:`discover_from_all_sitemaps` (which returns bare, host-stripped
+    paths), this keeps the verbatim ``<loc>`` URL so the host is preserved, and
+    captures ``<lastmod>`` when present. This is the v2 discovery primitive.
+
+    Args:
+        session: Requests session for connection pooling.
+
+    Returns:
+        List of ``{url, lastmod}`` dicts (``lastmod`` is ``None`` when the sitemap
+        omits it — platform.claude.com's sitemap has no lastmod). De-duplicated by
+        canonical URL and sorted.
+
+    Raises:
+        Exception: If no entries could be discovered from any sitemap.
+    """
+    namespace = {"ns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    entries: Dict[str, Optional[str]] = {}
+
+    for sitemap_url in SITEMAP_URLS:
+        try:
+            logger.info(f"Discovering sitemap entries from: {sitemap_url}")
+            response = session.get(sitemap_url, headers=HEADERS, timeout=30)
+            response.raise_for_status()
+            root = _parse_xml_safely(response.content)
+        except Exception as e:
+            logger.warning(f"  Failed to discover from {sitemap_url}: {e}")
+            continue
+
+        url_elems = root.findall(".//ns:url", namespace) or root.findall(".//url")
+        for url_elem in url_elems:
+            loc_elem = url_elem.find("ns:loc", namespace)
+            if loc_elem is None:
+                loc_elem = url_elem.find("loc")
+            if loc_elem is None or not loc_elem.text:
+                continue
+
+            parsed = urlparse(loc_elem.text.strip())
+            path = parsed.path
+            if path.endswith(".html"):
+                path = path[:-5]
+            path = path.rstrip("/")
+
+            # English documentation pages only (exclude /de/, /fr/, ... and non-doc URLs)
+            if not (path.startswith("/docs/en/") or path.startswith("/en/")):
+                continue
+            if any(skip in path for skip in ("/examples/", "/legacy/")):
+                continue
+
+            canonical = f"{parsed.scheme}://{parsed.netloc}{path}"
+
+            lastmod_elem = url_elem.find("ns:lastmod", namespace)
+            if lastmod_elem is None:
+                lastmod_elem = url_elem.find("lastmod")
+            lastmod = (
+                lastmod_elem.text.strip()
+                if lastmod_elem is not None and lastmod_elem.text
+                else None
+            )
+
+            # First occurrence wins, but prefer a real lastmod over None.
+            if canonical not in entries or (entries[canonical] is None and lastmod):
+                entries[canonical] = lastmod
+
+    if not entries:
+        raise Exception("Could not discover any entries from sitemaps")
+
+    result = [{"url": url, "lastmod": entries[url]} for url in sorted(entries)]
+    logger.info(f"Discovered {len(result)} English sitemap entries (with lastmod where available)")
+    return result
 
 
 def discover_sitemap_and_base_url(session: requests.Session) -> Tuple[str, str]:
