@@ -80,6 +80,9 @@ sample_paths.txt
 # Ephemeral fetch scratch dir (v2 pipeline fetches .md here to hash + index; never committed)
 .doc_fetch/
 
+# v2: documentation prose is NOT committed. docs/ is legacy/scratch only — never tracked.
+docs/
+
 # ============================================================================
 # Project Specific
 # ============================================================================
@@ -159,7 +162,6 @@ Pipfile.lock
 # Keep Important Directories (Explicit)
 # ============================================================================
 
-!docs/
 !scripts/
 !tests/
 !.github/
