@@ -1,122 +1,84 @@
 """
-Manifest file operations for tracking fetched documentation.
+Manifest v2 read/write.
 
-This module handles loading, saving, and validating the docs_manifest.json
-file that tracks all fetched documentation files.
+The v2 manifest lives at the repo root (``paths_manifest.json``) and is the
+single source of truth. Shape::
+
+    {
+      "schema_version": 2,
+      "generated_at": "2026-07-29T...Z",
+      "sources": ["https://code.claude.com/docs/llms.txt", ...],
+      "pages": [
+        { "id": "claude-code/hooks", "filename": "claude-code__hooks.md",
+          "url": "https://code.claude.com/docs/en/hooks",
+          "md_url": "https://code.claude.com/docs/en/hooks.md",
+          "title": "Hooks", "category": "claude_code",
+          "sha256": "...", "lastmod": "2026-07-...Z", "fetch_status": "ok" },
+        ...
+      ]
+    }
+
+``pages`` is the *discovery result*, not a successful-fetches-only list: a page
+whose fetch fails is carried forward (``fetch_status: "stale"``) rather than
+dropped, so a transient network error never deletes a page from the manifest.
 """
 
 import json
-import os
-import re
-import subprocess
 from datetime import datetime
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List, Optional
 
-from .config import MANIFEST_FILE, logger
+from .config import MANIFEST_SCHEMA_VERSION, PATHS_MANIFEST_FILE, logger
 
 
-def load_manifest(docs_dir: Path) -> Dict:
+def manifest_path(repo_root: Path) -> Path:
+    """Path to the v2 manifest at the repo root."""
+    return repo_root / PATHS_MANIFEST_FILE
+
+
+def load_manifest(path: Path) -> Dict:
     """
-    Load the manifest of previously fetched files.
+    Load the existing v2 manifest, or return an empty one.
 
-    Args:
-        docs_dir: Path to the docs directory
-
-    Returns:
-        Manifest dictionary with 'files' and 'last_updated' keys
+    A missing file, unreadable JSON, or a non-v2 (e.g. legacy ``{metadata,
+    categories}``) manifest all yield an empty ``{schema_version, pages: []}`` —
+    so the first v2 run has nothing to carry forward and is treated as a clean
+    start (not a mass removal).
     """
-    manifest_path = docs_dir / MANIFEST_FILE
-    if manifest_path.exists():
+    if path.exists():
         try:
-            manifest = json.loads(manifest_path.read_text())
-            # Ensure required keys exist
-            if "files" not in manifest:
-                manifest["files"] = {}
-            return manifest
+            data = json.loads(path.read_text())
+            if data.get("schema_version") == MANIFEST_SCHEMA_VERSION and isinstance(
+                data.get("pages"), list
+            ):
+                return data
+            logger.info(
+                f"{path.name} is not a v2 manifest (schema_version="
+                f"{data.get('schema_version')!r}); treating as empty for this run."
+            )
         except Exception as e:
-            logger.warning(f"Failed to load manifest: {e}")
-    return {"files": {}, "last_updated": None}
+            logger.warning(f"Failed to load manifest {path}: {e}")
+    return {"schema_version": MANIFEST_SCHEMA_VERSION, "pages": []}
 
 
-def save_manifest(docs_dir: Path, manifest: Dict) -> None:
-    """
-    Save the manifest of fetched files.
-
-    Args:
-        docs_dir: Path to the docs directory
-        manifest: Manifest dictionary to save
-    """
-    manifest_path = docs_dir / MANIFEST_FILE
-    manifest["last_updated"] = datetime.now().isoformat()
-
-    # Get GitHub repository from environment or use default
-    github_repo = os.environ.get('GITHUB_REPOSITORY', 'costiash/claude-code-docs')
-    github_ref = os.environ.get('GITHUB_REF_NAME', 'main')
-
-    # Validate repository name format (owner/repo)
-    if not re.match(r'^[\w.-]+/[\w.-]+$', github_repo):
-        logger.warning(f"Invalid repository format: {github_repo}, using default")
-        github_repo = 'costiash/claude-code-docs'
-
-    # Validate branch/ref name
-    if not re.match(r'^[\w.-]+$', github_ref):
-        logger.warning(f"Invalid ref format: {github_ref}, using default")
-        github_ref = 'main'
-
-    manifest["base_url"] = f"https://raw.githubusercontent.com/{github_repo}/{github_ref}/docs/"
-    manifest["github_repository"] = github_repo
-    manifest["github_ref"] = github_ref
-    manifest["description"] = "Claude Code documentation manifest. Keys are filenames, append to base_url for full URL."
-    manifest_path.write_text(json.dumps(manifest, indent=2))
+def pages_by_url(manifest: Dict) -> Dict[str, Dict]:
+    """Index a manifest's pages by canonical URL (for carry-forward lookup)."""
+    return {p["url"]: p for p in manifest.get("pages", []) if p.get("url")}
 
 
-def validate_repository_config(manifest: Dict) -> None:
-    """
-    Validate that manifest repository matches actual git repository.
+def build_manifest(pages: List[Dict], sources: List[str], generated_at: Optional[str] = None) -> Dict:
+    """Assemble a v2 manifest dict from page entries (pages sorted by id)."""
+    if generated_at is None:
+        generated_at = datetime.now().isoformat() + "Z"
+    return {
+        "schema_version": MANIFEST_SCHEMA_VERSION,
+        "generated_at": generated_at,
+        "sources": sources,
+        "pages": sorted(pages, key=lambda p: p["id"]),
+    }
 
-    Warns if there's a mismatch to catch configuration issues.
 
-    Args:
-        manifest: Manifest dictionary to validate
-    """
-    try:
-        # Get actual git repository from remote origin
-        result = subprocess.run(
-            ['git', 'remote', 'get-url', 'origin'],
-            capture_output=True,
-            text=True,
-            timeout=5
-        )
-
-        if result.returncode == 0:
-            git_url = result.stdout.strip()
-
-            # Extract owner/repo from git URL
-            # Handles both HTTPS and SSH formats:
-            # - https://github.com/costiash/claude-code-docs.git
-            # - git@github.com:costiash/claude-code-docs.git
-            if 'github.com' in git_url:
-                # Extract the owner/repo part
-                if git_url.startswith('git@github.com:'):
-                    repo_part = git_url.replace('git@github.com:', '').replace('.git', '')
-                elif 'github.com/' in git_url:
-                    repo_part = git_url.split('github.com/')[-1].replace('.git', '')
-                else:
-                    return  # Can't parse, skip validation
-
-                # Compare with manifest
-                manifest_repo = manifest.get('github_repository', '')
-
-                if manifest_repo and repo_part != manifest_repo:
-                    logger.warning("=" * 70)
-                    logger.warning("⚠️  REPOSITORY MISMATCH DETECTED!")
-                    logger.warning(f"   Git repository: {repo_part}")
-                    logger.warning(f"   Manifest repository: {manifest_repo}")
-                    logger.warning("   This may cause documentation to be fetched from wrong source.")
-                    logger.warning("   Consider updating GITHUB_REPOSITORY environment variable or")
-                    logger.warning("   updating the default in this script.")
-                    logger.warning("=" * 70)
-    except Exception as e:
-        # Don't fail on validation errors - this is just a warning
-        logger.debug(f"Could not validate repository config: {e}")
+def save_manifest(path: Path, manifest: Dict) -> None:
+    """Write a v2 manifest to disk (pretty-printed, trailing newline)."""
+    path.write_text(json.dumps(manifest, indent=2) + "\n")
+    logger.info(f"Wrote v2 manifest: {len(manifest.get('pages', []))} pages -> {path}")

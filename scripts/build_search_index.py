@@ -1,166 +1,183 @@
 #!/usr/bin/env python3
 """
-Build full-text search index from documentation files.
+Build the v2 search index (prose-free) from the fetch scratch dir + manifest.
 
-This script:
-1. Reads all markdown files in docs/
-2. Extracts title, content, keywords
-3. Builds searchable index
-4. Saves to docs/.search_index.json
+Output: repo-root ``search_index.json``. Per page::
+
+    { "filename": "claude-code__hooks.md", "id": "claude-code/hooks",
+      "title": "Hooks", "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "headings": [ {"text": "Configuration", "level": 2}, ... ],  # anchor = slugify(text), not stored
+      "terms": { "hook": 12, "matcher": 5, ... },   # stemmed word -> frequency, capped
+      "word_count": 1234 }
+
+FORBIDDEN (spec): ``content_preview``, sentence fragments, token positions,
+n-grams, or any absolute ``file_path`` — nothing from which prose can be
+reconstructed. Only titles, headings, and a capped bag of stemmed word counts.
+
+Title / category / url come from the manifest (the source of truth); headings /
+terms / word_count come from the fetched ``.md`` content in the scratch dir. A
+manifest page whose content is missing (fetch failed/stale) is still indexed by
+title so it stays findable.
+
+STEMMING CONTRACT (must be mirrored EXACTLY on the shell query side, B3):
+strip the first matching suffix from the ordered list ("ing", "ed", "es", "s")
+only if at least 3 characters remain; casefold first; applied AFTER stop-word
+filtering. B6 cross-checks the Python and shell implementations over a word list.
 """
 
 import json
+import os
 import re
-from pathlib import Path
-from typing import Dict, List, Set, Tuple
+import sys
 from collections import Counter
-import time
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+INDEX_SCHEMA_VERSION = 2
+MAX_TERMS = 50
 
-DOCS_DIR = Path("docs")
-INDEX_FILE = DOCS_DIR / ".search_index.json"
 STOP_WORDS = {
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
     'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
     'to', 'was', 'will', 'with', 'or', 'but', 'not', 'can', 'this',
-    'we', 'you', 'all', 'if', 'have', 'do', 'use', 'your', 'how'
+    'we', 'you', 'all', 'if', 'have', 'do', 'use', 'your', 'how',
+    'when', 'which', 'what', 'they', 'their', 'them', 'these', 'those',
+    'there', 'then', 'than', 'into', 'out', 'over', 'more', 'may',
 }
 
-
-def extract_title(content: str) -> str:
-    """Extract title from markdown (first # heading)"""
-    match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
-    return match.group(1).strip() if match else "Untitled"
+_SUFFIXES = ("ing", "ed", "es", "s")
+_MIN_STEM = 3
 
 
-def extract_keywords(content: str, top_n: int = 20) -> List[str]:
-    """Extract top keywords from content"""
-    # Remove markdown syntax
-    text = re.sub(r'```[\s\S]*?```', '', content)  # Code blocks
-    text = re.sub(r'`[^`]+`', '', text)  # Inline code
-    text = re.sub(r'##+\s*', '', text)  # Headers
-    text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)  # Links
-    text = re.sub(r'[^a-zA-Z\s]', ' ', text)  # Non-alpha chars
-
-    # Extract words
-    words = re.findall(r'\b[a-z]{3,}\b', text.lower())
-
-    # Filter stop words
-    words = [w for w in words if w not in STOP_WORDS]
-
-    # Count and return top N
-    counter = Counter(words)
-    return [word for word, count in counter.most_common(top_n)]
+def stem(word: str) -> str:
+    """Light suffix stemmer — see the STEMMING CONTRACT in the module docstring."""
+    w = word.lower()
+    for suffix in _SUFFIXES:
+        if w.endswith(suffix) and len(w) - len(suffix) >= _MIN_STEM:
+            return w[: -len(suffix)]
+    return w
 
 
-def path_from_file(file_path: Path, docs_dir: Path) -> str:
+def slugify(text: str) -> str:
+    """GitHub-style heading anchor: lowercase, non-alphanumerics → '-', collapsed."""
+    s = text.lower()
+    s = re.sub(r"[^a-z0-9\s-]", "", s)
+    s = re.sub(r"[\s-]+", "-", s)
+    return s.strip("-")
+
+
+def _strip_code_blocks(content: str) -> str:
+    """Remove fenced code blocks so their contents don't pollute headings/terms."""
+    return re.sub(r"```[\s\S]*?```", " ", content)
+
+
+def extract_headings(content: str) -> List[Dict]:
     """
-    Convert file path back to URL path.
+    Extract markdown headings (levels 1-6) as ``{text, level}``, excluding code blocks.
 
-    docs/en/docs/build-with-claude__prompt-engineering.md
-    -> /en/docs/build-with-claude/prompt-engineering
+    Anchors are intentionally NOT stored: ``anchor == slugify(text)`` deterministically,
+    so a consumer that needs a deep-link fragment recomputes it. Storing them doubled
+    the heading payload (~435 KB on 725 pages) for zero added information.
     """
-    relative_path = file_path.relative_to(docs_dir)
-    path_str = str(relative_path.with_suffix(''))
-
-    # Handle double underscore conversion
-    path_str = path_str.replace('__', '/')
-
-    # Ensure starts with /
-    if not path_str.startswith('/'):
-        path_str = '/' + path_str
-
-    return path_str
+    body = _strip_code_blocks(content)
+    headings = []
+    for match in re.finditer(r"^(#{1,6})\s+(.+?)\s*#*\s*$", body, re.MULTILINE):
+        text = match.group(2).strip()
+        if not text:
+            continue
+        headings.append({"text": text, "level": len(match.group(1))})
+    return headings
 
 
-def index_file(file_path: Path, docs_dir: Path) -> Tuple[str, Dict]:
-    """Index a single markdown file"""
-    try:
-        content = file_path.read_text(encoding='utf-8', errors='ignore')
-    except Exception as e:
-        print(f"  ✗ Error reading {file_path}: {e}")
-        return None, None
+def extract_terms(content: str, cap: int = MAX_TERMS) -> Dict[str, int]:
+    """Extract a capped bag of stemmed word frequencies (stop-words removed)."""
+    text = _strip_code_blocks(content)
+    text = re.sub(r"`[^`]+`", " ", text)                       # inline code
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)       # links -> link text
+    text = re.sub(r"[^a-zA-Z\s]", " ", text)                   # drop non-alpha
 
-    # Extract path
-    doc_path = path_from_file(file_path, docs_dir)
-
-    # Extract metadata
-    title = extract_title(content)
-    keywords = extract_keywords(content)
-    word_count = len(content.split())
-
-    # Content preview (first 200 chars, cleaned)
-    preview = content[:300].replace('\n', ' ').strip()
-    if len(preview) == 300:
-        preview = preview[:200] + "..."
-
-    doc_data = {
-        "title": title,
-        "content_preview": preview,
-        "keywords": keywords,
-        "word_count": word_count,
-        "file_path": str(file_path)
-    }
-
-    return doc_path, doc_data
+    counter: Counter = Counter()
+    for raw in re.findall(r"\b[a-z]{3,}\b", text.lower()):
+        if raw in STOP_WORDS:
+            continue
+        counter[stem(raw)] += 1
+    return dict(counter.most_common(cap))
 
 
-def build_index(docs_dir: Path = DOCS_DIR) -> Dict:
-    """Build search index from all markdown files"""
-    index = {}
-
-    # Find all markdown files
-    md_files = sorted(docs_dir.rglob("*.md"))
-
-    print(f"Indexing {len(md_files)} markdown files...")
-
-    success_count = 0
-    error_count = 0
-
-    for md_file in md_files:
-        doc_path, doc_data = index_file(md_file, docs_dir)
-        if doc_path and doc_data:
-            index[doc_path] = doc_data
-            success_count += 1
-            print(f"  ✓ {doc_path}")
-        else:
-            error_count += 1
-
-    print(f"\nIndexing complete:")
-    print(f"  Success: {success_count}")
-    print(f"  Errors: {error_count}")
-
+def index_page(entry: Dict, content: str) -> Dict:
+    """Build one index record from a manifest entry + (possibly empty) content."""
     return {
-        "version": "1.0",
-        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "indexed_files": len(index),
-        "index": index
+        "filename": entry["filename"],
+        "id": entry.get("id", entry["filename"]),
+        "title": entry.get("title") or "Untitled",
+        "category": entry.get("category", "core_documentation"),
+        "url": entry.get("url", ""),
+        "headings": extract_headings(content) if content else [],
+        "terms": extract_terms(content) if content else {},
+        "word_count": len(content.split()) if content else 0,
     }
 
 
-def save_index(index: Dict, output_file: Path = INDEX_FILE):
-    """Save index to JSON file"""
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_file, 'w') as f:
-        json.dump(index, f, indent=2)
+def build_index(manifest: Dict, scratch_dir: Path) -> Dict:
+    """Build the full v2 index from a manifest and the scratch content dir."""
+    pages = []
+    with_content = 0
+    for entry in manifest.get("pages", []):
+        md_path = scratch_dir / entry["filename"]
+        content = ""
+        if md_path.exists():
+            try:
+                content = md_path.read_text(encoding="utf-8", errors="ignore")
+                with_content += 1
+            except Exception as e:
+                print(f"  ! could not read {md_path}: {e}", file=sys.stderr)
+        pages.append(index_page(entry, content))
 
-    print(f"\n{'='*60}")
-    print(f"✅ SEARCH INDEX SAVED")
-    print(f"   Output: {output_file}")
-    print(f"   Files indexed: {index['indexed_files']}")
-    print(f"   File size: {output_file.stat().st_size / 1024:.1f} KB")
-    print(f"{'='*60}")
+    print(f"Indexed {len(pages)} pages ({with_content} with content) from {scratch_dir}")
+    return {
+        "schema_version": INDEX_SCHEMA_VERSION,
+        "generated_at": datetime.now().isoformat() + "Z",
+        "pages": pages,
+    }
+
+
+def save_index(index: Dict, path: Path) -> None:
+    path.write_text(json.dumps(index, indent=2) + "\n")
+    size_kb = path.stat().st_size / 1024
+    print(f"Wrote v2 search index: {len(index['pages'])} pages, {size_kb:.1f} KB -> {path}")
+
+
+def main() -> None:
+    scratch_dir = Path(
+        os.environ.get("DOCS_SCRATCH_DIR", str(REPO_ROOT / ".doc_fetch"))
+    )
+    manifest_path = REPO_ROOT / "paths_manifest.json"
+    index_path = REPO_ROOT / "search_index.json"
+    # Floor guard: refuse to build over an empty/tiny scratch (fail loudly, don't
+    # silently commit a content-less index). Set DOCS_INDEX_MIN_FILES=0 to disable.
+    min_files = int(os.environ.get("DOCS_INDEX_MIN_FILES", "250") or "0")
+
+    if not manifest_path.exists():
+        print(f"ERROR: manifest not found at {manifest_path}", file=sys.stderr)
+        sys.exit(1)
+
+    md_count = len(list(scratch_dir.glob("*.md"))) if scratch_dir.exists() else 0
+    if md_count < min_files:
+        print(
+            f"ERROR: scratch dir {scratch_dir} has {md_count} .md files "
+            f"(minimum {min_files}). Refusing to build a content-less index. "
+            f"Run the fetcher first, or set DOCS_INDEX_MIN_FILES=0 for a partial build.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    manifest = json.loads(manifest_path.read_text())
+    index = build_index(manifest, scratch_dir)
+    save_index(index, index_path)
 
 
 if __name__ == "__main__":
-    import sys
-
-    docs_directory = DOCS_DIR
-    if len(sys.argv) > 1:
-        docs_directory = Path(sys.argv[1])
-
-    print(f"Building search index from {docs_directory}/...")
-    index = build_index(docs_directory)
-    save_index(index)
-
-    print(f"\n✅ Complete! Search index ready for use.")
+    main()

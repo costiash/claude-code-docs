@@ -29,11 +29,35 @@ SITEMAP_URLS = [
 ]
 # REMOVED (broken): docs.claude.com, docs.anthropic.com
 
+# llms.txt sources — markdown lists of "title + .md URL + description" per page.
+# Used together with the sitemaps (union discovery): llms.txt supplies titles,
+# descriptions, and coverage the sitemap-only path (e.g. agent-sdk) fetch missed;
+# the sitemap supplies <lastmod>. See scripts/fetcher/discovery.py.
+LLMS_TXT_URLS = [
+    "https://code.claude.com/docs/llms.txt",     # Claude Code + Agent SDK (on code.claude.com)
+    "https://platform.claude.com/llms.txt",      # Platform API, guides, prompt library
+]
+
 
 # =============================================================================
 # FILE CONFIGURATION
 # =============================================================================
-MANIFEST_FILE = "docs_manifest.json"
+MANIFEST_FILE = "docs_manifest.json"  # legacy v1 manifest (docs/); removed in cutover
+
+# v2 manifest (repo root, single source of truth) — see scripts/fetcher/manifest.py
+MANIFEST_SCHEMA_VERSION = 2
+PATHS_MANIFEST_FILE = "paths_manifest.json"
+
+# Ephemeral scratch dir the v2 fetcher writes .md into (to hash + feed the index).
+# Never committed; overridable so Verify runs don't churn the tracked docs/ tree.
+DEFAULT_SCRATCH_DIR = ".doc_fetch"
+
+# Domains the fetcher (and the client fetch layer, B1) are allowed to request.
+ALLOWED_DOMAINS = (
+    "code.claude.com",
+    "platform.claude.com",
+    "raw.githubusercontent.com",  # changelog.md source
+)
 
 
 # =============================================================================

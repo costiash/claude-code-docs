@@ -10,6 +10,7 @@ This module handles:
 
 import hashlib
 import random
+import re
 import time
 from pathlib import Path
 from typing import Tuple
@@ -22,11 +23,6 @@ from .config import (
     RETRY_DELAY,
     MAX_RETRY_DELAY,
     logger,
-)
-from .paths import (
-    url_to_safe_filename,
-    convert_legacy_path_to_fetch_url,
-    get_base_url_for_path,
 )
 
 
@@ -73,9 +69,14 @@ def validate_markdown_content(content: str, filename: str) -> None:
                 indicator_count += 1
                 break
 
-    # Require at least some markdown formatting
+    # The .md endpoint returns authoritative markdown; HTML and too-short content
+    # are already hard-rejected above. A low indicator count only means the page is
+    # sparse (e.g. a stub "overview" that is mostly links/cards) — warn, don't reject,
+    # or we drop valid pages every single run.
     if indicator_count < 3:
-        raise ValueError(f"Content doesn't appear to be markdown (only {indicator_count} markdown indicators found)")
+        logger.warning(
+            f"{filename}: only {indicator_count} markdown indicator(s) — sparse page, accepting"
+        )
 
     # Check for common documentation patterns
     doc_patterns = ['installation', 'usage', 'example', 'api', 'configuration', 'claude', 'code']
@@ -86,39 +87,37 @@ def validate_markdown_content(content: str, filename: str) -> None:
         logger.warning(f"Content for {filename} doesn't contain expected documentation patterns")
 
 
-def fetch_markdown_content(path: str, session: requests.Session, base_url: str) -> Tuple[str, str]:
+def extract_title(content: str) -> str:
+    """Extract the page title from markdown (first ``# `` heading), else ``"Untitled"``."""
+    match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+    return match.group(1).strip() if match else "Untitled"
+
+
+def fetch_markdown(md_url: str, session: requests.Session, label: str = "") -> str:
     """
-    Fetch markdown content with better error handling and validation.
+    Fetch a markdown page from its verbatim ``.md`` URL.
+
+    URLs are stored verbatim in the v2 manifest (correct host preserved), so this
+    fetches exactly what discovery recorded — no base-URL reconstruction.
 
     Args:
-        path: URL path from manifest (may be legacy format like /en/docs/claude-code/hooks)
-        session: Requests session
-        base_url: Base URL for fetching (DEPRECATED - automatically determined from path)
+        md_url: The verbatim ``.md`` URL to fetch.
+        session: Requests session.
+        label: Human-readable label for logs (usually the filename).
 
     Returns:
-        Tuple of (filename, content) where filename uses legacy naming convention
+        The validated markdown content.
+
+    Raises:
+        Exception: On network failure after retries.
+        ValueError: If the response is not valid markdown.
     """
-    # Determine the correct base URL based on the path
-    # This overrides the passed base_url parameter to handle the multi-domain setup
-    actual_base_url = get_base_url_for_path(path)
-
-    # Convert legacy path to new fetch URL format
-    fetch_path = convert_legacy_path_to_fetch_url(path)
-
-    # Build full fetch URL using the correct domain
-    markdown_url = f"{actual_base_url}{fetch_path}.md"
-
-    # Keep original path for consistent filename (legacy convention)
-    # This ensures files keep their existing names even as URLs change
-    filename = url_to_safe_filename(path)
-
-    logger.info(f"Fetching: {markdown_url} -> {filename}")
+    label = label or md_url
 
     for attempt in range(MAX_RETRIES):
         try:
-            response = session.get(markdown_url, headers=HEADERS, timeout=30, allow_redirects=True)
+            response = session.get(md_url, headers=HEADERS, timeout=30, allow_redirects=True)
 
-            # Handle specific HTTP errors
             if response.status_code == 429:  # Rate limited
                 wait_time = int(response.headers.get('Retry-After', 60))
                 logger.warning(f"Rate limited. Waiting {wait_time} seconds...")
@@ -127,28 +126,26 @@ def fetch_markdown_content(path: str, session: requests.Session, base_url: str) 
 
             response.raise_for_status()
 
-            # Get content and validate
             content = response.text
-            validate_markdown_content(content, filename)
-
-            logger.info(f"Successfully fetched and validated {filename} ({len(content)} bytes)")
-            return filename, content
+            validate_markdown_content(content, label)
+            logger.info(f"Fetched and validated {label} ({len(content)} bytes)")
+            return content
 
         except requests.exceptions.RequestException as e:
-            logger.warning(f"Attempt {attempt + 1}/{MAX_RETRIES} failed for {filename}: {e}")
+            logger.warning(f"Attempt {attempt + 1}/{MAX_RETRIES} failed for {label}: {e}")
             if attempt < MAX_RETRIES - 1:
-                # Exponential backoff with jitter
                 delay = min(RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
-                # Add jitter to prevent thundering herd
                 jittered_delay = delay * random.uniform(0.5, 1.0)
-                logger.info(f"Retrying in {jittered_delay:.1f} seconds...")
                 time.sleep(jittered_delay)
             else:
-                raise Exception(f"Failed to fetch {filename} after {MAX_RETRIES} attempts: {e}")
+                raise Exception(f"Failed to fetch {label} after {MAX_RETRIES} attempts: {e}")
 
         except ValueError as e:
-            logger.error(f"Content validation failed for {filename}: {e}")
+            logger.error(f"Content validation failed for {label}: {e}")
             raise
+
+    # Only reachable if every attempt returned HTTP 429 (rate limited).
+    raise Exception(f"Exhausted all {MAX_RETRIES} attempts (rate limited) for {label}")
 
 
 def fetch_changelog(session: requests.Session) -> Tuple[str, str]:
@@ -212,6 +209,9 @@ def fetch_changelog(session: requests.Session) -> Tuple[str, str]:
         except ValueError as e:
             logger.error(f"Changelog validation failed: {e}")
             raise
+
+    # Only reachable if every attempt returned HTTP 429 (rate limited).
+    raise Exception(f"Exhausted all {MAX_RETRIES} attempts (rate limited) for changelog")
 
 
 def save_markdown_file(docs_dir: Path, filename: str, content: str) -> str:
