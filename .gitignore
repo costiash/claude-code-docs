@@ -83,6 +83,11 @@ sample_paths.txt
 # v2: documentation prose is NOT committed. docs/ is legacy/scratch only — never tracked.
 docs/
 
+# v2 client runtime state (populated on user machines, never committed):
+# cache/ holds fetched .md prose; courses/ holds generated HTML. Both survive hook resets.
+cache/
+courses/
+
 # ============================================================================
 # Project Specific
 # ============================================================================
