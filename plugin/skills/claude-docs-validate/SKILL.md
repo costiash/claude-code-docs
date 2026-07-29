@@ -3,21 +3,21 @@ name: claude-docs-validate
 description: >
   Check the health and freshness of locally-stored Claude documentation.
   Use this skill when the user asks about documentation health, broken links,
-  stale docs, freshness checks, or wants to validate that their local mirror
+  stale docs, freshness checks, or wants to validate that their local install
   is up-to-date and all URLs are reachable. Triggers on: "are my docs current",
   "check doc health", "validate documentation", "broken links", "stale docs".
 ---
 
 # Claude Documentation Validation Skill
 
-Check whether the local documentation mirror at `~/.claude-code-docs/` is healthy and up-to-date.
+Check whether the local documentation clone at `~/.claude-code-docs/` is healthy and up-to-date.
 
 ## When to Use This Skill
 
 Activate when the user asks about:
 - Documentation freshness or staleness
 - Broken links or unreachable docs
-- Health checks on their local mirror
+- Health checks on their local install
 - Whether docs need updating
 
 ## Validation Workflow

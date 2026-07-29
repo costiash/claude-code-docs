@@ -27,7 +27,7 @@ Documentation Content
 
 This repository contains no Anthropic documentation content. Documentation is
 fetched at runtime by the end user directly from Anthropic's servers. All
-documentation content remains (c) Anthropic PBC.
+documentation content remains © Anthropic PBC.
 
 The MIT license above applies to the tool code (fetch pipeline, plugin, scripts,
 tests) and to the metadata this project generates (the page manifest and the

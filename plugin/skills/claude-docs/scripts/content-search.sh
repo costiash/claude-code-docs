@@ -2,10 +2,10 @@
 # content-search.sh — full-text keyword search over the v2 search index.
 # Usage: content-search.sh <keyword> [keyword2 ...]
 #
-# Scores each page (BM25-lite in jq): title match x10 + heading match x5 + summed
-# stemmed-term frequency. Falls back to grep over the cache when the index or jq
-# is unavailable. Uniform output on BOTH paths: filename<TAB>title<TAB>score,
-# sorted by score descending (top 20).
+# Scores each page (BM25-lite in jq): title x10 + filename-slug x10 + matched
+# headings (capped 3) x3 + sqrt(stemmed-term freq) x2. Falls back to grep over
+# the cache when the index or jq is unavailable. Uniform output on BOTH paths:
+# filename<TAB>title<TAB>score, sorted by score descending (top 20).
 #
 # STEMMING must match scripts/build_search_index.py exactly (strip first of
 # ing/ed/es/s if >=3 chars remain). See tests/unit/test_stem_parity.py.
@@ -48,7 +48,7 @@ if [ -f "$INDEX" ] && command -v jq >/dev/null 2>&1; then
         | .pages[] | . as $p
         | ($p.filename | ascii_downcase | gsub("[_-]+"; " ")) as $fn
         | ( [ $q[] as $t
-              | (if ($p.title|ascii_downcase|contains($t)) then 10 else 0 end)
+              | (if (($p.title // "")|ascii_downcase|contains($t)) then 10 else 0 end)
               + (if ($fn|contains($t)) then 10 else 0 end)
               + (([ $p.headings[]? | select(.text|ascii_downcase|contains($t)) ] | length | if . > 3 then 3 else . end) * 3)
               + ((($p.terms[$t] // 0) | sqrt) * 2)
