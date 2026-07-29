@@ -656,21 +656,36 @@ For organizations requiring strict control over plugin sources, administrators c
 
 When `strictKnownMarketplaces` is configured in managed settings, the restriction behavior depends on the value:
 
-| Value               | Behavior                                                         |
-| ------------------- | ---------------------------------------------------------------- |
-| Undefined (default) | No restrictions. Users can add any marketplace                   |
-| Empty array `[]`    | Complete lockdown. Users can't add any new marketplaces          |
-| List of sources     | Users can only add marketplaces that match the allowlist exactly |
+| Value               | Behavior                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| Undefined (default) | No restrictions. Users can add any marketplace                                                   |
+| Empty array `[]`    | Complete lockdown. Blocks every marketplace source, including the official Anthropic marketplace |
+| List of sources     | Users can only add marketplaces that match the allowlist exactly                                 |
 
 #### Common configurations
 
-Disable all marketplace additions:
+Disable all marketplace additions, including the official Anthropic marketplace:
 
 ```json theme={null}
 {
   "strictKnownMarketplaces": []
 }
 ```
+
+Allow only the official Anthropic marketplace. Matching is exact, so this entry doesn't cover `ref` or `path` variants of the same repository:
+
+```json theme={null}
+{
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    }
+  ]
+}
+```
+
+With this entry, the official marketplace registers itself automatically the first time you start Claude Code interactively, so you don't need to pair it with `extraKnownMarketplaces`. In a non-interactive environment that runs before that first interactive launch, add it explicitly with `claude plugin marketplace add anthropics/claude-plugins-official` or include it in `extraKnownMarketplaces`.
 
 Allow specific marketplaces only:
 
@@ -732,7 +747,7 @@ Restrictions are checked before any network or filesystem operation. The check r
 
 The allowlist uses exact matching for most source types. For a marketplace to be allowed, all specified fields must match exactly:
 
-* For GitHub sources: `repo` is required, and `ref` or `path` must also match if specified in the allowlist
+* For GitHub sources: `repo` is required, and `ref` and `path` must each match exactly or be absent from both the marketplace source and the allowlist entry
 * For URL sources: the full URL must match exactly
 * For `hostPattern` sources: the marketplace host is matched against the regex pattern
 * For `pathPattern` sources: the marketplace's filesystem path is matched against the regex pattern

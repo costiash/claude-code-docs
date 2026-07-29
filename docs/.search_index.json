@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-07-29T00:51:26Z",
+  "generated_at": "2026-07-29T04:19:40Z",
   "indexed_files": 1813,
   "index": {
     "/changelog": {
@@ -196,7 +196,7 @@
         "project",
         "suppose"
       ],
-      "word_count": 2421,
+      "word_count": 2463,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -833,14 +833,14 @@
         "add",
         "marketplaces",
         "repository",
-        "github",
         "source",
+        "github",
+        "entry",
         "paths",
         "sources",
-        "entry",
         "path"
       ],
-      "word_count": 8051,
+      "word_count": 8154,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -924,7 +924,7 @@
         "windows",
         "git"
       ],
-      "word_count": 1716,
+      "word_count": 1774,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -991,8 +991,8 @@
         "claude",
         "managed",
         "source",
-        "code",
         "json",
+        "code",
         "file",
         "plugins",
         "theme",
@@ -1008,7 +1008,7 @@
         "corp",
         "example"
       ],
-      "word_count": 15788,
+      "word_count": 15891,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
