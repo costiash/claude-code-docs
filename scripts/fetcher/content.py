@@ -177,17 +177,9 @@ def fetch_changelog(session: requests.Session) -> Tuple[str, str]:
 
             content = response.text
 
-            # Add header to indicate this is from Claude Code repo, not docs site
-            header = """# Claude Code Changelog
-
-> **Source**: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
->
-> This is the official Claude Code release changelog, automatically fetched from the Claude Code repository. For documentation, see other topics via `/docs`.
-
----
-
-"""
-            content = header + content
+            # v2: store the changelog VERBATIM — the exact bytes the client fetches from
+            # the raw URL — so its manifest sha256 matches the client's and it never shows
+            # as permanently "stale". Source attribution lives in the manifest's url field.
 
             # Basic validation
             if len(content.strip()) < 100:

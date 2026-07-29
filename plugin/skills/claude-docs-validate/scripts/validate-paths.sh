@@ -69,5 +69,7 @@ echo "Timeout:       $timeout_count"
 [ -n "$redirect_list" ] && { echo ""; echo "=== Permanent Redirects ==="; echo -e "$redirect_list"; }
 [ -n "$broken_list" ] && { echo ""; echo "=== Broken Paths ==="; echo -e "$broken_list"; }
 
-[ "$broken" -gt 0 ] || [ "$timeout_count" -gt 0 ] && exit 1
+if [ "$broken" -gt 0 ] || [ "$timeout_count" -gt 0 ]; then
+    exit 1
+fi
 exit 0
