@@ -174,3 +174,16 @@ Pipfile.lock
 !tests/
 !.github/
 autoresearch-results.tsv
+
+# ============================================================================
+# Dev scratch / working artifacts (session-local, not shared)
+# ============================================================================
+# for-dummies-visualizer HTML output
+for-dummies/
+# Playwright MCP session scratch (snapshots, console logs)
+.playwright-mcp/
+# dev spec + handoff notes (local paths, handover docs)
+claude-code-docs-redistribution-spec.md
+HANDOFF.txt
+# dev screenshot
+hero-reduced-motion.jpeg
