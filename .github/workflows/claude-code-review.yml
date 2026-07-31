@@ -25,8 +25,8 @@ jobs:
     timeout-minutes: 15  # Prevent indefinite hanging
     permissions:
       contents: read
-      pull-requests: read
-      issues: read
+      pull-requests: write   # needed for `gh pr comment` to post the review
+      issues: write          # PR comments are issue comments
       id-token: write
 
     steps:
@@ -37,7 +37,6 @@ jobs:
 
       - name: Run Claude Code Review
         id: claude-review
-        continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -57,5 +56,5 @@ jobs:
 
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.claude.com/en/docs/claude-code/cli-reference for available options
-          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
+          claude_args: '--model claude-opus-4-8 --allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
 
