@@ -2,10 +2,10 @@
 
 ## Overview
 
-The documentation mirror at `~/.claude-code-docs/` contains:
-- `docs/` — Markdown files fetched from Anthropic's documentation sites
-- `docs/docs_manifest.json` — File tracking manifest (updated by CI/CD)
-- `paths_manifest.json` — Path categorization manifest (updated by CI/CD)
+The clone at `~/.claude-code-docs/` contains only metadata (no prose):
+- `paths_manifest.json` — the page index: per page `{id, filename, url, md_url, title, category, sha256, lastmod, fetch_status}` (updated by CI/CD every 3h)
+- `search_index.json` — per-page titles, headings, and stemmed term counts
+- Fetched `.md` pages are cached at `~/.claude-code-docs/cache/` (override `$CLAUDE_DOCS_CACHE_DIR`)
 
 ## Categories
 
@@ -14,7 +14,7 @@ Documentation is organized into these categories:
 | Category | Description | File Pattern |
 |----------|------------|-------------|
 | `claude_code` | Claude Code CLI docs | `claude-code__*.md` |
-| `agent_sdk` | Agent SDK (Python, TypeScript) | `docs__en__agent-sdk__*.md` |
+| `agent_sdk` | Agent SDK (Python, TypeScript) | `claude-code__agent-sdk__*.md` (on code.claude.com) |
 | `api_reference` | API endpoints, SDK docs | `docs__en__api__*.md` |
 | `agents_and_tools` | MCP, tool use, agent skills | `docs__en__agents-and-tools__*.md` |
 | `core_documentation` | Guides, tutorials | `docs__en__build-with-claude__*.md` |
@@ -42,29 +42,24 @@ When presenting results to users:
 
 ## URL Construction
 
-Convert filenames to source URLs:
+**Do not reconstruct URLs from filenames** — filenames are lossy and hosts vary
+(agent-sdk lives on code.claude.com, not platform). The manifest stores the exact,
+verbatim source URL for every page. Look it up:
 
-| Filename | URL |
-|---|---|
-| `claude-code__hooks.md` | `https://code.claude.com/docs/en/hooks` |
-| `claude-code__hooks-guide.md` | `https://code.claude.com/docs/en/hooks-guide` |
-| `docs__en__api__messages__create.md` | `https://platform.claude.com/en/docs/api/messages/create` |
-| `docs__en__agent-sdk__python.md` | `https://platform.claude.com/en/docs/agent-sdk/python` |
-| `docs__en__build-with-claude__vision.md` | `https://platform.claude.com/en/docs/build-with-claude/vision` |
-| `docs__en__resources__prompt-library__code-clarifier.md` | `https://platform.claude.com/en/docs/resources/prompt-library/code-clarifier` |
+```bash
+jq -r '.pages[] | select(.filename=="<filename>") | .url' ~/.claude-code-docs/paths_manifest.json
+```
 
-**Rules:**
-- `claude-code__<page>.md` → `https://code.claude.com/docs/en/<page>`
-- `docs__en__<path>.md` → `https://platform.claude.com/en/docs/<path>` (replace `__` with `/`)
+Example: `claude-code__hooks.md` → `https://code.claude.com/docs/en/hooks`.
 
 ## Dynamic Discovery
 
-To count available docs:
-```
-Glob: ~/.claude-code-docs/docs/*.md
+Count indexed pages:
+```bash
+jq '.pages | length' ~/.claude-code-docs/paths_manifest.json
 ```
 
-To check categories in manifest:
-```
-Read: ~/.claude-code-docs/paths_manifest.json
+Per-category counts:
+```bash
+jq -r '.pages[].category' ~/.claude-code-docs/paths_manifest.json | sort | uniq -c | sort -rn
 ```

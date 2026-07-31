@@ -5,13 +5,11 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
 [![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
 
-> **Enhanced fork of [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs)** with native plugin support, auto-discovery Skill, and AI-powered semantic search.
-
 **Official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
 
 ## Why Use This?
 
-Claude knows a lot — but documentation changes fast. API parameters shift, new features land, SDK methods get renamed. This tool gives Claude a local mirror of every official doc page, so answers come from the source, not stale training data.
+Claude knows a lot — but documentation changes fast. API parameters shift, new features land, SDK methods get renamed. This tool gives Claude a live index of every official doc page and fetches the latest page from Anthropic's servers on demand, so answers come from the source, not stale training data. The repository itself stores only metadata — a page manifest and a lossy search index — never documentation prose.
 
 | Without claude-code-docs | With claude-code-docs |
 |---|---|
@@ -30,19 +28,19 @@ Two commands, no dependencies:
 ```
 
 That's it. On your next session Claude will automatically:
-1. Clone all documentation files to `~/.claude-code-docs/`
-2. Keep them updated every session via `git pull`
-3. Make the `/docs` command available for manual lookups
+1. Clone a tiny metadata repo to `~/.claude-code-docs/` (manifest + search index, no prose)
+2. Fetch documentation pages into a local cache in the background, and keep both current each session
+3. Make the `/docs` skill available for manual lookups
 4. Activate the **auto-discovery Skill** — Claude reads docs automatically when you ask Claude-related questions
 
 ### What the Plugin Gets You
 
-- **`/docs` command** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
+- **`/docs` skill** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
 - **Auto-discovery Skill** — Claude proactively searches docs when you ask about Claude Code, the API, SDKs, or prompt engineering. No `/docs` prefix needed.
 - **Interactive Courses** — Turn any Claude topic into a stunning, self-contained HTML course with animated diagrams, protocol conversations, quizzes, and code translations. Just say "create a course on hooks" or run `/docs --course <topic>`.
 - **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
 - **Content search** — Shell-based full-text search and fuzzy filename matching, no Python needed
-- **Zero dependencies** — No Python, no jq, no curl. Just Claude Code with plugin support.
+- **Nothing to install** — the client is pure `bash` + `curl` + `jq` (already on macOS/Linux), no Python runtime needed
 
 ## Legacy: Script Install (Migration)
 
@@ -124,13 +122,13 @@ Each entry in the report includes a **"Create Course"** button. Click it to copy
 /docs agent sdk python   # Agent SDK Python guide
 /docs --course hooks     # Generate an interactive course on hooks
 /docs --report           # HTML changelog of recent doc changes
-/docs -t                 # Check freshness and pull updates
+/docs -t                 # Check freshness (read-only)
 /docs what's new         # Recent documentation changes
 ```
 
 ### Natural Language Queries
 
-The `/docs` command understands intent — ask questions in plain English:
+The `/docs` skill understands intent — ask questions in plain English:
 
 ```bash
 /docs what are the best practices for Agent SDK in Python?
@@ -153,7 +151,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 Documentation files across multiple categories, updated every 3 hours:
 
-- **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Kotlin, Ruby)
+- **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Ruby, C#, PHP)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
 - **Claude Code** — CLI docs: hooks, skills, MCP, plugins, settings, sub-agents
 - **Agents & Tools** — MCP connectors, tool use patterns, agent capabilities
@@ -161,25 +159,24 @@ Documentation files across multiple categories, updated every 3 hours:
 - **About Claude** — Model capabilities, context windows, pricing
 - **Getting Started** — Quickstart guides
 - **Testing & Evaluation** — Eval frameworks, testing guides
-- **Prompt Library** — Ready-to-use prompt templates
 - **Release Notes** — Version history and changelogs
 - **Resources** — Additional resources
 
 ## How Updates Work
 
-1. **Automatic (Plugin)** — Docs update via `git pull` at the start of each Claude Code session
-2. **Automatic (CI/CD)** — GitHub Actions fetches from Anthropic sitemaps every 3 hours
-3. **On-Demand** — `/docs -t` checks for and pulls updates
-4. **Safe** — Sync safeguards prevent mass deletion (min 200 paths discovered, max 10% deletion per sync, min 250 files)
+1. **Automatic (Plugin)** — Each session the metadata syncs (`git reset --hard origin/main`) and a background fetch updates only changed pages in the local cache
+2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
+3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
+4. **Safe** — Manifest safeguards prevent catastrophic changes (min 200 pages discovered, max 10% removed per sync, min 250 pages)
 
 ## Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
-| `/docs` not found | Restart Claude Code; for script install check `ls ~/.claude/commands/docs.md` |
-| Docs seem outdated | `/docs -t` to force update, or `cd ~/.claude-code-docs && git pull` |
+| `/docs` not found | Restart Claude Code so the plugin loads; for a script install, check `ls ~/.claude-code-docs/` |
+| Docs seem outdated | `/docs sync` (or the SessionStart hook, which hard-syncs each session) forces an update; `/docs -t` only checks freshness |
 | Plugin not working | Run `/plugin list` to verify installation |
-| "Installation cancelled" | Use `CLAUDE_DOCS_AUTO_INSTALL=yes` with the curl install |
+| Script install fails | Install the plugin instead: `/plugin install claude-docs@claude-code-docs` |
 
 ## Uninstalling
 
@@ -195,10 +192,10 @@ Documentation files across multiple categories, updated every 3 hours:
 
 ## Security
 
-- Input sanitization and path traversal protection
-- Sync safeguards prevent catastrophic documentation loss
-- All operations limited to documentation directory, HTTPS-only
-- Full test suite with security coverage
+- No documentation prose is committed — the repo holds only metadata (manifest + lossy index)
+- The client fetch layer enforces a **domain allowlist** (`code.claude.com`, `platform.claude.com`, `raw.githubusercontent.com`), HTTPS-only, with atomic writes and sha256 integrity checks
+- Manifest safeguards prevent catastrophic changes; input sanitization and path-traversal protection on filenames
+- Full test suite (including a mocked-curl harness for the client fetch layer)
 
 ## Contributing
 

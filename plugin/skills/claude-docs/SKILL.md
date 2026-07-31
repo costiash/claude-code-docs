@@ -16,7 +16,14 @@ description: >
 
 # Claude Documentation Search Skill
 
-You have access to a local mirror of Claude's official documentation at `~/.claude-code-docs/docs/`.
+Claude's official documentation is indexed locally. The clone at `~/.claude-code-docs/`
+holds only metadata:
+- `paths_manifest.json` — every page's filename, id, title, category, and source URL
+- `search_index.json` — per-page titles, headings, and stemmed term counts
+
+The actual `.md` pages are cached at `~/.claude-code-docs/cache/` (override:
+`$CLAUDE_DOCS_CACHE_DIR`). A background sync keeps the cache current; any page not
+yet cached is fetched on demand — see **Reading a doc** below.
 
 ## When to Use This Skill
 
@@ -29,123 +36,98 @@ Activate when the user asks about:
 
 ## Search Strategy
 
-Use this hierarchy — try simpler strategies first, escalate if needed:
+The search scripts read the manifest + index, so they see **every** page whether or
+not it is cached yet. Prefer them over globbing the cache.
 
-### 1. Direct Lookup (user names a specific topic)
-
-User says "hooks", "mcp", "memory" — a concrete topic name.
-
-```
-Glob: ~/.claude-code-docs/docs/*<keyword>*.md
-```
-
-If Glob returns matches, read the top 1-3 files and synthesize.
-
-### 2. Scoped Search (user specifies a product context)
-
-User says "hooks in agent sdk", "api rate limits", "cli plugins".
-
-Scope the Glob to the product prefix:
-
-| User mentions | Glob pattern |
-|---|---|
-| "Claude Code", "CLI", "hooks", "skills", "plugins" | `~/.claude-code-docs/docs/claude-code__*<keyword>*.md` |
-| "Agent SDK", "SDK", "Python SDK", "TypeScript SDK" | `~/.claude-code-docs/docs/docs__en__agent-sdk__*<keyword>*.md` |
-| "API", "messages endpoint", "tool use" | `~/.claude-code-docs/docs/docs__en__api__*<keyword>*.md` |
-| "agents and tools", "MCP connector" | `~/.claude-code-docs/docs/docs__en__agents-and-tools__*<keyword>*.md` |
-
-If scoped Glob misses, fall back to content search (step 3).
-
-### 3. Semantic/Content Search (user asks a question)
-
-User says "best practices for extended thinking", "how do I configure streaming".
-
-**Keyword extraction:** Strip filler words and keep domain-specific terms:
-- "how do I configure streaming" → `"streaming"` `"configure"`
-- "best practices for extended thinking" → `"extended"` `"thinking"`
-- "what's the difference between hooks and MCP" → `"hooks"` `"mcp"`
-- "why is my tool use not working" → `"tool-use"` (combine compound concepts with hyphens)
-
-Run the content search script with extracted keywords:
+### 1. Content search (default — questions and topics)
 
 ```bash
 bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "<keyword1>" "<keyword2>"
 ```
 
-The script outputs filenames with match scores. Read the top 3-5 matching files and synthesize.
+Output is `filename<TAB>title<TAB>score`, best first. **Keyword extraction:** strip filler,
+keep domain terms — "how do I configure streaming" → `streaming configure`; "difference
+between hooks and MCP" → `hooks mcp`. Take the top 3-5 filenames and read them (next section).
 
-If the script is not available or returns no results, fall back to Grep:
+### 2. Fuzzy search (approximate name)
 
-```
-Grep: "<keyword>" in ~/.claude-code-docs/docs/
-```
-
-### 4. Fuzzy Search (user has an approximate name)
-
-User says "something about checkpoint", "that caching doc".
+User says "that caching doc", "something about checkpoint":
 
 ```bash
 bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/fuzzy-search.sh "<query>"
 ```
 
-The script outputs ranked filenames. Read the top match.
+Output is ranked filenames. Read the top match.
+
+### 3. Direct manifest lookup (exact category/topic)
+
+To list pages in a category or matching a filename fragment, query the manifest:
+
+```bash
+jq -r '.pages[] | select(.filename | test("<fragment>")) | .filename' ~/.claude-code-docs/paths_manifest.json
+jq -r '.pages[] | select(.category=="claude_code") | .filename' ~/.claude-code-docs/paths_manifest.json
+```
+
+## Reading a doc (cache-miss rule)
+
+A search returns a **filename** (e.g. `claude-code__hooks.md`). The file is at
+`~/.claude-code-docs/cache/<filename>`.
+
+1. Read `~/.claude-code-docs/cache/<filename>`.
+2. **If it is not there** (not fetched yet), fetch it first, then read:
+   ```bash
+   ~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "<filename>"
+   ```
+   then Read `~/.claude-code-docs/cache/<filename>`.
+3. If the fetch fails (offline), the script prints the canonical source URL on stderr —
+   fall back to WebFetch on that URL.
+
+To save context on large pages, you can preview a page's structure from the index
+(title + headings) before reading the full body:
+```bash
+jq -r '.pages[] | select(.filename=="<filename>") | .title, (.headings[]|"  "+.text)' ~/.claude-code-docs/search_index.json
+```
 
 ## Synthesis Rules
 
 ### Same Product Context → SYNTHESIZE
-
-When all matching docs belong to the same product (all Claude Code CLI, all Agent SDK, etc.):
-- Read ALL matching docs silently — do not ask the user which to read
-- Extract relevant sections
-- Present one unified answer
-- Cite sources at the end
+When all matching docs share one product (all Claude Code, all Agent SDK, ...):
+read them all silently, extract relevant sections, present one unified answer, cite sources.
 
 ### Different Product Contexts → ASK
+When matches span products (CLI + API + Agent SDK), ask which the user means. Labels
+(see `manifest-reference.md`) map from `category`:
 
-When matches span different products (e.g., CLI + API + Agent SDK):
-- Ask the user which product context they mean
-- Use these user-friendly labels (see `manifest-reference.md` for complete list):
-
-| File pattern | Say to user |
+| category | Say to user |
 |---|---|
-| `claude-code__*.md` | **Claude Code** |
-| `docs__en__agent-sdk__*.md` | **Agent SDK** |
-| `docs__en__api__*.md` | **Claude API** |
-| `docs__en__build-with-claude__*.md` | **Claude Documentation** |
-| `docs__en__agents-and-tools__*.md` | **Agents & Tools** |
-| `docs__en__resources__prompt-library__*.md` | **Prompt Library** |
+| `claude_code` | **Claude Code** |
+| `agent_sdk` | **Agent SDK** |
+| `api_reference` | **Claude API** |
+| `core_documentation` | **Claude Documentation** |
+| `agents_and_tools` | **Agents & Tools** |
+| `prompt_library` | **Prompt Library** |
 
 After selection → read all docs in that context and synthesize.
 
 ### SDK Language Disambiguation
-
-When the user specifies a programming language, narrow the API docs to that SDK:
-
-| User mentions | Narrow search to |
-|---|---|
-| "Python", "pip", "anthropic" (Python import) | `docs__en__api__python__*` or `docs__en__agent-sdk__python*` |
-| "TypeScript", "npm", "@anthropic-ai/sdk" | `docs__en__api__typescript__*` or `docs__en__agent-sdk__typescript*` |
-| "Go", "golang" | `docs__en__api__go__*` |
-| "Java", "Maven", "Gradle" | `docs__en__api__java__*` |
-| "Ruby", "gem" | `docs__en__api__ruby__*` |
-| "C#", ".NET", "NuGet" | `docs__en__api__csharp__*` |
-
-If no language is mentioned but the query is about SDK methods, present the **Python** docs first (most common) and note that TypeScript equivalents exist.
+When the user names a language, narrow API/SDK results (e.g. `agent-sdk__python`,
+`agent-sdk__typescript`, `api__go`, `api__java`). If none named but the query is about SDK
+methods, present **Python** first and note TypeScript equivalents exist.
 
 ## URL Generation
 
-Always include source links in your response:
-- `claude-code__<page>.md` → `https://code.claude.com/docs/en/<page>` (replace `__` with `/`)
-- `docs__en__<path>.md` → `https://platform.claude.com/en/docs/<path>` (replace leading `docs__en__` then remaining `__` with `/`)
+Always cite source links. Get the **exact** URL from the manifest — never reconstruct it
+from the filename (filenames are lossy; the manifest stores the verbatim URL):
 
-**Examples:**
-- `claude-code__hooks.md` → `https://code.claude.com/docs/en/hooks`
-- `docs__en__agent-sdk__python.md` → `https://platform.claude.com/en/docs/agent-sdk/python`
-- `docs__en__api__messages__create.md` → `https://platform.claude.com/en/docs/api/messages/create`
+```bash
+jq -r '.pages[] | select(.filename=="<filename>") | .url' ~/.claude-code-docs/paths_manifest.json
+```
+
+Example: `claude-code__hooks.md` → `https://code.claude.com/docs/en/hooks`.
 
 ## Common Synonyms
 
-When a search returns no results or too few, try these known synonyms:
+When a search returns too few results, retry with a known synonym:
 
 | User says | Search for |
 |---|---|
@@ -161,15 +143,12 @@ When a search returns no results or too few, try these known synonyms:
 
 ## No Results
 
-If all search strategies return nothing:
-1. Try synonyms from the table above
-2. Try broader or narrower keywords
-3. Suggest the user run `/docs -t` to check if docs are installed and current
-4. Let them know the topic may not be in the local mirror
+If all strategies return nothing: try synonyms; try broader/narrower keywords; suggest
+`/docs -t` to check freshness; note the topic may not be in the index.
 
 ## Post-Response Course Prompt
 
-After presenting documentation to the user, always append this emphasized block at the bottom of your response:
+After presenting documentation, always append this block at the bottom:
 
 ---
 > **Want to go deeper?** I can create an interactive course on this topic — visual explanations, animated diagrams, and hands-on quizzes in a single HTML file you can open in your browser.
@@ -180,6 +159,6 @@ Replace `[topic]` with the actual topic the user asked about.
 ## Reference Files
 
 - `manifest-reference.md` — Category-to-label mapping (single source of truth)
-- `examples/direct-lookup.md` — Example: topic → Glob → synthesize
+- `examples/direct-lookup.md` — Example: topic → search → synthesize
 - `examples/semantic-search.md` — Example: question → content-search.sh → synthesize
 - `examples/cross-context.md` — Example: ambiguous → ask context → synthesize

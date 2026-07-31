@@ -3,78 +3,67 @@ name: claude-docs-validate
 description: >
   Check the health and freshness of locally-stored Claude documentation.
   Use this skill when the user asks about documentation health, broken links,
-  stale docs, freshness checks, or wants to validate that their local mirror
+  stale docs, freshness checks, or wants to validate that their local install
   is up-to-date and all URLs are reachable. Triggers on: "are my docs current",
   "check doc health", "validate documentation", "broken links", "stale docs".
 ---
 
 # Claude Documentation Validation Skill
 
-Check whether the local documentation mirror at `~/.claude-code-docs/` is healthy and up-to-date.
+Check whether the local documentation clone at `~/.claude-code-docs/` is healthy and up-to-date.
 
 ## When to Use This Skill
 
 Activate when the user asks about:
 - Documentation freshness or staleness
 - Broken links or unreachable docs
-- Health checks on their local mirror
+- Health checks on their local install
 - Whether docs need updating
 
 ## Validation Workflow
 
-### Step 1: Check if docs exist
+### Step 1: Check if the metadata is installed
 
-Verify `~/.claude-code-docs/docs/` exists and contains `.md` files. If not:
+Verify `~/.claude-code-docs/paths_manifest.json` exists. If not:
 > Documentation not found. Run this in Claude Code to install:
 > ```
 > /plugin marketplace add costiash/claude-code-docs
 > /plugin install claude-docs@claude-code-docs
 > ```
 
-### Step 2: Check freshness via git
+### Step 2: Check freshness
+
+Two signals — when the manifest was last generated (server-side), and when the clone last pulled:
+```bash
+jq -r '.generated_at' ~/.claude-code-docs/paths_manifest.json          # manifest build time
+cd ~/.claude-code-docs && git log -1 --format="%ci %s"                  # clone last updated
+```
+If the manifest is older than ~24h, the SessionStart hook normally refreshes it on the next
+session; a manual refresh is `cd ~/.claude-code-docs && git fetch origin main && git reset --hard origin/main`.
+
+### Step 3: Check the cache status
 
 ```bash
-cd ~/.claude-code-docs && git log -1 --format="%ci %s"
+~/.claude-code-docs/plugin/scripts/fetch-docs.sh status
 ```
+Reports manifest pages / cached / pending / stale. If pending > 0, suggest `/docs sync`.
 
-Report when docs were last updated. If older than 24 hours, suggest:
-```bash
-cd ~/.claude-code-docs && git pull
-```
+### Step 4: Run URL validation (if user asks for it)
 
-### Step 3: Run URL validation (if user asks for it)
-
-For a quick spot-check (recommended first):
+Quick spot-check (recommended first), or full scan (1-2 min):
 ```bash
 bash ~/.claude-code-docs/plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
-```
-
-For a full scan (all docs — takes 1-2 minutes):
-```bash
 bash ~/.claude-code-docs/plugin/skills/claude-docs-validate/scripts/validate-paths.sh
 ```
-
-### Step 4: Present results
-
-- Report summary: total checked, reachable, broken, timed out
-- For broken paths, suggest:
-  - Run `cd ~/.claude-code-docs && git pull` to get latest
-  - If still broken after pull, the upstream page may have moved
-  - Report persistent issues at https://github.com/costiash/claude-code-docs/issues
+These read URLs directly from the manifest. Report the summary (reachable / broken / timed out).
+For persistent broken URLs, the upstream page may have moved — report at
+https://github.com/costiash/claude-code-docs/issues.
 
 ### Step 5: Doc statistics (if user asks for stats/count)
 
-Report documentation coverage:
 ```bash
-# Total docs
-ls ~/.claude-code-docs/docs/*.md | wc -l
-
-# By category
-echo "Claude Code:  $(ls ~/.claude-code-docs/docs/claude-code__*.md 2>/dev/null | wc -l)"
-echo "Agent SDK:    $(ls ~/.claude-code-docs/docs/docs__en__agent-sdk__*.md 2>/dev/null | wc -l)"
-echo "API Reference:$(ls ~/.claude-code-docs/docs/docs__en__api__*.md 2>/dev/null | wc -l)"
-echo "Build Guides: $(ls ~/.claude-code-docs/docs/docs__en__build-with-claude__*.md 2>/dev/null | wc -l)"
-echo "Tools:        $(ls ~/.claude-code-docs/docs/docs__en__agents-and-tools__*.md 2>/dev/null | wc -l)"
+jq '.pages | length' ~/.claude-code-docs/paths_manifest.json                       # total
+jq -r '.pages[].category' ~/.claude-code-docs/paths_manifest.json | sort | uniq -c | sort -rn  # by category
 ```
 
 ## Troubleshooting

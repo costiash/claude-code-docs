@@ -1,89 +1,89 @@
 #!/usr/bin/env bash
+# content-search.sh — full-text keyword search over the v2 search index.
+# Usage: content-search.sh <keyword> [keyword2 ...]
+#
+# Scores each page (BM25-lite in jq): title x10 + filename-slug x10 + matched
+# headings (capped 3) x3 + sqrt(stemmed-term freq) x2. Falls back to grep over
+# the cache when the index or jq is unavailable. Uniform output on BOTH paths:
+# filename<TAB>title<TAB>score, sorted by score descending (top 20).
+#
+# STEMMING must match scripts/build_search_index.py exactly (strip first of
+# ing/ed/es/s if >=3 chars remain). See tests/unit/test_stem_parity.py.
+
 set -uo pipefail
 trap '' PIPE
 
-# content-search.sh — Full-text keyword search across Claude documentation
-# Usage: content-search.sh <keyword> [keyword2] [keyword3] ...
-# Searches .search_index.json if available, falls back to grep.
-# Output: matching filenames with match counts, sorted by relevance (descending).
-
-DOCS_DIR="${DOCS_DIR:-${HOME}/.claude-code-docs/docs}"
-INDEX_FILE="${DOCS_DIR}/.search_index.json"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+CLONE_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
+INDEX="${CLAUDE_DOCS_INDEX:-$CLONE_ROOT/search_index.json}"
+CACHE_DIR="${CLAUDE_DOCS_CACHE_DIR:-${DOCS_DIR:-$CLONE_ROOT/cache}}"
 
 if [ $# -eq 0 ]; then
     echo "Usage: content-search.sh <keyword> [keyword2 ...]" >&2
     exit 1
 fi
 
-# Sanitize keywords: lowercase, alphanumeric + hyphens only
+# Sanitize + tokenize like the Python indexer: split on every non-alphanumeric char
+# so a compound query fans into the same tokens the index holds ("agent-sdk" ->
+# "agent" "sdk", "node.js" -> "node" "js"). Keeping hyphens made a hyphenated query
+# match no index field and score 0 (build_search_index.py:100-106 splits on non-alpha).
 keywords=()
 for arg in "$@"; do
-    clean=$(echo "$arg" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' | xargs)
-    [ -n "$clean" ] && keywords+=("$clean")
+    clean=$(printf '%s' "$arg" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/ /g')
+    read -ra toks <<< "$clean"
+    for w in "${toks[@]}"; do
+        [ -n "$w" ] && keywords+=("$w")
+    done
 done
-
 if [ ${#keywords[@]} -eq 0 ]; then
     echo "No valid keywords provided" >&2
     exit 1
 fi
 
-if [ ! -d "$DOCS_DIR" ]; then
-    echo "Documentation directory not found: $DOCS_DIR" >&2
-    echo "Install docs: /plugin marketplace add costiash/claude-code-docs" >&2
-    exit 1
-fi
-
-# Strategy 1: Use search index if available and jq is installed
-if [ -f "$INDEX_FILE" ] && command -v jq >/dev/null 2>&1; then
-    jq_filter='.index | to_entries[] | {file: .value.file_path, title: .value.title, kw: .value.keywords, preview: .value.content_preview} |'
-
-    count_parts=()
-    for kw in "${keywords[@]}"; do
-        escaped=$(echo "$kw" | sed 's/\\/\\\\/g; s/"/\\"/g')
-        count_parts+=("(if (.kw | map(select(contains(\"${escaped}\"))) | length > 0) or (.title | ascii_downcase | contains(\"${escaped}\")) or (.file | ascii_downcase | contains(\"${escaped}\")) or (.preview | ascii_downcase | contains(\"${escaped}\")) then 1 else 0 end)")
-    done
-
-    count_expr=$(IFS='+'; echo "${count_parts[*]}")
-
-    results=$(jq -r "${jq_filter} (.file) + \"\t\" + (${count_expr} | tostring)" "$INDEX_FILE" 2>/dev/null \
-        | awk -F'\t' '$2 > 0' \
-        | sort -t$'\t' -k2 -rn \
+# Strategy 1: v2 index + jq (BM25-lite scoring, stemming mirrored from Python).
+if [ -f "$INDEX" ] && command -v jq >/dev/null 2>&1; then
+    results=$(jq -r --args '
+        def stem:
+          ascii_downcase as $w
+          | if   ($w|endswith("ing")) and (($w|length) >= 6) then $w[0:-3]
+            elif ($w|endswith("ed"))  and (($w|length) >= 5) then $w[0:-2]
+            elif ($w|endswith("es"))  and (($w|length) >= 5) then $w[0:-2]
+            elif ($w|endswith("s"))   and (($w|length) >= 4) then $w[0:-1]
+            else $w end;
+        ($ARGS.positional | map(stem)) as $q
+        | .pages[] | . as $p
+        | ($p.filename | ascii_downcase | gsub("[_-]+"; " ")) as $fn
+        | ( [ $q[] as $t
+              | (if (($p.title // "")|ascii_downcase|contains($t)) then 10 else 0 end)
+              + (if ($fn|contains($t)) then 10 else 0 end)
+              + (([ $p.headings[]? | select(.text|ascii_downcase|contains($t)) ] | length | if . > 3 then 3 else . end) * 3)
+              + ((($p.terms[$t] // 0) | sqrt) * 2)
+            ] | add ) as $score
+        | select($score > 0)
+        | [$p.filename, ($p.title // ""), ($score|tostring)] | @tsv
+    ' "${keywords[@]}" < "$INDEX" 2>/dev/null \
+        | sort -t$'\t' -k3 -rn \
         | head -20)
 
     if [ -n "$results" ]; then
-        echo "$results"
+        printf '%s\n' "$results"
         exit 0
     fi
 fi
 
-# Strategy 2: Fallback to grep
-
-declare -A file_scores 2>/dev/null || {
-    # Bash 3 (macOS default) doesn't support associative arrays — use temp file
-    score_file=$(mktemp)
-    trap 'rm -f "$score_file"' EXIT
-
+# Strategy 2: grep fallback over the cache (uniform 3-column output, empty title).
+if [ -d "$CACHE_DIR" ]; then
+    tmp=$(mktemp); trap 'rm -f "$tmp"' EXIT
     for kw in "${keywords[@]}"; do
-        grep -rli "$kw" "$DOCS_DIR"/*.md 2>/dev/null || true
+        grep -rli -- "$kw" "$CACHE_DIR"/*.md 2>/dev/null || true
     done | sort | uniq -c | sort -rn | head -20 \
         | while read -r count filepath; do
-            echo -e "$(basename "$filepath")\t$count"
-        done > "$score_file"
-
-    cat "$score_file"
+            printf '%s\t\t%s\n' "$(basename "$filepath")" "$count"
+        done > "$tmp"
+    cat "$tmp"
     exit 0
-}
+fi
 
-# Bash 4+ path with associative arrays
-for kw in "${keywords[@]}"; do
-    while IFS= read -r filepath; do
-        fname=$(basename "$filepath")
-        file_scores["$fname"]=$(( ${file_scores["$fname"]:-0} + 1 ))
-    done < <(grep -rli "$kw" "$DOCS_DIR"/*.md 2>/dev/null || true)
-done
-
-for fname in "${!file_scores[@]}"; do
-    echo -e "${fname}\t${file_scores[$fname]}"
-done | sort -t$'\t' -k2 -rn | head -20
-
-exit 0
+echo "No search index or cache found (expected $INDEX or $CACHE_DIR)" >&2
+echo "Run: fetch-docs.sh sync" >&2
+exit 1
