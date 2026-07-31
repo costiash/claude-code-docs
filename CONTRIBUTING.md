@@ -24,7 +24,7 @@ CI fetches pages only to hash them and build a lossy, prose-free index, into the
 **Prerequisites**
 
 - Git, Bash
-- For the CI Python scripts: Python 3.9+ and [`uv`](https://github.com/astral-sh/uv)
+- For the CI Python scripts: Python 3.10+ and [`uv`](https://github.com/astral-sh/uv)
 
 **Clone**
 
@@ -97,7 +97,7 @@ python3 scripts/build_search_index.py                     # build search_index.j
 
 ### Python (CI scripts)
 
-- Python 3.9+, type hints on function signatures, Google-style docstrings
+- Python 3.10+, type hints on function signatures, Google-style docstrings
 - PEP 8, max line length 100
 
 ## Filename conventions
