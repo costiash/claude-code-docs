@@ -44,15 +44,17 @@ die() { echo "fetch-docs: $*" >&2; exit 1; }
 
 have_jq() { command -v jq >/dev/null 2>&1; }
 
-# Guard used by every subcommand: jq present, manifest exists AND parses to a JSON
-# object. A truncated/empty/whitespace/wrong-shape manifest must fail loudly here,
-# not read as "0 pages / up to date" downstream. NB: `jq -e .` is NOT enough — jq
-# 1.6 exits 0 on empty/whitespace input; a `type == "object"` test rejects those
-# (and a stray top-level array) while still accepting an empty {"pages":[]}.
+# Guard used by every subcommand: jq present, manifest exists, parses to a JSON
+# object AND has a `.pages` array. A truncated/empty/whitespace/wrong-shape (e.g. a
+# legacy v1 {categories,metadata}) manifest must fail loudly here, not read as
+# "0 pages / up to date" downstream. NB: `jq -e .` is NOT enough — jq 1.6 exits 0 on
+# empty/whitespace input; the type tests reject those (and the v1 shape) while still
+# accepting an empty {"pages":[]}.
 require_manifest() {
     have_jq || die "jq is required"
     [ -f "$MANIFEST" ] || die "manifest not found: $MANIFEST"
     [ "$(jq -r 'type' "$MANIFEST" 2>/dev/null)" = "object" ] || die "manifest is not a valid JSON object: $MANIFEST"
+    [ "$(jq -r '.pages | type' "$MANIFEST" 2>/dev/null)" = "array" ] || die "manifest has no .pages array (wrong schema?): $MANIFEST"
 }
 
 url_host() { printf '%s' "$1" | sed -E 's#^https?://([^/]+).*#\1#'; }
@@ -193,8 +195,22 @@ cmd_sync() {
     export CACHE_DIR META_DIR ALLOWED_HOSTS
     xargs -P "$PARALLEL" -I{} "$SELF" __fetch_line "{}" < "$pending"
 
+    # Recount what still needs fetching (i.e. failed) to report a success count and
+    # to exit nonzero on a total failure — a silent 'sync complete' after 0 fetches
+    # (e.g. offline) is otherwise indistinguishable from success to the hook.
+    local still=0
+    while IFS=$'\t' read -r filename _ sha; do
+        needs_fetch "$filename" "$sha" && still=$((still + 1))
+    done < "$pending"
     rm -f "$pending"
-    echo "fetch-docs: sync complete"
+
+    local fetched=$((count - still))
+    echo "fetch-docs: sync complete ($fetched/$count fetched)"
+    if [ "$fetched" -eq 0 ]; then
+        echo "fetch-docs: all $count fetch(es) failed (offline?)" >&2
+        return 1
+    fi
+    return 0
 }
 
 # Internal: fetch one tab-separated line (used by xargs in sync).
@@ -239,6 +255,10 @@ cmd_prune() {
     [ -d "$CACHE_DIR" ] || { echo "fetch-docs: no cache to prune"; return 0; }
     local keep; keep=$(mktemp)
     jq -r '.pages[].filename' "$MANIFEST" | sort > "$keep"
+    if [ ! -s "$keep" ]; then
+        rm -f "$keep"
+        die "manifest lists 0 pages — refusing to prune (would wipe the entire cache)"
+    fi
     local removed=0
     for f in "$CACHE_DIR"/*.md; do
         [ -e "$f" ] || continue

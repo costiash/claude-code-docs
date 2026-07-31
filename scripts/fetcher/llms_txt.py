@@ -96,6 +96,14 @@ def discover_from_llms_txt(
             response = session.get(url, headers=HEADERS, timeout=30)
             response.raise_for_status()
             parsed = parse_llms_txt(response.text)
+            if not parsed and len(response.text.strip()) > 200:
+                # The file downloaded fine but matched zero link entries — almost
+                # certainly upstream format drift. Without this, discovery silently
+                # degrades to sitemap-only (llms-only pages drop, titles -> Untitled).
+                logger.warning(
+                    f"llms.txt {url}: 0 entries parsed from {len(response.text)} bytes "
+                    "— possible format drift; the _ENTRY_RE regex may need updating."
+                )
             logger.info(f"llms.txt {url}: parsed {len(parsed)} entries")
             records.extend(parsed)
         except Exception as e:

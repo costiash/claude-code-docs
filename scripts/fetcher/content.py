@@ -45,6 +45,19 @@ def validate_markdown_content(content: str, filename: str) -> None:
     if len(content.strip()) < 50:
         raise ValueError(f"Content too short ({len(content)} bytes)")
 
+    # Soft-404 guard: a short body with an error/maintenance phrase and no markdown
+    # heading is an error page, not docs. Storing it would hash an error string as the
+    # page's authoritative content (the client re-fetches the same body, gets a matching
+    # sha256, and never flags it stale). Raising here routes it through carry-forward.
+    if len(content.strip()) < 300 and not re.search(r'^#\s', content, re.MULTILINE):
+        head = content.lower()
+        soft_404_markers = (
+            "page not found", "404 not found", "not found",
+            "temporarily unavailable", "under maintenance",
+        )
+        if any(marker in head for marker in soft_404_markers):
+            raise ValueError("looks like a soft-404 / error body, not documentation")
+
     # Check for common markdown elements
     lines = content.split('\n')
     markdown_indicators = [

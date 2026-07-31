@@ -44,15 +44,14 @@ doc_count() {
     fi
 }
 
-# Kick off a background cache sync if there is pending work (status exits 2).
+# Kick off a background cache sync. We launch unconditionally rather than gating on a
+# foreground `status` scan: status is O(pages) and a large cache blew the 5s timeout
+# (exit 124, not 2), silently stranding pending updates. `sync` has its own cheap
+# 0-fetch fast path, so an already-current cache just no-ops in the background.
 maybe_background_sync() {
-    [ -x "$FETCH" ] || return 0
-    run_with_timeout 5 "$FETCH" status >/dev/null 2>&1
-    if [ $? -eq 2 ]; then
-        nohup "$FETCH" sync >/dev/null 2>&1 &
-        return 0  # work started
-    fi
-    return 1      # nothing pending
+    [ -x "$FETCH" ] || return 1
+    nohup "$FETCH" sync >/dev/null 2>&1 &
+    return 0
 }
 
 # First run: shallow-clone the tiny metadata repo, then bulk-fetch in background.
@@ -70,7 +69,9 @@ cd "$DOCS_DIR" || { output_context "Claude docs directory missing. Re-run /docs 
 
 BEFORE=$(git rev-parse HEAD 2>/dev/null)
 # Hard-sync to origin/main: fast, survives history rewrites, cleans stale tracked files.
-run_with_timeout 10 git fetch --depth 1 origin main >/dev/null 2>&1 || true
+# No --depth here: it would re-shallow a clone that manifest-diff.sh deepened for the
+# what's-new / changelog features (the first-run clone above stays shallow for speed).
+run_with_timeout 10 git fetch origin main >/dev/null 2>&1 || true
 run_with_timeout 10 git reset --hard origin/main >/dev/null 2>&1 || true
 AFTER=$(git rev-parse HEAD 2>/dev/null)
 

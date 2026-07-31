@@ -60,7 +60,9 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
 
     Raises:
         SystemExit: If the transition would remove > ``MAX_DELETION_PERCENT`` of
-            the previous pages, or leave < ``MIN_EXPECTED_FILES`` total.
+            the previous pages, or leave < ``MIN_EXPECTED_FILES`` *fetchable*
+            pages (sha256 set) — the latter catches a run where discovery is fine
+            but most per-page fetches failed.
     """
     old_urls = {p["url"] for p in old_manifest.get("pages", []) if p.get("url")}
     new_urls = {p["url"] for p in new_pages if p.get("url")}
@@ -82,13 +84,18 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
             logger.critical("=" * 70)
             sys.exit(1)
 
-    if len(new_pages) < MIN_EXPECTED_FILES:
+    fetchable = [p for p in new_pages if p.get("sha256")]
+    if len(fetchable) < MIN_EXPECTED_FILES:
         logger.critical("=" * 70)
-        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few pages in new manifest!")
+        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few fetchable pages in new manifest!")
         logger.critical(
-            f"   Only {len(new_pages)} pages (minimum: {MIN_EXPECTED_FILES}). Aborting."
+            f"   Only {len(fetchable)} of {len(new_pages)} pages have content "
+            f"(sha256 set; minimum {MIN_EXPECTED_FILES}). Most fetches failed — aborting."
         )
         logger.critical("=" * 70)
         sys.exit(1)
 
-    logger.info(f"✅ Manifest transition validated: {len(new_pages)} pages")
+    logger.info(
+        f"✅ Manifest transition validated: {len(new_pages)} pages "
+        f"({len(fetchable)} fetchable)"
+    )
