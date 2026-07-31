@@ -18,6 +18,14 @@ Claude knows a lot — but documentation changes fast. API parameters shift, new
 | "I think the API works like..." | "According to the documentation..." |
 | You verify answers manually | Answers cite specific doc pages |
 
+## How It Works
+
+The repository commits **only metadata** — a page manifest and a prose-free search index (a couple of MB, no documentation text). Your machine fetches the actual `.md` pages from Anthropic's servers on demand into a local cache. So:
+
+- **Current** — answers come from the live page on `platform.claude.com` / `code.claude.com`, not a snapshot or stale training data.
+- **Private & compliant** — no Anthropic documentation is redistributed. The repo commits none of it (not at the tip, not in history); you fetch it yourself, straight from the source.
+- **Tiny** — the clone is a few MB of metadata, not the ~100 MB doc corpus, and pages are cached only as you open them.
+
 ## Quick Start — Plugin Install (Recommended)
 
 Two commands, no dependencies:
@@ -149,7 +157,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 ## Documentation Coverage
 
-Documentation files across multiple categories, updated every 3 hours:
+The full Claude documentation set — every page on **platform.claude.com** and **code.claude.com** — re-indexed every 3 hours:
 
 - **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Ruby, C#, PHP)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
@@ -160,7 +168,6 @@ Documentation files across multiple categories, updated every 3 hours:
 - **Getting Started** — Quickstart guides
 - **Testing & Evaluation** — Eval frameworks, testing guides
 - **Release Notes** — Version history and changelogs
-- **Resources** — Additional resources
 
 ## How Updates Work
 
@@ -168,6 +175,8 @@ Documentation files across multiple categories, updated every 3 hours:
 2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
 3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
 4. **Safe** — Manifest safeguards prevent catastrophic changes (min 200 pages discovered, max 10% removed per sync, min 250 pages)
+
+> **Upgrading from a v1 (mirror) install?** Nothing to do — your next session auto-migrates. The SessionStart hook hard-syncs to the metadata-only v2 layout (removing the old committed `docs/`, preserving your cache and courses), then fetches pages on demand.
 
 ## Troubleshooting
 
