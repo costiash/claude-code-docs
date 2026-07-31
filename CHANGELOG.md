@@ -5,7 +5,7 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2026-07-31
 
 ### Breaking Changes — v1 *mirror* → v2 *manifest + client fetch*
 - **No documentation prose is committed anymore.** The repo now ships only metadata (`paths_manifest.json` + `search_index.json`); the actual `.md` pages are fetched at runtime from Anthropic's servers into a local cache at `~/.claude-code-docs/cache/`. See `ARCHITECTURE.md`.
