@@ -82,8 +82,9 @@ A search returns a **filename** (e.g. `claude-code__hooks.md`). The file is at
 3. If the fetch fails (offline), the script prints the canonical source URL on stderr —
    fall back to WebFetch on that URL.
 
-To save context on large pages, you can preview a page's structure from the index
-(title + headings) before reading the full body:
+**To save context, prefer previewing large pages before reading them.** Pull a page's
+structure from the index (title + headings) first — often the headings alone answer the
+question and you skip loading a multi-KB body:
 ```bash
 jq -r '.pages[] | select(.filename=="<filename>") | .title, (.headings[]|"  "+.text)' ~/.claude-code-docs/search_index.json
 ```
