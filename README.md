@@ -30,12 +30,12 @@ Two commands, no dependencies:
 That's it. On your next session Claude will automatically:
 1. Clone a tiny metadata repo to `~/.claude-code-docs/` (manifest + search index, no prose)
 2. Fetch documentation pages into a local cache in the background, and keep both current each session
-3. Make the `/docs` command available for manual lookups
+3. Make the `/docs` skill available for manual lookups
 4. Activate the **auto-discovery Skill** — Claude reads docs automatically when you ask Claude-related questions
 
 ### What the Plugin Gets You
 
-- **`/docs` command** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
+- **`/docs` skill** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
 - **Auto-discovery Skill** — Claude proactively searches docs when you ask about Claude Code, the API, SDKs, or prompt engineering. No `/docs` prefix needed.
 - **Interactive Courses** — Turn any Claude topic into a stunning, self-contained HTML course with animated diagrams, protocol conversations, quizzes, and code translations. Just say "create a course on hooks" or run `/docs --course <topic>`.
 - **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
@@ -122,13 +122,13 @@ Each entry in the report includes a **"Create Course"** button. Click it to copy
 /docs agent sdk python   # Agent SDK Python guide
 /docs --course hooks     # Generate an interactive course on hooks
 /docs --report           # HTML changelog of recent doc changes
-/docs -t                 # Check freshness and pull updates
+/docs -t                 # Check freshness (read-only)
 /docs what's new         # Recent documentation changes
 ```
 
 ### Natural Language Queries
 
-The `/docs` command understands intent — ask questions in plain English:
+The `/docs` skill understands intent — ask questions in plain English:
 
 ```bash
 /docs what are the best practices for Agent SDK in Python?
@@ -151,7 +151,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 Documentation files across multiple categories, updated every 3 hours:
 
-- **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Kotlin, Ruby)
+- **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Ruby, C#, PHP)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
 - **Claude Code** — CLI docs: hooks, skills, MCP, plugins, settings, sub-agents
 - **Agents & Tools** — MCP connectors, tool use patterns, agent capabilities
@@ -159,7 +159,6 @@ Documentation files across multiple categories, updated every 3 hours:
 - **About Claude** — Model capabilities, context windows, pricing
 - **Getting Started** — Quickstart guides
 - **Testing & Evaluation** — Eval frameworks, testing guides
-- **Prompt Library** — Ready-to-use prompt templates
 - **Release Notes** — Version history and changelogs
 - **Resources** — Additional resources
 
@@ -174,8 +173,8 @@ Documentation files across multiple categories, updated every 3 hours:
 
 | Problem | Solution |
 |---------|----------|
-| `/docs` not found | Restart Claude Code; for script install check `ls ~/.claude/commands/docs.md` |
-| Docs seem outdated | `/docs -t` (or `/docs sync`) to force an update — the SessionStart hook also hard-syncs the metadata each session |
+| `/docs` not found | Restart Claude Code so the plugin loads; for a script install, check `ls ~/.claude-code-docs/` |
+| Docs seem outdated | `/docs sync` (or the SessionStart hook, which hard-syncs each session) forces an update; `/docs -t` only checks freshness |
 | Plugin not working | Run `/plugin list` to verify installation |
 | Script install fails | Install the plugin instead: `/plugin install claude-docs@claude-code-docs` |
 

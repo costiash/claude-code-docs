@@ -76,5 +76,5 @@ python3 scripts/build_search_index.py                     # build search_index.j
 ./plugin/skills/claude-docs/scripts/fuzzy-search.sh agent sdk python
 ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-pytest tests/ -q -m "not network"
+uv run pytest tests/ -q -m "not network"
 ```
