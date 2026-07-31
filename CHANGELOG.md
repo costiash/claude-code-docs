@@ -5,6 +5,19 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Breaking Changes — v1 *mirror* → v2 *manifest + client fetch*
+- **No documentation prose is committed anymore.** The repo now ships only metadata (`paths_manifest.json` + `search_index.json`); the actual `.md` pages are fetched at runtime from Anthropic's servers into a local cache at `~/.claude-code-docs/cache/`. See `ARCHITECTURE.md`.
+- **One-time automatic re-sync on upgrade.** The SessionStart hook now runs `git reset --hard origin/main` (was `git pull --ff-only`). This absorbs the metadata-only cutover (and the later history rewrite), deletes the stale tracked `docs/*.md` left over from old mirror-era clones, and preserves your untracked `cache/` and `courses/`. Nothing to do — it happens automatically on your next session.
+
+### Changed
+- **`/docs` is now a Skill, not a flat command.** `plugin/commands/docs.md` → `plugin/skills/docs/SKILL.md` (`disable-model-invocation`, so it fires only on an explicit `/docs`; auto-discovery stays the `claude-docs` skill's job). Invocation is unchanged — bare `/docs …` still works, plus the namespaced `/claude-docs:docs`.
+
+### Migration notes (only if you used the older *script* install)
+- Remove the stale personal command so it can't shadow or conflict with the plugin's `/docs`: `rm -f ~/.claude/commands/docs.md` (or run `~/.claude-code-docs/uninstall.sh`, which also clears legacy hooks from `~/.claude/settings.json`).
+- Then install the plugin: `/plugin marketplace add costiash/claude-code-docs` then `/plugin install claude-docs@claude-code-docs`.
+
 ## [1.1.0] - 2026-03-28
 
 ### Added

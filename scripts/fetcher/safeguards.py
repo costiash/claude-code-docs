@@ -1,121 +1,101 @@
 """
-Safety safeguards to prevent catastrophic file deletion.
+Safety safeguards for the v2 pipeline.
 
-This module contains safeguard functions that prevent mass deletion
-of documentation files when sitemap discovery fails.
+v1 guarded against mass deletion of tracked ``docs/*.md`` files. v2 commits no
+prose — the thing worth protecting is now the **manifest**. Two gates:
+
+1. :func:`validate_discovery_threshold` — refuse to proceed if discovery found
+   fewer than ``MIN_DISCOVERY_THRESHOLD`` pages (a broken sitemap/llms.txt).
+2. :func:`validate_manifest_transition` — refuse to write a new manifest that
+   drops more than ``MAX_DELETION_PERCENT`` of the previous pages, or leaves
+   fewer than ``MIN_EXPECTED_FILES`` total. The first v2 run (no predecessor)
+   always passes.
 """
 
 import sys
-from pathlib import Path
-from typing import List, Set
+from typing import Dict, List
 
 from .config import (
-    MANIFEST_FILE,
     MIN_DISCOVERY_THRESHOLD,
     MAX_DELETION_PERCENT,
     MIN_EXPECTED_FILES,
     logger,
 )
-from .paths import load_paths_from_manifest
 
 
-def cleanup_old_files(docs_dir: Path, current_files: Set[str], manifest: dict) -> None:
+def validate_discovery_threshold(pages: List) -> List:
     """
-    Remove only files that were previously fetched but no longer exist.
-
-    Preserves manually added files.
-
-    SAFEGUARDS (prevent catastrophic deletion from sitemap failures):
-    - Refuses to delete > MAX_DELETION_PERCENT of files
-    - Refuses if current_files < MIN_EXPECTED_FILES
+    Ensure discovery returned enough pages; abort otherwise.
 
     Args:
-        docs_dir: Path to the docs directory
-        current_files: Set of filenames that should be kept
-        manifest: Previous manifest with file tracking
-    """
-    previous_files = set(manifest.get("files", {}).keys())
-    files_to_remove = previous_files - current_files
-
-    # SAFEGUARD 1: Check deletion percentage
-    if previous_files:
-        deletion_percent = (len(files_to_remove) / len(previous_files)) * 100
-        if deletion_percent > MAX_DELETION_PERCENT:
-            logger.error("=" * 70)
-            logger.error("🚨 SAFEGUARD TRIGGERED: Mass deletion prevented!")
-            logger.error(f"   Would delete {len(files_to_remove)} of {len(previous_files)} files "
-                        f"({deletion_percent:.1f}%)")
-            logger.error(f"   Threshold: {MAX_DELETION_PERCENT}%")
-            logger.error("   This likely indicates sitemap discovery failure.")
-            logger.error("   Files preserved. Manual investigation required.")
-            logger.error("=" * 70)
-            return
-
-    # SAFEGUARD 2: Check minimum file count
-    if len(current_files) < MIN_EXPECTED_FILES:
-        logger.error("=" * 70)
-        logger.error("🚨 SAFEGUARD TRIGGERED: Insufficient files!")
-        logger.error(f"   Only {len(current_files)} files in current set "
-                    f"(minimum: {MIN_EXPECTED_FILES})")
-        logger.error("   This likely indicates sitemap discovery failure.")
-        logger.error("   Files preserved. Manual investigation required.")
-        logger.error("=" * 70)
-        return
-
-    # Safe to proceed with deletion
-    if files_to_remove:
-        logger.info(f"Removing {len(files_to_remove)} obsolete files (within safe threshold)")
-
-    for filename in files_to_remove:
-        if filename == MANIFEST_FILE:  # Never delete the manifest
-            continue
-
-        file_path = docs_dir / filename
-        if file_path.exists():
-            logger.info(f"Removing obsolete file: {filename}")
-            file_path.unlink()
-
-
-def validate_discovery_threshold(documentation_pages: List[str]) -> List[str]:
-    """
-    Validate that discovery returned enough paths.
-
-    If insufficient paths are discovered, attempts to use the existing
-    manifest as a fallback. If both fail, exits to prevent data loss.
-
-    Args:
-        documentation_pages: List of discovered documentation paths
+        pages: Discovered page records (any list; only the count matters).
 
     Returns:
-        Validated list of paths (may be from fallback)
+        The same list, unchanged, when the count is sufficient.
 
     Raises:
-        SystemExit: If both discovery and fallback fail
+        SystemExit: If fewer than ``MIN_DISCOVERY_THRESHOLD`` pages were found.
     """
-    if len(documentation_pages) < MIN_DISCOVERY_THRESHOLD:
-        logger.error("=" * 70)
-        logger.error("🚨 SAFEGUARD TRIGGERED: Insufficient paths discovered!")
-        logger.error(f"   Only {len(documentation_pages)} paths discovered "
-                    f"(minimum: {MIN_DISCOVERY_THRESHOLD})")
-        logger.warning("Attempting to use existing manifest as fallback...")
+    if len(pages) < MIN_DISCOVERY_THRESHOLD:
+        logger.critical("=" * 70)
+        logger.critical("🚨 SAFEGUARD TRIGGERED: Insufficient pages discovered!")
+        logger.critical(
+            f"   Only {len(pages)} discovered (minimum: {MIN_DISCOVERY_THRESHOLD})."
+        )
+        logger.critical("   Likely a sitemap/llms.txt discovery failure. Aborting.")
+        logger.critical("=" * 70)
+        sys.exit(1)
 
-        fallback_paths = load_paths_from_manifest()
-        if len(fallback_paths) >= MIN_DISCOVERY_THRESHOLD:
-            logger.info(f"✅ Using {len(fallback_paths)} paths from manifest fallback")
-            return fallback_paths
-        else:
+    logger.info(f"✅ Discovery validated: {len(pages)} pages")
+    return pages
+
+
+def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> None:
+    """
+    Guard the old→new manifest transition against mass removal.
+
+    Args:
+        old_manifest: The previously-loaded v2 manifest (``{pages: [...]}``).
+        new_pages: The page entries about to be written.
+
+    Raises:
+        SystemExit: If the transition would remove > ``MAX_DELETION_PERCENT`` of
+            the previous pages, or leave < ``MIN_EXPECTED_FILES`` *fetchable*
+            pages (sha256 set) — the latter catches a run where discovery is fine
+            but most per-page fetches failed.
+    """
+    old_urls = {p["url"] for p in old_manifest.get("pages", []) if p.get("url")}
+    new_urls = {p["url"] for p in new_pages if p.get("url")}
+
+    # First v2 run (or unreadable predecessor): nothing to compare — pass.
+    if not old_urls:
+        logger.info("No prior v2 manifest — skipping transition check (clean start).")
+    else:
+        removed = old_urls - new_urls
+        removed_percent = (len(removed) / len(old_urls)) * 100
+        if removed_percent > MAX_DELETION_PERCENT:
             logger.critical("=" * 70)
-            logger.critical("🚨 CRITICAL: Both discovery AND fallback failed!")
-            logger.critical(f"   Discovery: {len(documentation_pages)} paths")
-            logger.critical(f"   Fallback: {len(fallback_paths)} paths")
-            logger.critical(f"   Required minimum: {MIN_DISCOVERY_THRESHOLD}")
-            logger.critical("   Aborting to prevent data loss.")
+            logger.critical("🚨 SAFEGUARD TRIGGERED: Mass page removal prevented!")
+            logger.critical(
+                f"   Would remove {len(removed)} of {len(old_urls)} pages "
+                f"({removed_percent:.1f}%, threshold {MAX_DELETION_PERCENT}%)."
+            )
+            logger.critical("   Likely a discovery failure. Aborting before write.")
             logger.critical("=" * 70)
             sys.exit(1)
 
-    if not documentation_pages:
-        logger.error("No documentation pages discovered!")
+    fetchable = [p for p in new_pages if p.get("sha256")]
+    if len(fetchable) < MIN_EXPECTED_FILES:
+        logger.critical("=" * 70)
+        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few fetchable pages in new manifest!")
+        logger.critical(
+            f"   Only {len(fetchable)} of {len(new_pages)} pages have content "
+            f"(sha256 set; minimum {MIN_EXPECTED_FILES}). Most fetches failed — aborting."
+        )
+        logger.critical("=" * 70)
         sys.exit(1)
 
-    logger.info(f"✅ Discovery validated: {len(documentation_pages)} paths to process")
-    return documentation_pages
+    logger.info(
+        f"✅ Manifest transition validated: {len(new_pages)} pages "
+        f"({len(fetchable)} fetchable)"
+    )

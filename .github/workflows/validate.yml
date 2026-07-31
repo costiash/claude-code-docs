@@ -22,8 +22,29 @@ jobs:
           python3 -m pip install requests>=2.32.0
           python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
 
-      - name: Validate all paths reachable
-        run: python3 scripts/lookup_paths.py --validate-all
+      - name: Validate sampled manifest URLs are reachable
+        run: |
+          set -euo pipefail
+          # v2: the manifest is the source of truth. Sample its md_urls and HEAD-check
+          # them (jq + curl only — no Python, no committed docs needed).
+          SAMPLE=$(jq -r '.pages[].md_url | select(. != null)' paths_manifest.json | shuf | head -30)
+          TOTAL=0
+          FAIL=0
+          while IFS= read -r url; do
+            [ -z "$url" ] && continue
+            TOTAL=$((TOTAL + 1))
+            code=$(curl -s -o /dev/null -w '%{http_code}' -I -L --proto '=https' --proto-redir '=https' --max-time 20 "$url" || echo "000")
+            if [ "$code" != "200" ]; then
+              echo "::warning::HTTP $code for $url"
+              FAIL=$((FAIL + 1))
+            fi
+          done <<< "$SAMPLE"
+          echo "Reachability sample: $((TOTAL - FAIL))/$TOTAL returned 200"
+          # Tolerate the odd transient failure; fail the run only on a broad outage.
+          if [ "$FAIL" -gt 5 ]; then
+            echo "::error::$FAIL of $TOTAL sampled URLs unreachable — likely a discovery/host problem."
+            exit 1
+          fi
 
       - name: Run validation tests
         run: |

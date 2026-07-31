@@ -67,34 +67,32 @@ Before writing course HTML, deeply understand the topic by reading all relevant 
 
 **How to find documentation files:**
 
-Search `~/.claude-code-docs/docs/` using this hierarchy (try simpler strategies first):
+Use the search scripts (they read the manifest + index, so they see every page whether or not it is cached):
 
-1. **Direct Glob** — for concrete topic names:
-   ```
-   Glob: ~/.claude-code-docs/docs/*<topic>*.md
-   ```
-
-2. **Scoped Glob** — when the product context is known:
-   | Context | Glob pattern |
-   |---------|-------------|
-   | Claude Code CLI | `~/.claude-code-docs/docs/claude-code__*<topic>*.md` |
-   | Agent SDK | `~/.claude-code-docs/docs/docs__en__agent-sdk__*<topic>*.md` |
-   | Claude API | `~/.claude-code-docs/docs/docs__en__api__*<topic>*.md` |
-   | Build guides | `~/.claude-code-docs/docs/docs__en__build-with-claude__*<topic>*.md` |
-   | Agents & tools | `~/.claude-code-docs/docs/docs__en__agents-and-tools__*<topic>*.md` |
-
-3. **Content search** — for questions or compound topics:
+1. **Content search** — for questions or compound topics:
    ```bash
    bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "<keyword1>" "<keyword2>"
    ```
 
-4. **Fuzzy search** — for approximate names:
+2. **Fuzzy search** — for approximate names:
    ```bash
    bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/fuzzy-search.sh "<query>"
    ```
 
+3. **By category** — list a whole product's pages:
+   ```bash
+   jq -r '.pages[] | select(.category=="claude_code") | .filename' ~/.claude-code-docs/paths_manifest.json
+   ```
+
+**Reading a page:** pages are cached at `~/.claude-code-docs/cache/<filename>`. If a file
+isn't there yet, fetch it first, then read it:
+```bash
+~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "<filename>"
+```
+(Fetching several? Run `~/.claude-code-docs/plugin/scripts/fetch-docs.sh sync` once instead.)
+
 **What to read:**
-- Read the top 5-8 matching docs for the topic
+- Read the top 5-8 matching docs for the topic (fetching any that aren't cached)
 - Read 1-2 adjacent/related docs for context (e.g., if the topic is "hooks", also skim the skills and settings docs)
 - Cap at 10 docs total to avoid context exhaustion
 

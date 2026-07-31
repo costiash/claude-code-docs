@@ -1,124 +1,60 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
-# validate-paths.sh — HTTP reachability checks for Claude documentation
+# validate-paths.sh — HTTP reachability checks for the v2 manifest.
 # Usage: validate-paths.sh [--quick]
-#   --quick: sample 20 random docs instead of all
-# Output: summary + list of broken paths
-# Exit: 0 if all reachable, 1 if any broken
+#   --quick: sample 20 random pages instead of all.
+# Reads md_urls directly from paths_manifest.json (no filename->URL derivation).
+# Exit: 0 if all reachable, 1 if any broken/timeout.
 
-DOCS_DIR="${DOCS_DIR:-${HOME}/.claude-code-docs/docs}"
+set -uo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+CLONE_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
+MANIFEST="${CLAUDE_DOCS_MANIFEST:-$CLONE_ROOT/paths_manifest.json}"
 QUICK_SAMPLE=20
 MAX_PARALLEL=5
 TIMEOUT=10
 
 quick_mode=false
-if [ "${1:-}" = "--quick" ]; then
-    quick_mode=true
-fi
+[ "${1:-}" = "--quick" ] && quick_mode=true
 
-if [ ! -d "$DOCS_DIR" ]; then
-    echo "Documentation directory not found: $DOCS_DIR" >&2
-    exit 1
-fi
+[ -f "$MANIFEST" ] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
 
-filename_to_url() {
-    local fname="$1"
-    fname="${fname%.md}"
-
-    if [[ "$fname" == claude-code__* ]]; then
-        local page="${fname#claude-code__}"
-        page=$(echo "$page" | sed 's/__/\//g')
-        echo "https://code.claude.com/docs/en/${page}"
-    elif [[ "$fname" == docs__en__* ]]; then
-        local path="${fname#docs__en__}"
-        path=$(echo "$path" | sed 's/__/\//g')
-        echo "https://platform.claude.com/en/docs/${path}"
-    else
-        echo ""
-    fi
-}
-
-mapfile -t all_files < <(find "$DOCS_DIR" -maxdepth 1 -name "*.md" -exec basename {} \; | sort)
-
-if [ ${#all_files[@]} -eq 0 ]; then
-    echo "No documentation files found" >&2
-    exit 1
-fi
+mapfile -t all_urls < <(jq -r '.pages[].md_url | select(. != null)' "$MANIFEST")
+[ ${#all_urls[@]} -gt 0 ] || { echo "No URLs in manifest" >&2; exit 1; }
 
 if [ "$quick_mode" = true ]; then
-    mapfile -t check_files < <(printf '%s\n' "${all_files[@]}" | shuf | head -n "$QUICK_SAMPLE")
-    echo "Validating ${#check_files[@]} random docs (quick mode)..."
+    mapfile -t check_urls < <(printf '%s\n' "${all_urls[@]}" | shuf | head -n "$QUICK_SAMPLE")
+    echo "Validating ${#check_urls[@]} random pages (quick mode)..."
 else
-    check_files=("${all_files[@]}")
-    echo "Validating all ${#check_files[@]} docs..."
+    check_urls=("${all_urls[@]}")
+    echo "Validating all ${#check_urls[@]} pages..."
 fi
 
-total=0
-reachable=0
-broken=0
-timeout_count=0
-skipped=0
-redirected=0
-broken_list=""
-redirect_list=""
-
 check_url() {
-    local fname="$1"
-    local url
-    url=$(filename_to_url "$fname")
-
-    if [ -z "$url" ]; then
-        echo "SKIP $fname"
-        return
-    fi
-
-    local status
-    status=$(curl -sI --max-time "$TIMEOUT" -o /dev/null -w "%{http_code}" "$url" 2>/dev/null || echo "000")
-
-    if [ "$status" = "200" ]; then
-        echo "OK $fname"
-    elif [ "$status" = "301" ] || [ "$status" = "308" ]; then
-        echo "REDIRECT_PERM $fname $status $url"
-    elif [ "$status" = "302" ] || [ "$status" = "307" ]; then
-        echo "OK $fname"
-    elif [ "$status" = "000" ]; then
-        echo "TIMEOUT $fname $url"
-    else
-        echo "BROKEN $fname $status $url"
-    fi
+    local url="$1" status
+    status=$(curl -sI -L --proto '=https' --proto-redir '=https' --max-time "${TIMEOUT:-10}" -o /dev/null -w "%{http_code}" "$url" 2>/dev/null || echo "000")
+    case "$status" in
+        200) echo "OK $url" ;;
+        301|308) echo "REDIRECT_PERM $status $url" ;;
+        302|307) echo "OK $url" ;;
+        000) echo "TIMEOUT $url" ;;
+        *) echo "BROKEN $status $url" ;;
+    esac
 }
+export -f check_url
+export TIMEOUT
 
-export -f filename_to_url check_url
-export DOCS_DIR TIMEOUT
+results=$(printf '%s\n' "${check_urls[@]}" | xargs -P "$MAX_PARALLEL" -I{} bash -c 'check_url "$@"' _ {})
 
-results=$(printf '%s\n' "${check_files[@]}" | xargs -P "$MAX_PARALLEL" -I{} bash -c 'check_url "$@"' _ {})
-
+total=0; reachable=0; broken=0; timeout_count=0; redirected=0
+broken_list=""; redirect_list=""
 while IFS= read -r line; do
     case "$line" in
-        OK*)
-            total=$((total + 1))
-            reachable=$((reachable + 1))
-            ;;
-        BROKEN*)
-            total=$((total + 1))
-            broken=$((broken + 1))
-            broken_list="${broken_list}${line#BROKEN }\n"
-            ;;
-        TIMEOUT*)
-            total=$((total + 1))
-            timeout_count=$((timeout_count + 1))
-            broken_list="${broken_list}${line#TIMEOUT } (timeout)\n"
-            ;;
-        REDIRECT_PERM*)
-            total=$((total + 1))
-            reachable=$((reachable + 1))
-            redirected=$((redirected + 1))
-            redirect_list="${redirect_list}${line#REDIRECT_PERM }\n"
-            ;;
-        SKIP*)
-            skipped=$((skipped + 1))
-            ;;
+        OK*)            total=$((total+1)); reachable=$((reachable+1)) ;;
+        REDIRECT_PERM*) total=$((total+1)); reachable=$((reachable+1)); redirected=$((redirected+1)); redirect_list="${redirect_list}${line#REDIRECT_PERM }\n" ;;
+        BROKEN*)        total=$((total+1)); broken=$((broken+1)); broken_list="${broken_list}${line#BROKEN }\n" ;;
+        TIMEOUT*)       total=$((total+1)); timeout_count=$((timeout_count+1)); broken_list="${broken_list}${line#TIMEOUT } (timeout)\n" ;;
     esac
 done <<< "$results"
 
@@ -129,22 +65,11 @@ echo "Reachable:     $reachable"
 echo "Redirected:    $redirected (permanent — URL may have moved)"
 echo "Broken:        $broken"
 echo "Timeout:       $timeout_count"
-echo "Skipped:       $skipped"
 
-if [ -n "$redirect_list" ]; then
-    echo ""
-    echo "=== Permanent Redirects (URLs may need updating) ==="
-    echo -e "$redirect_list"
-fi
-
-if [ -n "$broken_list" ]; then
-    echo ""
-    echo "=== Broken Paths ==="
-    echo -e "$broken_list"
-fi
+[ -n "$redirect_list" ] && { echo ""; echo "=== Permanent Redirects ==="; echo -e "$redirect_list"; }
+[ -n "$broken_list" ] && { echo ""; echo "=== Broken Paths ==="; echo -e "$broken_list"; }
 
 if [ "$broken" -gt 0 ] || [ "$timeout_count" -gt 0 ]; then
     exit 1
 fi
-
 exit 0

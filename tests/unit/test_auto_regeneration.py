@@ -1,311 +1,98 @@
-"""
-Comprehensive tests for auto-regeneration of paths_manifest.json.
+"""v2 manifest-regeneration invariants: determinism, uniqueness, category vocabulary."""
 
-These tests cover:
-1. categorize_path() function
-2. update_paths_manifest() function
-3. discover_from_all_sitemaps() function
-4. Integration with main() workflow
-"""
-
-import pytest
-import json
 import sys
-import tempfile
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock, call
-import xml.etree.ElementTree as ET
 
-# Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
-from fetch_claude_docs import (
-    discover_from_all_sitemaps,
-    discover_claude_code_pages,
-)
+from fetcher.discovery import merge_discovery
+from fetcher.paths import url_to_filename, page_id_from_filename, categorize_from_url
+from fetcher.manifest import build_manifest
+
+# The closed category vocabulary (mirrors plugin/skills/claude-docs/manifest-reference.md).
+CATEGORY_VOCAB = {
+    "claude_code", "agent_sdk", "api_reference", "agents_and_tools", "about_claude",
+    "core_documentation", "get_started", "test_and_evaluate", "prompt_library",
+    "resources", "release_notes",
+}
+
+SAMPLE_URLS = [
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/agent-sdk/python",
+    "https://code.claude.com/docs/en/agent-sdk/overview",
+    "https://platform.claude.com/docs/en/api/messages",
+    "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector",
+    "https://platform.claude.com/docs/en/about-claude/models",
+    "https://platform.claude.com/docs/en/build-with-claude/vision",
+    "https://platform.claude.com/docs/en/resources/prompt-library/code-clarifier",
+]
 
 
-class TestCategorizePath:
-    """Test categorize_path() function for auto-categorization."""
+def _enrich(url):
+    """Mirror cli.py enrichment without the network fetch."""
+    filename = url_to_filename(url)
+    return {
+        "id": page_id_from_filename(filename),
+        "filename": filename,
+        "url": url,
+        "md_url": url + ".md",
+        "title": None,
+        "category": categorize_from_url(url),
+        "sha256": None,
+        "lastmod": None,
+        "fetch_status": "failed",
+    }
 
-    def test_categorize_api_reference(self):
-        """Test API reference categorization."""
-        # Both old format (/en/...) and new format (/docs/en/...) should work
-        paths = [
-            "/docs/en/api/messages",
-            "/docs/en/api/admin/users/list",
-            "/docs/en/agent-sdk/overview",
-            "/docs/en/agent-sdk/python",
-            # Old format also works
-            "/en/api/messages",
-            "/en/agent-sdk/overview",
+
+class TestRegeneration:
+    def _manifest(self):
+        pages = [_enrich(u) for u in SAMPLE_URLS]
+        return build_manifest(pages, sources=["s"])
+
+    def test_sorted_by_id(self):
+        m = self._manifest()
+        ids = [p["id"] for p in m["pages"]]
+        assert ids == sorted(ids)
+
+    def test_unique_ids_and_filenames(self):
+        m = self._manifest()
+        ids = [p["id"] for p in m["pages"]]
+        filenames = [p["filename"] for p in m["pages"]]
+        assert len(ids) == len(set(ids))
+        assert len(filenames) == len(set(filenames))
+
+    def test_categories_within_vocabulary(self):
+        m = self._manifest()
+        for p in m["pages"]:
+            assert p["category"] in CATEGORY_VOCAB, f"{p['url']} -> {p['category']}"
+
+    def test_required_fields_present(self):
+        m = self._manifest()
+        required = {"id", "filename", "url", "md_url", "title", "category", "sha256", "lastmod", "fetch_status"}
+        for p in m["pages"]:
+            assert required <= set(p.keys())
+
+    def test_deterministic_ignoring_timestamp(self):
+        a = self._manifest()
+        b = self._manifest()
+        assert a["pages"] == b["pages"]  # generated_at differs, pages identical
+
+    def test_nested_and_flat_do_not_collide(self):
+        # agent-sdk/overview and (a hypothetical) top-level overview stay distinct.
+        m = self._manifest()
+        filenames = {p["filename"] for p in m["pages"]}
+        assert "claude-code__agent-sdk__overview.md" in filenames
+
+
+class TestDiscoveryUnionRegen:
+    def test_union_then_manifest(self):
+        llms = [
+            {"url": u, "md_url": u + ".md", "title": f"T{i}", "description": None}
+            for i, u in enumerate(SAMPLE_URLS)
         ]
-
-        # Import here to avoid circular import
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "api_reference", f"Failed for path: {path}"
-
-    def test_categorize_claude_code(self):
-        """Test Claude Code docs categorization."""
-        paths = [
-            "/docs/en/hooks",
-            "/docs/en/setup",
-            "/docs/en/quickstart",
-            "/docs/en/analytics",
-            "/docs/en/memory",
-        ]
-
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "claude_code", f"Failed for path: {path}"
-
-    def test_categorize_prompt_library(self):
-        """Test prompt library categorization."""
-        paths = [
-            "/docs/en/resources/prompt-library/code-clarifier",
-            "/docs/en/resources/prompt-library/grammar-genie",
-            # Old format also works
-            "/en/resources/prompt-library/code-clarifier",
-        ]
-
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "prompt_library", f"Failed for path: {path}"
-
-    def test_categorize_resources(self):
-        """Test resources categorization."""
-        paths = [
-            "/docs/en/resources/overview",
-            "/en/resources/glossary",
-            "/en/resources/faq",
-        ]
-
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "resources", f"Failed for path: {path}"
-
-    def test_categorize_release_notes(self):
-        """Test release notes categorization."""
-        paths = [
-            "/docs/en/release-notes/overview",
-            "/docs/en/release-notes/system-prompts",
-            "/en/release-notes/api",
-        ]
-
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "release_notes", f"Failed for path: {path}"
-
-    def test_categorize_core_documentation(self):
-        """Test core documentation categorization (fallback)."""
-        paths = [
-            "/docs/en/about-claude/models/overview",
-            "/docs/en/build-with-claude/prompt-engineering/overview",
-            "/docs/en/test-and-evaluate/define-success",
-            "/docs/en/agents-and-tools/tool-use/overview",
-            # Old format also works
-            "/en/about-claude/models",
-            "/en/build-with-claude/prompt-engineering",
-        ]
-
-        from fetch_claude_docs import categorize_path
-
-        for path in paths:
-            assert categorize_path(path) == "core_documentation", f"Failed for path: {path}"
-
-
-class TestUpdatePathsManifest:
-    """Test update_paths_manifest() function."""
-
-    def test_update_paths_manifest_creates_categorized_structure(self, tmp_path):
-        """Test that update_paths_manifest() creates properly categorized manifest."""
-        from fetch_claude_docs import update_paths_manifest
-
-        # Use new /docs/en/... format (from code.claude.com sitemap)
-        paths = [
-            "/docs/en/api/messages",
-            "/docs/en/hooks",
-            "/docs/en/resources/prompt-library/code-clarifier",
-            "/docs/en/resources/overview",
-            "/docs/en/about-claude/models/overview",
-        ]
-
-        manifest_file = tmp_path / "paths_manifest.json"
-
-        update_paths_manifest(paths, manifest_file)
-
-        # Load and verify
-        with open(manifest_file) as f:
-            manifest = json.load(f)
-
-        assert "metadata" in manifest
-        assert manifest["metadata"]["total_paths"] == 5
-        assert "categories" in manifest
-
-        # Check categorization
-        assert "/docs/en/api/messages" in manifest["categories"]["api_reference"]
-        assert "/docs/en/hooks" in manifest["categories"]["claude_code"]
-        assert "/docs/en/resources/prompt-library/code-clarifier" in manifest["categories"]["prompt_library"]
-        assert "/docs/en/resources/overview" in manifest["categories"]["resources"]
-        assert "/docs/en/about-claude/models/overview" in manifest["categories"]["core_documentation"]
-
-    def test_update_paths_manifest_includes_metadata(self, tmp_path):
-        """Test that metadata is properly included."""
-        from fetch_claude_docs import update_paths_manifest
-
-        paths = ["/en/api/messages", "/docs/en/hooks"]
-        manifest_file = tmp_path / "paths_manifest.json"
-
-        update_paths_manifest(paths, manifest_file)
-
-        with open(manifest_file) as f:
-            manifest = json.load(f)
-
-        assert "generated_at" in manifest["metadata"]
-        assert "total_paths" in manifest["metadata"]
-        assert manifest["metadata"]["total_paths"] == 2
-        assert "source" in manifest["metadata"]
-        assert manifest["metadata"]["source"] == "sitemap_discovery"
-
-
-class TestDiscoverFromAllSitemaps:
-    """Test discover_from_all_sitemaps() function."""
-
-    @patch('fetcher.sitemap.discover_claude_code_pages')
-    def test_discover_from_all_sitemaps_combines_results(self, mock_discover):
-        """Test that it combines results from all sitemaps."""
-        # Mock different results from different sitemaps
-        # NOTE: As of Dec 2025, we only have 2 sitemaps (platform.claude.com and code.claude.com)
-        mock_discover.side_effect = [
-            ["/en/api/messages", "/en/docs/about-claude/models"],  # platform.claude.com
-            ["/docs/en/hooks", "/docs/en/setup"],  # code.claude.com
-        ]
-
-        session = Mock()
-
-        result = discover_from_all_sitemaps(session)
-
-        # Should combine results from both sitemaps
-        assert len(result) == 4  # 4 unique paths from 2 sitemaps
-        assert "/en/api/messages" in result
-        assert "/docs/en/hooks" in result
-        assert "/en/docs/about-claude/models" in result
-
-    @patch('fetcher.sitemap.discover_claude_code_pages')
-    def test_discover_from_all_sitemaps_handles_failures(self, mock_discover):
-        """Test that it continues even if some sitemaps fail."""
-        # First sitemap works, second fails
-        # NOTE: We only have 2 sitemaps now
-        mock_discover.side_effect = [
-            ["/en/api/messages"],
-            Exception("Sitemap unavailable"),
-        ]
-
-        session = Mock()
-
-        result = discover_from_all_sitemaps(session)
-
-        # Should succeed with partial results from one sitemap
-        assert len(result) == 1
-        assert "/en/api/messages" in result
-
-    @patch('fetcher.sitemap.discover_claude_code_pages')
-    def test_discover_from_all_sitemaps_fails_if_all_fail(self, mock_discover):
-        """Test that it raises exception if ALL sitemaps fail."""
-        mock_discover.side_effect = Exception("All sitemaps unavailable")
-
-        session = Mock()
-
-        with pytest.raises(Exception, match="Could not discover from any sitemap"):
-            discover_from_all_sitemaps(session)
-
-
-class TestMainWorkflowIntegration:
-    """Test that auto-regeneration integrates properly with main() workflow."""
-
-    @patch('fetch_claude_docs.discover_from_all_sitemaps')
-    @patch('fetch_claude_docs.update_paths_manifest')
-    @patch('fetch_claude_docs.fetch_markdown_content')
-    @patch('fetch_claude_docs.save_manifest')
-    @patch('fetch_claude_docs.fetch_changelog')
-    def test_main_calls_update_paths_manifest_after_discovery(
-        self, mock_changelog, mock_save, mock_fetch, mock_update, mock_discover
-    ):
-        """Test that main() calls update_paths_manifest() after successful discovery."""
-        # Setup mocks
-        mock_discover.return_value = ["/en/api/messages", "/docs/en/hooks"]
-        mock_fetch.return_value = ("test.md", "content")
-        mock_changelog.return_value = ("changelog.md", "changelog content")
-
-        # Import and run (we'll need to mock more for full integration)
-        # This tests the INTENT - actual implementation will be tested in integration tests
-
-        # For now, verify the function exists and can be imported
-        from fetch_claude_docs import update_paths_manifest
-        assert callable(update_paths_manifest)
-
-
-# Edge case tests
-class TestEdgeCases:
-    """Test edge cases in auto-regeneration."""
-
-    def test_categorize_path_with_special_characters(self):
-        """Test paths with special characters."""
-        from fetch_claude_docs import categorize_path
-
-        # Should handle these without crashing
-        # Use new /docs/en/... format
-        test_cases = [
-            ("/docs/en/api/messages-v2", "api_reference"),
-            ("/docs/en/mcp", "claude_code"),
-            ("/docs/en/resources/prompt-library/code-consultant-v2", "prompt_library"),
-        ]
-
-        for path, expected_category in test_cases:
-            result = categorize_path(path)
-            assert isinstance(result, str)
-            assert result == expected_category, f"Path {path} should be {expected_category}, got {result}"
-
-    def test_update_paths_manifest_empty_paths(self, tmp_path):
-        """Test with empty paths list."""
-        from fetch_claude_docs import update_paths_manifest
-
-        manifest_file = tmp_path / "paths_manifest.json"
-
-        update_paths_manifest([], manifest_file)
-
-        with open(manifest_file) as f:
-            manifest = json.load(f)
-
-        assert manifest["metadata"]["total_paths"] == 0
-        assert manifest["categories"] == {}
-
-    def test_update_paths_manifest_many_paths(self, tmp_path):
-        """Test with realistic number of paths (~502)."""
-        from fetch_claude_docs import update_paths_manifest
-
-        # Generate realistic paths using new /docs/en/... format
-        paths = [f"/docs/en/api/endpoint-{i}" for i in range(300)]  # -> api_reference
-        paths += ["/docs/en/hooks", "/docs/en/quickstart"]  # -> claude_code (2 paths)
-        paths += [f"/docs/en/resources/prompt-library/prompt-{i}" for i in range(100)]  # -> prompt_library
-        paths += [f"/docs/en/about-claude/topic-{i}" for i in range(100)]  # -> core_documentation
-
-        manifest_file = tmp_path / "paths_manifest.json"
-
-        update_paths_manifest(paths, manifest_file)
-
-        with open(manifest_file) as f:
-            manifest = json.load(f)
-
-        # Total = 300 + 2 + 100 + 100 = 502
-        assert manifest["metadata"]["total_paths"] == 502
-        assert len(manifest["categories"]["api_reference"]) == 300
-        assert len(manifest["categories"]["claude_code"]) == 2
-        assert len(manifest["categories"]["prompt_library"]) == 100
-        assert len(manifest["categories"]["core_documentation"]) == 100
+        sitemap = [{"url": SAMPLE_URLS[0], "lastmod": "2026-07-01"}]
+        merged = merge_discovery(llms, sitemap)
+        assert len(merged) == len(SAMPLE_URLS)
+        # lastmod flows from sitemap onto the matching page.
+        hooks = next(p for p in merged if p["url"] == SAMPLE_URLS[0])
+        assert hooks["lastmod"] == "2026-07-01"

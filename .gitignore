@@ -77,6 +77,19 @@ extracted_paths.txt
 extracted_paths_clean.txt
 sample_paths.txt
 
+# Ephemeral fetch scratch dir (v2 pipeline fetches .md here to hash + index; never committed)
+.doc_fetch/
+
+# v2: documentation prose is NOT committed. The legacy top-level docs/ mirror is
+# scratch only — never tracked. Anchored to the repo root (/docs/) so it does NOT
+# also ignore nested dirs named "docs", e.g. the plugin/skills/docs/ router skill.
+/docs/
+
+# v2 client runtime state (populated on user machines, never committed):
+# cache/ holds fetched .md prose; courses/ holds generated HTML. Both survive hook resets.
+cache/
+courses/
+
 # ============================================================================
 # Project Specific
 # ============================================================================
@@ -86,6 +99,9 @@ sample_paths.txt
 .last_pull
 .last_check
 claude-docs-helper.sh
+
+# Personal Claude working rules (not shared)
+CLAUDE.local.md
 
 # Upstream reference repository (local development only)
 upstream/
@@ -156,8 +172,20 @@ Pipfile.lock
 # Keep Important Directories (Explicit)
 # ============================================================================
 
-!docs/
 !scripts/
 !tests/
 !.github/
 autoresearch-results.tsv
+
+# ============================================================================
+# Dev scratch / working artifacts (session-local, not shared)
+# ============================================================================
+# for-dummies-visualizer HTML output
+for-dummies/
+# Playwright MCP session scratch (snapshots, console logs)
+.playwright-mcp/
+# dev spec + handoff notes (local paths, handover docs)
+claude-code-docs-redistribution-spec.md
+HANDOFF.txt
+# dev screenshot
+hero-reduced-motion.jpeg

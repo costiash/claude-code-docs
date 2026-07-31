@@ -1,7 +1,7 @@
 [project]
 name = "claude-code-docs"
 version = "1.0.0"
-description = "Claude Code documentation mirror with automated updates and enhanced features"
+description = "Claude Code documentation index with automated updates and enhanced features"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
