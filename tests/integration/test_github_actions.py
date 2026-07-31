@@ -217,11 +217,10 @@ class TestWorkflowOutputs:
     """Test workflow outputs and artifacts."""
 
     @pytest.mark.integration
-    def test_docs_directory_structure(self, project_root):
-        """Test docs directory exists for workflow output."""
-        docs_dir = project_root / "docs"
-        assert docs_dir.exists()
-        assert docs_dir.is_dir()
+    def test_committed_data_files_exist(self, project_root):
+        """v2 workflow output is the committed manifest + prose-free index (docs/ is gone)."""
+        assert (project_root / "paths_manifest.json").is_file()
+        assert (project_root / "search_index.json").is_file()
 
     @pytest.mark.integration
     def test_manifest_can_be_created(self, tmp_path):
