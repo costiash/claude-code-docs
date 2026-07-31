@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-07-31
+
 ### Breaking Changes — v1 *mirror* → v2 *manifest + client fetch*
 - **No documentation prose is committed anymore.** The repo now ships only metadata (`paths_manifest.json` + `search_index.json`); the actual `.md` pages are fetched at runtime from Anthropic's servers into a local cache at `~/.claude-code-docs/cache/`. See `ARCHITECTURE.md`.
 - **One-time automatic re-sync on upgrade.** The SessionStart hook now runs `git reset --hard origin/main` (was `git pull --ff-only`). This absorbs the metadata-only cutover (and the later history rewrite), deletes the stale tracked `docs/*.md` left over from old mirror-era clones, and preserves your untracked `cache/` and `courses/`. Nothing to do — it happens automatically on your next session.
