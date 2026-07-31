@@ -33,6 +33,9 @@ STALE = ("docs__en__stale.md", "https://platform.claude.com/docs/en/stale.md", "
 EVIL = ("evil.md", "https://evil.example.com/docs/en/evil.md", "# Evil\n")
 # A page on an ALLOWED host but with an insecure http:// scheme (https-only guard test).
 INSECURE = ("insecure.md", "http://code.claude.com/docs/en/insecure.md", "# Insecure\n")
+# A raw-github URL a naive prefix-glob ALLOWS (curl squashes the ../ before sending) but
+# the exact-match pin must refuse — the traversal bypass that fetched a third-party repo.
+RAWEVIL = ("rawevil.md", "https://raw.githubusercontent.com/anthropics/claude-code/../../attacker/evil/main/x.md", "# RawEvil\n")
 
 FAKE_CURL = r'''#!/usr/bin/env python3
 import sys, os, json
@@ -91,6 +94,8 @@ def harness(tmp_path):
     content_map[EVIL[1]] = EVIL[2]
     # insecure http page available too — the guard must block BEFORE curl is ever reached
     content_map[INSECURE[1]] = INSECURE[2]
+    # non-anthropic raw-github page available too (the raw-github pin must block it)
+    content_map[RAWEVIL[1]] = RAWEVIL[2]
 
     manifest_path = clone / "paths_manifest.json"
     manifest_path.write_text(json.dumps({"schema_version": 2, "pages": pages}))
@@ -123,6 +128,12 @@ def add_evil(manifest_path):
 def add_insecure(manifest_path):
     data = json.loads(manifest_path.read_text())
     data["pages"].append(_entry(INSECURE[0], INSECURE[1], INSECURE[2], category="core_documentation"))
+    manifest_path.write_text(json.dumps(data))
+
+
+def add_rawevil(manifest_path):
+    data = json.loads(manifest_path.read_text())
+    data["pages"].append(_entry(RAWEVIL[0], RAWEVIL[1], RAWEVIL[2], category="core_documentation"))
     manifest_path.write_text(json.dumps(data))
 
 
@@ -190,6 +201,16 @@ class TestGet:
         assert "non-https" in r.stderr
         assert not (cache / "insecure.md").exists()
 
+    def test_get_non_changelog_rawgithub_refused(self, harness):
+        # raw.githubusercontent.com serves exactly one file to the client (the anthropics
+        # changelog); a ../ traversal URL that a prefix glob would allow must be refused.
+        env, cache, manifest_path = harness
+        add_rawevil(manifest_path)
+        r = run(env, "get", "rawevil.md")
+        assert r.returncode != 0
+        assert "non-changelog raw.githubusercontent.com" in r.stderr
+        assert not (cache / "rawevil.md").exists()
+
 
 class TestRetry:
     def test_retry_once_then_succeeds(self, harness):
@@ -219,3 +240,19 @@ class TestStatusPrune:
         assert r.returncode == 0
         assert not (cache / "orphan.md").exists()
         assert (cache / "claude-code__hooks.md").exists()
+
+
+def test_changelog_pin_agrees_across_files():
+    """The raw.githubusercontent.com changelog URL is hardcoded as the client exact-match
+    pin (fetch-docs.sh) and in the CI fetcher (cli.py, content.py). They MUST stay byte-
+    identical: a drift (e.g. a CI-side branch/repo rename) would silently stop the client
+    from fetching the changelog with no other test failing."""
+    import re
+    root = Path(__file__).resolve().parents[2]
+    pat = re.compile(r'https://raw\.githubusercontent\.com/[^\s"\')]*CHANGELOG\.md')
+    urls = set()
+    for rel in ("plugin/scripts/fetch-docs.sh", "scripts/fetcher/cli.py", "scripts/fetcher/content.py"):
+        found = pat.findall((root / rel).read_text())
+        assert found, f"no raw-github CHANGELOG URL found in {rel}"
+        urls.update(found)
+    assert len(urls) == 1, f"changelog pin drifted across files: {sorted(urls)}"
