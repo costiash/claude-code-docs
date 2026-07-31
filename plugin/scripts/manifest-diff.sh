@@ -31,6 +31,14 @@ command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
 cd "$CLONE_ROOT" || { echo "clone root not found: $CLONE_ROOT" >&2; exit 1; }
 [ -f "$MANIFEST_REL" ] || { echo "manifest not found: $CLONE_ROOT/$MANIFEST_REL" >&2; exit 1; }
 
+# The SessionStart hook clones shallow (--depth 1) for a fast first run, but diffing
+# manifest revisions across a window needs history. Deepen once, on demand, when the
+# clone is shallow (the metadata-only history is small, so this stays cheap). Without
+# it, rev-list can't reach a pre-window revision and every page reports as "added".
+if [ "$(git rev-parse --is-shallow-repository 2>/dev/null)" = "true" ]; then
+    git fetch --unshallow --quiet 2>/dev/null || git fetch --deepen 500 --quiet 2>/dev/null || true
+fi
+
 # Translate 7d / 24h into a git date expression.
 case "$since" in
     *d) git_since="${since%d} days ago" ;;

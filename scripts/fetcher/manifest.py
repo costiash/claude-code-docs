@@ -24,6 +24,7 @@ dropped, so a transient network error never deletes a page from the manifest.
 """
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -40,24 +41,38 @@ def load_manifest(path: Path) -> Dict:
     """
     Load the existing v2 manifest, or return an empty one.
 
-    A missing file, unreadable JSON, or a non-v2 (e.g. legacy ``{metadata,
-    categories}``) manifest all yield an empty ``{schema_version, pages: []}`` —
-    so the first v2 run has nothing to carry forward and is treated as a clean
-    start (not a mass removal).
+    A missing file, or a valid-JSON but non-v2 (e.g. legacy ``{metadata,
+    categories}``) manifest yields an empty ``{schema_version, pages: []}`` — so
+    the first v2 run has nothing to carry forward and is treated as a clean start
+    (not a mass removal).
+
+    An *existing* file that will not parse is corruption, not a clean start:
+    returning empty would make it indistinguishable from a first run and let
+    :func:`validate_manifest_transition` skip the mass-deletion guard. That case
+    fails closed (``SystemExit``) so a truncated manifest can never wave through a
+    catastrophic page loss.
     """
     if path.exists():
         try:
             data = json.loads(path.read_text())
-            if data.get("schema_version") == MANIFEST_SCHEMA_VERSION and isinstance(
-                data.get("pages"), list
-            ):
-                return data
-            logger.info(
-                f"{path.name} is not a v2 manifest (schema_version="
-                f"{data.get('schema_version')!r}); treating as empty for this run."
-            )
+            if not isinstance(data, dict):
+                raise ValueError(f"top-level JSON is {type(data).__name__}, not an object")
         except Exception as e:
-            logger.warning(f"Failed to load manifest {path}: {e}")
+            logger.critical("=" * 70)
+            logger.critical(f"🚨 SAFEGUARD: existing manifest {path} is unreadable: {e}")
+            logger.critical("   Refusing to proceed — a corrupt manifest must not read as a")
+            logger.critical("   clean first run and skip the mass-deletion guard.")
+            logger.critical("   Fix or remove the file to start clean.")
+            logger.critical("=" * 70)
+            sys.exit(1)
+        if data.get("schema_version") == MANIFEST_SCHEMA_VERSION and isinstance(
+            data.get("pages"), list
+        ):
+            return data
+        logger.info(
+            f"{path.name} is not a v2 manifest (schema_version="
+            f"{data.get('schema_version')!r}); treating as empty for this run."
+        )
     return {"schema_version": MANIFEST_SCHEMA_VERSION, "pages": []}
 
 

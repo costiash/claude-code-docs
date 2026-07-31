@@ -88,7 +88,14 @@ def discover_pages(session: requests.Session) -> List[Dict[str, Optional[str]]]:
         The canonical page set as ``{url, md_url, title, lastmod}`` dicts.
     """
     llms_records = discover_from_llms_txt(session)
-    sitemap_entries = discover_sitemap_entries(session)
+    try:
+        sitemap_entries = discover_sitemap_entries(session)
+    except Exception as e:
+        # A sitemap outage must not abort the run when llms.txt carried the union
+        # (symmetric with discover_from_llms_txt, which already tolerates failure).
+        # If BOTH sources come back empty, validate_discovery_threshold aborts.
+        logger.warning(f"Sitemap discovery failed ({e}); continuing with llms.txt only.")
+        sitemap_entries = []
     merged = merge_discovery(llms_records, sitemap_entries)
     logger.info(
         f"Discovery union: {len(llms_records)} llms.txt + "

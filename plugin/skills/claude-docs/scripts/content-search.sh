@@ -23,11 +23,17 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-# Sanitize keywords: lowercase, alphanumeric + hyphens only.
+# Sanitize + tokenize like the Python indexer: split on every non-alphanumeric char
+# so a compound query fans into the same tokens the index holds ("agent-sdk" ->
+# "agent" "sdk", "node.js" -> "node" "js"). Keeping hyphens made a hyphenated query
+# match no index field and score 0 (build_search_index.py:100-106 splits on non-alpha).
 keywords=()
 for arg in "$@"; do
-    clean=$(printf '%s' "$arg" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' | xargs)
-    [ -n "$clean" ] && keywords+=("$clean")
+    clean=$(printf '%s' "$arg" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/ /g')
+    read -ra toks <<< "$clean"
+    for w in "${toks[@]}"; do
+        [ -n "$w" ] && keywords+=("$w")
+    done
 done
 if [ ${#keywords[@]} -eq 0 ]; then
     echo "No valid keywords provided" >&2

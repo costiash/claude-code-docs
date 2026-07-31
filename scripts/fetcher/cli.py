@@ -21,7 +21,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import requests
 
@@ -119,30 +119,36 @@ def build_changelog_entry(session: requests.Session, scratch: Path, old_by_url: 
     return entry
 
 
-def check_no_filename_collisions(raw_pages: List[Dict]) -> List[str]:
+def map_pages_to_filenames(raw_pages: List[Dict]) -> List[Tuple[Dict, str]]:
     """
-    Map every page to its filename and abort on any collision (fail fast, no network).
+    Map every page to its filename; skip unmappable URLs, abort on collision.
 
-    Two URLs mapping to one filename would silently drop a page from the manifest
-    and overwrite one cached file with another. This makes that bug loud.
+    A single malformed discovery URL (e.g. an empty page slug from a bad upstream
+    llms.txt line) is logged and skipped rather than crashing the whole 3-hourly
+    run. A genuine *collision* (two URLs -> one filename) still raises, since
+    silently dropping one would corrupt the manifest/cache.
 
     Returns:
-        The list of filenames, parallel to ``raw_pages``.
+        ``(raw, filename)`` pairs for the pages that map cleanly (parallel, aligned).
 
     Raises:
-        ValueError: On the first collision found.
+        ValueError: On the first filename collision.
     """
     seen: Dict[str, str] = {}
-    filenames: List[str] = []
+    result: List[Tuple[Dict, str]] = []
     for raw in raw_pages:
-        filename = url_to_filename(raw["url"])
+        try:
+            filename = url_to_filename(raw["url"])
+        except ValueError as e:
+            logger.warning(f"Skipping page with unmappable URL {raw['url']!r}: {e}")
+            continue
         if filename in seen:
             raise ValueError(
                 f"Filename collision: {filename!r} from {raw['url']} and {seen[filename]}"
             )
         seen[filename] = raw["url"]
-        filenames.append(filename)
-    return filenames
+        result.append((raw, filename))
+    return result
 
 
 def main():
@@ -175,14 +181,14 @@ def main():
         else:
             raw_pages = validate_discovery_threshold(raw_pages)
 
-        filenames = check_no_filename_collisions(raw_pages)
+        page_pairs = map_pages_to_filenames(raw_pages)
 
-        for i, (raw, filename) in enumerate(zip(raw_pages, filenames), 1):
-            logger.info(f"[{i}/{len(raw_pages)}] {filename}")
+        for i, (raw, filename) in enumerate(page_pairs, 1):
+            logger.info(f"[{i}/{len(page_pairs)}] {filename}")
             entry = build_page_entry(raw, filename, session, scratch, old_by_url)
             stats[entry["fetch_status"]] = stats.get(entry["fetch_status"], 0) + 1
             pages.append(entry)
-            if i < len(raw_pages):
+            if i < len(page_pairs):
                 time.sleep(RATE_LIMIT_DELAY)
 
         changelog = build_changelog_entry(session, scratch, old_by_url)

@@ -14,7 +14,7 @@ from fetcher.paths import url_to_filename, categorize_from_url, page_id_from_fil
 from fetcher.manifest import load_manifest, pages_by_url, build_manifest, save_manifest
 from fetcher.content import validate_markdown_content, extract_title, fetch_markdown
 from fetcher.safeguards import validate_discovery_threshold, validate_manifest_transition
-from fetcher.cli import build_page_entry, check_no_filename_collisions
+from fetcher.cli import build_page_entry, map_pages_to_filenames
 
 
 class TestUrlToFilename:
@@ -83,6 +83,22 @@ class TestManifest:
         p.write_text(json.dumps({"metadata": {}, "categories": {"api_reference": ["/en/api/x"]}}))
         m = load_manifest(p)
         assert m["pages"] == []
+
+    def test_load_corrupt_fails_closed(self, tmp_path):
+        # A truncated/unparseable EXISTING manifest must abort, not read as a clean
+        # first run (which would skip the mass-deletion transition guard).
+        p = tmp_path / "paths_manifest.json"
+        p.write_text('{"schema_version": 2, "pages": [')  # truncated JSON
+        with pytest.raises(SystemExit):
+            load_manifest(p)
+
+    def test_load_non_object_fails_closed(self, tmp_path):
+        # Valid JSON that isn't an object (null / array) is malformed, not clean-start.
+        for bad in ("null", "[1, 2, 3]"):
+            p = tmp_path / "paths_manifest.json"
+            p.write_text(bad)
+            with pytest.raises(SystemExit):
+                load_manifest(p)
 
     def test_load_v2_roundtrip(self, tmp_path):
         p = tmp_path / "paths_manifest.json"
@@ -187,14 +203,24 @@ class TestCollisionCheck:
             {"url": "https://code.claude.com/docs/en/hooks"},
         ]
         with pytest.raises(ValueError, match="collision"):
-            check_no_filename_collisions(pages)
+            map_pages_to_filenames(pages)
 
     def test_no_collision_ok(self):
         pages = [
             {"url": "https://code.claude.com/docs/en/hooks"},
             {"url": "https://code.claude.com/docs/en/mcp"},
         ]
-        assert check_no_filename_collisions(pages) == ["claude-code__hooks.md", "claude-code__mcp.md"]
+        assert [fn for _, fn in map_pages_to_filenames(pages)] == [
+            "claude-code__hooks.md", "claude-code__mcp.md"
+        ]
+
+    def test_unmappable_url_skipped(self):
+        # One bad upstream URL (empty page slug) must be skipped, not abort the run.
+        pages = [
+            {"url": "https://code.claude.com/docs/en/hooks"},
+            {"url": "https://code.claude.com/docs/en/"},  # empty slug -> skipped
+        ]
+        assert [fn for _, fn in map_pages_to_filenames(pages)] == ["claude-code__hooks.md"]
 
 
 class TestSafeguards:
@@ -207,17 +233,23 @@ class TestSafeguards:
             validate_discovery_threshold([{"url": "u"}])
 
     def test_transition_first_run_passes(self):
-        new = [{"url": f"u{i}"} for i in range(300)]
+        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(300)]
         validate_manifest_transition({"pages": []}, new)  # no raise
 
     def test_transition_mass_removal_aborts(self):
         old = {"pages": [{"url": f"u{i}"} for i in range(300)]}
-        new = [{"url": f"u{i}"} for i in range(260)]  # removed 40/300 = 13% > 10%
+        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(260)]  # removed 40/300 = 13% > 10%
         with pytest.raises(SystemExit):
             validate_manifest_transition(old, new)
 
     def test_transition_below_floor_aborts(self):
-        old = {"pages": [{"url": f"u{i}"} for i in range(300)]}
-        new = [{"url": f"u{i}"} for i in range(240)]  # < 250 floor
+        # First run (no removal check) with too few fetchable pages -> floor aborts.
+        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(240)]  # 240 fetchable < 250
         with pytest.raises(SystemExit):
-            validate_manifest_transition(old, new)
+            validate_manifest_transition({"pages": []}, new)
+
+    def test_transition_too_few_fetchable_aborts(self):
+        # Discovery fine (300) but only 200 fetched OK (rest sha256=null) -> abort (#2).
+        new = [{"url": f"u{i}", "sha256": (f"h{i}" if i < 200 else None)} for i in range(300)]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, new)
