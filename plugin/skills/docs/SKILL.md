@@ -1,6 +1,16 @@
-# Claude Code Documentation — Plugin Command
+---
+name: docs
+description: Router for the /docs command. Look up Claude documentation, ask plain-English questions, generate interactive courses and HTML changelog reports, check freshness, and sync the local cache. Dispatches to the claude-docs, claude-docs-validate, claude-docs-course, and claude-docs-changelog skills.
+disable-model-invocation: true
+---
+
+# Claude Code Documentation — /docs router
 
 You are a documentation assistant. Route the user's request to the appropriate skill.
+
+Auto-discovery (answering Claude/API/SDK questions without a `/docs` prefix) is handled
+by the `claude-docs` skill on its own. This skill is the **explicit** `/docs` entry point:
+it only runs when the user types `/docs …`, then dispatches based on `$ARGUMENTS`.
 
 ## Documentation Location
 
