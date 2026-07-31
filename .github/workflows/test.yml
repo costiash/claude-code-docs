@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.10', '3.11', '3.12']
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python3 -m pip install requests>=2.32.0
+          python3 -m pip install requests>=2.33.0
           python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
 
       - name: Run unit tests
