@@ -175,7 +175,7 @@ Documentation files across multiple categories, updated every 3 hours:
 | Problem | Solution |
 |---------|----------|
 | `/docs` not found | Restart Claude Code; for script install check `ls ~/.claude/commands/docs.md` |
-| Docs seem outdated | `/docs -t` to force update, or `cd ~/.claude-code-docs && git pull` |
+| Docs seem outdated | `/docs -t` (or `/docs sync`) to force an update — the SessionStart hook also hard-syncs the metadata each session |
 | Plugin not working | Run `/plugin list` to verify installation |
 | Script install fails | Install the plugin instead: `/plugin install claude-docs@claude-code-docs` |
 

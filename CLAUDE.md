@@ -14,11 +14,12 @@ Actions every 3 hours with safeguards against catastrophic manifest changes.
 > fetch pipeline, safeguard thresholds, filename conventions, cache layout, and the
 > no-committed-content invariant.
 
-## Delivery: the `/docs` command and its skills
+## Delivery: the `/docs` skill and its sibling skills
 
 Documentation ships as a Claude Code plugin rooted at `plugin/` (the `source` in
-`.claude-plugin/marketplace.json`). `plugin/commands/docs.md` is a lean router that
-delegates to:
+`.claude-plugin/marketplace.json`). `plugin/skills/docs/SKILL.md` is a lean router
+(manual-only via `disable-model-invocation`, so it fires only on an explicit `/docs`;
+auto-discovery is the `claude-docs` skill's job) that delegates to:
 
 - **`claude-docs`** — all lookups, questions, and searches. Search strategy, synthesis
   rules, and URL generation live in its `SKILL.md`; the category-to-label mapping lives in

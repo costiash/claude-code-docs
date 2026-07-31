@@ -56,7 +56,7 @@ uv run shellcheck --severity=warning plugin/scripts/*.sh plugin/skills/*/scripts
 
 **Files to work on:**
 
-- `plugin/commands/docs.md` — the `/docs` command router
+- `plugin/skills/docs/SKILL.md` — the `/docs` router skill (manual-only, `disable-model-invocation`)
 - `plugin/skills/claude-docs/` — search skill + `content-search.sh` / `fuzzy-search.sh`
 - `plugin/skills/claude-docs-validate/` — health / freshness checks
 - `plugin/skills/claude-docs-course/`, `plugin/skills/claude-docs-changelog/` — self-contained HTML generators

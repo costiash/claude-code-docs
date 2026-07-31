@@ -80,8 +80,10 @@ sample_paths.txt
 # Ephemeral fetch scratch dir (v2 pipeline fetches .md here to hash + index; never committed)
 .doc_fetch/
 
-# v2: documentation prose is NOT committed. docs/ is legacy/scratch only — never tracked.
-docs/
+# v2: documentation prose is NOT committed. The legacy top-level docs/ mirror is
+# scratch only — never tracked. Anchored to the repo root (/docs/) so it does NOT
+# also ignore nested dirs named "docs", e.g. the plugin/skills/docs/ router skill.
+/docs/
 
 # v2 client runtime state (populated on user machines, never committed):
 # cache/ holds fetched .md prose; courses/ holds generated HTML. Both survive hook resets.
