@@ -79,9 +79,9 @@ ensure_dirs() { mkdir -p "$CACHE_DIR" "$META_DIR"; }
 # Fetch a URL to a file with one retry. Returns 0 on success.
 fetch_url() {
     local url="$1" out="$2"
-    curl -fsSL --max-time 30 -o "$out" "$url" 2>/dev/null && return 0
+    curl -fsSL --proto '=https' --proto-redir '=https' --max-redirs 0 --max-time 30 -o "$out" "$url" 2>/dev/null && return 0
     sleep 1
-    curl -fsSL --max-time 30 -o "$out" "$url" 2>/dev/null && return 0
+    curl -fsSL --proto '=https' --proto-redir '=https' --max-redirs 0 --max-time 30 -o "$out" "$url" 2>/dev/null && return 0
     return 1
 }
 
@@ -117,6 +117,15 @@ fetch_one() {
     local host; host=$(url_host "$md_url")
     if ! host_allowed "$host"; then
         echo "fetch-docs: refusing disallowed host '$host' for $filename" >&2
+        return 1
+    fi
+    # raw.githubusercontent.com is multi-tenant, and a prefix glob is bypassable: curl
+    # squashes ../ dot-segments before sending, so ".../claude-code/../../attacker/x"
+    # passes a prefix check yet fetches a third-party repo. The client fetches exactly
+    # ONE file from this host (the anthropics changelog) — match it exactly.
+    if [ "$host" = "raw.githubusercontent.com" ] \
+        && [ "$md_url" != "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md" ]; then
+        echo "fetch-docs: refusing non-changelog raw.githubusercontent.com URL for $filename" >&2
         return 1
     fi
     ensure_dirs

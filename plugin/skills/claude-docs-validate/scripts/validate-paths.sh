@@ -33,7 +33,7 @@ fi
 
 check_url() {
     local url="$1" status
-    status=$(curl -sI -L --max-time "${TIMEOUT:-10}" -o /dev/null -w "%{http_code}" "$url" 2>/dev/null || echo "000")
+    status=$(curl -sI -L --proto '=https' --proto-redir '=https' --max-time "${TIMEOUT:-10}" -o /dev/null -w "%{http_code}" "$url" 2>/dev/null || echo "000")
     case "$status" in
         200) echo "OK $url" ;;
         301|308) echo "REDIRECT_PERM $status $url" ;;
