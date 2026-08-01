@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-07-31T21:31:46.084790Z",
+  "generated_at": "2026-08-01T00:32:07.005335Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -59,8 +59,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/agent-loop.md",
       "title": "How the agent loop works",
       "category": "agent_sdk",
-      "sha256": "b0e3d426790832b36ac1c3f1445f0c05415494074e9ec286c838a22ab9266e2c",
-      "lastmod": "2026-07-29T05:02:06.783Z",
+      "sha256": "04fb0f9368ba871a48363c15f58255d569bad438c02cdf93479a0a29e3a13405",
+      "lastmod": "2026-07-31T21:56:12.980Z",
       "fetch_status": "ok"
     },
     {
@@ -224,8 +224,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/quickstart.md",
       "title": "Quickstart",
       "category": "agent_sdk",
-      "sha256": "585c6d1217ef01455d217ab9a56763bdb398d3275b60526f8b7547091a2cb396",
-      "lastmod": "2026-07-29T17:46:43.589Z",
+      "sha256": "f4c291936ecd082b6d39c44ca4293ff51694dc7ae29341aea590927d402b0dab",
+      "lastmod": "2026-07-31T21:56:12.976Z",
       "fetch_status": "ok"
     },
     {
