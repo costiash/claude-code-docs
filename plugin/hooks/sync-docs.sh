@@ -207,10 +207,20 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
     OLD_DIR="$DOCS_DIR.old.$$"
     # Stale leftovers under OUR pid (recycled from a dead session — kill -0
     # necessarily called them alive, so prune skipped them): rescue any parked
-    # user data before clearing, never blind-delete.
+    # user data before clearing, never blind-delete. If either the rescue or
+    # the removal fails, the dir may still hold user data — and proceeding
+    # would end in the clone-failed branch's rm -rf of NEW_DIR deleting it
+    # blind. Defer the repair instead; the next session retries with a fresh
+    # PID (and prune's age backstop eventually clears the orphan).
     for d in "$NEW_DIR" "$OLD_DIR"; do
         if [ -e "$d" ]; then
-            rescue_user_data "$d" && rm -rf "$d" 2>/dev/null
+            if rescue_user_data "$d"; then
+                rm -rf "$d" 2>/dev/null
+            fi
+            if [ -e "$d" ]; then
+                output_context "Claude docs installation needs repair, but a leftover directory ($d) could not be cleared safely. Repair will be retried on the next session start."
+                exit 0
+            fi
         fi
     done
 
