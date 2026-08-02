@@ -47,9 +47,9 @@ cap() {
     [ "$want" -lt "$left" ] && echo "$want" || echo "$left"
 }
 
-# NOTE: on expiry the fallback returns 143 (128+SIGTERM) where timeout(1)
-# returns 124 — no caller branches on the rc today; keep it that way or
-# normalize here first.
+# NOTE: on expiry the fallback returns 143 (128+SIGTERM), or 137 (128+SIGKILL)
+# when the escalation had to fire, where timeout(1) returns 124 — no caller
+# branches on the rc today; keep it that way or normalize here first.
 run_with_timeout() {
     local secs="$1"; shift
     if command -v timeout >/dev/null 2>&1; then
@@ -66,7 +66,10 @@ run_with_timeout() {
     # each clone keeps a partial NEW_DIR from ever being swapped in — and the
     # watchdog's own sleep may linger detached; both are harmless. setsid for a
     # group-kill is not portable to macOS, which is the platform this fallback
-    # exists for.
+    # exists for. On fast completion the reparented sleep still wakes later
+    # and signals $cmd_pid — usually dead (no-op), with a vanishingly small
+    # chance of hitting a recycled PID: the classic portable-shim tradeoff,
+    # accepted deliberately.
     "$@" &
     local cmd_pid=$!
     ( sleep "$secs"; kill "$cmd_pid" 2>/dev/null; sleep 2; kill -9 "$cmd_pid" 2>/dev/null ) &
@@ -152,6 +155,11 @@ rescue_user_data() {
 # keeps the orphan for the next session instead of deleting the data with it.
 prune_swap_orphans() {
     [ -d "$DOCS_DIR" ] || return 0
+    # Also reap a stale heal lock a crashed healer left behind (both readers
+    # of the lock are staleness-aware, so this is hygiene, not correctness).
+    if [ -d "$DOCS_DIR.heal.lock" ] && [ -n "$(find "$DOCS_DIR.heal.lock" -maxdepth 0 -mmin +2 2>/dev/null)" ]; then
+        rmdir "$DOCS_DIR.heal.lock" 2>/dev/null || rm -rf "$DOCS_DIR.heal.lock" 2>/dev/null
+    fi
     local d pid
     for d in "$DOCS_DIR".new.* "$DOCS_DIR".old.*; do
         [ -e "$d" ] || continue
@@ -327,7 +335,7 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
         # Clone failed BEFORE any user data was carried — NEW_DIR holds at
         # most a partial clone, safe to delete blind. DOCS_DIR still contains
         # the user's courses/ and cache/: never advise deleting it.
-        rm -rf "$NEW_DIR"
+        run_with_timeout "$(cap 10)" rm -rf "$NEW_DIR" >/dev/null 2>&1 || true
         output_context "Claude docs installation looks corrupted and could not be repaired (offline?). It will be retried on the next session start. Your courses/ and cache/ remain in $DOCS_DIR — do not delete it; to force a fresh install run: mv $DOCS_DIR $DOCS_DIR.bak"
         exit 0
     fi

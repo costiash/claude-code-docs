@@ -2,6 +2,12 @@
 
 Covers issue #27: hook time budget, macOS run_with_timeout watchdog fallback,
 rename-swap self-heal, and dead-PID swap-orphan pruning with user-data rescue.
+
+Deliberately NOT unit-covered (concurrency-dependent, verified by the
+adversarial verifier instead): the anti-nesting [ -e ] guard between the two
+swap renames, the post-swap nest-detection branch, and the recycled-own-PID
+rescue-fail deferral — all need precise interleaving that a subprocess test
+can't reproduce deterministically.
 """
 
 import json
