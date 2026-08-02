@@ -47,6 +47,7 @@ def run_hook(home: Path, origin: Path, budget="40", extra_env=None, path=None):
     env = {
         **os.environ,
         "HOME": str(home),
+        "CLAUDE_DOCS_TEST": "1",  # sentinel: REPO_URL override is honored only with it
         "CLAUDE_DOCS_REPO_URL": f"file://{origin}",
         "CLAUDE_DOCS_HOOK_BUDGET": budget,
         "GIT_CONFIG_GLOBAL": "/dev/null",
@@ -82,6 +83,28 @@ class TestFirstRunAndUpdate:
         assert "up-to-date" in context_of(r) or "updated" in context_of(r)
 
 
+class TestRepoUrlSentinel:
+    def test_override_ignored_without_sentinel(self, tmp_path, origin):
+        """A stray CLAUDE_DOCS_REPO_URL alone must never repoint a real install."""
+        home = tmp_path / "home"
+        home.mkdir()
+        log = tmp_path / "git-args.log"
+        fake = tmp_path / "bin"
+        fake.mkdir()
+        (fake / "git").write_text(
+            "#!/bin/bash\n" f'echo "$@" >> "{log}"\n' "exit 1\n"
+        )
+        (fake / "git").chmod(0o755)
+        r = run_hook(
+            home, origin,
+            extra_env={"CLAUDE_DOCS_TEST": ""},  # sentinel absent
+            path=f"{fake}:{os.environ['PATH']}",
+        )
+        assert r.returncode == 0
+        assert "github.com/costiash/claude-code-docs" in log.read_text()
+        assert str(origin) not in log.read_text()
+
+
 class TestBudget:
     def test_hung_git_cannot_exceed_budget(self, tmp_path, origin):
         """A git that hangs forever must be killed within the budget — even
@@ -112,6 +135,35 @@ class TestBudget:
         assert r.returncode == 0
         # budget 4s + watchdog granularity + interpreter overhead << 300s hang
         assert elapsed < 30, f"hook ran {elapsed:.1f}s — watchdog did not fire"
+
+    def test_sigterm_trapping_git_killed_by_escalation(self, tmp_path, origin):
+        """A command that ignores SIGTERM must still die: TERM -> 2s grace -> KILL."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        fake = tmp_path / "bin"
+        fake.mkdir()
+        real_git = shutil.which("git")
+        (fake / "git").write_text(
+            "#!/bin/bash\n"
+            'case "$1" in\n'
+            "  fetch|reset|clone) trap '' TERM; sleep 300 ;;\n"
+            f'  *) exec {real_git} "$@" ;;\n'
+            "esac\n"
+        )
+        (fake / "git").chmod(0o755)
+        stripped = tmp_path / "noto"
+        stripped.mkdir()
+        for tool in ("bash", "jq", "sleep", "kill", "mv", "rm", "mkdir", "find", "cat", "nohup", "sh", "grep", "pwd", "env", "rmdir", "chmod"):
+            src = shutil.which(tool)
+            if src:
+                (stripped / tool).symlink_to(src)
+        assert shutil.which("timeout", path=str(stripped)) is None
+        start = time.monotonic()
+        r = run_hook(home, origin, budget="4", path=f"{fake}:{stripped}")
+        elapsed = time.monotonic() - start
+        assert r.returncode == 0
+        assert elapsed < 40, f"hook ran {elapsed:.1f}s — KILL escalation did not fire"
 
     def test_remaining_never_reaches_zero(self, tmp_path, origin):
         """Budget already exhausted -> caps clamp to 1s, script still completes."""

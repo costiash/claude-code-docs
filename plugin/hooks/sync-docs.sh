@@ -9,8 +9,14 @@
 #   - preserves untracked cache/ and courses/.
 
 DOCS_DIR="$HOME/.claude-code-docs"
-# Overridable for offline tests (file:// fixture origin); real installs never set it.
-REPO_URL="${CLAUDE_DOCS_REPO_URL:-https://github.com/costiash/claude-code-docs.git}"
+# The clone source ships executable plugin scripts, so the test seam is gated
+# behind an explicit sentinel: a stray inherited CLAUDE_DOCS_REPO_URL alone can
+# never repoint a real install.
+if [ "${CLAUDE_DOCS_TEST:-}" = "1" ] && [ -n "${CLAUDE_DOCS_REPO_URL:-}" ]; then
+    REPO_URL="$CLAUDE_DOCS_REPO_URL"
+else
+    REPO_URL="https://github.com/costiash/claude-code-docs.git"
+fi
 FETCH="$DOCS_DIR/plugin/scripts/fetch-docs.sh"
 MANIFEST="$DOCS_DIR/paths_manifest.json"
 
@@ -45,12 +51,18 @@ run_with_timeout() {
     fi
     # Stock macOS has no timeout(1) — previously this branch ran UNBOUNDED and
     # the harness SIGKILL could land mid-clone/mid-swap. Portable watchdog:
-    # run the command in the background, kill it when the clock runs out.
-    # (The watchdog's sleep may linger up to $secs after an early kill; it is
-    # detached and harmless — the hook has exited long before.)
+    # run the command in the background, TERM it when the clock runs out, and
+    # escalate to KILL after a 2s grace so a TERM-trapping/stuck command can't
+    # block `wait` past the budget. Caveats (parity with bare timeout(1), which
+    # also signals only its direct child): helper grandchildren (e.g.
+    # git-remote-https) may briefly outlive the kill — the manifest check after
+    # each clone keeps a partial NEW_DIR from ever being swapped in — and the
+    # watchdog's own sleep may linger detached; both are harmless. setsid for a
+    # group-kill is not portable to macOS, which is the platform this fallback
+    # exists for.
     "$@" &
     local cmd_pid=$!
-    ( sleep "$secs"; kill "$cmd_pid" 2>/dev/null ) &
+    ( sleep "$secs"; kill "$cmd_pid" 2>/dev/null; sleep 2; kill -9 "$cmd_pid" 2>/dev/null ) &
     local wd_pid=$!
     wait "$cmd_pid" 2>/dev/null
     local rc=$?
@@ -193,8 +205,12 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
     # during the swap). Two sessions healing the same corrupt clone could
     # otherwise leapfrog each other's swaps and rm -rf a freshly-healed
     # install, courses/ included. Same mkdir+staleness pattern as .sync.lock.
+    # Staleness is 2 minutes, not .sync.lock's 30: a repair is budget-bounded
+    # to well under a minute, so anything older is a crashed heal — and every
+    # extra minute of a stuck lock is a minute of every session reporting
+    # "another session is repairing" while docs stay broken.
     HEAL_LOCK="$DOCS_DIR.heal.lock"
-    if [ -d "$HEAL_LOCK" ] && [ -n "$(find "$HEAL_LOCK" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+    if [ -d "$HEAL_LOCK" ] && [ -n "$(find "$HEAL_LOCK" -maxdepth 0 -mmin +2 2>/dev/null)" ]; then
         rmdir "$HEAL_LOCK" 2>/dev/null || rm -rf "$HEAL_LOCK" 2>/dev/null
     fi
     if ! mkdir "$HEAL_LOCK" 2>/dev/null; then
@@ -215,7 +231,9 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
     for d in "$NEW_DIR" "$OLD_DIR"; do
         if [ -e "$d" ]; then
             if rescue_user_data "$d"; then
-                rm -rf "$d" 2>/dev/null
+                # Capped like every other cleanup: a huge leftover on slow
+                # disk must not burn the budget before the doomed-clone check.
+                run_with_timeout "$(cap 10)" rm -rf "$d" >/dev/null 2>&1 || true
             fi
             if [ -e "$d" ]; then
                 output_context "Claude docs installation needs repair, but a leftover directory ($d) could not be cleared safely. Repair will be retried on the next session start."
