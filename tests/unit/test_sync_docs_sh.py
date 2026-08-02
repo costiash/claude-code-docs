@@ -92,9 +92,10 @@ class TestBudget:
         # Fake bin dir: git hangs on fetch/reset, real binaries otherwise.
         fake = tmp_path / "bin"
         fake.mkdir()
+        real_git = shutil.which("git")
         (fake / "git").write_text(
             "#!/bin/bash\n"
-            'case "$1" in fetch|reset|clone) sleep 300 ;; *) exec /usr/bin/git "$@" ;; esac\n'
+            f'case "$1" in fetch|reset|clone) sleep 300 ;; *) exec {real_git} "$@" ;; esac\n'
         )
         (fake / "git").chmod(0o755)
         # PATH without timeout(1): shim dir + a minimal dir set that lacks it.
@@ -190,6 +191,62 @@ class TestOrphanPrune:
         r = run_hook(home, origin)
         assert r.returncode == 0
         assert (live / "marker").exists()  # concurrent session's swap untouched
+
+    def test_nonnumeric_suffix_never_touched(self, tmp_path, origin):
+        """A user backup like ~/.claude-code-docs.old.bak must never be eaten."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        backup = home / ".claude-code-docs.old.bak"
+        (backup / "courses").mkdir(parents=True)
+        (backup / "courses" / "precious.html").write_text("precious")
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert (backup / "courses" / "precious.html").read_text() == "precious"
+
+    def test_stale_live_pid_orphan_pruned_by_age_backstop(self, tmp_path, origin):
+        """kill -0 can lie (recycled PID): dirs older than ~60 min prune anyway."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        docs = home / ".claude-code-docs"
+        stale = home / f".claude-code-docs.new.{os.getpid()}"  # 'alive' PID
+        (stale / "courses").mkdir(parents=True)
+        (stale / "courses" / "old-session.html").write_text("rescued")
+        two_hours_ago = time.time() - 7200
+        os.utime(stale, (two_hours_ago, two_hours_ago))
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert not stale.exists()
+        assert (docs / "courses" / "old-session.html").read_text() == "rescued"
+
+    def test_empty_recreated_dir_does_not_block_rescue(self, tmp_path, origin):
+        """A background fetch's empty mkdir must not beat a populated parked cache."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        docs = home / ".claude-code-docs"
+        (docs / "cache").mkdir()  # empty — recreated by a racing background fetch
+        orphan = home / ".claude-code-docs.new.4194301"
+        (orphan / "cache").mkdir(parents=True)
+        (orphan / "cache" / "page.md").write_text("full corpus")
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert (docs / "cache" / "page.md").read_text() == "full corpus"
+        assert not orphan.exists()
+
+    def test_heal_lock_defers_concurrent_repair(self, tmp_path, origin):
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        docs = home / ".claude-code-docs"
+        shutil.rmtree(docs / ".git")
+        (docs / "paths_manifest.json").unlink()
+        (home / ".claude-code-docs.heal.lock").mkdir()  # fresh: other session healing
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert "another session" in context_of(r)
+        assert not (docs / ".git").exists()  # untouched — deferred, not healed
 
     def test_rescue_never_overwrites_existing_data(self, tmp_path, origin):
         home = tmp_path / "home"
