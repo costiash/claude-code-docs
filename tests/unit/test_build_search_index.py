@@ -4,6 +4,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
 import build_search_index as bsi
@@ -109,6 +111,97 @@ class TestIndexPageSchema:
         assert page["headings"] == []
         assert page["terms"] == {}
         assert page["word_count"] == 0
+
+
+class TestIndexCarryForward:
+    """Missing scratch file must not silently erase a page's committed search data."""
+
+    OLD_RECORD = {
+        "filename": "claude-code__hooks.md",
+        "id": "claude-code/hooks",
+        "title": "Hooks",
+        "category": "claude_code",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "headings": [{"text": "Configuration", "level": 2}],
+        "terms": {"hook": 12, "matcher": 5},
+        "word_count": 1234,
+    }
+
+    def test_carry_forward_when_scratch_missing(self, tmp_path):
+        scratch = tmp_path / "scratch"
+        scratch.mkdir()  # no .md file for the entry
+        index = bsi.build_index(
+            {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": self.OLD_RECORD}
+        )
+        page = index["pages"][0]
+        assert page["terms"] == {"hook": 12, "matcher": 5}
+        assert page["headings"] == [{"text": "Configuration", "level": 2}]
+        assert page["word_count"] == 1234
+        # Metadata stays manifest-fresh, not copied from the old record.
+        assert page["title"] == "Hooks"
+        assert page["category"] == "claude_code"
+        assert set(page.keys()) == ALLOWED_KEYS
+
+    def test_empty_record_only_when_neither_exists(self, tmp_path):
+        scratch = tmp_path / "scratch"
+        scratch.mkdir()
+        index = bsi.build_index({"pages": [ENTRY]}, scratch, {})
+        page = index["pages"][0]
+        assert page["headings"] == []
+        assert page["terms"] == {}
+        assert page["word_count"] == 0
+
+    def test_empty_old_record_not_carried(self, tmp_path):
+        scratch = tmp_path / "scratch"
+        scratch.mkdir()
+        empty_old = dict(self.OLD_RECORD, headings=[], terms={}, word_count=0)
+        index = bsi.build_index(
+            {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": empty_old}
+        )
+        assert index["pages"][0]["terms"] == {}
+
+    def test_fresh_content_wins_over_old_record(self, tmp_path):
+        scratch = tmp_path / "scratch"
+        scratch.mkdir()
+        (scratch / "claude-code__hooks.md").write_text(SAMPLE_MD)
+        index = bsi.build_index(
+            {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": self.OLD_RECORD}
+        )
+        page = index["pages"][0]
+        assert page["word_count"] == len(SAMPLE_MD.split())  # rebuilt, not carried
+        assert page["terms"] != self.OLD_RECORD["terms"]
+
+    def test_load_existing_index(self, tmp_path):
+        path = tmp_path / "search_index.json"
+        assert bsi.load_existing_index(path) == {}  # missing -> no carry-forward
+        path.write_text(json.dumps({"schema_version": 2, "pages": [self.OLD_RECORD]}))
+        loaded = bsi.load_existing_index(path)
+        assert loaded["claude-code__hooks.md"]["terms"] == {"hook": 12, "matcher": 5}
+        path.write_text("{ not json")
+        assert bsi.load_existing_index(path) == {}  # unreadable -> tolerated
+
+
+class TestContentShareGuard:
+    @staticmethod
+    def _index(with_terms, empty):
+        pages = [{"filename": f"a{i}.md", "terms": {"x": 1}} for i in range(with_terms)]
+        pages += [{"filename": f"b{i}.md", "terms": {}} for i in range(empty)]
+        return {"pages": pages}
+
+    def test_trips_below_threshold(self):
+        with pytest.raises(SystemExit):
+            bsi.check_content_share(self._index(with_terms=8, empty=2), 0.90)
+
+    def test_passes_at_or_above_threshold(self):
+        bsi.check_content_share(self._index(with_terms=9, empty=1), 0.90)  # no raise
+        bsi.check_content_share(self._index(with_terms=10, empty=0), 0.90)
+
+    def test_empty_index_trips(self):
+        with pytest.raises(SystemExit):
+            bsi.check_content_share({"pages": []}, 0.90)
+
+    def test_zero_threshold_disables(self):
+        bsi.check_content_share(self._index(with_terms=0, empty=5), 0.0)  # no raise
 
 
 class TestBuildIndex:

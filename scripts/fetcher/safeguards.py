@@ -50,6 +50,22 @@ def validate_discovery_threshold(pages: List) -> List:
     return pages
 
 
+def count_ok_doc_pages(pages: List[Dict]) -> int:
+    """
+    Count documentation pages fetched OK this run (changelog excluded).
+
+    The changelog is GitHub-hosted, so it succeeds even during a total docs-site
+    outage — counting it would let ``ok == 1`` pass for a run where every real
+    documentation fetch failed. Single owner of the floor semantics: both the
+    transition guard below and any caller share this count.
+    """
+    return sum(
+        1
+        for p in pages
+        if p.get("fetch_status") == "ok" and p.get("id") != "changelog"
+    )
+
+
 def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> None:
     """
     Guard the old→new manifest transition against mass removal.
@@ -60,9 +76,11 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
 
     Raises:
         SystemExit: If the transition would remove > ``MAX_DELETION_PERCENT`` of
-            the previous pages, or leave < ``MIN_EXPECTED_FILES`` *fetchable*
-            pages (sha256 set) — the latter catches a run where discovery is fine
-            but most per-page fetches failed.
+            the previous pages, or leave < ``MIN_EXPECTED_FILES`` pages actually
+            fetched this run (``fetch_status == "ok"``) — the latter catches a
+            run where discovery is fine but most per-page fetches failed.
+            Counting sha256 here would be meaningless: carry-forward copies old
+            hashes into ``stale`` entries, so even a 100%-failed run has them set.
     """
     old_urls = {p["url"] for p in old_manifest.get("pages", []) if p.get("url")}
     new_urls = {p["url"] for p in new_pages if p.get("url")}
@@ -84,18 +102,23 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
             logger.critical("=" * 70)
             sys.exit(1)
 
-    fetchable = [p for p in new_pages if p.get("sha256")]
-    if len(fetchable) < MIN_EXPECTED_FILES:
+    # Count pages actually fetched THIS run. sha256 alone is not evidence of a
+    # live fetch — carry-forward copies old hashes into "stale" entries, so an
+    # all-stale (100%-failed) run would pass a sha256-based count. The changelog
+    # is excluded (GitHub-hosted; succeeds even in a total docs-site outage).
+    ok_count = count_ok_doc_pages(new_pages)
+    if ok_count < MIN_EXPECTED_FILES:
         logger.critical("=" * 70)
-        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few fetchable pages in new manifest!")
+        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few successfully fetched pages!")
         logger.critical(
-            f"   Only {len(fetchable)} of {len(new_pages)} pages have content "
-            f"(sha256 set; minimum {MIN_EXPECTED_FILES}). Most fetches failed — aborting."
+            f"   Only {ok_count} of {len(new_pages)} documentation pages fetched OK "
+            f"this run (fetch_status == \"ok\", changelog excluded; minimum "
+            f"{MIN_EXPECTED_FILES}). Most fetches failed/stale — aborting."
         )
         logger.critical("=" * 70)
         sys.exit(1)
 
     logger.info(
         f"✅ Manifest transition validated: {len(new_pages)} pages "
-        f"({len(fetchable)} fetchable)"
+        f"({ok_count} documentation pages fetched ok)"
     )

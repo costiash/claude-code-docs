@@ -4,7 +4,6 @@ import pytest
 import re
 import sys
 from pathlib import Path
-import json
 import subprocess
 
 # Add scripts directory to path
@@ -13,12 +12,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
 class TestScheduledUpdateWorkflow:
     """Test scheduled update workflow (simulated)."""
-
-    @pytest.mark.integration
-    def test_workflow_file_exists(self, project_root):
-        """Test update-docs.yml workflow file exists."""
-        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
-        assert workflow_file.exists()
 
     @pytest.mark.integration
     def test_workflow_syntax_valid(self, project_root):
@@ -39,18 +32,6 @@ class TestScheduledUpdateWorkflow:
             # If PyYAML not available, just check file is readable
             content = workflow_file.read_text()
             assert len(content) > 0
-
-    @pytest.mark.integration
-    def test_test_workflow_exists(self, project_root):
-        """Test test.yml workflow exists."""
-        workflow_file = project_root / ".github" / "workflows" / "test.yml"
-        assert workflow_file.exists()
-
-    @pytest.mark.integration
-    def test_validate_workflow_exists(self, project_root):
-        """Test validate.yml workflow exists."""
-        workflow_file = project_root / ".github" / "workflows" / "validate.yml"
-        assert workflow_file.exists()
 
 
 class TestManualTrigger:
@@ -84,13 +65,6 @@ class TestCommitAndPush:
             pytest.skip("git not available")
 
     @pytest.mark.integration
-    def test_repo_is_git_repo(self, project_root):
-        """Test current directory is a git repository."""
-        git_dir = project_root / ".git"
-        assert git_dir.exists()
-        assert git_dir.is_dir()
-
-    @pytest.mark.integration
     def test_can_check_git_status(self, project_root):
         """Test can check git status."""
         try:
@@ -105,39 +79,6 @@ class TestCommitAndPush:
             assert result.returncode == 0
         except FileNotFoundError:
             pytest.skip("git not available")
-
-
-class TestWorkflowEnvironment:
-    """Test workflow environment setup."""
-
-    @pytest.mark.integration
-    def test_python_version_file_exists(self, project_root):
-        """Test .python-version file exists."""
-        python_version_file = project_root / ".python-version"
-        assert python_version_file.exists()
-
-    @pytest.mark.integration
-    def test_requirements_or_pyproject(self, project_root):
-        """Test dependency specification exists."""
-        pyproject = project_root / "pyproject.toml"
-        requirements = project_root / "scripts" / "requirements.txt"
-
-        # At least one should exist
-        assert pyproject.exists() or requirements.exists()
-
-    @pytest.mark.integration
-    def test_scripts_are_executable(self, project_root):
-        """Test main scripts exist and are readable."""
-        # v2 modular package structure (legacy scripts/lookup removed).
-        scripts = [
-            project_root / "scripts" / "fetch_claude_docs.py",  # Thin wrapper
-            project_root / "scripts" / "build_search_index.py",  # Index builder
-            project_root / "scripts" / "fetcher" / "__init__.py",  # Package
-        ]
-
-        for script in scripts:
-            assert script.exists(), f"Script not found: {script}"
-            assert script.is_file()
 
 
 class TestManifestStaging:
@@ -169,47 +110,32 @@ class TestSearchIndexGeneration:
             "Workflow must run build_search_index.py to generate .search_index.json"
         )
 
-    @pytest.mark.integration
-    def test_build_search_index_script_exists(self, project_root):
-        """Test that the search index builder script exists."""
-        script = project_root / "scripts" / "build_search_index.py"
-        assert script.exists(), "scripts/build_search_index.py must exist"
 
-
-class TestHelperScriptPythonCalls:
-    """Test that helper script Python calls use correct working directory."""
+class TestSafeguardParity:
+    """Test that workflow shell safeguards stay in sync with the Python fetcher config."""
 
     @pytest.mark.integration
-    def test_python_calls_use_subshell_cd(self, project_root):
-        """Test Python calls are wrapped with cd to repo root."""
-        helper = project_root / "scripts" / "claude-docs-helper.sh"
-        content = helper.read_text()
+    def test_workflow_page_floor_matches_fetcher_config(self, project_root):
+        """The jq page-count floor in update-docs.yml must equal MIN_EXPECTED_FILES.
 
-        python_calls = [
-            line.strip() for line in content.splitlines()
-            if 'python3' in line
-            and not line.strip().startswith('#')
-            and 'lookup_paths.py' in line
-        ]
+        update-docs.yml repeats the minimum-file-count floor as a belt-and-suspenders
+        jq check ([ "$COUNT" -lt N ]) before committing. If it drifts from
+        scripts/fetcher/config.py MIN_EXPECTED_FILES, one guard silently weakens.
+        """
+        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
+        content = workflow_file.read_text()
 
-        for call in python_calls:
-            # Each call should use (cd ... && python3 ...) subshell pattern
-            assert re.search(r'\(cd\s+', call), (
-                f"Python call must use '(cd ...' subshell pattern: {call}"
-            )
-
-    @pytest.mark.integration
-    def test_helper_no_hardcoded_path_counts(self, project_root):
-        """Test helper script doesn't contain hardcoded path counts."""
-        helper = project_root / "scripts" / "claude-docs-helper.sh"
-        content = helper.read_text()
-
-        # Should not hardcode specific numbers of paths
-        assert 'Searching 573' not in content, (
-            "Helper script must not hardcode '573' doc count"
+        match = re.search(r'"\$COUNT"\s+-lt\s+(\d+)', content)
+        assert match, (
+            "update-docs.yml must contain the page-count floor check "
+            '(if [ "$COUNT" -lt <N> ])'
         )
-        assert 'fetch all 573' not in content.lower(), (
-            "Helper script must not hardcode '573' doc count"
+        workflow_floor = int(match.group(1))
+
+        from fetcher.config import MIN_EXPECTED_FILES
+        assert workflow_floor == MIN_EXPECTED_FILES, (
+            f"Workflow jq floor ({workflow_floor}) drifted from "
+            f"fetcher.config.MIN_EXPECTED_FILES ({MIN_EXPECTED_FILES})"
         )
 
 
@@ -221,19 +147,3 @@ class TestWorkflowOutputs:
         """v2 workflow output is the committed manifest + prose-free index (docs/ is gone)."""
         assert (project_root / "paths_manifest.json").is_file()
         assert (project_root / "search_index.json").is_file()
-
-    @pytest.mark.integration
-    def test_manifest_can_be_created(self, tmp_path):
-        """Test manifest file can be created as workflow artifact."""
-        manifest_path = tmp_path / "paths_manifest.json"
-
-        manifest_data = {
-            'metadata': {'total_paths': 0},
-            'categories': {}
-        }
-
-        manifest_path.write_text(json.dumps(manifest_data, indent=2))
-
-        assert manifest_path.exists()
-        loaded = json.loads(manifest_path.read_text())
-        assert loaded == manifest_data

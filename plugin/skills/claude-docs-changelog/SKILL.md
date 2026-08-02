@@ -61,9 +61,9 @@ For each changed page (or the most significant ones if there are many):
 4. **Write a 1-2 sentence summary** of the change
 5. **Extract 3-6 bullet points** describing specific additions or updates
 
-**For new files (A):** Read the full file and summarize what it covers.
-**For modified files (M):** Focus on what changed in the diff, not the entire file.
-**For deleted files (D):** Just note what was removed with a one-line description.
+**For `added` entries:** Read the full page and summarize what it covers.
+**For `changed` entries:** The sha256 delta says the content changed but not where — read the current page and highlight the sections most likely to be new or updated.
+**For `removed` entries:** The page is gone from the manifest (no content to read) — note what was removed with a one-line description built from its `title` and `category`.
 
 Group related changes (e.g., if 6 SDK language docs were all updated the same way, combine them into one card).
 

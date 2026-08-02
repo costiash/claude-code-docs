@@ -151,6 +151,23 @@ def map_pages_to_filenames(raw_pages: List[Dict]) -> List[Tuple[Dict, str]]:
     return result
 
 
+def parse_fetch_limit(raw: str) -> int:
+    """Parse ``DOCS_FETCH_LIMIT`` with a clear error instead of a raw traceback.
+
+    Whitespace-only counts as unset, matching ``_parse_env_number`` in
+    build_search_index.py.
+    """
+    raw = (raw or "").strip() or "0"
+    try:
+        return int(raw)
+    except ValueError:
+        logger.error(
+            f"Invalid DOCS_FETCH_LIMIT={raw!r}: must be an integer "
+            f"(e.g. DOCS_FETCH_LIMIT=8 for a preview run, or unset for a full run)."
+        )
+        sys.exit(1)
+
+
 def main():
     """Run the v2 fetch pipeline."""
     start_time = datetime.now()
@@ -160,7 +177,7 @@ def main():
     scratch.mkdir(parents=True, exist_ok=True)
     logger.info(f"Fetch scratch dir: {scratch}")
 
-    limit = int(os.environ.get("DOCS_FETCH_LIMIT", "0") or "0")
+    limit = parse_fetch_limit(os.environ.get("DOCS_FETCH_LIMIT", "0"))
 
     manifest_file = manifest_path(repo_root)
     old_manifest = load_manifest(manifest_file)
@@ -201,6 +218,9 @@ def main():
     if limit:
         out_path = scratch / "paths_manifest.preview.json"
     else:
+        # Guard runs BEFORE the write: a failed run must never overwrite the
+        # committed manifest. The fetch-success floor lives inside the
+        # transition guard (changelog excluded) — single owner, no drift.
         validate_manifest_transition(old_manifest, pages)
         out_path = manifest_file
 
@@ -215,6 +235,8 @@ def main():
     logger.info(f"Manifest: {out_path}")
 
     if stats["ok"] == 0:
+        # Preview-mode backstop (full runs are guarded by
+        # validate_manifest_transition's fetch-success floor before the write).
         logger.error("No pages were fetched successfully!")
         sys.exit(1)
 

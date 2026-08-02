@@ -5,16 +5,19 @@
 
 ## Skill Reasoning
 - User names a specific topic: "skills"
-- Strategy: Direct lookup (Priority 1)
+- Strategy: Direct manifest lookup
 - Multiple product contexts expected
 
 ## Actions
-1. Glob: `~/.claude-code-docs/docs/*skills*.md`
-2. Results span 3 product contexts:
-   - `claude-code__skills.md` → **Claude Code**
-   - `docs__en__agent-sdk__skills.md` → **Agent SDK**
-   - `docs__en__api__beta__skills.md` and related → **Claude API**
-   - `docs__en__agents-and-tools__agent-skills__*.md` → **Agents & Tools**
+1. Query the manifest:
+   ```bash
+   jq -r '.pages[] | select(.filename | test("skills")) | [.filename, .category] | @tsv' ~/.claude-code-docs/paths_manifest.json
+   ```
+2. Results span several product contexts (and both doc hosts):
+   - `claude-code__skills.md` → **Claude Code** (code.claude.com)
+   - `claude-code__agent-sdk__skills.md` → **Agent SDK** (code.claude.com)
+   - `docs__en__api__beta__skills.md` and related → **Claude API** (platform.claude.com)
+   - `docs__en__agents-and-tools__agent-skills__overview.md` and related → **Agents & Tools** (platform.claude.com)
 3. Different contexts → ASK the user
 
 ## Output Format
@@ -29,7 +32,10 @@ Which are you working with?"
 
 [After user selects, e.g., "1. Claude Code"]
 
-→ Read `claude-code__skills.md`, synthesize, present with source link.
+→ Read `~/.claude-code-docs/cache/claude-code__skills.md` (on a cache miss:
+`~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "claude-code__skills.md"` first),
+synthesize, present with the manifest's source link
+([Extend Claude with skills](https://code.claude.com/docs/en/skills)).
 
 ---
 
@@ -38,10 +44,16 @@ Which are you working with?"
 
 ## Skill Reasoning
 - User mentions "Python" → SDK language disambiguation applies
-- Narrow API docs to `docs__en__api__python__*`
-- Topic: "messages" + "create"
+- Topic: "messages" + "create" + Python client SDK
 
 ## Actions
-1. Glob: `~/.claude-code-docs/docs/docs__en__api__python__messages__create.md` → exact match
-2. Read and present the Python SDK example
-3. Note: "TypeScript equivalent: [Messages Create](https://platform.claude.com/en/docs/api/typescript/messages/create)"
+1. Run: `bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "python" "sdk"`
+   → top hits include `docs__en__cli-sdks-libraries__sdks__python.md` (Python client SDK)
+2. Fetch and read it, plus the API reference page `docs__en__api__messages__create.md`
+   for the endpoint parameters
+3. Present the Python SDK example
+4. Note: "TypeScript equivalent: [TypeScript SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript)"
+
+Sources:
+- [Python SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python)
+- [Create a Message](https://platform.claude.com/docs/en/api/messages/create)

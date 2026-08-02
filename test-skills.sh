@@ -5,7 +5,9 @@ set -euo pipefail
 # Runs content-search and fuzzy-search with known queries, checks expected results.
 # Output: PASS: <number> (total passed tests out of total)
 
-DOCS_DIR="${DOCS_DIR:-$(cd "$(dirname "$0")" && pwd)/docs}"
+# DOCS_DIR is the search scripts' grep-fallback location for fetched pages.
+# v2 has no docs/ mirror — the local page cache lives at <repo>/cache.
+DOCS_DIR="${DOCS_DIR:-$(cd "$(dirname "$0")" && pwd)/cache}"
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)/plugin/skills/claude-docs/scripts"
 
 export DOCS_DIR
@@ -41,14 +43,14 @@ check "content: extended thinking"  content-search.sh docs__en__build-with-claud
 check "content: streaming"         content-search.sh docs__en__build-with-claude__streaming.md         "streaming"
 check "content: prompt caching"    content-search.sh docs__en__build-with-claude__prompt-caching.md    "prompt" "caching"
 check "content: rate limits"       content-search.sh docs__en__api__rate-limits.md                     "rate" "limits"
-check "content: agent sdk python"  content-search.sh docs__en__agent-sdk__python.md                    "agent" "sdk" "python"
+check "content: agent sdk python"  content-search.sh claude-code__agent-sdk__python.md                 "agent" "sdk" "python"
 check "content: vision"            content-search.sh docs__en__build-with-claude__vision.md            "vision"
 
 # === Fuzzy Search Tests ===
 check "fuzzy: hooks"       fuzzy-search.sh claude-code__hooks.md       "hooks"
 check "fuzzy: mcp"         fuzzy-search.sh claude-code__mcp.md         "mcp"
 check "fuzzy: plugins"     fuzzy-search.sh claude-code__plugins.md     "plugins"
-check "fuzzy: agent sdk"   fuzzy-search.sh docs__en__agent-sdk         "agent sdk"
+check "fuzzy: agent sdk"   fuzzy-search.sh claude-code__agent-sdk      "agent sdk"
 check "fuzzy: streaming"   fuzzy-search.sh streaming                   "streaming"
 check "fuzzy: skills"      fuzzy-search.sh skills                      "skills"
 check "fuzzy: vision"      fuzzy-search.sh vision                      "vision"
@@ -82,48 +84,9 @@ check "content: github actions"    content-search.sh claude-code__github-actions
 check "fuzzy: sub-agents"          fuzzy-search.sh   claude-code__sub-agents.md                           "sub-agents"
 
 # === SDK Disambiguation Tests ===
-check "content: python sdk"        content-search.sh docs__en__api__sdks__python.md                    "python" "sdk"
-check "fuzzy: typescript sdk"      fuzzy-search.sh   docs__en__api__sdks__typescript.md                "typescript sdk"
-check "fuzzy: go sdk"              fuzzy-search.sh   docs__en__api__sdks__go.md                        "go sdk"
-
-# === URL Conversion Tests (extracted from validate-paths.sh) ===
-_filename_to_url() {
-    local fname="$1"
-    fname="${fname%.md}"
-    if [[ "$fname" == claude-code__* ]]; then
-        local page="${fname#claude-code__}"
-        page=$(echo "$page" | sed 's/__/\//g')
-        echo "https://code.claude.com/docs/en/${page}"
-    elif [[ "$fname" == docs__en__* ]]; then
-        local path="${fname#docs__en__}"
-        path=$(echo "$path" | sed 's/__/\//g')
-        echo "https://platform.claude.com/en/docs/${path}"
-    else
-        echo ""
-    fi
-}
-
-check_url() {
-    local desc="$1" input="$2" expected="$3"
-    total=$((total + 1))
-    local got
-    got=$(_filename_to_url "$input")
-    if [ "$got" = "$expected" ]; then
-        pass=$((pass + 1))
-    else
-        fail=$((fail + 1))
-        echo "FAIL: $desc — expected '$expected', got '$got'" >&2
-    fi
-}
-
-check_url "url: claude-code simple"   "claude-code__hooks.md"               "https://code.claude.com/docs/en/hooks"
-check_url "url: claude-code nested"   "claude-code__hooks-guide.md"         "https://code.claude.com/docs/en/hooks-guide"
-check_url "url: platform simple"      "docs__en__api__overview.md"          "https://platform.claude.com/en/docs/api/overview"
-check_url "url: platform deep"        "docs__en__api__messages__create.md"  "https://platform.claude.com/en/docs/api/messages/create"
-check_url "url: agent sdk"            "docs__en__agent-sdk__python.md"      "https://platform.claude.com/en/docs/agent-sdk/python"
-check_url "url: build-with-claude"    "docs__en__build-with-claude__vision.md"  "https://platform.claude.com/en/docs/build-with-claude/vision"
-check_url "url: prompt library"       "docs__en__resources__prompt-library__code-clarifier.md"  "https://platform.claude.com/en/docs/resources/prompt-library/code-clarifier"
-check_url "url: unknown prefix"       "random-file.md"                    ""
+check "content: python sdk"        content-search.sh docs__en__cli-sdks-libraries__sdks__python.md     "python" "sdk"
+check "fuzzy: typescript sdk"      fuzzy-search.sh   docs__en__cli-sdks-libraries__sdks__typescript.md "typescript sdk"
+check "fuzzy: go sdk"              fuzzy-search.sh   docs__en__cli-sdks-libraries__sdks__go.md         "go sdk"
 
 # === Additional Coverage ===
 check "content: model config"      content-search.sh claude-code__model-config.md                      "model" "config"
@@ -132,7 +95,7 @@ check "fuzzy: network config"      fuzzy-search.sh   claude-code__network-config
 check "content: pricing"           content-search.sh docs__en__about-claude__pricing.md                 "pricing"
 check "fuzzy: troubleshooting"     fuzzy-search.sh   claude-code__troubleshooting.md                    "troubleshooting"
 check "content: pdf support"       content-search.sh docs__en__build-with-claude__pdf-support.md        "pdf"
-check "content: data residency"    content-search.sh docs__en__build-with-claude__data-residency.md     "residency"
+check "content: data residency"    content-search.sh docs__en__manage-claude__data-residency.md         "residency"
 check "content: glossary"          content-search.sh docs__en__about-claude__glossary.md                "glossary"
 check "fuzzy: analytics"           fuzzy-search.sh   claude-code__analytics.md                          "analytics"
 check "fuzzy: costs"               fuzzy-search.sh   claude-code__costs.md                              "costs"
@@ -151,8 +114,11 @@ check "content: compaction"        content-search.sh docs__en__build-with-claude
 check "content: service tiers"     content-search.sh docs__en__api__service-tiers.md                    "service" "tiers"
 check "fuzzy: statusline"          fuzzy-search.sh   claude-code__statusline.md                         "statusline"
 check "fuzzy: amazon bedrock"      fuzzy-search.sh   claude-code__amazon-bedrock.md                     "amazon bedrock"
-check "content: openai sdk compat" content-search.sh docs__en__api__openai-sdk.md                       "openai"
-check_url "url: tool use deep"     "docs__en__agents-and-tools__tool-use__define-tools.md"  "https://platform.claude.com/en/docs/agents-and-tools/tool-use/define-tools"
+check "content: openai sdk compat" content-search.sh docs__en__cli-sdks-libraries__libraries__openai-sdk.md  "openai"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
+
+# Non-zero exit when any check failed, so CI and callers can gate on this harness.
+[ "$fail" -eq 0 ] || exit 1
+exit 0

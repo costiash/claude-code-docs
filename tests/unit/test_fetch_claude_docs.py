@@ -12,9 +12,23 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
 from fetcher.paths import url_to_filename, categorize_from_url, page_id_from_filename
 from fetcher.manifest import load_manifest, pages_by_url, build_manifest, save_manifest
-from fetcher.content import validate_markdown_content, extract_title, fetch_markdown
-from fetcher.safeguards import validate_discovery_threshold, validate_manifest_transition
-from fetcher.cli import build_page_entry, map_pages_to_filenames
+from fetcher.content import (
+    validate_markdown_content,
+    extract_title,
+    fetch_markdown,
+    save_markdown_file,
+    _retry_after_seconds,
+)
+from fetcher.safeguards import (
+    count_ok_doc_pages,
+    validate_discovery_threshold,
+    validate_manifest_transition,
+)
+from fetcher.cli import (
+    build_page_entry,
+    map_pages_to_filenames,
+    parse_fetch_limit,
+)
 
 
 class TestUrlToFilename:
@@ -143,26 +157,88 @@ class TestContentValidation:
 
 
 class TestFetchMarkdown:
-    def _session(self, status=200, text="# Doc\n\nlots of **markdown** content about claude code here\n\n- a\n- b"):
-        session = MagicMock()
+    GOOD_MD = b"# Doc\n\nlots of **markdown** content about claude code here\n\n- a\n- b"
+
+    def _response(self, status=200, content=GOOD_MD, headers=None):
         resp = MagicMock()
         resp.status_code = status
-        resp.text = text
+        resp.content = content
+        resp.text = content.decode("utf-8", errors="replace")
+        resp.headers = headers or {}
         if status >= 400:
             resp.raise_for_status.side_effect = requests.HTTPError(f"{status}")
         else:
             resp.raise_for_status.return_value = None
-        session.get.return_value = resp
+        return resp
+
+    def _session(self, status=200, content=GOOD_MD, headers=None):
+        session = MagicMock()
+        session.get.return_value = self._response(status, content, headers)
         return session
 
-    def test_success(self):
-        content = fetch_markdown("https://code.claude.com/docs/en/hooks.md", self._session(), "hooks")
-        assert "markdown" in content
+    def test_success_returns_raw_bytes(self):
+        session = self._session()
+        content = fetch_markdown("https://code.claude.com/docs/en/hooks.md", session, "hooks")
+        assert isinstance(content, bytes)
+        assert b"markdown" in content
+        # Redirects must not be followed (client fetches with --max-redirs 0).
+        assert session.get.call_args.kwargs.get("allow_redirects") is False
 
     def test_failure_raises_after_retries(self, monkeypatch):
         monkeypatch.setattr("time.sleep", lambda *_: None)  # no real backoff
         with pytest.raises(Exception):
             fetch_markdown("https://code.claude.com/docs/en/x.md", self._session(status=404), "x")
+
+    def test_redirect_307_treated_as_failure(self, monkeypatch):
+        # A 3xx must fail (through retry/carry-forward), never publish as ok:
+        # the shell client uses --max-redirs 0, so a redirecting URL is
+        # permanently unfetchable client-side.
+        monkeypatch.setattr("time.sleep", lambda *_: None)
+        session = self._session(
+            status=307, headers={"Location": "https://code.claude.com/docs/en/moved.md"}
+        )
+        with pytest.raises(Exception, match="redirect 307"):
+            fetch_markdown("https://code.claude.com/docs/en/x.md", session, "x")
+
+    def test_retry_after_http_date_no_crash_and_clamped(self, monkeypatch):
+        # HTTP allows an HTTP-date Retry-After; int() must not blow up the page.
+        sleeps = []
+        monkeypatch.setattr("time.sleep", lambda s: sleeps.append(s))
+        session = MagicMock()
+        rate_limited = self._response(
+            status=429, headers={"Retry-After": "Wed, 21 Oct 2026 07:28:00 GMT"}
+        )
+        session.get.side_effect = [rate_limited, self._response()]
+        content = fetch_markdown("https://code.claude.com/docs/en/x.md", session, "x")
+        assert b"markdown" in content
+        assert sleeps == [60]  # unparseable -> default 60s (well under the 300s cap)
+
+    def test_retry_after_seconds_parsing(self):
+        def resp(headers):
+            r = MagicMock()
+            r.headers = headers
+            return r
+
+        assert _retry_after_seconds(resp({"Retry-After": "5"})) == 5
+        assert _retry_after_seconds(resp({})) == 60                       # absent -> default
+        assert _retry_after_seconds(resp({"Retry-After": "nonsense"})) == 60
+        assert _retry_after_seconds(resp({"Retry-After": "9999"})) == 300  # clamped
+        assert _retry_after_seconds(resp({"Retry-After": "-3"})) == 0      # floor
+
+
+class TestSaveMarkdownFile:
+    def test_writes_exact_bytes_and_hashes_them(self, tmp_path):
+        import hashlib
+        raw = "# Título\n\ncafé content\n".encode("utf-8")
+        digest = save_markdown_file(tmp_path, "x.md", raw)
+        assert (tmp_path / "x.md").read_bytes() == raw
+        assert digest == hashlib.sha256(raw).hexdigest()
+
+    def test_str_input_encoded_utf8(self, tmp_path):
+        import hashlib
+        digest = save_markdown_file(tmp_path, "y.md", "# Hi\n")
+        assert (tmp_path / "y.md").read_bytes() == b"# Hi\n"
+        assert digest == hashlib.sha256(b"# Hi\n").hexdigest()
 
 
 class TestCarryForward:
@@ -224,6 +300,13 @@ class TestCollisionCheck:
 
 
 class TestSafeguards:
+    @staticmethod
+    def _ok_pages(n, start=0):
+        return [
+            {"url": f"u{i}", "sha256": f"h{i}", "fetch_status": "ok"}
+            for i in range(start, start + n)
+        ]
+
     def test_discovery_threshold_ok(self):
         pages = [{"url": f"u{i}"} for i in range(250)]
         assert validate_discovery_threshold(pages) is pages
@@ -233,23 +316,94 @@ class TestSafeguards:
             validate_discovery_threshold([{"url": "u"}])
 
     def test_transition_first_run_passes(self):
-        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(300)]
-        validate_manifest_transition({"pages": []}, new)  # no raise
+        validate_manifest_transition({"pages": []}, self._ok_pages(300))  # no raise
 
     def test_transition_mass_removal_aborts(self):
         old = {"pages": [{"url": f"u{i}"} for i in range(300)]}
-        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(260)]  # removed 40/300 = 13% > 10%
+        new = self._ok_pages(260)  # removed 40/300 = 13% > 10%
         with pytest.raises(SystemExit):
             validate_manifest_transition(old, new)
 
     def test_transition_below_floor_aborts(self):
-        # First run (no removal check) with too few fetchable pages -> floor aborts.
-        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(240)]  # 240 fetchable < 250
+        # First run (no removal check) with too few ok pages -> floor aborts.
+        new = self._ok_pages(240)  # 240 ok < 250
         with pytest.raises(SystemExit):
             validate_manifest_transition({"pages": []}, new)
 
-    def test_transition_too_few_fetchable_aborts(self):
-        # Discovery fine (300) but only 200 fetched OK (rest sha256=null) -> abort (#2).
-        new = [{"url": f"u{i}", "sha256": (f"h{i}" if i < 200 else None)} for i in range(300)]
+    def test_transition_too_few_ok_aborts(self):
+        # Discovery fine (300) but only 200 fetched OK (rest failed) -> abort (#2).
+        new = self._ok_pages(200) + [
+            {"url": f"u{i}", "sha256": None, "fetch_status": "failed"} for i in range(200, 300)
+        ]
         with pytest.raises(SystemExit):
             validate_manifest_transition({"pages": []}, new)
+
+    def test_transition_all_stale_aborts(self):
+        # 100%-failed run: carry-forward sets sha256 on every "stale" entry, so a
+        # sha256-based count would pass. The guard must count fetch_status == "ok".
+        old = {"pages": [{"url": f"u{i}"} for i in range(300)]}
+        new = [
+            {"url": f"u{i}", "sha256": f"h{i}", "fetch_status": "stale"} for i in range(300)
+        ]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, new)
+
+    def test_transition_missing_fetch_status_is_not_ok(self):
+        # sha256 set but no fetch_status at all must not count as fetched.
+        new = [{"url": f"u{i}", "sha256": f"h{i}"} for i in range(300)]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, new)
+
+
+class TestPreSaveFetchGuard:
+    """Fetch-success floor (now owned by validate_manifest_transition): abort
+    BEFORE any manifest write on a failed run, changelog excluded."""
+
+    @staticmethod
+    def _pages(ok_docs, other=0, other_status="stale", with_changelog_ok=True):
+        pages = [
+            {"id": f"p{i}", "url": f"u{i}", "fetch_status": "ok"} for i in range(ok_docs)
+        ]
+        pages += [
+            {"id": f"q{i}", "url": f"v{i}", "fetch_status": other_status} for i in range(other)
+        ]
+        if with_changelog_ok:
+            pages.append({"id": "changelog", "url": "cl", "fetch_status": "ok"})
+        return pages
+
+    def test_count_excludes_changelog(self):
+        assert count_ok_doc_pages(self._pages(ok_docs=3)) == 3
+        assert count_ok_doc_pages(self._pages(ok_docs=0)) == 0  # changelog ok alone -> 0
+
+    def test_count_ignores_stale_failed_and_missing_status(self):
+        pages = self._pages(ok_docs=2, other=5, with_changelog_ok=False)
+        pages.append({"id": "x", "url": "ux"})  # no fetch_status -> not ok
+        assert count_ok_doc_pages(pages) == 2
+
+    def test_passes_at_threshold(self):
+        validate_manifest_transition({"pages": []}, self._pages(ok_docs=250))  # no raise
+
+    def test_total_outage_aborts_even_with_changelog_ok(self):
+        # GitHub-hosted changelog succeeds during a docs-site outage; the old
+        # `stats["ok"] == 0` check passed with ok==1. The guard must abort.
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, self._pages(ok_docs=0, other=300))
+
+    def test_below_threshold_aborts_even_at_exact_changelog_boundary(self):
+        # 249 doc pages + ok changelog = 250 raw ok statuses; the changelog
+        # exclusion must keep this BELOW the floor (the one-page drift the two
+        # previously-duplicated guards disagreed on).
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, self._pages(ok_docs=249, other=60))
+
+
+class TestParseFetchLimit:
+    def test_valid_values(self):
+        assert parse_fetch_limit("8") == 8
+        assert parse_fetch_limit("0") == 0
+        assert parse_fetch_limit("") == 0
+        assert parse_fetch_limit(None) == 0
+
+    def test_invalid_value_exits_with_clear_error(self):
+        with pytest.raises(SystemExit):
+            parse_fetch_limit("eight")

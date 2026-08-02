@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs — Uninstaller v1.0.0
+# Claude Code Docs — Uninstaller v2.0.1
 
-echo "Claude Code Docs — Uninstaller"
-echo "==============================="
+echo "Claude Code Docs — Uninstaller v2.0.1"
+echo "====================================="
 echo ""
 
 INSTALL_DIR="$HOME/.claude-code-docs"
@@ -37,6 +37,24 @@ if [ -f "$HOME/.claude/commands/docs.md" ]; then
     if grep -q "claude-docs-helper" "$HOME/.claude/commands/docs.md" 2>/dev/null; then
         rm -f "$HOME/.claude/commands/docs.md"
         echo "Removed legacy /docs command"
+    fi
+fi
+
+# Remove legacy hooks from ~/.claude/settings.json (non-fatal). Fully
+# type-safe: a non-array PreToolUse passes through untouched, malformed
+# entries (non-array .hooks, scalar elements, missing .command) are kept,
+# and EVERY hook command in an entry is checked (not just .[0]) — only
+# well-formed entries mentioning claude-code-docs are removed.
+if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
+    if jq -e '.hooks.PreToolUse' "$HOME/.claude/settings.json" >/dev/null 2>&1; then
+        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | .command? // "")] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
+            "$HOME/.claude/settings.json" > "$HOME/.claude/settings.json.tmp" && \
+            mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"; then
+            echo "Removed legacy hooks from settings.json"
+        else
+            rm -f "$HOME/.claude/settings.json.tmp"
+            echo "Warning: could not clean legacy hooks from settings.json"
+        fi
     fi
 fi
 

@@ -27,17 +27,21 @@ filtering. B6 cross-checks the Python and shell implementations over a word list
 """
 
 import json
+import math
 import os
 import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INDEX_SCHEMA_VERSION = 2
 MAX_TERMS = 50
+# Minimum fraction of indexed pages that must carry non-empty terms; below this
+# the build refuses to overwrite the committed index (partial-outage guard).
+DEFAULT_MIN_CONTENT_SHARE = 0.90
 
 STOP_WORDS = {
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
@@ -121,10 +125,44 @@ def index_page(entry: Dict, content: str) -> Dict:
     }
 
 
-def build_index(manifest: Dict, scratch_dir: Path) -> Dict:
-    """Build the full v2 index from a manifest and the scratch content dir."""
+def _record_has_content(record: Optional[Dict]) -> bool:
+    """True if an old index record carries real search data worth preserving."""
+    if not record:
+        return False
+    return bool(record.get("terms") or record.get("headings") or record.get("word_count"))
+
+
+def load_existing_index(path: Path) -> Dict[str, Dict]:
+    """
+    Load the committed search index (if any) keyed by filename, for carry-forward.
+
+    A missing or unreadable index yields ``{}`` — carry-forward is then simply
+    unavailable (the content-share guard still protects the write).
+    """
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text())
+        return {p["filename"]: p for p in data.get("pages", []) if p.get("filename")}
+    except Exception as e:
+        print(f"  ! could not read existing index {path}: {e}", file=sys.stderr)
+        return {}
+
+
+def build_index(manifest: Dict, scratch_dir: Path, old_pages: Optional[Dict[str, Dict]] = None) -> Dict:
+    """
+    Build the full v2 index from a manifest and the scratch content dir.
+
+    ``old_pages`` (filename -> old index record) enables carry-forward: a manifest
+    page whose scratch ``.md`` is missing (fetch failed/stale this run) keeps its
+    previous headings/terms/word_count instead of being silently erased to an
+    empty record — the index-side mirror of the manifest's ``fetch_status: stale``
+    carry-forward.
+    """
+    old_pages = old_pages or {}
     pages = []
     with_content = 0
+    carried = 0
     for entry in manifest.get("pages", []):
         md_path = scratch_dir / entry["filename"]
         content = ""
@@ -134,14 +172,79 @@ def build_index(manifest: Dict, scratch_dir: Path) -> Dict:
                 with_content += 1
             except Exception as e:
                 print(f"  ! could not read {md_path}: {e}", file=sys.stderr)
-        pages.append(index_page(entry, content))
 
-    print(f"Indexed {len(pages)} pages ({with_content} with content) from {scratch_dir}")
+        page = index_page(entry, content)
+        if not content:
+            old = old_pages.get(entry["filename"])
+            if _record_has_content(old):
+                # Carry forward the old search data; metadata stays manifest-fresh.
+                page["headings"] = old.get("headings", [])
+                page["terms"] = old.get("terms", {})
+                page["word_count"] = old.get("word_count", 0)
+                carried += 1
+                print(f"  ~ carried forward search data for {entry['filename']} (scratch file missing)")
+        pages.append(page)
+
+    print(
+        f"Indexed {len(pages)} pages ({with_content} with content, "
+        f"{carried} carried forward) from {scratch_dir}"
+    )
     return {
         "schema_version": INDEX_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "pages": pages,
     }
+
+
+def check_content_share(index: Dict, min_share: float) -> None:
+    """
+    Guard: refuse an index where too few pages have real terms.
+
+    Exits 1 if the fraction of pages with non-empty ``terms`` is below
+    ``min_share`` — a mostly-empty index means a broken fetch run and must not
+    overwrite the committed one. Set ``DOCS_INDEX_MIN_CONTENT_SHARE=0`` to disable.
+    """
+    pages = index.get("pages", [])
+    total = len(pages)
+    with_terms = sum(1 for p in pages if p.get("terms"))
+    share = (with_terms / total) if total else 0.0
+    if share < min_share:
+        print(
+            f"ERROR: only {with_terms}/{total} indexed pages ({share:.1%}) have search terms "
+            f"(minimum {min_share:.0%}). Refusing to overwrite the committed index with a "
+            f"mostly-empty one. Fix the fetch run, or set DOCS_INDEX_MIN_CONTENT_SHARE=0 "
+            f"to force a partial build.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+def _parse_env_number(name: str, default, cast):
+    """
+    Parse a numeric guard threshold from the environment with a clear error.
+
+    An unset OR empty-string variable falls back to the default (the old
+    ``or "0"`` idiom silently DISABLED the guard on empty values); a
+    non-numeric, non-finite (nan/inf would silently disable the ``<``
+    comparison), or negative value exits with an actionable message instead
+    of a raw traceback. Explicit ``=0`` still disables the guard, documented
+    behavior.
+    """
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        value = cast(raw)
+        if not math.isfinite(value) or value < 0:
+            raise ValueError
+        return value
+    except ValueError:
+        print(
+            f"ERROR: invalid {name}={raw!r}: must be a finite non-negative number "
+            f"(e.g. {name}={default}; set {name}=0 to disable the guard).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
 
 def save_index(index: Dict, path: Path) -> None:
@@ -158,7 +261,12 @@ def main() -> None:
     index_path = REPO_ROOT / "search_index.json"
     # Floor guard: refuse to build over an empty/tiny scratch (fail loudly, don't
     # silently commit a content-less index). Set DOCS_INDEX_MIN_FILES=0 to disable.
-    min_files = int(os.environ.get("DOCS_INDEX_MIN_FILES", "250") or "0")
+    min_files = _parse_env_number(
+        "DOCS_INDEX_MIN_FILES", default=250, cast=int
+    )
+    min_content_share = _parse_env_number(
+        "DOCS_INDEX_MIN_CONTENT_SHARE", default=DEFAULT_MIN_CONTENT_SHARE, cast=float
+    )
 
     if not manifest_path.exists():
         print(f"ERROR: manifest not found at {manifest_path}", file=sys.stderr)
@@ -175,7 +283,9 @@ def main() -> None:
         sys.exit(1)
 
     manifest = json.loads(manifest_path.read_text())
-    index = build_index(manifest, scratch_dir)
+    old_pages = load_existing_index(index_path)
+    index = build_index(manifest, scratch_dir, old_pages)
+    check_content_share(index, min_content_share)
     save_index(index, index_path)
 
 

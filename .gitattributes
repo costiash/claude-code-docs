@@ -1,9 +1,6 @@
-# Mark documentation files as generated content
-# This prevents them from appearing in PR diffs by default
-# and excludes them from language statistics
+# Mark generated metadata as generated content.
+# This collapses them in PR diffs by default and excludes them from
+# language statistics.
 
-docs/*.md linguist-generated=true
-docs/**/*.md linguist-generated=true
-
-# Also mark search index as generated
-docs/.search_index.json linguist-generated=true
+/paths_manifest.json linguist-generated=true
+/search_index.json linguist-generated=true

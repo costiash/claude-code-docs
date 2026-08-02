@@ -27,7 +27,8 @@ from typing import Dict, List, Optional
 
 import requests
 
-from .config import HEADERS, LLMS_TXT_URLS, logger
+from .config import LLMS_TXT_URLS, logger
+from .content import discovery_get
 
 # A markdown list entry linking to a .md page, with an optional description that
 # may follow either a ":" (code.claude.com) or "-" (platform.claude.com) separator.
@@ -76,8 +77,11 @@ def discover_from_llms_txt(
     """
     Fetch and parse the configured llms.txt files.
 
-    A failure on one source is logged and skipped (the sitemap union still
-    provides coverage); it does not abort discovery.
+    FAIL CLOSED per source: every configured llms.txt must fetch and parse to at
+    least one entry, or the whole run aborts. llms.txt carries pages the sitemaps
+    miss (e.g. agent-sdk) plus all titles — silently skipping a dead source would
+    degrade discovery to sitemap-only and can delete that source's exclusive
+    pages under the 10% deletion threshold.
 
     Args:
         session: Requests session for connection pooling.
@@ -86,6 +90,9 @@ def discover_from_llms_txt(
     Returns:
         Combined list of page records across all sources (may contain
         duplicates across sources; de-duplication happens in the discovery union).
+
+    Raises:
+        RuntimeError: If any configured llms.txt fails or parses to zero entries.
     """
     if urls is None:
         urls = LLMS_TXT_URLS
@@ -93,19 +100,24 @@ def discover_from_llms_txt(
     records: List[Dict[str, Optional[str]]] = []
     for url in urls:
         try:
-            response = session.get(url, headers=HEADERS, timeout=30)
-            response.raise_for_status()
-            parsed = parse_llms_txt(response.text)
-            if not parsed and len(response.text.strip()) > 200:
-                # The file downloaded fine but matched zero link entries — almost
-                # certainly upstream format drift. Without this, discovery silently
-                # degrades to sitemap-only (llms-only pages drop, titles -> Untitled).
-                logger.warning(
-                    f"llms.txt {url}: 0 entries parsed from {len(response.text)} bytes "
-                    "— possible format drift; the _ENTRY_RE regex may need updating."
-                )
-            logger.info(f"llms.txt {url}: parsed {len(parsed)} entries")
-            records.extend(parsed)
+            # Retried GET (same budget as page fetches): fail-closed stays, but a
+            # single transient blip no longer aborts the whole 3-hourly run.
+            response = discovery_get(session, url)
         except Exception as e:
-            logger.warning(f"Failed to fetch/parse llms.txt {url}: {e}")
+            raise RuntimeError(
+                f"Discovery source failed: llms.txt {url}: {e} — aborting the run "
+                f"(a dead source must not silently drop its pages)."
+            ) from e
+        parsed = parse_llms_txt(response.text)
+        if not parsed:
+            # Zero link entries from a file that exists is upstream format drift
+            # (or an error body). Proceeding would silently degrade discovery to
+            # sitemap-only (llms-only pages drop, titles -> Untitled) — abort.
+            raise RuntimeError(
+                f"Discovery source failed: llms.txt {url}: 0 entries parsed from "
+                f"{len(response.text)} bytes — possible format drift (the _ENTRY_RE "
+                f"regex may need updating). Aborting the run (fail closed)."
+            )
+        logger.info(f"llms.txt {url}: parsed {len(parsed)} entries")
+        records.extend(parsed)
     return records

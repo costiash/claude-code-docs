@@ -7,6 +7,7 @@ This module handles:
 - Extracting English documentation paths
 """
 
+import re
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse
@@ -14,6 +15,7 @@ from urllib.parse import urlparse
 import requests
 
 from .config import SITEMAP_URLS, HEADERS, logger
+from .content import discovery_get
 
 
 def discover_from_all_sitemaps(session: requests.Session) -> List[str]:
@@ -53,7 +55,9 @@ def discover_from_all_sitemaps(session: requests.Session) -> List[str]:
     return unique_paths
 
 
-def discover_sitemap_entries(session: requests.Session) -> List[Dict[str, Optional[str]]]:
+def discover_sitemap_entries(
+    session: requests.Session, urls: Optional[List[str]] = None
+) -> List[Dict[str, Optional[str]]]:
     """
     Discover English documentation pages from all sitemaps as full URLs + lastmod.
 
@@ -61,8 +65,14 @@ def discover_sitemap_entries(session: requests.Session) -> List[Dict[str, Option
     paths), this keeps the verbatim ``<loc>`` URL so the host is preserved, and
     captures ``<lastmod>`` when present. This is the v2 discovery primitive.
 
+    FAIL CLOSED per source: each configured sitemap must fetch, parse, and yield
+    at least one English page, or the whole run aborts. Silently tolerating a
+    dead source would shrink the union by that source's exclusive pages — a loss
+    the 10% deletion threshold cannot always catch.
+
     Args:
         session: Requests session for connection pooling.
+        urls: Override list of sitemap URLs (defaults to ``SITEMAP_URLS``).
 
     Returns:
         List of ``{url, lastmod}`` dicts (``lastmod`` is ``None`` when the sitemap
@@ -70,21 +80,28 @@ def discover_sitemap_entries(session: requests.Session) -> List[Dict[str, Option
         canonical URL and sorted.
 
     Raises:
-        Exception: If no entries could be discovered from any sitemap.
+        RuntimeError: If any configured sitemap fails or yields zero pages.
     """
+    if urls is None:
+        urls = SITEMAP_URLS
+
     namespace = {"ns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     entries: Dict[str, Optional[str]] = {}
 
-    for sitemap_url in SITEMAP_URLS:
+    for sitemap_url in urls:
         try:
             logger.info(f"Discovering sitemap entries from: {sitemap_url}")
-            response = session.get(sitemap_url, headers=HEADERS, timeout=30)
-            response.raise_for_status()
+            # Retried GET (same budget as page fetches): fail-closed stays, but a
+            # single transient blip no longer aborts the whole 3-hourly run.
+            response = discovery_get(session, sitemap_url)
             root = _parse_xml_safely(response.content)
         except Exception as e:
-            logger.warning(f"  Failed to discover from {sitemap_url}: {e}")
-            continue
+            raise RuntimeError(
+                f"Discovery source failed: sitemap {sitemap_url}: {e} — "
+                f"aborting the run (a dead source must not silently drop its pages)."
+            ) from e
 
+        source_pages = 0
         url_elems = root.findall(".//ns:url", namespace) or root.findall(".//url")
         for url_elem in url_elems:
             loc_elem = url_elem.find("ns:loc", namespace)
@@ -119,9 +136,17 @@ def discover_sitemap_entries(session: requests.Session) -> List[Dict[str, Option
             # First occurrence wins, but prefer a real lastmod over None.
             if canonical not in entries or (entries[canonical] is None and lastmod):
                 entries[canonical] = lastmod
+            source_pages += 1
+
+        if source_pages == 0:
+            raise RuntimeError(
+                f"Discovery source failed: sitemap {sitemap_url} yielded zero English "
+                f"documentation pages — aborting the run (fail closed)."
+            )
+        logger.info(f"  {sitemap_url}: {source_pages} English pages")
 
     if not entries:
-        raise Exception("Could not discover any entries from sitemaps")
+        raise RuntimeError("Could not discover any entries from sitemaps")
 
     result = [{"url": url, "lastmod": entries[url]} for url in sorted(entries)]
     logger.info(f"Discovered {len(result)} English sitemap entries (with lastmod where available)")
@@ -274,19 +299,30 @@ def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> L
 
 def _parse_xml_safely(content: bytes) -> ET.Element:
     """
-    Parse XML content safely to prevent XXE attacks.
+    Parse XML content safely, rejecting DTD/entity declarations (XXE / billion
+    laughs defense).
+
+    Stdlib ``ET.XMLParser`` has no ``forbid_dtd``-style kwargs (those belong to
+    defusedxml), so the defense is a pre-parse content check: any ``<!DOCTYPE``
+    or ``<!ENTITY`` anywhere in the document rejects it outright. The scan must
+    cover the FULL content, not a fixed-size prefix: XML permits arbitrary
+    comments before the DOCTYPE, so a bounded prefix check is bypassable with
+    padding. Neither token can appear legitimately in a sitemap (``<`` inside
+    element text/attributes must be escaped as ``&lt;``), so this loses nothing.
 
     Args:
         content: Raw XML content bytes
 
     Returns:
         Parsed XML root element
+
+    Raises:
+        ValueError: If the content contains a DTD or entity declaration.
     """
-    try:
-        # Try with security parameters (Python 3.8+)
-        parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
-        return ET.fromstring(content, parser=parser)
-    except TypeError:
-        # Fallback for older Python versions
-        logger.warning("XMLParser security parameters not available, using default parser")
-        return ET.fromstring(content)
+    if re.search(rb'<!(?:doctype|entity)', content, re.IGNORECASE):
+        logger.error(
+            "Rejecting XML containing a DTD/ENTITY declaration "
+            "(possible XXE / billion-laughs payload) — sitemaps never declare DTDs."
+        )
+        raise ValueError("XML contains DTD/ENTITY declaration; refusing to parse")
+    return ET.fromstring(content)
