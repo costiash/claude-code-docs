@@ -152,8 +152,12 @@ def map_pages_to_filenames(raw_pages: List[Dict]) -> List[Tuple[Dict, str]]:
 
 
 def parse_fetch_limit(raw: str) -> int:
-    """Parse ``DOCS_FETCH_LIMIT`` with a clear error instead of a raw traceback."""
-    raw = raw or "0"
+    """Parse ``DOCS_FETCH_LIMIT`` with a clear error instead of a raw traceback.
+
+    Whitespace-only counts as unset, matching ``_parse_env_number`` in
+    build_search_index.py.
+    """
+    raw = (raw or "").strip() or "0"
     try:
         return int(raw)
     except ValueError:
