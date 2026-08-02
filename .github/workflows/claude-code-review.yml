@@ -10,10 +10,17 @@ on:
       - "*.md"
       - "enhancements/**"
 
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   claude-review:
-    # Skip review for very large PRs (>50 files) to avoid timeouts
-    if: github.event.pull_request.changed_files <= 50
+    # Skip fork PRs (no access to secrets.CLAUDE_CODE_OAUTH_TOKEN — the run would
+    # just fail red) and very large PRs (>50 files, to avoid timeouts).
+    if: |
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.changed_files <= 50
 
     # Optional: Filter by PR author
     # if: |
@@ -37,7 +44,7 @@ jobs:
 
       - name: Run Claude Code Review
         id: claude-review
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@c96dd0a84e0232ab86947fca5fe34f1caae8792f # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |

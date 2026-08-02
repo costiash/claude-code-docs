@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
   coverage:
@@ -18,23 +17,23 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          python3 -m pip install requests>=2.33.0
+          python3 -m pip install -r scripts/requirements.txt
           python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml coverage
 
       - name: Generate coverage
         run: |
-          pytest tests/ -v --cov=scripts --cov-report=html --cov-report=term --cov-report=xml -m "not slow and not network" || true
+          pytest tests/ -v --cov=scripts --cov-report=html --cov-report=term --cov-report=xml -m "not slow and not network"
 
-      - name: Check coverage threshold (75%)
+      - name: Check coverage threshold (50%)
         run: |
           if [ -f ".coverage" ]; then
-            coverage report --fail-under=75 || echo "⚠️  Coverage below 75% threshold (current: ~78.7%)"
+            coverage report --fail-under=50
           else
             echo "No coverage data generated"
           fi
@@ -45,17 +44,3 @@ jobs:
         with:
           name: coverage-report-html
           path: htmlcov/
-
-      - name: Upload coverage to Codecov
-        if: hashFiles('coverage.xml') != ''
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-          fail_ci_if_error: false
-
-      - name: Comment coverage on PR
-        if: github.event_name == 'pull_request' && hashFiles('coverage.xml') != ''
-        uses: py-cov-action/python-coverage-comment-action@v3
-        continue-on-error: true
-        with:
-          GITHUB_TOKEN: ${{ github.token }}

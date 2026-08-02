@@ -5,6 +5,9 @@ on:
     - cron: '0 6 * * *'  # Daily at 6am UTC
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -13,13 +16,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          python3 -m pip install requests>=2.33.0
+          python3 -m pip install -r scripts/requirements.txt
           python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
 
       - name: Validate sampled manifest URLs are reachable
@@ -33,9 +36,13 @@ jobs:
           while IFS= read -r url; do
             [ -z "$url" ] && continue
             TOTAL=$((TOTAL + 1))
-            code=$(curl -s -o /dev/null -w '%{http_code}' -I -L --proto '=https' --proto-redir '=https' --max-time 20 "$url" || echo "000")
+            # No -L: the fetch pipeline treats ANY 3xx as unfetchable (client uses
+            # --max-redirs 0, fetcher rejects redirects), so following redirects
+            # here would monitor a contract nothing else honors — a URL that
+            # redirects is a broken URL for every consumer of the manifest.
+            code=$(curl -s -o /dev/null -w '%{http_code}' -I --max-redirs 0 --proto '=https' --max-time 20 "$url" || echo "000")
             if [ "$code" != "200" ]; then
-              echo "::warning::HTTP $code for $url"
+              echo "::warning::HTTP $code for $url (3xx counts as broken: clients fetch with --max-redirs 0)"
               FAIL=$((FAIL + 1))
             fi
           done <<< "$SAMPLE"
