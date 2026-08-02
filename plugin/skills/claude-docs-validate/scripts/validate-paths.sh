@@ -68,7 +68,7 @@ while IFS= read -r line; do
         # temporary ones — count them broken; the separate list below only adds
         # the "URL likely moved, manifest should catch up" signal.
         REDIRECT_PERM*) total=$((total+1)); broken=$((broken+1)); redirected=$((redirected+1)); redirect_list="${redirect_list}${line#REDIRECT_PERM }\n" ;;
-        REDIRECT*)      total=$((total+1)); broken=$((broken+1)); broken_list="${broken_list}${line#REDIRECT } (redirect — client fetches with --max-redirs 0)\n" ;;
+        REDIRECT*)      total=$((total+1)); broken=$((broken+1)); redirected=$((redirected+1)); broken_list="${broken_list}${line#REDIRECT } (redirect — client fetches with --max-redirs 0)\n" ;;
         BROKEN*)        total=$((total+1)); broken=$((broken+1)); broken_list="${broken_list}${line#BROKEN }\n" ;;
         UNREACHABLE*)   total=$((total+1)); timeout_count=$((timeout_count+1)); broken_list="${broken_list}${line#UNREACHABLE } (unreachable)\n" ;;
     esac
@@ -78,7 +78,7 @@ echo ""
 echo "=== Validation Summary ==="
 echo "Total checked: $total"
 echo "Reachable:     $reachable"
-echo "Redirected:    $redirected (permanent — counted broken: clients fetch with --max-redirs 0; URL may have moved)"
+echo "Redirected:    $redirected (all counted broken: clients fetch with --max-redirs 0; permanent ones likely moved)"
 echo "Broken:        $broken"
 echo "Unreachable:   $timeout_count"
 

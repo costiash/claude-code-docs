@@ -67,7 +67,16 @@ def discovery_get(session: requests.Session, url: str) -> requests.Response:
     last_error: Exception = requests.exceptions.RequestException("no attempts made")
     for attempt in range(MAX_RETRIES):
         try:
-            response = session.get(url, headers=HEADERS, timeout=30)
+            # No redirects here either: a discovery source that starts
+            # redirecting has moved — that must surface as a loud failure
+            # (fail-closed), not be silently followed to who-knows-where.
+            response = session.get(url, headers=HEADERS, timeout=30, allow_redirects=False)
+            if 300 <= response.status_code < 400:
+                raise requests.exceptions.RequestException(
+                    f"redirect {response.status_code} to "
+                    f"{response.headers.get('Location', '?')!r} — discovery sources "
+                    f"must not redirect (update the URL in config.py)"
+                )
             if response.status_code == 429:
                 last_error = requests.exceptions.RequestException(
                     f"rate limited (429) on all {MAX_RETRIES} attempts"
