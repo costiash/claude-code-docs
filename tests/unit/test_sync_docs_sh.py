@@ -199,6 +199,13 @@ class TestSelfHealSwap:
         assert (docs / "courses" / "c.html").read_text() == "course"
         leftovers = list(home.glob(".claude-code-docs.new.*")) + list(home.glob(".claude-code-docs.old.*"))
         assert leftovers == []
+        # Healed dir must be a valid git toplevel itself — never a nested clone.
+        top = subprocess.run(
+            ["git", "-C", str(docs), "rev-parse", "--show-toplevel"],
+            capture_output=True, text=True,
+        ).stdout.strip()
+        assert Path(top).resolve() == docs.resolve()
+        assert not list(docs.glob(".claude-code-docs.new.*"))
 
     def test_failed_heal_offline_keeps_old_dir(self, tmp_path, origin):
         home = tmp_path / "home"
@@ -286,6 +293,24 @@ class TestOrphanPrune:
         assert r.returncode == 0
         assert (docs / "cache" / "page.md").read_text() == "full corpus"
         assert not orphan.exists()
+
+    def test_junk_budget_override_falls_back_to_default(self, tmp_path, origin):
+        home = tmp_path / "home"
+        home.mkdir()
+        r = run_hook(home, origin, budget="40s")  # non-integer: must not break $((...))
+        assert r.returncode == 0
+        assert "installed" in context_of(r)
+
+    def test_first_run_defers_during_active_heal(self, tmp_path, origin):
+        """DOCS_DIR absent + fresh heal lock = another session mid-swap: a
+        first-run clone into the gap would make the healer's rename nest."""
+        home = tmp_path / "home"
+        home.mkdir()
+        (home / ".claude-code-docs.heal.lock").mkdir()
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert "being repaired" in context_of(r)
+        assert not (home / ".claude-code-docs").exists()  # no clone into the gap
 
     def test_heal_lock_defers_concurrent_repair(self, tmp_path, origin):
         home = tmp_path / "home"

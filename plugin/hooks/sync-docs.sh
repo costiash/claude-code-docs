@@ -27,6 +27,10 @@ MANIFEST="$DOCS_DIR/paths_manifest.json"
 # worst-case chain (fetch + reset + self-heal clone) can no longer exceed the
 # harness timeout. Overridable only for tests.
 HOOK_BUDGET="${CLAUDE_DOCS_HOOK_BUDGET:-40}"
+# Non-integer override ("40s", "4.5") would blow up every $((...)) below.
+case "$HOOK_BUDGET" in
+    ''|*[!0-9]*) HOOK_BUDGET=40 ;;
+esac
 
 # Seconds left in the budget, never below 1 (a 0 would mean "no timeout" to
 # timeout(1) and "sleep forever" to the watchdog fallback).
@@ -43,6 +47,9 @@ cap() {
     [ "$want" -lt "$left" ] && echo "$want" || echo "$left"
 }
 
+# NOTE: on expiry the fallback returns 143 (128+SIGTERM) where timeout(1)
+# returns 124 — no caller branches on the rc today; keep it that way or
+# normalize here first.
 run_with_timeout() {
     local secs="$1"; shift
     if command -v timeout >/dev/null 2>&1; then
@@ -163,6 +170,14 @@ prune_swap_orphans() {
 
 # First run: shallow-clone the tiny metadata repo, then bulk-fetch in background.
 if [ ! -d "$DOCS_DIR" ]; then
+    # A missing DOCS_DIR can also mean another session is mid-heal (its swap
+    # briefly leaves DOCS_DIR absent). Cloning into that gap would recreate
+    # DOCS_DIR inside the healer's check-then-mv window and make its final
+    # rename nest silently. A fresh heal lock = defer; the healer finishes.
+    if [ -d "$DOCS_DIR.heal.lock" ] && [ -z "$(find "$DOCS_DIR.heal.lock" -maxdepth 0 -mmin +2 2>/dev/null)" ]; then
+        output_context "Claude docs is being repaired by another session; it will be ready on the next session start."
+        exit 0
+    fi
     if run_with_timeout "$(cap 30)" git clone --depth 1 "$REPO_URL" "$DOCS_DIR" >/dev/null 2>&1; then
         prune_swap_orphans
         maybe_background_sync
@@ -291,6 +306,17 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
             output_context "Claude docs repair could not complete; it will be retried on the next session start (your courses/ and cache/ are preserved)."
             exit 0
         }
+        # Post-swap sanity: the [ -e ] check and the mv above are not atomic —
+        # the first-run branch now defers on a fresh heal lock, but a
+        # microsecond recreate (e.g. a background fetch's mkdir -p) could
+        # still make the mv "succeed" by NESTING NEW_DIR inside a recreated
+        # DOCS_DIR. Detect that (mv-as-nest leaves the clone one level down)
+        # and un-nest by parking the clone back as an orphan for next session.
+        if [ -d "$DOCS_DIR/${NEW_DIR##*/}" ]; then
+            mv "$DOCS_DIR/${NEW_DIR##*/}" "$NEW_DIR" 2>/dev/null || true
+            output_context "Claude docs repair was interrupted by a concurrent session; it will finish on the next session start (your courses/ and cache/ are preserved)."
+            exit 0
+        fi
         # Best-effort cleanup of the corrupt old dir (capped: a huge mirror-era
         # dir on slow disk must not eat the remaining budget); a failure just
         # leaves a dead-PID orphan for the next session's prune.
