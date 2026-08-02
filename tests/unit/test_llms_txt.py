@@ -172,6 +172,12 @@ class TestAllowedDomains:
         assert merge_discovery([rec], []) == []
 
 
+@pytest.fixture(autouse=True)
+def _no_retry_sleep(monkeypatch):
+    """discovery_get backs off for real between attempts; don't sleep in tests."""
+    monkeypatch.setattr("fetcher.content.time.sleep", lambda s: None)
+
+
 class TestDiscoveryFailClosed:
     """A dead/empty discovery source must abort the run, not silently shrink the union."""
 
@@ -224,6 +230,27 @@ class TestDiscoveryFailClosed:
             session, urls=["https://a.example/llms.txt", "https://b.example/llms.txt"]
         )
         assert len(records) == 5  # 3 code + 2 platform
+
+    def test_transient_blip_survives_via_retry(self):
+        # Fail-closed must not fire on a single transient error: the first GET
+        # raises, the retry succeeds, and the run proceeds normally.
+        good = MagicMock()
+        good.status_code = 200
+        good.text = CODE_LLMS_TXT
+        good.raise_for_status.return_value = None
+        calls = {"n": 0}
+
+        def get(url, **kwargs):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise requests.ConnectionError("transient blip")
+            return good
+
+        session = MagicMock()
+        session.get.side_effect = get
+        records = discover_from_llms_txt(session, urls=["https://a.example/llms.txt"])
+        assert calls["n"] == 2
+        assert len(records) == 3
 
     def test_discover_pages_propagates_sitemap_failure(self, monkeypatch):
         # The old code swallowed sitemap failure and continued llms-only.

@@ -45,6 +45,12 @@ BILLION_LAUGHS = b"""<?xml version="1.0"?>
 </urlset>"""
 
 
+@pytest.fixture(autouse=True)
+def _no_retry_sleep(monkeypatch):
+    """discovery_get backs off for real between attempts; don't sleep in tests."""
+    monkeypatch.setattr("fetcher.content.time.sleep", lambda s: None)
+
+
 def _session_for(responses):
     """Map url -> (status, bytes); anything else raises ConnectionError."""
     session = MagicMock()
@@ -82,6 +88,17 @@ class TestParseXmlSafely:
         )
         with pytest.raises(ValueError):
             _parse_xml_safely(payload)
+
+    def test_rejects_dtd_after_large_comment_padding(self):
+        # XML allows arbitrary comments before the DOCTYPE; a fixed-size prefix
+        # scan is bypassable with padding, so the guard must scan everything.
+        padded = (
+            b'<?xml version="1.0"?><!-- ' + b"A" * 4096 + b" -->"
+            b'<!DOCTYPE lolz [<!ENTITY lol "lol">]>'
+            b"<urlset><url><loc>&lol;</loc></url></urlset>"
+        )
+        with pytest.raises(ValueError, match="DTD/ENTITY"):
+            _parse_xml_safely(padded)
 
     def test_parses_normal_namespaced_sitemap(self):
         root = _parse_xml_safely(NAMESPACED_SITEMAP)
@@ -155,3 +172,24 @@ class TestSitemapFailClosed:
         session = _session_for({self.GOOD: (200, BILLION_LAUGHS)})
         with pytest.raises(RuntimeError, match="Discovery source failed"):
             discover_sitemap_entries(session, urls=[self.GOOD])
+
+    def test_transient_blip_survives_via_retry(self):
+        # Fail-closed must not fire on a single transient error: the first GET
+        # raises, the retry succeeds, and the run proceeds normally.
+        good = MagicMock()
+        good.status_code = 200
+        good.content = NAMESPACED_SITEMAP
+        good.raise_for_status.return_value = None
+        calls = {"n": 0}
+
+        def get(url, **kwargs):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise requests.ConnectionError("transient blip")
+            return good
+
+        session = MagicMock()
+        session.get.side_effect = get
+        entries = discover_sitemap_entries(session, urls=[self.GOOD])
+        assert calls["n"] == 2
+        assert len(entries) == 2  # hooks + mcp survive the filter

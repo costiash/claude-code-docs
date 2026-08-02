@@ -49,6 +49,44 @@ def _retry_after_seconds(response) -> int:
     return max(0, min(seconds, MAX_RETRY_AFTER))
 
 
+def discovery_get(session: requests.Session, url: str) -> requests.Response:
+    """
+    GET a discovery source (llms.txt / sitemap) with the same retry/backoff
+    budget page fetches get.
+
+    Discovery is fail-closed by design — a dead source aborts the whole run —
+    so a single un-retried transient (one CDN 503 blip) must not be what pulls
+    that trigger. Retries here, hard failure after; the caller still raises.
+
+    Returns:
+        The successful (2xx) response.
+
+    Raises:
+        requests.exceptions.RequestException: after MAX_RETRIES failures.
+    """
+    last_error: Exception = requests.exceptions.RequestException("no attempts made")
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(url, headers=HEADERS, timeout=30)
+            if response.status_code == 429:
+                wait_time = _retry_after_seconds(response)
+                logger.warning(f"Discovery {url}: rate limited, waiting {wait_time}s...")
+                last_error = requests.exceptions.RequestException(
+                    f"rate limited (429) on all {MAX_RETRIES} attempts"
+                )
+                time.sleep(wait_time)
+                continue
+            response.raise_for_status()
+            return response
+        except requests.exceptions.RequestException as e:
+            last_error = e
+            logger.warning(f"Discovery attempt {attempt + 1}/{MAX_RETRIES} failed for {url}: {e}")
+            if attempt < MAX_RETRIES - 1:
+                delay = min(RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                time.sleep(delay * random.uniform(0.5, 1.0))
+    raise last_error
+
+
 def _reject_redirect(response, label: str) -> None:
     """
     Treat any 3xx as a fetch failure (raises RequestException).

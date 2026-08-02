@@ -61,27 +61,24 @@ jobs:
         fi
 
     # The fetcher rewrites generated_at on every run, so a raw `git diff` is never
-    # clean. Compare against HEAD with generated_at stripped from both sides so a
-    # commit only lands when actual content (pages, index entries) changed.
+    # clean. `git diff -I` ignores only the generated_at line (both files are
+    # pretty-printed, one key per line), so a commit only lands when actual content
+    # (pages, index entries) changed. Unlike a process-substitution diff, a failure
+    # here (bad object, unreadable file) propagates as a non-zero exit instead of
+    # silently reading as "no change". First run (file absent in HEAD) shows as an
+    # addition and correctly reports changed=true.
     - name: Check for changes
       id: verify-changed-files
       run: |
         set -euo pipefail
         git add paths_manifest.json search_index.json
-        CHANGED=false
-        for f in paths_manifest.json search_index.json; do
-          if git cat-file -e "HEAD:$f" 2>/dev/null; then
-            if ! diff -q <(git show "HEAD:$f" | jq 'del(.generated_at)') \
-                         <(jq 'del(.generated_at)' "$f") >/dev/null; then
-              echo "$f: content changed"
-              CHANGED=true
-            fi
-          else
-            # First run: file does not exist in HEAD yet.
-            echo "$f: not present in HEAD (first run)"
-            CHANGED=true
-          fi
-        done
+        if git diff --cached --quiet -I '^  "generated_at":' -- paths_manifest.json search_index.json; then
+          CHANGED=false
+          echo "no content changes (generated_at-only churn ignored)"
+        else
+          CHANGED=true
+          git diff --cached --stat -- paths_manifest.json search_index.json
+        fi
         echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
     - name: Generate commit message from manifest diff

@@ -109,16 +109,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      # pytest-cov is required even though the run passes --no-cov: pyproject.toml
+      # addopts inject --cov flags, which are unrecognized without the plugin.
       - name: Install dependencies
-        run: python3 -m pip install pytest pytest-mock pyyaml requests
+        run: python3 -m pip install pytest pytest-cov pytest-mock pyyaml requests
 
       - name: Run shell-script tests (BSD userland)
         run: python3 -m pytest tests/unit/test_fetch_docs_sh.py tests/unit/test_manifest_diff_sh.py --no-cov -q
 
       # macOS ships /bin/bash 3.2 — fail fast on bash-4+ only constructs.
+      # Comment lines are excluded so prose mentioning a builtin (e.g. "No
+      # mapfile: ...") doesn't trip the check; only code positions count.
+      # No \b word boundaries: that's a GNU extension this BSD-grep job
+      # can't rely on; the comment filter alone removes the false positive.
       - name: Check bash 3.2 compatibility
         run: |
-          if grep -rnE 'mapfile|readarray|declare -A|wait -n|\$\{[A-Za-z_]+(\^\^|,,)\}' plugin/ install.sh uninstall.sh; then
+          MATCHES=$(grep -rnE 'mapfile|readarray|declare -A|wait -n|\$\{[A-Za-z_]+(\^\^|,,)\}' plugin/ install.sh uninstall.sh \
+            | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' || true)
+          if [ -n "$MATCHES" ]; then
+            echo "$MATCHES"
             echo "::error::bash 4+ construct found - scripts must stay bash 3.2 compatible (macOS /bin/bash)"
             exit 1
           fi

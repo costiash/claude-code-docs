@@ -27,7 +27,8 @@ from typing import Dict, List, Optional
 
 import requests
 
-from .config import HEADERS, LLMS_TXT_URLS, logger
+from .config import LLMS_TXT_URLS, logger
+from .content import discovery_get
 
 # A markdown list entry linking to a .md page, with an optional description that
 # may follow either a ":" (code.claude.com) or "-" (platform.claude.com) separator.
@@ -99,8 +100,9 @@ def discover_from_llms_txt(
     records: List[Dict[str, Optional[str]]] = []
     for url in urls:
         try:
-            response = session.get(url, headers=HEADERS, timeout=30)
-            response.raise_for_status()
+            # Retried GET (same budget as page fetches): fail-closed stays, but a
+            # single transient blip no longer aborts the whole 3-hourly run.
+            response = discovery_get(session, url)
         except Exception as e:
             raise RuntimeError(
                 f"Discovery source failed: llms.txt {url}: {e} — aborting the run "

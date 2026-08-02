@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 import requests
 
 from .config import SITEMAP_URLS, HEADERS, logger
+from .content import discovery_get
 
 
 def discover_from_all_sitemaps(session: requests.Session) -> List[str]:
@@ -89,8 +90,9 @@ def discover_sitemap_entries(
     for sitemap_url in urls:
         try:
             logger.info(f"Discovering sitemap entries from: {sitemap_url}")
-            response = session.get(sitemap_url, headers=HEADERS, timeout=30)
-            response.raise_for_status()
+            # Retried GET (same budget as page fetches): fail-closed stays, but a
+            # single transient blip no longer aborts the whole 3-hourly run.
+            response = discovery_get(session, sitemap_url)
             root = _parse_xml_safely(response.content)
         except Exception as e:
             raise RuntimeError(
@@ -301,8 +303,11 @@ def _parse_xml_safely(content: bytes) -> ET.Element:
 
     Stdlib ``ET.XMLParser`` has no ``forbid_dtd``-style kwargs (those belong to
     defusedxml), so the defense is a pre-parse content check: any ``<!DOCTYPE``
-    or ``<!ENTITY`` in the first 2 KB rejects the document outright. A sitemap
-    never legitimately declares a DTD, so this loses nothing.
+    or ``<!ENTITY`` anywhere in the document rejects it outright. The scan must
+    cover the FULL content, not a fixed-size prefix: XML permits arbitrary
+    comments before the DOCTYPE, so a bounded prefix check is bypassable with
+    padding. Neither token can appear legitimately in a sitemap (``<`` inside
+    element text/attributes must be escaped as ``&lt;``), so this loses nothing.
 
     Args:
         content: Raw XML content bytes
@@ -313,8 +318,8 @@ def _parse_xml_safely(content: bytes) -> ET.Element:
     Raises:
         ValueError: If the content contains a DTD or entity declaration.
     """
-    head = content[:2048].lower()
-    if b'<!doctype' in head or b'<!entity' in head:
+    lowered = content.lower()
+    if b'<!doctype' in lowered or b'<!entity' in lowered:
         logger.error(
             "Rejecting XML containing a DTD/ENTITY declaration "
             "(possible XXE / billion-laughs payload) — sitemaps never declare DTDs."
