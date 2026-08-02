@@ -66,10 +66,13 @@ run_with_timeout() {
     # each clone keeps a partial NEW_DIR from ever being swapped in — and the
     # watchdog's own sleep may linger detached; both are harmless. setsid for a
     # group-kill is not portable to macOS, which is the platform this fallback
-    # exists for. On fast completion the reparented sleep still wakes later
-    # and signals $cmd_pid — usually dead (no-op), with a vanishingly small
-    # chance of hitting a recycled PID: the classic portable-shim tradeoff,
-    # accepted deliberately.
+    # exists for. On fast completion, killing the watchdog subshell means its
+    # pending kill statements never fire — only the reparented sleep lingers
+    # (inert; it signals nothing). PID-reuse exposure is therefore limited to
+    # the expiry path's own TERM/KILL pair racing a just-exited command.
+    # CALLERS MUST REDIRECT (>/dev/null 2>&1): the lingering sleep inherits
+    # this function's fds, and an unredirected call would leave it holding the
+    # SessionStart stdout pipe open for up to $secs after the hook exits.
     "$@" &
     local cmd_pid=$!
     ( sleep "$secs"; kill "$cmd_pid" 2>/dev/null; sleep 2; kill -9 "$cmd_pid" 2>/dev/null ) &
@@ -139,7 +142,9 @@ rescue_user_data() {
     for sub in cache courses; do
         [ -d "$src/$sub" ] || continue
         rmdir "$DOCS_DIR/$sub" 2>/dev/null || true  # only removes an EMPTY dir
-        [ -e "$DOCS_DIR/$sub" ] && continue         # real data present: keep it
+        # Real data present: install wins BY DESIGN — a second parked copy in
+        # another orphan is consciously discarded, not merged.
+        [ -e "$DOCS_DIR/$sub" ] && continue
         mv "$src/$sub" "$DOCS_DIR/$sub" 2>/dev/null || failed=1
     done
     return $failed
@@ -278,12 +283,23 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
         # cache/ (all fetched pages — re-downloadable but expensive) and
         # courses/ (user-generated HTML — irreplaceable). If a kill lands
         # after this point, prune_swap_orphans rescues them from the temp dir
-        # on the next session.
+        # on the next session. A FAILED carry must defer the whole repair:
+        # the un-carried data would otherwise ride DOCS_DIR into OLD_DIR and
+        # be rm -rf'd on the success path — the one asymmetry against the
+        # keep-source-on-failed-move invariant the rest of this file enforces.
+        CARRY_OK=1
         for d in cache courses; do
             if [ -d "$DOCS_DIR/$d" ]; then
-                mv "$DOCS_DIR/$d" "$NEW_DIR/$d" 2>/dev/null || true
+                mv "$DOCS_DIR/$d" "$NEW_DIR/$d" 2>/dev/null || CARRY_OK=0
             fi
         done
+        if [ "$CARRY_OK" != "1" ]; then
+            # DOCS_DIR keeps the item that would not move; NEW_DIR (holding
+            # whatever DID carry) outlives us as a .new.<pid> orphan and the
+            # next session's guarded prune rescues it.
+            output_context "Claude docs installation needs repair, but user data could not be moved safely this session. Repair will be retried on the next session start (your courses/ and cache/ are preserved)."
+            exit 0
+        fi
         cd / || true  # leave the directory we are about to move aside
         # Rename-swap instead of rm-then-mv: both renames are atomic sibling
         # moves, so there is no window where a kill deletes the install — the
