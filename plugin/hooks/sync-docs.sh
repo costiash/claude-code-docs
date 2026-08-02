@@ -53,7 +53,18 @@ cap() {
 run_with_timeout() {
     local secs="$1"; shift
     if command -v timeout >/dev/null 2>&1; then
-        timeout "$secs" "$@"
+        # -k gives timeout(1) the same TERM -> KILL escalation the fallback
+        # has: without it a TERM-ignoring git overruns $secs and the 45s
+        # harness SIGKILL lands mid-operation — on the PRIMARY platform.
+        # Probed once: busybox timeout has no -k.
+        if [ -z "${TIMEOUT_HAS_K+x}" ]; then
+            if timeout -k 1 1 true >/dev/null 2>&1; then TIMEOUT_HAS_K=1; else TIMEOUT_HAS_K=""; fi
+        fi
+        if [ -n "$TIMEOUT_HAS_K" ]; then
+            timeout -k 2 "$secs" "$@"
+        else
+            timeout "$secs" "$@"
+        fi
         return $?
     fi
     # Stock macOS has no timeout(1) — previously this branch ran UNBOUNDED and
@@ -228,6 +239,20 @@ fi
 # downstream feature is broken. Re-clone into a sibling temp dir and swap it
 # in — the corrupt dir is removed ONLY after the fresh clone succeeded, so an
 # offline session keeps whatever it had.
+#
+# State map — {DOCS_DIR, NEW_DIR (.new.$$), OLD_DIR (.old.$$), heal.lock} and
+# who cleans up what:
+#   lock busy (fresh)          -> defer (other session heals)
+#   leftover .new/.old ($$)    -> rescue+rm; if either survives -> defer
+#   budget < 5s                -> defer (doomed clone not attempted)
+#   clone fails                -> rm NEW (no user data yet), keep DOCS_DIR
+#   carry fails                -> defer; DOCS_DIR intact, NEW = orphan
+#   mv DOCS_DIR->OLD fails     -> defer; NEW (carried data) = orphan
+#   DOCS_DIR recreated pre-mv  -> defer; NEW+OLD = orphans
+#   final mv nests (TOCTOU)    -> un-nest to NEW orphan, defer
+#   success                    -> rm OLD (capped); orphans: none
+# Every defer exits 0; the EXIT trap releases the lock; dead-PID orphans are
+# rescued+pruned by the next session's prune_swap_orphans.
 if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)" ] || [ ! -f "$MANIFEST" ]; then
     # Inter-session heal lock (sibling of DOCS_DIR — the dir itself gets moved
     # during the swap). Two sessions healing the same corrupt clone could
@@ -245,7 +270,7 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
         output_context "Claude docs installation needs repair; another session is already repairing it. It will be ready on the next session start."
         exit 0
     fi
-    trap 'rmdir "$HEAL_LOCK" 2>/dev/null' EXIT
+    trap 'rmdir "$HEAL_LOCK" 2>/dev/null || rm -rf "$HEAL_LOCK" 2>/dev/null' EXIT
 
     NEW_DIR="$DOCS_DIR.new.$$"
     OLD_DIR="$DOCS_DIR.old.$$"
@@ -315,6 +340,13 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
             # rescues with the guarded logic instead of a race-prone loop.
             output_context "Claude docs installation looks corrupted and could not be replaced ($DOCS_DIR resists being moved aside). Repair will be retried on the next session start; your courses/ and cache/ are preserved."
             exit 0
+        fi
+        # Test-only sync point (double-gated like the REPO_URL seam): blocks
+        # while the named file exists — DOCS_DIR is absent here, so the suite
+        # can inject a concurrent recreate and deterministically drive the
+        # anti-nesting guard below plus the next-session recovery.
+        if [ "${CLAUDE_DOCS_TEST:-}" = "1" ] && [ -n "${CLAUDE_DOCS_TEST_PAUSE_BEFORE_SWAP_IN:-}" ]; then
+            while [ -e "$CLAUDE_DOCS_TEST_PAUSE_BEFORE_SWAP_IN" ]; do sleep 0.1; done
         fi
         # Anti-nesting guard: DOCS_DIR must still be absent. A concurrent
         # first-run clone or a background fetch's mkdir -p can recreate it

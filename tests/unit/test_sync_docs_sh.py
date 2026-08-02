@@ -3,11 +3,13 @@
 Covers issue #27: hook time budget, macOS run_with_timeout watchdog fallback,
 rename-swap self-heal, and dead-PID swap-orphan pruning with user-data rescue.
 
-Deliberately NOT unit-covered (concurrency-dependent, verified by the
-adversarial verifier instead): the anti-nesting [ -e ] guard between the two
-swap renames, the post-swap nest-detection branch, and the recycled-own-PID
-rescue-fail deferral — all need precise interleaving that a subprocess test
-can't reproduce deterministically.
+The anti-nesting guard's concurrent-recreate branch IS covered
+deterministically via the CLAUDE_DOCS_TEST_PAUSE_BEFORE_SWAP_IN sync-point
+seam (test_concurrent_recreate_defers_and_next_session_recovers).
+
+Deliberately NOT unit-covered (need sub-check interleaving no seam can pin,
+verified by the adversarial verifier instead): the post-swap nest-detection
+branch and the recycled-own-PID rescue-fail deferral.
 """
 
 import json
@@ -124,7 +126,7 @@ class TestBudget:
         real_git = shutil.which("git")
         (fake / "git").write_text(
             "#!/bin/bash\n"
-            f'case "$1" in fetch|reset|clone) sleep 300 ;; *) exec {real_git} "$@" ;; esac\n'
+            f'case "$1" in fetch|reset|clone) sleep 300 ;; *) exec "{real_git}" "$@" ;; esac\n'
         )
         (fake / "git").chmod(0o755)
         # PATH without timeout(1): shim dir + a minimal dir set that lacks it.
@@ -154,7 +156,7 @@ class TestBudget:
             "#!/bin/bash\n"
             'case "$1" in\n'
             "  fetch|reset|clone) trap '' TERM; sleep 300 ;;\n"
-            f'  *) exec {real_git} "$@" ;;\n'
+            f'  *) exec "{real_git}" "$@" ;;\n'
             "esac\n"
         )
         (fake / "git").chmod(0o755)
@@ -212,6 +214,55 @@ class TestSelfHealSwap:
         ).stdout.strip()
         assert Path(top).resolve() == docs.resolve()
         assert not list(docs.glob(".claude-code-docs.new.*"))
+
+    def test_concurrent_recreate_defers_and_next_session_recovers(self, tmp_path, origin):
+        """Drive the anti-nesting guard deterministically via the sync-point
+        seam: pause the healer with DOCS_DIR moved aside, recreate DOCS_DIR
+        (as a concurrent first-run clone would), unblock — the healer must
+        defer without nesting, and the next session must rescue the parked
+        user data."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        docs = self._corrupt(home)
+        pause = tmp_path / "pause"
+        pause.write_text("")
+        env = {
+            **os.environ,
+            "HOME": str(home),
+            "CLAUDE_DOCS_TEST": "1",
+            "CLAUDE_DOCS_REPO_URL": f"file://{origin}",
+            "CLAUDE_DOCS_HOOK_BUDGET": "40",
+            "CLAUDE_DOCS_TEST_PAUSE_BEFORE_SWAP_IN": str(pause),
+            "GIT_CONFIG_GLOBAL": "/dev/null",
+            "GIT_CONFIG_SYSTEM": "/dev/null",
+        }
+        proc = subprocess.Popen(
+            ["bash", str(HOOK)], env=env, stdout=subprocess.PIPE, text=True
+        )
+        # Wait until the healer parks DOCS_DIR aside (paused at the seam).
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline and docs.exists():
+            time.sleep(0.05)
+        assert not docs.exists(), "healer never reached the seam"
+        docs.mkdir()  # the concurrent recreate
+        pause.unlink()  # unblock
+        out, _ = proc.communicate(timeout=60)
+        assert proc.returncode == 0
+        assert "concurrent session" in json.loads(out)["hookSpecificOutput"]["additionalContext"]
+        # Nothing nested inside the recreated dir.
+        assert not list(docs.glob(".claude-code-docs.new.*"))
+        # Parked user data survives in the orphans.
+        orphans = list(home.glob(".claude-code-docs.new.*")) + list(home.glob(".claude-code-docs.old.*"))
+        assert orphans, "expected parked swap dirs"
+        # Next session (fresh PID): heals and rescues.
+        shutil.rmtree(docs)  # the fake recreate was an empty stub dir
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert (docs / "paths_manifest.json").exists()
+        assert (docs / "courses" / "c.html").read_text() == "course"
+        assert not list(home.glob(".claude-code-docs.new.*"))
+        assert not list(home.glob(".claude-code-docs.old.*"))
 
     def test_failed_heal_offline_keeps_old_dir(self, tmp_path, origin):
         home = tmp_path / "home"
