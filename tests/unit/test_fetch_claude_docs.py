@@ -19,12 +19,14 @@ from fetcher.content import (
     save_markdown_file,
     _retry_after_seconds,
 )
-from fetcher.safeguards import validate_discovery_threshold, validate_manifest_transition
+from fetcher.safeguards import (
+    count_ok_doc_pages,
+    validate_discovery_threshold,
+    validate_manifest_transition,
+)
 from fetcher.cli import (
     build_page_entry,
     map_pages_to_filenames,
-    count_ok_doc_pages,
-    validate_fetch_success,
     parse_fetch_limit,
 )
 
@@ -354,7 +356,8 @@ class TestSafeguards:
 
 
 class TestPreSaveFetchGuard:
-    """cli.validate_fetch_success: abort BEFORE any manifest write on a failed run."""
+    """Fetch-success floor (now owned by validate_manifest_transition): abort
+    BEFORE any manifest write on a failed run, changelog excluded."""
 
     @staticmethod
     def _pages(ok_docs, other=0, other_status="stale", with_changelog_ok=True):
@@ -378,17 +381,20 @@ class TestPreSaveFetchGuard:
         assert count_ok_doc_pages(pages) == 2
 
     def test_passes_at_threshold(self):
-        validate_fetch_success(self._pages(ok_docs=250))  # no raise
+        validate_manifest_transition({"pages": []}, self._pages(ok_docs=250))  # no raise
 
     def test_total_outage_aborts_even_with_changelog_ok(self):
         # GitHub-hosted changelog succeeds during a docs-site outage; the old
         # `stats["ok"] == 0` check passed with ok==1. The guard must abort.
         with pytest.raises(SystemExit):
-            validate_fetch_success(self._pages(ok_docs=0, other=300))
+            validate_manifest_transition({"pages": []}, self._pages(ok_docs=0, other=300))
 
-    def test_below_threshold_aborts(self):
+    def test_below_threshold_aborts_even_at_exact_changelog_boundary(self):
+        # 249 doc pages + ok changelog = 250 raw ok statuses; the changelog
+        # exclusion must keep this BELOW the floor (the one-page drift the two
+        # previously-duplicated guards disagreed on).
         with pytest.raises(SystemExit):
-            validate_fetch_success(self._pages(ok_docs=249, other=60))
+            validate_manifest_transition({"pages": []}, self._pages(ok_docs=249, other=60))
 
 
 class TestParseFetchLimit:

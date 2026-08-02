@@ -120,7 +120,26 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
             fi
         done
         cd / || true  # leave the directory we are about to delete
-        rm -rf "$DOCS_DIR"
+        rm -rf "$DOCS_DIR" 2>/dev/null
+        # The mv below MUST target a nonexistent path: if anything survived the
+        # rm (root-owned file, immutable flag) mv would nest the fresh clone
+        # INSIDE the old dir, permanently breaking /docs behind a re-clone loop.
+        # On failure keep the old dir as-is and surface the manual fix instead.
+        if [ -e "$DOCS_DIR" ]; then
+            # cache/ and courses/ were already carried into NEW_DIR — move them
+            # back before discarding it, and keep NEW_DIR if anything resists.
+            RESTORE_OK=1
+            for d in cache courses; do
+                if [ -d "$NEW_DIR/$d" ]; then
+                    mv "$NEW_DIR/$d" "$DOCS_DIR/$d" 2>/dev/null || RESTORE_OK=0
+                fi
+            done
+            if [ "$RESTORE_OK" = "1" ]; then
+                rm -rf "$NEW_DIR"
+            fi
+            output_context "Claude docs installation looks corrupted and could not be replaced (files in $DOCS_DIR resist deletion). Run: rm -rf $DOCS_DIR and restart Claude Code to reinstall."
+            exit 0
+        fi
         mv "$NEW_DIR" "$DOCS_DIR"
         cd "$DOCS_DIR" || { output_context "Claude docs directory missing. Re-run /docs -t to reinstall."; exit 0; }
         AFTER=$(git rev-parse HEAD 2>/dev/null)

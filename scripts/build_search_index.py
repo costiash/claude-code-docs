@@ -218,6 +218,29 @@ def check_content_share(index: Dict, min_share: float) -> None:
         sys.exit(1)
 
 
+def _parse_env_number(name: str, default, cast):
+    """
+    Parse a numeric guard threshold from the environment with a clear error.
+
+    An unset OR empty-string variable falls back to the default (the old
+    ``or "0"`` idiom silently DISABLED the guard on empty values); a
+    non-numeric value exits with an actionable message instead of a raw
+    traceback. Explicit ``=0`` still disables the guard, documented behavior.
+    """
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        return cast(raw)
+    except ValueError:
+        print(
+            f"ERROR: invalid {name}={raw!r}: must be a number "
+            f"(e.g. {name}={default}; set {name}=0 to disable the guard).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
 def save_index(index: Dict, path: Path) -> None:
     path.write_text(json.dumps(index, indent=2) + "\n")
     size_kb = path.stat().st_size / 1024
@@ -232,9 +255,11 @@ def main() -> None:
     index_path = REPO_ROOT / "search_index.json"
     # Floor guard: refuse to build over an empty/tiny scratch (fail loudly, don't
     # silently commit a content-less index). Set DOCS_INDEX_MIN_FILES=0 to disable.
-    min_files = int(os.environ.get("DOCS_INDEX_MIN_FILES", "250") or "0")
-    min_content_share = float(
-        os.environ.get("DOCS_INDEX_MIN_CONTENT_SHARE", str(DEFAULT_MIN_CONTENT_SHARE)) or "0"
+    min_files = _parse_env_number(
+        "DOCS_INDEX_MIN_FILES", default=250, cast=int
+    )
+    min_content_share = _parse_env_number(
+        "DOCS_INDEX_MIN_CONTENT_SHARE", default=DEFAULT_MIN_CONTENT_SHARE, cast=float
     )
 
     if not manifest_path.exists():

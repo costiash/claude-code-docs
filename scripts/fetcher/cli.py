@@ -30,7 +30,6 @@ from .config import (
     SITEMAP_URLS,
     LLMS_TXT_URLS,
     DEFAULT_SCRATCH_DIR,
-    MIN_EXPECTED_FILES,
     logger,
 )
 from .discovery import discover_pages
@@ -152,43 +151,6 @@ def map_pages_to_filenames(raw_pages: List[Dict]) -> List[Tuple[Dict, str]]:
     return result
 
 
-def count_ok_doc_pages(pages: List[Dict]) -> int:
-    """
-    Count documentation pages fetched OK this run (changelog excluded).
-
-    The changelog is GitHub-hosted, so it succeeds even during a total docs-site
-    outage — counting it would let ``ok == 1`` pass for a run where every real
-    documentation fetch failed. Pure function so the pre-save guard is testable.
-    """
-    return sum(
-        1
-        for p in pages
-        if p.get("fetch_status") == "ok" and p.get("id") != "changelog"
-    )
-
-
-def validate_fetch_success(pages: List[Dict], min_ok: int = MIN_EXPECTED_FILES) -> None:
-    """
-    Pre-save guard: abort (before any manifest write) if too few pages fetched OK.
-
-    Raises:
-        SystemExit: If fewer than ``min_ok`` documentation pages (changelog
-            excluded) have ``fetch_status == "ok"``.
-    """
-    ok_count = count_ok_doc_pages(pages)
-    if ok_count < min_ok:
-        logger.critical("=" * 70)
-        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few pages fetched successfully!")
-        logger.critical(
-            f"   Only {ok_count} documentation pages fetched OK this run "
-            f"(minimum {min_ok}; changelog excluded). Likely a docs-site outage."
-        )
-        logger.critical("   Refusing to write the manifest. Aborting.")
-        logger.critical("=" * 70)
-        sys.exit(1)
-    logger.info(f"✅ Fetch success validated: {ok_count} documentation pages ok")
-
-
 def parse_fetch_limit(raw: str) -> int:
     """Parse ``DOCS_FETCH_LIMIT`` with a clear error instead of a raw traceback."""
     raw = raw or "0"
@@ -252,9 +214,9 @@ def main():
     if limit:
         out_path = scratch / "paths_manifest.preview.json"
     else:
-        # Both guards run BEFORE the write: a failed run must never overwrite
-        # the committed manifest (the changelog alone must not count as success).
-        validate_fetch_success(pages)
+        # Guard runs BEFORE the write: a failed run must never overwrite the
+        # committed manifest. The fetch-success floor lives inside the
+        # transition guard (changelog excluded) — single owner, no drift.
         validate_manifest_transition(old_manifest, pages)
         out_path = manifest_file
 
@@ -269,8 +231,8 @@ def main():
     logger.info(f"Manifest: {out_path}")
 
     if stats["ok"] == 0:
-        # Preview-mode backstop (full runs are guarded by validate_fetch_success
-        # before the write above).
+        # Preview-mode backstop (full runs are guarded by
+        # validate_manifest_transition's fetch-success floor before the write).
         logger.error("No pages were fetched successfully!")
         sys.exit(1)
 

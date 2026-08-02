@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-08-02
+
+Deployment-hardening release: no new features, all fixes from an exhaustive
+5-domain code review of v2.0.0 plus an adversarial re-review of the fixes.
+
+### Fixed
+- **macOS sync now works.** The page-fetch job pool no longer relies on `xargs -I`
+  (BSD's 255-byte replacement limit made one page permanently unsyncable), the
+  validator no longer uses `mapfile`/`shuf` (dead on stock macOS bash 3.2), and a
+  new `shell-macos` CI job runs the shell suite under BSD userland on every PR.
+- **Session-hook wedge fixed.** The SessionStart hook timeout (15s) was below its
+  own 30s clone budget and could wedge installs forever; now 45s. The self-heal
+  path re-clones a corrupt install, verifies git resolves to the docs directory
+  itself (a lost `.git` under a git-managed `$HOME` previously risked
+  hard-resetting the *user's* repo), preserves untracked `cache/` and `courses/`
+  across the swap, and never nests a fresh clone inside a half-deleted one.
+- **No more no-op updates every 3 hours.** The metadata workflow compares
+  manifest/index against HEAD ignoring only the `generated_at` line, so a commit
+  (and every user's session-hook update) happens only when content actually
+  changed (~2,900 churn commits/year eliminated).
+- **Search results no longer degrade during doc-site outages.** The search index
+  carries forward the previous entry for pages whose fetch failed, guarded by a
+  content-share floor; safeguard counts now use real per-run fetch successes
+  (changelog excluded, single owner) and run before anything is written.
+- **Security hardening.** Real DTD/ENTITY rejection over the full sitemap content
+  (the previous 2 KB prefix check was bypassable with comment padding; before
+  that, defusedxml kwargs passed to stdlib ElementTree were silently dead);
+  manifest-filename traversal guard; `ALLOWED_DOMAINS` actually enforced;
+  redirects uniformly treated as fetch failures across client, fetcher, and the
+  daily reachability monitor.
+- **Discovery is fail-closed with retries.** A dead discovery source (sitemap or
+  llms.txt) aborts the run instead of silently dropping its pages; transient
+  errors are retried with backoff first so a single CDN blip doesn't kill a run.
+- **CI honesty.** Removed `|| true` around tests, the hardcoded fake coverage
+  number, and deprecated upload actions; coverage gate now reflects reality;
+  workflow actions SHA-pinned; PR workflows gated for forks; `manifest-diff.sh
+  --since` no longer hangs; installer jq crash on partial hook entries fixed.
+
+### Removed
+- Dead v1 legacy layer (`scripts/claude-docs-helper.sh` + template and the tests
+  pinning them) and the model-facing examples that still taught the v1 mirror
+  workflow with fabricated URLs — regenerated from the live manifest.
+
 ## [2.0.0] - 2026-07-31
 
 ### Breaking Changes — v1 *mirror* → v2 *manifest + client fetch*
