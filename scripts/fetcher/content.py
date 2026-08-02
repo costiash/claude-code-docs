@@ -69,12 +69,13 @@ def discovery_get(session: requests.Session, url: str) -> requests.Response:
         try:
             response = session.get(url, headers=HEADERS, timeout=30)
             if response.status_code == 429:
-                wait_time = _retry_after_seconds(response)
-                logger.warning(f"Discovery {url}: rate limited, waiting {wait_time}s...")
                 last_error = requests.exceptions.RequestException(
                     f"rate limited (429) on all {MAX_RETRIES} attempts"
                 )
-                time.sleep(wait_time)
+                if attempt < MAX_RETRIES - 1:  # no pointless sleep after the last try
+                    wait_time = _retry_after_seconds(response)
+                    logger.warning(f"Discovery {url}: rate limited, waiting {wait_time}s...")
+                    time.sleep(wait_time)
                 continue
             response.raise_for_status()
             return response

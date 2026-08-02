@@ -7,6 +7,7 @@ This module handles:
 - Extracting English documentation paths
 """
 
+import re
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse
@@ -318,8 +319,7 @@ def _parse_xml_safely(content: bytes) -> ET.Element:
     Raises:
         ValueError: If the content contains a DTD or entity declaration.
     """
-    lowered = content.lower()
-    if b'<!doctype' in lowered or b'<!entity' in lowered:
+    if re.search(rb'<!(?:doctype|entity)', content, re.IGNORECASE):
         logger.error(
             "Rejecting XML containing a DTD/ENTITY declaration "
             "(possible XXE / billion-laughs payload) — sitemaps never declare DTDs."
