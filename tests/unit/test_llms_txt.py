@@ -2,11 +2,16 @@
 
 import sys
 from pathlib import Path
+from unittest.mock import MagicMock
+
+import pytest
+import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
-from fetcher.llms_txt import parse_llms_txt
-from fetcher.discovery import merge_discovery
+import fetcher.discovery
+from fetcher.llms_txt import parse_llms_txt, discover_from_llms_txt
+from fetcher.discovery import merge_discovery, discover_pages
 
 
 # Real-format samples (trimmed) from the two properties, verified 2026-07.
@@ -125,8 +130,111 @@ class TestMergeDiscovery:
         assert urls == sorted(urls)
 
     def test_trailing_slash_normalized(self):
-        llms = [{"url": "https://x/docs/en/a/", "md_url": "https://x/docs/en/a.md", "title": "A", "description": None}]
-        sitemap = [{"url": "https://x/docs/en/a", "lastmod": "2026-01-01"}]
+        llms = [{"url": "https://code.claude.com/docs/en/a/",
+                 "md_url": "https://code.claude.com/docs/en/a.md", "title": "A", "description": None}]
+        sitemap = [{"url": "https://code.claude.com/docs/en/a", "lastmod": "2026-01-01"}]
         merged = merge_discovery(llms, sitemap)
         assert len(merged) == 1  # same page despite trailing slash
         assert merged[0]["lastmod"] == "2026-01-01"
+
+
+class TestAllowedDomains:
+    """merge_discovery is the choke point: non-https / non-allowlisted records drop."""
+
+    @staticmethod
+    def _llms_record(url):
+        return {"url": url, "md_url": url + ".md", "title": "T", "description": None}
+
+    def test_http_url_dropped(self):
+        merged = merge_discovery([self._llms_record("http://code.claude.com/docs/en/hooks")], [])
+        assert merged == []
+
+    def test_disallowed_host_dropped(self):
+        merged = merge_discovery([self._llms_record("https://evil.example/docs/en/hooks")], [])
+        assert merged == []
+
+    def test_disallowed_sitemap_entry_dropped(self):
+        merged = merge_discovery([], [{"url": "https://evil.example/docs/en/x", "lastmod": None}])
+        assert merged == []
+
+    def test_allowed_hosts_pass(self):
+        records = [
+            self._llms_record("https://code.claude.com/docs/en/hooks"),
+            self._llms_record("https://platform.claude.com/docs/en/api/messages"),
+            self._llms_record("https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG"),
+        ]
+        merged = merge_discovery(records, [])
+        assert len(merged) == 3
+
+    def test_bad_md_url_drops_record_even_with_good_url(self):
+        rec = {"url": "https://code.claude.com/docs/en/hooks",
+               "md_url": "https://evil.example/docs/en/hooks.md", "title": "T", "description": None}
+        assert merge_discovery([rec], []) == []
+
+
+class TestDiscoveryFailClosed:
+    """A dead/empty discovery source must abort the run, not silently shrink the union."""
+
+    @staticmethod
+    def _session_for(responses):
+        """Map url -> (status, text); anything else raises ConnectionError."""
+        session = MagicMock()
+
+        def get(url, **kwargs):
+            if url not in responses:
+                raise requests.ConnectionError(f"no route to {url}")
+            status, text = responses[url]
+            resp = MagicMock()
+            resp.status_code = status
+            resp.text = text
+            resp.content = text.encode("utf-8")
+            if status >= 400:
+                resp.raise_for_status.side_effect = requests.HTTPError(f"{status}")
+            else:
+                resp.raise_for_status.return_value = None
+            return resp
+
+        session.get.side_effect = get
+        return session
+
+    def test_llms_source_error_aborts(self):
+        session = self._session_for({"https://a.example/llms.txt": (200, CODE_LLMS_TXT)})
+        with pytest.raises(RuntimeError, match="Discovery source failed"):
+            discover_from_llms_txt(
+                session, urls=["https://a.example/llms.txt", "https://b.example/llms.txt"]
+            )
+
+    def test_llms_source_http_error_aborts(self):
+        session = self._session_for({"https://a.example/llms.txt": (500, "oops")})
+        with pytest.raises(RuntimeError, match="Discovery source failed"):
+            discover_from_llms_txt(session, urls=["https://a.example/llms.txt"])
+
+    def test_llms_source_zero_entries_aborts(self):
+        # File fetched fine but parsed to zero link entries (format drift) -> abort.
+        session = self._session_for({"https://a.example/llms.txt": (200, "no links here " * 50)})
+        with pytest.raises(RuntimeError, match="0 entries"):
+            discover_from_llms_txt(session, urls=["https://a.example/llms.txt"])
+
+    def test_all_llms_sources_healthy_passes(self):
+        session = self._session_for({
+            "https://a.example/llms.txt": (200, CODE_LLMS_TXT),
+            "https://b.example/llms.txt": (200, PLATFORM_LLMS_TXT),
+        })
+        records = discover_from_llms_txt(
+            session, urls=["https://a.example/llms.txt", "https://b.example/llms.txt"]
+        )
+        assert len(records) == 5  # 3 code + 2 platform
+
+    def test_discover_pages_propagates_sitemap_failure(self, monkeypatch):
+        # The old code swallowed sitemap failure and continued llms-only.
+        monkeypatch.setattr(
+            fetcher.discovery, "discover_from_llms_txt",
+            lambda session: parse_llms_txt(CODE_LLMS_TXT),
+        )
+
+        def boom(session):
+            raise RuntimeError("Discovery source failed: sitemap down")
+
+        monkeypatch.setattr(fetcher.discovery, "discover_sitemap_entries", boom)
+        with pytest.raises(RuntimeError, match="sitemap down"):
+            discover_pages(MagicMock())

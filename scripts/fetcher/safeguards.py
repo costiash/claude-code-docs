@@ -60,9 +60,11 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
 
     Raises:
         SystemExit: If the transition would remove > ``MAX_DELETION_PERCENT`` of
-            the previous pages, or leave < ``MIN_EXPECTED_FILES`` *fetchable*
-            pages (sha256 set) — the latter catches a run where discovery is fine
-            but most per-page fetches failed.
+            the previous pages, or leave < ``MIN_EXPECTED_FILES`` pages actually
+            fetched this run (``fetch_status == "ok"``) — the latter catches a
+            run where discovery is fine but most per-page fetches failed.
+            Counting sha256 here would be meaningless: carry-forward copies old
+            hashes into ``stale`` entries, so even a 100%-failed run has them set.
     """
     old_urls = {p["url"] for p in old_manifest.get("pages", []) if p.get("url")}
     new_urls = {p["url"] for p in new_pages if p.get("url")}
@@ -84,18 +86,22 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
             logger.critical("=" * 70)
             sys.exit(1)
 
-    fetchable = [p for p in new_pages if p.get("sha256")]
-    if len(fetchable) < MIN_EXPECTED_FILES:
+    # Count pages actually fetched THIS run. sha256 alone is not evidence of a
+    # live fetch — carry-forward copies old hashes into "stale" entries, so an
+    # all-stale (100%-failed) run would pass a sha256-based count.
+    fetched_ok = [p for p in new_pages if p.get("fetch_status") == "ok"]
+    if len(fetched_ok) < MIN_EXPECTED_FILES:
         logger.critical("=" * 70)
-        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few fetchable pages in new manifest!")
+        logger.critical("🚨 SAFEGUARD TRIGGERED: Too few successfully fetched pages!")
         logger.critical(
-            f"   Only {len(fetchable)} of {len(new_pages)} pages have content "
-            f"(sha256 set; minimum {MIN_EXPECTED_FILES}). Most fetches failed — aborting."
+            f"   Only {len(fetched_ok)} of {len(new_pages)} pages fetched OK this run "
+            f"(fetch_status == \"ok\"; minimum {MIN_EXPECTED_FILES}). "
+            f"Most fetches failed/stale — aborting."
         )
         logger.critical("=" * 70)
         sys.exit(1)
 
     logger.info(
         f"✅ Manifest transition validated: {len(new_pages)} pages "
-        f"({len(fetchable)} fetchable)"
+        f"({len(fetched_ok)} fetched ok)"
     )

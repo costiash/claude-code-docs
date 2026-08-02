@@ -18,10 +18,11 @@ build (A2), keeping this module purely about *which pages exist*.
 """
 
 from typing import Dict, List, Optional
+from urllib.parse import urlparse
 
 import requests
 
-from .config import logger
+from .config import ALLOWED_DOMAINS, logger
 from .llms_txt import discover_from_llms_txt
 from .sitemap import discover_sitemap_entries
 
@@ -29,6 +30,35 @@ from .sitemap import discover_sitemap_entries
 def _canonical(url: str) -> str:
     """Normalize a page URL for use as the union key (drop trailing slash)."""
     return url.rstrip("/")
+
+
+def _url_allowed(url: Optional[str]) -> bool:
+    """True if the URL is https and its host is in ``ALLOWED_DOMAINS``."""
+    if not url:
+        return False
+    parsed = urlparse(url)
+    return parsed.scheme == "https" and parsed.hostname in ALLOWED_DOMAINS
+
+
+def _filter_allowed(pages: List[Dict[str, Optional[str]]]) -> List[Dict[str, Optional[str]]]:
+    """
+    Enforce ``ALLOWED_DOMAINS`` at the single choke point where records enter
+    the pipeline: drop (loudly) any record whose ``url`` or ``md_url`` is not
+    https on an allowed host. A poisoned upstream source (llms.txt/sitemap
+    injection) must never make the fetcher request — or the manifest publish —
+    an attacker-controlled URL.
+    """
+    kept = []
+    for page in pages:
+        if _url_allowed(page.get("url")) and _url_allowed(page.get("md_url")):
+            kept.append(page)
+        else:
+            logger.error(
+                f"DROPPED disallowed discovery record: url={page.get('url')!r} "
+                f"md_url={page.get('md_url')!r} — scheme must be https and host "
+                f"in ALLOWED_DOMAINS {ALLOWED_DOMAINS}."
+            )
+    return kept
 
 
 def merge_discovery(
@@ -48,6 +78,8 @@ def merge_discovery(
         Sorted list of ``{url, md_url, title, lastmod}`` dicts. ``title`` is
         ``None`` for pages present only in the sitemap; ``lastmod`` is ``None``
         for pages present only in llms.txt (or whose sitemap omitted it).
+        Records with a non-https or non-``ALLOWED_DOMAINS`` url/md_url are
+        dropped (and logged) — see :func:`_filter_allowed`.
     """
     pages: Dict[str, Dict[str, Optional[str]]] = {}
 
@@ -74,28 +106,30 @@ def merge_discovery(
                 "lastmod": entry.get("lastmod"),
             }
 
-    return [pages[url] for url in sorted(pages)]
+    return _filter_allowed([pages[url] for url in sorted(pages)])
 
 
 def discover_pages(session: requests.Session) -> List[Dict[str, Optional[str]]]:
     """
     Run full v2 discovery: fetch both sources and return their union.
 
+    FAIL CLOSED: any configured discovery source (llms.txt or sitemap) that
+    errors or yields zero pages aborts the run (RuntimeError → non-zero exit
+    before any write). Tolerating a dead source silently shrinks the union by
+    that source's exclusive pages — a loss the 10% deletion threshold cannot
+    reliably catch.
+
     Args:
         session: Requests session for connection pooling.
 
     Returns:
         The canonical page set as ``{url, md_url, title, lastmod}`` dicts.
+
+    Raises:
+        RuntimeError: If any discovery source fails or comes back empty.
     """
     llms_records = discover_from_llms_txt(session)
-    try:
-        sitemap_entries = discover_sitemap_entries(session)
-    except Exception as e:
-        # A sitemap outage must not abort the run when llms.txt carried the union
-        # (symmetric with discover_from_llms_txt, which already tolerates failure).
-        # If BOTH sources come back empty, validate_discovery_threshold aborts.
-        logger.warning(f"Sitemap discovery failed ({e}); continuing with llms.txt only.")
-        sitemap_entries = []
+    sitemap_entries = discover_sitemap_entries(session)
     merged = merge_discovery(llms_records, sitemap_entries)
     logger.info(
         f"Discovery union: {len(llms_records)} llms.txt + "
