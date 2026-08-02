@@ -32,6 +32,9 @@ MANIFEST="${CLAUDE_DOCS_MANIFEST:-$CLONE_ROOT/paths_manifest.json}"
 CACHE_DIR="${CLAUDE_DOCS_CACHE_DIR:-$CLONE_ROOT/cache}"
 META_DIR="$CACHE_DIR/.meta"
 PARALLEL="${CLAUDE_DOCS_PARALLEL:-8}"
+# Sanitize: non-numeric or empty -> default; 0 would stall the job pool -> floor at 1.
+case "$PARALLEL" in ''|*[!0-9]*) PARALLEL=8 ;; esac
+[ "$PARALLEL" -ge 1 ] || PARALLEL=1
 
 # Only these hosts may be requested. Checked per-URL before every fetch.
 ALLOWED_HOSTS="code.claude.com platform.claude.com raw.githubusercontent.com"
@@ -91,8 +94,11 @@ fetch_url() {
 # NOT re-fetched every run; it re-fetches only when the manifest entry changes.
 write_sidecar() {
     local filename="$1" manifest_sha="$2" content_sha="$3" stale="$4"
+    # Atomic like the content write: temp file in the same dir, then rename.
+    local tmp="$META_DIR/.tmp.$filename.json.$$"
     printf '{"manifest_sha256":"%s","content_sha256":"%s","fetched_at":"%s","stale_manifest":%s}\n' \
-        "$manifest_sha" "$content_sha" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$stale" > "$META_DIR/$filename.json"
+        "$manifest_sha" "$content_sha" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$stale" > "$tmp"
+    mv -f "$tmp" "$META_DIR/$filename.json"
 }
 
 # needs_fetch <filename> <manifest_sha> — 0 (yes) if file missing or the sidecar
@@ -109,6 +115,14 @@ needs_fetch() {
 # Core single-page fetch. Args: filename, md_url, expected_sha ("" or "null" to skip check).
 fetch_one() {
     local filename="$1" md_url="$2" expected="$3"
+    # Filename comes from the manifest and is used to build cache/sidecar paths.
+    # Reject anything that could escape the cache dir (defense in depth: the CI
+    # generator flattens names, but a tampered manifest must not traverse paths).
+    case "$filename" in
+        */*|*..*|"")
+            echo "fetch-docs: refusing invalid filename '$filename'" >&2
+            return 1 ;;
+    esac
     # https-only: reject any non-https scheme before touching the network (defense in depth beside the host allowlist)
     case "$md_url" in
         https://*) ;;
@@ -198,11 +212,23 @@ cmd_sync() {
     fi
     echo "fetch-docs: fetching $count page(s)..."
 
-    # Parallel fetch: re-invoke self per line (line = filename\tmd_url\tsha).
-    # retry-once lives inside fetch_one; a page that still fails is skipped.
-    export -f fetch_one fetch_url write_sidecar url_host host_allowed sha256_of ensure_dirs 2>/dev/null || true
-    export CACHE_DIR META_DIR ALLOWED_HOSTS
-    xargs -P "$PARALLEL" -I{} "$SELF" __fetch_line "{}" < "$pending"
+    # Parallel fetch: re-invoke self per line (line = filename\tmd_url\tsha) via a
+    # portable bash job pool — launch up to $PARALLEL children, then wait for the
+    # batch. NOT xargs -I: BSD xargs caps -I replacement at 255 bytes (real manifest
+    # lines exceed that, so no page would ever sync on macOS) and does quote
+    # processing on input. retry-once lives inside fetch_one; failures are skipped
+    # and recounted below via needs_fetch.
+    local running=0
+    while IFS= read -r line; do
+        [ -n "$line" ] || continue
+        "$SELF" __fetch_line "$line" &
+        running=$((running + 1))
+        if [ "$running" -ge "$PARALLEL" ]; then
+            wait
+            running=0
+        fi
+    done < "$pending"
+    wait
 
     # Recount what still needs fetching (i.e. failed) to report a success count and
     # to exit nonzero on a total failure — a silent 'sync complete' after 0 fetches
@@ -222,7 +248,7 @@ cmd_sync() {
     return 0
 }
 
-# Internal: fetch one tab-separated line (used by xargs in sync).
+# Internal: fetch one tab-separated line (used by the sync job pool).
 cmd_fetch_line() {
     local line="$1"
     local filename md_url sha
@@ -292,7 +318,7 @@ main() {
         get)          cmd_get "$@" ;;
         status)       cmd_status "$@" ;;
         prune)        cmd_prune "$@" ;;
-        __fetch_line) cmd_fetch_line "$@" ;;  # internal (xargs)
+        __fetch_line) cmd_fetch_line "$@" ;;  # internal (sync job pool)
         ""|-h|--help)
             echo "usage: fetch-docs.sh {sync [--background]|get <filename|id>|status|prune}" ;;
         *) die "unknown subcommand: $cmd" ;;

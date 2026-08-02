@@ -19,10 +19,15 @@ MANIFEST_REL="paths_manifest.json"
 
 since="7d"
 as_json=false
+usage() { echo "usage: manifest-diff.sh [--since 7d|24h|<git-date>] [--json]" >&2; }
 while [ $# -gt 0 ]; do
     case "$1" in
-        --since) since="${2:-7d}"; shift 2 ;;
+        --since)
+            # NB: with $#=1, `shift 2` shifts nothing (no -e here) -> infinite loop.
+            [ $# -ge 2 ] || { echo "error: --since requires a value" >&2; usage; exit 2; }
+            since="$2"; shift 2 ;;
         --json)  as_json=true; shift ;;
+        -*)      echo "error: unknown option: $1" >&2; usage; exit 2 ;;
         *)       since="$1"; shift ;;  # bare positional = since value
     esac
 done

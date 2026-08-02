@@ -1,11 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v1.0.0
+# Claude Code Docs Installer v2.0.1
 # Migration wrapper: routes to plugin install when possible,
 # falls back to git clone for environments without plugin support.
 
-echo "Claude Code Docs v1.0.0"
+echo "Claude Code Docs v2.0.1"
 echo "======================="
 echo ""
 
@@ -61,13 +61,19 @@ if [ -d "$HOME/.claude" ]; then
                     fi
                 fi
 
-                # Remove legacy hooks from settings.json
+                # Remove legacy hooks from settings.json (non-fatal: a malformed
+                # entry must not abort the installer under set -e). The // ""
+                # guard keeps jq from erroring on entries without .hooks[0].command.
                 if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
                     if jq -e '.hooks.PreToolUse' "$HOME/.claude/settings.json" >/dev/null 2>&1; then
-                        jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("claude-code-docs") | not)]' \
+                        if jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select((.hooks[0].command // "") | contains("claude-code-docs") | not)]' \
                             "$HOME/.claude/settings.json" > "$HOME/.claude/settings.json.tmp" && \
-                            mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
-                        echo "  Cleaned legacy hooks from settings.json"
+                            mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"; then
+                            echo "  Cleaned legacy hooks from settings.json"
+                        else
+                            rm -f "$HOME/.claude/settings.json.tmp"
+                            echo "  Warning: could not clean legacy hooks from settings.json"
+                        fi
                     fi
                 fi
 
@@ -92,7 +98,9 @@ else
     if [ -d "$INSTALL_DIR" ]; then
         echo "Updating existing installation..."
         # reset --hard (not pull --ff-only) so a history rewrite is absorbed cleanly.
-        cd "$INSTALL_DIR" && git fetch --depth 1 origin main && git reset --hard origin/main || {
+        # No --depth 1 on fetch: it would re-shallow a clone that manifest-diff.sh
+        # may have deepened for the what's-new / changelog features.
+        cd "$INSTALL_DIR" && git fetch origin main && git reset --hard origin/main || {
             echo "Update failed. Try: rm -rf $INSTALL_DIR && re-run this script"
             exit 1
         }

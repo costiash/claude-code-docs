@@ -24,6 +24,12 @@ run_with_timeout() {
 
 output_context() {
     local msg="$1"
+    # Prefer jq (correct escaping for any content); fall back to manual escaping.
+    if command -v jq >/dev/null 2>&1; then
+        jq -n --arg msg "$msg" \
+            '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $msg}}'
+        return 0
+    fi
     msg="${msg//\\/\\\\}"
     msg="${msg//\"/\\\"}"
     cat <<EOF
@@ -48,9 +54,19 @@ doc_count() {
 # foreground `status` scan: status is O(pages) and a large cache blew the 5s timeout
 # (exit 124, not 2), silently stranding pending updates. `sync` has its own cheap
 # 0-fetch fast path, so an already-current cache just no-ops in the background.
+# A lock dir prevents concurrent sessions from stacking parallel syncs; the worst
+# case of losing the mkdir race is a skipped sync (the next session retries).
 maybe_background_sync() {
     [ -x "$FETCH" ] || return 1
-    nohup "$FETCH" sync >/dev/null 2>&1 &
+    local lock="$DOCS_DIR/.sync.lock"
+    # Stale lock (a crashed sync never removed it): clear if older than ~30 minutes.
+    if [ -d "$lock" ] && [ -n "$(find "$lock" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+        rmdir "$lock" 2>/dev/null || rm -rf "$lock" 2>/dev/null
+    fi
+    mkdir "$lock" 2>/dev/null || return 1  # another sync is running (or just won the race)
+    # The child owns the lock and removes it when the fetch finishes, however it exits.
+    nohup bash -c 'trap '\''rmdir "$2" 2>/dev/null'\'' EXIT; "$1" sync >/dev/null 2>&1' \
+        sync-docs-lock "$FETCH" "$lock" >/dev/null 2>&1 &
     return 0
 }
 
@@ -74,6 +90,27 @@ BEFORE=$(git rev-parse HEAD 2>/dev/null)
 run_with_timeout 10 git fetch origin main >/dev/null 2>&1 || true
 run_with_timeout 10 git reset --hard origin/main >/dev/null 2>&1 || true
 AFTER=$(git rev-parse HEAD 2>/dev/null)
+
+# Self-heal: if the clone is corrupt (not a git repo) or the manifest is still
+# missing after the update attempt, every downstream feature is broken. Re-clone
+# into a sibling temp dir and swap it in — the corrupt dir is removed ONLY after
+# the fresh clone succeeded, so an offline session keeps whatever it had.
+if ! git -C "$DOCS_DIR" rev-parse --git-dir >/dev/null 2>&1 || [ ! -f "$MANIFEST" ]; then
+    NEW_DIR="$DOCS_DIR.new.$$"
+    rm -rf "$NEW_DIR"
+    if run_with_timeout 30 git clone --depth 1 "$REPO_URL" "$NEW_DIR" >/dev/null 2>&1 \
+        && [ -f "$NEW_DIR/paths_manifest.json" ]; then
+        cd / || true  # leave the directory we are about to delete
+        rm -rf "$DOCS_DIR"
+        mv "$NEW_DIR" "$DOCS_DIR"
+        cd "$DOCS_DIR" || { output_context "Claude docs directory missing. Re-run /docs -t to reinstall."; exit 0; }
+        AFTER=$(git rev-parse HEAD 2>/dev/null)
+    else
+        rm -rf "$NEW_DIR"
+        output_context "Claude docs installation looks corrupted and could not be repaired (offline?). Run: rm -rf $DOCS_DIR and restart Claude Code to reinstall."
+        exit 0
+    fi
+fi
 
 if maybe_background_sync; then
     SYNC_NOTE=" Syncing changed pages to the cache in the background."
