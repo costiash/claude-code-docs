@@ -62,13 +62,13 @@ if [ -d "$HOME/.claude" ]; then
                 fi
 
                 # Remove legacy hooks from settings.json (non-fatal: a malformed
-                # entry must not abort the installer under set -e). The
-                # extraction is type-safe: .hooks missing/non-array or scalar
-                # elements yield "" instead of a jq error, so one bad entry
-                # can't abort the cleanup (malformed entries are kept).
+                # entry must not abort the installer under set -e). Fully
+                # type-safe: a non-array PreToolUse passes through untouched,
+                # malformed entries are kept, and EVERY hook command in an
+                # entry is checked (not just .[0]).
                 if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
                     if jq -e '.hooks.PreToolUse' "$HOME/.claude/settings.json" >/dev/null 2>&1; then
-                        if jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select((((.hooks? // null) | if type == "array" then (.[0].command? // "") else "" end)) | contains("claude-code-docs") | not)]' \
+                        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | .command? // "")] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
                             "$HOME/.claude/settings.json" > "$HOME/.claude/settings.json.tmp" && \
                             mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"; then
                             echo "  Cleaned legacy hooks from settings.json"

@@ -27,6 +27,7 @@ filtering. B6 cross-checks the Python and shell implementations over a word list
 """
 
 import json
+import math
 import os
 import re
 import sys
@@ -224,17 +225,22 @@ def _parse_env_number(name: str, default, cast):
 
     An unset OR empty-string variable falls back to the default (the old
     ``or "0"`` idiom silently DISABLED the guard on empty values); a
-    non-numeric value exits with an actionable message instead of a raw
-    traceback. Explicit ``=0`` still disables the guard, documented behavior.
+    non-numeric, non-finite (nan/inf would silently disable the ``<``
+    comparison), or negative value exits with an actionable message instead
+    of a raw traceback. Explicit ``=0`` still disables the guard, documented
+    behavior.
     """
     raw = os.environ.get(name)
     if raw is None or raw.strip() == "":
         return default
     try:
-        return cast(raw)
+        value = cast(raw)
+        if not math.isfinite(value) or value < 0:
+            raise ValueError
+        return value
     except ValueError:
         print(
-            f"ERROR: invalid {name}={raw!r}: must be a number "
+            f"ERROR: invalid {name}={raw!r}: must be a finite non-negative number "
             f"(e.g. {name}={default}; set {name}=0 to disable the guard).",
             file=sys.stderr,
         )
