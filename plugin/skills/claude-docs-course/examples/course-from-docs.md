@@ -5,15 +5,21 @@
 
 ## Skill Reasoning
 - User requests an interactive course on "hooks"
-- Strategy: Topic Discovery → find all hooks-related documentation files
+- Strategy: Topic Discovery → find all hooks-related documentation pages via the search scripts
 
 ## Actions
 
 ### Phase 1: Topic Discovery
-1. **Glob:** `~/.claude-code-docs/docs/*hooks*.md`
-   - Results: `claude-code__hooks.md`, `claude-code__hooks-guide.md`, `docs__en__agent-sdk__hooks.md`
-2. **Read all 3 files** — extract concept definitions, JSON config examples, matcher patterns, event types, lifecycle details
+1. **Search:** `bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/fuzzy-search.sh "hooks"`
+   - Results: `claude-code__hooks.md`, `claude-code__hooks-guide.md`, `claude-code__agent-sdk__hooks.md`
+2. **Fetch + read all 3 pages** — each lives at `~/.claude-code-docs/cache/<filename>`;
+   on a cache miss, fetch first:
+   ```bash
+   ~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "claude-code__hooks.md"
+   ```
+   Extract concept definitions, JSON config examples, matcher patterns, event types, lifecycle details
 3. **Adjacent docs for context:** Skim `claude-code__skills.md`, `claude-code__settings.md` for related features
+   (same get-then-read pattern)
 4. **Extracted material:**
    - Hook event types: PreToolUse, PostToolUse, SessionStart, etc.
    - JSON configuration format with matcher patterns
@@ -55,4 +61,7 @@ A single self-contained HTML file (~80-120KB) with:
 - Data flow animation of the hook lifecycle
 - Multiple-choice quizzes testing practical hook configuration
 - Glossary tooltips on terms: matchers, IIFE, ARIA, stdin, SSE, MCP
+- Source links from the manifest, e.g. [Hooks reference](https://code.claude.com/docs/en/hooks),
+  [Automate actions with hooks](https://code.claude.com/docs/en/hooks-guide),
+  [Agent SDK hooks](https://code.claude.com/docs/en/agent-sdk/hooks)
 - Obsidian & Amber design aesthetic (Instrument Serif + Outfit + JetBrains Mono)

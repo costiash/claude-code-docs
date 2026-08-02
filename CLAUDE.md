@@ -28,7 +28,8 @@ auto-discovery is the `claude-docs` skill's job) that delegates to:
 - **`claude-docs-validate`** — freshness checks (`-t`) and health validation
 - **`claude-docs-course`** — interactive course generation (`--course <topic>`)
 - **`claude-docs-changelog`** — HTML changelog reports (`--report`)
-- **inline git log** — "what's new" queries
+- **`plugin/scripts/manifest-diff.sh`** — "what's new" queries (added/changed/removed
+  pages between manifest revisions; there is no mirror-era `git log -- docs/`)
 
 A SessionStart hook keeps the metadata current via `git reset --hard origin/main`.
 

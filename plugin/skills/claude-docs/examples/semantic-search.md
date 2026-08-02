@@ -5,25 +5,38 @@
 
 ## Skill Reasoning
 - User asks a question — no exact filename match for "best practices for extended thinking"
-- Strategy: Semantic/Content search (Priority 3)
+- Strategy: Content search (default for questions and topics)
 - **Keyword extraction:** Strip filler words → `"extended"` `"thinking"`
 - Check synonym table: "thinking" → also try "extended thinking", "adaptive thinking"
 
 ## Actions
-1. Glob: `~/.claude-code-docs/docs/*extended*thinking*.md` → matches found
-   - `docs__en__build-with-claude__extended-thinking.md`
-2. Run: `content-search.sh "extended" "thinking"` for additional results
-3. Results (sorted by relevance):
-   - `docs__en__build-with-claude__adaptive-thinking.md` (2 matches — keywords + preview)
-   - `docs__en__build-with-claude__extended-thinking.md` (2 matches — keywords + filename)
-   - `docs__en__api__messages__create.md` (1 match — mentions thinking parameter)
-4. All are platform docs (same context) → read top 2-3, synthesize
+1. Run:
+   ```bash
+   bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "extended" "thinking"
+   ```
+2. Output is `filename<TAB>title<TAB>score`, best first:
+   ```
+   docs__en__build-with-claude__extended-thinking.md	Extended thinking (legacy)	81.97
+   docs__en__build-with-claude__thinking.md	Overview	51
+   docs__en__build-with-claude__thinking-troubleshooting.md	Troubleshooting	44.91
+   docs__en__build-with-claude__thinking-steering-and-cost.md	Steering and cost control	37.97
+   docs__en__build-with-claude__thinking-tool-workflows.md	Tool and multi-turn workflows	34.28
+   ```
+3. All are platform docs (same context) → read the top 2-3 from
+   `~/.claude-code-docs/cache/<filename>`; on a cache miss, fetch first:
+   `~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "docs__en__build-with-claude__thinking.md"`
+4. Note the top hit is titled "(legacy)" — lead with the current overview page, cite both
+5. Get exact URLs from the manifest:
+   ```bash
+   jq -r '.pages[] | select(.filename=="docs__en__build-with-claude__thinking.md") | .url' ~/.claude-code-docs/paths_manifest.json
+   ```
 
 ## Output Format
-"Extended thinking (also called adaptive thinking) lets Claude work through complex problems step by step before responding...
+"Extended thinking lets Claude work through complex problems step by step before responding...
 
 [Synthesized best practices from the matched docs]
 
 Sources:
-- [Extended Thinking](https://platform.claude.com/en/docs/build-with-claude/extended-thinking)
-- [Adaptive Thinking](https://platform.claude.com/en/docs/build-with-claude/adaptive-thinking)"
+- [Thinking overview](https://platform.claude.com/docs/en/build-with-claude/thinking)
+- [Extended thinking (legacy)](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
+- [Steering and cost control](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost)"
