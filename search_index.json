@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-04T04:09:11.615347Z",
+  "generated_at": "2026-08-04T18:44:58.031122Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -11242,19 +11242,19 @@
       ],
       "terms": {
         "step": 88,
-        "claude": 44,
+        "claude": 45,
         "title": 36,
-        "code": 29,
+        "code": 31,
         "tip": 28,
+        "run": 16,
         "session": 16,
-        "run": 15,
         "documentation": 14,
         "ask": 14,
         "task": 13,
         "file": 12,
         "test": 12,
+        "see": 11,
         "work": 11,
-        "see": 10,
         "need": 10,
         "fil": 10,
         "image": 10,
@@ -11292,7 +11292,7 @@
         "explor": 5,
         "prs": 5
       },
-      "word_count": 2463
+      "word_count": 2485
     },
     {
       "filename": "claude-code__communications-kit.md",
@@ -22341,7 +22341,7 @@
       "terms": {
         "code": 32,
         "claude": 27,
-        "security": 26,
+        "security": 27,
         "command": 19,
         "permission": 18,
         "user": 13,
@@ -22390,7 +22390,7 @@
         "best": 4,
         "report": 4
       },
-      "word_count": 1439
+      "word_count": 1454
     },
     {
       "filename": "claude-code__security-guidance.md",

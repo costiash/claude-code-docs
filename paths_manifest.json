@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-04T04:09:09.191836Z",
+  "generated_at": "2026-08-04T18:44:55.634841Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -708,8 +708,8 @@
       "md_url": "https://code.claude.com/docs/en/common-workflows.md",
       "title": "Common workflows",
       "category": "claude_code",
-      "sha256": "df01507484f3f783d287ea79f063bf6070b19288dc2443c0df349c8cc2e38240",
-      "lastmod": "2026-07-29T01:22:14.978Z",
+      "sha256": "3bb676dabc9efe7f1eb032277338e5955df90f013bf8a6db8eb51db8f677c8fa",
+      "lastmod": "2026-08-04T17:48:30.526Z",
       "fetch_status": "ok"
     },
     {
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/security.md",
       "title": "Security",
       "category": "claude_code",
-      "sha256": "2993bb5cffd66ce03aa1bc415cbc3a56070c8fbcf5eb82bd983b6e8c3a47cd2a",
-      "lastmod": "2026-07-28T20:39:22.643Z",
+      "sha256": "71cf3b2b94a3e218a378d9f02a573b54370f2a9c40738fe984c217cd3a50dbd8",
+      "lastmod": "2026-08-04T17:48:30.524Z",
       "fetch_status": "ok"
     },
     {
