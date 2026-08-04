@@ -110,10 +110,34 @@ class TestSyncLockDelegation:
         run_hook(home, origin)
         legacy = home / ".claude-code-docs" / ".sync.lock"
         legacy.mkdir()  # hook-era lock: bare dir, no pid file
+        old = time.time() - 3600
+        os.utime(legacy, (old, old))  # stale: no pre-#28 session still owns it
         r = run_hook(home, origin)
         assert r.returncode == 0
         assert "Syncing changed pages" in context_of(r), context_of(r)
         assert not legacy.exists()
+
+    def test_hook_preserves_fresh_legacy_lock(self, tmp_path, origin):
+        """A FRESH hook-era lock may belong to a still-running pre-#28
+        session's sync child — blind removal would double-sync during the
+        upgrade window. The new-caller sync still launches (its own lock is
+        elsewhere), but the legacy dir is left alone until stale."""
+        home = tmp_path / "home"
+        home.mkdir()
+        scripts = origin / "plugin" / "scripts"
+        scripts.mkdir(parents=True)
+        stub = scripts / "fetch-docs.sh"
+        stub.write_text("#!/bin/bash\nexit 0\n")
+        stub.chmod(0o755)
+        _git("add", ".", cwd=origin)
+        _git("commit", "-qm", "stub fetch script", cwd=origin)
+        run_hook(home, origin)
+        legacy = home / ".claude-code-docs" / ".sync.lock"
+        legacy.mkdir()  # fresh: possibly live pre-#28 owner
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert "Syncing changed pages" in context_of(r), context_of(r)
+        assert legacy.is_dir()
 
 
 class TestRepoUrlSentinel:
@@ -368,6 +392,26 @@ class TestOrphanPrune:
         run_hook(home, origin)
         docs = home / ".claude-code-docs"
         (docs / "cache").mkdir()  # empty — recreated by a racing background fetch
+        orphan = home / ".claude-code-docs.new.4194301"
+        (orphan / "cache").mkdir(parents=True)
+        (orphan / "cache" / "page.md").write_text("full corpus")
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert (docs / "cache" / "page.md").read_text() == "full corpus"
+        assert not orphan.exists()
+
+    def test_scaffold_only_recreated_cache_does_not_block_rescue(self, tmp_path, origin):
+        """Issue #28 review: a racing sync child recreates cache/ with .meta/
+        and .sync.lock/ scaffolding (ensure_dirs runs before the lock gate) —
+        never with a bare empty dir. Scaffolding-only cache must still count
+        as empty, or a populated parked corpus is silently discarded."""
+        home = tmp_path / "home"
+        home.mkdir()
+        run_hook(home, origin)
+        docs = home / ".claude-code-docs"
+        (docs / "cache" / ".meta").mkdir(parents=True)  # ensure_dirs artifact
+        (docs / "cache" / ".sync.lock").mkdir()
+        (docs / "cache" / ".sync.lock" / "pid").write_text("4194302\n")
         orphan = home / ".claude-code-docs.new.4194301"
         (orphan / "cache").mkdir(parents=True)
         (orphan / "cache" / "page.md").write_text("full corpus")

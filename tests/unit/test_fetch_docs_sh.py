@@ -40,7 +40,10 @@ RAWEVIL = ("rawevil.md", "https://raw.githubusercontent.com/anthropics/claude-co
 
 FAKE_CURL = r'''#!/usr/bin/env python3
 import sys, os, json, time
-time.sleep(float(os.environ.get("CURL_SLEEP", "0")))
+# Deterministic hold-open: block while the sentinel file exists (lock tests).
+_blk = os.environ.get("CURL_BLOCK_FILE", "")
+while _blk and os.path.exists(_blk):
+    time.sleep(0.02)
 args = sys.argv[1:]
 out = None; url = None
 i = 0
@@ -236,6 +239,35 @@ class TestSyncLock:
             assert (cache / fn).exists(), fn
         assert not self.lock_dir(cache).exists()
 
+    def test_sync_reaps_stale_plain_file_at_lock_path(self, harness):
+        # Poison-file regression: a heartbeat racing a lock removal can leave
+        # a plain FILE at the lock path. Treating non-dir as "vanished"
+        # forever would silently disable sync permanently — a stale file must
+        # be reaped like any stale lock.
+        env, cache, _ = harness
+        cache.mkdir(parents=True, exist_ok=True)
+        poison = self.lock_dir(cache)
+        poison.write_text("")
+        old = time.time() - 7200
+        os.utime(poison, (old, old))
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        for fn in list(PAGES) + [STALE[0]]:
+            assert (cache / fn).exists(), fn
+        assert not poison.exists()
+
+    def test_sync_defers_on_fresh_plain_file_at_lock_path(self, harness):
+        # Fresh non-dir obstruction: same grace as a fresh pidless lock.
+        env, cache, _ = harness
+        cache.mkdir(parents=True, exist_ok=True)
+        poison = self.lock_dir(cache)
+        poison.write_text("")
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        assert "already running" in r.stdout, r.stdout
+        assert not list(cache.glob("*.md"))
+        assert poison.exists()
+
     def test_sync_removes_own_lock_on_completion(self, harness):
         env, cache, _ = harness
         r = run(env, "sync")
@@ -244,21 +276,25 @@ class TestSyncLock:
 
     def test_finishing_sync_leaves_stolen_lock_alone(self, harness):
         # The #28 cascade: sync A's EXIT trap must not rmdir a lock that was
-        # (wrongly or rightly) reaped and re-acquired by a successor.
-        env, cache, _ = harness
+        # (wrongly or rightly) reaped and re-acquired by a successor. The
+        # fake curl blocks on a sentinel file, so the steal happens inside a
+        # deterministically held-open window (no sleeps, no timing).
+        env, cache, manifest_path = harness
         env = dict(env)
-        env["CURL_SLEEP"] = "1"
-        env["CLAUDE_DOCS_PARALLEL"] = "1"  # 4 syncable pages -> >=4s of fetching
+        block = manifest_path.parent / "curl.block"
+        block.write_text("")
+        env["CURL_BLOCK_FILE"] = str(block)
         a = subprocess.Popen([str(FETCH), "sync"], env=env,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         lock = self.lock_dir(cache)
         deadline = time.time() + 10
         while time.time() < deadline and not (lock / "pid").exists():
-            time.sleep(0.05)
+            time.sleep(0.02)
         assert (lock / "pid").exists(), "sync A never took the lock"
         # Steal the lock mid-sync (simulates the mtime reaper of a second session).
         shutil.rmtree(lock)
         self.make_lock(cache, pid=os.getpid())
+        block.unlink()  # release the held-open fetches; A finishes
         a.wait(timeout=60)
         assert lock.is_dir(), "finishing sync removed a lock it no longer owns"
         assert (lock / "pid").read_text().strip() == str(os.getpid())

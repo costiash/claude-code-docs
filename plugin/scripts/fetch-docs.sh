@@ -102,36 +102,55 @@ release_sync_lock() {
 
 # 0 = acquired (release trap installed); 1 = another sync owns the cache.
 acquire_sync_lock() {
-    local tries=0 pid
-    while :; do
+    local attempts=0 pid
+    while [ "$attempts" -lt 10 ]; do  # spin cap: livelock insurance, never hit in practice
+        attempts=$((attempts + 1))
         if mkdir "$LOCK_DIR" 2>/dev/null; then
-            echo "$$" > "$LOCK_DIR/pid"
+            if ! { echo "$$" > "$LOCK_DIR/pid"; } 2>/dev/null; then
+                # Ownership not recorded (disk full?): a pidless lock can
+                # never pass release's cat-guard and invites a live-owner
+                # reap after a minute — back out and defer instead.
+                rm -rf "$LOCK_DIR"
+                return 1
+            fi
             SYNC_LOCK_HELD=1
             trap release_sync_lock EXIT
             return 0
         fi
         pid=$(cat "$LOCK_DIR/pid" 2>/dev/null)
+        # Lock vanished between the failed mkdir and the read (owner released,
+        # or a contender's reap landed): retry the mkdir — returning 1 here
+        # would skip the sync on a false "already running". -e, not -d: a
+        # plain FILE at the lock path (a heartbeat touch racing a lock
+        # removal) must fall through to the staleness checks and the mv reap
+        # below (both handle files), or it poisons every future sync.
+        [ -e "$LOCK_DIR" ] || continue
         if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
             # Live owner wins — unless the lock mtime is ancient: a running
             # sync heartbeats every batch, so 30+ idle minutes means the PID
             # was recycled by an unrelated process (kill -0 lies alive).
-            [ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ] || return 1
+            if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+                [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
+                return 1
+            fi
         elif [ -z "$pid" ]; then
             # Pidless: the owner may be inside its mkdir->pid-write window.
             # Fresh (<1 min) = treat as live; older = crashed mid-acquire.
-            [ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin +1 2>/dev/null)" ] || return 1
+            if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +1 2>/dev/null)" ]; then
+                [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
+                return 1
+            fi
         fi
         # Stale by evidence (dead PID / recycled-PID backstop / old pidless).
         # Reap via rename: only one contender wins the mv, losers loop and
         # re-evaluate the fresh lock. ponytail: the read->mv gap is a
         # microsecond TOCTOU; worst case is one duplicate sync writing
         # atomically to the same cache, not corruption or lock loss.
-        [ "$tries" -lt 2 ] || return 1
-        tries=$((tries + 1))
         if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then
             rm -rf "$LOCK_DIR.reap.$$"
         fi
     done
+    return 1
 }
 
 # Fetch a URL to a file with one retry. Returns 0 on success.
@@ -285,7 +304,10 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
-            touch "$LOCK_DIR" 2>/dev/null  # heartbeat for the recycled-PID backstop
+            # Heartbeat for the recycled-PID backstop. Dir-guarded: after a
+            # lock removal races us, an unguarded touch would recreate the
+            # path as a plain FILE and poison future acquisitions.
+            [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
         fi
     done < "$pending"
     wait
