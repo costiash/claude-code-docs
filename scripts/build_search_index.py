@@ -42,6 +42,13 @@ MAX_TERMS = 50
 # Minimum fraction of indexed pages that must carry non-empty terms; below this
 # the build refuses to overwrite the committed index (partial-outage guard).
 DEFAULT_MIN_CONTENT_SHARE = 0.90
+# Ceiling on the fraction of records carried forward from the committed index
+# (issue #29). Carry-forward keeps search usable through doc-site outages, but
+# it also satisfies the content-share guard above — so without a separate
+# ceiling, a build over a mostly-missing scratch dir publishes a largely-stale
+# index silently. Majority-fresh by default; DOCS_INDEX_MAX_CARRY_SHARE=1
+# disables (a share can never exceed 1).
+DEFAULT_MAX_CARRY_SHARE = 0.50
 
 STOP_WORDS = {
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
@@ -149,7 +156,9 @@ def load_existing_index(path: Path) -> Dict[str, Dict]:
         return {}
 
 
-def build_index(manifest: Dict, scratch_dir: Path, old_pages: Optional[Dict[str, Dict]] = None) -> Dict:
+def build_index(
+    manifest: Dict, scratch_dir: Path, old_pages: Optional[Dict[str, Dict]] = None
+) -> "tuple[Dict, int]":
     """
     Build the full v2 index from a manifest and the scratch content dir.
 
@@ -158,6 +167,10 @@ def build_index(manifest: Dict, scratch_dir: Path, old_pages: Optional[Dict[str,
     previous headings/terms/word_count instead of being silently erased to an
     empty record — the index-side mirror of the manifest's ``fetch_status: stale``
     carry-forward.
+
+    Returns ``(index, carried)`` — the carried count feeds the carry-share
+    ceiling (:func:`check_carry_share`), which cannot be recomputed from the
+    index alone (a carried record is indistinguishable from a fresh one).
     """
     old_pages = old_pages or {}
     pages = []
@@ -189,11 +202,12 @@ def build_index(manifest: Dict, scratch_dir: Path, old_pages: Optional[Dict[str,
         f"Indexed {len(pages)} pages ({with_content} with content, "
         f"{carried} carried forward) from {scratch_dir}"
     )
-    return {
+    index = {
         "schema_version": INDEX_SCHEMA_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "pages": pages,
     }
+    return index, carried
 
 
 def check_content_share(index: Dict, min_share: float) -> None:
@@ -219,16 +233,41 @@ def check_content_share(index: Dict, min_share: float) -> None:
         sys.exit(1)
 
 
-def _parse_env_number(name: str, default, cast):
+def check_carry_share(carried: int, total: int, max_share: float) -> None:
+    """
+    Guard (issue #29): refuse an index where too many records were carried forward.
+
+    Exits 1 if ``carried / total`` exceeds ``max_share``. Carry-forward is kept
+    (search must not degrade during doc-site outages), but a build where most
+    records come from the previous index rather than this run's scratch dir is
+    a broken fetch, not an outage worth papering over. An empty index is left
+    to the content-share guard. Set ``DOCS_INDEX_MAX_CARRY_SHARE=1`` to disable.
+    """
+    if total == 0:
+        return
+    share = carried / total
+    if share > max_share:
+        print(
+            f"ERROR: {carried}/{total} indexed pages ({share:.1%}) were carried forward "
+            f"from the committed index (ceiling {max_share:.0%}). A mostly-carried index "
+            f"means this run's fetch barely produced content. Fix the fetch run, or set "
+            f"DOCS_INDEX_MAX_CARRY_SHARE=1 to force the build.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+def _parse_env_number(name: str, default, cast, disable: str = "0"):
     """
     Parse a numeric guard threshold from the environment with a clear error.
 
     An unset OR empty-string variable falls back to the default (the old
     ``or "0"`` idiom silently DISABLED the guard on empty values); a
-    non-numeric, non-finite (nan/inf would silently disable the ``<``
-    comparison), or negative value exits with an actionable message instead
-    of a raw traceback. Explicit ``=0`` still disables the guard, documented
-    behavior.
+    non-numeric, non-finite (nan/inf would silently disable the comparison),
+    or negative value exits with an actionable message instead of a raw
+    traceback. ``disable`` is the value the error hint names as turning the
+    guard off — ``0`` for the floor guards, ``1`` for the carry-share ceiling
+    (where ``0`` is the strictest setting, not off).
     """
     raw = os.environ.get(name)
     if raw is None or raw.strip() == "":
@@ -241,7 +280,7 @@ def _parse_env_number(name: str, default, cast):
     except ValueError:
         print(
             f"ERROR: invalid {name}={raw!r}: must be a finite non-negative number "
-            f"(e.g. {name}={default}; set {name}=0 to disable the guard).",
+            f"(e.g. {name}={default}; set {name}={disable} to disable the guard).",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -267,6 +306,10 @@ def main() -> None:
     min_content_share = _parse_env_number(
         "DOCS_INDEX_MIN_CONTENT_SHARE", default=DEFAULT_MIN_CONTENT_SHARE, cast=float
     )
+    max_carry_share = _parse_env_number(
+        "DOCS_INDEX_MAX_CARRY_SHARE", default=DEFAULT_MAX_CARRY_SHARE, cast=float,
+        disable="1",
+    )
 
     if not manifest_path.exists():
         print(f"ERROR: manifest not found at {manifest_path}", file=sys.stderr)
@@ -284,8 +327,9 @@ def main() -> None:
 
     manifest = json.loads(manifest_path.read_text())
     old_pages = load_existing_index(index_path)
-    index = build_index(manifest, scratch_dir, old_pages)
+    index, carried = build_index(manifest, scratch_dir, old_pages)
     check_content_share(index, min_content_share)
+    check_carry_share(carried, len(index["pages"]), max_carry_share)
     save_index(index, index_path)
 
 

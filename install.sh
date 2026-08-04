@@ -64,11 +64,15 @@ if [ -d "$HOME/.claude" ]; then
                 # Remove legacy hooks from settings.json (non-fatal: a malformed
                 # entry must not abort the installer under set -e). Fully
                 # type-safe: a non-array PreToolUse passes through untouched,
-                # malformed entries are kept, and EVERY hook command in an
-                # entry is checked (not just .[0]).
+                # malformed entries are kept, every hook command in an entry is
+                # checked (not just .[0]), and a non-string .command is tostring-
+                # coerced so contains() can never error the whole filter.
+                # NOTE: this jq filter is deliberately duplicated in uninstall.sh —
+                # both scripts must stay runnable standalone (curl | bash), so
+                # there is no shared file to source. Edit both in lockstep.
                 if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
                     if jq -e '.hooks.PreToolUse' "$HOME/.claude/settings.json" >/dev/null 2>&1; then
-                        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | .command? // "")] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
+                        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | (.command? // "" | tostring))] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
                             "$HOME/.claude/settings.json" > "$HOME/.claude/settings.json.tmp" && \
                             mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"; then
                             echo "  Cleaned legacy hooks from settings.json"
@@ -100,9 +104,19 @@ else
     if [ -d "$INSTALL_DIR" ]; then
         echo "Updating existing installation..."
         # reset --hard (not pull --ff-only) so a history rewrite is absorbed cleanly.
-        # No --depth 1 on fetch: it would re-shallow a clone that manifest-diff.sh
-        # may have deepened for the what's-new / changelog features.
-        cd "$INSTALL_DIR" && git fetch origin main && git reset --hard origin/main || {
+        # A pristine depth-1 clone keeps --depth 1 (a plain fetch would download
+        # every intermediate metadata commit for nothing); anything with more
+        # history keeps it. Shallowness alone is NOT the signal: manifest-diff.sh's
+        # --deepen 500 fallback leaves the repo shallow but deep, and re-shallowing
+        # it would destroy the history the what's-new / changelog features use.
+        if [ "$(git -C "$INSTALL_DIR" rev-parse --is-shallow-repository 2>/dev/null)" = "true" ] \
+            && [ "$(git -C "$INSTALL_DIR" rev-list --count HEAD 2>/dev/null)" = "1" ]; then
+            DEPTH_ARG="--depth 1"
+        else
+            DEPTH_ARG=""
+        fi
+        # DEPTH_ARG unquoted on purpose: it must expand to two words (or none).
+        cd "$INSTALL_DIR" && git fetch $DEPTH_ARG origin main && git reset --hard origin/main || {
             echo "Update failed. Try: rm -rf $INSTALL_DIR && re-run this script"
             exit 1
         }

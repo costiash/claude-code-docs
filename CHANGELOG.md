@@ -7,7 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Background-sync lock rework from issue #28 (PR #32).
+Background-sync lock rework from issue #28 (PR #32), the search-index
+stale-ratio ceiling from issue #29, and the low-severity backlog from
+issue #30.
+
+### Added
+- **Stale-ratio ceiling on the search index** (#29). Carry-forward keeps search
+  usable through doc-site outages, but it also satisfied the content-share
+  guard — so a standalone index build over a mostly-missing scratch dir could
+  publish a largely-stale index silently. The build now refuses when more than
+  half the records were carried forward from the committed index
+  (`DOCS_INDEX_MAX_CARRY_SHARE`, default `0.5`; `1` disables). Carry-forward
+  itself is unchanged.
+- **Shell/Python host-allowlist parity test** (#30): `ALLOWED_HOSTS`
+  (fetch-docs.sh) and `ALLOWED_DOMAINS` (fetcher config) are now locked
+  together by a unit test, so the two spellings of the fetch-domain contract
+  cannot drift silently.
+
+### Changed
+- **Sync uses a true worker pool** (#30): `xargs -0 -n1 -P` keeps all parallel
+  slots busy instead of the old batch loop, where every batch waited on its
+  slowest fetch. The lock heartbeat moved from the batch boundary to per-page.
+- **`fuzzy-search.sh` rewritten as a single awk pass** (#30): ~17s per query
+  (≈7,000 grep forks over 725 pages) down to ~0.03s, identical rankings (one
+  provably-unreachable scoring branch dropped rather than ported). This
+  unblocked wiring the `test-skills.sh` search-quality harness (64 checks,
+  ~10 min before, ~12s now) into CI as part of the macOS shell job.
+- **`prune` now clears orphaned `.tmp.*` files** (#30) older than an hour —
+  a killed fetch's leftovers were previously invisible to the `*.md` glob.
+- **`install.sh` keeps a still-shallow clone shallow** (#30): updates fetch
+  with `--depth 1` unless manifest-diff.sh already deepened the clone, instead
+  of unconditionally downloading every intermediate metadata commit.
+- **Quick-validate sampling re-seeded per run** (#30): the awk shuffle mixes
+  the PID into the seed, so two runs in the same second no longer sample
+  identical pages.
+- **CI dedupe** (#30): `coverage.yml` (a strict subset of `test.yml`, which
+  already enforces the 50% floor) removed; ~180 lines of dead mirror-era
+  sitemap discovery functions deleted; `pyproject.toml` version aligned with
+  the plugin (2.0.1) and the requests pin/floor cross-referenced between
+  `pyproject.toml` and `scripts/requirements.txt`.
+- **Legacy-hook cleanup hardened** (#30): the settings.json jq filter in
+  `install.sh`/`uninstall.sh` `tostring`-coerces a non-string `.command`
+  instead of erroring the whole filter (the two copies are deliberately
+  duplicated — both scripts run standalone — and now say so).
 
 ### Fixed
 - **Sync is now single-flight for every caller.** The lock moved from the

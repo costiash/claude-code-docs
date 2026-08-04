@@ -228,9 +228,9 @@ class TestSyncLock:
         assert not self.lock_dir(cache).exists()  # released its own lock
 
     def test_sync_reaps_ancient_lock_despite_live_pid(self, harness):
-        # Recycled-PID backstop: a live sync refreshes the lock mtime every
-        # batch, so a lock untouched for 30+ minutes belongs to no live sync
-        # even when kill -0 says otherwise.
+        # Recycled-PID backstop: a live sync refreshes the lock mtime per
+        # fetched page, so a lock untouched for 30+ minutes belongs to no live
+        # sync even when kill -0 says otherwise.
         env, cache, _ = harness
         self.make_lock(cache, pid=os.getpid(), age_secs=3600)
         r = run(env, "sync")
@@ -431,6 +431,26 @@ class TestStatusPrune:
         assert not (cache / "orphan.md").exists()
         assert (cache / "claude-code__hooks.md").exists()
 
+    def test_prune_removes_old_tmp_orphans_keeps_fresh(self, harness):
+        """A killed fetch leaves .tmp.* files the *.md glob never matched; prune
+        must clear old ones but never a live sync's in-flight temp files."""
+        env, cache, _ = harness
+        run(env, "sync")
+        meta = cache / ".meta"
+        old_tmp = cache / ".tmp.dead.md.999"
+        old_meta_tmp = meta / ".tmp.dead.md.json.999"
+        fresh_tmp = cache / ".tmp.live.md.111"
+        for f in (old_tmp, old_meta_tmp, fresh_tmp):
+            f.write_text("partial")
+        two_hours_ago = time.time() - 7200
+        os.utime(old_tmp, (two_hours_ago, two_hours_ago))
+        os.utime(old_meta_tmp, (two_hours_ago, two_hours_ago))
+        r = run(env, "prune")
+        assert r.returncode == 0
+        assert not old_tmp.exists()
+        assert not old_meta_tmp.exists()
+        assert fresh_tmp.exists()
+
 
 def test_changelog_pin_agrees_across_files():
     """The raw.githubusercontent.com changelog URL is hardcoded as the client exact-match
@@ -446,3 +466,19 @@ def test_changelog_pin_agrees_across_files():
         assert found, f"no raw-github CHANGELOG URL found in {rel}"
         urls.update(found)
     assert len(urls) == 1, f"changelog pin drifted across files: {sorted(urls)}"
+
+
+def test_host_allowlist_agrees_with_python_domains():
+    """ALLOWED_HOSTS (shell client) and ALLOWED_DOMAINS (CI fetcher config) are two
+    spellings of the same contract with no shared source. A host added to one but
+    not the other drifts silently: CI would fetch (and manifest) pages the client
+    then refuses, or vice versa. Lock them together like the changelog pin above."""
+    import re
+    import sys
+    root = Path(__file__).resolve().parents[2]
+    m = re.search(r'^ALLOWED_HOSTS="([^"]+)"', (root / "plugin/scripts/fetch-docs.sh").read_text(), re.M)
+    assert m, "ALLOWED_HOSTS not found in fetch-docs.sh"
+    shell_hosts = set(m.group(1).split())
+    sys.path.insert(0, str(root / "scripts"))
+    from fetcher.config import ALLOWED_DOMAINS
+    assert shell_hosts == set(ALLOWED_DOMAINS)
