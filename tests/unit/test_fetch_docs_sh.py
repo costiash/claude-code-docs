@@ -274,6 +274,22 @@ class TestSyncLock:
         assert r.returncode == 0, r.stderr
         assert not self.lock_dir(cache).exists()
 
+    def test_pid_write_failure_reports_distinct_error(self, harness):
+        # Disk-full backout must not masquerade as lock contention: umask 0777
+        # makes mkdir create the lock dir unwritable, so the pid write fails
+        # and the acquire backs out — the message must say so, not "another
+        # sync is already running", and the exit code must be nonzero.
+        env, cache, _ = harness
+        cache.mkdir(parents=True, exist_ok=True)
+        r = subprocess.run(
+            ["bash", "-c", f'umask 0777; exec "{FETCH}" sync'],
+            env=env, capture_output=True, text=True,
+        )
+        assert r.returncode != 0
+        assert "already running" not in r.stdout + r.stderr
+        assert "sync-lock ownership" in r.stderr, r.stderr
+        assert not self.lock_dir(cache).exists()  # backed out cleanly
+
     def test_fetch_line_child_does_not_release_parent_lock(self, harness):
         # The sync job pool re-invokes self as __fetch_line children; they
         # never install the release trap, so a child exiting must leave the

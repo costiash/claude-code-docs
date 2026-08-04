@@ -109,9 +109,11 @@ acquire_sync_lock() {
             if ! { echo "$$" > "$LOCK_DIR/pid"; } 2>/dev/null; then
                 # Ownership not recorded (disk full?): a pidless lock can
                 # never pass release's cat-guard and invites a live-owner
-                # reap after a minute — back out and defer instead.
+                # reap after a minute — back out. Distinct rc: this is an
+                # error, not contention, and the caller must not report it
+                # as "another sync is already running".
                 rm -rf "$LOCK_DIR"
-                return 1
+                return 2
             fi
             SYNC_LOCK_HELD=1
             # EXIT only, deliberately: a signal death that skips the trap
@@ -275,10 +277,15 @@ cmd_sync() {
     fi
 
     ensure_dirs
-    if ! acquire_sync_lock; then
-        echo "fetch-docs: another sync is already running (lock: $LOCK_DIR)"
-        return 0
-    fi
+    acquire_sync_lock
+    case $? in
+        1)  # contention: someone else is (or appears to be) syncing — benign
+            echo "fetch-docs: another sync is already running (lock: $LOCK_DIR)"
+            return 0 ;;
+        2)  # backout: lock init failed (disk full?) — an error, not contention
+            echo "fetch-docs: could not record sync-lock ownership (disk full?) — sync skipped" >&2
+            return 1 ;;
+    esac
     local pending; pending=$(mktemp)
     # Only pages with a real sha256 are syncable (failed pages have null).
     jq -r '.pages[] | select(.sha256 != null) | [.filename, .md_url, .sha256] | @tsv' "$MANIFEST" \
