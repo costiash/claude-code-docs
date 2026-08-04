@@ -101,11 +101,16 @@ When matches span products (CLI + API + Agent SDK), ask which the user means. La
 
 | category | Say to user |
 |---|---|
-| `claude_code` | **Claude Code** |
-| `agent_sdk` | **Agent SDK** |
+| `claude_code` | **Claude Code CLI** |
+| `agent_sdk` | **Claude Agent SDK** |
 | `api_reference` | **Claude API** |
 | `core_documentation` | **Claude Documentation** |
 | `agents_and_tools` | **Agents & Tools** |
+| `about_claude` | **About Claude** |
+| `get_started` | **Getting Started** |
+| `test_and_evaluate` | **Testing & Evaluation** |
+| `release_notes` | **Release Notes** |
+| `resources` | **Resources** |
 | `prompt_library` | **Prompt Library** |
 
 After selection → read all docs in that context and synthesize.
