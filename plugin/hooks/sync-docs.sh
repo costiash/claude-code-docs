@@ -128,7 +128,8 @@ doc_count() {
 # 0-fetch fast path, so an already-current cache just no-ops in the background.
 # Concurrency control lives inside `fetch-docs.sh sync` itself (issue #28: a
 # PID-owned lock in the cache dir covers EVERY caller, not just this hook), so
-# the child is a cheap no-op when another session is already syncing. The
+# the child is a cheap no-op when another session is already syncing — the
+# unconditional fork per session is deliberate, not a missing gate. The
 # hook-era lock at $DOCS_DIR/.sync.lock is legacy — remove it so a dir left by
 # a crashed pre-#28 session doesn't linger forever (bare dir, rmdir suffices).
 maybe_background_sync() {

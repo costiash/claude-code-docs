@@ -274,6 +274,34 @@ class TestSyncLock:
         assert r.returncode == 0, r.stderr
         assert not self.lock_dir(cache).exists()
 
+    def test_concurrent_syncs_exactly_one_wins(self, harness):
+        # Two real cmd_sync invocations racing the actual mkdir gate (not a
+        # fabricated lock): the winner holds through a sentinel-blocked fetch
+        # while the loser defers against the live lock; the winner completes.
+        env, cache, manifest_path = harness
+        env = dict(env)
+        block = manifest_path.parent / "curl.block2"
+        block.write_text("")
+        env["CURL_BLOCK_FILE"] = str(block)
+        a = subprocess.Popen([str(FETCH), "sync"], env=env,
+                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                             text=True)
+        lock = self.lock_dir(cache)
+        deadline = time.time() + 10
+        while time.time() < deadline and not (lock / "pid").exists():
+            time.sleep(0.02)
+        assert (lock / "pid").exists(), "winner never took the lock"
+        rb = run(env, "sync")  # loser: real acquire path against the live winner
+        assert rb.returncode == 0
+        assert "already running" in rb.stdout, rb.stdout
+        block.unlink()
+        out, _ = a.communicate(timeout=60)
+        assert a.returncode == 0
+        assert "sync complete" in out, out
+        for fn in list(PAGES) + [STALE[0]]:
+            assert (cache / fn).exists(), fn
+        assert not lock.exists()
+
     def test_pid_write_failure_reports_distinct_error(self, harness):
         # Disk-full backout must not masquerade as lock contention: umask 0777
         # makes mkdir create the lock dir unwritable, so the pid write fails

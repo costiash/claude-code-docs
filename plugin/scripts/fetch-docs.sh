@@ -94,7 +94,9 @@ SYNC_LOCK_HELD=0
 release_sync_lock() {
     [ "$SYNC_LOCK_HELD" = 1 ] || return 0
     # Remove only a lock we still own: if a reaper replaced it, rmdir'ing the
-    # successor's lock here is exactly the #28 cascade.
+    # successor's lock here is exactly the #28 cascade. The cat->rm gap is a
+    # benign TOCTOU: worst case a reaper moved the dir aside between the two
+    # and the rm removes nothing.
     if [ "$(cat "$LOCK_DIR/pid" 2>/dev/null)" = "$$" ]; then
         rm -rf "$LOCK_DIR"
     fi
@@ -167,6 +169,9 @@ acquire_sync_lock() {
         # (fractional sleep is non-POSIX; fall back to a whole second).
         sleep 0.1 2>/dev/null || sleep 1
     done
+    # Spin-cap exhausted: reported as contention (rc 1) deliberately — ten
+    # failed rounds means someone keeps holding/recreating the lock, and
+    # the next sync attempt retries from scratch anyway.
     return 1
 }
 
@@ -326,8 +331,9 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
-            # Heartbeat (each FULL batch; the final partial batch goes
-            # without, bounded by --max-time far below the 30-min backstop)
+            # Heartbeat (each FULL batch; the final partial batch — including
+            # a whole sync that fits in one batch — goes without, bounded by
+            # --max-time far below the 30-min backstop)
             # for the recycled-PID reap. Dir-guarded: after a lock removal
             # races us, an unguarded touch would recreate the path as a
             # plain FILE and poison future acquisitions.
