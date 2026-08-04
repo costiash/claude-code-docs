@@ -43,11 +43,15 @@ fi
 # Remove legacy hooks from ~/.claude/settings.json (non-fatal). Fully
 # type-safe: a non-array PreToolUse passes through untouched, malformed
 # entries (non-array .hooks, scalar elements, missing .command) are kept,
-# and EVERY hook command in an entry is checked (not just .[0]) — only
-# well-formed entries mentioning claude-code-docs are removed.
+# EVERY hook command in an entry is checked (not just .[0]), and a
+# non-string .command is tostring-coerced so contains() can never error
+# the whole filter — only entries mentioning claude-code-docs are removed.
+# NOTE: this jq filter is deliberately duplicated in install.sh — both
+# scripts must stay runnable standalone (curl | bash), so there is no
+# shared file to source. Edit both in lockstep.
 if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
     if jq -e '.hooks.PreToolUse' "$HOME/.claude/settings.json" >/dev/null 2>&1; then
-        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | .command? // "")] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
+        if jq '.hooks.PreToolUse = (if (.hooks.PreToolUse | type) == "array" then [.hooks.PreToolUse[] | select(([((.hooks? // null) | if type == "array" then .[] else empty end | (.command? // "" | tostring))] | any(contains("claude-code-docs"))) | not)] else .hooks.PreToolUse end)' \
             "$HOME/.claude/settings.json" > "$HOME/.claude/settings.json.tmp" && \
             mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"; then
             echo "Removed legacy hooks from settings.json"

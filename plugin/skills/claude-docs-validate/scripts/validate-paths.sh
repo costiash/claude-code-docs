@@ -28,12 +28,14 @@ done < <(jq -r '.pages[].md_url | select(. != null)' "$MANIFEST")
 [ ${#all_urls[@]} -gt 0 ] || { echo "No URLs in manifest" >&2; exit 1; }
 
 if [ "$quick_mode" = true ]; then
-    # Portable shuffle (no GNU shuf): random sort key via awk, strip it after sorting.
+    # Portable shuffle (no GNU shuf): random sort key via awk, strip it after
+    # sorting. Bare srand() seeds per-second, so two quick runs in the same
+    # second sample identical pages — mix the PID into the seed.
     check_urls=()
     while IFS= read -r u; do
         [ -n "$u" ] && check_urls+=("$u")
     done < <(printf '%s\n' "${all_urls[@]}" \
-        | awk 'BEGIN{srand()}{printf "%.6f\t%s\n", rand(), $0}' \
+        | awk -v seed="$(( $(date +%s) + $$ ))" 'BEGIN{srand(seed)}{printf "%.6f\t%s\n", rand(), $0}' \
         | sort -n | cut -f2- | head -n "$QUICK_SAMPLE")
     echo "Validating ${#check_urls[@]} random pages (quick mode)..."
 else

@@ -21,42 +21,54 @@ query=$(printf '%s' "$*" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' |
 [ -n "$query" ] || { echo "No valid query provided" >&2; exit 1; }
 [ -f "$MANIFEST" ] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
 command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
+# Validate the manifest BEFORE the pipeline: a malformed/truncated manifest must
+# fail loudly here, not surface as "no results, exit 0". (jq -e alone is not
+# enough — jq 1.6 exits 0 on empty input; the type test rejects that too.)
+[ "$(jq -r '.pages | type' "$MANIFEST" 2>/dev/null)" = "array" ] \
+    || { echo "Manifest has no .pages array (malformed?): $MANIFEST" >&2; exit 1; }
 
-read -ra tokens <<< "$query"
-query_hyphen=$(printf '%s' "$query" | tr ' ' '-')
-query_spaced=$(printf '%s' "$query" | tr '-' ' ')
+# Single awk pass over the whole manifest. The old per-page shell loop forked
+# grep up to ~10 times per page (~7,000 processes, ~17s per query); awk's
+# index() gives the same fixed-substring semantics (the query is sanitized to
+# [a-z0-9 -] above, so the old grep patterns had no live regex metacharacters)
+# in one process. Scoring is unchanged: query in filename +100, space-normalized
+# hyphen variant +90, query in title +80, per-token +15/+10 (>=6 chars scores
+# 15), all-tokens bonus +50. (The old loop also scored a hyphenated variant of
+# the query against the filename, but the filename haystack has every hyphen
+# converted to a space, so that branch could never match — dropped, not ported.)
+jq -r '.pages[] | [.filename, (.title // "")] | @tsv' "$MANIFEST" \
+| awk -F'\t' -v query="$query" '
+    BEGIN {
+        ntok = split(query, tok, " ")
+        qs = query; gsub(/-/, " ", qs)
+    }
+    $1 != "" {
+        fname = $1
+        title = tolower($2)
+        base = fname; sub(/\.md$/, "", base)
+        fl = tolower(base); gsub(/[_-]/, " ", fl)
 
-score_file=$(mktemp)
-trap 'rm -f "$score_file"' EXIT
+        score = 0
+        if (index(fl, query)) score += 100
+        if (qs != query && index(fl, qs)) score += 90
+        if (title != "" && index(title, query)) score += 80
 
-while IFS=$'\t' read -r fname title; do
-    [ -n "$fname" ] || continue
-    base="${fname%.md}"
-    fname_lower=$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr '_-' '  ')
-    title_lower=$(printf '%s' "$title" | tr '[:upper:]' '[:lower:]')
+        matched = 0
+        for (i = 1; i <= ntok; i++) {
+            t = tok[i]
+            ts = t; gsub(/-/, " ", ts)
+            if (index(fl, t) || index(fl, ts) || (title != "" && index(title, t))) {
+                score += (length(t) >= 6 ? 15 : 10)
+                matched++
+            }
+        }
+        if (matched == ntok && ntok > 1) score += 50
 
-    score=0
-    echo "$fname_lower" | grep -q -- "$query" && score=$((score + 100))
-    [ "$query_hyphen" != "$query" ] && echo "$fname_lower" | grep -q -- "$query_hyphen" && score=$((score + 90))
-    [ "$query_spaced" != "$query" ] && echo "$fname_lower" | grep -q -- "$query_spaced" && score=$((score + 90))
-    [ -n "$title_lower" ] && printf '%s' "$title_lower" | grep -qF -- "$query" && score=$((score + 80))
-
-    matched=0
-    for token in "${tokens[@]}"; do
-        token_spaced=$(printf '%s' "$token" | tr '-' ' ')
-        if echo "$fname_lower" | grep -q -- "$token" \
-           || echo "$fname_lower" | grep -q -- "$token_spaced" \
-           || { [ -n "$title_lower" ] && printf '%s' "$title_lower" | grep -qF -- "$token"; }; then
-            if [ "${#token}" -ge 6 ]; then score=$((score + 15)); else score=$((score + 10)); fi
-            matched=$((matched + 1))
-        fi
-    done
-    if [ "$matched" -eq "${#tokens[@]}" ] && [ "${#tokens[@]}" -gt 1 ]; then
-        score=$((score + 50))
-    fi
-
-    [ "$score" -gt 0 ] && printf '%s\t%s\n' "$score" "$fname" >> "$score_file"
-done < <(jq -r '.pages[] | [.filename, (.title // "")] | @tsv' "$MANIFEST")
-
-sort -t$'\t' -k1 -rn "$score_file" | head -10 | cut -f2
+        if (score > 0) printf "%d\t%s\n", score, fname
+    }' \
+| sort -t$'\t' -k1,1nr -k2,2 | head -10 | cut -f2
+# exit 0 is deliberate: with pipefail, `head -10` closing the pipe early makes
+# sort exit 2 (EPIPE under our `trap '' PIPE`) whenever there are >10 matches —
+# a benign race, not a failure. Real input errors fail loudly at the manifest
+# validation above, before this pipeline runs.
 exit 0

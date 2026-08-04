@@ -130,10 +130,11 @@ class TestIndexCarryForward:
     def test_carry_forward_when_scratch_missing(self, tmp_path):
         scratch = tmp_path / "scratch"
         scratch.mkdir()  # no .md file for the entry
-        index = bsi.build_index(
+        index, carried = bsi.build_index(
             {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": self.OLD_RECORD}
         )
         page = index["pages"][0]
+        assert carried == 1
         assert page["terms"] == {"hook": 12, "matcher": 5}
         assert page["headings"] == [{"text": "Configuration", "level": 2}]
         assert page["word_count"] == 1234
@@ -145,7 +146,8 @@ class TestIndexCarryForward:
     def test_empty_record_only_when_neither_exists(self, tmp_path):
         scratch = tmp_path / "scratch"
         scratch.mkdir()
-        index = bsi.build_index({"pages": [ENTRY]}, scratch, {})
+        index, carried = bsi.build_index({"pages": [ENTRY]}, scratch, {})
+        assert carried == 0
         page = index["pages"][0]
         assert page["headings"] == []
         assert page["terms"] == {}
@@ -155,19 +157,21 @@ class TestIndexCarryForward:
         scratch = tmp_path / "scratch"
         scratch.mkdir()
         empty_old = dict(self.OLD_RECORD, headings=[], terms={}, word_count=0)
-        index = bsi.build_index(
+        index, carried = bsi.build_index(
             {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": empty_old}
         )
+        assert carried == 0
         assert index["pages"][0]["terms"] == {}
 
     def test_fresh_content_wins_over_old_record(self, tmp_path):
         scratch = tmp_path / "scratch"
         scratch.mkdir()
         (scratch / "claude-code__hooks.md").write_text(SAMPLE_MD)
-        index = bsi.build_index(
+        index, carried = bsi.build_index(
             {"pages": [ENTRY]}, scratch, {"claude-code__hooks.md": self.OLD_RECORD}
         )
         page = index["pages"][0]
+        assert carried == 0
         assert page["word_count"] == len(SAMPLE_MD.split())  # rebuilt, not carried
         assert page["terms"] != self.OLD_RECORD["terms"]
 
@@ -204,6 +208,29 @@ class TestContentShareGuard:
         bsi.check_content_share(self._index(with_terms=0, empty=5), 0.0)  # no raise
 
 
+class TestCarryShareGuard:
+    """Issue #29: a mostly-carried-forward index must not be published silently."""
+
+    def test_trips_above_ceiling(self):
+        with pytest.raises(SystemExit):
+            bsi.check_carry_share(carried=6, total=10, max_share=0.50)
+
+    def test_passes_at_or_below_ceiling(self):
+        bsi.check_carry_share(carried=5, total=10, max_share=0.50)  # no raise
+        bsi.check_carry_share(carried=0, total=10, max_share=0.50)
+
+    def test_empty_index_left_to_content_share_guard(self):
+        bsi.check_carry_share(carried=0, total=0, max_share=0.50)  # no raise
+
+    def test_share_of_one_disables(self):
+        bsi.check_carry_share(carried=10, total=10, max_share=1.0)  # no raise
+
+    def test_zero_ceiling_rejects_any_carry(self):
+        with pytest.raises(SystemExit):
+            bsi.check_carry_share(carried=1, total=10, max_share=0.0)
+        bsi.check_carry_share(carried=0, total=10, max_share=0.0)  # no raise
+
+
 class TestBuildIndex:
     def test_build_and_save_roundtrip(self, tmp_path):
         scratch = tmp_path / "scratch"
@@ -211,7 +238,7 @@ class TestBuildIndex:
         (scratch / "claude-code__hooks.md").write_text(SAMPLE_MD)
         manifest = {"pages": [ENTRY]}
 
-        index = bsi.build_index(manifest, scratch)
+        index, _carried = bsi.build_index(manifest, scratch)
         assert index["schema_version"] == 2
         assert len(index["pages"]) == 1
 

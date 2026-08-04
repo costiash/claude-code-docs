@@ -84,7 +84,7 @@ ensure_dirs() { mkdir -p "$CACHE_DIR" "$META_DIR"; }
 # --------------------------------------------------------------------------
 # One sync per cache, whichever the caller (SessionStart hook, direct CLI,
 # --background child): mkdir is the atomic gate, the owner's PID lives in
-# $LOCK_DIR/pid, and a running sync heartbeats the lock mtime every batch.
+# $LOCK_DIR/pid, and a running sync heartbeats the lock mtime per fetched page.
 # Reaping is evidence-based, never blind-mtime — the old hook-side 30-minute
 # reaper could steal the lock from a legitimately slow first sync, and its
 # unconditional EXIT trap then removed the successor's lock, cascading.
@@ -141,9 +141,9 @@ acquire_sync_lock() {
         [ -e "$LOCK_DIR" ] || continue
         if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
             # Live owner wins — unless the lock mtime is ancient: a running
-            # sync heartbeats every full batch (bounded well under 30 min),
-            # so 30+ idle minutes means the PID was recycled by an unrelated
-            # process (kill -0 lies alive).
+            # sync heartbeats per fetched page (each bounded by curl
+            # --max-time, far under 30 min), so 30+ idle minutes means the
+            # PID was recycled by an unrelated process (kill -0 lies alive).
             if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
                 [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
                 return 1
@@ -319,31 +319,17 @@ cmd_sync() {
     fi
     echo "fetch-docs: fetching $count page(s)..."
 
-    # Parallel fetch: re-invoke self per line (line = filename\tmd_url\tsha) via a
-    # portable bash job pool — launch up to $PARALLEL children, then wait for the
-    # batch. NOT xargs -I: BSD xargs caps -I replacement at 255 bytes (real manifest
-    # lines exceed that, so no page would ever sync on macOS) and does quote
-    # processing on input. retry-once lives inside fetch_one; failures are skipped
-    # and recounted below via needs_fetch.
-    local running=0
-    while IFS= read -r line; do
-        [ -n "$line" ] || continue
-        "$SELF" __fetch_line "$line" &
-        running=$((running + 1))
-        if [ "$running" -ge "$PARALLEL" ]; then
-            wait
-            running=0
-            # Heartbeat for the recycled-PID reap, fired after each FULL
-            # batch. The final partial batch (or a whole sync that fits in
-            # one batch) goes without — safe, since a batch is bounded by
-            # curl --max-time, far below the 30-min backstop. Dir-guarded:
-            # after a lock removal races us, an unguarded touch would
-            # recreate the path as a plain FILE and poison future
-            # acquisitions.
-            [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
-        fi
-    done < "$pending"
-    wait
+    # Parallel fetch: re-invoke self per line (line = filename\tmd_url\tsha) via
+    # a true worker pool — xargs keeps $PARALLEL children busy continuously,
+    # unlike the old batch loop where every batch waited on its slowest fetch
+    # (idling up to PARALLEL-1 slots). NUL-delimited with -n1, NOT -I: BSD xargs
+    # caps -I replacement at 255 bytes (real manifest lines exceed that, so no
+    # page would ever sync on macOS) and does quote processing on input; -0
+    # passes each line verbatim as one argument. retry-once lives inside
+    # fetch_one; failures are skipped and recounted below via needs_fetch.
+    # The lock heartbeat moved into cmd_fetch_line — with no batch boundary in
+    # the parent, each child touches the lock after its fetch instead.
+    tr '\n' '\0' < "$pending" | xargs -0 -n1 -P "$PARALLEL" "$SELF" __fetch_line
 
     # Recount what still needs fetching (i.e. failed) to report a success count and
     # to exit nonzero on a total failure — a silent 'sync complete' after 0 fetches
@@ -363,14 +349,21 @@ cmd_sync() {
     return 0
 }
 
-# Internal: fetch one tab-separated line (used by the sync job pool).
+# Internal: fetch one tab-separated line (used by the sync worker pool).
 cmd_fetch_line() {
-    local line="$1"
+    local line="${1:-}"
+    [ -n "$line" ] || return 0
     local filename md_url sha
     filename=$(printf '%s' "$line" | cut -f1)
     md_url=$(printf '%s' "$line" | cut -f2)
     sha=$(printf '%s' "$line" | cut -f3)
-    fetch_one "$filename" "$md_url" "$sha" || true  # skip failures, don't abort the batch
+    fetch_one "$filename" "$md_url" "$sha" || true  # skip failures, don't abort the pool
+    # Heartbeat for the recycled-PID reap (per page, since the pool parent has
+    # no batch boundary to fire it from). Dir-guarded: after a lock removal
+    # races us, an unguarded touch would recreate the path as a plain FILE and
+    # poison future acquisitions.
+    [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
+    return 0
 }
 
 cmd_status() {
@@ -419,6 +412,9 @@ cmd_prune() {
         fi
     done
     rm -f "$keep"
+    # A killed fetch leaves .tmp.* files the *.md glob above never sees. Only
+    # old ones (60+ min) — a live sync's in-flight temp files must survive.
+    find "$CACHE_DIR" "$META_DIR" -maxdepth 1 -name '.tmp.*' -mmin +60 -exec rm -f {} + 2>/dev/null
     echo "fetch-docs: pruned $removed file(s) not in manifest"
 }
 

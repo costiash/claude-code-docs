@@ -1,1 +1,2 @@
+# Keep in lockstep with pyproject.toml [project.dependencies] (floor there, pin here).
 requests==2.33.0

@@ -85,6 +85,12 @@ stored — a consumer recomputes `slugify(text)` on demand.
 `validate_manifest_transition(old, new)` is first-run-safe: no v2 predecessor counts
 as a clean start, not a mass removal. `update-docs.yml` repeats the floor check in jq.
 
+The index build (`scripts/build_search_index.py`) has its own guards, env-tunable:
+`DOCS_INDEX_MIN_FILES` (250 — scratch floor), `DOCS_INDEX_MIN_CONTENT_SHARE` (0.90 —
+pages with real terms; `0` disables), and `DOCS_INDEX_MAX_CARRY_SHARE` (0.50 — ceiling
+on records carried forward from the committed index, so a build over a mostly-missing
+scratch dir cannot publish a largely-stale index silently; `1` disables).
+
 ## CI pipeline (`scripts/`, Python, not shipped to users)
 
 - `fetcher/` — `llms_txt.py` (parse) + `sitemap.py` (`discover_sitemap_entries`) →
@@ -105,7 +111,7 @@ as a clean start, not a mass removal. `update-docs.yml` repeats the floor check 
   `raw.githubusercontent.com`); atomic tmp+mv writes; retry-once; `xargs -P 8`.
   Offline + cache miss → the canonical URL is printed to stderr for a WebFetch fallback.
   `sync` is single-flight per cache via a PID-owned lock at `cache/.sync.lock/`
-  (owner PID in `pid`, mtime heartbeated per full fetch batch) — every caller is covered,
+  (owner PID in `pid`, mtime heartbeated per fetched page) — every caller is covered,
   hook or direct CLI. A held lock is reaped only on evidence: dead owner PID,
   a pidless lock older than a minute, or a 30-minute-idle mtime despite a
   "live" PID (recycled-PID backstop). Release is owner-checked, so a reaped

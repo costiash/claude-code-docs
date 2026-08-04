@@ -117,6 +117,12 @@ jobs:
       - name: Run shell-script tests (BSD userland)
         run: python3 -m pytest tests/unit/test_fetch_docs_sh.py tests/unit/test_manifest_diff_sh.py --no-cov -q
 
+      # Search-quality harness over the committed manifest/index (no page cache
+      # needed). Wired into CI once the fuzzy-search awk rewrite cut it from
+      # ~10 min to ~12s (issue #30).
+      - name: Run search-quality harness
+        run: ./test-skills.sh
+
       # macOS ships /bin/bash 3.2 — fail fast on bash-4+ only constructs.
       # Comment lines are excluded so prose mentioning a builtin (e.g. "No
       # mapfile: ...") doesn't trip the check; only code positions count.

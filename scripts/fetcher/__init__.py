@@ -47,9 +47,6 @@ from .llms_txt import (
 
 from .sitemap import (
     discover_sitemap_entries,
-    discover_from_all_sitemaps,
-    discover_sitemap_and_base_url,
-    discover_claude_code_pages,
 )
 
 from .discovery import (
@@ -105,9 +102,6 @@ __all__ = [
     "discover_from_llms_txt",
     # Sitemap
     "discover_sitemap_entries",
-    "discover_from_all_sitemaps",
-    "discover_sitemap_and_base_url",
-    "discover_claude_code_pages",
     # Discovery union
     "merge_discovery",
     "discover_pages",
