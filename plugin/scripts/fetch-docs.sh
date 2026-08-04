@@ -100,7 +100,9 @@ release_sync_lock() {
     fi
 }
 
-# 0 = acquired (release trap installed); 1 = another sync owns the cache.
+# 0 = acquired (release trap installed); 1 = another sync owns the cache;
+# 2 = backout, ownership could not be recorded (disk full?) — an error the
+# caller must not report as contention.
 acquire_sync_lock() {
     local attempts=0 pid
     while [ "$attempts" -lt 10 ]; do  # spin cap: livelock insurance, never hit in practice
