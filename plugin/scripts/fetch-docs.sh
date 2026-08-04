@@ -148,7 +148,7 @@ acquire_sync_lock() {
         fi
         # Stale by evidence (dead PID / recycled-PID backstop / old pidless).
         # Reap via rename: only one contender wins the mv, losers loop and
-        # re-evaluate the fresh lock. ponytail: the read->mv gap is a
+        # re-evaluate the fresh lock. Known ceiling: the read->mv gap is a
         # microsecond TOCTOU; worst case is one duplicate sync writing
         # atomically to the same cache, not corruption or lock loss.
         if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then

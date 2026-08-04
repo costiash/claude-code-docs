@@ -160,7 +160,7 @@ rescue_user_data() {
         # heuristic below, or a populated parked corpus gets discarded in
         # favor of an effectively-empty cache. Real content (.md pages,
         # sidecar files) makes the rmdir fail and the install win as before.
-        # ponytail: two narrow races, both crash-cleanup-only and benign:
+        # Known ceiling — two narrow races, both crash-cleanup-only and benign:
         # removing a contender's live lock at worst duplicates one sync
         # (atomic per-file writes); and a sync that acquired but has not yet
         # written any page can have its scaffold-only cache swapped for the
