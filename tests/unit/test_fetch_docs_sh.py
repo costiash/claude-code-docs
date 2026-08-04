@@ -473,12 +473,17 @@ def test_host_allowlist_agrees_with_python_domains():
     spellings of the same contract with no shared source. A host added to one but
     not the other drifts silently: CI would fetch (and manifest) pages the client
     then refuses, or vice versa. Lock them together like the changelog pin above."""
+    import importlib.util
     import re
-    import sys
     root = Path(__file__).resolve().parents[2]
     m = re.search(r'^ALLOWED_HOSTS="([^"]+)"', (root / "plugin/scripts/fetch-docs.sh").read_text(), re.M)
     assert m, "ALLOWED_HOSTS not found in fetch-docs.sh"
     shell_hosts = set(m.group(1).split())
-    sys.path.insert(0, str(root / "scripts"))
-    from fetcher.config import ALLOWED_DOMAINS
-    assert shell_hosts == set(ALLOWED_DOMAINS)
+    # Load config.py directly by path — no sys.path mutation to leak into other tests.
+    spec = importlib.util.spec_from_file_location(
+        "fetcher_config_parity", root / "scripts" / "fetcher" / "config.py"
+    )
+    assert spec is not None and spec.loader is not None
+    config = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(config)
+    assert shell_hosts == set(config.ALLOWED_DOMAINS)

@@ -21,6 +21,11 @@ query=$(printf '%s' "$*" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' |
 [ -n "$query" ] || { echo "No valid query provided" >&2; exit 1; }
 [ -f "$MANIFEST" ] || { echo "Manifest not found: $MANIFEST" >&2; exit 1; }
 command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
+# Validate the manifest BEFORE the pipeline: a malformed/truncated manifest must
+# fail loudly here, not surface as "no results, exit 0". (jq -e alone is not
+# enough — jq 1.6 exits 0 on empty input; the type test rejects that too.)
+[ "$(jq -r '.pages | type' "$MANIFEST" 2>/dev/null)" = "array" ] \
+    || { echo "Manifest has no .pages array (malformed?): $MANIFEST" >&2; exit 1; }
 
 # Single awk pass over the whole manifest. The old per-page shell loop forked
 # grep up to ~10 times per page (~7,000 processes, ~17s per query); awk's
@@ -61,5 +66,9 @@ jq -r '.pages[] | [.filename, (.title // "")] | @tsv' "$MANIFEST" \
 
         if (score > 0) printf "%d\t%s\n", score, fname
     }' \
-| sort -t$'\t' -k1 -rn | head -10 | cut -f2
+| sort -t$'\t' -k1,1nr -k2,2 | head -10 | cut -f2
+# exit 0 is deliberate: with pipefail, `head -10` closing the pipe early makes
+# sort exit 2 (EPIPE under our `trap '' PIPE`) whenever there are >10 matches —
+# a benign race, not a failure. Real input errors fail loudly at the manifest
+# validation above, before this pipeline runs.
 exit 0

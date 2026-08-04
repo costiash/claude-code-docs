@@ -103,20 +103,23 @@ else
 
     if [ -d "$INSTALL_DIR" ]; then
         echo "Updating existing installation..."
-        # reset --hard (not pull --ff-only) so a history rewrite is absorbed cleanly.
         # A pristine depth-1 clone keeps --depth 1 (a plain fetch would download
         # every intermediate metadata commit for nothing); anything with more
         # history keeps it. Shallowness alone is NOT the signal: manifest-diff.sh's
         # --deepen 500 fallback leaves the repo shallow but deep, and re-shallowing
         # it would destroy the history the what's-new / changelog features use.
-        if [ "$(git -C "$INSTALL_DIR" rev-parse --is-shallow-repository 2>/dev/null)" = "true" ] \
-            && [ "$(git -C "$INSTALL_DIR" rev-list --count HEAD 2>/dev/null)" = "1" ]; then
-            DEPTH_ARG="--depth 1"
-        else
-            DEPTH_ARG=""
-        fi
-        # DEPTH_ARG unquoted on purpose: it must expand to two words (or none).
-        cd "$INSTALL_DIR" && git fetch $DEPTH_ARG origin main && git reset --hard origin/main || {
+        # A function (not an array/unquoted var): "${arr[@]}" on an empty array
+        # errors under set -u on bash 3.2 — the macOS bash this script runs on.
+        fetch_update() {
+            if [ "$(git rev-parse --is-shallow-repository 2>/dev/null)" = "true" ] \
+                && [ "$(git rev-list --count HEAD 2>/dev/null)" = "1" ]; then
+                git fetch --depth 1 origin main
+            else
+                git fetch origin main
+            fi
+        }
+        # reset --hard (not pull --ff-only) so a history rewrite is absorbed cleanly.
+        cd "$INSTALL_DIR" && fetch_update && git reset --hard origin/main || {
             echo "Update failed. Try: rm -rf $INSTALL_DIR && re-run this script"
             exit 1
         }
