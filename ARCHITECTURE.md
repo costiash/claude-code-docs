@@ -91,6 +91,10 @@ pages with real terms; `0` disables), and `DOCS_INDEX_MAX_CARRY_SHARE` (0.50 —
 on records carried forward from the committed index, so a build over a mostly-missing
 scratch dir cannot publish a largely-stale index silently; `1` disables).
 
+Any tripped guard fails the scheduled `update-docs` run — **the red Actions run IS the
+alert** (fail-closed by design, no separate notification channel); the last-good
+manifest/index stay published untouched.
+
 ## CI pipeline (`scripts/`, Python, not shipped to users)
 
 - `fetcher/` — `llms_txt.py` (parse) + `sitemap.py` (`discover_sitemap_entries`) →

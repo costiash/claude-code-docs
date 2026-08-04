@@ -5,11 +5,12 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.2] - 2026-08-04
 
 Background-sync lock rework from issue #28 (PR #32), the search-index
-stale-ratio ceiling from issue #29, and the low-severity backlog from
-issue #30.
+stale-ratio ceiling from issue #29 (PR #34), and the low-severity backlog
+from issue #30 (PR #34). Bot reviewers converged on approve with no
+substantive findings; adversarially verified by execution.
 
 ### Added
 - **Stale-ratio ceiling on the search index** (#29). Carry-forward keeps search
