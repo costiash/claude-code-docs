@@ -160,8 +160,12 @@ rescue_user_data() {
         # heuristic below, or a populated parked corpus gets discarded in
         # favor of an effectively-empty cache. Real content (.md pages,
         # sidecar files) makes the rmdir fail and the install win as before.
-        # ponytail: removing a contender's live lock here at worst duplicates
-        # one sync (atomic per-file writes); rescue runs only on crash cleanup.
+        # ponytail: two narrow races, both crash-cleanup-only and benign:
+        # removing a contender's live lock at worst duplicates one sync
+        # (atomic per-file writes); and a sync that acquired but has not yet
+        # written any page can have its scaffold-only cache swapped for the
+        # rescued corpus mid-run — its children then write into the rescued
+        # cache, which is exactly where the pages belong.
         if [ "$sub" = "cache" ] && [ -d "$DOCS_DIR/$sub" ]; then
             rmdir "$DOCS_DIR/$sub/.meta" 2>/dev/null || true  # empty .meta only
             rm -rf "$DOCS_DIR/$sub/.sync.lock" 2>/dev/null || true

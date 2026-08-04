@@ -114,6 +114,8 @@ acquire_sync_lock() {
                 return 1
             fi
             SYNC_LOCK_HELD=1
+            # EXIT only, deliberately: a signal death that skips the trap
+            # leaves a dead-PID lock, which the evidence-based reap clears.
             trap release_sync_lock EXIT
             return 0
         fi
@@ -127,8 +129,9 @@ acquire_sync_lock() {
         [ -e "$LOCK_DIR" ] || continue
         if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
             # Live owner wins — unless the lock mtime is ancient: a running
-            # sync heartbeats every batch, so 30+ idle minutes means the PID
-            # was recycled by an unrelated process (kill -0 lies alive).
+            # sync heartbeats every full batch (bounded well under 30 min),
+            # so 30+ idle minutes means the PID was recycled by an unrelated
+            # process (kill -0 lies alive).
             if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
                 [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
                 return 1
@@ -149,6 +152,9 @@ acquire_sync_lock() {
         if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then
             rm -rf "$LOCK_DIR.reap.$$"
         fi
+        # Brief backoff so multi-contender reaping isn't a tight CPU spin
+        # (fractional sleep is non-POSIX; fall back to a whole second).
+        sleep 0.1 2>/dev/null || sleep 1
     done
     return 1
 }
@@ -304,9 +310,11 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
-            # Heartbeat for the recycled-PID backstop. Dir-guarded: after a
-            # lock removal races us, an unguarded touch would recreate the
-            # path as a plain FILE and poison future acquisitions.
+            # Heartbeat (each FULL batch; the final partial batch goes
+            # without, bounded by --max-time far below the 30-min backstop)
+            # for the recycled-PID reap. Dir-guarded: after a lock removal
+            # races us, an unguarded touch would recreate the path as a
+            # plain FILE and poison future acquisitions.
             [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
         fi
     done < "$pending"

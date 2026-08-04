@@ -274,6 +274,19 @@ class TestSyncLock:
         assert r.returncode == 0, r.stderr
         assert not self.lock_dir(cache).exists()
 
+    def test_fetch_line_child_does_not_release_parent_lock(self, harness):
+        # The sync job pool re-invokes self as __fetch_line children; they
+        # never install the release trap, so a child exiting must leave the
+        # parent's lock alone — load-bearing for the cascade fix.
+        env, cache, _ = harness
+        lock = self.make_lock(cache, pid=os.getpid())
+        url, content = PAGES["claude-code__hooks.md"]
+        line = f"claude-code__hooks.md\t{url}\t{sha(content)}"
+        r = run(env, "__fetch_line", line)
+        assert r.returncode == 0, r.stderr
+        assert (cache / "claude-code__hooks.md").exists()
+        assert lock.is_dir() and (lock / "pid").exists()
+
     def test_finishing_sync_leaves_stolen_lock_alone(self, harness):
         # The #28 cascade: sync A's EXIT trap must not rmdir a lock that was
         # (wrongly or rightly) reaped and re-acquired by a successor. The

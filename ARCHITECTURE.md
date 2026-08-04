@@ -105,7 +105,7 @@ as a clean start, not a mass removal. `update-docs.yml` repeats the floor check 
   `raw.githubusercontent.com`); atomic tmp+mv writes; retry-once; `xargs -P 8`.
   Offline + cache miss → the canonical URL is printed to stderr for a WebFetch fallback.
   `sync` is single-flight per cache via a PID-owned lock at `cache/.sync.lock/`
-  (owner PID in `pid`, mtime heartbeated per batch) — every caller is covered,
+  (owner PID in `pid`, mtime heartbeated per full fetch batch) — every caller is covered,
   hook or direct CLI. A held lock is reaped only on evidence: dead owner PID,
   a pidless lock older than a minute, or a 30-minute-idle mtime despite a
   "live" PID (recycled-PID backstop). Release is owner-checked, so a reaped
