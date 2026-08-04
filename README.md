@@ -4,6 +4,7 @@
 [![Tests](https://github.com/costiash/claude-code-docs/actions/workflows/test.yml/badge.svg)](https://github.com/costiash/claude-code-docs/actions)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
 [![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
+[![Listed on ClaudePluginHub](https://www.claudepluginhub.com/badge/costiash-claude-docs-plugin)](https://www.claudepluginhub.com/plugins/costiash-claude-docs-plugin?ref=badge)
 
 **Official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
 

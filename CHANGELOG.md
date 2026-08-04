@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-08-04
+
+Bug-fix release: the background-sync lock rework from issue #28 (PR #32).
+
+### Fixed
+- **Sync is now single-flight for every caller.** The lock moved from the
+  SessionStart hook into `fetch-docs.sh sync` itself, so direct CLI syncs and
+  `--background` children are covered, not just the hook path. The lock is
+  PID-owned (`cache/.sync.lock/pid`) with a per-batch mtime heartbeat.
+- **A slow first sync can no longer lose its lock.** The blind 30-minute mtime
+  reaper is gone; a held lock is reaped only on evidence — dead owner PID, a
+  pidless lock older than a minute, or a 30-minute-idle mtime despite a "live"
+  PID (recycled-PID backstop). Reaping goes through an atomic rename so two
+  contenders cannot double-reap.
+- **EXIT-trap cascade closed.** Lock release is owner-checked, so a sync whose
+  lock was reaped and re-acquired by a successor can no longer remove the
+  successor's lock on exit. A plain file left at the lock path is reaped
+  instead of silently disabling every future sync.
+- **Crash-cleanup rescue hardened.** A racing sync child's recreated cache
+  scaffolding (`.meta/`, `.sync.lock/`) no longer defeats the rescue of a
+  populated parked cache during self-heal; a disk-full lock backout reports a
+  distinct error instead of "another sync is already running"; lock cleanup
+  works on BSD userland (`rm -rf` cannot remove unreadable directories there).
+
 ## [2.0.1] - 2026-08-02
 
 Deployment-hardening release: no new features, all fixes from an exhaustive
