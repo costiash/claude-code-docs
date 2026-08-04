@@ -1,6 +1,6 @@
-# Changelog - Enhanced Edition
+# Changelog
 
-All notable changes to the enhanced edition of claude-code-docs will be documented in this file.
+All notable changes to claude-code-docs will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -397,6 +397,6 @@ Deployment-hardening release: no new features, all fixes from an exhaustive
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this enhanced edition.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this project.
 
 For upstream contributions, see [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs).

@@ -6,11 +6,31 @@
 [![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
 [![Listed on ClaudePluginHub](https://www.claudepluginhub.com/badge/costiash-claude-docs-plugin)](https://www.claudepluginhub.com/plugins/costiash-claude-docs-plugin?ref=badge)
 
-**Official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
+**Every official Claude doc page, always live, never redistributed.** 700+ pages across `platform.claude.com` and `code.claude.com`, re-indexed every 3 hours — and your Claude reads the actual current page, not a stale copy or a guess from training data.
 
-## Why Use This?
+```bash
+/plugin marketplace add costiash/claude-code-docs
+/plugin install claude-docs@claude-code-docs
+```
 
-Claude knows a lot — but documentation changes fast. API parameters shift, new features land, SDK methods get renamed. This tool gives Claude a live index of every official doc page and fetches the latest page from Anthropic's servers on demand, so answers come from the source, not stale training data. The repository itself stores only metadata — a page manifest and a lossy search index — never documentation prose.
+Two commands. No Python, no MCP server, no API keys — the client is pure `bash` + `curl` + `jq`.
+
+## The Architecture Nobody Else Uses
+
+Most documentation tools pick one of two designs: **mirror the docs** into a repo (instantly stale between syncs, redistributes content that isn't theirs, ~100 MB clones) or **serve them through an MCP server** (another process to run, network round-trips per query, answers that flood your context window).
+
+This tool does neither. The repository commits **only metadata** — a page manifest and a prose-free search index, about 3 MB total. Your machine fetches each `.md` page **directly from Anthropic's servers, on demand**, into a local cache. Claude searches the index first and reads only the pages it needs.
+
+| | Web search | Docs mirrors | MCP docs servers | **This tool** |
+|---|---|---|---|---|
+| Freshness | Search-engine lag | Stale between syncs | Usually current | **Live page, every read** |
+| Claude docs coverage | Hit-or-miss | Often partial | Generic libraries | **All 700+ pages, both sites** |
+| Runtime dependencies | None | git + disk | MCP server + config | **bash, curl, jq** |
+| Context cost per answer | Whole pages of noise | Full file reads | Large tool payloads | **Index hit → one targeted page** |
+| Redistributes Anthropic's docs | No | **Yes, wholesale** | Varies | **Never — you fetch from the source** |
+| Clone size | — | ~100 MB | — | **~3 MB** |
+
+The compliance point is not a footnote: this repo contains **zero documentation prose — not at the tip, not anywhere in its history**. What you install is a map; the territory always comes fresh from Anthropic.
 
 | Without claude-code-docs | With claude-code-docs |
 |---|---|
@@ -19,73 +39,20 @@ Claude knows a lot — but documentation changes fast. API parameters shift, new
 | "I think the API works like..." | "According to the documentation..." |
 | You verify answers manually | Answers cite specific doc pages |
 
-## How It Works
+## What You Get
 
-The repository commits **only metadata** — a page manifest and a prose-free search index (a couple of MB, no documentation text). Your machine fetches the actual `.md` pages from Anthropic's servers on demand into a local cache. So:
+- **Auto-discovery** — ask anything about Claude Code, the API, SDKs, or prompt engineering and Claude reads the relevant docs before answering. No prefix, no command. This is the feature you'll forget is running — your answers are just correct.
+- **`/docs` skill** — explicit lookups when you want them: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
+- **Interactive Courses** — turn any topic into a self-contained animated HTML course (below — this one's unique)
+- **Changelog Reports** — visual HTML reports of what changed in the docs, with one-click course generation per entry
+- **Token-efficient by design** — search runs in shell against a prose-free index; Claude's context only ever pays for the specific pages it reads
+- **Session-start auto-updates** — metadata syncs and changed pages re-fetch in the background every session. No cron jobs, no manual pulls.
 
-- **Current** — answers come from the live page on `platform.claude.com` / `code.claude.com`, not a snapshot or stale training data.
-- **Private & compliant** — no Anthropic documentation is redistributed. The repo commits none of it (not at the tip, not in history); you fetch it yourself, straight from the source.
-- **Tiny** — the clone is a few MB of metadata, not the ~100 MB doc corpus, and pages are cached only as you open them.
-
-## Quick Start — Plugin Install (Recommended)
-
-Two commands, no dependencies:
-
-```bash
-/plugin marketplace add costiash/claude-code-docs
-/plugin install claude-docs@claude-code-docs
-```
-
-That's it. On your next session Claude will automatically:
-1. Clone a tiny metadata repo to `~/.claude-code-docs/` (manifest + search index, no prose)
-2. Fetch documentation pages into a local cache in the background, and keep both current each session
-3. Make the `/docs` skill available for manual lookups
-4. Activate the **auto-discovery Skill** — Claude reads docs automatically when you ask Claude-related questions
-
-### What the Plugin Gets You
-
-- **`/docs` skill** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
-- **Auto-discovery Skill** — Claude proactively searches docs when you ask about Claude Code, the API, SDKs, or prompt engineering. No `/docs` prefix needed.
-- **Interactive Courses** — Turn any Claude topic into a stunning, self-contained HTML course with animated diagrams, protocol conversations, quizzes, and code translations. Just say "create a course on hooks" or run `/docs --course <topic>`.
-- **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
-- **Content search** — Shell-based full-text search and fuzzy filename matching, no Python needed
-- **Nothing to install** — the client is pure `bash` + `curl` + `jq` (already on macOS/Linux), no Python runtime needed
-
-## Legacy: Script Install (Migration)
-
-For environments without plugin support, the install script clones documentation locally:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
-```
-
-If Claude Code is detected, the script will guide you to install the plugin instead. Without Claude Code, it falls back to `git clone` for basic documentation access.
-
-## Team / Organization Adoption
-
-Auto-prompt every team member to install the plugin by adding this to your project's `.claude/settings.json`:
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "claude-code-docs": {
-      "source": {
-        "source": "github",
-        "repo": "costiash/claude-code-docs"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "claude-docs@claude-code-docs": true
-  }
-}
-```
-
-Commit this file to your repository. When a team member trusts the project folder, they'll be prompted to install the marketplace and plugin automatically — no manual setup needed.
+On your first session after install, Claude clones the ~3 MB metadata repo to `~/.claude-code-docs/`, warms the page cache in the background, and activates the skills. That's the whole setup.
 
 ## Interactive Courses — Learn Claude by Doing
 
-> **This isn't just a docs mirror anymore.** Ask about any Claude topic and get a beautifully crafted, interactive HTML course — complete with animated protocol diagrams, hands-on quizzes, code-with-English translations, and a stunning dark Obsidian & Amber visual theme. One self-contained file, zero setup, opens right in your browser.
+> **No other docs tool does this.** Ask about any Claude topic and get a beautifully crafted, interactive HTML course — animated protocol diagrams, hands-on quizzes, code-with-English translations, in a dark Obsidian & Amber theme. One self-contained file, zero setup, opens right in your browser.
 
 ```bash
 /docs --course hooks          # Generate a course on Claude Code hooks
@@ -97,19 +64,19 @@ Or just ask naturally after any docs response — Claude will offer to create a 
 
 https://github.com/user-attachments/assets/e36ae4c1-2ee6-4932-b0a5-3463cd20e012
 
-**What you get:**
-- **4-7 scroll-based modules** with progressive learning arc
-- **Protocol Conversations** — animated chat-style visualizations showing how Client, API, Claude, and tools actually exchange messages
-- **Code translations** — real API examples from the docs with line-by-line plain English explanations
-- **Quizzes that test application** — "What would you use for this scenario?" not "Define this term"
+**What's inside a course:**
+- **4-7 scroll-based modules** with a progressive learning arc
+- **Protocol Conversations** — animated chat-style visualizations of how Client, API, Claude, and tools actually exchange messages
+- **Code translations** — real API examples from the docs with line-by-line plain-English explanations
+- **Quizzes that test application** — "What would you use for this scenario?", not "Define this term"
 - **Glossary tooltips** on every Claude-specific term
-- **Obsidian & Amber theme** — dark, atmospheric design with Instrument Serif headings, warm amber accents, grain textures, and glass effects. Not your typical tutorial.
+- **Obsidian & Amber theme** — Instrument Serif headings, warm amber accents, grain textures, glass effects. Not your typical tutorial.
 
-Courses are saved to `~/.claude-code-docs/courses/` so you can revisit or share them with your team.
+Courses are saved to `~/.claude-code-docs/courses/` so you can revisit them or share them with your team.
 
-### Changelog Reports
+### Changelog Reports — the Docs→Learning Loop
 
-Stay on top of what's changing in Claude's documentation. Generate a visual HTML report of recent doc updates — grouped by category, with summaries and key highlights:
+Anthropic's documentation changes daily. Stay ahead of it:
 
 ```bash
 /docs --report          # Last 7 days of changes
@@ -117,9 +84,7 @@ Stay on top of what's changing in Claude's documentation. Generate a visual HTML
 /docs --report 30d      # Last 30 days
 ```
 
-Each entry in the report includes a **"Create Course"** button. Click it to copy a course generation command to your clipboard — paste it into Claude Code to instantly deep-dive into any topic that caught your eye.
-
----
+You get a visual HTML report of every added, changed, and removed page — grouped by category, with summaries. And each entry carries a **"Create Course"** button: click, paste into Claude Code, and deep-dive into whatever just changed. Docs monitoring and learning in one loop.
 
 ## Usage
 
@@ -148,34 +113,65 @@ The `/docs` skill understands intent — ask questions in plain English:
 
 Claude finds the right docs, reads them, and synthesizes a clear answer with source links.
 
-### With the Auto-Discovery Skill (Plugin Only)
+### Or Just Ask (Auto-Discovery)
 
-When installed as a plugin, you don't even need `/docs`. Just ask naturally:
+With the plugin installed you don't need `/docs` at all:
 
 > "How do I set up MCP servers in Claude Code?"
 
-Claude recognizes this is a documentation question and automatically reads the relevant docs before answering.
+Claude recognizes a documentation question and reads the relevant docs before answering — grounded answers with real URLs, every time.
 
 ## Documentation Coverage
 
-The full Claude documentation set — every page on **platform.claude.com** and **code.claude.com** — re-indexed every 3 hours:
+The full Claude documentation set — every page on **platform.claude.com** and **code.claude.com**:
 
 - **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Ruby, C#, PHP)
-- **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
 - **Claude Code** — CLI docs: hooks, skills, MCP, plugins, settings, sub-agents
-- **Agents & Tools** — MCP connectors, tool use patterns, agent capabilities
 - **Core Documentation** — Guides, tutorials, prompt engineering, extended thinking
+- **Agents & Tools** — MCP connectors, tool use patterns, agent capabilities
+- **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
 - **About Claude** — Model capabilities, context windows, pricing
-- **Getting Started** — Quickstart guides
 - **Testing & Evaluation** — Eval frameworks, testing guides
 - **Release Notes** — Version history and changelogs
+
+## Team / Organization Adoption
+
+Auto-prompt every team member to install the plugin by adding this to your project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "claude-code-docs": {
+      "source": {
+        "source": "github",
+        "repo": "costiash/claude-code-docs"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "claude-docs@claude-code-docs": true
+  }
+}
+```
+
+Commit this file to your repository. When a team member trusts the project folder, they'll be prompted to install the marketplace and plugin automatically — no manual setup needed.
 
 ## How Updates Work
 
 1. **Automatic (Plugin)** — Each session the metadata syncs (`git reset --hard origin/main`) and a background fetch updates only changed pages in the local cache
 2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
 3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
-4. **Safe** — Manifest safeguards prevent catastrophic changes (min 200 pages discovered, max 10% removed per sync, min 250 pages)
+4. **Safe** — Layered fail-closed safeguards: discovery floors, max-removal thresholds, index carry-forward through partial outages, and an independent floor check in CI before any commit. A bad upstream day can delay an update; it cannot corrupt your docs.
+
+## Legacy: Script Install (Migration)
+
+For environments without plugin support:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
+```
+
+If Claude Code is detected, the script will guide you to install the plugin instead. Without Claude Code, it sets up the same metadata clone + on-demand fetching for basic documentation access.
 
 > **Upgrading from a v1 (mirror) install?** Nothing to do — your next session auto-migrates. The SessionStart hook hard-syncs to the metadata-only v2 layout (removing the old committed `docs/`, preserving your cache and courses), then fetches pages on demand.
 
@@ -184,6 +180,7 @@ The full Claude documentation set — every page on **platform.claude.com** and 
 | Problem | Solution |
 |---------|----------|
 | `/docs` not found | Restart Claude Code so the plugin loads; for a script install, check `ls ~/.claude-code-docs/` |
+| `jq` missing | `brew install jq` (macOS) or `sudo apt install jq` (Debian/Ubuntu) — the only dependency not preinstalled everywhere |
 | Docs seem outdated | `/docs sync` (or the SessionStart hook, which hard-syncs each session) forces an update; `/docs -t` only checks freshness |
 | Plugin not working | Run `/plugin list` to verify installation |
 | Script install fails | Install the plugin instead: `/plugin install claude-docs@claude-code-docs` |
@@ -202,10 +199,11 @@ The full Claude documentation set — every page on **platform.claude.com** and 
 
 ## Security
 
-- No documentation prose is committed — the repo holds only metadata (manifest + lossy index)
-- The client fetch layer enforces a **domain allowlist** (`code.claude.com`, `platform.claude.com`, `raw.githubusercontent.com`), HTTPS-only, with atomic writes and sha256 integrity checks
-- Manifest safeguards prevent catastrophic changes; input sanitization and path-traversal protection on filenames
-- Full test suite (including a mocked-curl harness for the client fetch layer)
+- **No documentation prose is committed** — the repo holds only metadata (manifest + lossy, non-reconstructible index), verified by tests on every CI run
+- The client fetch layer enforces a **domain allowlist** (`code.claude.com`, `platform.claude.com`, `raw.githubusercontent.com`), HTTPS-only with no redirect following, atomic writes, sha256 integrity checks, and filename path-traversal protection
+- The CI pipeline is **fail-closed at every layer**: discovery floors, manifest transition guards, index carry-forward ceilings, and an independent jq floor check before any commit
+- Third-party CI actions are SHA-pinned; workflows run with least-privilege tokens; the shell client is tested on both Linux and macOS (BSD userland, bash 3.2) on every push
+- 150+ automated tests, including a mocked-curl harness that exercises the client's security guards directly
 
 ## Contributing
 
@@ -213,7 +211,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture overview, development se
 
 ## Acknowledgments
 
-- **[Eric Buess](https://github.com/ericbuess)** — Creator of the [original claude-code-docs](https://github.com/ericbuess/claude-code-docs)
+- **[Eric Buess](https://github.com/ericbuess)** — Creator of the [original claude-code-docs](https://github.com/ericbuess/claude-code-docs), the project that pioneered `/docs` in Claude Code and the foundation this tool grew from
 - **[zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course)** — Inspiration for the interactive course generator skill
 - **[Anthropic](https://www.anthropic.com/)** — For Claude Code and the documentation
 

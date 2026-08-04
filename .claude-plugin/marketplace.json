@@ -17,7 +17,7 @@
         "reference",
         "api-docs",
         "sdk-docs",
-        "offline",
+        "live-fetch",
         "auto-update",
         "search",
         "claude-code-plugin"

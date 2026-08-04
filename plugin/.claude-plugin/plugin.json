@@ -8,5 +8,5 @@
   "homepage": "https://costiash.github.io/claude-code-docs/",
   "repository": "https://github.com/costiash/claude-code-docs",
   "license": "MIT",
-  "keywords": ["documentation", "claude", "claude-code", "api", "agent-sdk", "search", "reference", "offline-docs"]
+  "keywords": ["documentation", "claude", "claude-code", "api", "agent-sdk", "search", "reference", "live-docs"]
 }
