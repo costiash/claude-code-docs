@@ -79,6 +79,61 @@ sha256_of() {
 
 ensure_dirs() { mkdir -p "$CACHE_DIR" "$META_DIR"; }
 
+# --------------------------------------------------------------------------
+# sync lock (issue #28)
+# --------------------------------------------------------------------------
+# One sync per cache, whichever the caller (SessionStart hook, direct CLI,
+# --background child): mkdir is the atomic gate, the owner's PID lives in
+# $LOCK_DIR/pid, and a running sync heartbeats the lock mtime every batch.
+# Reaping is evidence-based, never blind-mtime — the old hook-side 30-minute
+# reaper could steal the lock from a legitimately slow first sync, and its
+# unconditional EXIT trap then removed the successor's lock, cascading.
+LOCK_DIR="$CACHE_DIR/.sync.lock"
+SYNC_LOCK_HELD=0
+
+release_sync_lock() {
+    [ "$SYNC_LOCK_HELD" = 1 ] || return 0
+    # Remove only a lock we still own: if a reaper replaced it, rmdir'ing the
+    # successor's lock here is exactly the #28 cascade.
+    if [ "$(cat "$LOCK_DIR/pid" 2>/dev/null)" = "$$" ]; then
+        rm -rf "$LOCK_DIR"
+    fi
+}
+
+# 0 = acquired (release trap installed); 1 = another sync owns the cache.
+acquire_sync_lock() {
+    local tries=0 pid
+    while :; do
+        if mkdir "$LOCK_DIR" 2>/dev/null; then
+            echo "$$" > "$LOCK_DIR/pid"
+            SYNC_LOCK_HELD=1
+            trap release_sync_lock EXIT
+            return 0
+        fi
+        pid=$(cat "$LOCK_DIR/pid" 2>/dev/null)
+        if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+            # Live owner wins — unless the lock mtime is ancient: a running
+            # sync heartbeats every batch, so 30+ idle minutes means the PID
+            # was recycled by an unrelated process (kill -0 lies alive).
+            [ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ] || return 1
+        elif [ -z "$pid" ]; then
+            # Pidless: the owner may be inside its mkdir->pid-write window.
+            # Fresh (<1 min) = treat as live; older = crashed mid-acquire.
+            [ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin +1 2>/dev/null)" ] || return 1
+        fi
+        # Stale by evidence (dead PID / recycled-PID backstop / old pidless).
+        # Reap via rename: only one contender wins the mv, losers loop and
+        # re-evaluate the fresh lock. ponytail: the read->mv gap is a
+        # microsecond TOCTOU; worst case is one duplicate sync writing
+        # atomically to the same cache, not corruption or lock loss.
+        [ "$tries" -lt 2 ] || return 1
+        tries=$((tries + 1))
+        if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then
+            rm -rf "$LOCK_DIR.reap.$$"
+        fi
+    done
+}
+
 # Fetch a URL to a file with one retry. Returns 0 on success.
 fetch_url() {
     local url="$1" out="$2"
@@ -195,6 +250,10 @@ cmd_sync() {
     fi
 
     ensure_dirs
+    if ! acquire_sync_lock; then
+        echo "fetch-docs: another sync is already running (lock: $LOCK_DIR)"
+        return 0
+    fi
     local pending; pending=$(mktemp)
     # Only pages with a real sha256 are syncable (failed pages have null).
     jq -r '.pages[] | select(.sha256 != null) | [.filename, .md_url, .sha256] | @tsv' "$MANIFEST" \
@@ -226,6 +285,7 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
+            touch "$LOCK_DIR" 2>/dev/null  # heartbeat for the recycled-PID backstop
         fi
     done < "$pending"
     wait

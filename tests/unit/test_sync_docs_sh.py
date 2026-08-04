@@ -91,6 +91,31 @@ class TestFirstRunAndUpdate:
         assert "up-to-date" in context_of(r) or "updated" in context_of(r)
 
 
+class TestSyncLockDelegation:
+    def test_hook_cleans_legacy_lock_and_still_syncs(self, tmp_path, origin):
+        """Issue #28: locking moved into fetch-docs.sh cmd_sync. The hook no
+        longer takes its own lock — a leftover hook-era .sync.lock (bare dir)
+        must be cleaned up and must not suppress the background sync."""
+        home = tmp_path / "home"
+        home.mkdir()
+        # The fixture origin has no plugin/; ship a stub fetch-docs.sh so the
+        # hook's [ -x "$FETCH" ] gate passes and the launch path is exercised.
+        scripts = origin / "plugin" / "scripts"
+        scripts.mkdir(parents=True)
+        stub = scripts / "fetch-docs.sh"
+        stub.write_text("#!/bin/bash\nexit 0\n")
+        stub.chmod(0o755)
+        _git("add", ".", cwd=origin)
+        _git("commit", "-qm", "stub fetch script", cwd=origin)
+        run_hook(home, origin)
+        legacy = home / ".claude-code-docs" / ".sync.lock"
+        legacy.mkdir()  # hook-era lock: bare dir, no pid file
+        r = run_hook(home, origin)
+        assert r.returncode == 0
+        assert "Syncing changed pages" in context_of(r), context_of(r)
+        assert not legacy.exists()
+
+
 class TestRepoUrlSentinel:
     def test_override_ignored_without_sentinel(self, tmp_path, origin):
         """A stray CLAUDE_DOCS_REPO_URL alone must never repoint a real install."""

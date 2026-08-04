@@ -126,19 +126,15 @@ doc_count() {
 # foreground `status` scan: status is O(pages) and a large cache blew the 5s timeout
 # (exit 124, not 2), silently stranding pending updates. `sync` has its own cheap
 # 0-fetch fast path, so an already-current cache just no-ops in the background.
-# A lock dir prevents concurrent sessions from stacking parallel syncs; the worst
-# case of losing the mkdir race is a skipped sync (the next session retries).
+# Concurrency control lives inside `fetch-docs.sh sync` itself (issue #28: a
+# PID-owned lock in the cache dir covers EVERY caller, not just this hook), so
+# the child is a cheap no-op when another session is already syncing. The
+# hook-era lock at $DOCS_DIR/.sync.lock is legacy — remove it so a dir left by
+# a crashed pre-#28 session doesn't linger forever (bare dir, rmdir suffices).
 maybe_background_sync() {
     [ -x "$FETCH" ] || return 1
-    local lock="$DOCS_DIR/.sync.lock"
-    # Stale lock (a crashed sync never removed it): clear if older than ~30 minutes.
-    if [ -d "$lock" ] && [ -n "$(find "$lock" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
-        rmdir "$lock" 2>/dev/null || rm -rf "$lock" 2>/dev/null
-    fi
-    mkdir "$lock" 2>/dev/null || return 1  # another sync is running (or just won the race)
-    # The child owns the lock and removes it when the fetch finishes, however it exits.
-    nohup bash -c 'trap '\''rmdir "$2" 2>/dev/null'\'' EXIT; "$1" sync >/dev/null 2>&1' \
-        sync-docs-lock "$FETCH" "$lock" >/dev/null 2>&1 &
+    rmdir "$DOCS_DIR/.sync.lock" 2>/dev/null || true
+    nohup "$FETCH" sync >/dev/null 2>&1 &
     return 0
 }
 

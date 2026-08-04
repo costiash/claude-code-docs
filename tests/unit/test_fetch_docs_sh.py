@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import subprocess
+import time
 from pathlib import Path
 
 import pytest
@@ -38,7 +39,8 @@ INSECURE = ("insecure.md", "http://code.claude.com/docs/en/insecure.md", "# Inse
 RAWEVIL = ("rawevil.md", "https://raw.githubusercontent.com/anthropics/claude-code/../../attacker/evil/main/x.md", "# RawEvil\n")
 
 FAKE_CURL = r'''#!/usr/bin/env python3
-import sys, os, json
+import sys, os, json, time
+time.sleep(float(os.environ.get("CURL_SLEEP", "0")))
 args = sys.argv[1:]
 out = None; url = None
 i = 0
@@ -170,6 +172,96 @@ class TestSync:
         run(env, "sync")
         meta = json.loads((cache / ".meta" / "claude-code__hooks.md.json").read_text())
         assert meta["stale_manifest"] is False
+
+
+class TestSyncLock:
+    """Issue #28: cmd_sync must lock (every caller), reap only dead owners,
+    and never remove a lock it no longer owns (the EXIT-trap cascade)."""
+
+    @staticmethod
+    def lock_dir(cache: Path) -> Path:
+        return cache / ".sync.lock"
+
+    def make_lock(self, cache: Path, pid=None, age_secs=0):
+        cache.mkdir(parents=True, exist_ok=True)
+        lock = self.lock_dir(cache)
+        lock.mkdir()
+        if pid is not None:
+            (lock / "pid").write_text(f"{pid}\n")
+        if age_secs:
+            old = time.time() - age_secs
+            os.utime(lock, (old, old))
+        return lock
+
+    def test_sync_defers_when_lock_held_by_live_process(self, harness):
+        env, cache, _ = harness
+        self.make_lock(cache, pid=os.getpid())  # pytest itself: definitely alive
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        assert "already running" in r.stdout, r.stdout
+        assert not list(cache.glob("*.md"))  # nothing fetched
+        assert self.lock_dir(cache).is_dir()  # foreign lock untouched
+
+    def test_sync_defers_on_fresh_pidless_lock(self, harness):
+        # A pidless lock can be an owner inside its mkdir->pid-write window:
+        # fresh means live, do not reap.
+        env, cache, _ = harness
+        self.make_lock(cache)
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        assert "already running" in r.stdout, r.stdout
+        assert not list(cache.glob("*.md"))
+        assert self.lock_dir(cache).is_dir()
+
+    def test_sync_reaps_dead_owner_lock(self, harness):
+        env, cache, _ = harness
+        p = subprocess.Popen(["true"], stdout=subprocess.DEVNULL)
+        p.wait()  # reaped: kill -0 on this pid now fails
+        self.make_lock(cache, pid=p.pid)
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        for fn in list(PAGES) + [STALE[0]]:
+            assert (cache / fn).exists(), fn
+        assert not self.lock_dir(cache).exists()  # released its own lock
+
+    def test_sync_reaps_ancient_lock_despite_live_pid(self, harness):
+        # Recycled-PID backstop: a live sync refreshes the lock mtime every
+        # batch, so a lock untouched for 30+ minutes belongs to no live sync
+        # even when kill -0 says otherwise.
+        env, cache, _ = harness
+        self.make_lock(cache, pid=os.getpid(), age_secs=3600)
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        for fn in list(PAGES) + [STALE[0]]:
+            assert (cache / fn).exists(), fn
+        assert not self.lock_dir(cache).exists()
+
+    def test_sync_removes_own_lock_on_completion(self, harness):
+        env, cache, _ = harness
+        r = run(env, "sync")
+        assert r.returncode == 0, r.stderr
+        assert not self.lock_dir(cache).exists()
+
+    def test_finishing_sync_leaves_stolen_lock_alone(self, harness):
+        # The #28 cascade: sync A's EXIT trap must not rmdir a lock that was
+        # (wrongly or rightly) reaped and re-acquired by a successor.
+        env, cache, _ = harness
+        env = dict(env)
+        env["CURL_SLEEP"] = "1"
+        env["CLAUDE_DOCS_PARALLEL"] = "1"  # 4 syncable pages -> >=4s of fetching
+        a = subprocess.Popen([str(FETCH), "sync"], env=env,
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        lock = self.lock_dir(cache)
+        deadline = time.time() + 10
+        while time.time() < deadline and not (lock / "pid").exists():
+            time.sleep(0.05)
+        assert (lock / "pid").exists(), "sync A never took the lock"
+        # Steal the lock mid-sync (simulates the mtime reaper of a second session).
+        shutil.rmtree(lock)
+        self.make_lock(cache, pid=os.getpid())
+        a.wait(timeout=60)
+        assert lock.is_dir(), "finishing sync removed a lock it no longer owns"
+        assert (lock / "pid").read_text().strip() == str(os.getpid())
 
 
 class TestGet:
