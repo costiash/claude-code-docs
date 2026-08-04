@@ -7,9 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.2] - 2026-08-04
-
-Bug-fix release: the background-sync lock rework from issue #28 (PR #32).
+Background-sync lock rework from issue #28 (PR #32).
 
 ### Fixed
 - **Sync is now single-flight for every caller.** The lock moved from the
