@@ -113,8 +113,12 @@ acquire_sync_lock() {
                 # never pass release's cat-guard and invites a live-owner
                 # reap after a minute — back out. Distinct rc: this is an
                 # error, not contention, and the caller must not report it
-                # as "another sync is already running".
-                rm -rf "$LOCK_DIR"
+                # as "another sync is already running". rmdir first: BSD
+                # rm -rf refuses an unreadable (e.g. umask-created 000) dir,
+                # while rmdir needs only parent perms; chmod is the belt for
+                # the non-empty ENOSPC case.
+                rmdir "$LOCK_DIR" 2>/dev/null \
+                    || { chmod -R u+rwx "$LOCK_DIR" 2>/dev/null; rm -rf "$LOCK_DIR"; }
                 return 2
             fi
             SYNC_LOCK_HELD=1
@@ -154,7 +158,10 @@ acquire_sync_lock() {
         # microsecond TOCTOU; worst case is one duplicate sync writing
         # atomically to the same cache, not corruption or lock loss.
         if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then
-            rm -rf "$LOCK_DIR.reap.$$"
+            # Same BSD-rm caveat as the backout: make the moved-aside lock
+            # readable before recursing so an unreadable dir can't litter.
+            rmdir "$LOCK_DIR.reap.$$" 2>/dev/null \
+                || { chmod -R u+rwx "$LOCK_DIR.reap.$$" 2>/dev/null; rm -rf "$LOCK_DIR.reap.$$"; }
         fi
         # Brief backoff so multi-contender reaping isn't a tight CPU spin
         # (fractional sleep is non-POSIX; fall back to a whole second).
