@@ -285,6 +285,11 @@ class TestSyncLock:
             ["bash", "-c", f'umask 0777; exec "{FETCH}" sync'],
             env=env, capture_output=True, text=True,
         )
+        # ensure_dirs ran under umask 0777: reopen the 000-perm .meta so
+        # pytest's tmpdir teardown can remove it (same BSD/GNU rm issue).
+        meta = cache / ".meta"
+        if meta.exists():
+            meta.chmod(0o700)
         assert r.returncode != 0
         assert "already running" not in r.stdout + r.stderr
         assert "sync-lock ownership" in r.stderr, r.stderr
