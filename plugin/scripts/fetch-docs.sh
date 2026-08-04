@@ -88,6 +88,8 @@ ensure_dirs() { mkdir -p "$CACHE_DIR" "$META_DIR"; }
 # Reaping is evidence-based, never blind-mtime — the old hook-side 30-minute
 # reaper could steal the lock from a legitimately slow first sync, and its
 # unconditional EXIT trap then removed the successor's lock, cascading.
+# Assumes a local filesystem on a single host: mkdir atomicity and kill -0
+# PID checks are not meaningful across NFS/shared caches.
 LOCK_DIR="$CACHE_DIR/.sync.lock"
 SYNC_LOCK_HELD=0
 
@@ -331,12 +333,13 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
-            # Heartbeat (each FULL batch; the final partial batch — including
-            # a whole sync that fits in one batch — goes without, bounded by
-            # --max-time far below the 30-min backstop)
-            # for the recycled-PID reap. Dir-guarded: after a lock removal
-            # races us, an unguarded touch would recreate the path as a
-            # plain FILE and poison future acquisitions.
+            # Heartbeat for the recycled-PID reap, fired after each FULL
+            # batch. The final partial batch (or a whole sync that fits in
+            # one batch) goes without — safe, since a batch is bounded by
+            # curl --max-time, far below the 30-min backstop. Dir-guarded:
+            # after a lock removal races us, an unguarded touch would
+            # recreate the path as a plain FILE and poison future
+            # acquisitions.
             [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
         fi
     done < "$pending"
