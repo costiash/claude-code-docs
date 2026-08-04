@@ -71,7 +71,7 @@ uv run shellcheck --severity=warning plugin/scripts/*.sh plugin/skills/*/scripts
 uv sync --group dev
 
 # Run the test suite (network tests excluded)
-uv run pytest tests/ -q -m "not network"
+uv run pytest tests/ -q
 
 # Regenerate metadata locally: fetch into the gitignored .doc_fetch/ scratch, then build the index
 DOCS_FETCH_LIMIT=8 python3 scripts/fetch_claude_docs.py   # fast preview
@@ -114,7 +114,7 @@ Cache filenames follow the manifest's flattened convention. URLs are stored **ve
 
 ## Testing requirements
 
-- All new Python code needs unit tests; keep the suite green with `uv run pytest tests/ -q -m "not network"`.
+- All new Python code needs unit tests; keep the suite green with `uv run pytest tests/ -q`.
 - Shell scripts are tested via a mocked-curl harness under `tests/unit/` (see `test_fetch_docs_sh.py`) — no live network in unit tests.
 - The stemming rule in `build_search_index.py` (Python) and `content-search.sh` (jq) must stay **identical**; `tests/unit/test_stem_parity.py` enforces it.
 
@@ -122,7 +122,7 @@ Cache filenames follow the manifest's flattened convention. URLs are stored **ve
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, `test:`). Before opening a PR:
 
-- [ ] `uv run pytest tests/ -q -m "not network"` is green
+- [ ] `uv run pytest tests/ -q` is green
 - [ ] `shellcheck --severity=warning` is clean (if you touched shell)
 - [ ] No documentation prose is staged (the invariant above)
 - [ ] Relevant docs updated (`README.md`, `CLAUDE.md`, `ARCHITECTURE.md`)

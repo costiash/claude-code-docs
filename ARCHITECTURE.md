@@ -80,7 +80,7 @@ stored — a consumer recomputes `slugify(text)` on demand.
 |---|---|---|
 | `MIN_DISCOVERY_THRESHOLD` | 200 | abort if discovery finds fewer pages |
 | `MAX_DELETION_PERCENT` | 10 | abort if a manifest transition drops >10% of entries |
-| `MIN_EXPECTED_FILES` | 250 | abort if the new manifest has fewer pages |
+| `MIN_EXPECTED_FILES` | 250 | abort if fewer pages were fetched OK *this run* (changelog excluded); the workflow's jq check separately floors total manifest pages |
 
 `validate_manifest_transition(old, new)` is first-run-safe: no v2 predecessor counts
 as a clean start, not a mass removal. `update-docs.yml` repeats the floor check in jq.

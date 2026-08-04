@@ -143,7 +143,7 @@ The `/docs` skill understands intent — ask questions in plain English:
 /docs what are the best practices for Agent SDK in Python?
 /docs explain the differences between hooks and MCP
 /docs how do I configure extended thinking for the API?
-/docs show me all prompt library templates
+/docs show me all Agent SDK pages
 ```
 
 Claude finds the right docs, reads them, and synthesizes a clear answer with source links.

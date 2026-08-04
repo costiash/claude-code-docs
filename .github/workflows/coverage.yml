@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate coverage
         run: |
-          pytest tests/ -v --cov=scripts --cov-report=html --cov-report=term --cov-report=xml -m "not slow and not network"
+          pytest tests/ -v --cov=scripts --cov-report=html --cov-report=term --cov-report=xml
 
       - name: Check coverage threshold (50%)
         run: |
