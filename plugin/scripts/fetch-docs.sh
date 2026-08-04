@@ -79,6 +79,104 @@ sha256_of() {
 
 ensure_dirs() { mkdir -p "$CACHE_DIR" "$META_DIR"; }
 
+# --------------------------------------------------------------------------
+# sync lock (issue #28)
+# --------------------------------------------------------------------------
+# One sync per cache, whichever the caller (SessionStart hook, direct CLI,
+# --background child): mkdir is the atomic gate, the owner's PID lives in
+# $LOCK_DIR/pid, and a running sync heartbeats the lock mtime every batch.
+# Reaping is evidence-based, never blind-mtime — the old hook-side 30-minute
+# reaper could steal the lock from a legitimately slow first sync, and its
+# unconditional EXIT trap then removed the successor's lock, cascading.
+# Assumes a local filesystem on a single host: mkdir atomicity and kill -0
+# PID checks are not meaningful across NFS/shared caches.
+LOCK_DIR="$CACHE_DIR/.sync.lock"
+SYNC_LOCK_HELD=0
+
+release_sync_lock() {
+    [ "$SYNC_LOCK_HELD" = 1 ] || return 0
+    # Remove only a lock we still own: if a reaper replaced it, rmdir'ing the
+    # successor's lock here is exactly the #28 cascade. The cat->rm gap is a
+    # benign TOCTOU: worst case a reaper moved the dir aside between the two
+    # and the rm removes nothing.
+    if [ "$(cat "$LOCK_DIR/pid" 2>/dev/null)" = "$$" ]; then
+        rm -rf "$LOCK_DIR"
+    fi
+}
+
+# 0 = acquired (release trap installed); 1 = another sync owns the cache;
+# 2 = backout, ownership could not be recorded (disk full?) — an error the
+# caller must not report as contention.
+acquire_sync_lock() {
+    local attempts=0 pid
+    while [ "$attempts" -lt 10 ]; do  # spin cap: livelock insurance, never hit in practice
+        attempts=$((attempts + 1))
+        if mkdir "$LOCK_DIR" 2>/dev/null; then
+            if ! { echo "$$" > "$LOCK_DIR/pid"; } 2>/dev/null; then
+                # Ownership not recorded (disk full?): a pidless lock can
+                # never pass release's cat-guard and invites a live-owner
+                # reap after a minute — back out. Distinct rc: this is an
+                # error, not contention, and the caller must not report it
+                # as "another sync is already running". rmdir first: BSD
+                # rm -rf refuses an unreadable (e.g. umask-created 000) dir,
+                # while rmdir needs only parent perms; chmod is the belt for
+                # the non-empty ENOSPC case.
+                rmdir "$LOCK_DIR" 2>/dev/null \
+                    || { chmod -R u+rwx "$LOCK_DIR" 2>/dev/null; rm -rf "$LOCK_DIR"; }
+                return 2
+            fi
+            SYNC_LOCK_HELD=1
+            # EXIT only, deliberately: a signal death that skips the trap
+            # leaves a dead-PID lock, which the evidence-based reap clears.
+            trap release_sync_lock EXIT
+            return 0
+        fi
+        pid=$(cat "$LOCK_DIR/pid" 2>/dev/null)
+        # Lock vanished between the failed mkdir and the read (owner released,
+        # or a contender's reap landed): retry the mkdir — returning 1 here
+        # would skip the sync on a false "already running". -e, not -d: a
+        # plain FILE at the lock path (a heartbeat touch racing a lock
+        # removal) must fall through to the staleness checks and the mv reap
+        # below (both handle files), or it poisons every future sync.
+        [ -e "$LOCK_DIR" ] || continue
+        if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+            # Live owner wins — unless the lock mtime is ancient: a running
+            # sync heartbeats every full batch (bounded well under 30 min),
+            # so 30+ idle minutes means the PID was recycled by an unrelated
+            # process (kill -0 lies alive).
+            if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+                [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
+                return 1
+            fi
+        elif [ -z "$pid" ]; then
+            # Pidless: the owner may be inside its mkdir->pid-write window.
+            # Fresh (<1 min) = treat as live; older = crashed mid-acquire.
+            if [ -z "$(find "$LOCK_DIR" -maxdepth 0 -mmin +1 2>/dev/null)" ]; then
+                [ -e "$LOCK_DIR" ] || continue  # vanished mid-check
+                return 1
+            fi
+        fi
+        # Stale by evidence (dead PID / recycled-PID backstop / old pidless).
+        # Reap via rename: only one contender wins the mv, losers loop and
+        # re-evaluate the fresh lock. Known ceiling: the read->mv gap is a
+        # microsecond TOCTOU; worst case is one duplicate sync writing
+        # atomically to the same cache, not corruption or lock loss.
+        if mv "$LOCK_DIR" "$LOCK_DIR.reap.$$" 2>/dev/null; then
+            # Same BSD-rm caveat as the backout: make the moved-aside lock
+            # readable before recursing so an unreadable dir can't litter.
+            rmdir "$LOCK_DIR.reap.$$" 2>/dev/null \
+                || { chmod -R u+rwx "$LOCK_DIR.reap.$$" 2>/dev/null; rm -rf "$LOCK_DIR.reap.$$"; }
+        fi
+        # Brief backoff so multi-contender reaping isn't a tight CPU spin
+        # (fractional sleep is non-POSIX; fall back to a whole second).
+        sleep 0.1 2>/dev/null || sleep 1
+    done
+    # Spin-cap exhausted: reported as contention (rc 1) deliberately — ten
+    # failed rounds means someone keeps holding/recreating the lock, and
+    # the next sync attempt retries from scratch anyway.
+    return 1
+}
+
 # Fetch a URL to a file with one retry. Returns 0 on success.
 fetch_url() {
     local url="$1" out="$2"
@@ -195,6 +293,15 @@ cmd_sync() {
     fi
 
     ensure_dirs
+    acquire_sync_lock
+    case $? in
+        1)  # contention: someone else is (or appears to be) syncing — benign
+            echo "fetch-docs: another sync is already running (lock: $LOCK_DIR)"
+            return 0 ;;
+        2)  # backout: lock init failed (disk full?) — an error, not contention
+            echo "fetch-docs: could not record sync-lock ownership (disk full?) — sync skipped" >&2
+            return 1 ;;
+    esac
     local pending; pending=$(mktemp)
     # Only pages with a real sha256 are syncable (failed pages have null).
     jq -r '.pages[] | select(.sha256 != null) | [.filename, .md_url, .sha256] | @tsv' "$MANIFEST" \
@@ -226,6 +333,14 @@ cmd_sync() {
         if [ "$running" -ge "$PARALLEL" ]; then
             wait
             running=0
+            # Heartbeat for the recycled-PID reap, fired after each FULL
+            # batch. The final partial batch (or a whole sync that fits in
+            # one batch) goes without — safe, since a batch is bounded by
+            # curl --max-time, far below the 30-min backstop. Dir-guarded:
+            # after a lock removal races us, an unguarded touch would
+            # recreate the path as a plain FILE and poison future
+            # acquisitions.
+            [ -d "$LOCK_DIR" ] && touch "$LOCK_DIR" 2>/dev/null
         fi
     done < "$pending"
     wait

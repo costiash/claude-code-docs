@@ -126,19 +126,22 @@ doc_count() {
 # foreground `status` scan: status is O(pages) and a large cache blew the 5s timeout
 # (exit 124, not 2), silently stranding pending updates. `sync` has its own cheap
 # 0-fetch fast path, so an already-current cache just no-ops in the background.
-# A lock dir prevents concurrent sessions from stacking parallel syncs; the worst
-# case of losing the mkdir race is a skipped sync (the next session retries).
+# Concurrency control lives inside `fetch-docs.sh sync` itself (issue #28: a
+# PID-owned lock in the cache dir covers EVERY caller, not just this hook), so
+# the child is a cheap no-op when another session is already syncing — the
+# unconditional fork per session is deliberate, not a missing gate. The
+# hook-era lock at $DOCS_DIR/.sync.lock is legacy — remove it so a dir left by
+# a crashed pre-#28 session doesn't linger forever (bare dir, rmdir suffices).
 maybe_background_sync() {
     [ -x "$FETCH" ] || return 1
-    local lock="$DOCS_DIR/.sync.lock"
-    # Stale lock (a crashed sync never removed it): clear if older than ~30 minutes.
-    if [ -d "$lock" ] && [ -n "$(find "$lock" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
-        rmdir "$lock" 2>/dev/null || rm -rf "$lock" 2>/dev/null
+    # Stale-only: a FRESH legacy lock can still belong to a live pre-#28
+    # session's sync child (which took no other lock) — blind removal would
+    # double-sync during the one-time upgrade window.
+    if [ -d "$DOCS_DIR/.sync.lock" ] \
+        && [ -n "$(find "$DOCS_DIR/.sync.lock" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+        rmdir "$DOCS_DIR/.sync.lock" 2>/dev/null || true
     fi
-    mkdir "$lock" 2>/dev/null || return 1  # another sync is running (or just won the race)
-    # The child owns the lock and removes it when the fetch finishes, however it exits.
-    nohup bash -c 'trap '\''rmdir "$2" 2>/dev/null'\'' EXIT; "$1" sync >/dev/null 2>&1' \
-        sync-docs-lock "$FETCH" "$lock" >/dev/null 2>&1 &
+    nohup "$FETCH" sync >/dev/null 2>&1 &
     return 0
 }
 
@@ -152,6 +155,22 @@ rescue_user_data() {
     local src="$1" sub failed=0
     for sub in cache courses; do
         [ -d "$src/$sub" ] || continue
+        # A racing sync child recreates cache/ with scaffolding — an empty
+        # .meta/ (ensure_dirs) and possibly a .sync.lock/ — never bare-empty.
+        # Scaffolding is disposable and must not defeat the empty-dir
+        # heuristic below, or a populated parked corpus gets discarded in
+        # favor of an effectively-empty cache. Real content (.md pages,
+        # sidecar files) makes the rmdir fail and the install win as before.
+        # Known ceiling — two narrow races, both crash-cleanup-only and benign:
+        # removing a contender's live lock at worst duplicates one sync
+        # (atomic per-file writes); and a sync that acquired but has not yet
+        # written any page can have its scaffold-only cache swapped for the
+        # rescued corpus mid-run — its children then write into the rescued
+        # cache, which is exactly where the pages belong.
+        if [ "$sub" = "cache" ] && [ -d "$DOCS_DIR/$sub" ]; then
+            rmdir "$DOCS_DIR/$sub/.meta" 2>/dev/null || true  # empty .meta only
+            rm -rf "$DOCS_DIR/$sub/.sync.lock" 2>/dev/null || true
+        fi
         rmdir "$DOCS_DIR/$sub" 2>/dev/null || true  # only removes an EMPTY dir
         # Real data present: install wins BY DESIGN — a second parked copy in
         # another orphan is consciously discarded, not merged.
@@ -257,9 +276,10 @@ if [ "$(git -C "$DOCS_DIR" rev-parse --show-toplevel 2>/dev/null)" != "$(pwd -P)
     # Inter-session heal lock (sibling of DOCS_DIR — the dir itself gets moved
     # during the swap). Two sessions healing the same corrupt clone could
     # otherwise leapfrog each other's swaps and rm -rf a freshly-healed
-    # install, courses/ included. Same mkdir+staleness pattern as .sync.lock.
-    # Staleness is 2 minutes, not .sync.lock's 30: a repair is budget-bounded
-    # to well under a minute, so anything older is a crashed heal — and every
+    # install, courses/ included. Blind 2-minute mtime staleness is fine HERE
+    # (unlike the sync lock, now PID-owned in fetch-docs.sh, issue #28): a
+    # repair is budget-bounded to well under a minute, so anything older is a
+    # crashed heal — and every
     # extra minute of a stuck lock is a minute of every session reporting
     # "another session is repairing" while docs stay broken.
     HEAL_LOCK="$DOCS_DIR.heal.lock"

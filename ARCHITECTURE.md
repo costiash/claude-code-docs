@@ -104,6 +104,12 @@ as a clean start, not a mass removal. `update-docs.yml` repeats the floor check 
   every run. Per-URL **domain allowlist** (`code.claude.com`, `platform.claude.com`,
   `raw.githubusercontent.com`); atomic tmp+mv writes; retry-once; `xargs -P 8`.
   Offline + cache miss → the canonical URL is printed to stderr for a WebFetch fallback.
+  `sync` is single-flight per cache via a PID-owned lock at `cache/.sync.lock/`
+  (owner PID in `pid`, mtime heartbeated per full fetch batch) — every caller is covered,
+  hook or direct CLI. A held lock is reaped only on evidence: dead owner PID,
+  a pidless lock older than a minute, or a 30-minute-idle mtime despite a
+  "live" PID (recycled-PID backstop). Release is owner-checked, so a reaped
+  and re-acquired lock is never removed by the previous owner.
 - **`manifest-diff.sh`** — `--since 7d|24h|<date>` diffs committed manifest revisions →
   Added / Changed / Removed (Changed keyed off `sha256`). Powers the three
   git-history-dependent features: what's-new, freshness, and the changelog report.
@@ -119,7 +125,8 @@ as a clean start, not a mass removal. `update-docs.yml` repeats the floor check 
 ├── search_index.json
 ├── plugin/…
 ├── cache/                      # fetched .md pages (gitignored, not in the repo)
-│   └── .meta/<filename>.json   # per-page sync sidecars
+│   ├── .meta/<filename>.json   # per-page sync sidecars
+│   └── .sync.lock/pid          # transient single-flight sync lock (owner PID)
 └── courses/                    # generated HTML (untracked, survives resets)
 ```
 
