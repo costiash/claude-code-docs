@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-05T21:33:00.690036Z",
+  "generated_at": "2026-08-06T00:29:16.061679Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -708,8 +708,8 @@
       "md_url": "https://code.claude.com/docs/en/code-review.md",
       "title": "Code Review",
       "category": "claude_code",
-      "sha256": "b03b163f11600d9122c3e94a314308b236d7f5e9a47177f53c3cee6a99abad9a",
-      "lastmod": "2026-08-04T22:26:39.353Z",
+      "sha256": "37080df3bb2ace86c2799d59422206faf57e7bf01cf3c4d1edfcdfab25c0df47",
+      "lastmod": "2026-08-06T00:04:46.007Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/feature-availability.md",
       "title": "Feature availability",
       "category": "claude_code",
-      "sha256": "35cefe668a31718b9bec3f3b9493e860ed098873508a8ed2bfbbca6a6d0e036a",
-      "lastmod": "2026-08-04T22:58:12.320Z",
+      "sha256": "24377b9392f050515fec4ff850efcbe4202691e5c29017c05b09a81483023c55",
+      "lastmod": "2026-08-06T00:04:45.910Z",
       "fetch_status": "ok"
     },
     {
@@ -994,8 +994,19 @@
       "md_url": "https://code.claude.com/docs/en/github-actions.md",
       "title": "Claude Code GitHub Actions",
       "category": "claude_code",
-      "sha256": "b5b839f60ff45816372ac4cc13336b97c9d7abcf18571cbea7c18a49c6f51fe4",
-      "lastmod": "2026-07-04T02:33:59.571Z",
+      "sha256": "efed55b8d3a8433a443363b0c745eecc276ed9745d85e0fa5d2f2311edc2919a",
+      "lastmod": "2026-08-06T00:04:45.904Z",
+      "fetch_status": "ok"
+    },
+    {
+      "id": "claude-code/github-actions-cloud-providers",
+      "filename": "claude-code__github-actions-cloud-providers.md",
+      "url": "https://code.claude.com/docs/en/github-actions-cloud-providers",
+      "md_url": "https://code.claude.com/docs/en/github-actions-cloud-providers.md",
+      "title": "Use Claude Code GitHub Actions with cloud providers",
+      "category": "claude_code",
+      "sha256": "7a7a329c318f99c2ba31868cd61df3f6430c614cf160711d6cead9d62b417c3b",
+      "lastmod": "2026-08-06T00:04:45.908Z",
       "fetch_status": "ok"
     },
     {

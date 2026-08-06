@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-05T21:33:03.118865Z",
+  "generated_at": "2026-08-06T00:29:18.510645Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -11181,15 +11181,15 @@
         }
       ],
       "terms": {
-        "review": 168,
-        "code": 66,
-        "claude": 56,
-        "run": 55,
-        "comment": 36,
+        "review": 169,
+        "code": 65,
+        "claude": 58,
+        "run": 56,
+        "comment": 37,
         "finding": 33,
         "push": 28,
-        "check": 25,
-        "github": 21,
+        "check": 27,
+        "github": 22,
         "step": 21,
         "repository": 19,
         "trigger": 18,
@@ -11199,40 +11199,40 @@
         "cost": 16,
         "find": 16,
         "every": 15,
-        "read": 15,
         "severity": 14,
         "diff": 13,
         "request": 13,
+        "post": 13,
         "session": 13,
         "after": 13,
         "branch": 13,
+        "read": 13,
         "before": 12,
-        "post": 12,
         "inline": 12,
-        "issu": 12,
         "without": 12,
+        "app": 12,
         "each": 12,
         "fix": 12,
         "nit": 12,
         "fil": 12,
+        "want": 12,
         "repo": 12,
         "report": 12,
+        "issu": 11,
         "instead": 11,
-        "want": 11,
         "note": 10,
         "organization": 10,
-        "app": 10,
-        "also": 10,
+        "see": 10,
+        "repositori": 10,
         "per": 10,
         "title": 10,
         "set": 9,
         "agent": 9,
-        "see": 9,
+        "own": 9,
         "show": 9,
-        "level": 9,
-        "one": 9
+        "also": 9
       },
-      "word_count": 4304
+      "word_count": 4331
     },
     {
       "filename": "claude-code__commands.md",
@@ -14266,7 +14266,7 @@
         "provider": 30,
         "platform": 25,
         "see": 23,
-        "cloud": 19,
+        "cloud": 20,
         "anthropic": 18,
         "enterprise": 18,
         "code": 17,
@@ -14312,7 +14312,7 @@
         "style": 7,
         "display": 7
       },
-      "word_count": 1967
+      "word_count": 1976
     },
     {
       "filename": "claude-code__features-overview.md",
@@ -14648,43 +14648,35 @@
           "level": 1
         },
         {
-          "text": "Why use Claude Code GitHub Actions?",
-          "level": 2
-        },
-        {
-          "text": "What can Claude do?",
-          "level": 2
-        },
-        {
-          "text": "Claude Code Action",
-          "level": 3
-        },
-        {
           "text": "Setup",
           "level": 2
         },
         {
           "text": "Quick setup",
-          "level": 2
+          "level": 3
         },
         {
           "text": "Manual setup",
-          "level": 2
-        },
-        {
-          "text": "Upgrading from Beta",
-          "level": 2
-        },
-        {
-          "text": "Essential changes",
           "level": 3
         },
         {
-          "text": "Breaking Changes Reference",
+          "text": "Set up for an organization",
           "level": 3
         },
         {
-          "text": "Before and After Example",
+          "text": "Uninstall",
+          "level": 3
+        },
+        {
+          "text": "GitHub App permissions",
+          "level": 3
+        },
+        {
+          "text": "Interactive and automation modes",
+          "level": 2
+        },
+        {
+          "text": "Who can trigger runs",
           "level": 3
         },
         {
@@ -14692,19 +14684,15 @@
           "level": 2
         },
         {
-          "text": "Basic workflow",
+          "text": "Respond to @claude mentions",
           "level": 3
         },
         {
-          "text": "Using skills",
+          "text": "Run a skill",
           "level": 3
         },
         {
-          "text": "Custom automation with prompts",
-          "level": 3
-        },
-        {
-          "text": "Common use cases",
+          "text": "Run on a schedule",
           "level": 3
         },
         {
@@ -14712,40 +14700,20 @@
           "level": 2
         },
         {
-          "text": "CLAUDE.md configuration",
+          "text": "Define project standards in CLAUDE.md",
           "level": 3
         },
         {
-          "text": "Security considerations",
+          "text": "Protect your credentials",
           "level": 3
         },
         {
-          "text": "Optimizing performance",
+          "text": "Manage costs",
           "level": 3
         },
         {
-          "text": "CI costs",
-          "level": 3
-        },
-        {
-          "text": "Configuration examples",
+          "text": "Use a cloud provider",
           "level": 2
-        },
-        {
-          "text": "Using with Amazon Bedrock and Google Cloud",
-          "level": 2
-        },
-        {
-          "text": "Prerequisites",
-          "level": 3
-        },
-        {
-          "text": "For Google Cloud's Agent Platform:",
-          "level": 4
-        },
-        {
-          "text": "For Amazon Bedrock:",
-          "level": 4
         },
         {
           "text": "Troubleshooting",
@@ -14773,70 +14741,156 @@
         },
         {
           "text": "Pass CLI arguments",
-          "level": 4
-        },
-        {
-          "text": "Alternative integration methods",
           "level": 3
         },
         {
-          "text": "Customizing Claude's behavior",
-          "level": 3
+          "text": "Upgrade from beta",
+          "level": 2
+        },
+        {
+          "text": "What's next",
+          "level": 2
         }
       ],
       "terms": {
-        "github": 80,
-        "claude": 70,
-        "app": 50,
-        "action": 45,
-        "code": 36,
-        "workflow": 33,
-        "repository": 28,
-        "api": 27,
-        "cloud": 27,
-        "secret": 22,
-        "google": 22,
-        "key": 21,
-        "amazon": 20,
-        "bedrock": 20,
-        "permission": 18,
-        "create": 17,
-        "configuration": 17,
-        "agent": 16,
-        "requir": 16,
+        "claude": 129,
+        "github": 92,
+        "code": 70,
+        "action": 54,
+        "workflow": 54,
+        "run": 38,
+        "repository": 34,
+        "app": 32,
+        "secret": 28,
+        "request": 25,
+        "api": 25,
+        "see": 21,
+        "pull": 20,
+        "token": 19,
+        "permission": 19,
+        "read": 19,
+        "install": 18,
+        "set": 17,
+        "key": 17,
+        "write": 17,
+        "review": 16,
+        "input": 16,
         "setup": 15,
-        "platform": 15,
-        "tip": 15,
-        "provider": 15,
-        "install": 14,
-        "security": 14,
-        "identity": 14,
-        "step": 13,
-        "using": 13,
-        "authentication": 12,
-        "request": 11,
-        "token": 11,
-        "account": 11,
-        "add": 10,
-        "specific": 10,
-        "service": 10,
-        "documentation": 9,
-        "note": 9,
-        "custom": 9,
-        "need": 9,
-        "respond": 9,
-        "configure": 9,
-        "workload": 9,
-        "file": 8,
-        "follow": 8,
-        "project": 8,
-        "see": 8,
-        "run": 8,
-        "version": 8,
-        "content": 8,
-        "prompt": 8
+        "trigger": 15,
+        "comment": 12,
+        "step": 12,
+        "cloud": 12,
+        "before": 11,
+        "respond": 11,
+        "issue": 11,
+        "instead": 11,
+        "organization": 11,
+        "file": 10,
+        "acces": 10,
+        "check": 10,
+        "oauth": 10,
+        "each": 10,
+        "only": 9,
+        "provider": 9,
+        "mention": 8,
+        "also": 8,
+        "without": 8,
+        "authentication": 8,
+        "subscription": 8,
+        "pas": 8,
+        "list": 8,
+        "skill": 8,
+        "issu": 7,
+        "prompt": 7,
+        "fil": 7
       },
-      "word_count": 3375
+      "word_count": 3614
+    },
+    {
+      "filename": "claude-code__github-actions-cloud-providers.md",
+      "id": "claude-code/github-actions-cloud-providers",
+      "title": "Use Claude Code GitHub Actions with cloud providers",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/github-actions-cloud-providers",
+      "headings": [
+        {
+          "text": "Use Claude Code GitHub Actions with cloud providers",
+          "level": 1
+        },
+        {
+          "text": "Choose your provider",
+          "level": 2
+        },
+        {
+          "text": "Prerequisites",
+          "level": 2
+        },
+        {
+          "text": "Set up the integration",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "github": 45,
+        "claude": 39,
+        "step": 34,
+        "code": 26,
+        "cloud": 26,
+        "action": 23,
+        "app": 23,
+        "provider": 22,
+        "tab": 19,
+        "workflow": 18,
+        "microsoft": 16,
+        "foundry": 16,
+        "repository": 15,
+        "identity": 15,
+        "create": 14,
+        "model": 13,
+        "add": 13,
+        "agent": 12,
+        "platform": 12,
+        "secret": 12,
+        "bedrock": 11,
+        "google": 11,
+        "token": 11,
+        "credential": 11,
+        "title": 11,
+        "run": 10,
+        "oidc": 10,
+        "amazon": 9,
+        "acces": 9,
+        "see": 9,
+        "trust": 8,
+        "configuration": 8,
+        "custom": 8,
+        "file": 7,
+        "account": 7,
+        "application": 7,
+        "region": 7,
+        "role": 7,
+        "api": 6,
+        "each": 6,
+        "install": 6,
+        "service": 6,
+        "resource": 6,
+        "through": 5,
+        "own": 5,
+        "page": 5,
+        "only": 5,
+        "where": 5,
+        "need": 5,
+        "permission": 5
+      },
+      "word_count": 2074
     },
     {
       "filename": "claude-code__github-enterprise-server.md",
