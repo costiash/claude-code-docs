@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-06T04:10:04.262325Z",
+  "generated_at": "2026-08-06T06:59:42.964266Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -213,8 +213,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "44b2131f134c5c03887aee5712243c029b705de4b72ea9d714a8b3c79625b6de",
-      "lastmod": "2026-08-06T02:16:29.672Z",
+      "sha256": "ffd00c13f783aae033921c1d10162d5f4f16a8e7494467da164d4b1ae814f6b8",
+      "lastmod": "2026-08-06T04:28:26.835Z",
       "fetch_status": "ok"
     },
     {
@@ -268,8 +268,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/skills.md",
       "title": "Agent Skills in the SDK",
       "category": "agent_sdk",
-      "sha256": "6e56dc9e6d2911040cb8f01c046d884c408751d169b0aea84e3b1db819d5cd1b",
-      "lastmod": "2026-08-04T22:32:43.849Z",
+      "sha256": "c3d7ad8eaf830abd0b854d766450edb9920876bba84b67ce5b7be508b4fe676d",
+      "lastmod": "2026-08-06T04:28:26.826Z",
       "fetch_status": "ok"
     },
     {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-06T04:10:06.688083Z",
+  "generated_at": "2026-08-06T06:59:45.389143Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -4346,20 +4346,20 @@
         "field": 60,
         "hook": 57,
         "description": 57,
-        "claude": 52,
+        "claude": 53,
         "output": 48,
         "model": 39,
         "permission": 38,
+        "sdk": 37,
         "see": 37,
         "name": 37,
-        "sdk": 36,
         "subagent": 36,
         "identifier": 34,
         "message": 34,
         "task": 33,
+        "code": 32,
         "default": 32,
         "prompt": 32,
-        "code": 31,
         "return": 30,
         "server": 30,
         "configuration": 29,
@@ -4370,8 +4370,8 @@
         "sandbox": 27,
         "note": 26,
         "example": 25,
+        "only": 25,
         "cli": 24,
-        "only": 24,
         "call": 23,
         "parameter": 23,
         "project": 23,
@@ -4390,7 +4390,7 @@
         "path": 19,
         "file": 18
       },
-      "word_count": 17505
+      "word_count": 17525
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -4958,7 +4958,7 @@
       ],
       "terms": {
         "skill": 83,
-        "sdk": 28,
+        "sdk": 29,
         "claude": 22,
         "agent": 14,
         "load": 14,
@@ -4998,6 +4998,7 @@
         "relevant": 4,
         "contain": 4,
         "typescript": 4,
+        "python": 4,
         "automatically": 4,
         "bas": 4,
         "repository": 4,
@@ -5005,10 +5006,9 @@
         "match": 4,
         "enable": 4,
         "plugin": 4,
-        "reference": 4,
-        "before": 3
+        "reference": 4
       },
-      "word_count": 1715
+      "word_count": 1726
     },
     {
       "filename": "claude-code__agent-sdk__slash-commands.md",
