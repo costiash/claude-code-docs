@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-06T22:55:09.233906Z",
+  "generated_at": "2026-08-07T01:17:33.012062Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -213,8 +213,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "8ac5e57a3e824f3462ccb9b8b2e281a2ed3479545c3efa354985a2ffec513094",
-      "lastmod": "2026-08-06T14:53:04.047Z",
+      "sha256": "8f9fe520e09156c0eb3c354a100f75760d54294d2204f31d9068bfd0bb1a74dc",
+      "lastmod": "2026-08-07T00:38:06.244Z",
       "fetch_status": "ok"
     },
     {
@@ -367,8 +367,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "18abafdad10bf90eec3b37ccc181f1d370363183f2ee5ad72e4083b0935b758c",
-      "lastmod": "2026-08-06T14:53:04.051Z",
+      "sha256": "2c08beefa974a4c76d7c52a67c38cecc4b026ce769cbc45b28a0a88e9162dcce",
+      "lastmod": "2026-08-07T00:38:06.250Z",
       "fetch_status": "ok"
     },
     {
@@ -686,8 +686,8 @@
       "md_url": "https://code.claude.com/docs/en/cli-reference.md",
       "title": "CLI reference",
       "category": "claude_code",
-      "sha256": "8e6d91a6695c44d720bba3a16c435d460dab753b245362ab935d26025a03a780",
-      "lastmod": "2026-08-06T14:40:06.527Z",
+      "sha256": "ac2e62ff03b91a4519ad1803498f5418e1230b4810b24d96a204382282ce2c72",
+      "lastmod": "2026-08-07T00:19:01.240Z",
       "fetch_status": "ok"
     },
     {
@@ -807,8 +807,8 @@
       "md_url": "https://code.claude.com/docs/en/debug-your-config.md",
       "title": "Debug your configuration",
       "category": "claude_code",
-      "sha256": "79c900002533c53506c97440ca79f52ece090705aaf71ac0da6254f1af71a892",
-      "lastmod": "2026-08-06T02:17:29.030Z",
+      "sha256": "f86b1f3681203e61ee141a1c718cac72f834498c5931b25e5fd6911c85170264",
+      "lastmod": "2026-08-07T00:19:01.233Z",
       "fetch_status": "ok"
     },
     {
@@ -851,8 +851,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop-linux.md",
       "title": "Claude Desktop on Linux (beta)",
       "category": "claude_code",
-      "sha256": "65f623473eb2c16a2a6039eabf2bfb3a3f66889ff0406c80818b2c4873ed6013",
-      "lastmod": "2026-07-28T20:58:06.744Z",
+      "sha256": "421b5d295bf56179c9ab6c49a01356a7921ecd9d719054f2b6c66aa8d79e509f",
+      "lastmod": "2026-08-07T00:26:04.002Z",
       "fetch_status": "ok"
     },
     {
@@ -928,8 +928,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "073262de9e592dab946a7fdf8453e8f44413cf38b80681f1b80a22e64481e479",
-      "lastmod": "2026-08-06T02:17:29.046Z",
+      "sha256": "65881d0c049d4012db422906554aaa90e69630595729b150c0a9fd9e39235586",
+      "lastmod": "2026-08-07T00:19:01.243Z",
       "fetch_status": "ok"
     },
     {
@@ -1082,8 +1082,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "752d3f5e868f28d114afc8090e6e037c40b81625fed2b6fa51e3a6b7ad157b99",
-      "lastmod": "2026-08-05T18:32:14.450Z",
+      "sha256": "4f8ff174eb69b916b7bed1d3017ebc8ead8d7cb39d9605390197a3c2359154ab",
+      "lastmod": "2026-08-07T00:38:06.242Z",
       "fetch_status": "ok"
     },
     {
@@ -1610,8 +1610,8 @@
       "md_url": "https://code.claude.com/docs/en/statusline.md",
       "title": "Customize your status line",
       "category": "claude_code",
-      "sha256": "7d45ed03cf1d88ea7af30617080c626ea0b7b45b1babbc7940e6eb57d94a5210",
-      "lastmod": "2026-08-05T19:49:35.800Z",
+      "sha256": "6567501c3752fc41525d561e9300eea6ab2a50baf5f052854bf33540416e0233",
+      "lastmod": "2026-08-07T00:17:45.457Z",
       "fetch_status": "ok"
     },
     {
@@ -1665,8 +1665,8 @@
       "md_url": "https://code.claude.com/docs/en/troubleshoot-install.md",
       "title": "Troubleshoot installation and login",
       "category": "claude_code",
-      "sha256": "00447b45c65a83205e3a66b3a6f8f0f816a5950dff0b9dc50562007fcac7933b",
-      "lastmod": "2026-08-06T14:53:03.997Z",
+      "sha256": "e0122b294fc6fddf6b81e3d797b4e71408fbdf4de1feafdcfb3dc4b5a33ca631",
+      "lastmod": "2026-08-07T00:19:01.235Z",
       "fetch_status": "ok"
     },
     {
