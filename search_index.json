@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-07T04:05:36.280975Z",
+  "generated_at": "2026-08-07T06:31:23.726976Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -6954,7 +6954,7 @@
         "sandbox": 30,
         "pas": 29
       },
-      "word_count": 23367
+      "word_count": 23366
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -8684,7 +8684,7 @@
         "someth": 9,
         "keep": 9
       },
-      "word_count": 5402
+      "word_count": 5403
     },
     {
       "filename": "claude-code__champion-kit.md",
@@ -8829,58 +8829,58 @@
         }
       ],
       "terms": {
-        "fix": 2249,
-        "session": 813,
-        "now": 765,
-        "add": 487,
-        "update": 434,
-        "tool": 411,
-        "agent": 399,
-        "instead": 395,
-        "command": 382,
-        "claude": 380,
-        "mode": 364,
+        "fix": 2264,
+        "session": 831,
+        "now": 773,
+        "add": 494,
+        "update": 436,
+        "tool": 416,
+        "instead": 400,
+        "agent": 400,
+        "command": 385,
+        "claude": 383,
+        "mode": 365,
         "background": 345,
-        "improv": 340,
-        "show": 336,
-        "after": 333,
-        "prompt": 314,
-        "being": 295,
-        "error": 286,
-        "mcp": 257,
-        "fail": 251,
-        "model": 240,
-        "plugin": 237,
+        "improv": 343,
+        "show": 340,
+        "after": 339,
+        "prompt": 316,
+        "being": 298,
+        "error": 288,
+        "fail": 258,
+        "mcp": 258,
+        "model": 244,
+        "plugin": 241,
+        "code": 237,
+        "description": 236,
         "terminal": 236,
-        "code": 234,
-        "description": 234,
-        "server": 229,
-        "label": 221,
+        "server": 231,
+        "label": 222,
         "window": 217,
-        "auto": 193,
-        "file": 190,
-        "permission": 182,
+        "auto": 195,
+        "file": 191,
+        "permission": 183,
         "hook": 180,
-        "input": 167,
-        "runn": 166,
+        "runn": 168,
+        "input": 168,
+        "chang": 164,
         "skill": 162,
-        "bash": 159,
-        "chang": 158,
+        "bash": 161,
         "work": 148,
-        "subagent": 144,
-        "user": 142,
-        "setting": 137,
-        "remote": 136,
+        "user": 145,
+        "remote": 145,
+        "subagent": 145,
+        "setting": 142,
+        "silently": 135,
+        "longer": 134,
         "startup": 132,
         "read": 132,
         "memory": 132,
-        "longer": 130,
-        "token": 130,
-        "silently": 130,
+        "token": 131,
         "fil": 129,
-        "via": 127
+        "text": 127
       },
-      "word_count": 74329
+      "word_count": 75038
     },
     {
       "filename": "claude-code__channels.md",
@@ -10202,6 +10202,14 @@
           "level": 4
         },
         {
+          "text": "Send follow-ups from the CLI",
+          "level": 3
+        },
+        {
+          "text": "Output and errors",
+          "level": 4
+        },
+        {
           "text": "From web to terminal",
           "level": 3
         },
@@ -10287,58 +10295,58 @@
         }
       ],
       "terms": {
-        "session": 136,
-        "claude": 84,
-        "cloud": 63,
+        "session": 159,
+        "claude": 92,
+        "cloud": 65,
+        "code": 42,
         "github": 37,
-        "code": 35,
-        "run": 31,
+        "run": 32,
+        "account": 31,
+        "environment": 29,
         "repository": 28,
-        "account": 26,
         "web": 25,
         "fix": 25,
-        "terminal": 22,
+        "terminal": 24,
         "auto": 22,
+        "acces": 20,
         "app": 19,
-        "environment": 19,
-        "acces": 19,
-        "work": 18,
-        "see": 15,
-        "command": 14,
-        "start": 13,
+        "work": 19,
+        "anthropic": 18,
+        "see": 16,
+        "organization": 15,
+        "start": 15,
+        "command": 15,
+        "note": 14,
+        "same": 14,
+        "cli": 14,
+        "team": 13,
+        "host": 13,
         "review": 13,
         "open": 13,
-        "note": 12,
-        "team": 12,
-        "same": 12,
-        "anthropic": 11,
-        "task": 11,
+        "task": 12,
+        "local": 12,
         "connect": 11,
         "comment": 11,
-        "local": 11,
+        "check": 11,
         "pull": 10,
         "authentication": 10,
-        "organization": 10,
+        "network": 10,
+        "any": 10,
         "repositori": 10,
         "branch": 10,
-        "cli": 10,
         "remote": 10,
+        "api": 10,
+        "new": 9,
         "creat": 9,
-        "any": 9,
+        "without": 9,
         "push": 9,
-        "check": 9,
-        "teleport": 9,
-        "before": 8,
-        "infrastructure": 8,
-        "new": 8,
-        "shar": 8,
-        "automatically": 8,
-        "control": 8,
-        "default": 8,
-        "enabl": 8,
-        "must": 8
+        "enabl": 9,
+        "setting": 9,
+        "sign": 9,
+        "includ": 9,
+        "instead": 9
       },
-      "word_count": 3820
+      "word_count": 4544
     },
     {
       "filename": "claude-code__claude-directory.md",
@@ -10837,19 +10845,19 @@
         }
       ],
       "terms": {
-        "session": 74,
-        "claude": 63,
-        "code": 38,
+        "session": 79,
+        "claude": 64,
+        "code": 39,
         "prompt": 31,
         "flag": 30,
         "mode": 29,
         "start": 23,
         "requir": 23,
+        "see": 23,
         "only": 23,
         "tool": 23,
         "default": 22,
         "server": 21,
-        "see": 21,
         "print": 20,
         "mcp": 19,
         "file": 18,
@@ -10858,37 +10866,37 @@
         "command": 15,
         "later": 15,
         "output": 15,
+        "without": 15,
         "set": 14,
-        "without": 14,
         "model": 14,
         "agent": 13,
         "run": 13,
         "setting": 12,
         "before": 11,
+        "exit": 11,
         "directory": 11,
         "subagent": 11,
-        "exit": 10,
         "name": 10,
         "pas": 10,
         "list": 10,
         "sett": 10,
         "system": 10,
         "available": 9,
+        "includ": 9,
         "current": 9,
         "accept": 9,
         "json": 9,
         "auto": 9,
+        "url": 9,
         "plugin": 9,
         "permission": 9,
         "hook": 9,
-        "includ": 8,
+        "instead": 8,
         "user": 8,
         "still": 8,
-        "runn": 8,
-        "url": 8,
-        "project": 8
+        "runn": 8
       },
-      "word_count": 4375
+      "word_count": 4491
     },
     {
       "filename": "claude-code__cloud-environments.md",
@@ -11019,58 +11027,58 @@
         }
       ],
       "terms": {
-        "environment": 127,
-        "session": 111,
+        "environment": 141,
+        "session": 119,
         "com": 83,
         "org": 75,
-        "cloud": 66,
-        "claude": 64,
-        "script": 49,
-        "run": 47,
+        "cloud": 69,
+        "claude": 66,
+        "run": 51,
+        "script": 50,
         "install": 44,
         "setup": 40,
         "www": 40,
         "start": 34,
         "accordion": 34,
+        "network": 33,
         "default": 32,
-        "network": 31,
         "github": 29,
-        "code": 27,
+        "code": 28,
+        "setting": 28,
         "acces": 27,
-        "setting": 25,
         "repo": 24,
         "add": 22,
+        "hook": 22,
         "title": 21,
-        "hook": 21,
-        "proxy": 20,
+        "proxy": 21,
+        "host": 19,
+        "only": 19,
         "domain": 19,
         "level": 18,
-        "only": 18,
         "package": 18,
         "variabl": 17,
+        "own": 17,
         "need": 17,
         "each": 16,
         "set": 16,
         "work": 16,
+        "through": 16,
         "don": 16,
         "api": 16,
-        "own": 14,
-        "through": 14,
         "reach": 14,
         "tool": 14,
         "selector": 14,
         "step": 14,
         "command": 14,
+        "anthropic": 14,
         "docker": 14,
         "sessionstart": 14,
         "available": 13,
+        "any": 13,
         "shar": 13,
-        "allow": 12,
-        "any": 12,
-        "keep": 11,
-        "trust": 11
+        "organization": 13
       },
-      "word_count": 5064
+      "word_count": 5252
     },
     {
       "filename": "claude-code__code-review.md",
@@ -11318,7 +11326,7 @@
         "add": 11,
         "list": 11
       },
-      "word_count": 5748
+      "word_count": 5747
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -11468,7 +11476,7 @@
         "explor": 5,
         "prs": 5
       },
-      "word_count": 2485
+      "word_count": 2487
     },
     {
       "filename": "claude-code__communications-kit.md",
@@ -12787,9 +12795,9 @@
         "edit": 16,
         "server": 15,
         "diff": 14,
-        "run": 14,
         "fil": 14,
         "window": 13,
+        "run": 13,
         "prompt": 13,
         "before": 12,
         "review": 12,
@@ -12818,7 +12826,7 @@
         "config": 9,
         "http": 8
       },
-      "word_count": 10968
+      "word_count": 11002
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -13124,7 +13132,7 @@
         "sign": 4,
         "choose": 4
       },
-      "word_count": 1479
+      "word_count": 1478
     },
     {
       "filename": "claude-code__desktop-scheduled-tasks.md",
@@ -13210,6 +13218,7 @@
         "recurr": 5,
         "check": 5,
         "page": 5,
+        "cloud": 5,
         "call": 5,
         "option": 5,
         "picker": 5,
@@ -13219,10 +13228,9 @@
         "allow": 5,
         "file": 4,
         "remote": 4,
-        "only": 4,
-        "cloud": 4
+        "only": 4
       },
-      "word_count": 1580
+      "word_count": 1581
     },
     {
       "filename": "claude-code__desktop-wsl.md",
@@ -13620,38 +13628,38 @@
       ],
       "terms": {
         "set": 282,
-        "claude": 215,
-        "code": 151,
-        "default": 124,
+        "claude": 213,
+        "code": 150,
+        "default": 123,
         "model": 120,
         "session": 88,
         "tool": 81,
         "see": 78,
-        "variable": 69,
+        "variable": 68,
         "command": 61,
         "server": 58,
         "agent": 54,
         "disable": 53,
-        "requir": 51,
+        "requir": 50,
         "file": 49,
         "request": 49,
         "override": 45,
         "mode": 44,
         "platform": 44,
-        "later": 44,
         "sett": 43,
+        "later": 43,
         "background": 42,
         "before": 40,
-        "turn": 40,
         "value": 39,
+        "turn": 39,
         "instead": 39,
         "api": 38,
         "mcp": 38,
         "cloud": 38,
         "such": 37,
-        "off": 37,
         "auto": 37,
         "only": 36,
+        "off": 36,
         "subagent": 36,
         "setting": 35,
         "timeout": 34,
@@ -13659,10 +13667,10 @@
         "bash": 33,
         "also": 31,
         "window": 31,
+        "still": 31,
         "configuration": 31,
         "prompt": 31,
         "shell": 30,
-        "still": 30,
         "gateway": 29,
         "hook": 29,
         "environment": 28,
@@ -13670,7 +13678,7 @@
         "read": 27,
         "key": 27
       },
-      "word_count": 14527
+      "word_count": 14491
     },
     {
       "filename": "claude-code__errors.md",
@@ -13976,6 +13984,10 @@
           "level": 3
         },
         {
+          "text": "Plugin archive integrity check failed",
+          "level": 3
+        },
+        {
           "text": "Tool errors",
           "level": 2
         },
@@ -14070,15 +14082,15 @@
         "resume": 14,
         "tool": 14,
         "compact": 14,
+        "update": 14,
         "aws": 13,
-        "update": 13,
         "usage": 12,
         "base": 12,
+        "name": 12,
         "agent": 12,
         "url": 12,
         "com": 11,
         "network": 11,
-        "name": 11,
         "feedback": 11,
         "command": 10,
         "limit": 10,
@@ -14091,16 +14103,16 @@
         "branch": 9,
         "max": 9,
         "apikeyhelper": 9,
+        "plugin": 8,
         "read": 8,
         "context": 8,
         "token": 8,
         "rewind": 8,
         "print": 7,
         "message": 7,
-        "too": 7,
-        "config": 7
+        "too": 7
       },
-      "word_count": 21706
+      "word_count": 21918
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -14985,58 +14997,58 @@
         }
       ],
       "terms": {
-        "ghe": 59,
-        "github": 55,
-        "claude": 50,
+        "ghe": 64,
+        "github": 58,
+        "claude": 51,
         "code": 33,
-        "instance": 30,
-        "setting": 25,
-        "session": 24,
+        "instance": 32,
+        "session": 28,
+        "setting": 28,
+        "app": 27,
+        "repository": 24,
         "enterprise": 23,
-        "connect": 22,
-        "repository": 22,
-        "app": 21,
-        "add": 20,
-        "marketplac": 19,
-        "organization": 19,
-        "marketplace": 19,
-        "host": 17,
+        "connect": 23,
+        "host": 23,
+        "organization": 22,
+        "add": 22,
+        "marketplace": 21,
+        "marketplac": 20,
+        "plugin": 17,
+        "owner": 16,
         "web": 15,
         "review": 15,
-        "owner": 15,
-        "plugin": 14,
+        "user": 15,
+        "git": 15,
         "support": 14,
-        "credential": 14,
-        "git": 14,
-        "user": 14,
-        "com": 12,
+        "com": 13,
+        "credential": 13,
+        "connection": 13,
         "step": 12,
+        "read": 12,
         "manag": 11,
         "setup": 11,
+        "url": 11,
         "machine": 11,
         "repositori": 10,
-        "connection": 10,
+        "instead": 10,
+        "anthropic": 10,
         "server": 9,
+        "configuration": 9,
         "see": 9,
+        "own": 9,
         "work": 9,
         "admin": 9,
+        "permission": 9,
+        "each": 9,
         "account": 9,
         "fail": 9,
         "run": 8,
-        "configuration": 8,
         "requirement": 8,
-        "own": 8,
-        "acces": 8,
-        "read": 8,
-        "each": 8,
-        "url": 8,
-        "file": 7,
-        "instead": 7,
-        "developer": 7,
-        "hostname": 7,
-        "install": 7
+        "same": 8,
+        "webhook": 8,
+        "acces": 8
       },
-      "word_count": 2317
+      "word_count": 2608
     },
     {
       "filename": "claude-code__gitlab-ci-cd.md",
@@ -15858,10 +15870,10 @@
         "claude": 55,
         "code": 43,
         "run": 24,
+        "session": 18,
         "tool": 17,
         "command": 17,
         "example": 17,
-        "session": 16,
         "event": 16,
         "before": 15,
         "field": 15,
@@ -15872,11 +15884,11 @@
         "server": 13,
         "sdk": 12,
         "prompt": 12,
+        "exit": 12,
         "read": 12,
         "subagent": 12,
         "stream": 12,
         "output": 11,
-        "exit": 11,
         "such": 10,
         "without": 10,
         "load": 10,
@@ -15888,12 +15900,12 @@
         "file": 8,
         "cli": 8,
         "pas": 8,
+        "message": 8,
         "response": 8,
         "mcp": 8,
         "json": 8,
         "str": 8,
         "non": 7,
-        "message": 7,
         "flag": 7,
         "any": 7,
         "print": 7,
@@ -15906,7 +15918,7 @@
         "follow": 7,
         "messag": 7
       },
-      "word_count": 3172
+      "word_count": 3194
     },
     {
       "filename": "claude-code__hooks.md",
@@ -16882,6 +16894,7 @@
         "imag": 8,
         "svg": 8,
         "dark": 8,
+        "environment": 8,
         "read": 8,
         "start": 8,
         "branch": 8,
@@ -16891,7 +16904,6 @@
         "through": 7,
         "test": 7,
         "prompt": 7,
-        "environment": 7,
         "without": 7,
         "current": 7,
         "instruction": 7,
@@ -16904,7 +16916,7 @@
         "any": 6,
         "data": 6
       },
-      "word_count": 2636
+      "word_count": 2642
     },
     {
       "filename": "claude-code__interactive-mode.md",
@@ -18560,7 +18572,7 @@
       ],
       "terms": {
         "mcp": 119,
-        "claude": 92,
+        "claude": 93,
         "server": 63,
         "tool": 44,
         "json": 36,
@@ -18610,7 +18622,7 @@
         "sentry": 5,
         "own": 5
       },
-      "word_count": 11191
+      "word_count": 11238
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -19071,9 +19083,9 @@
         "claude": 34,
         "code": 33,
         "app": 24,
+        "cloud": 17,
         "remote": 15,
         "control": 15,
-        "cloud": 14,
         "dispatch": 14,
         "task": 13,
         "phone": 11,
@@ -19088,13 +19100,11 @@
         "web": 6,
         "local": 6,
         "mobile": 5,
-        "anthropic": 5,
         "tab": 5,
         "open": 5,
         "computer": 5,
         "need": 5,
         "ios": 4,
-        "infrastructure": 4,
         "desktop": 4,
         "message": 4,
         "same": 4,
@@ -19104,10 +19114,10 @@
         "file": 3,
         "android": 3,
         "reach": 3,
-        "manag": 3,
         "own": 3,
         "title": 3,
         "download": 3,
+        "anthropic": 3,
         "such": 3,
         "new": 3,
         "drive": 3,
@@ -19116,9 +19126,11 @@
         "also": 3,
         "cover": 3,
         "slack": 3,
-        "select": 3
+        "select": 3,
+        "environment": 3,
+        "mod": 3
       },
-      "word_count": 1126
+      "word_count": 1131
     },
     {
       "filename": "claude-code__model-config.md",
@@ -19286,34 +19298,34 @@
       ],
       "terms": {
         "model": 350,
-        "default": 125,
+        "default": 126,
         "claude": 123,
-        "session": 103,
+        "session": 104,
         "code": 85,
         "set": 78,
         "opu": 77,
-        "setting": 66,
+        "setting": 70,
         "version": 53,
+        "organization": 52,
         "provider": 51,
-        "organization": 50,
+        "manag": 51,
         "platform": 48,
         "level": 48,
-        "manag": 47,
+        "run": 46,
         "request": 45,
-        "run": 45,
         "picker": 45,
         "fallback": 43,
         "effort": 42,
         "sonnet": 40,
+        "anthropic": 37,
         "agent": 37,
-        "anthropic": 36,
         "fable": 36,
         "allowlist": 36,
+        "environment": 34,
         "only": 34,
         "bedrock": 33,
         "sett": 32,
         "amazon": 31,
-        "environment": 31,
         "list": 31,
         "user": 31,
         "such": 31,
@@ -19336,7 +19348,7 @@
         "appli": 25,
         "instead": 25
       },
-      "word_count": 10515
+      "word_count": 10584
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -19767,24 +19779,24 @@
       "terms": {
         "claude": 52,
         "code": 38,
-        "session": 19,
-        "environment": 18,
-        "proxy": 18,
+        "session": 24,
+        "host": 24,
+        "environment": 21,
+        "proxy": 20,
+        "anthropic": 19,
         "variabl": 18,
         "set": 18,
         "setting": 16,
-        "host": 15,
+        "only": 14,
         "check": 14,
-        "anthropic": 13,
-        "only": 12,
+        "network": 13,
+        "connection": 12,
         "watchdog": 12,
         "configuration": 11,
         "certificate": 11,
         "authentication": 11,
-        "connection": 11,
         "install": 11,
         "every": 11,
-        "network": 10,
         "shell": 10,
         "read": 10,
         "run": 10,
@@ -19800,9 +19812,11 @@
         "note": 8,
         "provider": 8,
         "see": 8,
+        "instead": 8,
         "gateway": 8,
         "agent": 8,
         "supervisor": 8,
+        "reach": 8,
         "mtl": 7,
         "trust": 7,
         "also": 7,
@@ -19810,13 +19824,11 @@
         "cloud": 7,
         "sett": 7,
         "background": 7,
-        "reach": 7,
         "launcher": 7,
         "minut": 7,
-        "page": 6,
-        "where": 6
+        "page": 6
       },
-      "word_count": 2547
+      "word_count": 2651
     },
     {
       "filename": "claude-code__output-styles.md",
@@ -20337,19 +20349,19 @@
       "terms": {
         "claude": 22,
         "code": 19,
-        "run": 15,
-        "session": 15,
+        "session": 17,
+        "run": 16,
         "desktop": 14,
         "work": 13,
         "cli": 11,
         "review": 11,
         "app": 11,
         "task": 11,
+        "cloud": 10,
         "terminal": 9,
-        "cloud": 8,
+        "team": 8,
         "integration": 7,
         "mobile": 7,
-        "team": 7,
         "platform": 6,
         "web": 6,
         "slack": 6,
@@ -20370,23 +20382,23 @@
         "project": 4,
         "provider": 4,
         "diff": 4,
+        "inside": 4,
         "runn": 4,
+        "start": 4,
         "away": 4,
+        "enterprise": 4,
+        "organization": 4,
         "own": 4,
         "install": 4,
         "chrome": 3,
+        "pick": 3,
         "set": 3,
         "agent": 3,
         "pro": 3,
         "max": 3,
-        "visual": 3,
-        "setup": 3,
-        "inside": 3,
-        "ide": 3,
-        "anthropic": 3,
-        "disconnect": 3
+        "visual": 3
       },
-      "word_count": 1064
+      "word_count": 1101
     },
     {
       "filename": "claude-code__plugin-dependencies.md",
@@ -20668,6 +20680,10 @@
           "level": 3
         },
         {
+          "text": "Zip archives",
+          "level": 3
+        },
+        {
           "text": "Advanced plugin entries",
           "level": 3
         },
@@ -20809,58 +20825,58 @@
         }
       ],
       "terms": {
-        "plugin": 208,
-        "marketplace": 164,
-        "claude": 66,
-        "code": 63,
-        "git": 61,
+        "plugin": 216,
+        "marketplace": 171,
+        "claude": 80,
+        "code": 77,
+        "git": 64,
         "path": 56,
-        "add": 43,
-        "field": 43,
-        "url": 43,
-        "install": 40,
+        "url": 48,
+        "install": 47,
+        "field": 46,
+        "add": 44,
+        "user": 42,
+        "repository": 42,
+        "str": 42,
+        "source": 40,
         "see": 40,
-        "repository": 40,
-        "user": 39,
-        "str": 39,
-        "source": 38,
+        "version": 38,
         "directory": 38,
         "github": 37,
+        "entry": 37,
+        "sourc": 35,
         "marketplac": 34,
-        "entry": 32,
-        "version": 31,
-        "sourc": 31,
-        "host": 29,
+        "host": 33,
+        "file": 30,
         "only": 29,
         "run": 28,
         "name": 28,
+        "fail": 27,
+        "set": 26,
         "each": 25,
-        "set": 24,
         "default": 24,
-        "fail": 24,
-        "file": 23,
+        "server": 23,
         "create": 22,
         "example": 22,
-        "commit": 22,
         "seed": 22,
-        "server": 21,
         "note": 21,
+        "requir": 21,
+        "same": 20,
+        "commit": 19,
+        "load": 19,
         "setting": 19,
         "updat": 18,
         "repositori": 18,
+        "local": 18,
         "list": 18,
         "fil": 18,
-        "requir": 18,
-        "same": 18,
-        "load": 18,
+        "such": 18,
         "relative": 18,
         "branch": 18,
-        "clone": 18,
-        "pull": 18,
-        "local": 17,
-        "exist": 17
+        "credential": 18,
+        "clone": 18
       },
-      "word_count": 8610
+      "word_count": 9142
     },
     {
       "filename": "claude-code__plugin-relevance.md",
@@ -21065,7 +21081,7 @@
         }
       ],
       "terms": {
-        "plugin": 154,
+        "plugin": 153,
         "skill": 51,
         "claude": 40,
         "directory": 31,
@@ -21075,8 +21091,8 @@
         "create": 22,
         "install": 20,
         "agent": 19,
-        "see": 19,
         "root": 19,
+        "see": 17,
         "add": 17,
         "server": 16,
         "marketplace": 15,
@@ -21111,12 +21127,12 @@
         "creat": 6,
         "directori": 6,
         "share": 6,
-        "new": 6,
         "command": 6,
         "note": 6,
-        "same": 6
+        "same": 6,
+        "include": 6
       },
-      "word_count": 3189
+      "word_count": 3175
     },
     {
       "filename": "claude-code__plugins-reference.md",
@@ -21340,7 +21356,7 @@
       ],
       "terms": {
         "plugin": 259,
-        "server": 85,
+        "server": 86,
         "claude": 75,
         "code": 69,
         "field": 64,
@@ -21352,25 +21368,25 @@
         "path": 42,
         "hook": 38,
         "mcp": 37,
+        "marketplace": 35,
         "component": 34,
-        "see": 33,
         "load": 33,
-        "marketplace": 33,
-        "version": 32,
+        "version": 33,
+        "see": 32,
         "session": 32,
+        "file": 29,
         "monitor": 29,
+        "user": 28,
         "option": 28,
-        "file": 27,
         "name": 27,
         "manifest": 26,
-        "user": 26,
         "tool": 26,
+        "fil": 25,
         "lsp": 24,
-        "fil": 24,
+        "one": 24,
         "only": 24,
         "run": 24,
         "root": 23,
-        "one": 23,
         "configuration": 23,
         "scope": 23,
         "agent": 22,
@@ -21383,14 +21399,14 @@
         "error": 19,
         "requir": 19,
         "array": 18,
+        "set": 17,
+        "chang": 17,
         "script": 17,
-        "set": 16,
-        "chang": 16,
         "after": 16,
         "setting": 16,
         "example": 15
       },
-      "word_count": 9235
+      "word_count": 9313
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -21900,24 +21916,25 @@
       ],
       "terms": {
         "claude": 130,
-        "session": 122,
+        "session": 124,
         "remote": 99,
         "code": 93,
         "control": 89,
-        "run": 40,
+        "run": 41,
         "device": 32,
         "app": 28,
         "connect": 26,
         "sign": 26,
         "set": 24,
+        "start": 22,
         "local": 21,
         "machine": 21,
-        "start": 21,
         "step": 21,
         "setting": 20,
         "server": 20,
         "mobile": 19,
         "title": 19,
+        "organization": 19,
         "devic": 18,
         "terminal": 18,
         "trust": 18,
@@ -21926,7 +21943,6 @@
         "one": 17,
         "only": 17,
         "turn": 17,
-        "organization": 17,
         "requir": 16,
         "account": 16,
         "prompt": 16,
@@ -21944,13 +21960,13 @@
         "cli": 14,
         "name": 14,
         "own": 14,
-        "anthropic": 14,
         "available": 13,
         "admin": 13,
         "runn": 13,
-        "while": 13
+        "while": 13,
+        "enable": 13
       },
-      "word_count": 5414
+      "word_count": 5448
     },
     {
       "filename": "claude-code__routines.md",
@@ -22083,7 +22099,7 @@
         "title": 28,
         "add": 27,
         "prompt": 26,
-        "environment": 24,
+        "environment": 25,
         "each": 23,
         "code": 22,
         "event": 22,
@@ -22120,7 +22136,7 @@
         "list": 11,
         "note": 10
       },
-      "word_count": 4639
+      "word_count": 4647
     },
     {
       "filename": "claude-code__sandbox-environments.md",
@@ -22196,29 +22212,29 @@
         "code": 47,
         "container": 32,
         "runtime": 27,
-        "run": 26,
+        "run": 27,
         "tool": 22,
         "bash": 20,
-        "isolation": 16,
+        "isolation": 17,
         "approach": 16,
         "built": 14,
         "inside": 13,
+        "session": 12,
+        "environment": 11,
         "dev": 11,
-        "session": 11,
         "command": 11,
+        "host": 11,
         "mcp": 11,
         "server": 11,
-        "environment": 10,
         "network": 10,
         "permission": 10,
-        "host": 10,
+        "organization": 10,
         "launch": 10,
         "boundary": 10,
         "path": 10,
         "configuration": 10,
         "file": 9,
         "docker": 9,
-        "organization": 9,
         "hook": 9,
         "web": 9,
         "own": 9,
@@ -22242,7 +22258,7 @@
         "start": 7,
         "cover": 7
       },
-      "word_count": 2422
+      "word_count": 2447
     },
     {
       "filename": "claude-code__sandboxing.md",
@@ -22515,6 +22531,7 @@
         "code": 8,
         "tool": 8,
         "time": 8,
+        "cloud": 8,
         "hour": 8,
         "minute": 8,
         "list": 8,
@@ -22531,7 +22548,6 @@
         "stop": 6,
         "any": 6,
         "recurr": 6,
-        "cloud": 6,
         "local": 6,
         "fix": 6,
         "only": 6,
@@ -22546,7 +22562,7 @@
         "poll": 5,
         "keep": 5
       },
-      "word_count": 2399
+      "word_count": 2401
     },
     {
       "filename": "claude-code__security.md",
@@ -22814,11 +22830,833 @@
         "str": 7,
         "catch": 6,
         "find": 6,
+        "cloud": 6,
         "through": 6,
-        "scope": 6,
-        "fil": 6
+        "scope": 6
       },
-      "word_count": 2671
+      "word_count": 2672
+    },
+    {
+      "filename": "claude-code__self-hosted-environments.md",
+      "id": "claude-code/self-hosted-environments",
+      "title": "Self-hosted environments",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments",
+      "headings": [
+        {
+          "text": "Self-hosted environments",
+          "level": 1
+        },
+        {
+          "text": "How self-hosted environments work",
+          "level": 2
+        },
+        {
+          "text": "Availability and limitations",
+          "level": 2
+        },
+        {
+          "text": "Why self-host",
+          "level": 2
+        },
+        {
+          "text": "Environments, runners, and sessions",
+          "level": 2
+        },
+        {
+          "text": "Key concepts",
+          "level": 3
+        },
+        {
+          "text": "Session lifecycle",
+          "level": 3
+        },
+        {
+          "text": "Runner lifecycle",
+          "level": 3
+        },
+        {
+          "text": "Network paths",
+          "level": 3
+        },
+        {
+          "text": "What stays on your infrastructure",
+          "level": 2
+        },
+        {
+          "text": "Get started",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "session": 80,
+        "runner": 61,
+        "host": 43,
+        "environment": 42,
+        "claude": 27,
+        "self": 26,
+        "network": 23,
+        "code": 22,
+        "anthropic": 18,
+        "start": 16,
+        "git": 16,
+        "run": 13,
+        "control": 13,
+        "inference": 12,
+        "path": 11,
+        "poll": 11,
+        "user": 11,
+        "cloud": 10,
+        "each": 10,
+        "queue": 10,
+        "http": 9,
+        "infrastructure": 9,
+        "own": 9,
+        "proces": 9,
+        "developer": 8,
+        "stream": 8,
+        "before": 7,
+        "organization": 7,
+        "work": 7,
+        "plane": 7,
+        "set": 6,
+        "deploy": 6,
+        "same": 6,
+        "inside": 6,
+        "one": 6,
+        "credential": 6,
+        "model": 6,
+        "outbound": 6,
+        "api": 6,
+        "connection": 6,
+        "once": 6,
+        "account": 6,
+        "com": 5,
+        "team": 5,
+        "any": 5,
+        "first": 5,
+        "admin": 5,
+        "claim": 5,
+        "cover": 5,
+        "reach": 5
+      },
+      "word_count": 2168
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-configuration.md",
+      "id": "claude-code/self-hosted-environments-configuration",
+      "title": "Customize sessions in self-hosted environments",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-configuration",
+      "headings": [
+        {
+          "text": "Customize sessions in self-hosted environments",
+          "level": 1
+        },
+        {
+          "text": "Wrapper scripts",
+          "level": 2
+        },
+        {
+          "text": "Keep stdin and file descriptor 3 attached",
+          "level": 3
+        },
+        {
+          "text": "Provision credentials scoped to the session creator",
+          "level": 3
+        },
+        {
+          "text": "Lifecycle hooks",
+          "level": 2
+        },
+        {
+          "text": "checkout",
+          "level": 3
+        },
+        {
+          "text": "post-session",
+          "level": 3
+        },
+        {
+          "text": "command",
+          "level": 3
+        },
+        {
+          "text": "On-demand runners",
+          "level": 2
+        },
+        {
+          "text": "The spawn-runner hook",
+          "level": 3
+        },
+        {
+          "text": "MCP servers",
+          "level": 2
+        },
+        {
+          "text": "Prompt sessions to push their work",
+          "level": 2
+        },
+        {
+          "text": "Permissions and tool approval",
+          "level": 2
+        },
+        {
+          "text": "How each session's config is assembled",
+          "level": 3
+        },
+        {
+          "text": "Repository-committed permission rules",
+          "level": 3
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "session": 138,
+        "runner": 86,
+        "hook": 54,
+        "environment": 32,
+        "host": 28,
+        "work": 28,
+        "file": 23,
+        "credential": 23,
+        "spawn": 23,
+        "wrapper": 22,
+        "run": 21,
+        "child": 21,
+        "token": 21,
+        "server": 21,
+        "per": 20,
+        "request": 18,
+        "claude": 17,
+        "see": 16,
+        "exit": 16,
+        "only": 16,
+        "path": 16,
+        "one": 15,
+        "code": 14,
+        "repository": 14,
+        "don": 14,
+        "set": 14,
+        "instead": 14,
+        "same": 14,
+        "tool": 14,
+        "git": 14,
+        "such": 13,
+        "pre": 13,
+        "order": 13,
+        "empty": 13,
+        "own": 12,
+        "after": 12,
+        "mcp": 12,
+        "claim": 11,
+        "read": 11,
+        "directory": 11,
+        "orchestrator": 11,
+        "script": 10,
+        "end": 10,
+        "jwt": 10,
+        "startup": 10,
+        "push": 10,
+        "default": 9,
+        "flag": 9,
+        "variable": 9,
+        "identity": 9
+      },
+      "word_count": 5163
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-deploy.md",
+      "id": "claude-code/self-hosted-environments-deploy",
+      "title": "Deploy self-hosted environments to production",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-deploy",
+      "headings": [
+        {
+          "text": "Deploy self-hosted environments to production",
+          "level": 1
+        },
+        {
+          "text": "Harden your deployment",
+          "level": 2
+        },
+        {
+          "text": "Network requirements",
+          "level": 2
+        },
+        {
+          "text": "Default-deny egress",
+          "level": 3
+        },
+        {
+          "text": "Configure git",
+          "level": 2
+        },
+        {
+          "text": "Let the runner configure git",
+          "level": 3
+        },
+        {
+          "text": "Ship git config in your image",
+          "level": 3
+        },
+        {
+          "text": "Use the Anthropic git proxy",
+          "level": 3
+        },
+        {
+          "text": "Rewrite git URLs for private networks",
+          "level": 3
+        },
+        {
+          "text": "Build the runner image",
+          "level": 2
+        },
+        {
+          "text": "Kubernetes",
+          "level": 2
+        },
+        {
+          "text": "Docker Compose",
+          "level": 2
+        },
+        {
+          "text": "Shutdown timing",
+          "level": 2
+        },
+        {
+          "text": "What reaches a running post-session hook",
+          "level": 3
+        },
+        {
+          "text": "Keep the base directory and capacity identical across runners",
+          "level": 2
+        },
+        {
+          "text": "Reuse a pre-warmed checkout",
+          "level": 2
+        },
+        {
+          "text": "Pin the version",
+          "level": 2
+        },
+        {
+          "text": "Scale the fleet",
+          "level": 2
+        },
+        {
+          "text": "Known issues and limitations",
+          "level": 2
+        },
+        {
+          "text": "Connector traffic leaves your network",
+          "level": 3
+        },
+        {
+          "text": "Some sessions don't count as idle",
+          "level": 3
+        },
+        {
+          "text": "Additional limitations",
+          "level": 3
+        },
+        {
+          "text": "Report an issue",
+          "level": 3
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "session": 139,
+        "runner": 134,
+        "host": 71,
+        "git": 41,
+        "environment": 34,
+        "run": 29,
+        "one": 26,
+        "each": 25,
+        "hook": 25,
+        "container": 23,
+        "default": 23,
+        "anthropic": 22,
+        "image": 22,
+        "own": 22,
+        "only": 22,
+        "proces": 19,
+        "code": 18,
+        "claude": 18,
+        "network": 18,
+        "credential": 18,
+        "per": 18,
+        "log": 18,
+        "doesn": 18,
+        "clone": 17,
+        "set": 17,
+        "start": 17,
+        "see": 16,
+        "work": 16,
+        "need": 16,
+        "self": 15,
+        "path": 15,
+        "push": 15,
+        "secret": 15,
+        "connector": 15,
+        "egres": 14,
+        "organization": 14,
+        "every": 14,
+        "sign": 14,
+        "control": 13,
+        "account": 13,
+        "keep": 13,
+        "identity": 13,
+        "proxy": 13,
+        "before": 12,
+        "any": 12,
+        "instead": 12,
+        "don": 12,
+        "such": 12,
+        "user": 12,
+        "tool": 12
+      },
+      "word_count": 5407
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-identity.md",
+      "id": "claude-code/self-hosted-environments-identity",
+      "title": "Verify session identity in self-hosted environments",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-identity",
+      "headings": [
+        {
+          "text": "Verify session identity in self-hosted environments",
+          "level": 1
+        },
+        {
+          "text": "The session token",
+          "level": 2
+        },
+        {
+          "text": "What the token proves",
+          "level": 3
+        },
+        {
+          "text": "Token format",
+          "level": 3
+        },
+        {
+          "text": "Verify the token",
+          "level": 2
+        },
+        {
+          "text": "Verify the token from your service",
+          "level": 3
+        },
+        {
+          "text": "Verify the token inside the session",
+          "level": 3
+        },
+        {
+          "text": "Claims reference",
+          "level": 2
+        },
+        {
+          "text": "The `act` chain",
+          "level": 3
+        },
+        {
+          "text": "Scope derived credentials",
+          "level": 2
+        },
+        {
+          "text": "Related environment variables",
+          "level": 2
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "token": 53,
+        "session": 50,
+        "environment": 39,
+        "user": 21,
+        "claim": 21,
+        "creat": 20,
+        "key": 20,
+        "verify": 19,
+        "anthropic": 18,
+        "step": 16,
+        "identity": 15,
+        "runner": 15,
+        "str": 12,
+        "host": 11,
+        "value": 11,
+        "claude": 10,
+        "run": 10,
+        "reject": 10,
+        "self": 9,
+        "sign": 9,
+        "any": 9,
+        "jwk": 9,
+        "read": 9,
+        "prefix": 9,
+        "title": 9,
+        "before": 8,
+        "jwt": 8,
+        "verification": 8,
+        "credential": 8,
+        "service": 8,
+        "signature": 8,
+        "issu": 8,
+        "organization": 8,
+        "set": 8,
+        "code": 7,
+        "inside": 7,
+        "wrapper": 7,
+        "check": 7,
+        "email": 7,
+        "servic": 6,
+        "present": 6,
+        "doesn": 6,
+        "start": 6,
+        "against": 6,
+        "one": 6,
+        "such": 6,
+        "tab": 6,
+        "see": 5,
+        "script": 5,
+        "endpoint": 5
+      },
+      "word_count": 2352
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-quickstart.md",
+      "id": "claude-code/self-hosted-environments-quickstart",
+      "title": "Self-hosted environments quickstart",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-quickstart",
+      "headings": [
+        {
+          "text": "Self-hosted environments quickstart",
+          "level": 1
+        },
+        {
+          "text": "Prerequisites",
+          "level": 2
+        },
+        {
+          "text": "Organization and roles",
+          "level": 3
+        },
+        {
+          "text": "Host and network",
+          "level": 3
+        },
+        {
+          "text": "Software on the runner host",
+          "level": 3
+        },
+        {
+          "text": "Set up an environment and runner",
+          "level": 2
+        },
+        {
+          "text": "Send a follow-up message to a running session",
+          "level": 2
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "runner": 39,
+        "environment": 34,
+        "session": 30,
+        "host": 27,
+        "claude": 17,
+        "step": 17,
+        "start": 13,
+        "secret": 12,
+        "code": 9,
+        "deploy": 9,
+        "run": 9,
+        "self": 8,
+        "create": 8,
+        "see": 8,
+        "production": 8,
+        "one": 8,
+        "work": 8,
+        "admin": 8,
+        "git": 8,
+        "need": 8,
+        "page": 7,
+        "version": 7,
+        "command": 7,
+        "runn": 6,
+        "instead": 6,
+        "exit": 6,
+        "install": 5,
+        "path": 5,
+        "cloud": 5,
+        "check": 5,
+        "repositori": 5,
+        "new": 5,
+        "where": 5,
+        "setup": 5,
+        "under": 5,
+        "select": 5,
+        "next": 5,
+        "restart": 5,
+        "file": 4,
+        "first": 4,
+        "test": 4,
+        "terminal": 4,
+        "credential": 4,
+        "confirm": 4,
+        "follow": 4,
+        "title": 4,
+        "read": 4,
+        "send": 4,
+        "available": 3,
+        "before": 3
+      },
+      "word_count": 1503
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-reference.md",
+      "id": "claude-code/self-hosted-environments-reference",
+      "title": "Self-hosted environments reference",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-reference",
+      "headings": [
+        {
+          "text": "Self-hosted environments reference",
+          "level": 1
+        },
+        {
+          "text": "Runner CLI flags",
+          "level": 2
+        },
+        {
+          "text": "Orchestrator CLI flags",
+          "level": 2
+        },
+        {
+          "text": "SCM connector flags",
+          "level": 3
+        },
+        {
+          "text": "Environment-variable-only settings",
+          "level": 2
+        },
+        {
+          "text": "Telemetry",
+          "level": 2
+        },
+        {
+          "text": "Health endpoint",
+          "level": 2
+        },
+        {
+          "text": "Prometheus metrics",
+          "level": 2
+        },
+        {
+          "text": "Pass through session-child metrics",
+          "level": 3
+        },
+        {
+          "text": "Session lifecycle counter semantics",
+          "level": 3
+        },
+        {
+          "text": "What's next",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "session": 86,
+        "runner": 73,
+        "environment": 43,
+        "hook": 32,
+        "flag": 28,
+        "spawn": 27,
+        "child": 25,
+        "host": 19,
+        "orchestrator": 18,
+        "own": 18,
+        "default": 18,
+        "same": 18,
+        "second": 18,
+        "before": 17,
+        "poll": 17,
+        "each": 16,
+        "seri": 16,
+        "set": 16,
+        "only": 16,
+        "after": 16,
+        "value": 14,
+        "unset": 14,
+        "end": 14,
+        "one": 14,
+        "counter": 14,
+        "metric": 13,
+        "per": 13,
+        "exit": 13,
+        "see": 12,
+        "proces": 12,
+        "every": 11,
+        "git": 11,
+        "request": 11,
+        "server": 11,
+        "wait": 10,
+        "increment": 10,
+        "self": 9,
+        "queue": 9,
+        "such": 9,
+        "variable": 9,
+        "port": 9,
+        "lifecycle": 9,
+        "count": 9,
+        "alert": 9,
+        "since": 9,
+        "prometheu": 8,
+        "turn": 8,
+        "start": 8,
+        "control": 8,
+        "release": 8
+      },
+      "word_count": 4712
+    },
+    {
+      "filename": "claude-code__self-hosted-environments-testing.md",
+      "id": "claude-code/self-hosted-environments-testing",
+      "title": "Test self-hosted environments end to end",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/self-hosted-environments-testing",
+      "headings": [
+        {
+          "text": "Test self-hosted environments end to end",
+          "level": 1
+        },
+        {
+          "text": "Install the capture hook on your test runner",
+          "level": 2
+        },
+        {
+          "text": "Save the hook files",
+          "level": 3
+        },
+        {
+          "text": "Before you start the runner",
+          "level": 3
+        },
+        {
+          "text": "Run the test loop",
+          "level": 2
+        },
+        {
+          "text": "Example script",
+          "level": 2
+        },
+        {
+          "text": "Remote test runners",
+          "level": 2
+        },
+        {
+          "text": "Authenticate from CI",
+          "level": 2
+        },
+        {
+          "text": "Long-lived CI host",
+          "level": 3
+        },
+        {
+          "text": "Ephemeral CI runners",
+          "level": 3
+        },
+        {
+          "text": "Create a dedicated test environment",
+          "level": 2
+        },
+        {
+          "text": "Mint the admin token",
+          "level": 3
+        },
+        {
+          "text": "Create the environment",
+          "level": 3
+        },
+        {
+          "text": "Delete the environment",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "runner": 37,
+        "environment": 24,
+        "test": 20,
+        "hook": 18,
+        "run": 18,
+        "host": 15,
+        "session": 14,
+        "token": 14,
+        "claude": 12,
+        "script": 12,
+        "reply": 9,
+        "start": 9,
+        "read": 8,
+        "same": 8,
+        "create": 7,
+        "install": 7,
+        "only": 7,
+        "image": 6,
+        "stop": 6,
+        "each": 6,
+        "admin": 6,
+        "before": 5,
+        "self": 5,
+        "acces": 5,
+        "call": 5,
+        "capture": 5,
+        "such": 5,
+        "liv": 5,
+        "account": 5,
+        "day": 5,
+        "code": 4,
+        "cli": 4,
+        "send": 4,
+        "follow": 4,
+        "set": 4,
+        "job": 4,
+        "turn": 4,
+        "two": 4,
+        "remote": 4,
+        "below": 4,
+        "one": 4,
+        "without": 4,
+        "refresh": 4,
+        "grant": 4,
+        "mint": 4,
+        "delete": 4,
+        "file": 3,
+        "dispatch": 3,
+        "full": 3,
+        "loop": 3
+      },
+      "word_count": 2095
     },
     {
       "filename": "claude-code__server-managed-settings.md",
@@ -22909,17 +23747,17 @@
         }
       ],
       "terms": {
-        "setting": 136,
-        "manag": 90,
+        "setting": 139,
+        "manag": 92,
         "claude": 59,
         "code": 48,
-        "server": 47,
+        "server": 48,
         "user": 41,
         "fetch": 35,
         "endpoint": 29,
-        "deliver": 27,
+        "deliver": 28,
         "variabl": 27,
-        "key": 23,
+        "key": 25,
         "configuration": 22,
         "cach": 22,
         "source": 21,
@@ -22927,12 +23765,12 @@
         "before": 19,
         "organization": 19,
         "block": 18,
+        "session": 17,
+        "environment": 17,
+        "only": 17,
         "dialog": 17,
         "such": 17,
-        "session": 16,
-        "only": 16,
         "startup": 16,
-        "environment": 15,
         "approval": 15,
         "value": 15,
         "see": 14,
@@ -22947,12 +23785,12 @@
         "admin": 11,
         "client": 11,
         "mdm": 11,
+        "file": 10,
         "other": 10,
         "includ": 10,
         "apply": 10,
         "set": 10,
         "later": 10,
-        "file": 9,
         "requir": 9,
         "delivery": 9,
         "don": 9,
@@ -22960,7 +23798,7 @@
         "shell": 9,
         "until": 9
       },
-      "word_count": 3464
+      "word_count": 3498
     },
     {
       "filename": "claude-code__sessions.md",
@@ -23196,7 +24034,7 @@
         "entry": 13,
         "disable": 13
       },
-      "word_count": 16715
+      "word_count": 16732
     },
     {
       "filename": "claude-code__setup.md",
@@ -24018,10 +24856,6 @@
           "level": 3
         },
         {
-          "text": "Session subagent limit",
-          "level": 3
-        },
-        {
           "text": "Concurrent subagent limit",
           "level": 3
         },
@@ -24083,58 +24917,58 @@
         }
       ],
       "terms": {
-        "subagent": 408,
-        "claude": 153,
-        "tool": 114,
-        "agent": 106,
-        "session": 77,
+        "subagent": 399,
+        "claude": 146,
+        "tool": 109,
+        "agent": 100,
         "main": 76,
-        "code": 75,
-        "conversation": 68,
-        "run": 68,
+        "code": 74,
+        "session": 69,
+        "conversation": 67,
+        "run": 65,
         "prompt": 60,
-        "fork": 52,
-        "only": 51,
+        "only": 50,
+        "fork": 49,
         "hook": 48,
         "task": 44,
-        "same": 44,
-        "spawn": 43,
+        "same": 43,
         "context": 40,
-        "work": 39,
         "field": 39,
         "model": 38,
-        "background": 36,
-        "limit": 36,
+        "work": 37,
+        "spawn": 36,
+        "background": 34,
         "one": 33,
         "project": 33,
         "directory": 33,
         "name": 32,
-        "before": 31,
         "list": 31,
         "plugin": 31,
         "server": 31,
+        "before": 30,
         "skill": 30,
-        "start": 30,
-        "own": 29,
         "system": 29,
         "permission": 29,
         "command": 29,
-        "such": 28,
-        "runn": 28,
         "frontmatter": 28,
+        "limit": 27,
+        "such": 27,
         "fil": 27,
+        "runn": 27,
+        "start": 27,
         "file": 26,
-        "every": 26,
-        "instead": 26,
+        "own": 25,
         "inherit": 25,
-        "set": 25,
-        "nam": 25,
+        "every": 25,
+        "instead": 25,
         "see": 24,
         "note": 24,
         "also": 24,
-        "default": 24
+        "set": 24,
+        "nam": 24,
+        "each": 23
       },
-      "word_count": 12183
+      "word_count": 11951
     },
     {
       "filename": "claude-code__terminal-config.md",
@@ -24311,22 +25145,22 @@
         }
       ],
       "terms": {
-        "claude": 42,
-        "code": 22,
+        "claude": 43,
+        "code": 23,
         "tab": 18,
+        "organization": 15,
         "through": 15,
         "team": 15,
-        "organization": 14,
         "aws": 14,
         "gateway": 14,
         "proxy": 13,
         "enterprise": 12,
         "cloud": 12,
         "configuration": 12,
+        "environment": 12,
         "platform": 12,
-        "environment": 11,
         "llm": 10,
-        "deployment": 9,
+        "deployment": 10,
         "bedrock": 9,
         "corporate": 9,
         "variabl": 9,
@@ -24349,20 +25183,20 @@
         "bill": 6,
         "anthropic": 6,
         "provider": 6,
+        "option": 6,
         "management": 6,
+        "model": 6,
         "payg": 6,
         "title": 6,
         "route": 6,
         "sett": 6,
         "plan": 5,
-        "option": 5,
         "best": 5,
         "security": 5,
         "feature": 5,
-        "gcp": 5,
-        "azure": 5
+        "gcp": 5
       },
-      "word_count": 1704
+      "word_count": 1730
     },
     {
       "filename": "claude-code__tools-reference.md",
@@ -24544,7 +25378,7 @@
         "later": 13,
         "conversation": 13
       },
-      "word_count": 7617
+      "word_count": 7628
     },
     {
       "filename": "claude-code__troubleshoot-install.md",
@@ -25386,14 +26220,14 @@
       ],
       "terms": {
         "claude": 73,
-        "session": 42,
+        "session": 43,
+        "step": 40,
         "code": 39,
-        "step": 39,
         "github": 29,
-        "environment": 27,
-        "run": 25,
+        "environment": 28,
+        "run": 26,
         "cloud": 24,
-        "setup": 17,
+        "setup": 18,
         "task": 15,
         "script": 15,
         "cli": 15,
@@ -25402,18 +26236,18 @@
         "title": 14,
         "web": 13,
         "connect": 12,
+        "default": 12,
         "app": 12,
         "work": 12,
+        "network": 12,
         "acces": 12,
         "account": 12,
         "don": 11,
-        "network": 11,
         "sign": 11,
         "branch": 10,
         "terminal": 10,
         "open": 10,
         "see": 10,
-        "default": 10,
         "local": 9,
         "create": 9,
         "one": 9,
@@ -25430,13 +26264,13 @@
         "show": 8,
         "add": 8,
         "submit": 7,
+        "push": 7,
+        "after": 7,
+        "organization": 7,
         "edit": 7,
-        "finish": 7,
-        "also": 7,
-        "available": 6,
-        "without": 6
+        "finish": 7
       },
-      "word_count": 2601
+      "word_count": 2636
     },
     {
       "filename": "claude-code__whats-new.md",
