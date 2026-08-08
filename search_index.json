@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-08T03:38:16.713109Z",
+  "generated_at": "2026-08-08T06:20:57.895870Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20299,15 +20299,15 @@
         }
       ],
       "terms": {
-        "mode": 136,
+        "mode": 138,
         "claude": 101,
         "session": 76,
         "auto": 60,
-        "code": 56,
+        "code": 57,
         "prompt": 56,
         "classifier": 47,
-        "permission": 44,
-        "default": 42,
+        "permission": 45,
+        "default": 43,
         "block": 36,
         "plan": 36,
         "set": 30,
@@ -20332,25 +20332,25 @@
         "work": 20,
         "push": 20,
         "without": 19,
+        "own": 19,
         "still": 19,
         "repository": 19,
-        "own": 18,
+        "mod": 18,
         "available": 17,
         "ask": 17,
+        "tab": 17,
         "bypas": 17,
         "appear": 17,
         "instead": 17,
         "model": 17,
         "content": 17,
         "file": 16,
-        "mod": 16,
         "writ": 16,
-        "tab": 14,
+        "see": 15,
         "review": 14,
-        "each": 14,
-        "nam": 14
+        "each": 14
       },
-      "word_count": 6532
+      "word_count": 6576
     },
     {
       "filename": "claude-code__permissions.md",

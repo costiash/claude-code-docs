@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-08T03:38:14.199806Z",
+  "generated_at": "2026-08-08T06:20:55.427610Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1357,8 +1357,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "3f985cfb9da3edeffc98114b605b2d67911cb03b8a0a0fe8e53343d48e9bcb05",
-      "lastmod": "2026-08-07T21:44:32.300Z",
+      "sha256": "d0d7141229b3828cdc1e8d313dc147c52f940fd16292ab40fdb612e7a2844791",
+      "lastmod": "2026-08-08T04:50:22.337Z",
       "fetch_status": "ok"
     },
     {
