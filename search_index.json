@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-08T06:20:57.895870Z",
+  "generated_at": "2026-08-09T03:39:23.641961Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -13836,7 +13836,7 @@
       ],
       "terms": {
         "set": 285,
-        "claude": 224,
+        "claude": 223,
         "code": 161,
         "default": 125,
         "model": 120,
@@ -13851,8 +13851,8 @@
         "requir": 53,
         "file": 49,
         "request": 49,
+        "sett": 46,
         "later": 46,
-        "sett": 45,
         "override": 45,
         "mode": 44,
         "platform": 44,
@@ -13886,7 +13886,7 @@
         "variabl": 27,
         "through": 27
       },
-      "word_count": 14774
+      "word_count": 14777
     },
     {
       "filename": "claude-code__errors.md",
@@ -17253,7 +17253,7 @@
       "terms": {
         "claude": 62,
         "command": 49,
-        "prompt": 45,
+        "prompt": 47,
         "code": 43,
         "mode": 36,
         "input": 34,
@@ -17278,31 +17278,31 @@
         "after": 17,
         "previou": 17,
         "insert": 17,
+        "turn": 16,
         "word": 16,
         "requir": 16,
+        "key": 15,
         "start": 15,
         "work": 15,
         "answer": 15,
         "before": 14,
-        "key": 14,
         "show": 14,
-        "turn": 14,
-        "toggle": 14,
+        "suggestion": 14,
         "render": 13,
         "maco": 13,
         "context": 13,
+        "toggle": 13,
         "end": 13,
         "type": 13,
         "option": 12,
+        "set": 12,
         "clear": 12,
         "current": 12,
-        "suggestion": 12,
         "question": 12,
         "fullscreen": 11,
-        "instead": 11,
-        "full": 11
+        "instead": 11
       },
-      "word_count": 4920
+      "word_count": 4981
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -24262,7 +24262,7 @@
         "policy": 13,
         "marketplace": 13
       },
-      "word_count": 17832
+      "word_count": 17871
     },
     {
       "filename": "claude-code__setup.md",
