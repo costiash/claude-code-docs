@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-11T00:20:01.513551Z",
+  "generated_at": "2026-08-11T03:39:10.970823Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "08b19b87c21b8c158ecfdc86199b9105ae9b38b629bf817b175c85046ebc9061",
-      "lastmod": "2026-08-07T21:59:58.362Z",
+      "sha256": "b1cafeb6383758d9a74dcb90786c3aa64176ba38309d4507982218c1420c2284",
+      "lastmod": "2026-08-11T00:52:31.507Z",
       "fetch_status": "ok"
     },
     {
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "65879ec560f31d2ca38e2fc7cd854ae7371e33efea11b5f3bf055824f4928826",
-      "lastmod": "2026-08-07T21:59:58.365Z",
+      "sha256": "bd1583de6b19543056a6aa7712c98c68980068d2652c672b6e023127da54e4fe",
+      "lastmod": "2026-08-11T00:52:31.505Z",
       "fetch_status": "ok"
     },
     {
@@ -631,8 +631,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md",
       "title": "Claude apps gateway spend limits",
       "category": "claude_code",
-      "sha256": "0263cbadaa219046b36951e27b1b1b6c4c5e66217614a910e6a75243175b63de",
-      "lastmod": "2026-08-07T20:23:45.019Z",
+      "sha256": "ecdcab396b4882fcc4d2881a451ba5f15d92de01a5587b19ae57a076e9cf8797",
+      "lastmod": "2026-08-11T00:52:31.502Z",
       "fetch_status": "ok"
     },
     {
@@ -862,8 +862,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop-ios-simulator.md",
       "title": "Test iOS apps in the simulator",
       "category": "claude_code",
-      "sha256": "e6032bada9af262bf8512e255cbf03859ed2309a8ba3f41d7787f0f8a67455b6",
-      "lastmod": "2026-08-03T23:35:56.840Z",
+      "sha256": "882af9bd5bbb430adbbf3f289b57407d09fa9636b57ec9ca63297649a489743b",
+      "lastmod": "2026-08-11T03:26:02.809Z",
       "fetch_status": "ok"
     },
     {
@@ -1104,8 +1104,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "d29d21b554b5c6bd0b0ed1f7a28161c1cd05954510a6fd0acb84b74d496987fb",
-      "lastmod": "2026-08-07T21:51:28.023Z",
+      "sha256": "65a363ec97d349de666f11041c8c9092616d2509e5b04d049648fd7f2c9989e2",
+      "lastmod": "2026-08-11T00:27:38.817Z",
       "fetch_status": "ok"
     },
     {
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks-guide.md",
       "title": "Automate actions with hooks",
       "category": "claude_code",
-      "sha256": "44481165eb466f1a3e7f27dd1375642b02f2b9e71df319085521af8f8e485f6d",
-      "lastmod": "2026-08-07T21:51:28.022Z",
+      "sha256": "23a9df9878064226f21e0e3df9b07738a37a1c922f91f749b063ef5fa5e10ac6",
+      "lastmod": "2026-08-11T00:27:38.805Z",
       "fetch_status": "ok"
     },
     {
@@ -1214,8 +1214,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway-protocol.md",
       "title": "Gateway protocol reference",
       "category": "claude_code",
-      "sha256": "79d6870f52da0be6d91e2b2cea8c08968d90403ef4955774a8f518b316c1156d",
-      "lastmod": "2026-08-07T20:23:45.014Z",
+      "sha256": "273c52480230569b9fd5da8db1260269e74186a9342fcd31e252345d6b2bb2f4",
+      "lastmod": "2026-08-11T01:46:02.210Z",
       "fetch_status": "ok"
     },
     {
@@ -1390,8 +1390,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-dependencies.md",
       "title": "Constrain plugin dependency versions",
       "category": "claude_code",
-      "sha256": "d0cfa37f9bacf8149ae8d3c086d6edacac419acc21956b4f10db58349bc315b8",
-      "lastmod": "2026-08-07T18:34:32.372Z",
+      "sha256": "e4693c8e114280d9ee2ad656916db99c8bc376a1920c15a1dbd8ddb6bc91f630",
+      "lastmod": "2026-08-11T01:58:58.312Z",
       "fetch_status": "ok"
     },
     {
@@ -1731,8 +1731,8 @@
       "md_url": "https://code.claude.com/docs/en/terminal-config.md",
       "title": "Configure your terminal for Claude Code",
       "category": "claude_code",
-      "sha256": "4f20beffe81dd8930d09c56473e719cb51becfb6e402b8ad8d7aab4d19ea9c77",
-      "lastmod": "2026-08-07T22:56:32.915Z",
+      "sha256": "5b447a75d71ab50834b721051cb3fabd1e64d37e41de8d06296dc7f105abe746",
+      "lastmod": "2026-08-11T00:27:38.804Z",
       "fetch_status": "ok"
     },
     {
