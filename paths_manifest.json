@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-12T06:35:36.126230Z",
+  "generated_at": "2026-08-12T09:32:36.305720Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "8a43de5c6210f51ccfd00dc2d1da68bebb689e4395f193e6506d016686824963",
-      "lastmod": "2026-08-11T15:11:51.159Z",
+      "sha256": "a4dad6e2075d661bd7a4bff554bf0b6e209f67804044ecfb0838da53a5f15260",
+      "lastmod": "2026-08-12T06:42:06.088Z",
       "fetch_status": "ok"
     },
     {
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "bd1583de6b19543056a6aa7712c98c68980068d2652c672b6e023127da54e4fe",
-      "lastmod": "2026-08-11T00:52:31.505Z",
+      "sha256": "93f30ae694f41986d9d832ed2bdf09cb14fa7a623cab9013bb7113ac479127c2",
+      "lastmod": "2026-08-12T06:42:06.090Z",
       "fetch_status": "ok"
     },
     {
@@ -609,8 +609,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md",
       "title": "Deploy Claude apps gateway on AWS",
       "category": "claude_code",
-      "sha256": "243c1ec7d0d9507d91880905a1ad27acdc5046800c74f4a9da00c63dd9db5e90",
-      "lastmod": "2026-08-07T20:23:45.017Z",
+      "sha256": "9f5bca9d45b3430feedf7cae9bc98efa5d1d0a90a9b00162ecddddfd41eeefd1",
+      "lastmod": "2026-08-12T06:42:06.083Z",
       "fetch_status": "ok"
     },
     {
@@ -1302,8 +1302,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "d3f29542e6764f737c96014ff28cb7b773a67ebec2b882e93cfa722577c3196b",
-      "lastmod": "2026-08-11T19:18:51.510Z",
+      "sha256": "fb46057162106c36a679061a1c8c85fa90e12eb8feb233c61c4c2672bcbde363",
+      "lastmod": "2026-08-12T06:42:06.084Z",
       "fetch_status": "ok"
     },
     {

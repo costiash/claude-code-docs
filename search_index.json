@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-12T06:35:38.107488Z",
+  "generated_at": "2026-08-12T09:32:38.813156Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9739,10 +9739,10 @@
         "group": 32,
         "developer": 31,
         "per": 31,
-        "one": 29,
         "requir": 29,
         "client": 29,
         "manag": 28,
+        "one": 28,
         "code": 27,
         "list": 26,
         "each": 25,
@@ -9774,7 +9774,7 @@
         "amazon": 16,
         "cloud": 16
       },
-      "word_count": 9059
+      "word_count": 9072
     },
     {
       "filename": "claude-code__claude-apps-gateway-deploy.md",
@@ -9915,12 +9915,12 @@
         "through": 11,
         "refresh": 11,
         "still": 11,
-        "one": 11,
         "host": 11,
         "http": 10,
-        "also": 10
+        "also": 10,
+        "network": 10
       },
-      "word_count": 5148
+      "word_count": 5147
     },
     {
       "filename": "claude-code__claude-apps-gateway-on-aws.md",
@@ -10014,11 +10014,11 @@
         "instance": 14,
         "policy": 14,
         "deploy": 13,
-        "one": 13,
         "per": 13,
         "need": 13,
         "arn": 13,
         "default": 13,
+        "one": 12,
         "deployment": 12,
         "see": 12,
         "load": 12,
@@ -10034,7 +10034,7 @@
         "client": 11,
         "via": 11
       },
-      "word_count": 5338
+      "word_count": 5337
     },
     {
       "filename": "claude-code__claude-apps-gateway-on-gcp.md",
@@ -19597,7 +19597,7 @@
         "set": 90,
         "opu": 83,
         "setting": 75,
-        "version": 53,
+        "version": 54,
         "organization": 53,
         "manag": 53,
         "window": 51,
@@ -19608,8 +19608,8 @@
         "request": 48,
         "picker": 47,
         "fable": 45,
+        "fallback": 45,
         "sonnet": 44,
-        "fallback": 44,
         "effort": 43,
         "context": 42,
         "such": 40,
@@ -19640,7 +19640,7 @@
         "family": 27,
         "think": 27
       },
-      "word_count": 11624
+      "word_count": 11631
     },
     {
       "filename": "claude-code__monitoring-usage.md",
