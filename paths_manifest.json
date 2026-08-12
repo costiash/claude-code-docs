@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-11T21:25:13.945319Z",
+  "generated_at": "2026-08-12T00:24:37.209977Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -422,8 +422,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-view.md",
       "title": "Manage multiple agents with agent view",
       "category": "claude_code",
-      "sha256": "ba022a6cd1fed290b95765016ac579bad67dfeb0943fb6a267612894cf82df32",
-      "lastmod": "2026-08-11T18:18:41.501Z",
+      "sha256": "7157fd51c80c274e342ba958833284a119d29978402fd7a112ba86b6feca2632",
+      "lastmod": "2026-08-11T21:41:51.407Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "2020d036599c74539338439f8b65c94638f8af3095aa7435457862400a7eda3f",
-      "lastmod": "2026-08-11T21:15:27.213Z",
+      "sha256": "cf171bc02525659deff44c732fe3ed16984e29ea2e03b987ff109edd3589d47e",
+      "lastmod": "2026-08-11T21:41:51.424Z",
       "fetch_status": "ok"
     },
     {
@@ -1104,8 +1104,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "ba6886ed3577fe744a763540c05779702c503a8cee2bdcc7154627c1ca642cd8",
-      "lastmod": "2026-08-11T21:15:27.211Z",
+      "sha256": "4733a2392b56a7ae8fe9449027bf94ac1d9e4803583e56be6100956a28edfa13",
+      "lastmod": "2026-08-12T00:05:01.419Z",
       "fetch_status": "ok"
     },
     {
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks-guide.md",
       "title": "Automate actions with hooks",
       "category": "claude_code",
-      "sha256": "21ca8e94b61002116704032b94b0e499f5835a4580c7e9fc8055c395a31fd3e0",
-      "lastmod": "2026-08-11T19:50:27.123Z",
+      "sha256": "4ae2f69b4cd666f336014d0a79f4ec71dd5edecc7e41618befefb7830b8922c4",
+      "lastmod": "2026-08-12T00:05:01.409Z",
       "fetch_status": "ok"
     },
     {
@@ -1336,7 +1336,7 @@
       "title": "Output styles",
       "category": "claude_code",
       "sha256": "861d74cd015ddf66f40c47afa2527d20ae9f2a97dbf81e13f6cb2ac31730b34e",
-      "lastmod": "2026-08-11T18:17:33.465Z",
+      "lastmod": "2026-08-11T21:17:55.604Z",
       "fetch_status": "ok"
     },
     {
@@ -1687,8 +1687,8 @@
       "md_url": "https://code.claude.com/docs/en/skills.md",
       "title": "Extend Claude with skills",
       "category": "claude_code",
-      "sha256": "a2e353744cba3091abc67e9c269e21bd120c2b755ab8167f7991f4b65087b789",
-      "lastmod": "2026-08-11T19:50:27.030Z",
+      "sha256": "19377a513d26524cc706c8bc00964d4e751fa563c7e69c8baac147bfbb162a1b",
+      "lastmod": "2026-08-11T21:41:51.408Z",
       "fetch_status": "ok"
     },
     {
@@ -1720,8 +1720,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "44d829233f0fb3f7f7b7c59e82ca1830dc7fb8d92032d6aef54f67776e982892",
-      "lastmod": "2026-08-11T19:24:25.081Z",
+      "sha256": "cc916b0f87a65170bfae016c60757a9dcb0ed7e31813f1fe73e610324d150ea7",
+      "lastmod": "2026-08-11T21:41:51.413Z",
       "fetch_status": "ok"
     },
     {
@@ -1753,8 +1753,8 @@
       "md_url": "https://code.claude.com/docs/en/tools-reference.md",
       "title": "Tools reference",
       "category": "claude_code",
-      "sha256": "5b3d9fa484d768070985e76552928ff902df0f39372fa1759d6b8f22de274c03",
-      "lastmod": "2026-08-11T21:15:27.208Z",
+      "sha256": "b0e066e71d7988dcb743d261dea0c75c0ced02e59e6b96fd933dc98b67b0d119",
+      "lastmod": "2026-08-11T21:41:51.404Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/worktrees.md",
       "title": "Run parallel sessions with worktrees",
       "category": "claude_code",
-      "sha256": "c5a85623acef35889ca086313de4ddd3383c9b6ab4b04ff7e0dcfa583c41075d",
-      "lastmod": "2026-08-05T20:46:06.525Z",
+      "sha256": "42bfdfe0fe7dcc909188377a3fe88701a406b4b891de30eb03198d4fedf06ddc",
+      "lastmod": "2026-08-11T21:41:51.405Z",
       "fetch_status": "ok"
     },
     {
