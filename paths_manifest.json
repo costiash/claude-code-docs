@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-12T03:51:45.012495Z",
+  "generated_at": "2026-08-12T06:35:36.126230Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -59,8 +59,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/agent-loop.md",
       "title": "How the agent loop works",
       "category": "agent_sdk",
-      "sha256": "10959f504574406d8780b11d9574c016c2b1f756d2c4bd5979c52fff599b5771",
-      "lastmod": "2026-08-10T22:52:54.898Z",
+      "sha256": "cf2442a80c8af3868325600b4739da2fae7ca03fbe5b3c2c2fefbaf3ba1bee97",
+      "lastmod": "2026-08-12T04:52:12.395Z",
       "fetch_status": "ok"
     },
     {
@@ -81,8 +81,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/cost-tracking.md",
       "title": "Track cost and usage",
       "category": "agent_sdk",
-      "sha256": "ea1b4f23a3aca32891636121ca55443d41b568d7140e7b2ef1f20f88e0fd1590",
-      "lastmod": "2026-08-07T23:18:44.992Z",
+      "sha256": "a7f8c9f24553499f29e74c5c70eba557e95d8c3a6d85f66c2d44fcb920a68cd8",
+      "lastmod": "2026-08-12T04:52:12.391Z",
       "fetch_status": "ok"
     },
     {
@@ -136,8 +136,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/hosting.md",
       "title": "Hosting the Agent SDK",
       "category": "agent_sdk",
-      "sha256": "fe2d232629522ebadcd6d6b68952a520dbd45a03dc0df17bae454297098b7dc0",
-      "lastmod": "2026-08-10T22:52:54.911Z",
+      "sha256": "0ca0bdd88dd83957f5164368c5864a739b525c5aea913368df7968f7d7999c8f",
+      "lastmod": "2026-08-12T04:52:12.393Z",
       "fetch_status": "ok"
     },
     {
@@ -224,8 +224,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "9e9b2fb9d9bae99e910436fbe0a1fe876010442ab0b2fd6b027d9872b5b51444",
-      "lastmod": "2026-08-11T19:24:25.092Z",
+      "sha256": "2e76ba3557785a382f200e02ee8a9d506e9e9a819900509a353afbe9810a3192",
+      "lastmod": "2026-08-12T04:52:12.396Z",
       "fetch_status": "ok"
     },
     {
@@ -257,8 +257,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/session-storage.md",
       "title": "Persist sessions to external storage",
       "category": "agent_sdk",
-      "sha256": "9a74a56b1c8504c308960593cef87c96ae9b36e65b3c109a1ceb8cbcd42169c0",
-      "lastmod": "2026-08-12T02:05:36.656Z",
+      "sha256": "daaf740b43f13c5d2e6cbe7b7569387ec195ab283216afc1dd3651d772ad064a",
+      "lastmod": "2026-08-12T04:52:12.393Z",
       "fetch_status": "ok"
     },
     {
@@ -378,8 +378,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "4b7db5151194b03625e29527147f48e131bc1195aef11acac57b4f4f1def2a0d",
-      "lastmod": "2026-08-12T02:38:24.529Z",
+      "sha256": "2543ebcc0a38643d827422c5dd616b87df90f000214b40f5b328afacdbaddbb5",
+      "lastmod": "2026-08-12T04:52:12.395Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "baf8e2ad26702a2c96080dd8d368992f9a1ddd5af02383f53e9e168a07969775",
-      "lastmod": "2026-08-12T02:05:36.676Z",
+      "sha256": "5af3d29bcf20963efc43df9d7f841d34a0e5be979cb4c782255d101e94399ca4",
+      "lastmod": "2026-08-12T04:58:13.877Z",
       "fetch_status": "ok"
     },
     {
@@ -961,8 +961,8 @@
       "md_url": "https://code.claude.com/docs/en/fast-mode.md",
       "title": "Speed up responses with fast mode",
       "category": "claude_code",
-      "sha256": "28b31d7dfa1132c8e4509609759b1c118888621f97bec19354ab73318152ed72",
-      "lastmod": "2026-08-11T18:17:33.527Z",
+      "sha256": "51b8d11c6741b6d8046d0cf123a54584e84b8ed80b2e79beafd04baa54f2aded",
+      "lastmod": "2026-08-12T04:59:00.707Z",
       "fetch_status": "ok"
     },
     {
@@ -972,8 +972,8 @@
       "md_url": "https://code.claude.com/docs/en/feature-availability.md",
       "title": "Feature availability",
       "category": "claude_code",
-      "sha256": "27f0160e90d69b158769716948cb0f942547e2fa748cecdd00a8f84180086a36",
-      "lastmod": "2026-08-12T02:06:31.854Z",
+      "sha256": "d59ef86091e1c84922f87a3412b50f8a7ab2dbcf443bb44d4a08d413c1ebc1b4",
+      "lastmod": "2026-08-12T04:59:00.705Z",
       "fetch_status": "ok"
     },
     {
@@ -1500,8 +1500,8 @@
       "md_url": "https://code.claude.com/docs/en/routines.md",
       "title": "Automate work with routines",
       "category": "claude_code",
-      "sha256": "42db4139025ce50198e80910cb9df2bd2f0118655d2079a2acb9c8ab3f919edd",
-      "lastmod": "2026-08-11T21:15:27.194Z",
+      "sha256": "137c0eda8a7e929260c4b253ab3504a68e63f1794fdb38642f69aa39e7fd3abd",
+      "lastmod": "2026-08-12T04:52:12.220Z",
       "fetch_status": "ok"
     },
     {
@@ -1687,8 +1687,8 @@
       "md_url": "https://code.claude.com/docs/en/skills.md",
       "title": "Extend Claude with skills",
       "category": "claude_code",
-      "sha256": "e3ae73f3a2b64bf3146a79ac6f84d5d3c734a203b68f4f89ac096eb5bdc4a538",
-      "lastmod": "2026-08-12T01:21:16.613Z",
+      "sha256": "d45e58091f14c33557c49910d2f33e51537536342b4bd6b882fec45f6d481db9",
+      "lastmod": "2026-08-12T05:00:37.875Z",
       "fetch_status": "ok"
     },
     {
