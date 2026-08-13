@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-13T03:53:16.727825Z",
+  "generated_at": "2026-08-13T09:33:49.984510Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.231",
+          "level": 2
         },
         {
           "text": "2.1.229",
@@ -1463,7 +1467,7 @@
         }
       ],
       "terms": {
-        "fix": 2305,
+        "fix": 2306,
         "session": 866,
         "now": 790,
         "add": 500,
@@ -1480,13 +1484,13 @@
         "prompt": 322,
         "being": 305,
         "error": 295,
-        "fail": 269,
-        "mcp": 262,
+        "fail": 270,
+        "mcp": 263,
         "model": 249,
         "plugin": 246,
         "terminal": 241,
+        "server": 239,
         "code": 239,
-        "server": 238,
         "window": 223,
         "auto": 199,
         "file": 197,
@@ -1514,7 +1518,7 @@
         "text": 127,
         "output": 125
       },
-      "word_count": 75066
+      "word_count": 75090
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -8875,11 +8879,11 @@
         }
       ],
       "terms": {
-        "fix": 2306,
+        "fix": 2307,
         "session": 866,
         "now": 790,
         "add": 500,
-        "update": 446,
+        "update": 448,
         "tool": 423,
         "instead": 411,
         "agent": 404,
@@ -8893,15 +8897,15 @@
         "prompt": 322,
         "being": 305,
         "error": 295,
-        "fail": 269,
-        "mcp": 262,
+        "fail": 270,
+        "mcp": 263,
         "model": 249,
         "plugin": 246,
+        "description": 243,
         "code": 242,
-        "description": 242,
         "terminal": 241,
-        "server": 237,
-        "label": 229,
+        "server": 238,
+        "label": 230,
         "window": 223,
         "auto": 199,
         "file": 198,
@@ -8926,7 +8930,7 @@
         "message": 132,
         "fil": 130
       },
-      "word_count": 76572
+      "word_count": 76600
     },
     {
       "filename": "claude-code__channels.md",
