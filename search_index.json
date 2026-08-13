@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-12T21:23:22.123480Z",
+  "generated_at": "2026-08-13T00:26:06.303694Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -1964,10 +1964,10 @@
         "cost": 22,
         "before": 21,
         "text": 19,
-        "only": 19,
         "limit": 18,
         "python": 18,
         "final": 18,
+        "only": 18,
         "field": 18,
         "hook": 17,
         "full": 17,
@@ -1998,7 +1998,7 @@
         "also": 10,
         "mcp": 10
       },
-      "word_count": 5145
+      "word_count": 5143
     },
     {
       "filename": "claude-code__agent-sdk__claude-code-features.md",
@@ -3614,10 +3614,6 @@
           "level": 1
         },
         {
-          "text": "What are plugins?",
-          "level": 2
-        },
-        {
           "text": "Loading plugins",
           "level": 2
         },
@@ -3664,18 +3660,18 @@
       ],
       "terms": {
         "plugin": 46,
+        "skill": 14,
         "path": 14,
-        "skill": 13,
         "directory": 11,
         "sdk": 10,
         "load": 9,
-        "agent": 8,
-        "note": 8,
         "codegroup": 8,
-        "claude": 7,
-        "code": 6,
+        "note": 8,
+        "agent": 7,
+        "claude": 6,
         "file": 6,
         "example": 6,
+        "code": 5,
         "appear": 5,
         "message": 5,
         "check": 5,
@@ -3683,15 +3679,13 @@
         "doesn": 4,
         "init": 4,
         "ensure": 4,
-        "hook": 3,
-        "mcp": 3,
-        "server": 3,
         "through": 3,
         "local": 3,
-        "legacy": 3,
+        "invoke": 3,
         "structure": 3,
         "see": 3,
         "system": 3,
+        "location": 3,
         "reference": 3,
         "work": 3,
         "verify": 3,
@@ -3704,17 +3698,19 @@
         "available": 2,
         "custom": 2,
         "extend": 2,
+        "hook": 2,
+        "mcp": 2,
+        "server": 2,
+        "capabiliti": 2,
         "session": 2,
         "include": 2,
-        "model": 2,
-        "invok": 2,
         "also": 2,
+        "directly": 2,
         "specializ": 2,
         "subagent": 2,
-        "event": 2,
-        "tool": 2
+        "event": 2
       },
-      "word_count": 1355
+      "word_count": 1337
     },
     {
       "filename": "claude-code__agent-sdk__python.md",
@@ -5050,7 +5046,7 @@
         "before": 3,
         "author": 3
       },
-      "word_count": 1684
+      "word_count": 1683
     },
     {
       "filename": "claude-code__agent-sdk__slash-commands.md",
@@ -5146,40 +5142,43 @@
       ],
       "terms": {
         "command": 46,
-        "sdk": 16,
-        "slash": 14,
-        "custom": 11,
+        "sdk": 17,
+        "slash": 13,
+        "custom": 12,
         "codegroup": 10,
         "conversation": 10,
+        "create": 10,
         "available": 9,
         "message": 9,
-        "create": 9,
+        "file": 8,
+        "work": 8,
         "note": 8,
-        "file": 7,
         "session": 7,
         "context": 7,
         "result": 7,
-        "claude": 6,
         "through": 6,
         "start": 6,
         "example": 6,
+        "skill": 6,
         "code": 5,
+        "claude": 5,
         "one": 5,
         "send": 5,
-        "format": 5,
         "documentation": 4,
         "complete": 4,
-        "work": 4,
         "prompt": 4,
         "history": 4,
         "prior": 4,
         "error": 4,
+        "new": 4,
         "using": 4,
         "project": 4,
         "name": 4,
         "argument": 4,
         "placeholder": 4,
         "index": 3,
+        "way": 3,
+        "like": 3,
         "compact": 3,
         "list": 3,
         "only": 3,
@@ -5191,12 +5190,9 @@
         "instead": 3,
         "after": 3,
         "cli": 3,
-        "single": 3,
-        "input": 3,
-        "call": 3,
-        "empty": 3
+        "single": 3
       },
-      "word_count": 2276
+      "word_count": 2291
     },
     {
       "filename": "claude-code__agent-sdk__streaming-output.md",
@@ -6978,7 +6974,7 @@
         "run": 49,
         "prompt": 49,
         "mode": 49,
-        "such": 47,
+        "such": 48,
         "one": 46,
         "command": 44,
         "request": 44,
@@ -7000,7 +6996,7 @@
         "available": 32,
         "same": 32
       },
-      "word_count": 24336
+      "word_count": 24335
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -23229,10 +23225,10 @@
         "self": 26,
         "network": 23,
         "code": 22,
-        "anthropic": 18,
+        "anthropic": 19,
         "start": 17,
         "git": 16,
-        "run": 14,
+        "run": 15,
         "control": 13,
         "inference": 12,
         "path": 11,
@@ -23240,9 +23236,9 @@
         "poll": 11,
         "user": 11,
         "cloud": 10,
+        "infrastructure": 10,
         "queue": 10,
         "http": 9,
-        "infrastructure": 9,
         "own": 9,
         "proces": 9,
         "developer": 8,
@@ -23272,7 +23268,7 @@
         "admin": 5,
         "claim": 5
       },
-      "word_count": 2222
+      "word_count": 2227
     },
     {
       "filename": "claude-code__self-hosted-environments-configuration.md",
@@ -23347,7 +23343,7 @@
         }
       ],
       "terms": {
-        "session": 148,
+        "session": 149,
         "runner": 93,
         "hook": 58,
         "environment": 32,
@@ -23368,18 +23364,18 @@
         "path": 18,
         "request": 18,
         "claude": 17,
-        "see": 16,
+        "see": 17,
         "one": 15,
         "code": 14,
         "don": 14,
         "such": 14,
         "set": 14,
-        "instead": 14,
         "same": 14,
         "tool": 14,
         "git": 14,
         "pre": 13,
         "read": 13,
+        "instead": 13,
         "order": 13,
         "empty": 13,
         "own": 12,
@@ -23398,7 +23394,7 @@
         "before": 9,
         "default": 9
       },
-      "word_count": 5309
+      "word_count": 5305
     },
     {
       "filename": "claude-code__self-hosted-environments-deploy.md",
@@ -23510,21 +23506,21 @@
       ],
       "terms": {
         "runner": 143,
-        "session": 140,
+        "session": 139,
         "host": 73,
         "git": 41,
         "environment": 34,
         "run": 27,
-        "one": 25,
         "default": 24,
+        "one": 24,
         "hook": 24,
-        "each": 23,
         "container": 23,
         "anthropic": 22,
+        "each": 22,
         "image": 22,
         "own": 22,
+        "only": 21,
         "log": 21,
-        "only": 20,
         "before": 19,
         "proces": 19,
         "code": 18,
@@ -23540,15 +23536,15 @@
         "see": 16,
         "work": 16,
         "self": 15,
-        "instead": 15,
         "push": 15,
         "secret": 15,
+        "every": 15,
         "directory": 15,
         "connector": 15,
         "egres": 14,
         "path": 14,
         "organization": 14,
-        "every": 14,
+        "instead": 14,
         "sign": 14,
         "account": 13,
         "such": 13,
@@ -23557,10 +23553,10 @@
         "proxy": 13,
         "startup": 13,
         "control": 12,
-        "any": 12,
-        "exit": 12
+        "exit": 12,
+        "tool": 12
       },
-      "word_count": 5559
+      "word_count": 5554
     },
     {
       "filename": "claude-code__self-hosted-environments-identity.md",
@@ -23819,7 +23815,7 @@
         }
       ],
       "terms": {
-        "session": 91,
+        "session": 93,
         "runner": 78,
         "environment": 43,
         "hook": 32,
@@ -23834,10 +23830,10 @@
         "same": 18,
         "second": 18,
         "after": 18,
+        "set": 17,
         "poll": 17,
         "each": 16,
         "seri": 16,
-        "set": 16,
         "only": 16,
         "value": 15,
         "exit": 14,
@@ -23846,10 +23842,10 @@
         "one": 14,
         "counter": 14,
         "metric": 13,
+        "start": 13,
         "per": 13,
         "turn": 12,
         "see": 12,
-        "start": 12,
         "proces": 12,
         "every": 11,
         "git": 11,
@@ -23862,15 +23858,15 @@
         "self": 9,
         "queue": 9,
         "such": 9,
+        "still": 9,
         "variable": 9,
         "startup": 9,
         "finish": 9,
         "port": 9,
         "release": 9,
-        "alert": 9,
-        "since": 9
+        "alert": 9
       },
-      "word_count": 4879
+      "word_count": 4892
     },
     {
       "filename": "claude-code__self-hosted-environments-testing.md",
@@ -24750,7 +24746,7 @@
         "frontmatter": 7,
         "follow": 7
       },
-      "word_count": 11071
+      "word_count": 11072
     },
     {
       "filename": "claude-code__slack.md",
