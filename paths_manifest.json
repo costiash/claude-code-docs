@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-13T00:26:03.678241Z",
+  "generated_at": "2026-08-13T03:53:14.126168Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "1222a87f3bbb01f608b163944e5d4a050c5f86e551342c0e0364e5ae85667cad",
-      "lastmod": "2026-08-12T00:36:53.574Z",
+      "sha256": "0a028c085d9e862aad66d6246c71f70588d11aa830b2c50859863790131a39fd",
+      "lastmod": "2026-08-13T00:33:09.610Z",
       "fetch_status": "ok"
     },
     {
@@ -1511,8 +1511,8 @@
       "md_url": "https://code.claude.com/docs/en/sandbox-environments.md",
       "title": "Choose a sandbox environment",
       "category": "claude_code",
-      "sha256": "a08ac4bb1709f06d6e431a8b68d6612ef515fe0618b61abcec4ef5ddf6d245b3",
-      "lastmod": "2026-08-07T19:21:35.867Z",
+      "sha256": "9c8982e3120d8a720667fa8b716001c092da6c07be524875bbe60517edd8a987",
+      "lastmod": "2026-08-13T01:21:32.395Z",
       "fetch_status": "ok"
     },
     {
