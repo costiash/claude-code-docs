@@ -3,7 +3,7 @@
 [![Last Update](https://img.shields.io/github/last-commit/costiash/claude-code-docs/main.svg?label=docs%20updated)](https://github.com/costiash/claude-code-docs/commits/main)
 [![Tests](https://github.com/costiash/claude-code-docs/actions/workflows/test.yml/badge.svg)](https://github.com/costiash/claude-code-docs/actions)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
-[![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![Listed on ClaudePluginHub](https://www.claudepluginhub.com/badge/costiash-claude-docs-plugin)](https://www.claudepluginhub.com/plugins/costiash-claude-docs-plugin?ref=badge)
 
 **Every official Claude doc page, always live, never redistributed.** 700+ pages across `platform.claude.com` and `code.claude.com`, re-indexed every 3 hours — and your Claude reads the actual current page, not a stale copy or a guess from training data.
