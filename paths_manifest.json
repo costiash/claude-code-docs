@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-16T15:12:52.831660Z",
+  "generated_at": "2026-08-17T18:16:14.383109Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -642,8 +642,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code on the web",
       "category": "claude_code",
-      "sha256": "e9dcd4c6efcc46658ba87bda8c16bcedfff802cc11355902cb573ba6421f0cd5",
-      "lastmod": "2026-08-15T15:11:50.787Z",
+      "sha256": "28d533d04055ab44d598949462421fde9dd6814e1eefe28c4d1ab3e9bcc7194f",
+      "lastmod": "2026-08-17T17:11:26.120Z",
       "fetch_status": "ok"
     },
     {
@@ -708,8 +708,8 @@
       "md_url": "https://code.claude.com/docs/en/cloud-environments.md",
       "title": "Configure cloud environments",
       "category": "claude_code",
-      "sha256": "26c8c6c15fdf278468b35654dc22c802489175f0112e05834f5090014b56d8d0",
-      "lastmod": "2026-08-13T16:58:26.296Z",
+      "sha256": "7d7258f1866db53c302099a47a2ce914bfdc96e16bedc65748f648d368b165ca",
+      "lastmod": "2026-08-17T17:11:26.117Z",
       "fetch_status": "ok"
     },
     {
@@ -851,8 +851,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "ec68edfc1e466400fd67436425f91c65eb2b8a444a16739261ee3901dced8076",
-      "lastmod": "2026-08-15T00:22:27.152Z",
+      "sha256": "c544249a31f1a936ebf6ecf64fee3ac1136de243753bd919cf9cea710f117cca",
+      "lastmod": "2026-08-17T17:11:26.124Z",
       "fetch_status": "ok"
     },
     {
@@ -1390,8 +1390,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-dependencies.md",
       "title": "Constrain plugin dependency versions",
       "category": "claude_code",
-      "sha256": "e5d67519dc18746a5a0e6ef33e13298050afb0ae717c9edc762910e6af772289",
-      "lastmod": "2026-08-13T19:52:25.963Z",
+      "sha256": "83c24f0f9915f66d24011167fc164a90c5badc1832495932717ff2d34dd93868",
+      "lastmod": "2026-08-17T17:09:42.085Z",
       "fetch_status": "ok"
     },
     {
@@ -1412,8 +1412,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-marketplaces.md",
       "title": "Create and distribute a plugin marketplace",
       "category": "claude_code",
-      "sha256": "d0bbda12c6c373eaace5176b5a1f6a834dfa89ef2be5c535ba3b19823bb9732d",
-      "lastmod": "2026-08-13T23:46:22.121Z",
+      "sha256": "30d4503ce5a82b9cd29374a842feb5763ab82bc00dcfbcba3a44817447d466dd",
+      "lastmod": "2026-08-17T17:09:42.091Z",
       "fetch_status": "ok"
     },
     {
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins-reference.md",
       "title": "Plugins reference",
       "category": "claude_code",
-      "sha256": "8d7a7c0649dec858c9d48072af247092ec0c82678ed70b3d4251748c822124ed",
-      "lastmod": "2026-08-14T19:12:06.369Z",
+      "sha256": "86e6d8bd05be813ebe95759768ed10a02b5964453a34101b4d67a114f3015068",
+      "lastmod": "2026-08-17T17:09:42.092Z",
       "fetch_status": "ok"
     },
     {
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/remote-control.md",
       "title": "Continue local sessions from any device with Remote Control",
       "category": "claude_code",
-      "sha256": "0f9b14f1ea657e96339dd25a3b6694c34030a0aaa89478f5a8f219dd57e896eb",
-      "lastmod": "2026-08-14T21:22:22.674Z",
+      "sha256": "7d5d8a1657469c7dcebaddd7852685349054a0bb68489e5ddaa1c858d97f8c37",
+      "lastmod": "2026-08-17T17:11:26.119Z",
       "fetch_status": "ok"
     },
     {
@@ -1698,8 +1698,8 @@
       "md_url": "https://code.claude.com/docs/en/slack.md",
       "title": "Claude Code in Slack",
       "category": "claude_code",
-      "sha256": "8ae170bcc43023f2669d3bd109856cd70423b6cfde14280c99637919e9712316",
-      "lastmod": "2026-08-11T14:18:34.467Z",
+      "sha256": "4373bdf9df4931f360dad2756c309935b3e3882dbf298012e0134028a2be2c37",
+      "lastmod": "2026-08-17T17:11:26.116Z",
       "fetch_status": "ok"
     },
     {
