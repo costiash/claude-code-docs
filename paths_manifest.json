@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T03:25:14.872724Z",
+  "generated_at": "2026-08-18T15:16:26.379052Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -411,8 +411,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-teams.md",
       "title": "Orchestrate teams of Claude Code sessions",
       "category": "claude_code",
-      "sha256": "379571f7616ed1b7402dfb51e354bf0d9093862d94221b4acc5709f92d8db322",
-      "lastmod": "2026-08-18T00:57:42.206Z",
+      "sha256": "afd50dd3eaa8b65678bc626927b6cf0fce0ff8f5f9699a5e371a5897bdc867f1",
+      "lastmod": "2026-08-18T14:46:22.296Z",
       "fetch_status": "ok"
     },
     {
@@ -444,8 +444,8 @@
       "md_url": "https://code.claude.com/docs/en/amazon-bedrock.md",
       "title": "Claude Code on Amazon Bedrock",
       "category": "claude_code",
-      "sha256": "149087cf71c43b56e6809bb6452adf0e372ce994fb5badfe75074b5ef7508bb0",
-      "lastmod": "2026-08-18T00:05:29.664Z",
+      "sha256": "731c37532c8421fad18cc7f649b66f3a482db0686176199b4886f0671ab814af",
+      "lastmod": "2026-08-18T14:46:22.295Z",
       "fetch_status": "ok"
     },
     {
@@ -730,8 +730,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "55a81cf6d74d778aeea9b4f7f93fa94f92bf8e6e3ec37237ce4d7d0ef357768c",
-      "lastmod": "2026-08-18T00:18:48.337Z",
+      "sha256": "76dcbb9439a42fcf868ddaad54c7fa5c439ce275ec0da6d9e514c86fc6970583",
+      "lastmod": "2026-08-18T14:50:34.362Z",
       "fetch_status": "ok"
     },
     {
@@ -851,8 +851,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "7c9c93d179f992db65c83f7f07a16902b5fb0c1e2624fc292c67b3b667ebecec",
-      "lastmod": "2026-08-18T02:41:46.887Z",
+      "sha256": "2f2c7eb04dc016d1156dca5281b956e1ad1378b7be528872ededc4dae1676a70",
+      "lastmod": "2026-08-18T14:46:22.294Z",
       "fetch_status": "ok"
     },
     {
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "701e0312033f7b3c43ad2d2ff0550803b6f3e7c66a2b50f5c7c2cb678c9e4507",
-      "lastmod": "2026-08-18T02:53:17.081Z",
+      "sha256": "983e39e18207ab3a2474d435a0221e1f105ee13a5ec61b0663e2e445405219a4",
+      "lastmod": "2026-08-18T14:50:34.369Z",
       "fetch_status": "ok"
     },
     {
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/goal.md",
       "title": "Keep Claude working toward a goal",
       "category": "claude_code",
-      "sha256": "bb4606e0b505f682800df2ca7a9ecaa1f06595a6f3018f062256164cd2c98b73",
-      "lastmod": "2026-08-14T22:10:18.862Z",
+      "sha256": "daf2bb91cf41cf1e0cb634e329e52858b721a07e5777e03c5452c977271d5a7a",
+      "lastmod": "2026-08-18T14:50:34.357Z",
       "fetch_status": "ok"
     },
     {
@@ -1357,8 +1357,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "e6e2fd5b6df6bdb040278a3537f3471ef8197b20d3165eed6a41ccf24e31bcd7",
-      "lastmod": "2026-08-18T02:41:46.884Z",
+      "sha256": "63b387905da8418b85b0dd679fc3676ea7ea57a40b896fdb66b4d8436f4ec0ba",
+      "lastmod": "2026-08-18T14:46:22.293Z",
       "fetch_status": "ok"
     },
     {
@@ -1720,8 +1720,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "a2820182679f9755218464a183e9f0011472d043ca162fb8720fd32f5a33369c",
-      "lastmod": "2026-08-17T22:18:40.765Z",
+      "sha256": "1926157b3db4755951c70d3d3a8cd74d5d3a564389120c7cab2491bde83bb246",
+      "lastmod": "2026-08-18T14:46:22.298Z",
       "fetch_status": "ok"
     },
     {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T03:25:17.845361Z",
+  "generated_at": "2026-08-18T15:16:29.300078Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7447,24 +7447,24 @@
         }
       ],
       "terms": {
-        "teammate": 94,
+        "teammate": 96,
         "team": 87,
         "teammat": 87,
         "agent": 85,
         "task": 72,
-        "claude": 64,
+        "claude": 66,
         "session": 59,
         "lead": 58,
         "subagent": 55,
         "work": 49,
+        "code": 36,
+        "spawn": 36,
         "each": 36,
-        "spawn": 35,
-        "code": 34,
         "other": 24,
         "message": 24,
         "own": 22,
         "mode": 22,
-        "one": 19,
+        "one": 18,
         "prompt": 18,
         "name": 17,
         "setting": 16,
@@ -7489,16 +7489,16 @@
         "shar": 12,
         "without": 12,
         "result": 12,
-        "ask": 12,
         "nam": 12,
         "instead": 12,
         "pane": 12,
         "iterm": 12,
         "single": 11,
         "only": 11,
-        "back": 11
+        "back": 11,
+        "main": 11
       },
-      "word_count": 5407
+      "word_count": 5432
     },
     {
       "filename": "claude-code__agent-view.md",
@@ -8009,9 +8009,9 @@
         "mantle": 25,
         "inference": 24,
         "prefix": 20,
-        "through": 18,
-        "api": 18,
+        "api": 19,
         "request": 18,
+        "through": 17,
         "see": 16,
         "setting": 16,
         "resolv": 15,
@@ -8044,7 +8044,7 @@
         "available": 9,
         "only": 9
       },
-      "word_count": 4842
+      "word_count": 4844
     },
     {
       "filename": "claude-code__analytics.md",
@@ -11452,7 +11452,7 @@
         "add": 12,
         "check": 12
       },
-      "word_count": 5959
+      "word_count": 5963
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -13025,10 +13025,10 @@
       "terms": {
         "claude": 102,
         "session": 33,
+        "permission": 24,
         "json": 24,
         "code": 23,
         "browser": 23,
-        "permission": 23,
         "desktop": 22,
         "mode": 22,
         "auto": 20,
@@ -13074,7 +13074,7 @@
         "http": 8,
         "available": 8
       },
-      "word_count": 11004
+      "word_count": 11006
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -13883,34 +13883,34 @@
         }
       ],
       "terms": {
-        "set": 309,
-        "claude": 283,
-        "code": 221,
-        "default": 133,
+        "set": 310,
+        "claude": 287,
+        "code": 224,
+        "default": 135,
         "model": 125,
         "session": 121,
         "see": 89,
         "tool": 88,
         "variable": 72,
         "command": 69,
-        "requir": 65,
-        "later": 60,
+        "requir": 66,
+        "later": 61,
         "agent": 59,
         "server": 59,
         "request": 54,
         "disable": 54,
         "mode": 50,
         "file": 49,
-        "before": 48,
+        "before": 49,
+        "value": 49,
         "such": 48,
-        "value": 48,
         "instead": 48,
+        "background": 48,
+        "turn": 47,
         "sett": 47,
-        "background": 47,
-        "turn": 46,
         "override": 46,
         "platform": 45,
-        "off": 42,
+        "off": 43,
         "setting": 41,
         "mcp": 41,
         "auto": 40,
@@ -13934,7 +13934,7 @@
         "shell": 31,
         "configuration": 31
       },
-      "word_count": 16443
+      "word_count": 16507
     },
     {
       "filename": "claude-code__errors.md",
@@ -15886,6 +15886,18 @@
           "level": 2
         },
         {
+          "text": "Errors you have to fix clear the goal",
+          "level": 3
+        },
+        {
+          "text": "Background work defers evaluation",
+          "level": 3
+        },
+        {
+          "text": "Evaluation model and cost",
+          "level": 3
+        },
+        {
           "text": "Requirements",
           "level": 2
         },
@@ -15895,58 +15907,58 @@
         }
       ],
       "terms": {
-        "goal": 29,
-        "turn": 29,
-        "claude": 28,
-        "condition": 24,
-        "run": 22,
-        "work": 15,
-        "session": 14,
-        "model": 12,
-        "active": 12,
-        "prompt": 11,
-        "code": 10,
-        "each": 10,
-        "stop": 10,
+        "claude": 40,
+        "goal": 37,
+        "turn": 35,
+        "condition": 23,
+        "run": 23,
+        "code": 20,
+        "work": 20,
+        "model": 15,
+        "session": 15,
+        "active": 14,
+        "clear": 13,
+        "prompt": 12,
+        "set": 11,
+        "each": 11,
+        "stop": 11,
+        "check": 10,
         "evaluator": 10,
+        "keep": 9,
+        "end": 9,
+        "runn": 9,
         "hook": 9,
-        "keep": 8,
-        "set": 8,
+        "evaluation": 9,
         "judg": 8,
+        "after": 8,
         "one": 8,
-        "check": 7,
-        "clear": 7,
+        "such": 8,
+        "until": 7,
+        "fix": 7,
+        "start": 7,
         "test": 7,
-        "runn": 7,
+        "next": 7,
         "mode": 7,
         "reason": 7,
-        "evaluation": 7,
-        "until": 6,
         "met": 6,
+        "error": 6,
         "command": 6,
-        "after": 6,
-        "start": 6,
-        "end": 6,
-        "next": 6,
+        "own": 6,
         "tool": 6,
         "also": 6,
-        "such": 6,
         "conversation": 6,
+        "background": 6,
         "file": 5,
+        "new": 5,
         "call": 5,
         "current": 5,
+        "finish": 5,
         "setting": 5,
-        "see": 5,
-        "show": 5,
-        "before": 4,
-        "toward": 4,
-        "completion": 4,
-        "impossible": 4,
-        "small": 4,
-        "fast": 4,
-        "return": 4
+        "auto": 5,
+        "any": 5,
+        "see": 5
       },
-      "word_count": 1544
+      "word_count": 1864
     },
     {
       "filename": "claude-code__google-vertex-ai.md",
@@ -20471,12 +20483,12 @@
         }
       ],
       "terms": {
-        "mode": 208,
-        "claude": 142,
+        "mode": 209,
+        "claude": 141,
         "session": 112,
         "code": 106,
+        "permission": 97,
         "auto": 86,
-        "permission": 80,
         "start": 70,
         "classifier": 63,
         "prompt": 56,
@@ -20487,7 +20499,7 @@
         "setting": 41,
         "run": 39,
         "block": 39,
-        "command": 36,
+        "command": 35,
         "check": 34,
         "path": 34,
         "mod": 32,
@@ -20495,7 +20507,7 @@
         "only": 31,
         "rul": 31,
         "allow": 31,
-        "edit": 29,
+        "edit": 28,
         "without": 27,
         "instead": 27,
         "read": 27,
@@ -20522,7 +20534,7 @@
         "target": 20,
         "see": 20
       },
-      "word_count": 8844
+      "word_count": 8858
     },
     {
       "filename": "claude-code__permissions.md",
@@ -25414,26 +25426,26 @@
       ],
       "terms": {
         "subagent": 425,
-        "claude": 187,
+        "claude": 189,
         "tool": 116,
         "agent": 110,
-        "code": 102,
+        "code": 104,
         "session": 88,
         "main": 79,
         "run": 76,
         "conversation": 69,
-        "fork": 67,
+        "fork": 69,
         "prompt": 61,
         "only": 50,
         "hook": 48,
         "same": 47,
         "spawn": 44,
+        "mode": 44,
+        "task": 43,
         "model": 43,
-        "mode": 43,
-        "task": 42,
+        "background": 40,
         "context": 39,
         "work": 39,
-        "background": 39,
         "field": 39,
         "one": 36,
         "name": 35,
@@ -25459,12 +25471,12 @@
         "inherit": 26,
         "such": 26,
         "file": 25,
+        "set": 25,
         "every": 25,
         "ask": 25,
-        "each": 24,
-        "note": 24
+        "each": 24
       },
-      "word_count": 12757
+      "word_count": 12789
     },
     {
       "filename": "claude-code__terminal-config.md",
