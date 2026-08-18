@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T18:15:21.176878Z",
+  "generated_at": "2026-08-18T21:13:33.322768Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.235",
+          "level": 2
         },
         {
           "text": "2.1.234",
@@ -1479,58 +1483,58 @@
         }
       ],
       "terms": {
-        "fix": 2360,
-        "session": 917,
-        "now": 839,
-        "add": 510,
-        "tool": 429,
-        "instead": 423,
-        "claude": 418,
-        "agent": 412,
-        "command": 407,
-        "mode": 380,
-        "improv": 362,
-        "after": 357,
-        "background": 353,
-        "show": 350,
-        "prompt": 334,
+        "fix": 2370,
+        "session": 923,
+        "now": 847,
+        "add": 512,
+        "tool": 430,
+        "instead": 428,
+        "claude": 421,
+        "agent": 415,
+        "command": 409,
+        "mode": 382,
+        "improv": 366,
+        "after": 358,
+        "background": 355,
+        "show": 352,
+        "prompt": 340,
         "being": 312,
-        "error": 301,
-        "fail": 278,
+        "error": 303,
+        "fail": 279,
         "mcp": 267,
         "model": 258,
         "code": 254,
         "plugin": 250,
-        "server": 246,
-        "terminal": 244,
-        "window": 229,
-        "auto": 206,
+        "server": 247,
+        "terminal": 245,
+        "window": 230,
+        "auto": 208,
+        "permission": 203,
         "file": 201,
-        "permission": 200,
         "hook": 183,
         "runn": 175,
         "chang": 175,
-        "remote": 173,
-        "input": 172,
+        "input": 174,
+        "remote": 174,
         "skill": 170,
         "bash": 168,
         "user": 155,
         "work": 154,
-        "longer": 152,
+        "longer": 153,
         "subagent": 150,
         "setting": 149,
-        "read": 143,
-        "silently": 142,
-        "startup": 141,
+        "silently": 144,
+        "read": 144,
+        "startup": 142,
         "token": 138,
+        "memory": 137,
+        "text": 137,
         "message": 137,
-        "text": 136,
-        "memory": 135,
         "fil": 134,
-        "only": 129,
-        "via": 129
+        "list": 133,
+        "where": 130
       },
-      "word_count": 77847
+      "word_count": 78266
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -1966,7 +1970,7 @@
         "tool": 104,
         "claude": 60,
         "loop": 46,
-        "sdk": 44,
+        "sdk": 43,
         "agent": 42,
         "turn": 38,
         "see": 35,
@@ -2014,7 +2018,7 @@
         "also": 10,
         "mcp": 10
       },
-      "word_count": 5163
+      "word_count": 5159
     },
     {
       "filename": "claude-code__agent-sdk__claude-code-features.md",
@@ -3705,7 +3709,6 @@
         "reference": 3,
         "work": 3,
         "verify": 3,
-        "using": 3,
         "manifest": 3,
         "list": 3,
         "documentation": 2,
@@ -3724,7 +3727,8 @@
         "directly": 2,
         "specializ": 2,
         "subagent": 2,
-        "event": 2
+        "event": 2,
+        "tool": 2
       },
       "word_count": 1337
     },
@@ -4949,40 +4953,68 @@
     {
       "filename": "claude-code__agent-sdk__skills.md",
       "id": "claude-code/agent-sdk/skills",
-      "title": "Agent Skills in the SDK",
+      "title": "Extend agents with skills",
       "category": "agent_sdk",
       "url": "https://code.claude.com/docs/en/agent-sdk/skills",
       "headings": [
         {
-          "text": "Agent Skills in the SDK",
+          "text": "Extend agents with skills",
           "level": 1
         },
         {
-          "text": "Overview",
+          "text": "How skills work with the Agent SDK",
           "level": 2
         },
         {
-          "text": "How Skills Work with the SDK",
+          "text": "Use skills with the Agent SDK",
           "level": 2
         },
         {
-          "text": "Using Skills with the SDK",
+          "text": "Set up skills in a session",
+          "level": 3
+        },
+        {
+          "text": "Confirm skills loaded",
+          "level": 3
+        },
+        {
+          "text": "Allow only specific skills",
+          "level": 3
+        },
+        {
+          "text": "Commands in Agent SDK sessions",
           "level": 2
         },
         {
-          "text": "Creating Skills",
+          "text": "Discover available commands",
+          "level": 3
+        },
+        {
+          "text": "Dispatch commands by name",
+          "level": 3
+        },
+        {
+          "text": "Compact history with `/compact`",
+          "level": 3
+        },
+        {
+          "text": "Reset context with `/clear`",
+          "level": 3
+        },
+        {
+          "text": "Create skills",
           "level": 2
         },
         {
-          "text": "Tool Restrictions",
-          "level": 2
+          "text": "Choose a discovery level",
+          "level": 3
         },
         {
-          "text": "Discovering Available Skills",
-          "level": 2
+          "text": "Create and dispatch your first skill",
+          "level": 3
         },
         {
-          "text": "Testing Skills",
+          "text": "Pre-approve tools for skills",
           "level": 2
         },
         {
@@ -4990,229 +5022,83 @@
           "level": 2
         },
         {
-          "text": "Skills Not Found",
+          "text": "Skills not found",
           "level": 3
         },
         {
-          "text": "Skill Not Being Used",
+          "text": "Skill not being used",
           "level": 3
         },
         {
-          "text": "Additional Troubleshooting",
+          "text": "Invalid skill name error",
           "level": 3
         },
         {
-          "text": "Related Documentation",
+          "text": "Additional troubleshooting",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
           "level": 2
         },
         {
-          "text": "Skills Guides",
-          "level": 3
-        },
-        {
-          "text": "SDK Resources",
-          "level": 3
+          "text": "Related resources",
+          "level": 2
         }
       ],
       "terms": {
-        "skill": 78,
-        "sdk": 29,
-        "claude": 21,
-        "agent": 14,
-        "codegroup": 14,
+        "skill": 118,
+        "claude": 38,
+        "sdk": 35,
+        "command": 33,
+        "list": 24,
+        "name": 23,
+        "session": 20,
+        "see": 17,
+        "agent": 16,
+        "codegroup": 16,
+        "discover": 14,
+        "load": 14,
+        "example": 14,
+        "work": 13,
         "directory": 12,
-        "load": 12,
-        "discover": 11,
-        "option": 11,
+        "option": 12,
+        "code": 11,
+        "invoke": 11,
+        "tool": 11,
+        "file": 10,
         "available": 10,
-        "filesystem": 10,
-        "list": 10,
-        "see": 8,
+        "dispatch": 10,
+        "fil": 10,
+        "includ": 10,
+        "user": 10,
+        "prompt": 10,
+        "nam": 10,
+        "note": 10,
+        "run": 10,
+        "start": 10,
+        "filesystem": 9,
+        "project": 9,
+        "only": 9,
+        "result": 9,
+        "python": 8,
+        "send": 8,
+        "frontmatter": 8,
+        "conversation": 8,
         "complete": 7,
-        "code": 7,
-        "using": 7,
         "invok": 7,
-        "set": 7,
-        "tool": 7,
-        "name": 7,
-        "work": 6,
-        "user": 6,
-        "nam": 6,
-        "note": 6,
-        "sourc": 6,
-        "only": 6,
-        "example": 6,
-        "documentation": 5,
-        "overview": 5,
-        "description": 5,
-        "pas": 5,
-        "control": 5,
-        "through": 5,
-        "check": 5,
-        "troubleshoot": 5,
-        "file": 4,
-        "relevant": 4,
-        "contain": 4,
-        "includ": 4,
-        "typescript": 4,
-        "python": 4,
-        "automatically": 4,
-        "project": 4,
-        "repository": 4,
-        "specific": 4,
-        "match": 4,
-        "enable": 4,
-        "reference": 4,
-        "before": 3,
-        "author": 3
-      },
-      "word_count": 1683
-    },
-    {
-      "filename": "claude-code__agent-sdk__slash-commands.md",
-      "id": "claude-code/agent-sdk/slash-commands",
-      "title": "Slash Commands in the SDK",
-      "category": "agent_sdk",
-      "url": "https://code.claude.com/docs/en/agent-sdk/slash-commands",
-      "headings": [
-        {
-          "text": "Slash Commands in the SDK",
-          "level": 1
-        },
-        {
-          "text": "Discovering Available Slash Commands",
-          "level": 2
-        },
-        {
-          "text": "Sending Slash Commands",
-          "level": 2
-        },
-        {
-          "text": "Common Slash Commands",
-          "level": 2
-        },
-        {
-          "text": "`/compact` - Compact conversation history",
-          "level": 3
-        },
-        {
-          "text": "`/clear` - Reset conversation context",
-          "level": 3
-        },
-        {
-          "text": "Creating Custom Slash Commands",
-          "level": 2
-        },
-        {
-          "text": "File Locations",
-          "level": 3
-        },
-        {
-          "text": "File Format",
-          "level": 3
-        },
-        {
-          "text": "Basic Example",
-          "level": 4
-        },
-        {
-          "text": "With Frontmatter",
-          "level": 4
-        },
-        {
-          "text": "Using Custom Commands in the SDK",
-          "level": 3
-        },
-        {
-          "text": "Advanced Features",
-          "level": 3
-        },
-        {
-          "text": "Arguments and Placeholders",
-          "level": 4
-        },
-        {
-          "text": "Bash Command Execution",
-          "level": 4
-        },
-        {
-          "text": "File References",
-          "level": 4
-        },
-        {
-          "text": "Organization with Namespacing",
-          "level": 3
-        },
-        {
-          "text": "Practical Examples",
-          "level": 3
-        },
-        {
-          "text": "Pull Request Review Command",
-          "level": 4
-        },
-        {
-          "text": "Test Runner Command",
-          "level": 4
-        },
-        {
-          "text": "See Also",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "command": 46,
-        "sdk": 17,
-        "slash": 13,
-        "custom": 12,
-        "codegroup": 10,
-        "conversation": 10,
-        "create": 10,
-        "available": 9,
-        "message": 9,
-        "file": 8,
-        "work": 8,
-        "note": 8,
-        "session": 7,
+        "each": 7,
         "context": 7,
-        "result": 7,
-        "through": 6,
-        "start": 6,
-        "example": 6,
-        "skill": 6,
-        "code": 5,
-        "claude": 5,
-        "one": 5,
-        "send": 5,
-        "documentation": 4,
-        "complete": 4,
-        "prompt": 4,
-        "history": 4,
-        "prior": 4,
-        "error": 4,
-        "new": 4,
-        "using": 4,
-        "project": 4,
-        "name": 4,
-        "argument": 4,
-        "placeholder": 4,
-        "index": 3,
-        "way": 3,
-        "like": 3,
-        "compact": 3,
-        "list": 3,
-        "only": 3,
-        "includ": 3,
-        "text": 3,
-        "such": 3,
-        "exampl": 3,
-        "same": 3,
-        "instead": 3,
-        "after": 3,
-        "cli": 3,
-        "single": 3
+        "doesn": 7,
+        "through": 7,
+        "set": 7,
+        "every": 7,
+        "message": 7,
+        "array": 7,
+        "same": 7,
+        "field": 7
       },
-      "word_count": 2291
+      "word_count": 3257
     },
     {
       "filename": "claude-code__agent-sdk__streaming-output.md",
@@ -22220,7 +22106,7 @@
         "latest": 4,
         "version": 4
       },
-      "word_count": 1952
+      "word_count": 1762
     },
     {
       "filename": "claude-code__remote-control.md",
@@ -31099,6 +30985,10 @@
           "level": 3
         },
         {
+          "text": "Skill content scanning",
+          "level": 3
+        },
+        {
           "text": "Evaluating Skills before deployment",
           "level": 2
         },
@@ -31164,58 +31054,58 @@
         }
       ],
       "terms": {
-        "skill": 102,
+        "skill": 113,
+        "claude": 25,
         "evaluation": 22,
-        "step": 18,
-        "claude": 16,
-        "api": 14,
-        "version": 14,
-        "review": 13,
-        "instruction": 11,
+        "step": 19,
+        "api": 17,
+        "version": 17,
+        "review": 15,
+        "instruction": 12,
+        "data": 12,
+        "agent": 11,
         "title": 10,
-        "agent": 10,
+        "organization": 10,
+        "see": 10,
         "before": 10,
+        "upload": 10,
         "tool": 9,
+        "security": 9,
         "deploy": 9,
-        "see": 9,
-        "data": 9,
+        "scann": 9,
         "acros": 8,
         "each": 8,
         "acces": 8,
         "trigger": 8,
         "require": 8,
         "workflow": 8,
-        "security": 7,
+        "deployment": 7,
+        "code": 7,
         "script": 7,
         "fil": 7,
-        "upload": 7,
+        "through": 7,
+        "production": 7,
+        "request": 7,
+        "enterprise": 6,
         "platform": 6,
         "description": 6,
         "best": 6,
         "practic": 6,
-        "deployment": 6,
-        "code": 6,
         "full": 6,
         "referenc": 6,
         "pattern": 6,
         "verify": 6,
-        "through": 6,
         "bas": 6,
-        "production": 6,
+        "new": 6,
         "using": 6,
-        "request": 6,
         "role": 6,
         "card": 6,
-        "enterprise": 5,
         "guidance": 5,
-        "organization": 5,
         "author": 5,
         "detail": 5,
-        "requir": 5,
-        "specific": 5,
-        "risk": 5
+        "requir": 5
       },
-      "word_count": 1672
+      "word_count": 1913
     },
     {
       "filename": "docs__en__agents-and-tools__agent-skills__overview.md",
@@ -31373,7 +31263,7 @@
         "prompt": 3,
         "level": 3
       },
-      "word_count": 2527
+      "word_count": 2576
     },
     {
       "filename": "docs__en__agents-and-tools__agent-skills__quickstart.md",
@@ -94455,63 +94345,67 @@
           "level": 2
         },
         {
+          "text": "Audit logging",
+          "level": 2
+        },
+        {
           "text": "Next steps",
           "level": 2
         }
       ],
       "terms": {
-        "skill": 105,
-        "api": 32,
+        "skill": 113,
+        "api": 38,
         "codegroup": 32,
-        "version": 24,
-        "claude": 21,
+        "version": 27,
+        "claude": 23,
         "fil": 19,
-        "agent": 17,
-        "custom": 14,
+        "agent": 18,
+        "custom": 17,
+        "upload": 15,
+        "request": 14,
         "code": 14,
         "execution": 14,
-        "request": 13,
-        "upload": 13,
+        "see": 13,
         "container": 13,
-        "see": 12,
         "tool": 12,
+        "workspace": 12,
         "note": 10,
         "card": 10,
+        "create": 10,
         "anthropic": 10,
         "reference": 9,
         "response": 9,
         "data": 9,
-        "create": 9,
         "list": 9,
         "must": 9,
         "file": 9,
         "directory": 8,
+        "platform": 7,
         "com": 7,
         "complete": 7,
         "specify": 7,
+        "each": 7,
         "multiple": 7,
         "title": 6,
         "using": 6,
         "http": 6,
-        "platform": 6,
         "doc": 6,
         "both": 6,
         "parameter": 6,
+        "operation": 6,
         "document": 6,
         "best": 6,
         "messag": 6,
+        "same": 6,
         "only": 6,
+        "tenant": 6,
         "top": 6,
         "level": 6,
         "cli": 6,
-        "maximum": 6,
-        "pre": 5,
-        "includ": 5,
-        "operation": 5,
-        "retention": 5,
-        "icon": 5
+        "maximum": 6
       },
-      "word_count": 13361
+      "word_count": 13581
     },
     {
       "filename": "docs__en__build-with-claude__streaming.md",

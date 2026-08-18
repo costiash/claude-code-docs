@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T18:15:18.234450Z",
+  "generated_at": "2026-08-18T21:13:30.414917Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "d527d331640b4801aef9480bbd2ad242fec4241be39f1f29e48616682ae80d7e",
+      "sha256": "78894e28c77b188265c9a45ccb595f12960540df89c725992e674662f3131c21",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -59,8 +59,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/agent-loop.md",
       "title": "How the agent loop works",
       "category": "agent_sdk",
-      "sha256": "a270ce0539dd5fbb7c31221ab45cf5f6bf1e1da07e9edc54f8c169c4b15747f3",
-      "lastmod": "2026-08-15T04:45:50.222Z",
+      "sha256": "8c998e19a93f78b6df2bc32f1d2d6a766d9aeee49aa7f861f02fcf998d960b17",
+      "lastmod": "2026-08-18T18:40:58.705Z",
       "fetch_status": "ok"
     },
     {
@@ -191,8 +191,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/overview.md",
       "title": "Agent SDK overview",
       "category": "agent_sdk",
-      "sha256": "a443e0c70e5b1c98998f6836a2a06ef17f310fb90dbd8e4c3f96b4179d4207bb",
-      "lastmod": "2026-07-28T23:08:49.491Z",
+      "sha256": "584a1641997bce448e6675b614c418d73b97087234419ab5227693b3dc89f9ff",
+      "lastmod": "2026-08-18T18:40:58.696Z",
       "fetch_status": "ok"
     },
     {
@@ -213,8 +213,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/plugins.md",
       "title": "Plugins in the SDK",
       "category": "agent_sdk",
-      "sha256": "26994bfcc00f70c3a5065b891902032b679d6752a3ad0d889b6214f9e1ecc20a",
-      "lastmod": "2026-08-12T23:38:18.201Z",
+      "sha256": "c8b179ee93ae6f4ee0a7b01b688153988c893a1cbca544859adea71097d296c0",
+      "lastmod": "2026-08-18T18:40:58.703Z",
       "fetch_status": "ok"
     },
     {
@@ -277,21 +277,10 @@
       "filename": "claude-code__agent-sdk__skills.md",
       "url": "https://code.claude.com/docs/en/agent-sdk/skills",
       "md_url": "https://code.claude.com/docs/en/agent-sdk/skills.md",
-      "title": "Agent Skills in the SDK",
+      "title": "Extend agents with skills",
       "category": "agent_sdk",
-      "sha256": "978ecbb28fbfc4dc7aed5380f99c42a108bd5bff652cf98e59ed4566c625cc3a",
-      "lastmod": "2026-08-12T23:38:18.202Z",
-      "fetch_status": "ok"
-    },
-    {
-      "id": "claude-code/agent-sdk/slash-commands",
-      "filename": "claude-code__agent-sdk__slash-commands.md",
-      "url": "https://code.claude.com/docs/en/agent-sdk/slash-commands",
-      "md_url": "https://code.claude.com/docs/en/agent-sdk/slash-commands.md",
-      "title": "Slash Commands in the SDK",
-      "category": "agent_sdk",
-      "sha256": "e5c597afe5e5ef0370896a12d51f01e32f80f23697c1d99b8bd2e7b5a463b810",
-      "lastmod": "2026-08-12T23:38:18.210Z",
+      "sha256": "400bb4b2c7af65d6bef64799f614a22fe8ff915ec06f1c31711b4be0d62aa9ee",
+      "lastmod": "2026-08-18T18:40:58.701Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1467,8 @@
       "md_url": "https://code.claude.com/docs/en/quickstart.md",
       "title": "Quickstart",
       "category": "claude_code",
-      "sha256": "760ac8c65123e97c7a0716a2f2c4f4c26573b2c93c48c5c7ee8224fc44551f58",
-      "lastmod": "2026-08-18T02:30:21.553Z",
+      "sha256": "f5b59b2f5b7186ab5fec800beacc45413c103c3e19b2c1292c00838b7d7c0c8d",
+      "lastmod": "2026-08-18T18:40:58.509Z",
       "fetch_status": "ok"
     },
     {
@@ -1687,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/skills.md",
       "title": "Extend Claude with skills",
       "category": "claude_code",
-      "sha256": "a6951e76716c9cf8f74f664aa635888ec6e0ee3ceecdb272b2f41f7b37a8b117",
-      "lastmod": "2026-08-18T00:16:42.715Z",
+      "sha256": "448fde484cc410c84d871ccffe9c8676f6a5e5fd8ff8330183ef2461fed43575",
+      "lastmod": "2026-08-18T18:40:58.438Z",
       "fetch_status": "ok"
     },
     {
@@ -2292,7 +2281,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise.md",
       "title": "Skills for enterprise",
       "category": "agents_and_tools",
-      "sha256": "de38cb2a0a0e4fd777a979be4604da73f93052bb29132f763beb79a0e1840190",
+      "sha256": "7a83e80ce335ab329ed9f1c674fa3747b3b0d46656c9de6835932cc168976e36",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2303,7 +2292,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md",
       "title": "Overview",
       "category": "agents_and_tools",
-      "sha256": "4f7b241829ad6a1358475dfc59e33de0669f7d0b00e634acd2da66c3c6e9b321",
+      "sha256": "f3a9e69a05e4d41157561ced529eb795dc420d99103faf2a3488d364f5eacf03",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7121,7 +7110,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide.md",
       "title": "Skills in the API",
       "category": "core_documentation",
-      "sha256": "71451b5bc3e2193c5673fb70c0380002900a142ddd5393fd2a1f750f3292e797",
+      "sha256": "85af315e980fe974e2f85d403db4099a5aee51a1fb0d902dd468cb4c42d5bb49",
       "lastmod": null,
       "fetch_status": "ok"
     },
