@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T15:16:29.300078Z",
+  "generated_at": "2026-08-18T18:15:21.176878Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -92375,6 +92375,10 @@
           "level": 3
         },
         {
+          "text": "Audit logging",
+          "level": 3
+        },
+        {
           "text": "Error handling",
           "level": 2
         },
@@ -92392,58 +92396,58 @@
         }
       ],
       "terms": {
-        "fil": 50,
-        "file": 50,
-        "upload": 25,
-        "api": 24,
-        "content": 17,
+        "fil": 54,
+        "file": 52,
+        "api": 30,
+        "upload": 26,
+        "content": 18,
+        "claude": 15,
         "tool": 15,
         "code": 14,
         "codegroup": 14,
         "block": 14,
-        "claude": 12,
-        "download": 12,
+        "download": 13,
         "execution": 12,
         "text": 12,
+        "workspace": 11,
+        "request": 10,
         "support": 10,
-        "request": 9,
         "type": 9,
         "pdf": 9,
         "messag": 8,
         "using": 8,
         "note": 8,
-        "workspace": 8,
         "limit": 8,
+        "platform": 7,
         "reference": 7,
         "creat": 7,
-        "beta": 7,
         "user": 7,
-        "platform": 6,
         "skill": 6,
+        "beta": 6,
+        "each": 6,
         "example": 6,
         "document": 6,
         "storage": 6,
+        "list": 6,
+        "operation": 6,
+        "data": 6,
         "card": 6,
         "imag": 5,
+        "other": 5,
         "typ": 5,
         "see": 5,
-        "list": 5,
         "delete": 5,
+        "key": 5,
+        "organization": 5,
+        "tenant": 5,
         "plain": 5,
         "image": 5,
         "analyze": 5,
+        "cannot": 5,
         "title": 4,
-        "http": 4,
-        "com": 4,
-        "doc": 4,
-        "through": 4,
-        "other": 4,
-        "acces": 4,
-        "key": 4,
-        "read": 4,
-        "sdk": 4
+        "http": 4
       },
-      "word_count": 3112
+      "word_count": 3261
     },
     {
       "filename": "docs__en__build-with-claude__handling-stop-reasons.md",
@@ -99306,7 +99310,7 @@
           "level": 2
         },
         {
-          "text": "Encrypted",
+          "text": "Encrypted with CMEK key",
           "level": 3
         },
         {
@@ -99314,7 +99318,7 @@
           "level": 3
         },
         {
-          "text": "Not encrypted",
+          "text": "Encrypted with Anthropic key",
           "level": 3
         },
         {
@@ -99335,33 +99339,33 @@
         }
       ],
       "terms": {
-        "key": 60,
-        "claude": 55,
-        "cmek": 33,
+        "key": 62,
+        "claude": 56,
+        "cmek": 32,
         "data": 31,
-        "anthropic": 26,
+        "anthropic": 27,
         "kms": 16,
         "platform": 15,
         "encryption": 14,
-        "under": 14,
-        "organization": 13,
+        "under": 13,
         "api": 12,
         "manag": 11,
         "aws": 11,
         "workspace": 10,
         "cloud": 10,
+        "organization": 10,
         "encrypt": 9,
         "content": 9,
         "code": 9,
-        "disabl": 9,
         "enterprise": 8,
         "such": 8,
         "service": 8,
+        "disabl": 8,
         "azure": 7,
         "vault": 7,
         "enabl": 7,
-        "protect": 7,
         "google": 6,
+        "account": 6,
         "fil": 6,
         "session": 6,
         "compliance": 6,
@@ -99379,14 +99383,14 @@
         "rest": 5,
         "audit": 5,
         "provider": 5,
-        "account": 5,
+        "protect": 5,
         "acces": 5,
         "configuration": 5,
         "only": 5,
         "admin": 5,
         "create": 5
       },
-      "word_count": 1747
+      "word_count": 1739
     },
     {
       "filename": "docs__en__manage-claude__cmek-aws-kms.md",
@@ -101819,12 +101823,12 @@
         "identity": 11,
         "iam": 11,
         "role": 11,
+        "exchange": 11,
         "pod": 10,
         "rule": 10,
         "url": 9,
         "path": 9,
         "anthropic": 9,
-        "exchange": 9,
         "call": 8,
         "kubernet": 8,
         "sdk": 8,
@@ -101842,6 +101846,7 @@
         "credential": 5,
         "only": 5,
         "inside": 5,
+        "fail": 5,
         "value": 5,
         "audience": 5,
         "provider": 4,
@@ -101851,10 +101856,9 @@
         "web": 4,
         "same": 4,
         "configure": 4,
-        "setting": 4,
-        "per": 4
+        "setting": 4
       },
-      "word_count": 2942
+      "word_count": 2982
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__azure.md",
@@ -101942,9 +101946,9 @@
         "anthropic": 21,
         "registration": 21,
         "federation": 21,
+        "exchange": 21,
         "client": 20,
         "register": 18,
-        "exchange": 18,
         "azure": 17,
         "value": 17,
         "set": 15,
@@ -101964,6 +101968,7 @@
         "api": 10,
         "create": 10,
         "one": 10,
+        "fail": 10,
         "resource": 10,
         "endpoint": 10,
         "url": 9,
@@ -101973,10 +101978,9 @@
         "creat": 9,
         "default": 9,
         "kubernet": 9,
-        "acces": 8,
-        "every": 8
+        "acces": 8
       },
-      "word_count": 6190
+      "word_count": 6248
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__gcp.md",
@@ -102028,9 +102032,9 @@
         "gke": 10,
         "claim": 10,
         "anthropic": 9,
+        "exchange": 9,
         "run": 8,
         "engine": 8,
-        "exchange": 8,
         "claude": 7,
         "match": 7,
         "metadata": 6,
@@ -102066,7 +102070,7 @@
         "configure": 3,
         "side": 3
       },
-      "word_count": 1917
+      "word_count": 1937
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__github-actions.md",
@@ -102145,18 +102149,18 @@
         "only": 3,
         "add": 3,
         "variabl": 3,
+        "return": 3,
         "file": 3,
-        "see": 3,
         "wizard": 3,
         "creat": 3,
         "refresh": 3,
         "event": 3,
+        "exchange": 3,
+        "check": 3,
         "url": 2,
-        "provider": 2,
-        "short": 2,
-        "instead": 2
+        "provider": 2
       },
-      "word_count": 1461
+      "word_count": 1503
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__kubernetes.md",
@@ -102218,6 +102222,7 @@
         "configure": 5,
         "audience": 5,
         "match": 5,
+        "exchange": 5,
         "wif": 4,
         "distribution": 4,
         "oidc": 4,
@@ -102228,7 +102233,6 @@
         "only": 4,
         "warn": 4,
         "namespace": 4,
-        "exchange": 4,
         "self": 3,
         "jwt": 3,
         "through": 3,
@@ -102243,10 +102247,10 @@
         "mode": 3,
         "wizard": 3,
         "creat": 3,
-        "scope": 3,
-        "http": 2
+        "fail": 3,
+        "scope": 3
       },
-      "word_count": 1460
+      "word_count": 1480
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__okta.md",
@@ -102325,6 +102329,7 @@
         "set": 4,
         "call": 4,
         "each": 4,
+        "exchange": 4,
         "oidc": 3,
         "note": 3,
         "must": 3,
@@ -102332,11 +102337,10 @@
         "key": 3,
         "ensure": 3,
         "configuration": 3,
-        "account": 3,
-        "organization": 3,
-        "policy": 3
+        "authentication": 3,
+        "account": 3
       },
-      "word_count": 2081
+      "word_count": 2101
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__spiffe.md",
@@ -102428,6 +102432,7 @@
         "configure": 8,
         "sign": 8,
         "endpoint": 8,
+        "exchange": 8,
         "account": 8,
         "call": 8,
         "default": 8,
@@ -102435,10 +102440,9 @@
         "card": 8,
         "title": 7,
         "any": 7,
-        "mode": 7,
-        "same": 7
+        "mode": 7
       },
-      "word_count": 3298
+      "word_count": 3318
     },
     {
       "filename": "docs__en__manage-claude__wif-reference.md",
@@ -102542,57 +102546,57 @@
       ],
       "terms": {
         "token": 40,
-        "rule": 34,
+        "rule": 38,
         "key": 30,
         "must": 25,
         "jwt": 24,
         "issuer": 21,
         "federation": 20,
         "jwk": 19,
+        "claim": 19,
         "sdk": 18,
-        "claim": 18,
         "profile": 17,
         "field": 17,
         "workspace": 17,
         "str": 17,
         "api": 17,
-        "match": 15,
+        "match": 16,
         "step": 15,
         "exchange": 14,
+        "request": 14,
         "set": 14,
         "claude": 13,
         "environment": 13,
-        "only": 13,
         "provider": 12,
-        "request": 12,
         "requir": 12,
         "anthropic": 12,
         "sign": 12,
+        "error": 11,
         "one": 11,
         "file": 11,
-        "error": 10,
+        "only": 11,
+        "configuration": 10,
         "scope": 10,
         "acces": 10,
+        "check": 10,
+        "fail": 10,
         "variabl": 9,
-        "configuration": 9,
         "identity": 9,
         "constraint": 9,
+        "organization": 9,
         "service": 9,
         "account": 9,
         "variable": 9,
         "credential": 9,
         "against": 9,
-        "check": 9,
         "url": 8,
         "see": 8,
         "yes": 8,
-        "organization": 8,
+        "response": 8,
         "fetch": 8,
-        "fail": 8,
-        "title": 7,
-        "reference": 7
+        "title": 7
       },
-      "word_count": 3501
+      "word_count": 3639
     },
     {
       "filename": "docs__en__manage-claude__workload-identity-federation.md",
