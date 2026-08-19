@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-18T21:13:30.414917Z",
+  "generated_at": "2026-08-19T00:15:42.464070Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -323,8 +323,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/subagents.md",
       "title": "Subagents in the SDK",
       "category": "agent_sdk",
-      "sha256": "e08018409381c1e4e25f81d5a39055381c43731b199b21c049d66c782e94a5b0",
-      "lastmod": "2026-08-17T19:42:18.391Z",
+      "sha256": "26955a76481587a90a7749534c8d0779846c632214ea7f29d828ba2a92e7563d",
+      "lastmod": "2026-08-18T22:51:33.160Z",
       "fetch_status": "ok"
     },
     {
@@ -510,8 +510,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "07d3c964061e482a67b2803b26b62a6308aa84b9e61f6e60a943512a5df299f9",
-      "lastmod": "2026-08-17T21:06:56.729Z",
+      "sha256": "055628a3225c59b1be4ea8fa99f76cedf5cea25023681f069ea17c94239eafa5",
+      "lastmod": "2026-08-18T22:29:33.078Z",
       "fetch_status": "ok"
     },
     {
@@ -796,8 +796,8 @@
       "md_url": "https://code.claude.com/docs/en/cross-session-messaging.md",
       "title": "Message your other Claude Code sessions",
       "category": "claude_code",
-      "sha256": "256b5079ec301ec1bad917f32d05baedc42498883014c8446a1ddc3f33f82d41",
-      "lastmod": "2026-08-14T00:43:57.301Z",
+      "sha256": "4906354c778df040a93eb79efa13356f6540a4ecf9241e3e3aa919ea06ba7712",
+      "lastmod": "2026-08-18T23:52:01.846Z",
       "fetch_status": "ok"
     },
     {
@@ -928,8 +928,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "983e39e18207ab3a2474d435a0221e1f105ee13a5ec61b0663e2e445405219a4",
-      "lastmod": "2026-08-18T14:50:34.369Z",
+      "sha256": "da368e4fda9e0569f8f39ed35cd153f787512684d2de118c2607a06e4977776a",
+      "lastmod": "2026-08-18T22:51:33.174Z",
       "fetch_status": "ok"
     },
     {
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "1dcf5f650f977f17f1c677ec4f917769083d0bb671fef30a9b1152735ea22be0",
-      "lastmod": "2026-08-18T02:39:03.268Z",
+      "sha256": "77d3587fb2f67aeb85fd3c966fcdfc312de4b50dd2c32519a5d0040ea2a42d4a",
+      "lastmod": "2026-08-18T23:52:01.851Z",
       "fetch_status": "ok"
     },
     {
@@ -1291,8 +1291,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "1492ee54df64707ae3c8732b52a56a4dc3186673567a171c4a3e79fb28d0cfdd",
-      "lastmod": "2026-08-18T02:37:33.834Z",
+      "sha256": "f1f8199299e10a5481ad693fcc149e3f241a4dbc0165cc7b8c08bd025af1bf19",
+      "lastmod": "2026-08-18T23:52:01.841Z",
       "fetch_status": "ok"
     },
     {
@@ -1709,8 +1709,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "1926157b3db4755951c70d3d3a8cd74d5d3a564389120c7cab2491bde83bb246",
-      "lastmod": "2026-08-18T14:46:22.298Z",
+      "sha256": "227626bc5018367896b25c3ecc241964adf11bacd050644f6576cb64e9226dd4",
+      "lastmod": "2026-08-18T22:51:33.161Z",
       "fetch_status": "ok"
     },
     {
