@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-19T06:16:16.106773Z",
+  "generated_at": "2026-08-19T15:17:34.215241Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1654,8 +1654,8 @@
       "md_url": "https://code.claude.com/docs/en/settings.md",
       "title": "Claude Code settings",
       "category": "claude_code",
-      "sha256": "c93f165ff64a6fcd372b3479095a870cd7ea87eefaa8190b648af7fd1516cc9f",
-      "lastmod": "2026-08-19T00:24:40.632Z",
+      "sha256": "e871e58af55f35e9e7e8f198ce0aa63962bf2744a301f4833ebddb6b27c1f427",
+      "lastmod": "2026-08-19T13:58:42.284Z",
       "fetch_status": "ok"
     },
     {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-19T06:16:19.053489Z",
+  "generated_at": "2026-08-19T15:17:37.151650Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -24444,7 +24444,7 @@
         "sett": 13,
         "any": 13
       },
-      "word_count": 19478
+      "word_count": 19580
     },
     {
       "filename": "claude-code__setup.md",
