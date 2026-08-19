@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-19T18:14:25.233228Z",
+  "generated_at": "2026-08-19T21:14:30.612280Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "78894e28c77b188265c9a45ccb595f12960540df89c725992e674662f3131c21",
+      "sha256": "3022a9df980c7dc7e7a5452d30ed46938588ff16c1b113a339fa9b9cd28be8a8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2081,7 +2081,7 @@
       "filename": "docs__en__about-claude__additional-resources.md",
       "url": "https://platform.claude.com/docs/en/about-claude/additional-resources",
       "md_url": "https://platform.claude.com/docs/en/about-claude/additional-resources.md",
-      "title": "Untitled",
+      "title": "Additional resources",
       "category": "about_claude",
       "sha256": "6303bfff6af1937165805bbe94e3da23b32f9602c516810e2d72e986aa934bd9",
       "lastmod": null,
@@ -2292,7 +2292,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise.md",
       "title": "Skills for enterprise",
       "category": "agents_and_tools",
-      "sha256": "7a83e80ce335ab329ed9f1c674fa3747b3b0d46656c9de6835932cc168976e36",
+      "sha256": "dbbd6b433898c561e78a1ee161bfcee4e996aec0e4442bfeaa26c1cf587eda67",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2303,7 +2303,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md",
       "title": "Overview",
       "category": "agents_and_tools",
-      "sha256": "f3a9e69a05e4d41157561ced529eb795dc420d99103faf2a3488d364f5eacf03",
+      "sha256": "c161721ff90020eb3e9ba8755f70371f1c70a1b1aeba3c0b1545087479a6949c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2314,7 +2314,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart.md",
       "title": "Quickstart",
       "category": "agents_and_tools",
-      "sha256": "c1295ed9cb4998662848b4a9b45e61e156a1f542adde11a5f2ea876d432d4be7",
+      "sha256": "b00c029bb325e47977bd8f4a50845c19e7707533f0371fb6660923b7b4501e38",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6945,7 +6945,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/files.md",
       "title": "Files API",
       "category": "core_documentation",
-      "sha256": "9cb3e722238635102bd70c5006d3c5d362a60022d1718e59d89c4bd7dde2c8b6",
+      "sha256": "ef44643401ba90ac33bf00ca99d501dcc9f1e6fc32c6e6d6404398df7a7c3ef7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7121,7 +7121,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide.md",
       "title": "Skills in the API",
       "category": "core_documentation",
-      "sha256": "85af315e980fe974e2f85d403db4099a5aee51a1fb0d902dd468cb4c42d5bb49",
+      "sha256": "c8f32577cd749adfd92db848db1f84c5b8f4a97fe654ff8bfa9405a033376846",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7517,7 +7517,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention.md",
       "title": "API and data retention",
       "category": "core_documentation",
-      "sha256": "9981daf66c4b75639235c980cf4e81cba75fa6eb8634d522ef8180e6aed19916",
+      "sha256": "f28771f6605286a50dc1cdc7a0b5696795b2481ae983bca5e308589e87318e81",
       "lastmod": null,
       "fetch_status": "ok"
     },
