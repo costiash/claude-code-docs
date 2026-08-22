@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-22T18:13:11.122847Z",
+  "generated_at": "2026-08-22T21:13:18.789839Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -510,8 +510,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "0bdb149e3227781d07932af419825604ae8a7b29cf741d7d1d58cd95dc45308f",
-      "lastmod": "2026-08-21T21:10:48.935Z",
+      "sha256": "a22076f5a5d3916d2363c714d187a10c413a2cb2159e71711c4fb72d987f82c3",
+      "lastmod": "2026-08-22T18:10:56.929Z",
       "fetch_status": "ok"
     },
     {
@@ -565,8 +565,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway.md",
       "title": "Claude apps gateway for Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry",
       "category": "claude_code",
-      "sha256": "847a1de96e50280485aef7f075b1620958442d0e151c70c8e3e212c822d85012",
-      "lastmod": "2026-08-21T23:08:54.425Z",
+      "sha256": "8663f94ba8c9f7245afbdad845269fdb640d346f25fe48802d1157f96979eba4",
+      "lastmod": "2026-08-22T18:22:13.309Z",
       "fetch_status": "ok"
     },
     {
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins-reference.md",
       "title": "Plugins reference",
       "category": "claude_code",
-      "sha256": "9cc919151ddfa0f388eaf0b1ca903a982f466ac0efa1f66560e23dc4673e5394",
-      "lastmod": "2026-08-22T12:54:03.081Z",
+      "sha256": "2997c815eebad8c8eccc5d0dbc10992d194b06de3eff855f497c7bcd6d81d0f1",
+      "lastmod": "2026-08-22T18:45:38.073Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1478,8 @@
       "md_url": "https://code.claude.com/docs/en/quickstart.md",
       "title": "Quickstart",
       "category": "claude_code",
-      "sha256": "e1f9fc3587ad746953ff6457e075e6429ce04dcf01f5e3407fb2357aec6451eb",
-      "lastmod": "2026-08-22T16:22:09.284Z",
+      "sha256": "6a7a0a38ced1235db962c3cd321c05a4370dc68732c9b41780d47ee489b33e0e",
+      "lastmod": "2026-08-22T18:32:25.750Z",
       "fetch_status": "ok"
     },
     {
@@ -1852,8 +1852,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new.md",
       "title": "What's new",
       "category": "claude_code",
-      "sha256": "598220ee884ac6bd854b235f57e7b9bbd6bf0e41f478523d52d824306c7bb039",
-      "lastmod": "2026-08-10T18:31:23.297Z",
+      "sha256": "30c6a1c955d7f66fa30e1fad08d49ff79ae92643906de413a303fd594d741667",
+      "lastmod": "2026-08-22T18:32:25.595Z",
       "fetch_status": "ok"
     },
     {
@@ -2066,13 +2066,35 @@
       "fetch_status": "ok"
     },
     {
+      "id": "claude-code/whats-new/2026-w33",
+      "filename": "claude-code__whats-new__2026-w33.md",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w33",
+      "md_url": "https://code.claude.com/docs/en/whats-new/2026-w33.md",
+      "title": "Week 33 \u00b7 August 10\u201314, 2026",
+      "category": "claude_code",
+      "sha256": "da98bb03b1c777c4195e767a34f850f7fb7e17ab273f9fc268f34e4642095aba",
+      "lastmod": "2026-08-22T18:32:25.614Z",
+      "fetch_status": "ok"
+    },
+    {
+      "id": "claude-code/whats-new/2026-w34",
+      "filename": "claude-code__whats-new__2026-w34.md",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w34",
+      "md_url": "https://code.claude.com/docs/en/whats-new/2026-w34.md",
+      "title": "Week 34 \u00b7 August 17\u201321, 2026",
+      "category": "claude_code",
+      "sha256": "1d892495d63b14a857c8aaaefa7d67568a43bd91f09009761e525c3083fa3a03",
+      "lastmod": "2026-08-22T18:32:25.591Z",
+      "fetch_status": "ok"
+    },
+    {
       "id": "claude-code/whats-new/index",
       "filename": "claude-code__whats-new__index.md",
       "url": "https://code.claude.com/docs/en/whats-new/index",
       "md_url": "https://code.claude.com/docs/en/whats-new/index.md",
       "title": "What's new",
       "category": "claude_code",
-      "sha256": "598220ee884ac6bd854b235f57e7b9bbd6bf0e41f478523d52d824306c7bb039",
+      "sha256": "30c6a1c955d7f66fa30e1fad08d49ff79ae92643906de413a303fd594d741667",
       "lastmod": null,
       "fetch_status": "ok"
     },
