@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-22T21:13:22.032074Z",
+  "generated_at": "2026-08-23T03:30:14.719390Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.241",
+          "level": 2
         },
         {
           "text": "2.1.240",
@@ -1503,7 +1507,7 @@
         }
       ],
       "terms": {
-        "fix": 2449,
+        "fix": 2450,
         "session": 984,
         "now": 901,
         "add": 522,
@@ -1554,7 +1558,7 @@
         "token": 139,
         "directory": 138
       },
-      "word_count": 81304
+      "word_count": 81312
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -8829,11 +8833,11 @@
         }
       ],
       "terms": {
-        "fix": 2450,
+        "fix": 2451,
         "session": 984,
         "now": 901,
         "add": 522,
-        "update": 475,
+        "update": 477,
         "instead": 448,
         "claude": 443,
         "tool": 437,
@@ -8853,9 +8857,9 @@
         "model": 265,
         "terminal": 260,
         "plugin": 258,
-        "description": 253,
+        "description": 254,
         "server": 253,
-        "label": 239,
+        "label": 240,
         "window": 236,
         "auto": 213,
         "file": 209,
@@ -8880,7 +8884,7 @@
         "control": 141,
         "memory": 140
       },
-      "word_count": 82850
+      "word_count": 82862
     },
     {
       "filename": "claude-code__channels.md",
