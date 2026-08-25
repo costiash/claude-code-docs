@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-25T15:26:48.253737Z",
+  "generated_at": "2026-08-25T18:20:40.165826Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20865,58 +20865,58 @@
         }
       ],
       "terms": {
-        "claude": 143,
-        "match": 122,
-        "code": 107,
-        "rule": 107,
-        "command": 98,
+        "claude": 148,
+        "match": 130,
+        "rule": 116,
+        "code": 111,
+        "command": 103,
         "rul": 91,
         "tool": 89,
         "directory": 70,
-        "permission": 61,
+        "permission": 60,
         "prompt": 59,
+        "only": 57,
         "setting": 55,
-        "allow": 53,
-        "only": 53,
+        "allow": 54,
         "deny": 51,
-        "any": 47,
+        "any": 46,
         "path": 42,
         "file": 40,
-        "read": 38,
-        "ask": 35,
+        "read": 39,
+        "ask": 37,
+        "run": 37,
         "such": 35,
-        "run": 34,
         "trust": 34,
         "repository": 33,
         "session": 33,
-        "bash": 29,
-        "every": 28,
+        "every": 31,
+        "bash": 27,
         "add": 27,
-        "block": 27,
         "project": 27,
+        "before": 26,
+        "each": 26,
+        "block": 26,
         "mode": 25,
         "fil": 25,
-        "like": 25,
+        "without": 25,
+        "name": 25,
         "pattern": 25,
         "hook": 25,
         "sandbox": 25,
-        "each": 24,
         "set": 24,
-        "start": 24,
+        "doesn": 24,
         "call": 24,
-        "without": 24,
-        "name": 24,
-        "before": 23,
+        "start": 23,
+        "like": 23,
         "same": 22,
+        "one": 21,
+        "write": 21,
         "still": 21,
-        "doesn": 21,
+        "also": 21,
         "folder": 21,
-        "one": 20,
-        "yes": 20,
-        "edit": 20,
-        "includ": 20
+        "yes": 20
       },
-      "word_count": 8612
+      "word_count": 8896
     },
     {
       "filename": "claude-code__platforms.md",
@@ -103846,6 +103846,120 @@
       "word_count": 1006
     },
     {
+      "filename": "docs__en__models__fable-5__migration-guide.md",
+      "id": "docs/en/models/fable-5/migration-guide",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide",
+      "headings": [
+        {
+          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "Features not available on Claude Mythos 5 and Claude Fable 5",
+          "level": 3
+        },
+        {
+          "text": "Token counting and billing",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 111,
+        "think": 56,
+        "model": 49,
+        "mytho": 38,
+        "fable": 34,
+        "same": 27,
+        "token": 27,
+        "opu": 26,
+        "output": 21,
+        "see": 20,
+        "request": 18,
+        "return": 18,
+        "data": 17,
+        "retention": 17,
+        "api": 15,
+        "unchang": 14,
+        "error": 13,
+        "chang": 12,
+        "effort": 12,
+        "adaptive": 12,
+        "classifier": 12,
+        "migrat": 11,
+        "preview": 11,
+        "migration": 10,
+        "run": 10,
+        "parameter": 10,
+        "configuration": 10,
+        "per": 10,
+        "refusal": 10,
+        "block": 10,
+        "name": 9,
+        "any": 9,
+        "prefill": 9,
+        "pric": 9,
+        "workload": 9,
+        "available": 8,
+        "only": 8,
+        "assistant": 8,
+        "prompt": 8,
+        "default": 8,
+        "count": 8,
+        "roughly": 8,
+        "level": 8,
+        "codegroup": 8,
+        "field": 8,
+        "code": 7,
+        "requir": 7,
+        "before": 7,
+        "alway": 7,
+        "extend": 7
+      },
+      "word_count": 3697
+    },
+    {
       "filename": "docs__en__models__fable-5__overview.md",
       "id": "docs/en/models/fable-5/overview",
       "title": "Claude Fable 5",
@@ -103946,6 +104060,80 @@
         "most": 3
       },
       "word_count": 970
+    },
+    {
+      "filename": "docs__en__models__haiku-4-5__migration-guide.md",
+      "id": "docs/en/models/haiku-4-5/migration-guide",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide",
+      "headings": [
+        {
+          "text": "Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models",
+          "level": 2
+        },
+        {
+          "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "Haiku 4.5 migration checklist",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 21,
+        "model": 21,
+        "haiku": 16,
+        "update": 10,
+        "break": 9,
+        "chang": 7,
+        "migrat": 6,
+        "note": 6,
+        "migration": 5,
+        "code": 5,
+        "reason": 5,
+        "think": 5,
+        "prompt": 5,
+        "tip": 4,
+        "skill": 4,
+        "any": 4,
+        "see": 4,
+        "extend": 4,
+        "review": 4,
+        "new": 4,
+        "rate": 4,
+        "limit": 4,
+        "warn": 4,
+        "both": 4,
+        "version": 4,
+        "platform": 3,
+        "checklist": 3,
+        "api": 3,
+        "parameter": 3,
+        "application": 3,
+        "overview": 3,
+        "using": 3,
+        "tool": 3,
+        "handle": 3,
+        "stop": 3,
+        "guide": 2,
+        "earlier": 2,
+        "name": 2,
+        "work": 2,
+        "target": 2,
+        "before": 2,
+        "adjust": 2,
+        "performance": 2,
+        "capabiliti": 2,
+        "pric": 2,
+        "task": 2,
+        "consider": 2,
+        "enabl": 2,
+        "separate": 2,
+        "detail": 2
+      },
+      "word_count": 564
     },
     {
       "filename": "docs__en__models__haiku-4-5__overview.md",
@@ -104512,6 +104700,188 @@
       "word_count": 802
     },
     {
+      "filename": "docs__en__models__opus-5__migration-guide.md",
+      "id": "docs/en/models/opus-5/migration-guide",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/models/opus-5/migration-guide",
+      "headings": [
+        {
+          "text": "Migrating to Claude Opus 5 from Claude Opus 4.8",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "Recommended changes",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Opus 5 from Claude Opus 4.7",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Recommended changes",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Opus 5 from Claude Opus 4.6 and earlier Opus models",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "Choosing an effort level",
+          "level": 3
+        },
+        {
+          "text": "Behavior changes",
+          "level": 3
+        },
+        {
+          "text": "Recommended changes",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating from Claude Opus 4.5 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Update your model name",
+          "level": 4
+        },
+        {
+          "text": "Breaking changes",
+          "level": 4
+        },
+        {
+          "text": "Recommended changes",
+          "level": 4
+        },
+        {
+          "text": "Migrating from Claude 4.1 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Additional breaking changes",
+          "level": 4
+        },
+        {
+          "text": "Additional recommended changes",
+          "level": 4
+        },
+        {
+          "text": "Migration checklist (from Claude Opus 4.5 or earlier)",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Opus 5 from Claude Sonnet 5",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 235,
+        "opu": 217,
+        "model": 114,
+        "think": 111,
+        "effort": 98,
+        "prompt": 70,
+        "token": 64,
+        "request": 53,
+        "tool": 52,
+        "chang": 50,
+        "earlier": 46,
+        "beta": 43,
+        "task": 40,
+        "see": 38,
+        "default": 38,
+        "remove": 37,
+        "parameter": 34,
+        "run": 33,
+        "output": 30,
+        "support": 28,
+        "header": 28,
+        "migrat": 25,
+        "update": 25,
+        "without": 25,
+        "return": 25,
+        "length": 24,
+        "level": 21,
+        "code": 20,
+        "lower": 20,
+        "verification": 20,
+        "break": 19,
+        "api": 19,
+        "response": 19,
+        "instruction": 19,
+        "workload": 18,
+        "disabl": 18,
+        "error": 18,
+        "codegroup": 18,
+        "set": 17,
+        "cache": 17,
+        "budget": 17,
+        "later": 17,
+        "work": 16,
+        "below": 16,
+        "adaptive": 16,
+        "where": 16,
+        "conversation": 16,
+        "migration": 15,
+        "recommend": 15,
+        "requir": 15
+      },
+      "word_count": 9617
+    },
+    {
       "filename": "docs__en__models__opus-5__overview.md",
       "id": "docs/en/models/opus-5/overview",
       "title": "Claude Opus 5",
@@ -105008,6 +105378,116 @@
         "invokemodel": 3
       },
       "word_count": 820
+    },
+    {
+      "filename": "docs__en__models__sonnet-5__migration-guide.md",
+      "id": "docs/en/models/sonnet-5/migration-guide",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5/migration-guide",
+      "headings": [
+        {
+          "text": "Migrating to Claude Sonnet 5 from Claude Sonnet 4.6",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 and earlier Sonnet models",
+          "level": 2
+        },
+        {
+          "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "When migrating from Sonnet 4.5",
+          "level": 4
+        },
+        {
+          "text": "When migrating from Claude 3.x",
+          "level": 4
+        },
+        {
+          "text": "Migrating to Claude Sonnet 5 from Claude Haiku 4.5",
+          "level": 2
+        },
+        {
+          "text": "Update your model name",
+          "level": 3
+        },
+        {
+          "text": "What changed",
+          "level": 3
+        },
+        {
+          "text": "Migration checklist",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 95,
+        "sonnet": 77,
+        "think": 31,
+        "model": 29,
+        "token": 27,
+        "default": 24,
+        "parameter": 20,
+        "output": 19,
+        "return": 17,
+        "chang": 16,
+        "error": 16,
+        "migrat": 15,
+        "prefill": 13,
+        "effort": 12,
+        "support": 12,
+        "haiku": 11,
+        "break": 10,
+        "adaptive": 10,
+        "prompt": 10,
+        "remove": 10,
+        "warn": 10,
+        "earlier": 9,
+        "pric": 9,
+        "per": 9,
+        "assistant": 9,
+        "workload": 9,
+        "run": 8,
+        "set": 8,
+        "same": 8,
+        "context": 8,
+        "tool": 8,
+        "update": 8,
+        "without": 8,
+        "request": 8,
+        "cybersecurity": 8,
+        "safeguard": 8,
+        "migration": 7,
+        "api": 7,
+        "code": 7,
+        "work": 7,
+        "extend": 7,
+        "message": 7,
+        "count": 7,
+        "configuration": 7,
+        "note": 6,
+        "see": 6,
+        "sampl": 6,
+        "non": 6,
+        "instead": 6,
+        "window": 6
+      },
+      "word_count": 3492
     },
     {
       "filename": "docs__en__models__sonnet-5__overview.md",

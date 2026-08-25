@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-25T15:26:45.000808Z",
+  "generated_at": "2026-08-25T18:20:37.003872Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1368,8 +1368,8 @@
       "md_url": "https://code.claude.com/docs/en/permissions.md",
       "title": "Configure permissions",
       "category": "claude_code",
-      "sha256": "6a1d2d107dc217f2d2f699d6d6a602fa6f6f806ac81a28a5d9664d77a2b6a791",
-      "lastmod": "2026-08-24T21:41:41.066Z",
+      "sha256": "4e38845956e078405ee411b496021df73e3a23c86f87f47ecd726549e2d50ed1",
+      "lastmod": "2026-08-25T16:50:31.263Z",
       "fetch_status": "ok"
     },
     {
@@ -8413,6 +8413,17 @@
       "fetch_status": "ok"
     },
     {
+      "id": "docs/en/models/fable-5/migration-guide",
+      "filename": "docs__en__models__fable-5__migration-guide.md",
+      "url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide",
+      "md_url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide.md",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "sha256": "a7647d13aef3780d9abbbd7dc0d18355f43083acb7aa0ed10cb0347db533c39c",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
       "id": "docs/en/models/fable-5/overview",
       "filename": "docs__en__models__fable-5__overview.md",
       "url": "https://platform.claude.com/docs/en/models/fable-5/overview",
@@ -8420,6 +8431,17 @@
       "title": "Claude Fable 5",
       "category": "core_documentation",
       "sha256": "8e936fc8475ba504531ad0f8356171851501cd636f686c14209bc6290d4d9ab8",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/models/haiku-4-5/migration-guide",
+      "filename": "docs__en__models__haiku-4-5__migration-guide.md",
+      "url": "https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide",
+      "md_url": "https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide.md",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "sha256": "1e09b6b5c470143800a4a683315c82fc477a5f1ba006c5efeed917684ddda1c3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8490,6 +8512,17 @@
       "fetch_status": "ok"
     },
     {
+      "id": "docs/en/models/opus-5/migration-guide",
+      "filename": "docs__en__models__opus-5__migration-guide.md",
+      "url": "https://platform.claude.com/docs/en/models/opus-5/migration-guide",
+      "md_url": "https://platform.claude.com/docs/en/models/opus-5/migration-guide.md",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "sha256": "daa378f6231b7e899febf15773d526386cfcb9a4b1b920b2a405aa046525068b",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
       "id": "docs/en/models/opus-5/overview",
       "filename": "docs__en__models__opus-5__overview.md",
       "url": "https://platform.claude.com/docs/en/models/opus-5/overview",
@@ -8541,6 +8574,17 @@
       "title": "Claude Sonnet 4.6",
       "category": "core_documentation",
       "sha256": "0201ed807a6124df60bccfa33c639168a1fbaceb51f70427d531a383d500a49e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/models/sonnet-5/migration-guide",
+      "filename": "docs__en__models__sonnet-5__migration-guide.md",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5/migration-guide",
+      "md_url": "https://platform.claude.com/docs/en/models/sonnet-5/migration-guide.md",
+      "title": "Migration guide",
+      "category": "core_documentation",
+      "sha256": "fc0572dd8c16d0da642a3c61cdf78a9e8b14ee9675a03c0a479aa0e0345b2a98",
       "lastmod": null,
       "fetch_status": "ok"
     },
