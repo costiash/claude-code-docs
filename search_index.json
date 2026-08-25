@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-25T09:21:28.836383Z",
+  "generated_at": "2026-08-25T15:26:48.253737Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -30316,311 +30316,55 @@
       "url": "https://platform.claude.com/docs/en/about-claude/models/migration-guide",
       "headings": [
         {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5",
-          "level": 2
-        },
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "Features not available on Claude Mythos 5 and Claude Fable 5",
-          "level": 4
-        },
-        {
-          "text": "Token counting and billing",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Opus 5",
-          "level": 2
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.8",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "Breaking changes",
-          "level": 4
-        },
-        {
-          "text": "Recommended changes",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.7",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "Breaking changes",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Recommended changes",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.6 and earlier Opus models",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "Breaking changes",
-          "level": 4
-        },
-        {
-          "text": "Choosing an effort level",
-          "level": 4
-        },
-        {
-          "text": "Behavior changes",
-          "level": 4
-        },
-        {
-          "text": "Recommended changes",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating from Claude Opus 4.5 or earlier",
-          "level": 4
-        },
-        {
-          "text": "Update your model name",
-          "level": 5
-        },
-        {
-          "text": "Breaking changes",
-          "level": 5
-        },
-        {
-          "text": "Recommended changes",
-          "level": 5
-        },
-        {
-          "text": "Migrating from Claude 4.1 or earlier",
-          "level": 4
-        },
-        {
-          "text": "Additional breaking changes",
-          "level": 5
-        },
-        {
-          "text": "Additional recommended changes",
-          "level": 5
-        },
-        {
-          "text": "Migration checklist (from Claude Opus 4.5 or earlier)",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Sonnet 5",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Sonnet 5",
-          "level": 2
-        },
-        {
-          "text": "Migrating to Claude Sonnet 5 from Claude Sonnet 4.6",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 and earlier Sonnet models",
-          "level": 3
-        },
-        {
-          "text": "Breaking changes",
-          "level": 4
-        },
-        {
-          "text": "When migrating from Sonnet 4.5",
-          "level": 5
-        },
-        {
-          "text": "When migrating from Claude 3.x",
-          "level": 5
-        },
-        {
-          "text": "Migrating to Claude Sonnet 5 from Claude Haiku 4.5",
-          "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
-        },
-        {
-          "text": "What changed",
-          "level": 4
-        },
-        {
-          "text": "Migration checklist",
-          "level": 4
-        },
-        {
-          "text": "Migrating to Claude Haiku 4.5",
-          "level": 2
-        },
-        {
-          "text": "Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models",
-          "level": 3
-        },
-        {
-          "text": "Breaking changes",
-          "level": 4
-        },
-        {
-          "text": "Haiku 4.5 migration checklist",
-          "level": 4
-        },
-        {
           "text": "Get help",
           "level": 2
         }
       ],
       "terms": {
-        "claude": 433,
-        "opu": 242,
-        "think": 203,
-        "model": 190,
-        "effort": 120,
-        "token": 119,
-        "prompt": 93,
-        "sonnet": 84,
-        "request": 79,
-        "chang": 71,
-        "output": 71,
-        "default": 70,
-        "see": 68,
-        "tool": 66,
-        "parameter": 64,
-        "return": 62,
-        "earlier": 56,
-        "migrat": 55,
-        "remove": 55,
-        "run": 49,
-        "error": 49,
-        "support": 49,
-        "update": 49,
-        "same": 48,
-        "task": 47,
-        "beta": 45,
-        "adaptive": 39,
-        "api": 37,
-        "without": 37,
-        "mytho": 36,
-        "workload": 36,
-        "per": 34,
-        "break": 33,
-        "fable": 32,
-        "pric": 32,
-        "level": 32,
-        "set": 31,
-        "code": 30,
-        "codegroup": 30,
-        "prefill": 28,
-        "context": 28,
-        "refusal": 28,
-        "header": 28,
-        "lower": 27,
-        "response": 27,
-        "migration": 26,
-        "any": 26,
-        "instruction": 26,
-        "field": 26,
-        "length": 26
+        "claude": 9,
+        "migrat": 5,
+        "migration": 3,
+        "model": 3,
+        "api": 3,
+        "guid": 2,
+        "review": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "about": 1,
+        "guide": 1,
+        "description": 1,
+        "latest": 1,
+        "previou": 1,
+        "version": 1,
+        "mytho": 1,
+        "fable": 1,
+        "opu": 1,
+        "sonnet": 1,
+        "haiku": 1,
+        "get": 1,
+        "help": 1,
+        "check": 1,
+        "documentation": 1,
+        "detail": 1,
+        "specification": 1,
+        "capabiliti": 1,
+        "performance": 1,
+        "comparison": 1,
+        "release": 1,
+        "not": 1,
+        "updat": 1,
+        "contact": 1,
+        "support": 1,
+        "encounter": 1,
+        "any": 1,
+        "issu": 1,
+        "dur": 1
       },
-      "word_count": 16892
+      "word_count": 84
     },
     {
       "filename": "docs__en__about-claude__models__model-ids-and-versions.md",
@@ -92584,7 +92328,7 @@
         "request": 75,
         "refusal": 37,
         "block": 35,
-        "claude": 26,
+        "claude": 25,
         "retry": 22,
         "response": 20,
         "declin": 18,
@@ -92621,14 +92365,14 @@
         "send": 10,
         "bill": 10,
         "http": 9,
+        "fable": 9,
         "error": 9,
         "set": 9,
         "work": 9,
         "client": 9,
         "field": 9,
         "keep": 9,
-        "result": 9,
-        "conversation": 9
+        "result": 9
       },
       "word_count": 6006
     },
@@ -104048,8 +103792,8 @@
         }
       ],
       "terms": {
-        "claude": 85,
-        "fable": 37,
+        "claude": 84,
+        "fable": 38,
         "mytho": 26,
         "model": 23,
         "fallback": 16,
@@ -104432,8 +104176,8 @@
         }
       ],
       "terms": {
-        "claude": 53,
-        "opu": 31,
+        "claude": 52,
+        "opu": 32,
         "model": 26,
         "card": 18,
         "platform": 13,
@@ -104457,7 +104201,6 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
-        "about": 5,
         "prompt": 5,
         "system": 5,
         "legacy": 4,
@@ -104466,6 +104209,7 @@
         "default": 4,
         "adaptive": 4,
         "extend": 4,
+        "about": 4,
         "batch": 4,
         "value": 4,
         "amazon": 4,
@@ -104526,8 +104270,8 @@
         }
       ],
       "terms": {
-        "claude": 52,
-        "opu": 31,
+        "claude": 51,
+        "opu": 32,
         "model": 26,
         "card": 18,
         "platform": 13,
@@ -104553,7 +104297,6 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
-        "about": 5,
         "batch": 5,
         "prompt": 5,
         "system": 5,
@@ -104561,6 +104304,7 @@
         "current": 4,
         "default": 4,
         "extend": 4,
+        "about": 4,
         "value": 4,
         "amazon": 4,
         "cardgroup": 4,
@@ -104620,8 +104364,8 @@
         }
       ],
       "terms": {
-        "claude": 48,
-        "opu": 28,
+        "claude": 47,
+        "opu": 29,
         "model": 24,
         "card": 16,
         "output": 13,
@@ -104647,12 +104391,12 @@
         "knowledge": 5,
         "cutoff": 5,
         "jan": 5,
-        "about": 5,
         "batch": 5,
         "prompt": 5,
         "system": 5,
         "current": 4,
         "default": 4,
+        "about": 4,
         "value": 4,
         "cardgroup": 4,
         "overview": 3,
@@ -104714,8 +104458,8 @@
         }
       ],
       "terms": {
-        "claude": 53,
-        "opu": 31,
+        "claude": 52,
+        "opu": 32,
         "model": 25,
         "card": 18,
         "platform": 13,
@@ -104742,11 +104486,11 @@
         "knowledge": 5,
         "cutoff": 5,
         "jan": 5,
-        "about": 5,
         "batch": 5,
         "system": 5,
         "current": 4,
         "default": 4,
+        "about": 4,
         "value": 4,
         "cardgroup": 4,
         "overview": 3,
@@ -105118,8 +104862,8 @@
         }
       ],
       "terms": {
-        "claude": 52,
-        "sonnet": 27,
+        "claude": 51,
+        "sonnet": 28,
         "model": 26,
         "card": 18,
         "platform": 13,
@@ -105144,7 +104888,6 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
-        "about": 5,
         "prompt": 5,
         "system": 5,
         "legacy": 4,
@@ -105154,6 +104897,7 @@
         "adaptive": 4,
         "jan": 4,
         "extend": 4,
+        "about": 4,
         "batch": 4,
         "value": 4,
         "amazon": 4,
@@ -105212,8 +104956,8 @@
         }
       ],
       "terms": {
-        "claude": 53,
-        "sonnet": 27,
+        "claude": 52,
+        "sonnet": 28,
         "model": 25,
         "card": 18,
         "platform": 13,
@@ -105240,7 +104984,6 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
-        "about": 5,
         "batch": 5,
         "prompt": 5,
         "system": 5,
@@ -105248,6 +104991,7 @@
         "current": 4,
         "default": 4,
         "extend": 4,
+        "about": 4,
         "value": 4,
         "amazon": 4,
         "cardgroup": 4,
@@ -105432,8 +105176,8 @@
         }
       ],
       "terms": {
-        "claude": 68,
-        "sonnet": 51,
+        "claude": 69,
+        "sonnet": 52,
         "token": 22,
         "think": 18,
         "model": 16,
@@ -105479,9 +105223,9 @@
         "without": 4,
         "limit": 4,
         "workload": 4,
-        "guide": 4,
         "codegroup": 4,
-        "produc": 4
+        "produc": 4,
+        "safeguard": 4
       },
       "word_count": 1494
     },
