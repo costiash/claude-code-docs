@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-25T03:28:39.059597Z",
+  "generated_at": "2026-08-25T06:16:44.313554Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "b388e190f645d97d9f72a904a1a8bfd156fe76c1a3f5a7147af4233c7bd2d7bd",
+      "sha256": "d675306a2d6bb19691faee880f7ed6313965c83c22ce7daab5baccf2af35ecd8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5856,7 +5856,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md",
       "title": "IAM actions (Claude Platform on AWS)",
       "category": "api_reference",
-      "sha256": "b2ad51115f4545214573f97bd2e5f5cdd770f017740277123cbc1ed122a70489",
+      "sha256": "a5c7eee985411ee4792f20ec12acb43d44253db1dd77b6062851b8545b4fbe4d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7044,7 +7044,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "460a7f6436eee06a45934a7b860f857398738a0086f8aa7c7d14a73e2089f7d2",
+      "sha256": "d769dc2d4bc6264830e5cbefec82c7ed4a13899121dce28fc084a097907ea998",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8166,7 +8166,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/environments.md",
       "title": "Cloud environment setup",
       "category": "core_documentation",
-      "sha256": "4fa66f7a7f2930cd2414e62b41949cb88bb98123c05e3f18788b26b4b829de29",
+      "sha256": "8374f7fda90137f89491006f08bc6fa7378eed7f33d1a0c8b873e4d7fcc25a94",
       "lastmod": null,
       "fetch_status": "ok"
     },

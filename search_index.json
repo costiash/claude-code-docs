@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-25T03:28:41.501162Z",
+  "generated_at": "2026-08-25T06:16:47.523294Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.245",
+          "level": 2
         },
         {
           "text": "2.1.243",
@@ -1511,7 +1515,7 @@
         }
       ],
       "terms": {
-        "fix": 2484,
+        "fix": 2485,
         "session": 1005,
         "now": 916,
         "add": 532,
@@ -1551,7 +1555,7 @@
         "user": 160,
         "setting": 156,
         "subagent": 156,
-        "startup": 153,
+        "startup": 154,
         "silently": 152,
         "text": 150,
         "message": 149,
@@ -1562,7 +1566,7 @@
         "memory": 143,
         "only": 140
       },
-      "word_count": 82772
+      "word_count": 82795
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -75878,20 +75882,20 @@
         "management": 29,
         "claude": 27,
         "authoriz": 27,
-        "workspace": 25,
         "policy": 25,
         "aws": 24,
+        "workspace": 24,
         "rout": 20,
-        "only": 20,
-        "read": 16,
+        "only": 18,
         "iam": 15,
         "platform": 15,
         "console": 15,
-        "api": 14,
+        "read": 14,
         "deni": 14,
         "deny": 14,
         "need": 14,
         "grant": 14,
+        "api": 13,
         "acces": 12,
         "route": 12,
         "manag": 12,
@@ -75908,7 +75912,6 @@
         "allow": 10,
         "agent": 10,
         "webhook": 10,
-        "workspac": 10,
         "inference": 9,
         "batch": 9,
         "content": 9,
@@ -75918,12 +75921,13 @@
         "mutation": 9,
         "session": 9,
         "event": 9,
+        "role": 9,
         "through": 8,
         "map": 8,
         "environment": 8,
         "includ": 8
       },
-      "word_count": 3713
+      "word_count": 3714
     },
     {
       "filename": "docs__en__api__completions.md",
@@ -89729,17 +89733,17 @@
         }
       ],
       "terms": {
-        "claude": 223,
-        "aws": 220,
-        "platform": 99,
+        "claude": 221,
+        "aws": 219,
+        "platform": 98,
         "api": 84,
-        "console": 71,
+        "console": 70,
         "see": 68,
         "anthropic": 64,
         "organization": 53,
-        "workspace": 52,
+        "workspace": 51,
+        "limit": 43,
         "account": 42,
-        "limit": 42,
         "request": 41,
         "key": 40,
         "iam": 40,
@@ -89755,12 +89759,12 @@
         "page": 27,
         "authentication": 26,
         "data": 26,
+        "workspac": 26,
         "acces": 24,
         "sigv": 24,
         "support": 24,
-        "workspac": 24,
+        "yes": 24,
         "sdk": 23,
-        "yes": 23,
         "amazon": 22,
         "note": 22,
         "set": 22,
@@ -89770,9 +89774,9 @@
         "agent": 20,
         "party": 20,
         "action": 20,
+        "spend": 20,
         "inference": 19,
         "header": 19,
-        "spend": 19,
         "title": 18,
         "marketplace": 18,
         "per": 18,
@@ -89780,7 +89784,7 @@
         "rate": 18,
         "step": 18
       },
-      "word_count": 7949
+      "word_count": 7960
     },
     {
       "filename": "docs__en__build-with-claude__compaction.md",
@@ -101892,13 +101896,13 @@
         }
       ],
       "terms": {
-        "environment": 21,
+        "environment": 23,
         "sandbox": 15,
         "session": 14,
         "cli": 11,
         "agent": 10,
         "codegroup": 10,
-        "network": 8,
+        "network": 9,
         "cloud": 7,
         "acces": 7,
         "multifileexample": 6,
@@ -101906,9 +101910,11 @@
         "packag": 6,
         "run": 5,
         "reference": 5,
+        "set": 5,
         "defaultlanguage": 5,
         "install": 5,
         "package": 5,
+        "list": 5,
         "manag": 4,
         "each": 4,
         "start": 4,
@@ -101919,7 +101925,6 @@
         "outbound": 4,
         "tool": 4,
         "allow": 4,
-        "list": 4,
         "card": 4,
         "title": 3,
         "http": 3,
@@ -101933,17 +101938,16 @@
         "share": 3,
         "same": 3,
         "get": 3,
+        "host": 3,
+        "request": 3,
         "beta": 3,
         "header": 3,
-        "set": 3,
         "label": 3,
         "filename": 3,
         "yaml": 3,
-        "field": 3,
-        "pre": 3,
-        "npm": 3
+        "field": 3
       },
-      "word_count": 2016
+      "word_count": 2063
     },
     {
       "filename": "docs__en__managed-agents__events-and-streaming.md",
