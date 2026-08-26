@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-26T15:57:50.242186Z",
+  "generated_at": "2026-08-26T18:47:52.344127Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -488,8 +488,8 @@
       "md_url": "https://code.claude.com/docs/en/best-practices.md",
       "title": "Best practices for Claude Code",
       "category": "claude_code",
-      "sha256": "defa65b9be8f0c7ed96824822644bdb9334a6b6b71f13684ddd6f6995eccf56c",
-      "lastmod": "2026-08-21T17:28:00.305Z",
+      "sha256": "d8634f18e24cbfb1e65f967c0c99ba443c1daa68b7a3099477ecda7b31f8052c",
+      "lastmod": "2026-08-26T17:52:01.441Z",
       "fetch_status": "ok"
     },
     {
@@ -719,8 +719,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "4cbaa03ff4d6a1a096ffc8187aa57ee8857642b3da10a1c8dd1287ad3b26e043",
-      "lastmod": "2026-08-26T00:34:58.327Z",
+      "sha256": "532d531cb94a7a610d9127ee055584cc204f345cc38bbb6689abf1476088d68b",
+      "lastmod": "2026-08-26T17:32:57.186Z",
       "fetch_status": "ok"
     },
     {
@@ -1060,8 +1060,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "32c4fcb81f56eba9c3910380535b50066ebd24eb0eb23acd29b153b4d2c0ccb2",
-      "lastmod": "2026-08-26T00:34:05.349Z",
+      "sha256": "0bc375186f31b339d4cb98190559da072423957f9335328a435570d369265806",
+      "lastmod": "2026-08-26T17:40:29.446Z",
       "fetch_status": "ok"
     },
     {
@@ -1214,8 +1214,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "279dd7dc054bb686426d8af376b9380f5705639bd90a5a1fde8e67cd126062eb",
-      "lastmod": "2026-08-24T23:58:38.621Z",
+      "sha256": "26ca78bc9507b21fd8614fcad26fdea95ea1098464dd2afd6800287194c57fa6",
+      "lastmod": "2026-08-26T16:14:25.465Z",
       "fetch_status": "ok"
     },
     {
@@ -1225,8 +1225,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks-guide.md",
       "title": "Automate actions with hooks",
       "category": "claude_code",
-      "sha256": "00af0e0c868aa63634d1fba1fb7bc2f94c108fd7f0e3fd6b9c5a237c512ca8f0",
-      "lastmod": "2026-08-24T23:58:38.602Z",
+      "sha256": "be224619a0e5cdae391c99aa6f8266771805c6af8a573c513ff2a2c02e12be40",
+      "lastmod": "2026-08-26T16:14:25.456Z",
       "fetch_status": "ok"
     },
     {
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/network-config.md",
       "title": "Enterprise network configuration",
       "category": "claude_code",
-      "sha256": "f1630e2968ba58876c00da71abaa797b040b8b18eabcb3dc12a1c154a2a684c7",
-      "lastmod": "2026-08-24T22:13:27.481Z",
+      "sha256": "6c8db24cf4a7f7dfc97d7f21e2ea925fdc8ba7c358bbe16a365efd9dd1f0b1f7",
+      "lastmod": "2026-08-26T17:40:29.431Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1478,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "b8ca26b4dcd5e836dcb97829ef92828a0bc21cfc1562c439dfde957ce9fc6ccc",
-      "lastmod": "2026-08-25T20:56:20.655Z",
+      "sha256": "b6730978664876586667430ba1211c0c92821a41edec3fe8cb773132ada77dfb",
+      "lastmod": "2026-08-26T17:51:03.339Z",
       "fetch_status": "ok"
     },
     {
@@ -1676,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/security-guidance.md",
       "title": "Catch security issues as Claude writes code",
       "category": "claude_code",
-      "sha256": "9f9a3f9899edbe67f5d53b95ada52aac8b4a719f9a5e47e1d123e3471777f6af",
-      "lastmod": "2026-08-21T22:50:10.984Z",
+      "sha256": "5805edbe465de5277faa6e5972eaaf486ff9fc65695ad06d5e649f6f71105a00",
+      "lastmod": "2026-08-26T17:51:03.333Z",
       "fetch_status": "ok"
     },
     {
@@ -1764,8 +1764,8 @@
       "md_url": "https://code.claude.com/docs/en/server-managed-settings.md",
       "title": "Configure server-managed settings",
       "category": "claude_code",
-      "sha256": "cacf4534ccc6151ee4544237376c7665fad4dc73b371156041cd48defd3788ff",
-      "lastmod": "2026-08-25T20:56:20.655Z",
+      "sha256": "a5dc7874a8267d0556e846cc6088241f92438cb69837ba3efe85c4a8b49e4c53",
+      "lastmod": "2026-08-26T18:29:51.461Z",
       "fetch_status": "ok"
     },
     {
@@ -1830,8 +1830,8 @@
       "md_url": "https://code.claude.com/docs/en/skills.md",
       "title": "Extend Claude with skills",
       "category": "claude_code",
-      "sha256": "8635e0597dc1a135bbdadcf0389cc00d807376d8dd801a0220a4d42f39a3e57e",
-      "lastmod": "2026-08-21T22:50:10.992Z",
+      "sha256": "1f99df74659cc68bc210011e60b1c1701ed6b72b57264b29595aa0d411e66aa8",
+      "lastmod": "2026-08-26T17:52:01.440Z",
       "fetch_status": "ok"
     },
     {
@@ -1907,8 +1907,8 @@
       "md_url": "https://code.claude.com/docs/en/troubleshoot-install.md",
       "title": "Troubleshoot installation and login",
       "category": "claude_code",
-      "sha256": "00ee610707c923d4014190aa678b73475c3cd442322d39d39d36843bbc63a84e",
-      "lastmod": "2026-08-14T19:13:24.634Z",
+      "sha256": "1776718e5d4c21654278ba638d5457e3f0da238b338f3ba4276fb36cd4b068cc",
+      "lastmod": "2026-08-26T18:29:51.431Z",
       "fetch_status": "ok"
     },
     {
@@ -2226,8 +2226,8 @@
       "md_url": "https://code.claude.com/docs/en/workflows.md",
       "title": "Orchestrate subagents at scale with dynamic workflows",
       "category": "claude_code",
-      "sha256": "4dde50ea069671837ace96541553bc7233e2263f44bb42dd7c9c1ceadb63aa93",
-      "lastmod": "2026-08-25T00:56:18.093Z",
+      "sha256": "ee2aa62cdfaab3414684267aff804f9544d877c1e39ca577497fd6b7d205d718",
+      "lastmod": "2026-08-26T17:52:01.435Z",
       "fetch_status": "ok"
     },
     {
@@ -4327,7 +4327,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta.md",
       "title": "Beta (Beta)",
       "category": "api_reference",
-      "sha256": "2c319a666f96b13216bd027dd338c4730b1a594e729eb21706e759142c353337",
+      "sha256": "eba0e5d593c95d542b1216f2807530e8370071bf037a440681cbb67d36cd3116",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4349,7 +4349,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents.md",
       "title": "Agents (Beta)",
       "category": "api_reference",
-      "sha256": "7c5928eec51170589613edfe7c88de17d7a2b1a1e57028d721ff82ac5efecee2",
+      "sha256": "57863b614b25c6459590dc53a75be9d38efd3216840d0e17ae54345bf9307408",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4360,7 +4360,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/archive.md",
       "title": "Archive Agent (Beta)",
       "category": "api_reference",
-      "sha256": "cf3791c21e8b4fd8c2b994ad156bda6a9a13f79b7f603bfd97097243c0c49b87",
+      "sha256": "d79864c2b2c78c14c8f53f74d280d22a2a09173572864db5b5d3f11c2b8063bf",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4371,7 +4371,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/create.md",
       "title": "Create Agent (Beta)",
       "category": "api_reference",
-      "sha256": "90889b09da5e838ce08fe7fd64dcac776accd8e6be9db16a7994a1288b4b566a",
+      "sha256": "2dafc53332b8daf0fe590fd3e1a4a68a96bdd1dcb985136822da56cd18c0307e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4382,7 +4382,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/list.md",
       "title": "List Agents (Beta)",
       "category": "api_reference",
-      "sha256": "527d1851c91f2e7016c9159139ca9298a77d60ee81bf4c991ae9d5db6dd2bed7",
+      "sha256": "2a763002a2287edf4c587f1a4066047269cd9b35586ccd422259a906f5515a84",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4393,7 +4393,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/retrieve.md",
       "title": "Get Agent (Beta)",
       "category": "api_reference",
-      "sha256": "c4f694594bc53eaec62f1d0c8039caf6f76599d3b120e5042279b3e701ac371c",
+      "sha256": "10db5a8eb0350e3dd94e3d20a11ccd2cf4ca406907b8f39597789477774f4818",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4404,7 +4404,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/update.md",
       "title": "Update Agent (Beta)",
       "category": "api_reference",
-      "sha256": "ba8ec71b7938cea9afba87e0113f0e78f8f783b29bdc68954a7eea2cbe0d2610",
+      "sha256": "38a4aa3fc2770108a9fbe8004e5029fc1cc1a101d6b28989b6430ca73d55f045",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4415,7 +4415,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/versions.md",
       "title": "Versions (Beta)",
       "category": "api_reference",
-      "sha256": "7e5fab63582a9af9999751c7409d4cd734703125493fd9579e0d096d5728a0b5",
+      "sha256": "28e8f4e7f701f6ec3ead7ad6e1cd18e5b2643c66c773656c3c6f9efbe6d660a9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4426,7 +4426,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/agents/versions/list.md",
       "title": "List Agent Versions (Beta)",
       "category": "api_reference",
-      "sha256": "8be63017f04204ceb9a1a54f40f6318bfbba1814f1177539978405d9700480c5",
+      "sha256": "25e857df4a182bd75a7f6a7250f847ca222e0fce3e537410362d6bba3f15817b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4437,7 +4437,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployment_runs.md",
       "title": "Deployment Runs (Beta)",
       "category": "api_reference",
-      "sha256": "da839577acf4e879ccee088cee317bc37e8aae29d688642453c9a3f7c81629be",
+      "sha256": "67468199538097eb3e7225df12a6e7599f351e36e1eb47fde48fa9b6c332e162",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4448,7 +4448,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployment_runs/list.md",
       "title": "List Deployment Runs (Beta)",
       "category": "api_reference",
-      "sha256": "9f3db59c27f27bcae7880f36db2fb3e305b13f519cf6ad7e204e98affdc1a099",
+      "sha256": "3d94af2663d6db18485b4e9f824cf758dc3adb2fc5feecc9e7b66609f0b54c52",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4459,7 +4459,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployment_runs/retrieve.md",
       "title": "Get Deployment Run (Beta)",
       "category": "api_reference",
-      "sha256": "72ee3b57bc45d3b54eecc0e1e14c58aa48c03bed527501be7159711f62840477",
+      "sha256": "ddd8e9ef6015c16c52ad34e673b0606607c64da8858ed0419ab691557c4556fe",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4470,7 +4470,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments.md",
       "title": "Deployments (Beta)",
       "category": "api_reference",
-      "sha256": "3b66c9b375db9b35c79d9770c0e7337e825210e62989613f7249b94050076ca0",
+      "sha256": "13d1fea3a2ccf1f4e2dc8e1dc2599e23df654036d2f4aa19b229532c8b7efa8a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4481,7 +4481,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/archive.md",
       "title": "Archive Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "42bd762cc134d0f05200bcbbef2687264bbcbd6adbda27e750c0ce79dfbab599",
+      "sha256": "92b1c3a1e5e45f4daf40b0415f5d9903a739b67c6c33336cb199097aadf2be9e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4492,7 +4492,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/create.md",
       "title": "Create Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "f682cdde8e5f8c7c3383841cf10a329ed4e3c49521605462af887c19840d744b",
+      "sha256": "61e8a3f55481b4c20e3f2a728a4ef148e1531700f356f20a8aed1fef64f246d8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4503,7 +4503,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/list.md",
       "title": "List Deployments (Beta)",
       "category": "api_reference",
-      "sha256": "c1e77843ef8847f33c1dc6217a5750ad949cbe74da22187cb820134e876f9c88",
+      "sha256": "99bf6c743bd20a1142e05d7b63b95ab85a67e7c846cddcbb10f513c95c4251f0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4514,7 +4514,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/pause.md",
       "title": "Pause Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "7a0bb36cf01dab12f1e51479f216d285241880d8a7e106d1478d481eb9623349",
+      "sha256": "acdae576894933057a075e03699119f39aa9f6f0b6e2b399ad7cfdc0da431151",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4525,7 +4525,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/retrieve.md",
       "title": "Get Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "5a883442e3c57977eb0aabbdf7ffeebeeeb92868309368788f92f9c6a911542c",
+      "sha256": "5d1454b1847932db7491942cd00bd6c84724b804226af3b3f88c2abba82473d3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4536,7 +4536,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/run.md",
       "title": "Run Deployment Now (Beta)",
       "category": "api_reference",
-      "sha256": "0c10aa504144ee1db86fd9bf1efa98acbb6c4b2e0a2194d48e240d0eebf1311a",
+      "sha256": "b5133e1bc7d9f4d7f5e2da47a76fa59a25a7735f3778af3eeeb33fb3b4a41eb1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4547,7 +4547,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/unpause.md",
       "title": "Unpause Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "e8aa45a70db135b73a7ac1dc2b5c594d928fbc5f2ec33c0b05373e7640403b33",
+      "sha256": "5fc399bbe2e9ed585f87f19b79332ef01b4886ce90e49e0e6ba892136a62e53d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4558,7 +4558,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/deployments/update.md",
       "title": "Update Deployment (Beta)",
       "category": "api_reference",
-      "sha256": "97a15f4b8fc12a3f8d56b0727b24fc1fdfbf210ec5c4d02955a8301d79bd66e8",
+      "sha256": "d0977388cc2a9999639e58e07af777851ba0a0c757341356e526da01eaf7a2cd",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4569,7 +4569,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams.md",
       "title": "Dreams (Beta)",
       "category": "api_reference",
-      "sha256": "53d0e3db2f1230799fa0a6e6adb89aa7f795f4e6c03d8928dd257affc8f148e1",
+      "sha256": "6e51c9e1aaa2043f53a5840c73455ca01ea862e9421e1c7e95a741e0cd865387",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4580,7 +4580,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams/archive.md",
       "title": "Archive a Dream (Beta)",
       "category": "api_reference",
-      "sha256": "5e371367d4cb33e1223c898fc2f39ed558540b5ff23de9f3ae14839c8251535a",
+      "sha256": "e4724ff124d8b067d5132f0b437c56ef3a36bb3e29084ef0c669b41c521903fe",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4591,7 +4591,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams/cancel.md",
       "title": "Cancel a Dream (Beta)",
       "category": "api_reference",
-      "sha256": "021fe2813299d9c51309433c7a8815849b9746a071ba3ef5311c483156c62408",
+      "sha256": "87e73cf4a003d76fb1e77073fc060d7f3af05a735f539edae36db839f6353282",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4602,7 +4602,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams/create.md",
       "title": "Create a Dream (Beta)",
       "category": "api_reference",
-      "sha256": "ce1c7449a0013b810bcff386384875dc21b3cd571eec3ccd8cd50ce32c826d06",
+      "sha256": "d5aa8fe5a754aa7820b7bb034f7527da40d6656945114d5fbddba065e3d2bc98",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4613,7 +4613,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams/list.md",
       "title": "List Dreams (Beta)",
       "category": "api_reference",
-      "sha256": "6cd53175d78d61e9bcfc2ba35a2e2e631a842ef2aacae7f762adf2dad9b362f5",
+      "sha256": "7da3eede58f15d871d1fcce645ea8954b47733eb5a2f0ddb5a102cf1801df26b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4624,7 +4624,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/dreams/retrieve.md",
       "title": "Get a Dream (Beta)",
       "category": "api_reference",
-      "sha256": "3199992d74f0d7858702057af8d7af85bc0adffdef3e673b2977cda143f6d85b",
+      "sha256": "9eca5f46fa2e94dfaeb9b815246878f3bc3fecf72e936b581638a1b2edf22328",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4635,7 +4635,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments.md",
       "title": "Environments (Beta)",
       "category": "api_reference",
-      "sha256": "bc68465287b37fce8338057911a231f37f63591039110450ddf782c8b7d02b32",
+      "sha256": "82a83dd40fac5b3546d94da525e6d0d497e8a82a215efc607e8337adebaab675",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4646,7 +4646,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/archive.md",
       "title": "Archive Environment (Beta)",
       "category": "api_reference",
-      "sha256": "ff605c0dbc3ecbb668f4c88a79898c9de5b936efb75722bf1f194fbb8a0c11fc",
+      "sha256": "1c29283860c0ad6cf7be42e269c907097c32ad32dd9eff488ae0412840cd902c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4657,7 +4657,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/create.md",
       "title": "Create Environment (Beta)",
       "category": "api_reference",
-      "sha256": "8a0f360f5a2cc1b897a2e05e98e2e9846abffcf42f710369cde3f50b454295d7",
+      "sha256": "e40d3cf6a686ddac29faa457c6a971a109b3140c97bc2c75134ca0c8a9ec37cc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4668,7 +4668,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/delete.md",
       "title": "Delete Environment (Beta)",
       "category": "api_reference",
-      "sha256": "6642445c148de39dbfee857205b5b66feb2631a7c6b4ca49552054a5b7d65831",
+      "sha256": "11acb92ae33934f002649f8091b21619633222ec23f3381dd456faccec871bb4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4679,7 +4679,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/list.md",
       "title": "List Environments (Beta)",
       "category": "api_reference",
-      "sha256": "0cde47b4073317df53fb6c5c5ba40e79eab23b468fd9148c2e686fcfb87a003d",
+      "sha256": "502a1d34635247ca18a889ddffbe768eb947b7430d0749843a4b7e91132f5618",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4690,7 +4690,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/retrieve.md",
       "title": "Get Environment (Beta)",
       "category": "api_reference",
-      "sha256": "9c3fe8d633d58b7cf7a9d17e20c69bb0ed0132e4af938960ba76bef27720d901",
+      "sha256": "6c8d854cfef202ca9a1259f14e5838a27d106c56346ba68639644e79165c60ec",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4701,7 +4701,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/update.md",
       "title": "Update Environment (Beta)",
       "category": "api_reference",
-      "sha256": "16aa2ce845bf0dae74e44be4cfb3024ea770d3bd76ed90af2bb75b28c6847144",
+      "sha256": "1fe6df4fa3626acb124c5e6fe938613ac9ed3f4679b615dd4622576d384912f6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4712,7 +4712,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work.md",
       "title": "Work (Beta)",
       "category": "api_reference",
-      "sha256": "80d38c2eea7f517f517317e3cbf18bd8350428b344cd5747c0e1e544d59b76af",
+      "sha256": "dc7f0799752f4d7ee36bee985495cded147cb09524c4abf18d10d7671ad07fdd",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4723,7 +4723,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/ack.md",
       "title": "Acknowledge Work (Beta)",
       "category": "api_reference",
-      "sha256": "46163c01e0a10b358b1ec692dd41347e124821c941706c1db9d753dd702b8b17",
+      "sha256": "420643fc21a5ace41b8bba31ef554804ab03c1215444ad174f2d27177ea5ac49",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4734,7 +4734,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/heartbeat.md",
       "title": "Record Heartbeat (Beta)",
       "category": "api_reference",
-      "sha256": "c832516c56140bff1e21a241875eda509a3e113fe3f48689bfbd280bdedca3e2",
+      "sha256": "44773e8dc09e9a27ae940f739f5a4b1a734742eaa2c3a0547b242c6870242b60",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4745,7 +4745,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/list.md",
       "title": "List Work Items (Beta)",
       "category": "api_reference",
-      "sha256": "a256aea5c3a3b876f413a45cf30136c6c3ff28fe48c944bcf1a9cf9abbeb08fd",
+      "sha256": "98d3735f4442dc57821a179a8c611166d3ca4e122fad6d8f30ac18ed00187bba",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4756,7 +4756,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/poll.md",
       "title": "Poll for Work (Beta)",
       "category": "api_reference",
-      "sha256": "ee447b5702596e44425119abec3a209a163006c29a4ac096ba16522a1dcc9384",
+      "sha256": "a524f01a61da639e64668dc90622a6671019f9e4b52054026c2fa82675889bd3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4767,7 +4767,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/retrieve.md",
       "title": "Get Work Item (Beta)",
       "category": "api_reference",
-      "sha256": "f5958e959b81ed1fb14653b3dfd5d9e42ee3259ce32ab4dea68a8d920cdebeae",
+      "sha256": "a8c741fa5fd362773caf6f73128bda0297d50b7615b2ff523da89cceda753078",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4778,7 +4778,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/stats.md",
       "title": "Get Queue Statistics (Beta)",
       "category": "api_reference",
-      "sha256": "c9bc76253c437f6338aef45c08d5ee2d60893c6918d29dfe7471313b56793b8e",
+      "sha256": "ee5d55d129efb617fb0478e0e2934dc2043be07c064737d165a3d1958ed234da",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4789,7 +4789,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/stop.md",
       "title": "Stop Work (Beta)",
       "category": "api_reference",
-      "sha256": "906db0cf67bfc79b9a20c09591a6f7fa6ffff07d74b9a6e61672f7819a2cd103",
+      "sha256": "d80e92a144b6d62205fc5ee0e6c660f73426cab6d8d30da1f9b0505907373ed5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4800,7 +4800,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/environments/work/update.md",
       "title": "Update Work Item (Beta)",
       "category": "api_reference",
-      "sha256": "dfa4f08382ad511001062c7298377fcfac296deda8502f0ab0847786deffd7c2",
+      "sha256": "40de75b48ea94f7cd18d5a7ff064ed43ce4a98fb862840a87a4af976fd7fda8c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4811,7 +4811,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files.md",
       "title": "Files (Beta)",
       "category": "api_reference",
-      "sha256": "35694404507c9d8213dfd34be7a47356dfd47f114bd47c472d54d7f902f98e62",
+      "sha256": "9510101981039872d1f7a9533575579f80031c52579f8982ec4944653f3f1614",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4822,7 +4822,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files/delete.md",
       "title": "Delete File (Beta)",
       "category": "api_reference",
-      "sha256": "336458e1cd4f10e22e293271557054d81427d8509eb86801b4f6b3ac0e4f52fb",
+      "sha256": "b6c0e1319cc7855ebaccba3eb9142fb6c76dbc666f9ddcc66314c3bafcf3c76c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4833,7 +4833,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files/download.md",
       "title": "Download File (Beta)",
       "category": "api_reference",
-      "sha256": "4290baff8a5696a0c2bb9491ed7977f0222755bd13a7f50cfe1cc6f79a250cda",
+      "sha256": "9aaed7df63e48df322f1133368de6b9ff722ebb94914f0de4025fb77531f33cd",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4844,7 +4844,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files/list.md",
       "title": "List Files (Beta)",
       "category": "api_reference",
-      "sha256": "21cf0668e64de11dc93d0401ccebb2255f9f5db81db1cfcf8cd3f41949acb1e4",
+      "sha256": "8a4aab9d498f4691d7036e7cf975eca45dfd9555a8f2d59435e811f8757a7d47",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4855,7 +4855,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files/retrieve_metadata.md",
       "title": "Get File Metadata (Beta)",
       "category": "api_reference",
-      "sha256": "e9b78d9c429103098daddcff409b920131d3bf0acb54f789561cbf6e7be917a4",
+      "sha256": "3a020ad263a183d66cd095ea5c6b80908bdbcf653670d6c12d784a22a78df696",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4866,7 +4866,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/files/upload.md",
       "title": "Upload File (Beta)",
       "category": "api_reference",
-      "sha256": "d178a57aa7709547d9c2d4b2cee410436119c19468d5ca1b1a21989d74663c60",
+      "sha256": "7d33ad33003bdee3ef32622fe87a0fa7a4dcba4b482b42bef525750aaa5ef4e1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4877,7 +4877,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores.md",
       "title": "Memory Stores (Beta)",
       "category": "api_reference",
-      "sha256": "90d7d82f06b8f64467ae70b9c15e6d89c78f3bff4fd5a808b89a7b70de2c8595",
+      "sha256": "94bc551aeb803da9acc052f3e96633b55302340bbf4e21fda4a89e43a04fad55",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4888,7 +4888,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/archive.md",
       "title": "Archive a memory store (Beta)",
       "category": "api_reference",
-      "sha256": "644ab7914dbe2ffb94e2ba26f5a386ef5c1ecdaa3738cae81cd153c310f8cb9d",
+      "sha256": "57780de8f54b521a662e81eacbf8dfcec98e4fa3a29ecf1d1c0db8a26c796cde",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4899,7 +4899,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/create.md",
       "title": "Create a memory store (Beta)",
       "category": "api_reference",
-      "sha256": "9e3b8b74821c678fe012315e0df82776a6c9580c176fa29ced43d3d41f3770c7",
+      "sha256": "063898aff386d8459e080790562832aa015897521d2a1f12b0496623ca55f54f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4910,7 +4910,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/delete.md",
       "title": "Delete a memory store (Beta)",
       "category": "api_reference",
-      "sha256": "3356bacb5902062c2ff0bbb4fe5c580f6076fc3ae3c911478f58beec2d6283a6",
+      "sha256": "8442e1bff6d102b992ab301d44522c72e1718ace6445a52c492eeadf6b51787f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4921,7 +4921,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/list.md",
       "title": "List memory stores (Beta)",
       "category": "api_reference",
-      "sha256": "4dacbb5ce607fca7f85a3a733f4636073442e8e811d1f6546fe79b878899b37c",
+      "sha256": "441abbc7523b3b9c37830138cc20277810f6094726d7b661d7815f113082e8a4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4932,7 +4932,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories.md",
       "title": "Memories (Beta)",
       "category": "api_reference",
-      "sha256": "05f415892a78c3a227e5676f2a1e9da516e0df1c592a9611990898f4b1b0b198",
+      "sha256": "aaa17c3fb1ec61136e7df4220ab09c833cc1a72943d79985c2dabd6c641c862b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4943,7 +4943,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories/create.md",
       "title": "Create a memory (Beta)",
       "category": "api_reference",
-      "sha256": "76929419422b185486f1266e952af3c8de8d4462e129b891d853c714807a817f",
+      "sha256": "44668474d331456c54d08bdcc08683f4d04d0c806689da1db4ce34a5573f7bc6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4954,7 +4954,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete.md",
       "title": "Delete a memory (Beta)",
       "category": "api_reference",
-      "sha256": "84abe378baf4df98195536e39833ab895e897be735dc41e4996fbd26f503255d",
+      "sha256": "28b894e117202b8ec5656b2aab37a1caf21095429e10de1cac1113791c45308a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4965,7 +4965,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list.md",
       "title": "List memories (Beta)",
       "category": "api_reference",
-      "sha256": "f990f8a75b1ecb9aa17e75597e50cf7483280d6cd179ed79112aa259d25bc32c",
+      "sha256": "cee259c1796a8f18a2e4735f23686cd613079d98273c7b50169f6eb07399ac3c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4976,7 +4976,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve.md",
       "title": "Retrieve a memory (Beta)",
       "category": "api_reference",
-      "sha256": "709a292ee3c1e22b98a1699a4d466b49fe70f6e808bd99bea15d08eb858847c8",
+      "sha256": "f52d03958bdf1c9f0446d219fb9e58a9b5001c0c5e47304d6dc06f4c19b134b0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4987,7 +4987,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update.md",
       "title": "Update a memory (Beta)",
       "category": "api_reference",
-      "sha256": "777e9780991ad7bae3034201b60c0ff4b9cb704d5920960998eb35deba6d1858",
+      "sha256": "fe71c675eb0736df259a73368b846f2dc51cb4063ea5c26f3135f1b805658404",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -4998,7 +4998,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions.md",
       "title": "Memory Versions (Beta)",
       "category": "api_reference",
-      "sha256": "e5659fd3a8f9340488110d2f5d74344b87e7cf9bb26d46967a0bdb3f64b32d45",
+      "sha256": "11c094fe87c2ee7375d1d57206a3db14a515a9fe1cc59199d1c469623973abfb",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5009,7 +5009,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list.md",
       "title": "List memory versions (Beta)",
       "category": "api_reference",
-      "sha256": "b5ec217723d16e9d0ceec0dd68cc910984d5d44cfbd6e4d857020a2a99f1d8d6",
+      "sha256": "44eebe661245d814f25edb005246eee5b00c8d07aa6dc4bb1602df7ad60416f5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5020,7 +5020,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/redact.md",
       "title": "Redact a memory version (Beta)",
       "category": "api_reference",
-      "sha256": "cd9591e21e79d4879b972715965cd6526bddb0daebd2f3cf9678d42c77865863",
+      "sha256": "e49e005aeb4830a141c529989ee6440c1519c4ed599cf4ba3c162f44d903862a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5031,7 +5031,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/retrieve.md",
       "title": "Retrieve a memory version (Beta)",
       "category": "api_reference",
-      "sha256": "ec7f2f87a9a960caccafa13e76741ccdb14681402d8d217ba7d851a7311584b6",
+      "sha256": "ab3b8d20668fd66e9ed04859bccea4e85512c1d10f21de7260a6a6027b603df0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5042,7 +5042,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve.md",
       "title": "Retrieve a memory store (Beta)",
       "category": "api_reference",
-      "sha256": "a9b8cb2b895bcccaf00b4e457f5d5c6397a9ef1f02768fb4be526f26c184103a",
+      "sha256": "4b459f4aad4a16298eb6ac4b43762d265bb42ce64c1df9a078033e50651c0f8f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5053,7 +5053,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/memory_stores/update.md",
       "title": "Update a memory store (Beta)",
       "category": "api_reference",
-      "sha256": "d464362701627e8c603e9d0ce4fd805fc92974c0b265eb2d83a3a3857bdad8ba",
+      "sha256": "6875f800093326844779c881d4bad83c615f6adeb5ec4eb2ce1d708d477268b2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5064,7 +5064,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages.md",
       "title": "Messages (Beta)",
       "category": "api_reference",
-      "sha256": "8870e3b75cc0692ec71dec8f318d7bbbc25f12b63524633680086cc9949926fe",
+      "sha256": "b142d5509e6b294a40da4abfd77e48d2ff7a0d26827352b68899a1b3c9f1095d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5075,7 +5075,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches.md",
       "title": "Batches (Beta)",
       "category": "api_reference",
-      "sha256": "a80ae942c3b00ccc813e1eca7b145cb22e618034d5c8da3c18dd3961e5834958",
+      "sha256": "41f57319e354681806aaf672c4e95403a23531ae9283b817ac7efa4a33de7719",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5086,7 +5086,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/cancel.md",
       "title": "Cancel a Message Batch (Beta)",
       "category": "api_reference",
-      "sha256": "355702ed1157a3335a7f8fce6fb9496ac8e39c0bf67dd8544aa36628b7928891",
+      "sha256": "6690bd666d3c3b7f0fcca395de0f74bb93198dc5f3bb8fe700ed0d74f7726bc1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5097,7 +5097,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/create.md",
       "title": "Create a Message Batch (Beta)",
       "category": "api_reference",
-      "sha256": "499c612557c0736f8a729d2bc7c6c2bd12d0c3cf0694975d166607102c00412a",
+      "sha256": "f152272a15c6a19ff0e18a9858930b67500235826394d96f9832f3342dcf4463",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5108,7 +5108,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/delete.md",
       "title": "Delete a Message Batch (Beta)",
       "category": "api_reference",
-      "sha256": "766ccab02f2b7fb096f74b2a4127d01b40928a29a6ad730f604cf437e6c25c6f",
+      "sha256": "cc52df006079820d3da43a02a9977c29c33e161d2a3c18ad8a49a34bb8a0363e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5119,7 +5119,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/list.md",
       "title": "List Message Batches (Beta)",
       "category": "api_reference",
-      "sha256": "72019d8e58edd8f0bd59722452ba4c0ab9ce95990b0b4f7b935a9ee84ba60cbd",
+      "sha256": "94ea88cc7ef470128b251f7e5b05fa5e8324cc6d48124bdd970915876c85b23d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5130,7 +5130,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/results.md",
       "title": "Retrieve Message Batch results (Beta)",
       "category": "api_reference",
-      "sha256": "45ab18826ecc14779e0836c1bb4a0be4c22fabe91866b54a434afec50faed4a3",
+      "sha256": "62ca01f0bcf2decb208aa16b4e4952c61214847c796ad4a3c6e83f59f6299004",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5141,7 +5141,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/retrieve.md",
       "title": "Retrieve a Message Batch (Beta)",
       "category": "api_reference",
-      "sha256": "7757ccd39b3fbb01730401e0cca958433527bda29cc5327b739d8d89ac882c25",
+      "sha256": "68ce51bfd2fe3a7b5107e149e1ce2c3e978f0689c2202dd47bc04a826fe9bdba",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5152,7 +5152,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/count_tokens.md",
       "title": "Count tokens in a Message (Beta)",
       "category": "api_reference",
-      "sha256": "dcae7fa3ba638166069ef54b6610c84a88a3d5b45c02d4cc44957a1dbdee1b5d",
+      "sha256": "54834836b3e6d4d2b92c78178a84e5c409ef0b341d04ad1c84011317ab89885a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5163,7 +5163,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/messages/create.md",
       "title": "Create a Message (Beta)",
       "category": "api_reference",
-      "sha256": "9346fc904819b2e368d497344ad7fc730d9d68844e0156a64fc6e195fd0dbd8d",
+      "sha256": "af7660172cb21c51aef854876cb91213cb438097c41c396f9195ef7801c162b1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5174,7 +5174,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/models.md",
       "title": "Models (Beta)",
       "category": "api_reference",
-      "sha256": "5b412eb04a384cc17b874f3af4623b3bbff50db832f28386919dc842ccb5c660",
+      "sha256": "0112b63e12047445f069ccbc95b904715035b4772e5297ba13f427563b1afd57",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5185,7 +5185,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/models/list.md",
       "title": "List Models (Beta)",
       "category": "api_reference",
-      "sha256": "10405373610d5db64db15dd982e81e84caf97d2ca1be01b22e415437c88884fc",
+      "sha256": "5c99b9e67021c76f494ca1a327407b2052a3e7a79f57c20c82ba2298e9eccab6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5196,7 +5196,799 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/models/retrieve.md",
       "title": "Get a Model (Beta)",
       "category": "api_reference",
-      "sha256": "ccb92b551a017f9ee5cf8e72d1e1765b09a183f614eabdc4194cca0a9af610fe",
+      "sha256": "f22816c98fc6e58aa2418c99bd2d23cdccd90d641b17f2fc44e8b9758a339d7a",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization",
+      "filename": "docs__en__api__beta__organization.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization.md",
+      "title": "Organization",
+      "category": "api_reference",
+      "sha256": "164cdab2eebb0f6b54914c12cb315a47fa2aae8a1b4b13c51e4e808b4bfe127d",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/api_keys",
+      "filename": "docs__en__api__beta__organization__api_keys.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys.md",
+      "title": "API Keys",
+      "category": "api_reference",
+      "sha256": "a0581b677fc8eb00e6633b6f4d8d18827fd4f35b1561afab46c857a987cb051f",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/api_keys/list",
+      "filename": "docs__en__api__beta__organization__api_keys__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/list.md",
+      "title": "List API Keys",
+      "category": "api_reference",
+      "sha256": "f667925adbe69b48135773b0b10692d163f4906fa75d46da1446433da478c121",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/api_keys/retrieve",
+      "filename": "docs__en__api__beta__organization__api_keys__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/retrieve.md",
+      "title": "Get API Key",
+      "category": "api_reference",
+      "sha256": "3af11b0f601c9dcdc08463ea2a9919ff0b8570b9be23ed9371a0f72d57a86ba3",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/api_keys/update",
+      "filename": "docs__en__api__beta__organization__api_keys__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/update.md",
+      "title": "Update API Key",
+      "category": "api_reference",
+      "sha256": "8d7ece478ad46e3c425f957abfd5e0e734892585866dcd36cf88e96662572f32",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys",
+      "filename": "docs__en__api__beta__organization__external_keys.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys.md",
+      "title": "External Keys",
+      "category": "api_reference",
+      "sha256": "11002cdfa1dd0d2fcec33ae7e6fb77b99ffca506228ded6103e864e435c36780",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/create",
+      "filename": "docs__en__api__beta__organization__external_keys__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/create.md",
+      "title": "Create External Key",
+      "category": "api_reference",
+      "sha256": "a83100bdd7e79c96cacb8fef66fd55a6e7f740dc587a842a2b0cb123c594748c",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/delete",
+      "filename": "docs__en__api__beta__organization__external_keys__delete.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/delete",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/delete.md",
+      "title": "Delete External Key",
+      "category": "api_reference",
+      "sha256": "595bd3cecaa78087eda762b04b41e156a6be69468e5631f15948c28363f43ca9",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/list",
+      "filename": "docs__en__api__beta__organization__external_keys__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/list.md",
+      "title": "List External Keys",
+      "category": "api_reference",
+      "sha256": "c754ccbf73fe623118850951862ba440bbd9e28eb4feada3eb785b3764d8e4a9",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/retrieve",
+      "filename": "docs__en__api__beta__organization__external_keys__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve.md",
+      "title": "Get External Key",
+      "category": "api_reference",
+      "sha256": "248368edb4c65ff5df2a8f51e999990999d25ac1e74d1fab9b4eb0c286c9140c",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/update",
+      "filename": "docs__en__api__beta__organization__external_keys__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/update.md",
+      "title": "Update External Key",
+      "category": "api_reference",
+      "sha256": "6861503cb25f49746330a2af7f67936ac917b560cfce86ca01876aa211d95fec",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/external_keys/validate",
+      "filename": "docs__en__api__beta__organization__external_keys__validate.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/validate",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/validate.md",
+      "title": "Validate External Key",
+      "category": "api_reference",
+      "sha256": "3db5ab200bf25347d10a87e080d00ee871d54bc193bb7d114ed249cbec428fa0",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation",
+      "filename": "docs__en__api__beta__organization__federation.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation.md",
+      "title": "Federation",
+      "category": "api_reference",
+      "sha256": "574cf31643c8e4b1b48f9f29ee418d65e65c1c9a06d1c1398b85382270b0c01b",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers",
+      "filename": "docs__en__api__beta__organization__federation__issuers.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers.md",
+      "title": "Issuers",
+      "category": "api_reference",
+      "sha256": "6fe787015cc1807e5443d8b03713e89e363ea13e74fba1c3d2c23652ca09f004",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers/archive",
+      "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/archive",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/archive.md",
+      "title": "Archive Federation Issuer",
+      "category": "api_reference",
+      "sha256": "a9d564cf3027621b455281d2b98b297a653419be70b2727f962f44812222a303",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers/create",
+      "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create.md",
+      "title": "Create Federation Issuer",
+      "category": "api_reference",
+      "sha256": "149e0fc37ed2f12a4a6b9e1c22322e47a0be0ea4f1b71405a738af8af96f88b7",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers/list",
+      "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/list.md",
+      "title": "List Federation Issuers",
+      "category": "api_reference",
+      "sha256": "f7decc00591e9d2f1417c87c74e33f1c0c09387661112a58dc42c6a5d0047f02",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers/retrieve",
+      "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/retrieve.md",
+      "title": "Get Federation Issuer",
+      "category": "api_reference",
+      "sha256": "761b799925a3b60cfbfabd29caebd0f898c376f05e6d9c20255232056feb3fe5",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/issuers/update",
+      "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/update.md",
+      "title": "Update Federation Issuer",
+      "category": "api_reference",
+      "sha256": "03021a73838aac4beab2d1466f6cc371b6e939d62991183034001d8d3fe62b48",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules",
+      "filename": "docs__en__api__beta__organization__federation__rules.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules.md",
+      "title": "Rules",
+      "category": "api_reference",
+      "sha256": "fb373b6c6da3147f714ac3a490c7bee3f4ab69f327873b84e74e1a6bb4d854c2",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/archive",
+      "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/archive",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/archive.md",
+      "title": "Archive Federation Rule",
+      "category": "api_reference",
+      "sha256": "fc1e7dce1636a5b59c7bc2bfc41d27c49bc1d8bf56c33b8801309b4a7bbff84c",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/create",
+      "filename": "docs__en__api__beta__organization__federation__rules__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create.md",
+      "title": "Create Federation Rule",
+      "category": "api_reference",
+      "sha256": "46d612f4a64409a76ef368abf8329d2e3ee33fcb4ef937fa9c959b353b390fd0",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/list",
+      "filename": "docs__en__api__beta__organization__federation__rules__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/list.md",
+      "title": "List Federation Rules",
+      "category": "api_reference",
+      "sha256": "5d4d36c74e109e3f2d38c1165f3fc047d7a876d8dfca48a2d6404c1d71c48cfb",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/retrieve",
+      "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/retrieve.md",
+      "title": "Get Federation Rule",
+      "category": "api_reference",
+      "sha256": "aad26091422c2e82af976c55a3eadfc9183a0085a1fe5dfb7fd36fa2bdb880bd",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/update",
+      "filename": "docs__en__api__beta__organization__federation__rules__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update.md",
+      "title": "Update Federation Rule",
+      "category": "api_reference",
+      "sha256": "bb0d386047c7d0f992695b43b29367decd8aac5a566333543e2bb388e8781797",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/workspaces",
+      "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces.md",
+      "title": "Workspaces",
+      "category": "api_reference",
+      "sha256": "dd9fecf0bb29aea1372c60707b7708739d1b9b7eb5ea1c7653e14c9d96298659",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/workspaces/add",
+      "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/add",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/add.md",
+      "title": "Add Federation Rule Workspace",
+      "category": "api_reference",
+      "sha256": "be6286d210e053850a11042e649fc3bc20c26d75b13c4bbcff545f2a90cb1d70",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/workspaces/list",
+      "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/list.md",
+      "title": "List Federation Rule Workspaces",
+      "category": "api_reference",
+      "sha256": "6a9f12b08602fa0adad589cb8c62d6bac4414a30de32d489676330ad964f48bb",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/federation/rules/workspaces/remove",
+      "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/remove",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/remove.md",
+      "title": "Remove Federation Rule Workspace",
+      "category": "api_reference",
+      "sha256": "203a4343d179ecd5068cae12001209290a77efa1f1489b6c8e4658cf3c67cb14",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/invites",
+      "filename": "docs__en__api__beta__organization__invites.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/invites",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/invites.md",
+      "title": "Invites",
+      "category": "api_reference",
+      "sha256": "89329dda310c70dfa08ac466073a98aa684cb808b8834eb73df336b98793aca5",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/invites/create",
+      "filename": "docs__en__api__beta__organization__invites__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/invites/create.md",
+      "title": "Create Invite",
+      "category": "api_reference",
+      "sha256": "bfbc4c895780b80767d2d2d6fa7b2fcfb72496667419f3a3b12a90cc0af15e1e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/invites/delete",
+      "filename": "docs__en__api__beta__organization__invites__delete.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/delete",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/invites/delete.md",
+      "title": "Delete Invite",
+      "category": "api_reference",
+      "sha256": "83ae545e676eea1ed6bc93f704401370a16160511ee7cf49c200d48d4e770ac4",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/invites/list",
+      "filename": "docs__en__api__beta__organization__invites__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/invites/list.md",
+      "title": "List Invites",
+      "category": "api_reference",
+      "sha256": "611d23fcf3c97614440e2864498fe6b4ddb3be18ff6b616ece147a8155385325",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/invites/retrieve",
+      "filename": "docs__en__api__beta__organization__invites__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve.md",
+      "title": "Get Invite",
+      "category": "api_reference",
+      "sha256": "b0fe9458ac360679238f7d86ca3ddaff29c9d3c11ebc3ba141fc32e19b6621df",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/rate_limits",
+      "filename": "docs__en__api__beta__organization__rate_limits.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits.md",
+      "title": "Rate Limits",
+      "category": "api_reference",
+      "sha256": "f12f607676e539193d6a2e3d4cd6b9e3b5ee10f9c5cf0023651c9d075b7aef50",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/rate_limits/list",
+      "filename": "docs__en__api__beta__organization__rate_limits__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits/list.md",
+      "title": "List Organization Rate Limits",
+      "category": "api_reference",
+      "sha256": "72c26f06d70cd07c8e69310921f7c670f1d15aa2cfad8766529b61c5a5025cf7",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/retrieve",
+      "filename": "docs__en__api__beta__organization__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/retrieve.md",
+      "title": "Get Current Organization",
+      "category": "api_reference",
+      "sha256": "8cf57b8e06dcc897d4439e9809e6b2fe9ec2ef89b341185dbb9f8f1007286fae",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts",
+      "filename": "docs__en__api__beta__organization__service_accounts.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts.md",
+      "title": "Service Accounts",
+      "category": "api_reference",
+      "sha256": "8dd91cf5b3929dd11ebfbfe9127e517749fbf49028fbbf3231b0b941374762be",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/archive",
+      "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/archive",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/archive.md",
+      "title": "Archive Service Account",
+      "category": "api_reference",
+      "sha256": "c2197dc5246a84090b319be84c4037b2996f949645aa2a7fcf063925bea05439",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/create",
+      "filename": "docs__en__api__beta__organization__service_accounts__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/create.md",
+      "title": "Create Service Account",
+      "category": "api_reference",
+      "sha256": "0d8d4380bef3b13683bbe7c196e080f1014468c82eaeff6842b356e92027c2a4",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/list",
+      "filename": "docs__en__api__beta__organization__service_accounts__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/list.md",
+      "title": "List Service Accounts",
+      "category": "api_reference",
+      "sha256": "694ec802dbc41f0da9f5bbfcef92fc9aa7d46f6ed54eccac0d926f4df599aa61",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/retrieve",
+      "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/retrieve.md",
+      "title": "Get Service Account",
+      "category": "api_reference",
+      "sha256": "4aa8fb2400e09cbb5b79f2eab10916b5beb59cebbdf0eeee3f9398bb3a91f422",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/update",
+      "filename": "docs__en__api__beta__organization__service_accounts__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/update.md",
+      "title": "Update Service Account",
+      "category": "api_reference",
+      "sha256": "3efba23cacb4b0de306264abbc39a2483f975fa1fb17d5d9cd4dd03b85ea3ffc",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/workspaces",
+      "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces.md",
+      "title": "Workspaces",
+      "category": "api_reference",
+      "sha256": "81bac26989ee5b14e9dd25737f2e6bea6c01fa2c27aa5354a831f286b0d6fd33",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/workspaces/add",
+      "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/add",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/add.md",
+      "title": "Add Workspace To Service Account",
+      "category": "api_reference",
+      "sha256": "d153a23c54484ecc2a3e9f75a20c8119580500d05af101cc89e0eb939d435ad2",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/workspaces/list",
+      "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/list.md",
+      "title": "List Workspaces For Service Account",
+      "category": "api_reference",
+      "sha256": "6fa133e4d802ea408ddebfaeba93d5021b281961520a43520143c0cf73dd9b13",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/service_accounts/workspaces/remove",
+      "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/remove",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/remove.md",
+      "title": "Remove Workspace From Service Account",
+      "category": "api_reference",
+      "sha256": "ee3c3449d8f1c7d1e20d83a6a275c75fb193ef9a2ea70ada8799d7bd38517fd0",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/users",
+      "filename": "docs__en__api__beta__organization__users.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/users",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/users.md",
+      "title": "Users",
+      "category": "api_reference",
+      "sha256": "6b7038d800adb5fe6241eea544117ab39f1fe82840d06e913a0b2139f2c40ac4",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/users/list",
+      "filename": "docs__en__api__beta__organization__users__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/users/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/users/list.md",
+      "title": "List Users",
+      "category": "api_reference",
+      "sha256": "a68cad64ca481597d3e16f16dcd358390fecab16aa41d2c9518930fed87090f0",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/users/remove",
+      "filename": "docs__en__api__beta__organization__users__remove.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/users/remove",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/users/remove.md",
+      "title": "Remove User",
+      "category": "api_reference",
+      "sha256": "3d3550735db23eeb97a264918779ac5b343b87872b2780e5d2763c46ab3e823f",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/users/retrieve",
+      "filename": "docs__en__api__beta__organization__users__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/users/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/users/retrieve.md",
+      "title": "Get User",
+      "category": "api_reference",
+      "sha256": "8b4a796e1fdc4ecf71d21ef2e3413251c8d17c5a5d991e84563b3774de74661f",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/users/update",
+      "filename": "docs__en__api__beta__organization__users__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/users/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/users/update.md",
+      "title": "Update User",
+      "category": "api_reference",
+      "sha256": "f01392be981edbc85b2cfdf7b08579a5aed0873d81b8a97e5160a8ed73be2c12",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces",
+      "filename": "docs__en__api__beta__organization__workspaces.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces.md",
+      "title": "Workspaces",
+      "category": "api_reference",
+      "sha256": "0a43fcdf9452d852169adcc5f28f9ff6270efd46ddb410c4c1d1039d398fdb9b",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/archive",
+      "filename": "docs__en__api__beta__organization__workspaces__archive.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/archive",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/archive.md",
+      "title": "Archive Workspace",
+      "category": "api_reference",
+      "sha256": "d01d0c8d1ad24ab66045172cbb38b49d14346c6e58c96eaeefd2aa1bc18a5cc8",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/create",
+      "filename": "docs__en__api__beta__organization__workspaces__create.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/create",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/create.md",
+      "title": "Create Workspace",
+      "category": "api_reference",
+      "sha256": "e3a5644ed5a68442283d0b75274cf9a5f7e409cedac1341d299bc9351e92c2ce",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/list",
+      "filename": "docs__en__api__beta__organization__workspaces__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/list.md",
+      "title": "List Workspaces",
+      "category": "api_reference",
+      "sha256": "beaf0d5d6ccc3cfa00360c14404b52676dba935d2a7f5da8d77fff6c7cd64cf0",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members",
+      "filename": "docs__en__api__beta__organization__workspaces__members.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members.md",
+      "title": "Members",
+      "category": "api_reference",
+      "sha256": "ffb12675329c74f020b08fa8fe2dcced0922768c64acb4d5143e7f656c6f1a15",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members/add",
+      "filename": "docs__en__api__beta__organization__workspaces__members__add.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/add",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/add.md",
+      "title": "Create Workspace Member",
+      "category": "api_reference",
+      "sha256": "5dcbdc6cc2c875226f521beeb9cb010737081ddb726412c5464a2a9767d8fe7e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members/list",
+      "filename": "docs__en__api__beta__organization__workspaces__members__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/list.md",
+      "title": "List Workspace Members",
+      "category": "api_reference",
+      "sha256": "0d932d6e24a202617da8106f93898643b94f95c4bc42e3f41416f9ca8cb2e203",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members/remove",
+      "filename": "docs__en__api__beta__organization__workspaces__members__remove.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove.md",
+      "title": "Delete Workspace Member",
+      "category": "api_reference",
+      "sha256": "fbdb508628c802a8b00e639afa1009e5198ac08d71f1aa2038db4a8807421dd3",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members/retrieve",
+      "filename": "docs__en__api__beta__organization__workspaces__members__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/retrieve.md",
+      "title": "Get Workspace Member",
+      "category": "api_reference",
+      "sha256": "abbb2bb065480fb7ffd84fc09224e6be87a6b4ccdc5e8a5ea70033daedae72d3",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/members/update",
+      "filename": "docs__en__api__beta__organization__workspaces__members__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/update.md",
+      "title": "Update Workspace Member",
+      "category": "api_reference",
+      "sha256": "d9ab55219bd41e1be2694ae36327d1ab4783ac69af3c9f6de56beaa580d09efd",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/rate_limits",
+      "filename": "docs__en__api__beta__organization__workspaces__rate_limits.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits.md",
+      "title": "Rate Limits",
+      "category": "api_reference",
+      "sha256": "451ae6ffa3c94834862ca4fb052ae4120f38a0e6ee306a7bfc555e06eedcdfa7",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/rate_limits/list",
+      "filename": "docs__en__api__beta__organization__workspaces__rate_limits__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits/list.md",
+      "title": "List Workspace Rate Limits",
+      "category": "api_reference",
+      "sha256": "e11421ea7503eb2b6b4043cbcd267a67e6f20f21b5febe7df8f98c09938b00ce",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/retrieve",
+      "filename": "docs__en__api__beta__organization__workspaces__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve.md",
+      "title": "Get Workspace",
+      "category": "api_reference",
+      "sha256": "45a6ca5fd06fc2b71a0fb7c0f4efdb4dc5b2c9fb2e643e30375b32680887cd69",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts.md",
+      "title": "Service Accounts",
+      "category": "api_reference",
+      "sha256": "25d426701f5634f100dfc8348a0a906be95067824c7ae3291fa0182ac3b673f9",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts/add",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/add",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/add.md",
+      "title": "Create Service Account Workspace Member",
+      "category": "api_reference",
+      "sha256": "4c1eec98d1f77e9b25e7ea28b3e143231dd69175c03e1837bc78e54b1c59c610",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts/list",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/list",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/list.md",
+      "title": "List Service Account Workspace Members",
+      "category": "api_reference",
+      "sha256": "9be90fd518eb385e75a80cb339b7d535080083b611bb3245d057b040990f470e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts/remove",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/remove",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/remove.md",
+      "title": "Delete Service Account Workspace Member",
+      "category": "api_reference",
+      "sha256": "4608834fd230e1d9b42bee49efb3177a4c75cfad6f3acf54fde50db6668a544e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts/retrieve",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/retrieve",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/retrieve.md",
+      "title": "Get Service Account Workspace Member",
+      "category": "api_reference",
+      "sha256": "d7eea6b078241a54fa97c1c159b6e31bca27409cb342a7b194b4b82a75ab1aa3",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/service_accounts/update",
+      "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/update.md",
+      "title": "Update Service Account Workspace Member",
+      "category": "api_reference",
+      "sha256": "eb9c656255418455659b91e39b299348833980b58a1c2bd1255507d8b8563ab7",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/api/beta/organization/workspaces/update",
+      "filename": "docs__en__api__beta__organization__workspaces__update.md",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/update",
+      "md_url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/update.md",
+      "title": "Update Workspace",
+      "category": "api_reference",
+      "sha256": "57e9c792e369c8951ece98828ed8ab54f99849260787d8472414fecaee97395c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5207,7 +5999,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions.md",
       "title": "Sessions (Beta)",
       "category": "api_reference",
-      "sha256": "48a913d266da98403dbf41cffc61b925297021448e9840f593b2dcf9e8579f2c",
+      "sha256": "d9ac5362487cc14733dd1283b875dbf1735dc58c5309ce5940d07a199c85a8f2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5218,7 +6010,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/archive.md",
       "title": "Archive Session (Beta)",
       "category": "api_reference",
-      "sha256": "cbba0a413835dc62c7ff00412edaa2565f0f622d481b43baa6d9b77376dd6bae",
+      "sha256": "c59ba605bb4cf3768d4248c49b2adda23c326c307cc3ee686798e7e589632bc8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5229,7 +6021,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/create.md",
       "title": "Create Session (Beta)",
       "category": "api_reference",
-      "sha256": "6dc90a6b25733a43b18fe890611924e50efb144396c269bf1901096be774fda6",
+      "sha256": "88bdd56f18b845dd6b56c31c2238b6744f3fe0677b22b6b58e7d9260fc3b7d4b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5240,7 +6032,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/delete.md",
       "title": "Delete Session (Beta)",
       "category": "api_reference",
-      "sha256": "ce73abbc5f2fd8a4369cd90e0467e16a00a393bfe01d0468c1fc77de424f50f4",
+      "sha256": "e17074689dcf118c75bb74a33799efaf1af46686d34b2b266316471245d61df0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5251,7 +6043,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/events.md",
       "title": "Events (Beta)",
       "category": "api_reference",
-      "sha256": "54ee5196642af638cc22ab0cb6fcd99e45f136927df5d1f2f0db3d91a46a67b9",
+      "sha256": "99855359220b1ef4de0e54ca6e52f3731a3061d05c704c31eaeedb5cbf62ebfd",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5262,7 +6054,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/events/list.md",
       "title": "List Events (Beta)",
       "category": "api_reference",
-      "sha256": "d5e385536967f5cb0b1132937cc53cca93de99e9282c0a86189522bf43fe87d3",
+      "sha256": "3c36addb20e9c16942499c7f20d6c7959c1f183551b429f2a47a12062855bac7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5273,7 +6065,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/events/send.md",
       "title": "Send Events (Beta)",
       "category": "api_reference",
-      "sha256": "fe559f9bfdded9d4921cee28420df967dd41c2aae65cacc26c77e204a278a529",
+      "sha256": "a1ccb3a964c8623cbb09928ae31f419fdf2c2563ad18d305df00202de3c99ecc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5284,7 +6076,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/events/stream.md",
       "title": "Stream Events (Beta)",
       "category": "api_reference",
-      "sha256": "c0854969e4f1e351729de4fac769d9fbfe62e081ac736e11e4c6543714a5af8a",
+      "sha256": "73aa967aee0cb02934bf4a9bc61ff000b995998c26f67d65a12840e70f0c70e9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5295,7 +6087,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/list.md",
       "title": "List Sessions (Beta)",
       "category": "api_reference",
-      "sha256": "c9edf6fbf07e723dccdd6c9fedf196fd73a07f1de56321efec490c3f79e054f7",
+      "sha256": "f13884581af59a3c8545467d93c10b12f0fd5fe6b4fc4ad034502ead4bb4c3b9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5306,7 +6098,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources.md",
       "title": "Resources (Beta)",
       "category": "api_reference",
-      "sha256": "8774c07aeecc84e4caa6489199a7a692ff0662ea57ec5f4f5a582064711b1d4c",
+      "sha256": "3cfd29d8b541348f2bf701611522d2dc4161727494e6d618ba26325c408894a5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5317,7 +6109,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources/add.md",
       "title": "Add Session Resource (Beta)",
       "category": "api_reference",
-      "sha256": "454bc6c4ef86c91044c3c7395aaece0da3182fc37ca89fcbff164306655029a2",
+      "sha256": "fcb3c0b2e87f022c6bda07a5d9de856d63605ebb96d1a5a604801249e7960e31",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5328,7 +6120,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources/delete.md",
       "title": "Delete Session Resource (Beta)",
       "category": "api_reference",
-      "sha256": "a26dee1bac2c106b2095f332203485a7528d5b1a0eb45ebc3d4f081073c63ef3",
+      "sha256": "fa87b496f584cfb3b1e1fda08565617bbb0d80919cfd7879a4777effbeef5637",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5339,7 +6131,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources/list.md",
       "title": "List Session Resources (Beta)",
       "category": "api_reference",
-      "sha256": "9532b3c7f3f9e014d94f1a299409b7b68450c4a813a6485a6cecfe8d80e49f64",
+      "sha256": "3df6b3d94ab28f165ef9a3221f7dff7c01ddea8f36943deb4c7c8ec91c387b73",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5350,7 +6142,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources/retrieve.md",
       "title": "Get Session Resource (Beta)",
       "category": "api_reference",
-      "sha256": "04cba94e9e4d54c52411b02d1a8722171499b7a37f1f894a54be067835d48460",
+      "sha256": "f26498999a086416bee18eec3513563247d03add29c8e15d58d39475c3291825",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5361,7 +6153,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/resources/update.md",
       "title": "Update Session Resource (Beta)",
       "category": "api_reference",
-      "sha256": "301faf92060a3a048ed9253717a44b656b3cdf9c9a6c9747a2dbc51be1840c07",
+      "sha256": "8a092cee0ad834340fe602077a8debc5569457540b3096b31116dfa671562546",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5372,7 +6164,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/retrieve.md",
       "title": "Get Session (Beta)",
       "category": "api_reference",
-      "sha256": "da803d80c23693c6d06f87fa29551092c31924fd465c9da6e20f9d5adc7f09ef",
+      "sha256": "a0d0af0205d3044c5cbb42d7f4036d595e33014601cbdf25e1ce6bb972a2b63d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5383,7 +6175,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads.md",
       "title": "Threads (Beta)",
       "category": "api_reference",
-      "sha256": "487fc7a962035eb4615602afedc38e70205065e35f370a9b7912d600d95c591b",
+      "sha256": "d6bb60beeb37a52fd6c567352e2706c8e368cf528c5fca99ba35107e19e543f3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5394,7 +6186,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/archive.md",
       "title": "Archive Session Thread (Beta)",
       "category": "api_reference",
-      "sha256": "d69814dde334212f903bf849310eda571c45e2a5627f8ae67c76f5c5e06c0f1d",
+      "sha256": "5ddeb30542a959b7272d95511e5ab3fea79c75a7d8516223e128b8a9a032d567",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5405,7 +6197,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/events.md",
       "title": "Events (Beta)",
       "category": "api_reference",
-      "sha256": "c198056541a8e314cdd15d460950ed181f3fd12b95fab5ea6b672a73f96ba44b",
+      "sha256": "63d79c8baacb366ee72930f586b0ecf0240a84b8a139e7e7e4361a3107265816",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5416,7 +6208,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/events/list.md",
       "title": "List Session Thread Events (Beta)",
       "category": "api_reference",
-      "sha256": "86cfe2cb8d5116b113a7424fb611e42ba6d4e858cd07d175e7b9e51cf415093f",
+      "sha256": "a6a70cdd96e4ba69c2e25cc709ed12ca01a6bc1d500ba8e5e0631ea4d30717f5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5427,7 +6219,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/events/stream.md",
       "title": "Stream Session Thread Events (Beta)",
       "category": "api_reference",
-      "sha256": "7705217bc21d3a3a534dc859c4f761ceb97cc98143f60b2a327edb28a3915560",
+      "sha256": "2caea13ee2f9eec89a84bd3e5cc9c3ce3f2f8370094aaee99060d1ea3e7eb775",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5438,7 +6230,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/list.md",
       "title": "List Session Threads (Beta)",
       "category": "api_reference",
-      "sha256": "bf4f710bc20ec7071235c029f53aa317bc6ed04c1c432e82833ba8b5a26db1d8",
+      "sha256": "41ad5c8f7b216485dc0a45401ba102f4148df62edf3334e60af29018c68a2673",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5449,7 +6241,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/threads/retrieve.md",
       "title": "Get Session Thread (Beta)",
       "category": "api_reference",
-      "sha256": "e64b897408fb7e388ff9225a2332f38e998c1b43e34a457ba561c32f4750506a",
+      "sha256": "f5dc6750597cc7b7a7b4f78b08c964ff5592ff6a44d5237bffd7f013c124ab5d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5460,7 +6252,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/sessions/update.md",
       "title": "Update Session (Beta)",
       "category": "api_reference",
-      "sha256": "d775ef7bb936b5f8911a7b43963332ab0c3cb47c17f7e1e93f072f147d7d2d99",
+      "sha256": "c2789678220be5a23e2421f37e06f7175126d4dc3c168cbc067c2623bb5d55e4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5471,7 +6263,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills.md",
       "title": "Skills (Beta)",
       "category": "api_reference",
-      "sha256": "71596c94ddd0bf0534acaed91d2f82d5f941076bafd1e0ddefbe224fe5feff37",
+      "sha256": "e69aad4cea407d69d5f7b51c865cc66a295f582147f6a6530c48fcd129084941",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5482,7 +6274,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/create.md",
       "title": "Create Skill (Beta)",
       "category": "api_reference",
-      "sha256": "62f9af48e976ec4b8b95394f2ebef98af73b6e0a07a959cc3cf1fca826793617",
+      "sha256": "579b671408536efe6cc8876e91e646c05a17ebd5c08d498d02e7786093bbd019",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5493,7 +6285,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/delete.md",
       "title": "Delete Skill (Beta)",
       "category": "api_reference",
-      "sha256": "cd25e912126014e717c083109807206576e93e76539de2d0d931bedec0d653c3",
+      "sha256": "3eb276123041c0b7b4ac54a068fbf6e788fe3a6dbe74f0acc43ba75c88e21625",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5504,7 +6296,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/list.md",
       "title": "List Skills (Beta)",
       "category": "api_reference",
-      "sha256": "ed9ecffdbabb8c60c1badf429da44f4dcdb52ee8e7d9780db2f7621c14ed1100",
+      "sha256": "94017d75537d1475f25d5b6d0eb2f12cc5d5ff13db7aab3bd8ecb4bbbc6faf26",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5515,7 +6307,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/retrieve.md",
       "title": "Get Skill (Beta)",
       "category": "api_reference",
-      "sha256": "9c327cc226419c20bcbd198c826a57fa97fd071f848f8e38280ea5df432ddced",
+      "sha256": "1406efad115e997b6505130440151ced33aa07e904ae5933e0471a35c2567f8b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5526,7 +6318,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions.md",
       "title": "Versions (Beta)",
       "category": "api_reference",
-      "sha256": "4c8f5a62950bb32a6114fdd6b01b01a75653df0859d750ecb272b30777a018f5",
+      "sha256": "7afed34fbe70ae0feac0c957b7b4a99e0418f8aeebf2f095171671f76ec6eca8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5537,7 +6329,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions/create.md",
       "title": "Create Skill Version (Beta)",
       "category": "api_reference",
-      "sha256": "ab8cff1e55f718c0240c8acae62f7cb2a6402b42a8dda9bddc920c5d986fb8bd",
+      "sha256": "dbaa98aa6f6244cabce10a96a77b9d890bd7823f3e25ba8ab217410bc7e46ece",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5548,7 +6340,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions/delete.md",
       "title": "Delete Skill Version (Beta)",
       "category": "api_reference",
-      "sha256": "51323817a7eea3ca56e2ca5b40572547a46604e6bf740b29f9d14e70fb856b4f",
+      "sha256": "952d98722e74a0b733d201de40dc9fe1851a399a0ebef22db05daf2d6b862ff5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5559,7 +6351,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions/download.md",
       "title": "Download Skill Version Content (Beta)",
       "category": "api_reference",
-      "sha256": "c3aad4bbc1987d1e298fc46822c7294ccc30940c2f6e8d5bfc2059d83df8660a",
+      "sha256": "195d494525d5ee2cb3619062143ce62b53039af4e26de2d738b326dca93a16f2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5570,7 +6362,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions/list.md",
       "title": "List Skill Versions (Beta)",
       "category": "api_reference",
-      "sha256": "a4fd09b9a711c3c6cf55d4bcca066e6d35d6117764e59f176692b59ce4157433",
+      "sha256": "b22dd445a850af5a4f4a64bf4e9683126c01b7bf79cdad2870af78d46b5a6898",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5581,7 +6373,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/skills/versions/retrieve.md",
       "title": "Get Skill Version (Beta)",
       "category": "api_reference",
-      "sha256": "445a5e4d2017af9b8c6a55a9f2714512b32f8c917e33b935c534d59a48d24047",
+      "sha256": "b016b71d7f6f8325dff6a08748ac47d31d9e0132ff8fcc7ae7a7ae7d6169448f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5592,7 +6384,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels.md",
       "title": "Tunnels (Beta)",
       "category": "api_reference",
-      "sha256": "d594e7d0d1587328ffe2aae47df003e56d5f8a85d2b0389ba6816b965760a231",
+      "sha256": "2da61e7ec7933ccafb9d959d5f212623d415e008fb022b1e2b6ea1ffd7551b3f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5603,7 +6395,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/archive.md",
       "title": "Archive Tunnel (Beta)",
       "category": "api_reference",
-      "sha256": "debd7a9721d0a6964bb0ae2a694f6e4d2af4a6f543d7fb19fc0b6d653dba0e3c",
+      "sha256": "fc2a99286367ece014d506ce4634efe916d60e449b2ce8aa1986662db1caaea3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5614,7 +6406,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/certificates.md",
       "title": "Certificates (Beta)",
       "category": "api_reference",
-      "sha256": "dcff2bfa5c5bcbd4172b6dff6b7f946e74051ba491fb9e60d73f0509df1b0490",
+      "sha256": "1ef4eefe9dbaa91a969975ed871254e5f835270b6390e8f41c05b86596a078af",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5625,7 +6417,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/certificates/archive.md",
       "title": "Archive Tunnel Certificate (Beta)",
       "category": "api_reference",
-      "sha256": "b5e172009655690a151910670a7bfb8ee6e8ed314dc9d8b2fe2510feb74e0591",
+      "sha256": "5333ecfda14a1e0d9ed0137d765f522f628f85f4c24c823d9c9e230ad478180d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5636,7 +6428,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/certificates/create.md",
       "title": "Create Tunnel Certificate (Beta)",
       "category": "api_reference",
-      "sha256": "23d0c509049e9c59b4b6bc59a6eb044b4f78fe63ea92be7d02352fc4cb2d9326",
+      "sha256": "16d9c09ccd92cb3b55a512ef715795636d96edf4650409a3e9902e06e58379f7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5647,7 +6439,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/certificates/list.md",
       "title": "List Tunnel Certificates (Beta)",
       "category": "api_reference",
-      "sha256": "00e4c263ea2ce036afda3c63282a747cf15b0e804a2a5d317dc354df661fa141",
+      "sha256": "697a949f09f6af0cecbb4a63ddb27331668d1db57a1a6f9642109eb5aba80003",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5658,7 +6450,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/certificates/retrieve.md",
       "title": "Get Tunnel Certificate (Beta)",
       "category": "api_reference",
-      "sha256": "00d6a3ef53fc14a56694afc3c3525d89a5e2d0f82a5be23958c56848a7f930df",
+      "sha256": "68966fc7dad6cea356959e76abddd88c7f707e581e0fab958294ca47e1c99bdf",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5669,7 +6461,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/create.md",
       "title": "Create Tunnel (Beta)",
       "category": "api_reference",
-      "sha256": "c66c243d7958aadbba8f7f030bb7031e7512f99c4701b083ad83034af290fa66",
+      "sha256": "ecc2b37758927a795376a37d8736a2d6cf2a6598c90e373e344aef4aea736ff1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5680,7 +6472,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/list.md",
       "title": "List Tunnels (Beta)",
       "category": "api_reference",
-      "sha256": "184b42c38521568a3461ed1e212e08974bb7d61ac0d49cc6aeff2012f565a241",
+      "sha256": "007162ff4f000fe9ac0ea2d5be3c77f5ab752fb4b59a59c7f5a1cb6c79022615",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5691,7 +6483,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/retrieve.md",
       "title": "Get Tunnel (Beta)",
       "category": "api_reference",
-      "sha256": "3d25e6a410229ecc5e3f8665862eac8f7c46bd934998a89bb5d1313dba692047",
+      "sha256": "d698e9f6e1d4a21f5733b7a06f27dda3236a009f6a73bf0116c6ee6d508f3fab",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5702,7 +6494,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/reveal_token.md",
       "title": "Reveal Tunnel Token (Beta)",
       "category": "api_reference",
-      "sha256": "22981771fc02b6f38a11cea46f6f415a78c49982cd3e43d5dbb6570ff629c3a7",
+      "sha256": "7141bf63fe197664a8c1f21de8dad3211d2846f9b20efb889691ba2661505f0b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5713,7 +6505,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token.md",
       "title": "Rotate Tunnel Token (Beta)",
       "category": "api_reference",
-      "sha256": "29fc39fd2faa2ba2839b959c8b0f45f72cceee4b63a2a3fb803f52b9505613bb",
+      "sha256": "4d8f524a85b3a8aeb791144d47aeebc1dd2aa3f0907e9a92c97dadb454de71c6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5724,7 +6516,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles.md",
       "title": "User Profiles (Beta)",
       "category": "api_reference",
-      "sha256": "ce8ac024559accbeb0954fe8597918c3bdbc005044747d461f8b362f672801f7",
+      "sha256": "327e6d25649c987082a1ce703f93024319d26b1b3b40d9d7b7598a245474fdad",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5735,7 +6527,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles/create.md",
       "title": "Create User Profile (Beta)",
       "category": "api_reference",
-      "sha256": "8ad954b4db0f091544d126dc0a44519f90e22b95652b6cb8e04d17416b0c8029",
+      "sha256": "9728f36dab62babc0b99eed9e07cbd8fab4729522744f2a47afa84b2be6da14b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5746,7 +6538,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles/create_enrollment_url.md",
       "title": "Create Enrollment URL (Beta)",
       "category": "api_reference",
-      "sha256": "03e7567b456802098138dfe0812e8081a1813e6cdc23ed4e8d36ad1af4909299",
+      "sha256": "e3d0b51b0385b0b6ea5127d2ff4581920d311480b1ee87f50bcc91086f6365ae",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5757,7 +6549,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles/list.md",
       "title": "List User Profiles (Beta)",
       "category": "api_reference",
-      "sha256": "997d7f0bdf83777268145fe5a6dc52ccd6615016fecab3de0e5423f2963c49b3",
+      "sha256": "897bf139a4def3b8a924647ba2c155c2affc1cec8b1d81e7f58aef2d5ae0c3d3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5768,7 +6560,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles/retrieve.md",
       "title": "Get User Profile (Beta)",
       "category": "api_reference",
-      "sha256": "e8e9075447a7cab5536fae07ebb91b14b521819937c8cafdfb04f6c18719ab68",
+      "sha256": "f351bf7a99878c2178288c6870ea21e67c5f7b76f973dd94546afde82b51f5db",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5779,7 +6571,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/user_profiles/update.md",
       "title": "Update User Profile (Beta)",
       "category": "api_reference",
-      "sha256": "943f0940c75971ab29d2b2557bcc3b50dd1c54cc0b9ac53b04473152366b06ba",
+      "sha256": "eb2a8495405d89c76a2fbdefdb4eb81bef106da1d19228c6b4f6d305f6833765",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5790,7 +6582,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults.md",
       "title": "Vaults (Beta)",
       "category": "api_reference",
-      "sha256": "03d5d6d94b82d73b11eb794bc18bdb39421b5e43121e8b28867a927451726dab",
+      "sha256": "eb370ffdc89e6a1b12fcd44d72b3f5c9fcf65c35d7a21487d4ad28ed914c3502",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5801,7 +6593,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/archive.md",
       "title": "Archive Vault (Beta)",
       "category": "api_reference",
-      "sha256": "da15511f4b959e8a47c9bdeb6a6be34b42cc8aefcb5d6f4185dd4d875d76e62e",
+      "sha256": "e29effe7ce3867a01b2999ded34ab43b5410ddb08db1d551c92920449250b651",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5812,7 +6604,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/create.md",
       "title": "Create Vault (Beta)",
       "category": "api_reference",
-      "sha256": "c59228e09f1d5add97a156eb506a7038a3268dcdb0c27ff04a9b58a45aa55c3a",
+      "sha256": "0ac53df8d40c8d1640db84cd86779412f701e5532f352afffc7db950beae70bb",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5823,7 +6615,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials.md",
       "title": "Credentials (Beta)",
       "category": "api_reference",
-      "sha256": "c266dc6a4bcfe898e5fc49b590dc44db6d0dac472b82c0cf61cb297866266e9e",
+      "sha256": "325c5151f6ab14186d6c7b75073676faba917ce081287d268bc85f8251fdac02",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5834,7 +6626,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/archive.md",
       "title": "Archive Credential (Beta)",
       "category": "api_reference",
-      "sha256": "55fb769b4b607cb20716a691beaf6bee17d90dea21ff540310589ff1cae4dc48",
+      "sha256": "0c47c0dc7c56cd31fc1a6163e069cfa3738c17f1587da52e404105eca93b41b7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5845,7 +6637,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/create.md",
       "title": "Create Credential (Beta)",
       "category": "api_reference",
-      "sha256": "d60d6d6ecf49ce36f7e30ee5e979da03106a131d3af3dcf700657880439f2fa6",
+      "sha256": "ceb78abdbb53707977e4f01c87401811c84da217bdee2009dbe57670734657b3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5856,7 +6648,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/delete.md",
       "title": "Delete Credential (Beta)",
       "category": "api_reference",
-      "sha256": "1fc686869349252d5b23d025cc3b484a0464698699678cf6c43cab86caa23fdb",
+      "sha256": "e16a938fecd62bc222a2007264292c539704f39442a09a13e29f5238752fcb6c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5867,7 +6659,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/list.md",
       "title": "List Credentials (Beta)",
       "category": "api_reference",
-      "sha256": "ef430b4d42f925f4491bb47058ee6f62b792b35473b4193dcff58ecfca914869",
+      "sha256": "d4d795a2d133db3e35ca32d2cffc482b245c51e70140af01da93eef6b74a298d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5878,7 +6670,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/mcp_oauth_validate.md",
       "title": "Validate Credential (Beta)",
       "category": "api_reference",
-      "sha256": "8b1cef4fdf7340e082a4deec105b02af3484cb047410af252dcff92f520d23b7",
+      "sha256": "fe7f00927eeefdd17222fcdb2bb08ba70f920f08e47590fc8877b5ce13592436",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5889,7 +6681,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/retrieve.md",
       "title": "Get Credential (Beta)",
       "category": "api_reference",
-      "sha256": "17f8c39a9775b52b4982db9d2effc91227c4976d0e66f7e70fe3c110025744d9",
+      "sha256": "555ea36af79a5baba0670010b943a47dd6ecca189bfc0780f26e0d2315063347",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5900,7 +6692,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/credentials/update.md",
       "title": "Update Credential (Beta)",
       "category": "api_reference",
-      "sha256": "a3c14145dc0ebd495bf311f035c7161bfd969a2471020955428210759fe773a2",
+      "sha256": "eca9754b8788864d7cf694188f8432947b8f17a3472b42203e3382c74be20b18",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5911,7 +6703,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/delete.md",
       "title": "Delete Vault (Beta)",
       "category": "api_reference",
-      "sha256": "e5da8f5a8f2fdba505e05a5c192153de8285e59a26a058d722c4c32ae017695b",
+      "sha256": "773128e05b7e891e21818d5275923d6bbc794bf2618e799d5401ef28cc797208",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5922,7 +6714,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/list.md",
       "title": "List Vaults (Beta)",
       "category": "api_reference",
-      "sha256": "fc0bae32e05cbbad9715c0c39214ba31f362c33de7716a0b8184bee634442f32",
+      "sha256": "3abacb82eb2d32eeea614689800aa55d6c94cde177a86b630666ff7ce07acd81",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5933,7 +6725,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/retrieve.md",
       "title": "Get Vault (Beta)",
       "category": "api_reference",
-      "sha256": "89b92916707f84a0ae764b903d0904418ce4c0fb83a9d7ab96c35e29bc21d329",
+      "sha256": "be10f99d487a4490f20baa1cd71cd28a1705a48b17ce0bd792af5fdc3dc6a531",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5944,7 +6736,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/beta/vaults/update.md",
       "title": "Update Vault (Beta)",
       "category": "api_reference",
-      "sha256": "2c5bb608ef42828e086547d960c4fcf463dfa862a7cbda517a61c05a9391787f",
+      "sha256": "98d4b9c672066c145ae6ff6109e5a286d1bf6311b5abddbf9d2fd9e3d4d3aebd",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5988,7 +6780,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/completions.md",
       "title": "Completions",
       "category": "api_reference",
-      "sha256": "63d96bee9305f057c4a829256bb5a914dd2586c26d39049e612438e93503fc7a",
+      "sha256": "22f365b48564434e0f7a9f1f393b44048102d8d1d3b75fb68afeb3bdbfa99774",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -5999,7 +6791,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/completions/create.md",
       "title": "Create a Text Completion",
       "category": "api_reference",
-      "sha256": "8888ecf090d0648dd73d724504bd52f9e65f01f19683bc14982722f7fe99b686",
+      "sha256": "cd9ca573e4f2b083eacc3e03521621e0af0e8c3b3edf64361cf0076a7878d50c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6890,7 +7682,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/models.md",
       "title": "Models",
       "category": "api_reference",
-      "sha256": "161dbdf8d3cbcdcd5c1a3d9f0e95643dd413d3de548bebd3e7fe1478bb660172",
+      "sha256": "410e806cbac71d88b172021f058f2a4e8098ce1e74f0e8d70b8b58eae932ab4b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6901,7 +7693,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/models/list.md",
       "title": "List Models",
       "category": "api_reference",
-      "sha256": "46e73cc0befdbb61e84f53af00c360ec6db60c8c9456cf22509a75f873ad8326",
+      "sha256": "4f4933230f01febc0a7374d0400c6e91e8fd88158c1de7c6533fe8fee4223b77",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6912,7 +7704,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/models/retrieve.md",
       "title": "Get a Model",
       "category": "api_reference",
-      "sha256": "c7eeb61a5318c29156399cebb873a8502eea0900cb57776de034f52ccfa68a82",
+      "sha256": "6ba36e6a33be24a05aef968d4d28092dc513aca5e43980d082bb9aedf0296f44",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6956,7 +7748,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/skills.md",
       "title": "Skills",
       "category": "api_reference",
-      "sha256": "acde27c92c4be09bc34bd380db4389a044371eab3e7887e140ec9cf1a6eaef7c",
+      "sha256": "d30631d95c4d969cd4f1ef29d0b123613ad76e03966fc9d1aaca8a182a56444b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7011,7 +7803,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/skills/versions.md",
       "title": "Versions",
       "category": "api_reference",
-      "sha256": "c78d7bcb752e5fdd48eff3901562ed90ae91281e0151acdb5768b936aaf6b67e",
+      "sha256": "88c0eb8d0489af58246c3deeed02d535ee54256c4671501448d49f20d15fffc6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7033,7 +7825,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/skills/versions/delete.md",
       "title": "Delete Skill Version",
       "category": "api_reference",
-      "sha256": "7dea0ecc3fbc4063b62801db8b11d083eb2ab82e846523752c6aa21ad7b906a8",
+      "sha256": "cd7760fda0ed620b52017aa2a567ba7aa206511c821953920d87258dec533984",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7055,7 +7847,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/skills/versions/retrieve.md",
       "title": "Get Skill Version",
       "category": "api_reference",
-      "sha256": "0db72420d3aa5a8f1c5c226a3319546bd40d0dd228242bb1e657b189354e0c78",
+      "sha256": "b09f2f9bddf2e87cf35f280ef554a067e23db33c3efe4e641f3f0102be2c6633",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7803,7 +8595,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api.md",
       "title": "Admin API",
       "category": "core_documentation",
-      "sha256": "246facf4af214c717a63b455f090d55f6567c76ef88f6a02f0f7ce7c7afdfc84",
+      "sha256": "baa15e54a84889ae23ae3a0329e2b27bda2e139b16b94794c1166ce12fcef47b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7891,7 +8683,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-aws-kms.md",
       "title": "AWS KMS",
       "category": "core_documentation",
-      "sha256": "e4dff880eba950c91a31445db65fe4f1467665b94f66435aa4aa70e95ad0dd3c",
+      "sha256": "8819be743690b00e5ae663c4c6efbf509450e24e4b566635822b6dd1d84dc64b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7902,7 +8694,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-azure-key-vault.md",
       "title": "Azure Key Vault",
       "category": "core_documentation",
-      "sha256": "4e7feb68773ee3d6b0daa0d618cbed212ffbc057d73f4eebec9aaac4fc2a32b9",
+      "sha256": "b4ea1ccd17fa1f3caab264bc9b8ba6a7d2a46357cec870e109f3dd7f4ecfdf9d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7913,7 +8705,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-google-cloud-kms.md",
       "title": "Google Cloud KMS",
       "category": "core_documentation",
-      "sha256": "e9286ec4fa8a20b2bf2853a0b349031185c09a5b20f58db51ac533a221e3e35b",
+      "sha256": "6b39fe756aef5b8c7d8b09c27da1e1ecf68397dac0784a0a084a8ab513f80907",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7935,7 +8727,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-api.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "e65ee6e825b1490845f2340d0ac4d9df7298dab7b8847d1b9b0e8fe750e2e3f2",
+      "sha256": "a27184f1b9b4d912ec3520101a36153be028904c3056c365802dc4523f9ad559",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7979,7 +8771,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-faq.md",
       "title": "FAQ",
       "category": "core_documentation",
-      "sha256": "6a9dcb03254a74fafd6a08e4d21be90e70e688a3a81a37c46567ea46220047de",
+      "sha256": "54c82cc1ef7bb523bdc8ced309bafb8dbdcb031d23efed5aea3ef8778444139f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8012,7 +8804,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-sessions.md",
       "title": "Session transcripts",
       "category": "core_documentation",
-      "sha256": "9e9aaa1aa6448c1e472dbe941b132c7cd3bf3c4cd1bdfeff7b9599d062d0b98d",
+      "sha256": "c956f02aaf2d5e117a3745d98a7a9c6f510f05de1c19855686c6af8ba38c4d5b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8067,7 +8859,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/rate-limits-api.md",
       "title": "Rate Limits API",
       "category": "core_documentation",
-      "sha256": "310ed3c11981075bb7a119a9ea176f9ebc74fcea3d0682047b6fbb6f7a40a8d8",
+      "sha256": "f8badd0e8b7474a670b80d0a5581af48f5faf45a11ea6b94b4e67f28b3f2daab",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8111,7 +8903,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-admin-api.md",
       "title": "Manage WIF via API",
       "category": "core_documentation",
-      "sha256": "fb1cc106693f7221864bfbbdd1dcd5b42bb6ec99c125b5f231b7b443ec416710",
+      "sha256": "c07be3aa1af5afd5b7c58697cabe61a63f969f5a3791a4b8893aad759094309f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8221,7 +9013,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/workspaces.md",
       "title": "Workspaces",
       "category": "core_documentation",
-      "sha256": "8cb66fcf1ed2e53163f2723fe2133751802c3632d58f2f604ab2b6f6d325c8c3",
+      "sha256": "7a0a90bd5d8b65479b93e3b76b675be9411dc425dd3b3cb2ac563edb7ffb6fde",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8738,7 +9530,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "acdbd45f250e9de64a026d71d930001b8ded78f5adb0884fea98e19843011e40",
+      "sha256": "b216ad765b853119b602a3fdd93ecb345ac8f6556938277e50a400549eed7539",
       "lastmod": null,
       "fetch_status": "ok"
     },
