@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-26T18:47:55.661853Z",
+  "generated_at": "2026-08-26T22:04:49.886410Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9383,13 +9383,13 @@
         "only": 9,
         "console": 8,
         "without": 8,
+        "connection": 8,
+        "error": 8,
         "start": 8,
         "app": 7,
         "site": 7,
         "action": 7,
         "page": 7,
-        "connection": 7,
-        "error": 7,
         "record": 7,
         "enabl": 7,
         "messag": 7,
@@ -9404,7 +9404,7 @@
         "verify": 6,
         "check": 6
       },
-      "word_count": 2538
+      "word_count": 2565
     },
     {
       "filename": "claude-code__claude-apps-gateway.md",
@@ -10336,24 +10336,24 @@
       ],
       "terms": {
         "session": 163,
-        "claude": 95,
+        "claude": 94,
         "cloud": 65,
-        "code": 46,
-        "github": 35,
+        "code": 45,
+        "github": 37,
         "run": 34,
-        "environment": 32,
+        "environment": 34,
         "account": 31,
         "repository": 31,
-        "web": 26,
+        "web": 27,
         "terminal": 24,
         "fix": 23,
         "auto": 21,
         "acces": 20,
         "work": 19,
         "see": 18,
+        "app": 17,
         "anthropic": 16,
-        "app": 16,
-        "organization": 15,
+        "organization": 16,
         "start": 15,
         "command": 15,
         "note": 14,
@@ -10365,14 +10365,15 @@
         "review": 13,
         "local": 13,
         "open": 13,
+        "instead": 12,
         "task": 11,
+        "connect": 11,
         "comment": 11,
         "check": 11,
-        "instead": 11,
         "pull": 10,
-        "connect": 10,
         "authentication": 10,
         "network": 10,
+        "default": 10,
         "any": 10,
         "branch": 10,
         "send": 10,
@@ -10383,10 +10384,9 @@
         "one": 9,
         "without": 9,
         "repositori": 9,
-        "push": 9,
-        "enabl": 9
+        "push": 9
       },
-      "word_count": 4531
+      "word_count": 4593
     },
     {
       "filename": "claude-code__claude-directory.md",
@@ -10505,7 +10505,7 @@
         }
       ],
       "terms": {
-        "claude": 150,
+        "claude": 153,
         "project": 125,
         "color": 96,
         "file": 87,
@@ -10522,8 +10522,8 @@
         "select": 57,
         "fil": 52,
         "folder": 51,
+        "code": 47,
         "type": 47,
-        "code": 46,
         "icon": 46,
         "description": 44,
         "children": 43,
@@ -10556,7 +10556,7 @@
         "styl": 24,
         "href": 23
       },
-      "word_count": 9202
+      "word_count": 9249
     },
     {
       "filename": "claude-code__claude-platform-on-aws.md",
@@ -11067,22 +11067,22 @@
         }
       ],
       "terms": {
-        "environment": 145,
+        "environment": 144,
         "session": 123,
         "com": 83,
         "claude": 80,
         "org": 75,
-        "cloud": 70,
+        "cloud": 71,
         "run": 56,
         "script": 47,
         "install": 42,
         "www": 40,
-        "setup": 38,
+        "setup": 39,
         "code": 36,
         "start": 35,
+        "default": 35,
         "accordion": 34,
         "network": 33,
-        "default": 33,
         "setting": 31,
         "host": 27,
         "github": 27,
@@ -11098,12 +11098,12 @@
         "title": 19,
         "level": 18,
         "work": 18,
-        "through": 18,
         "package": 18,
         "tool": 18,
         "anthropic": 18,
         "variabl": 17,
         "don": 17,
+        "through": 17,
         "need": 17,
         "api": 17,
         "each": 16,
@@ -11118,7 +11118,7 @@
         "such": 13,
         "every": 13
       },
-      "word_count": 5564
+      "word_count": 5593
     },
     {
       "filename": "claude-code__code-review.md",
@@ -11158,6 +11158,10 @@
         {
           "text": "Manually trigger reviews",
           "level": 2
+        },
+        {
+          "text": "Review pull requests from forks",
+          "level": 3
         },
         {
           "text": "Customize reviews",
@@ -11237,39 +11241,44 @@
         }
       ],
       "terms": {
-        "review": 173,
+        "review": 183,
+        "claude": 69,
         "code": 66,
-        "claude": 63,
-        "run": 58,
+        "run": 61,
+        "comment": 43,
         "finding": 39,
-        "comment": 38,
-        "push": 28,
-        "check": 27,
-        "github": 23,
-        "start": 21,
+        "push": 31,
+        "check": 29,
+        "request": 28,
+        "repository": 27,
+        "github": 25,
+        "start": 25,
         "step": 21,
-        "repository": 20,
+        "command": 19,
         "find": 19,
-        "command": 18,
-        "trigger": 18,
-        "request": 17,
-        "post": 16,
-        "work": 16,
+        "pull": 17,
+        "post": 17,
+        "work": 17,
+        "trigger": 17,
+        "cost": 17,
         "level": 16,
         "before": 15,
         "severity": 15,
-        "cost": 15,
+        "every": 15,
         "session": 15,
-        "every": 14,
+        "doesn": 15,
+        "organization": 14,
+        "after": 14,
+        "without": 14,
         "read": 14,
         "report": 14,
         "agent": 13,
-        "after": 13,
-        "without": 13,
+        "fix": 13,
         "branch": 13,
+        "only": 13,
         "inline": 12,
-        "fix": 12,
         "nit": 12,
+        "one": 12,
         "fil": 12,
         "diff": 11,
         "issu": 11,
@@ -11278,17 +11287,12 @@
         "want": 11,
         "app": 11,
         "repo": 11,
-        "only": 11,
         "file": 10,
-        "organization": 10,
         "instead": 10,
         "see": 10,
-        "one": 10,
-        "title": 10,
-        "where": 9,
-        "chang": 9
+        "per": 10
       },
-      "word_count": 4580
+      "word_count": 4844
     },
     {
       "filename": "claude-code__commands.md",
@@ -11323,12 +11327,12 @@
         }
       ],
       "terms": {
-        "claude": 132,
+        "claude": 134,
         "code": 95,
-        "session": 67,
+        "session": 68,
         "command": 54,
         "run": 44,
-        "open": 41,
+        "open": 43,
         "skill": 36,
         "requir": 36,
         "available": 33,
@@ -11344,7 +11348,7 @@
         "before": 23,
         "mode": 23,
         "pas": 23,
-        "review": 22,
+        "review": 23,
         "name": 21,
         "work": 21,
         "agent": 21,
@@ -11354,18 +11358,18 @@
         "interactive": 19,
         "turn": 18,
         "subagent": 18,
+        "argument": 17,
+        "report": 17,
         "menu": 16,
-        "report": 16,
-        "argument": 15,
+        "dialog": 16,
+        "instead": 16,
         "set": 15,
         "plan": 15,
         "list": 15,
-        "instead": 15,
         "branch": 15,
         "model": 14,
         "type": 14,
         "while": 14,
-        "dialog": 14,
         "project": 14,
         "terminal": 14,
         "own": 14,
@@ -11374,7 +11378,7 @@
         "start": 13,
         "add": 13
       },
-      "word_count": 6402
+      "word_count": 6451
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -12371,39 +12375,42 @@
         }
       ],
       "terms": {
-        "claude": 53,
-        "code": 42,
+        "claude": 58,
+        "code": 44,
         "data": 42,
         "default": 33,
         "session": 30,
         "anthropic": 29,
         "api": 19,
-        "report": 15,
+        "report": 18,
         "disable": 15,
         "off": 15,
         "user": 14,
+        "feedback": 14,
         "cloud": 13,
         "survey": 13,
         "model": 12,
         "platform": 12,
+        "retention": 12,
         "must": 12,
         "google": 11,
-        "retention": 11,
+        "transcript": 11,
         "setting": 11,
         "error": 11,
-        "feedback": 10,
-        "transcript": 10,
         "see": 10,
         "flow": 10,
         "check": 10,
+        "includ": 9,
         "prompt": 9,
         "opt": 9,
+        "send": 9,
+        "path": 9,
         "set": 9,
         "file": 8,
         "usage": 8,
         "max": 8,
-        "includ": 8,
         "party": 8,
+        "sent": 8,
         "organization": 8,
         "metric": 8,
         "disabl": 8,
@@ -12411,18 +12418,15 @@
         "webfetch": 8,
         "train": 7,
         "account": 7,
-        "sent": 7,
         "only": 7,
         "amazon": 7,
         "bedrock": 7,
         "agent": 7,
-        "send": 7,
-        "path": 7,
-        "follow": 7,
-        "local": 7,
-        "request": 7
+        "through": 7,
+        "same": 7,
+        "follow": 7
       },
-      "word_count": 2334
+      "word_count": 2410
     },
     {
       "filename": "claude-code__debug-your-config.md",
@@ -12965,7 +12969,7 @@
         }
       ],
       "terms": {
-        "claude": 102,
+        "claude": 103,
         "session": 33,
         "permission": 24,
         "json": 24,
@@ -12999,6 +13003,7 @@
         "sit": 10,
         "without": 10,
         "action": 10,
+        "com": 9,
         "tab": 9,
         "first": 9,
         "comment": 9,
@@ -13013,10 +13018,9 @@
         "ctrl": 9,
         "config": 9,
         "http": 8,
-        "available": 8,
-        "terminal": 8
+        "available": 8
       },
-      "word_count": 11174
+      "word_count": 11292
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -13744,9 +13748,9 @@
       ],
       "terms": {
         "plugin": 164,
-        "claude": 75,
+        "claude": 77,
         "install": 75,
-        "code": 68,
+        "code": 70,
         "marketplace": 60,
         "add": 45,
         "marketplac": 34,
@@ -13755,19 +13759,19 @@
         "server": 26,
         "run": 24,
         "step": 20,
+        "skill": 17,
         "session": 17,
         "url": 17,
-        "skill": 15,
         "without": 15,
         "update": 15,
         "auto": 15,
+        "before": 14,
         "tab": 14,
         "error": 14,
         "language": 14,
         "also": 14,
         "scope": 14,
         "repository": 14,
-        "before": 13,
         "project": 13,
         "detail": 13,
         "updat": 13,
@@ -13792,9 +13796,9 @@
         "using": 9,
         "official": 9,
         "github": 9,
-        "each": 9
+        "only": 9
       },
-      "word_count": 4291
+      "word_count": 4309
     },
     {
       "filename": "claude-code__docs___llms__cn.md",
@@ -16371,30 +16375,30 @@
         }
       ],
       "terms": {
-        "claude": 338,
-        "set": 328,
-        "code": 269,
+        "claude": 343,
+        "set": 330,
+        "code": 270,
         "default": 148,
         "model": 128,
-        "session": 124,
+        "session": 125,
         "see": 91,
         "tool": 90,
-        "variable": 78,
+        "variable": 79,
         "requir": 77,
         "later": 74,
         "command": 71,
         "server": 69,
         "agent": 63,
+        "turn": 59,
+        "off": 57,
         "request": 56,
-        "value": 55,
-        "turn": 55,
-        "off": 55,
+        "value": 56,
         "before": 54,
+        "such": 53,
         "mode": 53,
         "disable": 53,
-        "such": 52,
+        "sett": 52,
         "instead": 52,
-        "sett": 51,
         "background": 51,
         "file": 50,
         "platform": 50,
@@ -16412,17 +16416,17 @@
         "cloud": 39,
         "bash": 39,
         "subagent": 38,
-        "flag": 36,
+        "flag": 37,
         "gateway": 35,
         "google": 35,
+        "still": 34,
         "timeout": 34,
         "appli": 33,
-        "still": 33,
         "hook": 33,
         "cap": 33,
         "shell": 32
       },
-      "word_count": 17684
+      "word_count": 17755
     },
     {
       "filename": "claude-code__errors.md",
@@ -16930,12 +16934,12 @@
         "command": 19,
         "context": 19,
         "update": 19,
+        "com": 18,
         "control": 17,
         "too": 17,
         "oauth": 17,
         "origin": 17,
         "http": 16,
-        "com": 16,
         "cannot": 16,
         "run": 16,
         "usage": 15,
@@ -16948,7 +16952,7 @@
         "format": 14,
         "message": 13
       },
-      "word_count": 35158
+      "word_count": 35184
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -22914,6 +22918,10 @@
           "level": 2
         },
         {
+          "text": "Organization IP allowlists and proxy egress",
+          "level": 3
+        },
+        {
           "text": "GitHub allow lists and firewalls",
           "level": 3
         },
@@ -22927,41 +22935,43 @@
         }
       ],
       "terms": {
-        "claude": 69,
-        "code": 53,
+        "claude": 73,
+        "code": 55,
         "session": 27,
-        "host": 25,
+        "host": 27,
+        "proxy": 26,
         "environment": 21,
         "setting": 21,
-        "proxy": 20,
+        "anthropic": 21,
         "set": 20,
         "read": 20,
-        "anthropic": 20,
         "variabl": 18,
-        "connection": 17,
-        "only": 17,
+        "connection": 18,
+        "only": 18,
+        "check": 15,
         "certificate": 14,
         "install": 14,
-        "check": 14,
         "network": 13,
         "request": 13,
         "watchdog": 13,
         "doesn": 12,
         "error": 12,
         "authentication": 11,
+        "through": 11,
+        "app": 11,
         "gateway": 11,
         "block": 11,
         "fil": 11,
         "load": 11,
         "every": 11,
+        "allowlist": 11,
         "configuration": 10,
         "shell": 10,
-        "app": 10,
+        "also": 10,
         "manag": 10,
+        "organization": 10,
         "start": 10,
         "run": 10,
-        "through": 9,
-        "also": 9,
         "see": 9,
         "instead": 9,
         "api": 9,
@@ -22972,13 +22982,11 @@
         "appli": 8,
         "pair": 8,
         "next": 8,
+        "other": 8,
         "telemetry": 8,
-        "agent": 8,
-        "supervisor": 8,
-        "before": 7,
-        "mtl": 7
+        "agent": 8
       },
-      "word_count": 3179
+      "word_count": 3316
     },
     {
       "filename": "claude-code__output-styles.md",
@@ -24332,7 +24340,7 @@
       ],
       "terms": {
         "plugin": 151,
-        "skill": 51,
+        "skill": 49,
         "claude": 41,
         "directory": 32,
         "code": 28,
@@ -24358,7 +24366,6 @@
         "lsp": 10,
         "manifest": 9,
         "title": 9,
-        "only": 9,
         "project": 8,
         "contain": 8,
         "version": 8,
@@ -24366,6 +24373,7 @@
         "start": 8,
         "flag": 8,
         "user": 8,
+        "only": 8,
         "check": 8,
         "team": 7,
         "folder": 7,
@@ -24376,13 +24384,13 @@
         "complete": 6,
         "mcp": 6,
         "creat": 6,
-        "directori": 6,
         "share": 6,
         "command": 6,
         "same": 6,
-        "component": 6
+        "component": 6,
+        "default": 6
       },
-      "word_count": 3162
+      "word_count": 3138
     },
     {
       "filename": "claude-code__plugins-reference.md",
@@ -24609,13 +24617,13 @@
         }
       ],
       "terms": {
-        "plugin": 316,
-        "claude": 121,
-        "code": 105,
+        "plugin": 319,
+        "claude": 125,
+        "code": 109,
         "server": 91,
-        "install": 68,
+        "install": 70,
+        "command": 66,
         "directory": 66,
-        "command": 65,
         "field": 64,
         "skill": 55,
         "session": 47,
@@ -24623,22 +24631,23 @@
         "default": 45,
         "marketplace": 44,
         "path": 44,
+        "run": 43,
         "load": 42,
-        "run": 42,
         "hook": 41,
         "mcp": 38,
         "see": 36,
         "component": 34,
+        "only": 33,
+        "name": 32,
         "one": 32,
-        "only": 32,
         "user": 31,
         "file": 30,
-        "name": 29,
         "monitor": 28,
         "option": 28,
         "manifest": 27,
         "fil": 26,
         "tool": 25,
+        "before": 24,
         "root": 24,
         "configuration": 24,
         "same": 24,
@@ -24646,21 +24655,20 @@
         "str": 23,
         "script": 23,
         "scope": 23,
-        "before": 22,
         "agent": 22,
         "start": 22,
         "requir": 22,
         "description": 21,
         "source": 21,
         "set": 20,
+        "error": 20,
         "value": 19,
-        "error": 19,
         "setting": 19,
         "chang": 18,
         "array": 18,
         "dependenci": 18
       },
-      "word_count": 10742
+      "word_count": 10822
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -28177,14 +28185,14 @@
         }
       ],
       "terms": {
-        "claude": 479,
+        "claude": 480,
         "code": 388,
-        "setting": 318,
+        "setting": 319,
         "file": 250,
         "sandbox": 213,
-        "manag": 206,
+        "manag": 207,
         "default": 198,
-        "json": 182,
+        "json": 184,
         "session": 176,
         "any": 173,
         "command": 168,
@@ -28195,11 +28203,11 @@
         "turn": 128,
         "model": 119,
         "one": 114,
-        "null": 109,
+        "null": 110,
         "run": 104,
         "only": 103,
         "unset": 103,
-        "theme": 101,
+        "theme": 102,
         "mode": 99,
         "off": 97,
         "every": 96,
@@ -28212,9 +28220,9 @@
         "permission": 78,
         "tool": 77,
         "prompt": 77,
+        "user": 75,
         "requir": 75,
         "later": 75,
-        "user": 74,
         "such": 70,
         "show": 68,
         "plugin": 68,
@@ -28228,7 +28236,7 @@
         "request": 57,
         "start": 55
       },
-      "word_count": 41643
+      "word_count": 41879
     },
     {
       "filename": "claude-code__setup.md",
@@ -28608,7 +28616,7 @@
         "follow": 7,
         "launch": 7
       },
-      "word_count": 11221
+      "word_count": 11243
     },
     {
       "filename": "claude-code__slack.md",
@@ -28739,7 +28747,7 @@
         "app": 24,
         "channel": 22,
         "acces": 20,
-        "web": 19,
+        "web": 20,
         "repository": 15,
         "task": 13,
         "connect": 13,
@@ -28756,9 +28764,9 @@
         "title": 10,
         "card": 10,
         "tag": 9,
-        "admin": 9,
         "plan": 8,
         "organization": 8,
+        "admin": 8,
         "one": 8,
         "add": 8,
         "rout": 8,
@@ -28768,6 +28776,7 @@
         "github": 7,
         "click": 7,
         "want": 7,
+        "create": 7,
         "environment": 7,
         "enterprise": 6,
         "each": 6,
@@ -28777,12 +28786,11 @@
         "marketplace": 6,
         "mode": 6,
         "messag": 6,
-        "create": 6,
         "where": 6,
         "full": 6,
         "control": 6
       },
-      "word_count": 2101
+      "word_count": 2100
     },
     {
       "filename": "claude-code__statusline.md",
@@ -29524,6 +29532,34 @@
           "level": 2
         },
         {
+          "text": "SendFeedback tool behavior",
+          "level": 2
+        },
+        {
+          "text": "What you see when Claude drafts",
+          "level": 3
+        },
+        {
+          "text": "Review and edit a draft",
+          "level": 3
+        },
+        {
+          "text": "Send a draft",
+          "level": 3
+        },
+        {
+          "text": "Discard or keep a draft",
+          "level": 3
+        },
+        {
+          "text": "Turn Claude-drafted feedback off",
+          "level": 3
+        },
+        {
+          "text": "Sessions without Claude-drafted feedback",
+          "level": 3
+        },
+        {
           "text": "Task tool availability",
           "level": 2
         },
@@ -29553,11 +29589,11 @@
         }
       ],
       "terms": {
-        "claude": 157,
-        "tool": 140,
-        "code": 85,
-        "command": 68,
-        "session": 58,
+        "claude": 165,
+        "tool": 141,
+        "code": 91,
+        "command": 69,
+        "session": 59,
         "file": 47,
         "subagent": 46,
         "run": 38,
@@ -29567,35 +29603,35 @@
         "task": 34,
         "list": 33,
         "set": 32,
-        "see": 31,
+        "see": 32,
         "background": 30,
         "before": 26,
         "prompt": 26,
         "only": 26,
         "bash": 26,
         "one": 26,
+        "behavior": 25,
         "edit": 24,
-        "behavior": 23,
         "fil": 23,
         "permission": 22,
         "instead": 22,
         "end": 22,
         "powershell": 22,
         "result": 22,
+        "available": 20,
         "call": 20,
-        "available": 19,
         "hook": 19,
+        "yes": 19,
+        "requir": 19,
+        "later": 19,
         "rul": 18,
         "each": 18,
         "directory": 18,
-        "requir": 18,
-        "later": 18,
         "pattern": 18,
         "server": 17,
         "path": 17,
         "work": 17,
         "other": 17,
-        "yes": 16,
         "output": 16,
         "ask": 15,
         "without": 15,
@@ -29604,7 +29640,7 @@
         "also": 15,
         "same": 15
       },
-      "word_count": 8982
+      "word_count": 9792
     },
     {
       "filename": "claude-code__troubleshoot-install.md",
@@ -30453,58 +30489,58 @@
         }
       ],
       "terms": {
-        "claude": 74,
-        "session": 44,
-        "step": 40,
-        "code": 39,
-        "github": 29,
+        "claude": 84,
+        "code": 47,
+        "session": 45,
+        "step": 44,
+        "github": 37,
         "environment": 29,
         "run": 27,
-        "cloud": 24,
-        "setup": 19,
+        "cloud": 25,
+        "setup": 22,
+        "web": 20,
+        "start": 16,
+        "repository": 15,
         "task": 15,
         "script": 15,
         "cli": 15,
-        "start": 14,
-        "web": 14,
-        "repository": 14,
+        "connect": 14,
+        "work": 14,
+        "sign": 14,
         "title": 14,
-        "connect": 12,
+        "default": 13,
+        "network": 13,
+        "acces": 13,
+        "account": 13,
         "app": 12,
-        "work": 12,
-        "don": 12,
-        "network": 12,
-        "acces": 12,
-        "account": 12,
-        "default": 11,
-        "sign": 11,
+        "don": 11,
+        "after": 11,
+        "create": 11,
+        "see": 11,
+        "show": 11,
+        "install": 11,
         "command": 11,
+        "review": 10,
+        "instead": 10,
         "branch": 10,
         "terminal": 10,
         "open": 10,
-        "see": 10,
-        "show": 10,
-        "review": 9,
+        "repositori": 10,
+        "browser": 9,
         "local": 9,
-        "instead": 9,
-        "create": 9,
         "one": 9,
-        "install": 9,
         "prompt": 9,
-        "browser": 8,
+        "enterprise": 8,
         "machine": 8,
         "need": 8,
         "organization": 8,
         "diff": 8,
-        "repositori": 8,
+        "plan": 8,
         "add": 8,
-        "submit": 7,
-        "push": 7,
-        "after": 7,
-        "edit": 7,
-        "finish": 7
+        "available": 7,
+        "submit": 7
       },
-      "word_count": 2670
+      "word_count": 2920
     },
     {
       "filename": "claude-code__whats-new.md",
@@ -32414,7 +32450,7 @@
       ],
       "terms": {
         "zdr": 44,
-        "claude": 35,
+        "claude": 36,
         "organization": 21,
         "code": 18,
         "data": 16,
@@ -32426,17 +32462,18 @@
         "retention": 10,
         "enabl": 9,
         "requir": 9,
+        "session": 8,
         "cover": 8,
         "disabl": 7,
         "featur": 7,
         "request": 7,
-        "session": 7,
         "under": 7,
         "prompt": 6,
         "team": 6,
         "zero": 5,
         "stor": 5,
         "server": 5,
+        "retain": 5,
         "includ": 4,
         "where": 4,
         "standard": 4,
@@ -32444,7 +32481,6 @@
         "polici": 4,
         "doe": 4,
         "require": 4,
-        "retain": 4,
         "conversation": 4,
         "policy": 4,
         "qualifi": 3,
@@ -32464,7 +32500,7 @@
         "completion": 3,
         "fable": 3
       },
-      "word_count": 1002
+      "word_count": 1013
     },
     {
       "filename": "docs__en__about-claude__additional-resources.md",
@@ -34882,7 +34918,7 @@
         }
       ],
       "terms": {
-        "mcp": 80,
+        "mcp": 79,
         "tool": 78,
         "server": 45,
         "configuration": 23,
@@ -34901,11 +34937,11 @@
         "deprecat": 10,
         "oauth": 10,
         "codegroup": 10,
-        "connector": 9,
         "enabl": 9,
         "token": 9,
         "must": 9,
         "convert": 9,
+        "connector": 8,
         "connect": 8,
         "messag": 8,
         "beta": 8,
@@ -34921,7 +34957,6 @@
         "only": 7,
         "pattern": 7,
         "url": 6,
-        "requir": 6,
         "note": 6,
         "version": 6,
         "see": 6,
@@ -34931,9 +34966,10 @@
         "using": 6,
         "definition": 6,
         "each": 6,
-        "type": 6
+        "type": 6,
+        "str": 6
       },
-      "word_count": 4596
+      "word_count": 4582
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__concepts.md",
@@ -38940,16 +38976,16 @@
         }
       ],
       "terms": {
-        "fetch": 70,
-        "tool": 62,
-        "web": 47,
+        "fetch": 71,
+        "tool": 63,
+        "web": 48,
         "claude": 41,
         "content": 32,
         "url": 23,
         "note": 20,
         "api": 20,
+        "filter": 16,
         "result": 16,
-        "filter": 15,
         "see": 14,
         "token": 13,
         "code": 12,
@@ -38959,18 +38995,19 @@
         "document": 11,
         "limit": 11,
         "request": 11,
+        "only": 10,
         "parameter": 10,
         "pdf": 9,
-        "only": 9,
+        "dynamic": 9,
         "return": 9,
         "error": 9,
         "agent": 8,
         "specific": 8,
-        "dynamic": 8,
         "available": 8,
         "server": 8,
         "domain": 8,
         "page": 8,
+        "support": 7,
         "cache": 7,
         "user": 7,
         "citation": 7,
@@ -38978,6 +39015,7 @@
         "execution": 7,
         "http": 6,
         "context": 6,
+        "version": 6,
         "anthropic": 6,
         "enabl": 6,
         "provid": 6,
@@ -38987,11 +39025,9 @@
         "turn": 6,
         "codegroup": 6,
         "set": 6,
-        "cach": 6,
-        "card": 6,
-        "platform": 5
+        "cach": 6
       },
-      "word_count": 3690
+      "word_count": 3705
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__web-search-tool.md",
@@ -39079,18 +39115,18 @@
       ],
       "terms": {
         "search": 81,
-        "tool": 53,
+        "tool": 54,
         "web": 50,
         "claude": 36,
         "api": 25,
         "result": 22,
+        "filter": 21,
         "request": 21,
-        "filter": 20,
         "error": 17,
         "code": 15,
+        "dynamic": 14,
         "turn": 14,
         "content": 13,
-        "dynamic": 13,
         "see": 13,
         "note": 12,
         "agent": 11,
@@ -39104,11 +39140,13 @@
         "later": 8,
         "includ": 7,
         "available": 7,
+        "without": 7,
         "token": 7,
         "title": 6,
         "platform": 6,
         "citation": 6,
-        "without": 6,
+        "only": 6,
+        "support": 6,
         "conversation": 6,
         "fetch": 6,
         "limit": 6,
@@ -39117,7 +39155,7 @@
         "card": 6,
         "cit": 5,
         "context": 5,
-        "only": 5,
+        "basic": 5,
         "page": 5,
         "reference": 5,
         "organization": 5,
@@ -39125,11 +39163,9 @@
         "each": 5,
         "field": 5,
         "parameter": 5,
-        "source": 5,
-        "batch": 5,
-        "url": 4
+        "source": 5
       },
-      "word_count": 3117
+      "word_count": 3131
     },
     {
       "filename": "docs__en__api__admin.md",
@@ -70698,7 +70734,7 @@
     {
       "filename": "docs__en__api__beta__organization.md",
       "id": "docs/en/api/beta/organization",
-      "title": "Organization",
+      "title": "Organization (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization",
       "headings": [
@@ -72128,7 +72164,7 @@
     {
       "filename": "docs__en__api__beta__organization__api_keys.md",
       "id": "docs/en/api/beta/organization/api_keys",
-      "title": "API Keys",
+      "title": "API Keys (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys",
       "headings": [
@@ -72286,7 +72322,7 @@
     {
       "filename": "docs__en__api__beta__organization__api_keys__list.md",
       "id": "docs/en/api/beta/organization/api_keys/list",
-      "title": "List API Keys",
+      "title": "List API Keys (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/list",
       "headings": [
@@ -72368,7 +72404,7 @@
     {
       "filename": "docs__en__api__beta__organization__api_keys__retrieve.md",
       "id": "docs/en/api/beta/organization/api_keys/retrieve",
-      "title": "Get API Key",
+      "title": "Get API Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/retrieve",
       "headings": [
@@ -72450,7 +72486,7 @@
     {
       "filename": "docs__en__api__beta__organization__api_keys__update.md",
       "id": "docs/en/api/beta/organization/api_keys/update",
-      "title": "Update API Key",
+      "title": "Update API Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/api_keys/update",
       "headings": [
@@ -72536,7 +72572,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys.md",
       "id": "docs/en/api/beta/organization/external_keys",
-      "title": "External Keys",
+      "title": "External Keys (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys",
       "headings": [
@@ -72766,7 +72802,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__create.md",
       "id": "docs/en/api/beta/organization/external_keys/create",
-      "title": "Create External Key",
+      "title": "Create External Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/create",
       "headings": [
@@ -72848,7 +72884,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__delete.md",
       "id": "docs/en/api/beta/organization/external_keys/delete",
-      "title": "Delete External Key",
+      "title": "Delete External Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/delete",
       "headings": [
@@ -72898,7 +72934,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__list.md",
       "id": "docs/en/api/beta/organization/external_keys/list",
-      "title": "List External Keys",
+      "title": "List External Keys (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/list",
       "headings": [
@@ -72980,7 +73016,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__retrieve.md",
       "id": "docs/en/api/beta/organization/external_keys/retrieve",
-      "title": "Get External Key",
+      "title": "Get External Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve",
       "headings": [
@@ -73062,7 +73098,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__update.md",
       "id": "docs/en/api/beta/organization/external_keys/update",
-      "title": "Update External Key",
+      "title": "Update External Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/update",
       "headings": [
@@ -73148,7 +73184,7 @@
     {
       "filename": "docs__en__api__beta__organization__external_keys__validate.md",
       "id": "docs/en/api/beta/organization/external_keys/validate",
-      "title": "Validate External Key",
+      "title": "Validate External Key (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/external_keys/validate",
       "headings": [
@@ -73214,7 +73250,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation.md",
       "id": "docs/en/api/beta/organization/federation",
-      "title": "Federation",
+      "title": "Federation (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation",
       "headings": [
@@ -73620,7 +73656,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers.md",
       "id": "docs/en/api/beta/organization/federation/issuers",
-      "title": "Issuers",
+      "title": "Issuers (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers",
       "headings": [
@@ -73834,7 +73870,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
       "id": "docs/en/api/beta/organization/federation/issuers/archive",
-      "title": "Archive Federation Issuer",
+      "title": "Archive Federation Issuer (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/archive",
       "headings": [
@@ -73920,7 +73956,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
       "id": "docs/en/api/beta/organization/federation/issuers/create",
-      "title": "Create Federation Issuer",
+      "title": "Create Federation Issuer (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create",
       "headings": [
@@ -74006,7 +74042,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
       "id": "docs/en/api/beta/organization/federation/issuers/list",
-      "title": "List Federation Issuers",
+      "title": "List Federation Issuers (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/list",
       "headings": [
@@ -74092,7 +74128,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
       "id": "docs/en/api/beta/organization/federation/issuers/retrieve",
-      "title": "Get Federation Issuer",
+      "title": "Get Federation Issuer (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/retrieve",
       "headings": [
@@ -74178,7 +74214,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
       "id": "docs/en/api/beta/organization/federation/issuers/update",
-      "title": "Update Federation Issuer",
+      "title": "Update Federation Issuer (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/update",
       "headings": [
@@ -74268,7 +74304,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
       "id": "docs/en/api/beta/organization/federation/rules",
-      "title": "Rules",
+      "title": "Rules (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules",
       "headings": [
@@ -74562,7 +74598,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
       "id": "docs/en/api/beta/organization/federation/rules/archive",
-      "title": "Archive Federation Rule",
+      "title": "Archive Federation Rule (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/archive",
       "headings": [
@@ -74648,7 +74684,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
       "id": "docs/en/api/beta/organization/federation/rules/create",
-      "title": "Create Federation Rule",
+      "title": "Create Federation Rule (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create",
       "headings": [
@@ -74734,7 +74770,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
       "id": "docs/en/api/beta/organization/federation/rules/list",
-      "title": "List Federation Rules",
+      "title": "List Federation Rules (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/list",
       "headings": [
@@ -74820,7 +74856,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
       "id": "docs/en/api/beta/organization/federation/rules/retrieve",
-      "title": "Get Federation Rule",
+      "title": "Get Federation Rule (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/retrieve",
       "headings": [
@@ -74906,7 +74942,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
       "id": "docs/en/api/beta/organization/federation/rules/update",
-      "title": "Update Federation Rule",
+      "title": "Update Federation Rule (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update",
       "headings": [
@@ -74996,7 +75032,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
       "id": "docs/en/api/beta/organization/federation/rules/workspaces",
-      "title": "Workspaces",
+      "title": "Workspaces (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces",
       "headings": [
@@ -75150,7 +75186,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
       "id": "docs/en/api/beta/organization/federation/rules/workspaces/add",
-      "title": "Add Federation Rule Workspace",
+      "title": "Add Federation Rule Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/add",
       "headings": [
@@ -75240,7 +75276,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
       "id": "docs/en/api/beta/organization/federation/rules/workspaces/list",
-      "title": "List Federation Rule Workspaces",
+      "title": "List Federation Rule Workspaces (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/list",
       "headings": [
@@ -75330,7 +75366,7 @@
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
       "id": "docs/en/api/beta/organization/federation/rules/workspaces/remove",
-      "title": "Remove Federation Rule Workspace",
+      "title": "Remove Federation Rule Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/remove",
       "headings": [
@@ -75416,7 +75452,7 @@
     {
       "filename": "docs__en__api__beta__organization__invites.md",
       "id": "docs/en/api/beta/organization/invites",
-      "title": "Invites",
+      "title": "Invites (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/invites",
       "headings": [
@@ -75574,7 +75610,7 @@
     {
       "filename": "docs__en__api__beta__organization__invites__create.md",
       "id": "docs/en/api/beta/organization/invites/create",
-      "title": "Create Invite",
+      "title": "Create Invite (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/create",
       "headings": [
@@ -75656,7 +75692,7 @@
     {
       "filename": "docs__en__api__beta__organization__invites__delete.md",
       "id": "docs/en/api/beta/organization/invites/delete",
-      "title": "Delete Invite",
+      "title": "Delete Invite (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/delete",
       "headings": [
@@ -75702,7 +75738,7 @@
     {
       "filename": "docs__en__api__beta__organization__invites__list.md",
       "id": "docs/en/api/beta/organization/invites/list",
-      "title": "List Invites",
+      "title": "List Invites (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/list",
       "headings": [
@@ -75784,7 +75820,7 @@
     {
       "filename": "docs__en__api__beta__organization__invites__retrieve.md",
       "id": "docs/en/api/beta/organization/invites/retrieve",
-      "title": "Get Invite",
+      "title": "Get Invite (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve",
       "headings": [
@@ -75854,7 +75890,7 @@
     {
       "filename": "docs__en__api__beta__organization__rate_limits.md",
       "id": "docs/en/api/beta/organization/rate_limits",
-      "title": "Rate Limits",
+      "title": "Rate Limits (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits",
       "headings": [
@@ -75952,7 +75988,7 @@
     {
       "filename": "docs__en__api__beta__organization__rate_limits__list.md",
       "id": "docs/en/api/beta/organization/rate_limits/list",
-      "title": "List Organization Rate Limits",
+      "title": "List Organization Rate Limits (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/rate_limits/list",
       "headings": [
@@ -76034,7 +76070,7 @@
     {
       "filename": "docs__en__api__beta__organization__retrieve.md",
       "id": "docs/en/api/beta/organization/retrieve",
-      "title": "Get Current Organization",
+      "title": "Get Current Organization (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/retrieve",
       "headings": [
@@ -76082,7 +76118,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts.md",
       "id": "docs/en/api/beta/organization/service_accounts",
-      "title": "Service Accounts",
+      "title": "Service Accounts (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts",
       "headings": [
@@ -76368,7 +76404,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
       "id": "docs/en/api/beta/organization/service_accounts/archive",
-      "title": "Archive Service Account",
+      "title": "Archive Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/archive",
       "headings": [
@@ -76454,7 +76490,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
       "id": "docs/en/api/beta/organization/service_accounts/create",
-      "title": "Create Service Account",
+      "title": "Create Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/create",
       "headings": [
@@ -76540,7 +76576,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
       "id": "docs/en/api/beta/organization/service_accounts/list",
-      "title": "List Service Accounts",
+      "title": "List Service Accounts (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/list",
       "headings": [
@@ -76626,7 +76662,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
       "id": "docs/en/api/beta/organization/service_accounts/retrieve",
-      "title": "Get Service Account",
+      "title": "Get Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/retrieve",
       "headings": [
@@ -76712,7 +76748,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
       "id": "docs/en/api/beta/organization/service_accounts/update",
-      "title": "Update Service Account",
+      "title": "Update Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/update",
       "headings": [
@@ -76802,7 +76838,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
       "id": "docs/en/api/beta/organization/service_accounts/workspaces",
-      "title": "Workspaces",
+      "title": "Workspaces (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces",
       "headings": [
@@ -76956,7 +76992,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
       "id": "docs/en/api/beta/organization/service_accounts/workspaces/add",
-      "title": "Add Workspace To Service Account",
+      "title": "Add Workspace To Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/add",
       "headings": [
@@ -77046,7 +77082,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
       "id": "docs/en/api/beta/organization/service_accounts/workspaces/list",
-      "title": "List Workspaces For Service Account",
+      "title": "List Workspaces For Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/list",
       "headings": [
@@ -77136,7 +77172,7 @@
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
       "id": "docs/en/api/beta/organization/service_accounts/workspaces/remove",
-      "title": "Remove Workspace From Service Account",
+      "title": "Remove Workspace From Service Account (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/remove",
       "headings": [
@@ -77222,7 +77258,7 @@
     {
       "filename": "docs__en__api__beta__organization__users.md",
       "id": "docs/en/api/beta/organization/users",
-      "title": "Users",
+      "title": "Users (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/users",
       "headings": [
@@ -77384,7 +77420,7 @@
     {
       "filename": "docs__en__api__beta__organization__users__list.md",
       "id": "docs/en/api/beta/organization/users/list",
-      "title": "List Users",
+      "title": "List Users (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/users/list",
       "headings": [
@@ -77466,7 +77502,7 @@
     {
       "filename": "docs__en__api__beta__organization__users__remove.md",
       "id": "docs/en/api/beta/organization/users/remove",
-      "title": "Remove User",
+      "title": "Remove User (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/users/remove",
       "headings": [
@@ -77513,7 +77549,7 @@
     {
       "filename": "docs__en__api__beta__organization__users__retrieve.md",
       "id": "docs/en/api/beta/organization/users/retrieve",
-      "title": "Get User",
+      "title": "Get User (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/users/retrieve",
       "headings": [
@@ -77570,7 +77606,7 @@
     {
       "filename": "docs__en__api__beta__organization__users__update.md",
       "id": "docs/en/api/beta/organization/users/update",
-      "title": "Update User",
+      "title": "Update User (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/users/update",
       "headings": [
@@ -77643,7 +77679,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces.md",
       "id": "docs/en/api/beta/organization/workspaces",
-      "title": "Workspaces",
+      "title": "Workspaces (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces",
       "headings": [
@@ -78133,7 +78169,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__archive.md",
       "id": "docs/en/api/beta/organization/workspaces/archive",
-      "title": "Archive Workspace",
+      "title": "Archive Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/archive",
       "headings": [
@@ -78215,7 +78251,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__create.md",
       "id": "docs/en/api/beta/organization/workspaces/create",
-      "title": "Create Workspace",
+      "title": "Create Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/create",
       "headings": [
@@ -78301,7 +78337,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
       "id": "docs/en/api/beta/organization/workspaces/list",
-      "title": "List Workspaces",
+      "title": "List Workspaces (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/list",
       "headings": [
@@ -78383,7 +78419,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members.md",
       "id": "docs/en/api/beta/organization/workspaces/members",
-      "title": "Members",
+      "title": "Members (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members",
       "headings": [
@@ -78568,7 +78604,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members__add.md",
       "id": "docs/en/api/beta/organization/workspaces/members/add",
-      "title": "Create Workspace Member",
+      "title": "Create Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/add",
       "headings": [
@@ -78622,7 +78658,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members__list.md",
       "id": "docs/en/api/beta/organization/workspaces/members/list",
-      "title": "List Workspace Members",
+      "title": "List Workspace Members (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/list",
       "headings": [
@@ -78696,7 +78732,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members__remove.md",
       "id": "docs/en/api/beta/organization/workspaces/members/remove",
-      "title": "Delete Workspace Member",
+      "title": "Delete Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove",
       "headings": [
@@ -78742,7 +78778,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members__retrieve.md",
       "id": "docs/en/api/beta/organization/workspaces/members/retrieve",
-      "title": "Get Workspace Member",
+      "title": "Get Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/retrieve",
       "headings": [
@@ -78788,7 +78824,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__members__update.md",
       "id": "docs/en/api/beta/organization/workspaces/members/update",
-      "title": "Update Workspace Member",
+      "title": "Update Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/update",
       "headings": [
@@ -78841,7 +78877,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__rate_limits.md",
       "id": "docs/en/api/beta/organization/workspaces/rate_limits",
-      "title": "Rate Limits",
+      "title": "Rate Limits (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits",
       "headings": [
@@ -78943,7 +78979,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__rate_limits__list.md",
       "id": "docs/en/api/beta/organization/workspaces/rate_limits/list",
-      "title": "List Workspace Rate Limits",
+      "title": "List Workspace Rate Limits (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits/list",
       "headings": [
@@ -79029,7 +79065,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__retrieve.md",
       "id": "docs/en/api/beta/organization/workspaces/retrieve",
-      "title": "Get Workspace",
+      "title": "Get Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve",
       "headings": [
@@ -79111,7 +79147,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts",
-      "title": "Service Accounts",
+      "title": "Service Accounts (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts",
       "headings": [
@@ -79317,7 +79353,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts/add",
-      "title": "Create Service Account Workspace Member",
+      "title": "Create Service Account Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/add",
       "headings": [
@@ -79407,7 +79443,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts/list",
-      "title": "List Service Account Workspace Members",
+      "title": "List Service Account Workspace Members (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/list",
       "headings": [
@@ -79497,7 +79533,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts/remove",
-      "title": "Delete Service Account Workspace Member",
+      "title": "Delete Service Account Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/remove",
       "headings": [
@@ -79583,7 +79619,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts/retrieve",
-      "title": "Get Service Account Workspace Member",
+      "title": "Get Service Account Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/retrieve",
       "headings": [
@@ -79669,7 +79705,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
       "id": "docs/en/api/beta/organization/workspaces/service_accounts/update",
-      "title": "Update Service Account Workspace Member",
+      "title": "Update Service Account Workspace Member (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/service_accounts/update",
       "headings": [
@@ -79759,7 +79795,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
       "id": "docs/en/api/beta/organization/workspaces/update",
-      "title": "Update Workspace",
+      "title": "Update Workspace (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/update",
       "headings": [
@@ -102055,10 +102091,10 @@
         "claude": 89,
         "foundry": 62,
         "model": 55,
-        "azure": 54,
-        "deployment": 40,
+        "azure": 55,
+        "deployment": 41,
         "api": 33,
-        "host": 28,
+        "host": 29,
         "microsoft": 27,
         "tab": 25,
         "anthropic": 24,
@@ -102071,17 +102107,17 @@
         "portal": 14,
         "key": 14,
         "name": 14,
+        "available": 13,
+        "support": 13,
         "select": 13,
+        "version": 13,
         "acces": 12,
         "through": 12,
         "featur": 12,
-        "available": 12,
         "note": 12,
-        "support": 12,
         "sonnet": 11,
         "token": 11,
         "example": 11,
-        "version": 11,
         "http": 10,
         "platform": 10,
         "sdk": 10,
@@ -102103,7 +102139,7 @@
         "bill": 7,
         "usage": 7
       },
-      "word_count": 3945
+      "word_count": 3963
     },
     {
       "filename": "docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md",
@@ -106038,10 +106074,10 @@
       "terms": {
         "schema": 133,
         "json": 78,
-        "output": 63,
+        "output": 62,
         "claude": 41,
         "tool": 41,
-        "structur": 35,
+        "structur": 34,
         "sdk": 34,
         "accordion": 34,
         "title": 33,
@@ -106087,7 +106123,7 @@
         "match": 10,
         "step": 10
       },
-      "word_count": 10431
+      "word_count": 10418
     },
     {
       "filename": "docs__en__build-with-claude__task-budgets.md",
