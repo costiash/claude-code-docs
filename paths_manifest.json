@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-27T04:54:22.166960Z",
+  "generated_at": "2026-08-27T15:49:10.652751Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -224,8 +224,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "58a37e24bd3bfe9da9ccb2df148431f0d81b384a3b1ecf3e9a19010a9e58a0ae",
-      "lastmod": "2026-08-26T23:35:54.213Z",
+      "sha256": "29cd6d479bc1a3f02e109a08dd2f1b386431167b5be6a02e56fb40d3661f2a06",
+      "lastmod": "2026-08-27T15:06:05.932Z",
       "fetch_status": "ok"
     },
     {
@@ -345,8 +345,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/tool-search.md",
       "title": "Scale to many tools with tool search",
       "category": "agent_sdk",
-      "sha256": "e79c39a402a69fbda275937a2a1463afe821506474a67ed48c6f17fd68712ea3",
-      "lastmod": "2026-08-24T22:28:48.144Z",
+      "sha256": "7d57d9540d5b058e63981f5fc6046439e32dd6dbaf9a03472f32182dd3b9aef3",
+      "lastmod": "2026-08-27T15:07:01.828Z",
       "fetch_status": "ok"
     },
     {
@@ -796,8 +796,8 @@
       "md_url": "https://code.claude.com/docs/en/cross-session-messaging.md",
       "title": "Message your other Claude Code sessions",
       "category": "claude_code",
-      "sha256": "d2bb37193ec2f7d35376cf2455077cd91c3f1c7b7625720d87e016f65331a493",
-      "lastmod": "2026-08-22T02:35:10.424Z",
+      "sha256": "47d7adc6f72b0876d55f130397e9a088e418fe25206f42f160412b213848e00a",
+      "lastmod": "2026-08-27T15:00:38.345Z",
       "fetch_status": "ok"
     },
     {
@@ -862,8 +862,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop-linux.md",
       "title": "Claude Desktop on Linux (beta)",
       "category": "claude_code",
-      "sha256": "3962791d633a2c52d38d506a47216ff28dbcceb8817b0451a55f6c957bd151c5",
-      "lastmod": "2026-08-26T02:08:46.802Z",
+      "sha256": "12d9a33f896c68a5827969b4ef5c27838d0be37e0672a95f0835d664d386b66a",
+      "lastmod": "2026-08-27T15:07:01.826Z",
       "fetch_status": "ok"
     },
     {
@@ -1060,8 +1060,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "d3b98519b17a7e4509ad703ecc2ccc164e78dbbb8f4a879a25bd7eac5011aa7e",
-      "lastmod": "2026-08-27T00:36:39.671Z",
+      "sha256": "0d85834abc08cc6ec7d72083a73cff35ab6806b6fa0cc7d18eac59066de57dfc",
+      "lastmod": "2026-08-27T15:04:06.349Z",
       "fetch_status": "ok"
     },
     {
@@ -1247,8 +1247,8 @@
       "md_url": "https://code.claude.com/docs/en/interactive-mode.md",
       "title": "Interactive mode",
       "category": "claude_code",
-      "sha256": "b06cb6a585f212a485c1c5cdbae7032531c1c8bca3759b099a543250932cbc8b",
-      "lastmod": "2026-08-24T22:17:38.716Z",
+      "sha256": "350f11c12426eec0d33c1443259c74f335590184c173908a5d6bee07a8d0401f",
+      "lastmod": "2026-08-27T15:00:38.347Z",
       "fetch_status": "ok"
     },
     {
@@ -1269,8 +1269,8 @@
       "md_url": "https://code.claude.com/docs/en/keybindings.md",
       "title": "Customize keyboard shortcuts",
       "category": "claude_code",
-      "sha256": "90d13afcf8ccb4ea99665130bae14279788968603726dcfac54b8213a2512668",
-      "lastmod": "2026-08-26T23:35:54.206Z",
+      "sha256": "7b91cd8375a75a99e8add214590cea005d8b17b695c825d8ff428306a9c58ea1",
+      "lastmod": "2026-08-27T14:59:27.590Z",
       "fetch_status": "ok"
     },
     {
@@ -1511,8 +1511,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-dependencies.md",
       "title": "Constrain plugin dependency versions",
       "category": "claude_code",
-      "sha256": "ac3ed51b67b7cb90a264a6891454bfc9ce72a7f584f9592d204f53a29858db52",
-      "lastmod": "2026-08-24T21:34:39.627Z",
+      "sha256": "0702ffca596d673519c5612e67fc60f85a4cfdfb91af53262740044cecf6336a",
+      "lastmod": "2026-08-27T15:07:01.831Z",
       "fetch_status": "ok"
     },
     {
@@ -1533,8 +1533,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-marketplaces.md",
       "title": "Create and distribute a plugin marketplace",
       "category": "claude_code",
-      "sha256": "12cb0d2125148533bd6d7f1f6a38aa6a549256e7dd48c2fe4dc55f9c260e2e2c",
-      "lastmod": "2026-08-25T00:09:52.870Z",
+      "sha256": "816dd31f727fcc101dd1c3692c7c1ddfd26d8cac7706d7f2b96a09a98739fe8e",
+      "lastmod": "2026-08-27T15:07:01.840Z",
       "fetch_status": "ok"
     },
     {
@@ -2237,8 +2237,8 @@
       "md_url": "https://code.claude.com/docs/en/worktrees.md",
       "title": "Run parallel sessions with worktrees",
       "category": "claude_code",
-      "sha256": "d83a20b5c31148c5883dee48c70b4e88d8c51c3f6d8447308cf907328cb434d4",
-      "lastmod": "2026-08-24T22:14:49.517Z",
+      "sha256": "55ae33aa448e2aaa68fda56223dda6d8d12a792dc3b094c7c87fdae9f29dfcda",
+      "lastmod": "2026-08-27T14:58:22.565Z",
       "fetch_status": "ok"
     },
     {
@@ -2336,7 +2336,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/pricing.md",
       "title": "Pricing",
       "category": "about_claude",
-      "sha256": "c3ea88b25e2906d72bc7b26693bb752bfb97d31952e5b814cf7f62d4087b2f8b",
+      "sha256": "2b1d167ca43f7833a0a239a27009dbee468167e0415c391138af34b307e9b820",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8562,7 +8562,7 @@
       "md_url": "https://platform.claude.com/docs/en/home.md",
       "title": "Documentation",
       "category": "core_documentation",
-      "sha256": "6ddc70447304afea3d0a4e572ab5c57a6e82a64cca265938b66960d909a3dba2",
+      "sha256": "22114dbb6ac9cc3a63cfa45be205d66fa5602d67bb9a749d95baf7039c934125",
       "lastmod": null,
       "fetch_status": "ok"
     },
