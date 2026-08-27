@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-27T01:26:55.733852Z",
+  "generated_at": "2026-08-27T04:54:22.166960Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -510,8 +510,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "b24b366c78771f88d2eba9a696af53662ea17b88ef1127a092394e2abbc9bf50",
-      "lastmod": "2026-08-25T22:39:55.010Z",
+      "sha256": "aa6069c76a939809697f995469f759ef546fe7f28a4eca04d1807d73ac09a890",
+      "lastmod": "2026-08-27T01:17:39.521Z",
       "fetch_status": "ok"
     },
     {
@@ -1368,8 +1368,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "81eb377a5fa1990e23398ae100425f130f08869e87754f20938bb5f04b627fb9",
-      "lastmod": "2026-08-27T00:36:39.661Z",
+      "sha256": "19a036f16bd0fc454dbc1505ef23ca747f8c1dd33d20b8c36290c7aaa282ce84",
+      "lastmod": "2026-08-27T04:16:51.164Z",
       "fetch_status": "ok"
     },
     {
