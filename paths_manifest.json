@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-28T09:14:54.339004Z",
+  "generated_at": "2026-08-28T16:12:12.557905Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -81,8 +81,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/cost-tracking.md",
       "title": "Track cost and usage",
       "category": "agent_sdk",
-      "sha256": "e7aa2c3b9ac72c332929eb5d588d2a24fdbc11b8155bf7c5bf9057376be101ed",
-      "lastmod": "2026-08-28T04:41:32.959Z",
+      "sha256": "b2fa2c834953054967d04df953a52f3b0c71cba87d37791c97f14db6480f44b8",
+      "lastmod": "2026-08-28T15:36:58.371Z",
       "fetch_status": "ok"
     },
     {
@@ -367,8 +367,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "69b6d5e4532f4b54e52d43751cb5d11be40ec7d1ba0f36cae607eec36ed3bb49",
-      "lastmod": "2026-08-28T06:31:57.406Z",
+      "sha256": "6288f67a969ea3a6d9470ec6d6d5cd2b570370ef11655600aaf8842aee31026a",
+      "lastmod": "2026-08-28T15:36:58.385Z",
       "fetch_status": "ok"
     },
     {
@@ -785,8 +785,8 @@
       "md_url": "https://code.claude.com/docs/en/costs.md",
       "title": "Manage costs effectively",
       "category": "claude_code",
-      "sha256": "fb37cbae0413f78fa676e79b855c981160fd6e2b1c2b11ccb9a22a8881c5ddc4",
-      "lastmod": "2026-08-27T22:45:47.460Z",
+      "sha256": "1886d2f6a8ac53668bf2ce4b0786a5ab2f49fd2d66c51093dad327c2906e7c8a",
+      "lastmod": "2026-08-28T15:36:58.370Z",
       "fetch_status": "ok"
     },
     {
@@ -1357,8 +1357,8 @@
       "md_url": "https://code.claude.com/docs/en/managed-settings.md",
       "title": "Deploy managed settings",
       "category": "claude_code",
-      "sha256": "a1307d6828e4e3d0a8c341a8f745fcfc40b3e0e5e8fbddc15942ff35572fbe65",
-      "lastmod": "2026-08-28T07:03:20.404Z",
+      "sha256": "b0f3dadb5db924d3409c31e6629493056a93213136da533cc04fe76c5a19bda0",
+      "lastmod": "2026-08-28T15:36:58.371Z",
       "fetch_status": "ok"
     },
     {
@@ -1764,8 +1764,8 @@
       "md_url": "https://code.claude.com/docs/en/server-managed-settings.md",
       "title": "Configure server-managed settings",
       "category": "claude_code",
-      "sha256": "ca13f626edc01dbca54fff314430b0697f131587d613123c552603674ec034da",
-      "lastmod": "2026-08-28T03:24:00.463Z",
+      "sha256": "60d075ee4f24b33ea88700a854815664e2e9ebaf6ad6af4d16fc22c3f45dfcdb",
+      "lastmod": "2026-08-28T15:36:58.372Z",
       "fetch_status": "ok"
     },
     {
@@ -1808,8 +1808,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "Claude Code settings reference",
       "category": "claude_code",
-      "sha256": "87cf5ae4512d09024e1e268e3f2a4a135f23db8bd7e6d4bbbdb4086fe66b1acb",
-      "lastmod": "2026-08-28T07:13:30.495Z",
+      "sha256": "0f9153708afcbffb585fb2d60f30fd9bcbe4452873a8afe89c1cb4f0a5076fba",
+      "lastmod": "2026-08-28T15:36:58.383Z",
       "fetch_status": "ok"
     },
     {
@@ -1852,8 +1852,8 @@
       "md_url": "https://code.claude.com/docs/en/statusline.md",
       "title": "Customize your status line",
       "category": "claude_code",
-      "sha256": "82600c6334607af142180f96458da7910d341e44b7b2586b238205f0055fd34f",
-      "lastmod": "2026-08-28T06:33:01.276Z",
+      "sha256": "245a275523e5c024d2cc9b72b1bbfcc914808dfdaf17450d5f851373b65e451a",
+      "lastmod": "2026-08-28T15:36:58.373Z",
       "fetch_status": "ok"
     },
     {
