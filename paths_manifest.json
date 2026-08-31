@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-31T12:17:00.190381Z",
+  "generated_at": "2026-08-31T18:17:23.080021Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -180,8 +180,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/observability.md",
       "title": "Observability with OpenTelemetry",
       "category": "agent_sdk",
-      "sha256": "2b25862396915d6c444bca6e50c731214b47160d01df9ac930c4ff95fb6bc83c",
-      "lastmod": "2026-08-31T06:02:28.053Z",
+      "sha256": "dbbf23f75e67fa9bebc0078781ef429e8058f567e7032dff2068a4627df83d57",
+      "lastmod": "2026-08-31T15:46:02.791Z",
       "fetch_status": "ok"
     },
     {
@@ -323,8 +323,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/subagents.md",
       "title": "Subagents in the SDK",
       "category": "agent_sdk",
-      "sha256": "8439017889d40c6c18e4f9ad3add4c4953d79b922a78b2cb4f07b4ba6650ba65",
-      "lastmod": "2026-08-31T05:47:29.300Z",
+      "sha256": "0f2e497a7ed516f81e702b3b7ed3aa6775a4e96119b25982fa6a2f10c184c902",
+      "lastmod": "2026-08-31T15:46:02.792Z",
       "fetch_status": "ok"
     },
     {
@@ -367,8 +367,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "66bca40f031f3445400be2faab6313f502edf9fb7762a0cc30153c295399483d",
-      "lastmod": "2026-08-31T05:47:29.326Z",
+      "sha256": "6bba2fc5ec1b47c74057e241fd9d49afe18c7360e6d258464ec2c4c6c019cfec",
+      "lastmod": "2026-08-31T15:46:02.805Z",
       "fetch_status": "ok"
     },
     {
@@ -400,8 +400,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-teams.md",
       "title": "Orchestrate teams of Claude Code sessions",
       "category": "claude_code",
-      "sha256": "0eff171758ad7003344f6a6ca4dc13600599004bd41bc7a0da68ebde915dee3d",
-      "lastmod": "2026-08-31T05:47:29.299Z",
+      "sha256": "71fdb875aebcd713b70815917e7dd8a9b2e3075fae0eff17de73c35b05048e5d",
+      "lastmod": "2026-08-31T15:46:02.793Z",
       "fetch_status": "ok"
     },
     {
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "af962cd1acd4c2102d969a1213c9e00e2fb69d688e289e96a5fdebcc80ba8778",
-      "lastmod": "2026-08-31T05:54:31.820Z",
+      "sha256": "c3f8c11ce41d5c758933be80761c424f5a60f88098fbde12990cdd8d5e2e815c",
+      "lastmod": "2026-08-31T15:46:02.794Z",
       "fetch_status": "ok"
     },
     {
@@ -1049,8 +1049,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "db06824f9545d550719b412b53abca5a728711b9f56d7a2915b842f201c4a3ba",
-      "lastmod": "2026-08-31T06:02:28.063Z",
+      "sha256": "a321882b5ae0fe9fbd1bd83315beaccf6e20150e016416333ae2b0db38cb22c1",
+      "lastmod": "2026-08-31T15:46:02.814Z",
       "fetch_status": "ok"
     },
     {
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/gateways.md",
       "title": "Run Claude Code through a gateway",
       "category": "claude_code",
-      "sha256": "283234918cf222b4f80607d9d695bba2a42e879de5e85de950d41cc45724d940",
-      "lastmod": "2026-08-31T05:54:31.817Z",
+      "sha256": "3caf3d3109d7779a385f767201f87c087433742a1c2745b366c70417e0ddd003",
+      "lastmod": "2026-08-31T15:46:02.791Z",
       "fetch_status": "ok"
     },
     {
@@ -1214,8 +1214,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "eda66d26982ca7af5574852ba74ad60833baf429f0d25355a38cbadcbee5cc2c",
-      "lastmod": "2026-08-31T03:18:04.660Z",
+      "sha256": "9115e9107d717a3b10a320bcb029212eb66d233be2e869e1e8adda2481280583",
+      "lastmod": "2026-08-31T15:46:02.819Z",
       "fetch_status": "ok"
     },
     {
@@ -1434,8 +1434,8 @@
       "md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
       "title": "Monitoring",
       "category": "claude_code",
-      "sha256": "2d6b621661b34c63e9604e16e7afa18a1fc10dc2720bef4794d28fedd317b42f",
-      "lastmod": "2026-08-31T06:02:28.054Z",
+      "sha256": "3271c35f40da2a44d0c3a3e306b96b943cd19e4e3b3c24a5d53c5f0f4b0b972f",
+      "lastmod": "2026-08-31T15:46:02.804Z",
       "fetch_status": "ok"
     },
     {
@@ -1599,8 +1599,8 @@
       "md_url": "https://code.claude.com/docs/en/quickstart.md",
       "title": "Quickstart",
       "category": "claude_code",
-      "sha256": "9aa7657373a3eb4ad8271408ab0c1a5c8e04f745f56e2afae04efeef14c2a38d",
-      "lastmod": "2026-08-30T16:49:50.264Z",
+      "sha256": "c68c8537c767e88dc4cddfdb6d5e9a2aa85ed3118f3c9d0e2a4539c82222e06f",
+      "lastmod": "2026-08-31T15:11:34.646Z",
       "fetch_status": "ok"
     },
     {
@@ -1863,8 +1863,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "db910769bec0d1a79bff03c12e697e2dc8b68e5703f34d76842ff4eec83dc333",
-      "lastmod": "2026-08-31T10:11:34.185Z",
+      "sha256": "6c66574212e5885d5188fe1c468b97460ef0112008ad82f84b18615b6d47b5fa",
+      "lastmod": "2026-08-31T15:46:02.805Z",
       "fetch_status": "ok"
     },
     {
