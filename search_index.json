@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-31T21:14:36.901620Z",
+  "generated_at": "2026-09-01T00:26:03.009254Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -5527,17 +5527,17 @@
         }
       ],
       "terms": {
-        "subagent": 121,
-        "agent": 67,
-        "claude": 54,
-        "tool": 45,
-        "code": 34,
-        "prompt": 26,
-        "run": 21,
-        "sdk": 18,
+        "subagent": 114,
+        "agent": 66,
+        "claude": 52,
+        "tool": 46,
+        "code": 32,
+        "prompt": 24,
+        "run": 22,
         "see": 18,
         "limit": 18,
-        "session": 15,
+        "sdk": 14,
+        "session": 14,
         "result": 13,
         "only": 12,
         "codegroup": 12,
@@ -5545,40 +5545,40 @@
         "query": 12,
         "context": 11,
         "spawn": 11,
-        "without": 11,
+        "own": 11,
         "spend": 11,
         "instruction": 10,
         "main": 10,
         "add": 10,
         "fil": 10,
-        "own": 10,
         "conversation": 10,
-        "call": 10,
         "parent": 10,
-        "list": 10,
         "note": 10,
         "file": 9,
-        "before": 9,
-        "typescript": 9,
-        "python": 9,
         "start": 9,
-        "include": 9,
+        "call": 9,
         "example": 9,
-        "available": 8,
-        "task": 8,
-        "delegat": 8,
-        "message": 8,
+        "nam": 9,
+        "list": 9,
+        "block": 9,
+        "before": 8,
+        "typescript": 8,
+        "python": 8,
         "inherit": 8,
-        "invocation": 8,
-        "nam": 8,
         "model": 8,
         "resume": 8,
-        "block": 8,
-        "same": 8,
+        "background": 8,
+        "match": 8,
+        "available": 7,
+        "task": 7,
         "option": 7,
-        "bas": 7
+        "bas": 7,
+        "any": 7,
+        "delegat": 7,
+        "message": 7,
+        "read": 7
       },
-      "word_count": 5194
+      "word_count": 5035
     },
     {
       "filename": "claude-code__agent-sdk__todo-tracking.md",
@@ -35075,7 +35075,7 @@
         "detail": 5,
         "requir": 5
       },
-      "word_count": 1913
+      "word_count": 1908
     },
     {
       "filename": "docs__en__agents-and-tools__agent-skills__overview.md",
@@ -35204,6 +35204,7 @@
         "doc": 5,
         "capabiliti": 5,
         "packag": 5,
+        "learn": 5,
         "pre": 5,
         "document": 5,
         "form": 5,
@@ -35217,7 +35218,6 @@
         "work": 4,
         "environment": 4,
         "through": 4,
-        "learn": 4,
         "install": 4,
         "only": 4,
         "name": 4,
@@ -35233,7 +35233,7 @@
         "level": 3,
         "same": 3
       },
-      "word_count": 2542
+      "word_count": 2543
     },
     {
       "filename": "docs__en__agents-and-tools__agent-skills__quickstart.md",
@@ -36639,7 +36639,7 @@
         "where": 10,
         "client": 10
       },
-      "word_count": 9754
+      "word_count": 9755
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__bash-tool.md",
@@ -36773,7 +36773,7 @@
         "task": 4,
         "implement": 4
       },
-      "word_count": 6938
+      "word_count": 6939
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__browser-use-tool.md",
@@ -37059,11 +37059,11 @@
       "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "headings": [
         {
-          "text": "Model compatibility",
+          "text": "Compatibility",
           "level": 2
         },
         {
-          "text": "Platform availability",
+          "text": "Tool versions",
           "level": 2
         },
         {
@@ -37196,58 +37196,58 @@
         }
       ],
       "terms": {
-        "tool": 85,
-        "claude": 71,
-        "code": 67,
-        "execution": 64,
+        "tool": 88,
+        "code": 66,
+        "execution": 63,
+        "claude": 49,
         "container": 37,
         "fil": 35,
         "request": 32,
-        "api": 31,
+        "api": 30,
         "file": 26,
         "run": 24,
+        "version": 20,
         "python": 19,
+        "call": 19,
         "response": 19,
         "command": 18,
-        "call": 18,
         "result": 17,
-        "version": 15,
         "bash": 12,
         "includ": 12,
         "each": 12,
         "operation": 12,
         "return": 12,
-        "data": 11,
         "environment": 11,
         "later": 11,
-        "see": 11,
-        "model": 11,
+        "programmatic": 10,
         "web": 10,
-        "opu": 10,
+        "see": 10,
         "block": 10,
-        "programmatic": 9,
+        "data": 9,
+        "model": 9,
         "error": 9,
-        "platform": 8,
         "sandbox": 8,
+        "support": 8,
         "upload": 8,
-        "note": 8,
-        "available": 8,
-        "only": 8,
         "codegroup": 8,
         "provid": 8,
         "send": 8,
         "card": 8,
+        "platform": 7,
+        "state": 7,
         "also": 7,
         "limit": 7,
         "output": 7,
         "time": 7,
+        "only": 7,
         "reuse": 7,
         "client": 7,
-        "create": 6,
-        "edit": 6,
-        "sonnet": 6
+        "available": 6,
+        "three": 6,
+        "repl": 6,
+        "create": 6
       },
-      "word_count": 6264
+      "word_count": 6151
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__computer-use-tool.md",
@@ -37605,7 +37605,7 @@
         "href": 4,
         "agent": 3
       },
-      "word_count": 3465
+      "word_count": 3466
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__handle-tool-calls.md",
@@ -38105,7 +38105,7 @@
         "command": 5,
         "sdk": 5
       },
-      "word_count": 4386
+      "word_count": 4387
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__overview.md",
@@ -38303,7 +38303,7 @@
       "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
       "headings": [
         {
-          "text": "Model compatibility",
+          "text": "Compatibility",
           "level": 2
         },
         {
@@ -38500,58 +38500,58 @@
         }
       ],
       "terms": {
-        "tool": 184,
-        "call": 89,
-        "claude": 85,
-        "code": 80,
-        "programmatic": 55,
-        "execution": 52,
+        "tool": 187,
+        "call": 90,
+        "code": 79,
+        "claude": 66,
+        "programmatic": 56,
+        "execution": 51,
         "result": 41,
         "container": 27,
         "return": 17,
-        "model": 16,
         "response": 16,
         "request": 16,
         "token": 15,
-        "data": 15,
         "only": 15,
-        "see": 14,
         "block": 14,
+        "model": 13,
         "each": 13,
-        "note": 12,
-        "api": 12,
+        "data": 13,
+        "see": 12,
         "field": 12,
         "process": 12,
         "output": 12,
-        "opu": 10,
+        "api": 11,
         "step": 10,
         "error": 10,
         "workflow": 9,
+        "anthropic": 9,
         "invocation": 9,
         "filter": 9,
         "before": 9,
         "context": 9,
-        "anthropic": 9,
         "example": 9,
         "where": 9,
         "whose": 9,
         "paus": 9,
+        "platform": 8,
         "requir": 8,
+        "version": 8,
         "run": 8,
-        "enabl": 8,
         "function": 8,
         "sandbox": 8,
+        "note": 8,
         "same": 8,
         "message": 8,
         "card": 8,
-        "platform": 7,
         "description": 7,
         "round": 7,
         "trip": 7,
         "programmatically": 7,
-        "add": 7
+        "add": 7,
+        "input": 7
       },
-      "word_count": 6425
+      "word_count": 6355
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__server-tools.md",
@@ -38857,7 +38857,7 @@
         "agent": 3,
         "help": 3
       },
-      "word_count": 8453
+      "word_count": 8454
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__tool-combinations.md",
@@ -39033,7 +39033,7 @@
         "where": 4,
         "both": 4
       },
-      "word_count": 1578
+      "word_count": 1580
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__tool-runner.md",
@@ -39289,7 +39289,7 @@
         "cach": 6,
         "accordion": 6
       },
-      "word_count": 3620
+      "word_count": 3622
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__tool-use-with-prompt-caching.md",
@@ -39595,12 +39595,12 @@
         "error": 9,
         "agent": 8,
         "specific": 8,
+        "cache": 8,
         "available": 8,
         "server": 8,
         "domain": 8,
         "page": 8,
         "support": 7,
-        "cache": 7,
         "user": 7,
         "citation": 7,
         "later": 7,
@@ -39617,9 +39617,9 @@
         "turn": 6,
         "codegroup": 6,
         "set": 6,
-        "cach": 6
+        "card": 6
       },
-      "word_count": 3705
+      "word_count": 3706
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__web-search-tool.md",
@@ -39757,7 +39757,7 @@
         "parameter": 5,
         "source": 5
       },
-      "word_count": 3131
+      "word_count": 3132
     },
     {
       "filename": "docs__en__api__admin.md",
@@ -89000,7 +89000,7 @@
         "support": 3,
         "subscription": 3
       },
-      "word_count": 1311
+      "word_count": 1312
     },
     {
       "filename": "docs__en__api__claude-platform-on-aws-iam-actions.md",
@@ -101995,7 +101995,7 @@
         "example": 6,
         "day": 6
       },
-      "word_count": 6992
+      "word_count": 6993
     },
     {
       "filename": "docs__en__build-with-claude__cache-diagnostics.md",
@@ -102657,7 +102657,7 @@
         "configure": 5,
         "command": 5
       },
-      "word_count": 3613
+      "word_count": 3614
     },
     {
       "filename": "docs__en__build-with-claude__claude-on-vertex-ai.md",
@@ -103349,7 +103349,7 @@
         "php": 10,
         "see": 9
       },
-      "word_count": 8878
+      "word_count": 8879
     },
     {
       "filename": "docs__en__build-with-claude__context-windows.md",
@@ -103573,7 +103573,7 @@
         "budget": 6,
         "step": 6
       },
-      "word_count": 2632
+      "word_count": 2633
     },
     {
       "filename": "docs__en__build-with-claude__embeddings.md",
@@ -103773,7 +103773,7 @@
         "earlier": 4,
         "mod": 4
       },
-      "word_count": 2401
+      "word_count": 2403
     },
     {
       "filename": "docs__en__build-with-claude__fallback-credit.md",
@@ -103969,7 +103969,7 @@
         "data": 3,
         "aws": 3
       },
-      "word_count": 2665
+      "word_count": 2666
     },
     {
       "filename": "docs__en__build-with-claude__files.md",
@@ -104489,7 +104489,7 @@
         "without": 5,
         "invalidat": 5
       },
-      "word_count": 4665
+      "word_count": 4666
     },
     {
       "filename": "docs__en__build-with-claude__multilingual-support.md",
@@ -105021,7 +105021,7 @@
         "ttl": 17,
         "instruction": 17
       },
-      "word_count": 16352
+      "word_count": 16353
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md",
@@ -105255,7 +105255,7 @@
         "effective": 5,
         "structure": 5
       },
-      "word_count": 7643
+      "word_count": 7644
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__overview.md",
@@ -106025,7 +106025,7 @@
         "each": 4,
         "document": 4
       },
-      "word_count": 7795
+      "word_count": 7796
     },
     {
       "filename": "docs__en__build-with-claude__skills-guide.md",
@@ -106215,7 +106215,7 @@
         "best": 6,
         "specify": 6
       },
-      "word_count": 13420
+      "word_count": 13421
     },
     {
       "filename": "docs__en__build-with-claude__streaming.md",
@@ -106771,7 +106771,7 @@
         "generat": 11,
         "follow": 11
       },
-      "word_count": 6702
+      "word_count": 6705
     },
     {
       "filename": "docs__en__build-with-claude__thinking-steering-and-cost.md",
@@ -106881,7 +106881,7 @@
         "decid": 5,
         "workflow": 5
       },
-      "word_count": 3899
+      "word_count": 3902
     },
     {
       "filename": "docs__en__build-with-claude__thinking-tool-workflows.md",
@@ -106959,7 +106959,7 @@
         "only": 3,
         "exactly": 3
       },
-      "word_count": 2994
+      "word_count": 2995
     },
     {
       "filename": "docs__en__build-with-claude__thinking-troubleshooting.md",
@@ -107069,7 +107069,7 @@
         "whose": 4,
         "disabl": 4
       },
-      "word_count": 1580
+      "word_count": 1582
     },
     {
       "filename": "docs__en__build-with-claude__token-counting.md",
@@ -107465,7 +107465,7 @@
         "level": 3,
         "mid": 3
       },
-      "word_count": 3039
+      "word_count": 3040
     },
     {
       "filename": "docs__en__claude_api_primer.md",
@@ -110393,7 +110393,7 @@
       "terms": {
         "api": 60,
         "key": 39,
-        "claude": 36,
+        "claude": 35,
         "organization": 31,
         "admin": 25,
         "step": 21,
@@ -110442,7 +110442,7 @@
         "federation": 3,
         "accept": 3
       },
-      "word_count": 997
+      "word_count": 993
     },
     {
       "filename": "docs__en__manage-claude__analytics-api.md",
@@ -110674,7 +110674,7 @@
         "support": 11,
         "includ": 10
       },
-      "word_count": 3993
+      "word_count": 3999
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -111165,36 +111165,36 @@
         }
       ],
       "terms": {
-        "key": 154,
+        "key": 160,
         "workspace": 51,
-        "aws": 36,
+        "aws": 38,
         "claude": 34,
         "step": 34,
         "anthropic": 30,
         "attach": 30,
+        "account": 30,
         "policy": 29,
-        "account": 26,
         "compartment": 25,
         "kms": 24,
         "condition": 24,
         "principal": 22,
-        "arn": 21,
+        "arn": 22,
         "encryption": 20,
         "platform": 16,
         "encrypt": 15,
         "create": 15,
         "cmek": 14,
+        "organization": 14,
         "console": 14,
         "add": 14,
         "region": 14,
         "iam": 13,
         "statement": 13,
         "decrypt": 13,
-        "organization": 12,
         "service": 12,
+        "register": 12,
         "under": 11,
         "grant": 11,
-        "register": 11,
         "role": 10,
         "validation": 10,
         "permission": 10,
@@ -111216,7 +111216,7 @@
         "because": 7,
         "context": 7
       },
-      "word_count": 3521
+      "word_count": 3570
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -111497,7 +111497,7 @@
         }
       ],
       "terms": {
-        "claude": 52,
+        "claude": 51,
         "compliance": 40,
         "api": 33,
         "organization": 27,
@@ -111520,11 +111520,11 @@
         "user": 9,
         "href": 9,
         "fil": 8,
-        "cowork": 7,
-        "code": 7,
         "enterprise": 7,
         "content": 7,
         "every": 6,
+        "cowork": 6,
+        "code": 6,
         "retrieve": 6,
         "see": 6,
         "data": 6,
@@ -111548,7 +111548,7 @@
         "analytic": 4,
         "opentelemetry": 4
       },
-      "word_count": 1072
+      "word_count": 1070
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -111586,7 +111586,7 @@
         "key": 93,
         "organization": 72,
         "api": 67,
-        "claude": 59,
+        "claude": 56,
         "compliance": 55,
         "admin": 27,
         "acces": 25,
@@ -111627,14 +111627,14 @@
         "card": 6,
         "manage": 5,
         "role": 5,
-        "cowork": 5,
-        "code": 5,
         "see": 5,
         "call": 5,
         "secret": 5,
-        "section": 5
+        "section": 5,
+        "record": 5,
+        "any": 5
       },
-      "word_count": 1877
+      "word_count": 1869
     },
     {
       "filename": "docs__en__manage-claude__compliance-content-data.md",
@@ -111724,7 +111724,7 @@
         "any": 6,
         "carri": 6
       },
-      "word_count": 2485
+      "word_count": 2490
     },
     {
       "filename": "docs__en__manage-claude__compliance-errors.md",
@@ -111917,11 +111917,11 @@
         }
       ],
       "terms": {
-        "claude": 85,
+        "claude": 81,
         "api": 73,
         "organization": 73,
         "compliance": 58,
-        "session": 54,
+        "session": 55,
         "accordion": 36,
         "key": 34,
         "activity": 28,
@@ -111938,22 +111938,22 @@
         "only": 16,
         "user": 16,
         "transcript": 16,
-        "code": 16,
         "return": 15,
         "local": 15,
         "admin": 14,
+        "code": 14,
         "enterprise": 13,
         "file": 13,
         "doe": 12,
         "event": 12,
         "appear": 12,
-        "cowork": 12,
         "call": 11,
         "chat": 11,
         "link": 10,
         "turn": 10,
         "off": 10,
         "text": 10,
+        "cowork": 10,
         "retention": 9,
         "see": 9,
         "owner": 9,
@@ -111968,7 +111968,7 @@
         "delet": 8,
         "prompt": 8
       },
-      "word_count": 2692
+      "word_count": 2681
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -112058,7 +112058,7 @@
         "set": 5,
         "fil": 5
       },
-      "word_count": 1990
+      "word_count": 1991
     },
     {
       "filename": "docs__en__manage-claude__compliance-org-data.md",
@@ -112230,7 +112230,7 @@
         "bound": 10,
         "retrieve": 9
       },
-      "word_count": 5177
+      "word_count": 5178
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -112352,7 +112352,7 @@
         "usage": 4,
         "aws": 4
       },
-      "word_count": 1596
+      "word_count": 1597
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks.md",
@@ -112390,7 +112390,7 @@
         "inference": 28,
         "hook": 25,
         "request": 22,
-        "claude": 18,
+        "claude": 17,
         "security": 17,
         "server": 16,
         "organization": 15,
@@ -112438,7 +112438,7 @@
         "response": 3,
         "endpoint": 3
       },
-      "word_count": 1074
+      "word_count": 1070
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks-configuration.md",
@@ -112493,58 +112493,58 @@
         }
       ],
       "terms": {
-        "server": 40,
-        "request": 40,
+        "server": 45,
+        "request": 42,
+        "verdict": 35,
+        "inference": 32,
+        "hook": 32,
         "security": 32,
-        "verdict": 32,
-        "inference": 30,
-        "hook": 30,
         "step": 23,
-        "turn": 17,
+        "turn": 20,
         "mode": 17,
         "prompt": 16,
         "block": 16,
+        "breaker": 16,
         "claude": 15,
+        "organization": 15,
         "endpoint": 15,
-        "organization": 14,
+        "off": 15,
+        "enforce": 14,
         "header": 14,
+        "allow": 13,
+        "failure": 13,
         "set": 13,
-        "off": 13,
+        "secret": 13,
+        "trip": 13,
         "url": 12,
-        "allow": 12,
-        "failure": 12,
-        "enforce": 12,
         "shadow": 12,
-        "secret": 12,
+        "setting": 12,
         "title": 11,
-        "setting": 11,
+        "enforcement": 11,
         "page": 10,
         "see": 10,
+        "test": 10,
+        "sign": 10,
         "under": 10,
-        "breaker": 10,
-        "enforcement": 9,
         "handl": 9,
         "rol": 9,
         "custom": 9,
-        "sign": 9,
         "inspect": 9,
+        "only": 9,
         "every": 9,
         "record": 9,
-        "trip": 9,
         "before": 8,
+        "back": 8,
         "error": 8,
+        "while": 8,
+        "circuit": 8,
         "configuration": 7,
-        "test": 7,
         "never": 7,
         "enforc": 7,
-        "only": 7,
-        "while": 7,
-        "circuit": 7,
-        "http": 6,
-        "each": 6,
-        "host": 6
+        "inspection": 7,
+        "sent": 7
       },
-      "word_count": 2250
+      "word_count": 2415
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks-endpoint.md",
@@ -112623,29 +112623,32 @@
         }
       ],
       "terms": {
-        "request": 42,
-        "server": 32,
+        "request": 45,
+        "server": 33,
         "inference": 25,
         "hook": 22,
-        "verdict": 20,
+        "verdict": 21,
+        "block": 17,
         "field": 16,
-        "block": 15,
-        "anthropic": 13,
+        "anthropic": 14,
+        "failure": 13,
         "security": 12,
+        "sign": 12,
+        "test": 12,
         "body": 12,
-        "failure": 12,
-        "sign": 11,
         "header": 11,
+        "one": 11,
         "str": 11,
-        "one": 10,
+        "webhook": 11,
+        "organization": 10,
+        "trip": 10,
+        "any": 10,
         "secret": 10,
         "tool": 10,
-        "webhook": 10,
         "claude": 9,
         "return": 9,
-        "organization": 9,
+        "allow": 9,
         "see": 9,
-        "trip": 9,
         "identifier": 9,
         "only": 9,
         "valu": 9,
@@ -112654,27 +112657,24 @@
         "record": 9,
         "url": 8,
         "http": 8,
-        "allow": 8,
+        "deny": 8,
         "transcript": 8,
         "signature": 8,
-        "any": 8,
+        "administrator": 8,
         "sent": 8,
         "never": 8,
-        "deny": 7,
+        "user": 8,
+        "breaker": 8,
         "each": 7,
-        "administrator": 7,
-        "test": 7,
+        "respond": 7,
         "connection": 7,
         "every": 7,
         "value": 7,
-        "don": 7,
-        "key": 7,
-        "text": 7,
-        "user": 7,
-        "activity": 7,
-        "endpoint": 6
+        "per": 7,
+        "other": 7,
+        "don": 7
       },
-      "word_count": 4286
+      "word_count": 4381
     },
     {
       "filename": "docs__en__manage-claude__rate-limits-api.md",
@@ -115778,7 +115778,7 @@
         "rather": 5,
         "add": 5
       },
-      "word_count": 4553
+      "word_count": 4554
     },
     {
       "filename": "docs__en__managed-agents__migration.md",
@@ -118738,7 +118738,7 @@
         "google": 4,
         "cloud": 4
       },
-      "word_count": 1293
+      "word_count": 1294
     },
     {
       "filename": "docs__en__models__sonnet-4-5__overview.md",
@@ -119810,10 +119810,10 @@
         "claude": 391,
         "api": 149,
         "beta": 117,
-        "model": 116,
+        "model": 115,
         "now": 105,
+        "tool": 98,
         "opu": 98,
-        "tool": 97,
         "see": 76,
         "header": 71,
         "support": 65,
@@ -119828,9 +119828,9 @@
         "manag": 39,
         "sdk": 38,
         "think": 36,
+        "code": 33,
         "read": 33,
         "our": 33,
-        "code": 32,
         "new": 32,
         "learn": 32,
         "error": 31,
@@ -119858,7 +119858,7 @@
         "pric": 21,
         "window": 21
       },
-      "word_count": 10603
+      "word_count": 10605
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
