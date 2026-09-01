@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-01T18:20:27.418946Z",
+  "generated_at": "2026-09-01T21:14:57.292375Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7399,13 +7399,13 @@
       "terms": {
         "teammate": 105,
         "team": 87,
-        "teammat": 83,
+        "teammat": 84,
         "agent": 82,
         "claude": 79,
         "task": 71,
         "session": 65,
         "lead": 58,
-        "subagent": 52,
+        "subagent": 53,
         "work": 50,
         "code": 45,
         "spawn": 41,
@@ -7448,7 +7448,7 @@
         "request": 12,
         "iterm": 12
       },
-      "word_count": 5575
+      "word_count": 5584
     },
     {
       "filename": "claude-code__agent-view.md",
@@ -16791,20 +16791,20 @@
         }
       ],
       "terms": {
-        "claude": 355,
-        "set": 338,
-        "code": 281,
+        "claude": 356,
+        "set": 340,
+        "code": 282,
         "default": 149,
-        "model": 137,
+        "model": 140,
         "session": 129,
         "tool": 97,
         "see": 95,
+        "requir": 83,
         "variable": 82,
-        "requir": 82,
-        "later": 80,
+        "later": 81,
         "command": 73,
         "server": 70,
-        "agent": 66,
+        "agent": 67,
         "turn": 64,
         "setting": 62,
         "request": 61,
@@ -16830,9 +16830,9 @@
         "bash": 41,
         "cloud": 40,
         "run": 39,
+        "subagent": 38,
         "prompt": 37,
         "gateway": 37,
-        "subagent": 37,
         "shell": 36,
         "still": 36,
         "google": 36,
@@ -16842,7 +16842,7 @@
         "timeout": 34,
         "bedrock": 33
       },
-      "word_count": 18260
+      "word_count": 18296
     },
     {
       "filename": "claude-code__errors.md",
@@ -22964,7 +22964,7 @@
         "code": 170,
         "default": 142,
         "session": 136,
-        "set": 102,
+        "set": 103,
         "opu": 84,
         "setting": 79,
         "fable": 65,
@@ -23010,7 +23010,7 @@
         "switch": 30,
         "flag": 30
       },
-      "word_count": 12768
+      "word_count": 12773
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -28588,6 +28588,14 @@
           "level": 3
         },
         {
+          "text": "`timeFormat`",
+          "level": 3
+        },
+        {
+          "text": "`timeZone`",
+          "level": 3
+        },
+        {
           "text": "`tui`",
           "level": 3
         },
@@ -28737,58 +28745,58 @@
         }
       ],
       "terms": {
-        "claude": 550,
-        "code": 452,
-        "setting": 348,
-        "file": 257,
+        "claude": 557,
+        "code": 459,
+        "setting": 350,
+        "file": 261,
         "manag": 222,
         "sandbox": 214,
-        "default": 209,
+        "default": 211,
         "session": 197,
         "json": 188,
-        "any": 180,
-        "key": 173,
-        "set": 172,
+        "any": 184,
+        "key": 176,
+        "set": 175,
         "command": 169,
+        "scope": 158,
+        "type": 157,
         "model": 157,
-        "scope": 156,
-        "type": 155,
-        "turn": 130,
-        "one": 124,
+        "turn": 133,
+        "one": 125,
         "null": 112,
-        "only": 111,
-        "run": 106,
-        "unset": 105,
+        "only": 112,
+        "run": 107,
+        "unset": 107,
         "theme": 104,
         "every": 101,
         "mode": 99,
         "off": 98,
+        "each": 96,
         "const": 96,
         "see": 96,
-        "each": 92,
+        "show": 90,
         "list": 87,
         "hook": 83,
-        "show": 81,
+        "later": 83,
+        "such": 82,
+        "requir": 82,
         "user": 81,
-        "later": 81,
         "path": 80,
-        "requir": 80,
         "permission": 78,
         "tool": 77,
         "prompt": 77,
-        "such": 76,
+        "name": 70,
         "read": 70,
+        "terminal": 70,
         "plugin": 68,
-        "terminal": 68,
-        "name": 67,
         "boolean": 67,
-        "row": 65,
+        "row": 66,
         "block": 64,
+        "add": 63,
         "fil": 63,
-        "add": 61,
         "rul": 61
       },
-      "word_count": 45454
+      "word_count": 45883
     },
     {
       "filename": "claude-code__setup.md",
@@ -29707,18 +29715,18 @@
         }
       ],
       "terms": {
-        "subagent": 453,
-        "claude": 226,
-        "code": 135,
-        "agent": 120,
+        "subagent": 458,
+        "claude": 227,
+        "code": 136,
+        "agent": 122,
         "tool": 117,
         "session": 95,
-        "run": 82,
-        "main": 79,
-        "fork": 70,
-        "conversation": 69,
+        "run": 86,
+        "main": 81,
+        "conversation": 71,
+        "fork": 71,
         "prompt": 62,
-        "model": 57,
+        "model": 61,
         "only": 54,
         "hook": 49,
         "same": 48,
@@ -29737,14 +29745,14 @@
         "before": 36,
         "server": 36,
         "start": 34,
+        "skill": 34,
         "project": 33,
         "fil": 33,
-        "skill": 33,
         "command": 33,
+        "set": 32,
         "plugin": 32,
         "runn": 31,
         "limit": 30,
-        "set": 30,
         "list": 30,
         "own": 29,
         "system": 29,
@@ -29752,13 +29760,13 @@
         "permission": 28,
         "instead": 28,
         "such": 28,
+        "keep": 27,
         "each": 27,
+        "built": 27,
         "every": 27,
-        "keep": 26,
-        "any": 26,
-        "doesn": 26
+        "any": 26
       },
-      "word_count": 13777
+      "word_count": 13873
     },
     {
       "filename": "claude-code__terminal-config.md",
@@ -60404,61 +60412,101 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Beta \u203a Organization \u203a Compliance Settings",
+          "level": 2
+        },
+        {
+          "text": "Get Compliance Settings",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update Compliance Settings",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
         "tool": 2182,
-        "format": 1245,
-        "model": 1161,
-        "default": 933,
+        "format": 1257,
+        "model": 1196,
+        "default": 954,
         "member": 860,
-        "user": 823,
-        "agent": 804,
-        "time": 779,
-        "content": 749,
+        "user": 817,
+        "agent": 803,
+        "time": 788,
+        "content": 755,
         "call": 685,
-        "session": 661,
+        "session": 657,
+        "block": 642,
         "token": 635,
         "execution": 633,
-        "block": 603,
         "minlength": 572,
-        "return": 563,
-        "date": 534,
-        "request": 527,
-        "event": 523,
+        "request": 568,
+        "return": 566,
+        "date": 540,
+        "event": 528,
         "result": 522,
+        "key": 513,
         "confirmation": 508,
-        "rfc": 488,
-        "timestamp": 459,
-        "key": 445,
+        "rfc": 494,
+        "timestamp": 465,
+        "only": 438,
         "maxlength": 433,
-        "only": 423,
-        "configuration": 418,
-        "per": 412,
+        "per": 422,
+        "configuration": 422,
+        "workspace": 416,
         "name": 412,
-        "text": 404,
-        "identifier": 393,
-        "enabl": 393,
-        "error": 392,
-        "workspace": 391,
-        "value": 384,
-        "server": 383,
-        "response": 381,
-        "parameter": 373,
-        "input": 369,
-        "api": 362,
-        "must": 358,
+        "value": 407,
+        "text": 407,
+        "enabl": 404,
+        "error": 401,
+        "identifier": 394,
+        "response": 387,
+        "server": 386,
+        "parameter": 375,
+        "input": 375,
+        "must": 371,
+        "api": 366,
         "toolset": 353,
+        "policy": 341,
+        "whether": 340,
         "resolv": 340,
         "version": 339,
-        "whether": 336,
-        "header": 329,
-        "policy": 329,
+        "before": 338,
+        "header": 325,
         "create": 325,
-        "before": 324,
         "thread": 316
       },
-      "word_count": 209261
+      "word_count": 213379
     },
     {
       "filename": "docs__en__api__beta-headers.md",
@@ -60990,8 +61038,8 @@
         "approv": 171,
         "require": 171,
         "permission": 170,
-        "cod": 130,
-        "intelligence": 130,
+        "intelligence": 143,
+        "cod": 143,
         "default": 118,
         "maxlength": 95,
         "minlength": 90,
@@ -61026,7 +61074,7 @@
         "web": 46,
         "sett": 44
       },
-      "word_count": 24285
+      "word_count": 24503
     },
     {
       "filename": "docs__en__api__beta__agents__archive.md",
@@ -61069,6 +61117,8 @@
         "agent": 20,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -61076,8 +61126,6 @@
         "without": 11,
         "require": 11,
         "before": 11,
-        "cod": 10,
-        "intelligence": 10,
         "format": 9,
         "resolv": 7,
         "powerful": 6,
@@ -61092,6 +61140,7 @@
         "timestamp": 3,
         "rfc": 3,
         "date": 3,
+        "frontier": 3,
         "performance": 3,
         "session": 3,
         "favor": 3,
@@ -61109,10 +61158,9 @@
         "manag": 2,
         "identifier": 2,
         "power": 2,
-        "see": 2,
-        "additional": 2
+        "see": 2
       },
-      "word_count": 1533
+      "word_count": 1553
     },
     {
       "filename": "docs__en__api__beta__agents__create.md",
@@ -61155,6 +61203,8 @@
         "confirmation": 44,
         "model": 38,
         "configuration": 30,
+        "intelligence": 22,
+        "cod": 22,
         "permission": 22,
         "policy": 22,
         "automatically": 22,
@@ -61163,8 +61213,6 @@
         "require": 22,
         "before": 22,
         "default": 21,
-        "cod": 20,
-        "intelligence": 20,
         "maxlength": 20,
         "minlength": 18,
         "must": 17,
@@ -61198,7 +61246,7 @@
         "config": 8,
         "domain": 8
       },
-      "word_count": 3832
+      "word_count": 3866
     },
     {
       "filename": "docs__en__api__beta__agents__list.md",
@@ -61243,14 +61291,14 @@
         "format": 12,
         "before": 12,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
         "approv": 11,
         "without": 11,
         "require": 11,
-        "cod": 10,
-        "intelligence": 10,
         "time": 8,
         "resolv": 7,
         "powerful": 6,
@@ -61271,6 +61319,7 @@
         "maximum": 3,
         "timestamp": 3,
         "rfc": 3,
+        "frontier": 3,
         "performance": 3,
         "session": 3,
         "favor": 3,
@@ -61281,10 +61330,9 @@
         "maxlength": 3,
         "parameter": 2,
         "inclusive": 2,
-        "page": 2,
-        "opaque": 2
+        "page": 2
       },
-      "word_count": 1619
+      "word_count": 1639
     },
     {
       "filename": "docs__en__api__beta__agents__retrieve.md",
@@ -61331,6 +61379,8 @@
         "agent": 21,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -61339,8 +61389,6 @@
         "require": 11,
         "before": 11,
         "format": 10,
-        "cod": 10,
-        "intelligence": 10,
         "resolv": 7,
         "version": 6,
         "powerful": 6,
@@ -61357,6 +61405,7 @@
         "timestamp": 3,
         "rfc": 3,
         "date": 3,
+        "frontier": 3,
         "performance": 3,
         "session": 3,
         "favor": 3,
@@ -61371,10 +61420,9 @@
         "manag": 2,
         "identifier": 2,
         "power": 2,
-        "see": 2,
-        "additional": 2
+        "see": 2
       },
-      "word_count": 1554
+      "word_count": 1574
     },
     {
       "filename": "docs__en__api__beta__agents__update.md",
@@ -61421,6 +61469,8 @@
         "confirmation": 44,
         "model": 38,
         "configuration": 30,
+        "intelligence": 22,
+        "cod": 22,
         "permission": 22,
         "policy": 22,
         "automatically": 22,
@@ -61430,8 +61480,6 @@
         "before": 22,
         "default": 21,
         "maxlength": 20,
-        "cod": 20,
-        "intelligence": 20,
         "must": 19,
         "minlength": 17,
         "omit": 14,
@@ -61464,7 +61512,7 @@
         "reject": 8,
         "inference": 8
       },
-      "word_count": 3955
+      "word_count": 3989
     },
     {
       "filename": "docs__en__api__beta__agents__versions.md",
@@ -61515,6 +61563,8 @@
         "agent": 20,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -61523,8 +61573,6 @@
         "require": 11,
         "before": 11,
         "format": 10,
-        "cod": 10,
-        "intelligence": 10,
         "version": 8,
         "resolv": 7,
         "powerful": 6,
@@ -61543,6 +61591,7 @@
         "timestamp": 3,
         "rfc": 3,
         "date": 3,
+        "frontier": 3,
         "performance": 3,
         "session": 3,
         "favor": 3,
@@ -61555,10 +61604,9 @@
         "page": 2,
         "opaque": 2,
         "cursor": 2,
-        "header": 2,
-        "return": 2
+        "header": 2
       },
-      "word_count": 1582
+      "word_count": 1602
     },
     {
       "filename": "docs__en__api__beta__agents__versions__list.md",
@@ -61605,6 +61653,8 @@
         "agent": 20,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -61613,8 +61663,6 @@
         "require": 11,
         "before": 11,
         "format": 10,
-        "cod": 10,
-        "intelligence": 10,
         "version": 7,
         "resolv": 7,
         "powerful": 6,
@@ -61633,6 +61681,7 @@
         "timestamp": 3,
         "rfc": 3,
         "date": 3,
+        "frontier": 3,
         "performance": 3,
         "session": 3,
         "favor": 3,
@@ -61645,10 +61694,9 @@
         "page": 2,
         "opaque": 2,
         "cursor": 2,
-        "header": 2,
-        "return": 2
+        "header": 2
       },
-      "word_count": 1580
+      "word_count": 1600
     },
     {
       "filename": "docs__en__api__beta__deployment_runs.md",
@@ -61799,18 +61847,18 @@
         }
       ],
       "terms": {
-        "error": 96,
-        "deployment": 78,
+        "error": 92,
+        "deployment": 77,
         "human": 67,
         "readable": 67,
         "description": 64,
         "run": 63,
         "agent": 37,
-        "session": 27,
         "archiv": 25,
         "format": 24,
         "referenc": 24,
         "beta": 23,
+        "session": 23,
         "manag": 21,
         "longer": 20,
         "exist": 20,
@@ -61850,7 +61898,7 @@
         "unknown": 5,
         "resourc": 5
       },
-      "word_count": 2827
+      "word_count": 2839
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__list.md",
@@ -61885,9 +61933,9 @@
         }
       ],
       "terms": {
-        "deployment": 22,
-        "error": 21,
+        "deployment": 21,
         "run": 19,
+        "error": 19,
         "human": 17,
         "readable": 17,
         "description": 16,
@@ -61895,7 +61943,6 @@
         "format": 10,
         "return": 8,
         "date": 6,
-        "session": 6,
         "referenc": 6,
         "creat": 5,
         "non": 5,
@@ -61906,9 +61953,9 @@
         "list": 4,
         "filter": 4,
         "agent": 4,
+        "session": 4,
         "environment": 4,
         "omit": 3,
-        "page": 3,
         "cursor": 3,
         "trigger": 3,
         "strictly": 2,
@@ -61920,9 +61967,9 @@
         "workspace": 2,
         "maximum": 2,
         "result": 2,
+        "page": 2,
         "int": 2,
         "opaque": 2,
-        "next": 2,
         "response": 2,
         "header": 2,
         "version": 2,
@@ -61934,9 +61981,10 @@
         "failure": 2,
         "message": 2,
         "vault": 2,
-        "resource": 2
+        "resource": 2,
+        "creation": 2
       },
-      "word_count": 896
+      "word_count": 902
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__retrieve.md",
@@ -61971,13 +62019,13 @@
         }
       ],
       "terms": {
-        "error": 20,
         "deployment": 19,
+        "error": 19,
         "human": 17,
         "readable": 17,
         "description": 16,
         "run": 10,
-        "session": 7,
+        "session": 6,
         "referenc": 6,
         "format": 5,
         "archiv": 5,
@@ -62022,7 +62070,7 @@
         "single": 1,
         "execution": 1
       },
-      "word_count": 731
+      "word_count": 737
     },
     {
       "filename": "docs__en__api__beta__deployments.md",
@@ -62377,15 +62425,15 @@
         "image": 156,
         "referenc": 143,
         "document": 143,
-        "session": 122,
+        "session": 121,
         "file": 117,
         "format": 99,
         "url": 90,
-        "archiv": 85,
+        "archiv": 84,
         "base": 78,
         "data": 78,
         "run": 69,
-        "error": 69,
+        "error": 68,
         "type": 67,
         "exist": 66,
         "rubric": 65,
@@ -62396,7 +62444,7 @@
         "mount": 62,
         "maxlength": 61,
         "environment": 61,
-        "paus": 60,
+        "paus": 59,
         "only": 56,
         "timestamp": 56,
         "system": 55,
@@ -62420,7 +62468,7 @@
         "model": 39,
         "turn": 39
       },
-      "word_count": 20849
+      "word_count": 20897
     },
     {
       "filename": "docs__en__api__beta__deployments__archive.md",
@@ -62506,7 +62554,7 @@
         "context": 3,
         "model": 3
       },
-      "word_count": 1737
+      "word_count": 1743
     },
     {
       "filename": "docs__en__api__beta__deployments__create.md",
@@ -62592,7 +62640,7 @@
         "timestamp": 6,
         "str": 5
       },
-      "word_count": 2992
+      "word_count": 2998
     },
     {
       "filename": "docs__en__api__beta__deployments__list.md",
@@ -62635,10 +62683,10 @@
         "image": 12,
         "referenc": 11,
         "document": 11,
-        "archiv": 10,
         "session": 10,
         "agent": 9,
         "time": 9,
+        "archiv": 9,
         "file": 9,
         "default": 7,
         "url": 7,
@@ -62648,7 +62696,6 @@
         "data": 6,
         "list": 5,
         "creat": 5,
-        "paus": 5,
         "run": 5,
         "each": 5,
         "type": 5,
@@ -62666,6 +62713,7 @@
         "upload": 4,
         "plain": 4,
         "system": 4,
+        "paus": 4,
         "environment": 4,
         "container": 4,
         "cron": 4,
@@ -62678,7 +62726,7 @@
         "via": 3,
         "variant": 3
       },
-      "word_count": 1831
+      "word_count": 1837
     },
     {
       "filename": "docs__en__api__beta__deployments__pause.md",
@@ -62764,7 +62812,7 @@
         "previously": 3,
         "context": 3
       },
-      "word_count": 1737
+      "word_count": 1743
     },
     {
       "filename": "docs__en__api__beta__deployments__retrieve.md",
@@ -62850,7 +62898,7 @@
         "previously": 3,
         "context": 3
       },
-      "word_count": 1734
+      "word_count": 1740
     },
     {
       "filename": "docs__en__api__beta__deployments__run.md",
@@ -62885,13 +62933,13 @@
         }
       ],
       "terms": {
-        "error": 20,
         "deployment": 19,
+        "error": 19,
         "human": 17,
         "readable": 17,
         "description": 16,
         "run": 10,
-        "session": 7,
+        "session": 6,
         "referenc": 6,
         "format": 5,
         "archiv": 5,
@@ -62936,7 +62984,7 @@
         "only": 1,
         "single": 1
       },
-      "word_count": 734
+      "word_count": 740
     },
     {
       "filename": "docs__en__api__beta__deployments__unpause.md",
@@ -63022,7 +63070,7 @@
         "context": 3,
         "model": 3
       },
-      "word_count": 1737
+      "word_count": 1743
     },
     {
       "filename": "docs__en__api__beta__deployments__update.md",
@@ -63112,7 +63160,7 @@
         "check": 6,
         "day": 6
       },
-      "word_count": 3015
+      "word_count": 3021
     },
     {
       "filename": "docs__en__api__beta__dreams.md",
@@ -63294,6 +63342,10 @@
           "level": 3
         },
         {
+          "text": "Beta Dreaming Error",
+          "level": 3
+        },
+        {
           "text": "Beta Output Behavior",
           "level": 3
         },
@@ -63304,11 +63356,15 @@
         {
           "text": "Beta Output Behavior Update Existing",
           "level": 3
+        },
+        {
+          "text": "Beta Target Store Held Error",
+          "level": 3
         }
       ],
       "terms": {
-        "store": 141,
-        "dream": 81,
+        "store": 144,
+        "dream": 93,
         "memory": 81,
         "input": 72,
         "format": 67,
@@ -63316,7 +63372,8 @@
         "job": 59,
         "consolidat": 52,
         "token": 44,
-        "writ": 33,
+        "default": 40,
+        "writ": 36,
         "memori": 33,
         "read": 31,
         "every": 31,
@@ -63333,32 +63390,31 @@
         "creat": 26,
         "exist": 25,
         "new": 23,
-        "default": 22,
+        "beta": 21,
         "acros": 21,
         "timestamp": 20,
         "rfc": 20,
         "date": 20,
         "create": 19,
-        "beta": 19,
         "place": 19,
         "identifier": 19,
         "behavior": 18,
         "appli": 18,
         "clone": 17,
         "session": 15,
+        "error": 15,
         "transcript": 14,
         "prompt": 14,
         "cache": 14,
-        "api": 12,
+        "api": 13,
+        "one": 12,
         "update": 11,
+        "invalid": 11,
         "header": 10,
         "unles": 10,
-        "also": 10,
-        "type": 10,
-        "configuration": 10,
-        "maxlength": 10
+        "also": 10
       },
-      "word_count": 5047
+      "word_count": 5516
     },
     {
       "filename": "docs__en__api__beta__dreams__archive.md",
@@ -63444,7 +63500,7 @@
         "optional": 1,
         "specify": 1
       },
-      "word_count": 705
+      "word_count": 711
     },
     {
       "filename": "docs__en__api__beta__dreams__cancel.md",
@@ -63530,7 +63586,7 @@
         "optional": 1,
         "specify": 1
       },
-      "word_count": 705
+      "word_count": 711
     },
     {
       "filename": "docs__en__api__beta__dreams__create.md",
@@ -63616,7 +63672,7 @@
         "character": 2,
         "inference": 2
       },
-      "word_count": 987
+      "word_count": 993
     },
     {
       "filename": "docs__en__api__beta__dreams__list.md",
@@ -63702,7 +63758,7 @@
         "new": 2,
         "clone": 2
       },
-      "word_count": 756
+      "word_count": 762
     },
     {
       "filename": "docs__en__api__beta__dreams__retrieve.md",
@@ -63788,7 +63844,7 @@
         "specify": 1,
         "beta": 1
       },
-      "word_count": 702
+      "word_count": 708
     },
     {
       "filename": "docs__en__api__beta__environments.md",
@@ -64266,7 +64322,7 @@
         "field": 15,
         "update": 15
       },
-      "word_count": 8761
+      "word_count": 8845
     },
     {
       "filename": "docs__en__api__beta__environments__archive.md",
@@ -64352,7 +64408,7 @@
         "either": 1,
         "anthropic": 1
       },
-      "word_count": 551
+      "word_count": 557
     },
     {
       "filename": "docs__en__api__beta__environments__create.md",
@@ -64438,7 +64494,7 @@
         "server": 2,
         "endpoint": 2
       },
-      "word_count": 976
+      "word_count": 982
     },
     {
       "filename": "docs__en__api__beta__environments__delete.md",
@@ -64494,7 +64550,7 @@
         "default": 1,
         "example": 1
       },
-      "word_count": 190
+      "word_count": 196
     },
     {
       "filename": "docs__en__api__beta__environments__list.md",
@@ -64580,7 +64636,7 @@
         "beta": 1,
         "version": 1
       },
-      "word_count": 618
+      "word_count": 624
     },
     {
       "filename": "docs__en__api__beta__environments__retrieve.md",
@@ -64666,7 +64722,7 @@
         "mcp": 1,
         "server": 1
       },
-      "word_count": 540
+      "word_count": 546
     },
     {
       "filename": "docs__en__api__beta__environments__update.md",
@@ -64756,7 +64812,7 @@
         "configur": 2,
         "agent": 2
       },
-      "word_count": 972
+      "word_count": 978
     },
     {
       "filename": "docs__en__api__beta__environments__work.md",
@@ -65066,7 +65122,7 @@
         "long": 8,
         "assign": 8
       },
-      "word_count": 4470
+      "word_count": 4518
     },
     {
       "filename": "docs__en__api__beta__environments__work__ack.md",
@@ -65152,7 +65208,7 @@
         "return": 1,
         "resource": 1
       },
-      "word_count": 487
+      "word_count": 493
     },
     {
       "filename": "docs__en__api__beta__environments__work__heartbeat.md",
@@ -65242,7 +65298,7 @@
         "claim": 1,
         "unclaim": 1
       },
-      "word_count": 348
+      "word_count": 354
     },
     {
       "filename": "docs__en__api__beta__environments__work__list.md",
@@ -65332,7 +65388,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 501
+      "word_count": 507
     },
     {
       "filename": "docs__en__api__beta__environments__work__poll.md",
@@ -65422,7 +65478,7 @@
         "non": 1,
         "block": 1
       },
-      "word_count": 547
+      "word_count": 553
     },
     {
       "filename": "docs__en__api__beta__environments__work__retrieve.md",
@@ -65508,7 +65564,7 @@
         "represent": 1,
         "unit": 1
       },
-      "word_count": 475
+      "word_count": 481
     },
     {
       "filename": "docs__en__api__beta__environments__work__stats.md",
@@ -65594,7 +65650,7 @@
         "sent": 1,
         "request": 1
       },
-      "word_count": 281
+      "word_count": 287
     },
     {
       "filename": "docs__en__api__beta__environments__work__stop.md",
@@ -65684,7 +65740,7 @@
         "true": 1,
         "immediately": 1
       },
-      "word_count": 499
+      "word_count": 505
     },
     {
       "filename": "docs__en__api__beta__environments__work__update.md",
@@ -65774,7 +65830,7 @@
         "patch": 1,
         "set": 1
       },
-      "word_count": 517
+      "word_count": 523
     },
     {
       "filename": "docs__en__api__beta__files.md",
@@ -65968,7 +66024,7 @@
         "filename": 4,
         "mime": 4
       },
-      "word_count": 1840
+      "word_count": 1870
     },
     {
       "filename": "docs__en__api__beta__files__delete.md",
@@ -66023,7 +66079,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 186
+      "word_count": 192
     },
     {
       "filename": "docs__en__api__beta__files__download.md",
@@ -66063,7 +66119,7 @@
         "want": 1,
         "example": 1
       },
-      "word_count": 143
+      "word_count": 149
     },
     {
       "filename": "docs__en__api__beta__files__list.md",
@@ -66149,7 +66205,7 @@
         "visible": 1,
         "includ": 1
       },
-      "word_count": 509
+      "word_count": 515
     },
     {
       "filename": "docs__en__api__beta__files__retrieve_metadata.md",
@@ -66235,7 +66291,7 @@
         "doe": 1,
         "plu": 1
       },
-      "word_count": 357
+      "word_count": 363
     },
     {
       "filename": "docs__en__api__beta__files__upload.md",
@@ -66321,7 +66377,7 @@
         "identifier": 1,
         "length": 1
       },
-      "word_count": 396
+      "word_count": 402
     },
     {
       "filename": "docs__en__api__beta__memory_stores.md",
@@ -66783,7 +66839,7 @@
         "delet": 15,
         "specify": 14
       },
-      "word_count": 7997
+      "word_count": 8099
     },
     {
       "filename": "docs__en__api__beta__memory_stores__archive.md",
@@ -66869,7 +66925,7 @@
         "includ": 1,
         "system": 1
       },
-      "word_count": 381
+      "word_count": 387
     },
     {
       "filename": "docs__en__api__beta__memory_stores__create.md",
@@ -66955,7 +67011,7 @@
         "post": 1,
         "optional": 1
       },
-      "word_count": 502
+      "word_count": 508
     },
     {
       "filename": "docs__en__api__beta__memory_stores__delete.md",
@@ -67011,7 +67067,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 199
+      "word_count": 205
     },
     {
       "filename": "docs__en__api__beta__memory_stores__list.md",
@@ -67097,7 +67153,7 @@
         "pagination": 1,
         "previou": 1
       },
-      "word_count": 517
+      "word_count": 523
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories.md",
@@ -67359,7 +67415,7 @@
         "query": 9,
         "lowercase": 9
       },
-      "word_count": 4186
+      "word_count": 4234
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__create.md",
@@ -67453,7 +67509,7 @@
         "explicitly": 1,
         "least": 1
       },
-      "word_count": 568
+      "word_count": 583
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__delete.md",
@@ -67532,7 +67588,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 240
+      "word_count": 246
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__list.md",
@@ -67622,7 +67678,7 @@
         "rollup": 2,
         "marker": 2
       },
-      "word_count": 798
+      "word_count": 804
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__retrieve.md",
@@ -67712,7 +67768,7 @@
         "chang": 1,
         "identifier": 1
       },
-      "word_count": 479
+      "word_count": 485
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__update.md",
@@ -67806,7 +67862,7 @@
         "compute": 2,
         "locally": 2
       },
-      "word_count": 692
+      "word_count": 707
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions.md",
@@ -67984,7 +68040,7 @@
         "after": 8,
         "timestamp": 8
       },
-      "word_count": 3559
+      "word_count": 3577
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__list.md",
@@ -68074,7 +68130,7 @@
         "captur": 2,
         "writ": 2
       },
-      "word_count": 873
+      "word_count": 879
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__redact.md",
@@ -68160,7 +68216,7 @@
         "answer": 2,
         "ultimately": 2
       },
-      "word_count": 797
+      "word_count": 803
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__retrieve.md",
@@ -68250,7 +68306,7 @@
         "creat": 2,
         "writ": 2
       },
-      "word_count": 809
+      "word_count": 815
     },
     {
       "filename": "docs__en__api__beta__memory_stores__retrieve.md",
@@ -68336,7 +68392,7 @@
         "includ": 1,
         "system": 1
       },
-      "word_count": 378
+      "word_count": 384
     },
     {
       "filename": "docs__en__api__beta__memory_stores__update.md",
@@ -68426,7 +68482,7 @@
         "bag": 1,
         "limit": 1
       },
-      "word_count": 495
+      "word_count": 501
     },
     {
       "filename": "docs__en__api__beta__messages.md",
@@ -69344,6 +69400,10 @@
           "level": 3
         },
         {
+          "text": "Beta System Message Output Config",
+          "level": 3
+        },
+        {
           "text": "Beta Text Block",
           "level": 3
         },
@@ -69408,6 +69468,10 @@
           "level": 3
         },
         {
+          "text": "Beta Thinking Block Binding",
+          "level": 3
+        },
+        {
           "text": "Beta Thinking Block Param",
           "level": 3
         },
@@ -69429,6 +69493,14 @@
         },
         {
           "text": "Beta Thinking Delta",
+          "level": 3
+        },
+        {
+          "text": "Beta Thinking Dropped Input Transformation",
+          "level": 3
+        },
+        {
+          "text": "Beta Thinking Prefix Mismatch Behavior",
           "level": 3
         },
         {
@@ -69831,56 +69903,56 @@
       "terms": {
         "tool": 1984,
         "member": 1819,
-        "model": 1498,
-        "default": 1400,
-        "block": 1379,
+        "model": 1601,
+        "block": 1490,
+        "default": 1438,
         "token": 911,
-        "content": 789,
+        "content": 799,
         "toolset": 786,
-        "per": 758,
+        "per": 776,
         "result": 737,
+        "request": 691,
         "enabl": 691,
         "minimum": 659,
-        "request": 610,
         "cache": 600,
-        "input": 522,
+        "input": 536,
         "schema": 510,
-        "same": 485,
+        "same": 502,
         "load": 481,
         "number": 468,
+        "serv": 437,
         "whether": 432,
-        "serv": 429,
         "create": 421,
+        "control": 413,
+        "every": 413,
         "value": 411,
-        "control": 398,
-        "server": 398,
-        "config": 396,
+        "server": 406,
+        "config": 402,
         "must": 395,
+        "whose": 384,
+        "text": 382,
         "false": 380,
-        "text": 378,
-        "whose": 375,
         "breakpoint": 374,
         "resolv": 374,
-        "every": 371,
         "search": 366,
         "pattern": 365,
         "used": 359,
+        "output": 352,
         "offer": 350,
         "overrid": 346,
-        "output": 341,
         "defer": 341,
         "documentation": 340,
+        "prompt": 337,
+        "beta": 336,
         "resolve": 336,
         "withheld": 336,
         "maxlength": 334,
-        "prompt": 329,
-        "beta": 324,
-        "minlength": 314,
-        "cod": 297,
-        "intelligence": 297,
-        "return": 280
+        "intelligence": 324,
+        "cod": 324,
+        "think": 318,
+        "minlength": 314
       },
-      "word_count": 143031
+      "word_count": 148361
     },
     {
       "filename": "docs__en__api__beta__messages__batches.md",
@@ -70075,58 +70147,58 @@
         }
       ],
       "terms": {
-        "default": 527,
+        "default": 535,
         "tool": 510,
-        "model": 431,
-        "request": 331,
+        "model": 467,
+        "request": 356,
         "token": 326,
-        "block": 278,
+        "block": 312,
         "member": 266,
         "result": 257,
-        "message": 209,
+        "message": 220,
         "number": 199,
-        "content": 185,
+        "content": 187,
         "minimum": 183,
         "batch": 179,
-        "input": 163,
+        "input": 168,
         "cache": 142,
+        "response": 126,
         "used": 123,
-        "response": 122,
+        "per": 120,
+        "output": 119,
         "toolset": 119,
-        "output": 117,
-        "server": 114,
-        "per": 114,
-        "text": 112,
-        "error": 105,
-        "same": 104,
+        "server": 118,
+        "text": 113,
+        "same": 112,
+        "error": 110,
         "enabl": 100,
+        "only": 98,
+        "think": 97,
+        "entry": 96,
         "create": 94,
         "pattern": 93,
         "retry": 93,
         "search": 89,
-        "only": 87,
+        "one": 88,
         "code": 86,
         "schema": 85,
-        "think": 82,
         "process": 81,
         "execution": 81,
-        "entry": 80,
+        "time": 80,
         "load": 80,
+        "serv": 79,
+        "end": 78,
         "return": 77,
         "whether": 77,
-        "time": 76,
+        "prompt": 76,
         "context": 76,
-        "serv": 75,
-        "end": 74,
+        "turn": 74,
         "value": 73,
-        "prompt": 72,
-        "one": 72,
-        "whose": 68,
-        "must": 68,
-        "turn": 68,
-        "were": 66
+        "whose": 72,
+        "fallback": 69,
+        "every": 68
       },
-      "word_count": 39270
+      "word_count": 41031
     },
     {
       "filename": "docs__en__api__beta__messages__batches__cancel.md",
@@ -70212,7 +70284,7 @@
         "note": 1,
         "learn": 1
       },
-      "word_count": 689
+      "word_count": 695
     },
     {
       "filename": "docs__en__api__beta__messages__batches__create.md",
@@ -70249,24 +70321,24 @@
       "terms": {
         "tool": 266,
         "member": 262,
-        "model": 151,
-        "block": 138,
+        "model": 155,
+        "block": 144,
         "toolset": 111,
-        "per": 105,
+        "per": 107,
         "enabl": 100,
-        "content": 97,
-        "default": 82,
+        "content": 99,
+        "default": 86,
         "schema": 81,
         "load": 76,
+        "request": 66,
         "cache": 66,
         "same": 63,
-        "request": 61,
+        "control": 62,
         "whether": 61,
-        "control": 60,
+        "every": 60,
         "create": 58,
         "must": 57,
         "value": 57,
-        "every": 55,
         "breakpoint": 55,
         "serv": 55,
         "false": 53,
@@ -70276,20 +70348,20 @@
         "true": 51,
         "documentation": 50,
         "overrid": 50,
+        "only": 49,
+        "config": 49,
         "defer": 49,
-        "config": 48,
         "resolve": 48,
         "withheld": 48,
-        "only": 46,
         "call": 45,
+        "message": 44,
         "prompt": 44,
+        "input": 44,
         "return": 44,
-        "input": 43,
         "result": 42,
+        "includ": 39,
         "name": 39,
         "server": 38,
-        "includ": 38,
-        "message": 37,
         "reference": 35,
         "maxlength": 34,
         "token": 34,
@@ -70298,7 +70370,7 @@
         "search": 33,
         "batch": 32
       },
-      "word_count": 15047
+      "word_count": 15322
     },
     {
       "filename": "docs__en__api__beta__messages__batches__delete.md",
@@ -70368,7 +70440,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 228
+      "word_count": 234
     },
     {
       "filename": "docs__en__api__beta__messages__batches__list.md",
@@ -70454,7 +70526,7 @@
         "learn": 1,
         "about": 1
       },
-      "word_count": 768
+      "word_count": 774
     },
     {
       "filename": "docs__en__api__beta__messages__batches__results.md",
@@ -70485,58 +70557,58 @@
         }
       ],
       "terms": {
-        "default": 103,
+        "default": 104,
+        "model": 78,
         "token": 73,
-        "model": 70,
+        "request": 62,
         "tool": 61,
-        "request": 57,
         "result": 52,
+        "block": 42,
         "minimum": 37,
-        "block": 35,
         "number": 35,
-        "input": 30,
+        "input": 31,
+        "response": 25,
         "output": 25,
-        "response": 24,
         "text": 24,
+        "error": 23,
         "used": 23,
-        "error": 22,
         "content": 22,
+        "entry": 22,
         "retry": 21,
+        "server": 20,
+        "message": 19,
         "code": 19,
-        "server": 19,
+        "think": 19,
         "cache": 19,
-        "message": 18,
         "execution": 18,
-        "entry": 18,
+        "reason": 16,
         "were": 16,
-        "think": 16,
+        "one": 16,
+        "fallback": 16,
         "pattern": 15,
-        "fallback": 15,
         "context": 15,
         "search": 14,
-        "reason": 13,
-        "turn": 12,
+        "turn": 13,
+        "same": 12,
         "web": 12,
         "invocation": 12,
         "advisor": 12,
         "trigger": 12,
-        "one": 12,
+        "intelligence": 12,
+        "cod": 12,
         "category": 12,
         "generat": 11,
         "cit": 11,
         "count": 11,
         "compaction": 11,
-        "cod": 11,
-        "intelligence": 11,
         "refusal": 11,
+        "read": 11,
         "usage": 11,
         "iteration": 11,
-        "same": 10,
         "field": 10,
-        "directly": 10,
-        "srvtoolu": 10
+        "api": 10
       },
-      "word_count": 5512
+      "word_count": 5882
     },
     {
       "filename": "docs__en__api__beta__messages__batches__retrieve.md",
@@ -70622,7 +70694,7 @@
         "guide": 1,
         "path": 1
       },
-      "word_count": 649
+      "word_count": 655
     },
     {
       "filename": "docs__en__api__beta__messages__count_tokens.md",
@@ -70659,56 +70731,56 @@
       "terms": {
         "tool": 266,
         "member": 262,
-        "block": 136,
-        "model": 132,
+        "block": 142,
+        "model": 136,
         "toolset": 111,
-        "per": 105,
+        "per": 107,
         "enabl": 100,
-        "content": 95,
+        "content": 97,
         "schema": 81,
+        "default": 76,
         "load": 74,
-        "default": 72,
+        "control": 62,
         "cache": 61,
-        "control": 60,
         "whether": 59,
         "same": 58,
+        "every": 58,
         "create": 55,
         "breakpoint": 55,
         "must": 54,
         "serv": 53,
-        "every": 53,
         "false": 53,
         "resolv": 52,
         "value": 51,
         "true": 51,
         "offer": 50,
         "overrid": 50,
+        "config": 49,
         "whose": 49,
         "documentation": 49,
         "defer": 49,
-        "config": 48,
         "resolve": 48,
         "withheld": 48,
         "call": 45,
-        "input": 43,
+        "input": 44,
         "return": 42,
-        "includ": 39,
+        "includ": 40,
         "prompt": 39,
+        "only": 39,
         "name": 38,
-        "only": 36,
         "result": 34,
         "reference": 34,
         "search": 33,
+        "system": 32,
         "server": 32,
         "pattern": 32,
-        "system": 30,
         "minimum": 30,
         "nam": 30,
+        "request": 29,
         "via": 29,
-        "maxlength": 28,
-        "token": 27
+        "maxlength": 28
       },
-      "word_count": 13377
+      "word_count": 13652
     },
     {
       "filename": "docs__en__api__beta__messages__create.md",
@@ -70745,56 +70817,56 @@
       "terms": {
         "tool": 333,
         "member": 263,
-        "model": 232,
-        "block": 190,
-        "default": 169,
+        "model": 251,
+        "block": 210,
+        "default": 175,
+        "content": 130,
         "token": 129,
-        "content": 128,
+        "per": 114,
         "toolset": 113,
-        "per": 110,
+        "request": 107,
         "enabl": 100,
-        "request": 92,
         "cache": 88,
+        "input": 84,
         "result": 82,
         "schema": 82,
-        "input": 81,
         "load": 77,
+        "same": 75,
         "minimum": 74,
-        "same": 71,
         "create": 67,
         "whether": 66,
+        "server": 64,
         "value": 63,
+        "serv": 63,
         "number": 62,
-        "server": 62,
-        "serv": 61,
-        "control": 60,
+        "control": 62,
+        "every": 60,
         "must": 58,
         "used": 57,
+        "only": 57,
+        "whose": 57,
         "breakpoint": 55,
-        "whose": 55,
         "false": 55,
+        "response": 54,
         "resolv": 54,
-        "every": 53,
-        "response": 52,
+        "prompt": 52,
+        "output": 52,
         "return": 52,
         "offer": 51,
         "true": 51,
-        "only": 50,
-        "prompt": 50,
-        "output": 50,
         "overrid": 50,
+        "config": 49,
         "documentation": 49,
         "defer": 49,
-        "config": 48,
         "resolve": 48,
         "withheld": 48,
         "search": 47,
         "pattern": 47,
-        "call": 45,
-        "includ": 44,
-        "text": 43
+        "think": 46,
+        "includ": 45,
+        "call": 45
       },
-      "word_count": 20780
+      "word_count": 21756
     },
     {
       "filename": "docs__en__api__beta__models.md",
@@ -70940,7 +71012,7 @@
         "execution": 4,
         "strategi": 4
       },
-      "word_count": 2433
+      "word_count": 2445
     },
     {
       "filename": "docs__en__api__beta__models__list.md",
@@ -71026,7 +71098,7 @@
         "optional": 1,
         "specify": 1
       },
-      "word_count": 819
+      "word_count": 825
     },
     {
       "filename": "docs__en__api__beta__models__retrieve.md",
@@ -71112,7 +71184,7 @@
         "citation": 1,
         "generation": 1
       },
-      "word_count": 680
+      "word_count": 686
     },
     {
       "filename": "docs__en__api__beta__organization.md",
@@ -72488,61 +72560,101 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Organization \u203a Compliance Settings",
+          "level": 2
+        },
+        {
+          "text": "Get Compliance Settings",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update Compliance Settings",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "workspace": 319,
-        "key": 297,
+        "key": 371,
+        "workspace": 344,
+        "account": 202,
         "rule": 185,
         "service": 183,
-        "account": 183,
-        "default": 158,
-        "api": 155,
+        "default": 164,
+        "api": 162,
+        "organization": 142,
         "issuer": 139,
         "time": 126,
-        "organization": 121,
+        "return": 117,
         "tagg": 116,
-        "return": 114,
         "federation": 110,
         "format": 103,
         "token": 103,
         "date": 98,
-        "parameter": 82,
+        "parameter": 83,
         "user": 81,
+        "aws": 80,
+        "response": 76,
         "archiv": 75,
         "creat": 74,
-        "response": 73,
         "jwk": 73,
         "claim": 72,
         "only": 70,
+        "value": 69,
         "actor": 68,
         "identity": 68,
+        "must": 68,
+        "example": 67,
         "admin": 67,
         "fetch": 66,
-        "example": 65,
         "match": 64,
         "role": 63,
         "member": 63,
+        "object": 62,
+        "accept": 62,
         "maxlength": 61,
-        "accept": 61,
-        "object": 60,
         "name": 57,
         "page": 56,
         "type": 55,
-        "must": 55,
-        "field": 54,
+        "field": 55,
         "header": 54,
         "list": 53,
+        "str": 53,
         "optional": 53,
         "membership": 53,
-        "str": 52,
-        "oauth": 51,
-        "alway": 50,
-        "external": 50,
-        "anthropic": 49,
-        "scope": 48
+        "single": 52,
+        "reject": 52,
+        "enabl": 52
       },
-      "word_count": 26645
+      "word_count": 28069
     },
     {
       "filename": "docs__en__api__beta__organization__api_keys.md",
@@ -72953,6 +73065,270 @@
       "word_count": 568
     },
     {
+      "filename": "docs__en__api__beta__organization__compliance_settings.md",
+      "id": "docs/en/api/beta/organization/compliance_settings",
+      "title": "Compliance Settings (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/compliance_settings",
+      "headings": [
+        {
+          "text": "Compliance Settings",
+          "level": 1
+        },
+        {
+          "text": "Get Compliance Settings",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Update Compliance Settings",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Domain types",
+          "level": 2
+        },
+        {
+          "text": "Beta Compliance Settings",
+          "level": 3
+        },
+        {
+          "text": "Beta Compliance Settings State Disabled",
+          "level": 3
+        },
+        {
+          "text": "Beta Compliance Settings State Disabled Param",
+          "level": 3
+        },
+        {
+          "text": "Beta Compliance Settings State Enabled",
+          "level": 3
+        },
+        {
+          "text": "Beta Compliance Settings State Enabled Param",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "compliance": 23,
+        "enabl": 16,
+        "setting": 15,
+        "default": 11,
+        "organization": 10,
+        "api": 8,
+        "disabl": 8,
+        "state": 6,
+        "whether": 5,
+        "beta": 5,
+        "request": 4,
+        "return": 3,
+        "response": 3,
+        "provision": 3,
+        "get": 2,
+        "resource": 2,
+        "reflect": 2,
+        "parent": 2,
+        "example": 2,
+        "update": 2,
+        "sett": 2,
+        "turn": 2,
+        "activity": 2,
+        "event": 2,
+        "acces": 2,
+        "transparency": 2,
+        "object": 2,
+        "form": 2,
+        "param": 2,
+        "retrieve": 1,
+        "singleton": 1,
+        "exactly": 1,
+        "one": 1,
+        "per": 1,
+        "address": 1,
+        "without": 1,
+        "identifier": 1,
+        "field": 1,
+        "read": 1,
+        "inherit": 1,
+        "configuration": 1,
+        "post": 1,
+        "begin": 1,
+        "captur": 1,
+        "both": 1,
+        "off": 1,
+        "set": 1,
+        "current": 1,
+        "value": 1,
+        "succeed": 1
+      },
+      "word_count": 455
+    },
+    {
+      "filename": "docs__en__api__beta__organization__compliance_settings__retrieve.md",
+      "id": "docs/en/api/beta/organization/compliance_settings/retrieve",
+      "title": "Get Compliance Settings (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/retrieve",
+      "headings": [
+        {
+          "text": "Get Compliance Settings",
+          "level": 1
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "compliance": 6,
+        "organization": 5,
+        "setting": 4,
+        "enabl": 3,
+        "default": 3,
+        "get": 2,
+        "whether": 2,
+        "api": 2,
+        "parent": 2,
+        "retrieve": 1,
+        "singleton": 1,
+        "resource": 1,
+        "exactly": 1,
+        "one": 1,
+        "per": 1,
+        "address": 1,
+        "without": 1,
+        "identifier": 1,
+        "field": 1,
+        "reflect": 1,
+        "read": 1,
+        "state": 1,
+        "inherit": 1,
+        "configuration": 1,
+        "return": 1,
+        "disabl": 1,
+        "example": 1,
+        "response": 1
+      },
+      "word_count": 119
+    },
+    {
+      "filename": "docs__en__api__beta__organization__compliance_settings__update.md",
+      "id": "docs/en/api/beta/organization/compliance_settings/update",
+      "title": "Update Compliance Settings (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/update",
+      "headings": [
+        {
+          "text": "Update Compliance Settings",
+          "level": 1
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "compliance": 9,
+        "enabl": 8,
+        "api": 5,
+        "setting": 4,
+        "organization": 4,
+        "request": 4,
+        "provision": 3,
+        "disabl": 3,
+        "default": 3,
+        "update": 2,
+        "sett": 2,
+        "turn": 2,
+        "activity": 2,
+        "event": 2,
+        "whether": 2,
+        "acces": 2,
+        "transparency": 2,
+        "object": 2,
+        "form": 2,
+        "response": 2,
+        "return": 2,
+        "post": 1,
+        "begin": 1,
+        "captur": 1,
+        "both": 1,
+        "off": 1,
+        "reflect": 1,
+        "set": 1,
+        "current": 1,
+        "value": 1,
+        "succeed": 1,
+        "leav": 1,
+        "resource": 1,
+        "unchang": 1,
+        "stay": 1,
+        "effect": 1,
+        "until": 1,
+        "later": 1,
+        "next": 1,
+        "action": 1,
+        "also": 1,
+        "serv": 1,
+        "such": 1,
+        "includ": 1,
+        "run": 1,
+        "even": 1,
+        "after": 1,
+        "automat": 1,
+        "never": 1,
+        "body": 1
+      },
+      "word_count": 234
+    },
+    {
       "filename": "docs__en__api__beta__organization__external_keys.md",
       "id": "docs/en/api/beta/organization/external_keys",
       "title": "External Keys (Beta)",
@@ -73129,28 +73505,34 @@
         }
       ],
       "terms": {
-        "key": 104,
+        "key": 136,
+        "aws": 59,
         "config": 53,
         "external": 46,
         "kms": 39,
         "data": 31,
-        "aws": 27,
+        "arn": 29,
+        "organization": 24,
+        "region": 24,
+        "workspace": 24,
         "name": 24,
         "azure": 23,
         "encrypt": 23,
         "default": 22,
-        "arn": 21,
+        "claude": 21,
+        "platform": 21,
         "vault": 21,
+        "single": 18,
         "anthropic": 18,
         "tenant": 18,
         "app": 18,
-        "organization": 16,
+        "own": 17,
         "full": 16,
+        "account": 16,
         "deprecat": 16,
         "role": 16,
         "only": 16,
         "attach": 16,
-        "workspace": 16,
         "provider": 14,
         "maxlength": 14,
         "delet": 14,
@@ -73161,10 +73543,10 @@
         "any": 11,
         "time": 11,
         "response": 11,
-        "single": 10,
         "archiv": 10,
         "format": 10,
         "date": 10,
+        "reject": 9,
         "omitt": 9,
         "within": 9,
         "plane": 9,
@@ -73172,15 +73554,9 @@
         "application": 9,
         "client": 9,
         "omit": 9,
-        "multitenant": 9,
-        "provide": 9,
-        "using": 9,
-        "registration": 9,
-        "directory": 9,
-        "workspac": 9,
-        "path": 9
+        "multitenant": 9
       },
-      "word_count": 2994
+      "word_count": 3314
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys__create.md",
@@ -73211,19 +73587,26 @@
         }
       ],
       "terms": {
-        "key": 18,
+        "key": 26,
+        "aws": 14,
         "config": 10,
         "kms": 9,
+        "arn": 7,
         "data": 7,
-        "aws": 6,
+        "organization": 6,
+        "region": 6,
         "name": 6,
         "external": 5,
-        "arn": 5,
+        "own": 5,
+        "claude": 5,
+        "platform": 5,
+        "workspace": 5,
         "azure": 5,
         "vault": 5,
-        "organization": 4,
         "provider": 4,
         "full": 4,
+        "single": 4,
+        "account": 4,
         "deprecat": 4,
         "role": 4,
         "anthropic": 4,
@@ -73234,35 +73617,28 @@
         "maxlength": 3,
         "field": 3,
         "attach": 3,
-        "workspace": 3,
         "default": 3,
         "create": 2,
         "caller": 2,
         "identity": 2,
         "auth": 2,
         "coordinat": 2,
-        "region": 2,
+        "must": 2,
+        "cros": 2,
+        "multi": 2,
+        "alia": 2,
+        "reject": 2,
         "deriv": 2,
         "omitt": 2,
         "iam": 2,
         "reach": 2,
-        "via": 2,
-        "manag": 2,
+        "through": 2,
         "intermediate": 2,
-        "ignor": 2,
-        "resource": 2,
-        "cloud": 2,
-        "within": 2,
-        "plane": 2,
-        "uri": 2,
-        "application": 2,
-        "client": 2,
-        "omit": 2,
-        "multitenant": 2,
-        "provide": 2,
-        "using": 2
+        "credential": 2,
+        "issu": 2,
+        "ignor": 2
       },
-      "word_count": 594
+      "word_count": 674
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys__delete.md",
@@ -73343,26 +73719,29 @@
         }
       ],
       "terms": {
-        "key": 11,
+        "key": 15,
+        "aws": 8,
         "config": 6,
         "kms": 5,
         "external": 4,
         "default": 4,
-        "aws": 4,
+        "arn": 4,
         "data": 4,
+        "organization": 3,
         "result": 3,
         "time": 3,
         "cursor": 3,
         "response": 3,
         "page": 3,
-        "arn": 3,
+        "claude": 3,
+        "platform": 3,
+        "workspace": 3,
         "encrypt": 3,
         "name": 3,
+        "region": 3,
         "list": 2,
-        "organization": 2,
         "fetch": 2,
         "opaque": 2,
-        "workspace": 2,
         "archiv": 2,
         "delet": 2,
         "only": 2,
@@ -73371,6 +73750,9 @@
         "date": 2,
         "null": 2,
         "full": 2,
+        "single": 2,
+        "own": 2,
+        "account": 2,
         "deprecat": 2,
         "role": 2,
         "anthropic": 2,
@@ -73386,15 +73768,9 @@
         "newest": 1,
         "first": 1,
         "subsequent": 1,
-        "pag": 1,
-        "query": 1,
-        "parameter": 1,
-        "number": 1,
-        "per": 1,
-        "maximum": 1,
-        "minimum": 1
+        "pag": 1
       },
-      "word_count": 441
+      "word_count": 481
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys__retrieve.md",
@@ -73425,21 +73801,24 @@
         }
       ],
       "terms": {
-        "key": 13,
+        "key": 17,
         "config": 10,
+        "aws": 8,
         "external": 6,
+        "organization": 5,
         "data": 5,
         "kms": 5,
-        "organization": 4,
+        "workspace": 4,
         "encrypt": 4,
-        "aws": 4,
+        "arn": 4,
+        "single": 3,
         "attach": 3,
-        "workspace": 3,
-        "arn": 3,
+        "claude": 3,
+        "platform": 3,
         "default": 3,
         "name": 3,
+        "region": 3,
         "get": 2,
-        "single": 2,
         "caller": 2,
         "path": 2,
         "maxlength": 2,
@@ -73455,6 +73834,8 @@
         "date": 2,
         "time": 2,
         "full": 2,
+        "own": 2,
+        "account": 2,
         "deprecat": 2,
         "role": 2,
         "anthropic": 2,
@@ -73469,14 +73850,9 @@
         "belong": 1,
         "scop": 1,
         "once": 1,
-        "referenc": 1,
-        "become": 1,
-        "effectively": 1,
-        "immutable": 1,
-        "exist": 1,
-        "need": 1
+        "referenc": 1
       },
-      "word_count": 412
+      "word_count": 452
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys__update.md",
@@ -73511,23 +73887,30 @@
         }
       ],
       "terms": {
-        "key": 20,
+        "key": 28,
+        "aws": 14,
         "config": 11,
         "kms": 9,
         "data": 8,
+        "arn": 7,
         "external": 6,
+        "workspace": 6,
         "name": 6,
-        "aws": 6,
+        "region": 6,
         "encrypt": 5,
-        "arn": 5,
+        "claude": 5,
+        "platform": 5,
+        "organization": 5,
         "azure": 5,
         "vault": 5,
         "field": 4,
-        "workspace": 4,
         "maxlength": 4,
         "only": 4,
         "provider": 4,
         "full": 4,
+        "single": 4,
+        "own": 4,
+        "account": 4,
         "deprecat": 4,
         "role": 4,
         "anthropic": 4,
@@ -73537,7 +73920,6 @@
         "any": 3,
         "identity": 3,
         "decrypt": 3,
-        "organization": 3,
         "attach": 3,
         "default": 3,
         "update": 2,
@@ -73552,17 +73934,11 @@
         "geo": 2,
         "auth": 2,
         "coordinat": 2,
-        "region": 2,
-        "deriv": 2,
-        "iam": 2,
-        "reach": 2,
-        "via": 2,
-        "manag": 2,
-        "intermediate": 2,
-        "ignor": 2,
-        "resource": 2
+        "must": 2,
+        "cros": 2,
+        "multi": 2
       },
-      "word_count": 632
+      "word_count": 712
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys__validate.md",
@@ -74034,7 +74410,7 @@
         "true": 21,
         "assertion": 21
       },
-      "word_count": 10732
+      "word_count": 10810
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers.md",
@@ -74248,7 +74624,7 @@
         "identity": 12,
         "default": 12
       },
-      "word_count": 5013
+      "word_count": 5043
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
@@ -74334,7 +74710,7 @@
         "via": 2,
         "discovery": 2
       },
-      "word_count": 751
+      "word_count": 757
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
@@ -74420,7 +74796,7 @@
         "actor": 3,
         "post": 2
       },
-      "word_count": 1045
+      "word_count": 1051
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
@@ -74506,7 +74882,7 @@
         "tls": 2,
         "maxlength": 2
       },
-      "word_count": 745
+      "word_count": 751
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
@@ -74592,7 +74968,7 @@
         "anthropic": 2,
         "paus": 2
       },
-      "word_count": 712
+      "word_count": 718
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
@@ -74682,7 +75058,7 @@
         "sign": 3,
         "via": 3
       },
-      "word_count": 1074
+      "word_count": 1080
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
@@ -74976,7 +75352,7 @@
         "example": 17,
         "api": 16
       },
-      "word_count": 7287
+      "word_count": 7335
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
@@ -75062,7 +75438,7 @@
         "anthropic": 2,
         "condition": 2
       },
-      "word_count": 886
+      "word_count": 892
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
@@ -75148,7 +75524,7 @@
         "requir": 3,
         "admin": 3
       },
-      "word_count": 1366
+      "word_count": 1372
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
@@ -75234,7 +75610,7 @@
         "alway": 2,
         "null": 2
       },
-      "word_count": 820
+      "word_count": 826
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
@@ -75320,7 +75696,7 @@
         "member": 2,
         "carry": 2
       },
-      "word_count": 830
+      "word_count": 836
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
@@ -75410,7 +75786,7 @@
         "admin": 3,
         "set": 3
       },
-      "word_count": 1438
+      "word_count": 1444
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
@@ -75564,7 +75940,7 @@
         "require": 2,
         "console": 2
       },
-      "word_count": 1091
+      "word_count": 1109
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
@@ -75654,7 +76030,7 @@
         "whose": 1,
         "other": 1
       },
-      "word_count": 390
+      "word_count": 396
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
@@ -75744,7 +76120,7 @@
         "maximum": 1,
         "minimum": 1
       },
-      "word_count": 389
+      "word_count": 395
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
@@ -75830,7 +76206,7 @@
         "request": 1,
         "removal": 1
       },
-      "word_count": 270
+      "word_count": 276
     },
     {
       "filename": "docs__en__api__beta__organization__invites.md",
@@ -76782,7 +77158,7 @@
         "specify": 8,
         "version": 8
       },
-      "word_count": 3861
+      "word_count": 3909
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
@@ -76868,7 +77244,7 @@
         "another": 1,
         "path": 1
       },
-      "word_count": 451
+      "word_count": 457
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
@@ -76954,7 +77330,7 @@
         "accept": 1,
         "see": 1
       },
-      "word_count": 517
+      "word_count": 523
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
@@ -77040,7 +77416,7 @@
         "query": 1,
         "parameter": 1
       },
-      "word_count": 463
+      "word_count": 469
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
@@ -77126,7 +77502,7 @@
         "name": 1,
         "authorization": 1
       },
-      "word_count": 410
+      "word_count": 416
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
@@ -77216,7 +77592,7 @@
         "chang": 1,
         "sett": 1
       },
-      "word_count": 506
+      "word_count": 512
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
@@ -77370,7 +77746,7 @@
         "example": 3,
         "list": 3
       },
-      "word_count": 1255
+      "word_count": 1273
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
@@ -77460,7 +77836,7 @@
         "optional": 1,
         "specify": 1
       },
-      "word_count": 404
+      "word_count": 410
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
@@ -77550,7 +77926,7 @@
         "entri": 1,
         "plu": 1
       },
-      "word_count": 493
+      "word_count": 499
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
@@ -77636,7 +78012,7 @@
         "specify": 1,
         "beta": 1
       },
-      "word_count": 305
+      "word_count": 311
     },
     {
       "filename": "docs__en__api__beta__organization__users.md",
@@ -78496,27 +78872,36 @@
         }
       ],
       "terms": {
-        "workspace": 197,
-        "key": 113,
+        "workspace": 219,
+        "key": 171,
+        "account": 57,
+        "value": 56,
         "default": 52,
         "service": 49,
-        "account": 49,
         "member": 47,
+        "aws": 42,
         "geo": 40,
         "return": 37,
         "configuration": 36,
         "parameter": 35,
         "membership": 31,
-        "value": 30,
         "cmek": 28,
+        "platform": 28,
+        "attach": 28,
         "data": 28,
         "role": 28,
+        "region": 25,
+        "compartment": 24,
         "archiv": 23,
         "inference": 23,
+        "request": 23,
         "str": 22,
+        "kms": 22,
         "object": 21,
         "response": 20,
         "encryption": 20,
+        "policy": 20,
+        "claude": 20,
         "list": 19,
         "requir": 19,
         "api": 19,
@@ -78524,30 +78909,21 @@
         "user": 19,
         "workspac": 18,
         "page": 18,
-        "compartment": 18,
+        "organization": 18,
         "type": 18,
+        "same": 17,
         "example": 17,
         "field": 16,
         "once": 16,
         "rotate": 16,
-        "request": 15,
+        "against": 15,
         "implicit": 15,
         "tagg": 15,
         "indicat": 14,
         "customer": 14,
-        "manag": 14,
-        "kms": 14,
-        "anthropic": 14,
-        "allow": 14,
-        "create": 14,
-        "beta": 14,
-        "path": 14,
-        "reference": 13,
-        "see": 13,
-        "valu": 13,
-        "unrestrict": 13
+        "manag": 14
       },
-      "word_count": 6464
+      "word_count": 7274
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__archive.md",
@@ -78578,16 +78954,23 @@
         }
       ],
       "terms": {
-        "key": 15,
-        "workspace": 14,
+        "key": 23,
+        "workspace": 17,
+        "value": 8,
+        "aws": 6,
         "configuration": 5,
+        "compartment": 4,
         "cmek": 4,
-        "value": 4,
+        "platform": 4,
+        "attach": 4,
         "str": 3,
         "encryption": 3,
-        "compartment": 3,
+        "kms": 3,
+        "policy": 3,
+        "claude": 3,
         "data": 3,
         "geo": 3,
+        "region": 3,
         "archive": 2,
         "parameter": 2,
         "rfc": 2,
@@ -78600,12 +78983,19 @@
         "customer": 2,
         "manag": 2,
         "reference": 2,
-        "kms": 2,
+        "condition": 2,
         "anthropic": 2,
         "requir": 2,
+        "organization": 2,
+        "separate": 2,
+        "validation": 2,
+        "validat": 2,
+        "against": 2,
         "inference": 2,
         "default": 2,
+        "request": 2,
         "field": 2,
+        "same": 2,
         "once": 2,
         "rotate": 2,
         "post": 1,
@@ -78613,23 +79003,9 @@
         "return": 1,
         "identifier": 1,
         "configure": 1,
-        "aws": 1,
-        "policy": 1,
-        "condition": 1,
-        "scop": 1,
-        "gcp": 1,
-        "azure": 1,
-        "enforc": 1,
-        "bind": 1,
-        "automatically": 1,
-        "need": 1,
-        "see": 1,
-        "integration": 1,
-        "guide": 1,
-        "includ": 1,
-        "used": 1
+        "scop": 1
       },
-      "word_count": 386
+      "word_count": 496
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__create.md",
@@ -78664,31 +79040,43 @@
         }
       ],
       "terms": {
-        "key": 24,
-        "workspace": 21,
+        "key": 37,
+        "workspace": 26,
+        "value": 10,
+        "aws": 9,
         "configuration": 8,
         "geo": 8,
         "default": 7,
         "data": 6,
+        "region": 6,
         "cmek": 6,
+        "platform": 6,
+        "attach": 6,
         "str": 5,
-        "value": 5,
+        "kms": 5,
         "create": 4,
         "omitt": 4,
         "inference": 4,
+        "request": 4,
         "encryption": 4,
         "field": 4,
+        "claude": 4,
+        "same": 4,
+        "policy": 4,
         "once": 4,
         "rotate": 4,
+        "compartment": 4,
         "parameter": 3,
         "unrestrict": 3,
         "allow": 3,
+        "must": 3,
         "anthropic": 3,
         "customer": 3,
         "manag": 3,
         "requir": 3,
-        "kms": 3,
-        "compartment": 3,
+        "organization": 3,
+        "validat": 3,
+        "against": 3,
         "header": 2,
         "name": 2,
         "maxlength": 2,
@@ -78696,26 +79084,14 @@
         "permitt": 2,
         "valu": 2,
         "appli": 2,
-        "request": 2,
         "omit": 2,
+        "unles": 2,
         "geographic": 2,
-        "region": 2,
         "storage": 2,
         "immutable": 2,
-        "after": 2,
-        "creation": 2,
-        "hex": 2,
-        "color": 2,
-        "code": 2,
-        "represent": 2,
-        "console": 2,
-        "sett": 2,
-        "enabl": 2,
-        "organization": 2,
-        "set": 2,
-        "stor": 2
+        "after": 2
       },
-      "word_count": 778
+      "word_count": 951
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
@@ -78746,32 +79122,41 @@
         }
       ],
       "terms": {
-        "key": 15,
-        "workspace": 12,
+        "key": 23,
+        "workspace": 15,
+        "value": 8,
         "page": 6,
+        "aws": 6,
         "object": 5,
         "default": 5,
         "configuration": 5,
         "list": 4,
         "workspac": 4,
         "return": 4,
+        "compartment": 4,
         "cmek": 4,
-        "value": 4,
+        "platform": 4,
+        "attach": 4,
         "result": 3,
         "archiv": 3,
         "str": 3,
         "indicat": 3,
         "encryption": 3,
-        "compartment": 3,
+        "kms": 3,
+        "policy": 3,
+        "claude": 3,
         "used": 3,
         "data": 3,
         "geo": 3,
+        "request": 3,
+        "region": 3,
         "parameter": 2,
         "cursor": 2,
         "pagination": 2,
         "provid": 2,
         "immediately": 2,
         "after": 2,
+        "before": 2,
         "response": 2,
         "rfc": 2,
         "datetime": 2,
@@ -78781,23 +79166,14 @@
         "customer": 2,
         "manag": 2,
         "reference": 2,
-        "kms": 2,
+        "condition": 2,
         "anthropic": 2,
         "requir": 2,
-        "inference": 2,
-        "request": 2,
-        "field": 2,
-        "once": 2,
-        "rotate": 2,
-        "get": 1,
-        "query": 1,
-        "before": 1,
-        "whether": 1,
-        "include": 1,
-        "been": 1,
-        "false": 1
+        "organization": 2,
+        "separate": 2,
+        "validation": 2
       },
-      "word_count": 543
+      "word_count": 653
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__members.md",
@@ -79474,17 +79850,24 @@
         }
       ],
       "terms": {
-        "workspace": 15,
-        "key": 15,
+        "key": 23,
+        "workspace": 18,
+        "value": 8,
+        "aws": 6,
         "configuration": 5,
+        "compartment": 4,
         "cmek": 4,
-        "value": 4,
+        "platform": 4,
+        "attach": 4,
         "get": 3,
         "str": 3,
         "encryption": 3,
-        "compartment": 3,
+        "kms": 3,
+        "policy": 3,
+        "claude": 3,
         "data": 3,
         "geo": 3,
+        "region": 3,
         "parameter": 2,
         "rfc": 2,
         "datetime": 2,
@@ -79496,36 +79879,29 @@
         "customer": 2,
         "manag": 2,
         "reference": 2,
-        "kms": 2,
+        "condition": 2,
         "anthropic": 2,
         "requir": 2,
+        "organization": 2,
+        "separate": 2,
+        "validation": 2,
+        "validat": 2,
+        "against": 2,
         "inference": 2,
         "default": 2,
+        "request": 2,
         "field": 2,
+        "same": 2,
         "once": 2,
         "rotate": 2,
         "path": 1,
         "return": 1,
         "identifier": 1,
         "configure": 1,
-        "aws": 1,
-        "policy": 1,
-        "condition": 1,
         "scop": 1,
-        "gcp": 1,
-        "azure": 1,
-        "enforc": 1,
-        "bind": 1,
-        "automatically": 1,
-        "need": 1,
-        "see": 1,
-        "integration": 1,
-        "guide": 1,
-        "includ": 1,
-        "used": 1,
-        "dur": 1
+        "gcp": 1
       },
-      "word_count": 387
+      "word_count": 497
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts.md",
@@ -79731,7 +80107,7 @@
         "true": 4,
         "hold": 4
       },
-      "word_count": 1938
+      "word_count": 1968
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
@@ -79821,7 +80197,7 @@
         "suppli": 1,
         "here": 1
       },
-      "word_count": 430
+      "word_count": 436
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
@@ -79911,7 +80287,7 @@
         "maximum": 1,
         "minimum": 1
       },
-      "word_count": 410
+      "word_count": 416
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
@@ -79997,7 +80373,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 296
+      "word_count": 302
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
@@ -80083,7 +80459,7 @@
         "creat": 1,
         "true": 1
       },
-      "word_count": 359
+      "word_count": 365
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
@@ -80173,7 +80549,7 @@
         "beta": 1,
         "version": 1
       },
-      "word_count": 388
+      "word_count": 394
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
@@ -80208,27 +80584,39 @@
         }
       ],
       "terms": {
-        "key": 24,
-        "workspace": 20,
+        "key": 37,
+        "workspace": 25,
+        "value": 10,
+        "aws": 9,
         "configuration": 8,
         "geo": 7,
         "cmek": 6,
+        "platform": 6,
+        "attach": 6,
         "data": 5,
-        "value": 5,
+        "kms": 5,
+        "region": 5,
         "parameter": 4,
         "inference": 4,
+        "request": 4,
         "encryption": 4,
         "field": 4,
+        "claude": 4,
+        "same": 4,
+        "policy": 4,
         "once": 4,
         "rotate": 4,
         "str": 4,
+        "compartment": 4,
         "default": 3,
+        "must": 3,
         "anthropic": 3,
         "customer": 3,
         "manag": 3,
         "requir": 3,
-        "kms": 3,
-        "compartment": 3,
+        "organization": 3,
+        "validat": 3,
+        "against": 3,
         "update": 2,
         "residency": 2,
         "permitt": 2,
@@ -80236,8 +80624,8 @@
         "unrestrict": 2,
         "allow": 2,
         "appli": 2,
-        "request": 2,
         "omit": 2,
+        "unles": 2,
         "hex": 2,
         "color": 2,
         "code": 2,
@@ -80245,21 +80633,9 @@
         "console": 2,
         "maxlength": 2,
         "sett": 2,
-        "enabl": 2,
-        "organization": 2,
-        "set": 2,
-        "stor": 2,
-        "encrypt": 2,
-        "referenc": 2,
-        "create": 2,
-        "external": 2,
-        "api": 2,
-        "write": 2,
-        "attach": 2,
-        "cannot": 2,
-        "detach": 2
+        "enabl": 2
       },
-      "word_count": 620
+      "word_count": 787
     },
     {
       "filename": "docs__en__api__beta__sessions.md",
@@ -80928,7 +81304,7 @@
       "terms": {
         "tool": 1179,
         "format": 708,
-        "agent": 596,
+        "agent": 595,
         "event": 556,
         "user": 551,
         "execution": 511,
@@ -80955,17 +81331,17 @@
         "int": 212,
         "error": 209,
         "identifier": 205,
+        "intelligence": 198,
+        "cod": 198,
         "text": 188,
         "server": 187,
-        "cod": 180,
-        "intelligence": 180,
         "unique": 162,
         "maxlength": 161,
         "token": 161,
-        "runn": 157,
         "name": 154,
         "resolv": 152,
         "turn": 152,
+        "runn": 150,
         "request": 149,
         "only": 138,
         "client": 138,
@@ -80977,7 +81353,7 @@
         "input": 117,
         "document": 116
       },
-      "word_count": 69114
+      "word_count": 69480
     },
     {
       "filename": "docs__en__api__beta__sessions__archive.md",
@@ -81024,6 +81400,8 @@
         "model": 17,
         "configuration": 12,
         "before": 12,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -81031,15 +81409,13 @@
         "without": 11,
         "require": 11,
         "int": 11,
-        "cod": 10,
-        "intelligence": 10,
         "store": 10,
         "resolv": 9,
-        "runn": 8,
         "token": 8,
         "timestamp": 8,
         "rfc": 8,
         "date": 8,
+        "runn": 7,
         "memory": 7,
         "powerful": 6,
         "long": 6,
@@ -81057,13 +81433,13 @@
         "attach": 5,
         "cache": 5,
         "definition": 4,
+        "acros": 4,
         "reason": 4,
         "depth": 4,
         "request": 4,
-        "skill": 4,
-        "web": 4
+        "skill": 4
       },
-      "word_count": 2681
+      "word_count": 2701
     },
     {
       "filename": "docs__en__api__beta__sessions__create.md",
@@ -81113,20 +81489,20 @@
         "default": 26,
         "before": 24,
         "policy": 23,
+        "intelligence": 22,
+        "cod": 22,
         "permission": 22,
         "automatically": 22,
         "approv": 22,
         "without": 22,
         "require": 22,
-        "cod": 20,
-        "intelligence": 20,
         "time": 20,
         "int": 15,
         "server": 15,
         "name": 14,
-        "runn": 14,
         "store": 14,
         "must": 13,
+        "runn": 13,
         "content": 13,
         "overrid": 12,
         "powerful": 12,
@@ -81149,7 +81525,7 @@
         "url": 10,
         "high": 10
       },
-      "word_count": 5773
+      "word_count": 5807
     },
     {
       "filename": "docs__en__api__beta__sessions__delete.md",
@@ -81202,7 +81578,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 176
+      "word_count": 182
     },
     {
       "filename": "docs__en__api__beta__sessions__events.md",
@@ -81664,7 +82040,7 @@
         "referenc": 95,
         "emitt": 94
       },
-      "word_count": 42208
+      "word_count": 42282
     },
     {
       "filename": "docs__en__api__beta__sessions__events__list.md",
@@ -81742,7 +82118,6 @@
         "minlength": 17,
         "document": 17,
         "should": 17,
-        "next": 16,
         "message": 16,
         "via": 16,
         "policy": 16,
@@ -81751,10 +82126,11 @@
         "reference": 15,
         "name": 15,
         "stream": 15,
+        "next": 15,
         "token": 15,
         "type": 14
       },
-      "word_count": 6787
+      "word_count": 6807
     },
     {
       "filename": "docs__en__api__beta__sessions__events__send.md",
@@ -81844,7 +82220,7 @@
         "last": 6,
         "field": 6
       },
-      "word_count": 2477
+      "word_count": 2483
     },
     {
       "filename": "docs__en__api__beta__sessions__events__stream.md",
@@ -81934,7 +82310,7 @@
         "name": 15,
         "token": 15
       },
-      "word_count": 7068
+      "word_count": 7088
     },
     {
       "filename": "docs__en__api__beta__sessions__list.md",
@@ -81975,31 +82351,31 @@
         "time": 26,
         "user": 26,
         "call": 23,
-        "agent": 22,
         "execution": 22,
         "confirmation": 22,
+        "agent": 21,
         "model": 17,
         "before": 14,
         "int": 13,
         "date": 12,
-        "store": 12,
         "configuration": 12,
+        "store": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
         "approv": 11,
         "without": 11,
         "require": 11,
-        "creat": 10,
-        "cod": 10,
-        "intelligence": 10,
-        "memory": 9,
+        "creat": 9,
         "resolv": 9,
         "return": 8,
-        "runn": 8,
+        "memory": 8,
         "token": 8,
         "timestamp": 8,
         "rfc": 8,
+        "runn": 7,
         "powerful": 6,
         "long": 6,
         "thread": 6,
@@ -82020,7 +82396,7 @@
         "cache": 5,
         "list": 4
       },
-      "word_count": 2931
+      "word_count": 2951
     },
     {
       "filename": "docs__en__api__beta__sessions__resources.md",
@@ -82250,7 +82626,7 @@
         "section": 7,
         "char": 7
       },
-      "word_count": 3127
+      "word_count": 3157
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__add.md",
@@ -82319,7 +82695,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 254
+      "word_count": 260
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__delete.md",
@@ -82371,7 +82747,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 177
+      "word_count": 183
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__list.md",
@@ -82422,18 +82798,17 @@
         "name": 4,
         "attach": 4,
         "return": 3,
-        "page": 3,
         "maxlength": 3,
         "agent": 3,
         "list": 2,
         "path": 2,
         "parameter": 2,
         "per": 2,
+        "page": 2,
         "max": 2,
         "opaque": 2,
         "cursor": 2,
         "response": 2,
-        "next": 2,
         "header": 2,
         "check": 2,
         "minlength": 2,
@@ -82459,9 +82834,10 @@
         "branch": 1,
         "full": 1,
         "commit": 1,
-        "sha": 1
+        "sha": 1,
+        "memstore": 1
       },
-      "word_count": 538
+      "word_count": 544
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__retrieve.md",
@@ -82547,7 +82923,7 @@
         "max": 1,
         "char": 1
       },
-      "word_count": 455
+      "word_count": 461
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__update.md",
@@ -82637,7 +83013,7 @@
         "organization": 1,
         "workspace": 1
       },
-      "word_count": 488
+      "word_count": 494
     },
     {
       "filename": "docs__en__api__beta__sessions__retrieve.md",
@@ -82684,6 +83060,8 @@
         "model": 17,
         "configuration": 12,
         "before": 12,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -82691,15 +83069,13 @@
         "without": 11,
         "require": 11,
         "int": 11,
-        "cod": 10,
-        "intelligence": 10,
         "store": 10,
         "resolv": 9,
-        "runn": 8,
         "token": 8,
         "timestamp": 8,
         "rfc": 8,
         "date": 8,
+        "runn": 7,
         "memory": 7,
         "powerful": 6,
         "long": 6,
@@ -82717,13 +83093,13 @@
         "attach": 5,
         "cache": 5,
         "definition": 4,
+        "acros": 4,
         "reason": 4,
         "depth": 4,
         "request": 4,
-        "skill": 4,
-        "web": 4
+        "skill": 4
       },
-      "word_count": 2678
+      "word_count": 2698
     },
     {
       "filename": "docs__en__api__beta__sessions__threads.md",
@@ -82933,11 +83309,11 @@
         "permission": 83,
         "approv": 80,
         "without": 79,
+        "intelligence": 77,
+        "cod": 77,
         "require": 77,
         "runn": 75,
         "input": 75,
-        "cod": 70,
-        "intelligence": 70,
         "stream": 67,
         "minlength": 63,
         "resolv": 60,
@@ -82949,7 +83325,7 @@
         "return": 54,
         "message": 54
       },
-      "word_count": 28242
+      "word_count": 28370
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__archive.md",
@@ -82994,6 +83370,8 @@
         "agent": 16,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -83002,8 +83380,6 @@
         "require": 11,
         "before": 11,
         "time": 10,
-        "cod": 10,
-        "intelligence": 10,
         "session": 9,
         "runn": 9,
         "int": 9,
@@ -83016,6 +83392,7 @@
         "effort": 5,
         "cache": 5,
         "currency": 5,
+        "acros": 4,
         "reason": 4,
         "depth": 4,
         "web": 4,
@@ -83031,11 +83408,10 @@
         "ephemeral": 3,
         "creation": 3,
         "read": 3,
-        "performance": 3,
-        "favor": 3,
-        "latency": 3
+        "frontier": 3,
+        "performance": 3
       },
-      "word_count": 1916
+      "word_count": 1936
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events.md",
@@ -83157,7 +83533,7 @@
         "next": 29,
         "specifi": 28
       },
-      "word_count": 13713
+      "word_count": 13753
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__list.md",
@@ -83247,7 +83623,7 @@
         "specifi": 14,
         "directly": 14
       },
-      "word_count": 6634
+      "word_count": 6654
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__stream.md",
@@ -83337,7 +83713,7 @@
         "name": 15,
         "token": 15
       },
-      "word_count": 7077
+      "word_count": 7097
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__list.md",
@@ -83386,6 +83762,8 @@
         "agent": 16,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -83395,8 +83773,6 @@
         "before": 11,
         "int": 10,
         "time": 10,
-        "cod": 10,
-        "intelligence": 10,
         "session": 9,
         "runn": 9,
         "token": 8,
@@ -83410,6 +83786,7 @@
         "currency": 5,
         "default": 4,
         "only": 4,
+        "acros": 4,
         "reason": 4,
         "depth": 4,
         "web": 4,
@@ -83419,15 +83796,14 @@
         "double": 4,
         "parameter": 3,
         "result": 3,
-        "page": 3,
-        "next": 3,
         "primary": 3,
         "identifier": 3,
         "snapshot": 3,
         "advisor": 3,
-        "ephemeral": 3
+        "ephemeral": 3,
+        "creation": 3
       },
-      "word_count": 1955
+      "word_count": 1975
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__retrieve.md",
@@ -83472,6 +83848,8 @@
         "agent": 16,
         "model": 15,
         "configuration": 11,
+        "intelligence": 11,
+        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -83480,8 +83858,6 @@
         "require": 11,
         "before": 11,
         "time": 10,
-        "cod": 10,
-        "intelligence": 10,
         "session": 9,
         "runn": 9,
         "int": 9,
@@ -83494,6 +83870,7 @@
         "effort": 5,
         "cache": 5,
         "currency": 5,
+        "acros": 4,
         "reason": 4,
         "depth": 4,
         "web": 4,
@@ -83510,10 +83887,9 @@
         "ephemeral": 3,
         "creation": 3,
         "read": 3,
-        "performance": 3,
-        "favor": 3
+        "frontier": 3
       },
-      "word_count": 1913
+      "word_count": 1933
     },
     {
       "filename": "docs__en__api__beta__sessions__update.md",
@@ -83580,14 +83956,14 @@
         "whether": 11,
         "enabl": 11,
         "currency": 11,
+        "intelligence": 11,
+        "cod": 11,
         "only": 10,
         "available": 10,
         "must": 10,
         "claude": 10,
         "sett": 10,
         "one": 10,
-        "cod": 10,
-        "intelligence": 10,
         "store": 10,
         "mcp": 9,
         "token": 9,
@@ -83599,11 +83975,11 @@
         "web": 8,
         "domain": 8,
         "search": 8,
-        "runn": 8,
         "timestamp": 8,
-        "rfc": 8
+        "rfc": 8,
+        "date": 8
       },
-      "word_count": 4303
+      "word_count": 4323
     },
     {
       "filename": "docs__en__api__beta__skills.md",
@@ -83905,7 +84281,7 @@
         "example": 9,
         "frontmatter": 8
       },
-      "word_count": 3403
+      "word_count": 3457
     },
     {
       "filename": "docs__en__api__beta__skills__create.md",
@@ -83991,7 +84367,7 @@
         "want": 1,
         "body": 1
       },
-      "word_count": 441
+      "word_count": 447
     },
     {
       "filename": "docs__en__api__beta__skills__delete.md",
@@ -84052,7 +84428,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 205
+      "word_count": 211
     },
     {
       "filename": "docs__en__api__beta__skills__list.md",
@@ -84138,7 +84514,7 @@
         "rang": 1,
         "minimum": 1
       },
-      "word_count": 505
+      "word_count": 511
     },
     {
       "filename": "docs__en__api__beta__skills__retrieve.md",
@@ -84224,7 +84600,7 @@
         "character": 1,
         "deriv": 1
       },
-      "word_count": 389
+      "word_count": 395
     },
     {
       "filename": "docs__en__api__beta__skills__versions.md",
@@ -84422,7 +84798,7 @@
         "case": 4,
         "slug": 4
       },
-      "word_count": 1731
+      "word_count": 1761
     },
     {
       "filename": "docs__en__api__beta__skills__versions__create.md",
@@ -84512,7 +84888,7 @@
         "frontmatter": 1,
         "enclos": 1
       },
-      "word_count": 358
+      "word_count": 364
     },
     {
       "filename": "docs__en__api__beta__skills__versions__delete.md",
@@ -84584,7 +84960,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 238
+      "word_count": 244
     },
     {
       "filename": "docs__en__api__beta__skills__versions__download.md",
@@ -84642,7 +85018,7 @@
         "want": 1,
         "example": 1
       },
-      "word_count": 190
+      "word_count": 196
     },
     {
       "filename": "docs__en__api__beta__skills__versions__list.md",
@@ -84732,7 +85108,7 @@
         "kebab": 1,
         "case": 1
       },
-      "word_count": 405
+      "word_count": 411
     },
     {
       "filename": "docs__en__api__beta__skills__versions__retrieve.md",
@@ -84818,7 +85194,7 @@
         "enclos": 1,
         "every": 1
       },
-      "word_count": 350
+      "word_count": 356
     },
     {
       "filename": "docs__en__api__beta__tunnels.md",
@@ -85152,7 +85528,7 @@
         "readable": 6,
         "name": 6
       },
-      "word_count": 3425
+      "word_count": 3485
     },
     {
       "filename": "docs__en__api__beta__tunnels__archive.md",
@@ -85238,7 +85614,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 335
+      "word_count": 341
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates.md",
@@ -85416,7 +85792,7 @@
         "maximum": 3,
         "get": 3
       },
-      "word_count": 1441
+      "word_count": 1465
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__archive.md",
@@ -85502,7 +85878,7 @@
         "want": 1,
         "return": 1
       },
-      "word_count": 328
+      "word_count": 334
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__create.md",
@@ -85592,7 +85968,7 @@
         "beta": 1,
         "version": 1
       },
-      "word_count": 350
+      "word_count": 356
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__list.md",
@@ -85682,7 +86058,7 @@
         "int": 1,
         "opaque": 1
       },
-      "word_count": 375
+      "word_count": 381
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__retrieve.md",
@@ -85766,7 +86142,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 294
+      "word_count": 300
     },
     {
       "filename": "docs__en__api__beta__tunnels__create.md",
@@ -85852,7 +86228,7 @@
         "beta": 1,
         "version": 1
       },
-      "word_count": 343
+      "word_count": 349
     },
     {
       "filename": "docs__en__api__beta__tunnels__list.md",
@@ -85938,7 +86314,7 @@
         "number": 1,
         "per": 1
       },
-      "word_count": 382
+      "word_count": 388
     },
     {
       "filename": "docs__en__api__beta__tunnels__retrieve.md",
@@ -86024,7 +86400,7 @@
         "whose": 1,
         "host": 1
       },
-      "word_count": 296
+      "word_count": 302
     },
     {
       "filename": "docs__en__api__beta__tunnels__reveal_token.md",
@@ -86110,7 +86486,7 @@
         "identifier": 1,
         "current": 1
       },
-      "word_count": 278
+      "word_count": 284
     },
     {
       "filename": "docs__en__api__beta__tunnels__rotate_token.md",
@@ -86200,7 +86576,7 @@
         "audit": 1,
         "maxlength": 1
       },
-      "word_count": 293
+      "word_count": 299
     },
     {
       "filename": "docs__en__api__beta__user_profiles.md",
@@ -86355,58 +86731,58 @@
         }
       ],
       "terms": {
-        "platform": 55,
-        "profile": 54,
-        "user": 48,
-        "key": 36,
-        "company": 32,
-        "format": 25,
+        "profile": 47,
+        "format": 39,
+        "user": 34,
+        "platform": 33,
+        "key": 29,
+        "company": 25,
         "grant": 22,
-        "api": 21,
-        "entity": 20,
         "represent": 20,
-        "individual": 20,
-        "own": 20,
+        "timestamp": 19,
+        "rfc": 19,
+        "date": 19,
+        "time": 19,
         "name": 18,
-        "end": 16,
-        "header": 15,
         "use": 14,
+        "api": 14,
         "product": 14,
-        "behind": 14,
-        "resell": 14,
-        "resold": 13,
-        "timestamp": 12,
-        "rfc": 12,
-        "date": 12,
-        "time": 12,
+        "entity": 13,
+        "individual": 13,
+        "resell": 13,
         "trust": 12,
         "identifier": 11,
         "unique": 11,
         "maximum": 11,
+        "header": 10,
+        "parameter": 10,
         "char": 10,
-        "parameter": 9,
+        "end": 9,
         "valu": 9,
         "beta": 8,
         "character": 8,
         "value": 8,
         "behalf": 7,
         "sell": 7,
+        "behind": 7,
         "scen": 7,
         "raw": 7,
         "inference": 7,
         "identifi": 7,
-        "relat": 7,
-        "claude": 7,
-        "acces": 7,
-        "usage": 7,
+        "resold": 7,
         "object": 7,
         "type": 7,
         "alway": 7,
         "optional": 6,
+        "own": 6,
         "enforc": 6,
-        "real": 6
+        "real": 6,
+        "world": 6,
+        "claude": 6,
+        "acces": 6,
+        "metadata": 6
       },
-      "word_count": 2816
+      "word_count": 2589
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create.md",
@@ -86441,58 +86817,58 @@
         }
       ],
       "terms": {
-        "platform": 16,
-        "profile": 15,
-        "user": 12,
-        "company": 10,
-        "key": 9,
-        "api": 6,
-        "entity": 6,
+        "profile": 13,
+        "platform": 10,
+        "user": 8,
+        "company": 8,
+        "format": 8,
+        "key": 7,
         "represent": 6,
-        "individual": 6,
-        "own": 6,
         "name": 5,
         "use": 4,
+        "api": 4,
+        "entity": 4,
         "product": 4,
-        "behind": 4,
-        "end": 4,
+        "individual": 4,
         "resell": 4,
-        "resold": 4,
         "maximum": 4,
         "character": 4,
-        "format": 4,
+        "timestamp": 4,
+        "rfc": 4,
+        "date": 4,
+        "time": 4,
         "grant": 4,
-        "header": 3,
         "identifier": 3,
         "unique": 3,
         "valu": 3,
         "create": 2,
+        "header": 2,
         "optional": 2,
         "behalf": 2,
         "sell": 2,
+        "behind": 2,
         "scen": 2,
+        "end": 2,
         "raw": 2,
         "inference": 2,
         "identifi": 2,
+        "resold": 2,
+        "own": 2,
         "enforc": 2,
         "minlength": 2,
         "maxlength": 2,
         "value": 2,
         "real": 2,
         "world": 2,
-        "relat": 2,
         "claude": 2,
         "acces": 2,
-        "usage": 2,
-        "timestamp": 2,
-        "rfc": 2,
-        "date": 2,
-        "time": 2,
         "char": 2,
         "trust": 2,
-        "post": 1
+        "post": 1,
+        "specify": 1,
+        "beta": 1
       },
-      "word_count": 661
+      "word_count": 593
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create_enrollment_url.md",
@@ -86556,7 +86932,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 198
+      "word_count": 204
     },
     {
       "filename": "docs__en__api__beta__user_profiles__list.md",
@@ -86591,43 +86967,39 @@
         }
       ],
       "terms": {
-        "user": 8,
-        "platform": 8,
-        "profile": 7,
-        "format": 5,
-        "key": 5,
-        "company": 5,
-        "query": 4,
-        "parameter": 4,
+        "format": 7,
+        "user": 6,
+        "profile": 6,
+        "query": 5,
+        "parameter": 5,
+        "platform": 5,
+        "key": 4,
         "grant": 4,
+        "company": 4,
         "profil": 3,
         "page": 3,
-        "header": 3,
+        "timestamp": 3,
+        "rfc": 3,
+        "date": 3,
+        "time": 3,
         "name": 3,
-        "api": 3,
-        "entity": 3,
         "represent": 3,
-        "individual": 3,
-        "own": 3,
         "list": 2,
+        "order": 2,
+        "header": 2,
         "unique": 2,
         "identifier": 2,
-        "timestamp": 2,
-        "rfc": 2,
-        "date": 2,
-        "time": 2,
         "char": 2,
         "trust": 2,
         "use": 2,
+        "api": 2,
+        "entity": 2,
         "product": 2,
-        "behind": 2,
-        "end": 2,
+        "individual": 2,
         "resell": 2,
-        "resold": 2,
         "get": 1,
         "limit": 1,
         "int": 1,
-        "order": 1,
         "optional": 1,
         "specify": 1,
         "beta": 1,
@@ -86640,9 +87012,13 @@
         "metadata": 1,
         "maximum": 1,
         "pair": 1,
-        "valu": 1
+        "valu": 1,
+        "omitt": 1,
+        "active": 1,
+        "flight": 1,
+        "statu": 1
       },
-      "word_count": 505
+      "word_count": 486
     },
     {
       "filename": "docs__en__api__beta__user_profiles__retrieve.md",
@@ -86677,35 +87053,31 @@
         }
       ],
       "terms": {
-        "profile": 9,
-        "platform": 8,
-        "user": 7,
-        "key": 5,
-        "company": 5,
-        "format": 4,
+        "profile": 8,
+        "format": 6,
+        "user": 5,
+        "platform": 5,
+        "key": 4,
         "grant": 4,
+        "company": 4,
         "get": 3,
-        "header": 3,
+        "timestamp": 3,
+        "rfc": 3,
+        "date": 3,
+        "time": 3,
         "name": 3,
-        "api": 3,
-        "entity": 3,
         "represent": 3,
-        "individual": 3,
-        "own": 3,
+        "header": 2,
         "unique": 2,
         "identifier": 2,
-        "timestamp": 2,
-        "rfc": 2,
-        "date": 2,
-        "time": 2,
         "char": 2,
         "trust": 2,
         "use": 2,
+        "api": 2,
+        "entity": 2,
         "product": 2,
-        "behind": 2,
-        "end": 2,
+        "individual": 2,
         "resell": 2,
-        "resold": 2,
         "path": 1,
         "parameter": 1,
         "optional": 1,
@@ -86726,9 +87098,13 @@
         "flight": 1,
         "statu": 1,
         "object": 1,
-        "type": 1
+        "type": 1,
+        "alway": 1,
+        "behalf": 1,
+        "sell": 1,
+        "behind": 1
       },
-      "word_count": 444
+      "word_count": 411
     },
     {
       "filename": "docs__en__api__beta__user_profiles__update.md",
@@ -86767,40 +87143,43 @@
         }
       ],
       "terms": {
-        "platform": 15,
-        "profile": 13,
-        "key": 12,
-        "user": 10,
-        "company": 7,
-        "api": 6,
-        "entity": 5,
+        "profile": 11,
+        "key": 10,
+        "platform": 8,
+        "format": 8,
+        "user": 6,
         "represent": 5,
-        "individual": 5,
-        "own": 5,
+        "company": 5,
         "use": 4,
+        "api": 4,
         "product": 4,
-        "behind": 4,
-        "end": 4,
-        "resell": 4,
         "maximum": 4,
         "character": 4,
+        "timestamp": 4,
+        "rfc": 4,
+        "date": 4,
+        "time": 4,
         "name": 4,
-        "format": 4,
         "grant": 4,
-        "header": 3,
-        "resold": 3,
+        "entity": 3,
+        "individual": 3,
+        "resell": 3,
         "stor": 3,
         "unchang": 3,
         "value": 3,
         "valu": 3,
         "update": 2,
         "parameter": 2,
+        "header": 2,
         "behalf": 2,
         "sell": 2,
+        "behind": 2,
         "scen": 2,
+        "end": 2,
         "raw": 2,
         "inference": 2,
         "identifi": 2,
+        "resold": 2,
         "present": 2,
         "replac": 2,
         "omit": 2,
@@ -86810,15 +87189,12 @@
         "pair": 2,
         "metadata": 2,
         "provid": 2,
-        "relat": 2,
-        "claude": 2,
-        "acces": 2,
-        "usage": 2,
         "unique": 2,
         "identifier": 2,
-        "timestamp": 2
+        "char": 2,
+        "trust": 2
       },
-      "word_count": 667
+      "word_count": 593
     },
     {
       "filename": "docs__en__api__beta__vaults.md",
@@ -87228,7 +87604,7 @@
         "attach": 13,
         "list": 13
       },
-      "word_count": 6370
+      "word_count": 6448
     },
     {
       "filename": "docs__en__api__beta__vaults__archive.md",
@@ -87298,7 +87674,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 251
+      "word_count": 257
     },
     {
       "filename": "docs__en__api__beta__vaults__create.md",
@@ -87375,7 +87751,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 300
+      "word_count": 306
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials.md",
@@ -87765,7 +88141,7 @@
         "against": 20,
         "outbound": 20
       },
-      "word_count": 7874
+      "word_count": 7916
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__archive.md",
@@ -87851,7 +88227,7 @@
         "beta": 1,
         "version": 1
       },
-      "word_count": 612
+      "word_count": 618
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__create.md",
@@ -87941,7 +88317,7 @@
         "entry": 3,
         "never": 3
       },
-      "word_count": 1127
+      "word_count": 1133
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__delete.md",
@@ -87994,7 +88370,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 182
+      "word_count": 188
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__list.md",
@@ -88084,7 +88460,7 @@
         "query": 1,
         "include": 1
       },
-      "word_count": 670
+      "word_count": 676
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md",
@@ -88170,7 +88546,7 @@
         "overall": 1,
         "verdict": 1
       },
-      "word_count": 408
+      "word_count": 414
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__retrieve.md",
@@ -88256,7 +88632,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 609
+      "word_count": 615
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__update.md",
@@ -88346,7 +88722,7 @@
         "acces": 2,
         "configuration": 2
       },
-      "word_count": 1046
+      "word_count": 1052
     },
     {
       "filename": "docs__en__api__beta__vaults__delete.md",
@@ -88399,7 +88775,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 179
+      "word_count": 185
     },
     {
       "filename": "docs__en__api__beta__vaults__list.md",
@@ -88480,7 +88856,7 @@
         "null": 1,
         "example": 1
       },
-      "word_count": 308
+      "word_count": 314
     },
     {
       "filename": "docs__en__api__beta__vaults__retrieve.md",
@@ -88549,7 +88925,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 248
+      "word_count": 254
     },
     {
       "filename": "docs__en__api__beta__vaults__update.md",
@@ -88636,7 +89012,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 312
+      "word_count": 318
     },
     {
       "filename": "docs__en__api__beta__webhooks.md",
@@ -89229,9 +89605,9 @@
         }
       ],
       "terms": {
-        "model": 42,
-        "cod": 33,
-        "intelligence": 33,
+        "model": 45,
+        "intelligence": 36,
+        "cod": 36,
         "agent": 27,
         "long": 19,
         "powerful": 18,
@@ -89241,26 +89617,31 @@
         "prompt": 10,
         "see": 9,
         "detail": 9,
+        "frontier": 9,
+        "cybersecurity": 9,
         "high": 9,
         "performance": 9,
         "additional": 8,
         "option": 8,
         "text": 7,
+        "our": 7,
         "maximum": 7,
         "complete": 7,
-        "cybersecurity": 6,
+        "most": 6,
+        "capable": 6,
+        "biology": 6,
+        "research": 6,
         "fastest": 6,
         "near": 6,
-        "frontier": 6,
         "deprecat": 6,
         "parameter": 5,
         "object": 5,
         "sequenc": 5,
-        "our": 4,
         "token": 4,
         "reach": 4,
         "only": 4,
         "minimum": 4,
+        "task": 4,
         "generation": 4,
         "claude": 4,
         "response": 4,
@@ -89273,14 +89654,9 @@
         "using": 3,
         "number": 3,
         "stopp": 3,
-        "next": 3,
-        "hardest": 3,
-        "knowledge": 3,
-        "work": 3,
-        "problem": 3,
-        "most": 3
+        "ambitiou": 3
       },
-      "word_count": 1411
+      "word_count": 1507
     },
     {
       "filename": "docs__en__api__completions__create.md",
@@ -89315,9 +89691,9 @@
         }
       ],
       "terms": {
-        "model": 30,
-        "cod": 22,
-        "intelligence": 22,
+        "model": 32,
+        "intelligence": 24,
+        "cod": 24,
         "agent": 18,
         "long": 13,
         "powerful": 12,
@@ -89328,22 +89704,26 @@
         "see": 7,
         "detail": 7,
         "text": 6,
+        "our": 6,
         "maximum": 6,
         "additional": 6,
         "option": 6,
+        "frontier": 6,
+        "cybersecurity": 6,
         "high": 6,
         "performance": 6,
         "deprecat": 6,
         "complete": 5,
-        "our": 4,
         "parameter": 4,
         "token": 4,
         "only": 4,
         "minimum": 4,
-        "cybersecurity": 4,
+        "most": 4,
+        "capable": 4,
+        "biology": 4,
+        "research": 4,
         "fastest": 4,
         "near": 4,
-        "frontier": 4,
         "claude": 4,
         "response": 4,
         "value": 4,
@@ -89353,20 +89733,16 @@
         "using": 3,
         "number": 3,
         "reach": 3,
+        "task": 3,
         "generation": 3,
         "object": 3,
         "identifier": 3,
         "other": 3,
         "include": 3,
         "releas": 3,
-        "after": 3,
-        "opu": 3,
-        "accept": 3,
-        "valu": 3,
-        "reject": 3,
-        "error": 3
+        "after": 3
       },
-      "word_count": 1131
+      "word_count": 1197
     },
     {
       "filename": "docs__en__api__compliance.md",
@@ -99139,7 +99515,7 @@
         "tool": 1600,
         "default": 1106,
         "block": 1060,
-        "model": 1001,
+        "model": 1010,
         "toolset": 858,
         "per": 822,
         "enabl": 783,
@@ -99186,7 +99562,7 @@
         "cit": 212,
         "only": 211
       },
-      "word_count": 106552
+      "word_count": 106582
     },
     {
       "filename": "docs__en__api__messages__batches.md",
@@ -99363,8 +99739,8 @@
       "terms": {
         "default": 400,
         "tool": 372,
+        "model": 268,
         "member": 266,
-        "model": 263,
         "result": 214,
         "request": 206,
         "block": 188,
@@ -99397,6 +99773,8 @@
         "output": 63,
         "same": 61,
         "invocation": 60,
+        "intelligence": 60,
+        "cod": 60,
         "return": 59,
         "create": 58,
         "api": 57,
@@ -99408,11 +99786,9 @@
         "must": 56,
         "maxlength": 55,
         "generat": 55,
-        "cod": 55,
-        "intelligence": 55,
         "serv": 53
       },
-      "word_count": 25991
+      "word_count": 26101
     },
     {
       "filename": "docs__en__api__messages__batches__cancel.md",
@@ -99531,7 +99907,7 @@
       "terms": {
         "member": 262,
         "tool": 200,
-        "model": 127,
+        "model": 128,
         "toolset": 107,
         "per": 103,
         "block": 100,
@@ -99580,7 +99956,7 @@
         "system": 23,
         "via": 23
       },
-      "word_count": 11941
+      "word_count": 11931
     },
     {
       "filename": "docs__en__api__messages__batches__delete.md",
@@ -99752,7 +100128,7 @@
         "default": 73,
         "tool": 43,
         "result": 42,
-        "model": 34,
+        "model": 35,
         "request": 30,
         "block": 22,
         "error": 21,
@@ -99769,9 +100145,9 @@
         "web": 12,
         "pattern": 12,
         "invocation": 12,
+        "intelligence": 12,
+        "cod": 12,
         "generat": 11,
-        "cod": 11,
-        "intelligence": 11,
         "number": 11,
         "message": 10,
         "used": 10,
@@ -99800,7 +100176,7 @@
         "powerful": 6,
         "one": 6
       },
-      "word_count": 3000
+      "word_count": 3030
     },
     {
       "filename": "docs__en__api__messages__batches__retrieve.md",
@@ -99919,7 +100295,7 @@
       "terms": {
         "member": 262,
         "tool": 202,
-        "model": 117,
+        "model": 118,
         "toolset": 107,
         "per": 103,
         "block": 100,
@@ -99968,7 +100344,7 @@
         "reference": 20,
         "initial": 19
       },
-      "word_count": 10808
+      "word_count": 10798
     },
     {
       "filename": "docs__en__api__messages__create.md",
@@ -100005,7 +100381,7 @@
       "terms": {
         "member": 263,
         "tool": 245,
-        "model": 166,
+        "model": 168,
         "block": 130,
         "default": 130,
         "toolset": 109,
@@ -100054,7 +100430,7 @@
         "number": 31,
         "api": 29
       },
-      "word_count": 14719
+      "word_count": 14739
     },
     {
       "filename": "docs__en__api__models.md",
@@ -100200,7 +100576,7 @@
         "strategi": 4,
         "image": 4
       },
-      "word_count": 2319
+      "word_count": 2331
     },
     {
       "filename": "docs__en__api__models__list.md",
@@ -100286,7 +100662,7 @@
         "optional": 1,
         "specify": 1
       },
-      "word_count": 782
+      "word_count": 788
     },
     {
       "filename": "docs__en__api__models__retrieve.md",
@@ -100372,7 +100748,7 @@
         "reason": 1,
         "high": 1
       },
-      "word_count": 643
+      "word_count": 649
     },
     {
       "filename": "docs__en__api__overview.md",
@@ -104852,7 +105228,7 @@
     {
       "filename": "docs__en__build-with-claude__preserved-thinking.md",
       "id": "docs/en/build-with-claude/preserved-thinking",
-      "title": "Untitled",
+      "title": "Preserved thinking",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/build-with-claude/preserved-thinking",
       "headings": [
@@ -105602,7 +105978,7 @@
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-fable-5-1.md",
       "id": "docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1",
-      "title": "Delivering work",
+      "title": "Prompting Claude Fable 5.1",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1",
       "headings": [
@@ -117599,7 +117975,7 @@
     {
       "filename": "docs__en__models__fable-5-1__migration-guide.md",
       "id": "docs/en/models/fable-5-1/migration-guide",
-      "title": "Or, for the Project Glasswing model with the same capabilities:",
+      "title": "Migration guide",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/fable-5-1/migration-guide",
       "headings": [
@@ -117725,7 +118101,7 @@
     {
       "filename": "docs__en__models__fable-5-1__overview.md",
       "id": "docs/en/models/fable-5-1/overview",
-      "title": "Untitled",
+      "title": "Claude Fable 5.1",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
       "headings": [
@@ -117827,7 +118203,7 @@
     {
       "filename": "docs__en__models__fable-5-1__whats-new-fable-5-1.md",
       "id": "docs/en/models/fable-5-1/whats-new-fable-5-1",
-      "title": "Untitled",
+      "title": "What's new",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1",
       "headings": [
@@ -117965,7 +118341,7 @@
     {
       "filename": "docs__en__models__fable-5__introducing-claude-fable-5-and-claude-mythos-5.md",
       "id": "docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
-      "title": "What's new",
+      "title": "Introducing Claude Fable 5 and Claude Mythos 5",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
       "headings": [
@@ -118079,7 +118455,7 @@
     {
       "filename": "docs__en__models__fable-5__migration-guide.md",
       "id": "docs/en/models/fable-5/migration-guide",
-      "title": "Migration guide",
+      "title": "Migrating to Claude Mythos 5 and Claude Fable 5",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide",
       "headings": [
@@ -118463,7 +118839,7 @@
     {
       "filename": "docs__en__models__mythos-5-1__overview.md",
       "id": "docs/en/models/mythos-5-1/overview",
-      "title": "Untitled",
+      "title": "Claude Mythos 5.1",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
       "headings": [
@@ -120675,7 +121051,7 @@
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5-1.md",
       "id": "docs/en/release-notes/system-prompts/claude-fable-5-1",
-      "title": "Untitled",
+      "title": "Claude Fable 5.1",
       "category": "release_notes",
       "url": "https://platform.claude.com/docs/en/release-notes/system-prompts/claude-fable-5-1",
       "headings": [
