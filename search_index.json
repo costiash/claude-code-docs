@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-01T06:18:10.143484Z",
+  "generated_at": "2026-09-01T15:17:09.454734Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -16787,16 +16787,16 @@
         }
       ],
       "terms": {
-        "claude": 353,
+        "claude": 354,
         "set": 338,
-        "code": 280,
+        "code": 281,
         "default": 149,
         "model": 132,
         "session": 129,
         "tool": 97,
         "see": 95,
+        "variable": 82,
         "requir": 82,
-        "variable": 81,
         "later": 80,
         "command": 73,
         "server": 70,
@@ -16838,7 +16838,7 @@
         "timeout": 34,
         "bedrock": 33
       },
-      "word_count": 18223
+      "word_count": 18241
     },
     {
       "filename": "claude-code__errors.md",
@@ -22252,7 +22252,7 @@
         "read": 7,
         "instead": 7
       },
-      "word_count": 14709
+      "word_count": 14708
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -26266,7 +26266,7 @@
         "user": 23,
         "each": 22
       },
-      "word_count": 9031
+      "word_count": 9022
     },
     {
       "filename": "claude-code__scheduled-tasks.md",
