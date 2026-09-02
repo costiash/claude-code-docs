@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-02T03:17:36.581170Z",
+  "generated_at": "2026-09-02T06:19:08.037913Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -13262,7 +13262,7 @@
         "click": 5,
         "turn": 5
       },
-      "word_count": 1951
+      "word_count": 1944
     },
     {
       "filename": "claude-code__desktop-linux.md",
