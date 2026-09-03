@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-02T18:18:40.153809Z",
+  "generated_at": "2026-09-03T00:22:22.901024Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.259",
+          "level": 2
         },
         {
           "text": "2.1.258",
@@ -1547,58 +1551,58 @@
         }
       ],
       "terms": {
-        "fix": 2703,
-        "session": 1167,
-        "now": 1001,
-        "add": 563,
-        "instead": 512,
-        "claude": 510,
-        "tool": 472,
-        "command": 465,
-        "agent": 451,
-        "mode": 440,
-        "after": 433,
-        "background": 423,
-        "improv": 420,
-        "prompt": 418,
-        "show": 389,
-        "being": 356,
-        "error": 341,
-        "fail": 322,
-        "model": 304,
-        "mcp": 298,
-        "code": 293,
-        "server": 287,
+        "fix": 2729,
+        "session": 1181,
+        "now": 1007,
+        "add": 569,
+        "claude": 514,
+        "instead": 513,
+        "tool": 477,
+        "command": 470,
+        "agent": 454,
+        "mode": 444,
+        "after": 438,
+        "background": 426,
+        "improv": 425,
+        "prompt": 422,
+        "show": 394,
+        "being": 362,
+        "error": 343,
+        "fail": 325,
+        "model": 310,
+        "mcp": 303,
+        "code": 295,
+        "server": 293,
         "plugin": 282,
-        "terminal": 277,
+        "terminal": 278,
         "window": 249,
-        "auto": 240,
-        "chang": 233,
-        "permission": 230,
-        "file": 219,
-        "remote": 215,
-        "hook": 205,
-        "setting": 198,
-        "runn": 198,
-        "bash": 196,
-        "skill": 187,
-        "subagent": 180,
-        "input": 180,
-        "work": 177,
-        "longer": 173,
-        "user": 170,
-        "message": 168,
-        "startup": 167,
+        "auto": 242,
+        "chang": 236,
+        "permission": 233,
+        "file": 224,
+        "remote": 218,
+        "hook": 207,
+        "runn": 201,
+        "setting": 201,
+        "bash": 198,
+        "skill": 189,
+        "subagent": 183,
+        "input": 181,
+        "work": 178,
+        "longer": 175,
+        "user": 173,
+        "startup": 169,
+        "message": 169,
         "read": 165,
-        "control": 162,
-        "silently": 161,
-        "while": 160,
-        "list": 160,
-        "text": 160,
-        "only": 158,
-        "directory": 157
+        "while": 164,
+        "silently": 163,
+        "control": 163,
+        "list": 162,
+        "text": 161,
+        "only": 160,
+        "directory": 158
       },
-      "word_count": 90717
+      "word_count": 91529
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -106115,7 +106119,7 @@
         "lead": 7,
         "follow": 7
       },
-      "word_count": 6611
+      "word_count": 6621
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-4-8.md",
@@ -110728,6 +110732,10 @@
       "url": "https://platform.claude.com/docs/en/intro",
       "headings": [
         {
+          "text": "Explore the latest generation of Claude models",
+          "level": 2
+        },
+        {
           "text": "Recommended path for new developers",
           "level": 2
         },
@@ -110745,58 +110753,58 @@
         }
       ],
       "terms": {
-        "claude": 38,
+        "claude": 35,
         "card": 14,
         "title": 13,
         "step": 13,
         "api": 10,
+        "model": 10,
         "http": 8,
+        "platform": 8,
         "com": 8,
-        "platform": 7,
+        "text": 8,
         "icon": 7,
         "href": 7,
-        "model": 6,
-        "read": 6,
         "code": 6,
         "cardgroup": 6,
-        "text": 6,
+        "task": 5,
         "agent": 5,
+        "work": 5,
         "overview": 5,
         "doc": 4,
         "anthropic": 4,
-        "work": 4,
-        "announcement": 4,
+        "reason": 4,
         "build": 4,
         "messag": 4,
+        "explore": 4,
         "key": 4,
-        "built": 3,
-        "task": 3,
-        "reason": 3,
         "cod": 3,
-        "fable": 3,
+        "each": 3,
         "manag": 3,
         "prompt": 3,
+        "best": 3,
+        "long": 3,
         "learn": 3,
+        "opu": 3,
+        "workload": 3,
+        "agentic": 3,
+        "support": 3,
+        "vision": 3,
+        "tool": 3,
+        "cost": 3,
         "developer": 3,
-        "explore": 3,
         "help": 3,
         "col": 3,
         "statu": 3,
         "intro": 2,
-        "tip": 2,
+        "built": 2,
+        "note": 2,
+        "control": 2,
+        "see": 2,
         "generation": 2,
-        "long": 2,
-        "agentic": 2,
-        "offer": 2,
-        "capabiliti": 2,
-        "opu": 2,
-        "enterprise": 2,
-        "sonnet": 2,
-        "frontier": 2,
-        "intelligence": 2,
-        "scale": 2
+        "most": 2
       },
-      "word_count": 540
+      "word_count": 607
     },
     {
       "filename": "docs__en__manage-claude__access-transparency.md",
@@ -110922,7 +110930,7 @@
         "account": 5,
         "representative": 5
       },
-      "word_count": 2218
+      "word_count": 2226
     },
     {
       "filename": "docs__en__manage-claude__admin-api.md",
@@ -111188,6 +111196,10 @@
           "level": 2
         },
         {
+          "text": "Versioning",
+          "level": 2
+        },
+        {
           "text": "Known limitations",
           "level": 2
         },
@@ -111197,7 +111209,7 @@
         }
       ],
       "terms": {
-        "api": 64,
+        "api": 65,
         "claude": 54,
         "analytic": 30,
         "key": 25,
@@ -111210,10 +111222,11 @@
         "cost": 15,
         "admin": 13,
         "user": 12,
+        "available": 11,
         "title": 10,
         "metric": 10,
-        "available": 10,
         "endpoint": 10,
+        "request": 9,
         "activity": 9,
         "acces": 8,
         "adoption": 8,
@@ -111224,14 +111237,13 @@
         "platform": 7,
         "engagement": 7,
         "create": 7,
-        "request": 7,
         "connector": 7,
+        "see": 7,
         "parameter": 7,
         "acros": 6,
         "project": 6,
         "reference": 6,
         "note": 6,
-        "see": 6,
         "return": 6,
         "http": 5,
         "com": 5,
@@ -111248,7 +111260,7 @@
         "daily": 4,
         "chat": 4
       },
-      "word_count": 1378
+      "word_count": 1402
     },
     {
       "filename": "docs__en__manage-claude__api-and-data-retention.md",
@@ -111877,33 +111889,33 @@
         }
       ],
       "terms": {
-        "key": 160,
-        "workspace": 51,
+        "key": 162,
+        "workspace": 52,
         "aws": 38,
         "claude": 34,
         "step": 34,
+        "attach": 32,
+        "account": 31,
         "anthropic": 30,
-        "attach": 30,
-        "account": 30,
         "policy": 29,
         "compartment": 25,
         "kms": 24,
         "condition": 24,
-        "principal": 22,
-        "arn": 22,
-        "encryption": 20,
+        "principal": 23,
+        "arn": 23,
+        "encryption": 21,
         "platform": 16,
         "encrypt": 15,
         "create": 15,
         "cmek": 14,
         "organization": 14,
         "console": 14,
+        "statement": 14,
         "add": 14,
         "region": 14,
+        "service": 13,
         "iam": 13,
-        "statement": 13,
         "decrypt": 13,
-        "service": 12,
         "register": 12,
         "under": 11,
         "grant": 11,
@@ -111922,13 +111934,13 @@
         "acces": 8,
         "admin": 8,
         "any": 8,
+        "context": 8,
         "usage": 8,
         "frame": 8,
-        "action": 7,
-        "because": 7,
-        "context": 7
+        "entry": 8,
+        "action": 7
       },
-      "word_count": 3570
+      "word_count": 3612
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -112170,7 +112182,7 @@
         "full": 4,
         "result": 4
       },
-      "word_count": 1449
+      "word_count": 1465
     },
     {
       "filename": "docs__en__manage-claude__compliance-api.md",
@@ -112181,6 +112193,10 @@
       "headings": [
         {
           "text": "How the Compliance API works",
+          "level": 2
+        },
+        {
+          "text": "Versioning",
           "level": 2
         },
         {
@@ -112211,7 +112227,7 @@
       "terms": {
         "claude": 51,
         "compliance": 40,
-        "api": 33,
+        "api": 34,
         "organization": 27,
         "key": 20,
         "session": 18,
@@ -112232,13 +112248,14 @@
         "user": 9,
         "href": 9,
         "fil": 8,
+        "every": 8,
         "enterprise": 7,
         "content": 7,
-        "every": 6,
+        "see": 7,
         "cowork": 6,
         "code": 6,
         "retrieve": 6,
-        "see": 6,
+        "request": 6,
         "data": 6,
         "transcript": 6,
         "per": 6,
@@ -112254,13 +112271,12 @@
         "each": 4,
         "two": 4,
         "response": 4,
+        "header": 4,
         "parent": 4,
         "anthropic": 4,
-        "request": 4,
-        "analytic": 4,
-        "opentelemetry": 4
+        "analytic": 4
       },
-      "word_count": 1070
+      "word_count": 1098
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -112436,7 +112452,7 @@
         "any": 6,
         "carri": 6
       },
-      "word_count": 2490
+      "word_count": 2514
     },
     {
       "filename": "docs__en__manage-claude__compliance-errors.md",
@@ -112606,7 +112622,7 @@
         "same": 11,
         "through": 11
       },
-      "word_count": 4384
+      "word_count": 4385
     },
     {
       "filename": "docs__en__manage-claude__compliance-faq.md",
@@ -112770,7 +112786,7 @@
         "manage": 5,
         "siem": 5
       },
-      "word_count": 2024
+      "word_count": 2032
     },
     {
       "filename": "docs__en__manage-claude__compliance-org-data.md",
@@ -112856,7 +112872,7 @@
         "under": 4,
         "note": 4
       },
-      "word_count": 1995
+      "word_count": 2019
     },
     {
       "filename": "docs__en__manage-claude__compliance-sessions.md",
@@ -112942,7 +112958,7 @@
         "bound": 10,
         "retrieve": 9
       },
-      "word_count": 5216
+      "word_count": 5233
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -113542,6 +113558,10 @@
           "level": 3
         },
         {
+          "text": "Versioning",
+          "level": 2
+        },
+        {
           "text": "Rate limiting",
           "level": 2
         },
@@ -113646,15 +113666,15 @@
         "spend": 83,
         "limit": 74,
         "member": 64,
-        "request": 59,
-        "api": 33,
+        "request": 60,
+        "api": 34,
         "each": 25,
         "per": 22,
         "organization": 21,
         "claude": 19,
         "endpoint": 19,
         "increase": 19,
-        "see": 17,
+        "see": 18,
         "user": 17,
         "override": 14,
         "row": 14,
@@ -113694,7 +113714,7 @@
         "tier": 7,
         "raise": 7
       },
-      "word_count": 2765
+      "word_count": 2854
     },
     {
       "filename": "docs__en__manage-claude__usage-cost-api.md",
@@ -113898,6 +113918,10 @@
           "level": 3
         },
         {
+          "text": "Versioning",
+          "level": 2
+        },
+        {
           "text": "Rate limits",
           "level": 2
         },
@@ -114047,21 +114071,21 @@
         }
       ],
       "terms": {
-        "group": 77,
-        "member": 73,
+        "group": 75,
+        "member": 71,
+        "api": 61,
         "organization": 60,
-        "api": 60,
         "claude": 39,
-        "role": 39,
-        "invite": 37,
+        "role": 38,
+        "invite": 35,
         "return": 34,
         "rol": 32,
         "scope": 32,
         "endpoint": 30,
         "key": 26,
-        "see": 24,
+        "see": 25,
         "list": 23,
-        "custom": 23,
+        "custom": 22,
         "parameter": 22,
         "response": 22,
         "requir": 21,
@@ -114072,8 +114096,8 @@
         "schema": 19,
         "reference": 19,
         "admin": 18,
-        "request": 18,
         "read": 17,
+        "request": 15,
         "one": 15,
         "identity": 15,
         "provider": 15,
@@ -114089,16 +114113,16 @@
         "withdraw": 11,
         "manag": 11,
         "remove": 11,
+        "available": 11,
         "assign": 11,
         "change": 10,
         "email": 10,
         "membership": 10,
-        "available": 10,
         "only": 10,
-        "manage": 9,
-        "every": 9
+        "every": 10,
+        "manage": 9
       },
-      "word_count": 3582
+      "word_count": 3613
     },
     {
       "filename": "docs__en__manage-claude__wif-admin-api.md",
@@ -120975,18 +120999,18 @@
         }
       ],
       "terms": {
-        "claude": 426,
-        "api": 156,
+        "claude": 429,
+        "api": 161,
         "model": 123,
         "beta": 122,
-        "now": 105,
+        "now": 106,
         "tool": 104,
         "opu": 100,
-        "see": 82,
-        "header": 75,
+        "see": 83,
+        "header": 76,
         "support": 68,
+        "request": 65,
         "agent": 65,
-        "request": 64,
         "token": 63,
         "sonnet": 60,
         "launch": 56,
@@ -121010,10 +121034,10 @@
         "requir": 31,
         "console": 30,
         "context": 30,
+        "limit": 29,
         "event": 29,
         "august": 28,
         "acces": 28,
-        "limit": 28,
         "key": 27,
         "same": 26,
         "platform": 25,
@@ -121021,12 +121045,12 @@
         "usage": 25,
         "chang": 24,
         "mytho": 24,
+        "endpoint": 24,
         "skill": 24,
         "parameter": 24,
-        "mode": 23,
-        "window": 22
+        "mode": 23
       },
-      "word_count": 11168
+      "word_count": 11218
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
