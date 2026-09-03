@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-03T18:18:26.000144Z",
+  "generated_at": "2026-09-03T21:14:43.158510Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -102372,8 +102372,8 @@
         }
       ],
       "terms": {
-        "batch": 154,
-        "request": 80,
+        "batch": 152,
+        "request": 78,
         "api": 51,
         "message": 43,
         "process": 42,
@@ -102396,10 +102396,10 @@
         "opu": 11,
         "within": 10,
         "after": 10,
-        "available": 10,
         "cache": 10,
         "prompt": 10,
         "creat": 9,
+        "available": 9,
         "model": 9,
         "search": 9,
         "pric": 9,
@@ -102423,7 +102423,7 @@
         "example": 6,
         "day": 6
       },
-      "word_count": 7021
+      "word_count": 6972
     },
     {
       "filename": "docs__en__build-with-claude__cache-diagnostics.md",
