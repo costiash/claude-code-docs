@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-03T04:32:59.654298Z",
+  "generated_at": "2026-09-03T18:18:23.349338Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -224,8 +224,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "c05be4a1b246fbd870f9db69968a8ccc2e182729cc8920f3723c36ac66e4f447",
-      "lastmod": "2026-09-02T00:53:32.803Z",
+      "sha256": "065665ff7e6119d00741c2f1d92164bfbeccf1f16773621b5314a2e666462aa8",
+      "lastmod": "2026-09-03T16:08:42.935Z",
       "fetch_status": "ok"
     },
     {
@@ -367,8 +367,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "ade380769323c116d3c79da09c777cb20ad6af780d2e0e961badf271d86eea7a",
-      "lastmod": "2026-09-02T00:53:32.801Z",
+      "sha256": "4ae37f56971ecfb1680a1996aa87ea80fdc794ac5af09fd7b8b567d9acad7d53",
+      "lastmod": "2026-09-03T16:08:42.927Z",
       "fetch_status": "ok"
     },
     {

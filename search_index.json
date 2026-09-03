@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-03T04:33:03.195543Z",
+  "generated_at": "2026-09-03T18:18:26.000144Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -4504,7 +4504,7 @@
         "command": 23,
         "api": 22
       },
-      "word_count": 18263
+      "word_count": 18266
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -6994,7 +6994,7 @@
         "event": 39,
         "permission": 39
       },
-      "word_count": 28707
+      "word_count": 28705
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
