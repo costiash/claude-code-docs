@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T15:15:53.489359Z",
+  "generated_at": "2026-09-04T18:19:40.814810Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -3205,15 +3205,15 @@
         }
       ],
       "terms": {
-        "sdk": 15,
-        "claude": 12,
+        "sdk": 18,
+        "claude": 13,
+        "agent": 10,
         "chang": 10,
         "code": 9,
         "python": 9,
         "package": 8,
-        "agent": 7,
+        "migration": 7,
         "documentation": 6,
-        "migration": 6,
         "setting": 5,
         "old": 4,
         "update": 4,
@@ -3223,6 +3223,7 @@
         "filesystem": 4,
         "complete": 3,
         "doc": 3,
+        "migrat": 3,
         "typescript": 3,
         "been": 3,
         "renam": 3,
@@ -3239,8 +3240,10 @@
         "index": 2,
         "available": 2,
         "before": 2,
-        "migrat": 2,
         "overview": 2,
+        "openai": 2,
+        "each": 2,
+        "example": 2,
         "uninstall": 2,
         "replace": 2,
         "make": 2,
@@ -3251,12 +3254,9 @@
         "user": 2,
         "prompt": 2,
         "longer": 2,
-        "codegroup": 2,
-        "omitt": 2,
-        "local": 2,
-        "custom": 2
+        "codegroup": 2
       },
-      "word_count": 795
+      "word_count": 821
     },
     {
       "filename": "claude-code__agent-sdk__modifying-system-prompts.md",
@@ -3535,10 +3535,10 @@
         }
       ],
       "terms": {
-        "agent": 34,
-        "claude": 24,
-        "sdk": 23,
-        "code": 16,
+        "agent": 35,
+        "claude": 25,
+        "sdk": 25,
+        "code": 17,
         "tool": 11,
         "run": 7,
         "loop": 7,
@@ -3586,7 +3586,7 @@
         "documentation": 2,
         "index": 2
       },
-      "word_count": 828
+      "word_count": 842
     },
     {
       "filename": "claude-code__agent-sdk__permissions.md",
@@ -5779,7 +5779,7 @@
     {
       "filename": "claude-code__agent-sdk__troubleshooting.md",
       "id": "claude-code/agent-sdk/troubleshooting",
-      "title": "Troubleshooting",
+      "title": "Troubleshoot the Agent SDK",
       "category": "agent_sdk",
       "url": "https://code.claude.com/docs/en/agent-sdk/troubleshooting",
       "headings": [
@@ -11443,37 +11443,37 @@
         }
       ],
       "terms": {
-        "claude": 148,
-        "code": 104,
-        "session": 71,
+        "claude": 146,
+        "code": 102,
+        "session": 70,
         "command": 59,
         "run": 55,
-        "open": 43,
         "skill": 41,
-        "requir": 39,
+        "open": 40,
+        "requir": 38,
         "available": 34,
         "conversation": 31,
-        "later": 31,
-        "current": 30,
-        "turn": 29,
-        "show": 28,
-        "see": 27,
-        "before": 26,
-        "also": 26,
+        "later": 30,
+        "current": 29,
+        "see": 28,
+        "turn": 27,
+        "show": 27,
+        "before": 25,
+        "also": 25,
+        "review": 25,
         "only": 24,
         "without": 24,
         "mode": 24,
         "one": 24,
+        "work": 23,
         "pas": 23,
-        "review": 23,
-        "work": 22,
         "prompt": 22,
         "name": 21,
         "agent": 21,
         "background": 19,
         "alia": 19,
-        "interactive": 19,
         "subagent": 18,
+        "interactive": 18,
         "argument": 17,
         "instead": 17,
         "report": 17,
@@ -11483,18 +11483,18 @@
         "set": 16,
         "own": 16,
         "model": 15,
-        "such": 15,
         "project": 15,
         "plan": 15,
-        "list": 15,
-        "branch": 15,
         "view": 15,
         "type": 14,
+        "such": 14,
         "finish": 14,
-        "diff": 14,
-        "new": 14
+        "list": 14,
+        "new": 14,
+        "branch": 14,
+        "includ": 13
       },
-      "word_count": 6838
+      "word_count": 6737
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -17804,6 +17804,10 @@
           "level": 2
         },
         {
+          "text": "Watch your changes in the diff panel",
+          "level": 2
+        },
+        {
           "text": "Clear the conversation",
           "level": 2
         },
@@ -17833,58 +17837,58 @@
         }
       ],
       "terms": {
+        "claude": 86,
         "code": 85,
-        "claude": 84,
-        "terminal": 63,
+        "terminal": 64,
         "scroll": 47,
-        "fullscreen": 39,
+        "fullscreen": 40,
         "click": 38,
         "session": 37,
-        "render": 33,
+        "render": 34,
         "mouse": 32,
-        "start": 31,
-        "conversation": 25,
+        "start": 32,
+        "conversation": 26,
         "selection": 24,
         "tmux": 23,
+        "work": 23,
         "mode": 22,
-        "work": 22,
         "sett": 21,
+        "open": 20,
         "key": 20,
         "wheel": 20,
         "classic": 18,
         "renderer": 18,
         "screen": 18,
-        "open": 18,
         "run": 16,
         "set": 16,
         "dialog": 15,
+        "keep": 14,
         "instead": 14,
         "doesn": 14,
         "after": 14,
         "select": 14,
-        "keep": 13,
+        "show": 14,
         "iterm": 13,
         "inside": 13,
         "off": 13,
         "native": 13,
-        "show": 13,
         "send": 13,
         "relaunch": 12,
+        "while": 11,
         "output": 11,
         "window": 11,
         "turn": 11,
         "text": 11,
         "one": 11,
         "keyboard": 11,
-        "while": 10,
         "tool": 10,
         "print": 10,
         "other": 10,
         "transcript": 10,
-        "see": 10,
-        "fail": 10
+        "also": 10,
+        "see": 10
       },
-      "word_count": 4337
+      "word_count": 4409
     },
     {
       "filename": "claude-code__gateways.md",
@@ -20438,6 +20442,18 @@
           "level": 3
         },
         {
+          "text": "Review changes with /diff",
+          "level": 2
+        },
+        {
+          "text": "Diff panel",
+          "level": 3
+        },
+        {
+          "text": "Diff viewer",
+          "level": 3
+        },
+        {
           "text": "Side questions with /btw",
           "level": 2
         },
@@ -20479,58 +20495,58 @@
         }
       ],
       "terms": {
-        "claude": 169,
-        "code": 132,
-        "prompt": 75,
-        "command": 65,
-        "session": 53,
+        "claude": 183,
+        "code": 138,
+        "prompt": 79,
+        "command": 67,
+        "session": 57,
         "mode": 48,
-        "turn": 45,
-        "input": 42,
+        "turn": 48,
+        "input": 43,
+        "line": 41,
+        "open": 39,
+        "run": 39,
+        "pres": 38,
+        "one": 38,
         "word": 38,
-        "pres": 37,
-        "line": 37,
-        "one": 35,
-        "run": 35,
-        "after": 34,
+        "after": 36,
         "background": 32,
         "text": 32,
+        "start": 31,
         "task": 30,
-        "start": 30,
-        "open": 29,
+        "show": 29,
+        "list": 27,
+        "terminal": 26,
+        "see": 26,
         "history": 25,
         "end": 25,
-        "show": 24,
+        "file": 24,
         "character": 24,
         "search": 24,
+        "work": 24,
+        "next": 24,
         "wait": 24,
-        "terminal": 23,
-        "see": 23,
+        "conversation": 22,
         "suggestion": 22,
-        "work": 22,
-        "next": 22,
+        "while": 22,
+        "key": 21,
         "cursor": 21,
-        "conversation": 21,
         "doesn": 21,
         "requir": 21,
+        "later": 21,
         "type": 21,
+        "panel": 21,
         "such": 20,
         "answer": 20,
-        "while": 20,
         "set": 20,
         "normal": 20,
         "first": 19,
         "previou": 19,
+        "only": 19,
         "check": 19,
-        "list": 19,
-        "setting": 19,
-        "request": 19,
-        "key": 18,
-        "runn": 18,
-        "tool": 18,
-        "only": 18
+        "setting": 19
       },
-      "word_count": 8260
+      "word_count": 8816
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -20774,6 +20790,10 @@
           "level": 3
         },
         {
+          "text": "Diff panel actions",
+          "level": 3
+        },
+        {
           "text": "Model picker actions",
           "level": 3
         },
@@ -20843,58 +20863,58 @@
         }
       ],
       "terms": {
-        "action": 90,
-        "ctrl": 55,
-        "context": 36,
-        "default": 35,
+        "action": 93,
+        "ctrl": 58,
+        "context": 37,
+        "default": 36,
         "key": 34,
-        "description": 25,
-        "claude": 24,
+        "down": 27,
+        "description": 26,
+        "claude": 25,
+        "scroll": 25,
+        "code": 24,
         "available": 24,
-        "down": 24,
-        "code": 23,
-        "scroll": 23,
         "mode": 21,
         "shift": 19,
         "shortcut": 17,
+        "open": 17,
         "selection": 17,
         "escape": 17,
+        "file": 16,
         "bind": 15,
-        "file": 14,
         "tab": 14,
         "select": 14,
         "terminal": 14,
-        "open": 13,
+        "diff": 13,
         "enter": 13,
+        "panel": 12,
+        "unbound": 12,
         "previou": 12,
         "viewport": 12,
+        "list": 11,
         "toggle": 11,
         "next": 11,
         "option": 11,
         "chord": 11,
         "one": 11,
+        "active": 11,
         "footer": 10,
         "such": 10,
-        "active": 10,
         "vim": 10,
         "keyboard": 9,
         "history": 9,
         "search": 9,
-        "diff": 9,
-        "list": 9,
-        "unbound": 9,
         "view": 9,
+        "meta": 9,
         "prefix": 9,
         "binding": 8,
         "permission": 8,
         "dialog": 8,
-        "left": 8,
-        "detail": 8,
-        "layout": 8,
-        "keybinding": 7,
-        "unbind": 7
+        "same": 8,
+        "requir": 8,
+        "later": 8
       },
-      "word_count": 3646
+      "word_count": 3828
     },
     {
       "filename": "claude-code__large-codebases.md",
@@ -105285,31 +105305,43 @@
       "url": "https://platform.claude.com/docs/en/build-with-claude/preserved-thinking",
       "headings": [
         {
-          "text": "How it works",
+          "text": "Switching models mid-conversation",
           "level": 2
         },
         {
-          "text": "Who is affected",
+          "text": "Keeping the prefix unchanged",
           "level": 2
         },
         {
-          "text": "How to tell whether your integration is impacted",
-          "level": 2
-        },
-        {
-          "text": "What counts as an edit",
-          "level": 2
-        },
-        {
-          "text": "Update your integration",
-          "level": 2
-        },
-        {
-          "text": "Append assistant turns exactly as returned",
+          "text": "What the API does with an invalid block",
           "level": 3
         },
         {
-          "text": "Add instructions with a mid-conversation system message, not by editing `system`",
+          "text": "Set the mismatch behavior and read `input_transformations`",
+          "level": 3
+        },
+        {
+          "text": "When the API enforces the check",
+          "level": 3
+        },
+        {
+          "text": "What counts as an edit",
+          "level": 3
+        },
+        {
+          "text": "Check whether your code edits the prefix",
+          "level": 3
+        },
+        {
+          "text": "Make changes without editing the prefix",
+          "level": 2
+        },
+        {
+          "text": "Send assistant turns back exactly as returned",
+          "level": 3
+        },
+        {
+          "text": "Add instructions with a mid-conversation system message",
           "level": 3
         },
         {
@@ -105317,32 +105349,36 @@
           "level": 3
         },
         {
-          "text": "Change tools with `tool_addition` and `tool_removal`, not by editing `tools`",
+          "text": "Add or remove tools with `tool_addition` and `tool_removal`",
           "level": 3
         },
         {
-          "text": "Trim context on the server where you can",
+          "text": "Change effort with a per-message `output_config`",
           "level": 3
         },
         {
-          "text": "Custom compaction on the client",
+          "text": "Trim context on the server",
           "level": 3
         },
         {
-          "text": "Reference files by ID, not by URL that changes content",
+          "text": "Compact on the client",
           "level": 3
         },
         {
-          "text": "Decide what happens on a mismatch",
+          "text": "Simple compaction (recommended)",
+          "level": 4
+        },
+        {
+          "text": "Keep-tail compaction",
+          "level": 4
+        },
+        {
+          "text": "Patterns that don't work with preserved thinking",
+          "level": 4
+        },
+        {
+          "text": "Reference files by ID, not by a URL whose content changes",
           "level": 3
-        },
-        {
-          "text": "API features used on this page",
-          "level": 2
-        },
-        {
-          "text": "Checklist",
-          "level": 2
         },
         {
           "text": "FAQ",
@@ -105354,58 +105390,58 @@
         }
       ],
       "terms": {
-        "tool": 53,
-        "block": 35,
-        "think": 31,
-        "system": 23,
+        "block": 59,
+        "think": 48,
+        "tool": 43,
+        "model": 27,
+        "prefix": 23,
+        "claude": 19,
         "messag": 19,
-        "conversation": 16,
-        "turn": 16,
-        "model": 16,
-        "prefix": 16,
-        "request": 15,
-        "api": 14,
-        "check": 13,
-        "drop": 12,
-        "mismatch": 12,
-        "claude": 11,
-        "result": 9,
-        "account": 9,
-        "behavior": 9,
-        "set": 8,
+        "system": 19,
+        "drop": 15,
+        "mismatch": 15,
+        "bind": 13,
+        "request": 12,
+        "api": 11,
+        "earlier": 10,
+        "fable": 10,
+        "read": 10,
+        "error": 10,
+        "conversation": 10,
+        "behavior": 10,
+        "check": 8,
         "mid": 8,
-        "clear": 8,
-        "integration": 7,
-        "one": 7,
+        "reason": 8,
+        "message": 8,
+        "output": 8,
+        "config": 8,
+        "addition": 8,
+        "turn": 7,
+        "before": 7,
+        "every": 7,
         "keep": 7,
-        "user": 7,
-        "bind": 7,
-        "addition": 7,
-        "error": 6,
-        "chang": 6,
-        "earlier": 6,
-        "message": 6,
-        "new": 6,
-        "instruction": 6,
-        "before": 6,
-        "header": 6,
-        "control": 6,
-        "role": 6,
-        "text": 6,
-        "removal": 6,
-        "input": 6,
-        "transformation": 6,
-        "dropp": 5,
-        "whether": 5,
-        "affect": 5,
-        "see": 5,
-        "after": 5,
+        "each": 7,
+        "dropp": 7,
+        "input": 7,
+        "transformation": 7,
+        "clear": 7,
+        "only": 6,
+        "switch": 6,
+        "prompt": 6,
+        "history": 6,
+        "edit": 6,
+        "defer": 6,
+        "load": 6,
+        "true": 6,
+        "result": 6,
+        "chang": 5,
         "send": 5,
-        "remov": 5,
-        "each": 5,
-        "older": 5
+        "after": 5,
+        "beta": 5,
+        "header": 5,
+        "fail": 5
       },
-      "word_count": 4413
+      "word_count": 6709
     },
     {
       "filename": "docs__en__build-with-claude__prompt-caching.md",
@@ -107419,18 +107455,6 @@
           "level": 2
         },
         {
-          "text": "Only for the model that produced it, or a newer one",
-          "level": 3
-        },
-        {
-          "text": "Only in the conversation that produced it",
-          "level": 3
-        },
-        {
-          "text": "Controls for blocks that aren't preserved (beta)",
-          "level": 3
-        },
-        {
           "text": "Thinking and prompt caching",
           "level": 2
         },
@@ -107472,58 +107496,58 @@
         }
       ],
       "terms": {
-        "think": 243,
-        "block": 152,
-        "claude": 124,
-        "model": 88,
-        "turn": 66,
-        "tool": 65,
-        "see": 37,
-        "reason": 37,
+        "think": 274,
+        "block": 150,
+        "claude": 136,
+        "model": 90,
+        "tool": 77,
+        "turn": 72,
+        "see": 43,
+        "api": 35,
         "text": 35,
-        "request": 35,
-        "stream": 33,
-        "conversation": 32,
-        "api": 31,
+        "reason": 34,
+        "stream": 32,
         "response": 31,
-        "one": 30,
+        "request": 29,
+        "back": 29,
+        "opu": 29,
         "token": 28,
-        "mytho": 27,
-        "fable": 26,
-        "only": 26,
-        "earlier": 26,
+        "mytho": 26,
+        "keep": 25,
+        "field": 24,
+        "fable": 24,
         "progres": 24,
-        "back": 23,
-        "field": 22,
-        "opu": 22,
-        "beta": 22,
+        "only": 23,
+        "context": 22,
+        "effort": 21,
+        "return": 21,
         "call": 21,
-        "check": 20,
+        "default": 21,
+        "work": 20,
+        "pas": 20,
+        "result": 20,
         "each": 20,
-        "keep": 20,
-        "preserv": 20,
-        "empty": 19,
+        "conversation": 20,
         "update": 19,
-        "return": 18,
-        "work": 17,
-        "effort": 17,
-        "every": 17,
-        "pas": 16,
-        "between": 16,
-        "default": 16,
-        "message": 16,
-        "header": 16,
-        "assistant": 16,
-        "interleav": 16,
-        "result": 15,
-        "same": 15,
-        "prompt": 15,
-        "any": 15,
-        "event": 15,
-        "first": 14,
-        "chang": 14
+        "one": 18,
+        "empty": 18,
+        "preserv": 18,
+        "interleav": 18,
+        "between": 17,
+        "configuration": 17,
+        "assistant": 17,
+        "output": 16,
+        "event": 16,
+        "cach": 15,
+        "chang": 15,
+        "count": 15,
+        "cache": 15,
+        "note": 14,
+        "whether": 14,
+        "per": 14,
+        "error": 14
       },
-      "word_count": 10125
+      "word_count": 8065
     },
     {
       "filename": "docs__en__build-with-claude__thinking-steering-and-cost.md",
@@ -120498,6 +120522,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "September 3, 2026",
+          "level": 3
+        },
+        {
           "text": "September 1, 2026",
           "level": 3
         },
@@ -121050,11 +121078,11 @@
         "now": 106,
         "tool": 104,
         "opu": 100,
-        "see": 83,
+        "see": 84,
         "header": 76,
         "support": 68,
+        "agent": 66,
         "request": 65,
-        "agent": 65,
         "token": 63,
         "sonnet": 60,
         "launch": 56,
@@ -121066,14 +121094,14 @@
         "sdk": 38,
         "read": 36,
         "prompt": 36,
-        "code": 34,
-        "new": 34,
+        "code": 35,
+        "new": 35,
         "error": 33,
         "our": 33,
+        "add": 32,
         "fable": 32,
         "learn": 32,
         "output": 31,
-        "add": 31,
         "messag": 31,
         "requir": 31,
         "console": 30,
@@ -121082,19 +121110,19 @@
         "event": 29,
         "august": 28,
         "acces": 28,
+        "same": 27,
         "key": 27,
-        "same": 26,
         "platform": 25,
+        "skill": 25,
         "block": 25,
         "usage": 25,
         "chang": 24,
         "mytho": 24,
         "endpoint": 24,
-        "skill": 24,
         "parameter": 24,
         "mode": 23
       },
-      "word_count": 11219
+      "word_count": 11297
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
