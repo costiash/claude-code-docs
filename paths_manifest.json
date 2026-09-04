@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T00:22:26.859028Z",
+  "generated_at": "2026-09-04T03:15:45.430942Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -48,8 +48,8 @@
       "md_url": "https://code.claude.com/docs/en/advisor.md",
       "title": "Escalate hard decisions with the advisor tool",
       "category": "claude_code",
-      "sha256": "eee77bc10a9ce42b14fec9404f3a77f120be01dc5f5758c49db24dad0487dda1",
-      "lastmod": "2026-09-01T17:54:24.420Z",
+      "sha256": "f77acae98ae5ca62c52955dce14d8501c01958e351084f113e9d0393bbce3429",
+      "lastmod": "2026-09-04T02:33:00.819Z",
       "fetch_status": "ok"
     },
     {
@@ -565,8 +565,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway.md",
       "title": "Claude apps gateway for Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry",
       "category": "claude_code",
-      "sha256": "a73ed11b7ee9e51df65c9a93e8fe222c4340ce6d9baf72e86a756b19ca77bb36",
-      "lastmod": "2026-09-01T03:10:22.919Z",
+      "sha256": "2cdfbcbd137c3844d977b51a182ac4b3eed7bc7d1ffd229b4dd47b3542800fff",
+      "lastmod": "2026-09-04T02:25:23.064Z",
       "fetch_status": "ok"
     },
     {
@@ -686,8 +686,8 @@
       "md_url": "https://code.claude.com/docs/en/cli-reference.md",
       "title": "CLI reference",
       "category": "claude_code",
-      "sha256": "559d44b2d556d8095d8b5c2db6283bb6b843fab81ba8aebf5aa380f65cae940e",
-      "lastmod": "2026-09-01T17:54:24.450Z",
+      "sha256": "a5d0107ecdc1b96e5dc187fdd8f2b2d3c595e8a1cad2dcb624fe66bed63f4d07",
+      "lastmod": "2026-09-04T00:25:11.514Z",
       "fetch_status": "ok"
     },
     {
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/gateways.md",
       "title": "Run Claude Code through a gateway",
       "category": "claude_code",
-      "sha256": "3caf3d3109d7779a385f767201f87c087433742a1c2745b366c70417e0ddd003",
-      "lastmod": "2026-08-31T15:46:02.791Z",
+      "sha256": "3069bdb2ae05612f0d61d698552f8573bd498ebf7aea3fd903746b5c88c1cdb0",
+      "lastmod": "2026-09-04T02:25:23.057Z",
       "fetch_status": "ok"
     },
     {
@@ -1203,8 +1203,8 @@
       "md_url": "https://code.claude.com/docs/en/headless.md",
       "title": "Run Claude Code programmatically",
       "category": "claude_code",
-      "sha256": "999f122f6d227c14a25223e2d02d4044c1201f01d9a0621ca9646ebb8347fb47",
-      "lastmod": "2026-08-31T04:44:46.718Z",
+      "sha256": "6c8a31d658eb31c9611e18cb10f58638bc51b4a94afe379aedd0cdbf5728ab7c",
+      "lastmod": "2026-09-04T00:25:11.507Z",
       "fetch_status": "ok"
     },
     {
@@ -1302,8 +1302,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway.md",
       "title": "Other LLM gateways",
       "category": "claude_code",
-      "sha256": "0395008a43df2c18630fe504b2b6c51186b458f038d0fc40ca63ae5f8cc86292",
-      "lastmod": "2026-08-21T22:50:11.052Z",
+      "sha256": "236a7b796b0255310652fa290588809971d92ef4f8b43f2a3da5c1b16544f85f",
+      "lastmod": "2026-09-04T02:25:23.054Z",
       "fetch_status": "ok"
     },
     {
@@ -1313,8 +1313,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway-connect.md",
       "title": "Connect Claude Code to an LLM gateway",
       "category": "claude_code",
-      "sha256": "20a6a179e6b55f832cff842a3ea5b44de441ac2dcd6eb334a8fbb004bdb6e03c",
-      "lastmod": "2026-09-02T02:03:20.009Z",
+      "sha256": "6a51a2d4355632bfec26d2eaa9051cd416c41e24e1c506b559c78ca78b29f5fa",
+      "lastmod": "2026-09-04T02:25:23.059Z",
       "fetch_status": "ok"
     },
     {
@@ -1324,8 +1324,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway-protocol.md",
       "title": "Gateway protocol reference",
       "category": "claude_code",
-      "sha256": "a3e411deed88b53077921e177794b2cc05c4aa5dcc922798cb228e01faf87ea9",
-      "lastmod": "2026-09-01T17:54:24.417Z",
+      "sha256": "5188b617694a9e0e5b332720fe9c8e21b0c01fbfe3b0941ad0590c86d775e965",
+      "lastmod": "2026-09-04T02:25:23.058Z",
       "fetch_status": "ok"
     },
     {
@@ -1335,8 +1335,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway-rollout.md",
       "title": "Roll out an LLM gateway for your organization",
       "category": "claude_code",
-      "sha256": "56ed27f0da735b347ac4ead8db31992321b0b74869634210c4e057ad26cd6589",
-      "lastmod": "2026-08-21T23:08:54.425Z",
+      "sha256": "025814d0a36d440c1153d6a35079b5a3d70481d852e8a991b609941d40ddcc9f",
+      "lastmod": "2026-09-04T02:25:23.056Z",
       "fetch_status": "ok"
     },
     {
@@ -1577,8 +1577,8 @@
       "md_url": "https://code.claude.com/docs/en/prompt-caching.md",
       "title": "How Claude Code uses prompt caching",
       "category": "claude_code",
-      "sha256": "896f69cf6d5f367decef102622285a71a6c6ca36274a015b8d3889d33f8d9263",
-      "lastmod": "2026-09-03T02:34:38.621Z",
+      "sha256": "48ee5a6a708bda2e719212220962ca03ec6098e226b937d6d72eda6420df1631",
+      "lastmod": "2026-09-04T02:33:00.821Z",
       "fetch_status": "ok"
     },
     {
@@ -1984,8 +1984,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w13.md",
       "title": "Week 13 \u00b7 March 23\u201327, 2026",
       "category": "claude_code",
-      "sha256": "1f6b33d30fc2ba37f181750f871a769ba973868bd4c3b649f7c0b41856a91bc5",
-      "lastmod": "2026-07-29T05:10:48.687Z",
+      "sha256": "ed224aa7504b9d2bccb51ae70f3a55f45f9319f6fa9e84c4a22fcd854197b6ef",
+      "lastmod": "2026-09-04T00:23:08.834Z",
       "fetch_status": "ok"
     },
     {
@@ -1995,8 +1995,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w14.md",
       "title": "Week 14 \u00b7 March 30 \u2013 April 3, 2026",
       "category": "claude_code",
-      "sha256": "d2ba66788eb385a4c3ad9f8b0ead51b24d9ec4d631dc4855c00f8a21b2d972fb",
-      "lastmod": "2026-07-29T05:10:48.690Z",
+      "sha256": "cfd2170641de2347d5d14d76ad8ec787d0cf8cf61a8a9b6971a700c099bd8715",
+      "lastmod": "2026-09-04T00:23:08.836Z",
       "fetch_status": "ok"
     },
     {
@@ -2006,8 +2006,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w15.md",
       "title": "Week 15 \u00b7 April 6\u201310, 2026",
       "category": "claude_code",
-      "sha256": "0b44122d315a9909407b83def62e4edc8247262565bb4d1c22add11e21283be9",
-      "lastmod": "2026-07-29T05:10:48.689Z",
+      "sha256": "282687bbdbe4b964dc44ecfe2dc4a5e1e05603fc16309b9c51e520a25e6d2b39",
+      "lastmod": "2026-09-04T00:23:08.838Z",
       "fetch_status": "ok"
     },
     {
@@ -2017,8 +2017,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w16.md",
       "title": "Week 16 \u00b7 April 13\u201317, 2026",
       "category": "claude_code",
-      "sha256": "cd6cc611efc53cf7319f2bab020f13d733affe6a6b7a5c270a2f218289fa64dc",
-      "lastmod": "2026-07-04T02:33:59.831Z",
+      "sha256": "cef88008fa8788cc06714b7bfe784cb9a237e0f78a7f25fd2a2a98e8ef0c9704",
+      "lastmod": "2026-09-04T00:23:08.834Z",
       "fetch_status": "ok"
     },
     {
@@ -2028,8 +2028,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w17.md",
       "title": "Week 17 \u00b7 April 20\u201324, 2026",
       "category": "claude_code",
-      "sha256": "f578e85cf3fa449fd7c61e930970cd8fd70af9c2204d319b0c1a30daf99611df",
-      "lastmod": "2026-04-27T20:29:20.683Z",
+      "sha256": "973f7c7c7430178c62d52865f989d560aae6df76a80dcea301d7fe3087843e8c",
+      "lastmod": "2026-09-04T00:23:08.835Z",
       "fetch_status": "ok"
     },
     {
@@ -2039,8 +2039,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w18.md",
       "title": "Week 18 \u00b7 April 27 \u2013 May 1, 2026",
       "category": "claude_code",
-      "sha256": "a567c98c444a4e80c35d2090bf2cf756b1ce097c75cb57364d8ab5ddf155051e",
-      "lastmod": "2026-07-16T22:10:51.690Z",
+      "sha256": "8ba891ebc6152a8185e5f7475f9ec55c277ee348e6c8c1c8b29d0585d2812c68",
+      "lastmod": "2026-09-04T00:23:08.839Z",
       "fetch_status": "ok"
     },
     {
@@ -2050,8 +2050,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w19.md",
       "title": "Week 19 \u00b7 May 4\u20138, 2026",
       "category": "claude_code",
-      "sha256": "3d6247b5b48579fcd46e23c5286b90c390fd2e7c1f4b66aebb12578622a95e14",
-      "lastmod": "2026-06-03T18:25:43.837Z",
+      "sha256": "6adcc16ab8c4acf12e3a36ac273013e6e17dc9f20a40f52ae27cc2f9e2d4220d",
+      "lastmod": "2026-09-04T00:23:08.832Z",
       "fetch_status": "ok"
     },
     {
@@ -2061,8 +2061,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w20.md",
       "title": "Week 20 \u00b7 May 11\u201315, 2026",
       "category": "claude_code",
-      "sha256": "22e8189f0d539e07f0c6dbf0dac1de0145d64211cd0465acea97d0183e922525",
-      "lastmod": "2026-06-03T18:25:43.841Z",
+      "sha256": "6adb77dd7f1009b3890ab1d5c64042e231933e7abd3e1936a663463286acd1c5",
+      "lastmod": "2026-09-04T00:23:08.835Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w21.md",
       "title": "Week 21 \u00b7 May 18\u201322, 2026",
       "category": "claude_code",
-      "sha256": "e17d2c9c819da2cd57397894b79b7355f2b590be6b023c41f1fe322fa51b6d22",
-      "lastmod": "2026-07-16T22:43:22.244Z",
+      "sha256": "0d91a4159d2aa6359cf929701cb39759ad7f8910a39de76b355d27bfd0921e46",
+      "lastmod": "2026-09-04T00:23:08.838Z",
       "fetch_status": "ok"
     },
     {
@@ -2083,8 +2083,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w22.md",
       "title": "Week 22 \u00b7 May 25\u201329, 2026",
       "category": "claude_code",
-      "sha256": "17ec54c9ef14d0426d4a4375efe470ba0ecc9aaefad5582d9efe317c3c220687",
-      "lastmod": "2026-07-29T05:10:48.688Z",
+      "sha256": "9ebbf9240f833d3933766850c066734b62111dbe59ab34df416065f5570438ef",
+      "lastmod": "2026-09-04T00:23:08.839Z",
       "fetch_status": "ok"
     },
     {
@@ -2094,8 +2094,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w23.md",
       "title": "Week 23 \u00b7 June 1\u20135, 2026",
       "category": "claude_code",
-      "sha256": "b018b3971c54c267f4b4623676eedb339e2728b9a4c413cd07a0428739110dc4",
-      "lastmod": "2026-07-13T21:18:03.221Z",
+      "sha256": "226b64f003432d664b840391fbfc0bbe06ca73f1480e18b5f5b6943e821daba4",
+      "lastmod": "2026-09-04T00:23:08.840Z",
       "fetch_status": "ok"
     },
     {
@@ -2105,8 +2105,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w24.md",
       "title": "Week 24 \u00b7 June 8\u201312, 2026",
       "category": "claude_code",
-      "sha256": "770e40ecefed1e8ebb77426c3b8a6fd59227e6d59bf5c30f679feb5dd962cedd",
-      "lastmod": "2026-08-07T19:21:35.791Z",
+      "sha256": "7a2ee84a1e8ef73acccdc418876e8e5182918c40eebce6ff1e5ee7c043682556",
+      "lastmod": "2026-09-04T00:23:08.837Z",
       "fetch_status": "ok"
     },
     {
@@ -2116,8 +2116,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w25.md",
       "title": "Week 25 \u00b7 June 15\u201319, 2026",
       "category": "claude_code",
-      "sha256": "833f8d3b700c7618cce2202daf834614b956be2c30651edb8c102815e7dcbd08",
-      "lastmod": "2026-07-29T05:10:48.682Z",
+      "sha256": "9423716d28a7bca0fb8794bb207945d8082a516221978db16da3e35de7603c7d",
+      "lastmod": "2026-09-04T00:23:08.840Z",
       "fetch_status": "ok"
     },
     {
@@ -2127,8 +2127,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w26.md",
       "title": "Week 26 \u00b7 June 22\u201326, 2026",
       "category": "claude_code",
-      "sha256": "3b2140a178f36250ee1a24643bdc12b83b4f1534e1a1f8a94d40556a4c7e0625",
-      "lastmod": "2026-06-27T00:48:56.674Z",
+      "sha256": "daa492028b273039d527cdd5cb4fd93e0d8361e64b35e0e1941ad6dae2d46b9e",
+      "lastmod": "2026-09-04T00:23:08.831Z",
       "fetch_status": "ok"
     },
     {
@@ -2138,8 +2138,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w27.md",
       "title": "Week 27 \u00b7 June 29 \u2013 July 3, 2026",
       "category": "claude_code",
-      "sha256": "f6386207819b3af9e7bb379d3e5df84dabf7f87b90fe9a5fc58e91d5c2ed5fe2",
-      "lastmod": "2026-07-11T03:56:26.539Z",
+      "sha256": "5654dcbca409024332797dcc36f6089252b026353c54fa2c93703a66b0819870",
+      "lastmod": "2026-09-04T00:23:08.839Z",
       "fetch_status": "ok"
     },
     {
@@ -2149,8 +2149,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w28.md",
       "title": "Week 28 \u00b7 July 6\u201310, 2026",
       "category": "claude_code",
-      "sha256": "d42c311bdf5932bcb49f8a765ada6d39073bfaa98d16fdf12807b7074463b83f",
-      "lastmod": "2026-07-11T03:56:26.537Z",
+      "sha256": "181a056217f5115c1f17afc54f2051f2964dd7912fbf26d8269f4478b50a3058",
+      "lastmod": "2026-09-04T00:23:08.837Z",
       "fetch_status": "ok"
     },
     {
@@ -2160,8 +2160,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w29.md",
       "title": "Week 29 \u00b7 July 13\u201317, 2026",
       "category": "claude_code",
-      "sha256": "275e9c88fadfa5cc0cb39665a4a5d89234c970295e0f4d0bc583e15e2ff9bb29",
-      "lastmod": "2026-07-29T01:22:14.978Z",
+      "sha256": "118acce134ea5a471a45c714615904a70330fe7e8d3b70d9091fd2060cd1bb0e",
+      "lastmod": "2026-09-04T00:23:08.831Z",
       "fetch_status": "ok"
     },
     {
@@ -2171,8 +2171,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w30.md",
       "title": "Week 30 \u00b7 July 20\u201324, 2026",
       "category": "claude_code",
-      "sha256": "df099e47a73428b58df52eea4515ce2cc5894b6090a769e0f172808906f33ba1",
-      "lastmod": "2026-08-10T18:31:23.296Z",
+      "sha256": "459a4fd02f2d8def22603001222056cdfbd81dee4ad35e851f10e7be42e9ffeb",
+      "lastmod": "2026-09-04T00:23:08.832Z",
       "fetch_status": "ok"
     },
     {
@@ -2182,8 +2182,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w32.md",
       "title": "Week 32 \u00b7 August 3\u20137, 2026",
       "category": "claude_code",
-      "sha256": "cfbad4b72de7394d72cf97b7bb35a45ac25c8bc0b568db7f7c40478fe397ce4b",
-      "lastmod": "2026-08-22T17:19:41.917Z",
+      "sha256": "de203d78c64f3538ec3ef388dcdb2550914243ffba0ed1e4a2550f8d41f14930",
+      "lastmod": "2026-09-04T00:23:08.830Z",
       "fetch_status": "ok"
     },
     {
@@ -2193,8 +2193,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w33.md",
       "title": "Week 33 \u00b7 August 10\u201314, 2026",
       "category": "claude_code",
-      "sha256": "da98bb03b1c777c4195e767a34f850f7fb7e17ab273f9fc268f34e4642095aba",
-      "lastmod": "2026-08-22T18:32:25.614Z",
+      "sha256": "be5c3e889a7836d2aff2aa080ff8115861b47e0fc87764e64f844b3cd80314f6",
+      "lastmod": "2026-09-04T00:23:08.833Z",
       "fetch_status": "ok"
     },
     {
@@ -2204,8 +2204,8 @@
       "md_url": "https://code.claude.com/docs/en/whats-new/2026-w34.md",
       "title": "Week 34 \u00b7 August 17\u201321, 2026",
       "category": "claude_code",
-      "sha256": "260e257510e9eb8e36fc524aed44ef7d61ed6add074376d4eb143f2b0f83a68a",
-      "lastmod": "2026-08-31T05:13:36.105Z",
+      "sha256": "f60234a2a7d0b415f4c379dd923f040bc43bf854fc3cb97a2612ff124f94d985",
+      "lastmod": "2026-09-04T00:23:08.833Z",
       "fetch_status": "ok"
     },
     {
