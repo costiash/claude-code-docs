@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T03:15:45.430942Z",
+  "generated_at": "2026-09-04T06:17:37.629285Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -576,8 +576,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "eefabb25b14aad51b1e7996198df13165112e70d78072e34811ba7e895b0ef11",
-      "lastmod": "2026-09-02T00:43:56.907Z",
+      "sha256": "ce834441a43bf692e825109f9f10c1fa16234b6dc38950fc1c9e9fbde9379ab4",
+      "lastmod": "2026-09-04T03:33:51.301Z",
       "fetch_status": "ok"
     },
     {
@@ -631,8 +631,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code on the web",
       "category": "claude_code",
-      "sha256": "f6a53f0617b8872a25c47b03e34a8eeef6b0158d825a58e51316c0621ead3114",
-      "lastmod": "2026-08-29T18:03:06.240Z",
+      "sha256": "7274a272b2a556dce7d278c022ea7d772e432a40285fc396bfbefddcfba431da",
+      "lastmod": "2026-09-04T04:37:30.390Z",
       "fetch_status": "ok"
     },
     {
@@ -697,8 +697,8 @@
       "md_url": "https://code.claude.com/docs/en/cloud-environments.md",
       "title": "Configure cloud environments",
       "category": "claude_code",
-      "sha256": "a7caed2fb6658fb7f2638f1c759c9a28a9e1dd41a5ede3f902d304d9d8a60445",
-      "lastmod": "2026-08-31T03:13:18.348Z",
+      "sha256": "638802e5204ab2f469fe3fe949a6e62eba21d00343dd4fbd0732617c0ef1a23a",
+      "lastmod": "2026-09-04T04:37:30.395Z",
       "fetch_status": "ok"
     },
     {
@@ -1322,7 +1322,7 @@
       "filename": "claude-code__llm-gateway-protocol.md",
       "url": "https://code.claude.com/docs/en/llm-gateway-protocol",
       "md_url": "https://code.claude.com/docs/en/llm-gateway-protocol.md",
-      "title": "Gateway protocol reference",
+      "title": "Claude Code gateway compatibility guide",
       "category": "claude_code",
       "sha256": "5188b617694a9e0e5b332720fe9c8e21b0c01fbfe3b0941ad0590c86d775e965",
       "lastmod": "2026-09-04T02:25:23.058Z",
@@ -1621,8 +1621,8 @@
       "md_url": "https://code.claude.com/docs/en/routines.md",
       "title": "Automate work with routines",
       "category": "claude_code",
-      "sha256": "92956d11a1affd6915970cf588e70206d769ac8b5eb988bc1aa08f46a1879692",
-      "lastmod": "2026-09-01T03:10:22.717Z",
+      "sha256": "58c1526fa9b251f49a825d2006c13838445e1a0cdc0d6eda817c1282420f482b",
+      "lastmod": "2026-09-04T04:37:30.389Z",
       "fetch_status": "ok"
     },
     {
@@ -1764,8 +1764,8 @@
       "md_url": "https://code.claude.com/docs/en/server-managed-settings.md",
       "title": "Configure server-managed settings",
       "category": "claude_code",
-      "sha256": "bcc9f46b1ea80ce6bf25dfbff2a7575cba596511aa4826384db987fccf824eae",
-      "lastmod": "2026-09-03T23:48:54.941Z",
+      "sha256": "45ff79d701bc59dabb12684f21490b3f02bc20063d5b5c259ef4abf87e0dfc98",
+      "lastmod": "2026-09-04T03:33:51.295Z",
       "fetch_status": "ok"
     },
     {

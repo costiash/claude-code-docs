@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T03:15:48.968402Z",
+  "generated_at": "2026-09-04T06:17:41.159084Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9778,7 +9778,7 @@
       ],
       "terms": {
         "gateway": 149,
-        "claude": 70,
+        "claude": 69,
         "upstream": 68,
         "key": 67,
         "set": 51,
@@ -9803,8 +9803,8 @@
         "match": 29,
         "platform": 28,
         "boot": 28,
-        "manag": 27,
         "each": 27,
+        "manag": 26,
         "fail": 24,
         "api": 24,
         "only": 24,
@@ -9828,7 +9828,7 @@
         "endpoint": 19,
         "reject": 19
       },
-      "word_count": 10018
+      "word_count": 10014
     },
     {
       "filename": "claude-code__claude-apps-gateway-deploy.md",
@@ -10453,12 +10453,12 @@
         "note": 14,
         "cli": 14,
         "error": 14,
+        "team": 13,
         "review": 13,
         "local": 13,
         "instead": 13,
         "send": 13,
         "open": 13,
-        "team": 12,
         "task": 12,
         "check": 12,
         "message": 12,
@@ -10473,12 +10473,12 @@
         "authentication": 10,
         "default": 10,
         "creat": 10,
+        "plan": 10,
         "without": 10,
         "repositori": 10,
-        "remote": 10,
-        "credential": 10
+        "remote": 10
       },
-      "word_count": 4792
+      "word_count": 4806
     },
     {
       "filename": "claude-code__claude-directory.md",
@@ -11183,19 +11183,19 @@
         }
       ],
       "terms": {
-        "environment": 179,
+        "environment": 180,
         "session": 133,
         "claude": 94,
         "com": 83,
         "org": 75,
         "cloud": 73,
         "run": 61,
+        "credential": 51,
         "script": 50,
-        "credential": 50,
         "host": 48,
         "install": 44,
+        "api": 43,
         "code": 42,
-        "api": 42,
         "setup": 41,
         "www": 40,
         "start": 39,
@@ -11203,7 +11203,7 @@
         "network": 36,
         "default": 36,
         "accordion": 34,
-        "add": 32,
+        "add": 30,
         "github": 30,
         "request": 29,
         "setting": 28,
@@ -11213,12 +11213,12 @@
         "one": 24,
         "repo": 24,
         "own": 23,
+        "key": 23,
         "hook": 23,
         "level": 22,
         "variabl": 22,
         "only": 22,
         "title": 22,
-        "key": 22,
         "through": 21,
         "each": 20,
         "set": 20,
@@ -11234,7 +11234,7 @@
         "need": 16,
         "manag": 16
       },
-      "word_count": 6574
+      "word_count": 6633
     },
     {
       "filename": "claude-code__code-review.md",
@@ -21423,7 +21423,7 @@
     {
       "filename": "claude-code__llm-gateway-protocol.md",
       "id": "claude-code/llm-gateway-protocol",
-      "title": "Gateway protocol reference",
+      "title": "Claude Code gateway compatibility guide",
       "category": "claude_code",
       "url": "https://code.claude.com/docs/en/llm-gateway-protocol",
       "headings": [
@@ -25978,7 +25978,7 @@
         "repositori": 10,
         "pull": 10
       },
-      "word_count": 4803
+      "word_count": 4808
     },
     {
       "filename": "claude-code__sandbox-environments.md",
@@ -27661,37 +27661,37 @@
         }
       ],
       "terms": {
-        "setting": 165,
-        "claude": 108,
-        "manag": 103,
-        "code": 88,
+        "setting": 164,
+        "claude": 112,
+        "manag": 102,
+        "code": 90,
         "fetch": 59,
         "server": 55,
         "user": 45,
         "session": 36,
+        "key": 34,
+        "approval": 34,
         "dialog": 34,
-        "key": 33,
         "appli": 33,
-        "approval": 32,
         "cach": 31,
         "deliver": 30,
         "endpoint": 30,
+        "before": 28,
         "variabl": 28,
         "source": 28,
-        "before": 27,
         "startup": 27,
         "such": 26,
+        "run": 25,
         "only": 24,
-        "run": 24,
         "value": 24,
         "configuration": 23,
         "block": 22,
         "show": 22,
         "organization": 21,
         "without": 21,
+        "doesn": 20,
         "apply": 20,
         "any": 20,
-        "doesn": 19,
         "payload": 19,
         "environment": 18,
         "policy": 18,
@@ -27709,10 +27709,10 @@
         "admin": 14,
         "security": 14,
         "mdm": 14,
-        "interactive": 13,
-        "requir": 12
+        "requir": 13,
+        "interactive": 13
       },
-      "word_count": 4929
+      "word_count": 4964
     },
     {
       "filename": "claude-code__sessions.md",
