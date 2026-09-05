@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-05T06:16:52.076281Z",
+  "generated_at": "2026-09-05T15:14:32.998986Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -686,8 +686,8 @@
       "md_url": "https://code.claude.com/docs/en/cli-reference.md",
       "title": "CLI reference",
       "category": "claude_code",
-      "sha256": "faef134806631e663899af18056cd85002516b3cdb23bea1b3a3d559855f3439",
-      "lastmod": "2026-09-05T04:07:45.771Z",
+      "sha256": "7334cf725ef1c84a4fdc0aaa17baaa8a1af2a90fc1bc526279b48076d717b5bf",
+      "lastmod": "2026-09-05T14:28:20.378Z",
       "fetch_status": "ok"
     },
     {
@@ -1049,8 +1049,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "898553bf13af63f0deacd1479f7bd5b0dfc5475c0a68f1219a98212b70c87e22",
-      "lastmod": "2026-09-05T04:11:03.546Z",
+      "sha256": "baecab51b4e167cf5964739c5232f9b211b0a664c789110988b503cc59470778",
+      "lastmod": "2026-09-05T14:28:20.392Z",
       "fetch_status": "ok"
     },
     {
@@ -1863,8 +1863,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "6418a5f9bc399f080b19eedb7c785a5bc522d0d948cb11edd1479dc651f927b0",
-      "lastmod": "2026-09-05T04:09:31.902Z",
+      "sha256": "641e28dea991fa747c250944308f1d4fe86785345992c2da3254394d6cd4b982",
+      "lastmod": "2026-09-05T14:28:20.378Z",
       "fetch_status": "ok"
     },
     {
