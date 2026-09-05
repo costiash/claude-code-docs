@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T21:15:19.476652Z",
+  "generated_at": "2026-09-05T00:21:31.798103Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12255,9 +12255,9 @@
         }
       ],
       "terms": {
-        "claude": 120,
+        "claude": 122,
+        "code": 75,
         "usage": 74,
-        "code": 73,
         "token": 51,
         "session": 46,
         "spend": 45,
@@ -12289,9 +12289,9 @@
         "task": 16,
         "setting": 15,
         "developer": 15,
+        "line": 15,
         "start": 14,
         "tool": 14,
-        "line": 14,
         "count": 13,
         "conversation": 13,
         "only": 13,
@@ -12306,7 +12306,7 @@
         "agent": 12,
         "pro": 11
       },
-      "word_count": 5327
+      "word_count": 5360
     },
     {
       "filename": "claude-code__cross-session-messaging.md",
@@ -25399,9 +25399,9 @@
         }
       ],
       "terms": {
-        "claude": 107,
+        "claude": 109,
         "cache": 104,
-        "code": 72,
+        "code": 74,
         "request": 70,
         "turn": 51,
         "conversation": 48,
@@ -25412,8 +25412,8 @@
         "prompt": 36,
         "read": 35,
         "model": 32,
+        "one": 30,
         "chang": 29,
-        "one": 29,
         "ttl": 27,
         "after": 25,
         "each": 22,
@@ -25433,11 +25433,11 @@
         "server": 17,
         "same": 17,
         "switch": 16,
+        "also": 16,
         "keep": 16,
         "edit": 15,
         "context": 15,
         "set": 15,
-        "also": 15,
         "append": 14,
         "start": 14,
         "see": 13,
@@ -25450,7 +25450,7 @@
         "usage": 12,
         "imag": 12
       },
-      "word_count": 5158
+      "word_count": 5194
     },
     {
       "filename": "claude-code__prompt-library.md",
@@ -29521,12 +29521,12 @@
         }
       ],
       "terms": {
-        "claude": 63,
+        "claude": 69,
         "script": 62,
+        "code": 61,
         "line": 61,
         "statu": 59,
-        "code": 55,
-        "session": 52,
+        "session": 54,
         "field": 39,
         "git": 36,
         "window": 35,
@@ -29541,23 +29541,23 @@
         "current": 20,
         "setting": 19,
         "output": 19,
+        "request": 19,
         "display": 18,
         "appear": 18,
+        "first": 18,
         "model": 18,
         "directory": 18,
         "set": 18,
         "absent": 18,
-        "request": 18,
         "codegroup": 18,
         "json": 17,
         "show": 17,
-        "first": 17,
         "data": 16,
+        "each": 16,
         "link": 15,
         "statusline": 15,
         "path": 15,
         "input": 15,
-        "each": 15,
         "before": 14,
         "usage": 14,
         "cost": 14,
@@ -29572,7 +29572,7 @@
         "example": 13,
         "second": 13
       },
-      "word_count": 7465
+      "word_count": 7639
     },
     {
       "filename": "claude-code__sub-agents.md",
@@ -108470,6 +108470,100 @@
       "word_count": 3276
     },
     {
+      "filename": "docs__en__cli-sdks-libraries__cli__apply.md",
+      "id": "docs/en/cli-sdks-libraries/cli/apply",
+      "title": "Manage resources as code",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply",
+      "headings": [
+        {
+          "text": "Apply your first agent",
+          "level": 2
+        },
+        {
+          "text": "Commit claude-lock.json",
+          "level": 2
+        },
+        {
+          "text": "Grow it into a project",
+          "level": 2
+        },
+        {
+          "text": "How ant apply infers a file's kind",
+          "level": 3
+        },
+        {
+          "text": "Edit and reapply",
+          "level": 2
+        },
+        {
+          "text": "Run ant apply in CI",
+          "level": 2
+        },
+        {
+          "text": "Flags",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "file": 39,
+        "agent": 23,
+        "apply": 16,
+        "resource": 15,
+        "run": 15,
+        "cli": 14,
+        "skill": 12,
+        "fil": 12,
+        "resourc": 11,
+        "plan": 11,
+        "field": 11,
+        "directory": 11,
+        "lockfile": 11,
+        "deployment": 10,
+        "each": 9,
+        "claude": 8,
+        "api": 8,
+        "creat": 8,
+        "one": 8,
+        "filename": 7,
+        "environment": 6,
+        "memory": 6,
+        "commit": 6,
+        "instead": 6,
+        "path": 6,
+        "edit": 6,
+        "yaml": 6,
+        "card": 6,
+        "code": 5,
+        "repository": 5,
+        "updat": 5,
+        "first": 5,
+        "markdown": 5,
+        "terminal": 5,
+        "print": 5,
+        "exit": 5,
+        "organization": 5,
+        "workspace": 5,
+        "other": 5,
+        "kind": 5,
+        "match": 5,
+        "delet": 5,
+        "title": 4,
+        "ant": 4,
+        "http": 4,
+        "platform": 4,
+        "com": 4,
+        "doc": 4,
+        "stor": 4,
+        "under": 4
+      },
+      "word_count": 1768
+    },
+    {
       "filename": "docs__en__cli-sdks-libraries__cli__authentication.md",
       "id": "docs/en/cli-sdks-libraries/cli/authentication",
       "title": "Authentication options",
@@ -108686,19 +108780,20 @@
         "api": 7,
         "resourc": 7,
         "session": 7,
+        "apply": 6,
         "command": 6,
         "list": 6,
         "script": 5,
-        "apply": 5,
         "error": 5,
         "title": 4,
+        "ant": 4,
         "credential": 4,
         "output": 4,
         "environment": 4,
         "run": 4,
         "shell": 4,
         "event": 4,
-        "ant": 3,
+        "fil": 3,
         "see": 3,
         "each": 3,
         "message": 3,
@@ -108715,7 +108810,6 @@
         "call": 2,
         "flag": 2,
         "keep": 2,
-        "fil": 2,
         "manage": 2,
         "once": 2,
         "pas": 2,
@@ -108729,7 +108823,7 @@
         "terminal": 2,
         "tip": 2
       },
-      "word_count": 765
+      "word_count": 768
     },
     {
       "filename": "docs__en__cli-sdks-libraries__cli__using.md",
@@ -114430,7 +114524,7 @@
         "configure": 4,
         "setting": 4
       },
-      "word_count": 2982
+      "word_count": 2999
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__azure.md",
@@ -114552,7 +114646,7 @@
         "kubernet": 9,
         "acces": 8
       },
-      "word_count": 6248
+      "word_count": 6268
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__gcp.md",
@@ -114642,7 +114736,7 @@
         "configure": 3,
         "side": 3
       },
-      "word_count": 1937
+      "word_count": 1947
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__github-actions.md",
@@ -114732,7 +114826,7 @@
         "url": 2,
         "provider": 2
       },
-      "word_count": 1503
+      "word_count": 1504
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__kubernetes.md",
@@ -114822,7 +114916,7 @@
         "fail": 3,
         "scope": 3
       },
-      "word_count": 1480
+      "word_count": 1481
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__okta.md",
@@ -114912,7 +115006,7 @@
         "authentication": 3,
         "account": 3
       },
-      "word_count": 2101
+      "word_count": 2111
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__spiffe.md",
@@ -115282,7 +115376,7 @@
         "href": 7,
         "liv": 6
       },
-      "word_count": 2828
+      "word_count": 2834
     },
     {
       "filename": "docs__en__manage-claude__workspaces.md",

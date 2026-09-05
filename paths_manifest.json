@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T21:15:16.357583Z",
+  "generated_at": "2026-09-05T00:21:28.241522Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -785,8 +785,8 @@
       "md_url": "https://code.claude.com/docs/en/costs.md",
       "title": "Manage costs effectively",
       "category": "claude_code",
-      "sha256": "722eed3905efa13579b4ff0c00095157ebe9db8019efd38ac44d38df3b25746e",
-      "lastmod": "2026-09-01T17:54:24.421Z",
+      "sha256": "644ff6b0d4a75844ca626be566909dfd437f9785ef376179d73ebfa1aa8a92d9",
+      "lastmod": "2026-09-04T23:12:20.845Z",
       "fetch_status": "ok"
     },
     {
@@ -1577,8 +1577,8 @@
       "md_url": "https://code.claude.com/docs/en/prompt-caching.md",
       "title": "How Claude Code uses prompt caching",
       "category": "claude_code",
-      "sha256": "48ee5a6a708bda2e719212220962ca03ec6098e226b937d6d72eda6420df1631",
-      "lastmod": "2026-09-04T02:33:00.821Z",
+      "sha256": "aa25c32ab52a7525dd756a72107fbf3aebe223adae06aa1500a3ea6cc987fc3d",
+      "lastmod": "2026-09-04T23:12:20.851Z",
       "fetch_status": "ok"
     },
     {
@@ -1852,8 +1852,8 @@
       "md_url": "https://code.claude.com/docs/en/statusline.md",
       "title": "Customize your status line",
       "category": "claude_code",
-      "sha256": "bb8d2c7fa1dd48372ca1c382f3d02ded9f7220530c979e8be65c9bf1ce79c4f4",
-      "lastmod": "2026-08-29T01:09:31.965Z",
+      "sha256": "20379f8f1b7922c3088faadb0755214837883abd5ad33aba473190f65769e640",
+      "lastmod": "2026-09-04T23:12:20.850Z",
       "fetch_status": "ok"
     },
     {
@@ -8424,6 +8424,17 @@
       "fetch_status": "ok"
     },
     {
+      "id": "docs/en/cli-sdks-libraries/cli/apply",
+      "filename": "docs__en__cli-sdks-libraries__cli__apply.md",
+      "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply",
+      "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply.md",
+      "title": "Manage resources as code",
+      "category": "core_documentation",
+      "sha256": "1855adfa5f9c039e8bccb4d87653476a331009ed27f5b543c4efd17be62ea3e9",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
       "id": "docs/en/cli-sdks-libraries/cli/authentication",
       "filename": "docs__en__cli-sdks-libraries__cli__authentication.md",
       "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication",
@@ -8441,7 +8452,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "d04b90d6b800143c45b9198e0423682b9aedf6f5776ea2ff48f907226dc3ba49",
+      "sha256": "f0fe6e6518dd197ca413412ba1e641d6a9ccad40eb79fdc8886b0dab2cbae2b1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8452,7 +8463,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting.md",
       "title": "Scripting and automation",
       "category": "core_documentation",
-      "sha256": "39724fb843c1de0abcd6d4c2f137eb9b006d691f89a62790044b16c951ffe3f6",
+      "sha256": "4a18b2a0ef0a9f588bbb9c2446c3894a625b266c28e12870e4550c1687efa2f5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8969,7 +8980,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/aws.md",
       "title": "AWS",
       "category": "core_documentation",
-      "sha256": "9c097b02cadeff891d46fda2a9a43d637df60fc30e06bb2c17423c911dc54db1",
+      "sha256": "9d18c12a63196297f85c2e25dc7007d82d0b5c6465c6f1838f68ec529e34ba77",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8980,7 +8991,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/azure.md",
       "title": "Microsoft Entra ID",
       "category": "core_documentation",
-      "sha256": "2c6cf9d6a7a7dc3e05755c700ef2c39dfd3c7079206e0b2b51e59873fad3727e",
+      "sha256": "952202dd6887403d9a88e6fd385834a36f495c73cd33536fe2d20c2acfccfa6a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8991,7 +9002,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp.md",
       "title": "Google Cloud",
       "category": "core_documentation",
-      "sha256": "5c104d2f5bb7f6bbd30606196c878ee8156bd422525f64fb87af274da72a5f36",
+      "sha256": "ad5bd2da6d8f745f51dfc88ab53a172d43b22fba007f71212a55ffa80ab5dd2c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9002,7 +9013,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions.md",
       "title": "GitHub Actions",
       "category": "core_documentation",
-      "sha256": "0013cf9776f628177eb67ee7c1999fbe581715ed76b3078b38b6c7fe630e62e9",
+      "sha256": "1740710960061c0a3ab53bcb5a6ddd2dc3bd4b62787d3ed27f7db16a18c54e4a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9013,7 +9024,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes.md",
       "title": "Kubernetes",
       "category": "core_documentation",
-      "sha256": "8b13fb2a457db389eab5e11bbd9879b50735bf7d8f54de0e556b554c90b1beed",
+      "sha256": "3d9cf3406a76ef9771429eed7669dc7e5672323d53fa9de62be75661ac45aa2e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9024,7 +9035,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/okta.md",
       "title": "Okta",
       "category": "core_documentation",
-      "sha256": "f8d7bd9a6c68149366b1e89c8a3a86d6a96dd705441a157c161a58681378fcda",
+      "sha256": "98559fe1ee99ef5651d6e7da3e8d0d88d5f96ba3115d1c824a8d0ce35bbecf53",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9057,7 +9068,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/workload-identity-federation.md",
       "title": "Workload Identity Federation",
       "category": "core_documentation",
-      "sha256": "ea5b1da2e7bb2d8c11315f5d29c947af3ccdddcabcb6bf3f094bbe69e05af8ad",
+      "sha256": "6b4af6c6d56a3511216e74e9f009bdd3caa54acc2efda228019c980f660523b2",
       "lastmod": null,
       "fetch_status": "ok"
     },
