@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-08T21:13:53.951724Z",
+  "generated_at": "2026-09-09T00:22:24.683916Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.266",
+          "level": 2
         },
         {
           "text": "2.1.265",
@@ -1567,7 +1571,7 @@
         }
       ],
       "terms": {
-        "fix": 2851,
+        "fix": 2852,
         "session": 1266,
         "now": 1048,
         "add": 596,
@@ -1584,7 +1588,7 @@
         "show": 415,
         "being": 378,
         "error": 355,
-        "fail": 342,
+        "fail": 343,
         "model": 335,
         "code": 315,
         "mcp": 309,
@@ -1618,7 +1622,7 @@
         "silently": 168,
         "token": 167
       },
-      "word_count": 96060
+      "word_count": 96133
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -8949,13 +8953,13 @@
         }
       ],
       "terms": {
-        "fix": 2852,
+        "fix": 2853,
         "session": 1266,
         "now": 1048,
         "add": 596,
         "claude": 583,
         "instead": 529,
-        "update": 513,
+        "update": 515,
         "tool": 498,
         "command": 484,
         "agent": 473,
@@ -8967,17 +8971,17 @@
         "show": 415,
         "being": 378,
         "error": 355,
-        "fail": 342,
+        "fail": 343,
         "model": 335,
         "code": 318,
         "mcp": 309,
         "server": 300,
         "plugin": 297,
         "terminal": 288,
-        "description": 271,
+        "description": 272,
         "chang": 264,
         "window": 261,
-        "label": 258,
+        "label": 259,
         "auto": 247,
         "permission": 245,
         "file": 239,
@@ -9000,7 +9004,7 @@
         "startup": 176,
         "while": 174
       },
-      "word_count": 97670
+      "word_count": 97747
     },
     {
       "filename": "claude-code__channels.md",

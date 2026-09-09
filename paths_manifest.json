@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-08T21:13:50.313761Z",
+  "generated_at": "2026-09-09T00:22:21.269283Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "8c6132d9f9e9e1183d93683f036c8905b3a028819212ed7762856d0f33be9e6a",
+      "sha256": "8b4b6596c456fdb353121e571d7934971a98e477f5ce08a08523ca97872605e1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -510,8 +510,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "3950b06dc82ec56524306c52ff7a48fed5c010cb15fc86c7c40eeb2777f52eee",
-      "lastmod": "2026-09-08T20:48:33.333Z",
+      "sha256": "06dd6bf9134ce020cb4bb76d4ee55fcb365cff27b7466e4e82c28cfcb5533bb6",
+      "lastmod": "2026-09-09T00:03:32.020Z",
       "fetch_status": "ok"
     },
     {
