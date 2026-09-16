@@ -36,8 +36,9 @@ jobs:
 
     # Fetch discovers (llms.txt ∪ sitemap) and writes the v2 manifest at the repo
     # root; pages are fetched into the gitignored .doc_fetch/ scratch (never committed).
-    # The fetcher's own safeguards (discovery >=200, <=10% manifest removal, >=250
-    # floor) abort the run before writing on a bad transition.
+    # The fetcher's own safeguards (discovery >=200, <=10% removal of previously-
+    # live pages, >=250 ok floor, <=25% stale/failed share) abort the run before
+    # writing on a bad transition.
     - name: Fetch latest documentation (v2 manifest)
       id: fetch-docs
       env:
@@ -50,14 +51,64 @@ jobs:
     - name: Build search index
       run: python3 scripts/build_search_index.py
 
-    # Belt-and-suspenders shell safeguard: the manifest must still have >=250 pages.
-    - name: Safeguard — manifest page count
+    # Belt-and-suspenders shell safeguards, mirroring all three transition rules in
+    # scripts/fetcher/safeguards.py so the run fails closed even if the Python guard
+    # is bypassed: at least 250 documentation pages (changelog excluded) must have
+    # fetched OK this run; no more than 25% of documentation pages may be stale/failed
+    # carry-forwards;
+    # and no more than 10% of the previously-live pages (HEAD manifest entries not
+    # already stale/failed) may have been removed. tests/integration pins each
+    # constant to scripts/fetcher/config.py.
+    - name: Safeguard — page count, stale share, live removals
       run: |
-        COUNT=$(jq '.pages | length' paths_manifest.json)
-        echo "Manifest pages: $COUNT"
-        if [ "$COUNT" -lt 250 ]; then
-          echo "::error::🚨 SAFEGUARD: manifest has only $COUNT pages (<250). Refusing to commit."
+        DOCS=$(jq '[.pages[] | select(.id != "changelog")] | length' paths_manifest.json)
+        OK_DOCS=$(jq '[.pages[] | select(.id != "changelog" and .fetch_status == "ok")] | length' paths_manifest.json)
+        NOT_OK=$((DOCS - OK_DOCS))
+        echo "Manifest pages: $(jq '.pages | length' paths_manifest.json) (documentation pages fetched ok: $OK_DOCS of $DOCS)"
+        if [ "$OK_DOCS" -lt 250 ]; then
+          echo "::error::🚨 SAFEGUARD: only $OK_DOCS documentation pages fetched ok (<250). Refusing to commit."
           exit 1
+        fi
+        echo "Stale/failed documentation pages: $NOT_OK of $DOCS"
+        if [ "$DOCS" -gt 0 ] && [ $((NOT_OK * 100)) -gt $((DOCS * 25)) ]; then
+          echo "::error::🚨 SAFEGUARD: $NOT_OK of $DOCS pages are stale/failed (>25%). Refusing to commit."
+          exit 1
+        fi
+        # Live-removal share: diff the committed (HEAD) manifest against the new one.
+        # Mirrors load_manifest() + the Python guard: no HEAD file, or a JSON object
+        # that is not a v2 manifest, skips the check (clean start); anything that is
+        # not exactly one JSON object (unparsable, empty, array, scalar, concatenated
+        # docs), or a v2 manifest with a non-object page entry, fails closed. A URL is
+        # "dead" if any of its rows is stale/failed, exactly like the Python set logic.
+        if git show HEAD:paths_manifest.json > /tmp/old_manifest.json 2>/dev/null; then
+          OLD_KIND=$(jq -rs 'if length != 1 or (.[0] | type) != "object" then error("not a single JSON object")
+                             elif .[0].schema_version == 2 and (.[0].pages | type) == "array" then
+                               (if (.[0].pages | any(type != "object")) then error("page entry is not an object") else "v2" end)
+                             else "other" end' /tmp/old_manifest.json 2>/dev/null) || OLD_KIND=invalid
+          [ -n "$OLD_KIND" ] || OLD_KIND=invalid
+        else
+          OLD_KIND=missing
+        fi
+        if [ "$OLD_KIND" = "invalid" ]; then
+          echo "::error::🚨 SAFEGUARD: committed paths_manifest.json at HEAD is not a valid JSON object. Refusing to commit."
+          exit 1
+        elif [ "$OLD_KIND" = "v2" ]; then
+          # A url counts only when it is a non-empty string (same rule as the Python guard).
+          OLD_LIVE=$(jq '([.pages[] | .url | select(type == "string" and . != "")] | unique) as $all
+            | ([.pages[] | select((.url | type) == "string" and .url != "" and (.fetch_status == "stale" or .fetch_status == "failed")) | .url] | unique) as $dead
+            | ($all - $dead) | length' /tmp/old_manifest.json)
+          REMOVED_LIVE=$(jq -n --slurpfile old /tmp/old_manifest.json --slurpfile new paths_manifest.json '
+            ([$new[0].pages[] | .url | select(type == "string" and . != "")] | map({(.): true}) | add // {}) as $keep
+            | ([$old[0].pages[] | .url | select(type == "string" and . != "")] | unique) as $all
+            | ([$old[0].pages[] | select((.url | type) == "string" and .url != "" and (.fetch_status == "stale" or .fetch_status == "failed")) | .url] | unique) as $dead
+            | ($all - $dead) | map(select($keep[.] | not)) | length')
+          echo "Previously-live pages removed: $REMOVED_LIVE of $OLD_LIVE"
+          if [ "$OLD_LIVE" -gt 0 ] && [ $((REMOVED_LIVE * 100)) -gt $((OLD_LIVE * 10)) ]; then
+            echo "::error::🚨 SAFEGUARD: $REMOVED_LIVE of $OLD_LIVE previously-live pages removed (>10%). Refusing to commit."
+            exit 1
+          fi
+        else
+          echo "No committed v2 manifest at HEAD ($OLD_KIND) — skipping live-removal check (clean start)."
         fi
 
     # The fetcher rewrites generated_at on every run, so a raw `git diff` is never
@@ -79,7 +130,7 @@ jobs:
           CHANGED=true
           git diff --cached --stat -- paths_manifest.json search_index.json
         fi
-        echo "changed=$CHANGED" >> $GITHUB_OUTPUT
+        echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
 
     - name: Generate commit message from manifest diff
       if: steps.verify-changed-files.outputs.changed == 'true'
@@ -98,7 +149,7 @@ jobs:
           echo "message<<EOF"
           echo "${MSG}"
           echo "EOF"
-        } >> $GITHUB_OUTPUT
+        } >> "$GITHUB_OUTPUT"
 
     - name: Commit and push if changed
       if: steps.verify-changed-files.outputs.changed == 'true'

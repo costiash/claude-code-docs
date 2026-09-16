@@ -30,7 +30,15 @@ jobs:
           set -euo pipefail
           # v2: the manifest is the source of truth. Sample its md_urls and HEAD-check
           # them (jq + curl only — no Python, no committed docs needed).
-          SAMPLE=$(jq -r '.pages[].md_url | select(. != null)' paths_manifest.json | shuf | head -30)
+          # shuf -n, not `shuf | head`: head closing the pipe after 30 lines gave
+          # shuf an EPIPE, which pipefail turned into a failed assignment and
+          # set -e into a dead run — before a single URL was checked. The race
+          # got more likely as the manifest grew, and was solid red by 2026-08.
+          # Sample only pages the manifest says fetched OK: an entry already
+          # carried forward as stale/failed is a known-dead URL, and the
+          # update-docs guards own that signal. Re-reporting it here daily
+          # would only make this run red for reasons it cannot act on.
+          SAMPLE=$(jq -r '.pages[] | select(.fetch_status == "ok") | .md_url | select(. != null)' paths_manifest.json | shuf -n 30)
           TOTAL=0
           FAIL=0
           while IFS= read -r url; do
@@ -47,6 +55,12 @@ jobs:
             fi
           done <<< "$SAMPLE"
           echo "Reachability sample: $((TOTAL - FAIL))/$TOTAL returned 200"
+          # An empty sample means the manifest has no ok pages with an md_url —
+          # that is a broken manifest, not a clean bill of health.
+          if [ "$TOTAL" -eq 0 ]; then
+            echo "::error::No ok pages with an md_url in the manifest — nothing to validate."
+            exit 1
+          fi
           # Tolerate the odd transient failure; fail the run only on a broad outage.
           if [ "$FAIL" -gt 5 ]; then
             echo "::error::$FAIL of $TOTAL sampled URLs unreachable — likely a discovery/host problem."

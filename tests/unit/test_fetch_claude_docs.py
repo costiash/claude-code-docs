@@ -324,6 +324,98 @@ class TestSafeguards:
         with pytest.raises(SystemExit):
             validate_manifest_transition(old, new)
 
+    def test_transition_removing_already_stale_pages_passes(self):
+        # Upstream reorganisation (2026-09-10 Admin API move): a >10% block of
+        # pages first fails to fetch (carried forward as "stale"), then drops out
+        # of discovery next run. Removing already-stale entries must not count
+        # toward the deletion ceiling, or the pipeline wedges permanently.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
+            + [{"url": f"d{i}", "fetch_status": "stale"} for i in range(60)]
+            + [{"url": f"f{i}", "fetch_status": "failed"} for i in range(10)]
+        }
+        new = self._ok_pages(300)  # drops all 70 stale/failed = 19% of 370
+        validate_manifest_transition(old, new)  # no raise
+
+    def test_transition_stale_exclusion_does_not_mask_live_removal(self):
+        # Removing stale pages is free, but removing >10% of *ok* pages on top
+        # of that must still abort.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
+            + [{"url": f"d{i}", "fetch_status": "stale"} for i in range(60)]
+        }
+        new = self._ok_pages(260)  # drops 60 stale + 40 ok; 40/300 live = 13% > 10%
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, new)
+
+    def test_transition_dead_entries_do_not_pad_denominator(self):
+        # 700 ok + 300 stale; removing 85 ok pages is 12.1% of the live
+        # population (abort) even though it is only 8.5% of the whole manifest.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(700)]
+            + [{"url": f"d{i}", "fetch_status": "stale"} for i in range(300)]
+        }
+        new = self._ok_pages(615)
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, new)
+
+    def test_transition_missing_old_status_counts_as_live(self):
+        # Old entries without fetch_status are treated as live (conservative).
+        old = {"pages": [{"url": f"u{i}"} for i in range(300)]}
+        new = self._ok_pages(260)  # 40/300 = 13% > 10%
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, new)
+
+    def test_transition_stale_share_over_ceiling_aborts(self):
+        # 300 ok clears the 250 floor, but 200 stale = 40% > MAX_STALE_PERCENT.
+        # This is the run-N half of the two-step mass-loss scenario.
+        new = self._ok_pages(300) + [
+            {"url": f"s{i}", "sha256": f"h{i}", "fetch_status": "stale"} for i in range(200)
+        ]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, new)
+
+    def test_transition_stale_share_at_ceiling_passes(self):
+        # Exactly 25% stale (100 of 400) is allowed: the ceiling is strict >.
+        new = self._ok_pages(300) + [
+            {"url": f"s{i}", "sha256": f"h{i}", "fetch_status": "stale"} for i in range(100)
+        ]
+        validate_manifest_transition({"pages": []}, new)  # no raise
+
+    def test_transition_stale_share_excludes_changelog(self):
+        # Changelog is not a documentation page: it must not dilute the share.
+        # 300 ok + 101 stale = 25.2% > 25% even with an ok changelog appended.
+        new = self._ok_pages(300) + [
+            {"url": f"s{i}", "sha256": f"h{i}", "fetch_status": "stale"} for i in range(101)
+        ] + [{"url": "cl", "id": "changelog", "sha256": "c", "fetch_status": "ok"}]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, new)
+
+    def test_transition_duplicate_url_with_any_dead_row_is_dead(self):
+        # Same URL twice at HEAD, one ok row and one stale row: the URL is dead
+        # (set arithmetic), so dropping it is not a live removal.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
+            + [{"url": f"u{i}", "fetch_status": "stale"} for i in range(31)]
+        }
+        new = self._ok_pages(300)[31:]  # drops u0..u30, all of which have a stale row
+        validate_manifest_transition(old, new)  # no raise
+
+    def test_transition_ignores_non_string_or_empty_urls(self):
+        # Corrupt url values (numeric, empty) never participate in set arithmetic,
+        # on either side — matching the jq mirror's rule.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
+            + [{"url": 42, "fetch_status": "ok"}, {"url": "", "fetch_status": "ok"}]
+        }
+        new = self._ok_pages(300) + [{"url": 42, "fetch_status": "ok"}]
+        validate_manifest_transition(old, new)  # no raise: 0 live removals
+
+    def test_transition_non_object_old_page_entry_fails_closed(self):
+        old = {"pages": [{"url": "u0", "fetch_status": "ok"}, None]}
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, self._ok_pages(300))
+
     def test_transition_below_floor_aborts(self):
         # First run (no removal check) with too few ok pages -> floor aborts.
         new = self._ok_pages(240)  # 240 ok < 250
