@@ -189,3 +189,8 @@ claude-code-docs-redistribution-spec.md
 HANDOFF.txt
 # dev screenshot
 hero-reduced-motion.jpeg
+
+# Codex CLI local scaffolding (mirrors .claude/, never checked in)
+.codex/
+.agents/
+AGENTS.md
