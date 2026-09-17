@@ -57,13 +57,15 @@ execution against the real committed manifest, on both jq 1.6 and 1.7.1.
   re-checks all three rules (fetched-OK floor, stale share, live removals
   against the `HEAD` manifest) before committing, so the workflow fails closed
   even if the Python guard is bypassed. Both sides share one definition of a
-  live page, a dead URL, and a corrupt manifest; the mirror honours the same
-  override.
+  live page, a dead URL (dead only when every row carrying it is stale/failed),
+  and a corrupt manifest; the mirror honours the same override.
 - **Parity and execution tests.** Each jq constant is pinned to
   `scripts/fetcher/config.py` by an integration test, and the safeguard step
-  body is extracted from the workflow YAML and executed under `bash -e` in a
+  body is extracted from the workflow YAML and executed under `bash -eo pipefail` in a
   throwaway git repo across boundary, corruption, override, and first-run
-  scenarios, verified on jq 1.6 and ubuntu-latest's jq 1.7.1. 200 → 238 tests.
+  scenarios. The test workflow re-runs those tests under sha256-pinned jq 1.6
+  and 1.7.1 release binaries, so the cross-version claim is enforced by CI
+  rather than asserted. 200 → 240 tests.
 
 ### Changed
 - `ARCHITECTURE.md` and `CLAUDE.md` safeguard sections describe the three

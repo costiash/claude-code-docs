@@ -136,7 +136,8 @@ def validate_manifest_transition(
     every later run re-trips the guard. Only pages that were ``ok`` (or carry
     no status at all — treated as live, conservatively) count as removals,
     measured against the previously-live population so dead entries cannot pad
-    the denominator.
+    the denominator. A URL is dead only when every row carrying it is
+    ``stale``/``failed``; one live row keeps it live.
     """
     old_pages = [p for p in old_manifest.get("pages", []) if _has_url(p)]
     old_urls = {p["url"] for p in old_pages}
@@ -147,9 +148,14 @@ def validate_manifest_transition(
         logger.info("No prior v2 manifest — skipping transition check (clean start).")
     else:
         removed = old_urls - new_urls
-        already_dead = {
-            p["url"] for p in old_pages if p.get("fetch_status") in ("stale", "failed")
+        # A URL is live if ANY of its rows is not stale/failed; it is dead only
+        # when every row is. Duplicate rows cannot come from the fetcher (discovery
+        # is keyed by canonical URL), but if a hand-edited manifest ever carried
+        # them, the conservative reading keeps a still-ok URL under the guard.
+        live_urls = {
+            p["url"] for p in old_pages if p.get("fetch_status") not in ("stale", "failed")
         }
+        already_dead = old_urls - live_urls
         removed_live = removed - already_dead
         # Denominator is the previously-live population, not the whole manifest:
         # dead entries must not pad the base and dilute a real discovery drop.

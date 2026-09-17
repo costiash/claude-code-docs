@@ -407,15 +407,26 @@ class TestSafeguards:
         with pytest.raises(SystemExit):
             validate_manifest_transition({"pages": []}, new)
 
-    def test_transition_duplicate_url_with_any_dead_row_is_dead(self):
-        # Same URL twice at HEAD, one ok row and one stale row: the URL is dead
-        # (set arithmetic), so dropping it is not a live removal.
+    def test_transition_duplicate_url_stays_live_if_any_row_is_live(self):
+        # Same URL twice at HEAD, one ok row and one stale row: the URL is still
+        # live, so dropping 31 of them is a 10.3% live removal and must abort. A
+        # malformed manifest with duplicate rows cannot loosen the guard.
         old = {
             "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
             + [{"url": f"u{i}", "fetch_status": "stale"} for i in range(31)]
         }
-        new = self._ok_pages(300)[31:]  # drops u0..u30, all of which have a stale row
-        validate_manifest_transition(old, new)  # no raise
+        new = self._ok_pages(300)[31:]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, new)
+
+    def test_transition_duplicate_url_is_dead_only_when_all_rows_dead(self):
+        # Two dead rows for the same URL: dead, drops free.
+        old = {
+            "pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]
+            + [{"url": f"d{i}", "fetch_status": "stale"} for i in range(40)]
+            + [{"url": f"d{i}", "fetch_status": "failed"} for i in range(40)]
+        }
+        validate_manifest_transition(old, self._ok_pages(300))  # no raise
 
     def test_transition_ignores_non_string_or_empty_urls(self):
         # Corrupt url values (numeric, empty) never participate in set arithmetic,

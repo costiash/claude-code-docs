@@ -218,8 +218,9 @@ class TestSafeguardStepExecution:
     The parity tests above pin the constants; this class proves the step's
     arithmetic and jq behave like the Python guard at the boundaries. The body
     is extracted from the YAML so the test never drifts from the real step, and
-    it runs under ``bash -e`` in a throwaway git repo with the "old" manifest
-    committed at HEAD, exactly as actions/checkout leaves it.
+    it runs under ``bash --noprofile --norc -eo pipefail`` (GitHub's default for
+    ``run:``) in a throwaway git repo with the "old" manifest committed at HEAD,
+    exactly as actions/checkout leaves it.
     """
 
     @staticmethod
@@ -263,7 +264,8 @@ class TestSafeguardStepExecution:
             git("commit", "-q", "-m", "empty")
         (repo / "paths_manifest.json").write_text(json.dumps({"schema_version": 2, "pages": new_pages}))
         return subprocess.run(
-            ["bash", "-e", "-c", self._step_body(project_root)],
+            # GitHub's default `run:` shell is `bash --noprofile --norc -eo pipefail {0}`.
+            ["bash", "--noprofile", "--norc", "-eo", "pipefail", "-c", self._step_body(project_root)],
             cwd=repo, env=env, capture_output=True, text=True, timeout=60,
         )
 
@@ -295,15 +297,17 @@ class TestSafeguardStepExecution:
 
     @pytest.mark.integration
     def test_step_override_listing_matches_count_with_duplicate_dead_rows(self, project_root, tmp_path):
-        # A URL that also has a stale row is dead: it must be neither counted nor
-        # listed. 400 ok, 5 of them duplicated as stale; drop the first 100 ok
-        # (300 remain, clearing the floor so the override path is what runs).
-        old = self._pages(ok=400) + [dict(p, fetch_status="stale") for p in self._pages(ok=5)]
+        # Listing must equal the count under duplicate rows: 400 ok, 5 of them also
+        # carrying a stale row (still live), plus 10 URLs that are dead on every row.
+        # Drop the first 100 ok (300 remain, clearing the floor so the override runs).
+        old = (self._pages(ok=400)
+               + [dict(p, fetch_status="stale") for p in self._pages(ok=5)]
+               + self._pages(stale=10))
         new = self._pages(ok=400)[100:]
         r = self._run(project_root, tmp_path, old, new, extra_env={"DOCS_CONFIRM_REMOVALS": "1"})
         assert r.returncode == 0, r.stdout + r.stderr
-        assert "Previously-live pages removed: 95 of 395" in r.stdout
-        assert r.stdout.count("  removed: ") == 95, r.stdout
+        assert "Previously-live pages removed: 100 of 400" in r.stdout
+        assert r.stdout.count("  removed: ") == 100, r.stdout
 
     @pytest.mark.integration
     def test_step_confirm_removals_override_does_not_bypass_other_guards(self, project_root, tmp_path):
@@ -385,14 +389,23 @@ class TestSafeguardStepExecution:
         assert "not a valid JSON object" in r.stdout
 
     @pytest.mark.integration
-    def test_step_duplicate_url_with_any_dead_row_is_dead(self, project_root, tmp_path):
-        # Mirrors the Python set logic: one stale row makes the URL dead even if an
-        # ok row for the same URL also exists, so dropping it is not a live removal.
+    def test_step_duplicate_url_stays_live_if_any_row_is_live(self, project_root, tmp_path):
+        # Mirrors the Python set logic: a URL with one ok row and one stale row is
+        # live, so dropping 31 of them (10.3%) aborts. Duplicates cannot loosen the guard.
         old = self._pages(ok=300) + [dict(p, fetch_status="stale") for p in self._pages(ok=31)]
         new = self._pages(ok=300)[31:]
         r = self._run(project_root, tmp_path, old, new)
+        assert r.returncode != 0
+        assert "Previously-live pages removed: 31 of 300" in r.stdout
+
+    @pytest.mark.integration
+    def test_step_duplicate_url_is_dead_only_when_all_rows_dead(self, project_root, tmp_path):
+        old = self._pages(ok=300) + self._pages(stale=40) + [
+            dict(p, fetch_status="failed") for p in self._pages(stale=40)
+        ]
+        r = self._run(project_root, tmp_path, old, self._pages(ok=300))
         assert r.returncode == 0, r.stdout + r.stderr
-        assert "Previously-live pages removed: 0 of 269" in r.stdout
+        assert "Previously-live pages removed: 0 of 300" in r.stdout
 
     @pytest.mark.integration
     def test_step_ignores_non_string_or_empty_urls(self, project_root, tmp_path):

@@ -45,6 +45,27 @@ jobs:
             echo "Integration tests not yet implemented"
           fi
 
+      # The jq safeguard mirror must behave identically on the runner's jq
+      # (1.7.x on ubuntu-latest) and on jq 1.6 (the empty-input / error-path
+      # quirks differ). Download both release binaries, verify their sha256,
+      # and re-run the step-execution + parity tests under each explicitly.
+      - name: Safeguard step tests under pinned jq 1.6 and 1.7.1
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/jqbin/1.6 /tmp/jqbin/1.7.1
+          curl -sSL --proto '=https' --max-time 60 \
+            -o /tmp/jqbin/1.6/jq https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64
+          echo "af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44  /tmp/jqbin/1.6/jq" | sha256sum -c -
+          curl -sSL --proto '=https' --max-time 60 \
+            -o /tmp/jqbin/1.7.1/jq https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
+          echo "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5  /tmp/jqbin/1.7.1/jq" | sha256sum -c -
+          chmod +x /tmp/jqbin/1.6/jq /tmp/jqbin/1.7.1/jq
+          for v in 1.6 1.7.1; do
+            echo "== jq $v: $(PATH=/tmp/jqbin/$v:$PATH jq --version) =="
+            PATH="/tmp/jqbin/$v:$PATH" pytest tests/integration/test_github_actions.py \
+              -k "SafeguardStepExecution or SafeguardParity" -q --no-cov -p no:cacheprovider
+          done
+
       - name: Run validation tests
         run: |
           if [ -d "tests/validation" ]; then

@@ -79,7 +79,7 @@ stored — a consumer recomputes `slugify(text)` on demand.
 | Constant | Value | Guard |
 |---|---|---|
 | `MIN_DISCOVERY_THRESHOLD` | 200 | abort if discovery finds fewer pages |
-| `MAX_DELETION_PERCENT` | 10 | abort if a manifest transition drops >10% of the previously-live entries (measured against the live population; entries already `stale`/`failed` may leave freely — their fetch failed before discovery dropped them, so that is an upstream removal, not a discovery failure) |
+| `MAX_DELETION_PERCENT` | 10 | abort if a manifest transition drops >10% of the previously-live entries (measured against the live population; entries already `stale`/`failed` may leave freely — their fetch failed before discovery dropped them, so that is an upstream removal, not a discovery failure; a URL is dead only when every row carrying it is `stale`/`failed`) |
 | `MIN_EXPECTED_FILES` | 250 | abort if fewer pages were fetched OK *this run* (changelog excluded); mirrored as a jq check in the workflow |
 | `MAX_STALE_PERCENT` | 25 | abort if more than 25% of documentation pages in the new manifest are `stale`/`failed` (changelog excluded). Closes the gap the stale-exclusion rule above opens: a partial fetch outage can no longer commit a mostly-carry-forward manifest that the next run could then drop "for free". Worst-case two-run loss is therefore 25% stale dropped free plus the ordinary 10% live-removal allowance — per transition, measured against the current manifest, so it does not compose into an absolute bound across many runs; `MIN_EXPECTED_FILES` is the terminal backstop. Mirrored as a jq check in the workflow |
 
