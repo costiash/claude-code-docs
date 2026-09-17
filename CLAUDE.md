@@ -30,6 +30,9 @@ auto-discovery is the `claude-docs` skill's job) that delegates to:
 - **`claude-docs-changelog`** — HTML changelog reports (`--report`)
 - **`plugin/scripts/manifest-diff.sh`** — "what's new" queries (added/changed/removed
   pages between manifest revisions; there is no mirror-era `git log -- docs/`)
+- **`plugin/agents/`** — plugin subagents, auto-namespaced `claude-docs:<name>` (no
+  `agents` key in `plugin.json`; the directory is discovered by convention). Empty
+  scaffold in 2.1, populated by the specialist agents in 2.2.
 
 A SessionStart hook keeps the metadata current via `git reset --hard origin/main`.
 
