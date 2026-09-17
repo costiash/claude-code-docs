@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-17T06:16:01.273609Z",
+  "generated_at": "2026-09-17T18:16:39.692604Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7877,22 +7877,22 @@
         }
       ],
       "terms": {
-        "session": 657,
+        "session": 660,
         "background": 192,
-        "claude": 183,
-        "agent": 168,
-        "view": 142,
+        "claude": 185,
+        "agent": 169,
+        "view": 143,
         "code": 139,
         "row": 123,
-        "start": 117,
+        "start": 118,
         "show": 112,
         "open": 111,
-        "dispatch": 103,
+        "dispatch": 104,
         "directory": 91,
         "worktree": 90,
         "proces": 89,
-        "instead": 86,
-        "run": 84,
+        "instead": 87,
+        "run": 85,
         "prompt": 84,
         "before": 80,
         "work": 79,
@@ -7900,13 +7900,13 @@
         "attach": 76,
         "input": 75,
         "pres": 66,
+        "conversation": 64,
         "restart": 63,
-        "conversation": 62,
+        "one": 62,
         "keep": 62,
         "list": 61,
         "same": 60,
         "supervisor": 60,
-        "one": 59,
         "request": 58,
         "terminal": 56,
         "after": 56,
@@ -7928,7 +7928,7 @@
         "without": 41,
         "own": 40
       },
-      "word_count": 19467
+      "word_count": 19513
     },
     {
       "filename": "claude-code__agents.md",
@@ -7955,58 +7955,58 @@
         }
       ],
       "terms": {
-        "session": 28,
+        "session": 30,
         "agent": 24,
         "subagent": 24,
-        "claude": 18,
-        "one": 16,
-        "run": 15,
-        "each": 15,
-        "task": 11,
+        "claude": 21,
+        "one": 18,
+        "run": 16,
+        "each": 16,
+        "work": 13,
+        "task": 12,
         "view": 11,
-        "work": 11,
         "workflow": 8,
-        "check": 8,
         "team": 7,
+        "conversation": 7,
         "worker": 7,
+        "runn": 7,
+        "check": 7,
+        "need": 7,
+        "parallel": 6,
         "dynamic": 6,
-        "conversation": 6,
         "approach": 6,
-        "runn": 6,
         "background": 6,
-        "need": 6,
         "list": 6,
         "other": 6,
         "fil": 6,
-        "parallel": 5,
+        "code": 5,
+        "project": 5,
         "yourself": 5,
+        "machine": 5,
         "result": 5,
+        "dispatch": 5,
         "worktre": 5,
         "separate": 5,
         "edit": 5,
         "spawn": 5,
         "file": 4,
         "way": 4,
-        "different": 4,
-        "want": 4,
-        "off": 4,
-        "dispatch": 4,
+        "once": 4,
+        "several": 4,
+        "cloud": 4,
         "open": 4,
+        "off": 4,
+        "start": 4,
+        "many": 4,
         "cros": 4,
         "turn": 4,
         "finding": 4,
         "tool": 4,
         "command": 4,
-        "code": 3,
-        "depend": 3,
         "whether": 3,
-        "hand": 3,
-        "back": 3,
-        "own": 3,
-        "several": 3,
-        "statu": 3
+        "own": 3
       },
-      "word_count": 1099
+      "word_count": 1181
     },
     {
       "filename": "claude-code__amazon-bedrock.md",
@@ -10637,30 +10637,31 @@
         }
       ],
       "terms": {
-        "session": 182,
-        "claude": 104,
-        "cloud": 86,
+        "session": 187,
+        "claude": 108,
+        "cloud": 89,
         "code": 52,
-        "environment": 41,
+        "environment": 42,
         "run": 39,
-        "repository": 37,
-        "github": 35,
+        "repository": 39,
+        "github": 38,
         "account": 28,
         "terminal": 25,
         "fix": 24,
-        "app": 21,
+        "app": 22,
         "auto": 21,
-        "acces": 19,
-        "see": 19,
+        "acces": 20,
+        "see": 20,
         "host": 18,
+        "start": 18,
         "command": 18,
         "instead": 17,
         "anthropic": 17,
         "organization": 17,
-        "start": 17,
         "local": 17,
-        "work": 16,
+        "work": 17,
         "send": 16,
+        "one": 15,
         "same": 15,
         "error": 15,
         "open": 14,
@@ -10671,24 +10672,23 @@
         "pull": 12,
         "note": 12,
         "any": 12,
-        "one": 12,
         "network": 12,
+        "repositori": 12,
         "cli": 12,
         "message": 12,
         "team": 11,
+        "each": 11,
         "task": 11,
         "comment": 11,
         "without": 11,
-        "repositori": 11,
         "branch": 11,
-        "fil": 11,
         "api": 11,
         "before": 10,
         "teleport": 10,
         "self": 10,
         "own": 10
       },
-      "word_count": 4998
+      "word_count": 5081
     },
     {
       "filename": "claude-code__claude-directory.md",
@@ -10977,6 +10977,208 @@
         "precedence": 5
       },
       "word_count": 2272
+    },
+    {
+      "filename": "claude-code__claude-projects.md",
+      "id": "claude-code/claude-projects",
+      "title": "Let Claude coordinate ongoing work with Projects",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/claude-projects",
+      "headings": [
+        {
+          "text": "Let Claude coordinate ongoing work with Projects",
+          "level": 1
+        },
+        {
+          "text": "When to use a project",
+          "level": 2
+        },
+        {
+          "text": "When something else fits better",
+          "level": 3
+        },
+        {
+          "text": "How a project is organized",
+          "level": 2
+        },
+        {
+          "text": "Create a project",
+          "level": 2
+        },
+        {
+          "text": "Check the prerequisites",
+          "level": 3
+        },
+        {
+          "text": "Start a new project from scratch",
+          "level": 3
+        },
+        {
+          "text": "Start from an existing cloud session",
+          "level": 3
+        },
+        {
+          "text": "Set up GitHub access",
+          "level": 3
+        },
+        {
+          "text": "Work in a project",
+          "level": 2
+        },
+        {
+          "text": "Your first batch",
+          "level": 3
+        },
+        {
+          "text": "Send work and read results",
+          "level": 3
+        },
+        {
+          "text": "Review a thread's pull request",
+          "level": 3
+        },
+        {
+          "text": "See what needs you in Overview",
+          "level": 3
+        },
+        {
+          "text": "Open a thread when you need control",
+          "level": 3
+        },
+        {
+          "text": "Choose models and let Claude manage context",
+          "level": 3
+        },
+        {
+          "text": "Tune how Claude runs a project",
+          "level": 3
+        },
+        {
+          "text": "Unblock a thread waiting on approval",
+          "level": 3
+        },
+        {
+          "text": "Give a project standing context",
+          "level": 2
+        },
+        {
+          "text": "Write project instructions",
+          "level": 3
+        },
+        {
+          "text": "Decide which repositories to add",
+          "level": 3
+        },
+        {
+          "text": "What threads pick up from your repositories",
+          "level": 3
+        },
+        {
+          "text": "Choose an environment for threads",
+          "level": 3
+        },
+        {
+          "text": "Get skills, plugins, connectors, and tools into threads",
+          "level": 3
+        },
+        {
+          "text": "Project settings reference",
+          "level": 2
+        },
+        {
+          "text": "Pause, archive, or delete a project",
+          "level": 3
+        },
+        {
+          "text": "Usage and cost",
+          "level": 2
+        },
+        {
+          "text": "What draws on your plan",
+          "level": 3
+        },
+        {
+          "text": "See and reduce a project's usage",
+          "level": 3
+        },
+        {
+          "text": "How projects relate to other Claude Code features",
+          "level": 2
+        },
+        {
+          "text": "Limitations",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "A thread looks stuck",
+          "level": 3
+        },
+        {
+          "text": "Threads guessed or stalled instead of asking",
+          "level": 3
+        },
+        {
+          "text": "Related resources",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "thread": 271,
+        "project": 263,
+        "claude": 147,
+        "work": 91,
+        "one": 75,
+        "start": 69,
+        "repository": 65,
+        "session": 64,
+        "github": 57,
+        "conversation": 56,
+        "repositori": 45,
+        "new": 44,
+        "cloud": 42,
+        "each": 42,
+        "environment": 42,
+        "add": 38,
+        "open": 38,
+        "every": 37,
+        "need": 36,
+        "request": 34,
+        "code": 33,
+        "setting": 31,
+        "run": 30,
+        "pull": 30,
+        "step": 30,
+        "message": 30,
+        "ask": 29,
+        "task": 28,
+        "reach": 27,
+        "fil": 26,
+        "own": 26,
+        "instruction": 25,
+        "app": 25,
+        "send": 25,
+        "memory": 24,
+        "limit": 24,
+        "plan": 23,
+        "once": 23,
+        "see": 22,
+        "only": 21,
+        "acces": 21,
+        "setup": 21,
+        "turn": 21,
+        "list": 20,
+        "usage": 20,
+        "model": 20,
+        "don": 19,
+        "overview": 19,
+        "wait": 19,
+        "runn": 17
+      },
+      "word_count": 8279
     },
     {
       "filename": "claude-code__claude-security.md",
@@ -11397,58 +11599,58 @@
         }
       ],
       "terms": {
-        "environment": 179,
-        "session": 137,
+        "environment": 180,
+        "session": 145,
         "claude": 88,
         "com": 79,
         "cloud": 76,
         "org": 76,
-        "run": 60,
+        "run": 61,
         "credential": 54,
         "host": 53,
-        "script": 50,
-        "install": 45,
+        "script": 51,
+        "install": 46,
         "api": 42,
-        "setup": 40,
+        "setup": 41,
+        "start": 40,
         "www": 39,
         "network": 38,
-        "start": 38,
         "code": 37,
         "default": 36,
         "proxy": 34,
         "accordion": 34,
         "add": 31,
         "github": 30,
+        "setting": 29,
         "acces": 28,
+        "one": 28,
         "list": 28,
-        "setting": 28,
         "request": 28,
         "anthropic": 25,
-        "one": 24,
         "repo": 24,
+        "hook": 24,
         "own": 23,
         "key": 23,
         "level": 22,
         "variabl": 22,
         "organization": 22,
         "title": 22,
-        "hook": 22,
+        "set": 21,
         "only": 21,
         "through": 21,
         "each": 20,
-        "set": 20,
         "don": 19,
         "package": 19,
         "domain": 19,
+        "work": 18,
         "self": 18,
         "tool": 18,
-        "work": 17,
         "reach": 17,
         "need": 17,
-        "such": 16,
-        "get": 16
+        "read": 17,
+        "such": 16
       },
-      "word_count": 6661
+      "word_count": 6758
     },
     {
       "filename": "claude-code__code-review.md",
@@ -13362,7 +13564,7 @@
         "view": 9,
         "ctrl": 9
       },
-      "word_count": 11795
+      "word_count": 11838
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -20365,8 +20567,8 @@
         "field": 264,
         "tool": 257,
         "run": 239,
+        "session": 177,
         "event": 176,
-        "session": 175,
         "command": 143,
         "block": 137,
         "input": 136,
@@ -20407,10 +20609,10 @@
         "directory": 64,
         "such": 63,
         "read": 62,
-        "each": 61,
-        "any": 61
+        "any": 62,
+        "each": 61
       },
-      "word_count": 33447
+      "word_count": 33464
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -22960,7 +23162,7 @@
         "header": 3,
         "authorization": 3
       },
-      "word_count": 3578
+      "word_count": 3592
     },
     {
       "filename": "claude-code__memory.md",
@@ -24217,20 +24419,20 @@
         }
       ],
       "terms": {
+        "claude": 51,
         "code": 50,
-        "claude": 50,
         "tab": 23,
         "install": 18,
         "accordion": 18,
         "run": 17,
         "title": 17,
         "task": 15,
-        "work": 14,
+        "work": 15,
         "tool": 12,
         "app": 12,
         "start": 12,
+        "session": 12,
         "desktop": 11,
-        "session": 11,
         "terminal": 10,
         "get": 10,
         "window": 10,
@@ -24247,6 +24449,7 @@
         "build": 6,
         "automate": 6,
         "web": 6,
+        "project": 6,
         "installation": 6,
         "info": 6,
         "runn": 6,
@@ -24258,7 +24461,6 @@
         "bug": 5,
         "acros": 5,
         "multiple": 5,
-        "project": 5,
         "powershell": 5,
         "auto": 5,
         "instruction": 5,
@@ -24268,7 +24470,7 @@
         "mcp": 5,
         "available": 4
       },
-      "word_count": 1905
+      "word_count": 1923
     },
     {
       "filename": "claude-code__permission-modes.md",
@@ -24647,22 +24849,23 @@
         }
       ],
       "terms": {
-        "claude": 22,
+        "claude": 23,
         "code": 18,
+        "session": 18,
         "run": 17,
-        "session": 17,
         "desktop": 14,
-        "work": 13,
+        "work": 14,
         "cli": 12,
         "review": 11,
         "app": 11,
         "task": 11,
+        "cloud": 11,
         "terminal": 10,
-        "cloud": 10,
         "team": 8,
         "integration": 7,
         "mobile": 7,
         "platform": 6,
+        "where": 6,
         "jetbrain": 6,
         "web": 6,
         "slack": 6,
@@ -24672,15 +24875,14 @@
         "dispatch": 6,
         "control": 6,
         "chat": 6,
-        "where": 5,
         "like": 5,
+        "project": 5,
         "server": 5,
         "ide": 5,
         "shar": 5,
         "gitlab": 5,
         "channel": 5,
         "connect": 4,
-        "project": 4,
         "provider": 4,
         "diff": 4,
         "inside": 4,
@@ -24698,7 +24900,7 @@
         "set": 3,
         "agent": 3
       },
-      "word_count": 1114
+      "word_count": 1132
     },
     {
       "filename": "claude-code__plugin-dependencies.md",
@@ -26719,17 +26921,17 @@
         }
       ],
       "terms": {
-        "routine": 112,
+        "routine": 113,
         "run": 80,
-        "claude": 69,
+        "claude": 70,
         "trigger": 66,
         "step": 48,
-        "routin": 43,
-        "session": 37,
+        "routin": 45,
+        "session": 38,
         "api": 33,
         "github": 31,
+        "one": 30,
         "connector": 30,
-        "one": 29,
         "add": 29,
         "title": 27,
         "code": 25,
@@ -26737,7 +26939,7 @@
         "environment": 24,
         "cli": 23,
         "open": 23,
-        "cloud": 21,
+        "cloud": 22,
         "each": 21,
         "acces": 21,
         "create": 20,
@@ -26748,7 +26950,7 @@
         "start": 19,
         "schedule": 17,
         "time": 17,
-        "repository": 16,
+        "repository": 17,
         "select": 16,
         "branch": 16,
         "network": 15,
@@ -26768,9 +26970,9 @@
         "limit": 11,
         "organization": 11,
         "schedul": 11,
-        "same": 11
+        "instead": 11
       },
-      "word_count": 4818
+      "word_count": 4846
     },
     {
       "filename": "claude-code__sandbox-environments.md",
@@ -28771,19 +28973,19 @@
       "terms": {
         "setting": 146,
         "claude": 144,
-        "file": 135,
+        "file": 136,
         "code": 117,
         "manag": 91,
-        "key": 79,
+        "key": 80,
+        "session": 67,
         "project": 67,
-        "session": 63,
         "set": 56,
         "span": 50,
         "const": 43,
         "local": 40,
         "value": 39,
+        "one": 39,
         "fil": 37,
-        "one": 37,
         "appli": 32,
         "change": 29,
         "user": 27,
@@ -28792,24 +28994,24 @@
         "json": 25,
         "run": 25,
         "read": 25,
+        "repository": 25,
         "organization": 24,
+        "each": 23,
         "div": 22,
         "classname": 22,
-        "each": 22,
-        "repository": 22,
-        "see": 21,
+        "start": 22,
+        "see": 22,
         "source": 21,
-        "start": 20,
+        "only": 20,
         "sett": 20,
-        "only": 19,
         "such": 19,
+        "rul": 19,
         "level": 18,
         "same": 18,
         "path": 18,
         "model": 18,
         "list": 18,
-        "rul": 18,
-        "permission": 17,
+        "permission": 18,
         "doesn": 17,
         "app": 16,
         "left": 16,
@@ -28820,7 +29022,7 @@
         "scope": 14,
         "name": 14
       },
-      "word_count": 7119
+      "word_count": 7176
     },
     {
       "filename": "claude-code__settings-example.md",
@@ -31925,17 +32127,17 @@
         }
       ],
       "terms": {
-        "claude": 86,
+        "claude": 89,
         "session": 60,
-        "github": 53,
+        "github": 56,
         "step": 44,
         "code": 43,
         "cloud": 37,
         "run": 34,
         "environment": 28,
         "app": 24,
+        "start": 22,
         "setup": 22,
-        "start": 21,
         "connect": 18,
         "acces": 18,
         "cli": 18,
@@ -31966,6 +32168,7 @@
         "don": 10,
         "one": 9,
         "also": 9,
+        "need": 9,
         "push": 9,
         "select": 9,
         "open": 9,
@@ -31973,10 +32176,9 @@
         "add": 9,
         "machine": 8,
         "mobile": 8,
-        "desktop": 8,
-        "need": 8
+        "desktop": 8
       },
-      "word_count": 3276
+      "word_count": 3292
     },
     {
       "filename": "claude-code__whats-new.md",
@@ -106645,7 +106847,7 @@
         }
       ],
       "terms": {
-        "claude": 51,
+        "claude": 53,
         "compliance": 40,
         "api": 34,
         "organization": 27,
@@ -106696,7 +106898,7 @@
         "analytic": 4,
         "opentelemetry": 4
       },
-      "word_count": 1100
+      "word_count": 1106
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -107077,7 +107279,7 @@
         }
       ],
       "terms": {
-        "claude": 81,
+        "claude": 83,
         "api": 74,
         "organization": 73,
         "compliance": 59,
@@ -107107,8 +107309,8 @@
         "doe": 12,
         "event": 12,
         "appear": 12,
+        "chat": 12,
         "call": 11,
-        "chat": 11,
         "remote": 11,
         "link": 10,
         "turn": 10,
@@ -107128,7 +107330,7 @@
         "while": 8,
         "prompt": 8
       },
-      "word_count": 2707
+      "word_count": 2718
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -107339,12 +107541,12 @@
         }
       ],
       "terms": {
-        "session": 160,
-        "claude": 65,
-        "endpoint": 52,
+        "session": 161,
+        "claude": 70,
+        "endpoint": 53,
         "return": 52,
-        "user": 41,
-        "local": 37,
+        "user": 42,
+        "local": 38,
         "transcript": 36,
         "content": 35,
         "api": 33,
@@ -107390,7 +107592,7 @@
         "bound": 10,
         "retrieve": 9
       },
-      "word_count": 5233
+      "word_count": 5276
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -114998,6 +115200,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "September 18, 2026",
+          "level": 3
+        },
+        {
           "text": "September 14, 2026",
           "level": 3
         },
@@ -115555,14 +115761,14 @@
         }
       ],
       "terms": {
-        "claude": 436,
-        "api": 164,
-        "beta": 126,
+        "claude": 438,
+        "api": 165,
+        "beta": 127,
         "model": 124,
-        "now": 108,
+        "now": 109,
         "tool": 106,
         "opu": 101,
-        "see": 86,
+        "see": 87,
         "header": 78,
         "agent": 70,
         "support": 68,
@@ -115570,9 +115776,9 @@
         "token": 63,
         "sonnet": 60,
         "launch": 56,
-        "session": 52,
+        "session": 55,
         "available": 48,
-        "return": 46,
+        "return": 47,
         "think": 43,
         "manag": 42,
         "sdk": 38,
@@ -115591,22 +115797,22 @@
         "requir": 31,
         "event": 30,
         "context": 30,
+        "acces": 29,
         "limit": 29,
+        "key": 28,
         "same": 28,
         "august": 28,
-        "acces": 28,
         "block": 27,
-        "key": 27,
         "platform": 25,
         "chang": 25,
+        "endpoint": 25,
         "parameter": 25,
         "skill": 25,
         "mytho": 25,
         "usage": 25,
-        "endpoint": 24,
-        "call": 23
+        "organization": 23
       },
-      "word_count": 11544
+      "word_count": 11588
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
