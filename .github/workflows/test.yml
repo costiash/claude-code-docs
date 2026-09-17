@@ -54,14 +54,31 @@ jobs:
       - name: Safeguard step tests under pinned jq 1.6 and 1.7.1
         run: |
           set -euo pipefail
-          mkdir -p /tmp/jqbin/1.6 /tmp/jqbin/1.7.1
-          curl -sSL --proto '=https' --max-time 60 --retry 3 --retry-connrefused \
-            -o /tmp/jqbin/1.6/jq https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64
-          echo "af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44  /tmp/jqbin/1.6/jq" | sha256sum -c -
-          curl -sSL --proto '=https' --max-time 60 --retry 3 --retry-connrefused \
-            -o /tmp/jqbin/1.7.1/jq https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64
-          echo "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5  /tmp/jqbin/1.7.1/jq" | sha256sum -c -
-          chmod +x /tmp/jqbin/1.6/jq /tmp/jqbin/1.7.1/jq
+          # fetch <version> <asset-url> <sha256>: --fail turns a CDN error page into
+          # a curl error instead of a saved "binary"; --retry-all-errors retries it;
+          # and the checksum is re-tried as a whole up to 3 times, so one bad body
+          # (seen once on a matrix cell) cannot fail the job on its own.
+          fetch() {
+            local v="$1" url="$2" sum="$3" attempt
+            mkdir -p "/tmp/jqbin/$v"
+            for attempt in 1 2 3; do
+              if curl -fsSL --proto '=https' --max-time 60 --retry 3 --retry-all-errors \
+                   -o "/tmp/jqbin/$v/jq" "$url" \
+                 && echo "$sum  /tmp/jqbin/$v/jq" | sha256sum -c - ; then
+                chmod +x "/tmp/jqbin/$v/jq"; return 0
+              fi
+              rm -f "/tmp/jqbin/$v/jq"
+              if [ "$attempt" -lt 3 ]; then
+                echo "::warning::jq $v download attempt $attempt failed checksum/transfer; retrying"
+                sleep 5
+              fi
+            done
+            echo "::error::jq $v could not be fetched with a matching sha256 after 3 attempts"; return 1
+          }
+          fetch 1.6   https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 \
+                      af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
+          fetch 1.7.1 https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 \
+                      5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5
           for v in 1.6 1.7.1; do
             echo "== jq $v: $(PATH=/tmp/jqbin/$v:$PATH jq --version) =="
             PATH="/tmp/jqbin/$v:$PATH" pytest tests/integration/test_github_actions.py \
