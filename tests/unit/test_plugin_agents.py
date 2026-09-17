@@ -37,7 +37,13 @@ SOURCES_HEADING = "## Sources"
 # Per-agent contract phrases. The set of rows must equal the set of shipped
 # agents: a new agent without a row, or a row whose agent was removed, fails
 # test_every_agent_is_registered.
-REQUIRED_PHRASES = {}
+REQUIRED_PHRASES = {
+    "docs-researcher": [
+        "What the docs don't say",
+        "3 to 15 pages",
+        "both hosts",
+    ],
+}
 
 
 def _agent_files():

@@ -43,6 +43,7 @@ The compliance point is not a footnote: this repo contains **zero documentation 
 
 - **Auto-discovery** — ask anything about Claude Code, the API, SDKs, or prompt engineering and Claude reads the relevant docs before answering. No prefix, no command. This is the feature you'll forget is running — your answers are just correct.
 - **`/docs` skill** — explicit lookups when you want them: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
+- **Researcher agent** — questions that need more than three pages, span the API and Claude Code, compare two things, or ask for "everything about" a topic are handed to the `claude-docs:docs-researcher` subagent, which reads the pages in its own context and returns one cited synthesis with a "what the docs don't say" section (first of the specialist agents; more follow in 2.2)
 - **Interactive Courses** — turn any topic into a self-contained animated HTML course (below — this one's unique)
 - **Changelog Reports** — visual HTML reports of what changed in the docs, with one-click course generation per entry
 - **Token-efficient by design** — search runs in shell against a prose-free index; Claude's context only ever pays for the specific pages it reads

@@ -46,8 +46,11 @@ bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "<k
 ```
 
 Output is `filename<TAB>title<TAB>score`, best first. **Keyword extraction:** strip filler,
-keep domain terms — "how do I configure streaming" → `streaming configure`; "difference
-between hooks and MCP" → `hooks mcp`. Take the top 3-5 filenames and read them (next section).
+keep domain terms — "how do I configure streaming" → `streaming configure`; "where do
+hook settings live" → `hooks settings`. Take the top 1-3 filenames and read them (next
+section). If the answer needs more than 3 pages, or the question is a comparison, spans
+the API and Claude Code, or asks for "everything about", do not read them here: see
+Delegation below.
 
 ### 2. Fuzzy search (approximate name)
 
@@ -68,6 +71,28 @@ jq -r '.pages[] | select(.filename | test("<fragment>")) | .filename' ~/.claude-
 jq -r '.pages[] | select(.category=="claude_code") | .filename' ~/.claude-code-docs/paths_manifest.json
 ```
 
+## Delegation
+
+Single-page lookups stay inline: search, read the one page, answer. Delegate
+to the `claude-docs:docs-researcher` subagent instead of reading pages into
+this context when **any** of these hold:
+
+- the answer needs more than 3 pages;
+- the question spans the API and Claude Code (platform.claude.com and
+  code.claude.com pages together);
+- it is a comparison ("hooks vs MCP", "Python SDK vs TypeScript SDK");
+- it asks for "everything about" a topic.
+
+The second trigger is about the *question*, not the search results: delegate
+when the user deliberately asks across both products. If it is merely unclear
+which product the user means, ask first (see "Different Product Contexts"
+under Synthesis Rules) and delegate only if the answer is "both".
+
+Hand the subagent the user's question verbatim plus any filenames the search
+already surfaced. It returns a cited synthesis with a `## Sources` list; relay
+that synthesis, keep its citations, and do not re-read the pages yourself. If
+the subagent reports that the docs do not cover the question, say so.
+
 ## Reading a doc (cache-miss rule)
 
 A search returns a **filename** (e.g. `claude-code__hooks.md`). The file is at
@@ -79,7 +104,7 @@ A search returns a **filename** (e.g. `claude-code__hooks.md`). The file is at
    ~/.claude-code-docs/plugin/scripts/fetch-docs.sh get "<filename>"
    ```
    then Read `~/.claude-code-docs/cache/<filename>`.
-3. If the fetch fails (offline), the script prints the canonical source URL on stderr —
+3. If the fetch fails (offline), the script prints the page's `.md` URL on stderr —
    fall back to WebFetch on that URL.
 
 **To save context, prefer previewing large pages before reading them.** Pull a page's
@@ -93,11 +118,14 @@ jq -r '.pages[] | select(.filename=="<filename>") | .title, (.headings[]|"  "+.t
 
 ### Same Product Context → SYNTHESIZE
 When all matching docs share one product (all Claude Code, all Agent SDK, ...):
-read them all silently, extract relevant sections, present one unified answer, cite sources.
+read them silently (up to 3 pages; more goes to the researcher, see Delegation), extract
+relevant sections, present one unified answer, cite sources.
 
 ### Different Product Contexts → ASK
-When matches span products (CLI + API + Agent SDK), ask which the user means. Labels
-(see `manifest-reference.md`) map from `category`:
+When matches span products (CLI + API + Agent SDK) and it is unclear which the user
+means, ask. If the question itself deliberately spans them ("how does X in the API
+relate to Y in Claude Code"), do not ask: delegate to the researcher (see Delegation).
+Labels (see `manifest-reference.md`) map from `category`:
 
 | category | Say to user |
 |---|---|
@@ -113,7 +141,8 @@ When matches span products (CLI + API + Agent SDK), ask which the user means. La
 | `resources` | **Resources** |
 | `prompt_library` | **Prompt Library** |
 
-After selection → read all docs in that context and synthesize.
+After selection → treat it as Same Product Context above: up to 3 pages inline, more
+goes to the researcher (see Delegation).
 
 ### SDK Language Disambiguation
 When the user names a language, narrow API/SDK results (e.g. `agent-sdk__python`,

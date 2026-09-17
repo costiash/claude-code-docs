@@ -5,6 +5,25 @@ All notable changes to claude-code-docs will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+Work in progress on the 2.2 "Specialists" release: the first of four plugin
+subagents. Nothing here is released yet.
+
+### Added
+- **`docs-researcher` agent and a delegation rule.** When a question needs
+  more than three pages, spans the API and Claude Code, is a comparison, or
+  asks for "everything about" a topic, the `claude-docs` skill hands it to
+  the `claude-docs:docs-researcher` subagent, which reads the pages in its
+  own context and returns one cited synthesis with a "what the docs don't
+  say" section. Single-page lookups stay inline (at most three pages).
+- **Contract tests for plugin agents and the `/docs` router.** Every agent
+  under `plugin/agents/` must parse, use only the frontmatter fields Claude
+  Code supports for plugin agents, pin `model: opus`, be read-only, and
+  carry the docs-access, citation, and locality contract; the router's help
+  block and its routes are checked for one-to-one parity. A six-page
+  invented fixture runs every command the researcher prompt quotes.
+
 ## [2.1.0] - 2026-09-17
 
 A polish release from a clean-machine walkthrough of the install path. Three
