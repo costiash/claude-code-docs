@@ -53,9 +53,22 @@ intent behind them:
   behind, aborts rather than committing the loss. The guard is first-run-safe: no v2
   predecessor means a clean start, not a violation.
 - **Carry-forward**: a page that fails to fetch stays in the manifest marked
-  `fetch_status: stale`. A transient error never drops a page.
-- `update-docs.yml` repeats the minimum-file-count floor as a jq check before committing,
-  so the workflow fails closed even if the Python guard is bypassed.
+  `fetch_status: stale`. A transient error never drops a page. Pages already
+  `stale`/`failed` do not count toward the removal share (their disappearance
+  from discovery confirms an upstream removal), and a manifest more than 25%
+  stale is never committed. Those bounds are **per transition** (25% stale
+  dropped free plus the ordinary 10% live-removal allowance, each measured
+  against the current manifest); they do not compose across runs. The only
+  absolute backstops are the 250 fetched-OK floor and the 200 discovery floor.
+- **Operator override**: a page block that leaves discovery without first
+  failing to fetch (redirect and delisting in the same upstream deploy) goes
+  `ok` → absent in one run and trips the 10% guard every run thereafter. The
+  `confirm_removals` input on a manual `update-docs` dispatch allows that
+  removal for one run, logging every removed URL; the other guards still apply.
+- `update-docs.yml` repeats all three transition guards (page floor, stale-share ceiling,
+  live-removal share against the `HEAD` manifest) as jq checks before committing, so the
+  workflow fails closed even if the Python guard is bypassed; the jq mirror honours the
+  same `confirm_removals` override. Integration tests pin each jq constant to `config.py`.
 
 Discovery is the **union** of two `llms.txt` files and two sitemaps, keyed by canonical
 URL — llms.txt supplies titles and coverage, sitemaps supply `lastmod`. The four URLs are

@@ -24,12 +24,14 @@ from .config import (
     MIN_DISCOVERY_THRESHOLD,
     MAX_DELETION_PERCENT,
     MIN_EXPECTED_FILES,
+    MAX_STALE_PERCENT,
 )
 
 from .manifest import (
     manifest_path,
     load_manifest,
     pages_by_url,
+    has_url,
     build_manifest,
     save_manifest,
 )
@@ -87,10 +89,12 @@ __all__ = [
     "MIN_DISCOVERY_THRESHOLD",
     "MAX_DELETION_PERCENT",
     "MIN_EXPECTED_FILES",
+    "MAX_STALE_PERCENT",
     # Manifest
     "manifest_path",
     "load_manifest",
     "pages_by_url",
+    "has_url",
     "build_manifest",
     "save_manifest",
     # Paths

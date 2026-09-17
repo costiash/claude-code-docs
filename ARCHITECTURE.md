@@ -79,11 +79,24 @@ stored — a consumer recomputes `slugify(text)` on demand.
 | Constant | Value | Guard |
 |---|---|---|
 | `MIN_DISCOVERY_THRESHOLD` | 200 | abort if discovery finds fewer pages |
-| `MAX_DELETION_PERCENT` | 10 | abort if a manifest transition drops >10% of entries |
-| `MIN_EXPECTED_FILES` | 250 | abort if fewer pages were fetched OK *this run* (changelog excluded); the workflow's jq check separately floors total manifest pages |
+| `MAX_DELETION_PERCENT` | 10 | abort if a manifest transition drops >10% of the previously-live entries (measured against the live population; entries already `stale`/`failed` may leave freely — their fetch failed before discovery dropped them, so that is an upstream removal, not a discovery failure; a URL is dead only when every row carrying it is `stale`/`failed`) |
+| `MIN_EXPECTED_FILES` | 250 | abort if fewer pages were fetched OK *this run* (changelog excluded); mirrored as a jq check in the workflow |
+| `MAX_STALE_PERCENT` | 25 | abort if more than 25% of documentation pages in the new manifest are `stale`/`failed` (changelog excluded). Closes the gap the stale-exclusion rule above opens: a partial fetch outage can no longer commit a mostly-carry-forward manifest that the next run could then drop "for free". Worst-case two-run loss is therefore 25% stale dropped free plus the ordinary 10% live-removal allowance — per transition, measured against the current manifest, so it does not compose into an absolute bound across many runs; `MIN_EXPECTED_FILES` is the terminal backstop. Mirrored as a jq check in the workflow |
 
 `validate_manifest_transition(old, new)` is first-run-safe: no v2 predecessor counts
-as a clean start, not a mass removal. `update-docs.yml` repeats the floor check in jq.
+as a clean start, not a mass removal. `update-docs.yml` repeats all three checks in jq
+(floor, stale-share ceiling, and live-removal share against the `HEAD` manifest), each
+pinned to the `config.py` constant by `tests/integration/test_github_actions.py`.
+
+**Known residual and its lever.** The stale-exclusion rule only helps when upstream
+redirects a block one run *before* delisting it (the 2026-09-10 shape). If the redirect
+and the delisting land in the same deploy, those pages are never fetched again — carry-
+forward applies only to *discovered* pages — so they go `ok` → absent in a single
+transition, and a block over 10% of live pages trips the removal guard on every run
+until the committed manifest changes. The unwedge lever is the `confirm_removals` input
+on a manual `update-docs` dispatch (`DOCS_CONFIRM_REMOVALS=1`): for that one run the
+removal-share abort becomes a warning that lists every removed URL; the stale-share
+ceiling and the fetched-OK floor still apply, and scheduled runs never set it.
 
 The index build (`scripts/build_search_index.py`) has its own guards, env-tunable:
 `DOCS_INDEX_MIN_FILES` (250 — scratch floor), `DOCS_INDEX_MIN_CONTENT_SHARE` (0.90 —

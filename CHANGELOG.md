@@ -5,6 +5,76 @@ All notable changes to claude-code-docs will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] - 2026-09-17
+
+Three CI workflows had been red for weeks without biting: the 3-hourly manifest
+update wedged on an upstream reorganisation, the daily URL validation died on a
+shell pipe race before checking anything, and the macOS harness pinned a page
+filename that had moved. All three are fixed, and the manifest safeguards that
+caused the wedge are reworked so an upstream move can no longer lock the
+pipeline without an operator lever to unwedge it. Every guard was verified by
+execution against the real committed manifest, on both jq 1.6 and 1.7.1.
+
+### Fixed
+- **Manifest update wedged since 2026-09-10.** Anthropic moved the Admin API
+  reference (`api/admin/*` → `api/beta/organization/*`). The old pages failed
+  to fetch, were carried forward as `stale`, then dropped out of discovery on
+  the next run — 133 of 965 pages, 13.8%, over the 10% removal ceiling. Because
+  the committed manifest never advanced, every later run re-tripped the same
+  guard. Entries already `stale`/`failed` in the previous manifest no longer
+  count as removals (their disappearance confirms an upstream removal rather
+  than signalling a broken discovery source), and the ceiling is measured
+  against the previously-live population so dead entries cannot pad it.
+- **Daily validation died on `shuf | head`.** Under `set -o pipefail`, `head`
+  closing the pipe after 30 lines gave `shuf` an EPIPE once the URL list passed
+  the 64 KiB pipe buffer, killing the job before a single URL was checked. The
+  sampler now uses `shuf -n 30`, samples only pages the manifest marks `ok`,
+  and fails closed on an empty sample.
+- **Search-quality harness expected a moved page.** `docs/en/about-claude/
+  models/overview` is now `docs/en/models/overview`; the expectation follows.
+- **Corrupt-manifest check was unreachable.** A v2 manifest holding a
+  non-object page entry now fails closed in `load_manifest()` with the
+  safeguard banner, instead of an incidental `AttributeError` in the first
+  consumer. A legacy manifest with odd entries is still treated as empty.
+- Quoted the two `$GITHUB_OUTPUT` redirects in `update-docs.yml` (actionlint
+  SC2086).
+
+### Added
+- **Stale-share ceiling** (`MAX_STALE_PERCENT`, 25). A manifest with more than
+  25% of its documentation pages carried forward as `stale`/`failed` is never
+  committed. This closes the gap the stale-exclusion rule opens: a partial
+  fetch outage can no longer commit a mostly-dead manifest that the next run
+  could then drop "for free". Both bounds are per transition; the fetched-OK
+  floor (250) and discovery floor (200) are the absolute backstops.
+- **One-shot operator override.** The stale-exclusion rule only helps when
+  upstream redirects a block one run before delisting it. If both land in the
+  same deploy, those pages go `ok` → absent in a single run and the 10% guard
+  trips every run thereafter. A manual `update-docs` dispatch now takes a
+  `confirm_removals` input (`DOCS_CONFIRM_REMOVALS=1`) that allows that
+  removal for one run, logging every removed URL; the stale-share ceiling and
+  fetched-OK floor still apply, and scheduled runs never set it.
+- **Full jq mirror of the transition guard in CI.** `update-docs.yml` now
+  re-checks all three rules (fetched-OK floor, stale share, live removals
+  against the `HEAD` manifest) before committing, so the workflow fails closed
+  even if the Python guard is bypassed. Both sides share one definition of a
+  live page, a dead URL (dead only when every row carrying it is stale/failed),
+  and a corrupt manifest; the mirror honours the same override.
+- **Parity and execution tests.** Each jq constant is pinned to
+  `scripts/fetcher/config.py` by an integration test, and the safeguard step
+  body is extracted from the workflow YAML and executed under `bash -eo pipefail` in a
+  throwaway git repo across boundary, corruption, override, and first-run
+  scenarios. The test workflow re-runs those tests under sha256-pinned jq 1.6
+  and 1.7.1 release binaries, so the cross-version claim is enforced by CI
+  rather than asserted. 200 → 241 tests.
+
+### Changed
+- `ARCHITECTURE.md` and `CLAUDE.md` safeguard sections describe the three
+  rules, the shared semantics, the per-transition nature of the bounds, and
+  the known residual with its lever.
+- README no longer states a page count; upstream adds, moves, and prunes pages
+  without notice, so any number is stale by the next run. The Awesome badge now
+  links to the Awesome Claude Code list that mentions this project.
+
 ## [2.0.2] - 2026-08-04
 
 Background-sync lock rework from issue #28 (PR #32), the search-index

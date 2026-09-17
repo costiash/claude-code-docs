@@ -1,11 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v2.0.2
+# Claude Code Docs Installer v2.0.3
 # Migration wrapper: routes to plugin install when possible,
 # falls back to git clone for environments without plugin support.
 
-echo "Claude Code Docs v2.0.2"
+echo "Claude Code Docs v2.0.3"
 echo "======================="
 echo ""
 
