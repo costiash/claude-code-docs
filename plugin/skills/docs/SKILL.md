@@ -1,6 +1,6 @@
 ---
 name: docs
-description: Router for the /docs command. Look up Claude documentation, ask plain-English questions, generate interactive courses and HTML changelog reports, check freshness, and sync the local cache. Dispatches to the claude-docs, claude-docs-validate, claude-docs-course, and claude-docs-changelog skills.
+description: Router for the /docs command. Look up Claude documentation, ask plain-English questions, generate interactive courses and HTML changelog reports, check freshness, show cache status, and sync the local cache. Dispatches to the claude-docs, claude-docs-validate, claude-docs-course, and claude-docs-changelog skills.
 disable-model-invocation: true
 ---
 
@@ -40,7 +40,10 @@ Analyze `$ARGUMENTS` and route:
 > `/docs --report` — Generate an HTML changelog of recent doc changes (with course buttons)
 > `/docs -t` — Check documentation freshness
 > `/docs sync` — Fetch any missing/changed pages into the local cache now
+> `/docs status` — Show cache status (cached / pending / stale page counts)
 > `/docs what's new` — Show recent documentation changes
+> `/docs --stats` — Page counts by category
+> `/docs uninstall` — Show how to remove the plugin and local docs
 > `/docs <question>` — Ask a question about Claude (e.g., `/docs how do I configure MCP?`)
 
 **Freshness check** (`-t`, `--check`, `--freshness`, or user asks about freshness/health/validation):
@@ -53,6 +56,11 @@ Analyze `$ARGUMENTS` and route:
 **Sync** (`sync`, `update cache`, `fetch`):
 → Run: `~/.claude-code-docs/plugin/scripts/fetch-docs.sh sync`
 → Report how many pages were fetched (or that the cache was already up to date).
+
+**Status** (`status`, `--status`, `cache status`):
+→ Run: `~/.claude-code-docs/plugin/scripts/fetch-docs.sh status`
+→ Present the five lines it prints (manifest pages, syncable, cached, pending, stale).
+→ Exit code 2 is not an error: it means pages are pending. When pending is non-zero, suggest `/docs sync` to fetch them now.
 
 **Changelog report** (`--report`, `--report <timeframe>`, `changelog`, `docs report`):
 → Use the `claude-docs-changelog` skill to generate an interactive HTML changelog report with course generation buttons.
