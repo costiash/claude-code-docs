@@ -8,6 +8,9 @@ echo "====================================="
 echo ""
 
 INSTALL_DIR="$HOME/.claude-code-docs"
+# Set when stdin is not a terminal and the docs directory is left in place:
+# the closing line must then say what happened, not "Uninstall complete."
+KEPT_NONINTERACTIVE=0
 
 echo "To uninstall the plugin, run inside Claude Code:"
 echo ""
@@ -28,7 +31,10 @@ if [ -d "$INSTALL_DIR" ]; then
             echo "Kept $INSTALL_DIR (documentation files still available locally)"
         fi
     else
-        echo "Run interactively to remove, or: rm -rf $INSTALL_DIR"
+        # %q shell-quotes the path so the hint is copy-paste safe whatever
+        # characters the home directory contains.
+        printf 'Run interactively to remove, or: rm -rf %q\n' "$INSTALL_DIR"
+        KEPT_NONINTERACTIVE=1
     fi
 fi
 
@@ -63,5 +69,9 @@ if [ -f "$HOME/.claude/settings.json" ] && command -v jq >/dev/null 2>&1; then
 fi
 
 echo ""
-echo "Uninstall complete."
+if [ "$KEPT_NONINTERACTIVE" -eq 1 ]; then
+    echo "Plugin uninstall instructions printed; local docs kept at $INSTALL_DIR"
+else
+    echo "Uninstall complete."
+fi
 echo "To reinstall: /plugin marketplace add costiash/claude-code-docs"
