@@ -163,6 +163,30 @@ class TestSafeguardParity:
         )
 
     @pytest.mark.integration
+    def test_workflow_confirm_removals_input_is_wired_to_env(self, project_root):
+        """The override reaches both consumers only through the dispatch input.
+
+        cli.py reads DOCS_CONFIRM_REMOVALS during the fetch step; the jq mirror
+        reads it during the safeguard step. Each step's env must derive from
+        `inputs.confirm_removals` (a declared boolean input), and the expression
+        must yield '0' when the input is absent (scheduled runs). The expression
+        itself can only be evaluated by GitHub; this pins the wiring.
+        """
+        import yaml
+        wf = yaml.safe_load((project_root / ".github" / "workflows" / "update-docs.yml").read_text())
+        on = wf.get("on") or wf.get(True)
+        inp = on["workflow_dispatch"]["inputs"]["confirm_removals"]
+        assert inp["type"] == "boolean" and inp["default"] is False
+
+        steps = {s.get("name", ""): s for s in wf["jobs"]["update-docs"]["steps"]}
+        fetch = steps["Fetch latest documentation (v2 manifest)"]
+        guard = next(s for n, s in steps.items() if n.startswith("Safeguard"))
+        for step in (fetch, guard):
+            expr = step["env"]["DOCS_CONFIRM_REMOVALS"]
+            assert "inputs.confirm_removals" in expr, expr
+            assert "'1' || '0'" in expr, expr  # falls back to '0' on schedule
+
+    @pytest.mark.integration
     def test_workflow_removal_ceiling_matches_fetcher_config(self, project_root):
         """The jq live-removal ceiling in update-docs.yml must equal MAX_DELETION_PERCENT.
 
@@ -218,10 +242,10 @@ class TestSafeguardStepExecution:
             for i in range(stale)
         ]
 
-    def _run(self, project_root, tmp_path, old_pages, new_pages, commit_old=True, old_raw=None):
+    def _run(self, project_root, tmp_path, old_pages, new_pages, commit_old=True, old_raw=None, extra_env=None):
         """old_raw, when given, is committed verbatim at HEAD instead of a v2 manifest."""
         import json
-        env = {"PATH": __import__("os").environ["PATH"], "HOME": str(tmp_path)}
+        env = {"PATH": __import__("os").environ["PATH"], "HOME": str(tmp_path), **(extra_env or {})}
         repo = tmp_path / "repo"
         repo.mkdir()
         git = lambda *a: subprocess.run(["git", *a], cwd=repo, env=env, check=True, capture_output=True)
@@ -259,6 +283,33 @@ class TestSafeguardStepExecution:
         r = self._run(project_root, tmp_path, old, new)
         assert r.returncode != 0
         assert "previously-live pages removed (>10%)" in r.stdout
+
+    @pytest.mark.integration
+    def test_step_confirm_removals_override_allows_over_ceiling(self, project_root, tmp_path):
+        old = self._pages(ok=300, stale=133)
+        new = self._pages(ok=300)[31:]  # 10.3% of live pages
+        r = self._run(project_root, tmp_path, old, new, extra_env={"DOCS_CONFIRM_REMOVALS": "1"})
+        assert r.returncode == 0, r.stdout + r.stderr
+        assert "::warning::" in r.stdout and "allowed by the confirm_removals override" in r.stdout
+        assert r.stdout.count("  removed: ") == 31, r.stdout
+
+    @pytest.mark.integration
+    def test_step_override_listing_matches_count_with_duplicate_dead_rows(self, project_root, tmp_path):
+        # A URL that also has a stale row is dead: it must be neither counted nor
+        # listed. 400 ok, 5 of them duplicated as stale; drop the first 100 ok
+        # (300 remain, clearing the floor so the override path is what runs).
+        old = self._pages(ok=400) + [dict(p, fetch_status="stale") for p in self._pages(ok=5)]
+        new = self._pages(ok=400)[100:]
+        r = self._run(project_root, tmp_path, old, new, extra_env={"DOCS_CONFIRM_REMOVALS": "1"})
+        assert r.returncode == 0, r.stdout + r.stderr
+        assert "Previously-live pages removed: 95 of 395" in r.stdout
+        assert r.stdout.count("  removed: ") == 95, r.stdout
+
+    @pytest.mark.integration
+    def test_step_confirm_removals_override_does_not_bypass_other_guards(self, project_root, tmp_path):
+        r = self._run(project_root, tmp_path, self._pages(ok=300), self._pages(ok=249),
+                      extra_env={"DOCS_CONFIRM_REMOVALS": "1"})
+        assert r.returncode != 0 and "(<250)" in r.stdout
 
     @pytest.mark.integration
     def test_step_passes_at_exact_live_removal_ceiling(self, project_root, tmp_path):

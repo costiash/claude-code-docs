@@ -5,6 +5,14 @@ on:
     # Every 3 hours (00:00, 03:00, ... UTC)
     - cron: '0 */3 * * *'
   workflow_dispatch:
+    inputs:
+      confirm_removals:
+        description: >-
+          One-shot override: allow a removal of more than 10% of previously-live
+          pages for THIS run only (confirmed upstream removal/rename). Logs every
+          removed URL. The stale-share ceiling and fetched-OK floor still apply.
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +52,8 @@ jobs:
       env:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_REF_NAME: ${{ github.ref_name }}
+        # '1' only on a manual dispatch that ticked the box; '0' on schedule.
+        DOCS_CONFIRM_REMOVALS: ${{ inputs.confirm_removals == true && '1' || '0' }}
       run: python3 scripts/fetch_claude_docs.py
 
     # Build the prose-free search index from the scratch dir (floor guard refuses an
@@ -60,7 +70,11 @@ jobs:
     # already stale/failed) may have been removed. tests/integration pins each
     # constant to scripts/fetcher/config.py.
     - name: Safeguard — page count, stale share, live removals
+      env:
+        DOCS_CONFIRM_REMOVALS: ${{ inputs.confirm_removals == true && '1' || '0' }}
       run: |
+        # Scheduled runs must always show 0 here; only a ticked manual dispatch yields 1.
+        echo "confirm_removals override: DOCS_CONFIRM_REMOVALS=${DOCS_CONFIRM_REMOVALS:-unset}"
         DOCS=$(jq '[.pages[] | select(.id != "changelog")] | length' paths_manifest.json)
         OK_DOCS=$(jq '[.pages[] | select(.id != "changelog" and .fetch_status == "ok")] | length' paths_manifest.json)
         NOT_OK=$((DOCS - OK_DOCS))
@@ -104,8 +118,19 @@ jobs:
             | ($all - $dead) | map(select($keep[.] | not)) | length')
           echo "Previously-live pages removed: $REMOVED_LIVE of $OLD_LIVE"
           if [ "$OLD_LIVE" -gt 0 ] && [ $((REMOVED_LIVE * 100)) -gt $((OLD_LIVE * 10)) ]; then
-            echo "::error::🚨 SAFEGUARD: $REMOVED_LIVE of $OLD_LIVE previously-live pages removed (>10%). Refusing to commit."
-            exit 1
+            if [ "${DOCS_CONFIRM_REMOVALS:-0}" = "1" ]; then
+              echo "::warning::$REMOVED_LIVE of $OLD_LIVE previously-live pages removed (>10%) — allowed by the confirm_removals override for this run."
+              # Same $all/$dead set arithmetic as the count above: a URL with any
+              # stale/failed row is dead, so the listing equals REMOVED_LIVE exactly.
+              jq -r --slurpfile new paths_manifest.json '
+                ([$new[0].pages[] | .url | select(type == "string" and . != "")] | map({(.): true}) | add // {}) as $keep
+                | ([.pages[] | .url | select(type == "string" and . != "")] | unique) as $all
+                | ([.pages[] | select((.url | type) == "string" and .url != "" and (.fetch_status == "stale" or .fetch_status == "failed")) | .url] | unique) as $dead
+                | ($all - $dead) | map(select($keep[.] | not)) | sort[] | "  removed: \(.)"' /tmp/old_manifest.json
+            else
+              echo "::error::🚨 SAFEGUARD: $REMOVED_LIVE of $OLD_LIVE previously-live pages removed (>10%). Refusing to commit. Confirmed upstream removal? Re-run manually with confirm_removals=true."
+              exit 1
+            fi
           fi
         else
           echo "No committed v2 manifest at HEAD ($OLD_KIND) — skipping live-removal check (clean start)."

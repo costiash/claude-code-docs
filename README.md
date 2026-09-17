@@ -3,10 +3,10 @@
 [![Last Update](https://img.shields.io/github/last-commit/costiash/claude-code-docs/main.svg?label=docs%20updated)](https://github.com/costiash/claude-code-docs/commits/main)
 [![Tests](https://github.com/costiash/claude-code-docs/actions/workflows/test.yml/badge.svg)](https://github.com/costiash/claude-code-docs/actions)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
 [![Listed on ClaudePluginHub](https://www.claudepluginhub.com/badge/costiash-claude-docs-plugin)](https://www.claudepluginhub.com/plugins/costiash-claude-docs-plugin?ref=badge)
 
-**Every official Claude doc page, always live, never redistributed.** 700+ pages across `platform.claude.com` and `code.claude.com`, re-indexed every 3 hours — and your Claude reads the actual current page, not a stale copy or a guess from training data.
+**Every official Claude doc page, always live, never redistributed.** Every page across `platform.claude.com` and `code.claude.com`, re-indexed every 3 hours — and your Claude reads the actual current page, not a stale copy or a guess from training data.
 
 ```bash
 /plugin marketplace add costiash/claude-code-docs
@@ -24,7 +24,7 @@ This tool does neither. The repository commits **only metadata** — a page mani
 | | Web search | Docs mirrors | MCP docs servers | **This tool** |
 |---|---|---|---|---|
 | Freshness | Search-engine lag | Stale between syncs | Usually current | **Live page, every read** |
-| Claude docs coverage | Hit-or-miss | Often partial | Generic libraries | **All 700+ pages, both sites** |
+| Claude docs coverage | Hit-or-miss | Often partial | Generic libraries | **Every page, both sites** |
 | Runtime dependencies | None | git + disk | MCP server + config | **bash, curl, jq** |
 | Context cost per answer | Whole pages of noise | Full file reads | Large tool payloads | **Index hit → one targeted page** |
 | Redistributes Anthropic's docs | No | **Yes, wholesale** | Varies | **Never — you fetch from the source** |
@@ -161,7 +161,7 @@ Commit this file to your repository. When a team member trusts the project folde
 1. **Automatic (Plugin)** — Each session the metadata syncs (`git reset --hard origin/main`) and a background fetch updates only changed pages in the local cache
 2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
 3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
-4. **Safe** — Layered fail-closed safeguards: discovery floors, max-removal thresholds, index carry-forward through partial outages, and an independent floor check in CI before any commit. A bad upstream day can delay an update; it cannot corrupt your docs.
+4. **Safe** — Layered fail-closed safeguards: discovery floors, removal ceilings that distinguish a genuine upstream reorganisation from a broken discovery source, a cap on how much of the manifest may be carried forward through an outage, and an independent re-check of every rule in CI before any commit. A bad upstream day can delay an update; it cannot corrupt your docs — and it can no longer wedge the pipeline.
 
 ## Legacy: Script Install (Migration)
 
@@ -201,9 +201,9 @@ If Claude Code is detected, the script will guide you to install the plugin inst
 
 - **No documentation prose is committed** — the repo holds only metadata (manifest + lossy, non-reconstructible index), verified by tests on every CI run
 - The client fetch layer enforces a **domain allowlist** (`code.claude.com`, `platform.claude.com`, `raw.githubusercontent.com`), HTTPS-only with no redirect following, atomic writes, sha256 integrity checks, and filename path-traversal protection
-- The CI pipeline is **fail-closed at every layer**: discovery floors, manifest transition guards, index carry-forward ceilings, and an independent jq floor check before any commit
+- The CI pipeline is **fail-closed at every layer**: discovery floors, manifest transition guards (removal share, stale share, fetched-OK floor), index carry-forward ceilings, and an independent jq re-check of all three transition rules before any commit — pinned to the Python constants by tests and executed, not just read
 - Third-party CI actions are SHA-pinned; workflows run with least-privilege tokens; the shell client is tested on both Linux and macOS (BSD userland, bash 3.2) on every push
-- 150+ automated tests, including a mocked-curl harness that exercises the client's security guards directly
+- 230+ automated tests, including a mocked-curl harness that exercises the client's security guards directly and an integration harness that executes the CI safeguard step against synthetic manifests
 
 ## Contributing
 

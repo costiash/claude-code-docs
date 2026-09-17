@@ -114,6 +114,22 @@ class TestManifest:
             with pytest.raises(SystemExit):
                 load_manifest(p)
 
+    def test_load_v2_non_object_page_entry_fails_closed(self, tmp_path):
+        # A v2 page list holding a non-object is corruption. It must fail closed
+        # HERE — pages_by_url() dereferences every entry long before the
+        # transition guard runs, so the loader is the only place the banner fires.
+        p = tmp_path / "paths_manifest.json"
+        p.write_text(json.dumps({"schema_version": 2, "pages": [{"url": "u0"}, None]}))
+        with pytest.raises(SystemExit):
+            load_manifest(p)
+
+    def test_load_non_v2_with_odd_entries_treated_as_empty(self, tmp_path):
+        # Legacy manifest with a null entry is still "not v2 → empty", matching the
+        # workflow's jq mirror, which only rejects non-object entries under v2.
+        p = tmp_path / "paths_manifest.json"
+        p.write_text(json.dumps({"schema_version": 1, "pages": [None]}))
+        assert load_manifest(p) == {"schema_version": 2, "pages": []}
+
     def test_load_v2_roundtrip(self, tmp_path):
         p = tmp_path / "paths_manifest.json"
         pages = [
@@ -411,10 +427,25 @@ class TestSafeguards:
         new = self._ok_pages(300) + [{"url": 42, "fetch_status": "ok"}]
         validate_manifest_transition(old, new)  # no raise: 0 live removals
 
-    def test_transition_non_object_old_page_entry_fails_closed(self):
-        old = {"pages": [{"url": "u0", "fetch_status": "ok"}, None]}
+    def test_transition_confirm_removals_allows_over_ceiling_once(self):
+        # Same-deploy upstream move: 40/300 live pages leave discovery in ONE run
+        # (13% > 10%). The operator override lets that run through.
+        old = {"pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]}
+        new = self._ok_pages(260)
         with pytest.raises(SystemExit):
-            validate_manifest_transition(old, self._ok_pages(300))
+            validate_manifest_transition(old, new)
+        validate_manifest_transition(old, new, confirm_removals=True)  # no raise
+
+    def test_transition_confirm_removals_does_not_bypass_other_guards(self):
+        # The override is scoped to the removal share: floor and stale ceiling still abort.
+        old = {"pages": [{"url": f"u{i}", "fetch_status": "ok"} for i in range(300)]}
+        with pytest.raises(SystemExit):
+            validate_manifest_transition(old, self._ok_pages(240), confirm_removals=True)
+        stale_heavy = self._ok_pages(300) + [
+            {"url": f"s{i}", "sha256": f"h{i}", "fetch_status": "stale"} for i in range(200)
+        ]
+        with pytest.raises(SystemExit):
+            validate_manifest_transition({"pages": []}, stale_heavy, confirm_removals=True)
 
     def test_transition_below_floor_aborts(self):
         # First run (no removal check) with too few ok pages -> floor aborts.

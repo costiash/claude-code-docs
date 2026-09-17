@@ -221,7 +221,11 @@ def main():
         # Guard runs BEFORE the write: a failed run must never overwrite the
         # committed manifest. The fetch-success floor lives inside the
         # transition guard (changelog excluded) — single owner, no drift.
-        validate_manifest_transition(old_manifest, pages)
+        validate_manifest_transition(
+            old_manifest,
+            pages,
+            confirm_removals=os.environ.get("DOCS_CONFIRM_REMOVALS", "0") == "1",
+        )
         out_path = manifest_file
 
     save_manifest(out_path, manifest)

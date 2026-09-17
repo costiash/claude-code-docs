@@ -68,6 +68,19 @@ def load_manifest(path: Path) -> Dict:
         if data.get("schema_version") == MANIFEST_SCHEMA_VERSION and isinstance(
             data.get("pages"), list
         ):
+            # A v2 manifest whose page list holds a non-object is corruption, not
+            # a clean start: fail closed here, before any consumer dereferences it
+            # (pages_by_url runs long before the transition guard). Scoped to v2
+            # so a legacy manifest with odd entries is still "treated as empty",
+            # matching the workflow's jq mirror.
+            bad = [i for i, p in enumerate(data["pages"]) if not isinstance(p, dict)]
+            if bad:
+                logger.critical("=" * 70)
+                logger.critical(f"🚨 SAFEGUARD: existing manifest {path} is corrupt:")
+                logger.critical(f"   page entry #{bad[0]} is not a JSON object ({len(bad)} such entries).")
+                logger.critical("   Refusing to proceed — fix or remove the file to start clean.")
+                logger.critical("=" * 70)
+                sys.exit(1)
             return data
         logger.info(
             f"{path.name} is not a v2 manifest (schema_version="

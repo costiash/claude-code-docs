@@ -89,6 +89,6 @@ RATE_LIMIT_DELAY = 0.5  # seconds between requests
 # SAFETY THRESHOLDS - Prevent catastrophic deletion from sitemap failures
 # =============================================================================
 MIN_DISCOVERY_THRESHOLD = 200      # Refuse to proceed if < 200 paths discovered
-MAX_DELETION_PERCENT = 10          # Never delete > 10% of existing files
+MAX_DELETION_PERCENT = 10          # Never drop > 10% of previously-live pages per run
 MIN_EXPECTED_FILES = 250           # Minimum expected file count after fetch
 MAX_STALE_PERCENT = 25             # Never commit a manifest > 25% stale/failed

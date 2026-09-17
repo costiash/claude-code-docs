@@ -92,13 +92,25 @@ def count_doc_pages(pages: List[Dict]) -> int:
     return sum(1 for p in pages if p.get("id") != "changelog")
 
 
-def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> None:
+def validate_manifest_transition(
+    old_manifest: Dict, new_pages: List[Dict], confirm_removals: bool = False
+) -> None:
     """
     Guard the old→new manifest transition against mass removal.
 
     Args:
         old_manifest: The previously-loaded v2 manifest (``{pages: [...]}``).
         new_pages: The page entries about to be written.
+        confirm_removals: Operator override for ONE run (``workflow_dispatch``
+            input → ``DOCS_CONFIRM_REMOVALS=1``). When set, a removal share over
+            ``MAX_DELETION_PERCENT`` is logged with the full list of removed
+            live URLs and allowed instead of aborting. The stale-share ceiling
+            and the fetched-OK floor still apply. This is the unwedge lever for
+            an upstream move that lands the redirect and the delisting in the
+            same deploy: those pages go ``ok`` → absent in a single run, the
+            stale-exclusion rule never sees them, and without an override the
+            guard re-trips every run because the committed manifest never
+            advances. Never set on scheduled runs.
 
     Raises:
         SystemExit: If the transition would remove > ``MAX_DELETION_PERCENT`` of
@@ -109,6 +121,10 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
             (a partial outage must not commit a mostly-carry-forward manifest).
             Counting sha256 here would be meaningless: carry-forward copies old
             hashes into ``stale`` entries, so even a 100%-failed run has them set.
+
+    ``old_manifest`` is expected to come from :func:`fetcher.manifest.load_manifest`,
+    which already rejects a corrupt file (unparsable, non-object, or a v2 page
+    list holding a non-object); this function does not re-validate structure.
 
     Removal accounting: a page the previous manifest already marked ``stale``
     or ``failed`` does not count toward the deletion percentage. Those entries
@@ -122,14 +138,7 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
     measured against the previously-live population so dead entries cannot pad
     the denominator.
     """
-    raw_old = old_manifest.get("pages", [])
-    if any(not isinstance(p, dict) for p in raw_old):
-        logger.critical("=" * 70)
-        logger.critical("🚨 SAFEGUARD TRIGGERED: Corrupt previous manifest!")
-        logger.critical("   A page entry is not a JSON object. Refusing to compare against it.")
-        logger.critical("=" * 70)
-        sys.exit(1)
-    old_pages = [p for p in raw_old if _has_url(p)]
+    old_pages = [p for p in old_manifest.get("pages", []) if _has_url(p)]
     old_urls = {p["url"] for p in old_pages}
     new_urls = {p["url"] for p in new_pages if _has_url(p)}
 
@@ -151,7 +160,18 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
                 f"Dropping {len(removed & already_dead)} page(s) that were already "
                 f"stale/failed in the previous manifest (not counted as removals)."
             )
-        if removed_percent > MAX_DELETION_PERCENT:
+        if removed_percent > MAX_DELETION_PERCENT and confirm_removals:
+            logger.warning("=" * 70)
+            logger.warning("⚠️  Removal share over threshold — allowed by operator override.")
+            logger.warning(
+                f"   Removing {len(removed_live)} previously-live pages of {old_live} "
+                f"({removed_percent:.1f}%, threshold {MAX_DELETION_PERCENT}%); "
+                f"DOCS_CONFIRM_REMOVALS=1 for this run only."
+            )
+            for url in sorted(removed_live):
+                logger.warning(f"   removed: {url}")
+            logger.warning("=" * 70)
+        elif removed_percent > MAX_DELETION_PERCENT:
             logger.critical("=" * 70)
             logger.critical("🚨 SAFEGUARD TRIGGERED: Mass page removal prevented!")
             logger.critical(
@@ -160,6 +180,10 @@ def validate_manifest_transition(old_manifest: Dict, new_pages: List[Dict]) -> N
                 f"{MAX_DELETION_PERCENT}%)."
             )
             logger.critical("   Likely a discovery failure. Aborting before write.")
+            logger.critical(
+                "   If this is a confirmed upstream removal, re-run the workflow "
+                "manually with confirm_removals=true (DOCS_CONFIRM_REMOVALS=1)."
+            )
             logger.critical("=" * 70)
             sys.exit(1)
 
