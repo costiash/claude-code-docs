@@ -31,6 +31,7 @@ from .manifest import (
     manifest_path,
     load_manifest,
     pages_by_url,
+    has_url,
     build_manifest,
     save_manifest,
 )
@@ -93,6 +94,7 @@ __all__ = [
     "manifest_path",
     "load_manifest",
     "pages_by_url",
+    "has_url",
     "build_manifest",
     "save_manifest",
     # Paths

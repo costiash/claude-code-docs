@@ -153,6 +153,17 @@ class TestManifest:
         idx = pages_by_url(m)
         assert set(idx) == {"u1", "u2"}
 
+    def test_pages_by_url_ignores_unusable_urls(self, tmp_path):
+        # A list/number/empty url must be skipped, never used as a dict key
+        # (a list would raise TypeError in the first consumer of the manifest).
+        p = tmp_path / "paths_manifest.json"
+        p.write_text(json.dumps({"schema_version": 2, "pages": [
+            {"url": "u1", "id": "a"}, {"url": ["x"], "id": "b"},
+            {"url": 42, "id": "c"}, {"url": "", "id": "d"}, {"id": "e"},
+        ]}))
+        idx = pages_by_url(load_manifest(p))
+        assert set(idx) == {"u1"}
+
 
 class TestContentValidation:
     def test_rejects_html(self):

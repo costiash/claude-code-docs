@@ -24,6 +24,7 @@ ordinary ``MAX_DELETION_PERCENT`` live-removal allowance.
 import sys
 from typing import Dict, List
 
+from .manifest import has_url as _has_url
 from .config import (
     MIN_DISCOVERY_THRESHOLD,
     MAX_DELETION_PERCENT,
@@ -74,17 +75,6 @@ def count_ok_doc_pages(pages: List[Dict]) -> int:
         for p in pages
         if p.get("fetch_status") == "ok" and p.get("id") != "changelog"
     )
-
-
-def _has_url(page: Dict) -> bool:
-    """A page participates in URL set arithmetic only with a non-empty string url.
-
-    Shared definition with the workflow's jq mirror, so a corrupt entry (numeric
-    or empty url) is ignored identically on both sides rather than counted by
-    one and rejected by the other.
-    """
-    url = page.get("url")
-    return isinstance(url, str) and url != ""
 
 
 def count_doc_pages(pages: List[Dict]) -> int:

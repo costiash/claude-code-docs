@@ -89,9 +89,26 @@ def load_manifest(path: Path) -> Dict:
     return {"schema_version": MANIFEST_SCHEMA_VERSION, "pages": []}
 
 
+def has_url(page: Dict) -> bool:
+    """A page carries a usable URL only when ``url`` is a non-empty string.
+
+    This is the one definition shared by the carry-forward index, the transition
+    guard, and the workflow's jq mirror, so a corrupt value (numeric, list,
+    empty) is ignored identically everywhere rather than indexed by one consumer
+    and rejected — or crashed on — by another.
+    """
+    url = page.get("url")
+    return isinstance(url, str) and url != ""
+
+
 def pages_by_url(manifest: Dict) -> Dict[str, Dict]:
-    """Index a manifest's pages by canonical URL (for carry-forward lookup)."""
-    return {p["url"]: p for p in manifest.get("pages", []) if p.get("url")}
+    """Index a manifest's pages by canonical URL (for carry-forward lookup).
+
+    Entries without a usable URL are skipped rather than used as dict keys: a
+    list-valued ``url`` would otherwise raise ``TypeError`` here, in the first
+    consumer of the loaded manifest, instead of being handled deliberately.
+    """
+    return {p["url"]: p for p in manifest.get("pages", []) if has_url(p)}
 
 
 def build_manifest(pages: List[Dict], sources: List[str], generated_at: Optional[str] = None) -> Dict:

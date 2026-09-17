@@ -65,7 +65,7 @@ execution against the real committed manifest, on both jq 1.6 and 1.7.1.
   throwaway git repo across boundary, corruption, override, and first-run
   scenarios. The test workflow re-runs those tests under sha256-pinned jq 1.6
   and 1.7.1 release binaries, so the cross-version claim is enforced by CI
-  rather than asserted. 200 → 240 tests.
+  rather than asserted. 200 → 241 tests.
 
 ### Changed
 - `ARCHITECTURE.md` and `CLAUDE.md` safeguard sections describe the three
