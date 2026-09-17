@@ -11,6 +11,10 @@
 # ing/ed/es/s if >=3 chars remain). See tests/unit/test_stem_parity.py.
 
 set -uo pipefail
+# Ignoring SIGPIPE keeps this script alive when its reader closes early
+# (`| head`). Child processes inherit the ignore, so a sort feeding `head -20`
+# gets EPIPE instead of a quiet death and would print "write failed: Broken
+# pipe" on a broad query; every such writer below has its stderr silenced.
 trap '' PIPE
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
@@ -62,11 +66,11 @@ if [ -f "$INDEX" ] && command -v jq >/dev/null 2>&1; then
         | select($score > 0)
         | [$p.filename, ($p.title // ""), ($score|tostring)] | @tsv
     ' "${keywords[@]}" < "$INDEX" 2>/dev/null \
-        | sort -t$'\t' -k3 -rn \
+        | sort -t$'\t' -k3 -rn 2>/dev/null \
         | head -20)
 
     if [ -n "$results" ]; then
-        printf '%s\n' "$results"
+        printf '%s\n' "$results" 2>/dev/null || true
         exit 0
     fi
 fi
@@ -76,11 +80,11 @@ if [ -d "$CACHE_DIR" ]; then
     tmp=$(mktemp); trap 'rm -f "$tmp"' EXIT
     for kw in "${keywords[@]}"; do
         grep -rli -- "$kw" "$CACHE_DIR"/*.md 2>/dev/null || true
-    done | sort | uniq -c | sort -rn | head -20 \
+    done | sort | uniq -c | sort -rn 2>/dev/null | head -20 \
         | while read -r count filepath; do
             printf '%s\t\t%s\n' "$(basename "$filepath")" "$count"
         done > "$tmp"
-    cat "$tmp"
+    cat "$tmp" 2>/dev/null || true
     exit 0
 fi
 
