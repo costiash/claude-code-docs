@@ -161,7 +161,7 @@ Commit this file to your repository. When a team member trusts the project folde
 1. **Automatic (Plugin)** — Each session the metadata syncs (`git reset --hard origin/main`) and a background fetch updates only changed pages in the local cache
 2. **Automatic (CI/CD)** — GitHub Actions regenerates the manifest + index from Anthropic's `llms.txt` + sitemaps every 3 hours
 3. **On-Demand** — `/docs sync` fetches changed pages now; `/docs -t` checks freshness
-4. **Safe** — Layered fail-closed safeguards: discovery floors, removal ceilings that distinguish a genuine upstream reorganisation from a broken discovery source, a cap on how much of the manifest may be carried forward through an outage, and an independent re-check of every rule in CI before any commit. A bad upstream day can delay an update; it cannot corrupt your docs — and it can no longer wedge the pipeline permanently: the one remaining shape is cleared by a single manual dispatch.
+4. **Safe** — Layered fail-closed safeguards: discovery floors, removal ceilings that distinguish a genuine upstream reorganisation from a broken discovery source, a cap on how much of the manifest may be carried forward through an outage, and an independent re-check of every rule in CI before any commit. A bad upstream day can delay an update; it cannot corrupt your docs — and it can no longer wedge the pipeline permanently: an upstream reorganisation is cleared by a single manual dispatch, and a persistent fetch outage simply holds the last good manifest until it passes.
 
 ## Legacy: Script Install (Migration)
 
