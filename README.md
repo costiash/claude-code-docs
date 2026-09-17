@@ -28,7 +28,7 @@ This tool does neither. The repository commits **only metadata** — a page mani
 | Runtime dependencies | None | git + disk | MCP server + config | **bash, curl, jq** |
 | Context cost per answer | Whole pages of noise | Full file reads | Large tool payloads | **Index hit → one targeted page** |
 | Redistributes Anthropic's docs | No | **Yes, wholesale** | Varies | **Never — you fetch from the source** |
-| Clone size | — | ~100 MB | — | **~3 MB** |
+| Clone size | — | ~100 MB | — | **~4 MB** |
 
 The compliance point is not a footnote: this repo contains **zero documentation prose — not at the tip, not anywhere in its history**. What you install is a map; the territory always comes fresh from Anthropic.
 
@@ -48,7 +48,9 @@ The compliance point is not a footnote: this repo contains **zero documentation 
 - **Token-efficient by design** — search runs in shell against a prose-free index; Claude's context only ever pays for the specific pages it reads
 - **Session-start auto-updates** — metadata syncs and changed pages re-fetch in the background every session. No cron jobs, no manual pulls.
 
-On your first session after install, Claude clones the ~3 MB metadata repo to `~/.claude-code-docs/`, warms the page cache in the background, and activates the skills. That's the whole setup.
+On your first session after install, Claude clones the metadata repo to `~/.claude-code-docs/`, warms the page cache in the background, and activates the skills. That's the whole setup.
+
+Measured on a clean machine (three runs, 838 pages): the first session is ready in 1–2 s, the full page cache lands in about 45–50 s, the cache takes about 50 MB on disk, and the metadata clone about 4–5 MB.
 
 ## Interactive Courses — Learn Claude by Doing
 
